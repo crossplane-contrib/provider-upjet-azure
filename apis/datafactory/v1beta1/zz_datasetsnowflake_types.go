@@ -15,8 +15,38 @@ import (
 
 type DataSetSnowflakeObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Dataset Snowflake.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Dataset Snowflake.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Dataset Snowflake.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
 	// The ID of the Data Factory Snowflake Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Data Factory Linked Service name in which to associate the Dataset with.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Dataset Snowflake.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// A schema_column block as defined below.
+	SchemaColumn []DataSetSnowflakeSchemaColumnObservation `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
+
+	// The schema name of the Data Factory Dataset Snowflake.
+	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
+
+	// The table name of the Data Factory Dataset Snowflake.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type DataSetSnowflakeParameters struct {
@@ -82,6 +112,18 @@ type DataSetSnowflakeParameters struct {
 }
 
 type DataSetSnowflakeSchemaColumnObservation struct {
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The total number of digits allowed.
+	Precision *float64 `json:"precision,omitempty" tf:"precision,omitempty"`
+
+	// The number of digits allowed to the right of the decimal point.
+	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
+
+	// Type of the column. Valid values are NUMBER, DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT“FLOAT4, FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR, CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE, DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ, TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please note these values are case sensitive.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DataSetSnowflakeSchemaColumnParameters struct {

@@ -21,8 +21,14 @@ type IntegrationRuntimeSelfHostedObservation struct {
 	// The secondary integration runtime authentication key.
 	AuthorizationKeySecondary *string `json:"authorizationKeySecondary,omitempty" tf:"authorization_key_secondary,omitempty"`
 
+	// Integration runtime description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Synapse Self-hosted Integration Runtime.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Synapse Workspace ID in which to associate the Integration Runtime with. Changing this forces a new Synapse Self-hosted Integration Runtime to be created.
+	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`
 }
 
 type IntegrationRuntimeSelfHostedParameters struct {

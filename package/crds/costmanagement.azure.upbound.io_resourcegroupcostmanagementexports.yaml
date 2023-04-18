@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: resourcegroupcostmanagementexports.costmanagement.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -273,13 +277,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - exportDataOptions
-                - exportDataStorageLocation
-                - recurrencePeriodEndDate
-                - recurrencePeriodStartDate
-                - recurrenceType
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -451,15 +464,76 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: exportDataOptions is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.exportDataOptions)
+            - message: exportDataStorageLocation is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.exportDataStorageLocation)
+            - message: recurrencePeriodEndDate is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.recurrencePeriodEndDate)
+            - message: recurrencePeriodStartDate is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.recurrencePeriodStartDate)
+            - message: recurrenceType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.recurrenceType)
           status:
             description: ResourceGroupCostManagementExportStatus defines the observed
               state of ResourceGroupCostManagementExport.
             properties:
               atProvider:
                 properties:
+                  active:
+                    description: Is the cost management export active? Default is
+                      true.
+                    type: boolean
+                  exportDataOptions:
+                    description: A export_data_options block as defined below.
+                    items:
+                      properties:
+                        timeFrame:
+                          description: 'The time frame for pulling data for the query.
+                            If custom, then a specific time period must be provided.
+                            Possible values include: WeekToDate, MonthToDate, BillingMonthToDate,
+                            TheLastWeek, TheLastMonth, TheLastBillingMonth, Custom.'
+                          type: string
+                        type:
+                          description: The type of the query. Possible values are
+                            ActualCost, AmortizedCost and Usage.
+                          type: string
+                      type: object
+                    type: array
+                  exportDataStorageLocation:
+                    description: A export_data_storage_location block as defined below.
+                    items:
+                      properties:
+                        containerId:
+                          description: The Resource Manager ID of the container where
+                            exports will be uploaded. Changing this forces a new resource
+                            to be created.
+                          type: string
+                        rootFolderPath:
+                          description: The path of the directory where exports will
+                            be uploaded. Changing this forces a new resource to be
+                            created.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Cost Management Export for this Resource
                       Group.
+                    type: string
+                  recurrencePeriodEndDate:
+                    description: The date the export will stop capturing information.
+                    type: string
+                  recurrencePeriodStartDate:
+                    description: The date the export will start capturing information.
+                    type: string
+                  recurrenceType:
+                    description: How often the requested information will be exported.
+                      Valid values include Annually, Daily, Monthly, Weekly.
+                    type: string
+                  resourceGroupId:
+                    description: The id of the resource group on which to create an
+                      export. Changing this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

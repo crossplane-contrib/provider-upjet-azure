@@ -17,12 +17,15 @@ type SourceControlTokenObservation struct {
 
 	// The ID of the App Service Source GitHub Token.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Token type. Possible values include Bitbucket, Dropbox, Github, and OneDrive.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SourceControlTokenParameters struct {
 
 	// The Access Token.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 
 	// The Access Token Secret.
@@ -30,8 +33,8 @@ type SourceControlTokenParameters struct {
 	TokenSecretSecretRef *v1.SecretKeySelector `json:"tokenSecretSecretRef,omitempty" tf:"-"`
 
 	// The Token type. Possible values include Bitbucket, Dropbox, Github, and OneDrive.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // SourceControlTokenSpec defines the desired state of SourceControlToken
@@ -58,8 +61,10 @@ type SourceControlTokenStatus struct {
 type SourceControlToken struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SourceControlTokenSpec   `json:"spec"`
-	Status            SourceControlTokenStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tokenSecretRef)",message="tokenSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   SourceControlTokenSpec   `json:"spec"`
+	Status SourceControlTokenStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

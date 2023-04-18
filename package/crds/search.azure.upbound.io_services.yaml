@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: services.search.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -189,10 +193,22 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Search Service.
                     type: object
-                required:
-                - location
-                - sku
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -364,11 +380,22 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: sku is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)
           status:
             description: ServiceStatus defines the observed state of Service.
             properties:
               atProvider:
                 properties:
+                  allowedIps:
+                    description: A list of IPv4 addresses or CIDRs that are allowed
+                      access to the search service endpoint.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The ID of the Search Service.
                     type: string
@@ -384,11 +411,27 @@ spec:
                           description: The Tenant ID associated with this Managed
                             Service Identity.
                           type: string
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Search Service. The
+                            only possible value is SystemAssigned.
+                          type: string
                       type: object
                     type: array
+                  location:
+                    description: The Azure Region where the Search Service should
+                      exist. Changing this forces a new Search Service to be created.
+                    type: string
+                  partitionCount:
+                    description: The number of partitions which should be created.
+                    type: number
                   primaryKey:
                     description: The Primary Key used for Search Service Administration.
                     type: string
+                  publicNetworkAccessEnabled:
+                    description: Whether or not public network access is allowed for
+                      this resource. Defaults to true.
+                    type: boolean
                   queryKeys:
                     description: A query_keys block as defined below.
                     items:
@@ -401,9 +444,29 @@ spec:
                           type: string
                       type: object
                     type: array
+                  replicaCount:
+                    description: The number of replica's which should be created.
+                    type: number
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Search Service
+                      should exist. Changing this forces a new Search Service to be
+                      created.
+                    type: string
                   secondaryKey:
                     description: The Secondary Key used for Search Service Administration.
                     type: string
+                  sku:
+                    description: The SKU which should be used for this Search Service.
+                      Possible values are basic, free, standard, standard2, standard3,
+                      storage_optimized_l1 and storage_optimized_l2. Changing this
+                      forces a new Search Service to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Search Service.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

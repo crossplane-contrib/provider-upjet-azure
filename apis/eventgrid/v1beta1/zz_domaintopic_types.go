@@ -15,8 +15,14 @@ import (
 
 type DomainTopicObservation struct {
 
+	// Specifies the name of the EventGrid Domain. Changing this forces a new resource to be created.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
 	// The ID of the EventGrid Domain Topic.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which the EventGrid Domain exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type DomainTopicParameters struct {

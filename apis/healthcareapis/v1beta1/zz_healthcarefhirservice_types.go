@@ -14,6 +14,21 @@ import (
 )
 
 type CorsObservation struct {
+
+	// A set of headers to be allowed via CORS.
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and PUT.
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// A set of origins to be allowed via CORS.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// If credentials are allowed via CORS.
+	CredentialsAllowed *bool `json:"credentialsAllowed,omitempty" tf:"credentials_allowed,omitempty"`
+
+	// The max age to be allowed via CORS.
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
 }
 
 type CorsParameters struct {
@@ -40,6 +55,16 @@ type CorsParameters struct {
 }
 
 type HealthcareFHIRServiceAuthenticationObservation struct {
+
+	// The intended audience to receive authentication tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
+	Audience *string `json:"audience,omitempty" tf:"audience,omitempty"`
+
+	// The Azure Active Directory (tenant) that serves as the authentication authority to access the service.
+	// Authority must be registered to Azure AD and in the following format: https://{Azure-AD-endpoint}/{tenant-id}.
+	Authority *string `json:"authority,omitempty" tf:"authority,omitempty"`
+
+	// Whether smart proxy is enabled.
+	SmartProxyEnabled *bool `json:"smartProxyEnabled,omitempty" tf:"smart_proxy_enabled,omitempty"`
 }
 
 type HealthcareFHIRServiceAuthenticationParameters struct {
@@ -65,6 +90,9 @@ type HealthcareFHIRServiceIdentityObservation struct {
 
 	// The ID of the Healthcare FHIR Service.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The type of identity used for the Healthcare FHIR service. Possible values are SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type HealthcareFHIRServiceIdentityParameters struct {
@@ -76,15 +104,47 @@ type HealthcareFHIRServiceIdentityParameters struct {
 
 type HealthcareFHIRServiceObservation struct {
 
+	// A list of the access policies of the service instance.
+	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
+
+	// An authentication block as defined below.
+	Authentication []HealthcareFHIRServiceAuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// Specifies the name of the storage account which the operation configuration information is exported to.
+	ConfigurationExportStorageAccountName *string `json:"configurationExportStorageAccountName,omitempty" tf:"configuration_export_storage_account_name,omitempty"`
+
+	// A list of azure container registry settings used for convert data operation of the service instance.
+	ContainerRegistryLoginServerURL []*string `json:"containerRegistryLoginServerUrl,omitempty" tf:"container_registry_login_server_url,omitempty"`
+
+	// A cors block as defined below.
+	Cors []CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
+
 	// The ID of the Healthcare FHIR Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []HealthcareFHIRServiceIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the kind of the Healthcare FHIR Service. Possible values are: fhir-Stu3 and fhir-R4. Defaults to fhir-R4. Changing this forces a new Healthcare FHIR Service to be created.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// Specifies the Azure Region where the Healthcare FHIR Service should be created. Changing this forces a new Healthcare FHIR Service to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A list of objects describing OCI artifacts for export as defined below.
+	OciArtifact []OciArtifactObservation `json:"ociArtifact,omitempty" tf:"oci_artifact,omitempty"`
 
 	// Whether public networks access is enabled.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Specifies the name of the Resource Group in which to create the Healthcare FHIR Service. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the Healthcare FHIR Service.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the id of the Healthcare Workspace where the Healthcare FHIR Service should exist. Changing this forces a new Healthcare FHIR Service to be created.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type HealthcareFHIRServiceParameters struct {
@@ -94,8 +154,8 @@ type HealthcareFHIRServiceParameters struct {
 	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
 
 	// An authentication block as defined below.
-	// +kubebuilder:validation:Required
-	Authentication []HealthcareFHIRServiceAuthenticationParameters `json:"authentication" tf:"authentication,omitempty"`
+	// +kubebuilder:validation:Optional
+	Authentication []HealthcareFHIRServiceAuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
 	// Specifies the name of the storage account which the operation configuration information is exported to.
 	// +kubebuilder:validation:Optional
@@ -118,8 +178,8 @@ type HealthcareFHIRServiceParameters struct {
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// Specifies the Azure Region where the Healthcare FHIR Service should be created. Changing this forces a new Healthcare FHIR Service to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A list of objects describing OCI artifacts for export as defined below.
 	// +kubebuilder:validation:Optional
@@ -158,6 +218,15 @@ type HealthcareFHIRServiceParameters struct {
 }
 
 type OciArtifactObservation struct {
+
+	// A digest of an image within Azure container registry used for export operations of the service instance to narrow the artifacts down.
+	Digest *string `json:"digest,omitempty" tf:"digest,omitempty"`
+
+	// An image within Azure container registry used for export operations of the service instance.
+	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+
+	// An Azure container registry used for export operations of the service instance.
+	LoginServer *string `json:"loginServer,omitempty" tf:"login_server,omitempty"`
 }
 
 type OciArtifactParameters struct {
@@ -199,8 +268,10 @@ type HealthcareFHIRServiceStatus struct {
 type HealthcareFHIRService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HealthcareFHIRServiceSpec   `json:"spec"`
-	Status            HealthcareFHIRServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authentication)",message="authentication is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   HealthcareFHIRServiceSpec   `json:"spec"`
+	Status HealthcareFHIRServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

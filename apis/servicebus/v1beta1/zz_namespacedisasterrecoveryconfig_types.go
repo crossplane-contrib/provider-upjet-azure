@@ -15,8 +15,17 @@ import (
 
 type NamespaceDisasterRecoveryConfigObservation struct {
 
+	// The Shared access policies used to access the connection string for the alias.
+	AliasAuthorizationRuleID *string `json:"aliasAuthorizationRuleId,omitempty" tf:"alias_authorization_rule_id,omitempty"`
+
 	// The Service Bus Namespace Disaster Recovery Config ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Service Bus Namespace to replicate to.
+	PartnerNamespaceID *string `json:"partnerNamespaceId,omitempty" tf:"partner_namespace_id,omitempty"`
+
+	// The ID of the primary Service Bus Namespace to replicate. Changing this forces a new resource to be created.
+	PrimaryNamespaceID *string `json:"primaryNamespaceId,omitempty" tf:"primary_namespace_id,omitempty"`
 }
 
 type NamespaceDisasterRecoveryConfigParameters struct {

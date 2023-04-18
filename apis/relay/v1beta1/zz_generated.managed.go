@@ -17,6 +17,11 @@ func (mg *EventRelayNamespace) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this EventRelayNamespace.
+func (mg *EventRelayNamespace) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this EventRelayNamespace.
 func (mg *EventRelayNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *EventRelayNamespace) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this EventRelayNamespace.
 func (mg *EventRelayNamespace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this EventRelayNamespace.
+func (mg *EventRelayNamespace) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this EventRelayNamespace.
@@ -83,6 +93,11 @@ func (mg *HybridConnection) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HybridConnection.
+func (mg *HybridConnection) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HybridConnection.
 func (mg *HybridConnection) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *HybridConnection) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HybridConnection.
 func (mg *HybridConnection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HybridConnection.
+func (mg *HybridConnection) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HybridConnection.
@@ -149,6 +169,11 @@ func (mg *HybridConnectionAuthorizationRule) GetDeletionPolicy() xpv1.DeletionPo
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HybridConnectionAuthorizationRule.
+func (mg *HybridConnectionAuthorizationRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HybridConnectionAuthorizationRule.
 func (mg *HybridConnectionAuthorizationRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *HybridConnectionAuthorizationRule) SetConditions(c ...xpv1.Condition) 
 // SetDeletionPolicy of this HybridConnectionAuthorizationRule.
 func (mg *HybridConnectionAuthorizationRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HybridConnectionAuthorizationRule.
+func (mg *HybridConnectionAuthorizationRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HybridConnectionAuthorizationRule.
@@ -215,6 +245,11 @@ func (mg *NamespaceAuthorizationRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this NamespaceAuthorizationRule.
+func (mg *NamespaceAuthorizationRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this NamespaceAuthorizationRule.
 func (mg *NamespaceAuthorizationRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *NamespaceAuthorizationRule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this NamespaceAuthorizationRule.
 func (mg *NamespaceAuthorizationRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this NamespaceAuthorizationRule.
+func (mg *NamespaceAuthorizationRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this NamespaceAuthorizationRule.

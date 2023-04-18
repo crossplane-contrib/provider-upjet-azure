@@ -17,17 +17,32 @@ type ActiveDirectoryAdministratorObservation struct {
 
 	// The ID of the PostgreSQL Active Directory Administrator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The login name of the principal to set as the server administrator
+	Login *string `json:"login,omitempty" tf:"login,omitempty"`
+
+	// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	// The name of the resource group for the PostgreSQL server. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the PostgreSQL Server on which to set the administrator. Changing this forces a new resource to be created.
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// The Azure Tenant ID
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type ActiveDirectoryAdministratorParameters struct {
 
 	// The login name of the principal to set as the server administrator
-	// +kubebuilder:validation:Required
-	Login *string `json:"login" tf:"login,omitempty"`
+	// +kubebuilder:validation:Optional
+	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
 	// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
-	// +kubebuilder:validation:Required
-	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// The name of the resource group for the PostgreSQL server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -56,8 +71,8 @@ type ActiveDirectoryAdministratorParameters struct {
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// The Azure Tenant ID
-	// +kubebuilder:validation:Required
-	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 // ActiveDirectoryAdministratorSpec defines the desired state of ActiveDirectoryAdministrator
@@ -84,8 +99,11 @@ type ActiveDirectoryAdministratorStatus struct {
 type ActiveDirectoryAdministrator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ActiveDirectoryAdministratorSpec   `json:"spec"`
-	Status            ActiveDirectoryAdministratorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.login)",message="login is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.objectId)",message="objectId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tenantId)",message="tenantId is a required parameter"
+	Spec   ActiveDirectoryAdministratorSpec   `json:"spec"`
+	Status ActiveDirectoryAdministratorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

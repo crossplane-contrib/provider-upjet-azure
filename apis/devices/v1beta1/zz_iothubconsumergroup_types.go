@@ -15,8 +15,17 @@ import (
 
 type IOTHubConsumerGroupObservation struct {
 
+	// The name of the Event Hub-compatible endpoint in the IoT hub. Changing this forces a new resource to be created.
+	EventHubEndpointName *string `json:"eventhubEndpointName,omitempty" tf:"eventhub_endpoint_name,omitempty"`
+
 	// The ID of the IoTHub Consumer Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the IoT Hub. Changing this forces a new resource to be created.
+	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
+
+	// The name of the resource group that contains the IoT hub. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type IOTHubConsumerGroupParameters struct {

@@ -14,6 +14,9 @@ import (
 )
 
 type PermissionsObservation struct {
+
+	// A list of data actions that are allowed for the Cosmos DB SQL Role Definition.
+	DataActions []*string `json:"dataActions,omitempty" tf:"data_actions,omitempty"`
 }
 
 type PermissionsParameters struct {
@@ -25,8 +28,29 @@ type PermissionsParameters struct {
 
 type SQLRoleDefinitionObservation struct {
 
+	// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// A list of fully qualified scopes at or below which Role Assignments may be created using this Cosmos DB SQL Role Definition. It will allow application of this Cosmos DB SQL Role Definition on the entire Database Account or any underlying Database/Collection. Scopes higher than Database Account are not enforceable as assignable scopes.
+	AssignableScopes []*string `json:"assignableScopes,omitempty" tf:"assignable_scopes,omitempty"`
+
 	// The ID of the Cosmos DB SQL Role Definition.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An user-friendly name for the Cosmos DB SQL Role Definition which must be unique for the Database Account.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A permissions block as defined below.
+	Permissions []PermissionsObservation `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// The name of the Resource Group in which the Cosmos DB SQL Role Definition is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The GUID as the name of the Cosmos DB SQL Role Definition - one will be generated if not specified. Changing this forces a new resource to be created.
+	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
+
+	// The type of the Cosmos DB SQL Role Definition. Possible values are BuiltInRole and CustomRole. Defaults to CustomRole. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SQLRoleDefinitionParameters struct {
@@ -45,16 +69,16 @@ type SQLRoleDefinitionParameters struct {
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// A list of fully qualified scopes at or below which Role Assignments may be created using this Cosmos DB SQL Role Definition. It will allow application of this Cosmos DB SQL Role Definition on the entire Database Account or any underlying Database/Collection. Scopes higher than Database Account are not enforceable as assignable scopes.
-	// +kubebuilder:validation:Required
-	AssignableScopes []*string `json:"assignableScopes" tf:"assignable_scopes,omitempty"`
+	// +kubebuilder:validation:Optional
+	AssignableScopes []*string `json:"assignableScopes,omitempty" tf:"assignable_scopes,omitempty"`
 
 	// An user-friendly name for the Cosmos DB SQL Role Definition which must be unique for the Database Account.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A permissions block as defined below.
-	// +kubebuilder:validation:Required
-	Permissions []PermissionsParameters `json:"permissions" tf:"permissions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Permissions []PermissionsParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The name of the Resource Group in which the Cosmos DB SQL Role Definition is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -102,8 +126,11 @@ type SQLRoleDefinitionStatus struct {
 type SQLRoleDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLRoleDefinitionSpec   `json:"spec"`
-	Status            SQLRoleDefinitionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.assignableScopes)",message="assignableScopes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.permissions)",message="permissions is a required parameter"
+	Spec   SQLRoleDefinitionSpec   `json:"spec"`
+	Status SQLRoleDefinitionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

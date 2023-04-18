@@ -17,6 +17,15 @@ type SiteRecoveryProtectionContainerObservation struct {
 
 	// The ID of the Site Recovery Protection Container.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of fabric that should contain this protection container. Changing this forces a new resource to be created.
+	RecoveryFabricName *string `json:"recoveryFabricName,omitempty" tf:"recovery_fabric_name,omitempty"`
+
+	// The name of the vault that should be updated. Changing this forces a new resource to be created.
+	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
+
+	// Name of the resource group where the vault that should be updated is located. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type SiteRecoveryProtectionContainerParameters struct {

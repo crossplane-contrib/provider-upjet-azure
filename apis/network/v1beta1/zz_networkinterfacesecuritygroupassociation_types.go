@@ -15,6 +15,12 @@ import (
 
 type NetworkInterfaceSecurityGroupAssociationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Network Interface. Changing this forces a new resource to be created.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// The ID of the Network Security Group which should be attached to the Network Interface. Changing this forces a new resource to be created.
+	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
 }
 
 type NetworkInterfaceSecurityGroupAssociationParameters struct {

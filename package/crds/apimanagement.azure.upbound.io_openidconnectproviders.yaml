@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: openidconnectproviders.apimanagement.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -266,12 +270,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - clientIdSecretRef
-                - clientSecretSecretRef
-                - displayName
-                - metadataEndpoint
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -443,14 +457,41 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: clientIdSecretRef is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientIdSecretRef)
+            - message: clientSecretSecretRef is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientSecretSecretRef)
+            - message: displayName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)
+            - message: metadataEndpoint is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.metadataEndpoint)
           status:
             description: OpenIDConnectProviderStatus defines the observed state of
               OpenIDConnectProvider.
             properties:
               atProvider:
                 properties:
+                  apiManagementName:
+                    description: The name of the API Management Service in which this
+                      OpenID Connect Provider should be created. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  description:
+                    description: A description of this OpenID Connect Provider.
+                    type: string
+                  displayName:
+                    description: A user-friendly name for this OpenID Connect Provider.
+                    type: string
                   id:
                     description: The ID of the API Management OpenID Connect Provider.
+                    type: string
+                  metadataEndpoint:
+                    description: The URI of the Metadata endpoint.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the API Management
+                      Service exists. Changing this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

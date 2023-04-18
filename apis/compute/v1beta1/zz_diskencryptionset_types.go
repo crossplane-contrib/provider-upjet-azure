@@ -15,12 +15,32 @@ import (
 
 type DiskEncryptionSetObservation struct {
 
+	// Boolean flag to specify whether Azure Disk Encryption Set automatically rotates encryption Key to latest version.
+	AutoKeyRotationEnabled *bool `json:"autoKeyRotationEnabled,omitempty" tf:"auto_key_rotation_enabled,omitempty"`
+
+	// The type of key used to encrypt the data of the disk. Possible values are EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys and ConfidentialVmEncryptedWithCustomerKey. Defaults to EncryptionAtRestWithCustomerKey. Changing this forces a new resource to be created.
+	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+
+	// Multi-tenant application client id to access key vault in a different tenant.
+	FederatedClientID *string `json:"federatedClientId,omitempty" tf:"federated_client_id,omitempty"`
+
 	// The ID of the Disk Encryption Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Required
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the URL to a Key Vault Key (either from a Key Vault Key, or the Key URL for the Key Vault Secret).
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// Specifies the Azure Region where the Disk Encryption Set exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the Resource Group where the Disk Encryption Set should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the Disk Encryption Set.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type DiskEncryptionSetParameters struct {
@@ -38,8 +58,8 @@ type DiskEncryptionSetParameters struct {
 	FederatedClientID *string `json:"federatedClientId,omitempty" tf:"federated_client_id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Required
-	Identity []IdentityParameters `json:"identity" tf:"identity,omitempty"`
+	// +kubebuilder:validation:Optional
+	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the URL to a Key Vault Key (either from a Key Vault Key, or the Key URL for the Key Vault Secret).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
@@ -56,8 +76,8 @@ type DiskEncryptionSetParameters struct {
 	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the Azure Region where the Disk Encryption Set exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group where the Disk Encryption Set should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -79,11 +99,17 @@ type DiskEncryptionSetParameters struct {
 
 type IdentityObservation struct {
 
+	// A list of User Assigned Managed Identity IDs to be assigned to this Disk Encryption Set.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The (Client) ID of the Service Principal.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The ID of the Tenant the Service Principal is assigned in.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The type of Managed Service Identity that is configured on this Disk Encryption Set. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -121,8 +147,10 @@ type DiskEncryptionSetStatus struct {
 type DiskEncryptionSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DiskEncryptionSetSpec   `json:"spec"`
-	Status            DiskEncryptionSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identity)",message="identity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   DiskEncryptionSetSpec   `json:"spec"`
+	Status DiskEncryptionSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

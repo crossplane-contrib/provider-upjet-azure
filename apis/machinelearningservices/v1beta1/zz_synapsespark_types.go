@@ -15,11 +15,17 @@ import (
 
 type SynapseSparkIdentityObservation struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Synapse Spark. Changing this forces a new resource to be created.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this Machine Learning Synapse Spark.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Machine Learning Synapse Spark.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Synapse Spark. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SynapseSparkIdentityParameters struct {
@@ -35,12 +41,29 @@ type SynapseSparkIdentityParameters struct {
 
 type SynapseSparkObservation struct {
 
+	// The description of the Machine Learning Synapse Spark. Changing this forces a new Machine Learning Synapse Spark to be created.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Machine Learning Synapse Spark.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below. Changing this forces a new Machine Learning Synapse Spark to be created.
-	// +kubebuilder:validation:Optional
 	Identity []SynapseSparkIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Synapse Spark to be created.
+	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
+
+	// The Azure Region where the Machine Learning Synapse Spark should exist. Changing this forces a new Machine Learning Synapse Spark to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Synapse Spark to be created.
+	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
+
+	// The ID of the linked Synapse Spark Pool. Changing this forces a new Machine Learning Synapse Spark to be created.
+	SynapseSparkPoolID *string `json:"synapseSparkPoolId,omitempty" tf:"synapse_spark_pool_id,omitempty"`
+
+	// A mapping of tags which should be assigned to the Machine Learning Synapse Spark. Changing this forces a new Machine Learning Synapse Spark to be created.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SynapseSparkParameters struct {
@@ -58,8 +81,8 @@ type SynapseSparkParameters struct {
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// The Azure Region where the Machine Learning Synapse Spark should exist. Changing this forces a new Machine Learning Synapse Spark to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Synapse Spark to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/machinelearningservices/v1beta1.Workspace
@@ -118,8 +141,9 @@ type SynapseSparkStatus struct {
 type SynapseSpark struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SynapseSparkSpec   `json:"spec"`
-	Status            SynapseSparkStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   SynapseSparkSpec   `json:"spec"`
+	Status SynapseSparkStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

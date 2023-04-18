@@ -15,11 +15,41 @@ import (
 
 type ExpressRouteCircuitObservation struct {
 
+	// Allow the circuit to interact with classic (RDFE) resources. Defaults to false.
+	AllowClassicOperations *bool `json:"allowClassicOperations,omitempty" tf:"allow_classic_operations,omitempty"`
+
+	// The bandwidth in Gbps of the circuit being created on the Express Route Port.
+	BandwidthInGbps *float64 `json:"bandwidthInGbps,omitempty" tf:"bandwidth_in_gbps,omitempty"`
+
+	// The bandwidth in Mbps of the circuit being created on the Service Provider.
+	BandwidthInMbps *float64 `json:"bandwidthInMbps,omitempty" tf:"bandwidth_in_mbps,omitempty"`
+
+	// The ID of the Express Route Port this Express Route Circuit is based on. Changing this forces a new resource to be created.
+	ExpressRoutePortID *string `json:"expressRoutePortId,omitempty" tf:"express_route_port_id,omitempty"`
+
 	// The ID of the ExpressRoute circuit.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the peering location and not the Azure resource location. Changing this forces a new resource to be created.
+	PeeringLocation *string `json:"peeringLocation,omitempty" tf:"peering_location,omitempty"`
+
+	// The name of the resource group in which to create the ExpressRoute circuit. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the ExpressRoute Service Provider. Changing this forces a new resource to be created.
+	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
+
 	// The ExpressRoute circuit provisioning state from your chosen service provider. Possible values are NotProvisioned, Provisioning, Provisioned, and Deprovisioning.
 	ServiceProviderProvisioningState *string `json:"serviceProviderProvisioningState,omitempty" tf:"service_provider_provisioning_state,omitempty"`
+
+	// A sku block for the ExpressRoute circuit as documented below.
+	Sku []ExpressRouteCircuitSkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ExpressRouteCircuitParameters struct {
@@ -41,8 +71,8 @@ type ExpressRouteCircuitParameters struct {
 	ExpressRoutePortID *string `json:"expressRoutePortId,omitempty" tf:"express_route_port_id,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the peering location and not the Azure resource location. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -66,8 +96,8 @@ type ExpressRouteCircuitParameters struct {
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
 
 	// A sku block for the ExpressRoute circuit as documented below.
-	// +kubebuilder:validation:Required
-	Sku []ExpressRouteCircuitSkuParameters `json:"sku" tf:"sku,omitempty"`
+	// +kubebuilder:validation:Optional
+	Sku []ExpressRouteCircuitSkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -75,6 +105,12 @@ type ExpressRouteCircuitParameters struct {
 }
 
 type ExpressRouteCircuitSkuObservation struct {
+
+	// The billing mode for bandwidth. Possible values are MeteredData or UnlimitedData.
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
+
+	// The service tier. Possible values are Basic, Local, Standard or Premium.
+	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
 type ExpressRouteCircuitSkuParameters struct {
@@ -112,8 +148,10 @@ type ExpressRouteCircuitStatus struct {
 type ExpressRouteCircuit struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ExpressRouteCircuitSpec   `json:"spec"`
-	Status            ExpressRouteCircuitStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)",message="sku is a required parameter"
+	Spec   ExpressRouteCircuitSpec   `json:"spec"`
+	Status ExpressRouteCircuitStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

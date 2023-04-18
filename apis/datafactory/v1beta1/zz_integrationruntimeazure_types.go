@@ -14,7 +14,32 @@ import (
 )
 
 type IntegrationRuntimeAzureObservation struct {
+
+	// Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.
+	CleanupEnabled *bool `json:"cleanupEnabled,omitempty" tf:"cleanup_enabled,omitempty"`
+
+	// Compute type of the cluster which will execute data flow job. Valid values are General, ComputeOptimized and MemoryOptimized. Defaults to General.
+	ComputeType *string `json:"computeType,omitempty" tf:"compute_type,omitempty"`
+
+	// Core count of the cluster which will execute data flow job. Valid values are 8, 16, 32, 48, 80, 144 and 272. Defaults to 8.
+	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// Integration runtime description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Use AutoResolve to create an auto-resolve integration runtime. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Time to live (in minutes) setting of the cluster which will execute data flow job. Defaults to 0.
+	TimeToLiveMin *float64 `json:"timeToLiveMin,omitempty" tf:"time_to_live_min,omitempty"`
+
+	// Is Integration Runtime compute provisioned within Managed Virtual Network? Changing this forces a new resource to be created.
+	VirtualNetworkEnabled *bool `json:"virtualNetworkEnabled,omitempty" tf:"virtual_network_enabled,omitempty"`
 }
 
 type IntegrationRuntimeAzureParameters struct {
@@ -50,8 +75,8 @@ type IntegrationRuntimeAzureParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Use AutoResolve to create an auto-resolve integration runtime. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Time to live (in minutes) setting of the cluster which will execute data flow job. Defaults to 0.
 	// +kubebuilder:validation:Optional
@@ -86,8 +111,9 @@ type IntegrationRuntimeAzureStatus struct {
 type IntegrationRuntimeAzure struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IntegrationRuntimeAzureSpec   `json:"spec"`
-	Status            IntegrationRuntimeAzureStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   IntegrationRuntimeAzureSpec   `json:"spec"`
+	Status IntegrationRuntimeAzureStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

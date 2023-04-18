@@ -17,6 +17,11 @@ func (mg *AuthorizationRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this AuthorizationRule.
+func (mg *AuthorizationRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this AuthorizationRule.
 func (mg *AuthorizationRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *AuthorizationRule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this AuthorizationRule.
 func (mg *AuthorizationRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this AuthorizationRule.
+func (mg *AuthorizationRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this AuthorizationRule.
@@ -83,6 +93,11 @@ func (mg *NotificationHub) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this NotificationHub.
+func (mg *NotificationHub) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this NotificationHub.
 func (mg *NotificationHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *NotificationHub) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this NotificationHub.
 func (mg *NotificationHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this NotificationHub.
+func (mg *NotificationHub) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this NotificationHub.
@@ -149,6 +169,11 @@ func (mg *NotificationHubNamespace) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this NotificationHubNamespace.
+func (mg *NotificationHubNamespace) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this NotificationHubNamespace.
 func (mg *NotificationHubNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *NotificationHubNamespace) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this NotificationHubNamespace.
 func (mg *NotificationHubNamespace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this NotificationHubNamespace.
+func (mg *NotificationHubNamespace) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this NotificationHubNamespace.

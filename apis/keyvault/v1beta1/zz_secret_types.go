@@ -15,14 +15,29 @@ import (
 
 type SecretObservation struct {
 
+	// Specifies the content type for the Key Vault Secret.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
+	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
+
 	// The Key Vault Secret ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Key Vault where the Secret should be created. Changing this forces a new resource to be created.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
+	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
 
 	// The (Versioned) ID for this Key Vault Secret. This property points to a specific version of a Key Vault Secret, as such using this won't auto-rotate values if used in other Azure Services.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// The Versionless ID of the Key Vault Secret. This property allows other Azure Services (that support it) to auto-rotate their value when the Key Vault Secret is updated.
 	ResourceVersionlessID *string `json:"resourceVersionlessId,omitempty" tf:"resource_versionless_id,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The current version of the Key Vault Secret.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -64,7 +79,7 @@ type SecretParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the value of the Key Vault Secret.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
@@ -92,8 +107,9 @@ type SecretStatus struct {
 type Secret struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecretSpec   `json:"spec"`
-	Status            SecretStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.valueSecretRef)",message="valueSecretRef is a required parameter"
+	Spec   SecretSpec   `json:"spec"`
+	Status SecretStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

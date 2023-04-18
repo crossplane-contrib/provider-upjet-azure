@@ -20,13 +20,25 @@ type DeviceObservation struct {
 
 	// The ID of the Databox Edge Device.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Databox Edge Device should exist. Changing this forces a new Databox Edge Device to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where the Databox Edge Device should exist. Changing this forces a new Databox Edge Device to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The sku_name is comprised of two segments separated by a hyphen (e.g. TEA_1Node_UPS_Heater-Standard). The first segment of the sku_name defines the name of the SKU, possible values are Gateway, EdgeMR_Mini, EdgeP_Base, EdgeP_High, EdgePR_Base, EdgePR_Base_UPS, GPU, RCA_Large, RCA_Small, RDC, TCA_Large, TCA_Small, TDC, TEA_1Node, TEA_1Node_UPS, TEA_1Node_Heater, TEA_1Node_UPS_Heater, TEA_4Node_Heater, TEA_4Node_UPS_Heater or TMA. The second segment defines the tier of the sku_name, possible values are Standard. For more information see the product documentation. Changing this forces a new Databox Edge Device to be created.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Databox Edge Device.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type DeviceParameters struct {
 
 	// The Azure Region where the Databox Edge Device should exist. Changing this forces a new Databox Edge Device to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Databox Edge Device should exist. Changing this forces a new Databox Edge Device to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -42,8 +54,8 @@ type DeviceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The sku_name is comprised of two segments separated by a hyphen (e.g. TEA_1Node_UPS_Heater-Standard). The first segment of the sku_name defines the name of the SKU, possible values are Gateway, EdgeMR_Mini, EdgeP_Base, EdgeP_High, EdgePR_Base, EdgePR_Base_UPS, GPU, RCA_Large, RCA_Small, RDC, TCA_Large, TCA_Small, TDC, TEA_1Node, TEA_1Node_UPS, TEA_1Node_Heater, TEA_1Node_UPS_Heater, TEA_4Node_Heater, TEA_4Node_UPS_Heater or TMA. The second segment defines the tier of the sku_name, possible values are Standard. For more information see the product documentation. Changing this forces a new Databox Edge Device to be created.
-	// +kubebuilder:validation:Required
-	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Databox Edge Device.
 	// +kubebuilder:validation:Optional
@@ -113,8 +125,10 @@ type DeviceStatus struct {
 type Device struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DeviceSpec   `json:"spec"`
-	Status            DeviceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	Spec   DeviceSpec   `json:"spec"`
+	Status DeviceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

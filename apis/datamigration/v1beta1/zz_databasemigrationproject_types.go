@@ -17,17 +17,38 @@ type DatabaseMigrationProjectObservation struct {
 
 	// The ID of Database Migration Project.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specify the name of the database migration project. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Name of the resource group in which to create the database migration project. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Name of the database migration service where resource belongs to. Changing this forces a new resource to be created.
+	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+
+	// The platform type of the migration source. Currently only support: SQL(on-premises SQL Server). Changing this forces a new resource to be created.
+	SourcePlatform *string `json:"sourcePlatform,omitempty" tf:"source_platform,omitempty"`
+
+	// A mapping of tags to assigned to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The platform type of the migration target. Currently only support: SQLDB(Azure SQL Database). Changing this forces a new resource to be created.
+	TargetPlatform *string `json:"targetPlatform,omitempty" tf:"target_platform,omitempty"`
 }
 
 type DatabaseMigrationProjectParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specify the name of the database migration project. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Name of the resource group in which to create the database migration project. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -57,16 +78,16 @@ type DatabaseMigrationProjectParameters struct {
 	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// The platform type of the migration source. Currently only support: SQL(on-premises SQL Server). Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SourcePlatform *string `json:"sourcePlatform" tf:"source_platform,omitempty"`
+	// +kubebuilder:validation:Optional
+	SourcePlatform *string `json:"sourcePlatform,omitempty" tf:"source_platform,omitempty"`
 
 	// A mapping of tags to assigned to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The platform type of the migration target. Currently only support: SQLDB(Azure SQL Database). Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	TargetPlatform *string `json:"targetPlatform" tf:"target_platform,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetPlatform *string `json:"targetPlatform,omitempty" tf:"target_platform,omitempty"`
 }
 
 // DatabaseMigrationProjectSpec defines the desired state of DatabaseMigrationProject
@@ -93,8 +114,12 @@ type DatabaseMigrationProjectStatus struct {
 type DatabaseMigrationProject struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DatabaseMigrationProjectSpec   `json:"spec"`
-	Status            DatabaseMigrationProjectStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sourcePlatform)",message="sourcePlatform is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetPlatform)",message="targetPlatform is a required parameter"
+	Spec   DatabaseMigrationProjectSpec   `json:"spec"`
+	Status DatabaseMigrationProjectStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

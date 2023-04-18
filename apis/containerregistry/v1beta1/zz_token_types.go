@@ -15,8 +15,20 @@ import (
 
 type TokenObservation struct {
 
+	// The name of the Container Registry. Changing this forces a new resource to be created.
+	ContainerRegistryName *string `json:"containerRegistryName,omitempty" tf:"container_registry_name,omitempty"`
+
+	// Should the Container Registry token be enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The ID of the Container Registry token.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which to create the Container Registry token. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The ID of the Container Registry Scope Map associated with the token.
+	ScopeMapID *string `json:"scopeMapId,omitempty" tf:"scope_map_id,omitempty"`
 }
 
 type TokenParameters struct {

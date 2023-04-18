@@ -15,8 +15,26 @@ import (
 
 type AssetObservation struct {
 
+	// The alternate ID of the Asset.
+	AlternateID *string `json:"alternateId,omitempty" tf:"alternate_id,omitempty"`
+
+	// The name of the asset blob container. Changing this forces a new Media Asset to be created.
+	Container *string `json:"container,omitempty" tf:"container,omitempty"`
+
+	// The Asset description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Media Asset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the Media Services Account. Changing this forces a new Media Asset to be created.
+	MediaServicesAccountName *string `json:"mediaServicesAccountName,omitempty" tf:"media_services_account_name,omitempty"`
+
+	// The name of the Resource Group where the Media Asset should exist. Changing this forces a new Media Asset to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the storage account where to store the media asset. Changing this forces a new Media Asset to be created.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 }
 
 type AssetParameters struct {

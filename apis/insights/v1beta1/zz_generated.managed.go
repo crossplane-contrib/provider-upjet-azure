@@ -17,6 +17,11 @@ func (mg *ApplicationInsights) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ApplicationInsights.
+func (mg *ApplicationInsights) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ApplicationInsights.
 func (mg *ApplicationInsights) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *ApplicationInsights) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ApplicationInsights.
 func (mg *ApplicationInsights) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ApplicationInsights.
+func (mg *ApplicationInsights) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ApplicationInsights.
@@ -83,6 +93,11 @@ func (mg *ApplicationInsightsAPIKey) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ApplicationInsightsAPIKey.
+func (mg *ApplicationInsightsAPIKey) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ApplicationInsightsAPIKey.
 func (mg *ApplicationInsightsAPIKey) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *ApplicationInsightsAPIKey) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ApplicationInsightsAPIKey.
 func (mg *ApplicationInsightsAPIKey) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ApplicationInsightsAPIKey.
+func (mg *ApplicationInsightsAPIKey) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ApplicationInsightsAPIKey.
@@ -149,6 +169,11 @@ func (mg *ApplicationInsightsAnalyticsItem) GetDeletionPolicy() xpv1.DeletionPol
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ApplicationInsightsAnalyticsItem.
+func (mg *ApplicationInsightsAnalyticsItem) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ApplicationInsightsAnalyticsItem.
 func (mg *ApplicationInsightsAnalyticsItem) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *ApplicationInsightsAnalyticsItem) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ApplicationInsightsAnalyticsItem.
 func (mg *ApplicationInsightsAnalyticsItem) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ApplicationInsightsAnalyticsItem.
+func (mg *ApplicationInsightsAnalyticsItem) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ApplicationInsightsAnalyticsItem.
@@ -215,6 +245,11 @@ func (mg *ApplicationInsightsSmartDetectionRule) GetDeletionPolicy() xpv1.Deleti
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ApplicationInsightsSmartDetectionRule.
+func (mg *ApplicationInsightsSmartDetectionRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ApplicationInsightsSmartDetectionRule.
 func (mg *ApplicationInsightsSmartDetectionRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *ApplicationInsightsSmartDetectionRule) SetConditions(c ...xpv1.Conditi
 // SetDeletionPolicy of this ApplicationInsightsSmartDetectionRule.
 func (mg *ApplicationInsightsSmartDetectionRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ApplicationInsightsSmartDetectionRule.
+func (mg *ApplicationInsightsSmartDetectionRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ApplicationInsightsSmartDetectionRule.
@@ -281,6 +321,11 @@ func (mg *ApplicationInsightsStandardWebTest) GetDeletionPolicy() xpv1.DeletionP
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ApplicationInsightsStandardWebTest.
+func (mg *ApplicationInsightsStandardWebTest) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ApplicationInsightsStandardWebTest.
 func (mg *ApplicationInsightsStandardWebTest) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *ApplicationInsightsStandardWebTest) SetConditions(c ...xpv1.Condition)
 // SetDeletionPolicy of this ApplicationInsightsStandardWebTest.
 func (mg *ApplicationInsightsStandardWebTest) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ApplicationInsightsStandardWebTest.
+func (mg *ApplicationInsightsStandardWebTest) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ApplicationInsightsStandardWebTest.
@@ -347,6 +397,11 @@ func (mg *ApplicationInsightsWebTest) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ApplicationInsightsWebTest.
+func (mg *ApplicationInsightsWebTest) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ApplicationInsightsWebTest.
 func (mg *ApplicationInsightsWebTest) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *ApplicationInsightsWebTest) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ApplicationInsightsWebTest.
 func (mg *ApplicationInsightsWebTest) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ApplicationInsightsWebTest.
+func (mg *ApplicationInsightsWebTest) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ApplicationInsightsWebTest.
@@ -413,6 +473,11 @@ func (mg *ApplicationInsightsWorkbook) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ApplicationInsightsWorkbook.
+func (mg *ApplicationInsightsWorkbook) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ApplicationInsightsWorkbook.
 func (mg *ApplicationInsightsWorkbook) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *ApplicationInsightsWorkbook) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ApplicationInsightsWorkbook.
 func (mg *ApplicationInsightsWorkbook) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ApplicationInsightsWorkbook.
+func (mg *ApplicationInsightsWorkbook) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ApplicationInsightsWorkbook.
@@ -479,6 +549,11 @@ func (mg *ApplicationInsightsWorkbookTemplate) GetDeletionPolicy() xpv1.Deletion
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ApplicationInsightsWorkbookTemplate.
+func (mg *ApplicationInsightsWorkbookTemplate) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ApplicationInsightsWorkbookTemplate.
 func (mg *ApplicationInsightsWorkbookTemplate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -510,6 +585,11 @@ func (mg *ApplicationInsightsWorkbookTemplate) SetConditions(c ...xpv1.Condition
 // SetDeletionPolicy of this ApplicationInsightsWorkbookTemplate.
 func (mg *ApplicationInsightsWorkbookTemplate) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ApplicationInsightsWorkbookTemplate.
+func (mg *ApplicationInsightsWorkbookTemplate) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ApplicationInsightsWorkbookTemplate.
@@ -545,6 +625,11 @@ func (mg *MonitorActionGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MonitorActionGroup.
+func (mg *MonitorActionGroup) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MonitorActionGroup.
 func (mg *MonitorActionGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -576,6 +661,11 @@ func (mg *MonitorActionGroup) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MonitorActionGroup.
 func (mg *MonitorActionGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MonitorActionGroup.
+func (mg *MonitorActionGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MonitorActionGroup.
@@ -611,6 +701,11 @@ func (mg *MonitorActivityLogAlert) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MonitorActivityLogAlert.
+func (mg *MonitorActivityLogAlert) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MonitorActivityLogAlert.
 func (mg *MonitorActivityLogAlert) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -642,6 +737,11 @@ func (mg *MonitorActivityLogAlert) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MonitorActivityLogAlert.
 func (mg *MonitorActivityLogAlert) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MonitorActivityLogAlert.
+func (mg *MonitorActivityLogAlert) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MonitorActivityLogAlert.
@@ -677,6 +777,11 @@ func (mg *MonitorAutoscaleSetting) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MonitorAutoscaleSetting.
+func (mg *MonitorAutoscaleSetting) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MonitorAutoscaleSetting.
 func (mg *MonitorAutoscaleSetting) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -708,6 +813,11 @@ func (mg *MonitorAutoscaleSetting) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MonitorAutoscaleSetting.
 func (mg *MonitorAutoscaleSetting) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MonitorAutoscaleSetting.
+func (mg *MonitorAutoscaleSetting) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MonitorAutoscaleSetting.
@@ -743,6 +853,11 @@ func (mg *MonitorDataCollectionEndpoint) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MonitorDataCollectionEndpoint.
+func (mg *MonitorDataCollectionEndpoint) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MonitorDataCollectionEndpoint.
 func (mg *MonitorDataCollectionEndpoint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -774,6 +889,11 @@ func (mg *MonitorDataCollectionEndpoint) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MonitorDataCollectionEndpoint.
 func (mg *MonitorDataCollectionEndpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MonitorDataCollectionEndpoint.
+func (mg *MonitorDataCollectionEndpoint) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MonitorDataCollectionEndpoint.
@@ -809,6 +929,11 @@ func (mg *MonitorDataCollectionRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MonitorDataCollectionRule.
+func (mg *MonitorDataCollectionRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MonitorDataCollectionRule.
 func (mg *MonitorDataCollectionRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -840,6 +965,11 @@ func (mg *MonitorDataCollectionRule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MonitorDataCollectionRule.
 func (mg *MonitorDataCollectionRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MonitorDataCollectionRule.
+func (mg *MonitorDataCollectionRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MonitorDataCollectionRule.
@@ -875,6 +1005,11 @@ func (mg *MonitorDataCollectionRuleAssociation) GetDeletionPolicy() xpv1.Deletio
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MonitorDataCollectionRuleAssociation.
+func (mg *MonitorDataCollectionRuleAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MonitorDataCollectionRuleAssociation.
 func (mg *MonitorDataCollectionRuleAssociation) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -906,6 +1041,11 @@ func (mg *MonitorDataCollectionRuleAssociation) SetConditions(c ...xpv1.Conditio
 // SetDeletionPolicy of this MonitorDataCollectionRuleAssociation.
 func (mg *MonitorDataCollectionRuleAssociation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MonitorDataCollectionRuleAssociation.
+func (mg *MonitorDataCollectionRuleAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MonitorDataCollectionRuleAssociation.
@@ -941,6 +1081,11 @@ func (mg *MonitorMetricAlert) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MonitorMetricAlert.
+func (mg *MonitorMetricAlert) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MonitorMetricAlert.
 func (mg *MonitorMetricAlert) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -972,6 +1117,11 @@ func (mg *MonitorMetricAlert) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MonitorMetricAlert.
 func (mg *MonitorMetricAlert) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MonitorMetricAlert.
+func (mg *MonitorMetricAlert) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MonitorMetricAlert.
@@ -1007,6 +1157,11 @@ func (mg *MonitorPrivateLinkScope) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MonitorPrivateLinkScope.
+func (mg *MonitorPrivateLinkScope) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MonitorPrivateLinkScope.
 func (mg *MonitorPrivateLinkScope) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1038,6 +1193,11 @@ func (mg *MonitorPrivateLinkScope) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MonitorPrivateLinkScope.
 func (mg *MonitorPrivateLinkScope) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MonitorPrivateLinkScope.
+func (mg *MonitorPrivateLinkScope) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MonitorPrivateLinkScope.
@@ -1073,6 +1233,11 @@ func (mg *MonitorPrivateLinkScopedService) GetDeletionPolicy() xpv1.DeletionPoli
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MonitorPrivateLinkScopedService.
+func (mg *MonitorPrivateLinkScopedService) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MonitorPrivateLinkScopedService.
 func (mg *MonitorPrivateLinkScopedService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1104,6 +1269,11 @@ func (mg *MonitorPrivateLinkScopedService) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MonitorPrivateLinkScopedService.
 func (mg *MonitorPrivateLinkScopedService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MonitorPrivateLinkScopedService.
+func (mg *MonitorPrivateLinkScopedService) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MonitorPrivateLinkScopedService.
@@ -1139,6 +1309,11 @@ func (mg *MonitorScheduledQueryRulesAlert) GetDeletionPolicy() xpv1.DeletionPoli
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MonitorScheduledQueryRulesAlert.
+func (mg *MonitorScheduledQueryRulesAlert) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MonitorScheduledQueryRulesAlert.
 func (mg *MonitorScheduledQueryRulesAlert) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1170,6 +1345,11 @@ func (mg *MonitorScheduledQueryRulesAlert) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MonitorScheduledQueryRulesAlert.
 func (mg *MonitorScheduledQueryRulesAlert) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MonitorScheduledQueryRulesAlert.
+func (mg *MonitorScheduledQueryRulesAlert) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MonitorScheduledQueryRulesAlert.
@@ -1205,6 +1385,11 @@ func (mg *MonitorScheduledQueryRulesAlertV2) GetDeletionPolicy() xpv1.DeletionPo
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MonitorScheduledQueryRulesAlertV2.
+func (mg *MonitorScheduledQueryRulesAlertV2) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MonitorScheduledQueryRulesAlertV2.
 func (mg *MonitorScheduledQueryRulesAlertV2) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1236,6 +1421,11 @@ func (mg *MonitorScheduledQueryRulesAlertV2) SetConditions(c ...xpv1.Condition) 
 // SetDeletionPolicy of this MonitorScheduledQueryRulesAlertV2.
 func (mg *MonitorScheduledQueryRulesAlertV2) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MonitorScheduledQueryRulesAlertV2.
+func (mg *MonitorScheduledQueryRulesAlertV2) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MonitorScheduledQueryRulesAlertV2.
@@ -1271,6 +1461,11 @@ func (mg *MonitorScheduledQueryRulesLog) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this MonitorScheduledQueryRulesLog.
+func (mg *MonitorScheduledQueryRulesLog) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this MonitorScheduledQueryRulesLog.
 func (mg *MonitorScheduledQueryRulesLog) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -1302,6 +1497,11 @@ func (mg *MonitorScheduledQueryRulesLog) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this MonitorScheduledQueryRulesLog.
 func (mg *MonitorScheduledQueryRulesLog) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this MonitorScheduledQueryRulesLog.
+func (mg *MonitorScheduledQueryRulesLog) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this MonitorScheduledQueryRulesLog.

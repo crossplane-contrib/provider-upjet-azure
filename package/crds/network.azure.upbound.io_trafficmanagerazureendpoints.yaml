@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: trafficmanagerazureendpoints.network.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -282,6 +286,21 @@ spec:
                       1 and 1000.
                     type: number
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -459,9 +478,72 @@ spec:
             properties:
               atProvider:
                 properties:
+                  customHeader:
+                    description: One or more custom_header blocks as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: The name of the custom header.
+                          type: string
+                        value:
+                          description: The value of custom header. Applicable for
+                            HTTP and HTTPS protocol.
+                          type: string
+                      type: object
+                    type: array
+                  enabled:
+                    description: Is the endpoint enabled? Defaults to true.
+                    type: boolean
+                  geoMappings:
+                    description: A list of Geographic Regions used to distribute traffic,
+                      such as WORLD, UK or DE. The same location can't be specified
+                      in two endpoints. See the Geographic Hierarchies documentation
+                      for more information.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The ID of the Azure Endpoint.
                     type: string
+                  priority:
+                    description: Specifies the priority of this Endpoint, this must
+                      be specified for Profiles using the Priority traffic routing
+                      method. Supports values between 1 and 1000, with no Endpoints
+                      sharing the same value. If omitted the value will be computed
+                      in order of creation.
+                    type: number
+                  profileId:
+                    description: The ID of the Traffic Manager Profile that this Azure
+                      Endpoint should be created within. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  subnet:
+                    description: One or more subnet blocks as defined below. Changing
+                      this forces a new resource to be created.
+                    items:
+                      properties:
+                        first:
+                          description: The first IP Address in this subnet.
+                          type: string
+                        last:
+                          description: The last IP Address in this subnet.
+                          type: string
+                        scope:
+                          description: The block size (number of leading bits in the
+                            subnet mask).
+                          type: number
+                      type: object
+                    type: array
+                  targetResourceId:
+                    description: The ID of the Azure Resource which should be used
+                      as a target.
+                    type: string
+                  weight:
+                    description: Specifies how much traffic should be distributed
+                      to this endpoint, this must be specified for Profiles using
+                      the Weighted traffic routing method. Valid values are between
+                      1 and 1000.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

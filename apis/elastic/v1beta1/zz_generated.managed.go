@@ -17,6 +17,11 @@ func (mg *CloudElasticsearch) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this CloudElasticsearch.
+func (mg *CloudElasticsearch) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this CloudElasticsearch.
 func (mg *CloudElasticsearch) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *CloudElasticsearch) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this CloudElasticsearch.
 func (mg *CloudElasticsearch) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this CloudElasticsearch.
+func (mg *CloudElasticsearch) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this CloudElasticsearch.

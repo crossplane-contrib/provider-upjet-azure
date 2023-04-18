@@ -15,8 +15,29 @@ import (
 
 type VirtualNetworkPeeringObservation struct {
 
+	// Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to false.
+	AllowForwardedTraffic *bool `json:"allowForwardedTraffic,omitempty" tf:"allow_forwarded_traffic,omitempty"`
+
+	// Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network.
+	AllowGatewayTransit *bool `json:"allowGatewayTransit,omitempty" tf:"allow_gateway_transit,omitempty"`
+
+	// Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to true.
+	AllowVirtualNetworkAccess *bool `json:"allowVirtualNetworkAccess,omitempty" tf:"allow_virtual_network_access,omitempty"`
+
 	// The ID of the Virtual Network Peering.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created.
+	RemoteVirtualNetworkID *string `json:"remoteVirtualNetworkId,omitempty" tf:"remote_virtual_network_id,omitempty"`
+
+	// The name of the resource group in which to create the virtual network peering. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Controls if remote gateways can be used on the local virtual network. If the flag is set to true, and allow_gateway_transit on the remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. Defaults to false.
+	UseRemoteGateways *bool `json:"useRemoteGateways,omitempty" tf:"use_remote_gateways,omitempty"`
+
+	// The name of the virtual network. Changing this forces a new resource to be created.
+	VirtualNetworkName *string `json:"virtualNetworkName,omitempty" tf:"virtual_network_name,omitempty"`
 }
 
 type VirtualNetworkPeeringParameters struct {

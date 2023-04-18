@@ -15,15 +15,27 @@ import (
 
 type LogAnalyticsLinkedStorageAccountObservation struct {
 
+	// The data source type which should be used for this Log Analytics Linked Storage Account. Possible values are CustomLogs, AzureWatson, Query, Ingestion and Alerts. Changing this forces a new Log Analytics Linked Storage Account to be created.
+	DataSourceType *string `json:"dataSourceType,omitempty" tf:"data_source_type,omitempty"`
+
 	// The ID of the Log Analytics Linked Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Resource Group where the Log Analytics Linked Storage Account should exist. Changing this forces a new Log Analytics Linked Storage Account to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The storage account resource ids to be linked.
+	StorageAccountIds []*string `json:"storageAccountIds,omitempty" tf:"storage_account_ids,omitempty"`
+
+	// The resource ID of the Log Analytics Workspace. Changing this forces a new Log Analytics Linked Storage Account to be created.
+	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
 }
 
 type LogAnalyticsLinkedStorageAccountParameters struct {
 
 	// The data source type which should be used for this Log Analytics Linked Storage Account. Possible values are CustomLogs, AzureWatson, Query, Ingestion and Alerts. Changing this forces a new Log Analytics Linked Storage Account to be created.
-	// +kubebuilder:validation:Required
-	DataSourceType *string `json:"dataSourceType" tf:"data_source_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataSourceType *string `json:"dataSourceType,omitempty" tf:"data_source_type,omitempty"`
 
 	// The name of the Resource Group where the Log Analytics Linked Storage Account should exist. Changing this forces a new Log Analytics Linked Storage Account to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -91,8 +103,9 @@ type LogAnalyticsLinkedStorageAccountStatus struct {
 type LogAnalyticsLinkedStorageAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LogAnalyticsLinkedStorageAccountSpec   `json:"spec"`
-	Status            LogAnalyticsLinkedStorageAccountStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataSourceType)",message="dataSourceType is a required parameter"
+	Spec   LogAnalyticsLinkedStorageAccountSpec   `json:"spec"`
+	Status LogAnalyticsLinkedStorageAccountStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

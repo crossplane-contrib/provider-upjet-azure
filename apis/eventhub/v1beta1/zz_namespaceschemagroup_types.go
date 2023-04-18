@@ -17,6 +17,15 @@ type NamespaceSchemaGroupObservation struct {
 
 	// The ID of the EventHub Namespace Schema Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the ID of the EventHub Namespace. Changing this forces a new resource to be created.
+	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	// Specifies the compatibility of this schema group. Possible values are None, Backward, Forward. Changing this forces a new resource to be created.
+	SchemaCompatibility *string `json:"schemaCompatibility,omitempty" tf:"schema_compatibility,omitempty"`
+
+	// Specifies the Type of this schema group. Possible values are Avro, Unknown. Changing this forces a new resource to be created.
+	SchemaType *string `json:"schemaType,omitempty" tf:"schema_type,omitempty"`
 }
 
 type NamespaceSchemaGroupParameters struct {
@@ -36,12 +45,12 @@ type NamespaceSchemaGroupParameters struct {
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the compatibility of this schema group. Possible values are None, Backward, Forward. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SchemaCompatibility *string `json:"schemaCompatibility" tf:"schema_compatibility,omitempty"`
+	// +kubebuilder:validation:Optional
+	SchemaCompatibility *string `json:"schemaCompatibility,omitempty" tf:"schema_compatibility,omitempty"`
 
 	// Specifies the Type of this schema group. Possible values are Avro, Unknown. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SchemaType *string `json:"schemaType" tf:"schema_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	SchemaType *string `json:"schemaType,omitempty" tf:"schema_type,omitempty"`
 }
 
 // NamespaceSchemaGroupSpec defines the desired state of NamespaceSchemaGroup
@@ -68,8 +77,10 @@ type NamespaceSchemaGroupStatus struct {
 type NamespaceSchemaGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NamespaceSchemaGroupSpec   `json:"spec"`
-	Status            NamespaceSchemaGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schemaCompatibility)",message="schemaCompatibility is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schemaType)",message="schemaType is a required parameter"
+	Spec   NamespaceSchemaGroupSpec   `json:"spec"`
+	Status NamespaceSchemaGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

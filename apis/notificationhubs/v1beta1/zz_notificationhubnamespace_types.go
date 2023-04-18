@@ -15,11 +15,29 @@ import (
 
 type NotificationHubNamespaceObservation struct {
 
+	// Is this Notification Hub Namespace enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The ID of the Notification Hub Namespace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Azure Region in which this Notification Hub Namespace should be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The Type of Namespace - possible values are Messaging or NotificationHub.
+	NamespaceType *string `json:"namespaceType,omitempty" tf:"namespace_type,omitempty"`
+
+	// The name of the Resource Group in which the Notification Hub Namespace should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// The ServiceBus Endpoint for this Notification Hub Namespace.
 	ServiceBusEndpoint *string `json:"servicebusEndpoint,omitempty" tf:"servicebus_endpoint,omitempty"`
+
+	// The name of the SKU to use for this Notification Hub Namespace. Possible values are Free, Basic or Standard.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type NotificationHubNamespaceParameters struct {
@@ -29,12 +47,12 @@ type NotificationHubNamespaceParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The Azure Region in which this Notification Hub Namespace should be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Type of Namespace - possible values are Messaging or NotificationHub.
-	// +kubebuilder:validation:Required
-	NamespaceType *string `json:"namespaceType" tf:"namespace_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	NamespaceType *string `json:"namespaceType,omitempty" tf:"namespace_type,omitempty"`
 
 	// The name of the Resource Group in which the Notification Hub Namespace should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -50,8 +68,8 @@ type NotificationHubNamespaceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the SKU to use for this Notification Hub Namespace. Possible values are Free, Basic or Standard.
-	// +kubebuilder:validation:Required
-	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -82,8 +100,11 @@ type NotificationHubNamespaceStatus struct {
 type NotificationHubNamespace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NotificationHubNamespaceSpec   `json:"spec"`
-	Status            NotificationHubNamespaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.namespaceType)",message="namespaceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	Spec   NotificationHubNamespaceSpec   `json:"spec"`
+	Status NotificationHubNamespaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

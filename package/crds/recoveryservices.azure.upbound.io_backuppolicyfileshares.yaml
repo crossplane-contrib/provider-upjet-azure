@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: backuppolicyfileshares.recoveryservices.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -343,10 +347,22 @@ spec:
                     description: Specifies the timezone. the possible values are defined
                       here. Defaults to UTC
                     type: string
-                required:
-                - backup
-                - retentionDaily
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -518,14 +534,131 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: backup is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backup)
+            - message: retentionDaily is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.retentionDaily)
           status:
             description: BackupPolicyFileShareStatus defines the observed state of
               BackupPolicyFileShare.
             properties:
               atProvider:
                 properties:
+                  backup:
+                    description: Configures the Policy backup frequency and times
+                      as documented in the backup block below.
+                    items:
+                      properties:
+                        frequency:
+                          description: Sets the backup frequency. Currently, only
+                            Daily is supported
+                          type: string
+                        time:
+                          description: The time of day to perform the backup in 24-hour
+                            format. Times must be either on the hour or half hour
+                            (e.g. 12:00, 12:30, 13:00, etc.)
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Azure File Share Backup Policy.
+                    type: string
+                  recoveryVaultName:
+                    description: Specifies the name of the Recovery Services Vault
+                      to use. Changing this forces a new resource to be created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the policy. Changing this forces a new resource to be created.
+                    type: string
+                  retentionDaily:
+                    description: Configures the policy daily retention as documented
+                      in the retention_daily block below.
+                    items:
+                      properties:
+                        count:
+                          description: The number of daily backups to keep. Must be
+                            between 1 and 200 (inclusive)
+                          type: number
+                      type: object
+                    type: array
+                  retentionMonthly:
+                    description: Configures the policy monthly retention as documented
+                      in the retention_monthly block below.
+                    items:
+                      properties:
+                        count:
+                          description: The number of monthly backups to keep. Must
+                            be between 1 and 120
+                          type: number
+                        weekdays:
+                          description: The weekday backups to retain . Must be one
+                            of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
+                            or Saturday.
+                          items:
+                            type: string
+                          type: array
+                        weeks:
+                          description: The weeks of the month to retain backups of.
+                            Must be one of First, Second, Third, Fourth, Last.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  retentionWeekly:
+                    description: Configures the policy weekly retention as documented
+                      in the retention_weekly block below.
+                    items:
+                      properties:
+                        count:
+                          description: The number of daily backups to keep. Must be
+                            between 1 and 200 (inclusive)
+                          type: number
+                        weekdays:
+                          description: The weekday backups to retain. Must be one
+                            of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
+                            or Saturday.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  retentionYearly:
+                    description: Configures the policy yearly retention as documented
+                      in the retention_yearly block below.
+                    items:
+                      properties:
+                        count:
+                          description: The number of yearly backups to keep. Must
+                            be between 1 and 10
+                          type: number
+                        months:
+                          description: The months of the year to retain backups of.
+                            Must be one of January, February, March, April, May, June,
+                            July, Augest, September, October, November and December.
+                          items:
+                            type: string
+                          type: array
+                        weekdays:
+                          description: The weekday backups to retain . Must be one
+                            of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
+                            or Saturday.
+                          items:
+                            type: string
+                          type: array
+                        weeks:
+                          description: The weeks of the month to retain backups of.
+                            Must be one of First, Second, Third, Fourth, Last.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  timezone:
+                    description: Specifies the timezone. the possible values are defined
+                      here. Defaults to UTC
                     type: string
                 type: object
               conditions:

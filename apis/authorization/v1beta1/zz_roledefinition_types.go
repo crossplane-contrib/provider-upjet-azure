@@ -14,6 +14,18 @@ import (
 )
 
 type PermissionsObservation struct {
+
+	// One or more Allowed Actions, such as *, Microsoft.Resources/subscriptions/resourceGroups/read. See 'Azure Resource Manager resource provider operations' for details.
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// One or more Allowed Data Actions, such as *, Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read. See 'Azure Resource Manager resource provider operations' for details.
+	DataActions []*string `json:"dataActions,omitempty" tf:"data_actions,omitempty"`
+
+	// One or more Disallowed Actions, such as *, Microsoft.Resources/subscriptions/resourceGroups/read. See 'Azure Resource Manager resource provider operations' for details.
+	NotActions []*string `json:"notActions,omitempty" tf:"not_actions,omitempty"`
+
+	// One or more Disallowed Data Actions, such as *, Microsoft.Resources/subscriptions/resourceGroups/read. See 'Azure Resource Manager resource provider operations' for details.
+	NotDataActions []*string `json:"notDataActions,omitempty" tf:"not_data_actions,omitempty"`
 }
 
 type PermissionsParameters struct {
@@ -36,10 +48,29 @@ type PermissionsParameters struct {
 }
 
 type RoleDefinitionObservation struct {
+
+	// One or more assignable scopes for this Role Definition, such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM.
+	AssignableScopes []*string `json:"assignableScopes,omitempty" tf:"assignable_scopes,omitempty"`
+
+	// A description of the Role Definition.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Role Definition.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A permissions block as defined below.
+	Permissions []PermissionsObservation `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// A unique UUID/GUID which identifies this role - one will be generated if not specified. Changing this forces a new resource to be created.
+	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
 	// The Azure Resource Manager ID for the resource.
 	RoleDefinitionResourceID *string `json:"roleDefinitionResourceId,omitempty" tf:"role_definition_resource_id,omitempty"`
+
+	// The scope at which the Role Definition applies to, such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM. It is recommended to use the first entry of the assignable_scopes. Changing this forces a new resource to be created.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
 type RoleDefinitionParameters struct {
@@ -53,8 +84,8 @@ type RoleDefinitionParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the Role Definition.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A permissions block as defined below.
 	// +kubebuilder:validation:Optional
@@ -65,8 +96,8 @@ type RoleDefinitionParameters struct {
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
 	// The scope at which the Role Definition applies to, such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM. It is recommended to use the first entry of the assignable_scopes. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Scope *string `json:"scope" tf:"scope,omitempty"`
+	// +kubebuilder:validation:Optional
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
 // RoleDefinitionSpec defines the desired state of RoleDefinition
@@ -93,8 +124,10 @@ type RoleDefinitionStatus struct {
 type RoleDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RoleDefinitionSpec   `json:"spec"`
-	Status            RoleDefinitionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scope)",message="scope is a required parameter"
+	Spec   RoleDefinitionSpec   `json:"spec"`
+	Status RoleDefinitionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,8 +15,26 @@ import (
 
 type SentinelWatchlistObservation struct {
 
+	// The default duration in ISO8601 duration form of this Sentinel Watchlist. Changing this forces a new Sentinel Watchlist to be created.
+	DefaultDuration *string `json:"defaultDuration,omitempty" tf:"default_duration,omitempty"`
+
+	// The description of this Sentinel Watchlist. Changing this forces a new Sentinel Watchlist to be created.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The display name of this Sentinel Watchlist. Changing this forces a new Sentinel Watchlist to be created.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The ID of the Sentinel Watchlist.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The key used to optimize query performance when using Watchlist for joins with other data. Changing this forces a new Sentinel Watchlist to be created.
+	ItemSearchKey *string `json:"itemSearchKey,omitempty" tf:"item_search_key,omitempty"`
+
+	// Specifies a list of labels related to this Sentinel Watchlist. Changing this forces a new Sentinel Watchlist to be created.
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// The ID of the Log Analytics Workspace where this Sentinel Watchlist resides in. Changing this forces a new Sentinel Watchlist to be created.
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 }
 
 type SentinelWatchlistParameters struct {
@@ -30,12 +48,12 @@ type SentinelWatchlistParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The display name of this Sentinel Watchlist. Changing this forces a new Sentinel Watchlist to be created.
-	// +kubebuilder:validation:Required
-	DisplayName *string `json:"displayName" tf:"display_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The key used to optimize query performance when using Watchlist for joins with other data. Changing this forces a new Sentinel Watchlist to be created.
-	// +kubebuilder:validation:Required
-	ItemSearchKey *string `json:"itemSearchKey" tf:"item_search_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	ItemSearchKey *string `json:"itemSearchKey,omitempty" tf:"item_search_key,omitempty"`
 
 	// Specifies a list of labels related to this Sentinel Watchlist. Changing this forces a new Sentinel Watchlist to be created.
 	// +kubebuilder:validation:Optional
@@ -80,8 +98,10 @@ type SentinelWatchlistStatus struct {
 type SentinelWatchlist struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SentinelWatchlistSpec   `json:"spec"`
-	Status            SentinelWatchlistStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.itemSearchKey)",message="itemSearchKey is a required parameter"
+	Spec   SentinelWatchlistSpec   `json:"spec"`
+	Status SentinelWatchlistStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

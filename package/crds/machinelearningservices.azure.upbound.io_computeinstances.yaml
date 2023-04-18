@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: computeinstances.machinelearningservices.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -304,10 +308,22 @@ spec:
                     description: The Virtual Machine Size. Changing this forces a
                       new Machine Learning Compute Instance to be created.
                     type: string
-                required:
-                - location
-                - virtualMachineSize
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -479,11 +495,40 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: virtualMachineSize is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.virtualMachineSize)
           status:
             description: ComputeInstanceStatus defines the observed state of ComputeInstance.
             properties:
               atProvider:
                 properties:
+                  assignToUser:
+                    description: A assign_to_user block as defined below. A user explicitly
+                      assigned to a personal compute instance. Changing this forces
+                      a new Machine Learning Compute Instance to be created.
+                    items:
+                      properties:
+                        objectId:
+                          description: User’s AAD Object Id.
+                          type: string
+                        tenantId:
+                          description: User’s AAD Tenant Id.
+                          type: string
+                      type: object
+                    type: array
+                  authorizationType:
+                    description: 'The Compute Instance Authorization type. Possible
+                      values include: personal. Changing this forces a new Machine
+                      Learning Compute Instance to be created.'
+                    type: string
+                  description:
+                    description: The description of the Machine Learning Compute Instance.
+                      Changing this forces a new Machine Learning Compute Instance
+                      to be created.
+                    type: string
                   id:
                     description: The ID of the Machine Learning Compute Instance.
                     type: string
@@ -492,6 +537,13 @@ spec:
                       forces a new Machine Learning Compute Instance to be created.
                     items:
                       properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Machine Learning Compute Instance.
+                            Changing this forces a new resource to be created.
+                          items:
+                            type: string
+                          type: array
                         principalId:
                           description: The Principal ID for the Service Principal
                             associated with the Managed Service Identity of this Machine
@@ -502,8 +554,29 @@ spec:
                             with the Managed Service Identity of this Machine Learning
                             Compute Instance.
                           type: string
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Machine Learning Compute
+                            Instance. Possible values are SystemAssigned, UserAssigned,
+                            SystemAssigned, UserAssigned (to enable both). Changing
+                            this forces a new resource to be created.
+                          type: string
                       type: object
                     type: array
+                  localAuthEnabled:
+                    description: Whether local authentication methods is enabled.
+                      Defaults to true. Changing this forces a new Machine Learning
+                      Compute Instance to be created.
+                    type: boolean
+                  location:
+                    description: The Azure Region where the Machine Learning Compute
+                      Instance should exist. Changing this forces a new Machine Learning
+                      Compute Instance to be created.
+                    type: string
+                  machineLearningWorkspaceId:
+                    description: The ID of the Machine Learning Workspace. Changing
+                      this forces a new Machine Learning Compute Instance to be created.
+                    type: string
                   ssh:
                     description: A ssh block as defined below. Specifies policy and
                       settings for SSH access. Changing this forces a new Machine
@@ -513,12 +586,33 @@ spec:
                         port:
                           description: Describes the port for connecting through SSH.
                           type: number
+                        publicKey:
+                          description: Specifies the SSH rsa public key file as a
+                            string. Use "ssh-keygen -t rsa -b 2048" to generate your
+                            SSH key pairs.
+                          type: string
                         username:
                           description: The admin username of this Machine Learning
                             Compute Instance.
                           type: string
                       type: object
                     type: array
+                  subnetResourceId:
+                    description: Virtual network subnet resource ID the compute nodes
+                      belong to. Changing this forces a new Machine Learning Compute
+                      Instance to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Machine Learning Compute Instance. Changing this forces a new
+                      Machine Learning Compute Instance to be created.
+                    type: object
+                  virtualMachineSize:
+                    description: The Virtual Machine Size. Changing this forces a
+                      new Machine Learning Compute Instance to be created.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

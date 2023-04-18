@@ -15,11 +15,17 @@ import (
 
 type ResourcePolicyAssignmentIdentityObservation struct {
 
+	// A list of User Managed Identity IDs which should be assigned to the Policy Definition.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID of the Policy Assignment for this Resource.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID of the Policy Assignment for this Resource.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The Type of Managed Identity which should be added to this Policy Definition. Possible values are SystemAssigned and UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ResourcePolicyAssignmentIdentityParameters struct {
@@ -34,6 +40,12 @@ type ResourcePolicyAssignmentIdentityParameters struct {
 }
 
 type ResourcePolicyAssignmentNonComplianceMessageObservation struct {
+
+	// The non-compliance message text. When assigning policy sets (initiatives), unless policy_definition_reference_id is specified then this message will be the default for all policies.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// When assigning policy sets (initiatives), this is the ID of the policy definition that the non-compliance message applies to.
+	PolicyDefinitionReferenceID *string `json:"policyDefinitionReferenceId,omitempty" tf:"policy_definition_reference_id,omitempty"`
 }
 
 type ResourcePolicyAssignmentNonComplianceMessageParameters struct {
@@ -49,12 +61,44 @@ type ResourcePolicyAssignmentNonComplianceMessageParameters struct {
 
 type ResourcePolicyAssignmentObservation struct {
 
+	// A description which should be used for this Policy Assignment.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The Display Name for this Policy Assignment.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Specifies if this Policy should be enforced or not? Defaults to true.
+	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
+
 	// The ID of the Resource Policy Assignment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []ResourcePolicyAssignmentIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where the Policy Assignment should exist. Changing this forces a new Policy Assignment to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A JSON mapping of any Metadata for this Policy.
+	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name which should be used for this Policy Assignment. Changing this forces a new Resource Policy Assignment to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more non_compliance_message blocks as defined below.
+	NonComplianceMessage []ResourcePolicyAssignmentNonComplianceMessageObservation `json:"nonComplianceMessage,omitempty" tf:"non_compliance_message,omitempty"`
+
+	// Specifies a list of Resource Scopes (for example a Subscription, or a Resource Group) within this Management Group which are excluded from this Policy.
+	NotScopes []*string `json:"notScopes,omitempty" tf:"not_scopes,omitempty"`
+
+	// A JSON mapping of any Parameters for this Policy.
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
+	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
+
+	// The ID of the Resource (or Resource Scope) where this should be applied. Changing this forces a new Resource Policy Assignment to be created.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 }
 
 type ResourcePolicyAssignmentParameters struct {
@@ -84,8 +128,8 @@ type ResourcePolicyAssignmentParameters struct {
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name which should be used for this Policy Assignment. Changing this forces a new Resource Policy Assignment to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more non_compliance_message blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -114,8 +158,8 @@ type ResourcePolicyAssignmentParameters struct {
 	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Resource (or Resource Scope) where this should be applied. Changing this forces a new Resource Policy Assignment to be created.
-	// +kubebuilder:validation:Required
-	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 }
 
 // ResourcePolicyAssignmentSpec defines the desired state of ResourcePolicyAssignment
@@ -142,8 +186,10 @@ type ResourcePolicyAssignmentStatus struct {
 type ResourcePolicyAssignment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourcePolicyAssignmentSpec   `json:"spec"`
-	Status            ResourcePolicyAssignmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resourceId)",message="resourceId is a required parameter"
+	Spec   ResourcePolicyAssignmentSpec   `json:"spec"`
+	Status ResourcePolicyAssignmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

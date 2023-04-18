@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: transforms.media.azure.upbound.io
 spec:
@@ -54,9 +54,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -366,6 +370,21 @@ spec:
                         type: object
                     type: object
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -542,8 +561,160 @@ spec:
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: An optional verbose description of the Transform.
+                    type: string
                   id:
                     description: The ID of the Transform.
+                    type: string
+                  mediaServicesAccountName:
+                    description: The Media Services account name. Changing this forces
+                      a new Transform to be created.
+                    type: string
+                  output:
+                    description: One or more output blocks as defined below. At least
+                      one output must be defined.
+                    items:
+                      properties:
+                        audioAnalyzerPreset:
+                          description: A audio_analyzer_preset block as defined below.
+                          items:
+                            properties:
+                              audioAnalysisMode:
+                                description: Possibles value are Basic or Standard.
+                                  Determines the set of audio analysis operations
+                                  to be performed.
+                                type: string
+                              audioLanguage:
+                                description: 'The language for the audio payload in
+                                  the input using the BCP-47 format of ''language
+                                  tag-region'' (e.g: ''en-US''). If you know the language
+                                  of your content, it is recommended that you specify
+                                  it. The language must be specified explicitly for
+                                  AudioAnalysisMode:Basic, since automatic language
+                                  detection is not included in basic mode. If the
+                                  language isn''t specified, automatic language detection
+                                  will choose the first language detected and process
+                                  with the selected language for the duration of the
+                                  file. It does not currently support dynamically
+                                  switching between languages after the first language
+                                  is detected. The automatic detection works best
+                                  with audio recordings with clearly discernible speech.
+                                  If automatic detection fails to find the language,
+                                  transcription would fallback to ''en-US''." The
+                                  list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.
+                                  Possible values are ar-EG, ar-SY, de-DE, en-AU,
+                                  en-GB, en-US, es-ES, es-MX, fr-FR, hi-IN, it-IT,
+                                  ja-JP, ko-KR, pt-BR, ru-RU and zh-CN.'
+                                type: string
+                            type: object
+                          type: array
+                        builtinPreset:
+                          description: A builtin_preset block as defined below.
+                          items:
+                            properties:
+                              presetName:
+                                description: The built-in preset to be used for encoding
+                                  videos. The Possible values are AACGoodQualityAudio,
+                                  AdaptiveStreaming, ContentAwareEncoding, ContentAwareEncodingExperimental,
+                                  CopyAllBitrateNonInterleaved, H265AdaptiveStreaming,
+                                  H265ContentAwareEncoding, H265SingleBitrate4K, H265SingleBitrate1080p,
+                                  H265SingleBitrate720p, H264MultipleBitrate1080p,
+                                  H264MultipleBitrateSD, H264MultipleBitrate720p,
+                                  H264SingleBitrate1080p, H264SingleBitrateSD and
+                                  H264SingleBitrate720p.
+                                type: string
+                            type: object
+                          type: array
+                        faceDetectorPreset:
+                          description: A face_detector_preset block as defined below.
+                          items:
+                            properties:
+                              analysisResolution:
+                                description: Possibles value are SourceResolution
+                                  or StandardDefinition. Specifies the maximum resolution
+                                  at which your video is analyzed. The default behavior
+                                  is SourceResolution which will keep the input video
+                                  at its original resolution when analyzed. Using
+                                  StandardDefinition will resize input videos to standard
+                                  definition while preserving the appropriate aspect
+                                  ratio. It will only resize if the video is of higher
+                                  resolution. For example, a 1920x1080 input would
+                                  be scaled to 640x360 before processing. Switching
+                                  to StandardDefinition will reduce the time it takes
+                                  to process high resolution video. It may also reduce
+                                  the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics
+                                  for details). However, faces that end up being too
+                                  small in the resized video may not be detected.
+                                type: string
+                            type: object
+                          type: array
+                        onErrorAction:
+                          description: A Transform can define more than one outputs.
+                            This property defines what the service should do when
+                            one output fails - either continue to produce other outputs,
+                            or, stop the other outputs. The overall Job state will
+                            not reflect failures of outputs that are specified with
+                            ContinueJob. Possibles value are StopProcessingJob or
+                            ContinueJob.
+                          type: string
+                        relativePriority:
+                          description: Sets the relative priority of the TransformOutputs
+                            within a Transform. This sets the priority that the service
+                            uses for processing Transform Outputs. Possibles value
+                            are High, Normal or Low.
+                          type: string
+                        videoAnalyzerPreset:
+                          description: A video_analyzer_preset block as defined below.
+                          items:
+                            properties:
+                              audioAnalysisMode:
+                                description: Possibles value are Basic or Standard.
+                                  Determines the set of audio analysis operations
+                                  to be performed.
+                                type: string
+                              audioLanguage:
+                                description: 'The language for the audio payload in
+                                  the input using the BCP-47 format of ''language
+                                  tag-region'' (e.g: ''en-US''). If you know the language
+                                  of your content, it is recommended that you specify
+                                  it. The language must be specified explicitly for
+                                  AudioAnalysisMode:Basic, since automatic language
+                                  detection is not included in basic mode. If the
+                                  language isn''t specified, automatic language detection
+                                  will choose the first language detected and process
+                                  with the selected language for the duration of the
+                                  file. It does not currently support dynamically
+                                  switching between languages after the first language
+                                  is detected. The automatic detection works best
+                                  with audio recordings with clearly discernible speech.
+                                  If automatic detection fails to find the language,
+                                  transcription would fallback to ''en-US''." The
+                                  list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.
+                                  Possible values are ar-EG, ar-SY, de-DE, en-AU,
+                                  en-GB, en-US, es-ES, es-MX, fr-FR, hi-IN, it-IT,
+                                  ja-JP, ko-KR, pt-BR, ru-RU and zh-CN.'
+                                type: string
+                              insightsType:
+                                description: Defines the type of insights that you
+                                  want the service to generate. The allowed values
+                                  are AudioInsightsOnly, VideoInsightsOnly, and AllInsights.
+                                  If you set this to AllInsights and the input is
+                                  audio only, then only audio insights are generated.
+                                  Similarly if the input is video only, then only
+                                  video insights are generated. It is recommended
+                                  that you not use AudioInsightsOnly if you expect
+                                  some of your inputs to be video only; or use VideoInsightsOnly
+                                  if you expect some of your inputs to be audio only.
+                                  Your Jobs in such conditions would error out.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Transform
+                      should exist. Changing this forces a new Transform to be created.
                     type: string
                 type: object
               conditions:

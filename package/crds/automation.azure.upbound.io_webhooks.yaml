@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: webhooks.automation.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -340,10 +344,22 @@ spec:
                     - name
                     - namespace
                     type: object
-                required:
-                - expiryTime
-                - name
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -515,13 +531,49 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: expiryTime is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.expiryTime)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: WebhookStatus defines the observed state of Webhook.
             properties:
               atProvider:
                 properties:
+                  automationAccountName:
+                    description: The name of the automation account in which the Webhook
+                      is created. Changing this forces a new resource to be created.
+                    type: string
+                  enabled:
+                    description: Controls if Webhook is enabled. Defaults to true.
+                    type: boolean
+                  expiryTime:
+                    description: Timestamp when the webhook expires. Changing this
+                      forces a new resource to be created.
+                    type: string
                   id:
                     description: The Automation Webhook ID.
+                    type: string
+                  name:
+                    description: Specifies the name of the Webhook. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Map of input parameters passed to runbook.
+                    type: object
+                  resourceGroupName:
+                    description: The name of the resource group in which the Webhook
+                      is created. Changing this forces a new resource to be created.
+                    type: string
+                  runOnWorkerGroup:
+                    description: Name of the hybrid worker group the Webhook job will
+                      run on.
+                    type: string
+                  runbookName:
+                    description: Name of the Automation Runbook to execute by Webhook.
                     type: string
                 type: object
               conditions:

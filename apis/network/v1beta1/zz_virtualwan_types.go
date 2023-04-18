@@ -15,8 +15,29 @@ import (
 
 type VirtualWANObservation struct {
 
+	// Boolean flag to specify whether branch to branch traffic is allowed. Defaults to true.
+	AllowBranchToBranchTraffic *bool `json:"allowBranchToBranchTraffic,omitempty" tf:"allow_branch_to_branch_traffic,omitempty"`
+
+	// Boolean flag to specify whether VPN encryption is disabled. Defaults to false.
+	DisableVPNEncryption *bool `json:"disableVpnEncryption,omitempty" tf:"disable_vpn_encryption,omitempty"`
+
 	// The ID of the Virtual WAN.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the Office365 local breakout category. Possible values include: Optimize, OptimizeAndAllow, All, None. Defaults to None.
+	Office365LocalBreakoutCategory *string `json:"office365LocalBreakoutCategory,omitempty" tf:"office365_local_breakout_category,omitempty"`
+
+	// The name of the resource group in which to create the Virtual WAN. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the Virtual WAN.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the Virtual WAN type. Possible Values include: Basic and Standard. Defaults to Standard.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type VirtualWANParameters struct {
@@ -30,8 +51,8 @@ type VirtualWANParameters struct {
 	DisableVPNEncryption *bool `json:"disableVpnEncryption,omitempty" tf:"disable_vpn_encryption,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the Office365 local breakout category. Possible values include: Optimize, OptimizeAndAllow, All, None. Defaults to None.
 	// +kubebuilder:validation:Optional
@@ -83,8 +104,9 @@ type VirtualWANStatus struct {
 type VirtualWAN struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualWANSpec   `json:"spec"`
-	Status            VirtualWANStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   VirtualWANSpec   `json:"spec"`
+	Status VirtualWANStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

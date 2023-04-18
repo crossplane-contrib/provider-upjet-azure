@@ -14,6 +14,12 @@ import (
 )
 
 type ApplicationPortsObservation struct {
+
+	// The end of the Ephemeral Port Range on this Node Type.
+	EndPort *float64 `json:"endPort,omitempty" tf:"end_port,omitempty"`
+
+	// The start of the Ephemeral Port Range on this Node Type.
+	StartPort *float64 `json:"startPort,omitempty" tf:"start_port,omitempty"`
 }
 
 type ApplicationPortsParameters struct {
@@ -28,6 +34,15 @@ type ApplicationPortsParameters struct {
 }
 
 type AzureActiveDirectoryObservation struct {
+
+	// The Azure Active Directory Client ID which should be used for the Client Application.
+	ClientApplicationID *string `json:"clientApplicationId,omitempty" tf:"client_application_id,omitempty"`
+
+	// The Azure Active Directory Cluster Application ID.
+	ClusterApplicationID *string `json:"clusterApplicationId,omitempty" tf:"cluster_application_id,omitempty"`
+
+	// The Azure Active Directory Tenant ID.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type AzureActiveDirectoryParameters struct {
@@ -46,6 +61,12 @@ type AzureActiveDirectoryParameters struct {
 }
 
 type CertificateCommonNamesObservation struct {
+
+	// A common_names block as defined below.
+	CommonNames []CommonNamesObservation `json:"commonNames,omitempty" tf:"common_names,omitempty"`
+
+	// The X509 Store where the Certificate Exists, such as My.
+	X509StoreName *string `json:"x509StoreName,omitempty" tf:"x509_store_name,omitempty"`
 }
 
 type CertificateCommonNamesParameters struct {
@@ -60,6 +81,15 @@ type CertificateCommonNamesParameters struct {
 }
 
 type CertificateObservation struct {
+
+	// The Thumbprint of the Certificate.
+	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+
+	// The Secondary Thumbprint of the Certificate.
+	ThumbprintSecondary *string `json:"thumbprintSecondary,omitempty" tf:"thumbprint_secondary,omitempty"`
+
+	// The X509 Store where the Certificate Exists, such as My.
+	X509StoreName *string `json:"x509StoreName,omitempty" tf:"x509_store_name,omitempty"`
 }
 
 type CertificateParameters struct {
@@ -78,6 +108,15 @@ type CertificateParameters struct {
 }
 
 type ClientCertificateCommonNameObservation struct {
+
+	// The common or subject name of the certificate.
+	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
+
+	// Does the Client Certificate have Admin Access to the cluster? Non-admin clients can only perform read only operations on the cluster.
+	IsAdmin *bool `json:"isAdmin,omitempty" tf:"is_admin,omitempty"`
+
+	// The Issuer Thumbprint of the Certificate.
+	IssuerThumbprint *string `json:"issuerThumbprint,omitempty" tf:"issuer_thumbprint,omitempty"`
 }
 
 type ClientCertificateCommonNameParameters struct {
@@ -96,6 +135,12 @@ type ClientCertificateCommonNameParameters struct {
 }
 
 type ClientCertificateThumbprintObservation struct {
+
+	// Does the Client Certificate have Admin Access to the cluster? Non-admin clients can only perform read only operations on the cluster.
+	IsAdmin *bool `json:"isAdmin,omitempty" tf:"is_admin,omitempty"`
+
+	// The Thumbprint associated with the Client Certificate.
+	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
 }
 
 type ClientCertificateThumbprintParameters struct {
@@ -111,11 +156,77 @@ type ClientCertificateThumbprintParameters struct {
 
 type ClusterObservation struct {
 
+	// A List of one or more features which should be enabled, such as DnsService.
+	AddOnFeatures []*string `json:"addOnFeatures,omitempty" tf:"add_on_features,omitempty"`
+
+	// An azure_active_directory block as defined below.
+	AzureActiveDirectory []AzureActiveDirectoryObservation `json:"azureActiveDirectory,omitempty" tf:"azure_active_directory,omitempty"`
+
+	// A certificate block as defined below. Conflicts with certificate_common_names.
+	Certificate []CertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// A certificate_common_names block as defined below. Conflicts with certificate.
+	CertificateCommonNames []CertificateCommonNamesObservation `json:"certificateCommonNames,omitempty" tf:"certificate_common_names,omitempty"`
+
+	// A client_certificate_common_name block as defined below.
+	ClientCertificateCommonName []ClientCertificateCommonNameObservation `json:"clientCertificateCommonName,omitempty" tf:"client_certificate_common_name,omitempty"`
+
+	// One or more client_certificate_thumbprint blocks as defined below.
+	ClientCertificateThumbprint []ClientCertificateThumbprintObservation `json:"clientCertificateThumbprint,omitempty" tf:"client_certificate_thumbprint,omitempty"`
+
+	// Required if Upgrade Mode set to Manual, Specifies the Version of the Cluster Code of the cluster.
+	ClusterCodeVersion *string `json:"clusterCodeVersion,omitempty" tf:"cluster_code_version,omitempty"`
+
 	// The Cluster Endpoint for this Service Fabric Cluster.
 	ClusterEndpoint *string `json:"clusterEndpoint,omitempty" tf:"cluster_endpoint,omitempty"`
 
+	// A diagnostics_config block as defined below.
+	DiagnosticsConfig []DiagnosticsConfigObservation `json:"diagnosticsConfig,omitempty" tf:"diagnostics_config,omitempty"`
+
+	// One or more fabric_settings blocks as defined below.
+	FabricSettings []FabricSettingsObservation `json:"fabricSettings,omitempty" tf:"fabric_settings,omitempty"`
+
 	// The ID of the Service Fabric Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the Azure Region where the Service Fabric Cluster should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the Management Endpoint of the cluster such as http://example.com. Changing this forces a new resource to be created.
+	ManagementEndpoint *string `json:"managementEndpoint,omitempty" tf:"management_endpoint,omitempty"`
+
+	// One or more node_type blocks as defined below.
+	NodeType []NodeTypeObservation `json:"nodeType,omitempty" tf:"node_type,omitempty"`
+
+	// Specifies the Reliability Level of the Cluster. Possible values include None, Bronze, Silver, Gold and Platinum.
+	ReliabilityLevel *string `json:"reliabilityLevel,omitempty" tf:"reliability_level,omitempty"`
+
+	// The name of the Resource Group in which the Service Fabric Cluster exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A reverse_proxy_certificate block as defined below. Conflicts with reverse_proxy_certificate_common_names.
+	ReverseProxyCertificate []ReverseProxyCertificateObservation `json:"reverseProxyCertificate,omitempty" tf:"reverse_proxy_certificate,omitempty"`
+
+	// A reverse_proxy_certificate_common_names block as defined below. Conflicts with reverse_proxy_certificate.
+	ReverseProxyCertificateCommonNames []ReverseProxyCertificateCommonNamesObservation `json:"reverseProxyCertificateCommonNames,omitempty" tf:"reverse_proxy_certificate_common_names,omitempty"`
+
+	// Specifies the logical grouping of VMs in upgrade domains. Possible values are Hierarchical or Parallel.
+	ServiceFabricZonalUpgradeMode *string `json:"serviceFabricZonalUpgradeMode,omitempty" tf:"service_fabric_zonal_upgrade_mode,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the Upgrade Mode of the cluster. Possible values are Automatic or Manual.
+	UpgradeMode *string `json:"upgradeMode,omitempty" tf:"upgrade_mode,omitempty"`
+
+	// A upgrade_policy block as defined below.
+	UpgradePolicy []UpgradePolicyObservation `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
+
+	// Specifies the Image expected for the Service Fabric Cluster, such as Windows. Changing this forces a new resource to be created.
+	VMImage *string `json:"vmImage,omitempty" tf:"vm_image,omitempty"`
+
+	// Specifies the upgrade mode for the virtual machine scale set updates that happen in all availability zones at once. Possible values are Hierarchical or Parallel.
+	VmssZonalUpgradeMode *string `json:"vmssZonalUpgradeMode,omitempty" tf:"vmss_zonal_upgrade_mode,omitempty"`
 }
 
 type ClusterParameters struct {
@@ -157,20 +268,20 @@ type ClusterParameters struct {
 	FabricSettings []FabricSettingsParameters `json:"fabricSettings,omitempty" tf:"fabric_settings,omitempty"`
 
 	// Specifies the Azure Region where the Service Fabric Cluster should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the Management Endpoint of the cluster such as http://example.com. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	ManagementEndpoint *string `json:"managementEndpoint" tf:"management_endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	ManagementEndpoint *string `json:"managementEndpoint,omitempty" tf:"management_endpoint,omitempty"`
 
 	// One or more node_type blocks as defined below.
-	// +kubebuilder:validation:Required
-	NodeType []NodeTypeParameters `json:"nodeType" tf:"node_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	NodeType []NodeTypeParameters `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// Specifies the Reliability Level of the Cluster. Possible values include None, Bronze, Silver, Gold and Platinum.
-	// +kubebuilder:validation:Required
-	ReliabilityLevel *string `json:"reliabilityLevel" tf:"reliability_level,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReliabilityLevel *string `json:"reliabilityLevel,omitempty" tf:"reliability_level,omitempty"`
 
 	// The name of the Resource Group in which the Service Fabric Cluster exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -202,16 +313,16 @@ type ClusterParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Upgrade Mode of the cluster. Possible values are Automatic or Manual.
-	// +kubebuilder:validation:Required
-	UpgradeMode *string `json:"upgradeMode" tf:"upgrade_mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	UpgradeMode *string `json:"upgradeMode,omitempty" tf:"upgrade_mode,omitempty"`
 
 	// A upgrade_policy block as defined below.
 	// +kubebuilder:validation:Optional
 	UpgradePolicy []UpgradePolicyParameters `json:"upgradePolicy,omitempty" tf:"upgrade_policy,omitempty"`
 
 	// Specifies the Image expected for the Service Fabric Cluster, such as Windows. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	VMImage *string `json:"vmImage" tf:"vm_image,omitempty"`
+	// +kubebuilder:validation:Optional
+	VMImage *string `json:"vmImage,omitempty" tf:"vm_image,omitempty"`
 
 	// Specifies the upgrade mode for the virtual machine scale set updates that happen in all availability zones at once. Possible values are Hierarchical or Parallel.
 	// +kubebuilder:validation:Optional
@@ -219,6 +330,12 @@ type ClusterParameters struct {
 }
 
 type CommonNamesObservation struct {
+
+	// The common or subject name of the certificate.
+	CertificateCommonName *string `json:"certificateCommonName,omitempty" tf:"certificate_common_name,omitempty"`
+
+	// The Issuer Thumbprint of the Certificate.
+	CertificateIssuerThumbprint *string `json:"certificateIssuerThumbprint,omitempty" tf:"certificate_issuer_thumbprint,omitempty"`
 }
 
 type CommonNamesParameters struct {
@@ -233,6 +350,15 @@ type CommonNamesParameters struct {
 }
 
 type DeltaHealthPolicyObservation struct {
+
+	// Specifies the maximum tolerated percentage of delta unhealthy applications that can have aggregated health states of error. If the current unhealthy applications do not respect the percentage relative to the state at the beginning of the upgrade, the cluster is unhealthy. Defaults to 0.
+	MaxDeltaUnhealthyApplicationsPercent *float64 `json:"maxDeltaUnhealthyApplicationsPercent,omitempty" tf:"max_delta_unhealthy_applications_percent,omitempty"`
+
+	// Specifies the maximum tolerated percentage of delta unhealthy nodes that can have aggregated health states of error. If the current unhealthy nodes do not respect the percentage relative to the state at the beginning of the upgrade, the cluster is unhealthy. Defaults to 0.
+	MaxDeltaUnhealthyNodesPercent *float64 `json:"maxDeltaUnhealthyNodesPercent,omitempty" tf:"max_delta_unhealthy_nodes_percent,omitempty"`
+
+	// Specifies the maximum tolerated percentage of upgrade domain delta unhealthy nodes that can have aggregated health state of error. If there is any upgrade domain where the current unhealthy nodes do not respect the percentage relative to the state at the beginning of the upgrade, the cluster is unhealthy. Defaults to 0.
+	MaxUpgradeDomainDeltaUnhealthyNodesPercent *float64 `json:"maxUpgradeDomainDeltaUnhealthyNodesPercent,omitempty" tf:"max_upgrade_domain_delta_unhealthy_nodes_percent,omitempty"`
 }
 
 type DeltaHealthPolicyParameters struct {
@@ -251,6 +377,21 @@ type DeltaHealthPolicyParameters struct {
 }
 
 type DiagnosticsConfigObservation struct {
+
+	// The Blob Endpoint of the Storage Account.
+	BlobEndpoint *string `json:"blobEndpoint,omitempty" tf:"blob_endpoint,omitempty"`
+
+	// The protected diagnostics storage key name, such as StorageAccountKey1.
+	ProtectedAccountKeyName *string `json:"protectedAccountKeyName,omitempty" tf:"protected_account_key_name,omitempty"`
+
+	// The Queue Endpoint of the Storage Account.
+	QueueEndpoint *string `json:"queueEndpoint,omitempty" tf:"queue_endpoint,omitempty"`
+
+	// The name of the Storage Account where the Diagnostics should be sent to.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// The Table Endpoint of the Storage Account.
+	TableEndpoint *string `json:"tableEndpoint,omitempty" tf:"table_endpoint,omitempty"`
 }
 
 type DiagnosticsConfigParameters struct {
@@ -277,6 +418,12 @@ type DiagnosticsConfigParameters struct {
 }
 
 type EphemeralPortsObservation struct {
+
+	// The end of the Ephemeral Port Range on this Node Type.
+	EndPort *float64 `json:"endPort,omitempty" tf:"end_port,omitempty"`
+
+	// The start of the Ephemeral Port Range on this Node Type.
+	StartPort *float64 `json:"startPort,omitempty" tf:"start_port,omitempty"`
 }
 
 type EphemeralPortsParameters struct {
@@ -291,6 +438,12 @@ type EphemeralPortsParameters struct {
 }
 
 type FabricSettingsObservation struct {
+
+	// The name of the Fabric Setting, such as Security or Federation.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A map containing settings for the specified Fabric Setting.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type FabricSettingsParameters struct {
@@ -305,6 +458,12 @@ type FabricSettingsParameters struct {
 }
 
 type HealthPolicyObservation struct {
+
+	// Specifies the maximum tolerated percentage of applications that can have aggregated health state of error. If the upgrade exceeds this percentage, the cluster is unhealthy. Defaults to 0.
+	MaxUnhealthyApplicationsPercent *float64 `json:"maxUnhealthyApplicationsPercent,omitempty" tf:"max_unhealthy_applications_percent,omitempty"`
+
+	// Specifies the maximum tolerated percentage of nodes that can have aggregated health states of error. If an upgrade exceeds this percentage, the cluster is unhealthy. Defaults to 0.
+	MaxUnhealthyNodesPercent *float64 `json:"maxUnhealthyNodesPercent,omitempty" tf:"max_unhealthy_nodes_percent,omitempty"`
 }
 
 type HealthPolicyParameters struct {
@@ -319,6 +478,45 @@ type HealthPolicyParameters struct {
 }
 
 type NodeTypeObservation struct {
+
+	// A application_ports block as defined below.
+	ApplicationPorts []ApplicationPortsObservation `json:"applicationPorts,omitempty" tf:"application_ports,omitempty"`
+
+	// The capacity tags applied to the nodes in the node type, the cluster resource manager uses these tags to understand how much resource a node has.
+	Capacities map[string]*string `json:"capacities,omitempty" tf:"capacities,omitempty"`
+
+	// The Port used for the Client Endpoint for this Node Type.
+	ClientEndpointPort *float64 `json:"clientEndpointPort,omitempty" tf:"client_endpoint_port,omitempty"`
+
+	// The Durability Level for this Node Type. Possible values include Bronze, Gold and Silver. Defaults to Bronze.
+	DurabilityLevel *string `json:"durabilityLevel,omitempty" tf:"durability_level,omitempty"`
+
+	// A ephemeral_ports block as defined below.
+	EphemeralPorts []EphemeralPortsObservation `json:"ephemeralPorts,omitempty" tf:"ephemeral_ports,omitempty"`
+
+	// The Port used for the HTTP Endpoint for this Node Type.
+	HTTPEndpointPort *float64 `json:"httpEndpointPort,omitempty" tf:"http_endpoint_port,omitempty"`
+
+	// The number of nodes for this Node Type.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// Is this the Primary Node Type?
+	IsPrimary *bool `json:"isPrimary,omitempty" tf:"is_primary,omitempty"`
+
+	// Should this node type run only stateless services?
+	IsStateless *bool `json:"isStateless,omitempty" tf:"is_stateless,omitempty"`
+
+	// Does this node type span availability zones?
+	MultipleAvailabilityZones *bool `json:"multipleAvailabilityZones,omitempty" tf:"multiple_availability_zones,omitempty"`
+
+	// The name of the Node Type.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The placement tags applied to nodes in the node type, which can be used to indicate where certain services (workload) should run.
+	PlacementProperties map[string]*string `json:"placementProperties,omitempty" tf:"placement_properties,omitempty"`
+
+	// The Port used for the Reverse Proxy Endpoint for this Node Type. Changing this will upgrade the cluster.
+	ReverseProxyEndpointPort *float64 `json:"reverseProxyEndpointPort,omitempty" tf:"reverse_proxy_endpoint_port,omitempty"`
 }
 
 type NodeTypeParameters struct {
@@ -377,6 +575,12 @@ type NodeTypeParameters struct {
 }
 
 type ReverseProxyCertificateCommonNamesCommonNamesObservation struct {
+
+	// The common or subject name of the certificate.
+	CertificateCommonName *string `json:"certificateCommonName,omitempty" tf:"certificate_common_name,omitempty"`
+
+	// The Issuer Thumbprint of the Certificate.
+	CertificateIssuerThumbprint *string `json:"certificateIssuerThumbprint,omitempty" tf:"certificate_issuer_thumbprint,omitempty"`
 }
 
 type ReverseProxyCertificateCommonNamesCommonNamesParameters struct {
@@ -391,6 +595,12 @@ type ReverseProxyCertificateCommonNamesCommonNamesParameters struct {
 }
 
 type ReverseProxyCertificateCommonNamesObservation struct {
+
+	// A common_names block as defined below.
+	CommonNames []ReverseProxyCertificateCommonNamesCommonNamesObservation `json:"commonNames,omitempty" tf:"common_names,omitempty"`
+
+	// The X509 Store where the Certificate Exists, such as My.
+	X509StoreName *string `json:"x509StoreName,omitempty" tf:"x509_store_name,omitempty"`
 }
 
 type ReverseProxyCertificateCommonNamesParameters struct {
@@ -405,6 +615,15 @@ type ReverseProxyCertificateCommonNamesParameters struct {
 }
 
 type ReverseProxyCertificateObservation struct {
+
+	// The Thumbprint of the Certificate.
+	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+
+	// The Secondary Thumbprint of the Certificate.
+	ThumbprintSecondary *string `json:"thumbprintSecondary,omitempty" tf:"thumbprint_secondary,omitempty"`
+
+	// The X509 Store where the Certificate Exists, such as My.
+	X509StoreName *string `json:"x509StoreName,omitempty" tf:"x509_store_name,omitempty"`
 }
 
 type ReverseProxyCertificateParameters struct {
@@ -423,6 +642,33 @@ type ReverseProxyCertificateParameters struct {
 }
 
 type UpgradePolicyObservation struct {
+
+	// A delta_health_policy block as defined below
+	DeltaHealthPolicy []DeltaHealthPolicyObservation `json:"deltaHealthPolicy,omitempty" tf:"delta_health_policy,omitempty"`
+
+	// Indicates whether to restart the Service Fabric node even if only dynamic configurations have changed.
+	ForceRestartEnabled *bool `json:"forceRestartEnabled,omitempty" tf:"force_restart_enabled,omitempty"`
+
+	// Specifies the duration, in "hh:mm:ss" string format, after which Service Fabric retries the health check if the previous health check fails. Defaults to 00:45:00.
+	HealthCheckRetryTimeout *string `json:"healthCheckRetryTimeout,omitempty" tf:"health_check_retry_timeout,omitempty"`
+
+	// Specifies the duration, in "hh:mm:ss" string format, that Service Fabric waits in order to verify that the cluster is stable before it continues to the next upgrade domain or completes the upgrade. This wait duration prevents undetected changes of health right after the health check is performed. Defaults to 00:01:00.
+	HealthCheckStableDuration *string `json:"healthCheckStableDuration,omitempty" tf:"health_check_stable_duration,omitempty"`
+
+	// Specifies the duration, in "hh:mm:ss" string format, that Service Fabric waits before it performs the initial health check after it finishes the upgrade on the upgrade domain. Defaults to 00:00:30.
+	HealthCheckWaitDuration *string `json:"healthCheckWaitDuration,omitempty" tf:"health_check_wait_duration,omitempty"`
+
+	// A health_policy block as defined below
+	HealthPolicy []HealthPolicyObservation `json:"healthPolicy,omitempty" tf:"health_policy,omitempty"`
+
+	// Specifies the duration, in "hh:mm:ss" string format, that Service Fabric takes to upgrade a single upgrade domain. After this period, the upgrade fails. Defaults to 02:00:00.
+	UpgradeDomainTimeout *string `json:"upgradeDomainTimeout,omitempty" tf:"upgrade_domain_timeout,omitempty"`
+
+	// Specifies the duration, in "hh:mm:ss" string format, that Service Fabric waits for a replica set to reconfigure into a safe state, if it is not already in a safe state, before Service Fabric proceeds with the upgrade. Defaults to 10675199.02:48:05.4775807.
+	UpgradeReplicaSetCheckTimeout *string `json:"upgradeReplicaSetCheckTimeout,omitempty" tf:"upgrade_replica_set_check_timeout,omitempty"`
+
+	// Specifies the duration, in "hh:mm:ss" string format, that Service Fabric takes for the entire upgrade. After this period, the upgrade fails. Defaults to 12:00:00.
+	UpgradeTimeout *string `json:"upgradeTimeout,omitempty" tf:"upgrade_timeout,omitempty"`
 }
 
 type UpgradePolicyParameters struct {
@@ -488,8 +734,14 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ClusterSpec   `json:"spec"`
-	Status            ClusterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.managementEndpoint)",message="managementEndpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeType)",message="nodeType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.reliabilityLevel)",message="reliabilityLevel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.upgradeMode)",message="upgradeMode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vmImage)",message="vmImage is a required parameter"
+	Spec   ClusterSpec   `json:"spec"`
+	Status ClusterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

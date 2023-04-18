@@ -17,6 +17,11 @@ func (mg *CostAnomalyAlert) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this CostAnomalyAlert.
+func (mg *CostAnomalyAlert) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this CostAnomalyAlert.
 func (mg *CostAnomalyAlert) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *CostAnomalyAlert) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this CostAnomalyAlert.
 func (mg *CostAnomalyAlert) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this CostAnomalyAlert.
+func (mg *CostAnomalyAlert) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this CostAnomalyAlert.
@@ -83,6 +93,11 @@ func (mg *ResourceGroupCostManagementExport) GetDeletionPolicy() xpv1.DeletionPo
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ResourceGroupCostManagementExport.
+func (mg *ResourceGroupCostManagementExport) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ResourceGroupCostManagementExport.
 func (mg *ResourceGroupCostManagementExport) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *ResourceGroupCostManagementExport) SetConditions(c ...xpv1.Condition) 
 // SetDeletionPolicy of this ResourceGroupCostManagementExport.
 func (mg *ResourceGroupCostManagementExport) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ResourceGroupCostManagementExport.
+func (mg *ResourceGroupCostManagementExport) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ResourceGroupCostManagementExport.
@@ -149,6 +169,11 @@ func (mg *SubscriptionCostManagementExport) GetDeletionPolicy() xpv1.DeletionPol
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SubscriptionCostManagementExport.
+func (mg *SubscriptionCostManagementExport) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SubscriptionCostManagementExport.
 func (mg *SubscriptionCostManagementExport) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *SubscriptionCostManagementExport) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SubscriptionCostManagementExport.
 func (mg *SubscriptionCostManagementExport) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SubscriptionCostManagementExport.
+func (mg *SubscriptionCostManagementExport) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SubscriptionCostManagementExport.

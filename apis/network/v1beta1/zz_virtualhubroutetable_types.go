@@ -17,6 +17,15 @@ type VirtualHubRouteTableObservation struct {
 
 	// The ID of the Virtual Hub Route Table.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of labels associated with this route table.
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// A route block as defined below.
+	Route []VirtualHubRouteTableRouteObservation `json:"route,omitempty" tf:"route,omitempty"`
+
+	// The ID of the Virtual Hub within which this route table should be created. Changing this forces a new resource to be created.
+	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 }
 
 type VirtualHubRouteTableParameters struct {
@@ -45,6 +54,21 @@ type VirtualHubRouteTableParameters struct {
 }
 
 type VirtualHubRouteTableRouteObservation struct {
+
+	// A list of destination addresses for this route.
+	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
+
+	// The type of destinations. Possible values are CIDR, ResourceId and Service.
+	DestinationsType *string `json:"destinationsType,omitempty" tf:"destinations_type,omitempty"`
+
+	// The name which should be used for this route.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The next hop's resource ID.
+	NextHop *string `json:"nextHop,omitempty" tf:"next_hop,omitempty"`
+
+	// The type of next hop. Currently the only possible value is ResourceId. Defaults to ResourceId.
+	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
 }
 
 type VirtualHubRouteTableRouteParameters struct {

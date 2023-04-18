@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: springcloudappmysqlassociations.appplatform.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -396,9 +400,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - passwordSecretRef
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -570,14 +587,34 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: passwordSecretRef is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.passwordSecretRef)
           status:
             description: SpringCloudAppMySQLAssociationStatus defines the observed
               state of SpringCloudAppMySQLAssociation.
             properties:
               atProvider:
                 properties:
+                  databaseName:
+                    description: Specifies the name of the MySQL Database which the
+                      Spring Cloud App should be associated with.
+                    type: string
                   id:
                     description: The ID of the Spring Cloud Application MySQL Association.
+                    type: string
+                  mysqlServerId:
+                    description: Specifies the ID of the MySQL Server. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  springCloudAppId:
+                    description: Specifies the ID of the Spring Cloud Application
+                      where this Association is created. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  username:
+                    description: Specifies the username which should be used when
+                      connecting to the MySQL Database from the Spring Cloud App.
                     type: string
                 type: object
               conditions:

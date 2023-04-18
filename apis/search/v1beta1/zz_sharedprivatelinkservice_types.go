@@ -18,8 +18,20 @@ type SharedPrivateLinkServiceObservation struct {
 	// The ID of the Azure Search Shared Private Link resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specify the request message for requesting approval of the Shared Private Link Enabled Remote Resource.
+	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
+
+	// Specify the id of the Azure Search Service. Changing this forces a new resource to be created.
+	SearchServiceID *string `json:"searchServiceId,omitempty" tf:"search_service_id,omitempty"`
+
 	// The status of a private endpoint connection. Possible values are Pending, Approved, Rejected or Disconnected.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Specify the sub resource name which the Azure Search Private Endpoint is able to connect to. Changing this forces a new resource to be created.
+	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
+
+	// Specify the ID of the Shared Private Link Enabled Remote Resource which this Azure Search Private Endpoint should be connected to. Changing this forces a new resource to be created.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 
 type SharedPrivateLinkServiceParameters struct {
@@ -43,8 +55,8 @@ type SharedPrivateLinkServiceParameters struct {
 	SearchServiceIDSelector *v1.Selector `json:"searchServiceIdSelector,omitempty" tf:"-"`
 
 	// Specify the sub resource name which the Azure Search Private Endpoint is able to connect to. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SubresourceName *string `json:"subresourceName" tf:"subresource_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 
 	// Specify the ID of the Shared Private Link Enabled Remote Resource which this Azure Search Private Endpoint should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -85,8 +97,9 @@ type SharedPrivateLinkServiceStatus struct {
 type SharedPrivateLinkService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SharedPrivateLinkServiceSpec   `json:"spec"`
-	Status            SharedPrivateLinkServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subresourceName)",message="subresourceName is a required parameter"
+	Spec   SharedPrivateLinkServiceSpec   `json:"spec"`
+	Status SharedPrivateLinkServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

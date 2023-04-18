@@ -15,8 +15,20 @@ import (
 
 type CapacityReservationObservation struct {
 
+	// The ID of the Capacity Reservation Group where the Capacity Reservation exists. Changing this forces a new resource to be created.
+	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
+
 	// The ID of the Capacity Reservation.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A sku block as defined below.
+	Sku []SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the Availability Zone for this Capacity Reservation. Changing this forces a new resource to be created.
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type CapacityReservationParameters struct {
@@ -36,8 +48,8 @@ type CapacityReservationParameters struct {
 	CapacityReservationGroupIDSelector *v1.Selector `json:"capacityReservationGroupIdSelector,omitempty" tf:"-"`
 
 	// A sku block as defined below.
-	// +kubebuilder:validation:Required
-	Sku []SkuParameters `json:"sku" tf:"sku,omitempty"`
+	// +kubebuilder:validation:Optional
+	Sku []SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -49,6 +61,12 @@ type CapacityReservationParameters struct {
 }
 
 type SkuObservation struct {
+
+	// Specifies the number of instances to be reserved. It must be a positive integer and not exceed the quota in the subscription.
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// Name of the sku, such as Standard_F2. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type SkuParameters struct {
@@ -86,8 +104,9 @@ type CapacityReservationStatus struct {
 type CapacityReservation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CapacityReservationSpec   `json:"spec"`
-	Status            CapacityReservationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)",message="sku is a required parameter"
+	Spec   CapacityReservationSpec   `json:"spec"`
+	Status CapacityReservationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: firewallpolicyrulecollectiongroups.network.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -407,9 +411,22 @@ spec:
                     description: The priority of the Firewall Policy Rule Collection
                       Group. The range is 100-65000.
                     type: number
-                required:
-                - priority
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -581,15 +598,259 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: priority is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.priority)
           status:
             description: FirewallPolicyRuleCollectionGroupStatus defines the observed
               state of FirewallPolicyRuleCollectionGroup.
             properties:
               atProvider:
                 properties:
+                  applicationRuleCollection:
+                    description: One or more application_rule_collection blocks as
+                      defined below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to take for the application rules
+                            in this collection. Possible values are Allow and Deny.
+                          type: string
+                        name:
+                          description: The name which should be used for this application
+                            rule collection.
+                          type: string
+                        priority:
+                          description: The priority of the application rule collection.
+                            The range is 100 - 65000.
+                          type: number
+                        rule:
+                          description: One or more application_rule (application rule)
+                            blocks as defined below.
+                          items:
+                            properties:
+                              description:
+                                description: The description which should be used
+                                  for this rule.
+                                type: string
+                              destinationAddresses:
+                                description: Specifies a list of destination IP addresses
+                                  (including CIDR and *) or Service Tags.
+                                items:
+                                  type: string
+                                type: array
+                              destinationFqdnTags:
+                                description: Specifies a list of destination FQDN
+                                  tags.
+                                items:
+                                  type: string
+                                type: array
+                              destinationFqdns:
+                                description: Specifies a list of destination FQDNs.
+                                items:
+                                  type: string
+                                type: array
+                              destinationUrls:
+                                description: Specifies a list of destination URLs
+                                  for which policy should hold. Needs Premium SKU
+                                  for Firewall Policy. Conflicts with destination_fqdns.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  network rule collection.
+                                type: string
+                              protocols:
+                                description: Specifies a list of network protocols
+                                  this rule applies to. Possible values are Any, TCP,
+                                  UDP, ICMP.
+                                items:
+                                  properties:
+                                    port:
+                                      description: Port number of the protocol. Range
+                                        is 0-64000.
+                                      type: number
+                                    type:
+                                      description: Protocol type. Possible values
+                                        are Http and Https.
+                                      type: string
+                                  type: object
+                                type: array
+                              sourceAddresses:
+                                description: Specifies a list of source IP addresses
+                                  (including CIDR and *).
+                                items:
+                                  type: string
+                                type: array
+                              sourceIpGroups:
+                                description: Specifies a list of source IP groups.
+                                items:
+                                  type: string
+                                type: array
+                              terminateTls:
+                                description: Boolean specifying if TLS shall be terminated
+                                  (true) or not (false). Must be true when using destination_urls.
+                                  Needs Premium SKU for Firewall Policy.
+                                type: boolean
+                              webCategories:
+                                description: Specifies a list of web categories to
+                                  which access is denied or allowed depending on the
+                                  value of action above. Needs Premium SKU for Firewall
+                                  Policy.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  firewallPolicyId:
+                    description: The ID of the Firewall Policy where the Firewall
+                      Policy Rule Collection Group should exist. Changing this forces
+                      a new Firewall Policy Rule Collection Group to be created.
+                    type: string
                   id:
                     description: The ID of the Firewall Policy Rule Collection Group.
                     type: string
+                  natRuleCollection:
+                    description: One or more nat_rule_collection blocks as defined
+                      below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to take for the NAT rules in this
+                            collection. Currently, the only possible value is Dnat.
+                          type: string
+                        name:
+                          description: The name which should be used for this NAT
+                            rule collection.
+                          type: string
+                        priority:
+                          description: The priority of the NAT rule collection. The
+                            range is 100 - 65000.
+                          type: number
+                        rule:
+                          description: A nat_rule (NAT rule) block as defined below.
+                          items:
+                            properties:
+                              destinationAddress:
+                                description: The destination IP address (including
+                                  CIDR).
+                                type: string
+                              destinationPorts:
+                                description: Specifies a list of destination ports.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  network rule collection.
+                                type: string
+                              protocols:
+                                description: Specifies a list of network protocols
+                                  this rule applies to. Possible values are Any, TCP,
+                                  UDP, ICMP.
+                                items:
+                                  type: string
+                                type: array
+                              sourceAddresses:
+                                description: Specifies a list of source IP addresses
+                                  (including CIDR and *).
+                                items:
+                                  type: string
+                                type: array
+                              sourceIpGroups:
+                                description: Specifies a list of source IP groups.
+                                items:
+                                  type: string
+                                type: array
+                              translatedAddress:
+                                description: Specifies the translated address.
+                                type: string
+                              translatedFqdn:
+                                description: Specifies the translated FQDN.
+                                type: string
+                              translatedPort:
+                                description: Specifies the translated port.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  networkRuleCollection:
+                    description: One or more network_rule_collection blocks as defined
+                      below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to take for the network rules in
+                            this collection. Possible values are Allow and Deny.
+                          type: string
+                        name:
+                          description: The name which should be used for this network
+                            rule collection.
+                          type: string
+                        priority:
+                          description: The priority of the network rule collection.
+                            The range is 100 - 65000.
+                          type: number
+                        rule:
+                          description: One or more network_rule (network rule) blocks
+                            as defined below.
+                          items:
+                            properties:
+                              destinationAddresses:
+                                description: Specifies a list of destination IP addresses
+                                  (including CIDR and *) or Service Tags.
+                                items:
+                                  type: string
+                                type: array
+                              destinationFqdns:
+                                description: Specifies a list of destination FQDNs.
+                                items:
+                                  type: string
+                                type: array
+                              destinationIpGroups:
+                                description: Specifies a list of destination IP groups.
+                                items:
+                                  type: string
+                                type: array
+                              destinationPorts:
+                                description: Specifies a list of destination ports.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  network rule collection.
+                                type: string
+                              protocols:
+                                description: Specifies a list of network protocols
+                                  this rule applies to. Possible values are Any, TCP,
+                                  UDP, ICMP.
+                                items:
+                                  type: string
+                                type: array
+                              sourceAddresses:
+                                description: Specifies a list of source IP addresses
+                                  (including CIDR and *).
+                                items:
+                                  type: string
+                                type: array
+                              sourceIpGroups:
+                                description: Specifies a list of source IP groups.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  priority:
+                    description: The priority of the Firewall Policy Rule Collection
+                      Group. The range is 100-65000.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

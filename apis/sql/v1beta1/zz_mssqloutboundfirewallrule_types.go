@@ -17,6 +17,9 @@ type MSSQLOutboundFirewallRuleObservation struct {
 
 	// The SQL Outbound Firewall Rule ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The resource ID of the SQL Server on which to create the Outbound Firewall Rule. Changing this forces a new resource to be created.
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 }
 
 type MSSQLOutboundFirewallRuleParameters struct {

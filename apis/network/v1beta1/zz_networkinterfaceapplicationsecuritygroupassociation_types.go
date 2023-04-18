@@ -14,7 +14,14 @@ import (
 )
 
 type NetworkInterfaceApplicationSecurityGroupAssociationObservation struct {
+
+	// The ID of the Application Security Group which this Network Interface which should be connected to. Changing this forces a new resource to be created.
+	ApplicationSecurityGroupID *string `json:"applicationSecurityGroupId,omitempty" tf:"application_security_group_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Network Interface. Changing this forces a new resource to be created.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 }
 
 type NetworkInterfaceApplicationSecurityGroupAssociationParameters struct {

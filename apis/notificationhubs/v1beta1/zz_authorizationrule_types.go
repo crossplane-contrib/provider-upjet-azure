@@ -18,11 +18,29 @@ type AuthorizationRuleObservation struct {
 	// The ID of the Authorization Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Does this Authorization Rule have Listen access to the Notification Hub? Defaults to false.
+	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
+
+	// Does this Authorization Rule have Manage access to the Notification Hub? Defaults to false.
+	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
+
+	// The name of the Notification Hub Namespace in which the Notification Hub exists. Changing this forces a new resource to be created.
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// The name of the Notification Hub for which the Authorization Rule should be created. Changing this forces a new resource to be created.
+	NotificationHubName *string `json:"notificationHubName,omitempty" tf:"notification_hub_name,omitempty"`
+
 	// The Primary Access Key associated with this Authorization Rule.
 	PrimaryAccessKey *string `json:"primaryAccessKey,omitempty" tf:"primary_access_key,omitempty"`
 
+	// The name of the Resource Group in which the Notification Hub Namespace exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// The Secondary Access Key associated with this Authorization Rule.
 	SecondaryAccessKey *string `json:"secondaryAccessKey,omitempty" tf:"secondary_access_key,omitempty"`
+
+	// Does this Authorization Rule have Send access to the Notification Hub? Defaults to false.
+	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 
 type AuthorizationRuleParameters struct {

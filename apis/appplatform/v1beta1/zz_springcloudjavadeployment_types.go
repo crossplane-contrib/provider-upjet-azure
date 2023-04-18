@@ -15,8 +15,26 @@ import (
 
 type SpringCloudJavaDeploymentObservation struct {
 
+	// Specifies the environment variables of the Spring Cloud Deployment as a map of key-value pairs.
+	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
+
 	// The ID of the Spring Cloud Deployment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the required instance count of the Spring Cloud Deployment. Possible Values are between 1 and 500. Defaults to 1 if not specified.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// Specifies the jvm option of the Spring Cloud Deployment.
+	JvmOptions *string `json:"jvmOptions,omitempty" tf:"jvm_options,omitempty"`
+
+	// A quota block as defined below.
+	Quota []SpringCloudJavaDeploymentQuotaObservation `json:"quota,omitempty" tf:"quota,omitempty"`
+
+	// Specifies the runtime version of the Spring Cloud Deployment. Possible Values are Java_8, Java_11 and Java_17. Defaults to Java_8.
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+
+	// Specifies the id of the Spring Cloud Application in which to create the Deployment. Changing this forces a new resource to be created.
+	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`
 }
 
 type SpringCloudJavaDeploymentParameters struct {
@@ -57,6 +75,12 @@ type SpringCloudJavaDeploymentParameters struct {
 }
 
 type SpringCloudJavaDeploymentQuotaObservation struct {
+
+	// Specifies the required cpu of the Spring Cloud Deployment. Possible Values are 500m, 1, 2, 3 and 4. Defaults to 1 if not specified.
+	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
+
+	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not specified.
+	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }
 
 type SpringCloudJavaDeploymentQuotaParameters struct {

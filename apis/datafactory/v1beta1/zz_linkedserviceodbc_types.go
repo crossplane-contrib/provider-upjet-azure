@@ -14,6 +14,9 @@ import (
 )
 
 type LinkedServiceOdbcBasicAuthenticationObservation struct {
+
+	// The username which can be used to authenticate to the ODBC endpoint.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type LinkedServiceOdbcBasicAuthenticationParameters struct {
@@ -29,8 +32,32 @@ type LinkedServiceOdbcBasicAuthenticationParameters struct {
 
 type LinkedServiceOdbcObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Linked Service ODBC.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service ODBC.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// A basic_authentication block as defined below.
+	BasicAuthentication []LinkedServiceOdbcBasicAuthenticationObservation `json:"basicAuthentication,omitempty" tf:"basic_authentication,omitempty"`
+
+	// The connection string in which to authenticate with ODBC.
+	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Linked Service ODBC.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Data Factory ODBC Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service ODBC.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service ODBC.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type LinkedServiceOdbcParameters struct {
@@ -48,8 +75,8 @@ type LinkedServiceOdbcParameters struct {
 	BasicAuthentication []LinkedServiceOdbcBasicAuthenticationParameters `json:"basicAuthentication,omitempty" tf:"basic_authentication,omitempty"`
 
 	// The connection string in which to authenticate with ODBC.
-	// +kubebuilder:validation:Required
-	ConnectionString *string `json:"connectionString" tf:"connection_string,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.Factory
@@ -102,8 +129,9 @@ type LinkedServiceOdbcStatus struct {
 type LinkedServiceOdbc struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LinkedServiceOdbcSpec   `json:"spec"`
-	Status            LinkedServiceOdbcStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.connectionString)",message="connectionString is a required parameter"
+	Spec   LinkedServiceOdbcSpec   `json:"spec"`
+	Status LinkedServiceOdbcStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

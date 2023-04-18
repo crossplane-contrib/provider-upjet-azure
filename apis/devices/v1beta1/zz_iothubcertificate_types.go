@@ -17,12 +17,21 @@ type IOTHubCertificateObservation struct {
 
 	// The ID of the IoTHub Certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the IoTHub that this certificate will be attached to. Changing this forces a new resource to be created.
+	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
+
+	// Is the certificate verified? Defaults to false.
+	IsVerified *bool `json:"isVerified,omitempty" tf:"is_verified,omitempty"`
+
+	// The name of the resource group under which the IotHub Certificate resource has to be created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type IOTHubCertificateParameters struct {
 
 	// The Base-64 representation of the X509 leaf certificate .cer file or just a .pem file content.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	CertificateContentSecretRef v1.SecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
 	// The name of the IoTHub that this certificate will be attached to. Changing this forces a new resource to be created.
@@ -80,8 +89,9 @@ type IOTHubCertificateStatus struct {
 type IOTHubCertificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IOTHubCertificateSpec   `json:"spec"`
-	Status            IOTHubCertificateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.certificateContentSecretRef)",message="certificateContentSecretRef is a required parameter"
+	Spec   IOTHubCertificateSpec   `json:"spec"`
+	Status IOTHubCertificateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

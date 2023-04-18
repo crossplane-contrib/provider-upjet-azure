@@ -14,6 +14,18 @@ import (
 )
 
 type DataLakeGen2PathAceObservation struct {
+
+	// Specifies the Object ID of the Azure Active Directory User or Group that the entry relates to. Only valid for user or group entries.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the permissions for the entry in rwx form. For example, rwx gives full permissions but r-- only gives read permissions.
+	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// Specifies whether the ACE represents an access entry or a default entry. Default value is access.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Specifies the type of entry. Can be user, group, mask or other.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DataLakeGen2PathAceParameters struct {
@@ -37,8 +49,29 @@ type DataLakeGen2PathAceParameters struct {
 
 type DataLakeGen2PathObservation struct {
 
+	// One or more ace blocks as defined below to specify the entries for the ACL for the path.
+	Ace []DataLakeGen2PathAceObservation `json:"ace,omitempty" tf:"ace,omitempty"`
+
+	// The name of the Data Lake Gen2 File System which should be created within the Storage Account. Must be unique within the storage account the queue is located. Changing this forces a new resource to be created.
+	FileSystemName *string `json:"filesystemName,omitempty" tf:"filesystem_name,omitempty"`
+
+	// Specifies the Object ID of the Azure Active Directory Group to make the owning group. Possible values also include $superuser.
+	Group *string `json:"group,omitempty" tf:"group,omitempty"`
+
 	// The ID of the Data Lake Gen2 File System.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the Object ID of the Azure Active Directory User to make the owning user. Possible values also include $superuser.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// The path which should be created within the Data Lake Gen2 File System in the Storage Account. Changing this forces a new resource to be created.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Specifies the type for path to create. Currently only directory is supported. Changing this forces a new resource to be created.
+	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
+
+	// Specifies the ID of the Storage Account in which the Data Lake Gen2 File System should exist. Changing this forces a new resource to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 }
 
 type DataLakeGen2PathParameters struct {
@@ -69,12 +102,12 @@ type DataLakeGen2PathParameters struct {
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
 	// The path which should be created within the Data Lake Gen2 File System in the Storage Account. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Path *string `json:"path" tf:"path,omitempty"`
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Specifies the type for path to create. Currently only directory is supported. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Resource *string `json:"resource" tf:"resource,omitempty"`
+	// +kubebuilder:validation:Optional
+	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
 
 	// Specifies the ID of the Storage Account in which the Data Lake Gen2 File System should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -115,8 +148,10 @@ type DataLakeGen2PathStatus struct {
 type DataLakeGen2Path struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataLakeGen2PathSpec   `json:"spec"`
-	Status            DataLakeGen2PathStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.path)",message="path is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.resource)",message="resource is a required parameter"
+	Spec   DataLakeGen2PathSpec   `json:"spec"`
+	Status DataLakeGen2PathStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

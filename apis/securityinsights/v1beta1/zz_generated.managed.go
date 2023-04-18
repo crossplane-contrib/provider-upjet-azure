@@ -17,6 +17,11 @@ func (mg *SentinelAlertRuleFusion) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SentinelAlertRuleFusion.
 func (mg *SentinelAlertRuleFusion) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *SentinelAlertRuleFusion) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SentinelAlertRuleFusion.
 func (mg *SentinelAlertRuleFusion) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SentinelAlertRuleFusion.
@@ -83,6 +93,11 @@ func (mg *SentinelAlertRuleMSSecurityIncident) GetDeletionPolicy() xpv1.Deletion
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SentinelAlertRuleMSSecurityIncident.
+func (mg *SentinelAlertRuleMSSecurityIncident) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SentinelAlertRuleMSSecurityIncident.
 func (mg *SentinelAlertRuleMSSecurityIncident) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *SentinelAlertRuleMSSecurityIncident) SetConditions(c ...xpv1.Condition
 // SetDeletionPolicy of this SentinelAlertRuleMSSecurityIncident.
 func (mg *SentinelAlertRuleMSSecurityIncident) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SentinelAlertRuleMSSecurityIncident.
+func (mg *SentinelAlertRuleMSSecurityIncident) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SentinelAlertRuleMSSecurityIncident.
@@ -149,6 +169,11 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetDeletionPolicy()
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
 func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetConditions(c ...
 // SetDeletionPolicy of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
 func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
@@ -215,6 +245,11 @@ func (mg *SentinelAutomationRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SentinelAutomationRule.
+func (mg *SentinelAutomationRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SentinelAutomationRule.
 func (mg *SentinelAutomationRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *SentinelAutomationRule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SentinelAutomationRule.
 func (mg *SentinelAutomationRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SentinelAutomationRule.
+func (mg *SentinelAutomationRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SentinelAutomationRule.
@@ -281,6 +321,11 @@ func (mg *SentinelDataConnectorIOT) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SentinelDataConnectorIOT.
+func (mg *SentinelDataConnectorIOT) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SentinelDataConnectorIOT.
 func (mg *SentinelDataConnectorIOT) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *SentinelDataConnectorIOT) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SentinelDataConnectorIOT.
 func (mg *SentinelDataConnectorIOT) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SentinelDataConnectorIOT.
+func (mg *SentinelDataConnectorIOT) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SentinelDataConnectorIOT.
@@ -347,6 +397,11 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetDeletionPolicy() xpv1.Dele
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SentinelLogAnalyticsWorkspaceOnboarding.
 func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetConditions(c ...xpv1.Condi
 // SetDeletionPolicy of this SentinelLogAnalyticsWorkspaceOnboarding.
 func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SentinelLogAnalyticsWorkspaceOnboarding.
@@ -413,6 +473,11 @@ func (mg *SentinelWatchlist) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SentinelWatchlist.
+func (mg *SentinelWatchlist) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SentinelWatchlist.
 func (mg *SentinelWatchlist) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *SentinelWatchlist) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SentinelWatchlist.
 func (mg *SentinelWatchlist) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SentinelWatchlist.
+func (mg *SentinelWatchlist) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SentinelWatchlist.

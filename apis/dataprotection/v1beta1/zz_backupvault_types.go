@@ -15,31 +15,45 @@ import (
 
 type BackupVaultObservation struct {
 
+	// Specifies the type of the data store. Possible values are ArchiveStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
+	DatastoreType *string `json:"datastoreType,omitempty" tf:"datastore_type,omitempty"`
+
 	// The ID of the Backup Vault.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the backup storage redundancy. Possible values are GeoRedundant and LocallyRedundant. Changing this forces a new Backup Vault to be created.
+	Redundancy *string `json:"redundancy,omitempty" tf:"redundancy,omitempty"`
+
+	// The name of the Resource Group where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Backup Vault.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type BackupVaultParameters struct {
 
 	// Specifies the type of the data store. Possible values are ArchiveStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	DatastoreType *string `json:"datastoreType" tf:"datastore_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	DatastoreType *string `json:"datastoreType,omitempty" tf:"datastore_type,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the backup storage redundancy. Possible values are GeoRedundant and LocallyRedundant. Changing this forces a new Backup Vault to be created.
-	// +kubebuilder:validation:Required
-	Redundancy *string `json:"redundancy" tf:"redundancy,omitempty"`
+	// +kubebuilder:validation:Optional
+	Redundancy *string `json:"redundancy,omitempty" tf:"redundancy,omitempty"`
 
 	// The name of the Resource Group where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -66,6 +80,9 @@ type IdentityObservation struct {
 
 	// The Tenant ID for the Service Principal associated with the Identity of this Backup Vault.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Backup Vault. The only possible value is SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -99,8 +116,11 @@ type BackupVaultStatus struct {
 type BackupVault struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BackupVaultSpec   `json:"spec"`
-	Status            BackupVaultStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.datastoreType)",message="datastoreType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.redundancy)",message="redundancy is a required parameter"
+	Spec   BackupVaultSpec   `json:"spec"`
+	Status BackupVaultStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

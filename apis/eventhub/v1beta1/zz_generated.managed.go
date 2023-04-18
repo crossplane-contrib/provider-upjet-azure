@@ -17,6 +17,11 @@ func (mg *AuthorizationRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this AuthorizationRule.
+func (mg *AuthorizationRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this AuthorizationRule.
 func (mg *AuthorizationRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *AuthorizationRule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this AuthorizationRule.
 func (mg *AuthorizationRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this AuthorizationRule.
+func (mg *AuthorizationRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this AuthorizationRule.
@@ -83,6 +93,11 @@ func (mg *ConsumerGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ConsumerGroup.
+func (mg *ConsumerGroup) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ConsumerGroup.
 func (mg *ConsumerGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *ConsumerGroup) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ConsumerGroup.
 func (mg *ConsumerGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ConsumerGroup.
+func (mg *ConsumerGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ConsumerGroup.
@@ -149,6 +169,11 @@ func (mg *EventHub) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this EventHub.
+func (mg *EventHub) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this EventHub.
 func (mg *EventHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *EventHub) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this EventHub.
 func (mg *EventHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this EventHub.
+func (mg *EventHub) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this EventHub.
@@ -215,6 +245,11 @@ func (mg *EventHubNamespace) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this EventHubNamespace.
+func (mg *EventHubNamespace) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this EventHubNamespace.
 func (mg *EventHubNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *EventHubNamespace) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this EventHubNamespace.
 func (mg *EventHubNamespace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this EventHubNamespace.
+func (mg *EventHubNamespace) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this EventHubNamespace.
@@ -281,6 +321,11 @@ func (mg *NamespaceAuthorizationRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this NamespaceAuthorizationRule.
+func (mg *NamespaceAuthorizationRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this NamespaceAuthorizationRule.
 func (mg *NamespaceAuthorizationRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *NamespaceAuthorizationRule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this NamespaceAuthorizationRule.
 func (mg *NamespaceAuthorizationRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this NamespaceAuthorizationRule.
+func (mg *NamespaceAuthorizationRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this NamespaceAuthorizationRule.
@@ -347,6 +397,11 @@ func (mg *NamespaceDisasterRecoveryConfig) GetDeletionPolicy() xpv1.DeletionPoli
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this NamespaceDisasterRecoveryConfig.
+func (mg *NamespaceDisasterRecoveryConfig) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this NamespaceDisasterRecoveryConfig.
 func (mg *NamespaceDisasterRecoveryConfig) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *NamespaceDisasterRecoveryConfig) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this NamespaceDisasterRecoveryConfig.
 func (mg *NamespaceDisasterRecoveryConfig) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this NamespaceDisasterRecoveryConfig.
+func (mg *NamespaceDisasterRecoveryConfig) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this NamespaceDisasterRecoveryConfig.
@@ -413,6 +473,11 @@ func (mg *NamespaceSchemaGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this NamespaceSchemaGroup.
 func (mg *NamespaceSchemaGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *NamespaceSchemaGroup) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this NamespaceSchemaGroup.
 func (mg *NamespaceSchemaGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this NamespaceSchemaGroup.
+func (mg *NamespaceSchemaGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this NamespaceSchemaGroup.

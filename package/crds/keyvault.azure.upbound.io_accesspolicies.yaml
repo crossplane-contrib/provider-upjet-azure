@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: accesspolicies.keyvault.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -188,10 +192,22 @@ spec:
                       be used for authenticating requests to the key vault. Changing
                       this forces a new resource to be created.
                     type: string
-                required:
-                - objectId
-                - tenantId
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -363,13 +379,69 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: objectId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.objectId)
+            - message: tenantId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tenantId)
           status:
             description: AccessPolicyStatus defines the observed state of AccessPolicy.
             properties:
               atProvider:
                 properties:
+                  applicationId:
+                    description: The object ID of an Application in Azure Active Directory.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  certificatePermissions:
+                    description: 'List of certificate permissions, must be one or
+                      more from the following: Backup, Create, Delete, DeleteIssuers,
+                      Get, GetIssuers, Import, List, ListIssuers, ManageContacts,
+                      ManageIssuers, Purge, Recover, Restore, SetIssuers and Update.'
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: Key Vault Access Policy ID.
+                    type: string
+                  keyPermissions:
+                    description: 'List of key permissions, must be one or more from
+                      the following: Backup, Create, Decrypt, Delete, Encrypt, Get,
+                      Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update,
+                      Verify, WrapKey, Release, Rotate, GetRotationPolicy, and SetRotationPolicy.'
+                    items:
+                      type: string
+                    type: array
+                  keyVaultId:
+                    description: Specifies the id of the Key Vault resource. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  objectId:
+                    description: The object ID of a user, service principal or security
+                      group in the Azure Active Directory tenant for the vault. The
+                      object ID of a service principal can be fetched from  azuread_service_principal.object_id.
+                      The object ID must be unique for the list of access policies.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  secretPermissions:
+                    description: 'List of secret permissions, must be one or more
+                      from the following: Backup, Delete, Get, List, Purge, Recover,
+                      Restore and Set.'
+                    items:
+                      type: string
+                    type: array
+                  storagePermissions:
+                    description: 'List of storage permissions, must be one or more
+                      from the following: Backup, Delete, DeleteSAS, Get, GetSAS,
+                      List, ListSAS, Purge, Recover, RegenerateKey, Restore, Set,
+                      SetSAS and Update.'
+                    items:
+                      type: string
+                    type: array
+                  tenantId:
+                    description: The Azure Active Directory tenant ID that should
+                      be used for authenticating requests to the key vault. Changing
+                      this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

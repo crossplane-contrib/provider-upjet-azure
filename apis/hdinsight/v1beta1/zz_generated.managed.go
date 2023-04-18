@@ -17,6 +17,11 @@ func (mg *HBaseCluster) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HBaseCluster.
+func (mg *HBaseCluster) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HBaseCluster.
 func (mg *HBaseCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *HBaseCluster) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HBaseCluster.
 func (mg *HBaseCluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HBaseCluster.
+func (mg *HBaseCluster) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HBaseCluster.
@@ -83,6 +93,11 @@ func (mg *HadoopCluster) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this HadoopCluster.
+func (mg *HadoopCluster) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this HadoopCluster.
 func (mg *HadoopCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *HadoopCluster) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this HadoopCluster.
 func (mg *HadoopCluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this HadoopCluster.
+func (mg *HadoopCluster) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this HadoopCluster.
@@ -149,6 +169,11 @@ func (mg *InteractiveQueryCluster) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this InteractiveQueryCluster.
+func (mg *InteractiveQueryCluster) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this InteractiveQueryCluster.
 func (mg *InteractiveQueryCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *InteractiveQueryCluster) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this InteractiveQueryCluster.
 func (mg *InteractiveQueryCluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this InteractiveQueryCluster.
+func (mg *InteractiveQueryCluster) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this InteractiveQueryCluster.
@@ -215,6 +245,11 @@ func (mg *KafkaCluster) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this KafkaCluster.
+func (mg *KafkaCluster) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this KafkaCluster.
 func (mg *KafkaCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *KafkaCluster) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this KafkaCluster.
 func (mg *KafkaCluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this KafkaCluster.
+func (mg *KafkaCluster) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this KafkaCluster.
@@ -281,6 +321,11 @@ func (mg *SparkCluster) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this SparkCluster.
+func (mg *SparkCluster) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this SparkCluster.
 func (mg *SparkCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *SparkCluster) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this SparkCluster.
 func (mg *SparkCluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this SparkCluster.
+func (mg *SparkCluster) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this SparkCluster.

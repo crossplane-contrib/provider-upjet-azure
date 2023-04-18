@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: databases.kusto.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -235,9 +239,22 @@ spec:
                       being accessible to queries as ISO 8601 timespan. Default is
                       unlimited. For more information see: ISO 8601 Timespan'
                     type: string
-                required:
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -409,17 +426,43 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: DatabaseStatus defines the observed state of Database.
             properties:
               atProvider:
                 properties:
+                  clusterName:
+                    description: Specifies the name of the Kusto Cluster this database
+                      will be added to. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  hotCachePeriod:
+                    description: 'The time the data that should be kept in cache for
+                      fast queries as ISO 8601 timespan. Default is unlimited. For
+                      more information see: ISO 8601 Timespan'
+                    type: string
                   id:
                     description: The Kusto Cluster ID.
+                    type: string
+                  location:
+                    description: The location where the Kusto Database should be created.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  resourceGroupName:
+                    description: Specifies the Resource Group where the Kusto Database
+                      should exist. Changing this forces a new resource to be created.
                     type: string
                   size:
                     description: The size of the database in bytes.
                     type: number
+                  softDeletePeriod:
+                    description: 'The time the data should be kept before it stops
+                      being accessible to queries as ISO 8601 timespan. Default is
+                      unlimited. For more information see: ISO 8601 Timespan'
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

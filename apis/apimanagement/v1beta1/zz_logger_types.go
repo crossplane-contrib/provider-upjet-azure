@@ -24,6 +24,9 @@ type ApplicationInsightsParameters struct {
 }
 
 type EventHubObservation struct {
+
+	// The name of an EventHub.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type EventHubParameters struct {
@@ -39,8 +42,29 @@ type EventHubParameters struct {
 
 type LoggerObservation struct {
 
+	// The name of the API Management Service. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// An application_insights block as documented below. Changing this forces a new resource to be created.
+	ApplicationInsights []ApplicationInsightsParameters `json:"applicationInsights,omitempty" tf:"application_insights,omitempty"`
+
+	// Specifies whether records should be buffered in the Logger prior to publishing. Defaults to true.
+	Buffered *bool `json:"buffered,omitempty" tf:"buffered,omitempty"`
+
+	// A description of this Logger.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// An eventhub block as documented below. Changing this forces a new resource to be created.
+	EventHub []EventHubObservation `json:"eventhub,omitempty" tf:"eventhub,omitempty"`
+
 	// The ID of the API Management Logger.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The target resource id which will be linked in the API-Management portal page. Changing this forces a new resource to be created.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 }
 
 type LoggerParameters struct {

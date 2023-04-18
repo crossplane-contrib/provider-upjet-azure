@@ -15,8 +15,23 @@ import (
 
 type GlobalSchemaObservation struct {
 
+	// The Name of the API Management Service where the API exists. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// The description of the schema.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the API Management API Schema.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The content type of the Schema. Possible values are xml and json.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The string defining the document representing the Schema.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type GlobalSchemaParameters struct {
@@ -52,12 +67,12 @@ type GlobalSchemaParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The content type of the Schema. Possible values are xml and json.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The string defining the document representing the Schema.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // GlobalSchemaSpec defines the desired state of GlobalSchema
@@ -84,8 +99,10 @@ type GlobalSchemaStatus struct {
 type GlobalSchema struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GlobalSchemaSpec   `json:"spec"`
-	Status            GlobalSchemaStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.value)",message="value is a required parameter"
+	Spec   GlobalSchemaSpec   `json:"spec"`
+	Status GlobalSchemaStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

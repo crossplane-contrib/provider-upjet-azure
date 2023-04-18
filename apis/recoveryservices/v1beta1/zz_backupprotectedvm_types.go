@@ -15,8 +15,26 @@ import (
 
 type BackupProtectedVMObservation struct {
 
+	// Specifies the id of the backup policy to use.
+	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
+
+	// A list of Disks' Logical Unit Numbers(LUN) to be excluded for VM Protection.
+	ExcludeDiskLuns []*float64 `json:"excludeDiskLuns,omitempty" tf:"exclude_disk_luns,omitempty"`
+
 	// The ID of the Backup Protected Virtual Machine.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of Disks' Logical Unit Numbers(LUN) to be included for VM Protection.
+	IncludeDiskLuns []*float64 `json:"includeDiskLuns,omitempty" tf:"include_disk_luns,omitempty"`
+
+	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
+	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
+
+	// The name of the resource group in which to create the Recovery Services Vault. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the ID of the VM to backup. Changing this forces a new resource to be created.
+	SourceVMID *string `json:"sourceVmId,omitempty" tf:"source_vm_id,omitempty"`
 }
 
 type BackupProtectedVMParameters struct {

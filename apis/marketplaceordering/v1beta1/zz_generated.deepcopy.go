@@ -85,8 +85,23 @@ func (in *MarketplaceAgreementObservation) DeepCopyInto(out *MarketplaceAgreemen
 		*out = new(string)
 		**out = **in
 	}
+	if in.Offer != nil {
+		in, out := &in.Offer, &out.Offer
+		*out = new(string)
+		**out = **in
+	}
+	if in.Plan != nil {
+		in, out := &in.Plan, &out.Plan
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrivacyPolicyLink != nil {
 		in, out := &in.PrivacyPolicyLink, &out.PrivacyPolicyLink
+		*out = new(string)
+		**out = **in
+	}
+	if in.Publisher != nil {
+		in, out := &in.Publisher, &out.Publisher
 		*out = new(string)
 		**out = **in
 	}

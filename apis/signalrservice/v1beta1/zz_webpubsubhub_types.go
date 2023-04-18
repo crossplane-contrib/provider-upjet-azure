@@ -14,6 +14,9 @@ import (
 )
 
 type AuthObservation struct {
+
+	// Specify the identity ID of the target resource.
+	ManagedIdentityID *string `json:"managedIdentityId,omitempty" tf:"managed_identity_id,omitempty"`
 }
 
 type AuthParameters struct {
@@ -34,6 +37,18 @@ type AuthParameters struct {
 }
 
 type EventHandlerObservation struct {
+
+	// An auth block as defined below.
+	Auth []AuthObservation `json:"auth,omitempty" tf:"auth,omitempty"`
+
+	// Specify the list of system events. Supported values are connect, connected and disconnected.
+	SystemEvents []*string `json:"systemEvents,omitempty" tf:"system_events,omitempty"`
+
+	// The Event Handler URL Template. Two predefined parameters {hub} and {event} are available to use in the template. The value of the EventHandler URL is dynamically calculated when the client request comes in. Example: http://example.com/api/{hub}/{event}.
+	URLTemplate *string `json:"urlTemplate,omitempty" tf:"url_template,omitempty"`
+
+	// Specify the matching event names. There are 3 kind of patterns supported: * * matches any event name * , Combine multiple events with , for example event1,event2, it matches event event1 and event2 * The single event name, for example event1, it matches event1.
+	UserEventPattern *string `json:"userEventPattern,omitempty" tf:"user_event_pattern,omitempty"`
 }
 
 type EventHandlerParameters struct {
@@ -57,8 +72,21 @@ type EventHandlerParameters struct {
 
 type WebPubsubHubObservation struct {
 
+	// Is anonymous connections are allowed for this hub? Defaults to false.
+	// Possible values are true, false.
+	AnonymousConnectionsEnabled *bool `json:"anonymousConnectionsEnabled,omitempty" tf:"anonymous_connections_enabled,omitempty"`
+
+	// An event_handler block as defined below.
+	EventHandler []EventHandlerObservation `json:"eventHandler,omitempty" tf:"event_handler,omitempty"`
+
 	// The ID of the Web Pubsub Hub resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Web Pubsub hub service. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specify the id of the Web Pubsub. Changing this forces a new resource to be created.
+	WebPubsubID *string `json:"webPubsubId,omitempty" tf:"web_pubsub_id,omitempty"`
 }
 
 type WebPubsubHubParameters struct {
@@ -73,8 +101,8 @@ type WebPubsubHubParameters struct {
 	EventHandler []EventHandlerParameters `json:"eventHandler,omitempty" tf:"event_handler,omitempty"`
 
 	// The name of the Web Pubsub hub service. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specify the id of the Web Pubsub. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/signalrservice/v1beta1.WebPubsub
@@ -115,8 +143,9 @@ type WebPubsubHubStatus struct {
 type WebPubsubHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WebPubsubHubSpec   `json:"spec"`
-	Status            WebPubsubHubStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   WebPubsubHubSpec   `json:"spec"`
+	Status WebPubsubHubStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

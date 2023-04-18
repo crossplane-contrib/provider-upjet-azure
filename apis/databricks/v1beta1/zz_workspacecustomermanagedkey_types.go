@@ -17,6 +17,12 @@ type WorkspaceCustomerManagedKeyObservation struct {
 
 	// The ID of the Databricks Workspace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Key Vault.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The ID of the Databricks Workspace..
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type WorkspaceCustomerManagedKeyParameters struct {

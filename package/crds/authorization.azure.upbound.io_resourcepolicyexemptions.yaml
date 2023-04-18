@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: resourcepolicyexemptions.authorization.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -254,10 +258,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - exemptionCategory
-                - name
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -429,14 +445,58 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: exemptionCategory is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.exemptionCategory)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
           status:
             description: ResourcePolicyExemptionStatus defines the observed state
               of ResourcePolicyExemption.
             properties:
               atProvider:
                 properties:
+                  description:
+                    description: A description to use for this Policy Exemption.
+                    type: string
+                  displayName:
+                    description: A friendly display name to use for this Policy Exemption.
+                    type: string
+                  exemptionCategory:
+                    description: The category of this policy exemption. Possible values
+                      are Waiver and Mitigated.
+                    type: string
+                  expiresOn:
+                    description: The expiration date and time in UTC ISO 8601 format
+                      of this policy exemption.
+                    type: string
                   id:
                     description: The Policy Exemption id.
+                    type: string
+                  metadata:
+                    description: The metadata for this policy exemption. This is a
+                      JSON string representing additional metadata that should be
+                      stored with the policy exemption.
+                    type: string
+                  name:
+                    description: The name of the Policy Exemption. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  policyAssignmentId:
+                    description: The ID of the Policy Assignment to be exempted at
+                      the specified Scope. Changing this forces a new resource to
+                      be created.
+                    type: string
+                  policyDefinitionReferenceIds:
+                    description: The policy definition reference ID list when the
+                      associated policy assignment is an assignment of a policy set
+                      definition.
+                    items:
+                      type: string
+                    type: array
+                  resourceId:
+                    description: The Resource ID where the Policy Exemption should
+                      be applied. Changing this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

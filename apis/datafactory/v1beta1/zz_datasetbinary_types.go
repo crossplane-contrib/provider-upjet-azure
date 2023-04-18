@@ -14,6 +14,24 @@ import (
 )
 
 type AzureBlobStorageLocationObservation struct {
+
+	// The container on the Azure Blob Storage Account hosting the file.
+	Container *string `json:"container,omitempty" tf:"container,omitempty"`
+
+	// Is the container using dynamic expression, function or system variables? Defaults to false.
+	DynamicContainerEnabled *bool `json:"dynamicContainerEnabled,omitempty" tf:"dynamic_container_enabled,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the file in the blob container.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file in the blob container.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type AzureBlobStorageLocationParameters struct {
@@ -44,6 +62,12 @@ type AzureBlobStorageLocationParameters struct {
 }
 
 type CompressionObservation struct {
+
+	// The level of compression. Possible values are Fastest and Optimal.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// The type of compression used during transport. Possible values are BZip2, Deflate, GZip, Tar, TarGZip and ZipDeflate.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type CompressionParameters struct {
@@ -59,8 +83,41 @@ type CompressionParameters struct {
 
 type DataSetBinaryObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Binary Dataset.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Binary Dataset.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// A azure_blob_storage_location block as defined below.
+	AzureBlobStorageLocation []AzureBlobStorageLocationObservation `json:"azureBlobStorageLocation,omitempty" tf:"azure_blob_storage_location,omitempty"`
+
+	// A compression block as defined below.
+	Compression []CompressionObservation `json:"compression,omitempty" tf:"compression,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Dataset.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
+	// A http_server_location block as defined below.
+	HTTPServerLocation []HTTPServerLocationObservation `json:"httpServerLocation,omitempty" tf:"http_server_location,omitempty"`
+
 	// The ID of the Data Factory Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Data Factory Linked Service name in which to associate the Binary Dataset with.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies a list of parameters to associate with the Data Factory Binary Dataset.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// A sftp_server_location block as defined below.
+	SFTPServerLocation []SFTPServerLocationObservation `json:"sftpServerLocation,omitempty" tf:"sftp_server_location,omitempty"`
 }
 
 type DataSetBinaryParameters struct {
@@ -130,6 +187,21 @@ type DataSetBinaryParameters struct {
 }
 
 type HTTPServerLocationObservation struct {
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the file on the web server.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file on the web server.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The base URL to the web server hosting the file.
+	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
 }
 
 type HTTPServerLocationParameters struct {
@@ -156,6 +228,18 @@ type HTTPServerLocationParameters struct {
 }
 
 type SFTPServerLocationObservation struct {
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the file on the SFTP server.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file on the SFTP server.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type SFTPServerLocationParameters struct {

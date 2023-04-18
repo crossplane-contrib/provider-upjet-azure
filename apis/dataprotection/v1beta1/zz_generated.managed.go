@@ -17,6 +17,11 @@ func (mg *BackupInstanceBlobStorage) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BackupInstanceBlobStorage.
+func (mg *BackupInstanceBlobStorage) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BackupInstanceBlobStorage.
 func (mg *BackupInstanceBlobStorage) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *BackupInstanceBlobStorage) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BackupInstanceBlobStorage.
 func (mg *BackupInstanceBlobStorage) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BackupInstanceBlobStorage.
+func (mg *BackupInstanceBlobStorage) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BackupInstanceBlobStorage.
@@ -83,6 +93,11 @@ func (mg *BackupInstanceDisk) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BackupInstanceDisk.
+func (mg *BackupInstanceDisk) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BackupInstanceDisk.
 func (mg *BackupInstanceDisk) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *BackupInstanceDisk) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BackupInstanceDisk.
 func (mg *BackupInstanceDisk) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BackupInstanceDisk.
+func (mg *BackupInstanceDisk) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BackupInstanceDisk.
@@ -149,6 +169,11 @@ func (mg *BackupInstancePostgreSQL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BackupInstancePostgreSQL.
+func (mg *BackupInstancePostgreSQL) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BackupInstancePostgreSQL.
 func (mg *BackupInstancePostgreSQL) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *BackupInstancePostgreSQL) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BackupInstancePostgreSQL.
 func (mg *BackupInstancePostgreSQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BackupInstancePostgreSQL.
+func (mg *BackupInstancePostgreSQL) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BackupInstancePostgreSQL.
@@ -215,6 +245,11 @@ func (mg *BackupPolicyBlobStorage) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BackupPolicyBlobStorage.
+func (mg *BackupPolicyBlobStorage) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BackupPolicyBlobStorage.
 func (mg *BackupPolicyBlobStorage) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *BackupPolicyBlobStorage) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BackupPolicyBlobStorage.
 func (mg *BackupPolicyBlobStorage) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BackupPolicyBlobStorage.
+func (mg *BackupPolicyBlobStorage) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BackupPolicyBlobStorage.
@@ -281,6 +321,11 @@ func (mg *BackupPolicyDisk) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BackupPolicyDisk.
+func (mg *BackupPolicyDisk) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BackupPolicyDisk.
 func (mg *BackupPolicyDisk) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *BackupPolicyDisk) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BackupPolicyDisk.
 func (mg *BackupPolicyDisk) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BackupPolicyDisk.
+func (mg *BackupPolicyDisk) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BackupPolicyDisk.
@@ -347,6 +397,11 @@ func (mg *BackupVault) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this BackupVault.
+func (mg *BackupVault) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this BackupVault.
 func (mg *BackupVault) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *BackupVault) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this BackupVault.
 func (mg *BackupVault) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BackupVault.
+func (mg *BackupVault) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this BackupVault.
@@ -413,6 +473,11 @@ func (mg *ResourceGuard) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ResourceGuard.
+func (mg *ResourceGuard) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ResourceGuard.
 func (mg *ResourceGuard) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *ResourceGuard) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ResourceGuard.
 func (mg *ResourceGuard) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ResourceGuard.
+func (mg *ResourceGuard) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ResourceGuard.

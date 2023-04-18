@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: namedvalues.apimanagement.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -272,9 +276,22 @@ spec:
                     - name
                     - namespace
                     type: object
-                required:
-                - displayName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -446,14 +463,56 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: displayName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)
           status:
             description: NamedValueStatus defines the observed state of NamedValue.
             properties:
               atProvider:
                 properties:
+                  apiManagementName:
+                    description: The name of the API Management Service in which the
+                      API Management Named Value should exist. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  displayName:
+                    description: The display name of this API Management Named Value.
+                    type: string
                   id:
                     description: The ID of the API Management Named Value.
                     type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group in which the API Management
+                      Named Value should exist. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  secret:
+                    description: Specifies whether the API Management Named Value
+                      is secret. Valid values are true or false. The default value
+                      is false.
+                    type: boolean
+                  tags:
+                    description: A list of tags to be applied to the API Management
+                      Named Value.
+                    items:
+                      type: string
+                    type: array
+                  valueFromKeyVault:
+                    description: A value_from_key_vault block as defined below.
+                    items:
+                      properties:
+                        identityClientId:
+                          description: The client ID of User Assigned Identity, for
+                            the API Management Service, which will be used to access
+                            the key vault secret. The System Assigned Identity will
+                            be used in absence.
+                          type: string
+                        secretId:
+                          description: The resource ID of the Key Vault Secret.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

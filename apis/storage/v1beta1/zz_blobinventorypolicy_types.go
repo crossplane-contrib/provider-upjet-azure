@@ -17,13 +17,19 @@ type BlobInventoryPolicyObservation struct {
 
 	// The ID of the Storage Blob Inventory Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more rules blocks as defined below.
+	Rules []RulesObservation `json:"rules,omitempty" tf:"rules,omitempty"`
+
+	// The ID of the storage account to apply this Blob Inventory Policy to. Changing this forces a new Storage Blob Inventory Policy to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 }
 
 type BlobInventoryPolicyParameters struct {
 
 	// One or more rules blocks as defined below.
-	// +kubebuilder:validation:Required
-	Rules []RulesParameters `json:"rules" tf:"rules,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rules []RulesParameters `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// The ID of the storage account to apply this Blob Inventory Policy to. Changing this forces a new Storage Blob Inventory Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -41,6 +47,24 @@ type BlobInventoryPolicyParameters struct {
 }
 
 type FilterObservation struct {
+
+	// A set of blob types. Possible values are blockBlob, appendBlob, and pageBlob. The storage account with is_hns_enabled is true doesn't support pageBlob.
+	BlobTypes []*string `json:"blobTypes,omitempty" tf:"blob_types,omitempty"`
+
+	// A set of strings for blob prefixes to be excluded. Maximum of 10 blob prefixes.
+	ExcludePrefixes []*string `json:"excludePrefixes,omitempty" tf:"exclude_prefixes,omitempty"`
+
+	// Includes blob versions in blob inventory or not? Defaults to false.
+	IncludeBlobVersions *bool `json:"includeBlobVersions,omitempty" tf:"include_blob_versions,omitempty"`
+
+	// Includes deleted blobs in blob inventory or not? Defaults to false.
+	IncludeDeleted *bool `json:"includeDeleted,omitempty" tf:"include_deleted,omitempty"`
+
+	// Includes blob snapshots in blob inventory or not? Defaults to false.
+	IncludeSnapshots *bool `json:"includeSnapshots,omitempty" tf:"include_snapshots,omitempty"`
+
+	// A set of strings for blob prefixes to be matched. Maximum of 10 blob prefixes.
+	PrefixMatch []*string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 }
 
 type FilterParameters struct {
@@ -71,6 +95,27 @@ type FilterParameters struct {
 }
 
 type RulesObservation struct {
+
+	// A filter block as defined above. Can only be set when the scope is Blob.
+	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// The format of the inventory files. Possible values are Csv and Parquet.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// The name which should be used for this Blob Inventory Policy Rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The inventory schedule applied by this rule. Possible values are Daily and Weekly.
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// A list of fields to be included in the inventory. See the Azure API reference for all the supported fields.
+	SchemaFields []*string `json:"schemaFields,omitempty" tf:"schema_fields,omitempty"`
+
+	// The scope of the inventory for this rule. Possible values are Blob and Container.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// The storage container name to store the blob inventory files for this rule.
+	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
 }
 
 type RulesParameters struct {
@@ -137,8 +182,9 @@ type BlobInventoryPolicyStatus struct {
 type BlobInventoryPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BlobInventoryPolicySpec   `json:"spec"`
-	Status            BlobInventoryPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rules)",message="rules is a required parameter"
+	Spec   BlobInventoryPolicySpec   `json:"spec"`
+	Status BlobInventoryPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

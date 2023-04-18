@@ -15,8 +15,26 @@ import (
 
 type IntegrationRuntimeAzureObservation struct {
 
+	// Compute type of the cluster which will execute data flow job. Valid values are General, ComputeOptimized and MemoryOptimized. Defaults to General.
+	ComputeType *string `json:"computeType,omitempty" tf:"compute_type,omitempty"`
+
+	// Core count of the cluster which will execute data flow job. Valid values are 8, 16, 32, 48, 80, 144 and 272. Defaults to 8.
+	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	// Integration runtime description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Synapse Azure Integration Runtime.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Synapse Azure Integration Runtime should exist. Use AutoResolve to create an auto-resolve integration runtime. Changing this forces a new Synapse Azure Integration Runtime to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The Synapse Workspace ID in which to associate the Integration Runtime with. Changing this forces a new Synapse Azure Integration Runtime to be created.
+	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`
+
+	// Time to live (in minutes) setting of the cluster which will execute data flow job. Defaults to 0.
+	TimeToLiveMin *float64 `json:"timeToLiveMin,omitempty" tf:"time_to_live_min,omitempty"`
 }
 
 type IntegrationRuntimeAzureParameters struct {
@@ -34,8 +52,8 @@ type IntegrationRuntimeAzureParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Azure Region where the Synapse Azure Integration Runtime should exist. Use AutoResolve to create an auto-resolve integration runtime. Changing this forces a new Synapse Azure Integration Runtime to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Synapse Workspace ID in which to associate the Integration Runtime with. Changing this forces a new Synapse Azure Integration Runtime to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
@@ -80,8 +98,9 @@ type IntegrationRuntimeAzureStatus struct {
 type IntegrationRuntimeAzure struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IntegrationRuntimeAzureSpec   `json:"spec"`
-	Status            IntegrationRuntimeAzureStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   IntegrationRuntimeAzureSpec   `json:"spec"`
+	Status IntegrationRuntimeAzureStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

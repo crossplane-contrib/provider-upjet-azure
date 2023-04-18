@@ -17,13 +17,25 @@ type RouteFilterObservation struct {
 
 	// The ID of the Route Filter.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Route Filter should exist. Changing this forces a new Route Filter to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where the Route Filter should exist. Changing this forces a new Route Filter to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A rule block as defined below.
+	Rule []RouteFilterRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// A mapping of tags which should be assigned to the Route Filter.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type RouteFilterParameters struct {
 
 	// The Azure Region where the Route Filter should exist. Changing this forces a new Route Filter to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Route Filter should exist. Changing this forces a new Route Filter to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -48,6 +60,18 @@ type RouteFilterParameters struct {
 }
 
 type RouteFilterRuleObservation struct {
+
+	// The access type of the rule. The only possible value is Allow.
+	Access *string `json:"access,omitempty" tf:"access,omitempty"`
+
+	// The collection for bgp community values to filter on. e.g. ['12076:5010','12076:5020'].
+	Communities []*string `json:"communities,omitempty" tf:"communities,omitempty"`
+
+	// The name of the route filter rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The rule type of the rule. The only possible value is Community.
+	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
 }
 
 type RouteFilterRuleParameters struct {
@@ -93,8 +117,9 @@ type RouteFilterStatus struct {
 type RouteFilter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RouteFilterSpec   `json:"spec"`
-	Status            RouteFilterStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   RouteFilterSpec   `json:"spec"`
+	Status RouteFilterStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

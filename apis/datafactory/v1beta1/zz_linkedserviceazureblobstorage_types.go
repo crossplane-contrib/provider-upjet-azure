@@ -14,6 +14,12 @@ import (
 )
 
 type KeyVaultSASTokenObservation struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the secret name in Azure Key Vault that stores the SAS token.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type KeyVaultSASTokenParameters struct {
@@ -38,8 +44,50 @@ type KeyVaultSASTokenParameters struct {
 
 type LinkedServiceAzureBlobStorageObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The connection string sent insecurely. Conflicts with connection_string, sas_uri and service_endpoint.
+	ConnectionStringInsecure *string `json:"connectionStringInsecure,omitempty" tf:"connection_string_insecure,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Data Factory Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A key_vault_sas_token block as defined below. Use this argument to store SAS Token in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service. A sas_uri is required.
+	KeyVaultSASToken []KeyVaultSASTokenObservation `json:"keyVaultSasToken,omitempty" tf:"key_vault_sas_token,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The service principal id in which to authenticate against the Azure Blob Storage account.
+	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
+
+	// The service principal key in which to authenticate against the AAzure Blob Storage account.
+	ServicePrincipalKey *string `json:"servicePrincipalKey,omitempty" tf:"service_principal_key,omitempty"`
+
+	// A service_principal_linked_key_vault_key block as defined below. Use this argument to store Service Principal key in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service.
+	ServicePrincipalLinkedKeyVaultKey []ServicePrincipalLinkedKeyVaultKeyObservation `json:"servicePrincipalLinkedKeyVaultKey,omitempty" tf:"service_principal_linked_key_vault_key,omitempty"`
+
+	// Specify the kind of the storage account. Allowed values are Storage, StorageV2, BlobStorage and BlockBlobStorage.
+	StorageKind *string `json:"storageKind,omitempty" tf:"storage_kind,omitempty"`
+
+	// The tenant id or name in which to authenticate against the Azure Blob Storage account.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Whether to use the Data Factory's managed identity to authenticate against the Azure Blob Storage account. Incompatible with service_principal_id and service_principal_key.
+	UseManagedIdentity *bool `json:"useManagedIdentity,omitempty" tf:"use_managed_identity,omitempty"`
 }
 
 type LinkedServiceAzureBlobStorageParameters struct {
@@ -124,6 +172,12 @@ type LinkedServiceAzureBlobStorageParameters struct {
 }
 
 type ServicePrincipalLinkedKeyVaultKeyObservation struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the secret name in Azure Key Vault that stores the Service Principal key.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type ServicePrincipalLinkedKeyVaultKeyParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: publicips.network.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -219,10 +223,22 @@ spec:
                     items:
                       type: string
                     type: array
-                required:
-                - allocationMethod
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -394,11 +410,39 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: allocationMethod is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.allocationMethod)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: PublicIPStatus defines the observed state of PublicIP.
             properties:
               atProvider:
                 properties:
+                  allocationMethod:
+                    description: Defines the allocation method for this IP address.
+                      Possible values are Static or Dynamic.
+                    type: string
+                  ddosProtectionMode:
+                    description: The DDoS protection mode of the public IP. Possible
+                      values are Disabled, Enabled, and VirtualNetworkInherited. Defaults
+                      to VirtualNetworkInherited.
+                    type: string
+                  ddosProtectionPlanId:
+                    description: The ID of DDoS protection plan associated with the
+                      public IP.
+                    type: string
+                  domainNameLabel:
+                    description: Label for the Domain Name. Will be used to make up
+                      the FQDN. If a domain name label is specified, an A DNS record
+                      is created for the public IP in the Microsoft Azure DNS system.
+                    type: string
+                  edgeZone:
+                    description: Specifies the Edge Zone within the Azure Region where
+                      this Public IP should exist. Changing this forces a new Public
+                      IP to be created.
+                    type: string
                   fqdn:
                     description: Fully qualified domain name of the A DNS record associated
                       with the public IP. domain_name_label must be specified to get
@@ -408,9 +452,66 @@ spec:
                   id:
                     description: The ID of this Public IP.
                     type: string
+                  idleTimeoutInMinutes:
+                    description: Specifies the timeout for the TCP idle connection.
+                      The value can be set between 4 and 30 minutes.
+                    type: number
                   ipAddress:
                     description: The IP address value that was allocated.
                     type: string
+                  ipTags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of IP tags to assign to the public IP.
+                      Changing this forces a new resource to be created.
+                    type: object
+                  ipVersion:
+                    description: The IP Version to use, IPv6 or IPv4. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      Public IP should exist. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  publicIpPrefixId:
+                    description: If specified then public IP address allocated will
+                      be provided from the public IP prefix resource. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where this Public
+                      IP should exist. Changing this forces a new Public IP to be
+                      created.
+                    type: string
+                  reverseFqdn:
+                    description: A fully qualified domain name that resolves to this
+                      public IP address. If the reverseFqdn is specified, then a PTR
+                      DNS record is created pointing from the IP address in the in-addr.arpa
+                      domain to the reverse FQDN.
+                    type: string
+                  sku:
+                    description: The SKU of the Public IP. Accepted values are Basic
+                      and Standard. Defaults to Basic. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  skuTier:
+                    description: The SKU Tier that should be used for the Public IP.
+                      Possible values are Regional and Global. Defaults to Regional.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  zones:
+                    description: A collection containing the availability zone to
+                      allocate the Public IP in. Changing this forces a new resource
+                      to be created.
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

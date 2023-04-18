@@ -14,6 +14,30 @@ import (
 )
 
 type AccessRuleObservation struct {
+
+	// The access level for this rule. Possible values are: rw, ro, no.
+	Access *string `json:"access,omitempty" tf:"access,omitempty"`
+
+	// The anonymous GID used when root_squash_enabled is true.
+	AnonymousGID *float64 `json:"anonymousGid,omitempty" tf:"anonymous_gid,omitempty"`
+
+	// The anonymous UID used when root_squash_enabled is true.
+	AnonymousUID *float64 `json:"anonymousUid,omitempty" tf:"anonymous_uid,omitempty"`
+
+	// The filter applied to the scope for this rule. The filter's format depends on its scope: default scope matches all clients and has no filter value; network scope takes a CIDR format; host takes an IP address or fully qualified domain name. If a client does not match any filter rule and there is no default rule, access is denied.
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// Whether to enable root squash?
+	RootSquashEnabled *bool `json:"rootSquashEnabled,omitempty" tf:"root_squash_enabled,omitempty"`
+
+	// The scope of this rule. The scope and (potentially) the filter determine which clients match the rule. Possible values are: default, network, host.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Whether allow access to subdirectories under the root export?
+	SubmountAccessEnabled *bool `json:"submountAccessEnabled,omitempty" tf:"submount_access_enabled,omitempty"`
+
+	// Whether SUID is allowed?
+	SuidEnabled *bool `json:"suidEnabled,omitempty" tf:"suid_enabled,omitempty"`
 }
 
 type AccessRuleParameters struct {
@@ -52,6 +76,9 @@ type AccessRuleParameters struct {
 }
 
 type BindObservation struct {
+
+	// The Bind Distinguished Name (DN) identity to be used in the secure LDAP connection.
+	Dn *string `json:"dn,omitempty" tf:"dn,omitempty"`
 }
 
 type BindParameters struct {
@@ -66,6 +93,12 @@ type BindParameters struct {
 }
 
 type DNSObservation struct {
+
+	// The DNS search domain for the HPC Cache.
+	SearchDomain *string `json:"searchDomain,omitempty" tf:"search_domain,omitempty"`
+
+	// A list of DNS servers for the HPC Cache. At most three IP(s) are allowed to set.
+	Servers []*string `json:"servers,omitempty" tf:"servers,omitempty"`
 }
 
 type DNSParameters struct {
@@ -80,6 +113,9 @@ type DNSParameters struct {
 }
 
 type DefaultAccessPolicyObservation struct {
+
+	// One to three access_rule blocks as defined above.
+	AccessRule []AccessRuleObservation `json:"accessRule,omitempty" tf:"access_rule,omitempty"`
 }
 
 type DefaultAccessPolicyParameters struct {
@@ -90,6 +126,24 @@ type DefaultAccessPolicyParameters struct {
 }
 
 type DirectoryActiveDirectoryObservation struct {
+
+	// The NetBIOS name to assign to the HPC Cache when it joins the Active Directory domain as a server.
+	CacheNetbiosName *string `json:"cacheNetbiosName,omitempty" tf:"cache_netbios_name,omitempty"`
+
+	// The primary DNS IP address used to resolve the Active Directory domain controller's FQDN.
+	DNSPrimaryIP *string `json:"dnsPrimaryIp,omitempty" tf:"dns_primary_ip,omitempty"`
+
+	// The secondary DNS IP address used to resolve the Active Directory domain controller's FQDN.
+	DNSSecondaryIP *string `json:"dnsSecondaryIp,omitempty" tf:"dns_secondary_ip,omitempty"`
+
+	// The fully qualified domain name of the Active Directory domain controller.
+	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+
+	// The Active Directory domain's NetBIOS name.
+	DomainNetbiosName *string `json:"domainNetbiosName,omitempty" tf:"domain_netbios_name,omitempty"`
+
+	// The username of the Active Directory domain administrator.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type DirectoryActiveDirectoryParameters struct {
@@ -124,6 +178,12 @@ type DirectoryActiveDirectoryParameters struct {
 }
 
 type DirectoryFlatFileObservation struct {
+
+	// The URI of the file containing group information (/etc/group file format in Unix-like OS).
+	GroupFileURI *string `json:"groupFileUri,omitempty" tf:"group_file_uri,omitempty"`
+
+	// The URI of the file containing user information (/etc/passwd file format in Unix-like OS).
+	PasswordFileURI *string `json:"passwordFileUri,omitempty" tf:"password_file_uri,omitempty"`
 }
 
 type DirectoryFlatFileParameters struct {
@@ -138,6 +198,24 @@ type DirectoryFlatFileParameters struct {
 }
 
 type DirectoryLdapObservation struct {
+
+	// The base distinguished name (DN) for the LDAP domain.
+	BaseDn *string `json:"baseDn,omitempty" tf:"base_dn,omitempty"`
+
+	// A bind block as defined above.
+	Bind []BindObservation `json:"bind,omitempty" tf:"bind,omitempty"`
+
+	// The URI of the CA certificate to validate the LDAP secure connection.
+	CertificateValidationURI *string `json:"certificateValidationUri,omitempty" tf:"certificate_validation_uri,omitempty"`
+
+	// Whether the certificate should be automatically downloaded. This can be set to true only when certificate_validation_uri is provided.
+	DownloadCertificateAutomatically *bool `json:"downloadCertificateAutomatically,omitempty" tf:"download_certificate_automatically,omitempty"`
+
+	// Whether the LDAP connection should be encrypted?
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
+	// The FQDN or IP address of the LDAP server.
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 }
 
 type DirectoryLdapParameters struct {
@@ -169,11 +247,59 @@ type DirectoryLdapParameters struct {
 
 type HPCCacheObservation struct {
 
+	// Specifies whether the HPC Cache automatically rotates Encryption Key to the latest version.
+	AutomaticallyRotateKeyToLatestEnabled *bool `json:"automaticallyRotateKeyToLatestEnabled,omitempty" tf:"automatically_rotate_key_to_latest_enabled,omitempty"`
+
+	// The size of the HPC Cache, in GB. Possible values are 3072, 6144, 12288, 21623, 24576, 43246, 49152 and 86491. Changing this forces a new resource to be created.
+	CacheSizeInGb *float64 `json:"cacheSizeInGb,omitempty" tf:"cache_size_in_gb,omitempty"`
+
+	// A dns block as defined below.
+	DNS []DNSObservation `json:"dns,omitempty" tf:"dns,omitempty"`
+
+	// A default_access_policy block as defined below.
+	DefaultAccessPolicy []DefaultAccessPolicyObservation `json:"defaultAccessPolicy,omitempty" tf:"default_access_policy,omitempty"`
+
+	// A directory_active_directory block as defined below.
+	DirectoryActiveDirectory []DirectoryActiveDirectoryObservation `json:"directoryActiveDirectory,omitempty" tf:"directory_active_directory,omitempty"`
+
+	// A directory_flat_file block as defined below.
+	DirectoryFlatFile []DirectoryFlatFileObservation `json:"directoryFlatFile,omitempty" tf:"directory_flat_file,omitempty"`
+
+	// A directory_ldap block as defined below.
+	DirectoryLdap []DirectoryLdapObservation `json:"directoryLdap,omitempty" tf:"directory_ldap,omitempty"`
+
 	// The id of the HPC Cache.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below. Changing this forces a new resource to be created.
+	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The ID of the Key Vault Key which should be used to encrypt the data in this HPC Cache.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// Specifies the supported Azure Region where the HPC Cache should be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// A list of IP Addresses where the HPC Cache can be mounted.
 	MountAddresses []*string `json:"mountAddresses,omitempty" tf:"mount_addresses,omitempty"`
+
+	// The IPv4 maximum transmission unit configured for the subnet of the HPC Cache. Possible values range from 576 - 1500. Defaults to 1500.
+	Mtu *float64 `json:"mtu,omitempty" tf:"mtu,omitempty"`
+
+	// The NTP server IP Address or FQDN for the HPC Cache. Defaults to time.windows.com.
+	NtpServer *string `json:"ntpServer,omitempty" tf:"ntp_server,omitempty"`
+
+	// The name of the Resource Group in which to create the HPC Cache. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The SKU of HPC Cache to use. Possible values are (ReadWrite) - Standard_2G, Standard_4G Standard_8G or (ReadOnly) - Standard_L4_5G, Standard_L9G, and Standard_L16G. Changing this forces a new resource to be created.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// The ID of the Subnet for the HPC Cache. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// A mapping of tags to assign to the HPC Cache.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type HPCCacheParameters struct {
@@ -183,8 +309,8 @@ type HPCCacheParameters struct {
 	AutomaticallyRotateKeyToLatestEnabled *bool `json:"automaticallyRotateKeyToLatestEnabled,omitempty" tf:"automatically_rotate_key_to_latest_enabled,omitempty"`
 
 	// The size of the HPC Cache, in GB. Possible values are 3072, 6144, 12288, 21623, 24576, 43246, 49152 and 86491. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	CacheSizeInGb *float64 `json:"cacheSizeInGb" tf:"cache_size_in_gb,omitempty"`
+	// +kubebuilder:validation:Optional
+	CacheSizeInGb *float64 `json:"cacheSizeInGb,omitempty" tf:"cache_size_in_gb,omitempty"`
 
 	// A dns block as defined below.
 	// +kubebuilder:validation:Optional
@@ -215,8 +341,8 @@ type HPCCacheParameters struct {
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
 	// Specifies the supported Azure Region where the HPC Cache should be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The IPv4 maximum transmission unit configured for the subnet of the HPC Cache. Possible values range from 576 - 1500. Defaults to 1500.
 	// +kubebuilder:validation:Optional
@@ -240,8 +366,8 @@ type HPCCacheParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of HPC Cache to use. Possible values are (ReadWrite) - Standard_2G, Standard_4G Standard_8G or (ReadOnly) - Standard_L4_5G, Standard_L9G, and Standard_L16G. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The ID of the Subnet for the HPC Cache. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
@@ -263,6 +389,12 @@ type HPCCacheParameters struct {
 }
 
 type IdentityObservation struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this HPC Cache. Changing this forces a new resource to be created.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this HPC Cache. Only possible value is UserAssigned. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -300,8 +432,11 @@ type HPCCacheStatus struct {
 type HPCCache struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HPCCacheSpec   `json:"spec"`
-	Status            HPCCacheStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.cacheSizeInGb)",message="cacheSizeInGb is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	Spec   HPCCacheSpec   `json:"spec"`
+	Status HPCCacheStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

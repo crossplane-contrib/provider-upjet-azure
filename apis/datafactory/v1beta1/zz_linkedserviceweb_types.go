@@ -15,8 +15,35 @@ import (
 
 type LinkedServiceWebObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The type of authentication used to connect to the web table source. Valid options are Anonymous, Basic and ClientCertificate.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Data Factory Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The URL of the web service endpoint (e.g. https://www.microsoft.com).
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// The username for Basic authentication. Required if authentication_type sets to Basic.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type LinkedServiceWebParameters struct {
@@ -30,8 +57,8 @@ type LinkedServiceWebParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The type of authentication used to connect to the web table source. Valid options are Anonymous, Basic and ClientCertificate.
-	// +kubebuilder:validation:Required
-	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.Factory
@@ -64,8 +91,8 @@ type LinkedServiceWebParameters struct {
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The URL of the web service endpoint (e.g. https://www.microsoft.com).
-	// +kubebuilder:validation:Required
-	URL *string `json:"url" tf:"url,omitempty"`
+	// +kubebuilder:validation:Optional
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
 	// The username for Basic authentication. Required if authentication_type sets to Basic.
 	// +kubebuilder:validation:Optional
@@ -96,8 +123,10 @@ type LinkedServiceWebStatus struct {
 type LinkedServiceWeb struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LinkedServiceWebSpec   `json:"spec"`
-	Status            LinkedServiceWebStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authenticationType)",message="authenticationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.url)",message="url is a required parameter"
+	Spec   LinkedServiceWebSpec   `json:"spec"`
+	Status LinkedServiceWebStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -17,13 +17,19 @@ type BackupPolicyBlobStorageObservation struct {
 
 	// The ID of the Backup Policy Blob Storage.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
+	RetentionDuration *string `json:"retentionDuration,omitempty" tf:"retention_duration,omitempty"`
+
+	// The ID of the Backup Vault within which the Backup Policy Blob Storage should exist. Changing this forces a new Backup Policy Blob Storage to be created.
+	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 }
 
 type BackupPolicyBlobStorageParameters struct {
 
 	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
-	// +kubebuilder:validation:Required
-	RetentionDuration *string `json:"retentionDuration" tf:"retention_duration,omitempty"`
+	// +kubebuilder:validation:Optional
+	RetentionDuration *string `json:"retentionDuration,omitempty" tf:"retention_duration,omitempty"`
 
 	// The ID of the Backup Vault within which the Backup Policy Blob Storage should exist. Changing this forces a new Backup Policy Blob Storage to be created.
 	// +crossplane:generate:reference:type=BackupVault
@@ -64,8 +70,9 @@ type BackupPolicyBlobStorageStatus struct {
 type BackupPolicyBlobStorage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BackupPolicyBlobStorageSpec   `json:"spec"`
-	Status            BackupPolicyBlobStorageStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.retentionDuration)",message="retentionDuration is a required parameter"
+	Spec   BackupPolicyBlobStorageSpec   `json:"spec"`
+	Status BackupPolicyBlobStorageStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

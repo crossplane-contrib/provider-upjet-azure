@@ -14,6 +14,12 @@ import (
 )
 
 type ActionObservation struct {
+
+	// A request_header block as defined below.
+	RequestHeader []RequestHeaderObservation `json:"requestHeader,omitempty" tf:"request_header,omitempty"`
+
+	// A response_header block as defined below.
+	ResponseHeader []ResponseHeaderObservation `json:"responseHeader,omitempty" tf:"response_header,omitempty"`
 }
 
 type ActionParameters struct {
@@ -28,9 +34,22 @@ type ActionParameters struct {
 }
 
 type FrontdoorRulesEngineObservation struct {
+
+	// Whether this Rules engine configuration is enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The name of the Front Door instance. Changing this forces a new resource to be created.
+	FrontdoorName *string `json:"frontdoorName,omitempty" tf:"frontdoor_name,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A rule block as defined below.
+	Rule []FrontdoorRulesEngineRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type FrontdoorRulesEngineParameters struct {
@@ -71,6 +90,18 @@ type FrontdoorRulesEngineParameters struct {
 }
 
 type FrontdoorRulesEngineRuleObservation struct {
+
+	// An action block as defined below.
+	Action []ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// One or more match_condition block as defined below.
+	MatchCondition []RuleMatchConditionObservation `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
+
+	// The name of the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Priority of the rule, must be unique per rules engine definition.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 type FrontdoorRulesEngineRuleParameters struct {
@@ -93,6 +124,15 @@ type FrontdoorRulesEngineRuleParameters struct {
 }
 
 type RequestHeaderObservation struct {
+
+	// can be set to Overwrite, Append or Delete.
+	HeaderActionType *string `json:"headerActionType,omitempty" tf:"header_action_type,omitempty"`
+
+	// header name (string).
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+
+	// value name (string).
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RequestHeaderParameters struct {
@@ -111,6 +151,15 @@ type RequestHeaderParameters struct {
 }
 
 type ResponseHeaderObservation struct {
+
+	// can be set to Overwrite, Append or Delete.
+	HeaderActionType *string `json:"headerActionType,omitempty" tf:"header_action_type,omitempty"`
+
+	// header name (string).
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+
+	// value name (string).
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResponseHeaderParameters struct {
@@ -129,6 +178,24 @@ type ResponseHeaderParameters struct {
 }
 
 type RuleMatchConditionObservation struct {
+
+	// can be set to true or false to negate the given condition. Defaults to true.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// can be set to Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith or EndsWith
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// match against a specific key when variable is set to PostArgs or RequestHeader. It cannot be used with QueryString and RequestMethod.
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+
+	// can be set to one or more values out of Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode and UrlEncode
+	Transform []*string `json:"transform,omitempty" tf:"transform,omitempty"`
+
+	// value name (string).
+	Value []*string `json:"value,omitempty" tf:"value,omitempty"`
+
+	// can be set to IsMobile, RemoteAddr, RequestMethod, QueryString, PostArgs, RequestURI, RequestPath, RequestFilename, RequestFilenameExtension,RequestHeader,RequestBody or RequestScheme.
+	Variable *string `json:"variable,omitempty" tf:"variable,omitempty"`
 }
 
 type RuleMatchConditionParameters struct {

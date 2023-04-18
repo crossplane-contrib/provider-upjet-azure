@@ -15,8 +15,41 @@ import (
 
 type OutputBlobObservation struct {
 
+	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
+	// The maximum wait time per batch in hh:mm:ss e.g. 00:02:00 for two minutes.
+	BatchMaxWaitTime *string `json:"batchMaxWaitTime,omitempty" tf:"batch_max_wait_time,omitempty"`
+
+	// The minimum number of rows per batch (must be between 0 and 10000).
+	BatchMinRows *float64 `json:"batchMinRows,omitempty" tf:"batch_min_rows,omitempty"`
+
+	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
+	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
+
 	// The ID of the Stream Analytics Output Blob Storage.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The blob path pattern. Not a regular expression. It represents a pattern against which blob names will be matched to determine whether or not they should be included as input or output to the job.
+	PathPattern *string `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
+
+	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A serialization block as defined below.
+	Serialization []SerializationObservation `json:"serialization,omitempty" tf:"serialization,omitempty"`
+
+	// The name of the Storage Account.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// The name of the Container within the Storage Account.
+	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
+
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
+
+	// The time format. Wherever {time} appears in path_pattern, the value of this property is used as the time format instead.
+	TimeFormat *string `json:"timeFormat,omitempty" tf:"time_format,omitempty"`
 }
 
 type OutputBlobParameters struct {
@@ -34,12 +67,12 @@ type OutputBlobParameters struct {
 	BatchMinRows *float64 `json:"batchMinRows,omitempty" tf:"batch_min_rows,omitempty"`
 
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
-	// +kubebuilder:validation:Required
-	DateFormat *string `json:"dateFormat" tf:"date_format,omitempty"`
+	// +kubebuilder:validation:Optional
+	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
 
 	// The blob path pattern. Not a regular expression. It represents a pattern against which blob names will be matched to determine whether or not they should be included as input or output to the job.
-	// +kubebuilder:validation:Required
-	PathPattern *string `json:"pathPattern" tf:"path_pattern,omitempty"`
+	// +kubebuilder:validation:Optional
+	PathPattern *string `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -55,8 +88,8 @@ type OutputBlobParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
-	// +kubebuilder:validation:Required
-	Serialization []SerializationParameters `json:"serialization" tf:"serialization,omitempty"`
+	// +kubebuilder:validation:Optional
+	Serialization []SerializationParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The Access Key which should be used to connect to this Storage Account.
 	// +kubebuilder:validation:Optional
@@ -102,11 +135,23 @@ type OutputBlobParameters struct {
 	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// The time format. Wherever {time} appears in path_pattern, the value of this property is used as the time format instead.
-	// +kubebuilder:validation:Required
-	TimeFormat *string `json:"timeFormat" tf:"time_format,omitempty"`
+	// +kubebuilder:validation:Optional
+	TimeFormat *string `json:"timeFormat,omitempty" tf:"time_format,omitempty"`
 }
 
 type SerializationObservation struct {
+
+	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
+	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
+
+	// Specifies the format of the JSON the output will be written in. Possible values are Array and LineSeparated.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// The serialization format used for outgoing data streams. Possible values are Avro, Csv, Json and Parquet.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SerializationParameters struct {
@@ -152,8 +197,12 @@ type OutputBlobStatus struct {
 type OutputBlob struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OutputBlobSpec   `json:"spec"`
-	Status            OutputBlobStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dateFormat)",message="dateFormat is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.pathPattern)",message="pathPattern is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serialization)",message="serialization is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeFormat)",message="timeFormat is a required parameter"
+	Spec   OutputBlobSpec   `json:"spec"`
+	Status OutputBlobStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

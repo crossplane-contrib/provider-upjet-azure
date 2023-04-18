@@ -17,6 +17,11 @@ func (mg *LogAnalyticsSolution) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LogAnalyticsSolution.
+func (mg *LogAnalyticsSolution) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LogAnalyticsSolution.
 func (mg *LogAnalyticsSolution) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *LogAnalyticsSolution) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LogAnalyticsSolution.
 func (mg *LogAnalyticsSolution) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LogAnalyticsSolution.
+func (mg *LogAnalyticsSolution) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsSolution.

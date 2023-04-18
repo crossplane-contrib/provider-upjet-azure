@@ -17,13 +17,25 @@ type CreatorObservation struct {
 
 	// The ID of the Azure Maps Creator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Azure Maps Creator should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the Azure Maps Creator. Changing this forces a new resource to be created.
+	MapsAccountID *string `json:"mapsAccountId,omitempty" tf:"maps_account_id,omitempty"`
+
+	// The storage units to be allocated. Integer values from 1 to 100, inclusive.
+	StorageUnits *float64 `json:"storageUnits,omitempty" tf:"storage_units,omitempty"`
+
+	// A mapping of tags which should be assigned to the Azure Maps Creator.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type CreatorParameters struct {
 
 	// The Azure Region where the Azure Maps Creator should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Azure Maps Creator. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/maps/v1beta1.Account
@@ -40,8 +52,8 @@ type CreatorParameters struct {
 	MapsAccountIDSelector *v1.Selector `json:"mapsAccountIdSelector,omitempty" tf:"-"`
 
 	// The storage units to be allocated. Integer values from 1 to 100, inclusive.
-	// +kubebuilder:validation:Required
-	StorageUnits *float64 `json:"storageUnits" tf:"storage_units,omitempty"`
+	// +kubebuilder:validation:Optional
+	StorageUnits *float64 `json:"storageUnits,omitempty" tf:"storage_units,omitempty"`
 
 	// A mapping of tags which should be assigned to the Azure Maps Creator.
 	// +kubebuilder:validation:Optional
@@ -72,8 +84,10 @@ type CreatorStatus struct {
 type Creator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CreatorSpec   `json:"spec"`
-	Status            CreatorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageUnits)",message="storageUnits is a required parameter"
+	Spec   CreatorSpec   `json:"spec"`
+	Status CreatorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

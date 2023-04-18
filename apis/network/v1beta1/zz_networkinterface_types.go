@@ -14,6 +14,30 @@ import (
 )
 
 type NetworkInterfaceIPConfigurationObservation struct {
+
+	// The Frontend IP Configuration ID of a Gateway SKU Load Balancer.
+	GatewayLoadBalancerFrontendIPConfigurationID *string `json:"gatewayLoadBalancerFrontendIpConfigurationId,omitempty" tf:"gateway_load_balancer_frontend_ip_configuration_id,omitempty"`
+
+	// A name used for this IP Configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Is this the Primary IP Configuration? Must be true for the first ip_configuration when multiple are specified. Defaults to false.
+	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// The Static IP Address which should be used.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The allocation method used for the Private IP Address. Possible values are Dynamic and Static.
+	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
+
+	// The IP Version to use. Possible values are IPv4 or IPv6. Defaults to IPv4.
+	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
+
+	// Reference to a Public IP Address to associate with this NIC
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// The ID of the Subnet where this Network Interface should be located in.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type NetworkInterfaceIPConfigurationParameters struct {
@@ -66,11 +90,32 @@ type NetworkInterfaceObservation struct {
 	// If the Virtual Machine using this Network Interface is part of an Availability Set, then this list will have the union of all DNS servers from all Network Interfaces that are part of the Availability Set.
 	AppliedDNSServers []*string `json:"appliedDnsServers,omitempty" tf:"applied_dns_servers,omitempty"`
 
+	// A list of IP Addresses defining the DNS Servers which should be used for this Network Interface.
+	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
+
+	// Specifies the Edge Zone within the Azure Region where this Network Interface should exist. Changing this forces a new Network Interface to be created.
+	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
+
+	// Should Accelerated Networking be enabled? Defaults to false.
+	EnableAcceleratedNetworking *bool `json:"enableAcceleratedNetworking,omitempty" tf:"enable_accelerated_networking,omitempty"`
+
+	// Should IP Forwarding be enabled? Defaults to false.
+	EnableIPForwarding *bool `json:"enableIpForwarding,omitempty" tf:"enable_ip_forwarding,omitempty"`
+
 	// The ID of the Network Interface.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// One or more ip_configuration blocks as defined below.
+	IPConfiguration []NetworkInterfaceIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
+	// The (relative) DNS Name used for internal communications between Virtual Machines in the same Virtual Network.
+	InternalDNSNameLabel *string `json:"internalDnsNameLabel,omitempty" tf:"internal_dns_name_label,omitempty"`
+
 	// Even if internal_dns_name_label is not specified, a DNS entry is created for the primary NIC of the VM. This DNS name can be constructed by concatenating the VM name with the value of internal_domain_name_suffix.
 	InternalDomainNameSuffix *string `json:"internalDomainNameSuffix,omitempty" tf:"internal_domain_name_suffix,omitempty"`
+
+	// The location where the Network Interface should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Media Access Control (MAC) Address of the Network Interface.
 	MacAddress *string `json:"macAddress,omitempty" tf:"mac_address,omitempty"`
@@ -80,6 +125,12 @@ type NetworkInterfaceObservation struct {
 
 	// The private IP addresses of the network interface.
 	PrivateIPAddresses []*string `json:"privateIpAddresses,omitempty" tf:"private_ip_addresses,omitempty"`
+
+	// The name of the Resource Group in which to create the Network Interface. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Machine which this Network Interface is connected to.
 	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`
@@ -104,16 +155,16 @@ type NetworkInterfaceParameters struct {
 	EnableIPForwarding *bool `json:"enableIpForwarding,omitempty" tf:"enable_ip_forwarding,omitempty"`
 
 	// One or more ip_configuration blocks as defined below.
-	// +kubebuilder:validation:Required
-	IPConfiguration []NetworkInterfaceIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
+	// +kubebuilder:validation:Optional
+	IPConfiguration []NetworkInterfaceIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// The (relative) DNS Name used for internal communications between Virtual Machines in the same Virtual Network.
 	// +kubebuilder:validation:Optional
 	InternalDNSNameLabel *string `json:"internalDnsNameLabel,omitempty" tf:"internal_dns_name_label,omitempty"`
 
 	// The location where the Network Interface should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group in which to create the Network Interface. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -157,8 +208,10 @@ type NetworkInterfaceStatus struct {
 type NetworkInterface struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkInterfaceSpec   `json:"spec"`
-	Status            NetworkInterfaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ipConfiguration)",message="ipConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   NetworkInterfaceSpec   `json:"spec"`
+	Status NetworkInterfaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

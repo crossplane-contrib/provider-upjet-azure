@@ -18,8 +18,14 @@ type ManagerStaticMemberObservation struct {
 	// The ID of the Network Manager Static Member.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the ID of the Network Manager Group. Changing this forces a new Network Manager Static Member to be created.
+	NetworkGroupID *string `json:"networkGroupId,omitempty" tf:"network_group_id,omitempty"`
+
 	// The region of the Network Manager Static Member.
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+
+	// Specifies the Resource ID of the Virtual Network using as the Static Member. Changing this forces a new Network Manager Static Member to be created.
+	TargetVirtualNetworkID *string `json:"targetVirtualNetworkId,omitempty" tf:"target_virtual_network_id,omitempty"`
 }
 
 type ManagerStaticMemberParameters struct {

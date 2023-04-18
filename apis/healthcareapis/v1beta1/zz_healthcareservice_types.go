@@ -14,6 +14,16 @@ import (
 )
 
 type AuthenticationConfigurationObservation struct {
+
+	// The intended audience to receive authentication tokens for the service. The default value is https://azurehealthcareapis.com
+	Audience *string `json:"audience,omitempty" tf:"audience,omitempty"`
+
+	// The Azure Active Directory (tenant) that serves as the authentication authority to access the service.
+	// Authority must be registered to Azure AD and in the following format: https://{Azure-AD-endpoint}/{tenant-id}.
+	Authority *string `json:"authority,omitempty" tf:"authority,omitempty"`
+
+	// (Boolean) Enables the 'SMART on FHIR' option for mobile and web implementations.
+	SmartProxyEnabled *bool `json:"smartProxyEnabled,omitempty" tf:"smart_proxy_enabled,omitempty"`
 }
 
 type AuthenticationConfigurationParameters struct {
@@ -33,6 +43,21 @@ type AuthenticationConfigurationParameters struct {
 }
 
 type CorsConfigurationObservation struct {
+
+	// (Boolean) If credentials are allowed via CORS.
+	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
+
+	// A set of headers to be allowed via CORS.
+	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+
+	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and PUT.
+	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// A set of origins to be allowed via CORS.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// The max age to be allowed via CORS.
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
 }
 
 type CorsConfigurationParameters struct {
@@ -60,8 +85,38 @@ type CorsConfigurationParameters struct {
 
 type HealthcareServiceObservation struct {
 
+	// A set of Azure object IDs that are allowed to access the Service.
+	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
+
+	// An authentication_configuration block as defined below.
+	AuthenticationConfiguration []AuthenticationConfigurationObservation `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
+
+	// A cors_configuration block as defined below.
+	CorsConfiguration []CorsConfigurationObservation `json:"corsConfiguration,omitempty" tf:"cors_configuration,omitempty"`
+
+	// A versionless Key Vault Key ID for CMK encryption of the backing database. Changing this forces a new resource to be created.
+	CosmosDBKeyVaultKeyVersionlessID *string `json:"cosmosdbKeyVaultKeyVersionlessId,omitempty" tf:"cosmosdb_key_vault_key_versionless_id,omitempty"`
+
+	// The provisioned throughput for the backing database. Range of 400-10000. Defaults to 400.
+	CosmosDBThroughput *float64 `json:"cosmosdbThroughput,omitempty" tf:"cosmosdb_throughput,omitempty"`
+
 	// The ID of the Healthcare Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The type of the service. Values at time of publication are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// Specifies the supported Azure Region where the Service should be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Whether public network access is enabled or disabled for this service instance. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The name of the Resource Group in which to create the Service. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type HealthcareServiceParameters struct {
@@ -91,8 +146,8 @@ type HealthcareServiceParameters struct {
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// Specifies the supported Azure Region where the Service should be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether public network access is enabled or disabled for this service instance. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -140,8 +195,9 @@ type HealthcareServiceStatus struct {
 type HealthcareService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HealthcareServiceSpec   `json:"spec"`
-	Status            HealthcareServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   HealthcareServiceSpec   `json:"spec"`
+	Status HealthcareServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

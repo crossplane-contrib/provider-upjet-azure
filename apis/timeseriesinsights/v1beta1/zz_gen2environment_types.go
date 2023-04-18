@@ -20,17 +20,38 @@ type Gen2EnvironmentObservation struct {
 
 	// The ID of the IoT Time Series Insights Gen2 Environment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of property ids for the Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.
+	IDProperties []*string `json:"idProperties,omitempty" tf:"id_properties,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group in which to create the Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the SKU Name for this IoT Time Series Insights Gen2 Environment. Currently it supports only L1. For gen2, capacity cannot be specified. Changing this forces a new resource to be created.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A storage block as defined below.
+	Storage []StorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the ISO8601 timespan specifying the minimum number of days the environment's events will be available for query.
+	WarmStoreDataRetentionTime *string `json:"warmStoreDataRetentionTime,omitempty" tf:"warm_store_data_retention_time,omitempty"`
 }
 
 type Gen2EnvironmentParameters struct {
 
 	// A list of property ids for the Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	IDProperties []*string `json:"idProperties" tf:"id_properties,omitempty"`
+	// +kubebuilder:validation:Optional
+	IDProperties []*string `json:"idProperties,omitempty" tf:"id_properties,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -46,12 +67,12 @@ type Gen2EnvironmentParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the SKU Name for this IoT Time Series Insights Gen2 Environment. Currently it supports only L1. For gen2, capacity cannot be specified. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A storage block as defined below.
-	// +kubebuilder:validation:Required
-	Storage []StorageParameters `json:"storage" tf:"storage,omitempty"`
+	// +kubebuilder:validation:Optional
+	Storage []StorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -63,6 +84,9 @@ type Gen2EnvironmentParameters struct {
 }
 
 type StorageObservation struct {
+
+	// Name of storage account for Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type StorageParameters struct {
@@ -109,8 +133,12 @@ type Gen2EnvironmentStatus struct {
 type Gen2Environment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              Gen2EnvironmentSpec   `json:"spec"`
-	Status            Gen2EnvironmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.idProperties)",message="idProperties is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storage)",message="storage is a required parameter"
+	Spec   Gen2EnvironmentSpec   `json:"spec"`
+	Status Gen2EnvironmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

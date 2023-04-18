@@ -15,13 +15,22 @@ import (
 
 type NetworkInterfaceNatRuleAssociationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Name of the IP Configuration within the Network Interface which should be connected to the NAT Rule. Changing this forces a new resource to be created.
+	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
+
+	// The ID of the Load Balancer NAT Rule which this Network Interface which should be connected to. Changing this forces a new resource to be created.
+	NATRuleID *string `json:"natRuleId,omitempty" tf:"nat_rule_id,omitempty"`
+
+	// The ID of the Network Interface. Changing this forces a new resource to be created.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 }
 
 type NetworkInterfaceNatRuleAssociationParameters struct {
 
 	// The Name of the IP Configuration within the Network Interface which should be connected to the NAT Rule. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	IPConfigurationName *string `json:"ipConfigurationName" tf:"ip_configuration_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
 
 	// The ID of the Load Balancer NAT Rule which this Network Interface which should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=LoadBalancerNatRule
@@ -76,8 +85,9 @@ type NetworkInterfaceNatRuleAssociationStatus struct {
 type NetworkInterfaceNatRuleAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkInterfaceNatRuleAssociationSpec   `json:"spec"`
-	Status            NetworkInterfaceNatRuleAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ipConfigurationName)",message="ipConfigurationName is a required parameter"
+	Spec   NetworkInterfaceNatRuleAssociationSpec   `json:"spec"`
+	Status NetworkInterfaceNatRuleAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

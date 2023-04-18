@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: monitorscheduledqueryrulesalerts.insights.azure.upbound.io
 spec:
@@ -57,9 +57,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -430,15 +434,22 @@ spec:
                       - threshold
                       type: object
                     type: array
-                required:
-                - action
-                - frequency
-                - location
-                - name
-                - query
-                - timeWindow
-                - trigger
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -610,15 +621,154 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: action is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)
+            - message: frequency is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frequency)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: query is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.query)
+            - message: timeWindow is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeWindow)
+            - message: trigger is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.trigger)
           status:
             description: MonitorScheduledQueryRulesAlertStatus defines the observed
               state of MonitorScheduledQueryRulesAlert.
             properties:
               atProvider:
                 properties:
+                  action:
+                    description: An action block as defined below.
+                    items:
+                      properties:
+                        actionGroup:
+                          description: List of action group reference resource IDs.
+                          items:
+                            type: string
+                          type: array
+                        customWebhookPayload:
+                          description: Custom payload to be sent for all webhook payloads
+                            in alerting action.
+                          type: string
+                        emailSubject:
+                          description: Custom subject override for all email ids in
+                            Azure action group.
+                          type: string
+                      type: object
+                    type: array
+                  authorizedResourceIds:
+                    description: List of Resource IDs referred into query.
+                    items:
+                      type: string
+                    type: array
+                  autoMitigationEnabled:
+                    description: Should the alerts in this Metric Alert be auto resolved?
+                      Defaults to false. -> NOTE auto_mitigation_enabled and throttling
+                      are mutually exclusive and cannot both be set.
+                    type: boolean
+                  dataSourceId:
+                    description: The resource URI over which log search query is to
+                      be run.
+                    type: string
+                  description:
+                    description: The description of the scheduled query rule.
+                    type: string
+                  enabled:
+                    description: Whether this scheduled query rule is enabled. Default
+                      is true.
+                    type: boolean
+                  frequency:
+                    description: Frequency (in minutes) at which rule condition should
+                      be evaluated. Values must be between 5 and 1440 (inclusive).
+                    type: number
                   id:
                     description: The ID of the scheduled query rule.
                     type: string
+                  location:
+                    description: Specifies the Azure Region where the resource should
+                      exist. Changing this forces a new resource to be created.
+                    type: string
+                  name:
+                    description: The name of the scheduled query rule. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  query:
+                    description: Log search query.
+                    type: string
+                  queryType:
+                    description: The type of query results. Possible values are ResultCount
+                      and Number. Default is ResultCount. If set to Number, query
+                      must include an AggregatedValue column of a numeric type, for
+                      example, Heartbeat | summarize AggregatedValue = count() by
+                      bin(TimeGenerated, 5m).
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the scheduled query rule instance. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  severity:
+                    description: 'Severity of the alert. Possible values include:
+                      0, 1, 2, 3, or 4.'
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  throttling:
+                    description: Time (in minutes) for which Alerts should be throttled
+                      or suppressed. Values must be between 0 and 10000 (inclusive).
+                    type: number
+                  timeWindow:
+                    description: Time window for which data needs to be fetched for
+                      query (must be greater than or equal to frequency). Values must
+                      be between 5 and 2880 (inclusive).
+                    type: number
+                  trigger:
+                    description: A trigger block as defined below.
+                    items:
+                      properties:
+                        metricTrigger:
+                          description: A metric_trigger block as defined above. Trigger
+                            condition for metric query rule.
+                          items:
+                            properties:
+                              metricColumn:
+                                description: Evaluation of metric on a particular
+                                  column.
+                                type: string
+                              metricTriggerType:
+                                description: Metric Trigger Type - 'Consecutive' or
+                                  'Total'.
+                                type: string
+                              operator:
+                                description: Evaluation operation for rule - 'GreaterThan',
+                                  GreaterThanOrEqual', 'LessThan', or 'LessThanOrEqual'.
+                                type: string
+                              threshold:
+                                description: Result or count threshold based on which
+                                  rule should be triggered. Values must be between
+                                  0 and 10000 inclusive.
+                                type: number
+                            type: object
+                          type: array
+                        operator:
+                          description: Evaluation operation for rule - 'GreaterThan',
+                            GreaterThanOrEqual', 'LessThan', or 'LessThanOrEqual'.
+                          type: string
+                        threshold:
+                          description: Result or count threshold based on which rule
+                            should be triggered. Values must be between 0 and 10000
+                            inclusive.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

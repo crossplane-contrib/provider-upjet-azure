@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: redislinkedservers.cache.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -306,10 +310,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - linkedRedisCacheLocation
-                - serverRole
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -481,6 +497,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: linkedRedisCacheLocation is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.linkedRedisCacheLocation)
+            - message: serverRole is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serverRole)
           status:
             description: RedisLinkedServerStatus defines the observed state of RedisLinkedServer.
             properties:
@@ -489,8 +510,29 @@ spec:
                   id:
                     description: The ID of the Redis.
                     type: string
+                  linkedRedisCacheId:
+                    description: The ID of the linked Redis cache. Changing this forces
+                      a new Redis to be created.
+                    type: string
+                  linkedRedisCacheLocation:
+                    description: The location of the linked Redis cache. Changing
+                      this forces a new Redis to be created.
+                    type: string
                   name:
                     description: The name of the linked server.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Redis caches
+                      exists. Changing this forces a new Redis to be created.
+                    type: string
+                  serverRole:
+                    description: The role of the linked Redis cache (eg "Secondary").
+                      Changing this forces a new Redis to be created. Possible values
+                      are Primary and Secondary.
+                    type: string
+                  targetRedisCacheName:
+                    description: The name of Redis cache to link with. Changing this
+                      forces a new Redis to be created. (eg The primary role)
                     type: string
                 type: object
               conditions:

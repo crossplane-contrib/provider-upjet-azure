@@ -18,8 +18,23 @@ type ManagedStorageAccountSASTokenDefinitionObservation struct {
 	// The ID of the Managed Storage Account SAS Definition.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The ID of the Managed Storage Account.
+	ManagedStorageAccountID *string `json:"managedStorageAccountId,omitempty" tf:"managed_storage_account_id,omitempty"`
+
+	// The SAS definition token template signed with an arbitrary key. Tokens created according to the SAS definition will have the same properties as the template, but regenerated with a new validity period.
+	SASTemplateURI *string `json:"sasTemplateUri,omitempty" tf:"sas_template_uri,omitempty"`
+
+	// The type of SAS token the SAS definition will create. Possible values are account and service.
+	SASType *string `json:"sasType,omitempty" tf:"sas_type,omitempty"`
+
 	// The ID of the Secret that is created by Managed Storage Account SAS Definition.
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+
+	// A mapping of tags which should be assigned to the SAS Definition. Changing this forces a new resource to be created.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Validity period of SAS token. Value needs to be in ISO 8601 duration format.
+	ValidityPeriod *string `json:"validityPeriod,omitempty" tf:"validity_period,omitempty"`
 }
 
 type ManagedStorageAccountSASTokenDefinitionParameters struct {
@@ -39,20 +54,20 @@ type ManagedStorageAccountSASTokenDefinitionParameters struct {
 	ManagedStorageAccountIDSelector *v1.Selector `json:"managedStorageAccountIdSelector,omitempty" tf:"-"`
 
 	// The SAS definition token template signed with an arbitrary key. Tokens created according to the SAS definition will have the same properties as the template, but regenerated with a new validity period.
-	// +kubebuilder:validation:Required
-	SASTemplateURI *string `json:"sasTemplateUri" tf:"sas_template_uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	SASTemplateURI *string `json:"sasTemplateUri,omitempty" tf:"sas_template_uri,omitempty"`
 
 	// The type of SAS token the SAS definition will create. Possible values are account and service.
-	// +kubebuilder:validation:Required
-	SASType *string `json:"sasType" tf:"sas_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	SASType *string `json:"sasType,omitempty" tf:"sas_type,omitempty"`
 
 	// A mapping of tags which should be assigned to the SAS Definition. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Validity period of SAS token. Value needs to be in ISO 8601 duration format.
-	// +kubebuilder:validation:Required
-	ValidityPeriod *string `json:"validityPeriod" tf:"validity_period,omitempty"`
+	// +kubebuilder:validation:Optional
+	ValidityPeriod *string `json:"validityPeriod,omitempty" tf:"validity_period,omitempty"`
 }
 
 // ManagedStorageAccountSASTokenDefinitionSpec defines the desired state of ManagedStorageAccountSASTokenDefinition
@@ -79,8 +94,11 @@ type ManagedStorageAccountSASTokenDefinitionStatus struct {
 type ManagedStorageAccountSASTokenDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagedStorageAccountSASTokenDefinitionSpec   `json:"spec"`
-	Status            ManagedStorageAccountSASTokenDefinitionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sasTemplateUri)",message="sasTemplateUri is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sasType)",message="sasType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.validityPeriod)",message="validityPeriod is a required parameter"
+	Spec   ManagedStorageAccountSASTokenDefinitionSpec   `json:"spec"`
+	Status ManagedStorageAccountSASTokenDefinitionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

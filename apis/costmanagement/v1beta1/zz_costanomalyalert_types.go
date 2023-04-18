@@ -15,23 +15,35 @@ import (
 
 type CostAnomalyAlertObservation struct {
 
+	// The display name which should be used for this Cost Anomaly Alert.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Specifies a list of email addresses which the Anomaly Alerts are send to.
+	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
+
+	// The email subject of the Cost Anomaly Alerts. Maximum length of the subject is 70.
+	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
+
 	// The ID of the Cost Anomaly Alert.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The message of the Cost Anomaly Alert. Maximum length of the message is 250.
+	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 }
 
 type CostAnomalyAlertParameters struct {
 
 	// The display name which should be used for this Cost Anomaly Alert.
-	// +kubebuilder:validation:Required
-	DisplayName *string `json:"displayName" tf:"display_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Specifies a list of email addresses which the Anomaly Alerts are send to.
-	// +kubebuilder:validation:Required
-	EmailAddresses []*string `json:"emailAddresses" tf:"email_addresses,omitempty"`
+	// +kubebuilder:validation:Optional
+	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// The email subject of the Cost Anomaly Alerts. Maximum length of the subject is 70.
-	// +kubebuilder:validation:Required
-	EmailSubject *string `json:"emailSubject" tf:"email_subject,omitempty"`
+	// +kubebuilder:validation:Optional
+	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
 
 	// The message of the Cost Anomaly Alert. Maximum length of the message is 250.
 	// +kubebuilder:validation:Optional
@@ -62,8 +74,11 @@ type CostAnomalyAlertStatus struct {
 type CostAnomalyAlert struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CostAnomalyAlertSpec   `json:"spec"`
-	Status            CostAnomalyAlertStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.emailAddresses)",message="emailAddresses is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.emailSubject)",message="emailSubject is a required parameter"
+	Spec   CostAnomalyAlertSpec   `json:"spec"`
+	Status CostAnomalyAlertStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

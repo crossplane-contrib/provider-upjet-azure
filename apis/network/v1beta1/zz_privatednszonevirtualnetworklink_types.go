@@ -17,6 +17,21 @@ type PrivateDNSZoneVirtualNetworkLinkObservation struct {
 
 	// The ID of the Private DNS Zone Virtual Network Link.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Private DNS zone (without a terminating dot). Changing this forces a new resource to be created.
+	PrivateDNSZoneName *string `json:"privateDnsZoneName,omitempty" tf:"private_dns_zone_name,omitempty"`
+
+	// Is auto-registration of virtual machine records in the virtual network in the Private DNS zone enabled? Defaults to false.
+	RegistrationEnabled *bool `json:"registrationEnabled,omitempty" tf:"registration_enabled,omitempty"`
+
+	// Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the Virtual Network that should be linked to the DNS Zone. Changing this forces a new resource to be created.
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
 type PrivateDNSZoneVirtualNetworkLinkParameters struct {

@@ -15,18 +15,36 @@ import (
 
 type OutputSynapseObservation struct {
 
+	// The name of the Azure SQL database. Changing this forces a new resource to be created.
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
 	// The ID of the Stream Analytics Output to an Azure Synapse Analytics Workspace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the SQL server containing the Azure SQL database. Changing this forces a new resource to be created.
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
+
+	// The name of the table in the Azure SQL database. Changing this forces a new resource to be created.
+	Table *string `json:"table,omitempty" tf:"table,omitempty"`
+
+	// The user name that will be used to connect to the Azure SQL database. Changing this forces a new resource to be created.
+	User *string `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type OutputSynapseParameters struct {
 
 	// The name of the Azure SQL database. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Database *string `json:"database" tf:"database,omitempty"`
+	// +kubebuilder:validation:Optional
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// The password that will be used to connect to the Azure SQL database.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
@@ -43,8 +61,8 @@ type OutputSynapseParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the SQL server containing the Azure SQL database. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Server *string `json:"server" tf:"server,omitempty"`
+	// +kubebuilder:validation:Optional
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Job
@@ -60,8 +78,8 @@ type OutputSynapseParameters struct {
 	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// The name of the table in the Azure SQL database. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Table *string `json:"table" tf:"table,omitempty"`
+	// +kubebuilder:validation:Optional
+	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
 	// The user name that will be used to connect to the Azure SQL database. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
@@ -102,8 +120,12 @@ type OutputSynapseStatus struct {
 type OutputSynapse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OutputSynapseSpec   `json:"spec"`
-	Status            OutputSynapseStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.database)",message="database is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.server)",message="server is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.table)",message="table is a required parameter"
+	Spec   OutputSynapseSpec   `json:"spec"`
+	Status OutputSynapseStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

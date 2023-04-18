@@ -14,6 +14,18 @@ import (
 )
 
 type EncryptionObservation struct {
+
+	// Enabling/Disabling the Double Encryption state.
+	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
+
+	// The Key Vault key id used to encrypt this vault. Key managed by Vault Managed Hardware Security Module is also supported.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Indicate that system assigned identity should be used or not. Defaults to true.
+	UseSystemAssignedIdentity *bool `json:"useSystemAssignedIdentity,omitempty" tf:"use_system_assigned_identity,omitempty"`
+
+	// Specifies the user assigned identity ID to be used.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
 type EncryptionParameters struct {
@@ -37,11 +49,17 @@ type EncryptionParameters struct {
 
 type IdentityObservation struct {
 
+	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Recovery Services Vault. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -57,12 +75,44 @@ type IdentityParameters struct {
 
 type VaultObservation struct {
 
+	// Whether to enable the Classic experience for VMware replication. If set to false VMware machines will be protected using the new stateless ASR replication appliance. Changing this forces a new resource to be created.
+	ClassicVMwareReplicationEnabled *bool `json:"classicVmwareReplicationEnabled,omitempty" tf:"classic_vmware_replication_enabled,omitempty"`
+
+	// Is cross region restore enabled for this Vault? Only can be true, when storage_mode_type is GeoRedundant. Defaults to false.
+	CrossRegionRestoreEnabled *bool `json:"crossRegionRestoreEnabled,omitempty" tf:"cross_region_restore_enabled,omitempty"`
+
+	// An encryption block as defined below. Required with identity.
+	Encryption []EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
 	// The ID of the Recovery Services Vault.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Immutability Settings of vault, possible values include: Locked, Unlocked and Disabled.
+	Immutability *string `json:"immutability,omitempty" tf:"immutability,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Is it enabled to access the vault from public networks. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The name of the resource group in which to create the Recovery Services Vault. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Sets the vault's SKU. Possible values include: Standard, RS0.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// Is soft delete enable for this Vault? Defaults to true.
+	SoftDeleteEnabled *bool `json:"softDeleteEnabled,omitempty" tf:"soft_delete_enabled,omitempty"`
+
+	// The storage type of the Recovery Services Vault. Possible values are GeoRedundant, LocallyRedundant and ZoneRedundant. Defaults to GeoRedundant.
+	StorageModeType *string `json:"storageModeType,omitempty" tf:"storage_mode_type,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VaultParameters struct {
@@ -88,8 +138,8 @@ type VaultParameters struct {
 	Immutability *string `json:"immutability,omitempty" tf:"immutability,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Is it enabled to access the vault from public networks. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -109,8 +159,8 @@ type VaultParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Sets the vault's SKU. Possible values include: Standard, RS0.
-	// +kubebuilder:validation:Required
-	Sku *string `json:"sku" tf:"sku,omitempty"`
+	// +kubebuilder:validation:Optional
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Is soft delete enable for this Vault? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -149,8 +199,10 @@ type VaultStatus struct {
 type Vault struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VaultSpec   `json:"spec"`
-	Status            VaultStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)",message="sku is a required parameter"
+	Spec   VaultSpec   `json:"spec"`
+	Status VaultStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

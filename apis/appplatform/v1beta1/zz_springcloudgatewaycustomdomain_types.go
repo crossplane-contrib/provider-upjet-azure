@@ -17,13 +17,22 @@ type SpringCloudGatewayCustomDomainObservation struct {
 
 	// The ID of the Spring Cloud Gateway Custom Domain.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name which should be used for this Spring Cloud Gateway Custom Domain. Changing this forces a new Spring Cloud Gateway Custom Domain to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Spring Cloud Gateway. Changing this forces a new Spring Cloud Gateway Custom Domain to be created.
+	SpringCloudGatewayID *string `json:"springCloudGatewayId,omitempty" tf:"spring_cloud_gateway_id,omitempty"`
+
+	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud Gateway Custom Domain.
+	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
 }
 
 type SpringCloudGatewayCustomDomainParameters struct {
 
 	// The name which should be used for this Spring Cloud Gateway Custom Domain. Changing this forces a new Spring Cloud Gateway Custom Domain to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Spring Cloud Gateway. Changing this forces a new Spring Cloud Gateway Custom Domain to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudGateway
@@ -68,8 +77,9 @@ type SpringCloudGatewayCustomDomainStatus struct {
 type SpringCloudGatewayCustomDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpringCloudGatewayCustomDomainSpec   `json:"spec"`
-	Status            SpringCloudGatewayCustomDomainStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SpringCloudGatewayCustomDomainSpec   `json:"spec"`
+	Status SpringCloudGatewayCustomDomainStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

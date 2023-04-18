@@ -14,6 +14,21 @@ import (
 )
 
 type PacketCaptureFilterObservation struct {
+
+	// The local IP Address to be filtered on. Notation: "127.0.0.1" for single address entry. "127.0.0.1-127.0.0.255" for range. "127.0.0.1;127.0.0.5" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Changing this forces a new resource to be created.
+	LocalIPAddress *string `json:"localIpAddress,omitempty" tf:"local_ip_address,omitempty"`
+
+	// The local port to be filtered on. Notation: "80" for single port entry."80-85" for range. "80;443;" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Changing this forces a new resource to be created.
+	LocalPort *string `json:"localPort,omitempty" tf:"local_port,omitempty"`
+
+	// The Protocol to be filtered on. Possible values include Any, TCP and UDP. Changing this forces a new resource to be created.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The remote IP Address to be filtered on. Notation: "127.0.0.1" for single address entry. "127.0.0.1-127.0.0.255" for range. "127.0.0.1;127.0.0.5;" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported.. Changing this forces a new resource to be created.
+	RemoteIPAddress *string `json:"remoteIpAddress,omitempty" tf:"remote_ip_address,omitempty"`
+
+	// The remote port to be filtered on. Notation: "80" for single port entry."80-85" for range. "80;443;" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported. Changing this forces a new resource to be created.
+	RemotePort *string `json:"remotePort,omitempty" tf:"remote_port,omitempty"`
 }
 
 type PacketCaptureFilterParameters struct {
@@ -41,12 +56,32 @@ type PacketCaptureFilterParameters struct {
 
 type PacketCaptureObservation struct {
 
+	// One or more filter blocks as defined below. Changing this forces a new resource to be created.
+	Filter []PacketCaptureFilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
 	// The Packet Capture ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The number of bytes captured per packet. The remaining bytes are truncated. Defaults to 0 (Entire Packet Captured). Changing this forces a new resource to be created.
+	MaximumBytesPerPacket *float64 `json:"maximumBytesPerPacket,omitempty" tf:"maximum_bytes_per_packet,omitempty"`
+
+	// Maximum size of the capture in Bytes. Defaults to 1073741824 (1GB). Changing this forces a new resource to be created.
+	MaximumBytesPerSession *float64 `json:"maximumBytesPerSession,omitempty" tf:"maximum_bytes_per_session,omitempty"`
+
+	// The maximum duration of the capture session in seconds. Defaults to 18000 (5 hours). Changing this forces a new resource to be created.
+	MaximumCaptureDuration *float64 `json:"maximumCaptureDuration,omitempty" tf:"maximum_capture_duration,omitempty"`
+
+	// The name of the Network Watcher. Changing this forces a new resource to be created.
+	NetworkWatcherName *string `json:"networkWatcherName,omitempty" tf:"network_watcher_name,omitempty"`
+
+	// The name of the resource group in which the Network Watcher exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// A storage_location block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
 	StorageLocation []StorageLocationObservation `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
+
+	// The ID of the Resource to capture packets from. Changing this forces a new resource to be created.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 
 type PacketCaptureParameters struct {
@@ -94,15 +129,21 @@ type PacketCaptureParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A storage_location block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	StorageLocation []StorageLocationParameters `json:"storageLocation" tf:"storage_location,omitempty"`
+	// +kubebuilder:validation:Optional
+	StorageLocation []StorageLocationParameters `json:"storageLocation,omitempty" tf:"storage_location,omitempty"`
 
 	// The ID of the Resource to capture packets from. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	TargetResourceID *string `json:"targetResourceId" tf:"target_resource_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 
 type StorageLocationObservation struct {
+
+	// A valid local path on the targeting VM. Must include the name of the capture file (*.cap). For Linux virtual machine it must start with /var/captures.
+	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
+
+	// The ID of the storage account to save the packet capture session
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// The URI of the storage path to save the packet capture.
 	StoragePath *string `json:"storagePath,omitempty" tf:"storage_path,omitempty"`
@@ -153,8 +194,10 @@ type PacketCaptureStatus struct {
 type PacketCapture struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PacketCaptureSpec   `json:"spec"`
-	Status            PacketCaptureStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageLocation)",message="storageLocation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetResourceId)",message="targetResourceId is a required parameter"
+	Spec   PacketCaptureSpec   `json:"spec"`
+	Status PacketCaptureStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

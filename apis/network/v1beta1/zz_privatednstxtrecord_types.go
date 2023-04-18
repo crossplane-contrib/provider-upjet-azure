@@ -20,13 +20,28 @@ type PrivateDNSTXTRecordObservation struct {
 
 	// The Private DNS TXT Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more record blocks as defined below.
+	Record []PrivateDNSTXTRecordRecordObservation `json:"record,omitempty" tf:"record,omitempty"`
+
+	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
+	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
 }
 
 type PrivateDNSTXTRecordParameters struct {
 
 	// One or more record blocks as defined below.
-	// +kubebuilder:validation:Required
-	Record []PrivateDNSTXTRecordRecordParameters `json:"record" tf:"record,omitempty"`
+	// +kubebuilder:validation:Optional
+	Record []PrivateDNSTXTRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -42,8 +57,8 @@ type PrivateDNSTXTRecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Required
-	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
+	// +kubebuilder:validation:Optional
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -64,6 +79,9 @@ type PrivateDNSTXTRecordParameters struct {
 }
 
 type PrivateDNSTXTRecordRecordObservation struct {
+
+	// The value of the TXT record. Max length: 1024 characters
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PrivateDNSTXTRecordRecordParameters struct {
@@ -97,8 +115,10 @@ type PrivateDNSTXTRecordStatus struct {
 type PrivateDNSTXTRecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PrivateDNSTXTRecordSpec   `json:"spec"`
-	Status            PrivateDNSTXTRecordStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.record)",message="record is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	Spec   PrivateDNSTXTRecordSpec   `json:"spec"`
+	Status PrivateDNSTXTRecordStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

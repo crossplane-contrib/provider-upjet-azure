@@ -15,8 +15,41 @@ import (
 
 type DataSetHTTPObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Dataset.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Dataset.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Dataset.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
 	// The ID of the Data Factory Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Data Factory Linked Service name in which to associate the Dataset with.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Dataset.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The relative URL based on the URL in the HTTP Linked Service.
+	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
+
+	// The body for the HTTP request.
+	RequestBody *string `json:"requestBody,omitempty" tf:"request_body,omitempty"`
+
+	// The HTTP method for the HTTP request. (e.g. GET, POST)
+	RequestMethod *string `json:"requestMethod,omitempty" tf:"request_method,omitempty"`
+
+	// A schema_column block as defined below.
+	SchemaColumn []DataSetHTTPSchemaColumnObservation `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
 }
 
 type DataSetHTTPParameters struct {
@@ -86,6 +119,15 @@ type DataSetHTTPParameters struct {
 }
 
 type DataSetHTTPSchemaColumnObservation struct {
+
+	// The description of the column.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DataSetHTTPSchemaColumnParameters struct {

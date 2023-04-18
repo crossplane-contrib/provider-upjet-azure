@@ -14,6 +14,15 @@ import (
 )
 
 type DefinitionObservation struct {
+
+	// The description of this Subnet Service Endpoint Storage Policy Definition.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name which should be used for this Subnet Service Endpoint Storage Policy Definition.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies a list of resources that this Subnet Service Endpoint Storage Policy Definition applies to.
+	ServiceResources []*string `json:"serviceResources,omitempty" tf:"service_resources,omitempty"`
 }
 
 type DefinitionParameters struct {
@@ -33,8 +42,20 @@ type DefinitionParameters struct {
 
 type SubnetServiceEndpointStoragePolicyObservation struct {
 
+	// A definition block as defined below
+	Definition []DefinitionObservation `json:"definition,omitempty" tf:"definition,omitempty"`
+
 	// The ID of the Subnet Service Endpoint Storage Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Subnet Service Endpoint Storage Policy should exist. Changing this forces a new Subnet Service Endpoint Storage Policy to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where the Subnet Service Endpoint Storage Policy should exist. Changing this forces a new Subnet Service Endpoint Storage Policy to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Subnet Service Endpoint Storage Policy.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SubnetServiceEndpointStoragePolicyParameters struct {
@@ -44,8 +65,8 @@ type SubnetServiceEndpointStoragePolicyParameters struct {
 	Definition []DefinitionParameters `json:"definition,omitempty" tf:"definition,omitempty"`
 
 	// The Azure Region where the Subnet Service Endpoint Storage Policy should exist. Changing this forces a new Subnet Service Endpoint Storage Policy to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Subnet Service Endpoint Storage Policy should exist. Changing this forces a new Subnet Service Endpoint Storage Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -89,8 +110,9 @@ type SubnetServiceEndpointStoragePolicyStatus struct {
 type SubnetServiceEndpointStoragePolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubnetServiceEndpointStoragePolicySpec   `json:"spec"`
-	Status            SubnetServiceEndpointStoragePolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   SubnetServiceEndpointStoragePolicySpec   `json:"spec"`
+	Status SubnetServiceEndpointStoragePolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

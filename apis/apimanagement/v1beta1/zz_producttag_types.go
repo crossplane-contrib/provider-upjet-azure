@@ -15,15 +15,27 @@ import (
 
 type ProductTagObservation struct {
 
+	// The name of the API Management Service. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// The name of the API Management product. Changing this forces a new resource to be created.
+	APIManagementProductID *string `json:"apiManagementProductId,omitempty" tf:"api_management_product_id,omitempty"`
+
 	// The ID of the API Management Product.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name which should be used for this API Management Tag. Changing this forces a new API Management Tag to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type ProductTagParameters struct {
 
 	// The name of the API Management Service. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	APIManagementName *string `json:"apiManagementName" tf:"api_management_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
 	// The name of the API Management product. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Product
@@ -89,8 +101,9 @@ type ProductTagStatus struct {
 type ProductTag struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ProductTagSpec   `json:"spec"`
-	Status            ProductTagStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.apiManagementName)",message="apiManagementName is a required parameter"
+	Spec   ProductTagSpec   `json:"spec"`
+	Status ProductTagStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

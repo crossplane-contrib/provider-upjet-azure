@@ -27,8 +27,17 @@ type LoadBalancerBackendAddressPoolObservation struct {
 	// The Load Balancing Rules associated with this Backend Address Pool.
 	LoadBalancingRules []*string `json:"loadBalancingRules,omitempty" tf:"load_balancing_rules,omitempty"`
 
+	// The ID of the Load Balancer in which to create the Backend Address Pool. Changing this forces a new resource to be created.
+	LoadbalancerID *string `json:"loadbalancerId,omitempty" tf:"loadbalancer_id,omitempty"`
+
 	// An array of the Load Balancing Outbound Rules associated with this Backend Address Pool.
 	OutboundRules []*string `json:"outboundRules,omitempty" tf:"outbound_rules,omitempty"`
+
+	// One or more tunnel_interface blocks as defined below.
+	TunnelInterface []TunnelInterfaceObservation `json:"tunnelInterface,omitempty" tf:"tunnel_interface,omitempty"`
+
+	// The ID of the Virtual Network within which the Backend Address Pool should exist.
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
 type LoadBalancerBackendAddressPoolParameters struct {
@@ -57,6 +66,18 @@ type LoadBalancerBackendAddressPoolParameters struct {
 }
 
 type TunnelInterfaceObservation struct {
+
+	// The unique identifier of this Gateway Lodbalancer Tunnel Interface.
+	Identifier *float64 `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// The port number that this Gateway Lodbalancer Tunnel Interface listens to.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The protocol used for this Gateway Lodbalancer Tunnel Interface. Possible values are None, Native and VXLAN.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The traffic type of this Gateway Lodbalancer Tunnel Interface. Possible values are None, Internal and External.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TunnelInterfaceParameters struct {

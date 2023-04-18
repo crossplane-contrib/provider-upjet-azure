@@ -15,11 +15,19 @@ import (
 
 type BotChannelDirectLineObservation struct {
 
+	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
+	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`
+
 	// The Bot Channel ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
 	// A site represents a client application that you want to connect to your bot. Multiple site blocks may be defined as below
-	// +kubebuilder:validation:Required
 	Site []SiteObservation `json:"site,omitempty" tf:"site,omitempty"`
 }
 
@@ -40,8 +48,8 @@ type BotChannelDirectLineParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -57,14 +65,32 @@ type BotChannelDirectLineParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A site represents a client application that you want to connect to your bot. Multiple site blocks may be defined as below
-	// +kubebuilder:validation:Required
-	Site []SiteParameters `json:"site" tf:"site,omitempty"`
+	// +kubebuilder:validation:Optional
+	Site []SiteParameters `json:"site,omitempty" tf:"site,omitempty"`
 }
 
 type SiteObservation struct {
 
+	// Enables/Disables this site. Enabled by default Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Enables additional security measures for this site, see Enhanced Directline Authentication Features. Disabled by default.
+	EnhancedAuthenticationEnabled *bool `json:"enhancedAuthenticationEnabled,omitempty" tf:"enhanced_authentication_enabled,omitempty"`
+
 	// Id for the site
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the site
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// This field is required when is_secure_site_enabled is enabled. Determines which origins can establish a Directline conversation for this site.
+	TrustedOrigins []*string `json:"trustedOrigins,omitempty" tf:"trusted_origins,omitempty"`
+
+	// Enables v1 of the Directline protocol for this site. Enabled by default Defaults to true.
+	V1Allowed *bool `json:"v1Allowed,omitempty" tf:"v1_allowed,omitempty"`
+
+	// Enables v3 of the Directline protocol for this site. Enabled by default Defaults to true.
+	V3Allowed *bool `json:"v3Allowed,omitempty" tf:"v3_allowed,omitempty"`
 }
 
 type SiteParameters struct {
@@ -118,8 +144,10 @@ type BotChannelDirectLineStatus struct {
 type BotChannelDirectLine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BotChannelDirectLineSpec   `json:"spec"`
-	Status            BotChannelDirectLineStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.site)",message="site is a required parameter"
+	Spec   BotChannelDirectLineSpec   `json:"spec"`
+	Status BotChannelDirectLineStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

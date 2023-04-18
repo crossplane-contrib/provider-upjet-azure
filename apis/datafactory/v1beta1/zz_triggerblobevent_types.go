@@ -15,8 +15,41 @@ import (
 
 type TriggerBlobEventObservation struct {
 
+	// Specifies if the Data Factory Blob Event Trigger is activated. Defaults to true.
+	Activated *bool `json:"activated,omitempty" tf:"activated,omitempty"`
+
+	// A map of additional properties to associate with the Data Factory Blob Event Trigger.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Blob Event Trigger.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The pattern that blob path starts with for trigger to fire.
+	BlobPathBeginsWith *string `json:"blobPathBeginsWith,omitempty" tf:"blob_path_begins_with,omitempty"`
+
+	// The pattern that blob path ends with for trigger to fire.
+	BlobPathEndsWith *string `json:"blobPathEndsWith,omitempty" tf:"blob_path_ends_with,omitempty"`
+
+	// The ID of Data Factory in which to associate the Trigger with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Blob Event Trigger.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// List of events that will fire this trigger. Possible values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobDeleted.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
 	// The ID of the Data Factory Blob Event Trigger.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// are blobs with zero bytes ignored?
+	IgnoreEmptyBlobs *bool `json:"ignoreEmptyBlobs,omitempty" tf:"ignore_empty_blobs,omitempty"`
+
+	// One or more pipeline blocks as defined below.
+	Pipeline []TriggerBlobEventPipelineObservation `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
+
+	// The ID of Storage Account in which blob event will be listened. Changing this forces a new resource.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 }
 
 type TriggerBlobEventParameters struct {
@@ -60,16 +93,16 @@ type TriggerBlobEventParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// List of events that will fire this trigger. Possible values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobDeleted.
-	// +kubebuilder:validation:Required
-	Events []*string `json:"events" tf:"events,omitempty"`
+	// +kubebuilder:validation:Optional
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// are blobs with zero bytes ignored?
 	// +kubebuilder:validation:Optional
 	IgnoreEmptyBlobs *bool `json:"ignoreEmptyBlobs,omitempty" tf:"ignore_empty_blobs,omitempty"`
 
 	// One or more pipeline blocks as defined below.
-	// +kubebuilder:validation:Required
-	Pipeline []TriggerBlobEventPipelineParameters `json:"pipeline" tf:"pipeline,omitempty"`
+	// +kubebuilder:validation:Optional
+	Pipeline []TriggerBlobEventPipelineParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
 	// The ID of Storage Account in which blob event will be listened. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -87,6 +120,12 @@ type TriggerBlobEventParameters struct {
 }
 
 type TriggerBlobEventPipelineObservation struct {
+
+	// The Data Factory Pipeline name that the trigger will act on.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Data Factory Pipeline parameters that the trigger will act on.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type TriggerBlobEventPipelineParameters struct {
@@ -133,8 +172,10 @@ type TriggerBlobEventStatus struct {
 type TriggerBlobEvent struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TriggerBlobEventSpec   `json:"spec"`
-	Status            TriggerBlobEventStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.events)",message="events is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.pipeline)",message="pipeline is a required parameter"
+	Spec   TriggerBlobEventSpec   `json:"spec"`
+	Status TriggerBlobEventStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

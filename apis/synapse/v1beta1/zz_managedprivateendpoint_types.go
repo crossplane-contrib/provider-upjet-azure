@@ -17,17 +17,29 @@ type ManagedPrivateEndpointObservation struct {
 
 	// The Synapse Managed Private Endpoint ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name which should be used for this Managed Private Endpoint. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the sub resource name which the Synapse Private Endpoint is able to connect to. Changing this forces a new resource to be created.
+	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
+
+	// The ID of the Synapse Workspace on which to create the Managed Private Endpoint. Changing this forces a new resource to be created.
+	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`
+
+	// The ID of the Private Link Enabled Remote Resource which this Synapse Private Endpoint should be connected to. Changing this forces a new resource to be created.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 
 type ManagedPrivateEndpointParameters struct {
 
 	// Specifies the name which should be used for this Managed Private Endpoint. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the sub resource name which the Synapse Private Endpoint is able to connect to. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SubresourceName *string `json:"subresourceName" tf:"subresource_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 
 	// The ID of the Synapse Workspace on which to create the Managed Private Endpoint. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
@@ -82,8 +94,10 @@ type ManagedPrivateEndpointStatus struct {
 type ManagedPrivateEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagedPrivateEndpointSpec   `json:"spec"`
-	Status            ManagedPrivateEndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subresourceName)",message="subresourceName is a required parameter"
+	Spec   ManagedPrivateEndpointSpec   `json:"spec"`
+	Status ManagedPrivateEndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

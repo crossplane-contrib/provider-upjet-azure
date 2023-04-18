@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: expressrouteports.network.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -238,12 +242,22 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Express Route Port.
                     type: object
-                required:
-                - bandwidthInGbps
-                - encapsulation
-                - location
-                - peeringLocation
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -415,11 +429,33 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: bandwidthInGbps is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bandwidthInGbps)
+            - message: encapsulation is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.encapsulation)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: peeringLocation is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.peeringLocation)
           status:
             description: ExpressRoutePortStatus defines the observed state of ExpressRoutePort.
             properties:
               atProvider:
                 properties:
+                  bandwidthInGbps:
+                    description: Bandwidth of the Express Route Port in Gbps. Changing
+                      this forces a new Express Route Port to be created.
+                    type: number
+                  billingType:
+                    description: The billing type of the Express Route Port. Possible
+                      values are MeteredData and UnlimitedData.
+                    type: string
+                  encapsulation:
+                    description: 'The encapsulation method used for the Express Route
+                      Port. Changing this forces a new Express Route Port to be created.
+                      Possible values are: Dot1Q, QinQ.'
+                    type: string
                   ethertype:
                     description: The EtherType of the Express Route Port.
                     type: string
@@ -429,10 +465,31 @@ spec:
                   id:
                     description: The ID of the Express Route Port.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Express Route Port.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Express Route Port.
+                            Only possible value is UserAssigned.
+                          type: string
+                      type: object
+                    type: array
                   link1:
                     description: A list of link blocks as defined below.
                     items:
                       properties:
+                        adminEnabled:
+                          description: Whether enable administration state on the
+                            Express Route Port Link? Defaults to false.
+                          type: boolean
                         connectorType:
                           description: The connector type of the Express Route Port
                             Link.
@@ -443,6 +500,19 @@ spec:
                         interfaceName:
                           description: The interface name of the Azure router associated
                             with the Express Route Port Link.
+                          type: string
+                        macsecCakKeyvaultSecretId:
+                          description: The ID of the Key Vault Secret that contains
+                            the Mac security CAK key for this Express Route Port Link.
+                          type: string
+                        macsecCipher:
+                          description: The MACSec cipher used for this Express Route
+                            Port Link. Possible values are GcmAes128 and GcmAes256.
+                            Defaults to GcmAes128.
+                          type: string
+                        macsecCknKeyvaultSecretId:
+                          description: The ID of the Key Vault Secret that contains
+                            the MACSec CKN key for this Express Route Port Link.
                           type: string
                         patchPanelId:
                           description: The ID that maps from the Express Route Port
@@ -462,6 +532,10 @@ spec:
                     description: A list of link blocks as defined below.
                     items:
                       properties:
+                        adminEnabled:
+                          description: Whether enable administration state on the
+                            Express Route Port Link? Defaults to false.
+                          type: boolean
                         connectorType:
                           description: The connector type of the Express Route Port
                             Link.
@@ -472,6 +546,19 @@ spec:
                         interfaceName:
                           description: The interface name of the Azure router associated
                             with the Express Route Port Link.
+                          type: string
+                        macsecCakKeyvaultSecretId:
+                          description: The ID of the Key Vault Secret that contains
+                            the Mac security CAK key for this Express Route Port Link.
+                          type: string
+                        macsecCipher:
+                          description: The MACSec cipher used for this Express Route
+                            Port Link. Possible values are GcmAes128 and GcmAes256.
+                            Defaults to GcmAes128.
+                          type: string
+                        macsecCknKeyvaultSecretId:
+                          description: The ID of the Key Vault Secret that contains
+                            the MACSec CKN key for this Express Route Port Link.
                           type: string
                         patchPanelId:
                           description: The ID that maps from the Express Route Port
@@ -487,10 +574,30 @@ spec:
                           type: string
                       type: object
                     type: array
+                  location:
+                    description: The Azure Region where the Express Route Port should
+                      exist. Changing this forces a new Express Route Port to be created.
+                    type: string
                   mtu:
                     description: The maximum transmission unit of the Express Route
                       Port.
                     type: string
+                  peeringLocation:
+                    description: The name of the peering location that this Express
+                      Route Port is physically mapped to. Changing this forces a new
+                      Express Route Port to be created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Express
+                      Route Port should exist. Changing this forces a new Express
+                      Route Port to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Express Route Port.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -15,8 +15,35 @@ import (
 
 type DataSetMySQLObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Dataset MySQL.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Dataset MySQL.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Dataset MySQL.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
 	// The ID of the Data Factory MySQL Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Data Factory Linked Service name in which to associate the Dataset with.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Dataset MySQL.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// A schema_column block as defined below.
+	SchemaColumn []DataSetMySQLSchemaColumnObservation `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
+
+	// The table name of the Data Factory Dataset MySQL.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type DataSetMySQLParameters struct {
@@ -78,6 +105,15 @@ type DataSetMySQLParameters struct {
 }
 
 type DataSetMySQLSchemaColumnObservation struct {
+
+	// The description of the column.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DataSetMySQLSchemaColumnParameters struct {

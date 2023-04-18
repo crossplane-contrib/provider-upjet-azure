@@ -15,8 +15,20 @@ import (
 
 type ConsumerGroupObservation struct {
 
+	// Specifies the name of the EventHub. Changing this forces a new resource to be created.
+	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
+
 	// The ID of the EventHub Consumer Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the grandparent EventHub Namespace. Changing this forces a new resource to be created.
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// The name of the resource group in which the EventHub Consumer Group's grandparent Namespace exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the user metadata.
+	UserMetadata *string `json:"userMetadata,omitempty" tf:"user_metadata,omitempty"`
 }
 
 type ConsumerGroupParameters struct {

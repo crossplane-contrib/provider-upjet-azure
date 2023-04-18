@@ -20,13 +20,28 @@ type DNSMXRecordObservation struct {
 
 	// The DNS MX Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of values that make up the MX record. Each record block supports fields documented below.
+	Record []DNSMXRecordRecordObservation `json:"record,omitempty" tf:"record,omitempty"`
+
+	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created.
+	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
 }
 
 type DNSMXRecordParameters struct {
 
 	// A list of values that make up the MX record. Each record block supports fields documented below.
-	// +kubebuilder:validation:Required
-	Record []DNSMXRecordRecordParameters `json:"record" tf:"record,omitempty"`
+	// +kubebuilder:validation:Optional
+	Record []DNSMXRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -42,8 +57,8 @@ type DNSMXRecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Required
-	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
+	// +kubebuilder:validation:Optional
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -64,6 +79,12 @@ type DNSMXRecordParameters struct {
 }
 
 type DNSMXRecordRecordObservation struct {
+
+	// The mail server responsible for the domain covered by the MX record.
+	Exchange *string `json:"exchange,omitempty" tf:"exchange,omitempty"`
+
+	// String representing the "preference” value of the MX records. Records with lower preference value take priority.
+	Preference *string `json:"preference,omitempty" tf:"preference,omitempty"`
 }
 
 type DNSMXRecordRecordParameters struct {
@@ -101,8 +122,10 @@ type DNSMXRecordStatus struct {
 type DNSMXRecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DNSMXRecordSpec   `json:"spec"`
-	Status            DNSMXRecordStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.record)",message="record is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	Spec   DNSMXRecordSpec   `json:"spec"`
+	Status DNSMXRecordStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

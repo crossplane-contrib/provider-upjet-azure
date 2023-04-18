@@ -14,6 +14,12 @@ import (
 )
 
 type FeatureObservation struct {
+
+	// Specifies the name of the feature to register.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Should this feature be Registered or Unregistered?
+	Registered *bool `json:"registered,omitempty" tf:"registered,omitempty"`
 }
 
 type FeatureParameters struct {
@@ -28,7 +34,14 @@ type FeatureParameters struct {
 }
 
 type ResourceProviderRegistrationObservation struct {
+
+	// A list of feature blocks as defined below.
+	Feature []FeatureObservation `json:"feature,omitempty" tf:"feature,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The namespace of the Resource Provider which should be registered. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ResourceProviderRegistrationParameters struct {
@@ -38,8 +51,8 @@ type ResourceProviderRegistrationParameters struct {
 	Feature []FeatureParameters `json:"feature,omitempty" tf:"feature,omitempty"`
 
 	// The namespace of the Resource Provider which should be registered. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 // ResourceProviderRegistrationSpec defines the desired state of ResourceProviderRegistration
@@ -66,8 +79,9 @@ type ResourceProviderRegistrationStatus struct {
 type ResourceProviderRegistration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceProviderRegistrationSpec   `json:"spec"`
-	Status            ResourceProviderRegistrationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ResourceProviderRegistrationSpec   `json:"spec"`
+	Status ResourceProviderRegistrationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

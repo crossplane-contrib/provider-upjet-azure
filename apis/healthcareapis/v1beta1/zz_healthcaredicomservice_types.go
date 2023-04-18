@@ -35,13 +35,24 @@ type HealthcareDICOMServiceObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the Azure Region where the Healthcare DICOM Service should be created. Changing this forces a new Healthcare DICOM Service to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	PrivateEndpoint []PrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
+	// Whether to enabled public networks when data plane traffic coming from public networks while private endpoint is enabled. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
 	// The url of the Healthcare DICOM Services.
 	ServiceURL *string `json:"serviceUrl,omitempty" tf:"service_url,omitempty"`
+
+	// A mapping of tags to assign to the Healthcare DICOM Service.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the id of the Healthcare Workspace where the Healthcare DICOM Service should exist. Changing this forces a new Healthcare DICOM Service to be created.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type HealthcareDICOMServiceParameters struct {
@@ -51,8 +62,8 @@ type HealthcareDICOMServiceParameters struct {
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the Azure Region where the Healthcare DICOM Service should be created. Changing this forces a new Healthcare DICOM Service to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether to enabled public networks when data plane traffic coming from public networks while private endpoint is enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -79,11 +90,17 @@ type HealthcareDICOMServiceParameters struct {
 
 type IdentityObservation struct {
 
+	// A list of User Assigned Identity IDs which should be assigned to this Healthcare DICOM service.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The ID of the Healthcare DICOM Service.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The ID of the Healthcare DICOM Service.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The type of identity used for the Healthcare DICOM service. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned. If UserAssigned is set, an identity_ids must be set as well.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -133,8 +150,9 @@ type HealthcareDICOMServiceStatus struct {
 type HealthcareDICOMService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HealthcareDICOMServiceSpec   `json:"spec"`
-	Status            HealthcareDICOMServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   HealthcareDICOMServiceSpec   `json:"spec"`
+	Status HealthcareDICOMServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

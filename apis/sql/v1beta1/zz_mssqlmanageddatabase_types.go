@@ -17,6 +17,9 @@ type MSSQLManagedDatabaseObservation struct {
 
 	// The Azure SQL Managed Database ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Azure SQL Managed Instance on which to create this Managed Database. Changing this forces a new resource to be created.
+	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 }
 
 type MSSQLManagedDatabaseParameters struct {

@@ -15,8 +15,29 @@ import (
 
 type IOTHubDPSSharedAccessPolicyObservation struct {
 
+	// Adds EnrollmentRead permission to this Shared Access Account. It allows read access to enrollment data.
+	EnrollmentRead *bool `json:"enrollmentRead,omitempty" tf:"enrollment_read,omitempty"`
+
+	// Adds EnrollmentWrite permission to this Shared Access Account. It allows write access to enrollment data.
+	EnrollmentWrite *bool `json:"enrollmentWrite,omitempty" tf:"enrollment_write,omitempty"`
+
 	// The ID of the IoTHub Device Provisioning Service Shared Access Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the IoT Hub Device Provisioning service to which this Shared Access Policy belongs. Changing this forces a new resource to be created.
+	IOTHubDPSName *string `json:"iothubDpsName,omitempty" tf:"iothub_dps_name,omitempty"`
+
+	// Adds RegistrationStatusRead permission to this Shared Access Account. It allows read access to device registrations.
+	RegistrationRead *bool `json:"registrationRead,omitempty" tf:"registration_read,omitempty"`
+
+	// Adds RegistrationStatusWrite permission to this Shared Access Account. It allows write access to device registrations.
+	RegistrationWrite *bool `json:"registrationWrite,omitempty" tf:"registration_write,omitempty"`
+
+	// The name of the resource group under which the IotHub Shared Access Policy resource has to be created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Adds ServiceConfig permission to this Shared Access Account. It allows configuration of the Device Provisioning Service.
+	ServiceConfig *bool `json:"serviceConfig,omitempty" tf:"service_config,omitempty"`
 }
 
 type IOTHubDPSSharedAccessPolicyParameters struct {

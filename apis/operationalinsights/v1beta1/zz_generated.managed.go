@@ -17,6 +17,11 @@ func (mg *LogAnalyticsDataExportRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LogAnalyticsDataExportRule.
+func (mg *LogAnalyticsDataExportRule) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LogAnalyticsDataExportRule.
 func (mg *LogAnalyticsDataExportRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *LogAnalyticsDataExportRule) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LogAnalyticsDataExportRule.
 func (mg *LogAnalyticsDataExportRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LogAnalyticsDataExportRule.
+func (mg *LogAnalyticsDataExportRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsDataExportRule.
@@ -83,6 +93,11 @@ func (mg *LogAnalyticsDataSourceWindowsEvent) GetDeletionPolicy() xpv1.DeletionP
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LogAnalyticsDataSourceWindowsEvent.
+func (mg *LogAnalyticsDataSourceWindowsEvent) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LogAnalyticsDataSourceWindowsEvent.
 func (mg *LogAnalyticsDataSourceWindowsEvent) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *LogAnalyticsDataSourceWindowsEvent) SetConditions(c ...xpv1.Condition)
 // SetDeletionPolicy of this LogAnalyticsDataSourceWindowsEvent.
 func (mg *LogAnalyticsDataSourceWindowsEvent) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LogAnalyticsDataSourceWindowsEvent.
+func (mg *LogAnalyticsDataSourceWindowsEvent) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsDataSourceWindowsEvent.
@@ -149,6 +169,11 @@ func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetDeletionPolicy() x
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
 func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetConditions(c ...xp
 // SetDeletionPolicy of this LogAnalyticsDataSourceWindowsPerformanceCounter.
 func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LogAnalyticsDataSourceWindowsPerformanceCounter.
+func (mg *LogAnalyticsDataSourceWindowsPerformanceCounter) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsDataSourceWindowsPerformanceCounter.
@@ -215,6 +245,11 @@ func (mg *LogAnalyticsLinkedService) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LogAnalyticsLinkedService.
+func (mg *LogAnalyticsLinkedService) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LogAnalyticsLinkedService.
 func (mg *LogAnalyticsLinkedService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *LogAnalyticsLinkedService) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LogAnalyticsLinkedService.
 func (mg *LogAnalyticsLinkedService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LogAnalyticsLinkedService.
+func (mg *LogAnalyticsLinkedService) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsLinkedService.
@@ -281,6 +321,11 @@ func (mg *LogAnalyticsLinkedStorageAccount) GetDeletionPolicy() xpv1.DeletionPol
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LogAnalyticsLinkedStorageAccount.
+func (mg *LogAnalyticsLinkedStorageAccount) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LogAnalyticsLinkedStorageAccount.
 func (mg *LogAnalyticsLinkedStorageAccount) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *LogAnalyticsLinkedStorageAccount) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LogAnalyticsLinkedStorageAccount.
 func (mg *LogAnalyticsLinkedStorageAccount) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LogAnalyticsLinkedStorageAccount.
+func (mg *LogAnalyticsLinkedStorageAccount) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsLinkedStorageAccount.
@@ -347,6 +397,11 @@ func (mg *LogAnalyticsQueryPack) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LogAnalyticsQueryPack.
+func (mg *LogAnalyticsQueryPack) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LogAnalyticsQueryPack.
 func (mg *LogAnalyticsQueryPack) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -378,6 +433,11 @@ func (mg *LogAnalyticsQueryPack) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LogAnalyticsQueryPack.
 func (mg *LogAnalyticsQueryPack) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LogAnalyticsQueryPack.
+func (mg *LogAnalyticsQueryPack) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsQueryPack.
@@ -413,6 +473,11 @@ func (mg *LogAnalyticsQueryPackQuery) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LogAnalyticsQueryPackQuery.
+func (mg *LogAnalyticsQueryPackQuery) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LogAnalyticsQueryPackQuery.
 func (mg *LogAnalyticsQueryPackQuery) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -444,6 +509,11 @@ func (mg *LogAnalyticsQueryPackQuery) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LogAnalyticsQueryPackQuery.
 func (mg *LogAnalyticsQueryPackQuery) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LogAnalyticsQueryPackQuery.
+func (mg *LogAnalyticsQueryPackQuery) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsQueryPackQuery.
@@ -479,6 +549,11 @@ func (mg *LogAnalyticsSavedSearch) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this LogAnalyticsSavedSearch.
+func (mg *LogAnalyticsSavedSearch) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this LogAnalyticsSavedSearch.
 func (mg *LogAnalyticsSavedSearch) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -510,6 +585,11 @@ func (mg *LogAnalyticsSavedSearch) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this LogAnalyticsSavedSearch.
 func (mg *LogAnalyticsSavedSearch) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this LogAnalyticsSavedSearch.
+func (mg *LogAnalyticsSavedSearch) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this LogAnalyticsSavedSearch.
@@ -545,6 +625,11 @@ func (mg *Workspace) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Workspace.
+func (mg *Workspace) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Workspace.
 func (mg *Workspace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -576,6 +661,11 @@ func (mg *Workspace) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Workspace.
 func (mg *Workspace) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Workspace.
+func (mg *Workspace) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Workspace.

@@ -17,13 +17,28 @@ type ExpressRouteGatewayObservation struct {
 
 	// The ID of the ExpressRoute gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group in which to create the ExpressRoute gateway. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The number of scale units with which to provision the ExpressRoute gateway. Each scale unit is equal to 2Gbps, with support for up to 10 scale units (20Gbps).
+	ScaleUnits *float64 `json:"scaleUnits,omitempty" tf:"scale_units,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of a Virtual HUB within which the ExpressRoute gateway should be created. Changing this forces a new resource to be created.
+	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 }
 
 type ExpressRouteGatewayParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the ExpressRoute gateway. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -39,8 +54,8 @@ type ExpressRouteGatewayParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The number of scale units with which to provision the ExpressRoute gateway. Each scale unit is equal to 2Gbps, with support for up to 10 scale units (20Gbps).
-	// +kubebuilder:validation:Required
-	ScaleUnits *float64 `json:"scaleUnits" tf:"scale_units,omitempty"`
+	// +kubebuilder:validation:Optional
+	ScaleUnits *float64 `json:"scaleUnits,omitempty" tf:"scale_units,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -85,8 +100,10 @@ type ExpressRouteGatewayStatus struct {
 type ExpressRouteGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ExpressRouteGatewaySpec   `json:"spec"`
-	Status            ExpressRouteGatewayStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scaleUnits)",message="scaleUnits is a required parameter"
+	Spec   ExpressRouteGatewaySpec   `json:"spec"`
+	Status ExpressRouteGatewayStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

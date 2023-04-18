@@ -15,23 +15,38 @@ import (
 
 type SecurityCenterContactObservation struct {
 
+	// Whether to send security alerts notifications to the security contact.
+	AlertNotifications *bool `json:"alertNotifications,omitempty" tf:"alert_notifications,omitempty"`
+
+	// Whether to send security alerts notifications to subscription admins.
+	AlertsToAdmins *bool `json:"alertsToAdmins,omitempty" tf:"alerts_to_admins,omitempty"`
+
+	// The email of the Security Center Contact.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
 	// The Security Center Contact ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Security Center Contact. Defaults to default1.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The phone number of the Security Center Contact.
+	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
 }
 
 type SecurityCenterContactParameters struct {
 
 	// Whether to send security alerts notifications to the security contact.
-	// +kubebuilder:validation:Required
-	AlertNotifications *bool `json:"alertNotifications" tf:"alert_notifications,omitempty"`
+	// +kubebuilder:validation:Optional
+	AlertNotifications *bool `json:"alertNotifications,omitempty" tf:"alert_notifications,omitempty"`
 
 	// Whether to send security alerts notifications to subscription admins.
-	// +kubebuilder:validation:Required
-	AlertsToAdmins *bool `json:"alertsToAdmins" tf:"alerts_to_admins,omitempty"`
+	// +kubebuilder:validation:Optional
+	AlertsToAdmins *bool `json:"alertsToAdmins,omitempty" tf:"alerts_to_admins,omitempty"`
 
 	// The email of the Security Center Contact.
-	// +kubebuilder:validation:Required
-	Email *string `json:"email" tf:"email,omitempty"`
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// The name of the Security Center Contact. Defaults to default1.
 	// +kubebuilder:validation:Optional
@@ -66,8 +81,11 @@ type SecurityCenterContactStatus struct {
 type SecurityCenterContact struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityCenterContactSpec   `json:"spec"`
-	Status            SecurityCenterContactStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.alertNotifications)",message="alertNotifications is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.alertsToAdmins)",message="alertsToAdmins is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.email)",message="email is a required parameter"
+	Spec   SecurityCenterContactSpec   `json:"spec"`
+	Status SecurityCenterContactStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

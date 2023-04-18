@@ -17,17 +17,29 @@ type ManagementLockObservation struct {
 
 	// The ID of the Management Lock
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the Level to be used for this Lock. Possible values are CanNotDelete and ReadOnly. Changing this forces a new resource to be created.
+	LockLevel *string `json:"lockLevel,omitempty" tf:"lock_level,omitempty"`
+
+	// Specifies the name of the Management Lock. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies some notes about the lock. Maximum of 512 characters. Changing this forces a new resource to be created.
+	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
+
+	// Specifies the scope at which the Management Lock should be created. Changing this forces a new resource to be created.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
 type ManagementLockParameters struct {
 
 	// Specifies the Level to be used for this Lock. Possible values are CanNotDelete and ReadOnly. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	LockLevel *string `json:"lockLevel" tf:"lock_level,omitempty"`
+	// +kubebuilder:validation:Optional
+	LockLevel *string `json:"lockLevel,omitempty" tf:"lock_level,omitempty"`
 
 	// Specifies the name of the Management Lock. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies some notes about the lock. Maximum of 512 characters. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -72,8 +84,10 @@ type ManagementLockStatus struct {
 type ManagementLock struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagementLockSpec   `json:"spec"`
-	Status            ManagementLockStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lockLevel)",message="lockLevel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ManagementLockSpec   `json:"spec"`
+	Status ManagementLockStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

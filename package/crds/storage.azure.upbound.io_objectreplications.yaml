@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: objectreplications.storage.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -400,9 +404,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - rules
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -574,6 +591,9 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: rules is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rules)
           status:
             description: ObjectReplicationStatus defines the observed state of ObjectReplication.
             properties:
@@ -583,6 +603,10 @@ spec:
                     description: The ID of the Object Replication in the destination
                       storage account.
                     type: string
+                  destinationStorageAccountId:
+                    description: The ID of the destination storage account. Changing
+                      this forces a new Storage Object Replication to be created.
+                    type: string
                   id:
                     description: The ID of the Storage Object Replication in the destination
                       storage account. It's composed as format source_object_replication_id;destination_object_replication_id.
@@ -591,13 +615,37 @@ spec:
                     description: One or more rules blocks as defined below.
                     items:
                       properties:
+                        copyBlobsCreatedAfter:
+                          description: 'The time after which the Block Blobs created
+                            will be copies to the destination. Possible values are
+                            OnlyNewObjects, Everything and time in RFC3339 format:
+                            2006-01-02T15:04:00Z.'
+                          type: string
+                        destinationContainerName:
+                          description: The destination storage container name. Changing
+                            this forces a new Storage Object Replication to be created.
+                          type: string
+                        filterOutBlobsWithPrefix:
+                          description: Specifies a list of filters prefixes, the blobs
+                            whose names begin with which will be replicated.
+                          items:
+                            type: string
+                          type: array
                         name:
+                          type: string
+                        sourceContainerName:
+                          description: The source storage container name. Changing
+                            this forces a new Storage Object Replication to be created.
                           type: string
                       type: object
                     type: array
                   sourceObjectReplicationId:
                     description: The ID of the Object Replication in the source storage
                       account.
+                    type: string
+                  sourceStorageAccountId:
+                    description: The ID of the source storage account. Changing this
+                      forces a new Storage Object Replication to be created.
                     type: string
                 type: object
               conditions:

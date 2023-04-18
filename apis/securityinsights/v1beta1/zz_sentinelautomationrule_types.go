@@ -14,6 +14,27 @@ import (
 )
 
 type ActionIncidentObservation struct {
+
+	// The classification of the incident, when closing it. Possible values are: BenignPositive_SuspiciousButExpected, FalsePositive_InaccurateData, FalsePositive_IncorrectAlertLogic, TruePositive_SuspiciousActivity and Undetermined.
+	Classification *string `json:"classification,omitempty" tf:"classification,omitempty"`
+
+	// The comment why the incident is to be closed.
+	ClassificationComment *string `json:"classificationComment,omitempty" tf:"classification_comment,omitempty"`
+
+	// Specifies a list of labels to add to the incident.
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// The execution order of this action.
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// The object ID of the entity this incident is assigned to.
+	OwnerID *string `json:"ownerId,omitempty" tf:"owner_id,omitempty"`
+
+	// The severity to add to the incident. Possible values are High, Informational, Low and Medium.
+	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
+
+	// The status to set to the incident. Possible values are: Active, Closed, New.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type ActionIncidentParameters struct {
@@ -48,6 +69,15 @@ type ActionIncidentParameters struct {
 }
 
 type ActionPlaybookObservation struct {
+
+	// The ID of the Logic App that defines the playbook's logic.
+	LogicAppID *string `json:"logicAppId,omitempty" tf:"logic_app_id,omitempty"`
+
+	// The execution order of this action.
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// The ID of the Tenant that owns the playbook.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type ActionPlaybookParameters struct {
@@ -66,6 +96,15 @@ type ActionPlaybookParameters struct {
 }
 
 type ConditionObservation struct {
+
+	// The operator to use for evaluate the condition. Possible values include: Equals, NotEquals, Contains, NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// The property to use for evaluate the condition. Possible values include: AccountAadTenantId, AccountAadUserId, AccountNTDomain, AccountName, AccountObjectGuid, AccountPUID, AccountSid, AccountUPNSuffix, AzureResourceResourceId, AzureResourceSubscriptionId, CloudApplicationAppId, CloudApplicationAppName, DNSDomainName, FileDirectory, FileHashValue, FileName, HostAzureID, HostNTDomain, HostName, HostNetBiosName, HostOSVersion, IPAddress, IncidentDescription, IncidentProviderName, IncidentRelatedAnalyticRuleIds, IncidentSeverity, IncidentStatus, IncidentTactics, IncidentTitle, IoTDeviceId, IoTDeviceModel, IoTDeviceName, IoTDeviceOperatingSystem, IoTDeviceType, IoTDeviceVendor, MailMessageDeliveryAction, MailMessageDeliveryLocation, MailMessageP1Sender, MailMessageP2Sender, MailMessageRecipient, MailMessageSenderIP, MailMessageSubject, MailboxDisplayName, MailboxPrimaryAddress, MailboxUPN, MalwareCategory, MalwareName, ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData, Url.
+	Property *string `json:"property,omitempty" tf:"property,omitempty"`
+
+	// Specifies a list of values to use for evaluate the condition.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type ConditionParameters struct {
@@ -85,8 +124,44 @@ type ConditionParameters struct {
 
 type SentinelAutomationRuleObservation struct {
 
+	// One or more action_incident blocks as defined below.
+	ActionIncident []ActionIncidentObservation `json:"actionIncident,omitempty" tf:"action_incident,omitempty"`
+
+	// One or more action_playbook blocks as defined below.
+	ActionPlaybook []ActionPlaybookObservation `json:"actionPlaybook,omitempty" tf:"action_playbook,omitempty"`
+
+	// One or more condition blocks as defined below.
+	Condition []ConditionObservation `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// A JSON array of one or more condition JSON objects as is defined here.
+	ConditionJSON *string `json:"conditionJson,omitempty" tf:"condition_json,omitempty"`
+
+	// The display name which should be used for this Sentinel Automation Rule.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Whether this Sentinel Automation Rule is enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The time in RFC3339 format of kind UTC that determines when this Automation Rule should expire and be disabled.
+	Expiration *string `json:"expiration,omitempty" tf:"expiration,omitempty"`
+
 	// The ID of the Sentinel Automation Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Log Analytics Workspace where this Sentinel applies to. Changing this forces a new Sentinel Automation Rule to be created.
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+
+	// The UUID which should be used for this Sentinel Automation Rule. Changing this forces a new Sentinel Automation Rule to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The order of this Sentinel Automation Rule. Possible values varies between 1 and 1000.
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// Specifies what triggers this automation rule. Possible values are Alerts and Incidents. Defaults to Incidents.
+	TriggersOn *string `json:"triggersOn,omitempty" tf:"triggers_on,omitempty"`
+
+	// Specifies when will this automation rule be triggered. Possible values are Created and Updated. Defaults to Created.
+	TriggersWhen *string `json:"triggersWhen,omitempty" tf:"triggers_when,omitempty"`
 }
 
 type SentinelAutomationRuleParameters struct {
@@ -108,8 +183,8 @@ type SentinelAutomationRuleParameters struct {
 	ConditionJSON *string `json:"conditionJson,omitempty" tf:"condition_json,omitempty"`
 
 	// The display name which should be used for this Sentinel Automation Rule.
-	// +kubebuilder:validation:Required
-	DisplayName *string `json:"displayName" tf:"display_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Whether this Sentinel Automation Rule is enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -134,12 +209,12 @@ type SentinelAutomationRuleParameters struct {
 	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The UUID which should be used for this Sentinel Automation Rule. Changing this forces a new Sentinel Automation Rule to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The order of this Sentinel Automation Rule. Possible values varies between 1 and 1000.
-	// +kubebuilder:validation:Required
-	Order *float64 `json:"order" tf:"order,omitempty"`
+	// +kubebuilder:validation:Optional
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// Specifies what triggers this automation rule. Possible values are Alerts and Incidents. Defaults to Incidents.
 	// +kubebuilder:validation:Optional
@@ -174,8 +249,11 @@ type SentinelAutomationRuleStatus struct {
 type SentinelAutomationRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SentinelAutomationRuleSpec   `json:"spec"`
-	Status            SentinelAutomationRuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.order)",message="order is a required parameter"
+	Spec   SentinelAutomationRuleSpec   `json:"spec"`
+	Status SentinelAutomationRuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

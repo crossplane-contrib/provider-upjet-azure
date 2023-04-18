@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: accountnetworkrules.storage.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -183,9 +187,22 @@ spec:
                     items:
                       type: string
                     type: array
-                required:
-                - defaultAction
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -357,14 +374,61 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: defaultAction is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultAction)
           status:
             description: AccountNetworkRulesStatus defines the observed state of AccountNetworkRules.
             properties:
               atProvider:
                 properties:
+                  bypass:
+                    description: Specifies whether traffic is bypassed for Logging/Metrics/AzureServices.
+                      Valid options are any combination of Logging, Metrics, AzureServices,
+                      or None.
+                    items:
+                      type: string
+                    type: array
+                  defaultAction:
+                    description: Specifies the default action of allow or deny when
+                      no other rules match. Valid options are Deny or Allow.
+                    type: string
                   id:
                     description: The ID of the Storage Account.
                     type: string
+                  ipRules:
+                    description: List of public IP or IP ranges in CIDR Format. Only
+                      IPv4 addresses are allowed. Private IP address ranges (as defined
+                      in RFC 1918) are not allowed.
+                    items:
+                      type: string
+                    type: array
+                  privateLinkAccess:
+                    description: One or More private_link_access block as defined
+                      below.
+                    items:
+                      properties:
+                        endpointResourceId:
+                          description: The resource id of the resource access rule
+                            to be granted access.
+                          type: string
+                        endpointTenantId:
+                          description: The tenant id of the resource of the resource
+                            access rule to be granted access. Defaults to the current
+                            tenant id.
+                          type: string
+                      type: object
+                    type: array
+                  storageAccountId:
+                    description: Specifies the ID of the storage account. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  virtualNetworkSubnetIds:
+                    description: A list of virtual network subnet ids to to secure
+                      the storage account.
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

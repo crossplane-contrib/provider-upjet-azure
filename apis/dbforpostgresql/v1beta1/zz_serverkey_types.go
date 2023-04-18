@@ -17,6 +17,12 @@ type ServerKeyObservation struct {
 
 	// The ID of the PostgreSQL Server Key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The URL to a Key Vault Key.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The ID of the PostgreSQL Server. Changing this forces a new resource to be created.
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 }
 
 type ServerKeyParameters struct {

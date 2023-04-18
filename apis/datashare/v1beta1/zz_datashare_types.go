@@ -15,8 +15,23 @@ import (
 
 type DataShareObservation struct {
 
+	// The ID of the Data Share account in which the Data Share is created. Changing this forces a new Data Share to be created.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// The Data Share's description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Data Share.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The kind of the Data Share. Possible values are CopyBased and InPlace. Changing this forces a new Data Share to be created.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// A snapshot_schedule block as defined below.
+	SnapshotSchedule []SnapshotScheduleObservation `json:"snapshotSchedule,omitempty" tf:"snapshot_schedule,omitempty"`
+
+	// The terms of the Data Share.
+	Terms *string `json:"terms,omitempty" tf:"terms,omitempty"`
 }
 
 type DataShareParameters struct {
@@ -40,8 +55,8 @@ type DataShareParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The kind of the Data Share. Possible values are CopyBased and InPlace. Changing this forces a new Data Share to be created.
-	// +kubebuilder:validation:Required
-	Kind *string `json:"kind" tf:"kind,omitempty"`
+	// +kubebuilder:validation:Optional
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// A snapshot_schedule block as defined below.
 	// +kubebuilder:validation:Optional
@@ -53,6 +68,15 @@ type DataShareParameters struct {
 }
 
 type SnapshotScheduleObservation struct {
+
+	// The name of the snapshot schedule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The interval of the synchronization with the source data. Possible values are Hour and Day.
+	Recurrence *string `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
+
+	// The synchronization with the source data's start time.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
 type SnapshotScheduleParameters struct {
@@ -94,8 +118,9 @@ type DataShareStatus struct {
 type DataShare struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataShareSpec   `json:"spec"`
-	Status            DataShareStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.kind)",message="kind is a required parameter"
+	Spec   DataShareSpec   `json:"spec"`
+	Status DataShareStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

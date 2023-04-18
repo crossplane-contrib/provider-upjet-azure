@@ -15,8 +15,23 @@ import (
 
 type OpenIDConnectProviderObservation struct {
 
+	// The name of the API Management Service in which this OpenID Connect Provider should be created. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// A description of this OpenID Connect Provider.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A user-friendly name for this OpenID Connect Provider.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The ID of the API Management OpenID Connect Provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The URI of the Metadata endpoint.
+	MetadataEndpoint *string `json:"metadataEndpoint,omitempty" tf:"metadata_endpoint,omitempty"`
+
+	// The name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type OpenIDConnectProviderParameters struct {
@@ -35,11 +50,11 @@ type OpenIDConnectProviderParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The Client ID used for the Client Application.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ClientIDSecretRef v1.SecretKeySelector `json:"clientIdSecretRef" tf:"-"`
 
 	// The Client Secret used for the Client Application.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// A description of this OpenID Connect Provider.
@@ -47,12 +62,12 @@ type OpenIDConnectProviderParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A user-friendly name for this OpenID Connect Provider.
-	// +kubebuilder:validation:Required
-	DisplayName *string `json:"displayName" tf:"display_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The URI of the Metadata endpoint.
-	// +kubebuilder:validation:Required
-	MetadataEndpoint *string `json:"metadataEndpoint" tf:"metadata_endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetadataEndpoint *string `json:"metadataEndpoint,omitempty" tf:"metadata_endpoint,omitempty"`
 
 	// The name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -92,8 +107,12 @@ type OpenIDConnectProviderStatus struct {
 type OpenIDConnectProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OpenIDConnectProviderSpec   `json:"spec"`
-	Status            OpenIDConnectProviderStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientIdSecretRef)",message="clientIdSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientSecretSecretRef)",message="clientSecretSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.metadataEndpoint)",message="metadataEndpoint is a required parameter"
+	Spec   OpenIDConnectProviderSpec   `json:"spec"`
+	Status OpenIDConnectProviderStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: blobs.storage.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -276,9 +280,22 @@ spec:
                       values are Append, Block or Page. Changing this forces a new
                       resource to be created.
                     type: string
-                required:
-                - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -450,13 +467,82 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: type is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)
           status:
             description: BlobStatus defines the observed state of Blob.
             properties:
               atProvider:
                 properties:
+                  accessTier:
+                    description: The access tier of the storage blob. Possible values
+                      are Archive, Cool and Hot.
+                    type: string
+                  cacheControl:
+                    description: Controls the cache control header content of the
+                      response when blob is requested .
+                    type: string
+                  contentMd5:
+                    description: The MD5 sum of the blob contents. Cannot be defined
+                      if source_uri is defined, or if blob type is Append or Page.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  contentType:
+                    description: The content type of the storage blob. Cannot be defined
+                      if source_uri is defined. Defaults to application/octet-stream.
+                    type: string
                   id:
                     description: The ID of the Storage Blob.
+                    type: string
+                  metadata:
+                    additionalProperties:
+                      type: string
+                    description: A map of custom blob metadata.
+                    type: object
+                  parallelism:
+                    description: The number of workers per CPU core to run for concurrent
+                      uploads. Defaults to 8. Changing this forces a new resource
+                      to be created.
+                    type: number
+                  size:
+                    description: Used only for page blobs to specify the size in bytes
+                      of the blob to be created. Must be a multiple of 512. Defaults
+                      to 0. Changing this forces a new resource to be created.
+                    type: number
+                  source:
+                    description: An absolute path to a file on the local system. This
+                      field cannot be specified for Append blobs and cannot be specified
+                      if source_content or source_uri is specified. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  sourceContent:
+                    description: The content for this blob which should be defined
+                      inline. This field can only be specified for Block blobs and
+                      cannot be specified if source or source_uri is specified. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  sourceUri:
+                    description: The URI of an existing blob, or a file in the Azure
+                      File service, to use as the source contents for the blob to
+                      be created. Changing this forces a new resource to be created.
+                      This field cannot be specified for Append blobs and cannot be
+                      specified if source or source_content is specified.
+                    type: string
+                  storageAccountName:
+                    description: Specifies the storage account in which to create
+                      the storage container. Changing this forces a new resource to
+                      be created. Changing this forces a new resource to be created.
+                    type: string
+                  storageContainerName:
+                    description: The name of the storage container in which this blob
+                      should be created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  type:
+                    description: The type of the storage blob to be created. Possible
+                      values are Append, Block or Page. Changing this forces a new
+                      resource to be created.
                     type: string
                   url:
                     description: The URL of the blob

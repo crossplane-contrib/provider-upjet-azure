@@ -15,8 +15,20 @@ import (
 
 type SubAccountObservation struct {
 
+	// Whether the resource monitoring is enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The ID of the logz Sub Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Logz Monitor. Changing this forces a new logz Sub Account to be created.
+	LogzMonitorID *string `json:"logzMonitorId,omitempty" tf:"logz_monitor_id,omitempty"`
+
+	// A mapping of tags which should be assigned to the logz Sub Account.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A user block as defined below. Changing this forces a new resource to be created.
+	User []SubAccountUserObservation `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type SubAccountParameters struct {
@@ -44,11 +56,23 @@ type SubAccountParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A user block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	User []SubAccountUserParameters `json:"user" tf:"user,omitempty"`
+	// +kubebuilder:validation:Optional
+	User []SubAccountUserParameters `json:"user,omitempty" tf:"user,omitempty"`
 }
 
 type SubAccountUserObservation struct {
+
+	// Email of the user used by Logz for contacting them if needed. A valid email address consists of an email prefix and an email domain. The prefix and domain may contain only letters, numbers, underscores, periods and dashes. Changing this forces a new logz Sub Account to be created.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// First Name of the user. Possible values must be between 1 and 50 characters in length. Changing this forces a new logz Sub Account to be created.
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
+
+	// Last Name of the user. Possible values must be between 1 and 50 characters in length. Changing this forces a new logz Sub Account to be created.
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// Phone number of the user used by Logz for contacting them if needed. Possible values must be between 1 and 40 characters in length. Changing this forces a new logz Sub Account to be created.
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 }
 
 type SubAccountUserParameters struct {
@@ -94,8 +118,9 @@ type SubAccountStatus struct {
 type SubAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubAccountSpec   `json:"spec"`
-	Status            SubAccountStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.user)",message="user is a required parameter"
+	Spec   SubAccountSpec   `json:"spec"`
+	Status SubAccountStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

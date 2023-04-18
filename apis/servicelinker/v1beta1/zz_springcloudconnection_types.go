@@ -14,6 +14,21 @@ import (
 )
 
 type AuthenticationObservation struct {
+
+	// Client ID for userAssignedIdentity or servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate. When type is set to userAssignedIdentity, client_id and subscription_id should be either both specified or both not specified.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// Username or account name for secret auth. name and secret should be either both specified or both not specified when type is set to secret.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Principal ID for servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// Subscription ID for userAssignedIdentity. subscription_id and client_id should be either both specified or both not specified.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+
+	// The authentication type. Possible values are systemAssignedIdentity, userAssignedIdentity, servicePrincipalSecret, servicePrincipalCertificate, secret. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AuthenticationParameters struct {
@@ -49,23 +64,41 @@ type AuthenticationParameters struct {
 
 type SpringCloudConnectionObservation struct {
 
+	// The authentication info. An authentication block as defined below.
+	Authentication []AuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
+	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
+
 	// The ID of the service connector.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the service connection. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the data source spring cloud. Changing this forces a new resource to be created.
+	SpringCloudID *string `json:"springCloudId,omitempty" tf:"spring_cloud_id,omitempty"`
+
+	// The ID of the target resource. Changing this forces a new resource to be created. Possible values are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// The type of the VNet solution. Possible values are serviceEndpoint, privateLink.
+	VnetSolution *string `json:"vnetSolution,omitempty" tf:"vnet_solution,omitempty"`
 }
 
 type SpringCloudConnectionParameters struct {
 
 	// The authentication info. An authentication block as defined below.
-	// +kubebuilder:validation:Required
-	Authentication []AuthenticationParameters `json:"authentication" tf:"authentication,omitempty"`
+	// +kubebuilder:validation:Optional
+	Authentication []AuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
 	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
 	// +kubebuilder:validation:Optional
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
 	// The name of the service connection. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the data source spring cloud. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudJavaDeployment
@@ -124,8 +157,10 @@ type SpringCloudConnectionStatus struct {
 type SpringCloudConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpringCloudConnectionSpec   `json:"spec"`
-	Status            SpringCloudConnectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authentication)",message="authentication is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SpringCloudConnectionSpec   `json:"spec"`
+	Status SpringCloudConnectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

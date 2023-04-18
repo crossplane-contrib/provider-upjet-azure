@@ -14,6 +14,12 @@ import (
 )
 
 type ActionObservation struct {
+
+	// Specifies the endpoint of the action.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// Specifies the name of the action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ActionParameters struct {
@@ -29,8 +35,26 @@ type ActionParameters struct {
 
 type CustomProviderObservation struct {
 
+	// Any number of action block as defined below. One of resource_type or action must be specified.
+	Action []ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
 	// The ID of the Custom Provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group in which to create the Custom Provider. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Any number of resource_type block as defined below. One of resource_type or action must be specified.
+	ResourceType []ResourceTypeObservation `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Any number of validation block as defined below.
+	Validation []ValidationObservation `json:"validation,omitempty" tf:"validation,omitempty"`
 }
 
 type CustomProviderParameters struct {
@@ -40,8 +64,8 @@ type CustomProviderParameters struct {
 	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Custom Provider. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -70,6 +94,15 @@ type CustomProviderParameters struct {
 }
 
 type ResourceTypeObservation struct {
+
+	// Specifies the endpoint of the route definition.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// Specifies the name of the route definition.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. This value defaults to ResourceTypeRoutingProxy.
+	RoutingType *string `json:"routingType,omitempty" tf:"routing_type,omitempty"`
 }
 
 type ResourceTypeParameters struct {
@@ -88,6 +121,9 @@ type ResourceTypeParameters struct {
 }
 
 type ValidationObservation struct {
+
+	// The endpoint where the validation specification is located.
+	Specification *string `json:"specification,omitempty" tf:"specification,omitempty"`
 }
 
 type ValidationParameters struct {
@@ -121,8 +157,9 @@ type CustomProviderStatus struct {
 type CustomProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CustomProviderSpec   `json:"spec"`
-	Status            CustomProviderStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   CustomProviderSpec   `json:"spec"`
+	Status CustomProviderStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

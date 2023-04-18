@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: policyvirtualmachineconfigurationassignments.guestconfiguration.azure.upbound.io
 spec:
@@ -57,9 +57,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -193,10 +197,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - configuration
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -368,15 +384,69 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: configuration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.configuration)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: PolicyVirtualMachineConfigurationAssignmentStatus defines
               the observed state of PolicyVirtualMachineConfigurationAssignment.
             properties:
               atProvider:
                 properties:
+                  configuration:
+                    description: A configuration block as defined below.
+                    items:
+                      properties:
+                        assignmentType:
+                          description: The assignment type for the Guest Configuration
+                            Assignment. Possible values are Audit, ApplyAndAutoCorrect,
+                            ApplyAndMonitor and DeployAndAutoCorrect.
+                          type: string
+                        contentHash:
+                          description: The content hash for the Guest Configuration
+                            package.
+                          type: string
+                        contentUri:
+                          description: The content URI where the Guest Configuration
+                            package is stored.
+                          type: string
+                        parameter:
+                          description: One or more parameter blocks as defined below
+                            which define what configuration parameters and values
+                            against.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the configuration parameter
+                                  to check.
+                                type: string
+                              value:
+                                description: The value to check the configuration
+                                  parameter with.
+                                type: string
+                            type: object
+                          type: array
+                        version:
+                          description: The version of the Guest Configuration that
+                            will be assigned in this Guest Configuration Assignment.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Policy Virtual Machine Configuration
                       Assignment.
+                    type: string
+                  location:
+                    description: The Azure location where the Policy Virtual Machine
+                      Configuration Assignment should exist. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  virtualMachineId:
+                    description: The resource ID of the Policy Virtual Machine which
+                      this Guest Configuration Assignment should apply to. Changing
+                      this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

@@ -15,12 +15,44 @@ import (
 
 type FactoryObservation struct {
 
+	// Specifies the Azure Key Vault Key ID to be used as the Customer Managed Key (CMK) for double encryption. Required with user assigned identity.
+	CustomerManagedKeyID *string `json:"customerManagedKeyId,omitempty" tf:"customer_managed_key_id,omitempty"`
+
+	// Specifies the ID of the user assigned identity associated with the Customer Managed Key. Must be supplied if customer_managed_key_id is set.
+	CustomerManagedKeyIdentityID *string `json:"customerManagedKeyIdentityId,omitempty" tf:"customer_managed_key_identity_id,omitempty"`
+
+	// A github_configuration block as defined below.
+	GithubConfiguration []GithubConfigurationObservation `json:"githubConfiguration,omitempty" tf:"github_configuration,omitempty"`
+
+	// A list of global_parameter blocks as defined above.
+	GlobalParameter []GlobalParameterObservation `json:"globalParameter,omitempty" tf:"global_parameter,omitempty"`
+
 	// The ID of the Data Factory.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Is Managed Virtual Network enabled?
+	ManagedVirtualNetworkEnabled *bool `json:"managedVirtualNetworkEnabled,omitempty" tf:"managed_virtual_network_enabled,omitempty"`
+
+	// Is the Data Factory visible to the public network? Defaults to true.
+	PublicNetworkEnabled *bool `json:"publicNetworkEnabled,omitempty" tf:"public_network_enabled,omitempty"`
+
+	// Specifies the ID of the purview account resource associated with the Data Factory.
+	PurviewID *string `json:"purviewId,omitempty" tf:"purview_id,omitempty"`
+
+	// The name of the resource group in which to create the Data Factory. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A vsts_configuration block as defined below.
+	VstsConfiguration []VstsConfigurationObservation `json:"vstsConfiguration,omitempty" tf:"vsts_configuration,omitempty"`
 }
 
 type FactoryParameters struct {
@@ -46,8 +78,8 @@ type FactoryParameters struct {
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Is Managed Virtual Network enabled?
 	// +kubebuilder:validation:Optional
@@ -84,6 +116,21 @@ type FactoryParameters struct {
 }
 
 type GithubConfigurationObservation struct {
+
+	// Specifies the GitHub account name.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// Specifies the branch of the repository to get code from.
+	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
+
+	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com. Use https://github.com for open source repositories.
+	GitURL *string `json:"gitUrl,omitempty" tf:"git_url,omitempty"`
+
+	// Specifies the name of the git repository.
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+
+	// Specifies the root folder within the repository. Set to / for the top level.
+	RootFolder *string `json:"rootFolder,omitempty" tf:"root_folder,omitempty"`
 }
 
 type GithubConfigurationParameters struct {
@@ -110,6 +157,15 @@ type GithubConfigurationParameters struct {
 }
 
 type GlobalParameterObservation struct {
+
+	// Specifies the global parameter name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the global parameter type. Possible Values are Array, Bool, Float, Int, Object or String.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Specifies the global parameter value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type GlobalParameterParameters struct {
@@ -129,11 +185,17 @@ type GlobalParameterParameters struct {
 
 type IdentityObservation struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Data Factory.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Data Factory. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -148,6 +210,24 @@ type IdentityParameters struct {
 }
 
 type VstsConfigurationObservation struct {
+
+	// Specifies the VSTS account name.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// Specifies the branch of the repository to get code from.
+	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
+
+	// Specifies the name of the VSTS project.
+	ProjectName *string `json:"projectName,omitempty" tf:"project_name,omitempty"`
+
+	// Specifies the name of the git repository.
+	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+
+	// Specifies the root folder within the repository. Set to / for the top level.
+	RootFolder *string `json:"rootFolder,omitempty" tf:"root_folder,omitempty"`
+
+	// Specifies the Tenant ID associated with the VSTS account.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type VstsConfigurationParameters struct {
@@ -201,8 +281,9 @@ type FactoryStatus struct {
 type Factory struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FactorySpec   `json:"spec"`
-	Status            FactoryStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   FactorySpec   `json:"spec"`
+	Status FactoryStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

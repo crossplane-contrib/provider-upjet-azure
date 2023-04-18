@@ -15,8 +15,35 @@ import (
 
 type GalleryApplicationObservation struct {
 
+	// A description of the Gallery Application.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The end of life date in RFC3339 format of the Gallery Application.
+	EndOfLifeDate *string `json:"endOfLifeDate,omitempty" tf:"end_of_life_date,omitempty"`
+
+	// The End User Licence Agreement of the Gallery Application.
+	Eula *string `json:"eula,omitempty" tf:"eula,omitempty"`
+
+	// The ID of the Shared Image Gallery. Changing this forces a new resource to be created.
+	GalleryID *string `json:"galleryId,omitempty" tf:"gallery_id,omitempty"`
+
 	// The ID of the Gallery Application.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Gallery Application exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The URI containing the Privacy Statement associated with the Gallery Application.
+	PrivacyStatementURI *string `json:"privacyStatementUri,omitempty" tf:"privacy_statement_uri,omitempty"`
+
+	// The URI containing the Release Notes associated with the Gallery Application.
+	ReleaseNoteURI *string `json:"releaseNoteUri,omitempty" tf:"release_note_uri,omitempty"`
+
+	// The type of the Operating System supported for the Gallery Application. Possible values are Linux and Windows. Changing this forces a new resource to be created.
+	SupportedOsType *string `json:"supportedOsType,omitempty" tf:"supported_os_type,omitempty"`
+
+	// A mapping of tags to assign to the Gallery Application.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type GalleryApplicationParameters struct {
@@ -48,8 +75,8 @@ type GalleryApplicationParameters struct {
 	GalleryIDSelector *v1.Selector `json:"galleryIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Gallery Application exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The URI containing the Privacy Statement associated with the Gallery Application.
 	// +kubebuilder:validation:Optional
@@ -60,8 +87,8 @@ type GalleryApplicationParameters struct {
 	ReleaseNoteURI *string `json:"releaseNoteUri,omitempty" tf:"release_note_uri,omitempty"`
 
 	// The type of the Operating System supported for the Gallery Application. Possible values are Linux and Windows. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SupportedOsType *string `json:"supportedOsType" tf:"supported_os_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	SupportedOsType *string `json:"supportedOsType,omitempty" tf:"supported_os_type,omitempty"`
 
 	// A mapping of tags to assign to the Gallery Application.
 	// +kubebuilder:validation:Optional
@@ -92,8 +119,10 @@ type GalleryApplicationStatus struct {
 type GalleryApplication struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GalleryApplicationSpec   `json:"spec"`
-	Status            GalleryApplicationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.supportedOsType)",message="supportedOsType is a required parameter"
+	Spec   GalleryApplicationSpec   `json:"spec"`
+	Status GalleryApplicationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

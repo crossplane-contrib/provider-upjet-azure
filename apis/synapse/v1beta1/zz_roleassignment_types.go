@@ -17,17 +17,29 @@ type RoleAssignmentObservation struct {
 
 	// The Synapse Role Assignment ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Principal (User, Group or Service Principal) to assign the Synapse Role Definition to. Changing this forces a new resource to be created.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Role Name of the Synapse Built-In Role. Changing this forces a new resource to be created.
+	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
+
+	// The Synapse Spark Pool which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
+	SynapseSparkPoolID *string `json:"synapseSparkPoolId,omitempty" tf:"synapse_spark_pool_id,omitempty"`
+
+	// The Synapse Workspace which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
+	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`
 }
 
 type RoleAssignmentParameters struct {
 
 	// The ID of the Principal (User, Group or Service Principal) to assign the Synapse Role Definition to. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	PrincipalID *string `json:"principalId" tf:"principal_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Role Name of the Synapse Built-In Role. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	RoleName *string `json:"roleName" tf:"role_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
 
 	// The Synapse Spark Pool which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -72,8 +84,10 @@ type RoleAssignmentStatus struct {
 type RoleAssignment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RoleAssignmentSpec   `json:"spec"`
-	Status            RoleAssignmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principalId)",message="principalId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.roleName)",message="roleName is a required parameter"
+	Spec   RoleAssignmentSpec   `json:"spec"`
+	Status RoleAssignmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

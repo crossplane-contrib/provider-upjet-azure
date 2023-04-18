@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: securitycenterassessments.security.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -248,9 +252,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - status
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -422,14 +439,48 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: status is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.status)
           status:
             description: SecurityCenterAssessmentStatus defines the observed state
               of SecurityCenterAssessment.
             properties:
               atProvider:
                 properties:
+                  additionalData:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional data to associate with the assessment.
+                    type: object
+                  assessmentPolicyId:
+                    description: The ID of the security Assessment policy to apply
+                      to this resource. Changing this forces a new security Assessment
+                      to be created.
+                    type: string
                   id:
                     description: The ID of the Security Center Assessment.
+                    type: string
+                  status:
+                    description: A status block as defined below.
+                    items:
+                      properties:
+                        cause:
+                          description: Specifies the cause of the assessment status.
+                          type: string
+                        code:
+                          description: Specifies the programmatic code of the assessment
+                            status. Possible values are Healthy, Unhealthy and NotApplicable.
+                          type: string
+                        description:
+                          description: Specifies the human readable description of
+                            the assessment status.
+                          type: string
+                      type: object
+                    type: array
+                  targetResourceId:
+                    description: The ID of the target resource. Changing this forces
+                      a new security Assessment to be created.
                     type: string
                 type: object
               conditions:

@@ -14,6 +14,12 @@ import (
 )
 
 type ContentLinkHashObservation struct {
+
+	// Specifies the hash algorithm used to hash the content.
+	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
+
+	// Specifies the expected hash value of the content.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ContentLinkHashParameters struct {
@@ -28,6 +34,15 @@ type ContentLinkHashParameters struct {
 }
 
 type ContentLinkObservation struct {
+
+	// A hash block as defined below.
+	Hash []ContentLinkHashObservation `json:"hash,omitempty" tf:"hash,omitempty"`
+
+	// The URI of the runbook content.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+
+	// Specifies the version of the content
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ContentLinkParameters struct {
@@ -46,9 +61,22 @@ type ContentLinkParameters struct {
 }
 
 type DraftObservation struct {
+
+	// A publish_content_link block as defined above.
+	ContentLink []ContentLinkObservation `json:"contentLink,omitempty" tf:"content_link,omitempty"`
+
 	CreationTime *string `json:"creationTime,omitempty" tf:"creation_time,omitempty"`
 
+	// Whether the draft in edit mode.
+	EditModeEnabled *bool `json:"editModeEnabled,omitempty" tf:"edit_mode_enabled,omitempty"`
+
 	LastModifiedTime *string `json:"lastModifiedTime,omitempty" tf:"last_modified_time,omitempty"`
+
+	// Specifies the output types of the runbook.
+	OutputTypes []*string `json:"outputTypes,omitempty" tf:"output_types,omitempty"`
+
+	// A list of parameters block as defined below.
+	Parameters []ParametersObservation `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type DraftParameters struct {
@@ -71,6 +99,17 @@ type DraftParameters struct {
 }
 
 type JobScheduleObservation struct {
+
+	// The Automation Runbook ID.
+	JobScheduleID *string `json:"jobScheduleId,omitempty" tf:"job_schedule_id,omitempty"`
+
+	// A list of parameters block as defined below.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	RunOn *string `json:"runOn,omitempty" tf:"run_on,omitempty"`
+
+	// Specifies the name of the Runbook. Changing this forces a new resource to be created.
+	ScheduleName *string `json:"scheduleName,omitempty" tf:"schedule_name,omitempty"`
 }
 
 type JobScheduleParameters struct {
@@ -92,6 +131,21 @@ type JobScheduleParameters struct {
 }
 
 type ParametersObservation struct {
+
+	// Specifies the default value of the parameter.
+	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
+
+	// The name of the parameter.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Whether this parameter is mandatory.
+	Mandatory *bool `json:"mandatory,omitempty" tf:"mandatory,omitempty"`
+
+	// Specifies the position of the parameter.
+	Position *float64 `json:"position,omitempty" tf:"position,omitempty"`
+
+	// Specifies the type of this parameter.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ParametersParameters struct {
@@ -118,6 +172,12 @@ type ParametersParameters struct {
 }
 
 type PublishContentLinkHashObservation struct {
+
+	// Specifies the hash algorithm used to hash the content.
+	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
+
+	// Specifies the expected hash value of the content.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type PublishContentLinkHashParameters struct {
@@ -132,6 +192,15 @@ type PublishContentLinkHashParameters struct {
 }
 
 type PublishContentLinkObservation struct {
+
+	// A hash block as defined below.
+	Hash []PublishContentLinkHashObservation `json:"hash,omitempty" tf:"hash,omitempty"`
+
+	// The URI of the runbook content.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+
+	// Specifies the version of the content
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type PublishContentLinkParameters struct {
@@ -151,12 +220,49 @@ type PublishContentLinkParameters struct {
 
 type RunBookObservation struct {
 
+	// The name of the automation account in which the Runbook is created. Changing this forces a new resource to be created.
+	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
+
+	// The desired content of the runbook.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// A description for this credential.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// A draft block as defined below .
-	// +kubebuilder:validation:Optional
 	Draft []DraftObservation `json:"draft,omitempty" tf:"draft,omitempty"`
 
 	// The Automation Runbook ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	JobSchedule []JobScheduleObservation `json:"jobSchedule,omitempty" tf:"job_schedule,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the activity-level tracing options of the runbook, available only for Graphical runbooks. Possible values are 0 for None, 9 for Basic, and 15 for Detailed. Must turn on Verbose logging in order to see the tracing.
+	LogActivityTraceLevel *float64 `json:"logActivityTraceLevel,omitempty" tf:"log_activity_trace_level,omitempty"`
+
+	// Progress log option.
+	LogProgress *bool `json:"logProgress,omitempty" tf:"log_progress,omitempty"`
+
+	// Verbose log option.
+	LogVerbose *bool `json:"logVerbose,omitempty" tf:"log_verbose,omitempty"`
+
+	// Specifies the name of the Runbook. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The published runbook content link.
+	PublishContentLink []PublishContentLinkObservation `json:"publishContentLink,omitempty" tf:"publish_content_link,omitempty"`
+
+	// The name of the resource group in which the Runbook is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The type of the runbook - can be either Graph, GraphPowerShell, GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, Python3, Python2 or Script. Changing this forces a new resource to be created.
+	RunBookType *string `json:"runbookType,omitempty" tf:"runbook_type,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type RunBookParameters struct {
@@ -190,24 +296,24 @@ type RunBookParameters struct {
 	JobSchedule []JobScheduleParameters `json:"jobSchedule,omitempty" tf:"job_schedule,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the activity-level tracing options of the runbook, available only for Graphical runbooks. Possible values are 0 for None, 9 for Basic, and 15 for Detailed. Must turn on Verbose logging in order to see the tracing.
 	// +kubebuilder:validation:Optional
 	LogActivityTraceLevel *float64 `json:"logActivityTraceLevel,omitempty" tf:"log_activity_trace_level,omitempty"`
 
 	// Progress log option.
-	// +kubebuilder:validation:Required
-	LogProgress *bool `json:"logProgress" tf:"log_progress,omitempty"`
+	// +kubebuilder:validation:Optional
+	LogProgress *bool `json:"logProgress,omitempty" tf:"log_progress,omitempty"`
 
 	// Verbose log option.
-	// +kubebuilder:validation:Required
-	LogVerbose *bool `json:"logVerbose" tf:"log_verbose,omitempty"`
+	// +kubebuilder:validation:Optional
+	LogVerbose *bool `json:"logVerbose,omitempty" tf:"log_verbose,omitempty"`
 
 	// Specifies the name of the Runbook. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The published runbook content link.
 	// +kubebuilder:validation:Optional
@@ -227,8 +333,8 @@ type RunBookParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The type of the runbook - can be either Graph, GraphPowerShell, GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, Python3, Python2 or Script. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	RunBookType *string `json:"runbookType" tf:"runbook_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	RunBookType *string `json:"runbookType,omitempty" tf:"runbook_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -259,8 +365,13 @@ type RunBookStatus struct {
 type RunBook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RunBookSpec   `json:"spec"`
-	Status            RunBookStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.logProgress)",message="logProgress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.logVerbose)",message="logVerbose is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.runbookType)",message="runbookType is a required parameter"
+	Spec   RunBookSpec   `json:"spec"`
+	Status RunBookStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

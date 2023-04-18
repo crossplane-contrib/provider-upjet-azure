@@ -14,6 +14,24 @@ import (
 )
 
 type ConfigServerGitSettingObservation struct {
+
+	// A http_basic_auth block as defined below.
+	HTTPBasicAuth []HTTPBasicAuthObservation `json:"httpBasicAuth,omitempty" tf:"http_basic_auth,omitempty"`
+
+	// The default label of the Git repository, should be the branch name, tag name, or commit-id of the repository.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// One or more repository blocks as defined below.
+	Repository []ConfigServerGitSettingRepositoryObservation `json:"repository,omitempty" tf:"repository,omitempty"`
+
+	// A ssh_auth block as defined below.
+	SSHAuth []ConfigServerGitSettingSSHAuthObservation `json:"sshAuth,omitempty" tf:"ssh_auth,omitempty"`
+
+	// An array of strings used to search subdirectories of the Git repository.
+	SearchPaths []*string `json:"searchPaths,omitempty" tf:"search_paths,omitempty"`
+
+	// The URI of the default Git repository used as the Config Server back end, should be started with http://, https://, git@, or ssh://.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ConfigServerGitSettingParameters struct {
@@ -44,6 +62,27 @@ type ConfigServerGitSettingParameters struct {
 }
 
 type ConfigServerGitSettingRepositoryObservation struct {
+
+	// A http_basic_auth block as defined below.
+	HTTPBasicAuth []RepositoryHTTPBasicAuthObservation `json:"httpBasicAuth,omitempty" tf:"http_basic_auth,omitempty"`
+
+	// The default label of the Git repository, should be the branch name, tag name, or commit-id of the repository.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// A name to identify on the Git repository, required only if repos exists.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// An array of strings used to match an application name. For each pattern, use the {application}/{profile} format with wildcards.
+	Pattern []*string `json:"pattern,omitempty" tf:"pattern,omitempty"`
+
+	// A ssh_auth block as defined below.
+	SSHAuth []RepositorySSHAuthObservation `json:"sshAuth,omitempty" tf:"ssh_auth,omitempty"`
+
+	// An array of strings used to search subdirectories of the Git repository.
+	SearchPaths []*string `json:"searchPaths,omitempty" tf:"search_paths,omitempty"`
+
+	// The URI of the Git repository that's used as the Config Server back end should be started with http://, https://, git@, or ssh://.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ConfigServerGitSettingRepositoryParameters struct {
@@ -78,6 +117,12 @@ type ConfigServerGitSettingRepositoryParameters struct {
 }
 
 type ConfigServerGitSettingSSHAuthObservation struct {
+
+	// The host key algorithm, should be ssh-dss, ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521. Required only if host-key exists.
+	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
+
+	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
+	StrictHostKeyCheckingEnabled *bool `json:"strictHostKeyCheckingEnabled,omitempty" tf:"strict_host_key_checking_enabled,omitempty"`
 }
 
 type ConfigServerGitSettingSSHAuthParameters struct {
@@ -100,6 +145,9 @@ type ConfigServerGitSettingSSHAuthParameters struct {
 }
 
 type HTTPBasicAuthObservation struct {
+
+	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type HTTPBasicAuthParameters struct {
@@ -114,6 +162,24 @@ type HTTPBasicAuthParameters struct {
 }
 
 type NetworkObservation struct {
+
+	// Specifies the Name of the resource group containing network resources of Azure Spring Cloud Apps. Changing this forces a new resource to be created.
+	AppNetworkResourceGroup *string `json:"appNetworkResourceGroup,omitempty" tf:"app_network_resource_group,omitempty"`
+
+	// Specifies the ID of the Subnet which should host the Spring Boot Applications deployed in this Spring Cloud Service. Changing this forces a new resource to be created.
+	AppSubnetID *string `json:"appSubnetId,omitempty" tf:"app_subnet_id,omitempty"`
+
+	// A list of (at least 3) CIDR ranges (at least /16) which are used to host the Spring Cloud infrastructure, which must not overlap with any existing CIDR ranges in the Subnet. Changing this forces a new resource to be created.
+	CidrRanges []*string `json:"cidrRanges,omitempty" tf:"cidr_ranges,omitempty"`
+
+	// Ingress read time out in seconds.
+	ReadTimeoutSeconds *float64 `json:"readTimeoutSeconds,omitempty" tf:"read_timeout_seconds,omitempty"`
+
+	// Specifies the Name of the resource group containing network resources of Azure Spring Cloud Service Runtime. Changing this forces a new resource to be created.
+	ServiceRuntimeNetworkResourceGroup *string `json:"serviceRuntimeNetworkResourceGroup,omitempty" tf:"service_runtime_network_resource_group,omitempty"`
+
+	// Specifies the ID of the Subnet where the Service Runtime components of the Spring Cloud Service will exist. Changing this forces a new resource to be created.
+	ServiceRuntimeSubnetID *string `json:"serviceRuntimeSubnetId,omitempty" tf:"service_runtime_subnet_id,omitempty"`
 }
 
 type NetworkParameters struct {
@@ -164,6 +230,9 @@ type NetworkParameters struct {
 }
 
 type RepositoryHTTPBasicAuthObservation struct {
+
+	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type RepositoryHTTPBasicAuthParameters struct {
@@ -178,6 +247,12 @@ type RepositoryHTTPBasicAuthParameters struct {
 }
 
 type RepositorySSHAuthObservation struct {
+
+	// The host key algorithm, should be ssh-dss, ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521. Required only if host-key exists.
+	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
+
+	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
+	StrictHostKeyCheckingEnabled *bool `json:"strictHostKeyCheckingEnabled,omitempty" tf:"strict_host_key_checking_enabled,omitempty"`
 }
 
 type RepositorySSHAuthParameters struct {
@@ -222,8 +297,23 @@ type RequiredNetworkTrafficRulesParameters struct {
 
 type SpringCloudServiceObservation struct {
 
+	// Specifies the size for this Spring Cloud Service's default build agent pool. Possible values are S1, S2, S3, S4 and S5. This field is applicable only for Spring Cloud Service with enterprise tier.
+	BuildAgentPoolSize *string `json:"buildAgentPoolSize,omitempty" tf:"build_agent_pool_size,omitempty"`
+
+	// A config_server_git_setting block as defined below. This field is applicable only for Spring Cloud Service with basic and standard tier.
+	ConfigServerGitSetting []ConfigServerGitSettingObservation `json:"configServerGitSetting,omitempty" tf:"config_server_git_setting,omitempty"`
+
 	// The ID of the Spring Cloud Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Should the log stream in vnet injection instance could be accessed from Internet?
+	LogStreamPublicEndpointEnabled *bool `json:"logStreamPublicEndpointEnabled,omitempty" tf:"log_stream_public_endpoint_enabled,omitempty"`
+
+	// A network block as defined below. Changing this forces a new resource to be created.
+	Network []NetworkObservation `json:"network,omitempty" tf:"network,omitempty"`
 
 	// A list of the outbound Public IP Addresses used by this Spring Cloud Service.
 	OutboundPublicIPAddresses []*string `json:"outboundPublicIpAddresses,omitempty" tf:"outbound_public_ip_addresses,omitempty"`
@@ -231,8 +321,26 @@ type SpringCloudServiceObservation struct {
 	// A list of required_network_traffic_rules blocks as defined below.
 	RequiredNetworkTrafficRules []RequiredNetworkTrafficRulesObservation `json:"requiredNetworkTrafficRules,omitempty" tf:"required_network_traffic_rules,omitempty"`
 
+	// Specifies The name of the resource group in which to create the Spring Cloud Service. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Whether enable the default Service Registry. This field is applicable only for Spring Cloud Service with enterprise tier.
+	ServiceRegistryEnabled *bool `json:"serviceRegistryEnabled,omitempty" tf:"service_registry_enabled,omitempty"`
+
 	// The ID of the Spring Cloud Service Registry.
 	ServiceRegistryID *string `json:"serviceRegistryId,omitempty" tf:"service_registry_id,omitempty"`
+
+	// Specifies the SKU Name for this Spring Cloud Service. Possible values are B0, S0 and E0. Defaults to S0. Changing this forces a new resource to be created.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A trace block as defined below.
+	Trace []TraceObservation `json:"trace,omitempty" tf:"trace,omitempty"`
+
+	// Whether zone redundancy is enabled for this Spring Cloud Service. Defaults to false.
+	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
 }
 
 type SpringCloudServiceParameters struct {
@@ -246,8 +354,8 @@ type SpringCloudServiceParameters struct {
 	ConfigServerGitSetting []ConfigServerGitSettingParameters `json:"configServerGitSetting,omitempty" tf:"config_server_git_setting,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Should the log stream in vnet injection instance could be accessed from Internet?
 	// +kubebuilder:validation:Optional
@@ -292,6 +400,12 @@ type SpringCloudServiceParameters struct {
 }
 
 type TraceObservation struct {
+
+	// The connection string used for Application Insights.
+	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+
+	// The sampling rate of Application Insights Agent. Must be between 0.0 and 100.0. Defaults to 10.0.
+	SampleRate *float64 `json:"sampleRate,omitempty" tf:"sample_rate,omitempty"`
 }
 
 type TraceParameters struct {
@@ -339,8 +453,9 @@ type SpringCloudServiceStatus struct {
 type SpringCloudService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpringCloudServiceSpec   `json:"spec"`
-	Status            SpringCloudServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   SpringCloudServiceSpec   `json:"spec"`
+	Status SpringCloudServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,11 +15,26 @@ import (
 
 type DataSetBlobStorageObservation struct {
 
+	// The name of the storage account container to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
+	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+
+	// The ID of the Data Share in which this Data Share Blob Storage Dataset should be created. Changing this forces a new Data Share Blob Storage Dataset to be created.
+	DataShareID *string `json:"dataShareId,omitempty" tf:"data_share_id,omitempty"`
+
 	// The name of the Data Share Dataset.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// The path of the file in the storage container to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
+	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
+
+	// The path of the folder in the storage container to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
+	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
+
 	// The ID of the Data Share Blob Storage Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A storage_account block as defined below. Changing this forces a new resource to be created.
+	StorageAccount []StorageAccountObservation `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
 }
 
 type DataSetBlobStorageParameters struct {
@@ -60,11 +75,20 @@ type DataSetBlobStorageParameters struct {
 	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
 
 	// A storage_account block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	StorageAccount []StorageAccountParameters `json:"storageAccount" tf:"storage_account,omitempty"`
+	// +kubebuilder:validation:Optional
+	StorageAccount []StorageAccountParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
 }
 
 type StorageAccountObservation struct {
+
+	// The name of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The resource group name of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The subscription id of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type StorageAccountParameters struct {
@@ -124,8 +148,9 @@ type DataSetBlobStorageStatus struct {
 type DataSetBlobStorage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              DataSetBlobStorageSpec   `json:"spec"`
-	Status            DataSetBlobStorageStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageAccount)",message="storageAccount is a required parameter"
+	Spec   DataSetBlobStorageSpec   `json:"spec"`
+	Status DataSetBlobStorageStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

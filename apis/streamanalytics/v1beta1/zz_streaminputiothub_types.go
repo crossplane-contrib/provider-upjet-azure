@@ -15,15 +15,39 @@ import (
 
 type StreamInputIOTHubObservation struct {
 
+	// The IoT Hub endpoint to connect to (ie. messages/events, messages/operationsMonitoringEvents, etc.).
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// The name of an Event Hub Consumer Group that should be used to read events from the Event Hub. Specifying distinct consumer group names for multiple inputs allows each of those inputs to receive the same events from the Event Hub.
+	EventHubConsumerGroupName *string `json:"eventhubConsumerGroupName,omitempty" tf:"eventhub_consumer_group_name,omitempty"`
+
 	// The ID of the Stream Analytics Stream Input IoTHub.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name or the URI of the IoT Hub.
+	IOTHubNamespace *string `json:"iothubNamespace,omitempty" tf:"iothub_namespace,omitempty"`
+
+	// The name of the Stream Input IoTHub. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A serialization block as defined below.
+	Serialization []StreamInputIOTHubSerializationObservation `json:"serialization,omitempty" tf:"serialization,omitempty"`
+
+	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
+	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
+
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
 }
 
 type StreamInputIOTHubParameters struct {
 
 	// The IoT Hub endpoint to connect to (ie. messages/events, messages/operationsMonitoringEvents, etc.).
-	// +kubebuilder:validation:Required
-	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
+	// +kubebuilder:validation:Optional
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// The name of an Event Hub Consumer Group that should be used to read events from the Event Hub. Specifying distinct consumer group names for multiple inputs allows each of those inputs to receive the same events from the Event Hub.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.ConsumerGroup
@@ -52,8 +76,8 @@ type StreamInputIOTHubParameters struct {
 	IOTHubNamespaceSelector *v1.Selector `json:"iothubNamespaceSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Input IoTHub. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -69,16 +93,16 @@ type StreamInputIOTHubParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
-	// +kubebuilder:validation:Required
-	Serialization []StreamInputIOTHubSerializationParameters `json:"serialization" tf:"serialization,omitempty"`
+	// +kubebuilder:validation:Optional
+	Serialization []StreamInputIOTHubSerializationParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The shared access policy key for the specified shared access policy. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	SharedAccessPolicyKeySecretRef v1.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
-	// +kubebuilder:validation:Required
-	SharedAccessPolicyName *string `json:"sharedAccessPolicyName" tf:"shared_access_policy_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Job
@@ -95,6 +119,15 @@ type StreamInputIOTHubParameters struct {
 }
 
 type StreamInputIOTHubSerializationObservation struct {
+
+	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
+	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
+
+	// The serialization format used for incoming data streams. Possible values are Avro, Csv and Json.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type StreamInputIOTHubSerializationParameters struct {
@@ -136,8 +169,13 @@ type StreamInputIOTHubStatus struct {
 type StreamInputIOTHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StreamInputIOTHubSpec   `json:"spec"`
-	Status            StreamInputIOTHubStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endpoint)",message="endpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serialization)",message="serialization is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sharedAccessPolicyKeySecretRef)",message="sharedAccessPolicyKeySecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sharedAccessPolicyName)",message="sharedAccessPolicyName is a required parameter"
+	Spec   StreamInputIOTHubSpec   `json:"spec"`
+	Status StreamInputIOTHubStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

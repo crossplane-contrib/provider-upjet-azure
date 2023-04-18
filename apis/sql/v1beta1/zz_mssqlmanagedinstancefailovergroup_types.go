@@ -18,8 +18,23 @@ type MSSQLManagedInstanceFailoverGroupObservation struct {
 	// The ID of the Managed Instance Failover Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Azure Region where the Managed Instance Failover Group should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the Azure SQL Managed Instance which will be replicated using a Managed Instance Failover Group. Changing this forces a new resource to be created.
+	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
+
+	// The ID of the Azure SQL Managed Instance which will be replicated to. Changing this forces a new resource to be created.
+	PartnerManagedInstanceID *string `json:"partnerManagedInstanceId,omitempty" tf:"partner_managed_instance_id,omitempty"`
+
 	// A partner_region block as defined below.
 	PartnerRegion []PartnerRegionObservation `json:"partnerRegion,omitempty" tf:"partner_region,omitempty"`
+
+	// A read_write_endpoint_failover_policy block as defined below.
+	ReadWriteEndpointFailoverPolicy []MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyObservation `json:"readWriteEndpointFailoverPolicy,omitempty" tf:"read_write_endpoint_failover_policy,omitempty"`
+
+	// Failover policy for the read-only endpoint. Defaults to true.
+	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
 
 	// The local replication role of the Managed Instance Failover Group.
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
@@ -60,8 +75,8 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 	PartnerManagedInstanceIDSelector *v1.Selector `json:"partnerManagedInstanceIdSelector,omitempty" tf:"-"`
 
 	// A read_write_endpoint_failover_policy block as defined below.
-	// +kubebuilder:validation:Required
-	ReadWriteEndpointFailoverPolicy []MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyParameters `json:"readWriteEndpointFailoverPolicy" tf:"read_write_endpoint_failover_policy,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReadWriteEndpointFailoverPolicy []MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyParameters `json:"readWriteEndpointFailoverPolicy,omitempty" tf:"read_write_endpoint_failover_policy,omitempty"`
 
 	// Failover policy for the read-only endpoint. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -69,6 +84,12 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 }
 
 type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyObservation struct {
+
+	// Applies only if mode is Automatic. The grace period in minutes before failover with data loss is attempted.
+	GraceMinutes *float64 `json:"graceMinutes,omitempty" tf:"grace_minutes,omitempty"`
+
+	// The failover mode. Possible values are Automatic or Manual.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
 type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyParameters struct {
@@ -118,8 +139,9 @@ type MSSQLManagedInstanceFailoverGroupStatus struct {
 type MSSQLManagedInstanceFailoverGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MSSQLManagedInstanceFailoverGroupSpec   `json:"spec"`
-	Status            MSSQLManagedInstanceFailoverGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.readWriteEndpointFailoverPolicy)",message="readWriteEndpointFailoverPolicy is a required parameter"
+	Spec   MSSQLManagedInstanceFailoverGroupSpec   `json:"spec"`
+	Status MSSQLManagedInstanceFailoverGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

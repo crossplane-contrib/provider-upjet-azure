@@ -15,8 +15,17 @@ import (
 
 type MSSQLServerTransparentDataEncryptionObservation struct {
 
+	// When enabled, the server will continuously check the key vault for any new versions of the key being used as the TDE protector. If a new version of the key is detected, the TDE protector on the server will be automatically rotated to the latest key version within 60 minutes.
+	AutoRotationEnabled *bool `json:"autoRotationEnabled,omitempty" tf:"auto_rotation_enabled,omitempty"`
+
 	// The ID of the MSSQL encryption protector
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// To use customer managed keys from Azure Key Vault, provide the AKV Key ID. To use service managed keys, omit this field.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 }
 
 type MSSQLServerTransparentDataEncryptionParameters struct {

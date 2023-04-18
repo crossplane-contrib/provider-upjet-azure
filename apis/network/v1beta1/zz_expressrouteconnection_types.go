@@ -15,8 +15,29 @@ import (
 
 type ExpressRouteConnectionObservation struct {
 
+	// The authorization key to establish the Express Route Connection.
+	AuthorizationKey *string `json:"authorizationKey,omitempty" tf:"authorization_key,omitempty"`
+
+	// Is Internet security enabled for this Express Route Connection?
+	EnableInternetSecurity *bool `json:"enableInternetSecurity,omitempty" tf:"enable_internet_security,omitempty"`
+
+	// The ID of the Express Route Circuit Peering that this Express Route Connection connects with. Changing this forces a new resource to be created.
+	ExpressRouteCircuitPeeringID *string `json:"expressRouteCircuitPeeringId,omitempty" tf:"express_route_circuit_peering_id,omitempty"`
+
+	// Specified whether Fast Path is enabled for Virtual Wan Firewall Hub. Defaults to false.
+	ExpressRouteGatewayBypassEnabled *bool `json:"expressRouteGatewayBypassEnabled,omitempty" tf:"express_route_gateway_bypass_enabled,omitempty"`
+
+	// The ID of the Express Route Gateway that this Express Route Connection connects with. Changing this forces a new resource to be created.
+	ExpressRouteGatewayID *string `json:"expressRouteGatewayId,omitempty" tf:"express_route_gateway_id,omitempty"`
+
 	// The ID of the Express Route Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A routing block as defined below.
+	Routing []RoutingObservation `json:"routing,omitempty" tf:"routing,omitempty"`
+
+	// The routing weight associated to the Express Route Connection. Possible value is between 0 and 32000. Defaults to 0.
+	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
 }
 
 type ExpressRouteConnectionParameters struct {
@@ -71,6 +92,12 @@ type ExpressRouteConnectionParameters struct {
 }
 
 type PropagatedRouteTableObservation struct {
+
+	// The list of labels to logically group route tables.
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// A list of IDs of the Virtual Hub Route Table to propagate routes from Express Route Connection to the route table.
+	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 }
 
 type PropagatedRouteTableParameters struct {
@@ -85,6 +112,18 @@ type PropagatedRouteTableParameters struct {
 }
 
 type RoutingObservation struct {
+
+	// The ID of the Virtual Hub Route Table associated with this Express Route Connection.
+	AssociatedRouteTableID *string `json:"associatedRouteTableId,omitempty" tf:"associated_route_table_id,omitempty"`
+
+	// The ID of the Route Map associated with this Express Route Connection for inbound routes.
+	InboundRouteMapID *string `json:"inboundRouteMapId,omitempty" tf:"inbound_route_map_id,omitempty"`
+
+	// The ID of the Route Map associated with this Express Route Connection for outbound routes.
+	OutboundRouteMapID *string `json:"outboundRouteMapId,omitempty" tf:"outbound_route_map_id,omitempty"`
+
+	// A propagated_route_table block as defined below.
+	PropagatedRouteTable []PropagatedRouteTableObservation `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
 }
 
 type RoutingParameters struct {

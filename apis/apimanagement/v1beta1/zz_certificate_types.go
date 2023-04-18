@@ -15,11 +15,23 @@ import (
 
 type CertificateObservation_2 struct {
 
+	// The Name of the API Management Service where this Service should be created. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
 	// The Expiration Date of this Certificate, formatted as an RFC3339 string.
 	Expiration *string `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
 	// The ID of the API Management Certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Client ID of the User Assigned Managed Identity to use for retrieving certificate.
+	KeyVaultIdentityClientID *string `json:"keyVaultIdentityClientId,omitempty" tf:"key_vault_identity_client_id,omitempty"`
+
+	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+
+	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// The Subject of this Certificate.
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`

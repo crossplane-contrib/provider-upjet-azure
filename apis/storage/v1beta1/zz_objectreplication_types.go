@@ -18,15 +18,20 @@ type ObjectReplicationObservation struct {
 	// The ID of the Object Replication in the destination storage account.
 	DestinationObjectReplicationID *string `json:"destinationObjectReplicationId,omitempty" tf:"destination_object_replication_id,omitempty"`
 
+	// The ID of the destination storage account. Changing this forces a new Storage Object Replication to be created.
+	DestinationStorageAccountID *string `json:"destinationStorageAccountId,omitempty" tf:"destination_storage_account_id,omitempty"`
+
 	// The ID of the Storage Object Replication in the destination storage account. It's composed as format source_object_replication_id;destination_object_replication_id.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// One or more rules blocks as defined below.
-	// +kubebuilder:validation:Required
 	Rules []ObjectReplicationRulesObservation `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// The ID of the Object Replication in the source storage account.
 	SourceObjectReplicationID *string `json:"sourceObjectReplicationId,omitempty" tf:"source_object_replication_id,omitempty"`
+
+	// The ID of the source storage account. Changing this forces a new Storage Object Replication to be created.
+	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`
 }
 
 type ObjectReplicationParameters struct {
@@ -46,8 +51,8 @@ type ObjectReplicationParameters struct {
 	DestinationStorageAccountIDSelector *v1.Selector `json:"destinationStorageAccountIdSelector,omitempty" tf:"-"`
 
 	// One or more rules blocks as defined below.
-	// +kubebuilder:validation:Required
-	Rules []ObjectReplicationRulesParameters `json:"rules" tf:"rules,omitempty"`
+	// +kubebuilder:validation:Optional
+	Rules []ObjectReplicationRulesParameters `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// The ID of the source storage account. Changing this forces a new Storage Object Replication to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -65,7 +70,20 @@ type ObjectReplicationParameters struct {
 }
 
 type ObjectReplicationRulesObservation struct {
+
+	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z.
+	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
+
+	// The destination storage container name. Changing this forces a new Storage Object Replication to be created.
+	DestinationContainerName *string `json:"destinationContainerName,omitempty" tf:"destination_container_name,omitempty"`
+
+	// Specifies a list of filters prefixes, the blobs whose names begin with which will be replicated.
+	FilterOutBlobsWithPrefix []*string `json:"filterOutBlobsWithPrefix,omitempty" tf:"filter_out_blobs_with_prefix,omitempty"`
+
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The source storage container name. Changing this forces a new Storage Object Replication to be created.
+	SourceContainerName *string `json:"sourceContainerName,omitempty" tf:"source_container_name,omitempty"`
 }
 
 type ObjectReplicationRulesParameters struct {
@@ -129,8 +147,9 @@ type ObjectReplicationStatus struct {
 type ObjectReplication struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ObjectReplicationSpec   `json:"spec"`
-	Status            ObjectReplicationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rules)",message="rules is a required parameter"
+	Spec   ObjectReplicationSpec   `json:"spec"`
+	Status ObjectReplicationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

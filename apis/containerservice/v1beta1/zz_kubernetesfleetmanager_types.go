@@ -14,6 +14,8 @@ import (
 )
 
 type HubProfileObservation struct {
+	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
+
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
 	KubernetesVersion *string `json:"kubernetesVersion,omitempty" tf:"kubernetes_version,omitempty"`
@@ -28,11 +30,19 @@ type HubProfileParameters struct {
 type KubernetesFleetManagerObservation struct {
 
 	// A hub_profile block as defined below. The FleetHubProfile configures the Fleet's hub. Changing this forces a new Kubernetes Fleet Manager to be created.
-	// +kubebuilder:validation:Optional
 	HubProfile []HubProfileObservation `json:"hubProfile,omitempty" tf:"hub_profile,omitempty"`
 
 	// The ID of the Kubernetes Fleet Manager.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Kubernetes Fleet Manager should exist. Changing this forces a new Kubernetes Fleet Manager to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the Resource Group within which this Kubernetes Fleet Manager should exist. Changing this forces a new Kubernetes Fleet Manager to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Kubernetes Fleet Manager.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type KubernetesFleetManagerParameters struct {
@@ -42,8 +52,8 @@ type KubernetesFleetManagerParameters struct {
 	HubProfile []HubProfileParameters `json:"hubProfile,omitempty" tf:"hub_profile,omitempty"`
 
 	// The Azure Region where the Kubernetes Fleet Manager should exist. Changing this forces a new Kubernetes Fleet Manager to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group within which this Kubernetes Fleet Manager should exist. Changing this forces a new Kubernetes Fleet Manager to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -87,8 +97,9 @@ type KubernetesFleetManagerStatus struct {
 type KubernetesFleetManager struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              KubernetesFleetManagerSpec   `json:"spec"`
-	Status            KubernetesFleetManagerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   KubernetesFleetManagerSpec   `json:"spec"`
+	Status KubernetesFleetManagerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

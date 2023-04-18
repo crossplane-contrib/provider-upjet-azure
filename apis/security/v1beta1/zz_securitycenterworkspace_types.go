@@ -17,13 +17,19 @@ type SecurityCenterWorkspaceObservation struct {
 
 	// The Security Center Workspace ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The scope of VMs to send their security data to the desired workspace, unless overridden by a setting with more specific scope.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// The ID of the Log Analytics Workspace to save the data in.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type SecurityCenterWorkspaceParameters struct {
 
 	// The scope of VMs to send their security data to the desired workspace, unless overridden by a setting with more specific scope.
-	// +kubebuilder:validation:Required
-	Scope *string `json:"scope" tf:"scope,omitempty"`
+	// +kubebuilder:validation:Optional
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// The ID of the Log Analytics Workspace to save the data in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
@@ -64,8 +70,9 @@ type SecurityCenterWorkspaceStatus struct {
 type SecurityCenterWorkspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityCenterWorkspaceSpec   `json:"spec"`
-	Status            SecurityCenterWorkspaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scope)",message="scope is a required parameter"
+	Spec   SecurityCenterWorkspaceSpec   `json:"spec"`
+	Status SecurityCenterWorkspaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

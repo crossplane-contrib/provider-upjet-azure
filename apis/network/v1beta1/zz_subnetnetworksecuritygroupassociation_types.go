@@ -17,6 +17,12 @@ type SubnetNetworkSecurityGroupAssociationObservation struct {
 
 	// The ID of the Subnet.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Network Security Group which should be associated with the Subnet. Changing this forces a new resource to be created.
+	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
+
+	// The ID of the Subnet. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type SubnetNetworkSecurityGroupAssociationParameters struct {

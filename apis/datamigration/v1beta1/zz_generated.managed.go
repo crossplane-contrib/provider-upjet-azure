@@ -17,6 +17,11 @@ func (mg *DatabaseMigrationProject) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this DatabaseMigrationProject.
+func (mg *DatabaseMigrationProject) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this DatabaseMigrationProject.
 func (mg *DatabaseMigrationProject) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *DatabaseMigrationProject) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this DatabaseMigrationProject.
 func (mg *DatabaseMigrationProject) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this DatabaseMigrationProject.
+func (mg *DatabaseMigrationProject) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this DatabaseMigrationProject.
@@ -83,6 +93,11 @@ func (mg *DatabaseMigrationService) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this DatabaseMigrationService.
+func (mg *DatabaseMigrationService) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this DatabaseMigrationService.
 func (mg *DatabaseMigrationService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *DatabaseMigrationService) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this DatabaseMigrationService.
 func (mg *DatabaseMigrationService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this DatabaseMigrationService.
+func (mg *DatabaseMigrationService) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this DatabaseMigrationService.

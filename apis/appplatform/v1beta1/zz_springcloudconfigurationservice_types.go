@@ -14,6 +14,33 @@ import (
 )
 
 type RepositoryObservation struct {
+
+	// Specifies the SSH public key of git repository.
+	HostKey *string `json:"hostKey,omitempty" tf:"host_key,omitempty"`
+
+	// Specifies the SSH key algorithm of git repository.
+	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
+
+	// Specifies the label of the repository.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Specifies the name which should be used for this repository.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the collection of patterns of the repository.
+	Patterns []*string `json:"patterns,omitempty" tf:"patterns,omitempty"`
+
+	// Specifies a list of searching path of the repository
+	SearchPaths []*string `json:"searchPaths,omitempty" tf:"search_paths,omitempty"`
+
+	// Specifies whether enable the strict host key checking.
+	StrictHostKeyChecking *bool `json:"strictHostKeyChecking,omitempty" tf:"strict_host_key_checking,omitempty"`
+
+	// Specifies the URI of the repository.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+
+	// Specifies the username of git repository basic auth.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type RepositoryParameters struct {
@@ -67,6 +94,12 @@ type SpringCloudConfigurationServiceObservation struct {
 
 	// The ID of the Spring Cloud Configuration Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more repository blocks as defined below.
+	Repository []RepositoryObservation `json:"repository,omitempty" tf:"repository,omitempty"`
+
+	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Configuration Service to be created.
+	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`
 }
 
 type SpringCloudConfigurationServiceParameters struct {

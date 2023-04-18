@@ -15,8 +15,17 @@ import (
 
 type FirewallIPConfigurationObservation struct {
 
+	// Specifies the name of the IP Configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The Private IP address of the Azure Firewall.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The ID of the Public IP Address associated with the firewall.
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Reference to the subnet associated with the IP Configuration. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type FirewallIPConfigurationParameters struct {
@@ -56,20 +65,47 @@ type FirewallIPConfigurationParameters struct {
 
 type FirewallObservation struct {
 
+	// A list of DNS servers that the Azure Firewall will direct DNS traffic to the for name resolution.
+	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
+
+	// The ID of the Firewall Policy applied to this Firewall.
+	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
+
 	// The ID of the Azure Firewall.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An ip_configuration block as documented below.
-	// +kubebuilder:validation:Optional
 	IPConfiguration []FirewallIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// A management_ip_configuration block as documented below, which allows force-tunnelling of traffic to be performed by the firewall. Adding or removing this block or changing the subnet_id in an existing block forces a new resource to be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	ManagementIPConfiguration []ManagementIPConfigurationObservation `json:"managementIpConfiguration,omitempty" tf:"management_ip_configuration,omitempty"`
 
+	// A list of SNAT private CIDR IP ranges, or the special string IANAPrivateRanges, which indicates Azure Firewall does not SNAT when the destination IP address is a private range per IANA RFC 1918.
+	PrivateIPRanges []*string `json:"privateIpRanges,omitempty" tf:"private_ip_ranges,omitempty"`
+
+	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// SKU name of the Firewall. Possible values are AZFW_Hub and AZFW_VNet. Changing this forces a new resource to be created.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// SKU tier of the Firewall. Possible values are Premium, Standard and Basic.
+	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The operation mode for threat intelligence-based filtering. Possible values are: Off, Alert and Deny. Defaults to Alert.
+	ThreatIntelMode *string `json:"threatIntelMode,omitempty" tf:"threat_intel_mode,omitempty"`
+
 	// A virtual_hub block as documented below.
-	// +kubebuilder:validation:Optional
 	VirtualHub []VirtualHubObservation `json:"virtualHub,omitempty" tf:"virtual_hub,omitempty"`
+
+	// Specifies a list of Availability Zones in which this Azure Firewall should be located. Changing this forces a new Azure Firewall to be created.
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type FirewallParameters struct {
@@ -87,8 +123,8 @@ type FirewallParameters struct {
 	IPConfiguration []FirewallIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A management_ip_configuration block as documented below, which allows force-tunnelling of traffic to be performed by the firewall. Adding or removing this block or changing the subnet_id in an existing block forces a new resource to be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -112,12 +148,12 @@ type FirewallParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// SKU name of the Firewall. Possible values are AZFW_Hub and AZFW_VNet. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// SKU tier of the Firewall. Possible values are Premium, Standard and Basic.
-	// +kubebuilder:validation:Required
-	SkuTier *string `json:"skuTier" tf:"sku_tier,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -138,8 +174,17 @@ type FirewallParameters struct {
 
 type ManagementIPConfigurationObservation struct {
 
+	// Specifies the name of the IP Configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The private IP address associated with the Firewall.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The ID of the Public IP Address associated with the firewall.
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Reference to the subnet associated with the IP Configuration. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type ManagementIPConfigurationParameters struct {
@@ -174,6 +219,12 @@ type VirtualHubObservation struct {
 
 	// The list of public IP addresses associated with the Firewall.
 	PublicIPAddresses []*string `json:"publicIpAddresses,omitempty" tf:"public_ip_addresses,omitempty"`
+
+	// Specifies the number of public IPs to assign to the Firewall. Defaults to 1.
+	PublicIPCount *float64 `json:"publicIpCount,omitempty" tf:"public_ip_count,omitempty"`
+
+	// Specifies the ID of the Virtual Hub where the Firewall resides in.
+	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 }
 
 type VirtualHubParameters struct {
@@ -211,8 +262,11 @@ type FirewallStatus struct {
 type Firewall struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FirewallSpec   `json:"spec"`
-	Status            FirewallStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuTier)",message="skuTier is a required parameter"
+	Spec   FirewallSpec   `json:"spec"`
+	Status FirewallStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

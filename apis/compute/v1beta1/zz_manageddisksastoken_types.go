@@ -15,19 +15,28 @@ import (
 
 type ManagedDiskSASTokenObservation struct {
 
+	// The level of access required on the disk. Supported are Read, Write. Changing this forces a new resource to be created.
+	AccessLevel *string `json:"accessLevel,omitempty" tf:"access_level,omitempty"`
+
+	// The duration for which the export should be allowed. Should be between 30 & 4294967295 seconds. Changing this forces a new resource to be created.
+	DurationInSeconds *float64 `json:"durationInSeconds,omitempty" tf:"duration_in_seconds,omitempty"`
+
 	// The ID of the Disk Export resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of an existing Managed Disk which should be exported. Changing this forces a new resource to be created.
+	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 }
 
 type ManagedDiskSASTokenParameters struct {
 
 	// The level of access required on the disk. Supported are Read, Write. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	AccessLevel *string `json:"accessLevel" tf:"access_level,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccessLevel *string `json:"accessLevel,omitempty" tf:"access_level,omitempty"`
 
 	// The duration for which the export should be allowed. Should be between 30 & 4294967295 seconds. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	DurationInSeconds *float64 `json:"durationInSeconds" tf:"duration_in_seconds,omitempty"`
+	// +kubebuilder:validation:Optional
+	DurationInSeconds *float64 `json:"durationInSeconds,omitempty" tf:"duration_in_seconds,omitempty"`
 
 	// The ID of an existing Managed Disk which should be exported. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.ManagedDisk
@@ -68,8 +77,10 @@ type ManagedDiskSASTokenStatus struct {
 type ManagedDiskSASToken struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagedDiskSASTokenSpec   `json:"spec"`
-	Status            ManagedDiskSASTokenStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accessLevel)",message="accessLevel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.durationInSeconds)",message="durationInSeconds is a required parameter"
+	Spec   ManagedDiskSASTokenSpec   `json:"spec"`
+	Status ManagedDiskSASTokenStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

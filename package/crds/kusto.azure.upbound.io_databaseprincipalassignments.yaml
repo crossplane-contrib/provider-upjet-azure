@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: databaseprincipalassignments.kusto.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -315,12 +319,22 @@ spec:
                     description: The tenant id in which the principal resides. Changing
                       this forces a new resource to be created.
                     type: string
-                required:
-                - principalId
-                - principalType
-                - role
-                - tenantId
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -492,17 +506,55 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: principalId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principalId)
+            - message: principalType is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principalType)
+            - message: role is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.role)
+            - message: tenantId is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tenantId)
           status:
             description: DatabasePrincipalAssignmentStatus defines the observed state
               of DatabasePrincipalAssignment.
             properties:
               atProvider:
                 properties:
+                  clusterName:
+                    description: The name of the cluster in which to create the resource.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  databaseName:
+                    description: The name of the database in which to create the resource.
+                      Changing this forces a new resource to be created.
+                    type: string
                   id:
                     description: The ID of the Kusto Database Principal Assignment.
                     type: string
+                  principalId:
+                    description: The object id of the principal. Changing this forces
+                      a new resource to be created.
+                    type: string
                   principalName:
                     description: The name of the principal.
+                    type: string
+                  principalType:
+                    description: The type of the principal. Valid values include App,
+                      Group, User. Changing this forces a new resource to be created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the resource. Changing this forces a new resource to be created.
+                    type: string
+                  role:
+                    description: The database role assigned to the principal. Valid
+                      values include Admin, Ingestor, Monitor, UnrestrictedViewer,
+                      User and Viewer. Changing this forces a new resource to be created.
+                    type: string
+                  tenantId:
+                    description: The tenant id in which the principal resides. Changing
+                      this forces a new resource to be created.
                     type: string
                   tenantName:
                     description: The name of the tenant.

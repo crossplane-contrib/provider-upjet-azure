@@ -15,8 +15,23 @@ import (
 
 type BackupProtectedFileShareObservation struct {
 
+	// Specifies the ID of the backup policy to use. The policy must be an Azure File Share backup policy. Other types are not supported.
+	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
+
 	// The ID of the Backup File Share.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
+	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
+
+	// The name of the resource group in which to create the Azure Backup Protected File Share. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the name of the file share to backup. Changing this forces a new resource to be created.
+	SourceFileShareName *string `json:"sourceFileShareName,omitempty" tf:"source_file_share_name,omitempty"`
+
+	// Specifies the ID of the storage account of the file share to backup. Changing this forces a new resource to be created.
+	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`
 }
 
 type BackupProtectedFileShareParameters struct {

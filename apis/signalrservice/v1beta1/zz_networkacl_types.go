@@ -15,23 +15,35 @@ import (
 
 type NetworkACLObservation struct {
 
+	// The default action to control the network access when no other rule matches. Possible values are Allow and Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
 	// The ID of the SignalR service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A private_endpoint block as defined below.
+	PrivateEndpoint []PrivateEndpointObservation `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+
+	// A public_network block as defined below.
+	PublicNetwork []PublicNetworkObservation `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
+
+	// The ID of the SignalR service. Changing this forces a new resource to be created.
+	SignalrServiceID *string `json:"signalrServiceId,omitempty" tf:"signalr_service_id,omitempty"`
 }
 
 type NetworkACLParameters struct {
 
 	// The default action to control the network access when no other rule matches. Possible values are Allow and Deny.
-	// +kubebuilder:validation:Required
-	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// A private_endpoint block as defined below.
 	// +kubebuilder:validation:Optional
 	PrivateEndpoint []PrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// A public_network block as defined below.
-	// +kubebuilder:validation:Required
-	PublicNetwork []PublicNetworkParameters `json:"publicNetwork" tf:"public_network,omitempty"`
+	// +kubebuilder:validation:Optional
+	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
 	// The ID of the SignalR service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/signalrservice/v1beta1.Service
@@ -49,6 +61,15 @@ type NetworkACLParameters struct {
 }
 
 type PrivateEndpointObservation struct {
+
+	// The allowed request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
+
+	// The denied request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
+
+	// The ID of the Private Endpoint which is based on the SignalR service.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type PrivateEndpointParameters struct {
@@ -77,6 +98,12 @@ type PrivateEndpointParameters struct {
 }
 
 type PublicNetworkObservation struct {
+
+	// The allowed request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
+
+	// The denied request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 }
 
 type PublicNetworkParameters struct {
@@ -114,8 +141,10 @@ type NetworkACLStatus struct {
 type NetworkACL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkACLSpec   `json:"spec"`
-	Status            NetworkACLStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultAction)",message="defaultAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.publicNetwork)",message="publicNetwork is a required parameter"
+	Spec   NetworkACLSpec   `json:"spec"`
+	Status NetworkACLStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

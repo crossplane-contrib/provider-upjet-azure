@@ -15,8 +15,35 @@ import (
 
 type ResourcePolicyExemptionObservation struct {
 
+	// A description to use for this Policy Exemption.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A friendly display name to use for this Policy Exemption.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The category of this policy exemption. Possible values are Waiver and Mitigated.
+	ExemptionCategory *string `json:"exemptionCategory,omitempty" tf:"exemption_category,omitempty"`
+
+	// The expiration date and time in UTC ISO 8601 format of this policy exemption.
+	ExpiresOn *string `json:"expiresOn,omitempty" tf:"expires_on,omitempty"`
+
 	// The Policy Exemption id.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The metadata for this policy exemption. This is a JSON string representing additional metadata that should be stored with the policy exemption.
+	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name of the Policy Exemption. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Policy Assignment to be exempted at the specified Scope. Changing this forces a new resource to be created.
+	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
+
+	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
+	PolicyDefinitionReferenceIds []*string `json:"policyDefinitionReferenceIds,omitempty" tf:"policy_definition_reference_ids,omitempty"`
+
+	// The Resource ID where the Policy Exemption should be applied. Changing this forces a new resource to be created.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 }
 
 type ResourcePolicyExemptionParameters struct {
@@ -30,8 +57,8 @@ type ResourcePolicyExemptionParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The category of this policy exemption. Possible values are Waiver and Mitigated.
-	// +kubebuilder:validation:Required
-	ExemptionCategory *string `json:"exemptionCategory" tf:"exemption_category,omitempty"`
+	// +kubebuilder:validation:Optional
+	ExemptionCategory *string `json:"exemptionCategory,omitempty" tf:"exemption_category,omitempty"`
 
 	// The expiration date and time in UTC ISO 8601 format of this policy exemption.
 	// +kubebuilder:validation:Optional
@@ -42,8 +69,8 @@ type ResourcePolicyExemptionParameters struct {
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the Policy Exemption. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Policy Assignment to be exempted at the specified Scope. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.ResourcePolicyAssignment
@@ -102,8 +129,10 @@ type ResourcePolicyExemptionStatus struct {
 type ResourcePolicyExemption struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourcePolicyExemptionSpec   `json:"spec"`
-	Status            ResourcePolicyExemptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.exemptionCategory)",message="exemptionCategory is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ResourcePolicyExemptionSpec   `json:"spec"`
+	Status ResourcePolicyExemptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

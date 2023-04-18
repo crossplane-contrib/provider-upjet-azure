@@ -14,6 +14,12 @@ import (
 )
 
 type EncryptionSettingsDiskEncryptionKeyObservation struct {
+
+	// The URL to the Key Vault Secret used as the Disk Encryption Key. This can be found as id on the azurerm_key_vault_secret resource.
+	SecretURL *string `json:"secretUrl,omitempty" tf:"secret_url,omitempty"`
+
+	// The ID of the source Key Vault. This can be found as id on the azurerm_key_vault resource.
+	SourceVaultID *string `json:"sourceVaultId,omitempty" tf:"source_vault_id,omitempty"`
 }
 
 type EncryptionSettingsDiskEncryptionKeyParameters struct {
@@ -28,6 +34,12 @@ type EncryptionSettingsDiskEncryptionKeyParameters struct {
 }
 
 type EncryptionSettingsKeyEncryptionKeyObservation struct {
+
+	// The URL to the Key Vault Key used as the Key Encryption Key. This can be found as id on the azurerm_key_vault_key resource.
+	KeyURL *string `json:"keyUrl,omitempty" tf:"key_url,omitempty"`
+
+	// The ID of the source Key Vault. This can be found as id on the azurerm_key_vault resource.
+	SourceVaultID *string `json:"sourceVaultId,omitempty" tf:"source_vault_id,omitempty"`
 }
 
 type EncryptionSettingsKeyEncryptionKeyParameters struct {
@@ -42,6 +54,14 @@ type EncryptionSettingsKeyEncryptionKeyParameters struct {
 }
 
 type SnapshotEncryptionSettingsObservation struct {
+
+	// A disk_encryption_key block as defined below.
+	DiskEncryptionKey []EncryptionSettingsDiskEncryptionKeyObservation `json:"diskEncryptionKey,omitempty" tf:"disk_encryption_key,omitempty"`
+
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A key_encryption_key block as defined below.
+	KeyEncryptionKey []EncryptionSettingsKeyEncryptionKeyObservation `json:"keyEncryptionKey,omitempty" tf:"key_encryption_key,omitempty"`
 }
 
 type SnapshotEncryptionSettingsParameters struct {
@@ -60,8 +80,35 @@ type SnapshotEncryptionSettingsParameters struct {
 
 type SnapshotObservation struct {
 
+	// Indicates how the snapshot is to be created. Possible values are Copy or Import.
+	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
+
+	// The size of the Snapshotted Disk in GB.
+	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+
+	// A encryption_settings block as defined below.
+	EncryptionSettings []SnapshotEncryptionSettingsObservation `json:"encryptionSettings,omitempty" tf:"encryption_settings,omitempty"`
+
 	// The Snapshot ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group in which to create the Snapshot. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies a reference to an existing snapshot, when create_option is Copy. Changing this forces a new resource to be created.
+	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
+
+	// Specifies the URI to a Managed or Unmanaged Disk. Changing this forces a new resource to be created.
+	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
+
+	// Specifies the ID of an storage account. Used with source_uri to allow authorization during import of unmanaged blobs from a different subscription. Changing this forces a new resource to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether Trusted Launch is enabled for the Snapshot.
 	TrustedLaunchEnabled *bool `json:"trustedLaunchEnabled,omitempty" tf:"trusted_launch_enabled,omitempty"`
@@ -70,8 +117,8 @@ type SnapshotObservation struct {
 type SnapshotParameters struct {
 
 	// Indicates how the snapshot is to be created. Possible values are Copy or Import.
-	// +kubebuilder:validation:Required
-	CreateOption *string `json:"createOption" tf:"create_option,omitempty"`
+	// +kubebuilder:validation:Optional
+	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
 
 	// The size of the Snapshotted Disk in GB.
 	// +kubebuilder:validation:Optional
@@ -82,8 +129,8 @@ type SnapshotParameters struct {
 	EncryptionSettings []SnapshotEncryptionSettingsParameters `json:"encryptionSettings,omitempty" tf:"encryption_settings,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Snapshot. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -149,8 +196,10 @@ type SnapshotStatus struct {
 type Snapshot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SnapshotSpec   `json:"spec"`
-	Status            SnapshotStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.createOption)",message="createOption is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   SnapshotSpec   `json:"spec"`
+	Status SnapshotStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

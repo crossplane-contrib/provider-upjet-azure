@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: monitoralertprocessingrulesuppressions.alertsmanagement.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -561,6 +565,21 @@ spec:
                       Alert Processing Rule.
                     type: object
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -738,9 +757,311 @@ spec:
             properties:
               atProvider:
                 properties:
+                  condition:
+                    description: A condition block as defined below.
+                    items:
+                      properties:
+                        alertContext:
+                          description: A alert_context block as defined above.
+                          items:
+                            properties:
+                              operator:
+                                description: The operator for a given condition. Possible
+                                  values are Equals, NotEquals, Contains, and DoesNotContain.
+                                type: string
+                              values:
+                                description: A list of values to match for a given
+                                  condition. The values should be valid resource types.
+                                  (e.g. Microsoft.Compute/VirtualMachines)
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        alertRuleId:
+                          description: A alert_rule_id block as defined above.
+                          items:
+                            properties:
+                              operator:
+                                description: The operator for a given condition. Possible
+                                  values are Equals, NotEquals, Contains, and DoesNotContain.
+                                type: string
+                              values:
+                                description: A list of values to match for a given
+                                  condition. The values should be valid resource types.
+                                  (e.g. Microsoft.Compute/VirtualMachines)
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        alertRuleName:
+                          description: A alert_rule_name block as defined above.
+                          items:
+                            properties:
+                              operator:
+                                description: The operator for a given condition. Possible
+                                  values are Equals, NotEquals, Contains, and DoesNotContain.
+                                type: string
+                              values:
+                                description: A list of values to match for a given
+                                  condition. The values should be valid resource types.
+                                  (e.g. Microsoft.Compute/VirtualMachines)
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        description:
+                          description: A description block as defined below.
+                          items:
+                            properties:
+                              operator:
+                                description: The operator for a given condition. Possible
+                                  values are Equals, NotEquals, Contains, and DoesNotContain.
+                                type: string
+                              values:
+                                description: A list of values to match for a given
+                                  condition. The values should be valid resource types.
+                                  (e.g. Microsoft.Compute/VirtualMachines)
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        monitorCondition:
+                          description: A monitor_condition block as defined below.
+                          items:
+                            properties:
+                              operator:
+                                description: The operator for a given condition. Possible
+                                  values are Equals, NotEquals, Contains, and DoesNotContain.
+                                type: string
+                              values:
+                                description: A list of values to match for a given
+                                  condition. The values should be valid resource types.
+                                  (e.g. Microsoft.Compute/VirtualMachines)
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        monitorService:
+                          description: A monitor_service block as defined below.
+                          items:
+                            properties:
+                              operator:
+                                description: The operator for a given condition. Possible
+                                  values are Equals, NotEquals, Contains, and DoesNotContain.
+                                type: string
+                              values:
+                                description: A list of values to match for a given
+                                  condition. The values should be valid resource types.
+                                  (e.g. Microsoft.Compute/VirtualMachines)
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        severity:
+                          description: A severity block as defined below.
+                          items:
+                            properties:
+                              operator:
+                                description: The operator for a given condition. Possible
+                                  values are Equals, NotEquals, Contains, and DoesNotContain.
+                                type: string
+                              values:
+                                description: A list of values to match for a given
+                                  condition. The values should be valid resource types.
+                                  (e.g. Microsoft.Compute/VirtualMachines)
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        signalType:
+                          description: A signal_type block as defined below.
+                          items:
+                            properties:
+                              operator:
+                                description: The operator for a given condition. Possible
+                                  values are Equals, NotEquals, Contains, and DoesNotContain.
+                                type: string
+                              values:
+                                description: A list of values to match for a given
+                                  condition. The values should be valid resource types.
+                                  (e.g. Microsoft.Compute/VirtualMachines)
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        targetResource:
+                          description: A target_resource block as defined below.
+                          items:
+                            properties:
+                              operator:
+                                description: The operator for a given condition. Possible
+                                  values are Equals, NotEquals, Contains, and DoesNotContain.
+                                type: string
+                              values:
+                                description: A list of values to match for a given
+                                  condition. The values should be valid resource types.
+                                  (e.g. Microsoft.Compute/VirtualMachines)
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        targetResourceGroup:
+                          description: A target_resource_group block as defined below.
+                          items:
+                            properties:
+                              operator:
+                                description: The operator for a given condition. Possible
+                                  values are Equals, NotEquals, Contains, and DoesNotContain.
+                                type: string
+                              values:
+                                description: A list of values to match for a given
+                                  condition. The values should be valid resource types.
+                                  (e.g. Microsoft.Compute/VirtualMachines)
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        targetResourceType:
+                          description: A target_resource_type block as defined below.
+                          items:
+                            properties:
+                              operator:
+                                description: The operator for a given condition. Possible
+                                  values are Equals, NotEquals, Contains, and DoesNotContain.
+                                type: string
+                              values:
+                                description: A list of values to match for a given
+                                  condition. The values should be valid resource types.
+                                  (e.g. Microsoft.Compute/VirtualMachines)
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  description:
+                    description: Specifies a description for the Alert Processing
+                      Rule.
+                    type: string
+                  enabled:
+                    description: Should the Alert Processing Rule be enabled? Defaults
+                      to true.
+                    type: boolean
                   id:
                     description: The ID of the Alert Processing Rule.
                     type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Alert Processing
+                      Rule should exist. Changing this forces a new Alert Processing
+                      Rule to be created.
+                    type: string
+                  schedule:
+                    description: A schedule block as defined below.
+                    items:
+                      properties:
+                        effectiveFrom:
+                          description: Specifies the Alert Processing Rule effective
+                            start time (Y-m-d'T'H:M:S).
+                          type: string
+                        effectiveUntil:
+                          description: Specifies the Alert Processing Rule effective
+                            end time (Y-m-d'T'H:M:S).
+                          type: string
+                        recurrence:
+                          description: A recurrence block as defined above.
+                          items:
+                            properties:
+                              daily:
+                                description: One or more daily blocks as defined above.
+                                items:
+                                  properties:
+                                    endTime:
+                                      description: Specifies the recurrence end time
+                                        (H:M:S).
+                                      type: string
+                                    startTime:
+                                      description: Specifies the recurrence start
+                                        time (H:M:S).
+                                      type: string
+                                  type: object
+                                type: array
+                              monthly:
+                                description: One or more monthly blocks as defined
+                                  above.
+                                items:
+                                  properties:
+                                    daysOfMonth:
+                                      description: Specifies a list of dayOfMonth
+                                        to recurrence. Possible values are integers
+                                        between 1 - 31.
+                                      items:
+                                        type: number
+                                      type: array
+                                    endTime:
+                                      description: Specifies the recurrence end time
+                                        (H:M:S).
+                                      type: string
+                                    startTime:
+                                      description: Specifies the recurrence start
+                                        time (H:M:S).
+                                      type: string
+                                  type: object
+                                type: array
+                              weekly:
+                                description: One or more weekly blocks as defined
+                                  below.
+                                items:
+                                  properties:
+                                    daysOfWeek:
+                                      description: Specifies a list of dayOfWeek to
+                                        recurrence. Possible values are Sunday, Monday,
+                                        Tuesday, Wednesday, Thursday, Friday, and
+                                        Saturday.
+                                      items:
+                                        type: string
+                                      type: array
+                                    endTime:
+                                      description: Specifies the recurrence end time
+                                        (H:M:S).
+                                      type: string
+                                    startTime:
+                                      description: Specifies the recurrence start
+                                        time (H:M:S).
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        timeZone:
+                          description: The time zone (e.g. Pacific Standard time,
+                            Eastern Standard Time). Defaults to UTC. possible values
+                            are defined here.
+                          type: string
+                      type: object
+                    type: array
+                  scopes:
+                    description: A list of resource IDs which will be the target of
+                      Alert Processing Rule.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Alert Processing Rule.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

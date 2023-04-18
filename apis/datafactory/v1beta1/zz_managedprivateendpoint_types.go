@@ -15,8 +15,23 @@ import (
 
 type ManagedPrivateEndpointObservation struct {
 
+	// The ID of the Data Factory on which to create the Managed Private Endpoint. Changing this forces a new resource to be created.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// Fully qualified domain names. Changing this forces a new resource to be created.
+	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
+
 	// The ID of the Data Factory Managed Private Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name which should be used for this Managed Private Endpoint. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the sub resource name which the Data Factory Private Endpoint is able to connect to. Changing this forces a new resource to be created.
+	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
+
+	// The ID of the Private Link Enabled Remote Resource which this Data Factory Private Endpoint should be connected to. Changing this forces a new resource to be created.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 
 type ManagedPrivateEndpointParameters struct {
@@ -40,8 +55,8 @@ type ManagedPrivateEndpointParameters struct {
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
 	// Specifies the name which should be used for this Managed Private Endpoint. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the sub resource name which the Data Factory Private Endpoint is able to connect to. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -86,8 +101,9 @@ type ManagedPrivateEndpointStatus struct {
 type ManagedPrivateEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagedPrivateEndpointSpec   `json:"spec"`
-	Status            ManagedPrivateEndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ManagedPrivateEndpointSpec   `json:"spec"`
+	Status ManagedPrivateEndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

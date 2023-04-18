@@ -15,11 +15,20 @@ import (
 
 type FrontdoorEndpointObservation struct {
 
+	// The ID of the Front Door Profile within which this Front Door Endpoint should exist. Changing this forces a new Front Door Endpoint to be created.
+	CdnFrontdoorProfileID *string `json:"cdnFrontdoorProfileId,omitempty" tf:"cdn_frontdoor_profile_id,omitempty"`
+
+	// Specifies if this Front Door Endpoint is enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The host name of the Front Door Endpoint, in the format {endpointName}.{dnsZone} (for example, contoso.azureedge.net).
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// The ID of this Front Door Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies a mapping of tags which should be assigned to the Front Door Endpoint.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FrontdoorEndpointParameters struct {

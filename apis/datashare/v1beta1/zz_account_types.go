@@ -19,19 +19,27 @@ type AccountObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where the Data Share Account should exist. Changing this forces a new Data Share Account to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where the Data Share Account should exist. Changing this forces a new Data Share Account to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Data Share Account.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type AccountParameters struct {
 
 	// An identity block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Identity []IdentityParameters `json:"identity" tf:"identity,omitempty"`
+	// +kubebuilder:validation:Optional
+	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Data Share Account should exist. Changing this forces a new Data Share Account to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Data Share Account should exist. Changing this forces a new Data Share Account to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -58,6 +66,9 @@ type IdentityObservation struct {
 
 	// The Tenant ID for the Service Principal associated with the Identity of this Data Share Account.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Data Share Account. The only possible value is SystemAssigned. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
@@ -91,8 +102,10 @@ type AccountStatus struct {
 type Account struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AccountSpec   `json:"spec"`
-	Status            AccountStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identity)",message="identity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   AccountSpec   `json:"spec"`
+	Status AccountStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

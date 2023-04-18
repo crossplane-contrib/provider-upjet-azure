@@ -17,13 +17,25 @@ type ConfigurationObservation struct {
 
 	// The ID of the MariaDB Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the MariaDB Configuration, which needs to be a valid MariaDB configuration name. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the resource group in which the MariaDB Server exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the name of the MariaDB Server. Changing this forces a new resource to be created.
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// Specifies the value of the MariaDB Configuration. See the MariaDB documentation for valid values. Changing this forces a new resource to be created.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ConfigurationParameters struct {
 
 	// Specifies the name of the MariaDB Configuration, which needs to be a valid MariaDB configuration name. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which the MariaDB Server exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -52,8 +64,8 @@ type ConfigurationParameters struct {
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// Specifies the value of the MariaDB Configuration. See the MariaDB documentation for valid values. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // ConfigurationSpec defines the desired state of Configuration
@@ -80,8 +92,10 @@ type ConfigurationStatus struct {
 type Configuration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ConfigurationSpec   `json:"spec"`
-	Status            ConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.value)",message="value is a required parameter"
+	Spec   ConfigurationSpec   `json:"spec"`
+	Status ConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -17,13 +17,22 @@ type FlexibleServerConfigurationObservation struct {
 
 	// The ID of the PostgreSQL Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the PostgreSQL Flexible Server where we want to change configuration. Changing this forces a new PostgreSQL Flexible Server Configuration resource.
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FlexibleServerConfigurationParameters struct {
 
 	// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the PostgreSQL Flexible Server where we want to change configuration. Changing this forces a new PostgreSQL Flexible Server Configuration resource.
 	// +crossplane:generate:reference:type=FlexibleServer
@@ -40,8 +49,8 @@ type FlexibleServerConfigurationParameters struct {
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // FlexibleServerConfigurationSpec defines the desired state of FlexibleServerConfiguration
@@ -68,8 +77,10 @@ type FlexibleServerConfigurationStatus struct {
 type FlexibleServerConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FlexibleServerConfigurationSpec   `json:"spec"`
-	Status            FlexibleServerConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.value)",message="value is a required parameter"
+	Spec   FlexibleServerConfigurationSpec   `json:"spec"`
+	Status FlexibleServerConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

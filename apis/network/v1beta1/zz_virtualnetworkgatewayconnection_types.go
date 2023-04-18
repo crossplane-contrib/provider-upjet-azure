@@ -14,6 +14,12 @@ import (
 )
 
 type CustomBGPAddressesObservation struct {
+
+	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (first one)
+	Primary *string `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (second one)
+	Secondary *string `json:"secondary,omitempty" tf:"secondary,omitempty"`
 }
 
 type CustomBGPAddressesParameters struct {
@@ -28,6 +34,32 @@ type CustomBGPAddressesParameters struct {
 }
 
 type IpsecPolicyObservation struct {
+
+	// The DH group used in IKE phase 1 for initial SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048, DHGroup24, ECP256, ECP384, or None.
+	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
+
+	// The IKE encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
+	IkeEncryption *string `json:"ikeEncryption,omitempty" tf:"ike_encryption,omitempty"`
+
+	// The IKE integrity algorithm. Valid options are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
+	IkeIntegrity *string `json:"ikeIntegrity,omitempty" tf:"ike_integrity,omitempty"`
+
+	// The IPSec encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, or None.
+	IpsecEncryption *string `json:"ipsecEncryption,omitempty" tf:"ipsec_encryption,omitempty"`
+
+	// The IPSec integrity algorithm. Valid options are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
+	IpsecIntegrity *string `json:"ipsecIntegrity,omitempty" tf:"ipsec_integrity,omitempty"`
+
+	// The DH group used in IKE phase 2 for new child SA.
+	// Valid options are ECP256, ECP384, PFS1, PFS14, PFS2, PFS2048, PFS24, PFSMM,
+	// or None.
+	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
+
+	// The IPSec SA payload size in KB. Must be at least 1024 KB. Defaults to 102400000 KB.
+	SaDatasize *float64 `json:"saDatasize,omitempty" tf:"sa_datasize,omitempty"`
+
+	// The IPSec SA lifetime in seconds. Must be at least 300 seconds. Defaults to 27000 seconds.
+	SaLifetime *float64 `json:"saLifetime,omitempty" tf:"sa_lifetime,omitempty"`
 }
 
 type IpsecPolicyParameters struct {
@@ -68,6 +100,12 @@ type IpsecPolicyParameters struct {
 }
 
 type TrafficSelectorPolicyObservation struct {
+
+	// List of local CIDRs.
+	LocalAddressCidrs []*string `json:"localAddressCidrs,omitempty" tf:"local_address_cidrs,omitempty"`
+
+	// List of remote CIDRs.
+	RemoteAddressCidrs []*string `json:"remoteAddressCidrs,omitempty" tf:"remote_address_cidrs,omitempty"`
 }
 
 type TrafficSelectorPolicyParameters struct {
@@ -83,8 +121,78 @@ type TrafficSelectorPolicyParameters struct {
 
 type VirtualNetworkGatewayConnectionObservation struct {
 
+	// Connection mode to use. Possible values are Default, InitiatorOnly and ResponderOnly. Defaults to Default. Changing this value will force a resource to be created.
+	ConnectionMode *string `json:"connectionMode,omitempty" tf:"connection_mode,omitempty"`
+
+	// The IKE protocol version to use. Possible values are IKEv1 and IKEv2, values are IKEv1 and IKEv2. Defaults to IKEv2. Changing this forces a new resource to be created.
+	// -> Note: Only valid for IPSec connections on virtual network gateways with SKU VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.
+	ConnectionProtocol *string `json:"connectionProtocol,omitempty" tf:"connection_protocol,omitempty"`
+
+	// A custom_bgp_addresses (Border Gateway Protocol custom IP Addresses) block which is documented below.
+	// The block can only be used on IPSec / activeactive connections,
+	// For details about see the relevant section in the Azure documentation.
+	CustomBGPAddresses []CustomBGPAddressesObservation `json:"customBgpAddresses,omitempty" tf:"custom_bgp_addresses,omitempty"`
+
+	// The dead peer detection timeout of this connection in seconds. Changing this forces a new resource to be created.
+	DpdTimeoutSeconds *float64 `json:"dpdTimeoutSeconds,omitempty" tf:"dpd_timeout_seconds,omitempty"`
+
+	// A list of the egress NAT Rule Ids.
+	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
+
+	// If true, BGP (Border Gateway Protocol) is enabled for this connection. Defaults to false.
+	EnableBGP *bool `json:"enableBgp,omitempty" tf:"enable_bgp,omitempty"`
+
+	// The ID of the Express Route Circuit when creating an ExpressRoute connection (i.e. when type is ExpressRoute). The Express Route Circuit can be in the same or in a different subscription. Changing this forces a new resource to be created.
+	ExpressRouteCircuitID *string `json:"expressRouteCircuitId,omitempty" tf:"express_route_circuit_id,omitempty"`
+
+	// If true, data packets will bypass ExpressRoute Gateway for data forwarding This is only valid for ExpressRoute connections.
+	ExpressRouteGatewayBypass *bool `json:"expressRouteGatewayBypass,omitempty" tf:"express_route_gateway_bypass,omitempty"`
+
 	// The ID of the Virtual Network Gateway Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of the ingress NAT Rule Ids.
+	IngressNATRuleIds []*string `json:"ingressNatRuleIds,omitempty" tf:"ingress_nat_rule_ids,omitempty"`
+
+	// A ipsec_policy block which is documented below.
+	// Only a single policy can be defined for a connection. For details on
+	// custom policies refer to the relevant section in the Azure documentation.
+	IpsecPolicy []IpsecPolicyObservation `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
+
+	// Use private local Azure IP for the connection. Changing this forces a new resource to be created.
+	LocalAzureIPAddressEnabled *bool `json:"localAzureIpAddressEnabled,omitempty" tf:"local_azure_ip_address_enabled,omitempty"`
+
+	// The ID of the local network gateway when creating Site-to-Site connection (i.e. when type is IPsec).
+	LocalNetworkGatewayID *string `json:"localNetworkGatewayId,omitempty" tf:"local_network_gateway_id,omitempty"`
+
+	// The location/region where the connection is located. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the peer virtual network gateway when creating a VNet-to-VNet connection (i.e. when type is Vnet2Vnet). The peer Virtual Network Gateway can be in the same or in a different subscription. Changing this forces a new resource to be created.
+	PeerVirtualNetworkGatewayID *string `json:"peerVirtualNetworkGatewayId,omitempty" tf:"peer_virtual_network_gateway_id,omitempty"`
+
+	// The name of the resource group in which to create the connection Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The routing weight. Defaults to 10.
+	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// One or more traffic_selector_policy blocks which are documented below.
+	// A traffic_selector_policy allows to specify a traffic selector policy proposal to be used in a virtual network gateway connection.
+	// For details about traffic selectors refer to the relevant section in the Azure documentation.
+	TrafficSelectorPolicy []TrafficSelectorPolicyObservation `json:"trafficSelectorPolicy,omitempty" tf:"traffic_selector_policy,omitempty"`
+
+	// The type of connection. Valid options are IPsec (Site-to-Site), ExpressRoute (ExpressRoute), and Vnet2Vnet (VNet-to-VNet). Each connection type requires different mandatory arguments (refer to the examples above). Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// If true, policy-based traffic selectors are enabled for this connection. Enabling policy-based traffic selectors requires an ipsec_policy block. Defaults to false.
+	UsePolicyBasedTrafficSelectors *bool `json:"usePolicyBasedTrafficSelectors,omitempty" tf:"use_policy_based_traffic_selectors,omitempty"`
+
+	// The ID of the Virtual Network Gateway in which the connection will be created. Changing this forces a new resource to be created.
+	VirtualNetworkGatewayID *string `json:"virtualNetworkGatewayId,omitempty" tf:"virtual_network_gateway_id,omitempty"`
 }
 
 type VirtualNetworkGatewayConnectionParameters struct {
@@ -157,8 +265,8 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	LocalNetworkGatewayIDSelector *v1.Selector `json:"localNetworkGatewayIdSelector,omitempty" tf:"-"`
 
 	// The location/region where the connection is located. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the peer virtual network gateway when creating a VNet-to-VNet connection (i.e. when type is Vnet2Vnet). The peer Virtual Network Gateway can be in the same or in a different subscription. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualNetworkGateway
@@ -206,8 +314,8 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	TrafficSelectorPolicy []TrafficSelectorPolicyParameters `json:"trafficSelectorPolicy,omitempty" tf:"traffic_selector_policy,omitempty"`
 
 	// The type of connection. Valid options are IPsec (Site-to-Site), ExpressRoute (ExpressRoute), and Vnet2Vnet (VNet-to-VNet). Each connection type requires different mandatory arguments (refer to the examples above). Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// If true, policy-based traffic selectors are enabled for this connection. Enabling policy-based traffic selectors requires an ipsec_policy block. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -252,8 +360,10 @@ type VirtualNetworkGatewayConnectionStatus struct {
 type VirtualNetworkGatewayConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              VirtualNetworkGatewayConnectionSpec   `json:"spec"`
-	Status            VirtualNetworkGatewayConnectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   VirtualNetworkGatewayConnectionSpec   `json:"spec"`
+	Status VirtualNetworkGatewayConnectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

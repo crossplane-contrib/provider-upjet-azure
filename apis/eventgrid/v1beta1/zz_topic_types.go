@@ -15,11 +15,17 @@ import (
 
 type TopicIdentityObservation struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid Topic.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Event Grid Topic. Possible values are SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TopicIdentityParameters struct {
@@ -34,6 +40,12 @@ type TopicIdentityParameters struct {
 }
 
 type TopicInboundIPRuleObservation struct {
+
+	// The action to take when the rule is matched. Possible values are Allow.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The IP mask (CIDR) to match on.
+	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
 }
 
 type TopicInboundIPRuleParameters struct {
@@ -48,6 +60,15 @@ type TopicInboundIPRuleParameters struct {
 }
 
 type TopicInputMappingDefaultValuesObservation struct {
+
+	// Specifies the default data version of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	DataVersion *string `json:"dataVersion,omitempty" tf:"data_version,omitempty"`
+
+	// Specifies the default event type of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
+
+	// Specifies the default subject of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
 type TopicInputMappingDefaultValuesParameters struct {
@@ -66,6 +87,24 @@ type TopicInputMappingDefaultValuesParameters struct {
 }
 
 type TopicInputMappingFieldsObservation struct {
+
+	// Specifies the data version of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	DataVersion *string `json:"dataVersion,omitempty" tf:"data_version,omitempty"`
+
+	// Specifies the event time of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	EventTime *string `json:"eventTime,omitempty" tf:"event_time,omitempty"`
+
+	// Specifies the event type of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
+
+	// Specifies the id of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the subject of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// Specifies the topic of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
 type TopicInputMappingFieldsParameters struct {
@@ -104,8 +143,34 @@ type TopicObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []TopicIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// One or more inbound_ip_rule blocks as defined below.
+	InboundIPRule []TopicInboundIPRuleObservation `json:"inboundIpRule,omitempty" tf:"inbound_ip_rule,omitempty"`
+
+	// A input_mapping_default_values block as defined below. Changing this forces a new resource to be created.
+	InputMappingDefaultValues []TopicInputMappingDefaultValuesObservation `json:"inputMappingDefaultValues,omitempty" tf:"input_mapping_default_values,omitempty"`
+
+	// A input_mapping_fields block as defined below. Changing this forces a new resource to be created.
+	InputMappingFields []TopicInputMappingFieldsObservation `json:"inputMappingFields,omitempty" tf:"input_mapping_fields,omitempty"`
+
+	// Specifies the schema in which incoming events will be published to this domain. Allowed values are CloudEventSchemaV1_0, CustomEventSchema, or EventGridSchema. Defaults to EventGridSchema. Changing this forces a new resource to be created.
+	InputSchema *string `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
+
+	// Whether local authentication methods is enabled for the EventGrid Topic. Defaults to true.
+	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Whether or not public network access is allowed for this server. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The name of the resource group in which the EventGrid Topic exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type TopicParameters struct {
@@ -135,8 +200,8 @@ type TopicParameters struct {
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether or not public network access is allowed for this server. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -184,8 +249,9 @@ type TopicStatus struct {
 type Topic struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TopicSpec   `json:"spec"`
-	Status            TopicStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   TopicSpec   `json:"spec"`
+	Status TopicStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -14,6 +14,63 @@ import (
 )
 
 type AdvancedFilterObservation struct {
+
+	// Compares a value of an event using a single boolean value.
+	BoolEquals []BoolEqualsObservation `json:"boolEquals,omitempty" tf:"bool_equals,omitempty"`
+
+	// Evaluates if a value of an event isn't NULL or undefined.
+	IsNotNull []IsNotNullObservation `json:"isNotNull,omitempty" tf:"is_not_null,omitempty"`
+
+	// Evaluates if a value of an event is NULL or undefined.
+	IsNullOrUndefined []IsNullOrUndefinedObservation `json:"isNullOrUndefined,omitempty" tf:"is_null_or_undefined,omitempty"`
+
+	// Compares a value of an event using a single floating point number.
+	NumberGreaterThan []NumberGreaterThanObservation `json:"numberGreaterThan,omitempty" tf:"number_greater_than,omitempty"`
+
+	// Compares a value of an event using a single floating point number.
+	NumberGreaterThanOrEquals []NumberGreaterThanOrEqualsObservation `json:"numberGreaterThanOrEquals,omitempty" tf:"number_greater_than_or_equals,omitempty"`
+
+	// Compares a value of an event using multiple floating point numbers.
+	NumberIn []NumberInObservation `json:"numberIn,omitempty" tf:"number_in,omitempty"`
+
+	// Compares a value of an event using multiple floating point number ranges.
+	NumberInRange []NumberInRangeObservation `json:"numberInRange,omitempty" tf:"number_in_range,omitempty"`
+
+	// Compares a value of an event using a single floating point number.
+	NumberLessThan []NumberLessThanObservation `json:"numberLessThan,omitempty" tf:"number_less_than,omitempty"`
+
+	// Compares a value of an event using a single floating point number.
+	NumberLessThanOrEquals []NumberLessThanOrEqualsObservation `json:"numberLessThanOrEquals,omitempty" tf:"number_less_than_or_equals,omitempty"`
+
+	// Compares a value of an event using multiple floating point numbers.
+	NumberNotIn []NumberNotInObservation `json:"numberNotIn,omitempty" tf:"number_not_in,omitempty"`
+
+	// Compares a value of an event using multiple floating point number ranges.
+	NumberNotInRange []NumberNotInRangeObservation `json:"numberNotInRange,omitempty" tf:"number_not_in_range,omitempty"`
+
+	// Compares a value of an event using multiple string values.
+	StringBeginsWith []StringBeginsWithObservation `json:"stringBeginsWith,omitempty" tf:"string_begins_with,omitempty"`
+
+	// Compares a value of an event using multiple string values.
+	StringContains []StringContainsObservation `json:"stringContains,omitempty" tf:"string_contains,omitempty"`
+
+	// Compares a value of an event using multiple string values.
+	StringEndsWith []StringEndsWithObservation `json:"stringEndsWith,omitempty" tf:"string_ends_with,omitempty"`
+
+	// Compares a value of an event using multiple string values.
+	StringIn []StringInObservation `json:"stringIn,omitempty" tf:"string_in,omitempty"`
+
+	// Compares a value of an event using multiple string values.
+	StringNotBeginsWith []StringNotBeginsWithObservation `json:"stringNotBeginsWith,omitempty" tf:"string_not_begins_with,omitempty"`
+
+	// Compares a value of an event using multiple string values.
+	StringNotContains []StringNotContainsObservation `json:"stringNotContains,omitempty" tf:"string_not_contains,omitempty"`
+
+	// Compares a value of an event using multiple string values.
+	StringNotEndsWith []StringNotEndsWithObservation `json:"stringNotEndsWith,omitempty" tf:"string_not_ends_with,omitempty"`
+
+	// Compares a value of an event using multiple string values.
+	StringNotIn []StringNotInObservation `json:"stringNotIn,omitempty" tf:"string_not_in,omitempty"`
 }
 
 type AdvancedFilterParameters struct {
@@ -96,6 +153,15 @@ type AdvancedFilterParameters struct {
 }
 
 type AzureFunctionEndpointObservation struct {
+
+	// Specifies the ID of the Function where the Event Subscription will receive events. This must be the functions ID in format {function_app.id}/functions/{name}.
+	FunctionID *string `json:"functionId,omitempty" tf:"function_id,omitempty"`
+
+	// Maximum number of events per batch.
+	MaxEventsPerBatch *float64 `json:"maxEventsPerBatch,omitempty" tf:"max_events_per_batch,omitempty"`
+
+	// Preferred batch size in Kilobytes.
+	PreferredBatchSizeInKilobytes *float64 `json:"preferredBatchSizeInKilobytes,omitempty" tf:"preferred_batch_size_in_kilobytes,omitempty"`
 }
 
 type AzureFunctionEndpointParameters struct {
@@ -114,6 +180,12 @@ type AzureFunctionEndpointParameters struct {
 }
 
 type BoolEqualsObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *bool `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type BoolEqualsParameters struct {
@@ -128,6 +200,12 @@ type BoolEqualsParameters struct {
 }
 
 type DeadLetterIdentityObservation struct {
+
+	// Specifies the type of Managed Service Identity that is used for dead lettering. Allowed value is SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The user identity associated with the resource.
+	UserAssignedIdentity *string `json:"userAssignedIdentity,omitempty" tf:"user_assigned_identity,omitempty"`
 }
 
 type DeadLetterIdentityParameters struct {
@@ -142,6 +220,12 @@ type DeadLetterIdentityParameters struct {
 }
 
 type DeliveryIdentityObservation struct {
+
+	// Specifies the type of Managed Service Identity that is used for event delivery. Allowed value is SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The user identity associated with the resource.
+	UserAssignedIdentity *string `json:"userAssignedIdentity,omitempty" tf:"user_assigned_identity,omitempty"`
 }
 
 type DeliveryIdentityParameters struct {
@@ -156,6 +240,18 @@ type DeliveryIdentityParameters struct {
 }
 
 type DeliveryPropertyObservation struct {
+
+	// The name of the header to send on to the destination
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+
+	// True if the value is a secret and should be protected, otherwise false. If True, then this value won't be returned from Azure API calls
+	Secret *bool `json:"secret,omitempty" tf:"secret,omitempty"`
+
+	// If the type is Dynamic, then provide the payload field to be used as the value. Valid source fields differ by subscription type.
+	SourceField *string `json:"sourceField,omitempty" tf:"source_field,omitempty"`
+
+	// Either Static or Dynamic
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DeliveryPropertyParameters struct {
@@ -183,11 +279,70 @@ type DeliveryPropertyParameters struct {
 
 type EventSubscriptionObservation struct {
 
+	// A advanced_filter block as defined below.
+	AdvancedFilter []AdvancedFilterObservation `json:"advancedFilter,omitempty" tf:"advanced_filter,omitempty"`
+
+	// Specifies whether advanced filters should be evaluated against an array of values instead of expecting a singular value. Defaults to false.
+	AdvancedFilteringOnArraysEnabled *bool `json:"advancedFilteringOnArraysEnabled,omitempty" tf:"advanced_filtering_on_arrays_enabled,omitempty"`
+
+	// An azure_function_endpoint block as defined below.
+	AzureFunctionEndpoint []AzureFunctionEndpointObservation `json:"azureFunctionEndpoint,omitempty" tf:"azure_function_endpoint,omitempty"`
+
+	// A dead_letter_identity block as defined below.
+	DeadLetterIdentity []DeadLetterIdentityObservation `json:"deadLetterIdentity,omitempty" tf:"dead_letter_identity,omitempty"`
+
+	// A delivery_identity block as defined below.
+	DeliveryIdentity []DeliveryIdentityObservation `json:"deliveryIdentity,omitempty" tf:"delivery_identity,omitempty"`
+
+	// One or more delivery_property blocks as defined below.
+	DeliveryProperty []DeliveryPropertyObservation `json:"deliveryProperty,omitempty" tf:"delivery_property,omitempty"`
+
+	// Specifies the event delivery schema for the event subscription. Possible values include: EventGridSchema, CloudEventSchemaV1_0, CustomInputSchema. Defaults to EventGridSchema. Changing this forces a new resource to be created.
+	EventDeliverySchema *string `json:"eventDeliverySchema,omitempty" tf:"event_delivery_schema,omitempty"`
+
+	// Specifies the id where the Event Hub is located.
+	EventHubEndpointID *string `json:"eventhubEndpointId,omitempty" tf:"eventhub_endpoint_id,omitempty"`
+
+	// Specifies the expiration time of the event subscription (Datetime Format RFC 3339).
+	ExpirationTimeUtc *string `json:"expirationTimeUtc,omitempty" tf:"expiration_time_utc,omitempty"`
+
+	// Specifies the id where the Hybrid Connection is located.
+	HybridConnectionEndpointID *string `json:"hybridConnectionEndpointId,omitempty" tf:"hybrid_connection_endpoint_id,omitempty"`
+
 	// The ID of the EventGrid Event Subscription.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A list of applicable event types that need to be part of the event subscription.
+	IncludedEventTypes []*string `json:"includedEventTypes,omitempty" tf:"included_event_types,omitempty"`
+
+	// A list of labels to assign to the event subscription.
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// Specifies the name of the EventGrid Event Subscription resource. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A retry_policy block as defined below.
+	RetryPolicy []RetryPolicyObservation `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
+
+	// Specifies the scope at which the EventGrid Event Subscription should be created. Changing this forces a new resource to be created.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Specifies the id where the Service Bus Queue is located.
+	ServiceBusQueueEndpointID *string `json:"serviceBusQueueEndpointId,omitempty" tf:"service_bus_queue_endpoint_id,omitempty"`
+
+	// Specifies the id where the Service Bus Topic is located.
+	ServiceBusTopicEndpointID *string `json:"serviceBusTopicEndpointId,omitempty" tf:"service_bus_topic_endpoint_id,omitempty"`
+
+	// A storage_blob_dead_letter_destination block as defined below.
+	StorageBlobDeadLetterDestination []StorageBlobDeadLetterDestinationObservation `json:"storageBlobDeadLetterDestination,omitempty" tf:"storage_blob_dead_letter_destination,omitempty"`
+
+	// A storage_queue_endpoint block as defined below.
+	StorageQueueEndpoint []StorageQueueEndpointObservation `json:"storageQueueEndpoint,omitempty" tf:"storage_queue_endpoint,omitempty"`
+
+	// A subject_filter block as defined below.
+	SubjectFilter []SubjectFilterObservation `json:"subjectFilter,omitempty" tf:"subject_filter,omitempty"`
+
 	// A webhook_endpoint block as defined below.
-	// +kubebuilder:validation:Optional
 	WebhookEndpoint []WebhookEndpointObservation `json:"webhookEndpoint,omitempty" tf:"webhook_endpoint,omitempty"`
 }
 
@@ -242,8 +397,8 @@ type EventSubscriptionParameters struct {
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// Specifies the name of the EventGrid Event Subscription resource. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A retry_policy block as defined below.
 	// +kubebuilder:validation:Optional
@@ -289,6 +444,9 @@ type EventSubscriptionParameters struct {
 }
 
 type IsNotNullObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type IsNotNullParameters struct {
@@ -299,6 +457,9 @@ type IsNotNullParameters struct {
 }
 
 type IsNullOrUndefinedObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 type IsNullOrUndefinedParameters struct {
@@ -309,9 +470,21 @@ type IsNullOrUndefinedParameters struct {
 }
 
 type NumberGreaterThanObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NumberGreaterThanOrEqualsObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NumberGreaterThanOrEqualsParameters struct {
@@ -337,6 +510,12 @@ type NumberGreaterThanParameters struct {
 }
 
 type NumberInObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*float64 `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type NumberInParameters struct {
@@ -351,6 +530,12 @@ type NumberInParameters struct {
 }
 
 type NumberInRangeObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values [][]*float64 `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type NumberInRangeParameters struct {
@@ -365,9 +550,21 @@ type NumberInRangeParameters struct {
 }
 
 type NumberLessThanObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NumberLessThanOrEqualsObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies a single value to compare to when using a single value operator.
+	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type NumberLessThanOrEqualsParameters struct {
@@ -393,6 +590,12 @@ type NumberLessThanParameters struct {
 }
 
 type NumberNotInObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*float64 `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type NumberNotInParameters struct {
@@ -407,6 +610,12 @@ type NumberNotInParameters struct {
 }
 
 type NumberNotInRangeObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values [][]*float64 `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type NumberNotInRangeParameters struct {
@@ -421,6 +630,12 @@ type NumberNotInRangeParameters struct {
 }
 
 type RetryPolicyObservation struct {
+
+	// Specifies the time to live (in minutes) for events. Supported range is 1 to 1440. See official documentation for more details.
+	EventTimeToLive *float64 `json:"eventTimeToLive,omitempty" tf:"event_time_to_live,omitempty"`
+
+	// Specifies the maximum number of delivery retry attempts for events.
+	MaxDeliveryAttempts *float64 `json:"maxDeliveryAttempts,omitempty" tf:"max_delivery_attempts,omitempty"`
 }
 
 type RetryPolicyParameters struct {
@@ -435,6 +650,12 @@ type RetryPolicyParameters struct {
 }
 
 type StorageBlobDeadLetterDestinationObservation struct {
+
+	// Specifies the id of the storage account id where the storage blob is located.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Specifies the name of the Storage blob container that is the destination of the deadletter events.
+	StorageBlobContainerName *string `json:"storageBlobContainerName,omitempty" tf:"storage_blob_container_name,omitempty"`
 }
 
 type StorageBlobDeadLetterDestinationParameters struct {
@@ -449,6 +670,15 @@ type StorageBlobDeadLetterDestinationParameters struct {
 }
 
 type StorageQueueEndpointObservation struct {
+
+	// Storage queue message time to live in seconds.
+	QueueMessageTimeToLiveInSeconds *float64 `json:"queueMessageTimeToLiveInSeconds,omitempty" tf:"queue_message_time_to_live_in_seconds,omitempty"`
+
+	// Specifies the name of the storage queue where the Event Subscription will receive events.
+	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
+
+	// Specifies the id of the storage account id where the storage queue is located.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 }
 
 type StorageQueueEndpointParameters struct {
@@ -486,6 +716,12 @@ type StorageQueueEndpointParameters struct {
 }
 
 type StringBeginsWithObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type StringBeginsWithParameters struct {
@@ -500,6 +736,12 @@ type StringBeginsWithParameters struct {
 }
 
 type StringContainsObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type StringContainsParameters struct {
@@ -514,6 +756,12 @@ type StringContainsParameters struct {
 }
 
 type StringEndsWithObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type StringEndsWithParameters struct {
@@ -528,6 +776,12 @@ type StringEndsWithParameters struct {
 }
 
 type StringInObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type StringInParameters struct {
@@ -542,6 +796,12 @@ type StringInParameters struct {
 }
 
 type StringNotBeginsWithObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type StringNotBeginsWithParameters struct {
@@ -556,6 +816,12 @@ type StringNotBeginsWithParameters struct {
 }
 
 type StringNotContainsObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type StringNotContainsParameters struct {
@@ -570,6 +836,12 @@ type StringNotContainsParameters struct {
 }
 
 type StringNotEndsWithObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type StringNotEndsWithParameters struct {
@@ -584,6 +856,12 @@ type StringNotEndsWithParameters struct {
 }
 
 type StringNotInObservation struct {
+
+	// Specifies the field within the event data that you want to use for filtering. Type of the field can be a number, boolean, or string.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// Specifies an array of values to compare to when using a multiple values operator.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type StringNotInParameters struct {
@@ -598,6 +876,15 @@ type StringNotInParameters struct {
 }
 
 type SubjectFilterObservation struct {
+
+	// Specifies if subject_begins_with and subject_ends_with case sensitive. This value
+	CaseSensitive *bool `json:"caseSensitive,omitempty" tf:"case_sensitive,omitempty"`
+
+	// A string to filter events for an event subscription based on a resource path prefix.
+	SubjectBeginsWith *string `json:"subjectBeginsWith,omitempty" tf:"subject_begins_with,omitempty"`
+
+	// A string to filter events for an event subscription based on a resource path suffix.
+	SubjectEndsWith *string `json:"subjectEndsWith,omitempty" tf:"subject_ends_with,omitempty"`
 }
 
 type SubjectFilterParameters struct {
@@ -617,8 +904,23 @@ type SubjectFilterParameters struct {
 
 type WebhookEndpointObservation struct {
 
+	// The Azure Active Directory Application ID or URI to get the access token that will be included as the bearer token in delivery requests.
+	ActiveDirectoryAppIDOrURI *string `json:"activeDirectoryAppIdOrUri,omitempty" tf:"active_directory_app_id_or_uri,omitempty"`
+
+	// The Azure Active Directory Tenant ID to get the access token that will be included as the bearer token in delivery requests.
+	ActiveDirectoryTenantID *string `json:"activeDirectoryTenantId,omitempty" tf:"active_directory_tenant_id,omitempty"`
+
 	// (Computed) The base url of the webhook where the Event Subscription will receive events.
 	BaseURL *string `json:"baseUrl,omitempty" tf:"base_url,omitempty"`
+
+	// Maximum number of events per batch.
+	MaxEventsPerBatch *float64 `json:"maxEventsPerBatch,omitempty" tf:"max_events_per_batch,omitempty"`
+
+	// Preferred batch size in Kilobytes.
+	PreferredBatchSizeInKilobytes *float64 `json:"preferredBatchSizeInKilobytes,omitempty" tf:"preferred_batch_size_in_kilobytes,omitempty"`
+
+	// Specifies the url of the webhook where the Event Subscription will receive events.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type WebhookEndpointParameters struct {
@@ -668,8 +970,9 @@ type EventSubscriptionStatus struct {
 type EventSubscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventSubscriptionSpec   `json:"spec"`
-	Status            EventSubscriptionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   EventSubscriptionSpec   `json:"spec"`
+	Status EventSubscriptionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

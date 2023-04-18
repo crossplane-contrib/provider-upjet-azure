@@ -14,6 +14,15 @@ import (
 )
 
 type MonitorScheduledQueryRulesAlertActionObservation struct {
+
+	// List of action group reference resource IDs.
+	ActionGroup []*string `json:"actionGroup,omitempty" tf:"action_group,omitempty"`
+
+	// Custom payload to be sent for all webhook payloads in alerting action.
+	CustomWebhookPayload *string `json:"customWebhookPayload,omitempty" tf:"custom_webhook_payload,omitempty"`
+
+	// Custom subject override for all email ids in Azure action group.
+	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
 }
 
 type MonitorScheduledQueryRulesAlertActionParameters struct {
@@ -43,15 +52,67 @@ type MonitorScheduledQueryRulesAlertActionParameters struct {
 
 type MonitorScheduledQueryRulesAlertObservation struct {
 
+	// An action block as defined below.
+	Action []MonitorScheduledQueryRulesAlertActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// List of Resource IDs referred into query.
+	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
+
+	// Should the alerts in this Metric Alert be auto resolved? Defaults to false.
+	// -> NOTE auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
+	AutoMitigationEnabled *bool `json:"autoMitigationEnabled,omitempty" tf:"auto_mitigation_enabled,omitempty"`
+
+	// The resource URI over which log search query is to be run.
+	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
+
+	// The description of the scheduled query rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether this scheduled query rule is enabled. Default is true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Frequency (in minutes) at which rule condition should be evaluated. Values must be between 5 and 1440 (inclusive).
+	Frequency *float64 `json:"frequency,omitempty" tf:"frequency,omitempty"`
+
 	// The ID of the scheduled query rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the Azure Region where the resource should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the scheduled query rule. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Log search query.
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to Number, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
+	QueryType *string `json:"queryType,omitempty" tf:"query_type,omitempty"`
+
+	// The name of the resource group in which to create the scheduled query rule instance. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Severity of the alert. Possible values include: 0, 1, 2, 3, or 4.
+	Severity *float64 `json:"severity,omitempty" tf:"severity,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Time (in minutes) for which Alerts should be throttled or suppressed. Values must be between 0 and 10000 (inclusive).
+	Throttling *float64 `json:"throttling,omitempty" tf:"throttling,omitempty"`
+
+	// Time window for which data needs to be fetched for query (must be greater than or equal to frequency). Values must be between 5 and 2880 (inclusive).
+	TimeWindow *float64 `json:"timeWindow,omitempty" tf:"time_window,omitempty"`
+
+	// A trigger block as defined below.
+	Trigger []TriggerObservation `json:"trigger,omitempty" tf:"trigger,omitempty"`
 }
 
 type MonitorScheduledQueryRulesAlertParameters struct {
 
 	// An action block as defined below.
-	// +kubebuilder:validation:Required
-	Action []MonitorScheduledQueryRulesAlertActionParameters `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action []MonitorScheduledQueryRulesAlertActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// List of Resource IDs referred into query.
 	// +kubebuilder:validation:Optional
@@ -85,20 +146,20 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Frequency (in minutes) at which rule condition should be evaluated. Values must be between 5 and 1440 (inclusive).
-	// +kubebuilder:validation:Required
-	Frequency *float64 `json:"frequency" tf:"frequency,omitempty"`
+	// +kubebuilder:validation:Optional
+	Frequency *float64 `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// Specifies the Azure Region where the resource should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the scheduled query rule. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Log search query.
-	// +kubebuilder:validation:Required
-	Query *string `json:"query" tf:"query,omitempty"`
+	// +kubebuilder:validation:Optional
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
 	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to Number, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
 	// +kubebuilder:validation:Optional
@@ -130,15 +191,27 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 	Throttling *float64 `json:"throttling,omitempty" tf:"throttling,omitempty"`
 
 	// Time window for which data needs to be fetched for query (must be greater than or equal to frequency). Values must be between 5 and 2880 (inclusive).
-	// +kubebuilder:validation:Required
-	TimeWindow *float64 `json:"timeWindow" tf:"time_window,omitempty"`
+	// +kubebuilder:validation:Optional
+	TimeWindow *float64 `json:"timeWindow,omitempty" tf:"time_window,omitempty"`
 
 	// A trigger block as defined below.
-	// +kubebuilder:validation:Required
-	Trigger []TriggerParameters `json:"trigger" tf:"trigger,omitempty"`
+	// +kubebuilder:validation:Optional
+	Trigger []TriggerParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
 }
 
 type TriggerMetricTriggerObservation struct {
+
+	// Evaluation of metric on a particular column.
+	MetricColumn *string `json:"metricColumn,omitempty" tf:"metric_column,omitempty"`
+
+	// Metric Trigger Type - 'Consecutive' or 'Total'.
+	MetricTriggerType *string `json:"metricTriggerType,omitempty" tf:"metric_trigger_type,omitempty"`
+
+	// Evaluation operation for rule - 'GreaterThan', GreaterThanOrEqual', 'LessThan', or 'LessThanOrEqual'.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// Result or count threshold based on which rule should be triggered. Values must be between 0 and 10000 inclusive.
+	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
 
 type TriggerMetricTriggerParameters struct {
@@ -161,6 +234,15 @@ type TriggerMetricTriggerParameters struct {
 }
 
 type TriggerObservation struct {
+
+	// A metric_trigger block as defined above. Trigger condition for metric query rule.
+	MetricTrigger []TriggerMetricTriggerObservation `json:"metricTrigger,omitempty" tf:"metric_trigger,omitempty"`
+
+	// Evaluation operation for rule - 'GreaterThan', GreaterThanOrEqual', 'LessThan', or 'LessThanOrEqual'.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// Result or count threshold based on which rule should be triggered. Values must be between 0 and 10000 inclusive.
+	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
 
 type TriggerParameters struct {
@@ -202,8 +284,15 @@ type MonitorScheduledQueryRulesAlertStatus struct {
 type MonitorScheduledQueryRulesAlert struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MonitorScheduledQueryRulesAlertSpec   `json:"spec"`
-	Status            MonitorScheduledQueryRulesAlertStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frequency)",message="frequency is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.query)",message="query is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeWindow)",message="timeWindow is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.trigger)",message="trigger is a required parameter"
+	Spec   MonitorScheduledQueryRulesAlertSpec   `json:"spec"`
+	Status MonitorScheduledQueryRulesAlertStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

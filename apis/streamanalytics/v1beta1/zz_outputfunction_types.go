@@ -15,14 +15,32 @@ import (
 
 type OutputFunctionObservation struct {
 
+	// The maximum number of events in each batch that's sent to the function. Defaults to 100.
+	BatchMaxCount *float64 `json:"batchMaxCount,omitempty" tf:"batch_max_count,omitempty"`
+
+	// The maximum batch size in bytes that's sent to the function. Defaults to 262144 (256 kB).
+	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
+
+	// The name of the Function App.
+	FunctionApp *string `json:"functionApp,omitempty" tf:"function_app,omitempty"`
+
+	// The name of the function in the Function App.
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
 	// The ID of the Stream Analytics Output Function.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Resource Group where the Stream Analytics Output should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
 }
 
 type OutputFunctionParameters struct {
 
 	// The API key for the Function.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 
 	// The maximum number of events in each batch that's sent to the function. Defaults to 100.
@@ -48,8 +66,8 @@ type OutputFunctionParameters struct {
 	FunctionAppSelector *v1.Selector `json:"functionAppSelector,omitempty" tf:"-"`
 
 	// The name of the function in the Function App.
-	// +kubebuilder:validation:Required
-	FunctionName *string `json:"functionName" tf:"function_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Output should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -102,8 +120,10 @@ type OutputFunctionStatus struct {
 type OutputFunction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              OutputFunctionSpec   `json:"spec"`
-	Status            OutputFunctionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.apiKeySecretRef)",message="apiKeySecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.functionName)",message="functionName is a required parameter"
+	Spec   OutputFunctionSpec   `json:"spec"`
+	Status OutputFunctionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,8 +15,38 @@ import (
 
 type CustomDataSetObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Dataset.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Dataset.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The Data Factory ID in which to associate the Dataset with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Dataset.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
 	// The ID of the Data Factory Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A linked_service block as defined below.
+	LinkedService []LinkedServiceObservation `json:"linkedService,omitempty" tf:"linked_service,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Dataset.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// A JSON object that contains the schema of the Data Factory Dataset.
+	SchemaJSON *string `json:"schemaJson,omitempty" tf:"schema_json,omitempty"`
+
+	// The type of dataset that will be associated with Data Factory. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// A JSON object that contains the properties of the Data Factory Dataset.
+	TypePropertiesJSON *string `json:"typePropertiesJson,omitempty" tf:"type_properties_json,omitempty"`
 }
 
 type CustomDataSetParameters struct {
@@ -52,8 +82,8 @@ type CustomDataSetParameters struct {
 	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
 
 	// A linked_service block as defined below.
-	// +kubebuilder:validation:Required
-	LinkedService []LinkedServiceParameters `json:"linkedService" tf:"linked_service,omitempty"`
+	// +kubebuilder:validation:Optional
+	LinkedService []LinkedServiceParameters `json:"linkedService,omitempty" tf:"linked_service,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Dataset.
 	// +kubebuilder:validation:Optional
@@ -64,15 +94,21 @@ type CustomDataSetParameters struct {
 	SchemaJSON *string `json:"schemaJson,omitempty" tf:"schema_json,omitempty"`
 
 	// The type of dataset that will be associated with Data Factory. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A JSON object that contains the properties of the Data Factory Dataset.
-	// +kubebuilder:validation:Required
-	TypePropertiesJSON *string `json:"typePropertiesJson" tf:"type_properties_json,omitempty"`
+	// +kubebuilder:validation:Optional
+	TypePropertiesJSON *string `json:"typePropertiesJson,omitempty" tf:"type_properties_json,omitempty"`
 }
 
 type LinkedServiceObservation struct {
+
+	// The name of the Data Factory Linked Service.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type LinkedServiceParameters struct {
@@ -119,8 +155,11 @@ type CustomDataSetStatus struct {
 type CustomDataSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CustomDataSetSpec   `json:"spec"`
-	Status            CustomDataSetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.linkedService)",message="linkedService is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.typePropertiesJson)",message="typePropertiesJson is a required parameter"
+	Spec   CustomDataSetSpec   `json:"spec"`
+	Status CustomDataSetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

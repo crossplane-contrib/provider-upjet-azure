@@ -30,8 +30,20 @@ type LabObservation struct {
 	// The ID of the Key used for this Dev Test Lab.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
+	// Specifies the supported Azure location where the Dev Test Lab should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// The ID of the Storage Account used for Storage of Premium Data Disk.
 	PremiumDataDiskStorageAccountID *string `json:"premiumDataDiskStorageAccountId,omitempty" tf:"premium_data_disk_storage_account_id,omitempty"`
+
+	// The name of the resource group under which the Dev Test Lab resource has to be created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The type of storage used by the Dev Test Lab. Possible values are Standard and Premium. Defaults to Premium.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The unique immutable identifier of the Dev Test Lab.
 	UniqueIdentifier *string `json:"uniqueIdentifier,omitempty" tf:"unique_identifier,omitempty"`
@@ -40,8 +52,8 @@ type LabObservation struct {
 type LabParameters struct {
 
 	// Specifies the supported Azure location where the Dev Test Lab should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group under which the Dev Test Lab resource has to be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -89,8 +101,9 @@ type LabStatus struct {
 type Lab struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LabSpec   `json:"spec"`
-	Status            LabStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   LabSpec   `json:"spec"`
+	Status LabStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,8 +15,50 @@ import (
 
 type APIDiagnosticObservation struct {
 
+	// The ID (name) of the Diagnostics Logger.
+	APIManagementLoggerID *string `json:"apiManagementLoggerId,omitempty" tf:"api_management_logger_id,omitempty"`
+
+	// The name of the API Management Service instance. Changing this forces a new API Management Service API Diagnostics Logs to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// The name of the API on which to configure the Diagnostics Logs. Changing this forces a new API Management Service API Diagnostics Logs to be created.
+	APIName *string `json:"apiName,omitempty" tf:"api_name,omitempty"`
+
+	// Always log errors. Send telemetry if there is an erroneous condition, regardless of sampling settings.
+	AlwaysLogErrors *bool `json:"alwaysLogErrors,omitempty" tf:"always_log_errors,omitempty"`
+
+	// A backend_request block as defined below.
+	BackendRequest []BackendRequestObservation `json:"backendRequest,omitempty" tf:"backend_request,omitempty"`
+
+	// A backend_response block as defined below.
+	BackendResponse []BackendResponseObservation `json:"backendResponse,omitempty" tf:"backend_response,omitempty"`
+
+	// A frontend_request block as defined below.
+	FrontendRequest []FrontendRequestObservation `json:"frontendRequest,omitempty" tf:"frontend_request,omitempty"`
+
+	// A frontend_response block as defined below.
+	FrontendResponse []FrontendResponseObservation `json:"frontendResponse,omitempty" tf:"frontend_response,omitempty"`
+
+	// The HTTP Correlation Protocol to use. Possible values are None, Legacy or W3C.
+	HTTPCorrelationProtocol *string `json:"httpCorrelationProtocol,omitempty" tf:"http_correlation_protocol,omitempty"`
+
 	// The ID of the API Management Service API Diagnostics Logs.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Log client IP address.
+	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
+
+	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url. Defaults to Name.
+	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
+
+	// The name of the Resource Group where the API Management Service API Diagnostics Logs should exist. Changing this forces a new API Management Service API Diagnostics Logs to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Sampling (%). For high traffic APIs, please read this documentation to understand performance implications and log sampling. Valid values are between 0.0 and 100.0.
+	SamplingPercentage *float64 `json:"samplingPercentage,omitempty" tf:"sampling_percentage,omitempty"`
+
+	// Logging verbosity. Possible values are verbose, information or error.
+	Verbosity *string `json:"verbosity,omitempty" tf:"verbosity,omitempty"`
 }
 
 type APIDiagnosticParameters struct {
@@ -116,6 +158,15 @@ type APIDiagnosticParameters struct {
 }
 
 type BackendRequestObservation struct {
+
+	// Number of payload bytes to log (up to 8192).
+	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
+
+	// A data_masking block as defined below.
+	DataMasking []DataMaskingObservation `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
+
+	// Specifies a list of headers to log.
+	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
 type BackendRequestParameters struct {
@@ -134,6 +185,12 @@ type BackendRequestParameters struct {
 }
 
 type BackendResponseDataMaskingObservation struct {
+
+	// A headers block as defined below.
+	Headers []DataMaskingHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// A query_params block as defined below.
+	QueryParams []DataMaskingQueryParamsObservation `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
 
 type BackendResponseDataMaskingParameters struct {
@@ -148,6 +205,15 @@ type BackendResponseDataMaskingParameters struct {
 }
 
 type BackendResponseObservation struct {
+
+	// Number of payload bytes to log (up to 8192).
+	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
+
+	// A data_masking block as defined below.
+	DataMasking []BackendResponseDataMaskingObservation `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
+
+	// Specifies a list of headers to log.
+	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
 type BackendResponseParameters struct {
@@ -166,6 +232,12 @@ type BackendResponseParameters struct {
 }
 
 type DataMaskingHeadersObservation struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DataMaskingHeadersParameters struct {
@@ -180,6 +252,12 @@ type DataMaskingHeadersParameters struct {
 }
 
 type DataMaskingObservation struct {
+
+	// A headers block as defined below.
+	Headers []HeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// A query_params block as defined below.
+	QueryParams []QueryParamsObservation `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
 
 type DataMaskingParameters struct {
@@ -194,6 +272,12 @@ type DataMaskingParameters struct {
 }
 
 type DataMaskingQueryParamsObservation struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DataMaskingQueryParamsParameters struct {
@@ -208,6 +292,12 @@ type DataMaskingQueryParamsParameters struct {
 }
 
 type FrontendRequestDataMaskingHeadersObservation struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FrontendRequestDataMaskingHeadersParameters struct {
@@ -222,6 +312,12 @@ type FrontendRequestDataMaskingHeadersParameters struct {
 }
 
 type FrontendRequestDataMaskingObservation struct {
+
+	// A headers block as defined below.
+	Headers []FrontendRequestDataMaskingHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// A query_params block as defined below.
+	QueryParams []FrontendRequestDataMaskingQueryParamsObservation `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
 
 type FrontendRequestDataMaskingParameters struct {
@@ -236,6 +332,12 @@ type FrontendRequestDataMaskingParameters struct {
 }
 
 type FrontendRequestDataMaskingQueryParamsObservation struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FrontendRequestDataMaskingQueryParamsParameters struct {
@@ -250,6 +352,15 @@ type FrontendRequestDataMaskingQueryParamsParameters struct {
 }
 
 type FrontendRequestObservation struct {
+
+	// Number of payload bytes to log (up to 8192).
+	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
+
+	// A data_masking block as defined below.
+	DataMasking []FrontendRequestDataMaskingObservation `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
+
+	// Specifies a list of headers to log.
+	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
 type FrontendRequestParameters struct {
@@ -268,6 +379,12 @@ type FrontendRequestParameters struct {
 }
 
 type FrontendResponseDataMaskingHeadersObservation struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FrontendResponseDataMaskingHeadersParameters struct {
@@ -282,6 +399,12 @@ type FrontendResponseDataMaskingHeadersParameters struct {
 }
 
 type FrontendResponseDataMaskingObservation struct {
+
+	// A headers block as defined below.
+	Headers []FrontendResponseDataMaskingHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// A query_params block as defined below.
+	QueryParams []FrontendResponseDataMaskingQueryParamsObservation `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
 
 type FrontendResponseDataMaskingParameters struct {
@@ -296,6 +419,12 @@ type FrontendResponseDataMaskingParameters struct {
 }
 
 type FrontendResponseDataMaskingQueryParamsObservation struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type FrontendResponseDataMaskingQueryParamsParameters struct {
@@ -310,6 +439,15 @@ type FrontendResponseDataMaskingQueryParamsParameters struct {
 }
 
 type FrontendResponseObservation struct {
+
+	// Number of payload bytes to log (up to 8192).
+	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
+
+	// A data_masking block as defined below.
+	DataMasking []FrontendResponseDataMaskingObservation `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
+
+	// Specifies a list of headers to log.
+	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
 type FrontendResponseParameters struct {
@@ -328,6 +466,12 @@ type FrontendResponseParameters struct {
 }
 
 type HeadersObservation struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HeadersParameters struct {
@@ -342,6 +486,12 @@ type HeadersParameters struct {
 }
 
 type QueryParamsObservation struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type QueryParamsParameters struct {

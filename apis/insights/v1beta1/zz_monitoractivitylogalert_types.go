@@ -14,6 +14,12 @@ import (
 )
 
 type ActionObservation struct {
+
+	// The ID of the Action Group can be sourced from the .
+	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
+
+	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
+	WebhookProperties map[string]*string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
 }
 
 type ActionParameters struct {
@@ -38,6 +44,51 @@ type ActionParameters struct {
 }
 
 type CriteriaObservation struct {
+
+	// The email address or Azure Active Directory identifier of the user who performed the operation.
+	Caller *string `json:"caller,omitempty" tf:"caller,omitempty"`
+
+	// The category of the operation. Possible values are Administrative, Autoscale, Policy, Recommendation, ResourceHealth, Security and ServiceHealth.
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// The severity level of the event. Possible values are Verbose, Informational, Warning, Error, and Critical.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// The Resource Manager Role-Based Access Control operation name. Supported operation should be of the form: <resourceProvider>/<resourceType>/<operation>.
+	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
+
+	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence and Performance. It is only allowed when category is Recommendation.
+	RecommendationCategory *string `json:"recommendationCategory,omitempty" tf:"recommendation_category,omitempty"`
+
+	// The recommendation impact of the event. Possible values are High, Medium and Low. It is only allowed when category is Recommendation.
+	RecommendationImpact *string `json:"recommendationImpact,omitempty" tf:"recommendation_impact,omitempty"`
+
+	// The recommendation type of the event. It is only allowed when category is Recommendation.
+	RecommendationType *string `json:"recommendationType,omitempty" tf:"recommendation_type,omitempty"`
+
+	// The name of resource group monitored by the activity log alert.
+	ResourceGroup *string `json:"resourceGroup,omitempty" tf:"resource_group,omitempty"`
+
+	// A block to define fine grain resource health settings.
+	ResourceHealth []ResourceHealthObservation `json:"resourceHealth,omitempty" tf:"resource_health,omitempty"`
+
+	// The specific resource monitored by the activity log alert. It should be within one of the scopes.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// The name of the resource provider monitored by the activity log alert.
+	ResourceProvider *string `json:"resourceProvider,omitempty" tf:"resource_provider,omitempty"`
+
+	// The resource type monitored by the activity log alert.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// A block to define fine grain service health settings.
+	ServiceHealth []ServiceHealthObservation `json:"serviceHealth,omitempty" tf:"service_health,omitempty"`
+
+	// The status of the event. For example, Started, Failed, or Succeeded.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The sub status of the event.
+	SubStatus *string `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
 }
 
 type CriteriaParameters struct {
@@ -115,8 +166,32 @@ type CriteriaParameters struct {
 
 type MonitorActivityLogAlertObservation struct {
 
+	// One or more action blocks as defined below.
+	Action []ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
+
+	// A criteria block as defined below.
+	Criteria []CriteriaObservation `json:"criteria,omitempty" tf:"criteria,omitempty"`
+
+	// The description of this activity log alert.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Should this Activity Log Alert be enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
 	// The ID of the activity log alert.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the activity log alert. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the resource group in which to create the activity log alert instance. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The Scope at which the Activity Log should be applied. A list of strings which could be a resource group , or a subscription, or a resource ID (such as a Storage Account).
+	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MonitorActivityLogAlertParameters struct {
@@ -126,8 +201,8 @@ type MonitorActivityLogAlertParameters struct {
 	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A criteria block as defined below.
-	// +kubebuilder:validation:Required
-	Criteria []CriteriaParameters `json:"criteria" tf:"criteria,omitempty"`
+	// +kubebuilder:validation:Optional
+	Criteria []CriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
 	// The description of this activity log alert.
 	// +kubebuilder:validation:Optional
@@ -138,8 +213,8 @@ type MonitorActivityLogAlertParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the activity log alert. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which to create the activity log alert instance. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -174,6 +249,15 @@ type MonitorActivityLogAlertParameters struct {
 }
 
 type ResourceHealthObservation struct {
+
+	// The current resource health statuses that will log an alert. Possible values are Available, Degraded, Unavailable and Unknown.
+	Current []*string `json:"current,omitempty" tf:"current,omitempty"`
+
+	// The previous resource health statuses that will log an alert. Possible values are Available, Degraded, Unavailable and Unknown.
+	Previous []*string `json:"previous,omitempty" tf:"previous,omitempty"`
+
+	// The reason that will log an alert. Possible values are PlatformInitiated (such as a problem with the resource in an affected region of an Azure incident), UserInitiated (such as a shutdown request of a VM) and Unknown.
+	Reason []*string `json:"reason,omitempty" tf:"reason,omitempty"`
 }
 
 type ResourceHealthParameters struct {
@@ -192,6 +276,15 @@ type ResourceHealthParameters struct {
 }
 
 type ServiceHealthObservation struct {
+
+	// Events this alert will monitor Possible values are Incident, Maintenance, Informational, ActionRequired and Security.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// Locations this alert will monitor. For example, West Europe.
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+
+	// Services this alert will monitor. For example, Activity Logs & Alerts, Action Groups. Defaults to all Services.
+	Services []*string `json:"services,omitempty" tf:"services,omitempty"`
 }
 
 type ServiceHealthParameters struct {
@@ -233,8 +326,10 @@ type MonitorActivityLogAlertStatus struct {
 type MonitorActivityLogAlert struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MonitorActivityLogAlertSpec   `json:"spec"`
-	Status            MonitorActivityLogAlertStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.criteria)",message="criteria is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   MonitorActivityLogAlertSpec   `json:"spec"`
+	Status MonitorActivityLogAlertStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

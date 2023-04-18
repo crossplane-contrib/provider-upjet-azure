@@ -15,6 +15,9 @@ import (
 
 type SecurityCenterAutoProvisioningObservation struct {
 
+	// Should the security agent be automatically provisioned on Virtual Machines in this subscription? Possible values are On (to install the security agent automatically, if it's missing) or Off (to not install the security agent automatically).
+	AutoProvision *string `json:"autoProvision,omitempty" tf:"auto_provision,omitempty"`
+
 	// The ID of the Security Center Auto Provisioning.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
@@ -22,8 +25,8 @@ type SecurityCenterAutoProvisioningObservation struct {
 type SecurityCenterAutoProvisioningParameters struct {
 
 	// Should the security agent be automatically provisioned on Virtual Machines in this subscription? Possible values are On (to install the security agent automatically, if it's missing) or Off (to not install the security agent automatically).
-	// +kubebuilder:validation:Required
-	AutoProvision *string `json:"autoProvision" tf:"auto_provision,omitempty"`
+	// +kubebuilder:validation:Optional
+	AutoProvision *string `json:"autoProvision,omitempty" tf:"auto_provision,omitempty"`
 }
 
 // SecurityCenterAutoProvisioningSpec defines the desired state of SecurityCenterAutoProvisioning
@@ -50,8 +53,9 @@ type SecurityCenterAutoProvisioningStatus struct {
 type SecurityCenterAutoProvisioning struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SecurityCenterAutoProvisioningSpec   `json:"spec"`
-	Status            SecurityCenterAutoProvisioningStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.autoProvision)",message="autoProvision is a required parameter"
+	Spec   SecurityCenterAutoProvisioningSpec   `json:"spec"`
+	Status SecurityCenterAutoProvisioningStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

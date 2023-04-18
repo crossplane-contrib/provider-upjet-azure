@@ -15,8 +15,20 @@ import (
 
 type BotChannelAlexaObservation struct {
 
+	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
+	BotName *string `json:"botName,omitempty" tf:"bot_name,omitempty"`
+
 	// The ID of the Alexa Integration for a Bot Channel.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group where the Alexa Channel should be created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The Alexa skill ID for the Alexa Channel.
+	SkillID *string `json:"skillId,omitempty" tf:"skill_id,omitempty"`
 }
 
 type BotChannelAlexaParameters struct {
@@ -36,8 +48,8 @@ type BotChannelAlexaParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group where the Alexa Channel should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -53,8 +65,8 @@ type BotChannelAlexaParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Alexa skill ID for the Alexa Channel.
-	// +kubebuilder:validation:Required
-	SkillID *string `json:"skillId" tf:"skill_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkillID *string `json:"skillId,omitempty" tf:"skill_id,omitempty"`
 }
 
 // BotChannelAlexaSpec defines the desired state of BotChannelAlexa
@@ -81,8 +93,10 @@ type BotChannelAlexaStatus struct {
 type BotChannelAlexa struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BotChannelAlexaSpec   `json:"spec"`
-	Status            BotChannelAlexaStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skillId)",message="skillId is a required parameter"
+	Spec   BotChannelAlexaSpec   `json:"spec"`
+	Status BotChannelAlexaStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

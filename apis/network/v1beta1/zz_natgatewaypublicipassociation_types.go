@@ -15,6 +15,12 @@ import (
 
 type NATGatewayPublicIPAssociationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the NAT Gateway. Changing this forces a new resource to be created.
+	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
+
+	// The ID of the Public IP which this NAT Gateway which should be connected to. Changing this forces a new resource to be created.
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 }
 
 type NATGatewayPublicIPAssociationParameters struct {

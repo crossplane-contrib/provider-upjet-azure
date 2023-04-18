@@ -15,6 +15,12 @@ import (
 
 type FrontdoorCustomDomainAssociationObservation struct {
 
+	// The ID of the Front Door Custom Domain that should be managed by the association resource. Changing this forces a new association resource to be created.
+	CdnFrontdoorCustomDomainID *string `json:"cdnFrontdoorCustomDomainId,omitempty" tf:"cdn_frontdoor_custom_domain_id,omitempty"`
+
+	// One or more IDs of the Front Door Route to which the Front Door Custom Domain is associated with.
+	CdnFrontdoorRouteIds []*string `json:"cdnFrontdoorRouteIds,omitempty" tf:"cdn_frontdoor_route_ids,omitempty"`
+
 	// The ID of the Front Door Custom Domain Association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }

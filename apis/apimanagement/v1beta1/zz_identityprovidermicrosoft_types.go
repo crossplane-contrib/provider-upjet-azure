@@ -15,8 +15,17 @@ import (
 
 type IdentityProviderMicrosoftObservation struct {
 
+	// The Name of the API Management Service where this Microsoft Identity Provider should be created. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// Client Id of the Azure AD Application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
 	// The ID of the API Management Microsoft Identity Provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type IdentityProviderMicrosoftParameters struct {
@@ -35,11 +44,11 @@ type IdentityProviderMicrosoftParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// Client Id of the Azure AD Application.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Client secret of the Azure AD Application.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
@@ -80,8 +89,10 @@ type IdentityProviderMicrosoftStatus struct {
 type IdentityProviderMicrosoft struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IdentityProviderMicrosoftSpec   `json:"spec"`
-	Status            IdentityProviderMicrosoftStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientId)",message="clientId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientSecretSecretRef)",message="clientSecretSecretRef is a required parameter"
+	Spec   IdentityProviderMicrosoftSpec   `json:"spec"`
+	Status IdentityProviderMicrosoftStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

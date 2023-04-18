@@ -14,6 +14,15 @@ import (
 )
 
 type EncryptionObservation struct {
+
+	// The Key Vault URI to access the encryption key.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The ID of the keyVault where the customer owned encryption key is present.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// The Key Vault URI to access the encryption key.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
 type EncryptionParameters struct {
@@ -63,11 +72,17 @@ type EncryptionParameters struct {
 
 type WorkspaceIdentityObservation struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Workspace.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Workspace. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type WorkspaceIdentityParameters struct {
@@ -83,15 +98,65 @@ type WorkspaceIdentityParameters struct {
 
 type WorkspaceObservation struct {
 
+	// The ID of the Application Insights associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
+	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
+
+	// The ID of the container registry associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
+	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
+
+	// The description of this Machine Learning Workspace.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The url for the discovery service to identify regional endpoints for machine learning experimentation services.
 	DiscoveryURL *string `json:"discoveryUrl,omitempty" tf:"discovery_url,omitempty"`
+
+	// An encryption block as defined below. Changing this forces a new resource to be created.
+	Encryption []EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
+	// Display name for this Machine Learning Workspace.
+	FriendlyName *string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
+
+	// Flag to signal High Business Impact (HBI) data in the workspace and reduce diagnostic data collected by the service
+	HighBusinessImpact *bool `json:"highBusinessImpact,omitempty" tf:"high_business_impact,omitempty"`
 
 	// The ID of the Machine Learning Workspace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Required
 	Identity []WorkspaceIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The compute name for image build of the Machine Learning Workspace.
+	ImageBuildComputeName *string `json:"imageBuildComputeName,omitempty" tf:"image_build_compute_name,omitempty"`
+
+	// The ID of key vault associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Specifies the supported Azure location where the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The user assigned identity id that represents the workspace identity.
+	PrimaryUserAssignedIdentity *string `json:"primaryUserAssignedIdentity,omitempty" tf:"primary_user_assigned_identity,omitempty"`
+
+	// Enable public access when this Machine Learning Workspace is behind a VNet. Changing this forces a new resource to be created.
+	PublicAccessBehindVirtualNetworkEnabled *bool `json:"publicAccessBehindVirtualNetworkEnabled,omitempty" tf:"public_access_behind_virtual_network_enabled,omitempty"`
+
+	// Enable public access when this Machine Learning Workspace is behind VNet.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Specifies the name of the Resource Group in which the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// SKU/edition of the Machine Learning Workspace, possible values are Basic. Defaults to Basic.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// The ID of the Storage Account associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Enable V1 API features, enabling v1_legacy_mode may prevent you from using features provided by the v2 API. Defaults to false.
+	V1LegacyModeEnabled *bool `json:"v1LegacyModeEnabled,omitempty" tf:"v1_legacy_mode_enabled,omitempty"`
 }
 
 type WorkspaceParameters struct {
@@ -131,8 +196,8 @@ type WorkspaceParameters struct {
 	HighBusinessImpact *bool `json:"highBusinessImpact,omitempty" tf:"high_business_impact,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Required
-	Identity []WorkspaceIdentityParameters `json:"identity" tf:"identity,omitempty"`
+	// +kubebuilder:validation:Optional
+	Identity []WorkspaceIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The compute name for image build of the Machine Learning Workspace.
 	// +kubebuilder:validation:Optional
@@ -153,8 +218,8 @@ type WorkspaceParameters struct {
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The user assigned identity id that represents the workspace identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
@@ -242,8 +307,10 @@ type WorkspaceStatus struct {
 type Workspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WorkspaceSpec   `json:"spec"`
-	Status            WorkspaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identity)",message="identity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   WorkspaceSpec   `json:"spec"`
+	Status WorkspaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

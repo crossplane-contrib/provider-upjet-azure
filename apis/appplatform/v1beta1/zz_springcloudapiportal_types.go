@@ -15,8 +15,26 @@ import (
 
 type SpringCloudAPIPortalObservation struct {
 
+	// Specifies a list of Spring Cloud Gateway.
+	GatewayIds []*string `json:"gatewayIds,omitempty" tf:"gateway_ids,omitempty"`
+
+	// is only https is allowed?
+	HTTPSOnlyEnabled *bool `json:"httpsOnlyEnabled,omitempty" tf:"https_only_enabled,omitempty"`
+
 	// The ID of the Spring Cloud API Portal.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the required instance count of the Spring Cloud API Portal. Possible Values are between 1 and 500. Defaults to 1 if not specified.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// Is the public network access enabled?
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud API Portal to be created.
+	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`
+
+	// A sso block as defined below.
+	Sso []SsoObservation `json:"sso,omitempty" tf:"sso,omitempty"`
 
 	// TODO.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
@@ -70,6 +88,18 @@ type SpringCloudAPIPortalParameters struct {
 }
 
 type SsoObservation struct {
+
+	// The public identifier for the application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The secret known only to the application and the authorization server.
+	ClientSecret *string `json:"clientSecret,omitempty" tf:"client_secret,omitempty"`
+
+	// The URI of Issuer Identifier.
+	IssuerURI *string `json:"issuerUri,omitempty" tf:"issuer_uri,omitempty"`
+
+	// It defines the specific actions applications can be allowed to do on a user's behalf.
+	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
 type SsoParameters struct {

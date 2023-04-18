@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: springcloudbuilders.appplatform.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -180,11 +184,22 @@ spec:
                       - version
                       type: object
                     type: array
-                required:
-                - buildPackGroup
-                - name
-                - stack
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -356,14 +371,57 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: buildPackGroup is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.buildPackGroup)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: stack is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.stack)
           status:
             description: SpringCloudBuilderStatus defines the observed state of SpringCloudBuilder.
             properties:
               atProvider:
                 properties:
+                  buildPackGroup:
+                    description: One or more build_pack_group blocks as defined below.
+                    items:
+                      properties:
+                        buildPackIds:
+                          description: Specifies a list of the build pack's ID.
+                          items:
+                            type: string
+                          type: array
+                        name:
+                          description: The name which should be used for this build
+                            pack group.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Spring Cloud Builder.
                     type: string
+                  name:
+                    description: The name which should be used for this Spring Cloud
+                      Builder. Changing this forces a new Spring Cloud Builder to
+                      be created.
+                    type: string
+                  springCloudServiceId:
+                    description: The ID of the Spring Cloud Service. Changing this
+                      forces a new Spring Cloud Builder to be created.
+                    type: string
+                  stack:
+                    description: A stack block as defined below.
+                    items:
+                      properties:
+                        id:
+                          description: Specifies the ID of the ClusterStack.
+                          type: string
+                        version:
+                          description: Specifies the version of the ClusterStack
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

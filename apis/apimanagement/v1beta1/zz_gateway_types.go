@@ -15,8 +15,17 @@ import (
 
 type GatewayObservation struct {
 
+	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
+	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
+
+	// The description of the API Management Gateway.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the API Management Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A location_data block as documented below.
+	LocationData []LocationDataObservation `json:"locationData,omitempty" tf:"location_data,omitempty"`
 }
 
 type GatewayParameters struct {
@@ -40,11 +49,23 @@ type GatewayParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A location_data block as documented below.
-	// +kubebuilder:validation:Required
-	LocationData []LocationDataParameters `json:"locationData" tf:"location_data,omitempty"`
+	// +kubebuilder:validation:Optional
+	LocationData []LocationDataParameters `json:"locationData,omitempty" tf:"location_data,omitempty"`
 }
 
 type LocationDataObservation struct {
+
+	// The city or locality where the resource is located.
+	City *string `json:"city,omitempty" tf:"city,omitempty"`
+
+	// The district, state, or province where the resource is located.
+	District *string `json:"district,omitempty" tf:"district,omitempty"`
+
+	// A canonical name for the geographic or physical location.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The country or region where the resource is located.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type LocationDataParameters struct {
@@ -90,8 +111,9 @@ type GatewayStatus struct {
 type Gateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              GatewaySpec   `json:"spec"`
-	Status            GatewayStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.locationData)",message="locationData is a required parameter"
+	Spec   GatewaySpec   `json:"spec"`
+	Status GatewayStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

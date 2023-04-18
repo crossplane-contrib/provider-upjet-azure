@@ -15,11 +15,26 @@ import (
 
 type EmailTemplateObservation struct {
 
+	// The name of the API Management Service in which the Email Template should exist. Changing this forces a new API Management Email Template to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// The body of the Email. Its format has to be a well-formed HTML document.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
 	// The description of the Email Template.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the API Management Email Template.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Resource Group where the API Management Email Template should exist. Changing this forces a new API Management Email Template to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The subject of the Email.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+
+	// The name of the Email Template. Possible values are AccountClosedDeveloper, ApplicationApprovedNotificationMessage, ConfirmSignUpIdentityDefault, EmailChangeIdentityDefault, InviteUserNotificationMessage, NewCommentNotificationMessage, NewDeveloperNotificationMessage, NewIssueNotificationMessage, PasswordResetByAdminNotificationMessage, PasswordResetIdentityDefault, PurchaseDeveloperNotificationMessage, QuotaLimitApproachingDeveloperNotificationMessage, RejectDeveloperNotificationMessage, RequestDeveloperNotificationMessage. Changing this forces a new API Management Email Template to be created.
+	TemplateName *string `json:"templateName,omitempty" tf:"template_name,omitempty"`
 
 	// The title of the Email Template.
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
@@ -41,8 +56,8 @@ type EmailTemplateParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The body of the Email. Its format has to be a well-formed HTML document.
-	// +kubebuilder:validation:Required
-	Body *string `json:"body" tf:"body,omitempty"`
+	// +kubebuilder:validation:Optional
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The name of the Resource Group where the API Management Email Template should exist. Changing this forces a new API Management Email Template to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -58,8 +73,8 @@ type EmailTemplateParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The subject of the Email.
-	// +kubebuilder:validation:Required
-	Subject *string `json:"subject" tf:"subject,omitempty"`
+	// +kubebuilder:validation:Optional
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
 	// The name of the Email Template. Possible values are AccountClosedDeveloper, ApplicationApprovedNotificationMessage, ConfirmSignUpIdentityDefault, EmailChangeIdentityDefault, InviteUserNotificationMessage, NewCommentNotificationMessage, NewDeveloperNotificationMessage, NewIssueNotificationMessage, PasswordResetByAdminNotificationMessage, PasswordResetIdentityDefault, PurchaseDeveloperNotificationMessage, QuotaLimitApproachingDeveloperNotificationMessage, RejectDeveloperNotificationMessage, RequestDeveloperNotificationMessage. Changing this forces a new API Management Email Template to be created.
 	// +kubebuilder:validation:Required
@@ -90,8 +105,10 @@ type EmailTemplateStatus struct {
 type EmailTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EmailTemplateSpec   `json:"spec"`
-	Status            EmailTemplateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.body)",message="body is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subject)",message="subject is a required parameter"
+	Spec   EmailTemplateSpec   `json:"spec"`
+	Status EmailTemplateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

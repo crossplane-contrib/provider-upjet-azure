@@ -15,8 +15,26 @@ import (
 
 type IOTHubSharedAccessPolicyObservation struct {
 
+	// Adds DeviceConnect permission to this Shared Access Account. It allows sending and receiving on the device-side endpoints.
+	DeviceConnect *bool `json:"deviceConnect,omitempty" tf:"device_connect,omitempty"`
+
 	// The ID of the IoTHub Shared Access Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the IoTHub to which this Shared Access Policy belongs. Changing this forces a new resource to be created.
+	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
+
+	// Adds RegistryRead permission to this Shared Access Account. It allows read access to the identity registry.
+	RegistryRead *bool `json:"registryRead,omitempty" tf:"registry_read,omitempty"`
+
+	// Adds RegistryWrite permission to this Shared Access Account. It allows write access to the identity registry.
+	RegistryWrite *bool `json:"registryWrite,omitempty" tf:"registry_write,omitempty"`
+
+	// The name of the resource group under which the IotHub Shared Access Policy resource has to be created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Adds ServiceConnect permission to this Shared Access Account. It allows sending and receiving on the cloud-side endpoints.
+	ServiceConnect *bool `json:"serviceConnect,omitempty" tf:"service_connect,omitempty"`
 }
 
 type IOTHubSharedAccessPolicyParameters struct {

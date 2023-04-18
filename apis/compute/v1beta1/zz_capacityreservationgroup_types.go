@@ -17,13 +17,25 @@ type CapacityReservationGroupObservation struct {
 
 	// The ID of the Capacity Reservation Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure location where the Capacity Reservation Group exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the resource group the Capacity Reservation Group is located in. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies a list of Availability Zones for this Capacity Reservation Group. Changing this forces a new resource to be created.
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type CapacityReservationGroupParameters struct {
 
 	// The Azure location where the Capacity Reservation Group exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the resource group the Capacity Reservation Group is located in. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -71,8 +83,9 @@ type CapacityReservationGroupStatus struct {
 type CapacityReservationGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              CapacityReservationGroupSpec   `json:"spec"`
-	Status            CapacityReservationGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   CapacityReservationGroupSpec   `json:"spec"`
+	Status CapacityReservationGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

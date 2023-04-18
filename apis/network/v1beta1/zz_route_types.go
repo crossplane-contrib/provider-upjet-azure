@@ -15,23 +15,38 @@ import (
 
 type RouteObservation_2 struct {
 
+	// The destination to which the route applies. Can be CIDR (such as 10.1.0.0/16) or Azure Service Tag (such as ApiManagement, AzureBackup or AzureMonitor) format.
+	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
+
 	// The Route ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Contains the IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance.
+	NextHopInIPAddress *string `json:"nextHopInIpAddress,omitempty" tf:"next_hop_in_ip_address,omitempty"`
+
+	// The type of Azure hop the packet should be sent to. Possible values are VirtualNetworkGateway, VnetLocal, Internet, VirtualAppliance and None.
+	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
+
+	// The name of the resource group in which to create the route. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the route table within which create the route. Changing this forces a new resource to be created.
+	RouteTableName *string `json:"routeTableName,omitempty" tf:"route_table_name,omitempty"`
 }
 
 type RouteParameters_2 struct {
 
 	// The destination to which the route applies. Can be CIDR (such as 10.1.0.0/16) or Azure Service Tag (such as ApiManagement, AzureBackup or AzureMonitor) format.
-	// +kubebuilder:validation:Required
-	AddressPrefix *string `json:"addressPrefix" tf:"address_prefix,omitempty"`
+	// +kubebuilder:validation:Optional
+	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
 
 	// Contains the IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance.
 	// +kubebuilder:validation:Optional
 	NextHopInIPAddress *string `json:"nextHopInIpAddress,omitempty" tf:"next_hop_in_ip_address,omitempty"`
 
 	// The type of Azure hop the packet should be sent to. Possible values are VirtualNetworkGateway, VnetLocal, Internet, VirtualAppliance and None.
-	// +kubebuilder:validation:Required
-	NextHopType *string `json:"nextHopType" tf:"next_hop_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
 
 	// The name of the resource group in which to create the route. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -84,8 +99,10 @@ type RouteStatus struct {
 type Route struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RouteSpec   `json:"spec"`
-	Status            RouteStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.addressPrefix)",message="addressPrefix is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nextHopType)",message="nextHopType is a required parameter"
+	Spec   RouteSpec   `json:"spec"`
+	Status RouteStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

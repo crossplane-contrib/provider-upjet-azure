@@ -17,13 +17,25 @@ type ResourceGuardObservation struct {
 
 	// The ID of the Resource Guard.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Resource Guard should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where the Resource Guard should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Resource Guard.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A list of the critical operations which are not protected by this Resource Guard.
+	VaultCriticalOperationExclusionList []*string `json:"vaultCriticalOperationExclusionList,omitempty" tf:"vault_critical_operation_exclusion_list,omitempty"`
 }
 
 type ResourceGuardParameters struct {
 
 	// The Azure Region where the Resource Guard should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Resource Guard should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -71,8 +83,9 @@ type ResourceGuardStatus struct {
 type ResourceGuard struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceGuardSpec   `json:"spec"`
-	Status            ResourceGuardStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   ResourceGuardSpec   `json:"spec"`
+	Status ResourceGuardStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,11 +15,47 @@ import (
 
 type ApplicationInsightsStandardWebTestObservation struct {
 
+	// The ID of the Application Insights instance on which the WebTest operates. Changing this forces a new Application Insights Standard WebTest to be created.
+	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
+
+	// Purpose/user defined descriptive test for this WebTest.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Should the WebTest be enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Interval in seconds between test runs for this WebTest. Valid options are 300, 600 and 900. Defaults to 300.
+	Frequency *float64 `json:"frequency,omitempty" tf:"frequency,omitempty"`
+
+	// Specifies a list of where to physically run the tests from to give global coverage for accessibility of your application.
+	GeoLocations []*string `json:"geoLocations,omitempty" tf:"geo_locations,omitempty"`
+
 	// The ID of the Application Insights Standard WebTest.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Azure Region where the Application Insights Standard WebTest should exist. Changing this forces a new Application Insights Standard WebTest to be created. It needs to correlate with location of the parent resource (azurerm_application_insights)
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A request block as defined below.
+	Request []RequestObservation `json:"request,omitempty" tf:"request,omitempty"`
+
+	// The name of the Resource Group where the Application Insights Standard WebTest should exist. Changing this forces a new Application Insights Standard WebTest to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Should the retry on WebTest failure be enabled?
+	RetryEnabled *bool `json:"retryEnabled,omitempty" tf:"retry_enabled,omitempty"`
+
 	// Unique ID of this WebTest. This is typically the same value as the Name field.
 	SyntheticMonitorID *string `json:"syntheticMonitorId,omitempty" tf:"synthetic_monitor_id,omitempty"`
+
+	// A mapping of tags which should be assigned to the Application Insights Standard WebTest.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Seconds until this WebTest will timeout and fail. Default is 30.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+
+	// A validation_rules block as defined below.
+	ValidationRules []ValidationRulesObservation `json:"validationRules,omitempty" tf:"validation_rules,omitempty"`
 }
 
 type ApplicationInsightsStandardWebTestParameters struct {
@@ -51,16 +87,16 @@ type ApplicationInsightsStandardWebTestParameters struct {
 	Frequency *float64 `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// Specifies a list of where to physically run the tests from to give global coverage for accessibility of your application.
-	// +kubebuilder:validation:Required
-	GeoLocations []*string `json:"geoLocations" tf:"geo_locations,omitempty"`
+	// +kubebuilder:validation:Optional
+	GeoLocations []*string `json:"geoLocations,omitempty" tf:"geo_locations,omitempty"`
 
 	// The Azure Region where the Application Insights Standard WebTest should exist. Changing this forces a new Application Insights Standard WebTest to be created. It needs to correlate with location of the parent resource (azurerm_application_insights)
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A request block as defined below.
-	// +kubebuilder:validation:Required
-	Request []RequestParameters `json:"request" tf:"request,omitempty"`
+	// +kubebuilder:validation:Optional
+	Request []RequestParameters `json:"request,omitempty" tf:"request,omitempty"`
 
 	// The name of the Resource Group where the Application Insights Standard WebTest should exist. Changing this forces a new Application Insights Standard WebTest to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -93,6 +129,15 @@ type ApplicationInsightsStandardWebTestParameters struct {
 }
 
 type ContentObservation struct {
+
+	// A string value containing the content to match on.
+	ContentMatch *string `json:"contentMatch,omitempty" tf:"content_match,omitempty"`
+
+	// Ignore the casing in the content_match value.
+	IgnoreCase *bool `json:"ignoreCase,omitempty" tf:"ignore_case,omitempty"`
+
+	// If the content of content_match is found, pass the test. If set to false, the WebTest is failing if the content of content_match is found.
+	PassIfTextFound *bool `json:"passIfTextFound,omitempty" tf:"pass_if_text_found,omitempty"`
 }
 
 type ContentParameters struct {
@@ -111,6 +156,12 @@ type ContentParameters struct {
 }
 
 type HeaderObservation struct {
+
+	// The name which should be used for this Application Insights Standard WebTest. Changing this forces a new Application Insights Standard WebTest to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value which should be used for a header in the request.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HeaderParameters struct {
@@ -125,6 +176,24 @@ type HeaderParameters struct {
 }
 
 type RequestObservation struct {
+
+	// The WebTest request body.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
+	// Should the following of redirects be enabled? Defaults to true.
+	FollowRedirectsEnabled *bool `json:"followRedirectsEnabled,omitempty" tf:"follow_redirects_enabled,omitempty"`
+
+	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'.
+	HTTPVerb *string `json:"httpVerb,omitempty" tf:"http_verb,omitempty"`
+
+	// One or more header blocks as defined above.
+	Header []HeaderObservation `json:"header,omitempty" tf:"header,omitempty"`
+
+	// Should the parsing of dependend requests be enabled? Defaults to true.
+	ParseDependentRequestsEnabled *bool `json:"parseDependentRequestsEnabled,omitempty" tf:"parse_dependent_requests_enabled,omitempty"`
+
+	// The WebTest request URL.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type RequestParameters struct {
@@ -155,6 +224,18 @@ type RequestParameters struct {
 }
 
 type ValidationRulesObservation struct {
+
+	// A content block as defined above.
+	Content []ContentObservation `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The expected status code of the response. Default is '200', '0' means 'response code < 400'
+	ExpectedStatusCode *float64 `json:"expectedStatusCode,omitempty" tf:"expected_status_code,omitempty"`
+
+	// The number of days of SSL certificate validity remaining for the checked endpoint. If the certificate has a shorter remaining lifetime left, the test will fail. This number should be between 1 and 365.
+	SSLCertRemainingLifetime *float64 `json:"sslCertRemainingLifetime,omitempty" tf:"ssl_cert_remaining_lifetime,omitempty"`
+
+	// Should the SSL check be enabled?
+	SSLCheckEnabled *bool `json:"sslCheckEnabled,omitempty" tf:"ssl_check_enabled,omitempty"`
 }
 
 type ValidationRulesParameters struct {
@@ -200,8 +281,11 @@ type ApplicationInsightsStandardWebTestStatus struct {
 type ApplicationInsightsStandardWebTest struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationInsightsStandardWebTestSpec   `json:"spec"`
-	Status            ApplicationInsightsStandardWebTestStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.geoLocations)",message="geoLocations is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.request)",message="request is a required parameter"
+	Spec   ApplicationInsightsStandardWebTestSpec   `json:"spec"`
+	Status ApplicationInsightsStandardWebTestStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

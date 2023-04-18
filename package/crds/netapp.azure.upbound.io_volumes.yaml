@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: volumes.netapp.azure.upbound.io
 spec:
@@ -54,9 +54,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -748,12 +752,22 @@ spec:
                       refer to Manage availability zone volume placement for Azure
                       NetApp Files.
                     type: string
-                required:
-                - location
-                - serviceLevel
-                - storageQuotaInGb
-                - volumePath
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -925,13 +939,107 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: serviceLevel is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serviceLevel)
+            - message: storageQuotaInGb is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageQuotaInGb)
+            - message: volumePath is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.volumePath)
           status:
             description: VolumeStatus defines the observed state of Volume.
             properties:
               atProvider:
                 properties:
+                  accountName:
+                    description: The name of the NetApp account in which the NetApp
+                      Pool should be created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  azureVmwareDataStoreEnabled:
+                    description: Is the NetApp Volume enabled for Azure VMware Solution
+                      (AVS) datastore purpose. Defaults to false. Changing this forces
+                      a new resource to be created.
+                    type: boolean
+                  createFromSnapshotResourceId:
+                    description: 'Creates volume from snapshot. Following properties
+                      must be the same as the original volume where the snapshot was
+                      taken from: protocols, subnet_id, location, service_level, resource_group_name,
+                      account_name and pool_name. Changing this forces a new resource
+                      to be created.'
+                    type: string
+                  dataProtectionReplication:
+                    description: A data_protection_replication block as defined below.
+                      Changing this forces a new resource to be created.
+                    items:
+                      properties:
+                        endpointType:
+                          description: The endpoint type, default value is dst for
+                            destination.
+                          type: string
+                        remoteVolumeLocation:
+                          description: Location of the primary volume. Changing this
+                            forces a new resource to be created.
+                          type: string
+                        remoteVolumeResourceId:
+                          description: Resource ID of the primary volume.
+                          type: string
+                        replicationFrequency:
+                          description: Replication frequency, supported values are
+                            '10minutes', 'hourly', 'daily', values are case sensitive.
+                          type: string
+                      type: object
+                    type: array
+                  dataProtectionSnapshotPolicy:
+                    description: A data_protection_snapshot_policy block as defined
+                      below.
+                    items:
+                      properties:
+                        snapshotPolicyId:
+                          description: Resource ID of the snapshot policy to apply
+                            to the volume.
+                          type: string
+                      type: object
+                    type: array
+                  exportPolicyRule:
+                    description: One or more export_policy_rule block defined below.
+                    items:
+                      properties:
+                        allowedClients:
+                          description: A list of allowed clients IPv4 addresses.
+                          items:
+                            type: string
+                          type: array
+                        protocolsEnabled:
+                          description: 'A list of allowed protocols. Valid values
+                            include CIFS, NFSv3, or NFSv4.1. Only one value is supported
+                            at this time. This replaces the previous arguments: cifs_enabled,
+                            nfsv3_enabled and nfsv4_enabled.'
+                          items:
+                            type: string
+                          type: array
+                        rootAccessEnabled:
+                          description: Is root access permitted to this volume?
+                          type: boolean
+                        ruleIndex:
+                          description: The index number of the rule.
+                          type: number
+                        unixReadOnly:
+                          description: Is the file system on unix read only?
+                          type: boolean
+                        unixReadWrite:
+                          description: Is the file system on unix read and write?
+                          type: boolean
+                      type: object
+                    type: array
                   id:
                     description: The ID of the NetApp Volume.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
                   mountIpAddresses:
                     description: A list of IPv4 Addresses which should be used to
@@ -939,6 +1047,81 @@ spec:
                     items:
                       type: string
                     type: array
+                  networkFeatures:
+                    description: Indicates which network feature to use, accepted
+                      values are Basic or Standard, it defaults to Basic if not defined.
+                      This is a feature in public preview and for more information
+                      about it and how to register, please refer to Configure network
+                      features for an Azure NetApp Files volume. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  poolName:
+                    description: The name of the NetApp pool in which the NetApp Volume
+                      should be created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  protocols:
+                    description: The target volume protocol expressed as a list. Supported
+                      single value include CIFS, NFSv3, or NFSv4.1. If argument is
+                      not defined it will default to NFSv3. Changing this forces a
+                      new resource to be created and data will be lost. Dual protocol
+                      scenario is supported for CIFS and NFSv3, for more information,
+                      please refer to Create a dual-protocol volume for Azure NetApp
+                      Files document.
+                    items:
+                      type: string
+                    type: array
+                  resourceGroupName:
+                    description: The name of the resource group where the NetApp Volume
+                      should be created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  securityStyle:
+                    description: Volume security style, accepted values are Unix or
+                      Ntfs. If not provided, single-protocol volume is created defaulting
+                      to Unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default
+                      to Ntfs. In a dual-protocol volume, if not provided, its value
+                      will be Ntfs. Changing this forces a new resource to be created.
+                    type: string
+                  serviceLevel:
+                    description: The target performance of the file system. Valid
+                      values include Premium, Standard, or Ultra. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  snapshotDirectoryVisible:
+                    description: Specifies whether the .snapshot (NFS clients) or
+                      ~snapshot (SMB clients) path of a volume is visible, default
+                      value is true.
+                    type: boolean
+                  storageQuotaInGb:
+                    description: The maximum Storage Quota allowed for a file system
+                      in Gigabytes.
+                    type: number
+                  subnetId:
+                    description: The ID of the Subnet the NetApp Volume resides in,
+                      which must have the Microsoft.NetApp/volumes delegation. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  throughputInMibps:
+                    description: Throughput of this volume in Mibps.
+                    type: number
+                  volumePath:
+                    description: A unique file path for the volume. Used when creating
+                      mount targets. Changing this forces a new resource to be created.
+                    type: string
+                  zone:
+                    description: Specifies the Availability Zone in which the Volume
+                      should be located. Possible values are 1, 2 and 3. Changing
+                      this forces a new resource to be created. This feature is currently
+                      in preview, for more information on how to enable it, please
+                      refer to Manage availability zone volume placement for Azure
+                      NetApp Files.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

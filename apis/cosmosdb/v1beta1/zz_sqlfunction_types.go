@@ -15,6 +15,12 @@ import (
 
 type SQLFunctionObservation struct {
 
+	// Body of the User Defined Function.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
+	// The id of the Cosmos DB SQL Container to create the SQL User Defined Function within. Changing this forces a new SQL User Defined Function to be created.
+	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
+
 	// The ID of the SQL User Defined Function.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
@@ -22,8 +28,8 @@ type SQLFunctionObservation struct {
 type SQLFunctionParameters struct {
 
 	// Body of the User Defined Function.
-	// +kubebuilder:validation:Required
-	Body *string `json:"body" tf:"body,omitempty"`
+	// +kubebuilder:validation:Optional
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The id of the Cosmos DB SQL Container to create the SQL User Defined Function within. Changing this forces a new SQL User Defined Function to be created.
 	// +crossplane:generate:reference:type=SQLContainer
@@ -64,8 +70,9 @@ type SQLFunctionStatus struct {
 type SQLFunction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLFunctionSpec   `json:"spec"`
-	Status            SQLFunctionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.body)",message="body is a required parameter"
+	Spec   SQLFunctionSpec   `json:"spec"`
+	Status SQLFunctionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

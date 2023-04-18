@@ -15,8 +15,23 @@ import (
 
 type BackupInstanceDiskObservation struct {
 
+	// The ID of the Backup Policy.
+	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
+
+	// The ID of the source Disk. Changing this forces a new Backup Instance Disk to be created.
+	DiskID *string `json:"diskId,omitempty" tf:"disk_id,omitempty"`
+
 	// The ID of the Backup Instance Disk.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Backup Instance Disk should exist. Changing this forces a new Backup Instance Disk to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where snapshots are stored. Changing this forces a new Backup Instance Disk to be created.
+	SnapshotResourceGroupName *string `json:"snapshotResourceGroupName,omitempty" tf:"snapshot_resource_group_name,omitempty"`
+
+	// The ID of the Backup Vault within which the Backup Instance Disk should exist. Changing this forces a new Backup Instance Disk to be created.
+	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 }
 
 type BackupInstanceDiskParameters struct {
@@ -50,8 +65,8 @@ type BackupInstanceDiskParameters struct {
 	DiskIDSelector *v1.Selector `json:"diskIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Backup Instance Disk should exist. Changing this forces a new Backup Instance Disk to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where snapshots are stored. Changing this forces a new Backup Instance Disk to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -105,8 +120,9 @@ type BackupInstanceDiskStatus struct {
 type BackupInstanceDisk struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BackupInstanceDiskSpec   `json:"spec"`
-	Status            BackupInstanceDiskStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   BackupInstanceDiskSpec   `json:"spec"`
+	Status BackupInstanceDiskStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

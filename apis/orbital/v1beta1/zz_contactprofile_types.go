@@ -14,6 +14,24 @@ import (
 )
 
 type ChannelsObservation struct {
+
+	// Bandwidth in MHz.
+	BandwidthMhz *float64 `json:"bandwidthMhz,omitempty" tf:"bandwidth_mhz,omitempty"`
+
+	// Center frequency in MHz.
+	CenterFrequencyMhz *float64 `json:"centerFrequencyMhz,omitempty" tf:"center_frequency_mhz,omitempty"`
+
+	// Copy of the modem configuration file such as Kratos QRadio or Kratos QuantumRx. Only valid for downlink directions. If provided, the modem connects to the customer endpoint and sends demodulated data instead of a VITA.49 stream.
+	DemodulationConfiguration *string `json:"demodulationConfiguration,omitempty" tf:"demodulation_configuration,omitempty"`
+
+	// Customer End point to store/retrieve data during a contact. An end_point block as defined below.
+	EndPoint []EndPointObservation `json:"endPoint,omitempty" tf:"end_point,omitempty"`
+
+	// Copy of the modem configuration file such as Kratos QRadio. Only valid for uplink directions. If provided, the modem connects to the customer endpoint and accepts commands from the customer instead of a VITA.49 stream.
+	ModulationConfiguration *string `json:"modulationConfiguration,omitempty" tf:"modulation_configuration,omitempty"`
+
+	// The name of the contact profile. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ChannelsParameters struct {
@@ -45,35 +63,62 @@ type ChannelsParameters struct {
 
 type ContactProfileObservation struct {
 
+	// Auto-tracking configurations for a spacecraft. Possible values are disabled, xBand and sBand.
+	AutoTracking *string `json:"autoTracking,omitempty" tf:"auto_tracking,omitempty"`
+
+	// ARM resource identifier of the Event Hub used for telemetry. Requires granting Orbital Resource Provider the rights to send telemetry into the hub.
+	EventHubURI *string `json:"eventHubUri,omitempty" tf:"event_hub_uri,omitempty"`
+
 	// The ID of the contact profile.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of spacecraft links. A links block as defined below. Changing this forces a new resource to be created.
+	Links []LinksObservation `json:"links,omitempty" tf:"links,omitempty"`
+
+	// The location where the contact profile exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Maximum elevation of the antenna during the contact in decimal degrees.
+	MinimumElevationDegrees *float64 `json:"minimumElevationDegrees,omitempty" tf:"minimum_elevation_degrees,omitempty"`
+
+	// Minimum viable contact duration in ISO 8601 format. Used for listing the available contacts with a spacecraft at a given ground station.
+	MinimumVariableContactDuration *string `json:"minimumVariableContactDuration,omitempty" tf:"minimum_variable_contact_duration,omitempty"`
+
+	// ARM resource identifier of the subnet delegated to the Microsoft.Orbital/orbitalGateways. Needs to be at least a class C subnet, and should not have any IP created in it. Changing this forces a new resource to be created.
+	NetworkConfigurationSubnetID *string `json:"networkConfigurationSubnetId,omitempty" tf:"network_configuration_subnet_id,omitempty"`
+
+	// The name of the Resource Group where the contact profile exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ContactProfileParameters struct {
 
 	// Auto-tracking configurations for a spacecraft. Possible values are disabled, xBand and sBand.
-	// +kubebuilder:validation:Required
-	AutoTracking *string `json:"autoTracking" tf:"auto_tracking,omitempty"`
+	// +kubebuilder:validation:Optional
+	AutoTracking *string `json:"autoTracking,omitempty" tf:"auto_tracking,omitempty"`
 
 	// ARM resource identifier of the Event Hub used for telemetry. Requires granting Orbital Resource Provider the rights to send telemetry into the hub.
 	// +kubebuilder:validation:Optional
 	EventHubURI *string `json:"eventHubUri,omitempty" tf:"event_hub_uri,omitempty"`
 
 	// A list of spacecraft links. A links block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Links []LinksParameters `json:"links" tf:"links,omitempty"`
+	// +kubebuilder:validation:Optional
+	Links []LinksParameters `json:"links,omitempty" tf:"links,omitempty"`
 
 	// The location where the contact profile exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Maximum elevation of the antenna during the contact in decimal degrees.
 	// +kubebuilder:validation:Optional
 	MinimumElevationDegrees *float64 `json:"minimumElevationDegrees,omitempty" tf:"minimum_elevation_degrees,omitempty"`
 
 	// Minimum viable contact duration in ISO 8601 format. Used for listing the available contacts with a spacecraft at a given ground station.
-	// +kubebuilder:validation:Required
-	MinimumVariableContactDuration *string `json:"minimumVariableContactDuration" tf:"minimum_variable_contact_duration,omitempty"`
+	// +kubebuilder:validation:Optional
+	MinimumVariableContactDuration *string `json:"minimumVariableContactDuration,omitempty" tf:"minimum_variable_contact_duration,omitempty"`
 
 	// ARM resource identifier of the subnet delegated to the Microsoft.Orbital/orbitalGateways. Needs to be at least a class C subnet, and should not have any IP created in it. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
@@ -108,6 +153,18 @@ type ContactProfileParameters struct {
 }
 
 type EndPointObservation struct {
+
+	// Name of an end point.
+	EndPointName *string `json:"endPointName,omitempty" tf:"end_point_name,omitempty"`
+
+	// IP address of an end point.
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// TCP port to listen on to receive data.
+	Port *string `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Protocol of an end point. Possible values are TCP and UDP.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type EndPointParameters struct {
@@ -130,6 +187,18 @@ type EndPointParameters struct {
 }
 
 type LinksObservation struct {
+
+	// A list of contact profile link channels. A channels block as defined below. Changing this forces a new resource to be created.
+	Channels []ChannelsObservation `json:"channels,omitempty" tf:"channels,omitempty"`
+
+	// Direction of the link. Possible values are Uplink and Downlink.
+	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
+
+	// Name of the link.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Polarization of the link. Possible values are LHCP, RHCP, linearVertical and linearHorizontal.
+	Polarization *string `json:"polarization,omitempty" tf:"polarization,omitempty"`
 }
 
 type LinksParameters struct {
@@ -175,8 +244,12 @@ type ContactProfileStatus struct {
 type ContactProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ContactProfileSpec   `json:"spec"`
-	Status            ContactProfileStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.autoTracking)",message="autoTracking is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.links)",message="links is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.minimumVariableContactDuration)",message="minimumVariableContactDuration is a required parameter"
+	Spec   ContactProfileSpec   `json:"spec"`
+	Status ContactProfileStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

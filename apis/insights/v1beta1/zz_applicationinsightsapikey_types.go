@@ -15,8 +15,20 @@ import (
 
 type ApplicationInsightsAPIKeyObservation struct {
 
+	// The ID of the Application Insights component on which the API key operates. Changing this forces a new resource to be created.
+	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
+
 	// The ID of the Application Insights API key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the Application Insights API key. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the list of read permissions granted to the API key. Valid values are agentconfig, aggregate, api, draft, extendqueries, search. Please note these values are case sensitive. Changing this forces a new resource to be created.
+	ReadPermissions []*string `json:"readPermissions,omitempty" tf:"read_permissions,omitempty"`
+
+	// Specifies the list of write permissions granted to the API key. Valid values are annotations. Please note these values are case sensitive. Changing this forces a new resource to be created.
+	WritePermissions []*string `json:"writePermissions,omitempty" tf:"write_permissions,omitempty"`
 }
 
 type ApplicationInsightsAPIKeyParameters struct {
@@ -36,8 +48,8 @@ type ApplicationInsightsAPIKeyParameters struct {
 	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Application Insights API key. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the list of read permissions granted to the API key. Valid values are agentconfig, aggregate, api, draft, extendqueries, search. Please note these values are case sensitive. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -72,8 +84,9 @@ type ApplicationInsightsAPIKeyStatus struct {
 type ApplicationInsightsAPIKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationInsightsAPIKeySpec   `json:"spec"`
-	Status            ApplicationInsightsAPIKeyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   ApplicationInsightsAPIKeySpec   `json:"spec"`
+	Status ApplicationInsightsAPIKeyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

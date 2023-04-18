@@ -15,14 +15,32 @@ import (
 
 type ApplicationInsightsAnalyticsItemObservation struct {
 
+	// The ID of the Application Insights component on which the Analytics Item exists. Changing this forces a new resource to be created.
+	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
+
+	// The content for the Analytics Item, for example the query text if type is query.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The alias to use for the function. Required when type is function.
+	FunctionAlias *string `json:"functionAlias,omitempty" tf:"function_alias,omitempty"`
+
 	// The ID of the Application Insights Analytics Item.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the Application Insights Analytics Item. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The scope for the Analytics Item. Can be shared or user. Changing this forces a new resource to be created. Must be shared for functions.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// A string containing the time the Analytics Item was created.
 	TimeCreated *string `json:"timeCreated,omitempty" tf:"time_created,omitempty"`
 
 	// A string containing the time the Analytics Item was last modified.
 	TimeModified *string `json:"timeModified,omitempty" tf:"time_modified,omitempty"`
+
+	// The type of Analytics Item to create. Can be one of query, function, folder, recent. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A string indicating the version of the query format
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -45,24 +63,24 @@ type ApplicationInsightsAnalyticsItemParameters struct {
 	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// The content for the Analytics Item, for example the query text if type is query.
-	// +kubebuilder:validation:Required
-	Content *string `json:"content" tf:"content,omitempty"`
+	// +kubebuilder:validation:Optional
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The alias to use for the function. Required when type is function.
 	// +kubebuilder:validation:Optional
 	FunctionAlias *string `json:"functionAlias,omitempty" tf:"function_alias,omitempty"`
 
 	// Specifies the name of the Application Insights Analytics Item. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The scope for the Analytics Item. Can be shared or user. Changing this forces a new resource to be created. Must be shared for functions.
-	// +kubebuilder:validation:Required
-	Scope *string `json:"scope" tf:"scope,omitempty"`
+	// +kubebuilder:validation:Optional
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// The type of Analytics Item to create. Can be one of query, function, folder, recent. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // ApplicationInsightsAnalyticsItemSpec defines the desired state of ApplicationInsightsAnalyticsItem
@@ -89,8 +107,12 @@ type ApplicationInsightsAnalyticsItemStatus struct {
 type ApplicationInsightsAnalyticsItem struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationInsightsAnalyticsItemSpec   `json:"spec"`
-	Status            ApplicationInsightsAnalyticsItemStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.content)",message="content is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scope)",message="scope is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	Spec   ApplicationInsightsAnalyticsItemSpec   `json:"spec"`
+	Status ApplicationInsightsAnalyticsItemStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

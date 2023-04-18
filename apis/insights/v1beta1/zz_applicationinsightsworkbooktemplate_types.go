@@ -15,8 +15,35 @@ import (
 
 type ApplicationInsightsWorkbookTemplateObservation struct {
 
+	// Information about the author of the workbook template.
+	Author *string `json:"author,omitempty" tf:"author,omitempty"`
+
+	// A galleries block as defined below.
+	Galleries []GalleriesObservation `json:"galleries,omitempty" tf:"galleries,omitempty"`
+
 	// The ID of the Application Insights Workbook Template.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Key value pairs of localized gallery. Each key is the locale code of languages supported by the Azure portal.
+	Localized *string `json:"localized,omitempty" tf:"localized,omitempty"`
+
+	// Specifies the Azure Region where the Application Insights Workbook Template should exist. Changing this forces a new Application Insights Workbook Template to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name which should be used for this Application Insights Workbook Template. Changing this forces a new Application Insights Workbook Template to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Priority of the template. Determines which template to open when a workbook gallery is opened in viewer mode. Defaults to 0.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// Specifies the name of the Resource Group where the Application Insights Workbook Template should exist. Changing this forces a new Application Insights Workbook Template to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Application Insights Workbook Template.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Valid JSON object containing workbook template payload.
+	TemplateData *string `json:"templateData,omitempty" tf:"template_data,omitempty"`
 }
 
 type ApplicationInsightsWorkbookTemplateParameters struct {
@@ -26,20 +53,20 @@ type ApplicationInsightsWorkbookTemplateParameters struct {
 	Author *string `json:"author,omitempty" tf:"author,omitempty"`
 
 	// A galleries block as defined below.
-	// +kubebuilder:validation:Required
-	Galleries []GalleriesParameters `json:"galleries" tf:"galleries,omitempty"`
+	// +kubebuilder:validation:Optional
+	Galleries []GalleriesParameters `json:"galleries,omitempty" tf:"galleries,omitempty"`
 
 	// Key value pairs of localized gallery. Each key is the locale code of languages supported by the Azure portal.
 	// +kubebuilder:validation:Optional
 	Localized *string `json:"localized,omitempty" tf:"localized,omitempty"`
 
 	// Specifies the Azure Region where the Application Insights Workbook Template should exist. Changing this forces a new Application Insights Workbook Template to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name which should be used for this Application Insights Workbook Template. Changing this forces a new Application Insights Workbook Template to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Priority of the template. Determines which template to open when a workbook gallery is opened in viewer mode. Defaults to 0.
 	// +kubebuilder:validation:Optional
@@ -63,11 +90,26 @@ type ApplicationInsightsWorkbookTemplateParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Valid JSON object containing workbook template payload.
-	// +kubebuilder:validation:Required
-	TemplateData *string `json:"templateData" tf:"template_data,omitempty"`
+	// +kubebuilder:validation:Optional
+	TemplateData *string `json:"templateData,omitempty" tf:"template_data,omitempty"`
 }
 
 type GalleriesObservation struct {
+
+	// Category for the gallery.
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// Name of the workbook template in the gallery.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Order of the template within the gallery. Defaults to 0.
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// Azure resource type supported by the gallery. Defaults to Azure Monitor.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// Type of workbook supported by the workbook template. Defaults to workbook.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type GalleriesParameters struct {
@@ -117,8 +159,12 @@ type ApplicationInsightsWorkbookTemplateStatus struct {
 type ApplicationInsightsWorkbookTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ApplicationInsightsWorkbookTemplateSpec   `json:"spec"`
-	Status            ApplicationInsightsWorkbookTemplateStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.galleries)",message="galleries is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.templateData)",message="templateData is a required parameter"
+	Spec   ApplicationInsightsWorkbookTemplateSpec   `json:"spec"`
+	Status ApplicationInsightsWorkbookTemplateStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

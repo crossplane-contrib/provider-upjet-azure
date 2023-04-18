@@ -14,6 +14,15 @@ import (
 )
 
 type IdentifierObservation struct {
+
+	// The Offer Name for this Shared Image. Changing this forces a new resource to be created.
+	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
+
+	// The Publisher Name for this Gallery Image. Changing this forces a new resource to be created.
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+
+	// The Name of the SKU for this Gallery Image. Changing this forces a new resource to be created.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 }
 
 type IdentifierParameters struct {
@@ -32,6 +41,15 @@ type IdentifierParameters struct {
 }
 
 type PurchasePlanObservation struct {
+
+	// The Purchase Plan Name for this Shared Image. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Purchase Plan Product for this Gallery Image. Changing this forces a new resource to be created.
+	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+
+	// The Purchase Plan Publisher for this Gallery Image. Changing this forces a new resource to be created.
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 }
 
 type PurchasePlanParameters struct {
@@ -51,8 +69,80 @@ type PurchasePlanParameters struct {
 
 type SharedImageObservation struct {
 
+	// Specifies if the Shared Image supports Accelerated Network. Changing this forces a new resource to be created.
+	AcceleratedNetworkSupportEnabled *bool `json:"acceleratedNetworkSupportEnabled,omitempty" tf:"accelerated_network_support_enabled,omitempty"`
+
+	// CPU architecture supported by an OS. Possible values are x64 and Arm64. Defaults to x64. Changing this forces a new resource to be created.
+	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
+
+	// Specifies if Confidential Virtual Machines enabled. It will enable all the features of trusted, with higher confidentiality features for isolate machines or encrypted data. Available for Gen2 machines. Changing this forces a new resource to be created.
+	ConfidentialVMEnabled *bool `json:"confidentialVmEnabled,omitempty" tf:"confidential_vm_enabled,omitempty"`
+
+	// Specifies if supports creation of both Confidential virtual machines and Gen2 virtual machines with standard security from a compatible Gen2 OS disk VHD or Gen2 Managed image. Changing this forces a new resource to be created.
+	ConfidentialVMSupported *bool `json:"confidentialVmSupported,omitempty" tf:"confidential_vm_supported,omitempty"`
+
+	// A description of this Shared Image.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// One or more Disk Types not allowed for the Image. Possible values include Standard_LRS and Premium_LRS.
+	DiskTypesNotAllowed []*string `json:"diskTypesNotAllowed,omitempty" tf:"disk_types_not_allowed,omitempty"`
+
+	// The end of life date in RFC3339 format of the Image.
+	EndOfLifeDate *string `json:"endOfLifeDate,omitempty" tf:"end_of_life_date,omitempty"`
+
+	// The End User Licence Agreement for the Shared Image. Changing this forces a new resource to be created.
+	Eula *string `json:"eula,omitempty" tf:"eula,omitempty"`
+
+	// Specifies the name of the Shared Image Gallery in which this Shared Image should exist. Changing this forces a new resource to be created.
+	GalleryName *string `json:"galleryName,omitempty" tf:"gallery_name,omitempty"`
+
+	// The generation of HyperV that the Virtual Machine used to create the Shared Image is based on. Possible values are V1 and V2. Defaults to V1. Changing this forces a new resource to be created.
+	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
+
 	// The ID of the Shared Image.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An identifier block as defined below.
+	Identifier []IdentifierObservation `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// Specifies the supported Azure location where the Shared Image Gallery exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Maximum memory in GB recommended for the Image.
+	MaxRecommendedMemoryInGb *float64 `json:"maxRecommendedMemoryInGb,omitempty" tf:"max_recommended_memory_in_gb,omitempty"`
+
+	// Maximum count of vCPUs recommended for the Image.
+	MaxRecommendedVcpuCount *float64 `json:"maxRecommendedVcpuCount,omitempty" tf:"max_recommended_vcpu_count,omitempty"`
+
+	// Minimum memory in GB recommended for the Image.
+	MinRecommendedMemoryInGb *float64 `json:"minRecommendedMemoryInGb,omitempty" tf:"min_recommended_memory_in_gb,omitempty"`
+
+	// Minimum count of vCPUs recommended for the Image.
+	MinRecommendedVcpuCount *float64 `json:"minRecommendedVcpuCount,omitempty" tf:"min_recommended_vcpu_count,omitempty"`
+
+	// The type of Operating System present in this Shared Image. Possible values are Linux and Windows. Changing this forces a new resource to be created.
+	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
+
+	// The URI containing the Privacy Statement associated with this Shared Image. Changing this forces a new resource to be created.
+	PrivacyStatementURI *string `json:"privacyStatementUri,omitempty" tf:"privacy_statement_uri,omitempty"`
+
+	// A purchase_plan block as defined below.
+	PurchasePlan []PurchasePlanObservation `json:"purchasePlan,omitempty" tf:"purchase_plan,omitempty"`
+
+	// The URI containing the Release Notes associated with this Shared Image.
+	ReleaseNoteURI *string `json:"releaseNoteUri,omitempty" tf:"release_note_uri,omitempty"`
+
+	// The name of the resource group in which the Shared Image Gallery exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies that the Operating System used inside this Image has not been Generalized (for example, sysprep on Windows has not been run). Changing this forces a new resource to be created.
+	Specialized *bool `json:"specialized,omitempty" tf:"specialized,omitempty"`
+
+	// A mapping of tags to assign to the Shared Image.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies if Trusted Launch has to be enabled for the Virtual Machine created from the Shared Image. Changing this forces a new resource to be created.
+	TrustedLaunchEnabled *bool `json:"trustedLaunchEnabled,omitempty" tf:"trusted_launch_enabled,omitempty"`
 }
 
 type SharedImageParameters struct {
@@ -107,12 +197,12 @@ type SharedImageParameters struct {
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
 	// An identifier block as defined below.
-	// +kubebuilder:validation:Required
-	Identifier []IdentifierParameters `json:"identifier" tf:"identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	Identifier []IdentifierParameters `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
 	// Specifies the supported Azure location where the Shared Image Gallery exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Maximum memory in GB recommended for the Image.
 	// +kubebuilder:validation:Optional
@@ -131,8 +221,8 @@ type SharedImageParameters struct {
 	MinRecommendedVcpuCount *float64 `json:"minRecommendedVcpuCount,omitempty" tf:"min_recommended_vcpu_count,omitempty"`
 
 	// The type of Operating System present in this Shared Image. Possible values are Linux and Windows. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	OsType *string `json:"osType" tf:"os_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
 	// The URI containing the Privacy Statement associated with this Shared Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -196,8 +286,11 @@ type SharedImageStatus struct {
 type SharedImage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SharedImageSpec   `json:"spec"`
-	Status            SharedImageStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.identifier)",message="identifier is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.osType)",message="osType is a required parameter"
+	Spec   SharedImageSpec   `json:"spec"`
+	Status SharedImageStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

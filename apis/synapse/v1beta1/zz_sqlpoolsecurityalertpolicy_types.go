@@ -15,8 +15,29 @@ import (
 
 type SQLPoolSecurityAlertPolicyObservation struct {
 
+	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
+	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
+
+	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
+	EmailAccountAdminsEnabled *bool `json:"emailAccountAdminsEnabled,omitempty" tf:"email_account_admins_enabled,omitempty"`
+
+	// Specifies an array of email addresses to which the alert is sent.
+	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
+
 	// The ID of the Synapse SQL Pool Security Alert Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific SQL pool. Possible values are Disabled, Enabled and New.
+	PolicyState *string `json:"policyState,omitempty" tf:"policy_state,omitempty"`
+
+	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
+	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+
+	// Specifies the ID of the Synapse SQL Pool. Changing this forces a new resource to be created.
+	SQLPoolID *string `json:"sqlPoolId,omitempty" tf:"sql_pool_id,omitempty"`
+
+	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
+	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
 }
 
 type SQLPoolSecurityAlertPolicyParameters struct {
@@ -34,8 +55,8 @@ type SQLPoolSecurityAlertPolicyParameters struct {
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific SQL pool. Possible values are Disabled, Enabled and New.
-	// +kubebuilder:validation:Required
-	PolicyState *string `json:"policyState" tf:"policy_state,omitempty"`
+	// +kubebuilder:validation:Optional
+	PolicyState *string `json:"policyState,omitempty" tf:"policy_state,omitempty"`
 
 	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
 	// +kubebuilder:validation:Optional
@@ -98,8 +119,9 @@ type SQLPoolSecurityAlertPolicyStatus struct {
 type SQLPoolSecurityAlertPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLPoolSecurityAlertPolicySpec   `json:"spec"`
-	Status            SQLPoolSecurityAlertPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.policyState)",message="policyState is a required parameter"
+	Spec   SQLPoolSecurityAlertPolicySpec   `json:"spec"`
+	Status SQLPoolSecurityAlertPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

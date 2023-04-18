@@ -14,6 +14,15 @@ import (
 )
 
 type ACLAccessPolicyObservation struct {
+
+	// The ISO8061 UTC time at which this Access Policy should be valid until.
+	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
+
+	// The permissions which should associated with this Shared Identifier.
+	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// The ISO8061 UTC time at which this Access Policy should be valid from.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type ACLAccessPolicyParameters struct {
@@ -32,6 +41,12 @@ type ACLAccessPolicyParameters struct {
 }
 
 type TableACLObservation struct {
+
+	// An access_policy block as defined below.
+	AccessPolicy []ACLAccessPolicyObservation `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+
+	// The ID which should be used for this Shared Identifier.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type TableACLParameters struct {
@@ -47,8 +62,17 @@ type TableACLParameters struct {
 
 type TableObservation struct {
 
+	// One or more acl blocks as defined below.
+	ACL []TableACLObservation `json:"acl,omitempty" tf:"acl,omitempty"`
+
 	// The ID of the Table within the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the storage table. Only Alphanumeric characters allowed, starting with a letter. Must be unique within the storage account the table is located. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the storage account in which to create the storage table. Changing this forces a new resource to be created.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 }
 
 type TableParameters struct {
@@ -58,8 +82,8 @@ type TableParameters struct {
 	ACL []TableACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// The name of the storage table. Only Alphanumeric characters allowed, starting with a letter. Must be unique within the storage account the table is located. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the storage account in which to create the storage table. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -99,8 +123,9 @@ type TableStatus struct {
 type Table struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TableSpec   `json:"spec"`
-	Status            TableStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   TableSpec   `json:"spec"`
+	Status TableStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -15,8 +15,26 @@ import (
 
 type SQLRoleAssignmentObservation struct {
 
+	// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
 	// The ID of the Cosmos DB SQL Role Assignment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The name of the Resource Group in which the Cosmos DB SQL Role Assignment is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The resource ID of the Cosmos DB SQL Role Definition.
+	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
+
+	// The data plane resource path for which access is being granted through this Cosmos DB SQL Role Assignment. Changing this forces a new resource to be created.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
 type SQLRoleAssignmentParameters struct {
@@ -39,8 +57,8 @@ type SQLRoleAssignmentParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	PrincipalID *string `json:"principalId" tf:"principal_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The name of the Resource Group in which the Cosmos DB SQL Role Assignment is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -108,8 +126,9 @@ type SQLRoleAssignmentStatus struct {
 type SQLRoleAssignment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLRoleAssignmentSpec   `json:"spec"`
-	Status            SQLRoleAssignmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principalId)",message="principalId is a required parameter"
+	Spec   SQLRoleAssignmentSpec   `json:"spec"`
+	Status SQLRoleAssignmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

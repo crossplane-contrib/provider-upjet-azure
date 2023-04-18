@@ -15,8 +15,44 @@ import (
 
 type LinkedServiceSFTPObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The type of authentication used to connect to the web table source. Valid options are Anonymous, Basic and ClientCertificate.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The SFTP server hostname.
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
+
+	// The host key fingerprint of the SFTP server.
+	HostKeyFingerprint *string `json:"hostKeyFingerprint,omitempty" tf:"host_key_fingerprint,omitempty"`
+
 	// The ID of the Data Factory Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The TCP port number that the SFTP server uses to listen for client connection. Default value is 22.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Whether to validate host key fingerprint while connecting. If set to false, host_key_fingerprint must also be set.
+	SkipHostKeyValidation *bool `json:"skipHostKeyValidation,omitempty" tf:"skip_host_key_validation,omitempty"`
+
+	// The username used to log on to the SFTP server.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type LinkedServiceSFTPParameters struct {
@@ -30,8 +66,8 @@ type LinkedServiceSFTPParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The type of authentication used to connect to the web table source. Valid options are Anonymous, Basic and ClientCertificate.
-	// +kubebuilder:validation:Required
-	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.Factory
@@ -52,8 +88,8 @@ type LinkedServiceSFTPParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The SFTP server hostname.
-	// +kubebuilder:validation:Required
-	Host *string `json:"host" tf:"host,omitempty"`
+	// +kubebuilder:validation:Optional
+	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
 	// The host key fingerprint of the SFTP server.
 	// +kubebuilder:validation:Optional
@@ -68,20 +104,20 @@ type LinkedServiceSFTPParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Password to logon to the SFTP Server for Basic Authentication.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The TCP port number that the SFTP server uses to listen for client connection. Default value is 22.
-	// +kubebuilder:validation:Required
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Whether to validate host key fingerprint while connecting. If set to false, host_key_fingerprint must also be set.
 	// +kubebuilder:validation:Optional
 	SkipHostKeyValidation *bool `json:"skipHostKeyValidation,omitempty" tf:"skip_host_key_validation,omitempty"`
 
 	// The username used to log on to the SFTP server.
-	// +kubebuilder:validation:Required
-	Username *string `json:"username" tf:"username,omitempty"`
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 // LinkedServiceSFTPSpec defines the desired state of LinkedServiceSFTP
@@ -108,8 +144,13 @@ type LinkedServiceSFTPStatus struct {
 type LinkedServiceSFTP struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LinkedServiceSFTPSpec   `json:"spec"`
-	Status            LinkedServiceSFTPStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authenticationType)",message="authenticationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.host)",message="host is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.port)",message="port is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.username)",message="username is a required parameter"
+	Spec   LinkedServiceSFTPSpec   `json:"spec"`
+	Status LinkedServiceSFTPStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

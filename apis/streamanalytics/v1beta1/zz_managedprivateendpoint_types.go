@@ -17,6 +17,18 @@ type ManagedPrivateEndpointObservation struct {
 
 	// The ID of the Stream Analytics.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Resource Group where the Stream Analytics Managed Private Endpoint should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the Stream Analytics Cluster where the Managed Private Endpoint should be created. Changing this forces a new resource to be created.
+	StreamAnalyticsClusterName *string `json:"streamAnalyticsClusterName,omitempty" tf:"stream_analytics_cluster_name,omitempty"`
+
+	// Specifies the sub resource name which the Stream Analytics Private Endpoint is able to connect to. Changing this forces a new resource to be created.
+	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
+
+	// The ID of the Private Link Enabled Remote Resource which this Stream Analytics Private endpoint should be connected to. Changing this forces a new resource to be created.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 
 type ManagedPrivateEndpointParameters struct {
@@ -48,8 +60,8 @@ type ManagedPrivateEndpointParameters struct {
 	StreamAnalyticsClusterNameSelector *v1.Selector `json:"streamAnalyticsClusterNameSelector,omitempty" tf:"-"`
 
 	// Specifies the sub resource name which the Stream Analytics Private Endpoint is able to connect to. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SubresourceName *string `json:"subresourceName" tf:"subresource_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 
 	// The ID of the Private Link Enabled Remote Resource which this Stream Analytics Private endpoint should be connected to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -90,8 +102,9 @@ type ManagedPrivateEndpointStatus struct {
 type ManagedPrivateEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagedPrivateEndpointSpec   `json:"spec"`
-	Status            ManagedPrivateEndpointStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subresourceName)",message="subresourceName is a required parameter"
+	Spec   ManagedPrivateEndpointSpec   `json:"spec"`
+	Status ManagedPrivateEndpointStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

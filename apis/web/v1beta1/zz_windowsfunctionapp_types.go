@@ -14,6 +14,18 @@ import (
 )
 
 type WindowsFunctionAppAuthSettingsActiveDirectoryObservation struct {
+
+	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
+	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the Client to use to authenticate with Azure Active Directory.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret.
+	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 }
 
 type WindowsFunctionAppAuthSettingsActiveDirectoryParameters struct {
@@ -40,6 +52,18 @@ type WindowsFunctionAppAuthSettingsActiveDirectoryParameters struct {
 }
 
 type WindowsFunctionAppAuthSettingsFacebookObservation struct {
+
+	// The App ID of the Facebook app used for login.
+	// The App ID of the Facebook app used for login.
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
+	// The app setting name that contains the app_secret value used for Facebook login. Cannot be specified with app_secret.
+	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
+	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
 type WindowsFunctionAppAuthSettingsFacebookParameters struct {
@@ -66,6 +90,18 @@ type WindowsFunctionAppAuthSettingsFacebookParameters struct {
 }
 
 type WindowsFunctionAppAuthSettingsGithubObservation struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the GitHub app used for login.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret.
+	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
 type WindowsFunctionAppAuthSettingsGithubParameters struct {
@@ -92,6 +128,18 @@ type WindowsFunctionAppAuthSettingsGithubParameters struct {
 }
 
 type WindowsFunctionAppAuthSettingsGoogleObservation struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Google web application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret.
+	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
 type WindowsFunctionAppAuthSettingsGoogleParameters struct {
@@ -118,6 +166,18 @@ type WindowsFunctionAppAuthSettingsGoogleParameters struct {
 }
 
 type WindowsFunctionAppAuthSettingsMicrosoftObservation struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
+	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
 type WindowsFunctionAppAuthSettingsMicrosoftParameters struct {
@@ -144,6 +204,60 @@ type WindowsFunctionAppAuthSettingsMicrosoftParameters struct {
 }
 
 type WindowsFunctionAppAuthSettingsObservation struct {
+
+	// An active_directory block as defined above.
+	ActiveDirectory []WindowsFunctionAppAuthSettingsActiveDirectoryObservation `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
+
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Function App.
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
+	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
+
+	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github
+	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
+	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
+
+	// Should the Authentication / Authorization feature be enabled for the Windows Function App?
+	// Should the Authentication / Authorization feature be enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A facebook block as defined below.
+	Facebook []WindowsFunctionAppAuthSettingsFacebookObservation `json:"facebook,omitempty" tf:"facebook,omitempty"`
+
+	// A github block as defined below.
+	Github []WindowsFunctionAppAuthSettingsGithubObservation `json:"github,omitempty" tf:"github,omitempty"`
+
+	// A google block as defined below.
+	Google []WindowsFunctionAppAuthSettingsGoogleObservation `json:"google,omitempty" tf:"google,omitempty"`
+
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens for this Windows Function App.
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// A microsoft block as defined below.
+	Microsoft []WindowsFunctionAppAuthSettingsMicrosoftObservation `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
+
+	// The Runtime Version of the Authentication / Authorization feature in use for the Windows Function App.
+	// The RuntimeVersion of the Authentication / Authorization feature in use.
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
+
+	// Should the Windows Function App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
+	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
+	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+
+	// A twitter block as defined below.
+	Twitter []WindowsFunctionAppAuthSettingsTwitterObservation `json:"twitter,omitempty" tf:"twitter,omitempty"`
+
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
+	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
 }
 
 type WindowsFunctionAppAuthSettingsParameters struct {
@@ -219,6 +333,14 @@ type WindowsFunctionAppAuthSettingsParameters struct {
 }
 
 type WindowsFunctionAppAuthSettingsTwitterObservation struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret.
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
 }
 
 type WindowsFunctionAppAuthSettingsTwitterParameters struct {
@@ -241,8 +363,15 @@ type WindowsFunctionAppAuthSettingsTwitterParameters struct {
 
 type WindowsFunctionAppBackupObservation struct {
 
+	// Should this backup job be enabled? Defaults to true.
+	// Should this backup job be enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The name which should be used for this Backup.
+	// The name which should be used for this Backup.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// A schedule block as defined below.
-	// +kubebuilder:validation:Required
 	Schedule []WindowsFunctionAppBackupScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
 }
 
@@ -270,8 +399,28 @@ type WindowsFunctionAppBackupParameters struct {
 
 type WindowsFunctionAppBackupScheduleObservation struct {
 
+	// How often the backup should be executed (e.g. for weekly backup, this should be set to 7 and frequency_unit should be set to Day).
+	// How often the backup should be executed (e.g. for weekly backup, this should be set to `7` and `frequency_unit` should be set to `Day`).
+	FrequencyInterval *float64 `json:"frequencyInterval,omitempty" tf:"frequency_interval,omitempty"`
+
+	// The unit of time for how often the backup should take place. Possible values include: Day and Hour.
+	// The unit of time for how often the backup should take place. Possible values include: `Day` and `Hour`.
+	FrequencyUnit *string `json:"frequencyUnit,omitempty" tf:"frequency_unit,omitempty"`
+
+	// Should the service keep at least one backup, regardless of age of backup. Defaults to false.
+	// Should the service keep at least one backup, regardless of age of backup. Defaults to `false`.
+	KeepAtLeastOneBackup *bool `json:"keepAtLeastOneBackup,omitempty" tf:"keep_at_least_one_backup,omitempty"`
+
 	// The time the backup was last attempted.
 	LastExecutionTime *string `json:"lastExecutionTime,omitempty" tf:"last_execution_time,omitempty"`
+
+	// After how many days backups should be deleted. Defaults to 30.
+	// After how many days backups should be deleted.
+	RetentionPeriodDays *float64 `json:"retentionPeriodDays,omitempty" tf:"retention_period_days,omitempty"`
+
+	// When the schedule should start working in RFC-3339 format.
+	// When the schedule should start working in RFC-3339 format.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
 type WindowsFunctionAppBackupScheduleParameters struct {
@@ -303,6 +452,14 @@ type WindowsFunctionAppBackupScheduleParameters struct {
 }
 
 type WindowsFunctionAppConnectionStringObservation struct {
+
+	// The name which should be used for this Connection.
+	// The name which should be used for this Connection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of database. Possible values include: APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub, PostgreSQL, RedisCache, ServiceBus, SQLAzure, and SQLServer.
+	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type WindowsFunctionAppConnectionStringParameters struct {
@@ -325,11 +482,17 @@ type WindowsFunctionAppConnectionStringParameters struct {
 
 type WindowsFunctionAppIdentityObservation struct {
 
+	// A list of User Assigned Managed Identity IDs to be assigned to this Windows Function App.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Windows Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type WindowsFunctionAppIdentityParameters struct {
@@ -345,22 +508,73 @@ type WindowsFunctionAppIdentityParameters struct {
 
 type WindowsFunctionAppObservation struct {
 
+	// A map of key-value pairs for App Settings and custom values.
+	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
+
+	// A auth_settings block as defined below.
+	AuthSettings []WindowsFunctionAppAuthSettingsObservation `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
+
 	// A backup block as defined below.
-	// +kubebuilder:validation:Optional
 	Backup []WindowsFunctionAppBackupObservation `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// Should built in logging be enabled. Configures AzureWebJobsDashboard app setting based on the configured storage setting. Defaults to true.
+	// Should built in logging be enabled. Configures `AzureWebJobsDashboard` app setting based on the configured storage setting
+	BuiltinLoggingEnabled *bool `json:"builtinLoggingEnabled,omitempty" tf:"builtin_logging_enabled,omitempty"`
+
+	// Should the function app use Client Certificates.
+	// Should the function app use Client Certificates
+	ClientCertificateEnabled *bool `json:"clientCertificateEnabled,omitempty" tf:"client_certificate_enabled,omitempty"`
+
+	// Paths to exclude when using client certificates, separated by ;
+	// Paths to exclude when using client certificates, separated by ;
+	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
+
+	// The mode of the Function App's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser.
+	// The mode of the Function App's client certificates requirement for incoming requests. Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`
+	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
+
+	// One or more connection_string blocks as defined below.
+	ConnectionString []WindowsFunctionAppConnectionStringObservation `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+
+	// Should Content Share Settings be disabled. Defaults to false.
+	// Force disable the content share settings.
+	ContentShareForceDisabled *bool `json:"contentShareForceDisabled,omitempty" tf:"content_share_force_disabled,omitempty"`
+
+	// The amount of memory in gigabyte-seconds that your application is allowed to consume per day. Setting this value only affects function apps under the consumption plan. Defaults to 0.
+	// The amount of memory in gigabyte-seconds that your application is allowed to consume per day. Setting this value only affects function apps in Consumption Plans.
+	DailyMemoryTimeQuota *float64 `json:"dailyMemoryTimeQuota,omitempty" tf:"daily_memory_time_quota,omitempty"`
 
 	// The default hostname of the Windows Function App.
 	DefaultHostName *string `json:"defaultHostname,omitempty" tf:"default_hostname,omitempty"`
+
+	// Is the Function App enabled? Defaults to true.
+	// Is the Windows Function App enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The runtime version associated with the Function App. Defaults to ~4.
+	// The runtime version associated with the Function App.
+	FunctionsExtensionVersion *string `json:"functionsExtensionVersion,omitempty" tf:"functions_extension_version,omitempty"`
+
+	// Can the Function App only be accessed via HTTPS? Defaults to false.
+	// Can the Function App only be accessed via HTTPS?
+	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
 	// The ID of the Windows Function App.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []WindowsFunctionAppIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The User Assigned Identity ID used for accessing KeyVault secrets. The identity must be assigned to the application in the identity block. For more information see - Access vaults with a user-assigned identity
+	// The User Assigned Identity to use for Key Vault access.
+	KeyVaultReferenceIdentityID *string `json:"keyVaultReferenceIdentityId,omitempty" tf:"key_vault_reference_identity_id,omitempty"`
 
 	// The Kind value for this Windows Function App.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// The Azure Region where the Windows Function App should exist. Changing this forces a new Windows Function App to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A list of outbound IP addresses. For example ["52.23.25.3", "52.143.43.12"]
 	OutboundIPAddressList []*string `json:"outboundIpAddressList,omitempty" tf:"outbound_ip_address_list,omitempty"`
@@ -374,12 +588,42 @@ type WindowsFunctionAppObservation struct {
 	// A comma separated list of possible outbound IP addresses as a string. For example 52.23.25.3,52.143.43.12,52.143.43.17. This is a superset of outbound_ip_addresses. For example ["52.23.25.3", "52.143.43.12","52.143.43.17"].
 	PossibleOutboundIPAddresses *string `json:"possibleOutboundIpAddresses,omitempty" tf:"possible_outbound_ip_addresses,omitempty"`
 
+	// The name of the Resource Group where the Windows Function App should exist. Changing this forces a new Windows Function App to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The ID of the App Service Plan within which to create this Function App.
+	// The ID of the App Service Plan within which to create this Function App
+	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
+
 	// A site_config block as defined below.
-	// +kubebuilder:validation:Required
 	SiteConfig []WindowsFunctionAppSiteConfigObservation `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
 	// A site_credential block as defined below.
 	SiteCredential []WindowsFunctionAppSiteCredentialObservation `json:"siteCredential,omitempty" tf:"site_credential,omitempty"`
+
+	// A sticky_settings block as defined below.
+	StickySettings []WindowsFunctionAppStickySettingsObservation `json:"stickySettings,omitempty" tf:"sticky_settings,omitempty"`
+
+	// One or more storage_account blocks as defined below.
+	StorageAccount []WindowsFunctionAppStorageAccountObservation `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
+
+	// The backend storage account name which will be used by this Function App.
+	// The backend storage account name which will be used by this Function App.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// The Key Vault Secret ID, optionally including version, that contains the Connection String to connect to the storage account for this Function App.
+	// The Key Vault Secret ID, including version, that contains the Connection String to connect to the storage account for this Function App.
+	StorageKeyVaultSecretID *string `json:"storageKeyVaultSecretId,omitempty" tf:"storage_key_vault_secret_id,omitempty"`
+
+	// Should the Function App use Managed Identity to access the storage account. Conflicts with storage_account_access_key.
+	// Should the Function App use its Managed Identity to access storage?
+	StorageUsesManagedIdentity *bool `json:"storageUsesManagedIdentity,omitempty" tf:"storage_uses_managed_identity,omitempty"`
+
+	// A mapping of tags which should be assigned to the Windows Function App.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The subnet id which will be used by this Function App for regional virtual network integration.
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 }
 
 type WindowsFunctionAppParameters struct {
@@ -456,8 +700,8 @@ type WindowsFunctionAppParameters struct {
 	KeyVaultReferenceIdentityID *string `json:"keyVaultReferenceIdentityId,omitempty" tf:"key_vault_reference_identity_id,omitempty"`
 
 	// The Azure Region where the Windows Function App should exist. Changing this forces a new Windows Function App to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Windows Function App should exist. Changing this forces a new Windows Function App to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -488,8 +732,8 @@ type WindowsFunctionAppParameters struct {
 	ServicePlanIDSelector *v1.Selector `json:"servicePlanIdSelector,omitempty" tf:"-"`
 
 	// A site_config block as defined below.
-	// +kubebuilder:validation:Required
-	SiteConfig []WindowsFunctionAppSiteConfigParameters `json:"siteConfig" tf:"site_config,omitempty"`
+	// +kubebuilder:validation:Optional
+	SiteConfig []WindowsFunctionAppSiteConfigParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
 	// A sticky_settings block as defined below.
 	// +kubebuilder:validation:Optional
@@ -548,6 +792,14 @@ type WindowsFunctionAppParameters struct {
 }
 
 type WindowsFunctionAppSiteConfigAppServiceLogsObservation struct {
+
+	// The amount of disk space to use for logs. Valid values are between 25 and 100. Defaults to 35.
+	// The amount of disk space to use for logs. Valid values are between `25` and `100`.
+	DiskQuotaMb *float64 `json:"diskQuotaMb,omitempty" tf:"disk_quota_mb,omitempty"`
+
+	// After how many days backups should be deleted. Defaults to 30.
+	// The retention period for logs in days. Valid values are between `0` and `99999`. Defaults to `0` (never delete).
+	RetentionPeriodDays *float64 `json:"retentionPeriodDays,omitempty" tf:"retention_period_days,omitempty"`
 }
 
 type WindowsFunctionAppSiteConfigAppServiceLogsParameters struct {
@@ -564,6 +816,30 @@ type WindowsFunctionAppSiteConfigAppServiceLogsParameters struct {
 }
 
 type WindowsFunctionAppSiteConfigApplicationStackObservation struct {
+
+	// The version of .NET to use. Possible values include v3.0, v4.0 v6.0 and v7.0.
+	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0` and `v7.0`
+	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
+
+	// The Version of Java to use. Supported versions include 1.8, 11 & 17 (In-Preview).
+	// The version of Java to use. Possible values are `1.8`, `11` and `17`
+	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
+
+	// The version of Node to run. Possible values include ~12, ~14, ~16 and ~18.
+	// The version of Node to use. Possible values include `12`, and `14`
+	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
+
+	// The version of PowerShell Core to run. Possible values are 7, and 7.2.
+	// The PowerShell Core version to use. Possible values are `7`, and `7.2`
+	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
+
+	// Should the Windows Function App use a custom runtime?
+	// Does the Function App use a custom Application Stack?
+	UseCustomRuntime *bool `json:"useCustomRuntime,omitempty" tf:"use_custom_runtime,omitempty"`
+
+	// Should the DotNet process use an isolated runtime. Defaults to false.
+	// Should the DotNet process use an isolated runtime. Defaults to `false`.
+	UseDotnetIsolatedRuntime *bool `json:"useDotnetIsolatedRuntime,omitempty" tf:"use_dotnet_isolated_runtime,omitempty"`
 }
 
 type WindowsFunctionAppSiteConfigApplicationStackParameters struct {
@@ -600,6 +876,14 @@ type WindowsFunctionAppSiteConfigApplicationStackParameters struct {
 }
 
 type WindowsFunctionAppSiteConfigCorsObservation struct {
+
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Are credentials allowed in CORS requests? Defaults to false.
+	// Are credentials allowed in CORS requests? Defaults to `false`.
+	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
 }
 
 type WindowsFunctionAppSiteConfigCorsParameters struct {
@@ -616,6 +900,18 @@ type WindowsFunctionAppSiteConfigCorsParameters struct {
 }
 
 type WindowsFunctionAppSiteConfigIPRestrictionHeadersObservation struct {
+
+	// Specifies a list of Azure Front Door IDs.
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
+
+	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe,omitempty"`
+
+	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for,omitempty"`
+
+	// Specifies a list of Hosts for which matching should be applied.
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
 }
 
 type WindowsFunctionAppSiteConfigIPRestrictionHeadersParameters struct {
@@ -638,6 +934,27 @@ type WindowsFunctionAppSiteConfigIPRestrictionHeadersParameters struct {
 }
 
 type WindowsFunctionAppSiteConfigIPRestrictionObservation struct {
+
+	// The action to take. Possible values are Allow or Deny.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// A headers block as defined above.
+	Headers []WindowsFunctionAppSiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The name which should be used for this Storage Account.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority value of this ip_restriction. Defaults to 65000.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Service Tag used for this IP Restriction.
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The subnet id which will be used by this Function App for regional virtual network integration.
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 }
 
 type WindowsFunctionAppSiteConfigIPRestrictionParameters struct {
@@ -683,15 +1000,126 @@ type WindowsFunctionAppSiteConfigIPRestrictionParameters struct {
 
 type WindowsFunctionAppSiteConfigObservation struct {
 
+	// The URL of the API definition that describes this Windows Function App.
+	// The URL of the API definition that describes this Windows Function App.
+	APIDefinitionURL *string `json:"apiDefinitionUrl,omitempty" tf:"api_definition_url,omitempty"`
+
+	// The ID of the API Management API for this Windows Function App.
+	// The ID of the API Management API for this Windows Function App.
+	APIManagementAPIID *string `json:"apiManagementApiId,omitempty" tf:"api_management_api_id,omitempty"`
+
+	// If this Windows Function App is Always On enabled. Defaults to false.
+	// If this Windows Web App is Always On enabled. Defaults to `false`.
+	AlwaysOn *bool `json:"alwaysOn,omitempty" tf:"always_on,omitempty"`
+
+	// The App command line to launch.
+	// The program and any arguments used to launch this app via the command line. (Example `node myapp.js`).
+	AppCommandLine *string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
+
+	// The number of workers this function app can scale out to. Only applicable to apps on the Consumption and Premium plan.
+	// The number of workers this function app can scale out to. Only applicable to apps on the Consumption and Premium plan.
+	AppScaleLimit *float64 `json:"appScaleLimit,omitempty" tf:"app_scale_limit,omitempty"`
+
+	// An app_service_logs block as defined above.
+	AppServiceLogs []WindowsFunctionAppSiteConfigAppServiceLogsObservation `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
+
+	// An application_stack block as defined above.
+	ApplicationStack []WindowsFunctionAppSiteConfigApplicationStackObservation `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
+
+	// A cors block as defined above.
+	Cors []WindowsFunctionAppSiteConfigCorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// Specifies a list of Default Documents for the Windows Function App.
+	// Specifies a list of Default Documents for the Windows Web App.
+	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
+
 	// Is the Function App enabled? Defaults to true.
 	// Is detailed error logging enabled
 	DetailedErrorLoggingEnabled *bool `json:"detailedErrorLoggingEnabled,omitempty" tf:"detailed_error_logging_enabled,omitempty"`
 
+	// The number of minimum instances for this Windows Function App. Only affects apps on Elastic Premium plans.
+	// The number of minimum instances for this Windows Function App. Only affects apps on Elastic Premium plans.
+	ElasticInstanceMinimum *float64 `json:"elasticInstanceMinimum,omitempty" tf:"elastic_instance_minimum,omitempty"`
+
+	// State of FTP / FTPS service for this Windows Function App. Possible values include: AllAllowed, FtpsOnly and Disabled. Defaults to Disabled.
+	// State of FTP / FTPS service for this function app. Possible values include: `AllAllowed`, `FtpsOnly` and `Disabled`. Defaults to `Disabled`.
+	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
+
+	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
+
+	// The path to be checked for this Windows Function App health.
+	// The path to be checked for this function app health.
+	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
+
+	// Specifies if the HTTP2 protocol should be enabled. Defaults to false.
+	// Specifies if the http2 protocol should be enabled. Defaults to `false`.
+	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
+
+	// One or more ip_restriction blocks as defined above.
+	IPRestriction []WindowsFunctionAppSiteConfigIPRestrictionObservation `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+
+	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
+	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
+	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
+
+	// Managed pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
+	// The Managed Pipeline mode. Possible values include: `Integrated`, `Classic`. Defaults to `Integrated`.
+	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
+
+	// Configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
+	// The number of pre-warmed instances for this Windows Function App. Only affects apps on an Elastic Premium plan.
+	// The number of pre-warmed instances for this function app. Only affects apps on an Elastic Premium plan.
+	PreWarmedInstanceCount *float64 `json:"preWarmedInstanceCount,omitempty" tf:"pre_warmed_instance_count,omitempty"`
+
+	// Should Remote Debugging be enabled. Defaults to false.
+	// Should Remote Debugging be enabled. Defaults to `false`.
+	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
+
+	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
+	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022`
+	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
+
+	// Should Scale Monitoring of the Functions Runtime be enabled?
+	// Should Functions Runtime Scale Monitoring be enabled.
+	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
+
+	// One or more scm_ip_restriction blocks as defined above.
+	ScmIPRestriction []WindowsFunctionAppSiteConfigScmIPRestrictionObservation `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// Configures the minimum version of TLS required for SSL requests to the SCM site. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
+
 	// The SCM Type in use by the Windows Function App.
 	ScmType *string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
 
+	// Should the Windows Function App ip_restriction configuration be used for the SCM also.
+	// Should the Windows Function App `ip_restriction` configuration be used for the SCM also.
+	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
+
+	// Should the Windows Function App use a 32-bit worker process. Defaults to true.
+	// Should the Windows Web App use a 32-bit worker.
+	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
+
+	// Should all outbound traffic to have NAT Gateways, Network Security Groups and User Defined Routes applied? Defaults to false.
+	// Should all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied? Defaults to `false`.
+	VnetRouteAllEnabled *bool `json:"vnetRouteAllEnabled,omitempty" tf:"vnet_route_all_enabled,omitempty"`
+
+	// Should Web Sockets be enabled. Defaults to false.
+	// Should Web Sockets be enabled. Defaults to `false`.
+	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
+
 	// The Windows FX Version string.
 	WindowsFxVersion *string `json:"windowsFxVersion,omitempty" tf:"windows_fx_version,omitempty"`
+
+	// The number of Workers for this Windows Function App.
+	// The number of Workers for this Windows Function App.
+	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 }
 
 type WindowsFunctionAppSiteConfigParameters struct {
@@ -848,6 +1276,18 @@ type WindowsFunctionAppSiteConfigParameters struct {
 }
 
 type WindowsFunctionAppSiteConfigScmIPRestrictionHeadersObservation struct {
+
+	// Specifies a list of Azure Front Door IDs.
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
+
+	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe,omitempty"`
+
+	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for,omitempty"`
+
+	// Specifies a list of Hosts for which matching should be applied.
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
 }
 
 type WindowsFunctionAppSiteConfigScmIPRestrictionHeadersParameters struct {
@@ -870,6 +1310,27 @@ type WindowsFunctionAppSiteConfigScmIPRestrictionHeadersParameters struct {
 }
 
 type WindowsFunctionAppSiteConfigScmIPRestrictionObservation struct {
+
+	// The action to take. Possible values are Allow or Deny.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// A headers block as defined above.
+	Headers []WindowsFunctionAppSiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The name which should be used for this Storage Account.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority value of this ip_restriction. Defaults to 65000.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Service Tag used for this IP Restriction.
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The subnet id which will be used by this Function App for regional virtual network integration.
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 }
 
 type WindowsFunctionAppSiteConfigScmIPRestrictionParameters struct {
@@ -926,6 +1387,12 @@ type WindowsFunctionAppSiteCredentialParameters struct {
 }
 
 type WindowsFunctionAppStickySettingsObservation struct {
+
+	// A list of app_setting names that the Windows Function App will not swap between Slots when a swap operation is triggered.
+	AppSettingNames []*string `json:"appSettingNames,omitempty" tf:"app_setting_names,omitempty"`
+
+	// A list of connection_string names that the Windows Function App will not swap between Slots when a swap operation is triggered.
+	ConnectionStringNames []*string `json:"connectionStringNames,omitempty" tf:"connection_string_names,omitempty"`
 }
 
 type WindowsFunctionAppStickySettingsParameters struct {
@@ -940,6 +1407,21 @@ type WindowsFunctionAppStickySettingsParameters struct {
 }
 
 type WindowsFunctionAppStorageAccountObservation struct {
+
+	// The Name of the Storage Account.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// The path at which to mount the storage share.
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+
+	// The name which should be used for this Storage Account.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Name of the File Share or Container Name for Blob storage.
+	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
+
+	// The Azure Storage Type. Possible values include AzureFiles.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type WindowsFunctionAppStorageAccountParameters struct {
@@ -993,8 +1475,10 @@ type WindowsFunctionAppStatus struct {
 type WindowsFunctionApp struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WindowsFunctionAppSpec   `json:"spec"`
-	Status            WindowsFunctionAppStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.siteConfig)",message="siteConfig is a required parameter"
+	Spec   WindowsFunctionAppSpec   `json:"spec"`
+	Status WindowsFunctionAppStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

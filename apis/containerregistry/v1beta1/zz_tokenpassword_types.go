@@ -14,6 +14,9 @@ import (
 )
 
 type Password1Observation struct {
+
+	// The expiration date of the password in RFC3339 format. Changing this forces a new resource to be created.
+	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 }
 
 type Password1Parameters struct {
@@ -24,6 +27,9 @@ type Password1Parameters struct {
 }
 
 type Password2Observation struct {
+
+	// The expiration date of the password in RFC3339 format. Changing this forces a new resource to be created.
+	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 }
 
 type Password2Parameters struct {
@@ -35,8 +41,17 @@ type Password2Parameters struct {
 
 type TokenPasswordObservation struct {
 
+	// The ID of the Container Registry Token that this Container Registry Token Password resides in. Changing this forces a new Container Registry Token Password to be created.
+	ContainerRegistryTokenID *string `json:"containerRegistryTokenId,omitempty" tf:"container_registry_token_id,omitempty"`
+
 	// The ID of the Container Registry Token Password.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One password block as defined below.
+	Password1 []Password1Observation `json:"password1,omitempty" tf:"password1,omitempty"`
+
+	// One password block as defined below.
+	Password2 []Password2Observation `json:"password2,omitempty" tf:"password2,omitempty"`
 }
 
 type TokenPasswordParameters struct {
@@ -56,8 +71,8 @@ type TokenPasswordParameters struct {
 	ContainerRegistryTokenIDSelector *v1.Selector `json:"containerRegistryTokenIdSelector,omitempty" tf:"-"`
 
 	// One password block as defined below.
-	// +kubebuilder:validation:Required
-	Password1 []Password1Parameters `json:"password1" tf:"password1,omitempty"`
+	// +kubebuilder:validation:Optional
+	Password1 []Password1Parameters `json:"password1,omitempty" tf:"password1,omitempty"`
 
 	// One password block as defined below.
 	// +kubebuilder:validation:Optional
@@ -88,8 +103,9 @@ type TokenPasswordStatus struct {
 type TokenPassword struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              TokenPasswordSpec   `json:"spec"`
-	Status            TokenPasswordStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.password1)",message="password1 is a required parameter"
+	Spec   TokenPasswordSpec   `json:"spec"`
+	Status TokenPasswordStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

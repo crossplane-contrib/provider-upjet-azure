@@ -14,6 +14,30 @@ import (
 )
 
 type HPCCacheAccessPolicyAccessRuleObservation struct {
+
+	// The access level for this rule. Possible values are: rw, ro, no.
+	Access *string `json:"access,omitempty" tf:"access,omitempty"`
+
+	// The anonymous GID used when root_squash_enabled is true.
+	AnonymousGID *float64 `json:"anonymousGid,omitempty" tf:"anonymous_gid,omitempty"`
+
+	// The anonymous UID used when root_squash_enabled is true.
+	AnonymousUID *float64 `json:"anonymousUid,omitempty" tf:"anonymous_uid,omitempty"`
+
+	// The filter applied to the scope for this rule. The filter's format depends on its scope: default scope matches all clients and has no filter value; network scope takes a CIDR format; host takes an IP address or fully qualified domain name. If a client does not match any filter rule and there is no default rule, access is denied.
+	Filter *string `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// Whether to enable root squash?
+	RootSquashEnabled *bool `json:"rootSquashEnabled,omitempty" tf:"root_squash_enabled,omitempty"`
+
+	// The scope of this rule. The scope and (potentially) the filter determine which clients match the rule. Possible values are: default, network, host.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Whether allow access to subdirectories under the root export?
+	SubmountAccessEnabled *bool `json:"submountAccessEnabled,omitempty" tf:"submount_access_enabled,omitempty"`
+
+	// Whether SUID is allowed?
+	SuidEnabled *bool `json:"suidEnabled,omitempty" tf:"suid_enabled,omitempty"`
 }
 
 type HPCCacheAccessPolicyAccessRuleParameters struct {
@@ -53,6 +77,12 @@ type HPCCacheAccessPolicyAccessRuleParameters struct {
 
 type HPCCacheAccessPolicyObservation struct {
 
+	// Up to three access_rule blocks as defined below.
+	AccessRule []HPCCacheAccessPolicyAccessRuleObservation `json:"accessRule,omitempty" tf:"access_rule,omitempty"`
+
+	// The ID of the HPC Cache that this HPC Cache Access Policy resides in. Changing this forces a new HPC Cache Access Policy to be created.
+	HPCCacheID *string `json:"hpcCacheId,omitempty" tf:"hpc_cache_id,omitempty"`
+
 	// The ID of the HPC Cache Access Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
@@ -60,8 +90,8 @@ type HPCCacheAccessPolicyObservation struct {
 type HPCCacheAccessPolicyParameters struct {
 
 	// Up to three access_rule blocks as defined below.
-	// +kubebuilder:validation:Required
-	AccessRule []HPCCacheAccessPolicyAccessRuleParameters `json:"accessRule" tf:"access_rule,omitempty"`
+	// +kubebuilder:validation:Optional
+	AccessRule []HPCCacheAccessPolicyAccessRuleParameters `json:"accessRule,omitempty" tf:"access_rule,omitempty"`
 
 	// The ID of the HPC Cache that this HPC Cache Access Policy resides in. Changing this forces a new HPC Cache Access Policy to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta1.HPCCache
@@ -102,8 +132,9 @@ type HPCCacheAccessPolicyStatus struct {
 type HPCCacheAccessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HPCCacheAccessPolicySpec   `json:"spec"`
-	Status            HPCCacheAccessPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.accessRule)",message="accessRule is a required parameter"
+	Spec   HPCCacheAccessPolicySpec   `json:"spec"`
+	Status HPCCacheAccessPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

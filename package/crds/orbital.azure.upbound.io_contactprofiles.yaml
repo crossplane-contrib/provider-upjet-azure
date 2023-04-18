@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: contactprofiles.orbital.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -336,12 +340,22 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
-                required:
-                - autoTracking
-                - links
-                - location
-                - minimumVariableContactDuration
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -513,14 +527,132 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: autoTracking is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.autoTracking)
+            - message: links is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.links)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: minimumVariableContactDuration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.minimumVariableContactDuration)
           status:
             description: ContactProfileStatus defines the observed state of ContactProfile.
             properties:
               atProvider:
                 properties:
+                  autoTracking:
+                    description: Auto-tracking configurations for a spacecraft. Possible
+                      values are disabled, xBand and sBand.
+                    type: string
+                  eventHubUri:
+                    description: ARM resource identifier of the Event Hub used for
+                      telemetry. Requires granting Orbital Resource Provider the rights
+                      to send telemetry into the hub.
+                    type: string
                   id:
                     description: The ID of the contact profile.
                     type: string
+                  links:
+                    description: A list of spacecraft links. A links block as defined
+                      below. Changing this forces a new resource to be created.
+                    items:
+                      properties:
+                        channels:
+                          description: A list of contact profile link channels. A
+                            channels block as defined below. Changing this forces
+                            a new resource to be created.
+                          items:
+                            properties:
+                              bandwidthMhz:
+                                description: Bandwidth in MHz.
+                                type: number
+                              centerFrequencyMhz:
+                                description: Center frequency in MHz.
+                                type: number
+                              demodulationConfiguration:
+                                description: Copy of the modem configuration file
+                                  such as Kratos QRadio or Kratos QuantumRx. Only
+                                  valid for downlink directions. If provided, the
+                                  modem connects to the customer endpoint and sends
+                                  demodulated data instead of a VITA.49 stream.
+                                type: string
+                              endPoint:
+                                description: Customer End point to store/retrieve
+                                  data during a contact. An end_point block as defined
+                                  below.
+                                items:
+                                  properties:
+                                    endPointName:
+                                      description: Name of an end point.
+                                      type: string
+                                    ipAddress:
+                                      description: IP address of an end point.
+                                      type: string
+                                    port:
+                                      description: TCP port to listen on to receive
+                                        data.
+                                      type: string
+                                    protocol:
+                                      description: Protocol of an end point. Possible
+                                        values are TCP and UDP.
+                                      type: string
+                                  type: object
+                                type: array
+                              modulationConfiguration:
+                                description: Copy of the modem configuration file
+                                  such as Kratos QRadio. Only valid for uplink directions.
+                                  If provided, the modem connects to the customer
+                                  endpoint and accepts commands from the customer
+                                  instead of a VITA.49 stream.
+                                type: string
+                              name:
+                                description: The name of the contact profile. Changing
+                                  this forces a new resource to be created.
+                                type: string
+                            type: object
+                          type: array
+                        direction:
+                          description: Direction of the link. Possible values are
+                            Uplink and Downlink.
+                          type: string
+                        name:
+                          description: Name of the link.
+                          type: string
+                        polarization:
+                          description: Polarization of the link. Possible values are
+                            LHCP, RHCP, linearVertical and linearHorizontal.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: The location where the contact profile exists. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  minimumElevationDegrees:
+                    description: Maximum elevation of the antenna during the contact
+                      in decimal degrees.
+                    type: number
+                  minimumVariableContactDuration:
+                    description: Minimum viable contact duration in ISO 8601 format.
+                      Used for listing the available contacts with a spacecraft at
+                      a given ground station.
+                    type: string
+                  networkConfigurationSubnetId:
+                    description: ARM resource identifier of the subnet delegated to
+                      the Microsoft.Orbital/orbitalGateways. Needs to be at least
+                      a class C subnet, and should not have any IP created in it.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the contact
+                      profile exists. Changing this forces a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

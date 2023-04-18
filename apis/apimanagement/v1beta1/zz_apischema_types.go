@@ -15,8 +15,29 @@ import (
 
 type APISchemaObservation struct {
 
+	// The Name of the API Management Service where the API exists. Changing this forces a new resource to be created.
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// The name of the API within the API Management Service where this API Schema should be created. Changing this forces a new resource to be created.
+	APIName *string `json:"apiName,omitempty" tf:"api_name,omitempty"`
+
+	// Types definitions. Used for Swagger/OpenAPI v2/v3 schemas only.
+	Components *string `json:"components,omitempty" tf:"components,omitempty"`
+
+	// The content type of the API Schema.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Types definitions. Used for Swagger/OpenAPI v1 schemas only.
+	Definitions *string `json:"definitions,omitempty" tf:"definitions,omitempty"`
+
 	// The ID of the API Management API Schema.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The JSON escaped string defining the document representing the Schema.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type APISchemaParameters struct {
@@ -52,8 +73,8 @@ type APISchemaParameters struct {
 	Components *string `json:"components,omitempty" tf:"components,omitempty"`
 
 	// The content type of the API Schema.
-	// +kubebuilder:validation:Required
-	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Types definitions. Used for Swagger/OpenAPI v1 schemas only.
 	// +kubebuilder:validation:Optional
@@ -101,8 +122,9 @@ type APISchemaStatus struct {
 type APISchema struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              APISchemaSpec   `json:"spec"`
-	Status            APISchemaStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.contentType)",message="contentType is a required parameter"
+	Spec   APISchemaSpec   `json:"spec"`
+	Status APISchemaStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

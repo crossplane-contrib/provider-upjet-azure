@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: services.signalrservice.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -257,10 +261,22 @@ spec:
                       - urlTemplate
                       type: object
                     type: array
-                required:
-                - location
-                - sku
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -432,11 +448,32 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: sku is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)
           status:
             description: ServiceStatus defines the observed state of Service.
             properties:
               atProvider:
                 properties:
+                  connectivityLogsEnabled:
+                    description: Specifies if Connectivity Logs are enabled or not.
+                      Defaults to false.
+                    type: boolean
+                  cors:
+                    description: A cors block as documented below.
+                    items:
+                      properties:
+                        allowedOrigins:
+                          description: A list of origins which should be able to make
+                            cross-origin calls. * can be used to allow all calls.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   hostname:
                     description: The FQDN of the SignalR service.
                     type: string
@@ -446,14 +483,106 @@ spec:
                   ipAddress:
                     description: The publicly accessible IP of the SignalR service.
                     type: string
+                  liveTrace:
+                    description: A live_trace block as defined below.
+                    items:
+                      properties:
+                        connectivityLogsEnabled:
+                          description: Whether the log category ConnectivityLogs is
+                            enabled? Defaults to true
+                          type: boolean
+                        enabled:
+                          description: Whether the live trace is enabled? Defaults
+                            to true.
+                          type: boolean
+                        httpRequestLogsEnabled:
+                          description: Whether the log category HttpRequestLogs is
+                            enabled? Defaults to true
+                          type: boolean
+                        messagingLogsEnabled:
+                          description: Whether the log category MessagingLogs is enabled?
+                            Defaults to true
+                          type: boolean
+                      type: object
+                    type: array
+                  liveTraceEnabled:
+                    description: Specifies if Live Trace is enabled or not. Defaults
+                      to false.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      SignalR service exists. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  messagingLogsEnabled:
+                    description: Specifies if Messaging Logs are enabled or not. Defaults
+                      to false.
+                    type: boolean
                   publicPort:
                     description: The publicly accessible port of the SignalR service
                       which is designed for browser/client use.
                     type: number
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the SignalR service. Changing this forces a new resource to
+                      be created.
+                    type: string
                   serverPort:
                     description: The publicly accessible port of the SignalR service
                       which is designed for customer server side use.
                     type: number
+                  serviceMode:
+                    description: Specifies the service mode. Possible values are Classic,
+                      Default and Serverless. Defaults to Default.
+                    type: string
+                  sku:
+                    description: A sku block as documented below.
+                    items:
+                      properties:
+                        capacity:
+                          description: Specifies the number of units associated with
+                            this SignalR service. Valid values are 1, 2, 5, 10, 20,
+                            50 and 100.
+                          type: number
+                        name:
+                          description: Specifies which tier to use. Valid values are
+                            Free_F1, Standard_S1 and Premium_P1.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  upstreamEndpoint:
+                    description: An upstream_endpoint block as documented below. Using
+                      this block requires the SignalR service to be Serverless. When
+                      creating multiple blocks they will be processed in the order
+                      they are defined in.
+                    items:
+                      properties:
+                        categoryPattern:
+                          description: The categories to match on, or * for all.
+                          items:
+                            type: string
+                          type: array
+                        eventPattern:
+                          description: The events to match on, or * for all.
+                          items:
+                            type: string
+                          type: array
+                        hubPattern:
+                          description: The hubs to match on, or * for all.
+                          items:
+                            type: string
+                          type: array
+                        urlTemplate:
+                          description: The upstream URL Template. This can be a url
+                            or a template such as http://host.com/{hub}/api/{category}/{event}.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

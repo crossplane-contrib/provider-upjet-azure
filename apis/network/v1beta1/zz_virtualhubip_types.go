@@ -17,6 +17,21 @@ type VirtualHubIPObservation struct {
 
 	// The ID of the Virtual Hub IP.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The private IP address of the IP configuration.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The private IP address allocation method. Possible values are Static and Dynamic is allowed. Defaults to Dynamic.
+	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
+
+	// The ID of the Public IP Address. This option is required since September 1st 2021. Changing this forces a new resource to be created.
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// The ID of the Subnet that the IP will reside. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// The ID of the Virtual Hub within which this IP configuration should be created. Changing this forces a new resource to be created.
+	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 }
 
 type VirtualHubIPParameters struct {

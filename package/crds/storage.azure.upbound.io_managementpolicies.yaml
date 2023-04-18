@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: managementpolicies.storage.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -326,6 +330,21 @@ spec:
                         type: object
                     type: object
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -504,6 +523,184 @@ spec:
                 properties:
                   id:
                     description: The ID of the Storage Account Management Policy.
+                    type: string
+                  rule:
+                    description: A rule block as documented below.
+                    items:
+                      properties:
+                        actions:
+                          description: An actions block as documented below.
+                          items:
+                            properties:
+                              baseBlob:
+                                description: A base_blob block as documented below.
+                                items:
+                                  properties:
+                                    deleteAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to delete the blob snapshot. Must be between
+                                        0 and 99999. Defaults to -1.
+                                      type: number
+                                    deleteAfterDaysSinceLastAccessTimeGreaterThan:
+                                      description: The age in days after last access
+                                        time to delete the blob. Must be between 0
+                                        and 99999. Defaults to -1.
+                                      type: number
+                                    deleteAfterDaysSinceModificationGreaterThan:
+                                      description: The age in days after last modification
+                                        to delete the blob. Must be between 0 and
+                                        99999. Defaults to -1.
+                                      type: number
+                                    tierToArchiveAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to archive storage. Supports blob currently
+                                        at Hot or Cool tier. Must be between 0 and99999.
+                                        Defaults to -1.
+                                      type: number
+                                    tierToArchiveAfterDaysSinceLastAccessTimeGreaterThan:
+                                      description: The age in days after last access
+                                        time to tier blobs to archive storage. Supports
+                                        blob currently at Hot or Cool tier. Must be
+                                        between 0 and99999. Defaults to -1.
+                                      type: number
+                                    tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
+                                      description: The age in days after last tier
+                                        change to the blobs to skip to be archved.
+                                        Must be between 0 and 99999. Defaults to -1.
+                                      type: number
+                                    tierToArchiveAfterDaysSinceModificationGreaterThan:
+                                      description: The age in days after last modification
+                                        to tier blobs to archive storage. Supports
+                                        blob currently at Hot or Cool tier. Must be
+                                        between 0 and 99999. Defaults to -1.
+                                      type: number
+                                    tierToCoolAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to cool storage. Supports blob currently at
+                                        Hot tier. Must be between 0 and 99999. Defaults
+                                        to -1.
+                                      type: number
+                                    tierToCoolAfterDaysSinceLastAccessTimeGreaterThan:
+                                      description: The age in days after last access
+                                        time to tier blobs to cool storage. Supports
+                                        blob currently at Hot tier. Must be between
+                                        0 and 99999. Defaults to -1.
+                                      type: number
+                                    tierToCoolAfterDaysSinceModificationGreaterThan:
+                                      description: The age in days after last modification
+                                        to tier blobs to cool storage. Supports blob
+                                        currently at Hot tier. Must be between 0 and
+                                        99999. Defaults to -1.
+                                      type: number
+                                  type: object
+                                type: array
+                              snapshot:
+                                description: A snapshot block as documented below.
+                                items:
+                                  properties:
+                                    changeTierToArchiveAfterDaysSinceCreation:
+                                      description: The age in days after creation
+                                        to tier blob version to archive storage. Must
+                                        be between 0 and 99999. Defaults to -1.
+                                      type: number
+                                    changeTierToCoolAfterDaysSinceCreation:
+                                      description: The age in days creation create
+                                        to tier blob version to cool storage. Must
+                                        be between 0 and 99999. Defaults to -1.
+                                      type: number
+                                    deleteAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to delete the blob snapshot. Must be between
+                                        0 and 99999. Defaults to -1.
+                                      type: number
+                                    tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
+                                      description: The age in days after last tier
+                                        change to the blobs to skip to be archved.
+                                        Must be between 0 and 99999. Defaults to -1.
+                                      type: number
+                                  type: object
+                                type: array
+                              version:
+                                description: A version block as documented below.
+                                items:
+                                  properties:
+                                    changeTierToArchiveAfterDaysSinceCreation:
+                                      description: The age in days after creation
+                                        to tier blob version to archive storage. Must
+                                        be between 0 and 99999. Defaults to -1.
+                                      type: number
+                                    changeTierToCoolAfterDaysSinceCreation:
+                                      description: The age in days creation create
+                                        to tier blob version to cool storage. Must
+                                        be between 0 and 99999. Defaults to -1.
+                                      type: number
+                                    deleteAfterDaysSinceCreation:
+                                      description: The age in days after creation
+                                        to delete the blob version. Must be between
+                                        0 and 99999. Defaults to -1.
+                                      type: number
+                                    tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
+                                      description: The age in days after last tier
+                                        change to the blobs to skip to be archved.
+                                        Must be between 0 and 99999. Defaults to -1.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        enabled:
+                          description: Boolean to specify whether the rule is enabled.
+                          type: boolean
+                        filters:
+                          description: A filters block as documented below.
+                          items:
+                            properties:
+                              blobTypes:
+                                description: An array of predefined values. Valid
+                                  options are blockBlob and appendBlob.
+                                items:
+                                  type: string
+                                type: array
+                              matchBlobIndexTag:
+                                description: A match_blob_index_tag block as defined
+                                  below. The block defines the blob index tag based
+                                  filtering for blob objects.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the rule. Rule name
+                                        is case-sensitive. It must be unique within
+                                        a policy.
+                                      type: string
+                                    operation:
+                                      description: The comparison operator which is
+                                        used for object comparison and filtering.
+                                        Possible value is ==. Defaults to ==.
+                                      type: string
+                                    value:
+                                      description: The filter tag value used for tag
+                                        based filtering for blob objects.
+                                      type: string
+                                  type: object
+                                type: array
+                              prefixMatch:
+                                description: An array of strings for prefixes to be
+                                  matched.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        name:
+                          description: The name of the rule. Rule name is case-sensitive.
+                            It must be unique within a policy.
+                          type: string
+                      type: object
+                    type: array
+                  storageAccountId:
+                    description: Specifies the id of the storage account to apply
+                      the management policy to. Changing this forces a new resource
+                      to be created.
                     type: string
                 type: object
               conditions:

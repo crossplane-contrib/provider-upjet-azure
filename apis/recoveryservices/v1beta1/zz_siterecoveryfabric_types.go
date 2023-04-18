@@ -17,13 +17,22 @@ type SiteRecoveryFabricObservation struct {
 
 	// The ID of the Site Recovery Fabric.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// In what region should the fabric be located. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the vault that should be updated. Changing this forces a new resource to be created.
+	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
+
+	// Name of the resource group where the vault that should be updated is located. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type SiteRecoveryFabricParameters struct {
 
 	// In what region should the fabric be located. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.Vault
@@ -76,8 +85,9 @@ type SiteRecoveryFabricStatus struct {
 type SiteRecoveryFabric struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SiteRecoveryFabricSpec   `json:"spec"`
-	Status            SiteRecoveryFabricStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   SiteRecoveryFabricSpec   `json:"spec"`
+	Status SiteRecoveryFabricStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

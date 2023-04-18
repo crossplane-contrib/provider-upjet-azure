@@ -15,6 +15,12 @@ import (
 
 type GatewayAPIObservation struct {
 
+	// The Identifier of the API Management API within the API Management Service. Changing this forces a new API Management Gateway API to be created.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// The Identifier for the API Management Gateway. Changing this forces a new API Management Gateway API to be created.
+	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
+
 	// The ID of the API Management Gateway API.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }

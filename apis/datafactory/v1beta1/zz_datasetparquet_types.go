@@ -14,6 +14,24 @@ import (
 )
 
 type DataSetParquetAzureBlobStorageLocationObservation struct {
+
+	// The container on the Azure Blob Storage Account hosting the file.
+	Container *string `json:"container,omitempty" tf:"container,omitempty"`
+
+	// Is the container using dynamic expression, function or system variables? Defaults to false.
+	DynamicContainerEnabled *bool `json:"dynamicContainerEnabled,omitempty" tf:"dynamic_container_enabled,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the file on the web server.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file on the web server.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type DataSetParquetAzureBlobStorageLocationParameters struct {
@@ -44,6 +62,21 @@ type DataSetParquetAzureBlobStorageLocationParameters struct {
 }
 
 type DataSetParquetHTTPServerLocationObservation struct {
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the file on the web server.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file on the web server.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The base URL to the web server hosting the file.
+	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
 }
 
 type DataSetParquetHTTPServerLocationParameters struct {
@@ -71,8 +104,44 @@ type DataSetParquetHTTPServerLocationParameters struct {
 
 type DataSetParquetObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Dataset.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Dataset.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// A azure_blob_storage_location block as defined below.
+	AzureBlobStorageLocation []DataSetParquetAzureBlobStorageLocationObservation `json:"azureBlobStorageLocation,omitempty" tf:"azure_blob_storage_location,omitempty"`
+
+	// The compression codec used to read/write text files. Valid values are bzip2, gzip, deflate, ZipDeflate, TarGzip, Tar, snappy, or lz4. Please note these values are case-sensitive.
+	CompressionCodec *string `json:"compressionCodec,omitempty" tf:"compression_codec,omitempty"`
+
+	// Specifies the compression level. Possible values are Optimal and Fastest,
+	CompressionLevel *string `json:"compressionLevel,omitempty" tf:"compression_level,omitempty"`
+
+	// The Data Factory ID in which to associate the Dataset with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Dataset.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
+	// A http_server_location block as defined below.
+	HTTPServerLocation []DataSetParquetHTTPServerLocationObservation `json:"httpServerLocation,omitempty" tf:"http_server_location,omitempty"`
+
 	// The ID of the Data Factory Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Data Factory Linked Service name in which to associate the Dataset with.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Dataset.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// A schema_column block as defined below.
+	SchemaColumn []DataSetParquetSchemaColumnObservation `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
 }
 
 type DataSetParquetParameters struct {
@@ -146,6 +215,15 @@ type DataSetParquetParameters struct {
 }
 
 type DataSetParquetSchemaColumnObservation struct {
+
+	// The description of the column.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type DataSetParquetSchemaColumnParameters struct {

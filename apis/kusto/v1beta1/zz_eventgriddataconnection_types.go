@@ -15,8 +15,53 @@ import (
 
 type EventGridDataConnectionObservation struct {
 
+	// Specifies the blob storage event type that needs to be processed. Possible Values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobRenamed. Defaults to Microsoft.Storage.BlobCreated.
+	BlobStorageEventType *string `json:"blobStorageEventType,omitempty" tf:"blob_storage_event_type,omitempty"`
+
+	// Specifies the name of the Kusto Cluster this data connection will be added to. Changing this forces a new resource to be created.
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// Specifies the data format of the EventHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV, TSVE, TXT and W3CLOGFILE.
+	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
+
+	// Specifies the name of the Kusto Database this data connection will be added to. Changing this forces a new resource to be created.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created.
+	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
+
+	// The resource ID of the event grid that is subscribed to the storage account events.
+	EventGridResourceID *string `json:"eventgridResourceId,omitempty" tf:"eventgrid_resource_id,omitempty"`
+
+	// Specifies the Event Hub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
+	EventHubConsumerGroupName *string `json:"eventhubConsumerGroupName,omitempty" tf:"eventhub_consumer_group_name,omitempty"`
+
+	// Specifies the resource id of the Event Hub this data connection will use for ingestion. Changing this forces a new resource to be created.
+	EventHubID *string `json:"eventhubId,omitempty" tf:"eventhub_id,omitempty"`
+
 	// The ID of the Kusto Event Grid Data Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Empty for non-managed identity based data connection. For system assigned identity, provide cluster resource Id. For user assigned identity (UAI) provide the UAI resource Id.
+	ManagedIdentityResourceID *string `json:"managedIdentityResourceId,omitempty" tf:"managed_identity_resource_id,omitempty"`
+
+	// Specifies the mapping rule used for the message ingestion. Mapping rule must exist before resource is created.
+	MappingRuleName *string `json:"mappingRuleName,omitempty" tf:"mapping_rule_name,omitempty"`
+
+	// Specifies the Resource Group where the Kusto Database should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// is the first record of every file ignored? Defaults to false.
+	SkipFirstRecord *bool `json:"skipFirstRecord,omitempty" tf:"skip_first_record,omitempty"`
+
+	// Specifies the resource id of the Storage Account this data connection will use for ingestion. Changing this forces a new resource to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Specifies the target table name used for the message ingestion. Table must exist before resource is created.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type EventGridDataConnectionParameters struct {
@@ -91,8 +136,8 @@ type EventGridDataConnectionParameters struct {
 	EventHubIDSelector *v1.Selector `json:"eventhubIdSelector,omitempty" tf:"-"`
 
 	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Empty for non-managed identity based data connection. For system assigned identity, provide cluster resource Id. For user assigned identity (UAI) provide the UAI resource Id.
 	// +kubebuilder:validation:Optional
@@ -162,8 +207,9 @@ type EventGridDataConnectionStatus struct {
 type EventGridDataConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventGridDataConnectionSpec   `json:"spec"`
-	Status            EventGridDataConnectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   EventGridDataConnectionSpec   `json:"spec"`
+	Status EventGridDataConnectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -14,6 +14,9 @@ import (
 )
 
 type AdditionalCapabilitiesObservation struct {
+
+	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
+	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 }
 
 type AdditionalCapabilitiesParameters struct {
@@ -24,6 +27,12 @@ type AdditionalCapabilitiesParameters struct {
 }
 
 type AdminSSHKeyObservation struct {
+
+	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format. Changing this forces a new resource to be created.
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
+
+	// The Username for which this Public SSH Key should be configured. Changing this forces a new resource to be created.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type AdminSSHKeyParameters struct {
@@ -38,6 +47,9 @@ type AdminSSHKeyParameters struct {
 }
 
 type BootDiagnosticsObservation struct {
+
+	// The Primary/Secondary Endpoint for the Azure Storage Account which should be used to store Boot Diagnostics, including Console Output and Screenshots from the Hypervisor.
+	StorageAccountURI *string `json:"storageAccountUri,omitempty" tf:"storage_account_uri,omitempty"`
 }
 
 type BootDiagnosticsParameters struct {
@@ -48,6 +60,9 @@ type BootDiagnosticsParameters struct {
 }
 
 type CertificateObservation struct {
+
+	// The Secret URL of a Key Vault Certificate.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type CertificateParameters struct {
@@ -58,6 +73,12 @@ type CertificateParameters struct {
 }
 
 type DiffDiskSettingsObservation struct {
+
+	// Specifies the Ephemeral Disk Settings for the OS Disk. At this time the only possible value is Local. Changing this forces a new resource to be created.
+	Option *string `json:"option,omitempty" tf:"option,omitempty"`
+
+	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
+	Placement *string `json:"placement,omitempty" tf:"placement,omitempty"`
 }
 
 type DiffDiskSettingsParameters struct {
@@ -72,6 +93,18 @@ type DiffDiskSettingsParameters struct {
 }
 
 type LinuxVirtualMachineGalleryApplicationObservation struct {
+
+	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided.
+	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
+
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647.
+	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+
+	// Specifies a passthrough value for more generic context. This field can be any valid string value.
+	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
+
+	// Specifies the Gallery Application Version resource ID.
+	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
 }
 
 type LinuxVirtualMachineGalleryApplicationParameters struct {
@@ -95,11 +128,17 @@ type LinuxVirtualMachineGalleryApplicationParameters struct {
 
 type LinuxVirtualMachineIdentityObservation struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Linux Virtual Machine.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Linux Virtual Machine. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LinuxVirtualMachineIdentityParameters struct {
@@ -115,12 +154,89 @@ type LinuxVirtualMachineIdentityParameters struct {
 
 type LinuxVirtualMachineObservation struct {
 
+	// A additional_capabilities block as defined below.
+	AdditionalCapabilities []AdditionalCapabilitiesObservation `json:"additionalCapabilities,omitempty" tf:"additional_capabilities,omitempty"`
+
+	// One or more admin_ssh_key blocks as defined below. Changing this forces a new resource to be created.
+	AdminSSHKey []AdminSSHKeyObservation `json:"adminSshKey,omitempty" tf:"admin_ssh_key,omitempty"`
+
+	// The username of the local administrator used for the Virtual Machine. Changing this forces a new resource to be created.
+	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
+
+	// Should Extension Operations be allowed on this Virtual Machine? Defaults to true.
+	AllowExtensionOperations *bool `json:"allowExtensionOperations,omitempty" tf:"allow_extension_operations,omitempty"`
+
+	// Specifies the ID of the Availability Set in which the Virtual Machine should exist. Changing this forces a new resource to be created.
+	AvailabilitySetID *string `json:"availabilitySetId,omitempty" tf:"availability_set_id,omitempty"`
+
+	// A boot_diagnostics block as defined below.
+	BootDiagnostics []BootDiagnosticsObservation `json:"bootDiagnostics,omitempty" tf:"boot_diagnostics,omitempty"`
+
+	// Specifies the ID of the Capacity Reservation Group which the Virtual Machine should be allocated to.
+	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
+
+	// Specifies the Hostname which should be used for this Virtual Machine. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name, then you must specify computer_name. Changing this forces a new resource to be created.
+	ComputerName *string `json:"computerName,omitempty" tf:"computer_name,omitempty"`
+
+	// The ID of a Dedicated Host Group that this Linux Virtual Machine should be run within. Conflicts with dedicated_host_id.
+	DedicatedHostGroupID *string `json:"dedicatedHostGroupId,omitempty" tf:"dedicated_host_group_id,omitempty"`
+
+	// The ID of a Dedicated Host where this machine should be run on. Conflicts with dedicated_host_group_id.
+	DedicatedHostID *string `json:"dedicatedHostId,omitempty" tf:"dedicated_host_id,omitempty"`
+
+	// Should Password Authentication be disabled on this Virtual Machine? Defaults to true. Changing this forces a new resource to be created.
+	DisablePasswordAuthentication *bool `json:"disablePasswordAuthentication,omitempty" tf:"disable_password_authentication,omitempty"`
+
+	// Specifies the Edge Zone within the Azure Region where this Linux Virtual Machine should exist. Changing this forces a new Linux Virtual Machine to be created.
+	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
+
+	// Should all of the disks (including the temp disk) attached to this Virtual Machine be encrypted by enabling Encryption at Host?
+	EncryptionAtHostEnabled *bool `json:"encryptionAtHostEnabled,omitempty" tf:"encryption_at_host_enabled,omitempty"`
+
+	// Specifies what should happen when the Virtual Machine is evicted for price reasons when using a Spot instance. Possible values are Deallocate and Delete. Changing this forces a new resource to be created.
+	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
+
+	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
+	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
+
+	// A gallery_application block as defined below.
+	GalleryApplication []LinuxVirtualMachineGalleryApplicationObservation `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
+
 	// The ID of the Linux Virtual Machine.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []LinuxVirtualMachineIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the BYOL Type for this Virtual Machine. Possible values are RHEL_BYOS and SLES_BYOS.
+	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
+
+	// The Azure location where the Linux Virtual Machine should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The maximum price you're willing to pay for this Virtual Machine, in US Dollars; which must be greater than the current spot price. If this bid price falls below the current spot price the Virtual Machine will be evicted using the eviction_policy. Defaults to -1, which means that the Virtual Machine should not be evicted for price reasons.
+	MaxBidPrice *float64 `json:"maxBidPrice,omitempty" tf:"max_bid_price,omitempty"`
+
+	// . A list of Network Interface IDs which should be attached to this Virtual Machine. The first Network Interface ID in this list will be the Primary Network Interface on the Virtual Machine.
+	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
+
+	// A os_disk block as defined below.
+	OsDisk []LinuxVirtualMachineOsDiskObservation `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
+
+	// Specifies the mode of VM Guest Patching for the Virtual Machine. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
+	PatchAssessmentMode *string `json:"patchAssessmentMode,omitempty" tf:"patch_assessment_mode,omitempty"`
+
+	// Specifies the mode of in-guest patching to this Linux Virtual Machine. Possible values are AutomaticByPlatform and ImageDefault. Defaults to ImageDefault. For more information on patch modes please see the product documentation.
+	PatchMode *string `json:"patchMode,omitempty" tf:"patch_mode,omitempty"`
+
+	// A plan block as defined below. Changing this forces a new resource to be created.
+	Plan []PlanObservation `json:"plan,omitempty" tf:"plan,omitempty"`
+
+	// Specifies the Platform Fault Domain in which this Linux Virtual Machine should be created. Defaults to -1, which means this will be automatically assigned to a fault domain that best maintains balance across the available fault domains. Changing this forces a new Linux Virtual Machine to be created.
+	PlatformFaultDomain *float64 `json:"platformFaultDomain,omitempty" tf:"platform_fault_domain,omitempty"`
+
+	// Specifies the priority of this Virtual Machine. Possible values are Regular and Spot. Defaults to Regular. Changing this forces a new resource to be created.
+	Priority *string `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The Primary Private IP Address assigned to this Virtual Machine.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
@@ -128,17 +244,86 @@ type LinuxVirtualMachineObservation struct {
 	// A list of Private IP Addresses assigned to this Virtual Machine.
 	PrivateIPAddresses []*string `json:"privateIpAddresses,omitempty" tf:"private_ip_addresses,omitempty"`
 
+	// Should the Azure VM Agent be provisioned on this Virtual Machine? Defaults to true. Changing this forces a new resource to be created.
+	ProvisionVMAgent *bool `json:"provisionVmAgent,omitempty" tf:"provision_vm_agent,omitempty"`
+
+	// The ID of the Proximity Placement Group which the Virtual Machine should be assigned to.
+	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
+
 	// The Primary Public IP Address assigned to this Virtual Machine.
 	PublicIPAddress *string `json:"publicIpAddress,omitempty" tf:"public_ip_address,omitempty"`
 
 	// A list of the Public IP Addresses assigned to this Virtual Machine.
 	PublicIPAddresses []*string `json:"publicIpAddresses,omitempty" tf:"public_ip_addresses,omitempty"`
 
+	// The name of the Resource Group in which the Linux Virtual Machine should be exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// One or more secret blocks as defined below.
+	Secret []SecretObservation `json:"secret,omitempty" tf:"secret,omitempty"`
+
+	// Specifies whether secure boot should be enabled on the virtual machine. Changing this forces a new resource to be created.
+	SecureBootEnabled *bool `json:"secureBootEnabled,omitempty" tf:"secure_boot_enabled,omitempty"`
+
+	// The SKU which should be used for this Virtual Machine, such as Standard_F2.
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	// The ID of the Image which this Virtual Machine should be created from. Changing this forces a new resource to be created. Possible Image ID types include Image IDs, Shared Image IDs, Shared Image Version IDs, Community Gallery Image IDs, Community Gallery Image Version IDs, Shared Gallery Image IDs and Shared Gallery Image Version IDs.
+	SourceImageID *string `json:"sourceImageId,omitempty" tf:"source_image_id,omitempty"`
+
+	// A source_image_reference block as defined below. Changing this forces a new resource to be created.
+	SourceImageReference []SourceImageReferenceObservation `json:"sourceImageReference,omitempty" tf:"source_image_reference,omitempty"`
+
+	// A mapping of tags which should be assigned to this Virtual Machine.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A termination_notification block as defined below.
+	TerminationNotification []TerminationNotificationObservation `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
+
+	// The Base64-Encoded User Data which should be used for this Virtual Machine.
+	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
+
 	// A 128-bit identifier which uniquely identifies this Virtual Machine.
 	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`
+
+	// Specifies the Orchestrated Virtual Machine Scale Set that this Virtual Machine should be created within. Changing this forces a new resource to be created.
+	VirtualMachineScaleSetID *string `json:"virtualMachineScaleSetId,omitempty" tf:"virtual_machine_scale_set_id,omitempty"`
+
+	// Specifies whether vTPM should be enabled on the virtual machine. Changing this forces a new resource to be created.
+	VtpmEnabled *bool `json:"vtpmEnabled,omitempty" tf:"vtpm_enabled,omitempty"`
+
+	// Specifies the Availability Zones in which this Linux Virtual Machine should be located. Changing this forces a new Linux Virtual Machine to be created.
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
 type LinuxVirtualMachineOsDiskObservation struct {
+
+	// The Type of Caching which should be used for the Internal OS Disk. Possible values are None, ReadOnly and ReadWrite.
+	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
+
+	// A diff_disk_settings block as defined above. Changing this forces a new resource to be created.
+	DiffDiskSettings []DiffDiskSettingsObservation `json:"diffDiskSettings,omitempty" tf:"diff_disk_settings,omitempty"`
+
+	// The ID of the Disk Encryption Set which should be used to Encrypt this OS Disk. Conflicts with secure_vm_disk_encryption_set_id.
+	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
+
+	// The Size of the Internal OS Disk in GB, if you wish to vary from the size used in the image this Virtual Machine is sourced from.
+	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+
+	// The name which should be used for the Internal OS Disk. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Disk Encryption Set which should be used to Encrypt this OS Disk when the Virtual Machine is a Confidential VM. Conflicts with disk_encryption_set_id. Changing this forces a new resource to be created.
+	SecureVMDiskEncryptionSetID *string `json:"secureVmDiskEncryptionSetId,omitempty" tf:"secure_vm_disk_encryption_set_id,omitempty"`
+
+	// Encryption Type when the Virtual Machine is a Confidential VM. Possible values are VMGuestStateOnly and DiskWithVMGuestState. Changing this forces a new resource to be created.
+	SecurityEncryptionType *string `json:"securityEncryptionType,omitempty" tf:"security_encryption_type,omitempty"`
+
+	// The Type of Storage Account which should back this the Internal OS Disk. Possible values are Standard_LRS, StandardSSD_LRS, Premium_LRS, StandardSSD_ZRS and Premium_ZRS. Changing this forces a new resource to be created.
+	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
+
+	// Should Write Accelerator be Enabled for this OS Disk? Defaults to false.
+	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
 }
 
 type LinuxVirtualMachineOsDiskParameters struct {
@@ -195,8 +380,8 @@ type LinuxVirtualMachineParameters struct {
 	AdminSSHKey []AdminSSHKeyParameters `json:"adminSshKey,omitempty" tf:"admin_ssh_key,omitempty"`
 
 	// The username of the local administrator used for the Virtual Machine. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
+	// +kubebuilder:validation:Optional
+	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
 
 	// Should Extension Operations be allowed on this Virtual Machine? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -263,8 +448,8 @@ type LinuxVirtualMachineParameters struct {
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
 	// The Azure location where the Linux Virtual Machine should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The maximum price you're willing to pay for this Virtual Machine, in US Dollars; which must be greater than the current spot price. If this bid price falls below the current spot price the Virtual Machine will be evicted using the eviction_policy. Defaults to -1, which means that the Virtual Machine should not be evicted for price reasons.
 	// +kubebuilder:validation:Optional
@@ -285,8 +470,8 @@ type LinuxVirtualMachineParameters struct {
 	NetworkInterfaceIdsSelector *v1.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
 
 	// A os_disk block as defined below.
-	// +kubebuilder:validation:Required
-	OsDisk []LinuxVirtualMachineOsDiskParameters `json:"osDisk" tf:"os_disk,omitempty"`
+	// +kubebuilder:validation:Optional
+	OsDisk []LinuxVirtualMachineOsDiskParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
 	// Specifies the mode of VM Guest Patching for the Virtual Machine. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
 	// +kubebuilder:validation:Optional
@@ -338,8 +523,8 @@ type LinuxVirtualMachineParameters struct {
 	SecureBootEnabled *bool `json:"secureBootEnabled,omitempty" tf:"secure_boot_enabled,omitempty"`
 
 	// The SKU which should be used for this Virtual Machine, such as Standard_F2.
-	// +kubebuilder:validation:Required
-	Size *string `json:"size" tf:"size,omitempty"`
+	// +kubebuilder:validation:Optional
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
 	// The ID of the Image which this Virtual Machine should be created from. Changing this forces a new resource to be created. Possible Image ID types include Image IDs, Shared Image IDs, Shared Image Version IDs, Community Gallery Image IDs, Community Gallery Image Version IDs, Shared Gallery Image IDs and Shared Gallery Image Version IDs.
 	// +kubebuilder:validation:Optional
@@ -375,6 +560,15 @@ type LinuxVirtualMachineParameters struct {
 }
 
 type PlanObservation struct {
+
+	// Specifies the Name of the Marketplace Image this Virtual Machine should be created from. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the Product of the Marketplace Image this Virtual Machine should be created from. Changing this forces a new resource to be created.
+	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+
+	// Specifies the Publisher of the Marketplace Image this Virtual Machine should be created from. Changing this forces a new resource to be created.
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 }
 
 type PlanParameters struct {
@@ -393,6 +587,12 @@ type PlanParameters struct {
 }
 
 type SecretObservation struct {
+
+	// One or more certificate blocks as defined above.
+	Certificate []CertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// The ID of the Key Vault from which all Secrets should be sourced.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 }
 
 type SecretParameters struct {
@@ -407,6 +607,18 @@ type SecretParameters struct {
 }
 
 type SourceImageReferenceObservation struct {
+
+	// Specifies the offer of the image used to create the virtual machines. Changing this forces a new resource to be created.
+	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
+
+	// Specifies the publisher of the image used to create the virtual machines. Changing this forces a new resource to be created.
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+
+	// Specifies the SKU of the image used to create the virtual machines. Changing this forces a new resource to be created.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// Specifies the version of the image used to create the virtual machines. Changing this forces a new resource to be created.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type SourceImageReferenceParameters struct {
@@ -429,6 +641,12 @@ type SourceImageReferenceParameters struct {
 }
 
 type TerminationNotificationObservation struct {
+
+	// Should the termination notification be enabled on this Virtual Machine?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
+	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type TerminationNotificationParameters struct {
@@ -466,8 +684,12 @@ type LinuxVirtualMachineStatus struct {
 type LinuxVirtualMachine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LinuxVirtualMachineSpec   `json:"spec"`
-	Status            LinuxVirtualMachineStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.adminUsername)",message="adminUsername is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.osDisk)",message="osDisk is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.size)",message="size is a required parameter"
+	Spec   LinuxVirtualMachineSpec   `json:"spec"`
+	Status LinuxVirtualMachineStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

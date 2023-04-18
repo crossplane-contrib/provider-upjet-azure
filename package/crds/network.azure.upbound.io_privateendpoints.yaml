@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: privateendpoints.network.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -414,10 +418,22 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
-                required:
-                - location
-                - privateServiceConnection
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -589,6 +605,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: privateServiceConnection is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.privateServiceConnection)
           status:
             description: PrivateEndpointStatus defines the observed state of PrivateEndpoint.
             properties:
@@ -609,8 +630,44 @@ spec:
                           type: array
                       type: object
                     type: array
+                  customNetworkInterfaceName:
+                    description: The custom name of the network interface attached
+                      to the private endpoint. Changing this forces a new resource
+                      to be created.
+                    type: string
                   id:
                     description: The ID of the Private Endpoint.
+                    type: string
+                  ipConfiguration:
+                    description: One or more ip_configuration blocks as defined below.
+                      This allows a static IP address to be set for this Private Endpoint,
+                      otherwise an address is dynamically allocated from the Subnet.
+                    items:
+                      properties:
+                        memberName:
+                          description: Specifies the member name this IP address applies
+                            to. If it is not specified, it will use the value of subresource_name.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        name:
+                          description: Specifies the Name of the IP Configuration.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        privateIpAddress:
+                          description: Specifies the static IP address within the
+                            private endpoint's subnet to be used. Changing this forces
+                            a new resource to be created.
+                          type: string
+                        subresourceName:
+                          description: Specifies the subresource this IP address applies
+                            to. subresource_names corresponds to group_id. Changing
+                            this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: The supported Azure location where the resource exists.
+                      Changing this forces a new resource to be created.
                     type: string
                   networkInterface:
                     description: A network_interface block as defined below.
@@ -676,20 +733,85 @@ spec:
                         id:
                           description: The ID of the Private DNS Zone Group.
                           type: string
+                        name:
+                          description: Specifies the Name of the Private DNS Zone
+                            Group.
+                          type: string
+                        privateDnsZoneIds:
+                          description: Specifies the list of Private DNS Zones to
+                            include within the private_dns_zone_group.
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   privateServiceConnection:
                     description: A private_service_connection block as defined below.
                     items:
                       properties:
+                        isManualConnection:
+                          description: Does the Private Endpoint require Manual Approval
+                            from the remote resource owner? Changing this forces a
+                            new resource to be created.
+                          type: boolean
+                        name:
+                          description: Specifies the Name of the Private Service Connection.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        privateConnectionResourceAlias:
+                          description: The Service Alias of the Private Link Enabled
+                            Remote Resource which this Private Endpoint should be
+                            connected to. One of private_connection_resource_id or
+                            private_connection_resource_alias must be specified. Changing
+                            this forces a new resource to be created.
+                          type: string
+                        privateConnectionResourceId:
+                          description: The ID of the Private Link Enabled Remote Resource
+                            which this Private Endpoint should be connected to. One
+                            of private_connection_resource_id or private_connection_resource_alias
+                            must be specified. Changing this forces a new resource
+                            to be created. For a web app or function app slot, the
+                            parent web app should be used in this field instead of
+                            a reference to the slot itself.
+                          type: string
                         privateIpAddress:
                           description: (Computed) The private IP address associated
                             with the private endpoint, note that you will have a private
                             IP address assigned to the private endpoint even if the
                             connection request was Rejected.
                           type: string
+                        requestMessage:
+                          description: A message passed to the owner of the remote
+                            resource when the private endpoint attempts to establish
+                            the connection to the remote resource. The request message
+                            can be a maximum of 140 characters in length. Only valid
+                            if is_manual_connection is set to true.
+                          type: string
+                        subresourceNames:
+                          description: A list of subresource names which the Private
+                            Endpoint is able to connect to. subresource_names corresponds
+                            to group_id. Changing this forces a new resource to be
+                            created.
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
+                  resourceGroupName:
+                    description: Specifies the Name of the Resource Group within which
+                      the Private Endpoint should exist. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  subnetId:
+                    description: The ID of the Subnet from which Private IP Addresses
+                      will be allocated for this Private Endpoint. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
                 type: object
               conditions:
                 description: Conditions of the resource.

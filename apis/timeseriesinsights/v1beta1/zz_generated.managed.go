@@ -17,6 +17,11 @@ func (mg *EventSourceEventHub) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this EventSourceEventHub.
+func (mg *EventSourceEventHub) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this EventSourceEventHub.
 func (mg *EventSourceEventHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *EventSourceEventHub) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this EventSourceEventHub.
 func (mg *EventSourceEventHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this EventSourceEventHub.
+func (mg *EventSourceEventHub) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this EventSourceEventHub.
@@ -83,6 +93,11 @@ func (mg *EventSourceIOTHub) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this EventSourceIOTHub.
+func (mg *EventSourceIOTHub) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this EventSourceIOTHub.
 func (mg *EventSourceIOTHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *EventSourceIOTHub) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this EventSourceIOTHub.
 func (mg *EventSourceIOTHub) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this EventSourceIOTHub.
+func (mg *EventSourceIOTHub) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this EventSourceIOTHub.
@@ -149,6 +169,11 @@ func (mg *Gen2Environment) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this Gen2Environment.
+func (mg *Gen2Environment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this Gen2Environment.
 func (mg *Gen2Environment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *Gen2Environment) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this Gen2Environment.
 func (mg *Gen2Environment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this Gen2Environment.
+func (mg *Gen2Environment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this Gen2Environment.
@@ -215,6 +245,11 @@ func (mg *ReferenceDataSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this ReferenceDataSet.
+func (mg *ReferenceDataSet) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this ReferenceDataSet.
 func (mg *ReferenceDataSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -246,6 +281,11 @@ func (mg *ReferenceDataSet) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this ReferenceDataSet.
 func (mg *ReferenceDataSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this ReferenceDataSet.
+func (mg *ReferenceDataSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this ReferenceDataSet.
@@ -281,6 +321,11 @@ func (mg *StandardEnvironment) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this StandardEnvironment.
+func (mg *StandardEnvironment) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this StandardEnvironment.
 func (mg *StandardEnvironment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -312,6 +357,11 @@ func (mg *StandardEnvironment) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this StandardEnvironment.
 func (mg *StandardEnvironment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this StandardEnvironment.
+func (mg *StandardEnvironment) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this StandardEnvironment.

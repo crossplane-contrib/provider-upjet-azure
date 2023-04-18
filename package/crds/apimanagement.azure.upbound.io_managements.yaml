@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: managements.apimanagement.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -673,12 +677,22 @@ spec:
                     items:
                       type: string
                     type: array
-                required:
-                - location
-                - publisherEmail
-                - publisherName
-                - skuName
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -850,6 +864,15 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: publisherEmail is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.publisherEmail)
+            - message: publisherName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.publisherName)
+            - message: skuName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)
           status:
             description: ManagementStatus defines the observed state of Management.
             properties:
@@ -860,9 +883,22 @@ spec:
                       below.
                     items:
                       properties:
+                        capacity:
+                          description: The number of compute units in this region.
+                            Defaults to the capacity of the main region.
+                          type: number
+                        gatewayDisabled:
+                          description: Only valid for an Api Management service deployed
+                            in multiple locations. This can be used to disable the
+                            gateway in this additional location.
+                          type: boolean
                         gatewayRegionalUrl:
                           description: The URL of the Regional Gateway for the API
                             Management Service in the specified region.
+                          type: string
+                        location:
+                          description: The name of the Azure Region in which the API
+                            Management Service should be expanded to.
                           type: string
                         privateIpAddresses:
                           description: The Private IP addresses of the API Management
@@ -871,10 +907,31 @@ spec:
                           items:
                             type: string
                           type: array
+                        publicIpAddressId:
+                          description: ID of a standard SKU IPv4 Public IP.
+                          type: string
                         publicIpAddresses:
                           description: Public Static Load Balanced IP addresses of
                             the API Management service in the additional location.
                             Available only for Basic, Standard and Premium SKU.
+                          items:
+                            type: string
+                          type: array
+                        virtualNetworkConfiguration:
+                          description: A virtual_network_configuration block as defined
+                            below. Required when virtual_network_type is External
+                            or Internal.
+                          items:
+                            properties:
+                              subnetId:
+                                description: The id of the subnet that will be used
+                                  for the API Management.
+                                type: string
+                            type: object
+                          type: array
+                        zones:
+                          description: A list of availability zones. Changing this
+                            forces a new resource to be created.
                           items:
                             type: string
                           type: array
@@ -889,6 +946,11 @@ spec:
                           description: 'The expiration date of the certificate in
                             RFC3339 format: 2000-01-02T03:04:05Z.'
                           type: string
+                        storeName:
+                          description: The name of the Certificate Store where this
+                            certificate should be stored. Possible values are CertificateAuthority
+                            and Root.
+                          type: string
                         subject:
                           description: The subject of the certificate.
                           type: string
@@ -897,10 +959,36 @@ spec:
                           type: string
                       type: object
                     type: array
+                  clientCertificateEnabled:
+                    description: Enforce a client certificate to be presented on each
+                      request to the gateway? This is only supported when SKU type
+                      is Consumption.
+                    type: boolean
+                  delegation:
+                    description: A delegation block as defined below.
+                    items:
+                      properties:
+                        subscriptionsEnabled:
+                          description: Should subscription requests be delegated to
+                            an external url? Defaults to false.
+                          type: boolean
+                        url:
+                          description: The delegation URL.
+                          type: string
+                        userRegistrationEnabled:
+                          description: Should user registration requests be delegated
+                            to an external url? Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
                   developerPortalUrl:
                     description: The URL for the Developer Portal associated with
                       this API Management service.
                     type: string
+                  gatewayDisabled:
+                    description: Disable the gateway in main region? This is only
+                      supported when additional_location is set.
+                    type: boolean
                   gatewayRegionalUrl:
                     description: The Region URL for the Gateway of the API Management
                       Service.
@@ -1129,6 +1217,12 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this API Management Service.
+                          items:
+                            type: string
+                          type: array
                         principalId:
                           description: The Principal ID associated with this Managed
                             Service Identity.
@@ -1137,12 +1231,44 @@ spec:
                           description: The Tenant ID associated with this Managed
                             Service Identity.
                           type: string
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this API Management Service.
+                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
+                          type: string
                       type: object
                     type: array
+                  location:
+                    description: The Azure location where the API Management Service
+                      exists. Changing this forces a new resource to be created.
+                    type: string
                   managementApiUrl:
                     description: The URL for the Management API associated with this
                       API Management service.
                     type: string
+                  minApiVersion:
+                    description: The version which the control plane API calls to
+                      API Management service are limited with version equal to or
+                      newer than.
+                    type: string
+                  notificationSenderEmail:
+                    description: Email address from which the notification will be
+                      sent.
+                    type: string
+                  policy:
+                    description: A policy block as defined below.
+                    items:
+                      properties:
+                        xmlContent:
+                          description: The XML Content for this Policy.
+                          type: string
+                        xmlLink:
+                          description: A link to an API Management Policy XML Document,
+                            which must be publicly available.
+                          type: string
+                      type: object
+                    type: array
                   portalUrl:
                     description: The URL for the Publisher Portal associated with
                       this API Management service.
@@ -1152,24 +1278,201 @@ spec:
                     items:
                       type: string
                     type: array
+                  protocols:
+                    description: A protocols block as defined below.
+                    items:
+                      properties:
+                        enableHttp2:
+                          description: Should HTTP/2 be supported by the API Management
+                            Service? Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  publicIpAddressId:
+                    description: ID of a standard SKU IPv4 Public IP.
+                    type: string
                   publicIpAddresses:
                     description: The Public IP addresses of the API Management Service.
                     items:
                       type: string
                     type: array
+                  publicNetworkAccessEnabled:
+                    description: Is public access to the service allowed?. Defaults
+                      to true
+                    type: boolean
+                  publisherEmail:
+                    description: The email of publisher/company.
+                    type: string
+                  publisherName:
+                    description: The name of publisher/company.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group in which the API Management
+                      Service should be exist. Changing this forces a new resource
+                      to be created.
+                    type: string
                   scmUrl:
                     description: The URL for the SCM (Source Code Management) Endpoint
                       associated with this API Management service.
                     type: string
+                  security:
+                    description: A security block as defined below.
+                    items:
+                      properties:
+                        enableBackendSsl30:
+                          description: Should SSL 3.0 be enabled on the backend of
+                            the gateway? Defaults to false.
+                          type: boolean
+                        enableBackendTls10:
+                          description: Should TLS 1.0 be enabled on the backend of
+                            the gateway? Defaults to false.
+                          type: boolean
+                        enableBackendTls11:
+                          description: Should TLS 1.1 be enabled on the backend of
+                            the gateway? Defaults to false.
+                          type: boolean
+                        enableFrontendSsl30:
+                          description: Should SSL 3.0 be enabled on the frontend of
+                            the gateway? Defaults to false.
+                          type: boolean
+                        enableFrontendTls10:
+                          description: Should TLS 1.0 be enabled on the frontend of
+                            the gateway? Defaults to false.
+                          type: boolean
+                        enableFrontendTls11:
+                          description: Should TLS 1.1 be enabled on the frontend of
+                            the gateway? Defaults to false.
+                          type: boolean
+                        tlsEcdheEcdsaWithAes128CbcShaCiphersEnabled:
+                          description: Should the TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsEcdheEcdsaWithAes256CbcShaCiphersEnabled:
+                          description: Should the TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsEcdheRsaWithAes128CbcShaCiphersEnabled:
+                          description: Should the TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsEcdheRsaWithAes256CbcShaCiphersEnabled:
+                          description: Should the TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsRsaWithAes128CbcSha256CiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_128_CBC_SHA256
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsRsaWithAes128CbcShaCiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_128_CBC_SHA cipher
+                            be enabled? Defaults to false.
+                          type: boolean
+                        tlsRsaWithAes128GcmSha256CiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_128_GCM_SHA256
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsRsaWithAes256CbcSha256CiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_256_CBC_SHA256
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsRsaWithAes256CbcShaCiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_256_CBC_SHA cipher
+                            be enabled? Defaults to false.
+                          type: boolean
+                        tlsRsaWithAes256GcmSha384CiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_256_GCM_SHA384
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tripleDesCiphersEnabled:
+                          description: Should the TLS_RSA_WITH_3DES_EDE_CBC_SHA cipher
+                            be enabled for alL TLS versions (1.0, 1.1 and 1.2)?
+                          type: boolean
+                      type: object
+                    type: array
+                  signIn:
+                    description: A sign_in block as defined below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Should anonymous users be redirected to the
+                            sign in page?
+                          type: boolean
+                      type: object
+                    type: array
+                  signUp:
+                    description: A sign_up block as defined below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Can users sign up on the development portal?
+                          type: boolean
+                        termsOfService:
+                          description: A terms_of_service block as defined below.
+                          items:
+                            properties:
+                              consentRequired:
+                                description: Should the user be asked for consent
+                                  during sign up?
+                                type: boolean
+                              enabled:
+                                description: Should Terms of Service be displayed
+                                  during sign up?.
+                                type: boolean
+                              text:
+                                description: The Terms of Service which users are
+                                  required to agree to in order to sign up.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  skuName:
+                    description: 'sku_name is a string consisting of two parts separated
+                      by an underscore(_). The first part is the name, valid values
+                      include: Consumption, Developer, Basic, Standard and Premium.
+                      The second part is the capacity (e.g. the number of deployed
+                      units of the sku), which must be a positive integer (e.g. Developer_1).'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags assigned to the resource.
+                    type: object
                   tenantAccess:
                     description: A tenant_access block as defined below.
                     items:
                       properties:
+                        enabled:
+                          description: Should the access to the management API be
+                            enabled?
+                          type: boolean
                         tenantId:
                           description: The identifier for the tenant access information
                             contract.
                           type: string
                       type: object
+                    type: array
+                  virtualNetworkConfiguration:
+                    description: A virtual_network_configuration block as defined
+                      below. Required when virtual_network_type is External or Internal.
+                    items:
+                      properties:
+                        subnetId:
+                          description: The id of the subnet that will be used for
+                            the API Management.
+                          type: string
+                      type: object
+                    type: array
+                  virtualNetworkType:
+                    description: 'The type of virtual network you want to use, valid
+                      values include: None, External, Internal.'
+                    type: string
+                  zones:
+                    description: Specifies a list of Availability Zones in which this
+                      API Management service should be located. Changing this forces
+                      a new API Management service to be created.
+                    items:
+                      type: string
                     type: array
                 type: object
               conditions:

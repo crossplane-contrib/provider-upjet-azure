@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: firewallnatrulecollections.network.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -284,11 +288,22 @@ spec:
                       - translatedPort
                       type: object
                     type: array
-                required:
-                - action
-                - priority
-                - rule
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -460,14 +475,85 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: action is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)
+            - message: priority is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.priority)
+            - message: rule is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rule)
           status:
             description: FirewallNATRuleCollectionStatus defines the observed state
               of FirewallNATRuleCollection.
             properties:
               atProvider:
                 properties:
+                  action:
+                    description: Specifies the action the rule will apply to matching
+                      traffic. Possible values are Dnat and Snat.
+                    type: string
+                  azureFirewallName:
+                    description: Specifies the name of the Firewall in which the NAT
+                      Rule Collection should be created. Changing this forces a new
+                      resource to be created.
+                    type: string
                   id:
                     type: string
+                  priority:
+                    description: Specifies the priority of the rule collection. Possible
+                      values are between 100 - 65000.
+                    type: number
+                  resourceGroupName:
+                    description: Specifies the name of the Resource Group in which
+                      the Firewall exists. Changing this forces a new resource to
+                      be created.
+                    type: string
+                  rule:
+                    description: One or more rule blocks as defined below.
+                    items:
+                      properties:
+                        description:
+                          description: Specifies a description for the rule.
+                          type: string
+                        destinationAddresses:
+                          description: A list of destination IP addresses and/or IP
+                            ranges.
+                          items:
+                            type: string
+                          type: array
+                        destinationPorts:
+                          description: A list of destination ports.
+                          items:
+                            type: string
+                          type: array
+                        name:
+                          description: Specifies the name of the rule.
+                          type: string
+                        protocols:
+                          description: A list of protocols. Possible values are Any,
+                            ICMP, TCP and UDP. If action is Dnat, protocols can only
+                            be TCP and UDP.
+                          items:
+                            type: string
+                          type: array
+                        sourceAddresses:
+                          description: A list of source IP addresses and/or IP ranges.
+                          items:
+                            type: string
+                          type: array
+                        sourceIpGroups:
+                          description: A list of source IP Group IDs for the rule.
+                          items:
+                            type: string
+                          type: array
+                        translatedAddress:
+                          description: The address of the service behind the Firewall.
+                          type: string
+                        translatedPort:
+                          description: The port of the service behind the Firewall.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

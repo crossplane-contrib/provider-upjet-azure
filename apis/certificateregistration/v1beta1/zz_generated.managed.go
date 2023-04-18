@@ -17,6 +17,11 @@ func (mg *AppServiceCertificateOrder) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this AppServiceCertificateOrder.
+func (mg *AppServiceCertificateOrder) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this AppServiceCertificateOrder.
 func (mg *AppServiceCertificateOrder) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *AppServiceCertificateOrder) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this AppServiceCertificateOrder.
 func (mg *AppServiceCertificateOrder) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this AppServiceCertificateOrder.
+func (mg *AppServiceCertificateOrder) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this AppServiceCertificateOrder.

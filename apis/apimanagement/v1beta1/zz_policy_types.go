@@ -15,8 +15,17 @@ import (
 
 type PolicyObservation_2 struct {
 
+	// The ID of the API Management service. Changing this forces a new API Management service Policy to be created.
+	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
+
 	// The ID of the API Management service Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The XML Content for this Policy as a string.
+	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content,omitempty"`
+
+	// A link to a Policy XML Document, which must be publicly available.
+	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link,omitempty"`
 }
 
 type PolicyParameters_2 struct {

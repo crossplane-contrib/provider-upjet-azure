@@ -17,6 +17,15 @@ type MonitorPrivateLinkScopedServiceObservation struct {
 
 	// The ID of the Azure Monitor Private Link Scoped Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the linked resource. It must be the Log Analytics workspace or the Application Insights component or the Data Collection endpoint. Changing this forces a new resource to be created.
+	LinkedResourceID *string `json:"linkedResourceId,omitempty" tf:"linked_resource_id,omitempty"`
+
+	// The name of the Resource Group where the Azure Monitor Private Link Scoped Service should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the Azure Monitor Private Link Scope. Changing this forces a new resource to be created.
+	ScopeName *string `json:"scopeName,omitempty" tf:"scope_name,omitempty"`
 }
 
 type MonitorPrivateLinkScopedServiceParameters struct {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: applicationinsightsanalyticsitems.insights.azure.upbound.io
 spec:
@@ -56,9 +56,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -167,12 +171,22 @@ spec:
                       of query, function, folder, recent. Changing this forces a new
                       resource to be created.
                     type: string
-                required:
-                - content
-                - name
-                - scope
-                - type
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -344,14 +358,45 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: content is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.content)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: scope is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scope)
+            - message: type is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)
           status:
             description: ApplicationInsightsAnalyticsItemStatus defines the observed
               state of ApplicationInsightsAnalyticsItem.
             properties:
               atProvider:
                 properties:
+                  applicationInsightsId:
+                    description: The ID of the Application Insights component on which
+                      the Analytics Item exists. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  content:
+                    description: The content for the Analytics Item, for example the
+                      query text if type is query.
+                    type: string
+                  functionAlias:
+                    description: The alias to use for the function. Required when
+                      type is function.
+                    type: string
                   id:
                     description: The ID of the Application Insights Analytics Item.
+                    type: string
+                  name:
+                    description: Specifies the name of the Application Insights Analytics
+                      Item. Changing this forces a new resource to be created.
+                    type: string
+                  scope:
+                    description: The scope for the Analytics Item. Can be shared or
+                      user. Changing this forces a new resource to be created. Must
+                      be shared for functions.
                     type: string
                   timeCreated:
                     description: A string containing the time the Analytics Item was
@@ -360,6 +405,11 @@ spec:
                   timeModified:
                     description: A string containing the time the Analytics Item was
                       last modified.
+                    type: string
+                  type:
+                    description: The type of Analytics Item to create. Can be one
+                      of query, function, folder, recent. Changing this forces a new
+                      resource to be created.
                     type: string
                   version:
                     description: A string indicating the version of the query format

@@ -15,15 +15,33 @@ import (
 
 type AppIntegrationAccountBatchConfigurationObservation struct {
 
+	// The batch group name of the Logic App Integration Batch Configuration. Changing this forces a new resource to be created.
+	BatchGroupName *string `json:"batchGroupName,omitempty" tf:"batch_group_name,omitempty"`
+
 	// The ID of the Logic App Integration Account Batch Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Logic App Integration Account. Changing this forces a new resource to be created.
+	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
+
+	// A JSON mapping of any Metadata for this Logic App Integration Account Batch Configuration.
+	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name which should be used for this Logic App Integration Account Batch Configuration. Only Alphanumeric characters allowed. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A release_criteria block as documented below, which is used to select the criteria to meet before processing each batch.
+	ReleaseCriteria []ReleaseCriteriaObservation `json:"releaseCriteria,omitempty" tf:"release_criteria,omitempty"`
+
+	// The name of the Resource Group where the Logic App Integration Account Batch Configuration should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type AppIntegrationAccountBatchConfigurationParameters struct {
 
 	// The batch group name of the Logic App Integration Batch Configuration. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	BatchGroupName *string `json:"batchGroupName" tf:"batch_group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	BatchGroupName *string `json:"batchGroupName,omitempty" tf:"batch_group_name,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logic/v1beta1.AppIntegrationAccount
@@ -44,12 +62,12 @@ type AppIntegrationAccountBatchConfigurationParameters struct {
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name which should be used for this Logic App Integration Account Batch Configuration. Only Alphanumeric characters allowed. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A release_criteria block as documented below, which is used to select the criteria to meet before processing each batch.
-	// +kubebuilder:validation:Required
-	ReleaseCriteria []ReleaseCriteriaParameters `json:"releaseCriteria" tf:"release_criteria,omitempty"`
+	// +kubebuilder:validation:Optional
+	ReleaseCriteria []ReleaseCriteriaParameters `json:"releaseCriteria,omitempty" tf:"release_criteria,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Batch Configuration should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -66,6 +84,12 @@ type AppIntegrationAccountBatchConfigurationParameters struct {
 }
 
 type MonthlyObservation struct {
+
+	// The occurrence of the week within the month.
+	Week *float64 `json:"week,omitempty" tf:"week,omitempty"`
+
+	// The day of the occurrence. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
+	Weekday *string `json:"weekday,omitempty" tf:"weekday,omitempty"`
 }
 
 type MonthlyParameters struct {
@@ -80,6 +104,24 @@ type MonthlyParameters struct {
 }
 
 type RecurrenceObservation struct {
+
+	// The end time of the schedule, formatted as an RFC3339 string.
+	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
+
+	// The frequency of the schedule. Possible values are Day, Hour, Minute, Month, NotSpecified, Second, Week and Year.
+	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+
+	// The number of frequencys between runs.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// A schedule block as documented below.
+	Schedule []ScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// The start time of the schedule, formatted as an RFC3339 string.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// The timezone of the start/end time.
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
 type RecurrenceParameters struct {
@@ -110,6 +152,15 @@ type RecurrenceParameters struct {
 }
 
 type ReleaseCriteriaObservation struct {
+
+	// The batch size in bytes for the Logic App Integration Batch Configuration.
+	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+
+	// The message count for the Logic App Integration Batch Configuration.
+	MessageCount *float64 `json:"messageCount,omitempty" tf:"message_count,omitempty"`
+
+	// A recurrence block as documented below.
+	Recurrence []RecurrenceObservation `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }
 
 type ReleaseCriteriaParameters struct {
@@ -128,6 +179,21 @@ type ReleaseCriteriaParameters struct {
 }
 
 type ScheduleObservation struct {
+
+	// A list containing a single item, which specifies the Hour interval at which this recurrence should be triggered.
+	Hours []*float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+
+	// A list containing a single item which specifies the Minute interval at which this recurrence should be triggered.
+	Minutes []*float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
+
+	// A list of days of the month that the job should execute on.
+	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
+
+	// A monthly block as documented below.
+	Monthly []MonthlyObservation `json:"monthly,omitempty" tf:"monthly,omitempty"`
+
+	// A list of days of the week that the job should execute on. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
+	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
 }
 
 type ScheduleParameters struct {
@@ -177,8 +243,11 @@ type AppIntegrationAccountBatchConfigurationStatus struct {
 type AppIntegrationAccountBatchConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppIntegrationAccountBatchConfigurationSpec   `json:"spec"`
-	Status            AppIntegrationAccountBatchConfigurationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.batchGroupName)",message="batchGroupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.releaseCriteria)",message="releaseCriteria is a required parameter"
+	Spec   AppIntegrationAccountBatchConfigurationSpec   `json:"spec"`
+	Status AppIntegrationAccountBatchConfigurationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

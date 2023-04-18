@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: cassandradatacenters.cosmosdb.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -260,9 +264,22 @@ spec:
                   skuName:
                     description: Determines the selected sku.
                     type: string
-                required:
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -434,13 +451,64 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: CassandraDatacenterStatus defines the observed state of CassandraDatacenter.
             properties:
               atProvider:
                 properties:
+                  availabilityZonesEnabled:
+                    description: Determines whether availability zones are enabled.
+                      Defaults to true.
+                    type: boolean
+                  backupStorageCustomerKeyUri:
+                    description: The key URI of the customer key to use for the encryption
+                      of the backup Storage Account.
+                    type: string
+                  base64EncodedYamlFragment:
+                    description: The fragment of the cassandra.yaml configuration
+                      file to be included in the cassandra.yaml for all nodes in this
+                      Cassandra Datacenter. The fragment should be Base64 encoded
+                      and only a subset of keys is allowed.
+                    type: string
+                  cassandraClusterId:
+                    description: The ID of the Cassandra Cluster. Changing this forces
+                      a new Cassandra Datacenter to be created.
+                    type: string
+                  delegatedManagementSubnetId:
+                    description: The ID of the delegated management subnet for this
+                      Cassandra Datacenter. Changing this forces a new Cassandra Datacenter
+                      to be created.
+                    type: string
+                  diskCount:
+                    description: Determines the number of p30 disks that are attached
+                      to each node.
+                    type: number
+                  diskSku:
+                    description: The Disk SKU that is used for this Cassandra Datacenter.
+                      Defaults to P30.
+                    type: string
                   id:
                     description: The ID of the Cassandra Datacenter.
+                    type: string
+                  location:
+                    description: The Azure Region where the Cassandra Datacenter should
+                      exist. Changing this forces a new Cassandra Datacenter to be
+                      created.
+                    type: string
+                  managedDiskCustomerKeyUri:
+                    description: The key URI of the customer key to use for the encryption
+                      of the Managed Disk.
+                    type: string
+                  nodeCount:
+                    description: The number of nodes the Cassandra Datacenter should
+                      have. The number should be equal or greater than 3. Defaults
+                      to 3.
+                    type: number
+                  skuName:
+                    description: Determines the selected sku.
                     type: string
                 type: object
               conditions:

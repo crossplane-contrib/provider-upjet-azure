@@ -14,6 +14,12 @@ import (
 )
 
 type ManagedHardwareSecurityModuleNetworkAclsObservation struct {
+
+	// Specifies which traffic can bypass the network rules. Possible values are AzureServices and None.
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+
+	// The Default Action to use. Possible values are Allow and Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 }
 
 type ManagedHardwareSecurityModuleNetworkAclsParameters struct {
@@ -29,22 +35,52 @@ type ManagedHardwareSecurityModuleNetworkAclsParameters struct {
 
 type ManagedHardwareSecurityModuleObservation struct {
 
+	// Specifies a list of administrators object IDs for the key vault Managed Hardware Security Module. Changing this forces a new resource to be created.
+	AdminObjectIds []*string `json:"adminObjectIds,omitempty" tf:"admin_object_ids,omitempty"`
+
 	// The URI of the Key Vault Managed Hardware Security Module, used for performing operations on keys.
 	HSMURI *string `json:"hsmUri,omitempty" tf:"hsm_uri,omitempty"`
 
 	// The Key Vault Secret Managed Hardware Security Module ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A network_acls block as defined below.
+	NetworkAcls []ManagedHardwareSecurityModuleNetworkAclsObservation `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
+
+	// Whether traffic from public networks is permitted. Defaults to true. Changing this forces a new resource to be created.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Is Purge Protection enabled for this Key Vault Managed Hardware Security Module? Changing this forces a new resource to be created.
+	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
+
+	// The name of the resource group in which to create the Key Vault Managed Hardware Security Module. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The Name of the SKU used for this Key Vault Managed Hardware Security Module. Possible value is Standard_B1. Changing this forces a new resource to be created.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// The number of days that items should be retained for once soft-deleted. This value can be between 7 and 90 days. Defaults to 90. Changing this forces a new resource to be created.
+	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
+
+	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Azure Active Directory Tenant ID that should be used for authenticating requests to the key vault Managed Hardware Security Module. Changing this forces a new resource to be created.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type ManagedHardwareSecurityModuleParameters struct {
 
 	// Specifies a list of administrators object IDs for the key vault Managed Hardware Security Module. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	AdminObjectIds []*string `json:"adminObjectIds" tf:"admin_object_ids,omitempty"`
+	// +kubebuilder:validation:Optional
+	AdminObjectIds []*string `json:"adminObjectIds,omitempty" tf:"admin_object_ids,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A network_acls block as defined below.
 	// +kubebuilder:validation:Optional
@@ -72,8 +108,8 @@ type ManagedHardwareSecurityModuleParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Name of the SKU used for this Key Vault Managed Hardware Security Module. Possible value is Standard_B1. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The number of days that items should be retained for once soft-deleted. This value can be between 7 and 90 days. Defaults to 90. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -84,8 +120,8 @@ type ManagedHardwareSecurityModuleParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure Active Directory Tenant ID that should be used for authenticating requests to the key vault Managed Hardware Security Module. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 // ManagedHardwareSecurityModuleSpec defines the desired state of ManagedHardwareSecurityModule
@@ -112,8 +148,12 @@ type ManagedHardwareSecurityModuleStatus struct {
 type ManagedHardwareSecurityModule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagedHardwareSecurityModuleSpec   `json:"spec"`
-	Status            ManagedHardwareSecurityModuleStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.adminObjectIds)",message="adminObjectIds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tenantId)",message="tenantId is a required parameter"
+	Spec   ManagedHardwareSecurityModuleSpec   `json:"spec"`
+	Status ManagedHardwareSecurityModuleStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

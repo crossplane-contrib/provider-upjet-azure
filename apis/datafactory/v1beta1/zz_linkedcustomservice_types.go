@@ -14,6 +14,12 @@ import (
 )
 
 type IntegrationRuntimeObservation struct {
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A map of parameters to associate with the integration runtime.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type IntegrationRuntimeParameters struct {
@@ -29,8 +35,32 @@ type IntegrationRuntimeParameters struct {
 
 type LinkedCustomServiceObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Data Factory Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An integration_runtime block as defined below.
+	IntegrationRuntime []IntegrationRuntimeObservation `json:"integrationRuntime,omitempty" tf:"integration_runtime,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The type of data stores that will be connected to Data Factory. For full list of supported data stores, please refer to Azure Data Factory connector. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// A JSON object that contains the properties of the Data Factory Linked Service.
+	TypePropertiesJSON *string `json:"typePropertiesJson,omitempty" tf:"type_properties_json,omitempty"`
 }
 
 type LinkedCustomServiceParameters struct {
@@ -70,12 +100,12 @@ type LinkedCustomServiceParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of data stores that will be connected to Data Factory. For full list of supported data stores, please refer to Azure Data Factory connector. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A JSON object that contains the properties of the Data Factory Linked Service.
-	// +kubebuilder:validation:Required
-	TypePropertiesJSON *string `json:"typePropertiesJson" tf:"type_properties_json,omitempty"`
+	// +kubebuilder:validation:Optional
+	TypePropertiesJSON *string `json:"typePropertiesJson,omitempty" tf:"type_properties_json,omitempty"`
 }
 
 // LinkedCustomServiceSpec defines the desired state of LinkedCustomService
@@ -102,8 +132,10 @@ type LinkedCustomServiceStatus struct {
 type LinkedCustomService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LinkedCustomServiceSpec   `json:"spec"`
-	Status            LinkedCustomServiceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.typePropertiesJson)",message="typePropertiesJson is a required parameter"
+	Spec   LinkedCustomServiceSpec   `json:"spec"`
+	Status LinkedCustomServiceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

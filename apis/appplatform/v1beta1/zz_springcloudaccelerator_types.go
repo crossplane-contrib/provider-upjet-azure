@@ -17,13 +17,19 @@ type SpringCloudAcceleratorObservation struct {
 
 	// The ID of the Spring Cloud Accelerator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name which should be used for this Spring Cloud Accelerator. Changing this forces a new Spring Cloud Accelerator to be created. The only possible value is default.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Accelerator to be created.
+	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`
 }
 
 type SpringCloudAcceleratorParameters struct {
 
 	// The name which should be used for this Spring Cloud Accelerator. Changing this forces a new Spring Cloud Accelerator to be created. The only possible value is default.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Accelerator to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudService
@@ -64,8 +70,9 @@ type SpringCloudAcceleratorStatus struct {
 type SpringCloudAccelerator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpringCloudAcceleratorSpec   `json:"spec"`
-	Status            SpringCloudAcceleratorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SpringCloudAcceleratorSpec   `json:"spec"`
+	Status SpringCloudAcceleratorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

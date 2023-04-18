@@ -17,6 +17,27 @@ type SQLPoolWorkloadGroupObservation struct {
 
 	// The ID of the Synapse SQL Pool Workload Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The workload group importance level. Defaults to normal.
+	Importance *string `json:"importance,omitempty" tf:"importance,omitempty"`
+
+	// The workload group cap percentage resource.
+	MaxResourcePercent *float64 `json:"maxResourcePercent,omitempty" tf:"max_resource_percent,omitempty"`
+
+	// The workload group request maximum grant percentage. Defaults to 3.
+	MaxResourcePercentPerRequest *float64 `json:"maxResourcePercentPerRequest,omitempty" tf:"max_resource_percent_per_request,omitempty"`
+
+	// The workload group minimum percentage resource.
+	MinResourcePercent *float64 `json:"minResourcePercent,omitempty" tf:"min_resource_percent,omitempty"`
+
+	// The workload group request minimum grant percentage.
+	MinResourcePercentPerRequest *float64 `json:"minResourcePercentPerRequest,omitempty" tf:"min_resource_percent_per_request,omitempty"`
+
+	// The workload group query execution timeout.
+	QueryExecutionTimeoutInSeconds *float64 `json:"queryExecutionTimeoutInSeconds,omitempty" tf:"query_execution_timeout_in_seconds,omitempty"`
+
+	// The ID of the Synapse SQL Pool. Changing this forces a new Synapse SQL Pool Workload Group to be created.
+	SQLPoolID *string `json:"sqlPoolId,omitempty" tf:"sql_pool_id,omitempty"`
 }
 
 type SQLPoolWorkloadGroupParameters struct {
@@ -26,16 +47,16 @@ type SQLPoolWorkloadGroupParameters struct {
 	Importance *string `json:"importance,omitempty" tf:"importance,omitempty"`
 
 	// The workload group cap percentage resource.
-	// +kubebuilder:validation:Required
-	MaxResourcePercent *float64 `json:"maxResourcePercent" tf:"max_resource_percent,omitempty"`
+	// +kubebuilder:validation:Optional
+	MaxResourcePercent *float64 `json:"maxResourcePercent,omitempty" tf:"max_resource_percent,omitempty"`
 
 	// The workload group request maximum grant percentage. Defaults to 3.
 	// +kubebuilder:validation:Optional
 	MaxResourcePercentPerRequest *float64 `json:"maxResourcePercentPerRequest,omitempty" tf:"max_resource_percent_per_request,omitempty"`
 
 	// The workload group minimum percentage resource.
-	// +kubebuilder:validation:Required
-	MinResourcePercent *float64 `json:"minResourcePercent" tf:"min_resource_percent,omitempty"`
+	// +kubebuilder:validation:Optional
+	MinResourcePercent *float64 `json:"minResourcePercent,omitempty" tf:"min_resource_percent,omitempty"`
 
 	// The workload group request minimum grant percentage.
 	// +kubebuilder:validation:Optional
@@ -84,8 +105,10 @@ type SQLPoolWorkloadGroupStatus struct {
 type SQLPoolWorkloadGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLPoolWorkloadGroupSpec   `json:"spec"`
-	Status            SQLPoolWorkloadGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.maxResourcePercent)",message="maxResourcePercent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.minResourcePercent)",message="minResourcePercent is a required parameter"
+	Spec   SQLPoolWorkloadGroupSpec   `json:"spec"`
+	Status SQLPoolWorkloadGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

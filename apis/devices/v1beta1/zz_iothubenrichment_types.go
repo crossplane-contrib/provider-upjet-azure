@@ -15,15 +15,30 @@ import (
 
 type IOTHubEnrichmentObservation struct {
 
+	// The list of endpoints which will be enriched.
+	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+
 	// The ID of the IoTHub Enrichment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
+	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
+
+	// The key of the enrichment. Changing this forces a new resource to be created.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The name of the resource group under which the IoTHub resource is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The value of the enrichment. Value can be any static string, the name of the IoT hub sending the message (use $iothubname) or information from the device twin (ex: $twin.tags.latitude)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type IOTHubEnrichmentParameters struct {
 
 	// The list of endpoints which will be enriched.
-	// +kubebuilder:validation:Required
-	EndpointNames []*string `json:"endpointNames" tf:"endpoint_names,omitempty"`
+	// +kubebuilder:validation:Optional
+	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
 	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
@@ -39,8 +54,8 @@ type IOTHubEnrichmentParameters struct {
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// The key of the enrichment. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The name of the resource group under which the IoTHub resource is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -56,8 +71,8 @@ type IOTHubEnrichmentParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The value of the enrichment. Value can be any static string, the name of the IoT hub sending the message (use $iothubname) or information from the device twin (ex: $twin.tags.latitude)
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // IOTHubEnrichmentSpec defines the desired state of IOTHubEnrichment
@@ -84,8 +99,11 @@ type IOTHubEnrichmentStatus struct {
 type IOTHubEnrichment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IOTHubEnrichmentSpec   `json:"spec"`
-	Status            IOTHubEnrichmentStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.endpointNames)",message="endpointNames is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.key)",message="key is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.value)",message="value is a required parameter"
+	Spec   IOTHubEnrichmentSpec   `json:"spec"`
+	Status IOTHubEnrichmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

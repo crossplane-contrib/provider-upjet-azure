@@ -14,7 +14,17 @@ import (
 )
 
 type NetworkInterfaceBackendAddressPoolAssociationObservation struct {
+
+	// The ID of the Load Balancer Backend Address Pool which this Network Interface should be connected to. Changing this forces a new resource to be created.
+	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Name of the IP Configuration within the Network Interface which should be connected to the Backend Address Pool. Changing this forces a new resource to be created.
+	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
+
+	// The ID of the Network Interface. Changing this forces a new resource to be created.
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
 }
 
 type NetworkInterfaceBackendAddressPoolAssociationParameters struct {
@@ -34,8 +44,8 @@ type NetworkInterfaceBackendAddressPoolAssociationParameters struct {
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
 	// The Name of the IP Configuration within the Network Interface which should be connected to the Backend Address Pool. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	IPConfigurationName *string `json:"ipConfigurationName" tf:"ip_configuration_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
 
 	// The ID of the Network Interface. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=NetworkInterface
@@ -76,8 +86,9 @@ type NetworkInterfaceBackendAddressPoolAssociationStatus struct {
 type NetworkInterfaceBackendAddressPoolAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NetworkInterfaceBackendAddressPoolAssociationSpec   `json:"spec"`
-	Status            NetworkInterfaceBackendAddressPoolAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ipConfigurationName)",message="ipConfigurationName is a required parameter"
+	Spec   NetworkInterfaceBackendAddressPoolAssociationSpec   `json:"spec"`
+	Status NetworkInterfaceBackendAddressPoolAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

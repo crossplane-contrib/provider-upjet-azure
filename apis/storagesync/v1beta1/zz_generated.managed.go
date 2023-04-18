@@ -17,6 +17,11 @@ func (mg *StorageSync) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this StorageSync.
+func (mg *StorageSync) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this StorageSync.
 func (mg *StorageSync) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *StorageSync) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this StorageSync.
 func (mg *StorageSync) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this StorageSync.
+func (mg *StorageSync) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this StorageSync.

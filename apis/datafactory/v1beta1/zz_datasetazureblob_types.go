@@ -15,8 +15,44 @@ import (
 
 type DataSetAzureBlobObservation struct {
 
+	// A map of additional properties to associate with the Data Factory Dataset.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Dataset.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// The description for the Data Factory Dataset.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the Azure Blob.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
 	// The ID of the Data Factory Dataset.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Data Factory Linked Service name in which to associate the Dataset with.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Dataset.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The path of the Azure Blob.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// A schema_column block as defined below.
+	SchemaColumn []SchemaColumnObservation `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
 }
 
 type DataSetAzureBlobParameters struct {
@@ -90,6 +126,15 @@ type DataSetAzureBlobParameters struct {
 }
 
 type SchemaColumnObservation struct {
+
+	// The description of the column.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type SchemaColumnParameters struct {

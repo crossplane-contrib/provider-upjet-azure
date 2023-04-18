@@ -15,8 +15,20 @@ import (
 
 type SpringCloudAppMySQLAssociationObservation struct {
 
+	// Specifies the name of the MySQL Database which the Spring Cloud App should be associated with.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
 	// The ID of the Spring Cloud Application MySQL Association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the ID of the MySQL Server. Changing this forces a new resource to be created.
+	MySQLServerID *string `json:"mysqlServerId,omitempty" tf:"mysql_server_id,omitempty"`
+
+	// Specifies the ID of the Spring Cloud Application where this Association is created. Changing this forces a new resource to be created.
+	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`
+
+	// Specifies the username which should be used when connecting to the MySQL Database from the Spring Cloud App.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type SpringCloudAppMySQLAssociationParameters struct {
@@ -49,7 +61,7 @@ type SpringCloudAppMySQLAssociationParameters struct {
 	MySQLServerIDSelector *v1.Selector `json:"mysqlServerIdSelector,omitempty" tf:"-"`
 
 	// Specifies the password which should be used when connecting to the MySQL Database from the Spring Cloud App.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the ID of the Spring Cloud Application where this Association is created. Changing this forces a new resource to be created.
@@ -105,8 +117,9 @@ type SpringCloudAppMySQLAssociationStatus struct {
 type SpringCloudAppMySQLAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpringCloudAppMySQLAssociationSpec   `json:"spec"`
-	Status            SpringCloudAppMySQLAssociationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
+	Spec   SpringCloudAppMySQLAssociationSpec   `json:"spec"`
+	Status SpringCloudAppMySQLAssociationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

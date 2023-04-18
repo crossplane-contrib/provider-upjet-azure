@@ -14,6 +14,9 @@ import (
 )
 
 type TableAutoscaleSettingsObservation struct {
+
+	// The maximum throughput of the Table (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
 
 type TableAutoscaleSettingsParameters struct {
@@ -25,8 +28,20 @@ type TableAutoscaleSettingsParameters struct {
 
 type TableObservation struct {
 
+	// The name of the Cosmos DB Table to create the table within. Changing this forces a new resource to be created.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// An autoscale_settings block as defined below.
+	AutoscaleSettings []TableAutoscaleSettingsObservation `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+
 	// The ID of the CosmosDB Table.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which the Cosmos DB Table is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The throughput of Table (RU/s). Must be set in increments of 100. The minimum value is 400.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
 type TableParameters struct {

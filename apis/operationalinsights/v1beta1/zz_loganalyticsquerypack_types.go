@@ -17,13 +17,22 @@ type LogAnalyticsQueryPackObservation struct {
 
 	// The ID of the Log Analytics Query Pack.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Log Analytics Query Pack should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where the Log Analytics Query Pack should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Log Analytics Query Pack.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LogAnalyticsQueryPackParameters struct {
 
 	// The Azure Region where the Log Analytics Query Pack should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Log Analytics Query Pack should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -67,8 +76,9 @@ type LogAnalyticsQueryPackStatus struct {
 type LogAnalyticsQueryPack struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LogAnalyticsQueryPackSpec   `json:"spec"`
-	Status            LogAnalyticsQueryPackStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   LogAnalyticsQueryPackSpec   `json:"spec"`
+	Status LogAnalyticsQueryPackStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

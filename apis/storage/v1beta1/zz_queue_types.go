@@ -18,8 +18,14 @@ type QueueObservation struct {
 	// The ID of the Storage Queue.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A mapping of MetaData which should be assigned to this Storage Queue.
+	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
 	// The Resource Manager ID of this Storage Queue.
 	ResourceManagerID *string `json:"resourceManagerId,omitempty" tf:"resource_manager_id,omitempty"`
+
+	// Specifies the Storage Account in which the Storage Queue should exist. Changing this forces a new resource to be created.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 }
 
 type QueueParameters struct {

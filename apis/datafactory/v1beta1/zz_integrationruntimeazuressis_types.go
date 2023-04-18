@@ -14,6 +14,21 @@ import (
 )
 
 type CatalogInfoObservation struct {
+
+	// Administrator login name for the SQL Server.
+	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
+
+	// The dual standby Azure-SSIS Integration Runtime pair with SSISDB failover.
+	DualStandbyPairName *string `json:"dualStandbyPairName,omitempty" tf:"dual_standby_pair_name,omitempty"`
+
+	// The name of SQL elastic pool where the database will be created for the SSIS catalog. Mutually exclusive with pricing_tier.
+	ElasticPoolName *string `json:"elasticPoolName,omitempty" tf:"elastic_pool_name,omitempty"`
+
+	// Pricing tier for the database that will be created for the SSIS catalog. Valid values are: Basic, S0, S1, S2, S3, S4, S6, S7, S9, S12, P1, P2, P4, P6, P11, P15, GP_S_Gen5_1, GP_S_Gen5_2, GP_S_Gen5_4, GP_S_Gen5_6, GP_S_Gen5_8, GP_S_Gen5_10, GP_S_Gen5_12, GP_S_Gen5_14, GP_S_Gen5_16, GP_S_Gen5_18, GP_S_Gen5_20, GP_S_Gen5_24, GP_S_Gen5_32, GP_S_Gen5_40, GP_Gen5_2, GP_Gen5_4, GP_Gen5_6, GP_Gen5_8, GP_Gen5_10, GP_Gen5_12, GP_Gen5_14, GP_Gen5_16, GP_Gen5_18, GP_Gen5_20, GP_Gen5_24, GP_Gen5_32, GP_Gen5_40, GP_Gen5_80, BC_Gen5_2, BC_Gen5_4, BC_Gen5_6, BC_Gen5_8, BC_Gen5_10, BC_Gen5_12, BC_Gen5_14, BC_Gen5_16, BC_Gen5_18, BC_Gen5_20, BC_Gen5_24, BC_Gen5_32, BC_Gen5_40, BC_Gen5_80, HS_Gen5_2, HS_Gen5_4, HS_Gen5_6, HS_Gen5_8, HS_Gen5_10, HS_Gen5_12, HS_Gen5_14, HS_Gen5_16, HS_Gen5_18, HS_Gen5_20, HS_Gen5_24, HS_Gen5_32, HS_Gen5_40 and HS_Gen5_80. Mutually exclusive with elastic_pool_name.
+	PricingTier *string `json:"pricingTier,omitempty" tf:"pricing_tier,omitempty"`
+
+	// The endpoint of an Azure SQL Server that will be used to host the SSIS catalog.
+	ServerEndpoint *string `json:"serverEndpoint,omitempty" tf:"server_endpoint,omitempty"`
 }
 
 type CatalogInfoParameters struct {
@@ -44,6 +59,15 @@ type CatalogInfoParameters struct {
 }
 
 type CommandKeyObservation struct {
+
+	// A key_vault_secret_reference block as defined below.
+	KeyVaultPassword []KeyVaultPasswordObservation `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
+
+	// The target computer or domain name.
+	TargetName *string `json:"targetName,omitempty" tf:"target_name,omitempty"`
+
+	// The username for the target device.
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
 }
 
 type CommandKeyParameters struct {
@@ -66,6 +90,12 @@ type CommandKeyParameters struct {
 }
 
 type ComponentObservation struct {
+
+	// A key_vault_secret_reference block as defined below.
+	KeyVaultLicense []KeyVaultLicenseObservation `json:"keyVaultLicense,omitempty" tf:"key_vault_license,omitempty"`
+
+	// Name of the package store.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ComponentParameters struct {
@@ -84,6 +114,9 @@ type ComponentParameters struct {
 }
 
 type CustomSetupScriptObservation struct {
+
+	// The blob endpoint for the container which contains a custom setup script that will be run on every node on startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
+	BlobContainerURI *string `json:"blobContainerUri,omitempty" tf:"blob_container_uri,omitempty"`
 }
 
 type CustomSetupScriptParameters struct {
@@ -98,6 +131,18 @@ type CustomSetupScriptParameters struct {
 }
 
 type ExpressCustomSetupObservation struct {
+
+	// One or more command_key blocks as defined below.
+	CommandKey []CommandKeyObservation `json:"commandKey,omitempty" tf:"command_key,omitempty"`
+
+	// One or more component blocks as defined below.
+	Component []ComponentObservation `json:"component,omitempty" tf:"component,omitempty"`
+
+	// The Environment Variables for the Azure-SSIS Integration Runtime.
+	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
+
+	// The version of Azure Powershell installed for the Azure-SSIS Integration Runtime.
+	PowershellVersion *string `json:"powershellVersion,omitempty" tf:"powershell_version,omitempty"`
 }
 
 type ExpressCustomSetupParameters struct {
@@ -120,6 +165,9 @@ type ExpressCustomSetupParameters struct {
 }
 
 type ExpressVnetIntegrationObservation struct {
+
+	// id of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type ExpressVnetIntegrationParameters struct {
@@ -141,8 +189,53 @@ type ExpressVnetIntegrationParameters struct {
 
 type IntegrationRuntimeAzureSSISObservation struct {
 
+	// A catalog_info block as defined below.
+	CatalogInfo []CatalogInfoObservation `json:"catalogInfo,omitempty" tf:"catalog_info,omitempty"`
+
+	// A custom_setup_script block as defined below.
+	CustomSetupScript []CustomSetupScriptObservation `json:"customSetupScript,omitempty" tf:"custom_setup_script,omitempty"`
+
+	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// Integration runtime description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The Azure-SSIS Integration Runtime edition. Valid values are Standard and Enterprise. Defaults to Standard.
+	Edition *string `json:"edition,omitempty" tf:"edition,omitempty"`
+
+	// An express_custom_setup block as defined below.
+	ExpressCustomSetup []ExpressCustomSetupObservation `json:"expressCustomSetup,omitempty" tf:"express_custom_setup,omitempty"`
+
+	// A express_vnet_integration block as defined below.
+	ExpressVnetIntegration []ExpressVnetIntegrationObservation `json:"expressVnetIntegration,omitempty" tf:"express_vnet_integration,omitempty"`
+
 	// The ID of the Data Factory Azure-SSIS Integration Runtime.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The type of the license that is used. Valid values are LicenseIncluded and BasePrice. Defaults to LicenseIncluded.
+	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Defines the maximum parallel executions per node. Defaults to 1. Max is 16.
+	MaxParallelExecutionsPerNode *float64 `json:"maxParallelExecutionsPerNode,omitempty" tf:"max_parallel_executions_per_node,omitempty"`
+
+	// The size of the nodes on which the Azure-SSIS Integration Runtime runs. Valid values are: Standard_D2_v3, Standard_D4_v3, Standard_D8_v3, Standard_D16_v3, Standard_D32_v3, Standard_D64_v3, Standard_E2_v3, Standard_E4_v3, Standard_E8_v3, Standard_E16_v3, Standard_E32_v3, Standard_E64_v3, Standard_D1_v2, Standard_D2_v2, Standard_D3_v2, Standard_D4_v2, Standard_A4_v2 and Standard_A8_v2
+	NodeSize *string `json:"nodeSize,omitempty" tf:"node_size,omitempty"`
+
+	// Number of nodes for the Azure-SSIS Integration Runtime. Max is 10. Defaults to 1.
+	NumberOfNodes *float64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
+
+	// One or more package_store block as defined below.
+	PackageStore []PackageStoreObservation `json:"packageStore,omitempty" tf:"package_store,omitempty"`
+
+	// A proxy block as defined below.
+	Proxy []ProxyObservation `json:"proxy,omitempty" tf:"proxy,omitempty"`
+
+	// A vnet_integration block as defined below.
+	VnetIntegration []VnetIntegrationObservation `json:"vnetIntegration,omitempty" tf:"vnet_integration,omitempty"`
 }
 
 type IntegrationRuntimeAzureSSISParameters struct {
@@ -190,16 +283,16 @@ type IntegrationRuntimeAzureSSISParameters struct {
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Defines the maximum parallel executions per node. Defaults to 1. Max is 16.
 	// +kubebuilder:validation:Optional
 	MaxParallelExecutionsPerNode *float64 `json:"maxParallelExecutionsPerNode,omitempty" tf:"max_parallel_executions_per_node,omitempty"`
 
 	// The size of the nodes on which the Azure-SSIS Integration Runtime runs. Valid values are: Standard_D2_v3, Standard_D4_v3, Standard_D8_v3, Standard_D16_v3, Standard_D32_v3, Standard_D64_v3, Standard_E2_v3, Standard_E4_v3, Standard_E8_v3, Standard_E16_v3, Standard_E32_v3, Standard_E64_v3, Standard_D1_v2, Standard_D2_v2, Standard_D3_v2, Standard_D4_v2, Standard_A4_v2 and Standard_A8_v2
-	// +kubebuilder:validation:Required
-	NodeSize *string `json:"nodeSize" tf:"node_size,omitempty"`
+	// +kubebuilder:validation:Optional
+	NodeSize *string `json:"nodeSize,omitempty" tf:"node_size,omitempty"`
 
 	// Number of nodes for the Azure-SSIS Integration Runtime. Max is 10. Defaults to 1.
 	// +kubebuilder:validation:Optional
@@ -219,6 +312,18 @@ type IntegrationRuntimeAzureSSISParameters struct {
 }
 
 type KeyVaultLicenseObservation struct {
+
+	// Name of the Linked Service to associate with the packages.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// A map of parameters to associate with the Key Vault Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Specifies the secret name in Azure Key Vault.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// Specifies the secret version in Azure Key Vault.
+	SecretVersion *string `json:"secretVersion,omitempty" tf:"secret_version,omitempty"`
 }
 
 type KeyVaultLicenseParameters struct {
@@ -241,6 +346,18 @@ type KeyVaultLicenseParameters struct {
 }
 
 type KeyVaultPasswordObservation struct {
+
+	// Name of the Linked Service to associate with the packages.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// A map of parameters to associate with the Key Vault Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// Specifies the secret name in Azure Key Vault.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// Specifies the secret version in Azure Key Vault.
+	SecretVersion *string `json:"secretVersion,omitempty" tf:"secret_version,omitempty"`
 }
 
 type KeyVaultPasswordParameters struct {
@@ -263,6 +380,12 @@ type KeyVaultPasswordParameters struct {
 }
 
 type PackageStoreObservation struct {
+
+	// Name of the Linked Service to associate with the packages.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Name of the package store.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type PackageStoreParameters struct {
@@ -277,6 +400,15 @@ type PackageStoreParameters struct {
 }
 
 type ProxyObservation struct {
+
+	// The path in the data store to be used when moving data between Self-Hosted and Azure-SSIS Integration Runtimes.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// Name of Self Hosted Integration Runtime as a proxy.
+	SelfHostedIntegrationRuntimeName *string `json:"selfHostedIntegrationRuntimeName,omitempty" tf:"self_hosted_integration_runtime_name,omitempty"`
+
+	// Name of Azure Blob Storage linked service to reference the staging data store to be used when moving data between self-hosted and Azure-SSIS integration runtimes.
+	StagingStorageLinkedServiceName *string `json:"stagingStorageLinkedServiceName,omitempty" tf:"staging_storage_linked_service_name,omitempty"`
 }
 
 type ProxyParameters struct {
@@ -295,6 +427,18 @@ type ProxyParameters struct {
 }
 
 type VnetIntegrationObservation struct {
+
+	// Static public IP addresses for the Azure-SSIS Integration Runtime. The size must be 2.
+	PublicIps []*string `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
+
+	// id of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Name of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
+	SubnetName *string `json:"subnetName,omitempty" tf:"subnet_name,omitempty"`
+
+	// ID of the virtual network to which the nodes of the Azure-SSIS Integration Runtime will be added.
+	VnetID *string `json:"vnetId,omitempty" tf:"vnet_id,omitempty"`
 }
 
 type VnetIntegrationParameters struct {
@@ -359,8 +503,10 @@ type IntegrationRuntimeAzureSSISStatus struct {
 type IntegrationRuntimeAzureSSIS struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IntegrationRuntimeAzureSSISSpec   `json:"spec"`
-	Status            IntegrationRuntimeAzureSSISStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeSize)",message="nodeSize is a required parameter"
+	Spec   IntegrationRuntimeAzureSSISSpec   `json:"spec"`
+	Status IntegrationRuntimeAzureSSISStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

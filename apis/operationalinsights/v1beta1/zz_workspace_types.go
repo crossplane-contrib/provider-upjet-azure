@@ -15,8 +15,44 @@ import (
 
 type WorkspaceObservation struct {
 
+	// Specifies if the log Analytics Workspace allow users accessing to data associated with resources they have permission to view, without permission to workspace. Defaults to true.
+	AllowResourceOnlyPermissions *bool `json:"allowResourceOnlyPermissions,omitempty" tf:"allow_resource_only_permissions,omitempty"`
+
+	// Is Customer Managed Storage mandatory for query management?
+	CmkForQueryForced *bool `json:"cmkForQueryForced,omitempty" tf:"cmk_for_query_forced,omitempty"`
+
+	// The workspace daily quota for ingestion in GB. Defaults to -1 (unlimited) if omitted.
+	DailyQuotaGb *float64 `json:"dailyQuotaGb,omitempty" tf:"daily_quota_gb,omitempty"`
+
 	// The Log Analytics Workspace ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Should the Log Analytics Workspace support ingestion over the Public Internet? Defaults to true.
+	InternetIngestionEnabled *bool `json:"internetIngestionEnabled,omitempty" tf:"internet_ingestion_enabled,omitempty"`
+
+	// Should the Log Analytics Workspace support querying over the Public Internet? Defaults to true.
+	InternetQueryEnabled *bool `json:"internetQueryEnabled,omitempty" tf:"internet_query_enabled,omitempty"`
+
+	// Specifies if the log Analytics workspace should enforce authentication using Azure AD. Defaults to false.
+	LocalAuthenticationDisabled *bool `json:"localAuthenticationDisabled,omitempty" tf:"local_authentication_disabled,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The capacity reservation level in GB for this workspace. Must be in increments of 100 between 100 and 5000.
+	ReservationCapacityInGbPerDay *float64 `json:"reservationCapacityInGbPerDay,omitempty" tf:"reservation_capacity_in_gb_per_day,omitempty"`
+
+	// The name of the resource group in which the Log Analytics workspace is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The workspace data retention in days. Possible values are either 7 (Free Tier only) or range between 30 and 730.
+	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
+
+	// Specifies the SKU of the Log Analytics Workspace. Possible values are Free, PerNode, Premium, Standard, Standalone, Unlimited, CapacityReservation, and PerGB2018 (new SKU as of 2018-04-03). Defaults to PerGB2018.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Workspace (or Customer) ID for the Log Analytics Workspace.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
@@ -49,8 +85,8 @@ type WorkspaceParameters struct {
 	LocalAuthenticationDisabled *bool `json:"localAuthenticationDisabled,omitempty" tf:"local_authentication_disabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The capacity reservation level in GB for this workspace. Must be in increments of 100 between 100 and 5000.
 	// +kubebuilder:validation:Optional
@@ -106,8 +142,9 @@ type WorkspaceStatus struct {
 type Workspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WorkspaceSpec   `json:"spec"`
-	Status            WorkspaceStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   WorkspaceSpec   `json:"spec"`
+	Status WorkspaceStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

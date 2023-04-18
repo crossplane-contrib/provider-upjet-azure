@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: networkinterfaces.network.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -293,10 +297,22 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
-                required:
-                - ipConfiguration
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -468,6 +484,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: ipConfiguration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ipConfiguration)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: NetworkInterfaceStatus defines the observed state of NetworkInterface.
             properties:
@@ -481,14 +502,77 @@ spec:
                     items:
                       type: string
                     type: array
+                  dnsServers:
+                    description: A list of IP Addresses defining the DNS Servers which
+                      should be used for this Network Interface.
+                    items:
+                      type: string
+                    type: array
+                  edgeZone:
+                    description: Specifies the Edge Zone within the Azure Region where
+                      this Network Interface should exist. Changing this forces a
+                      new Network Interface to be created.
+                    type: string
+                  enableAcceleratedNetworking:
+                    description: Should Accelerated Networking be enabled? Defaults
+                      to false.
+                    type: boolean
+                  enableIpForwarding:
+                    description: Should IP Forwarding be enabled? Defaults to false.
+                    type: boolean
                   id:
                     description: The ID of the Network Interface.
+                    type: string
+                  internalDnsNameLabel:
+                    description: The (relative) DNS Name used for internal communications
+                      between Virtual Machines in the same Virtual Network.
                     type: string
                   internalDomainNameSuffix:
                     description: Even if internal_dns_name_label is not specified,
                       a DNS entry is created for the primary NIC of the VM. This DNS
                       name can be constructed by concatenating the VM name with the
                       value of internal_domain_name_suffix.
+                    type: string
+                  ipConfiguration:
+                    description: One or more ip_configuration blocks as defined below.
+                    items:
+                      properties:
+                        gatewayLoadBalancerFrontendIpConfigurationId:
+                          description: The Frontend IP Configuration ID of a Gateway
+                            SKU Load Balancer.
+                          type: string
+                        name:
+                          description: A name used for this IP Configuration.
+                          type: string
+                        primary:
+                          description: Is this the Primary IP Configuration? Must
+                            be true for the first ip_configuration when multiple are
+                            specified. Defaults to false.
+                          type: boolean
+                        privateIpAddress:
+                          description: The Static IP Address which should be used.
+                          type: string
+                        privateIpAddressAllocation:
+                          description: The allocation method used for the Private
+                            IP Address. Possible values are Dynamic and Static.
+                          type: string
+                        privateIpAddressVersion:
+                          description: The IP Version to use. Possible values are
+                            IPv4 or IPv6. Defaults to IPv4.
+                          type: string
+                        publicIpAddressId:
+                          description: Reference to a Public IP Address to associate
+                            with this NIC
+                          type: string
+                        subnetId:
+                          description: The ID of the Subnet where this Network Interface
+                            should be located in.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: The location where the Network Interface should exist.
+                      Changing this forces a new resource to be created.
                     type: string
                   macAddress:
                     description: The Media Access Control (MAC) Address of the Network
@@ -502,6 +586,16 @@ spec:
                     items:
                       type: string
                     type: array
+                  resourceGroupName:
+                    description: The name of the Resource Group in which to create
+                      the Network Interface. Changing this forces a new resource to
+                      be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
                   virtualMachineId:
                     description: The ID of the Virtual Machine which this Network
                       Interface is connected to.

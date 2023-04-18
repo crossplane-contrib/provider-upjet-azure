@@ -18,8 +18,17 @@ type ManagerManagementGroupConnectionObservation struct {
 	// The Connection state of the Network Manager Management Group Connection.
 	ConnectionState *string `json:"connectionState,omitempty" tf:"connection_state,omitempty"`
 
+	// A description of the Network Manager Management Group Connection.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Network Manager Management Group Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the ID of the target Management Group. Changing this forces a new resource to be created.
+	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
+
+	// Specifies the ID of the Network Manager which the Management Group is connected to. Changing this forces a new resource to be created.
+	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`
 }
 
 type ManagerManagementGroupConnectionParameters struct {

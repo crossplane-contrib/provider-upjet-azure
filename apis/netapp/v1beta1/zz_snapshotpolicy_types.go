@@ -14,6 +14,15 @@ import (
 )
 
 type DailyScheduleObservation struct {
+
+	// Hour of the day that the snapshots will be created, valid range is from 0 to 23.
+	Hour *float64 `json:"hour,omitempty" tf:"hour,omitempty"`
+
+	// Minute of the hour that the snapshots will be created, valid range is from 0 to 59.
+	Minute *float64 `json:"minute,omitempty" tf:"minute,omitempty"`
+
+	// How many hourly snapshots to keep, valid range is from 0 to 255.
+	SnapshotsToKeep *float64 `json:"snapshotsToKeep,omitempty" tf:"snapshots_to_keep,omitempty"`
 }
 
 type DailyScheduleParameters struct {
@@ -32,6 +41,12 @@ type DailyScheduleParameters struct {
 }
 
 type HourlyScheduleObservation struct {
+
+	// Minute of the hour that the snapshots will be created, valid range is from 0 to 59.
+	Minute *float64 `json:"minute,omitempty" tf:"minute,omitempty"`
+
+	// How many hourly snapshots to keep, valid range is from 0 to 255.
+	SnapshotsToKeep *float64 `json:"snapshotsToKeep,omitempty" tf:"snapshots_to_keep,omitempty"`
 }
 
 type HourlyScheduleParameters struct {
@@ -46,6 +61,18 @@ type HourlyScheduleParameters struct {
 }
 
 type MonthlyScheduleObservation struct {
+
+	// List of the days of the month when the snapshots will be created, valid range is from 1 to 30.
+	DaysOfMonth []*float64 `json:"daysOfMonth,omitempty" tf:"days_of_month,omitempty"`
+
+	// Hour of the day that the snapshots will be created, valid range is from 0 to 23.
+	Hour *float64 `json:"hour,omitempty" tf:"hour,omitempty"`
+
+	// Minute of the hour that the snapshots will be created, valid range is from 0 to 59.
+	Minute *float64 `json:"minute,omitempty" tf:"minute,omitempty"`
+
+	// How many hourly snapshots to keep, valid range is from 0 to 255.
+	SnapshotsToKeep *float64 `json:"snapshotsToKeep,omitempty" tf:"snapshots_to_keep,omitempty"`
 }
 
 type MonthlyScheduleParameters struct {
@@ -69,8 +96,35 @@ type MonthlyScheduleParameters struct {
 
 type SnapshotPolicyObservation struct {
 
+	// The name of the NetApp Account in which the NetApp Snapshot Policy should be created. Changing this forces a new resource to be created.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// Sets a daily snapshot schedule. See details in below daily_schedule block.
+	DailySchedule []DailyScheduleObservation `json:"dailySchedule,omitempty" tf:"daily_schedule,omitempty"`
+
+	// Defines that the NetApp Snapshot Policy is enabled or not.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Sets an hourly snapshot schedule. See details in below hourly_schedule block.
+	HourlySchedule []HourlyScheduleObservation `json:"hourlySchedule,omitempty" tf:"hourly_schedule,omitempty"`
+
 	// The ID of the NetApp Snapshot.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Sets a monthly snapshot schedule. See details in below monthly_schedule block.
+	MonthlySchedule []MonthlyScheduleObservation `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
+
+	// The name of the resource group where the NetApp Snapshot Policy should be created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Sets a weekly snapshot schedule. See details in below weekly_schedule block.
+	WeeklySchedule []WeeklyScheduleObservation `json:"weeklySchedule,omitempty" tf:"weekly_schedule,omitempty"`
 }
 
 type SnapshotPolicyParameters struct {
@@ -93,16 +147,16 @@ type SnapshotPolicyParameters struct {
 	DailySchedule []DailyScheduleParameters `json:"dailySchedule,omitempty" tf:"daily_schedule,omitempty"`
 
 	// Defines that the NetApp Snapshot Policy is enabled or not.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Sets an hourly snapshot schedule. See details in below hourly_schedule block.
 	// +kubebuilder:validation:Optional
 	HourlySchedule []HourlyScheduleParameters `json:"hourlySchedule,omitempty" tf:"hourly_schedule,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Sets a monthly snapshot schedule. See details in below monthly_schedule block.
 	// +kubebuilder:validation:Optional
@@ -131,6 +185,18 @@ type SnapshotPolicyParameters struct {
 }
 
 type WeeklyScheduleObservation struct {
+
+	// List of the week days using English names when the snapshots will be created.
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// Hour of the day that the snapshots will be created, valid range is from 0 to 23.
+	Hour *float64 `json:"hour,omitempty" tf:"hour,omitempty"`
+
+	// Minute of the hour that the snapshots will be created, valid range is from 0 to 59.
+	Minute *float64 `json:"minute,omitempty" tf:"minute,omitempty"`
+
+	// How many hourly snapshots to keep, valid range is from 0 to 255.
+	SnapshotsToKeep *float64 `json:"snapshotsToKeep,omitempty" tf:"snapshots_to_keep,omitempty"`
 }
 
 type WeeklyScheduleParameters struct {
@@ -176,8 +242,10 @@ type SnapshotPolicyStatus struct {
 type SnapshotPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SnapshotPolicySpec   `json:"spec"`
-	Status            SnapshotPolicyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   SnapshotPolicySpec   `json:"spec"`
+	Status SnapshotPolicyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

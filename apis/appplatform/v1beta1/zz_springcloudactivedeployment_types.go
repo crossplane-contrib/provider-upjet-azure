@@ -15,8 +15,14 @@ import (
 
 type SpringCloudActiveDeploymentObservation struct {
 
+	// Specifies the name of Spring Cloud Deployment which is going to be active.
+	DeploymentName *string `json:"deploymentName,omitempty" tf:"deployment_name,omitempty"`
+
 	// The ID of the Spring Cloud Active Deployment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the id of the Spring Cloud Application. Changing this forces a new resource to be created.
+	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`
 }
 
 type SpringCloudActiveDeploymentParameters struct {

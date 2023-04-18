@@ -18,8 +18,17 @@ type ManagerSubscriptionConnectionObservation struct {
 	// The Connection state of the Network Manager Subscription Connection.
 	ConnectionState *string `json:"connectionState,omitempty" tf:"connection_state,omitempty"`
 
+	// A description of the Network Manager Subscription Connection.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Network Manager Subscription Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the ID of the Network Manager which the Subscription is connected to.
+	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`
+
+	// Specifies the ID of the target Subscription. Changing this forces a new resource to be created.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type ManagerSubscriptionConnectionParameters struct {
@@ -43,8 +52,8 @@ type ManagerSubscriptionConnectionParameters struct {
 	NetworkManagerIDSelector *v1.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the target Subscription. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SubscriptionID *string `json:"subscriptionId" tf:"subscription_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 // ManagerSubscriptionConnectionSpec defines the desired state of ManagerSubscriptionConnection
@@ -71,8 +80,9 @@ type ManagerSubscriptionConnectionStatus struct {
 type ManagerSubscriptionConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagerSubscriptionConnectionSpec   `json:"spec"`
-	Status            ManagerSubscriptionConnectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subscriptionId)",message="subscriptionId is a required parameter"
+	Spec   ManagerSubscriptionConnectionSpec   `json:"spec"`
+	Status ManagerSubscriptionConnectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

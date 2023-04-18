@@ -17,6 +17,18 @@ type StorageSyncObservation struct {
 
 	// The ID of the Storage Sync.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Incoming traffic policy. Possible values are AllowAllTraffic and AllowVirtualNetworksOnly.
+	IncomingTrafficPolicy *string `json:"incomingTrafficPolicy,omitempty" tf:"incoming_traffic_policy,omitempty"`
+
+	// The Azure Region where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Storage Sync.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type StorageSyncParameters struct {
@@ -26,8 +38,8 @@ type StorageSyncParameters struct {
 	IncomingTrafficPolicy *string `json:"incomingTrafficPolicy,omitempty" tf:"incoming_traffic_policy,omitempty"`
 
 	// The Azure Region where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -71,8 +83,9 @@ type StorageSyncStatus struct {
 type StorageSync struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              StorageSyncSpec   `json:"spec"`
-	Status            StorageSyncStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   StorageSyncSpec   `json:"spec"`
+	Status StorageSyncStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -14,6 +14,18 @@ import (
 )
 
 type ApplicationRuleCollectionObservation struct {
+
+	// The action to take for the application rules in this collection. Possible values are Allow and Deny.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The name which should be used for this application rule collection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority of the application rule collection. The range is 100 - 65000.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// One or more application_rule (application rule) blocks as defined below.
+	Rule []ApplicationRuleCollectionRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type ApplicationRuleCollectionParameters struct {
@@ -36,6 +48,39 @@ type ApplicationRuleCollectionParameters struct {
 }
 
 type ApplicationRuleCollectionRuleObservation struct {
+
+	// The description which should be used for this rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies a list of destination IP addresses (including CIDR and *) or Service Tags.
+	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
+
+	// Specifies a list of destination FQDN tags.
+	DestinationFqdnTags []*string `json:"destinationFqdnTags,omitempty" tf:"destination_fqdn_tags,omitempty"`
+
+	// Specifies a list of destination FQDNs.
+	DestinationFqdns []*string `json:"destinationFqdns,omitempty" tf:"destination_fqdns,omitempty"`
+
+	// Specifies a list of destination URLs for which policy should hold. Needs Premium SKU for Firewall Policy. Conflicts with destination_fqdns.
+	DestinationUrls []*string `json:"destinationUrls,omitempty" tf:"destination_urls,omitempty"`
+
+	// The name which should be used for this network rule collection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies a list of network protocols this rule applies to. Possible values are Any, TCP, UDP, ICMP.
+	Protocols []ProtocolsObservation `json:"protocols,omitempty" tf:"protocols,omitempty"`
+
+	// Specifies a list of source IP addresses (including CIDR and *).
+	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
+
+	// Specifies a list of source IP groups.
+	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
+
+	// Boolean specifying if TLS shall be terminated (true) or not (false). Must be true when using destination_urls. Needs Premium SKU for Firewall Policy.
+	TerminateTLS *bool `json:"terminateTls,omitempty" tf:"terminate_tls,omitempty"`
+
+	// Specifies a list of web categories to which access is denied or allowed depending on the value of action above. Needs Premium SKU for Firewall Policy.
+	WebCategories []*string `json:"webCategories,omitempty" tf:"web_categories,omitempty"`
 }
 
 type ApplicationRuleCollectionRuleParameters struct {
@@ -87,8 +132,23 @@ type ApplicationRuleCollectionRuleParameters struct {
 
 type FirewallPolicyRuleCollectionGroupObservation struct {
 
+	// One or more application_rule_collection blocks as defined below.
+	ApplicationRuleCollection []ApplicationRuleCollectionObservation `json:"applicationRuleCollection,omitempty" tf:"application_rule_collection,omitempty"`
+
+	// The ID of the Firewall Policy where the Firewall Policy Rule Collection Group should exist. Changing this forces a new Firewall Policy Rule Collection Group to be created.
+	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
+
 	// The ID of the Firewall Policy Rule Collection Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more nat_rule_collection blocks as defined below.
+	NATRuleCollection []NATRuleCollectionObservation `json:"natRuleCollection,omitempty" tf:"nat_rule_collection,omitempty"`
+
+	// One or more network_rule_collection blocks as defined below.
+	NetworkRuleCollection []NetworkRuleCollectionObservation `json:"networkRuleCollection,omitempty" tf:"network_rule_collection,omitempty"`
+
+	// The priority of the Firewall Policy Rule Collection Group. The range is 100-65000.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 type FirewallPolicyRuleCollectionGroupParameters struct {
@@ -120,11 +180,23 @@ type FirewallPolicyRuleCollectionGroupParameters struct {
 	NetworkRuleCollection []NetworkRuleCollectionParameters `json:"networkRuleCollection,omitempty" tf:"network_rule_collection,omitempty"`
 
 	// The priority of the Firewall Policy Rule Collection Group. The range is 100-65000.
-	// +kubebuilder:validation:Required
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 type NATRuleCollectionObservation struct {
+
+	// The action to take for the NAT rules in this collection. Currently, the only possible value is Dnat.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The name which should be used for this NAT rule collection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority of the NAT rule collection. The range is 100 - 65000.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// A nat_rule (NAT rule) block as defined below.
+	Rule []NATRuleCollectionRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type NATRuleCollectionParameters struct {
@@ -147,6 +219,33 @@ type NATRuleCollectionParameters struct {
 }
 
 type NATRuleCollectionRuleObservation struct {
+
+	// The destination IP address (including CIDR).
+	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
+
+	// Specifies a list of destination ports.
+	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
+
+	// The name which should be used for this network rule collection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies a list of network protocols this rule applies to. Possible values are Any, TCP, UDP, ICMP.
+	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+
+	// Specifies a list of source IP addresses (including CIDR and *).
+	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
+
+	// Specifies a list of source IP groups.
+	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
+
+	// Specifies the translated address.
+	TranslatedAddress *string `json:"translatedAddress,omitempty" tf:"translated_address,omitempty"`
+
+	// Specifies the translated FQDN.
+	TranslatedFqdn *string `json:"translatedFqdn,omitempty" tf:"translated_fqdn,omitempty"`
+
+	// Specifies the translated port.
+	TranslatedPort *float64 `json:"translatedPort,omitempty" tf:"translated_port,omitempty"`
 }
 
 type NATRuleCollectionRuleParameters struct {
@@ -189,6 +288,18 @@ type NATRuleCollectionRuleParameters struct {
 }
 
 type NetworkRuleCollectionObservation struct {
+
+	// The action to take for the network rules in this collection. Possible values are Allow and Deny.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The name which should be used for this network rule collection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority of the network rule collection. The range is 100 - 65000.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// One or more network_rule (network rule) blocks as defined below.
+	Rule []NetworkRuleCollectionRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type NetworkRuleCollectionParameters struct {
@@ -211,6 +322,30 @@ type NetworkRuleCollectionParameters struct {
 }
 
 type NetworkRuleCollectionRuleObservation struct {
+
+	// Specifies a list of destination IP addresses (including CIDR and *) or Service Tags.
+	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
+
+	// Specifies a list of destination FQDNs.
+	DestinationFqdns []*string `json:"destinationFqdns,omitempty" tf:"destination_fqdns,omitempty"`
+
+	// Specifies a list of destination IP groups.
+	DestinationIPGroups []*string `json:"destinationIpGroups,omitempty" tf:"destination_ip_groups,omitempty"`
+
+	// Specifies a list of destination ports.
+	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
+
+	// The name which should be used for this network rule collection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies a list of network protocols this rule applies to. Possible values are Any, TCP, UDP, ICMP.
+	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+
+	// Specifies a list of source IP addresses (including CIDR and *).
+	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
+
+	// Specifies a list of source IP groups.
+	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 }
 
 type NetworkRuleCollectionRuleParameters struct {
@@ -249,6 +384,12 @@ type NetworkRuleCollectionRuleParameters struct {
 }
 
 type ProtocolsObservation struct {
+
+	// Port number of the protocol. Range is 0-64000.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Protocol type. Possible values are Http and Https.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProtocolsParameters struct {
@@ -286,8 +427,9 @@ type FirewallPolicyRuleCollectionGroupStatus struct {
 type FirewallPolicyRuleCollectionGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              FirewallPolicyRuleCollectionGroupSpec   `json:"spec"`
-	Status            FirewallPolicyRuleCollectionGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.priority)",message="priority is a required parameter"
+	Spec   FirewallPolicyRuleCollectionGroupSpec   `json:"spec"`
+	Status FirewallPolicyRuleCollectionGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

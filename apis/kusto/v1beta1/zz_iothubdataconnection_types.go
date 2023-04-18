@@ -15,8 +15,47 @@ import (
 
 type IOTHubDataConnectionObservation struct {
 
+	// Specifies the name of the Kusto Cluster this data connection will be added to. Changing this forces a new resource to be created.
+	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
+
+	// Specifies the IotHub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
+	ConsumerGroup *string `json:"consumerGroup,omitempty" tf:"consumer_group,omitempty"`
+
+	// Specifies the data format of the IoTHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV, TSVE, TXT and W3CLOGFILE. Changing this forces a new resource to be created.
+	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
+
+	// Specifies the name of the Kusto Database this data connection will be added to. Changing this forces a new resource to be created.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created.
+	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
+
+	// Specifies the System Properties that each IoT Hub message should contain. Changing this forces a new resource to be created. Possible values are message-id, sequence-number, to, absolute-expiry-time, iothub-enqueuedtime, correlation-id, user-id, iothub-ack, iothub-connection-device-id, iothub-connection-auth-generation-id and iothub-connection-auth-method.
+	EventSystemProperties []*string `json:"eventSystemProperties,omitempty" tf:"event_system_properties,omitempty"`
+
 	// The ID of the Kusto IotHub Data Connection.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the resource id of the IotHub this data connection will use for ingestion. Changing this forces a new resource to be created.
+	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
+
+	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the mapping rule used for the message ingestion. Mapping rule must exist before resource is created. Changing this forces a new resource to be created.
+	MappingRuleName *string `json:"mappingRuleName,omitempty" tf:"mapping_rule_name,omitempty"`
+
+	// The name of the Kusto IotHub Data Connection to create. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the Resource Group where the Kusto Database should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the IotHub Shared Access Policy this data connection will use for ingestion, which must have read permission. Changing this forces a new resource to be created.
+	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
+
+	// Specifies the target table name used for the message ingestion. Table must exist before resource is created. Changing this forces a new resource to be created.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
 type IOTHubDataConnectionParameters struct {
@@ -87,16 +126,16 @@ type IOTHubDataConnectionParameters struct {
 	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the mapping rule used for the message ingestion. Mapping rule must exist before resource is created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	MappingRuleName *string `json:"mappingRuleName,omitempty" tf:"mapping_rule_name,omitempty"`
 
 	// The name of the Kusto IotHub Data Connection to create. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the Resource Group where the Kusto Database should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -153,8 +192,10 @@ type IOTHubDataConnectionStatus struct {
 type IOTHubDataConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              IOTHubDataConnectionSpec   `json:"spec"`
-	Status            IOTHubDataConnectionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   IOTHubDataConnectionSpec   `json:"spec"`
+	Status IOTHubDataConnectionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

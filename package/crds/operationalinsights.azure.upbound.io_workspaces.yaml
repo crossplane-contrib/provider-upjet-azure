@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: workspaces.operationalinsights.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -191,9 +195,22 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
-                required:
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -365,14 +382,69 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: WorkspaceStatus defines the observed state of Workspace.
             properties:
               atProvider:
                 properties:
+                  allowResourceOnlyPermissions:
+                    description: Specifies if the log Analytics Workspace allow users
+                      accessing to data associated with resources they have permission
+                      to view, without permission to workspace. Defaults to true.
+                    type: boolean
+                  cmkForQueryForced:
+                    description: Is Customer Managed Storage mandatory for query management?
+                    type: boolean
+                  dailyQuotaGb:
+                    description: The workspace daily quota for ingestion in GB. Defaults
+                      to -1 (unlimited) if omitted.
+                    type: number
                   id:
                     description: The Log Analytics Workspace ID.
                     type: string
+                  internetIngestionEnabled:
+                    description: Should the Log Analytics Workspace support ingestion
+                      over the Public Internet? Defaults to true.
+                    type: boolean
+                  internetQueryEnabled:
+                    description: Should the Log Analytics Workspace support querying
+                      over the Public Internet? Defaults to true.
+                    type: boolean
+                  localAuthenticationDisabled:
+                    description: Specifies if the log Analytics workspace should enforce
+                      authentication using Azure AD. Defaults to false.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  reservationCapacityInGbPerDay:
+                    description: The capacity reservation level in GB for this workspace.
+                      Must be in increments of 100 between 100 and 5000.
+                    type: number
+                  resourceGroupName:
+                    description: The name of the resource group in which the Log Analytics
+                      workspace is created. Changing this forces a new resource to
+                      be created.
+                    type: string
+                  retentionInDays:
+                    description: The workspace data retention in days. Possible values
+                      are either 7 (Free Tier only) or range between 30 and 730.
+                    type: number
+                  sku:
+                    description: Specifies the SKU of the Log Analytics Workspace.
+                      Possible values are Free, PerNode, Premium, Standard, Standalone,
+                      Unlimited, CapacityReservation, and PerGB2018 (new SKU as of
+                      2018-04-03). Defaults to PerGB2018.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
                   workspaceId:
                     description: The Workspace (or Customer) ID for the Log Analytics
                       Workspace.

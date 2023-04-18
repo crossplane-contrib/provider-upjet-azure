@@ -15,11 +15,26 @@ import (
 
 type RouteTableObservation struct {
 
+	// Boolean flag which controls propagation of routes learned by BGP on that route table. True means disable.
+	DisableBGPRoutePropagation *bool `json:"disableBgpRoutePropagation,omitempty" tf:"disable_bgp_route_propagation,omitempty"`
+
 	// The Route Table ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the resource group in which to create the route table. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// List of objects representing routes. Each object accepts the arguments documented below.
+	Route []RouteTableRouteObservation `json:"route,omitempty" tf:"route,omitempty"`
+
 	// The collection of Subnets associated with this route table.
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type RouteTableParameters struct {
@@ -29,8 +44,8 @@ type RouteTableParameters struct {
 	DisableBGPRoutePropagation *bool `json:"disableBgpRoutePropagation,omitempty" tf:"disable_bgp_route_propagation,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the route table. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -55,6 +70,18 @@ type RouteTableParameters struct {
 }
 
 type RouteTableRouteObservation struct {
+
+	// The destination to which the route applies. Can be CIDR (such as 10.1.0.0/16) or Azure Service Tag (such as ApiManagement, AzureBackup or AzureMonitor) format.
+	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
+
+	// The name of the route.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Contains the IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance.
+	NextHopInIPAddress *string `json:"nextHopInIpAddress,omitempty" tf:"next_hop_in_ip_address,omitempty"`
+
+	// The type of Azure hop the packet should be sent to. Possible values are VirtualNetworkGateway, VnetLocal, Internet, VirtualAppliance and None.
+	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
 }
 
 type RouteTableRouteParameters struct {
@@ -100,8 +127,9 @@ type RouteTableStatus struct {
 type RouteTable struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              RouteTableSpec   `json:"spec"`
-	Status            RouteTableStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   RouteTableSpec   `json:"spec"`
+	Status RouteTableStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

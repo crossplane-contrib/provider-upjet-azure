@@ -15,15 +15,30 @@ import (
 
 type AppIntegrationAccountSchemaObservation struct {
 
+	// The content of the Logic App Integration Account Schema.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The file name of the Logic App Integration Account Schema.
+	FileName *string `json:"fileName,omitempty" tf:"file_name,omitempty"`
+
 	// The ID of the Logic App Integration Account Schema.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Schema to be created.
+	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
+
+	// The metadata of the Logic App Integration Account Schema.
+	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name of the Resource Group where the Logic App Integration Account Schema should exist. Changing this forces a new Logic App Integration Account Schema to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type AppIntegrationAccountSchemaParameters struct {
 
 	// The content of the Logic App Integration Account Schema.
-	// +kubebuilder:validation:Required
-	Content *string `json:"content" tf:"content,omitempty"`
+	// +kubebuilder:validation:Optional
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The file name of the Logic App Integration Account Schema.
 	// +kubebuilder:validation:Optional
@@ -85,8 +100,9 @@ type AppIntegrationAccountSchemaStatus struct {
 type AppIntegrationAccountSchema struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppIntegrationAccountSchemaSpec   `json:"spec"`
-	Status            AppIntegrationAccountSchemaStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.content)",message="content is a required parameter"
+	Spec   AppIntegrationAccountSchemaSpec   `json:"spec"`
+	Status AppIntegrationAccountSchemaStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

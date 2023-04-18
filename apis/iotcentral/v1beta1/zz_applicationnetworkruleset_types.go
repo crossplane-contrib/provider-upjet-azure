@@ -15,8 +15,20 @@ import (
 
 type ApplicationNetworkRuleSetObservation struct {
 
+	// Whether these IP Rules apply for device connectivity to IoT Hub and Device Provisioning Service associated with this IoT Central Application. Possible values are true, false. Defaults to true
+	ApplyToDevice *bool `json:"applyToDevice,omitempty" tf:"apply_to_device,omitempty"`
+
+	// Specifies the default action for the IoT Central Application Network Rule Set. Possible values are Allow and Deny. Defaults to Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
 	// The ID of the IoT Central Application Network Rule Set.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// One or more ip_rule blocks as defined below.
+	IPRule []IPRuleObservation `json:"ipRule,omitempty" tf:"ip_rule,omitempty"`
+
+	// The ID of the IoT Central Application. Changing this forces a new resource to be created.
+	IotcentralApplicationID *string `json:"iotcentralApplicationId,omitempty" tf:"iotcentral_application_id,omitempty"`
 }
 
 type ApplicationNetworkRuleSetParameters struct {
@@ -49,6 +61,12 @@ type ApplicationNetworkRuleSetParameters struct {
 }
 
 type IPRuleObservation struct {
+
+	// The IP address range in CIDR notation for the IP Rule.
+	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
+
+	// The name of the IP Rule
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type IPRuleParameters struct {

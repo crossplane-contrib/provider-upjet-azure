@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: outputservicebustopics.streamanalytics.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -446,10 +450,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - name
-                - serialization
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -621,15 +637,86 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: serialization is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serialization)
           status:
             description: OutputServiceBusTopicStatus defines the observed state of
               OutputServiceBusTopic.
             properties:
               atProvider:
                 properties:
+                  authenticationMode:
+                    description: The authentication mode for the Stream Output. Possible
+                      values are Msi and ConnectionString. Defaults to ConnectionString.
+                    type: string
                   id:
                     description: The ID of the Stream Analytics Output ServiceBus
                       Topic.
+                    type: string
+                  name:
+                    description: The name of the Stream Output. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  propertyColumns:
+                    description: A list of property columns to add to the Service
+                      Bus Topic output.
+                    items:
+                      type: string
+                    type: array
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Stream Analytics
+                      Job exists. Changing this forces a new resource to be created.
+                    type: string
+                  serialization:
+                    description: A serialization block as defined below.
+                    items:
+                      properties:
+                        encoding:
+                          description: The encoding of the incoming data in the case
+                            of input and the encoding of outgoing data in the case
+                            of output. It currently can only be set to UTF8.
+                          type: string
+                        fieldDelimiter:
+                          description: "The delimiter that will be used to separate
+                            comma-separated value (CSV) records. Possible values are
+                            \  (space), , (comma), \t (tab), | (pipe) and ;."
+                          type: string
+                        format:
+                          description: Specifies the format of the JSON the output
+                            will be written in. Possible values are Array and LineSeparated.
+                          type: string
+                        type:
+                          description: The serialization format used for outgoing
+                            data streams. Possible values are Avro, Csv, Json and
+                            Parquet.
+                          type: string
+                      type: object
+                    type: array
+                  servicebusNamespace:
+                    description: The namespace that is associated with the desired
+                      Event Hub, Service Bus Topic, Service Bus Topic, etc.
+                    type: string
+                  sharedAccessPolicyName:
+                    description: The shared access policy name for the Event Hub,
+                      Service Bus Queue, Service Bus Topic, etc. Required if authentication_mode
+                      is ConnectionString.
+                    type: string
+                  streamAnalyticsJobName:
+                    description: The name of the Stream Analytics Job. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  systemPropertyColumns:
+                    additionalProperties:
+                      type: string
+                    description: A key-value pair of system property columns that
+                      will be attached to the outgoing messages for the Service Bus
+                      Topic Output.
+                    type: object
+                  topicName:
+                    description: The name of the Service Bus Topic.
                     type: string
                 type: object
               conditions:

@@ -17,6 +17,24 @@ type AppIntegrationAccountObservation struct {
 
 	// The ID of the Logic App Integration Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The resource ID of the Integration Service Environment. Changing this forces a new Logic App Integration Account to be created.
+	IntegrationServiceEnvironmentID *string `json:"integrationServiceEnvironmentId,omitempty" tf:"integration_service_environment_id,omitempty"`
+
+	// The Azure Region where the Logic App Integration Account should exist. Changing this forces a new Logic App Integration Account to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name which should be used for this Logic App Integration Account. Changing this forces a new Logic App Integration Account to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the Resource Group where the Logic App Integration Account should exist. Changing this forces a new Logic App Integration Account to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The SKU name of the Logic App Integration Account. Possible Values are Basic, Free and Standard.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Logic App Integration Account.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type AppIntegrationAccountParameters struct {
@@ -26,12 +44,12 @@ type AppIntegrationAccountParameters struct {
 	IntegrationServiceEnvironmentID *string `json:"integrationServiceEnvironmentId,omitempty" tf:"integration_service_environment_id,omitempty"`
 
 	// The Azure Region where the Logic App Integration Account should exist. Changing this forces a new Logic App Integration Account to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name which should be used for this Logic App Integration Account. Changing this forces a new Logic App Integration Account to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account should exist. Changing this forces a new Logic App Integration Account to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -47,8 +65,8 @@ type AppIntegrationAccountParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU name of the Logic App Integration Account. Possible Values are Basic, Free and Standard.
-	// +kubebuilder:validation:Required
-	SkuName *string `json:"skuName" tf:"sku_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Logic App Integration Account.
 	// +kubebuilder:validation:Optional
@@ -79,8 +97,11 @@ type AppIntegrationAccountStatus struct {
 type AppIntegrationAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppIntegrationAccountSpec   `json:"spec"`
-	Status            AppIntegrationAccountStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	Spec   AppIntegrationAccountSpec   `json:"spec"`
+	Status AppIntegrationAccountStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

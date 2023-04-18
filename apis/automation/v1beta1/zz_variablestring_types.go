@@ -15,8 +15,23 @@ import (
 
 type VariableStringObservation struct {
 
+	// The name of the automation account in which the Variable is created. Changing this forces a new resource to be created.
+	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
+
+	// The description of the Automation Variable.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies if the Automation Variable is encrypted. Defaults to false.
+	Encrypted *bool `json:"encrypted,omitempty" tf:"encrypted,omitempty"`
+
 	// The ID of the Automation Variable.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which to create the Automation Variable. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The value of the Automation Variable as a string.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type VariableStringParameters struct {

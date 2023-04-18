@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: privatelinkservices.network.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -291,11 +295,22 @@ spec:
                     items:
                       type: string
                     type: array
-                required:
-                - loadBalancerFrontendIpConfigurationIds
-                - location
-                - natIpConfiguration
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -467,6 +482,13 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: loadBalancerFrontendIpConfigurationIds is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.loadBalancerFrontendIpConfigurationIds)
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: natIpConfiguration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.natIpConfiguration)
           status:
             description: PrivateLinkServiceStatus defines the observed state of PrivateLinkService.
             properties:
@@ -477,8 +499,81 @@ spec:
                       Service. You can use this alias to request a connection to your
                       Private Link Service.
                     type: string
+                  autoApprovalSubscriptionIds:
+                    description: A list of Subscription UUID/GUID's that will be automatically
+                      be able to use this Private Link Service.
+                    items:
+                      type: string
+                    type: array
+                  enableProxyProtocol:
+                    description: Should the Private Link Service support the Proxy
+                      Protocol?
+                    type: boolean
+                  fqdns:
+                    description: List of FQDNs allowed for the Private Link Service.
+                    items:
+                      type: string
+                    type: array
                   id:
                     type: string
+                  loadBalancerFrontendIpConfigurationIds:
+                    description: A list of Frontend IP Configuration IDs from a Standard
+                      Load Balancer, where traffic from the Private Link Service should
+                      be routed. You can use Load Balancer Rules to direct this traffic
+                      to appropriate backend pools where your applications are running.
+                      Changing this forces a new resource to be created.
+                    items:
+                      type: string
+                    type: array
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  natIpConfiguration:
+                    description: One or more (up to 8) nat_ip_configuration block
+                      as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: Specifies the name which should be used for
+                            the NAT IP Configuration. Changing this forces a new resource
+                            to be created.
+                          type: string
+                        primary:
+                          description: Is this is the Primary IP Configuration? Changing
+                            this forces a new resource to be created.
+                          type: boolean
+                        privateIpAddress:
+                          description: Specifies a Private Static IP Address for this
+                            IP Configuration.
+                          type: string
+                        privateIpAddressVersion:
+                          description: The version of the IP Protocol which should
+                            be used. At this time the only supported value is IPv4.
+                            Defaults to IPv4.
+                          type: string
+                        subnetId:
+                          description: Specifies the ID of the Subnet which should
+                            be used for the Private Link Service.
+                          type: string
+                      type: object
+                    type: array
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Private
+                      Link Service should exist. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  visibilitySubscriptionIds:
+                    description: A list of Subscription UUID/GUID's that will be able
+                      to see this Private Link Service.
+                    items:
+                      type: string
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

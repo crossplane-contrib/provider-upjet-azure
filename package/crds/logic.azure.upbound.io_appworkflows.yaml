@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: appworkflows.logic.azure.upbound.io
 spec:
@@ -55,9 +55,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -301,9 +305,22 @@ spec:
                       Logic App Workflow. Defaults to 1.0.0.0. Changing this forces
                       a new resource to be created.
                     type: string
-                required:
-                - location
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -475,11 +492,93 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
           status:
             description: AppWorkflowStatus defines the observed state of AppWorkflow.
             properties:
               atProvider:
                 properties:
+                  accessControl:
+                    description: A access_control block as defined below.
+                    items:
+                      properties:
+                        action:
+                          description: A action block as defined below.
+                          items:
+                            properties:
+                              allowedCallerIpAddressRange:
+                                description: A list of the allowed caller IP address
+                                  ranges.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        content:
+                          description: A content block as defined below.
+                          items:
+                            properties:
+                              allowedCallerIpAddressRange:
+                                description: A list of the allowed caller IP address
+                                  ranges.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        trigger:
+                          description: A trigger block as defined below.
+                          items:
+                            properties:
+                              allowedCallerIpAddressRange:
+                                description: A list of the allowed caller IP address
+                                  ranges.
+                                items:
+                                  type: string
+                                type: array
+                              openAuthenticationPolicy:
+                                description: A open_authentication_policy block as
+                                  defined below.
+                                items:
+                                  properties:
+                                    claim:
+                                      description: A claim block as defined below.
+                                      items:
+                                        properties:
+                                          name:
+                                            description: The OAuth policy name for
+                                              the Logic App Workflow.
+                                            type: string
+                                          value:
+                                            description: The value of the OAuth policy
+                                              claim for the Logic App Workflow.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    name:
+                                      description: The OAuth policy name for the Logic
+                                        App Workflow.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        workflowManagement:
+                          description: A workflow_management block as defined below.
+                          items:
+                            properties:
+                              allowedCallerIpAddressRange:
+                                description: A list of the allowed caller IP address
+                                  ranges.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   accessEndpoint:
                     description: The Access Endpoint for the Logic App Workflow.
                     type: string
@@ -493,6 +592,9 @@ spec:
                     items:
                       type: string
                     type: array
+                  enabled:
+                    description: Is the Logic App Workflow enabled? Defaults to true.
+                    type: boolean
                   id:
                     description: The Logic App Workflow ID.
                     type: string
@@ -500,6 +602,12 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Logic App Workflow.
+                          items:
+                            type: string
+                          type: array
                         principalId:
                           description: The Principal ID for the Service Principal
                             associated with the Managed Service Identity of this Logic
@@ -509,8 +617,42 @@ spec:
                           description: The Tenant ID for the Service Principal associated
                             with the Managed Service Identity of this Logic App Workflow.
                           type: string
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Logic App Workflow.
+                            Possible values are SystemAssigned, UserAssigned.
+                          type: string
                       type: object
                     type: array
+                  integrationServiceEnvironmentId:
+                    description: The ID of the Integration Service Environment to
+                      which this Logic App Workflow belongs. Changing this forces
+                      a new Logic App Workflow to be created.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      Logic App Workflow exists. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  logicAppIntegrationAccountId:
+                    description: The ID of the integration account linked by this
+                      Logic App Workflow.
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of Key-Value pairs.
+                    type: object
+                  resourceGroupName:
+                    description: The name of the Resource Group in which the Logic
+                      App Workflow should be created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
                   workflowEndpointIpAddresses:
                     description: The list of access endpoint IP addresses of workflow.
                     items:
@@ -521,6 +663,24 @@ spec:
                     items:
                       type: string
                     type: array
+                  workflowParameters:
+                    additionalProperties:
+                      type: string
+                    description: 'Specifies a map of Key-Value pairs of the Parameter
+                      Definitions to use for this Logic App Workflow. The key is the
+                      parameter name, and the value is a JSON encoded string of the
+                      parameter definition (see: https://docs.microsoft.com/azure/logic-apps/logic-apps-workflow-definition-language#parameters).'
+                    type: object
+                  workflowSchema:
+                    description: Specifies the Schema to use for this Logic App Workflow.
+                      Defaults to https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  workflowVersion:
+                    description: Specifies the version of the Schema used for this
+                      Logic App Workflow. Defaults to 1.0.0.0. Changing this forces
+                      a new resource to be created.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -15,8 +15,32 @@ import (
 
 type EventSourceIOTHubObservation struct {
 
+	// Specifies the name of the IotHub Consumer Group that holds the partitions from which events will be read.
+	ConsumerGroupName *string `json:"consumerGroupName,omitempty" tf:"consumer_group_name,omitempty"`
+
+	// Specifies the id of the IoT Time Series Insights Environment that the Event Source should be associated with. Changing this forces a new resource to created.
+	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
+
+	// Specifies the resource id where events will be coming from.
+	EventSourceResourceID *string `json:"eventSourceResourceId,omitempty" tf:"event_source_resource_id,omitempty"`
+
 	// The ID of the IoT Time Series Insights IoTHub Event Source.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the name of the IotHub which will be associated with this resource.
+	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the Shared Access key that grants the Event Source access to the IotHub.
+	SharedAccessKeyName *string `json:"sharedAccessKeyName,omitempty" tf:"shared_access_key_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the value that will be used as the event source's timestamp. This value defaults to the event creation time.
+	TimestampPropertyName *string `json:"timestampPropertyName,omitempty" tf:"timestamp_property_name,omitempty"`
 }
 
 type EventSourceIOTHubParameters struct {
@@ -76,15 +100,15 @@ type EventSourceIOTHubParameters struct {
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Shared Access key that grants the Event Source access to the IotHub.
-	// +kubebuilder:validation:Required
-	SharedAccessKeyName *string `json:"sharedAccessKeyName" tf:"shared_access_key_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SharedAccessKeyName *string `json:"sharedAccessKeyName,omitempty" tf:"shared_access_key_name,omitempty"`
 
 	// Specifies the value of the Shared Access Policy key that grants the Time Series Insights service read access to the IotHub.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	SharedAccessKeySecretRef v1.SecretKeySelector `json:"sharedAccessKeySecretRef" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
@@ -120,8 +144,11 @@ type EventSourceIOTHubStatus struct {
 type EventSourceIOTHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              EventSourceIOTHubSpec   `json:"spec"`
-	Status            EventSourceIOTHubStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sharedAccessKeySecretRef)",message="sharedAccessKeySecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sharedAccessKeyName)",message="sharedAccessKeyName is a required parameter"
+	Spec   EventSourceIOTHubSpec   `json:"spec"`
+	Status EventSourceIOTHubStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

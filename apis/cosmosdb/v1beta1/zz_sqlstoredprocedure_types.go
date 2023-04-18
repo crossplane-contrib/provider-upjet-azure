@@ -15,8 +15,23 @@ import (
 
 type SQLStoredProcedureObservation struct {
 
+	// The name of the Cosmos DB Account to create the stored procedure within. Changing this forces a new resource to be created.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// The body of the stored procedure.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
+	// The name of the Cosmos DB SQL Container to create the stored procedure within. Changing this forces a new resource to be created.
+	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+
+	// The name of the Cosmos DB SQL Database to create the stored procedure within. Changing this forces a new resource to be created.
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
 	// The ID of the Cosmos DB SQL Stored Procedure.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name of the resource group in which the Cosmos DB SQL Database is created. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 }
 
 type SQLStoredProcedureParameters struct {
@@ -35,8 +50,8 @@ type SQLStoredProcedureParameters struct {
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The body of the stored procedure.
-	// +kubebuilder:validation:Required
-	Body *string `json:"body" tf:"body,omitempty"`
+	// +kubebuilder:validation:Optional
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The name of the Cosmos DB SQL Container to create the stored procedure within. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=SQLContainer
@@ -102,8 +117,9 @@ type SQLStoredProcedureStatus struct {
 type SQLStoredProcedure struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SQLStoredProcedureSpec   `json:"spec"`
-	Status            SQLStoredProcedureStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.body)",message="body is a required parameter"
+	Spec   SQLStoredProcedureSpec   `json:"spec"`
+	Status SQLStoredProcedureStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

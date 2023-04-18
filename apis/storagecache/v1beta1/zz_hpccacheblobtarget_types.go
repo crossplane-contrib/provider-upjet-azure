@@ -15,8 +15,23 @@ import (
 
 type HPCCacheBlobTargetObservation struct {
 
+	// The name of the access policy applied to this target. Defaults to default.
+	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
+
+	// The name HPC Cache, which the HPC Cache Blob Target will be added to. Changing this forces a new resource to be created.
+	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
+
 	// The ID of the HPC Cache Blob Target.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The client-facing file path of the HPC Cache Blob Target.
+	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
+
+	// The name of the Resource Group in which to create the HPC Cache Blob Target. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The Resource Manager ID of the Storage Container used as the HPC Cache Blob Target. Changing this forces a new resource to be created.
+	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 }
 
 type HPCCacheBlobTargetParameters struct {
@@ -39,8 +54,8 @@ type HPCCacheBlobTargetParameters struct {
 	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
 	// The client-facing file path of the HPC Cache Blob Target.
-	// +kubebuilder:validation:Required
-	NamespacePath *string `json:"namespacePath" tf:"namespace_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
 
 	// The name of the Resource Group in which to create the HPC Cache Blob Target. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -94,8 +109,9 @@ type HPCCacheBlobTargetStatus struct {
 type HPCCacheBlobTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              HPCCacheBlobTargetSpec   `json:"spec"`
-	Status            HPCCacheBlobTargetStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.namespacePath)",message="namespacePath is a required parameter"
+	Spec   HPCCacheBlobTargetSpec   `json:"spec"`
+	Status HPCCacheBlobTargetStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

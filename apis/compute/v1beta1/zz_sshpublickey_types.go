@@ -17,17 +17,29 @@ type SSHPublicKeyObservation struct {
 
 	// The ID of the SSH Public Key.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the SSH Public Key should exist. Changing this forces a new SSH Public Key to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// SSH public key used to authenticate to a virtual machine through ssh. the provided public key needs to be at least 2048-bit and in ssh-rsa format.
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
+
+	// The name of the Resource Group where the SSH Public Key should exist. Changing this forces a new SSH Public Key to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the SSH Public Key.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type SSHPublicKeyParameters struct {
 
 	// The Azure Region where the SSH Public Key should exist. Changing this forces a new SSH Public Key to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// SSH public key used to authenticate to a virtual machine through ssh. the provided public key needs to be at least 2048-bit and in ssh-rsa format.
-	// +kubebuilder:validation:Required
-	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// The name of the Resource Group where the SSH Public Key should exist. Changing this forces a new SSH Public Key to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -71,8 +83,10 @@ type SSHPublicKeyStatus struct {
 type SSHPublicKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SSHPublicKeySpec   `json:"spec"`
-	Status            SSHPublicKeyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.publicKey)",message="publicKey is a required parameter"
+	Spec   SSHPublicKeySpec   `json:"spec"`
+	Status SSHPublicKeyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

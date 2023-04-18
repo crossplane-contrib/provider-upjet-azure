@@ -17,13 +17,19 @@ type ResourceGroupObservation struct {
 
 	// The ID of the Resource Group.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags which should be assigned to the Resource Group.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ResourceGroupParameters struct {
 
 	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Group.
 	// +kubebuilder:validation:Optional
@@ -54,8 +60,9 @@ type ResourceGroupStatus struct {
 type ResourceGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ResourceGroupSpec   `json:"spec"`
-	Status            ResourceGroupStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   ResourceGroupSpec   `json:"spec"`
+	Status ResourceGroupStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

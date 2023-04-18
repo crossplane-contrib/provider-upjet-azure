@@ -15,23 +15,50 @@ import (
 
 type WebhookObservation struct {
 
+	// A list of actions that trigger the Webhook to post notifications. At least one action needs to be specified. Valid values are: push, delete, quarantine, chart_push, chart_delete
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
+
+	// Custom headers that will be added to the webhook notifications request.
+	CustomHeaders map[string]*string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
+
 	// The ID of the Container Registry Webhook.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The Name of Container registry this Webhook belongs to. Changing this forces a new resource to be created.
+	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
+
+	// The name of the resource group in which to create the Container Registry Webhook. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the scope of repositories that can trigger an event. For example, foo:* means events for all tags under repository foo. foo:bar means events for 'foo:bar' only. foo is equivalent to foo:latest. Empty means all events. Defaults to "".
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Specifies the service URI for the Webhook to post notifications.
+	ServiceURI *string `json:"serviceUri,omitempty" tf:"service_uri,omitempty"`
+
+	// Specifies if this Webhook triggers notifications or not. Valid values: enabled and disabled. Default is enabled.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type WebhookParameters struct {
 
 	// A list of actions that trigger the Webhook to post notifications. At least one action needs to be specified. Valid values are: push, delete, quarantine, chart_push, chart_delete
-	// +kubebuilder:validation:Required
-	Actions []*string `json:"actions" tf:"actions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// Custom headers that will be added to the webhook notifications request.
 	// +kubebuilder:validation:Optional
 	CustomHeaders map[string]*string `json:"customHeaders,omitempty" tf:"custom_headers,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Name of Container registry this Webhook belongs to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerregistry/v1beta1.Registry
@@ -64,8 +91,8 @@ type WebhookParameters struct {
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Specifies the service URI for the Webhook to post notifications.
-	// +kubebuilder:validation:Required
-	ServiceURI *string `json:"serviceUri" tf:"service_uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	ServiceURI *string `json:"serviceUri,omitempty" tf:"service_uri,omitempty"`
 
 	// Specifies if this Webhook triggers notifications or not. Valid values: enabled and disabled. Default is enabled.
 	// +kubebuilder:validation:Optional
@@ -100,8 +127,11 @@ type WebhookStatus struct {
 type Webhook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WebhookSpec   `json:"spec"`
-	Status            WebhookStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.actions)",message="actions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serviceUri)",message="serviceUri is a required parameter"
+	Spec   WebhookSpec   `json:"spec"`
+	Status WebhookStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

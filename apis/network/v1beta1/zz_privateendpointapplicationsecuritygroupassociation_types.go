@@ -14,7 +14,14 @@ import (
 )
 
 type PrivateEndpointApplicationSecurityGroupAssociationObservation struct {
+
+	// The id of application security group to associate. Changing this forces a new resource to be created.
+	ApplicationSecurityGroupID *string `json:"applicationSecurityGroupId,omitempty" tf:"application_security_group_id,omitempty"`
+
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The id of private endpoint to associate. Changing this forces a new resource to be created.
+	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
 }
 
 type PrivateEndpointApplicationSecurityGroupAssociationParameters struct {

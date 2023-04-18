@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.1
+    controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
   name: appintegrationaccountbatchconfigurations.logic.azure.upbound.io
 spec:
@@ -57,9 +57,13 @@ spec:
             properties:
               deletionPolicy:
                 default: Delete
-                description: DeletionPolicy specifies what will happen to the underlying
+                description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
-                  or "Orphan" the external resource.
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicy field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
                 enum:
                 - Orphan
                 - Delete
@@ -338,11 +342,22 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - batchGroupName
-                - name
-                - releaseCriteria
                 type: object
+              managementPolicy:
+                default: FullControl
+                description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. ManagementPolicy
+                  specifies the level of control Crossplane has over the managed external
+                  resource. This field is planned to replace the DeletionPolicy field
+                  in a future release. Currently, both could be set independently
+                  and non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - FullControl
+                - ObserveOnly
+                - OrphanOnDelete
+                type: string
               providerConfigRef:
                 default:
                   name: default
@@ -514,15 +529,138 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: batchGroupName is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.batchGroupName)
+            - message: name is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+            - message: releaseCriteria is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.releaseCriteria)
           status:
             description: AppIntegrationAccountBatchConfigurationStatus defines the
               observed state of AppIntegrationAccountBatchConfiguration.
             properties:
               atProvider:
                 properties:
+                  batchGroupName:
+                    description: The batch group name of the Logic App Integration
+                      Batch Configuration. Changing this forces a new resource to
+                      be created.
+                    type: string
                   id:
                     description: The ID of the Logic App Integration Account Batch
                       Configuration.
+                    type: string
+                  integrationAccountName:
+                    description: The name of the Logic App Integration Account. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  metadata:
+                    additionalProperties:
+                      type: string
+                    description: A JSON mapping of any Metadata for this Logic App
+                      Integration Account Batch Configuration.
+                    type: object
+                  name:
+                    description: The name which should be used for this Logic App
+                      Integration Account Batch Configuration. Only Alphanumeric characters
+                      allowed. Changing this forces a new resource to be created.
+                    type: string
+                  releaseCriteria:
+                    description: A release_criteria block as documented below, which
+                      is used to select the criteria to meet before processing each
+                      batch.
+                    items:
+                      properties:
+                        batchSize:
+                          description: The batch size in bytes for the Logic App Integration
+                            Batch Configuration.
+                          type: number
+                        messageCount:
+                          description: The message count for the Logic App Integration
+                            Batch Configuration.
+                          type: number
+                        recurrence:
+                          description: A recurrence block as documented below.
+                          items:
+                            properties:
+                              endTime:
+                                description: The end time of the schedule, formatted
+                                  as an RFC3339 string.
+                                type: string
+                              frequency:
+                                description: The frequency of the schedule. Possible
+                                  values are Day, Hour, Minute, Month, NotSpecified,
+                                  Second, Week and Year.
+                                type: string
+                              interval:
+                                description: The number of frequencys between runs.
+                                type: number
+                              schedule:
+                                description: A schedule block as documented below.
+                                items:
+                                  properties:
+                                    hours:
+                                      description: A list containing a single item,
+                                        which specifies the Hour interval at which
+                                        this recurrence should be triggered.
+                                      items:
+                                        type: number
+                                      type: array
+                                    minutes:
+                                      description: A list containing a single item
+                                        which specifies the Minute interval at which
+                                        this recurrence should be triggered.
+                                      items:
+                                        type: number
+                                      type: array
+                                    monthDays:
+                                      description: A list of days of the month that
+                                        the job should execute on.
+                                      items:
+                                        type: number
+                                      type: array
+                                    monthly:
+                                      description: A monthly block as documented below.
+                                      items:
+                                        properties:
+                                          week:
+                                            description: The occurrence of the week
+                                              within the month.
+                                            type: number
+                                          weekday:
+                                            description: The day of the occurrence.
+                                              Possible values are Sunday, Monday,
+                                              Tuesday, Wednesday, Thursday, Friday
+                                              and Saturday.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    weekDays:
+                                      description: A list of days of the week that
+                                        the job should execute on. Possible values
+                                        are Sunday, Monday, Tuesday, Wednesday, Thursday,
+                                        Friday and Saturday.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              startTime:
+                                description: The start time of the schedule, formatted
+                                  as an RFC3339 string.
+                                type: string
+                              timeZone:
+                                description: The timezone of the start/end time.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Logic App
+                      Integration Account Batch Configuration should exist. Changing
+                      this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

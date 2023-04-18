@@ -15,8 +15,35 @@ import (
 
 type SubscriptionPolicyRemediationObservation struct {
 
+	// A number between 0.0 to 1.0 representing the percentage failure threshold. The remediation will fail if the percentage of failed remediation operations (i.e. failed deployments) exceeds this threshold.
+	FailurePercentage *float64 `json:"failurePercentage,omitempty" tf:"failure_percentage,omitempty"`
+
 	// The ID of the Policy Remediation.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// A list of the resource locations that will be remediated.
+	LocationFilters []*string `json:"locationFilters,omitempty" tf:"location_filters,omitempty"`
+
+	// Determines how many resources to remediate at any given time. Can be used to increase or reduce the pace of the remediation. If not provided, the default parallel deployments value is used.
+	ParallelDeployments *float64 `json:"parallelDeployments,omitempty" tf:"parallel_deployments,omitempty"`
+
+	// The ID of the Policy Assignment that should be remediated.
+	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
+
+	// The unique ID for the policy definition within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
+	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
+
+	// The unique ID for the policy definition reference within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
+	PolicyDefinitionReferenceID *string `json:"policyDefinitionReferenceId,omitempty" tf:"policy_definition_reference_id,omitempty"`
+
+	// Determines the max number of resources that can be remediated by the remediation job. If not provided, the default resource count is used.
+	ResourceCount *float64 `json:"resourceCount,omitempty" tf:"resource_count,omitempty"`
+
+	// The way that resources to remediate are discovered. Possible values are ExistingNonCompliant, ReEvaluateCompliance. Defaults to ExistingNonCompliant.
+	ResourceDiscoveryMode *string `json:"resourceDiscoveryMode,omitempty" tf:"resource_discovery_mode,omitempty"`
+
+	// The Subscription ID at which the Policy Remediation should be applied. Changing this forces a new resource to be created.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type SubscriptionPolicyRemediationParameters struct {
@@ -64,8 +91,8 @@ type SubscriptionPolicyRemediationParameters struct {
 	ResourceDiscoveryMode *string `json:"resourceDiscoveryMode,omitempty" tf:"resource_discovery_mode,omitempty"`
 
 	// The Subscription ID at which the Policy Remediation should be applied. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	SubscriptionID *string `json:"subscriptionId" tf:"subscription_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 // SubscriptionPolicyRemediationSpec defines the desired state of SubscriptionPolicyRemediation
@@ -92,8 +119,9 @@ type SubscriptionPolicyRemediationStatus struct {
 type SubscriptionPolicyRemediation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SubscriptionPolicyRemediationSpec   `json:"spec"`
-	Status            SubscriptionPolicyRemediationStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subscriptionId)",message="subscriptionId is a required parameter"
+	Spec   SubscriptionPolicyRemediationSpec   `json:"spec"`
+	Status SubscriptionPolicyRemediationStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

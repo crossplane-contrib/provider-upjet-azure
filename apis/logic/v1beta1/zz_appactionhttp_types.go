@@ -15,8 +15,29 @@ import (
 
 type AppActionHTTPObservation struct {
 
+	// Specifies the HTTP Body that should be sent to the uri when this HTTP Action is triggered.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
+	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
+	Headers map[string]*string `json:"headers,omitempty" tf:"headers,omitempty"`
+
 	// The ID of the HTTP Action within the Logic App Workflow.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
+	LogicAppID *string `json:"logicAppId,omitempty" tf:"logic_app_id,omitempty"`
+
+	// Specifies the HTTP Method which should be used for this HTTP Action. Possible values include DELETE, GET, PATCH, POST and PUT.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
+	Queries map[string]*string `json:"queries,omitempty" tf:"queries,omitempty"`
+
+	// Specifies the place of the HTTP Action in the Logic App Workflow. If not specified, the HTTP Action is right after the Trigger. A run_after block is as defined below.
+	RunAfter []RunAfterObservation `json:"runAfter,omitempty" tf:"run_after,omitempty"`
+
+	// Specifies the URI which will be called when this HTTP Action is triggered.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type AppActionHTTPParameters struct {
@@ -44,8 +65,8 @@ type AppActionHTTPParameters struct {
 	LogicAppIDSelector *v1.Selector `json:"logicAppIdSelector,omitempty" tf:"-"`
 
 	// Specifies the HTTP Method which should be used for this HTTP Action. Possible values include DELETE, GET, PATCH, POST and PUT.
-	// +kubebuilder:validation:Required
-	Method *string `json:"method" tf:"method,omitempty"`
+	// +kubebuilder:validation:Optional
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
 	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
 	// +kubebuilder:validation:Optional
@@ -56,11 +77,17 @@ type AppActionHTTPParameters struct {
 	RunAfter []RunAfterParameters `json:"runAfter,omitempty" tf:"run_after,omitempty"`
 
 	// Specifies the URI which will be called when this HTTP Action is triggered.
-	// +kubebuilder:validation:Required
-	URI *string `json:"uri" tf:"uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type RunAfterObservation struct {
+
+	// Specifies the name of the precedent HTTP Action.
+	ActionName *string `json:"actionName,omitempty" tf:"action_name,omitempty"`
+
+	// Specifies the expected result of the precedent HTTP Action, only after which the current HTTP Action will be triggered. Possible values include Succeeded, Failed, Skipped and TimedOut.
+	ActionResult *string `json:"actionResult,omitempty" tf:"action_result,omitempty"`
 }
 
 type RunAfterParameters struct {
@@ -98,8 +125,10 @@ type AppActionHTTPStatus struct {
 type AppActionHTTP struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              AppActionHTTPSpec   `json:"spec"`
-	Status            AppActionHTTPStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.method)",message="method is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.uri)",message="uri is a required parameter"
+	Spec   AppActionHTTPSpec   `json:"spec"`
+	Status AppActionHTTPStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

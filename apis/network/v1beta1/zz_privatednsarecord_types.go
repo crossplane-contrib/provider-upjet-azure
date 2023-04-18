@@ -20,13 +20,28 @@ type PrivateDNSARecordObservation struct {
 
 	// The Private DNS A Record ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// List of IPv4 Addresses.
+	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
+
+	// Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
+	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
 }
 
 type PrivateDNSARecordParameters struct {
 
 	// List of IPv4 Addresses.
-	// +kubebuilder:validation:Required
-	Records []*string `json:"records" tf:"records,omitempty"`
+	// +kubebuilder:validation:Optional
+	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
 	// Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -42,8 +57,8 @@ type PrivateDNSARecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Required
-	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
+	// +kubebuilder:validation:Optional
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
@@ -87,8 +102,10 @@ type PrivateDNSARecordStatus struct {
 type PrivateDNSARecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              PrivateDNSARecordSpec   `json:"spec"`
-	Status            PrivateDNSARecordStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.records)",message="records is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	Spec   PrivateDNSARecordSpec   `json:"spec"`
+	Status PrivateDNSARecordStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

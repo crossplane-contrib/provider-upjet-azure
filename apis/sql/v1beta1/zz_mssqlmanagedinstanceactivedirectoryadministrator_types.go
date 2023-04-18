@@ -15,8 +15,23 @@ import (
 
 type MSSQLManagedInstanceActiveDirectoryAdministratorObservation struct {
 
+	// When true, only permit logins from AAD users and administrators. When false, also allow local database users.
+	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
+
 	// The ID of the SQL Managed Instance Active Directory Administrator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The login name of the principal to set as the Managed Instance Administrator.
+	LoginUsername *string `json:"loginUsername,omitempty" tf:"login_username,omitempty"`
+
+	// The ID of the Azure SQL Managed Instance for which to set the administrator. Changing this forces a new resource to be created.
+	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
+
+	// The Object ID of the principal to set as the Managed Instance Administrator.
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	// The Azure Active Directory Tenant ID.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type MSSQLManagedInstanceActiveDirectoryAdministratorParameters struct {
@@ -26,8 +41,8 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorParameters struct {
 	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
 	// The login name of the principal to set as the Managed Instance Administrator.
-	// +kubebuilder:validation:Required
-	LoginUsername *string `json:"loginUsername" tf:"login_username,omitempty"`
+	// +kubebuilder:validation:Optional
+	LoginUsername *string `json:"loginUsername,omitempty" tf:"login_username,omitempty"`
 
 	// The ID of the Azure SQL Managed Instance for which to set the administrator. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=MSSQLManagedInstance
@@ -44,12 +59,12 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorParameters struct {
 	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 
 	// The Object ID of the principal to set as the Managed Instance Administrator.
-	// +kubebuilder:validation:Required
-	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// The Azure Active Directory Tenant ID.
-	// +kubebuilder:validation:Required
-	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 // MSSQLManagedInstanceActiveDirectoryAdministratorSpec defines the desired state of MSSQLManagedInstanceActiveDirectoryAdministrator
@@ -76,8 +91,11 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorStatus struct {
 type MSSQLManagedInstanceActiveDirectoryAdministrator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              MSSQLManagedInstanceActiveDirectoryAdministratorSpec   `json:"spec"`
-	Status            MSSQLManagedInstanceActiveDirectoryAdministratorStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.loginUsername)",message="loginUsername is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.objectId)",message="objectId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tenantId)",message="tenantId is a required parameter"
+	Spec   MSSQLManagedInstanceActiveDirectoryAdministratorSpec   `json:"spec"`
+	Status MSSQLManagedInstanceActiveDirectoryAdministratorStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

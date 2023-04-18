@@ -15,6 +15,12 @@ import (
 
 type TagObservation struct {
 
+	// The ID of the API Management. Changing this forces a new API Management Tag to be created.
+	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
+
+	// The display name of the API Management Tag. Defaults to the name.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The ID of the API Management Tag.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }

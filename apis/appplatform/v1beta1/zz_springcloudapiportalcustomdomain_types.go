@@ -17,13 +17,22 @@ type SpringCloudAPIPortalCustomDomainObservation struct {
 
 	// The ID of the Spring Cloud API Portal Domain.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The name which should be used for this Spring Cloud API Portal Domain. Changing this forces a new Spring Cloud API Portal Domain to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Spring Cloud API Portal. Changing this forces a new Spring Cloud API Portal Domain to be created.
+	SpringCloudAPIPortalID *string `json:"springCloudApiPortalId,omitempty" tf:"spring_cloud_api_portal_id,omitempty"`
+
+	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud API Portal Domain.
+	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
 }
 
 type SpringCloudAPIPortalCustomDomainParameters struct {
 
 	// The name which should be used for this Spring Cloud API Portal Domain. Changing this forces a new Spring Cloud API Portal Domain to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Spring Cloud API Portal. Changing this forces a new Spring Cloud API Portal Domain to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudAPIPortal
@@ -68,8 +77,9 @@ type SpringCloudAPIPortalCustomDomainStatus struct {
 type SpringCloudAPIPortalCustomDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              SpringCloudAPIPortalCustomDomainSpec   `json:"spec"`
-	Status            SpringCloudAPIPortalCustomDomainStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	Spec   SpringCloudAPIPortalCustomDomainSpec   `json:"spec"`
+	Status SpringCloudAPIPortalCustomDomainStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

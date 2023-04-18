@@ -17,6 +17,18 @@ type VirtualNetworkRuleObservation struct {
 
 	// The ID of the PostgreSQL Virtual Network Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Should the Virtual Network Rule be created before the Subnet has the Virtual Network Service Endpoint enabled?
+	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+	// The name of the resource group where the PostgreSQL server resides. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The name of the SQL Server to which this PostgreSQL virtual network rule will be applied to. Changing this forces a new resource to be created.
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// The ID of the subnet that the PostgreSQL server will be connected to.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
 type VirtualNetworkRuleParameters struct {

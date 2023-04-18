@@ -17,6 +17,11 @@ func (mg *KubernetesCluster) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this KubernetesCluster.
+func (mg *KubernetesCluster) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this KubernetesCluster.
 func (mg *KubernetesCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -48,6 +53,11 @@ func (mg *KubernetesCluster) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this KubernetesCluster.
 func (mg *KubernetesCluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this KubernetesCluster.
+func (mg *KubernetesCluster) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this KubernetesCluster.
@@ -83,6 +93,11 @@ func (mg *KubernetesClusterNodePool) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this KubernetesClusterNodePool.
+func (mg *KubernetesClusterNodePool) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this KubernetesClusterNodePool.
 func (mg *KubernetesClusterNodePool) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -114,6 +129,11 @@ func (mg *KubernetesClusterNodePool) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this KubernetesClusterNodePool.
 func (mg *KubernetesClusterNodePool) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this KubernetesClusterNodePool.
+func (mg *KubernetesClusterNodePool) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this KubernetesClusterNodePool.
@@ -149,6 +169,11 @@ func (mg *KubernetesFleetManager) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
+// GetManagementPolicy of this KubernetesFleetManager.
+func (mg *KubernetesFleetManager) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
 // GetProviderConfigReference of this KubernetesFleetManager.
 func (mg *KubernetesFleetManager) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
@@ -180,6 +205,11 @@ func (mg *KubernetesFleetManager) SetConditions(c ...xpv1.Condition) {
 // SetDeletionPolicy of this KubernetesFleetManager.
 func (mg *KubernetesFleetManager) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this KubernetesFleetManager.
+func (mg *KubernetesFleetManager) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
 }
 
 // SetProviderConfigReference of this KubernetesFleetManager.

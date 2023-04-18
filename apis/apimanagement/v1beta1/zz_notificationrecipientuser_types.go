@@ -15,8 +15,17 @@ import (
 
 type NotificationRecipientUserObservation struct {
 
+	// The ID of the API Management Service from which to create this Notification Recipient User. Changing this forces a new API Management Notification Recipient User to be created.
+	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
+
 	// The ID of the API Management Notification Recipient User.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Notification Name to be received. Changing this forces a new API Management Notification Recipient User to be created. Possible values are AccountClosedPublisher, BCC, NewApplicationNotificationMessage, NewIssuePublisherNotificationMessage, PurchasePublisherNotificationMessage, QuotaLimitApproachingPublisherNotificationMessage, and RequestPublisherNotificationMessage.
+	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
+
+	// The recipient user ID. Changing this forces a new API Management Notification Recipient User to be created.
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
 }
 
 type NotificationRecipientUserParameters struct {
@@ -36,8 +45,8 @@ type NotificationRecipientUserParameters struct {
 	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
 	// The Notification Name to be received. Changing this forces a new API Management Notification Recipient User to be created. Possible values are AccountClosedPublisher, BCC, NewApplicationNotificationMessage, NewIssuePublisherNotificationMessage, PurchasePublisherNotificationMessage, QuotaLimitApproachingPublisherNotificationMessage, and RequestPublisherNotificationMessage.
-	// +kubebuilder:validation:Required
-	NotificationType *string `json:"notificationType" tf:"notification_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
 	// The recipient user ID. Changing this forces a new API Management Notification Recipient User to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.User
@@ -77,8 +86,9 @@ type NotificationRecipientUserStatus struct {
 type NotificationRecipientUser struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              NotificationRecipientUserSpec   `json:"spec"`
-	Status            NotificationRecipientUserStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.notificationType)",message="notificationType is a required parameter"
+	Spec   NotificationRecipientUserSpec   `json:"spec"`
+	Status NotificationRecipientUserStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

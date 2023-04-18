@@ -14,6 +14,12 @@ import (
 )
 
 type AuthorizationObservation struct {
+
+	// Specifies a role definition identifier for the provider. This role will define all the permissions that the provider must have on the managed application's container resource group. This role definition cannot have permission to delete the resource group.
+	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
+
+	// Specifies a service principal identifier for the provider. This is the identity that the provider will use to call ARM to manage the managed application resources.
+	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
 }
 
 type AuthorizationParameters struct {
@@ -29,8 +35,41 @@ type AuthorizationParameters struct {
 
 type ManagedApplicationDefinitionObservation struct {
 
+	// One or more authorization block defined below.
+	Authorization []AuthorizationObservation `json:"authorization,omitempty" tf:"authorization,omitempty"`
+
+	// Specifies the createUiDefinition JSON for the backing template with Microsoft.Solutions/applications resource.
+	CreateUIDefinition *string `json:"createUiDefinition,omitempty" tf:"create_ui_definition,omitempty"`
+
+	// Specifies the managed application definition description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the managed application definition display name.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
 	// The ID of the Managed Application Definition.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the managed application lock level. Valid values include CanNotDelete, None, ReadOnly. Changing this forces a new resource to be created.
+	LockLevel *string `json:"lockLevel,omitempty" tf:"lock_level,omitempty"`
+
+	// Specifies the inline main template JSON which has resources to be provisioned.
+	MainTemplate *string `json:"mainTemplate,omitempty" tf:"main_template,omitempty"`
+
+	// Is the package enabled? Defaults to true.
+	PackageEnabled *bool `json:"packageEnabled,omitempty" tf:"package_enabled,omitempty"`
+
+	// Specifies the managed application definition package file Uri.
+	PackageFileURI *string `json:"packageFileUri,omitempty" tf:"package_file_uri,omitempty"`
+
+	// The name of the Resource Group where the Managed Application Definition should exist. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ManagedApplicationDefinitionParameters struct {
@@ -48,16 +87,16 @@ type ManagedApplicationDefinitionParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the managed application definition display name.
-	// +kubebuilder:validation:Required
-	DisplayName *string `json:"displayName" tf:"display_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the managed application lock level. Valid values include CanNotDelete, None, ReadOnly. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	LockLevel *string `json:"lockLevel" tf:"lock_level,omitempty"`
+	// +kubebuilder:validation:Optional
+	LockLevel *string `json:"lockLevel,omitempty" tf:"lock_level,omitempty"`
 
 	// Specifies the inline main template JSON which has resources to be provisioned.
 	// +kubebuilder:validation:Optional
@@ -113,8 +152,11 @@ type ManagedApplicationDefinitionStatus struct {
 type ManagedApplicationDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              ManagedApplicationDefinitionSpec   `json:"spec"`
-	Status            ManagedApplicationDefinitionStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.lockLevel)",message="lockLevel is a required parameter"
+	Spec   ManagedApplicationDefinitionSpec   `json:"spec"`
+	Status ManagedApplicationDefinitionStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

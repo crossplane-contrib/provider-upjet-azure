@@ -15,8 +15,20 @@ import (
 
 type BackupInstanceBlobStorageObservation struct {
 
+	// The ID of the Backup Policy.
+	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
+
 	// The ID of the Backup Instance Blob Storage.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The location of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// The ID of the Backup Vault within which the Backup Instance Blob Storage should exist. Changing this forces a new Backup Instance Blob Storage to be created.
+	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 }
 
 type BackupInstanceBlobStorageParameters struct {
@@ -36,8 +48,8 @@ type BackupInstanceBlobStorageParameters struct {
 	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The location of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -92,8 +104,9 @@ type BackupInstanceBlobStorageStatus struct {
 type BackupInstanceBlobStorage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              BackupInstanceBlobStorageSpec   `json:"spec"`
-	Status            BackupInstanceBlobStorageStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   BackupInstanceBlobStorageSpec   `json:"spec"`
+	Status BackupInstanceBlobStorageStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

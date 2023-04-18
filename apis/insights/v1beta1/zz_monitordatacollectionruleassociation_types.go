@@ -15,8 +15,20 @@ import (
 
 type MonitorDataCollectionRuleAssociationObservation struct {
 
+	// The ID of the Data Collection Endpoint which will be associated to the target resource.
+	DataCollectionEndpointID *string `json:"dataCollectionEndpointId,omitempty" tf:"data_collection_endpoint_id,omitempty"`
+
+	// The ID of the Data Collection Rule which will be associated to the target resource.
+	DataCollectionRuleID *string `json:"dataCollectionRuleId,omitempty" tf:"data_collection_rule_id,omitempty"`
+
+	// The description of the Data Collection Rule Association.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The ID of the Data Collection Rule Association.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The ID of the Azure Resource which to associate to a Data Collection Rule or a Data Collection Endpoint. Changing this forces a new resource to be created.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 
 type MonitorDataCollectionRuleAssociationParameters struct {

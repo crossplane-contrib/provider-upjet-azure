@@ -15,6 +15,9 @@ import (
 
 type LoadBalancerFrontendIPConfigurationObservation struct {
 
+	// The Frontend IP Configuration ID of a Gateway SKU Load Balancer.
+	GatewayLoadBalancerFrontendIPConfigurationID *string `json:"gatewayLoadBalancerFrontendIpConfigurationId,omitempty" tf:"gateway_load_balancer_frontend_ip_configuration_id,omitempty"`
+
 	// The id of the Frontend IP Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -24,8 +27,32 @@ type LoadBalancerFrontendIPConfigurationObservation struct {
 	// The list of IDs of load balancing rules that use this frontend IP.
 	LoadBalancerRules []*string `json:"loadBalancerRules,omitempty" tf:"load_balancer_rules,omitempty"`
 
+	// Specifies the name of the frontend IP configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// The list of IDs outbound rules that use this frontend IP.
 	OutboundRules []*string `json:"outboundRules,omitempty" tf:"outbound_rules,omitempty"`
+
+	// Private IP Address to assign to the Load Balancer. The last one and first four IPs in any range are reserved and cannot be manually assigned.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The allocation method for the Private IP Address used by this Load Balancer. Possible values as Dynamic and Static.
+	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
+
+	// The version of IP that the Private IP Address is. Possible values are IPv4 or IPv6.
+	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
+
+	// The ID of a Public IP Address which should be associated with the Load Balancer.
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// The ID of a Public IP Prefix which should be associated with the Load Balancer. Public IP Prefix can only be used with outbound rules.
+	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
+
+	// The ID of the Subnet which should be associated with the IP Configuration.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Specifies a list of Availability Zones in which the IP Address for this Load Balancer should be located.
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type LoadBalancerFrontendIPConfigurationParameters struct {
@@ -89,18 +116,35 @@ type LoadBalancerFrontendIPConfigurationParameters struct {
 
 type LoadBalancerObservation struct {
 
+	// Specifies the Edge Zone within the Azure Region where this Load Balancer should exist. Changing this forces a new Load Balancer to be created.
+	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
+
 	// One or multiple frontend_ip_configuration blocks as documented below.
-	// +kubebuilder:validation:Optional
 	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationObservation `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// The Load Balancer ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure Region where the Load Balancer should be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The first private IP address assigned to the load balancer in frontend_ip_configuration blocks, if any.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
 	// The list of private IP address assigned to the load balancer in frontend_ip_configuration blocks, if any.
 	PrivateIPAddresses []*string `json:"privateIpAddresses,omitempty" tf:"private_ip_addresses,omitempty"`
+
+	// The name of the Resource Group in which to create the Load Balancer. Changing this forces a new resource to be created.
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The SKU of the Azure Load Balancer. Accepted values are Basic, Standard and Gateway. Defaults to Basic. Changing this forces a new resource to be created.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// sku_tier -  The SKU tier of this Load Balancer. Possible values are Global and Regional. Defaults to Regional. Changing this forces a new resource to be created.
+	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LoadBalancerParameters struct {
@@ -114,8 +158,8 @@ type LoadBalancerParameters struct {
 	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// Specifies the supported Azure Region where the Load Balancer should be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group in which to create the Load Balancer. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -167,8 +211,9 @@ type LoadBalancerStatus struct {
 type LoadBalancer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              LoadBalancerSpec   `json:"spec"`
-	Status            LoadBalancerStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	Spec   LoadBalancerSpec   `json:"spec"`
+	Status LoadBalancerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
