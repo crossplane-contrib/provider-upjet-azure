@@ -1,0 +1,60 @@
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppIntegrationAccountSchema
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appintegrationaccountschema
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    integrationAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    content: |
+      <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <xs:element name="person">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" type="xs:string"/>
+              <xs:element name="age" type="xs:integer"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:schema>   
+
+---
+
+apiVersion: logic.azure.upbound.io/v1beta1
+kind: AppIntegrationAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appintegrationaccountschema
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-ia
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Basic
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logic/v1beta1/appintegrationaccountschema
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
