@@ -37,8 +37,18 @@ type BackupInstancePostgreSQLObservation struct {
 type BackupInstancePostgreSQLParameters struct {
 
 	// The ID of the Backup Policy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta1.BackupPolicyPostgreSQL
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
+
+	// Reference to a BackupPolicyPostgreSQL in dataprotection to populate backupPolicyId.
+	// +kubebuilder:validation:Optional
+	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a BackupPolicyPostgreSQL in dataprotection to populate backupPolicyId.
+	// +kubebuilder:validation:Optional
+	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The ID or versionless ID of the key vault secret which stores the connection string of the database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Secret
@@ -111,7 +121,6 @@ type BackupInstancePostgreSQLStatus struct {
 type BackupInstancePostgreSQL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backupPolicyId)",message="backupPolicyId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   BackupInstancePostgreSQLSpec   `json:"spec"`
 	Status BackupInstancePostgreSQLStatus `json:"status,omitempty"`
