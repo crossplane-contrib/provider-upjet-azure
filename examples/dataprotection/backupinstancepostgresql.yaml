@@ -30,6 +30,7 @@ kind: BackupPolicyPostgreSQL
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -52,6 +53,7 @@ kind: BackupVault
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -73,6 +75,7 @@ kind: Vault
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example-backup
@@ -93,6 +96,7 @@ kind: Secret
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example-backupinstancepostgresql
@@ -125,6 +129,7 @@ kind: Database
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -146,6 +151,7 @@ kind: FirewallRule
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -167,6 +173,7 @@ kind: Server
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example-backupinstancepostgresql
@@ -207,6 +214,7 @@ kind: ResourceGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -26,8 +26,6 @@ def load_crd_type(t):
 
 exception_set = {
     'ProviderConfigUsage.azure.upbound.io/v1beta1',
-    'AppIntegrationAccountSchema.logic.azure.upbound.io/v1beta1',
-    'BackupInstancePostgreSQL.dataprotection.azure.upbound.io/v1beta1'
 }
 
 # Example usage: check-examples.py <CRD dir> <example manifests dir>
