@@ -152,6 +152,6 @@ func main() {
 		log.Info("Alpha feature enabled", "flag", features.EnableAlphaManagementPolicies)
 	}
 
-	kingpin.FatalIfError(controller.Setup(mgr, o), "Cannot setup Azure controllers")
+	kingpin.FatalIfError(controller.Setup_operationalinsights(mgr, o), "Cannot setup Azure controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
 }

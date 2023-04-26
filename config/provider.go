@@ -70,6 +70,7 @@ import (
 	"github.com/upbound/provider-azure/config/storagesync"
 	"github.com/upbound/provider-azure/config/streamanalytics"
 	"github.com/upbound/provider-azure/config/web"
+	"github.com/upbound/provider-azure/hack"
 )
 
 const (
@@ -168,6 +169,7 @@ func GetProvider() *tjconfig.Provider {
 		),
 		tjconfig.WithReferenceInjectors([]tjconfig.ReferenceInjector{reference.NewInjector(modulePath)}),
 		tjconfig.WithFeaturesPackage("internal/features"),
+		tjconfig.WithMainTemplate(hack.MainTemplate),
 	)
 
 	// API group overrides from Terraform import statements
