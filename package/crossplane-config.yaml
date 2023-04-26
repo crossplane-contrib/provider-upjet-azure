@@ -18,7 +18,3 @@ metadata:
       If you encounter an issue please reach out on support@upbound.io email
       address. This is a subpackage for the {{ APIGROUP }} API group.
     friendly-name.meta.crossplane.io: Provider Azure ({{ APIGROUP }})
-spec:
-  dependsOn:
-    - provider: {{ XPKG_REG_ORGS }}/provider-azure-config
-      version: ">={{ VERSION }}"
