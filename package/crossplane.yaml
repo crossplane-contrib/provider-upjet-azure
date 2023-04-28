@@ -21,4 +21,4 @@ metadata:
 spec:
   dependsOn:
     - provider: {{ XPKG_REG_ORGS }}/provider-azure-config
-      version: ">={{ VERSION }}"
+      version: "{{ DEP_CONSTRAINT }}"
