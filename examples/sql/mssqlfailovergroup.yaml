@@ -19,7 +19,9 @@ apiVersion: sql.azure.upbound.io/v1beta1
 kind: MSSQLServerDNSAlias
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "Creation fails, see https://github.com/upbound/official-providers/issues/364"
+    meta.upbound.io/example-id: sql/v1beta1/mssqlfailovergroup
+  labels:
+    testing.upbound.io/example-name: example
   name: ${Rand.RFC1123Subdomain}
 spec:
   forProvider:
@@ -146,7 +148,7 @@ metadata:
   name: example-sql-failover-primary-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    location: North Europe
+    location: West Europe
 
 ---
 
