@@ -22,4 +22,8 @@ func Configure(p *config.Provider) {
 		}
 		delete(r.References, "linked_redis_cache_location")
 	})
+
+	p.AddResourceConfigurator("azurerm_redis_cache", func(r *config.Resource) {
+		config.MarkAsRequired(r.TerraformResource, "redis_version")
+	})
 }

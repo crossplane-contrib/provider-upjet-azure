@@ -635,6 +635,8 @@ spec:
               rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.family)
             - message: location is a required parameter
               rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: redisVersion is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.redisVersion)
             - message: skuName is a required parameter
               rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)
           status:
