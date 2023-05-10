@@ -87,8 +87,8 @@ spec:
                       Alert Rule to be created.
                     type: string
                   logAnalyticsWorkspaceIdRef:
-                    description: Reference to a LogAnalyticsSolution in operationsmanagement
-                      to populate logAnalyticsWorkspaceId.
+                    description: Reference to a Workspace in operationalinsights to
+                      populate logAnalyticsWorkspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -122,8 +122,8 @@ spec:
                     - name
                     type: object
                   logAnalyticsWorkspaceIdSelector:
-                    description: Selector for a LogAnalyticsSolution in operationsmanagement
-                      to populate logAnalyticsWorkspaceId.
+                    description: Selector for a Workspace in operationalinsights to
+                      populate logAnalyticsWorkspaceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

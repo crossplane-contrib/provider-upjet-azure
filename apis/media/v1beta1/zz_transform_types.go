@@ -13,67 +13,870 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AacAudioObservation struct {
+
+	// The average bitrate in bits per second at which to encode the input video when generating this layer.
+	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+
+	// The number of audio channels. Default to 2.
+	Channels *float64 `json:"channels,omitempty" tf:"channels,omitempty"`
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The H.264 profile. Possible values are Auto, Baseline, High, High422, High444,or Main. Default to Auto.
+	Profile *string `json:"profile,omitempty" tf:"profile,omitempty"`
+
+	// The sampling rate to use for encoding in Hertz. Default to 48000.
+	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
+}
+
+type AacAudioParameters struct {
+
+	// The average bitrate in bits per second at which to encode the input video when generating this layer.
+	// +kubebuilder:validation:Optional
+	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+
+	// The number of audio channels. Default to 2.
+	// +kubebuilder:validation:Optional
+	Channels *float64 `json:"channels,omitempty" tf:"channels,omitempty"`
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The H.264 profile. Possible values are Auto, Baseline, High, High422, High444,or Main. Default to Auto.
+	// +kubebuilder:validation:Optional
+	Profile *string `json:"profile,omitempty" tf:"profile,omitempty"`
+
+	// The sampling rate to use for encoding in Hertz. Default to 48000.
+	// +kubebuilder:validation:Optional
+	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
+}
+
 type AudioAnalyzerPresetObservation struct {
 
-	// Possibles value are Basic or Standard. Determines the set of audio analysis operations to be performed.
+	// Possible values are Basic or Standard. Determines the set of audio analysis operations to be performed. Default to Standard.
 	AudioAnalysisMode *string `json:"audioAnalysisMode,omitempty" tf:"audio_analysis_mode,omitempty"`
 
-	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463. Possible values are ar-EG, ar-SY, de-DE, en-AU, en-GB, en-US, es-ES, es-MX, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, ru-RU and zh-CN.
+	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fall back to en-US. The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.
 	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
+
+	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
 }
 
 type AudioAnalyzerPresetParameters struct {
 
-	// Possibles value are Basic or Standard. Determines the set of audio analysis operations to be performed.
+	// Possible values are Basic or Standard. Determines the set of audio analysis operations to be performed. Default to Standard.
 	// +kubebuilder:validation:Optional
 	AudioAnalysisMode *string `json:"audioAnalysisMode,omitempty" tf:"audio_analysis_mode,omitempty"`
 
-	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463. Possible values are ar-EG, ar-SY, de-DE, en-AU, en-GB, en-US, es-ES, es-MX, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, ru-RU and zh-CN.
+	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fall back to en-US. The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.
 	// +kubebuilder:validation:Optional
 	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
+
+	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	// +kubebuilder:validation:Optional
+	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
+}
+
+type AudioObservation struct {
+
+	// The gain level of audio in the overlay. The value should be in range between 0 to 1.0. The default is 1.0.
+	AudioGainLevel *float64 `json:"audioGainLevel,omitempty" tf:"audio_gain_level,omitempty"`
+
+	// The end position, with reference to the input video, at which the overlay ends. The value should be in ISO 8601 format. For example, PT30S to end the overlay at 30 seconds into the input video. If not specified or the value is greater than the input video duration, the overlay will be applied until the end of the input video if the overlay media duration is greater than the input video duration, else the overlay will last as long as the overlay media duration.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// The duration over which the overlay fades in onto the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade in (same as PT0S).
+	FadeInDuration *string `json:"fadeInDuration,omitempty" tf:"fade_in_duration,omitempty"`
+
+	// The duration over which the overlay fades out of the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade out (same as PT0S).
+	FadeOutDuration *string `json:"fadeOutDuration,omitempty" tf:"fade_out_duration,omitempty"`
+
+	// The label of the job input which is to be used as an overlay. The input must specify exact one file. You can specify an image file in JPG, PNG, GIF or BMP format, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file.
+	InputLabel *string `json:"inputLabel,omitempty" tf:"input_label,omitempty"`
+
+	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+}
+
+type AudioParameters struct {
+
+	// The gain level of audio in the overlay. The value should be in range between 0 to 1.0. The default is 1.0.
+	// +kubebuilder:validation:Optional
+	AudioGainLevel *float64 `json:"audioGainLevel,omitempty" tf:"audio_gain_level,omitempty"`
+
+	// The end position, with reference to the input video, at which the overlay ends. The value should be in ISO 8601 format. For example, PT30S to end the overlay at 30 seconds into the input video. If not specified or the value is greater than the input video duration, the overlay will be applied until the end of the input video if the overlay media duration is greater than the input video duration, else the overlay will last as long as the overlay media duration.
+	// +kubebuilder:validation:Optional
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// The duration over which the overlay fades in onto the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade in (same as PT0S).
+	// +kubebuilder:validation:Optional
+	FadeInDuration *string `json:"fadeInDuration,omitempty" tf:"fade_in_duration,omitempty"`
+
+	// The duration over which the overlay fades out of the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade out (same as PT0S).
+	// +kubebuilder:validation:Optional
+	FadeOutDuration *string `json:"fadeOutDuration,omitempty" tf:"fade_out_duration,omitempty"`
+
+	// The label of the job input which is to be used as an overlay. The input must specify exact one file. You can specify an image file in JPG, PNG, GIF or BMP format, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file.
+	// +kubebuilder:validation:Required
+	InputLabel *string `json:"inputLabel" tf:"input_label,omitempty"`
+
+	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
+	// +kubebuilder:validation:Optional
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 type BuiltinPresetObservation struct {
 
-	// The built-in preset to be used for encoding videos. The Possible values are AACGoodQualityAudio, AdaptiveStreaming, ContentAwareEncoding, ContentAwareEncodingExperimental, CopyAllBitrateNonInterleaved, H265AdaptiveStreaming, H265ContentAwareEncoding, H265SingleBitrate4K, H265SingleBitrate1080p, H265SingleBitrate720p, H264MultipleBitrate1080p, H264MultipleBitrateSD, H264MultipleBitrate720p, H264SingleBitrate1080p, H264SingleBitrateSD and H264SingleBitrate720p.
+	// A present_configuration block as defined below.
+	PresetConfiguration []PresetConfigurationObservation `json:"presetConfiguration,omitempty" tf:"preset_configuration,omitempty"`
+
+	// The built-in preset to be used for encoding videos. The Possible values are AACGoodQualityAudio, AdaptiveStreaming, ContentAwareEncoding, ContentAwareEncodingExperimental, CopyAllBitrateNonInterleaved, DDGoodQualityAudio, H265AdaptiveStreaming, H265ContentAwareEncoding, H265SingleBitrate4K, H265SingleBitrate1080p, H265SingleBitrate720p, H264MultipleBitrate1080p, H264MultipleBitrateSD, H264MultipleBitrate720p, H264SingleBitrate1080p, H264SingleBitrateSD and H264SingleBitrate720p.
 	PresetName *string `json:"presetName,omitempty" tf:"preset_name,omitempty"`
 }
 
 type BuiltinPresetParameters struct {
 
-	// The built-in preset to be used for encoding videos. The Possible values are AACGoodQualityAudio, AdaptiveStreaming, ContentAwareEncoding, ContentAwareEncodingExperimental, CopyAllBitrateNonInterleaved, H265AdaptiveStreaming, H265ContentAwareEncoding, H265SingleBitrate4K, H265SingleBitrate1080p, H265SingleBitrate720p, H264MultipleBitrate1080p, H264MultipleBitrateSD, H264MultipleBitrate720p, H264SingleBitrate1080p, H264SingleBitrateSD and H264SingleBitrate720p.
+	// A present_configuration block as defined below.
+	// +kubebuilder:validation:Optional
+	PresetConfiguration []PresetConfigurationParameters `json:"presetConfiguration,omitempty" tf:"preset_configuration,omitempty"`
+
+	// The built-in preset to be used for encoding videos. The Possible values are AACGoodQualityAudio, AdaptiveStreaming, ContentAwareEncoding, ContentAwareEncodingExperimental, CopyAllBitrateNonInterleaved, DDGoodQualityAudio, H265AdaptiveStreaming, H265ContentAwareEncoding, H265SingleBitrate4K, H265SingleBitrate1080p, H265SingleBitrate720p, H264MultipleBitrate1080p, H264MultipleBitrateSD, H264MultipleBitrate720p, H264SingleBitrate1080p, H264SingleBitrateSD and H264SingleBitrate720p.
 	// +kubebuilder:validation:Required
 	PresetName *string `json:"presetName" tf:"preset_name,omitempty"`
 }
 
+type CodecObservation struct {
+
+	// A aac_audio block as defined above.
+	AacAudio []AacAudioObservation `json:"aacAudio,omitempty" tf:"aac_audio,omitempty"`
+
+	// A copy_audio block as defined below.
+	CopyAudio []CopyAudioObservation `json:"copyAudio,omitempty" tf:"copy_audio,omitempty"`
+
+	// A copy_video block as defined below.
+	CopyVideo []CopyVideoObservation `json:"copyVideo,omitempty" tf:"copy_video,omitempty"`
+
+	// A dd_audio block as defined below.
+	DdAudio []DdAudioObservation `json:"ddAudio,omitempty" tf:"dd_audio,omitempty"`
+
+	// A h264_video block as defined below.
+	H264Video []H264VideoObservation `json:"h264Video,omitempty" tf:"h264_video,omitempty"`
+
+	// A h265_video block as defined below.
+	H265Video []H265VideoObservation `json:"h265Video,omitempty" tf:"h265_video,omitempty"`
+}
+
+type CodecParameters struct {
+
+	// A aac_audio block as defined above.
+	// +kubebuilder:validation:Optional
+	AacAudio []AacAudioParameters `json:"aacAudio,omitempty" tf:"aac_audio,omitempty"`
+
+	// A copy_audio block as defined below.
+	// +kubebuilder:validation:Optional
+	CopyAudio []CopyAudioParameters `json:"copyAudio,omitempty" tf:"copy_audio,omitempty"`
+
+	// A copy_video block as defined below.
+	// +kubebuilder:validation:Optional
+	CopyVideo []CopyVideoParameters `json:"copyVideo,omitempty" tf:"copy_video,omitempty"`
+
+	// A dd_audio block as defined below.
+	// +kubebuilder:validation:Optional
+	DdAudio []DdAudioParameters `json:"ddAudio,omitempty" tf:"dd_audio,omitempty"`
+
+	// A h264_video block as defined below.
+	// +kubebuilder:validation:Optional
+	H264Video []H264VideoParameters `json:"h264Video,omitempty" tf:"h264_video,omitempty"`
+
+	// A h265_video block as defined below.
+	// +kubebuilder:validation:Optional
+	H265Video []H265VideoParameters `json:"h265Video,omitempty" tf:"h265_video,omitempty"`
+}
+
+type CopyAudioObservation struct {
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+}
+
+type CopyAudioParameters struct {
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+}
+
+type CopyVideoObservation struct {
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+}
+
+type CopyVideoParameters struct {
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+}
+
+type CropRectangleObservation struct {
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// The number of pixels from the left-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Left *string `json:"left,omitempty" tf:"left,omitempty"`
+
+	// The number of pixels from the top-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Top *string `json:"top,omitempty" tf:"top,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type CropRectangleParameters struct {
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// The number of pixels from the left-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Left *string `json:"left,omitempty" tf:"left,omitempty"`
+
+	// The number of pixels from the top-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Top *string `json:"top,omitempty" tf:"top,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type CustomPresetObservation struct {
+
+	// One or more codec blocks as defined above.
+	Codec []CodecObservation `json:"codec,omitempty" tf:"codec,omitempty"`
+
+	// A filter block as defined below.
+	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// One or more format blocks as defined below.
+	Format []FormatObservation `json:"format,omitempty" tf:"format,omitempty"`
+}
+
+type CustomPresetParameters struct {
+
+	// One or more codec blocks as defined above.
+	// +kubebuilder:validation:Required
+	Codec []CodecParameters `json:"codec" tf:"codec,omitempty"`
+
+	// A filter block as defined below.
+	// +kubebuilder:validation:Optional
+	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// One or more format blocks as defined below.
+	// +kubebuilder:validation:Required
+	Format []FormatParameters `json:"format" tf:"format,omitempty"`
+}
+
+type DdAudioObservation struct {
+
+	// The average bitrate in bits per second at which to encode the input video when generating this layer.
+	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+
+	// The number of audio channels. Default to 2.
+	Channels *float64 `json:"channels,omitempty" tf:"channels,omitempty"`
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The sampling rate to use for encoding in Hertz. Default to 48000.
+	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
+}
+
+type DdAudioParameters struct {
+
+	// The average bitrate in bits per second at which to encode the input video when generating this layer.
+	// +kubebuilder:validation:Optional
+	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+
+	// The number of audio channels. Default to 2.
+	// +kubebuilder:validation:Optional
+	Channels *float64 `json:"channels,omitempty" tf:"channels,omitempty"`
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The sampling rate to use for encoding in Hertz. Default to 48000.
+	// +kubebuilder:validation:Optional
+	SamplingRate *float64 `json:"samplingRate,omitempty" tf:"sampling_rate,omitempty"`
+}
+
+type DeinterlaceObservation struct {
+
+	// The deinterlacing mode. Possible values are AutoPixelAdaptive or Off. Default to AutoPixelAdaptive.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The field parity to use for deinterlacing. Possible values are Auto, TopFieldFirst or BottomFieldFirst. Default to Auto.
+	Parity *string `json:"parity,omitempty" tf:"parity,omitempty"`
+}
+
+type DeinterlaceParameters struct {
+
+	// The deinterlacing mode. Possible values are AutoPixelAdaptive or Off. Default to AutoPixelAdaptive.
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The field parity to use for deinterlacing. Possible values are Auto, TopFieldFirst or BottomFieldFirst. Default to Auto.
+	// +kubebuilder:validation:Optional
+	Parity *string `json:"parity,omitempty" tf:"parity,omitempty"`
+}
+
 type FaceDetectorPresetObservation struct {
 
-	// Possibles value are SourceResolution or StandardDefinition. Specifies the maximum resolution at which your video is analyzed. The default behavior is SourceResolution which will keep the input video at its original resolution when analyzed. Using StandardDefinition will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to StandardDefinition will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected.
+	// Possible values are SourceResolution or StandardDefinition. Specifies the maximum resolution at which your video is analyzed. which will keep the input video at its original resolution when analyzed. Using StandardDefinition will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to StandardDefinition will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected. Default to SourceResolution.
 	AnalysisResolution *string `json:"analysisResolution,omitempty" tf:"analysis_resolution,omitempty"`
+
+	// Specifies the type of blur to apply to faces in the output video. Possible values are Black, Box, High, Low,and Med.
+	BlurType *string `json:"blurType,omitempty" tf:"blur_type,omitempty"`
+
+	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
+
+	// This mode provides the ability to choose between the following settings: 1) Analyze - For detection only. This mode generates a metadata JSON file marking appearances of faces throughout the video. Where possible, appearances of the same person are assigned the same ID. 2) Combined - Additionally redacts(blurs) detected faces. 3) Redact - This enables a 2-pass process, allowing for selective redaction of a subset of detected faces. It takes in the metadata file from a prior analyze pass, along with the source video, and a user-selected subset of IDs that require redaction. Default to Analyze.
+	FaceRedactorMode *string `json:"faceRedactorMode,omitempty" tf:"face_redactor_mode,omitempty"`
 }
 
 type FaceDetectorPresetParameters struct {
 
-	// Possibles value are SourceResolution or StandardDefinition. Specifies the maximum resolution at which your video is analyzed. The default behavior is SourceResolution which will keep the input video at its original resolution when analyzed. Using StandardDefinition will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to StandardDefinition will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected.
+	// Possible values are SourceResolution or StandardDefinition. Specifies the maximum resolution at which your video is analyzed. which will keep the input video at its original resolution when analyzed. Using StandardDefinition will resize input videos to standard definition while preserving the appropriate aspect ratio. It will only resize if the video is of higher resolution. For example, a 1920x1080 input would be scaled to 640x360 before processing. Switching to StandardDefinition will reduce the time it takes to process high resolution video. It may also reduce the cost of using this component (see https://azure.microsoft.com/en-us/pricing/details/media-services/#analytics for details). However, faces that end up being too small in the resized video may not be detected. Default to SourceResolution.
 	// +kubebuilder:validation:Optional
 	AnalysisResolution *string `json:"analysisResolution,omitempty" tf:"analysis_resolution,omitempty"`
+
+	// Specifies the type of blur to apply to faces in the output video. Possible values are Black, Box, High, Low,and Med.
+	// +kubebuilder:validation:Optional
+	BlurType *string `json:"blurType,omitempty" tf:"blur_type,omitempty"`
+
+	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	// +kubebuilder:validation:Optional
+	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
+
+	// This mode provides the ability to choose between the following settings: 1) Analyze - For detection only. This mode generates a metadata JSON file marking appearances of faces throughout the video. Where possible, appearances of the same person are assigned the same ID. 2) Combined - Additionally redacts(blurs) detected faces. 3) Redact - This enables a 2-pass process, allowing for selective redaction of a subset of detected faces. It takes in the metadata file from a prior analyze pass, along with the source video, and a user-selected subset of IDs that require redaction. Default to Analyze.
+	// +kubebuilder:validation:Optional
+	FaceRedactorMode *string `json:"faceRedactorMode,omitempty" tf:"face_redactor_mode,omitempty"`
+}
+
+type FadeInObservation struct {
+
+	// The duration of the fade effect in the video. The value can be in ISO 8601 format (For example, PT05S to fade In/Out a color during 5 seconds), or a frame count (For example, 10 to fade 10 frames from the start time), or a relative value to stream duration (For example, 10% to fade 10% of stream duration).
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// The color for the fade in/out. It can be on the CSS Level1 colors or an RGB/hex value: e.g: rgb(255,0,0), 0xFF0000 or #FF0000.
+	FadeColor *string `json:"fadeColor,omitempty" tf:"fade_color,omitempty"`
+
+	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+}
+
+type FadeInParameters struct {
+
+	// The duration of the fade effect in the video. The value can be in ISO 8601 format (For example, PT05S to fade In/Out a color during 5 seconds), or a frame count (For example, 10 to fade 10 frames from the start time), or a relative value to stream duration (For example, 10% to fade 10% of stream duration).
+	// +kubebuilder:validation:Required
+	Duration *string `json:"duration" tf:"duration,omitempty"`
+
+	// The color for the fade in/out. It can be on the CSS Level1 colors or an RGB/hex value: e.g: rgb(255,0,0), 0xFF0000 or #FF0000.
+	// +kubebuilder:validation:Required
+	FadeColor *string `json:"fadeColor" tf:"fade_color,omitempty"`
+
+	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
+	// +kubebuilder:validation:Optional
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+}
+
+type FadeOutObservation struct {
+
+	// The duration of the fade effect in the video. The value can be in ISO 8601 format (For example, PT05S to fade In/Out a color during 5 seconds), or a frame count (For example, 10 to fade 10 frames from the start time), or a relative value to stream duration (For example, 10% to fade 10% of stream duration).
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// The color for the fade in/out. It can be on the CSS Level1 colors or an RGB/hex value: e.g: rgb(255,0,0), 0xFF0000 or #FF0000.
+	FadeColor *string `json:"fadeColor,omitempty" tf:"fade_color,omitempty"`
+
+	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+}
+
+type FadeOutParameters struct {
+
+	// The duration of the fade effect in the video. The value can be in ISO 8601 format (For example, PT05S to fade In/Out a color during 5 seconds), or a frame count (For example, 10 to fade 10 frames from the start time), or a relative value to stream duration (For example, 10% to fade 10% of stream duration).
+	// +kubebuilder:validation:Required
+	Duration *string `json:"duration" tf:"duration,omitempty"`
+
+	// The color for the fade in/out. It can be on the CSS Level1 colors or an RGB/hex value: e.g: rgb(255,0,0), 0xFF0000 or #FF0000.
+	// +kubebuilder:validation:Required
+	FadeColor *string `json:"fadeColor" tf:"fade_color,omitempty"`
+
+	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
+	// +kubebuilder:validation:Optional
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+}
+
+type FilterObservation struct {
+
+	// A crop_rectangle block as defined above.
+	CropRectangle []CropRectangleObservation `json:"cropRectangle,omitempty" tf:"crop_rectangle,omitempty"`
+
+	// A deinterlace block as defined below.
+	Deinterlace []DeinterlaceObservation `json:"deinterlace,omitempty" tf:"deinterlace,omitempty"`
+
+	// A fade_in block as defined above.
+	FadeIn []FadeInObservation `json:"fadeIn,omitempty" tf:"fade_in,omitempty"`
+
+	// A fade_out block as defined above.
+	FadeOut []FadeOutObservation `json:"fadeOut,omitempty" tf:"fade_out,omitempty"`
+
+	// One or more overlay blocks as defined below.
+	Overlay []OverlayObservation `json:"overlay,omitempty" tf:"overlay,omitempty"`
+
+	// The rotation to be applied to the input video before it is encoded. Possible values are Auto, None, Rotate90, Rotate180, Rotate270,or Rotate0. Default to Auto.
+	Rotation *string `json:"rotation,omitempty" tf:"rotation,omitempty"`
+}
+
+type FilterParameters struct {
+
+	// A crop_rectangle block as defined above.
+	// +kubebuilder:validation:Optional
+	CropRectangle []CropRectangleParameters `json:"cropRectangle,omitempty" tf:"crop_rectangle,omitempty"`
+
+	// A deinterlace block as defined below.
+	// +kubebuilder:validation:Optional
+	Deinterlace []DeinterlaceParameters `json:"deinterlace,omitempty" tf:"deinterlace,omitempty"`
+
+	// A fade_in block as defined above.
+	// +kubebuilder:validation:Optional
+	FadeIn []FadeInParameters `json:"fadeIn,omitempty" tf:"fade_in,omitempty"`
+
+	// A fade_out block as defined above.
+	// +kubebuilder:validation:Optional
+	FadeOut []FadeOutParameters `json:"fadeOut,omitempty" tf:"fade_out,omitempty"`
+
+	// One or more overlay blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Overlay []OverlayParameters `json:"overlay,omitempty" tf:"overlay,omitempty"`
+
+	// The rotation to be applied to the input video before it is encoded. Possible values are Auto, None, Rotate90, Rotate180, Rotate270,or Rotate0. Default to Auto.
+	// +kubebuilder:validation:Optional
+	Rotation *string `json:"rotation,omitempty" tf:"rotation,omitempty"`
+}
+
+type FormatObservation struct {
+
+	// A mp4 block as defined below.
+	Mp4 []Mp4Observation `json:"mp4,omitempty" tf:"mp4,omitempty"`
+
+	// A transport_stream block as defined below.
+	TransportStream []TransportStreamObservation `json:"transportStream,omitempty" tf:"transport_stream,omitempty"`
+}
+
+type FormatParameters struct {
+
+	// A mp4 block as defined below.
+	// +kubebuilder:validation:Optional
+	Mp4 []Mp4Parameters `json:"mp4,omitempty" tf:"mp4,omitempty"`
+
+	// A transport_stream block as defined below.
+	// +kubebuilder:validation:Optional
+	TransportStream []TransportStreamParameters `json:"transportStream,omitempty" tf:"transport_stream,omitempty"`
+}
+
+type H264VideoObservation struct {
+
+	// The complexity of the encoding. Possible values are Balanced, Speed or Quality.
+	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
+
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// One or more layer blocks as defined below.
+	Layer []LayerObservation `json:"layer,omitempty" tf:"layer,omitempty"`
+
+	// The rate control mode. Possible values are ABR, CBR or CRF. Default to ABR.
+	RateControlMode *string `json:"rateControlMode,omitempty" tf:"rate_control_mode,omitempty"`
+
+	// Whether the encoder should insert key frames at scene changes. This flag should be set to true only when the encoder is being configured to produce a single output video. Default to false.
+	SceneChangeDetectionEnabled *bool `json:"sceneChangeDetectionEnabled,omitempty" tf:"scene_change_detection_enabled,omitempty"`
+
+	// Specifies the resizing mode - how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
+	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
+
+	// Specifies the synchronization mode for the video. Possible values are Auto, Cfr, Passthrough or Vfr. Default to Auto.
+	SyncMode *string `json:"syncMode,omitempty" tf:"sync_mode,omitempty"`
+}
+
+type H264VideoParameters struct {
+
+	// The complexity of the encoding. Possible values are Balanced, Speed or Quality.
+	// +kubebuilder:validation:Optional
+	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
+
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// +kubebuilder:validation:Optional
+	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// One or more layer blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Layer []LayerParameters `json:"layer,omitempty" tf:"layer,omitempty"`
+
+	// The rate control mode. Possible values are ABR, CBR or CRF. Default to ABR.
+	// +kubebuilder:validation:Optional
+	RateControlMode *string `json:"rateControlMode,omitempty" tf:"rate_control_mode,omitempty"`
+
+	// Whether the encoder should insert key frames at scene changes. This flag should be set to true only when the encoder is being configured to produce a single output video. Default to false.
+	// +kubebuilder:validation:Optional
+	SceneChangeDetectionEnabled *bool `json:"sceneChangeDetectionEnabled,omitempty" tf:"scene_change_detection_enabled,omitempty"`
+
+	// Specifies the resizing mode - how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
+	// +kubebuilder:validation:Optional
+	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
+
+	// Specifies the synchronization mode for the video. Possible values are Auto, Cfr, Passthrough or Vfr. Default to Auto.
+	// +kubebuilder:validation:Optional
+	SyncMode *string `json:"syncMode,omitempty" tf:"sync_mode,omitempty"`
+}
+
+type H265VideoLayerObservation struct {
+
+	// Whether adaptive B-frames are used when encoding this layer. If not specified, the encoder will turn it on whenever the video profile permits its use. Default to true.
+	AdaptiveBFrameEnabled *bool `json:"adaptiveBFrameEnabled,omitempty" tf:"adaptive_b_frame_enabled,omitempty"`
+
+	// The number of B-frames to use when encoding this layer. If not specified, the encoder chooses an appropriate number based on the video profile and level.
+	BFrames *float64 `json:"bFrames,omitempty" tf:"b_frames,omitempty"`
+
+	// The average bitrate in bits per second at which to encode the input video when generating this layer.
+	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+
+	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. The default is 5 seconds (PT5S).
+	BufferWindow *string `json:"bufferWindow,omitempty" tf:"buffer_window,omitempty"`
+
+	// The value of CRF to be used when encoding this layer. This setting takes effect when rate_control_mode is set CRF. The range of CRF value is between 0 and 51, where lower values would result in better quality, at the expense of higher file sizes. Higher values mean more compression, but at some point quality degradation will be noticed. Default to 23.
+	Crf *float64 `json:"crf,omitempty" tf:"crf,omitempty"`
+
+	// The frame rate (in frames per second) at which to encode this layer. The value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame rates based on the profile and level. If it is not specified, the encoder will use the same frame rate as the input video.
+	FrameRate *string `json:"frameRate,omitempty" tf:"frame_rate,omitempty"`
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The H.264 levels. Currently, the resource support Level up to 6.2. The value can be auto, or a number that matches the H.264 profile. If not specified, the default is auto, which lets the encoder choose the Level that is appropriate for this layer.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// The maximum bitrate (in bits per second), at which the VBV buffer should be assumed to refill. If not specified, defaults to the same value as bitrate.
+	MaxBitrate *float64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
+
+	// The H.264 profile. Possible values are Auto, Baseline, High, High422, High444,or Main. Default to Auto.
+	Profile *string `json:"profile,omitempty" tf:"profile,omitempty"`
+
+	// The number of reference frames to be used when encoding this layer. If not specified, the encoder determines an appropriate number based on the encoder complexity setting.
+	ReferenceFrames *float64 `json:"referenceFrames,omitempty" tf:"reference_frames,omitempty"`
+
+	// The number of slices to be used when encoding this layer. If not specified, default is 1, which means that encoder will use a single slice for each frame.
+	Slices *float64 `json:"slices,omitempty" tf:"slices,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type H265VideoLayerParameters struct {
+
+	// Whether adaptive B-frames are used when encoding this layer. If not specified, the encoder will turn it on whenever the video profile permits its use. Default to true.
+	// +kubebuilder:validation:Optional
+	AdaptiveBFrameEnabled *bool `json:"adaptiveBFrameEnabled,omitempty" tf:"adaptive_b_frame_enabled,omitempty"`
+
+	// The number of B-frames to use when encoding this layer. If not specified, the encoder chooses an appropriate number based on the video profile and level.
+	// +kubebuilder:validation:Optional
+	BFrames *float64 `json:"bFrames,omitempty" tf:"b_frames,omitempty"`
+
+	// The average bitrate in bits per second at which to encode the input video when generating this layer.
+	// +kubebuilder:validation:Required
+	Bitrate *float64 `json:"bitrate" tf:"bitrate,omitempty"`
+
+	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. The default is 5 seconds (PT5S).
+	// +kubebuilder:validation:Optional
+	BufferWindow *string `json:"bufferWindow,omitempty" tf:"buffer_window,omitempty"`
+
+	// The value of CRF to be used when encoding this layer. This setting takes effect when rate_control_mode is set CRF. The range of CRF value is between 0 and 51, where lower values would result in better quality, at the expense of higher file sizes. Higher values mean more compression, but at some point quality degradation will be noticed. Default to 23.
+	// +kubebuilder:validation:Optional
+	Crf *float64 `json:"crf,omitempty" tf:"crf,omitempty"`
+
+	// The frame rate (in frames per second) at which to encode this layer. The value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame rates based on the profile and level. If it is not specified, the encoder will use the same frame rate as the input video.
+	// +kubebuilder:validation:Optional
+	FrameRate *string `json:"frameRate,omitempty" tf:"frame_rate,omitempty"`
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The H.264 levels. Currently, the resource support Level up to 6.2. The value can be auto, or a number that matches the H.264 profile. If not specified, the default is auto, which lets the encoder choose the Level that is appropriate for this layer.
+	// +kubebuilder:validation:Optional
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// The maximum bitrate (in bits per second), at which the VBV buffer should be assumed to refill. If not specified, defaults to the same value as bitrate.
+	// +kubebuilder:validation:Optional
+	MaxBitrate *float64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
+
+	// The H.264 profile. Possible values are Auto, Baseline, High, High422, High444,or Main. Default to Auto.
+	// +kubebuilder:validation:Optional
+	Profile *string `json:"profile,omitempty" tf:"profile,omitempty"`
+
+	// The number of reference frames to be used when encoding this layer. If not specified, the encoder determines an appropriate number based on the encoder complexity setting.
+	// +kubebuilder:validation:Optional
+	ReferenceFrames *float64 `json:"referenceFrames,omitempty" tf:"reference_frames,omitempty"`
+
+	// The number of slices to be used when encoding this layer. If not specified, default is 1, which means that encoder will use a single slice for each frame.
+	// +kubebuilder:validation:Optional
+	Slices *float64 `json:"slices,omitempty" tf:"slices,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type H265VideoObservation struct {
+
+	// The complexity of the encoding. Possible values are Balanced, Speed or Quality.
+	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
+
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// One or more layer blocks as defined below.
+	Layer []H265VideoLayerObservation `json:"layer,omitempty" tf:"layer,omitempty"`
+
+	// Whether the encoder should insert key frames at scene changes. This flag should be set to true only when the encoder is being configured to produce a single output video. Default to false.
+	SceneChangeDetectionEnabled *bool `json:"sceneChangeDetectionEnabled,omitempty" tf:"scene_change_detection_enabled,omitempty"`
+
+	// Specifies the resizing mode - how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
+	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
+
+	// Specifies the synchronization mode for the video. Possible values are Auto, Cfr, Passthrough or Vfr. Default to Auto.
+	SyncMode *string `json:"syncMode,omitempty" tf:"sync_mode,omitempty"`
+}
+
+type H265VideoParameters struct {
+
+	// The complexity of the encoding. Possible values are Balanced, Speed or Quality.
+	// +kubebuilder:validation:Optional
+	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
+
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// +kubebuilder:validation:Optional
+	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// One or more layer blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Layer []H265VideoLayerParameters `json:"layer,omitempty" tf:"layer,omitempty"`
+
+	// Whether the encoder should insert key frames at scene changes. This flag should be set to true only when the encoder is being configured to produce a single output video. Default to false.
+	// +kubebuilder:validation:Optional
+	SceneChangeDetectionEnabled *bool `json:"sceneChangeDetectionEnabled,omitempty" tf:"scene_change_detection_enabled,omitempty"`
+
+	// Specifies the resizing mode - how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
+	// +kubebuilder:validation:Optional
+	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
+
+	// Specifies the synchronization mode for the video. Possible values are Auto, Cfr, Passthrough or Vfr. Default to Auto.
+	// +kubebuilder:validation:Optional
+	SyncMode *string `json:"syncMode,omitempty" tf:"sync_mode,omitempty"`
+}
+
+type LayerObservation struct {
+
+	// Whether adaptive B-frames are used when encoding this layer. If not specified, the encoder will turn it on whenever the video profile permits its use. Default to true.
+	AdaptiveBFrameEnabled *bool `json:"adaptiveBFrameEnabled,omitempty" tf:"adaptive_b_frame_enabled,omitempty"`
+
+	// The number of B-frames to use when encoding this layer. If not specified, the encoder chooses an appropriate number based on the video profile and level.
+	BFrames *float64 `json:"bFrames,omitempty" tf:"b_frames,omitempty"`
+
+	// The average bitrate in bits per second at which to encode the input video when generating this layer.
+	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+
+	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. The default is 5 seconds (PT5S).
+	BufferWindow *string `json:"bufferWindow,omitempty" tf:"buffer_window,omitempty"`
+
+	// The value of CRF to be used when encoding this layer. This setting takes effect when rate_control_mode is set CRF. The range of CRF value is between 0 and 51, where lower values would result in better quality, at the expense of higher file sizes. Higher values mean more compression, but at some point quality degradation will be noticed. Default to 23.
+	Crf *float64 `json:"crf,omitempty" tf:"crf,omitempty"`
+
+	// The entropy mode to be used for this layer. Possible values are Cabac or Cavlc. If not specified, the encoder chooses the mode that is appropriate for the profile and level.
+	EntropyMode *string `json:"entropyMode,omitempty" tf:"entropy_mode,omitempty"`
+
+	// The frame rate (in frames per second) at which to encode this layer. The value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame rates based on the profile and level. If it is not specified, the encoder will use the same frame rate as the input video.
+	FrameRate *string `json:"frameRate,omitempty" tf:"frame_rate,omitempty"`
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The H.264 levels. Currently, the resource support Level up to 6.2. The value can be auto, or a number that matches the H.264 profile. If not specified, the default is auto, which lets the encoder choose the Level that is appropriate for this layer.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// The maximum bitrate (in bits per second), at which the VBV buffer should be assumed to refill. If not specified, defaults to the same value as bitrate.
+	MaxBitrate *float64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
+
+	// The H.264 profile. Possible values are Auto, Baseline, High, High422, High444,or Main. Default to Auto.
+	Profile *string `json:"profile,omitempty" tf:"profile,omitempty"`
+
+	// The number of reference frames to be used when encoding this layer. If not specified, the encoder determines an appropriate number based on the encoder complexity setting.
+	ReferenceFrames *float64 `json:"referenceFrames,omitempty" tf:"reference_frames,omitempty"`
+
+	// The number of slices to be used when encoding this layer. If not specified, default is 1, which means that encoder will use a single slice for each frame.
+	Slices *float64 `json:"slices,omitempty" tf:"slices,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type LayerParameters struct {
+
+	// Whether adaptive B-frames are used when encoding this layer. If not specified, the encoder will turn it on whenever the video profile permits its use. Default to true.
+	// +kubebuilder:validation:Optional
+	AdaptiveBFrameEnabled *bool `json:"adaptiveBFrameEnabled,omitempty" tf:"adaptive_b_frame_enabled,omitempty"`
+
+	// The number of B-frames to use when encoding this layer. If not specified, the encoder chooses an appropriate number based on the video profile and level.
+	// +kubebuilder:validation:Optional
+	BFrames *float64 `json:"bFrames,omitempty" tf:"b_frames,omitempty"`
+
+	// The average bitrate in bits per second at which to encode the input video when generating this layer.
+	// +kubebuilder:validation:Required
+	Bitrate *float64 `json:"bitrate" tf:"bitrate,omitempty"`
+
+	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. The default is 5 seconds (PT5S).
+	// +kubebuilder:validation:Optional
+	BufferWindow *string `json:"bufferWindow,omitempty" tf:"buffer_window,omitempty"`
+
+	// The value of CRF to be used when encoding this layer. This setting takes effect when rate_control_mode is set CRF. The range of CRF value is between 0 and 51, where lower values would result in better quality, at the expense of higher file sizes. Higher values mean more compression, but at some point quality degradation will be noticed. Default to 23.
+	// +kubebuilder:validation:Optional
+	Crf *float64 `json:"crf,omitempty" tf:"crf,omitempty"`
+
+	// The entropy mode to be used for this layer. Possible values are Cabac or Cavlc. If not specified, the encoder chooses the mode that is appropriate for the profile and level.
+	// +kubebuilder:validation:Optional
+	EntropyMode *string `json:"entropyMode,omitempty" tf:"entropy_mode,omitempty"`
+
+	// The frame rate (in frames per second) at which to encode this layer. The value can be in the form of M/N where M and N are integers (For example, 30000/1001), or in the form of a number (For example, 30, or 29.97). The encoder enforces constraints on allowed frame rates based on the profile and level. If it is not specified, the encoder will use the same frame rate as the input video.
+	// +kubebuilder:validation:Optional
+	FrameRate *string `json:"frameRate,omitempty" tf:"frame_rate,omitempty"`
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The H.264 levels. Currently, the resource support Level up to 6.2. The value can be auto, or a number that matches the H.264 profile. If not specified, the default is auto, which lets the encoder choose the Level that is appropriate for this layer.
+	// +kubebuilder:validation:Optional
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// The maximum bitrate (in bits per second), at which the VBV buffer should be assumed to refill. If not specified, defaults to the same value as bitrate.
+	// +kubebuilder:validation:Optional
+	MaxBitrate *float64 `json:"maxBitrate,omitempty" tf:"max_bitrate,omitempty"`
+
+	// The H.264 profile. Possible values are Auto, Baseline, High, High422, High444,or Main. Default to Auto.
+	// +kubebuilder:validation:Optional
+	Profile *string `json:"profile,omitempty" tf:"profile,omitempty"`
+
+	// The number of reference frames to be used when encoding this layer. If not specified, the encoder determines an appropriate number based on the encoder complexity setting.
+	// +kubebuilder:validation:Optional
+	ReferenceFrames *float64 `json:"referenceFrames,omitempty" tf:"reference_frames,omitempty"`
+
+	// The number of slices to be used when encoding this layer. If not specified, default is 1, which means that encoder will use a single slice for each frame.
+	// +kubebuilder:validation:Optional
+	Slices *float64 `json:"slices,omitempty" tf:"slices,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type Mp4Observation struct {
+
+	// The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename.
+	FilenamePattern *string `json:"filenamePattern,omitempty" tf:"filename_pattern,omitempty"`
+
+	// One or more output_file blocks as defined above.
+	OutputFile []OutputFileObservation `json:"outputFile,omitempty" tf:"output_file,omitempty"`
+}
+
+type Mp4Parameters struct {
+
+	// The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename.
+	// +kubebuilder:validation:Required
+	FilenamePattern *string `json:"filenamePattern" tf:"filename_pattern,omitempty"`
+
+	// One or more output_file blocks as defined above.
+	// +kubebuilder:validation:Optional
+	OutputFile []OutputFileParameters `json:"outputFile,omitempty" tf:"output_file,omitempty"`
+}
+
+type OutputFileObservation struct {
+
+	// The list of labels that describe how the encoder should multiplex video and audio into an output file. For example, if the encoder is producing two video layers with labels v1 and v2, and one audio layer with label a1, then an array like ["v1", "a1"] tells the encoder to produce an output file with the video track represented by v1 and the audio track represented by a1.
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+}
+
+type OutputFileParameters struct {
+
+	// The list of labels that describe how the encoder should multiplex video and audio into an output file. For example, if the encoder is producing two video layers with labels v1 and v2, and one audio layer with label a1, then an array like ["v1", "a1"] tells the encoder to produce an output file with the video track represented by v1 and the audio track represented by a1.
+	// +kubebuilder:validation:Required
+	Labels []*string `json:"labels" tf:"labels,omitempty"`
 }
 
 type OutputObservation struct {
 
-	// A audio_analyzer_preset block as defined below.
+	// An audio_analyzer_preset block as defined above.
 	AudioAnalyzerPreset []AudioAnalyzerPresetObservation `json:"audioAnalyzerPreset,omitempty" tf:"audio_analyzer_preset,omitempty"`
 
-	// A builtin_preset block as defined below.
+	// A builtin_preset block as defined above.
 	BuiltinPreset []BuiltinPresetObservation `json:"builtinPreset,omitempty" tf:"builtin_preset,omitempty"`
 
-	// A face_detector_preset block as defined below.
+	// A custom_preset block as defined above.
+	CustomPreset []CustomPresetObservation `json:"customPreset,omitempty" tf:"custom_preset,omitempty"`
+
+	// A face_detector_preset block as defined above.
 	FaceDetectorPreset []FaceDetectorPresetObservation `json:"faceDetectorPreset,omitempty" tf:"face_detector_preset,omitempty"`
 
-	// A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The overall Job state will not reflect failures of outputs that are specified with ContinueJob. Possibles value are StopProcessingJob or ContinueJob.
+	// A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The overall Job state will not reflect failures of outputs that are specified with ContinueJob. Possible values are StopProcessingJob or ContinueJob. The default is StopProcessingJob.
 	OnErrorAction *string `json:"onErrorAction,omitempty" tf:"on_error_action,omitempty"`
 
-	// Sets the relative priority of the TransformOutputs within a Transform. This sets the priority that the service uses for processing Transform Outputs. Possibles value are High, Normal or Low.
+	// Sets the relative priority of the TransformOutputs within a Transform. This sets the priority that the service uses for processing Transform Outputs. Possible values are High, Normal or Low. Defaults to Normal.
 	RelativePriority *string `json:"relativePriority,omitempty" tf:"relative_priority,omitempty"`
 
 	// A video_analyzer_preset block as defined below.
@@ -82,29 +885,149 @@ type OutputObservation struct {
 
 type OutputParameters struct {
 
-	// A audio_analyzer_preset block as defined below.
+	// An audio_analyzer_preset block as defined above.
 	// +kubebuilder:validation:Optional
 	AudioAnalyzerPreset []AudioAnalyzerPresetParameters `json:"audioAnalyzerPreset,omitempty" tf:"audio_analyzer_preset,omitempty"`
 
-	// A builtin_preset block as defined below.
+	// A builtin_preset block as defined above.
 	// +kubebuilder:validation:Optional
 	BuiltinPreset []BuiltinPresetParameters `json:"builtinPreset,omitempty" tf:"builtin_preset,omitempty"`
 
-	// A face_detector_preset block as defined below.
+	// A custom_preset block as defined above.
+	// +kubebuilder:validation:Optional
+	CustomPreset []CustomPresetParameters `json:"customPreset,omitempty" tf:"custom_preset,omitempty"`
+
+	// A face_detector_preset block as defined above.
 	// +kubebuilder:validation:Optional
 	FaceDetectorPreset []FaceDetectorPresetParameters `json:"faceDetectorPreset,omitempty" tf:"face_detector_preset,omitempty"`
 
-	// A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The overall Job state will not reflect failures of outputs that are specified with ContinueJob. Possibles value are StopProcessingJob or ContinueJob.
+	// A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The overall Job state will not reflect failures of outputs that are specified with ContinueJob. Possible values are StopProcessingJob or ContinueJob. The default is StopProcessingJob.
 	// +kubebuilder:validation:Optional
 	OnErrorAction *string `json:"onErrorAction,omitempty" tf:"on_error_action,omitempty"`
 
-	// Sets the relative priority of the TransformOutputs within a Transform. This sets the priority that the service uses for processing Transform Outputs. Possibles value are High, Normal or Low.
+	// Sets the relative priority of the TransformOutputs within a Transform. This sets the priority that the service uses for processing Transform Outputs. Possible values are High, Normal or Low. Defaults to Normal.
 	// +kubebuilder:validation:Optional
 	RelativePriority *string `json:"relativePriority,omitempty" tf:"relative_priority,omitempty"`
 
 	// A video_analyzer_preset block as defined below.
 	// +kubebuilder:validation:Optional
 	VideoAnalyzerPreset []VideoAnalyzerPresetParameters `json:"videoAnalyzerPreset,omitempty" tf:"video_analyzer_preset,omitempty"`
+}
+
+type OverlayObservation struct {
+
+	// An audio block as defined above.
+	Audio []AudioObservation `json:"audio,omitempty" tf:"audio,omitempty"`
+
+	// A video block as defined below.
+	Video []VideoObservation `json:"video,omitempty" tf:"video,omitempty"`
+}
+
+type OverlayParameters struct {
+
+	// An audio block as defined above.
+	// +kubebuilder:validation:Optional
+	Audio []AudioParameters `json:"audio,omitempty" tf:"audio,omitempty"`
+
+	// A video block as defined below.
+	// +kubebuilder:validation:Optional
+	Video []VideoParameters `json:"video,omitempty" tf:"video,omitempty"`
+}
+
+type PositionObservation struct {
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// The number of pixels from the left-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Left *string `json:"left,omitempty" tf:"left,omitempty"`
+
+	// The number of pixels from the top-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Top *string `json:"top,omitempty" tf:"top,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type PositionParameters struct {
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// The number of pixels from the left-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Left *string `json:"left,omitempty" tf:"left,omitempty"`
+
+	// The number of pixels from the top-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Top *string `json:"top,omitempty" tf:"top,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type PresetConfigurationObservation struct {
+
+	// The complexity of the encoding. Possible values are Balanced, Speed or Quality.
+	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
+
+	// Specifies the interleave mode of the output to control how audio are stored in the container format. Possible values are InterleavedOutput and NonInterleavedOutput.
+	InterleaveOutput *string `json:"interleaveOutput,omitempty" tf:"interleave_output,omitempty"`
+
+	// The key frame interval in seconds. Possible value is a positive float. For example, set as 2.0 to reduce the playback buffering for some players.
+	KeyFrameIntervalInSeconds *float64 `json:"keyFrameIntervalInSeconds,omitempty" tf:"key_frame_interval_in_seconds,omitempty"`
+
+	// The maximum bitrate in bits per second (threshold for the top video layer). For example, set as 6000000 to avoid producing very high bitrate outputs for contents with high complexity.
+	MaxBitrateBps *float64 `json:"maxBitrateBps,omitempty" tf:"max_bitrate_bps,omitempty"`
+
+	// The maximum height of output video layers. For example, set as 720 to produce output layers up to 720P even if the input is 4K.
+	MaxHeight *float64 `json:"maxHeight,omitempty" tf:"max_height,omitempty"`
+
+	// The maximum number of output video layers. For example, set as 4 to make sure at most 4 output layers are produced to control the overall cost of the encoding job.
+	MaxLayers *float64 `json:"maxLayers,omitempty" tf:"max_layers,omitempty"`
+
+	// The minimum bitrate in bits per second (threshold for the bottom video layer). For example, set as 200000 to have a bottom layer that covers users with low network bandwidth.
+	MinBitrateBps *float64 `json:"minBitrateBps,omitempty" tf:"min_bitrate_bps,omitempty"`
+
+	// The minimum height of output video layers. For example, set as 360 to avoid output layers of smaller resolutions like 180P.
+	MinHeight *float64 `json:"minHeight,omitempty" tf:"min_height,omitempty"`
+}
+
+type PresetConfigurationParameters struct {
+
+	// The complexity of the encoding. Possible values are Balanced, Speed or Quality.
+	// +kubebuilder:validation:Optional
+	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
+
+	// Specifies the interleave mode of the output to control how audio are stored in the container format. Possible values are InterleavedOutput and NonInterleavedOutput.
+	// +kubebuilder:validation:Optional
+	InterleaveOutput *string `json:"interleaveOutput,omitempty" tf:"interleave_output,omitempty"`
+
+	// The key frame interval in seconds. Possible value is a positive float. For example, set as 2.0 to reduce the playback buffering for some players.
+	// +kubebuilder:validation:Optional
+	KeyFrameIntervalInSeconds *float64 `json:"keyFrameIntervalInSeconds,omitempty" tf:"key_frame_interval_in_seconds,omitempty"`
+
+	// The maximum bitrate in bits per second (threshold for the top video layer). For example, set as 6000000 to avoid producing very high bitrate outputs for contents with high complexity.
+	// +kubebuilder:validation:Optional
+	MaxBitrateBps *float64 `json:"maxBitrateBps,omitempty" tf:"max_bitrate_bps,omitempty"`
+
+	// The maximum height of output video layers. For example, set as 720 to produce output layers up to 720P even if the input is 4K.
+	// +kubebuilder:validation:Optional
+	MaxHeight *float64 `json:"maxHeight,omitempty" tf:"max_height,omitempty"`
+
+	// The maximum number of output video layers. For example, set as 4 to make sure at most 4 output layers are produced to control the overall cost of the encoding job.
+	// +kubebuilder:validation:Optional
+	MaxLayers *float64 `json:"maxLayers,omitempty" tf:"max_layers,omitempty"`
+
+	// The minimum bitrate in bits per second (threshold for the bottom video layer). For example, set as 200000 to have a bottom layer that covers users with low network bandwidth.
+	// +kubebuilder:validation:Optional
+	MinBitrateBps *float64 `json:"minBitrateBps,omitempty" tf:"min_bitrate_bps,omitempty"`
+
+	// The minimum height of output video layers. For example, set as 360 to avoid output layers of smaller resolutions like 180P.
+	// +kubebuilder:validation:Optional
+	MinHeight *float64 `json:"minHeight,omitempty" tf:"min_height,omitempty"`
 }
 
 type TransformObservation struct {
@@ -162,31 +1085,174 @@ type TransformParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
+type TransportStreamObservation struct {
+
+	// The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename.
+	FilenamePattern *string `json:"filenamePattern,omitempty" tf:"filename_pattern,omitempty"`
+
+	// One or more output_file blocks as defined above.
+	OutputFile []TransportStreamOutputFileObservation `json:"outputFile,omitempty" tf:"output_file,omitempty"`
+}
+
+type TransportStreamOutputFileObservation struct {
+
+	// The list of labels that describe how the encoder should multiplex video and audio into an output file. For example, if the encoder is producing two video layers with labels v1 and v2, and one audio layer with label a1, then an array like ["v1", "a1"] tells the encoder to produce an output file with the video track represented by v1 and the audio track represented by a1.
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+}
+
+type TransportStreamOutputFileParameters struct {
+
+	// The list of labels that describe how the encoder should multiplex video and audio into an output file. For example, if the encoder is producing two video layers with labels v1 and v2, and one audio layer with label a1, then an array like ["v1", "a1"] tells the encoder to produce an output file with the video track represented by v1 and the audio track represented by a1.
+	// +kubebuilder:validation:Required
+	Labels []*string `json:"labels" tf:"labels,omitempty"`
+}
+
+type TransportStreamParameters struct {
+
+	// The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename.
+	// +kubebuilder:validation:Required
+	FilenamePattern *string `json:"filenamePattern" tf:"filename_pattern,omitempty"`
+
+	// One or more output_file blocks as defined above.
+	// +kubebuilder:validation:Optional
+	OutputFile []TransportStreamOutputFileParameters `json:"outputFile,omitempty" tf:"output_file,omitempty"`
+}
+
 type VideoAnalyzerPresetObservation struct {
 
-	// Possibles value are Basic or Standard. Determines the set of audio analysis operations to be performed.
+	// Possible values are Basic or Standard. Determines the set of audio analysis operations to be performed. Default to Standard.
 	AudioAnalysisMode *string `json:"audioAnalysisMode,omitempty" tf:"audio_analysis_mode,omitempty"`
 
-	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463. Possible values are ar-EG, ar-SY, de-DE, en-AU, en-GB, en-US, es-ES, es-MX, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, ru-RU and zh-CN.
+	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fall back to en-US. The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.
 	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
 
-	// Defines the type of insights that you want the service to generate. The allowed values are AudioInsightsOnly, VideoInsightsOnly, and AllInsights. If you set this to AllInsights and the input is audio only, then only audio insights are generated. Similarly if the input is video only, then only video insights are generated. It is recommended that you not use AudioInsightsOnly if you expect some of your inputs to be video only; or use VideoInsightsOnly if you expect some of your inputs to be audio only. Your Jobs in such conditions would error out.
+	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
+
+	// Defines the type of insights that you want the service to generate. The allowed values are AudioInsightsOnly, VideoInsightsOnly, and AllInsights. If you set this to AllInsights and the input is audio only, then only audio insights are generated. Similarly, if the input is video only, then only video insights are generated. It is recommended that you not use AudioInsightsOnly if you expect some of your inputs to be video only; or use VideoInsightsOnly if you expect some of your inputs to be audio only. Your Jobs in such conditions would error out. Default to AllInsights.
 	InsightsType *string `json:"insightsType,omitempty" tf:"insights_type,omitempty"`
 }
 
 type VideoAnalyzerPresetParameters struct {
 
-	// Possibles value are Basic or Standard. Determines the set of audio analysis operations to be performed.
+	// Possible values are Basic or Standard. Determines the set of audio analysis operations to be performed. Default to Standard.
 	// +kubebuilder:validation:Optional
 	AudioAnalysisMode *string `json:"audioAnalysisMode,omitempty" tf:"audio_analysis_mode,omitempty"`
 
-	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fallback to 'en-US'." The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463. Possible values are ar-EG, ar-SY, de-DE, en-AU, en-GB, en-US, es-ES, es-MX, fr-FR, hi-IN, it-IT, ja-JP, ko-KR, pt-BR, ru-RU and zh-CN.
+	// The language for the audio payload in the input using the BCP-47 format of 'language tag-region' (e.g: 'en-US'). If you know the language of your content, it is recommended that you specify it. The language must be specified explicitly for AudioAnalysisMode:Basic, since automatic language detection is not included in basic mode. If the language isn't specified, automatic language detection will choose the first language detected and process with the selected language for the duration of the file. It does not currently support dynamically switching between languages after the first language is detected. The automatic detection works best with audio recordings with clearly discernible speech. If automatic detection fails to find the language, transcription would fall back to en-US. The list of supported languages is available here: https://go.microsoft.com/fwlink/?linkid=2109463.
 	// +kubebuilder:validation:Optional
 	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
 
-	// Defines the type of insights that you want the service to generate. The allowed values are AudioInsightsOnly, VideoInsightsOnly, and AllInsights. If you set this to AllInsights and the input is audio only, then only audio insights are generated. Similarly if the input is video only, then only video insights are generated. It is recommended that you not use AudioInsightsOnly if you expect some of your inputs to be video only; or use VideoInsightsOnly if you expect some of your inputs to be audio only. Your Jobs in such conditions would error out.
+	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	// +kubebuilder:validation:Optional
+	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
+
+	// Defines the type of insights that you want the service to generate. The allowed values are AudioInsightsOnly, VideoInsightsOnly, and AllInsights. If you set this to AllInsights and the input is audio only, then only audio insights are generated. Similarly, if the input is video only, then only video insights are generated. It is recommended that you not use AudioInsightsOnly if you expect some of your inputs to be video only; or use VideoInsightsOnly if you expect some of your inputs to be audio only. Your Jobs in such conditions would error out. Default to AllInsights.
 	// +kubebuilder:validation:Optional
 	InsightsType *string `json:"insightsType,omitempty" tf:"insights_type,omitempty"`
+}
+
+type VideoCropRectangleObservation struct {
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// The number of pixels from the left-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Left *string `json:"left,omitempty" tf:"left,omitempty"`
+
+	// The number of pixels from the top-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Top *string `json:"top,omitempty" tf:"top,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type VideoCropRectangleParameters struct {
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// The number of pixels from the left-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Left *string `json:"left,omitempty" tf:"left,omitempty"`
+
+	// The number of pixels from the top-margin. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Top *string `json:"top,omitempty" tf:"top,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type VideoObservation struct {
+
+	// The gain level of audio in the overlay. The value should be in range between 0 to 1.0. The default is 1.0.
+	AudioGainLevel *float64 `json:"audioGainLevel,omitempty" tf:"audio_gain_level,omitempty"`
+
+	// A crop_rectangle block as defined above.
+	CropRectangle []VideoCropRectangleObservation `json:"cropRectangle,omitempty" tf:"crop_rectangle,omitempty"`
+
+	// The end position, with reference to the input video, at which the overlay ends. The value should be in ISO 8601 format. For example, PT30S to end the overlay at 30 seconds into the input video. If not specified or the value is greater than the input video duration, the overlay will be applied until the end of the input video if the overlay media duration is greater than the input video duration, else the overlay will last as long as the overlay media duration.
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// The duration over which the overlay fades in onto the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade in (same as PT0S).
+	FadeInDuration *string `json:"fadeInDuration,omitempty" tf:"fade_in_duration,omitempty"`
+
+	// The duration over which the overlay fades out of the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade out (same as PT0S).
+	FadeOutDuration *string `json:"fadeOutDuration,omitempty" tf:"fade_out_duration,omitempty"`
+
+	// The label of the job input which is to be used as an overlay. The input must specify exact one file. You can specify an image file in JPG, PNG, GIF or BMP format, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file.
+	InputLabel *string `json:"inputLabel,omitempty" tf:"input_label,omitempty"`
+
+	// The opacity of the overlay. The value should be in the range between 0 to 1.0. Default to 1.0, which means the overlay is opaque.
+	Opacity *float64 `json:"opacity,omitempty" tf:"opacity,omitempty"`
+
+	// A position block as defined above.
+	Position []PositionObservation `json:"position,omitempty" tf:"position,omitempty"`
+
+	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+}
+
+type VideoParameters struct {
+
+	// The gain level of audio in the overlay. The value should be in range between 0 to 1.0. The default is 1.0.
+	// +kubebuilder:validation:Optional
+	AudioGainLevel *float64 `json:"audioGainLevel,omitempty" tf:"audio_gain_level,omitempty"`
+
+	// A crop_rectangle block as defined above.
+	// +kubebuilder:validation:Optional
+	CropRectangle []VideoCropRectangleParameters `json:"cropRectangle,omitempty" tf:"crop_rectangle,omitempty"`
+
+	// The end position, with reference to the input video, at which the overlay ends. The value should be in ISO 8601 format. For example, PT30S to end the overlay at 30 seconds into the input video. If not specified or the value is greater than the input video duration, the overlay will be applied until the end of the input video if the overlay media duration is greater than the input video duration, else the overlay will last as long as the overlay media duration.
+	// +kubebuilder:validation:Optional
+	End *string `json:"end,omitempty" tf:"end,omitempty"`
+
+	// The duration over which the overlay fades in onto the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade in (same as PT0S).
+	// +kubebuilder:validation:Optional
+	FadeInDuration *string `json:"fadeInDuration,omitempty" tf:"fade_in_duration,omitempty"`
+
+	// The duration over which the overlay fades out of the input video. The value should be in ISO 8601 duration format. If not specified the default behavior is to have no fade out (same as PT0S).
+	// +kubebuilder:validation:Optional
+	FadeOutDuration *string `json:"fadeOutDuration,omitempty" tf:"fade_out_duration,omitempty"`
+
+	// The label of the job input which is to be used as an overlay. The input must specify exact one file. You can specify an image file in JPG, PNG, GIF or BMP format, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file.
+	// +kubebuilder:validation:Required
+	InputLabel *string `json:"inputLabel" tf:"input_label,omitempty"`
+
+	// The opacity of the overlay. The value should be in the range between 0 to 1.0. Default to 1.0, which means the overlay is opaque.
+	// +kubebuilder:validation:Optional
+	Opacity *float64 `json:"opacity,omitempty" tf:"opacity,omitempty"`
+
+	// A position block as defined above.
+	// +kubebuilder:validation:Optional
+	Position []PositionParameters `json:"position,omitempty" tf:"position,omitempty"`
+
+	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
+	// +kubebuilder:validation:Optional
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
 // TransformSpec defines the desired state of Transform

@@ -770,7 +770,7 @@ type NetworkRulesObservation struct {
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
-	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918),  are not allowed.
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or More private_link_access block as defined below.
@@ -790,7 +790,7 @@ type NetworkRulesParameters struct {
 	// +kubebuilder:validation:Required
 	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
-	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918),  are not allowed.
 	// +kubebuilder:validation:Optional
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 

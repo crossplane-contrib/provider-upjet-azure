@@ -1565,6 +1565,9 @@ type WindowsWebAppSlotObservation struct {
 	// Should the Windows Web App Slot require HTTPS connections.
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
+	// The ID of the App Service Environment used by App Service Slot.
+	HostingEnvironmentID *string `json:"hostingEnvironmentId,omitempty" tf:"hosting_environment_id,omitempty"`
+
 	// The ID of the Windows Web App Slot.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -1597,9 +1600,6 @@ type WindowsWebAppSlotObservation struct {
 
 	// A site_config block as defined below.
 	SiteConfig []WindowsWebAppSlotSiteConfigObservation `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
-
-	// A site_credential block as defined below.
-	SiteCredential []WindowsWebAppSlotSiteCredentialObservation `json:"siteCredential,omitempty" tf:"site_credential,omitempty"`
 
 	// One or more storage_account blocks as defined below.
 	StorageAccount []WindowsWebAppSlotStorageAccountObservation `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
@@ -1929,8 +1929,8 @@ type WindowsWebAppSlotSiteConfigCorsParameters struct {
 
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// +kubebuilder:validation:Required
-	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
+	// +kubebuilder:validation:Optional
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Whether CORS requests with credentials are allowed. Defaults to false
 	// Are credentials allowed in CORS requests? Defaults to `false`.
@@ -1975,58 +1975,70 @@ type WindowsWebAppSlotSiteConfigIPRestrictionHeadersParameters struct {
 type WindowsWebAppSlotSiteConfigIPRestrictionObservation struct {
 
 	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A headers block as defined above.
 	Headers []WindowsWebAppSlotSiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The name which should be used for this Storage Account.
+	// The name which should be used for this `ip_restriction`.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The priority value of this ip_restriction. Defaults to 65000.
+	// The priority value of this `ip_restriction`.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
+	// The Service Tag used for this IP Restriction.
 	// The Service Tag used for this IP Restriction.
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 }
 
 type WindowsWebAppSlotSiteConfigIPRestrictionParameters struct {
 
 	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are `Allow` or `Deny`.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action"`
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A headers block as defined above.
 	// +kubebuilder:validation:Optional
-	Headers []WindowsWebAppSlotSiteConfigIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers"`
+	Headers []WindowsWebAppSlotSiteConfigIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
 	// +kubebuilder:validation:Optional
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The name which should be used for this Storage Account.
+	// The name which should be used for this `ip_restriction`.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The priority value of this ip_restriction. Defaults to 65000.
+	// The priority value of this `ip_restriction`.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The Service Tag used for this IP Restriction.
+	// The Service Tag used for this IP Restriction.
 	// +kubebuilder:validation:Optional
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
@@ -2308,58 +2320,70 @@ type WindowsWebAppSlotSiteConfigScmIPRestrictionHeadersParameters struct {
 type WindowsWebAppSlotSiteConfigScmIPRestrictionObservation struct {
 
 	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A headers block as defined above.
 	Headers []WindowsWebAppSlotSiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The name which should be used for this Storage Account.
+	// The name which should be used for this `ip_restriction`.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The priority value of this ip_restriction. Defaults to 65000.
+	// The priority value of this `ip_restriction`.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
+	// The Service Tag used for this IP Restriction.
 	// The Service Tag used for this IP Restriction.
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 }
 
 type WindowsWebAppSlotSiteConfigScmIPRestrictionParameters struct {
 
 	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are `Allow` or `Deny`.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action"`
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A headers block as defined above.
 	// +kubebuilder:validation:Optional
-	Headers []WindowsWebAppSlotSiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers"`
+	Headers []WindowsWebAppSlotSiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
 	// +kubebuilder:validation:Optional
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The name which should be used for this Storage Account.
+	// The name which should be used for this `ip_restriction`.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The priority value of this ip_restriction. Defaults to 65000.
+	// The priority value of this `ip_restriction`.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The Service Tag used for this IP Restriction.
+	// The Service Tag used for this IP Restriction.
 	// +kubebuilder:validation:Optional
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
 
 	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional

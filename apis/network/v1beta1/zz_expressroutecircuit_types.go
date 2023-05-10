@@ -58,6 +58,10 @@ type ExpressRouteCircuitParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowClassicOperations *bool `json:"allowClassicOperations,omitempty" tf:"allow_classic_operations,omitempty"`
 
+	// The authorization key. This can be used to set up an ExpressRoute Circuit with an ExpressRoute Port from another subscription.
+	// +kubebuilder:validation:Optional
+	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
+
 	// The bandwidth in Gbps of the circuit being created on the Express Route Port.
 	// +kubebuilder:validation:Optional
 	BandwidthInGbps *float64 `json:"bandwidthInGbps,omitempty" tf:"bandwidth_in_gbps,omitempty"`

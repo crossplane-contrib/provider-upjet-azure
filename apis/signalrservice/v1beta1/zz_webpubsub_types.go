@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type IdentityObservation struct {
+type WebPubsubIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Web PubSub.
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
@@ -28,7 +28,7 @@ type IdentityObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type IdentityParameters struct {
+type WebPubsubIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Web PubSub.
 	// +kubebuilder:validation:Optional
@@ -91,7 +91,7 @@ type WebPubsubObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []WebPubsubIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// A live_trace block as defined below.
 	LiveTrace []WebPubsubLiveTraceObservation `json:"liveTrace,omitempty" tf:"live_trace,omitempty"`
@@ -117,7 +117,7 @@ type WebPubsubObservation struct {
 	// The publicly accessible port of the Web PubSub service which is designed for customer server side use.
 	ServerPort *float64 `json:"serverPort,omitempty" tf:"server_port,omitempty"`
 
-	// Specifies which SKU to use. Possible values are Free_F1 and Standard_S1.
+	// Specifies which SKU to use. Possible values are Free_F1, Standard_S1, and Premium_P1.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Whether to request client certificate during TLS handshake? Defaults to false.
@@ -141,7 +141,7 @@ type WebPubsubParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []WebPubsubIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// A live_trace block as defined below.
 	// +kubebuilder:validation:Optional
@@ -176,7 +176,7 @@ type WebPubsubParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies which SKU to use. Possible values are Free_F1 and Standard_S1.
+	// Specifies which SKU to use. Possible values are Free_F1, Standard_S1, and Premium_P1.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 

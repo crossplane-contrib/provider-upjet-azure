@@ -245,8 +245,9 @@ spec:
                         subresourceNames:
                           description: A list of subresource names which the Private
                             Endpoint is able to connect to. subresource_names corresponds
-                            to group_id. Changing this forces a new resource to be
-                            created.
+                            to group_id. Possible values are detailed in the product
+                            documentation in the Subresources column. Changing this
+                            forces a new resource to be created.
                           items:
                             type: string
                           type: array
@@ -790,8 +791,9 @@ spec:
                         subresourceNames:
                           description: A list of subresource names which the Private
                             Endpoint is able to connect to. subresource_names corresponds
-                            to group_id. Changing this forces a new resource to be
-                            created.
+                            to group_id. Possible values are detailed in the product
+                            documentation in the Subresources column. Changing this
+                            forces a new resource to be created.
                           items:
                             type: string
                           type: array

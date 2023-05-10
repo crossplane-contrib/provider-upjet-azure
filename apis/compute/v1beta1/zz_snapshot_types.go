@@ -92,6 +92,9 @@ type SnapshotObservation struct {
 	// The Snapshot ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies if the Snapshot is incremental.
+	IncrementalEnabled *bool `json:"incrementalEnabled,omitempty" tf:"incremental_enabled,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -127,6 +130,10 @@ type SnapshotParameters struct {
 	// A encryption_settings block as defined below.
 	// +kubebuilder:validation:Optional
 	EncryptionSettings []SnapshotEncryptionSettingsParameters `json:"encryptionSettings,omitempty" tf:"encryption_settings,omitempty"`
+
+	// Specifies if the Snapshot is incremental.
+	// +kubebuilder:validation:Optional
+	IncrementalEnabled *bool `json:"incrementalEnabled,omitempty" tf:"incremental_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

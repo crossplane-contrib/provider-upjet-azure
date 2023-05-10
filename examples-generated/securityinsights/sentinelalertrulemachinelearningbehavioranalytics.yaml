@@ -16,33 +16,6 @@ spec:
 
 ---
 
-apiVersion: operationsmanagement.azure.upbound.io/v1beta1
-kind: LogAnalyticsSolution
-metadata:
-  annotations:
-    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelalertrulemachinelearningbehavioranalytics
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    location: West Europe
-    plan:
-    - product: OMSGallery/SecurityInsights
-      publisher: Microsoft
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    solutionName: SecurityInsights
-    workspaceNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    workspaceResourceIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-
----
-
 apiVersion: operationalinsights.azure.upbound.io/v1beta1
 kind: Workspace
 metadata:
@@ -72,6 +45,20 @@ metadata:
 spec:
   forProvider:
     location: West Europe
+
+---
+
+apiVersion: securityinsights.azure.upbound.io/v1beta1
+kind: SentinelLogAnalyticsWorkspaceOnboarding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelalertrulemachinelearningbehavioranalytics
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    workspaceId: ${azurerm_log_analytics_workspace.example.id}
 
 ---
 

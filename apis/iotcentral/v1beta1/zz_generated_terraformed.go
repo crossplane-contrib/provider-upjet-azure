@@ -84,7 +84,7 @@ func (tr *Application) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *Application) GetTerraformSchemaVersion() int {
-	return 1
+	return 2
 }
 
 // GetTerraformResourceType returns Terraform resource type for this ApplicationNetworkRuleSet

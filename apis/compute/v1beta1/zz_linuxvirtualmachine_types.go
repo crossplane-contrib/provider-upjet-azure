@@ -199,7 +199,7 @@ type LinuxVirtualMachineObservation struct {
 	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
-	// A gallery_application block as defined below.
+	// One or more gallery_application blocks as defined below.
 	GalleryApplication []LinuxVirtualMachineGalleryApplicationObservation `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
 	// The ID of the Linux Virtual Machine.
@@ -435,7 +435,7 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
-	// A gallery_application block as defined below.
+	// One or more gallery_application blocks as defined below.
 	// +kubebuilder:validation:Optional
 	GalleryApplication []LinuxVirtualMachineGalleryApplicationParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 

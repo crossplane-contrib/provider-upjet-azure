@@ -73,6 +73,10 @@ spec:
                       Virtual Hub. Changing this forces a new resource to be created.
                       The address prefix subnet cannot be smaller than a .
                     type: string
+                  hubRoutingPreference:
+                    description: The hub routing preference. Possible values are ExpressRoute,
+                      ASPath and VpnGateway. Defaults to ExpressRoute.
+                    type: string
                   location:
                     description: Specifies the supported Azure location where the
                       Virtual Hub should exist. Changing this forces a new resource
@@ -466,6 +470,10 @@ spec:
                   defaultRouteTableId:
                     description: The ID of the default Route Table in the Virtual
                       Hub.
+                    type: string
+                  hubRoutingPreference:
+                    description: The hub routing preference. Possible values are ExpressRoute,
+                      ASPath and VpnGateway. Defaults to ExpressRoute.
                     type: string
                   id:
                     description: The ID of the Virtual Hub.

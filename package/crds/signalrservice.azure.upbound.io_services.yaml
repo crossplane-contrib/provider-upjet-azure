@@ -68,6 +68,9 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  aadAuthEnabled:
+                    description: Whether to enable AAD auth? Defaults to true.
+                    type: boolean
                   connectivityLogsEnabled:
                     description: Specifies if Connectivity Logs are enabled or not.
                       Defaults to false.
@@ -84,6 +87,29 @@ spec:
                           type: array
                       required:
                       - allowedOrigins
+                      type: object
+                    type: array
+                  httpRequestLogsEnabled:
+                    description: Specifies if Http Request Logs are enabled or not.
+                      Defaults to false.
+                    type: boolean
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this signalR.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this signalR. Possible values
+                            are SystemAssigned, UserAssigned.
+                          type: string
+                      required:
+                      - type
                       type: object
                     type: array
                   liveTrace:
@@ -112,6 +138,9 @@ spec:
                     description: Specifies if Live Trace is enabled or not. Defaults
                       to false.
                     type: boolean
+                  localAuthEnabled:
+                    description: Whether to enable local auth? Defaults to true.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       SignalR service exists. Changing this forces a new resource
@@ -120,6 +149,10 @@ spec:
                   messagingLogsEnabled:
                     description: Specifies if Messaging Logs are enabled or not. Defaults
                       to false.
+                    type: boolean
+                  publicNetworkAccessEnabled:
+                    description: Whether to enable public network access? Defaults
+                      to true.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -201,6 +234,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  serverlessConnectionTimeoutInSeconds:
+                    description: Specifies the client connection timeout. Defaults
+                      to 30.
+                    type: number
                   serviceMode:
                     description: Specifies the service mode. Possible values are Classic,
                       Default and Serverless. Defaults to Default.
@@ -211,8 +248,8 @@ spec:
                       properties:
                         capacity:
                           description: Specifies the number of units associated with
-                            this SignalR service. Valid values are 1, 2, 5, 10, 20,
-                            50 and 100.
+                            this SignalR service. Valid values are 1, 2, 3, 4, 5,
+                            6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90 and 100.
                           type: number
                         name:
                           description: Specifies which tier to use. Valid values are
@@ -228,6 +265,10 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                  tlsClientCertEnabled:
+                    description: Whether to request client certificate during TLS
+                      handshake? Defaults to false.
+                    type: boolean
                   upstreamEndpoint:
                     description: An upstream_endpoint block as documented below. Using
                       this block requires the SignalR service to be Serverless. When
@@ -458,6 +499,9 @@ spec:
             properties:
               atProvider:
                 properties:
+                  aadAuthEnabled:
+                    description: Whether to enable AAD auth? Defaults to true.
+                    type: boolean
                   connectivityLogsEnabled:
                     description: Specifies if Connectivity Logs are enabled or not.
                       Defaults to false.
@@ -477,9 +521,36 @@ spec:
                   hostname:
                     description: The FQDN of the SignalR service.
                     type: string
+                  httpRequestLogsEnabled:
+                    description: Specifies if Http Request Logs are enabled or not.
+                      Defaults to false.
+                    type: boolean
                   id:
                     description: The ID of the SignalR service.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this signalR.
+                          items:
+                            type: string
+                          type: array
+                        principalId:
+                          description: The ID of the SignalR service.
+                          type: string
+                        tenantId:
+                          description: The ID of the SignalR service.
+                          type: string
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this signalR. Possible values
+                            are SystemAssigned, UserAssigned.
+                          type: string
+                      type: object
+                    type: array
                   ipAddress:
                     description: The publicly accessible IP of the SignalR service.
                     type: string
@@ -509,6 +580,9 @@ spec:
                     description: Specifies if Live Trace is enabled or not. Defaults
                       to false.
                     type: boolean
+                  localAuthEnabled:
+                    description: Whether to enable local auth? Defaults to true.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       SignalR service exists. Changing this forces a new resource
@@ -517,6 +591,10 @@ spec:
                   messagingLogsEnabled:
                     description: Specifies if Messaging Logs are enabled or not. Defaults
                       to false.
+                    type: boolean
+                  publicNetworkAccessEnabled:
+                    description: Whether to enable public network access? Defaults
+                      to true.
                     type: boolean
                   publicPort:
                     description: The publicly accessible port of the SignalR service
@@ -531,6 +609,10 @@ spec:
                     description: The publicly accessible port of the SignalR service
                       which is designed for customer server side use.
                     type: number
+                  serverlessConnectionTimeoutInSeconds:
+                    description: Specifies the client connection timeout. Defaults
+                      to 30.
+                    type: number
                   serviceMode:
                     description: Specifies the service mode. Possible values are Classic,
                       Default and Serverless. Defaults to Default.
@@ -541,8 +623,8 @@ spec:
                       properties:
                         capacity:
                           description: Specifies the number of units associated with
-                            this SignalR service. Valid values are 1, 2, 5, 10, 20,
-                            50 and 100.
+                            this SignalR service. Valid values are 1, 2, 3, 4, 5,
+                            6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90 and 100.
                           type: number
                         name:
                           description: Specifies which tier to use. Valid values are
@@ -555,6 +637,10 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                  tlsClientCertEnabled:
+                    description: Whether to request client certificate during TLS
+                      handshake? Defaults to false.
+                    type: boolean
                   upstreamEndpoint:
                     description: An upstream_endpoint block as documented below. Using
                       this block requires the SignalR service to be Serverless. When

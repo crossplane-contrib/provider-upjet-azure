@@ -1615,8 +1615,6 @@ spec:
                                   are allowed. Defaults to false Are credentials allowed
                                   in CORS requests? Defaults to `false`.
                                 type: boolean
-                            required:
-                            - allowedOrigins
                             type: object
                           type: array
                         defaultDocuments:
@@ -1651,7 +1649,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny.
+                                  Allow or Deny. The action to take. Possible values
+                                  are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -1687,22 +1686,27 @@ spec:
                                 type: array
                               ipAddress:
                                 description: 'The CIDR notation of the IP or IP Range
-                                  to match. For example: 10.0.0.0/24 or 192.168.10.1/32'
+                                  to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+                                  The CIDR notation of the IP or IP Range to match.
+                                  For example: `10.0.0.0/24` or `192.168.10.1/32`
+                                  or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`'
                                 type: string
                               name:
                                 description: The name which should be used for this
-                                  TODO.
+                                  TODO. The name which should be used for this `ip_restriction`.
                                 type: string
                               priority:
                                 description: The priority value of this ip_restriction.
-                                  Defaults to 65000.
+                                  Defaults to 65000. The priority value of this `ip_restriction`.
                                 type: number
                               serviceTag:
                                 description: The Service Tag used for this IP Restriction.
+                                  The Service Tag used for this IP Restriction.
                                 type: string
                               virtualNetworkSubnetId:
                                 description: The subnet id which will be used by this
                                   Web App for regional virtual network integration.
+                                  The Virtual Network Subnet ID used for this IP Restriction.
                                 type: string
                               virtualNetworkSubnetIdRef:
                                 description: Reference to a Subnet in network to populate
@@ -1819,7 +1823,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny.
+                                  Allow or Deny. The action to take. Possible values
+                                  are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -1855,22 +1860,27 @@ spec:
                                 type: array
                               ipAddress:
                                 description: 'The CIDR notation of the IP or IP Range
-                                  to match. For example: 10.0.0.0/24 or 192.168.10.1/32'
+                                  to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+                                  The CIDR notation of the IP or IP Range to match.
+                                  For example: `10.0.0.0/24` or `192.168.10.1/32`
+                                  or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`'
                                 type: string
                               name:
                                 description: The name which should be used for this
-                                  TODO.
+                                  TODO. The name which should be used for this `ip_restriction`.
                                 type: string
                               priority:
                                 description: The priority value of this ip_restriction.
-                                  Defaults to 65000.
+                                  Defaults to 65000. The priority value of this `ip_restriction`.
                                 type: number
                               serviceTag:
                                 description: The Service Tag used for this IP Restriction.
+                                  The Service Tag used for this IP Restriction.
                                 type: string
                               virtualNetworkSubnetId:
                                 description: The subnet id which will be used by this
                                   Web App for regional virtual network integration.
+                                  The Virtual Network Subnet ID used for this IP Restriction.
                                 type: string
                               virtualNetworkSubnetIdRef:
                                 description: Reference to a Subnet in network to populate
@@ -2172,8 +2182,9 @@ spec:
                     description: The local path and filename of the Zip packaged application
                       to deploy to this Windows Web App. The local path and filename
                       of the Zip packaged application to deploy to this Windows Web
-                      App. **Note:** Using this value requires `WEBSITE_RUN_FROM_PACKAGE=1`
-                      on the App in `app_settings`.
+                      App. **Note:** Using this value requires either `WEBSITE_RUN_FROM_PACKAGE=1`
+                      or `SCM_DO_BUILD_DURING_DEPLOYMENT=true` to be set on the App
+                      in `app_settings`.
                     type: string
                 type: object
               managementPolicy:
@@ -3197,6 +3208,10 @@ spec:
                     description: Should the Windows Web App be enabled? Defaults to
                       true.
                     type: boolean
+                  hostingEnvironmentId:
+                    description: The ID of the App Service Environment used by App
+                      Service.
+                    type: string
                   httpsOnly:
                     description: Should the Windows Web App require HTTPS connections.
                     type: boolean
@@ -3624,7 +3639,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny.
+                                  Allow or Deny. The action to take. Possible values
+                                  are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -3660,22 +3676,27 @@ spec:
                                 type: array
                               ipAddress:
                                 description: 'The CIDR notation of the IP or IP Range
-                                  to match. For example: 10.0.0.0/24 or 192.168.10.1/32'
+                                  to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+                                  The CIDR notation of the IP or IP Range to match.
+                                  For example: `10.0.0.0/24` or `192.168.10.1/32`
+                                  or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`'
                                 type: string
                               name:
                                 description: The name which should be used for this
-                                  TODO.
+                                  TODO. The name which should be used for this `ip_restriction`.
                                 type: string
                               priority:
                                 description: The priority value of this ip_restriction.
-                                  Defaults to 65000.
+                                  Defaults to 65000. The priority value of this `ip_restriction`.
                                 type: number
                               serviceTag:
                                 description: The Service Tag used for this IP Restriction.
+                                  The Service Tag used for this IP Restriction.
                                 type: string
                               virtualNetworkSubnetId:
                                 description: The subnet id which will be used by this
                                   Web App for regional virtual network integration.
+                                  The Virtual Network Subnet ID used for this IP Restriction.
                                 type: string
                             type: object
                           type: array
@@ -3714,7 +3735,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny.
+                                  Allow or Deny. The action to take. Possible values
+                                  are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -3750,22 +3772,27 @@ spec:
                                 type: array
                               ipAddress:
                                 description: 'The CIDR notation of the IP or IP Range
-                                  to match. For example: 10.0.0.0/24 or 192.168.10.1/32'
+                                  to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+                                  The CIDR notation of the IP or IP Range to match.
+                                  For example: `10.0.0.0/24` or `192.168.10.1/32`
+                                  or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`'
                                 type: string
                               name:
                                 description: The name which should be used for this
-                                  TODO.
+                                  TODO. The name which should be used for this `ip_restriction`.
                                 type: string
                               priority:
                                 description: The priority value of this ip_restriction.
-                                  Defaults to 65000.
+                                  Defaults to 65000. The priority value of this `ip_restriction`.
                                 type: number
                               serviceTag:
                                 description: The Service Tag used for this IP Restriction.
+                                  The Service Tag used for this IP Restriction.
                                 type: string
                               virtualNetworkSubnetId:
                                 description: The subnet id which will be used by this
                                   Web App for regional virtual network integration.
+                                  The Virtual Network Subnet ID used for this IP Restriction.
                                 type: string
                             type: object
                           type: array
@@ -3834,18 +3861,6 @@ spec:
                           type: number
                       type: object
                     type: array
-                  siteCredential:
-                    description: A site_credential block as defined below.
-                    items:
-                      properties:
-                        name:
-                          description: The Site Credentials Username used for publishing.
-                          type: string
-                        password:
-                          description: The Site Credentials Password used for publishing.
-                          type: string
-                      type: object
-                    type: array
                   stickySettings:
                     description: A sticky_settings block as defined below.
                     items:
@@ -3903,8 +3918,9 @@ spec:
                     description: The local path and filename of the Zip packaged application
                       to deploy to this Windows Web App. The local path and filename
                       of the Zip packaged application to deploy to this Windows Web
-                      App. **Note:** Using this value requires `WEBSITE_RUN_FROM_PACKAGE=1`
-                      on the App in `app_settings`.
+                      App. **Note:** Using this value requires either `WEBSITE_RUN_FROM_PACKAGE=1`
+                      or `SCM_DO_BUILD_DURING_DEPLOYMENT=true` to be set on the App
+                      in `app_settings`.
                     type: string
                 type: object
               conditions:

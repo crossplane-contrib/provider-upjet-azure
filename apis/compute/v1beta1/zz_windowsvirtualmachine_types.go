@@ -163,7 +163,7 @@ type WindowsVirtualMachineObservation struct {
 	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
-	// A gallery_application block as defined below.
+	// One or more gallery_application blocks as defined below.
 	GalleryApplication []WindowsVirtualMachineGalleryApplicationObservation `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
 	// Should the VM be patched without requiring a reboot? Possible values are true or false. Defaults to false. For more information about hot patching please see the product documentation.
@@ -428,7 +428,7 @@ type WindowsVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
-	// A gallery_application block as defined below.
+	// One or more gallery_application blocks as defined below.
 	// +kubebuilder:validation:Optional
 	GalleryApplication []WindowsVirtualMachineGalleryApplicationParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 

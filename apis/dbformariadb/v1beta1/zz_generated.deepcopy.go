@@ -705,6 +705,11 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.SSLMinimalTLSVersionEnforced != nil {
+		in, out := &in.SSLMinimalTLSVersionEnforced, &out.SSLMinimalTLSVersionEnforced
+		*out = new(string)
+		**out = **in
+	}
 	if in.SkuName != nil {
 		in, out := &in.SkuName, &out.SkuName
 		*out = new(string)
@@ -828,6 +833,11 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 	if in.SSLEnforcementEnabled != nil {
 		in, out := &in.SSLEnforcementEnabled, &out.SSLEnforcementEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.SSLMinimalTLSVersionEnforced != nil {
+		in, out := &in.SSLMinimalTLSVersionEnforced, &out.SSLMinimalTLSVersionEnforced
+		*out = new(string)
 		**out = **in
 	}
 	if in.SkuName != nil {

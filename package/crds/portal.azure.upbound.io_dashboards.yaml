@@ -352,6 +352,8 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
+            - message: dashboardProperties is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dashboardProperties)
             - message: location is a required parameter
               rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
             - message: name is a required parameter

@@ -498,6 +498,26 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.CommonEncryptionCenc); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.CommonEncryptionCenc[i3].DefaultContentKey); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyNameRef,
+				Selector:     mg.Spec.ForProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyNameSelector,
+				To: reference.To{
+					List:    &ContentKeyPolicyList{},
+					Managed: &ContentKeyPolicy{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyName")
+			}
+			mg.Spec.ForProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyNameRef = rsp.ResolvedReference
+
+		}
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.MediaServicesAccountName),
 		Extract:      reference.ExternalName(),

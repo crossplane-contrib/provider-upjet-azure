@@ -148,9 +148,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
-                    description: The name of the resource group in which to Changing
-                      this forces a new resource to be created. create the ExpressRoute
-                      circuit. Changing this forces a new resource to be created.
+                    description: The name of the resource group in which to create
+                      the ExpressRoute circuit. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -432,9 +432,9 @@ spec:
                     description: The ID of the ExpressRoute Circuit Authorization.
                     type: string
                   resourceGroupName:
-                    description: The name of the resource group in which to Changing
-                      this forces a new resource to be created. create the ExpressRoute
-                      circuit. Changing this forces a new resource to be created.
+                    description: The name of the resource group in which to create
+                      the ExpressRoute circuit. Changing this forces a new resource
+                      to be created.
                     type: string
                 type: object
               conditions:

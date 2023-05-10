@@ -9,8 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
-	v1beta12 "github.com/upbound/provider-azure/apis/operationalinsights/v1beta1"
+	v1beta12 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta11 "github.com/upbound/provider-azure/apis/operationalinsights/v1beta1"
 	v1beta1 "github.com/upbound/provider-azure/apis/operationsmanagement/v1beta1"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -51,12 +51,12 @@ func (mg *SentinelAlertRuleMSSecurityIncident) ResolveReferences(ctx context.Con
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
-		Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+		Extract:      resource.ExtractParamPath("workspace_id", false),
 		Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 		Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 		To: reference.To{
-			List:    &v1beta1.LogAnalyticsSolutionList{},
-			Managed: &v1beta1.LogAnalyticsSolution{},
+			List:    &SentinelLogAnalyticsWorkspaceOnboardingList{},
+			Managed: &SentinelLogAnalyticsWorkspaceOnboarding{},
 		},
 	})
 	if err != nil {
@@ -77,12 +77,12 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) ResolveReferences(c
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
-		Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 		Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 		To: reference.To{
-			List:    &v1beta1.LogAnalyticsSolutionList{},
-			Managed: &v1beta1.LogAnalyticsSolution{},
+			List:    &v1beta11.WorkspaceList{},
+			Managed: &v1beta11.Workspace{},
 		},
 	})
 	if err != nil {
@@ -103,12 +103,12 @@ func (mg *SentinelAutomationRule) ResolveReferences(ctx context.Context, c clien
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
-		Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+		Extract:      resource.ExtractParamPath("workspace_id", false),
 		Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 		Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 		To: reference.To{
-			List:    &v1beta1.LogAnalyticsSolutionList{},
-			Managed: &v1beta1.LogAnalyticsSolution{},
+			List:    &SentinelLogAnalyticsWorkspaceOnboardingList{},
+			Managed: &SentinelLogAnalyticsWorkspaceOnboarding{},
 		},
 	})
 	if err != nil {
@@ -129,12 +129,12 @@ func (mg *SentinelDataConnectorIOT) ResolveReferences(ctx context.Context, c cli
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
-		Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+		Extract:      resource.ExtractParamPath("workspace_id", false),
 		Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 		Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 		To: reference.To{
-			List:    &v1beta1.LogAnalyticsSolutionList{},
-			Managed: &v1beta1.LogAnalyticsSolution{},
+			List:    &SentinelLogAnalyticsWorkspaceOnboardingList{},
+			Managed: &SentinelLogAnalyticsWorkspaceOnboarding{},
 		},
 	})
 	if err != nil {
@@ -159,8 +159,8 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta12.ResourceGroupList{},
+			Managed: &v1beta12.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -175,8 +175,8 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) ResolveReferences(ctx context
 		Reference:    mg.Spec.ForProvider.WorkspaceNameRef,
 		Selector:     mg.Spec.ForProvider.WorkspaceNameSelector,
 		To: reference.To{
-			List:    &v1beta12.WorkspaceList{},
-			Managed: &v1beta12.Workspace{},
+			List:    &v1beta11.WorkspaceList{},
+			Managed: &v1beta11.Workspace{},
 		},
 	})
 	if err != nil {
@@ -197,12 +197,12 @@ func (mg *SentinelWatchlist) ResolveReferences(ctx context.Context, c client.Rea
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.LogAnalyticsWorkspaceID),
-		Extract:      resource.ExtractParamPath("workspace_resource_id", false),
+		Extract:      resource.ExtractParamPath("workspace_id", false),
 		Reference:    mg.Spec.ForProvider.LogAnalyticsWorkspaceIDRef,
 		Selector:     mg.Spec.ForProvider.LogAnalyticsWorkspaceIDSelector,
 		To: reference.To{
-			List:    &v1beta1.LogAnalyticsSolutionList{},
-			Managed: &v1beta1.LogAnalyticsSolution{},
+			List:    &SentinelLogAnalyticsWorkspaceOnboardingList{},
+			Managed: &SentinelLogAnalyticsWorkspaceOnboarding{},
 		},
 	})
 	if err != nil {

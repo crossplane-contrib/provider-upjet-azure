@@ -277,7 +277,7 @@ type HighAvailabilityParameters struct {
 
 type IdentityObservation struct {
 
-	// A list of User Assigned Managed Identity IDs to be assigned to this API Management Service. Required if used together with customer_managed_key block.
+	// A list of User Assigned Managed Identity IDs to be assigned to this PostgreSQL Flexible Server. Required if used together with customer_managed_key block.
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The ID of the PostgreSQL Flexible Server.
@@ -286,17 +286,17 @@ type IdentityObservation struct {
 	// The Tenant ID of the Azure Active Directory which is used by the Active Directory authentication. active_directory_auth_enabled must be set to true.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this API Management Service. Should be set to UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. Should be set to UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
 
-	// A list of User Assigned Managed Identity IDs to be assigned to this API Management Service. Required if used together with customer_managed_key block.
+	// A list of User Assigned Managed Identity IDs to be assigned to this PostgreSQL Flexible Server. Required if used together with customer_managed_key block.
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this API Management Service. Should be set to UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. Should be set to UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

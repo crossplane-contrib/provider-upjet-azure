@@ -24,7 +24,7 @@ type AccountLocalUserObservation struct {
 	// One or more permission_scope blocks as defined below.
 	PermissionScope []PermissionScopeObservation `json:"permissionScope,omitempty" tf:"permission_scope,omitempty"`
 
-	// One or more ssh_authorized_key blocks as defined below. Changing this forces a new Storage Account Local User to be created.
+	// One or more ssh_authorized_key blocks as defined below.
 	SSHAuthorizedKey []SSHAuthorizedKeyObservation `json:"sshAuthorizedKey,omitempty" tf:"ssh_authorized_key,omitempty"`
 
 	// Specifies whether SSH Key Authentication is enabled. Defaults to false.
@@ -47,7 +47,7 @@ type AccountLocalUserParameters struct {
 	// +kubebuilder:validation:Optional
 	PermissionScope []PermissionScopeParameters `json:"permissionScope,omitempty" tf:"permission_scope,omitempty"`
 
-	// One or more ssh_authorized_key blocks as defined below. Changing this forces a new Storage Account Local User to be created.
+	// One or more ssh_authorized_key blocks as defined below.
 	// +kubebuilder:validation:Optional
 	SSHAuthorizedKey []SSHAuthorizedKeyParameters `json:"sshAuthorizedKey,omitempty" tf:"ssh_authorized_key,omitempty"`
 

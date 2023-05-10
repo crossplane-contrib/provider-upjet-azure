@@ -217,8 +217,8 @@ type TriggerMetricTriggerObservation struct {
 type TriggerMetricTriggerParameters struct {
 
 	// Evaluation of metric on a particular column.
-	// +kubebuilder:validation:Required
-	MetricColumn *string `json:"metricColumn" tf:"metric_column,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricColumn *string `json:"metricColumn,omitempty" tf:"metric_column,omitempty"`
 
 	// Metric Trigger Type - 'Consecutive' or 'Total'.
 	// +kubebuilder:validation:Required

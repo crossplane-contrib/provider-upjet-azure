@@ -65,7 +65,7 @@ type ScheduleObservation struct {
 	// Start time of the schedule. Must be at least five minutes in the future. Defaults to seven minutes in the future from the time the resource is created.
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
-	// The timezone of the start time. Defaults to UTC. For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows
+	// The timezone of the start time. Defaults to Etc/UTC. For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
 	// List of days of the week that the job should execute on. Only valid when frequency is Week. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
@@ -128,7 +128,7 @@ type ScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
-	// The timezone of the start time. Defaults to UTC. For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows
+	// The timezone of the start time. Defaults to Etc/UTC. For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows
 	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 

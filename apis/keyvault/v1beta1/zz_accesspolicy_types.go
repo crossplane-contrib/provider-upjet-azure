@@ -24,7 +24,7 @@ type AccessPolicyObservation_2 struct {
 	// Key Vault Access Policy ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// List of key permissions, must be one or more from the following: Backup, Create, Decrypt, Delete, Encrypt, Get, Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update, Verify, WrapKey, Release, Rotate, GetRotationPolicy, and SetRotationPolicy.
+	// List of key permissions, must be one or more from the following: Backup, Create, Decrypt, Delete, Encrypt, Get, Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update, Verify, WrapKey, Release, Rotate, GetRotationPolicy and SetRotationPolicy.
 	KeyPermissions []*string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty"`
 
 	// Specifies the id of the Key Vault resource. Changing this forces a new resource to be created.
@@ -53,7 +53,7 @@ type AccessPolicyParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	CertificatePermissions []*string `json:"certificatePermissions,omitempty" tf:"certificate_permissions,omitempty"`
 
-	// List of key permissions, must be one or more from the following: Backup, Create, Decrypt, Delete, Encrypt, Get, Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update, Verify, WrapKey, Release, Rotate, GetRotationPolicy, and SetRotationPolicy.
+	// List of key permissions, must be one or more from the following: Backup, Create, Decrypt, Delete, Encrypt, Get, Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update, Verify, WrapKey, Release, Rotate, GetRotationPolicy and SetRotationPolicy.
 	// +kubebuilder:validation:Optional
 	KeyPermissions []*string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty"`
 

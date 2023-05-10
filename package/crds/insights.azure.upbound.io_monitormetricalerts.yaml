@@ -227,8 +227,8 @@ spec:
                           type: string
                         operator:
                           description: The criteria operator. Possible values are
-                            Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan
-                            and LessThanOrEqual.
+                            Equals, GreaterThan, GreaterThanOrEqual, LessThan and
+                            LessThanOrEqual.
                           type: string
                         skipMetricValidation:
                           description: Skip the metric validation to allow creating
@@ -786,8 +786,8 @@ spec:
                           type: string
                         operator:
                           description: The criteria operator. Possible values are
-                            Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan
-                            and LessThanOrEqual.
+                            Equals, GreaterThan, GreaterThanOrEqual, LessThan and
+                            LessThanOrEqual.
                           type: string
                         skipMetricValidation:
                           description: Skip the metric validation to allow creating

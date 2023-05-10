@@ -42,7 +42,7 @@ type AccountObservation struct {
 	// The creation mode for the CosmosDB Account. Possible values are Default and Restore. Changing this forces a new resource to be created.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
-	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or start with UserAssignedIdentity.
+	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 
 	// Enable automatic failover for this Cosmos DB account.
@@ -156,7 +156,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
-	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or start with UserAssignedIdentity.
+	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
 	// +kubebuilder:validation:Optional
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 

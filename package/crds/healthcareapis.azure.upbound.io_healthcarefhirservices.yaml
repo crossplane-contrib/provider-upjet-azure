@@ -117,8 +117,8 @@ spec:
                           type: array
                         allowedMethods:
                           description: The methods to be allowed via CORS. Possible
-                            values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and
-                            PUT.
+                            values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH
+                            and PUT.
                           items:
                             type: string
                           type: array
@@ -143,9 +143,16 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of one or more Resource IDs for User
+                            Assigned Managed identities to assign. Required when type
+                            is set to UserAssigned.
+                          items:
+                            type: string
+                          type: array
                         type:
-                          description: The type of identity used for the Healthcare
-                            FHIR service. Possible values are SystemAssigned.
+                          description: The type of managed identity to assign. Possible
+                            values are UserAssigned and SystemAssigned
                           type: string
                       required:
                       - type
@@ -592,8 +599,8 @@ spec:
                           type: array
                         allowedMethods:
                           description: The methods to be allowed via CORS. Possible
-                            values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and
-                            PUT.
+                            values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH
+                            and PUT.
                           items:
                             type: string
                           type: array
@@ -617,6 +624,13 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of one or more Resource IDs for User
+                            Assigned Managed identities to assign. Required when type
+                            is set to UserAssigned.
+                          items:
+                            type: string
+                          type: array
                         principalId:
                           description: The ID of the Healthcare FHIR Service.
                           type: string
@@ -624,8 +638,8 @@ spec:
                           description: The ID of the Healthcare FHIR Service.
                           type: string
                         type:
-                          description: The type of identity used for the Healthcare
-                            FHIR service. Possible values are SystemAssigned.
+                          description: The type of managed identity to assign. Possible
+                            values are UserAssigned and SystemAssigned
                           type: string
                       type: object
                     type: array

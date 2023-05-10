@@ -13,6 +13,29 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OverridesSelectorsObservation struct {
+
+	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
+	In []*string `json:"in,omitempty" tf:"in,omitempty"`
+
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
+	NotIn []*string `json:"notIn,omitempty" tf:"not_in,omitempty"`
+}
+
+type OverridesSelectorsParameters struct {
+
+	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
+	// +kubebuilder:validation:Optional
+	In []*string `json:"in,omitempty" tf:"in,omitempty"`
+
+	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
+	// +kubebuilder:validation:Optional
+	NotIn []*string `json:"notIn,omitempty" tf:"not_in,omitempty"`
+}
+
 type ResourcePolicyAssignmentIdentityObservation struct {
 
 	// A list of User Managed Identity IDs which should be assigned to the Policy Definition.
@@ -91,6 +114,9 @@ type ResourcePolicyAssignmentObservation struct {
 	// Specifies a list of Resource Scopes (for example a Subscription, or a Resource Group) within this Management Group which are excluded from this Policy.
 	NotScopes []*string `json:"notScopes,omitempty" tf:"not_scopes,omitempty"`
 
+	// One or more overrides blocks as defined below. More detail about overrides and resource_selectors see policy assignment structure
+	Overrides []ResourcePolicyAssignmentOverridesObservation `json:"overrides,omitempty" tf:"overrides,omitempty"`
+
 	// A JSON mapping of any Parameters for this Policy.
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
@@ -99,6 +125,29 @@ type ResourcePolicyAssignmentObservation struct {
 
 	// The ID of the Resource (or Resource Scope) where this should be applied. Changing this forces a new Resource Policy Assignment to be created.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
+	ResourceSelectors []ResourcePolicyAssignmentResourceSelectorsObservation `json:"resourceSelectors,omitempty" tf:"resource_selectors,omitempty"`
+}
+
+type ResourcePolicyAssignmentOverridesObservation struct {
+
+	// One or more override_selector as defined below.
+	Selectors []OverridesSelectorsObservation `json:"selectors,omitempty" tf:"selectors,omitempty"`
+
+	// Specifies the value to override the policy property. Possible values for policyEffect override listed policy effects.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ResourcePolicyAssignmentOverridesParameters struct {
+
+	// One or more override_selector as defined below.
+	// +kubebuilder:validation:Optional
+	Selectors []OverridesSelectorsParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
+
+	// Specifies the value to override the policy property. Possible values for policyEffect override listed policy effects.
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ResourcePolicyAssignmentParameters struct {
@@ -139,6 +188,10 @@ type ResourcePolicyAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	NotScopes []*string `json:"notScopes,omitempty" tf:"not_scopes,omitempty"`
 
+	// One or more overrides blocks as defined below. More detail about overrides and resource_selectors see policy assignment structure
+	// +kubebuilder:validation:Optional
+	Overrides []ResourcePolicyAssignmentOverridesParameters `json:"overrides,omitempty" tf:"overrides,omitempty"`
+
 	// A JSON mapping of any Parameters for this Policy.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
@@ -160,6 +213,57 @@ type ResourcePolicyAssignmentParameters struct {
 	// The ID of the Resource (or Resource Scope) where this should be applied. Changing this forces a new Resource Policy Assignment to be created.
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
+	// +kubebuilder:validation:Optional
+	ResourceSelectors []ResourcePolicyAssignmentResourceSelectorsParameters `json:"resourceSelectors,omitempty" tf:"resource_selectors,omitempty"`
+}
+
+type ResourcePolicyAssignmentResourceSelectorsObservation struct {
+
+	// Specifies a name for the resource selector.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more resource_selector block as defined below.
+	Selectors []ResourcePolicyAssignmentResourceSelectorsSelectorsObservation `json:"selectors,omitempty" tf:"selectors,omitempty"`
+}
+
+type ResourcePolicyAssignmentResourceSelectorsParameters struct {
+
+	// Specifies a name for the resource selector.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more resource_selector block as defined below.
+	// +kubebuilder:validation:Required
+	Selectors []ResourcePolicyAssignmentResourceSelectorsSelectorsParameters `json:"selectors" tf:"selectors,omitempty"`
+}
+
+type ResourcePolicyAssignmentResourceSelectorsSelectorsObservation struct {
+
+	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
+	In []*string `json:"in,omitempty" tf:"in,omitempty"`
+
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
+	NotIn []*string `json:"notIn,omitempty" tf:"not_in,omitempty"`
+}
+
+type ResourcePolicyAssignmentResourceSelectorsSelectorsParameters struct {
+
+	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
+	// +kubebuilder:validation:Optional
+	In []*string `json:"in,omitempty" tf:"in,omitempty"`
+
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// +kubebuilder:validation:Required
+	Kind *string `json:"kind" tf:"kind,omitempty"`
+
+	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
+	// +kubebuilder:validation:Optional
+	NotIn []*string `json:"notIn,omitempty" tf:"not_in,omitempty"`
 }
 
 // ResourcePolicyAssignmentSpec defines the desired state of ResourcePolicyAssignment

@@ -779,7 +779,7 @@ type HTTPListenerObservation struct {
 	// The Protocol to use for this HTTP Listener. Possible values are Http and Https.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// Should Server Name Indication be Required?
+	// Should Server Name Indication be Required? Defaults to false.
 	RequireSni *bool `json:"requireSni,omitempty" tf:"require_sni,omitempty"`
 
 	// The ID of the associated SSL Certificate.
@@ -829,7 +829,7 @@ type HTTPListenerParameters struct {
 	// +kubebuilder:validation:Required
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
-	// Should Server Name Indication be Required?
+	// Should Server Name Indication be Required? Defaults to false.
 	// +kubebuilder:validation:Optional
 	RequireSni *bool `json:"requireSni,omitempty" tf:"require_sni,omitempty"`
 
@@ -1325,7 +1325,7 @@ type RewriteRuleObservation struct {
 	// Rule sequence of the rewrite rule that determines the order of execution in a set.
 	RuleSequence *float64 `json:"ruleSequence,omitempty" tf:"rule_sequence,omitempty"`
 
-	// One url block as defined above
+	// One url block as defined below
 	URL []URLObservation `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -1351,7 +1351,7 @@ type RewriteRuleParameters struct {
 	// +kubebuilder:validation:Required
 	RuleSequence *float64 `json:"ruleSequence" tf:"rule_sequence,omitempty"`
 
-	// One url block as defined above
+	// One url block as defined below
 	// +kubebuilder:validation:Optional
 	URL []URLParameters `json:"url,omitempty" tf:"url,omitempty"`
 }
@@ -1396,7 +1396,7 @@ type SSLCertificateObservation struct {
 
 type SSLCertificateParameters struct {
 
-	// PFX certificate. Required if key_vault_secret_id is not set.
+	// The base64-encoded PFX certificate data. Required if key_vault_secret_id is not set.
 	// +kubebuilder:validation:Optional
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 

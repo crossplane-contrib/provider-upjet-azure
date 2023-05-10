@@ -60,7 +60,7 @@ type ApplicationInsightsObservation struct {
 	// A mapping of tags to assign to the resource.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the id of a log analytics workspace resource. Changing this forces a new resource to be created.
+	// Specifies the id of a log analytics workspace resource.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
@@ -127,7 +127,7 @@ type ApplicationInsightsParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the id of a log analytics workspace resource. Changing this forces a new resource to be created.
+	// Specifies the id of a log analytics workspace resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

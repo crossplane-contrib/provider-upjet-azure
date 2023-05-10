@@ -35,7 +35,7 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: Provider is the Schema for the Providers API. Manages a Attestation
+        description: Provider is the Schema for the Providers API. Manages an Attestation
           Provider.
         properties:
           apiVersion:
@@ -72,6 +72,19 @@ spec:
                     description: The Azure Region where the Attestation Provider should
                       exist. Changing this forces a new resource to be created.
                     type: string
+                  openEnclavePolicyBase64:
+                    description: Specifies the base64 URI Encoded RFC 7519 JWT that
+                      should be used for the TPM Policy.
+                    type: string
+                  policy:
+                    items:
+                      properties:
+                        data:
+                          type: string
+                        environmentType:
+                          type: string
+                      type: object
+                    type: array
                   policySigningCertificateData:
                     description: A valid X.509 certificate (Section 4 of RFC4648).
                       Changing this forces a new resource to be created.
@@ -156,12 +169,20 @@ spec:
                             type: string
                         type: object
                     type: object
+                  sgxEnclavePolicyBase64:
+                    description: Specifies the base64 URI Encoded RFC 7519 JWT that
+                      should be used for the TPM Policy.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to the
                       Attestation Provider.
                     type: object
+                  tpmPolicyBase64:
+                    description: Specifies the base64 URI Encoded RFC 7519 JWT that
+                      should be used for the TPM Policy.
+                    type: string
                 type: object
               managementPolicy:
                 default: FullControl
@@ -367,6 +388,19 @@ spec:
                     description: The Azure Region where the Attestation Provider should
                       exist. Changing this forces a new resource to be created.
                     type: string
+                  openEnclavePolicyBase64:
+                    description: Specifies the base64 URI Encoded RFC 7519 JWT that
+                      should be used for the TPM Policy.
+                    type: string
+                  policy:
+                    items:
+                      properties:
+                        data:
+                          type: string
+                        environmentType:
+                          type: string
+                      type: object
+                    type: array
                   policySigningCertificateData:
                     description: A valid X.509 certificate (Section 4 of RFC4648).
                       Changing this forces a new resource to be created.
@@ -376,12 +410,20 @@ spec:
                       provider should exist. Changing this forces a new resource to
                       be created.
                     type: string
+                  sgxEnclavePolicyBase64:
+                    description: Specifies the base64 URI Encoded RFC 7519 JWT that
+                      should be used for the TPM Policy.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to the
                       Attestation Provider.
                     type: object
+                  tpmPolicyBase64:
+                    description: Specifies the base64 URI Encoded RFC 7519 JWT that
+                      should be used for the TPM Policy.
+                    type: string
                   trustModel:
                     description: Trust model used for the Attestation Service.
                     type: string

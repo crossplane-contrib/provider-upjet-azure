@@ -74,6 +74,9 @@ type ServiceBusNamespaceObservation struct {
 	// An customer_managed_key block as defined below.
 	CustomerManagedKey []CustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
+	// The URL to access the ServiceBus Namespace.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
 	// The ServiceBus Namespace ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

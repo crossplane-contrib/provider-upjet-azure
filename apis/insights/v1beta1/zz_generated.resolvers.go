@@ -11,6 +11,7 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta13 "github.com/upbound/provider-azure/apis/compute/v1beta1"
+	v1beta14 "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
 	v1beta11 "github.com/upbound/provider-azure/apis/operationalinsights/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	v1beta12 "github.com/upbound/provider-azure/apis/storage/v1beta1"
@@ -476,6 +477,42 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 	var rsp reference.ResolutionResponse
 	var err error
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DataCollectionEndpointID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.DataCollectionEndpointIDRef,
+		Selector:     mg.Spec.ForProvider.DataCollectionEndpointIDSelector,
+		To: reference.To{
+			List:    &MonitorDataCollectionEndpointList{},
+			Managed: &MonitorDataCollectionEndpoint{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.DataCollectionEndpointID")
+	}
+	mg.Spec.ForProvider.DataCollectionEndpointID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DataCollectionEndpointIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Destinations); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Destinations[i3].EventHub); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Destinations[i3].EventHub[i4].EventHubID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.Destinations[i3].EventHub[i4].EventHubIDRef,
+				Selector:     mg.Spec.ForProvider.Destinations[i3].EventHub[i4].EventHubIDSelector,
+				To: reference.To{
+					List:    &v1beta14.EventHubList{},
+					Managed: &v1beta14.EventHub{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Destinations[i3].EventHub[i4].EventHubID")
+			}
+			mg.Spec.ForProvider.Destinations[i3].EventHub[i4].EventHubID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Destinations[i3].EventHub[i4].EventHubIDRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Destinations); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.Destinations[i3].LogAnalytics); i4++ {
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
@@ -493,6 +530,46 @@ func (mg *MonitorDataCollectionRule) ResolveReferences(ctx context.Context, c cl
 			}
 			mg.Spec.ForProvider.Destinations[i3].LogAnalytics[i4].WorkspaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 			mg.Spec.ForProvider.Destinations[i3].LogAnalytics[i4].WorkspaceResourceIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Destinations); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Destinations[i3].StorageBlob); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].ContainerName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].ContainerNameRef,
+				Selector:     mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].ContainerNameSelector,
+				To: reference.To{
+					List:    &v1beta12.ContainerList{},
+					Managed: &v1beta12.Container{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].ContainerName")
+			}
+			mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].ContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].ContainerNameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Destinations); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Destinations[i3].StorageBlob); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].StorageAccountID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].StorageAccountIDRef,
+				Selector:     mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].StorageAccountIDSelector,
+				To: reference.To{
+					List:    &v1beta12.AccountList{},
+					Managed: &v1beta12.Account{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].StorageAccountID")
+			}
+			mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.Destinations[i3].StorageBlob[i4].StorageAccountIDRef = rsp.ResolvedReference
 
 		}
 	}

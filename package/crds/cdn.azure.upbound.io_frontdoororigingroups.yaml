@@ -183,8 +183,8 @@ spec:
                         additionalLatencyInMilliseconds:
                           description: Specifies the additional latency in milliseconds
                             for probes to fall into the lowest latency bucket. Possible
-                            values are between 0 and 1000 seconds (inclusive). Defaults
-                            to 50.
+                            values are between 0 and 1000 milliseconds (inclusive).
+                            Defaults to 50.
                           type: number
                         sampleSize:
                           description: Specifies the number of samples to consider
@@ -444,8 +444,8 @@ spec:
                         additionalLatencyInMilliseconds:
                           description: Specifies the additional latency in milliseconds
                             for probes to fall into the lowest latency bucket. Possible
-                            values are between 0 and 1000 seconds (inclusive). Defaults
-                            to 50.
+                            values are between 0 and 1000 milliseconds (inclusive).
+                            Defaults to 50.
                           type: number
                         sampleSize:
                           description: Specifies the number of samples to consider

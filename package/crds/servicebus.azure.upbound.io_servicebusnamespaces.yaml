@@ -447,6 +447,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                  endpoint:
+                    description: The URL to access the ServiceBus Namespace.
+                    type: string
                   id:
                     description: The ServiceBus Namespace ID.
                     type: string

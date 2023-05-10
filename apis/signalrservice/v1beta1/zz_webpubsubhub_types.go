@@ -41,13 +41,13 @@ type EventHandlerObservation struct {
 	// An auth block as defined below.
 	Auth []AuthObservation `json:"auth,omitempty" tf:"auth,omitempty"`
 
-	// Specify the list of system events. Supported values are connect, connected and disconnected.
+	// Specifies the list of system events. Supported values are connect, connected and disconnected.
 	SystemEvents []*string `json:"systemEvents,omitempty" tf:"system_events,omitempty"`
 
 	// The Event Handler URL Template. Two predefined parameters {hub} and {event} are available to use in the template. The value of the EventHandler URL is dynamically calculated when the client request comes in. Example: http://example.com/api/{hub}/{event}.
 	URLTemplate *string `json:"urlTemplate,omitempty" tf:"url_template,omitempty"`
 
-	// Specify the matching event names. There are 3 kind of patterns supported: * * matches any event name * , Combine multiple events with , for example event1,event2, it matches event event1 and event2 * The single event name, for example event1, it matches event1.
+	// Specifies the matching event names. There are 3 kind of patterns supported: * * matches any event name * , Combine multiple events with , for example event1,event2, it matches event event1 and event2 * The single event name, for example event1, it matches event1.
 	UserEventPattern *string `json:"userEventPattern,omitempty" tf:"user_event_pattern,omitempty"`
 }
 
@@ -57,7 +57,7 @@ type EventHandlerParameters struct {
 	// +kubebuilder:validation:Optional
 	Auth []AuthParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
-	// Specify the list of system events. Supported values are connect, connected and disconnected.
+	// Specifies the list of system events. Supported values are connect, connected and disconnected.
 	// +kubebuilder:validation:Optional
 	SystemEvents []*string `json:"systemEvents,omitempty" tf:"system_events,omitempty"`
 
@@ -65,9 +65,61 @@ type EventHandlerParameters struct {
 	// +kubebuilder:validation:Required
 	URLTemplate *string `json:"urlTemplate" tf:"url_template,omitempty"`
 
-	// Specify the matching event names. There are 3 kind of patterns supported: * * matches any event name * , Combine multiple events with , for example event1,event2, it matches event event1 and event2 * The single event name, for example event1, it matches event1.
+	// Specifies the matching event names. There are 3 kind of patterns supported: * * matches any event name * , Combine multiple events with , for example event1,event2, it matches event event1 and event2 * The single event name, for example event1, it matches event1.
 	// +kubebuilder:validation:Optional
 	UserEventPattern *string `json:"userEventPattern,omitempty" tf:"user_event_pattern,omitempty"`
+}
+
+type EventListenerObservation struct {
+
+	// Specifies the event hub name to receive the events.
+	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
+
+	// Specifies the event hub namespace name to receive the events.
+	EventHubNamespaceName *string `json:"eventhubNamespaceName,omitempty" tf:"eventhub_namespace_name,omitempty"`
+
+	// Specifies the list of system events. Supported values are connected and disconnected.
+	SystemEventNameFilter []*string `json:"systemEventNameFilter,omitempty" tf:"system_event_name_filter,omitempty"`
+
+	// Specifies the list of matching user event names. ["*"] can be used to match all events.
+	UserEventNameFilter []*string `json:"userEventNameFilter,omitempty" tf:"user_event_name_filter,omitempty"`
+}
+
+type EventListenerParameters struct {
+
+	// Specifies the event hub name to receive the events.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	// +kubebuilder:validation:Optional
+	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
+
+	// Reference to a EventHub in eventhub to populate eventhubName.
+	// +kubebuilder:validation:Optional
+	EventHubNameRef *v1.Reference `json:"eventhubNameRef,omitempty" tf:"-"`
+
+	// Selector for a EventHub in eventhub to populate eventhubName.
+	// +kubebuilder:validation:Optional
+	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
+
+	// Specifies the event hub namespace name to receive the events.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHubNamespace
+	// +kubebuilder:validation:Optional
+	EventHubNamespaceName *string `json:"eventhubNamespaceName,omitempty" tf:"eventhub_namespace_name,omitempty"`
+
+	// Reference to a EventHubNamespace in eventhub to populate eventhubNamespaceName.
+	// +kubebuilder:validation:Optional
+	EventHubNamespaceNameRef *v1.Reference `json:"eventhubNamespaceNameRef,omitempty" tf:"-"`
+
+	// Selector for a EventHubNamespace in eventhub to populate eventhubNamespaceName.
+	// +kubebuilder:validation:Optional
+	EventHubNamespaceNameSelector *v1.Selector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
+
+	// Specifies the list of system events. Supported values are connected and disconnected.
+	// +kubebuilder:validation:Optional
+	SystemEventNameFilter []*string `json:"systemEventNameFilter,omitempty" tf:"system_event_name_filter,omitempty"`
+
+	// Specifies the list of matching user event names. ["*"] can be used to match all events.
+	// +kubebuilder:validation:Optional
+	UserEventNameFilter []*string `json:"userEventNameFilter,omitempty" tf:"user_event_name_filter,omitempty"`
 }
 
 type WebPubsubHubObservation struct {
@@ -79,13 +131,16 @@ type WebPubsubHubObservation struct {
 	// An event_handler block as defined below.
 	EventHandler []EventHandlerObservation `json:"eventHandler,omitempty" tf:"event_handler,omitempty"`
 
+	// An event_listener block as defined below.
+	EventListener []EventListenerObservation `json:"eventListener,omitempty" tf:"event_listener,omitempty"`
+
 	// The ID of the Web Pubsub Hub resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The name of the Web Pubsub hub service. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specify the id of the Web Pubsub. Changing this forces a new resource to be created.
+	// Specifies the id of the Web Pubsub. Changing this forces a new resource to be created.
 	WebPubsubID *string `json:"webPubsubId,omitempty" tf:"web_pubsub_id,omitempty"`
 }
 
@@ -100,11 +155,15 @@ type WebPubsubHubParameters struct {
 	// +kubebuilder:validation:Optional
 	EventHandler []EventHandlerParameters `json:"eventHandler,omitempty" tf:"event_handler,omitempty"`
 
+	// An event_listener block as defined below.
+	// +kubebuilder:validation:Optional
+	EventListener []EventListenerParameters `json:"eventListener,omitempty" tf:"event_listener,omitempty"`
+
 	// The name of the Web Pubsub hub service. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Specify the id of the Web Pubsub. Changing this forces a new resource to be created.
+	// Specifies the id of the Web Pubsub. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/signalrservice/v1beta1.WebPubsub
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

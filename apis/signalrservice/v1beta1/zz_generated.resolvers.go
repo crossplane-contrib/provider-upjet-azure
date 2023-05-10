@@ -10,6 +10,7 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta14 "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
 	v1beta12 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
 	v1beta13 "github.com/upbound/provider-azure/apis/managedidentity/v1beta1"
 	v1beta1 "github.com/upbound/provider-azure/apis/network/v1beta1"
@@ -181,6 +182,42 @@ func (mg *WebPubsubHub) ResolveReferences(ctx context.Context, c client.Reader) 
 			mg.Spec.ForProvider.EventHandler[i3].Auth[i4].ManagedIdentityIDRef = rsp.ResolvedReference
 
 		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EventListener); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventListener[i3].EventHubName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.EventListener[i3].EventHubNameRef,
+			Selector:     mg.Spec.ForProvider.EventListener[i3].EventHubNameSelector,
+			To: reference.To{
+				List:    &v1beta14.EventHubList{},
+				Managed: &v1beta14.EventHub{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.EventListener[i3].EventHubName")
+		}
+		mg.Spec.ForProvider.EventListener[i3].EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EventListener[i3].EventHubNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.EventListener); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceNameRef,
+			Selector:     mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceNameSelector,
+			To: reference.To{
+				List:    &v1beta14.EventHubNamespaceList{},
+				Managed: &v1beta14.EventHubNamespace{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceName")
+		}
+		mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.EventListener[i3].EventHubNamespaceNameRef = rsp.ResolvedReference
+
 	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WebPubsubID),

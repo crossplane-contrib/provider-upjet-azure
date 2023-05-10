@@ -33,7 +33,7 @@ type AccountNetworkRulesObservation struct {
 	// Specifies the ID of the storage account. Changing this forces a new resource to be created.
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
-	// A list of virtual network subnet ids to to secure the storage account.
+	// A list of virtual network subnet ids to secure the storage account.
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
@@ -69,7 +69,7 @@ type AccountNetworkRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
-	// A list of virtual network subnet ids to to secure the storage account.
+	// A list of virtual network subnet ids to secure the storage account.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }

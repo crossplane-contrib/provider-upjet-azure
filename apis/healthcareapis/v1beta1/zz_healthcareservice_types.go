@@ -50,7 +50,7 @@ type CorsConfigurationObservation struct {
 	// A set of headers to be allowed via CORS.
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
-	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and PUT.
+	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// A set of origins to be allowed via CORS.
@@ -70,7 +70,7 @@ type CorsConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
-	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and PUT.
+	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
 	// +kubebuilder:validation:Optional
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
@@ -97,7 +97,7 @@ type HealthcareServiceObservation struct {
 	// A versionless Key Vault Key ID for CMK encryption of the backing database. Changing this forces a new resource to be created.
 	CosmosDBKeyVaultKeyVersionlessID *string `json:"cosmosdbKeyVaultKeyVersionlessId,omitempty" tf:"cosmosdb_key_vault_key_versionless_id,omitempty"`
 
-	// The provisioned throughput for the backing database. Range of 400-10000. Defaults to 400.
+	// The provisioned throughput for the backing database. Range of 400-100000. Defaults to 1000.
 	CosmosDBThroughput *float64 `json:"cosmosdbThroughput,omitempty" tf:"cosmosdb_throughput,omitempty"`
 
 	// The ID of the Healthcare Service.
@@ -137,7 +137,7 @@ type HealthcareServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	CosmosDBKeyVaultKeyVersionlessID *string `json:"cosmosdbKeyVaultKeyVersionlessId,omitempty" tf:"cosmosdb_key_vault_key_versionless_id,omitempty"`
 
-	// The provisioned throughput for the backing database. Range of 400-10000. Defaults to 400.
+	// The provisioned throughput for the backing database. Range of 400-100000. Defaults to 1000.
 	// +kubebuilder:validation:Optional
 	CosmosDBThroughput *float64 `json:"cosmosdbThroughput,omitempty" tf:"cosmosdb_throughput,omitempty"`
 

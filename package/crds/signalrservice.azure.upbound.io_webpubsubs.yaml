@@ -214,8 +214,8 @@ spec:
                         type: object
                     type: object
                   sku:
-                    description: Specifies which SKU to use. Possible values are Free_F1
-                      and Standard_S1.
+                    description: Specifies which SKU to use. Possible values are Free_F1,
+                      Standard_S1, and Premium_P1.
                     type: string
                   tags:
                     additionalProperties:
@@ -519,8 +519,8 @@ spec:
                       which is designed for customer server side use.
                     type: number
                   sku:
-                    description: Specifies which SKU to use. Possible values are Free_F1
-                      and Standard_S1.
+                    description: Specifies which SKU to use. Possible values are Free_F1,
+                      Standard_S1, and Premium_P1.
                     type: string
                   tags:
                     additionalProperties:

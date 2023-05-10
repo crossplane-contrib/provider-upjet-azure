@@ -177,6 +177,21 @@ func (in *ServiceObservation) DeepCopyInto(out *ServiceObservation) {
 			}
 		}
 	}
+	if in.AuthenticationFailureMode != nil {
+		in, out := &in.AuthenticationFailureMode, &out.AuthenticationFailureMode
+		*out = new(string)
+		**out = **in
+	}
+	if in.CustomerManagedKeyEnforcementEnabled != nil {
+		in, out := &in.CustomerManagedKeyEnforcementEnabled, &out.CustomerManagedKeyEnforcementEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.HostingMode != nil {
+		in, out := &in.HostingMode, &out.HostingMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -189,6 +204,11 @@ func (in *ServiceObservation) DeepCopyInto(out *ServiceObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.LocalAuthenticationEnabled != nil {
+		in, out := &in.LocalAuthenticationEnabled, &out.LocalAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -197,11 +217,6 @@ func (in *ServiceObservation) DeepCopyInto(out *ServiceObservation) {
 	if in.PartitionCount != nil {
 		in, out := &in.PartitionCount, &out.PartitionCount
 		*out = new(float64)
-		**out = **in
-	}
-	if in.PrimaryKey != nil {
-		in, out := &in.PrimaryKey, &out.PrimaryKey
-		*out = new(string)
 		**out = **in
 	}
 	if in.PublicNetworkAccessEnabled != nil {
@@ -223,11 +238,6 @@ func (in *ServiceObservation) DeepCopyInto(out *ServiceObservation) {
 	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
-		*out = new(string)
-		**out = **in
-	}
-	if in.SecondaryKey != nil {
-		in, out := &in.SecondaryKey, &out.SecondaryKey
 		*out = new(string)
 		**out = **in
 	}
@@ -277,12 +287,32 @@ func (in *ServiceParameters) DeepCopyInto(out *ServiceParameters) {
 			}
 		}
 	}
+	if in.AuthenticationFailureMode != nil {
+		in, out := &in.AuthenticationFailureMode, &out.AuthenticationFailureMode
+		*out = new(string)
+		**out = **in
+	}
+	if in.CustomerManagedKeyEnforcementEnabled != nil {
+		in, out := &in.CustomerManagedKeyEnforcementEnabled, &out.CustomerManagedKeyEnforcementEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.HostingMode != nil {
+		in, out := &in.HostingMode, &out.HostingMode
+		*out = new(string)
+		**out = **in
+	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
 		*out = make([]IdentityParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.LocalAuthenticationEnabled != nil {
+		in, out := &in.LocalAuthenticationEnabled, &out.LocalAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location

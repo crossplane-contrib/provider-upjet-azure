@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PolicyObservation struct {
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
+	EnvironmentType *string `json:"environmentType,omitempty" tf:"environment_type,omitempty"`
+}
+
+type PolicyParameters struct {
+
+	// +kubebuilder:validation:Optional
+	Data *string `json:"data,omitempty" tf:"data,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	EnvironmentType *string `json:"environmentType,omitempty" tf:"environment_type,omitempty"`
+}
+
 type ProviderObservation struct {
 
 	// The URI of the Attestation Service.
@@ -24,14 +39,25 @@ type ProviderObservation struct {
 	// The Azure Region where the Attestation Provider should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// Specifies the base64 URI Encoded RFC 7519 JWT that should be used for the TPM Policy.
+	OpenEnclavePolicyBase64 *string `json:"openEnclavePolicyBase64,omitempty" tf:"open_enclave_policy_base64,omitempty"`
+
+	Policy []PolicyObservation `json:"policy,omitempty" tf:"policy,omitempty"`
+
 	// A valid X.509 certificate (Section 4 of RFC4648). Changing this forces a new resource to be created.
 	PolicySigningCertificateData *string `json:"policySigningCertificateData,omitempty" tf:"policy_signing_certificate_data,omitempty"`
 
 	// The name of the Resource Group where the attestation provider should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// Specifies the base64 URI Encoded RFC 7519 JWT that should be used for the TPM Policy.
+	SgxEnclavePolicyBase64 *string `json:"sgxEnclavePolicyBase64,omitempty" tf:"sgx_enclave_policy_base64,omitempty"`
+
 	// A mapping of tags which should be assigned to the Attestation Provider.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the base64 URI Encoded RFC 7519 JWT that should be used for the TPM Policy.
+	TpmPolicyBase64 *string `json:"tpmPolicyBase64,omitempty" tf:"tpm_policy_base64,omitempty"`
 
 	// Trust model used for the Attestation Service.
 	TrustModel *string `json:"trustModel,omitempty" tf:"trust_model,omitempty"`
@@ -42,6 +68,13 @@ type ProviderParameters struct {
 	// The Azure Region where the Attestation Provider should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the base64 URI Encoded RFC 7519 JWT that should be used for the TPM Policy.
+	// +kubebuilder:validation:Optional
+	OpenEnclavePolicyBase64 *string `json:"openEnclavePolicyBase64,omitempty" tf:"open_enclave_policy_base64,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	Policy []PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// A valid X.509 certificate (Section 4 of RFC4648). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -60,9 +93,17 @@ type ProviderParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// Specifies the base64 URI Encoded RFC 7519 JWT that should be used for the TPM Policy.
+	// +kubebuilder:validation:Optional
+	SgxEnclavePolicyBase64 *string `json:"sgxEnclavePolicyBase64,omitempty" tf:"sgx_enclave_policy_base64,omitempty"`
+
 	// A mapping of tags which should be assigned to the Attestation Provider.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the base64 URI Encoded RFC 7519 JWT that should be used for the TPM Policy.
+	// +kubebuilder:validation:Optional
+	TpmPolicyBase64 *string `json:"tpmPolicyBase64,omitempty" tf:"tpm_policy_base64,omitempty"`
 }
 
 // ProviderSpec defines the desired state of Provider
@@ -79,7 +120,7 @@ type ProviderStatus struct {
 
 // +kubebuilder:object:root=true
 
-// Provider is the Schema for the Providers API. Manages a Attestation Provider.
+// Provider is the Schema for the Providers API. Manages an Attestation Provider.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

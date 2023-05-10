@@ -87,6 +87,12 @@ type CertificateObservation struct {
 	// The ID of the Key Vault where the Certificate should be created. Changing this forces a new resource to be created.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
+	// The (Versioned) ID for this Key Vault Certificate. This property points to a specific version of a Key Vault Certificate, as such using this won't auto-rotate values if used in other Azure Services.
+	ResourceManagerID *string `json:"resourceManagerId,omitempty" tf:"resource_manager_id,omitempty"`
+
+	// The Versionless ID of the Key Vault Certificate. This property allows other Azure Services (that support it) to auto-rotate their value when the Key Vault Certificate is updated.
+	ResourceManagerVersionlessID *string `json:"resourceManagerVersionlessId,omitempty" tf:"resource_manager_versionless_id,omitempty"`
+
 	// The ID of the associated Key Vault Secret.
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 

@@ -103,7 +103,7 @@ type HealthProbeParameters struct {
 
 type LoadBalancingObservation struct {
 
-	// Specifies the additional latency in milliseconds for probes to fall into the lowest latency bucket. Possible values are between 0 and 1000 seconds (inclusive). Defaults to 50.
+	// Specifies the additional latency in milliseconds for probes to fall into the lowest latency bucket. Possible values are between 0 and 1000 milliseconds (inclusive). Defaults to 50.
 	AdditionalLatencyInMilliseconds *float64 `json:"additionalLatencyInMilliseconds,omitempty" tf:"additional_latency_in_milliseconds,omitempty"`
 
 	// Specifies the number of samples to consider for load balancing decisions. Possible values are between 0 and 255 (inclusive). Defaults to 4.
@@ -115,7 +115,7 @@ type LoadBalancingObservation struct {
 
 type LoadBalancingParameters struct {
 
-	// Specifies the additional latency in milliseconds for probes to fall into the lowest latency bucket. Possible values are between 0 and 1000 seconds (inclusive). Defaults to 50.
+	// Specifies the additional latency in milliseconds for probes to fall into the lowest latency bucket. Possible values are between 0 and 1000 milliseconds (inclusive). Defaults to 50.
 	// +kubebuilder:validation:Optional
 	AdditionalLatencyInMilliseconds *float64 `json:"additionalLatencyInMilliseconds,omitempty" tf:"additional_latency_in_milliseconds,omitempty"`
 
