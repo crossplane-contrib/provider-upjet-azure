@@ -39,6 +39,10 @@ spec:
         testing.upbound.io/example-name: linuxfuncnappslot-sp
     siteConfig:
     - {}
+    storageAccountAccessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: upbound-system
     storageAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: linuxfuncnappslotacc
@@ -95,3 +99,6 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: linuxfuncnappslot-rg
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system
