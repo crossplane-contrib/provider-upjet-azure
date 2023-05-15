@@ -235,7 +235,7 @@ type PrivateServiceConnectionObservation struct {
 	// A message passed to the owner of the remote resource when the private endpoint attempts to establish the connection to the remote resource. The request message can be a maximum of 140 characters in length. Only valid if is_manual_connection is set to true.
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
-	// A list of subresource names which the Private Endpoint is able to connect to. subresource_names corresponds to group_id. Changing this forces a new resource to be created.
+	// A list of subresource names which the Private Endpoint is able to connect to. subresource_names corresponds to group_id. Possible values are detailed in the product documentation in the Subresources column. Changing this forces a new resource to be created.
 	SubresourceNames []*string `json:"subresourceNames,omitempty" tf:"subresource_names,omitempty"`
 }
 
@@ -261,7 +261,7 @@ type PrivateServiceConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
-	// A list of subresource names which the Private Endpoint is able to connect to. subresource_names corresponds to group_id. Changing this forces a new resource to be created.
+	// A list of subresource names which the Private Endpoint is able to connect to. subresource_names corresponds to group_id. Possible values are detailed in the product documentation in the Subresources column. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SubresourceNames []*string `json:"subresourceNames,omitempty" tf:"subresource_names,omitempty"`
 }

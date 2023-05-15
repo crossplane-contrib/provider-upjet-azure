@@ -21,6 +21,9 @@ type VirtualHubObservation_2 struct {
 	// The ID of the default Route Table in the Virtual Hub.
 	DefaultRouteTableID *string `json:"defaultRouteTableId,omitempty" tf:"default_route_table_id,omitempty"`
 
+	// The hub routing preference. Possible values are ExpressRoute, ASPath and VpnGateway. Defaults to ExpressRoute.
+	HubRoutingPreference *string `json:"hubRoutingPreference,omitempty" tf:"hub_routing_preference,omitempty"`
+
 	// The ID of the Virtual Hub.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -54,6 +57,10 @@ type VirtualHubParameters_2 struct {
 	// The Address Prefix which should be used for this Virtual Hub. Changing this forces a new resource to be created. The address prefix subnet cannot be smaller than a .
 	// +kubebuilder:validation:Optional
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
+
+	// The hub routing preference. Possible values are ExpressRoute, ASPath and VpnGateway. Defaults to ExpressRoute.
+	// +kubebuilder:validation:Optional
+	HubRoutingPreference *string `json:"hubRoutingPreference,omitempty" tf:"hub_routing_preference,omitempty"`
 
 	// Specifies the supported Azure location where the Virtual Hub should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

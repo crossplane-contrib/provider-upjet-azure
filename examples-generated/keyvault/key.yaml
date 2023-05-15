@@ -20,6 +20,11 @@ spec:
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    rotationPolicy:
+    - automatic:
+      - timeBeforeExpiry: P30D
+      expireAfter: P90D
+      notifyBeforeExpiry: P29D
 
 ---
 

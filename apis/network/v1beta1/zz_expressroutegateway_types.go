@@ -15,6 +15,9 @@ import (
 
 type ExpressRouteGatewayObservation struct {
 
+	// Specified whether this gateway accept traffic from non-Virtual WAN networks. Defaults to false.
+	AllowNonVirtualWanTraffic *bool `json:"allowNonVirtualWanTraffic,omitempty" tf:"allow_non_virtual_wan_traffic,omitempty"`
+
 	// The ID of the ExpressRoute gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -35,6 +38,10 @@ type ExpressRouteGatewayObservation struct {
 }
 
 type ExpressRouteGatewayParameters struct {
+
+	// Specified whether this gateway accept traffic from non-Virtual WAN networks. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AllowNonVirtualWanTraffic *bool `json:"allowNonVirtualWanTraffic,omitempty" tf:"allow_non_virtual_wan_traffic,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

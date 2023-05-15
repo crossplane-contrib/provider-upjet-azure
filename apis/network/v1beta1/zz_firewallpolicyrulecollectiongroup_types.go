@@ -52,7 +52,7 @@ type ApplicationRuleCollectionRuleObservation struct {
 	// The description which should be used for this rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies a list of destination IP addresses (including CIDR and *) or Service Tags.
+	// Specifies a list of destination IP addresses (including CIDR, IP range and *) or Service Tags.
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
 	// Specifies a list of destination FQDN tags.
@@ -70,7 +70,7 @@ type ApplicationRuleCollectionRuleObservation struct {
 	// Specifies a list of network protocols this rule applies to. Possible values are Any, TCP, UDP, ICMP.
 	Protocols []ProtocolsObservation `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// Specifies a list of source IP addresses (including CIDR and *).
+	// Specifies a list of source IP addresses (including CIDR, IP range and *).
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
 	// Specifies a list of source IP groups.
@@ -89,7 +89,7 @@ type ApplicationRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies a list of destination IP addresses (including CIDR and *) or Service Tags.
+	// Specifies a list of destination IP addresses (including CIDR, IP range and *) or Service Tags.
 	// +kubebuilder:validation:Optional
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
@@ -113,7 +113,7 @@ type ApplicationRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Protocols []ProtocolsParameters `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// Specifies a list of source IP addresses (including CIDR and *).
+	// Specifies a list of source IP addresses (including CIDR, IP range and *).
 	// +kubebuilder:validation:Optional
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
@@ -232,7 +232,7 @@ type NATRuleCollectionRuleObservation struct {
 	// Specifies a list of network protocols this rule applies to. Possible values are Any, TCP, UDP, ICMP.
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// Specifies a list of source IP addresses (including CIDR and *).
+	// Specifies a list of source IP addresses (including CIDR, IP range and *).
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
 	// Specifies a list of source IP groups.
@@ -266,7 +266,7 @@ type NATRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Protocols []*string `json:"protocols" tf:"protocols,omitempty"`
 
-	// Specifies a list of source IP addresses (including CIDR and *).
+	// Specifies a list of source IP addresses (including CIDR, IP range and *).
 	// +kubebuilder:validation:Optional
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
@@ -323,7 +323,7 @@ type NetworkRuleCollectionParameters struct {
 
 type NetworkRuleCollectionRuleObservation struct {
 
-	// Specifies a list of destination IP addresses (including CIDR and *) or Service Tags.
+	// Specifies a list of destination IP addresses (including CIDR, IP range and *) or Service Tags.
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
 	// Specifies a list of destination FQDNs.
@@ -341,7 +341,7 @@ type NetworkRuleCollectionRuleObservation struct {
 	// Specifies a list of network protocols this rule applies to. Possible values are Any, TCP, UDP, ICMP.
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// Specifies a list of source IP addresses (including CIDR and *).
+	// Specifies a list of source IP addresses (including CIDR, IP range and *).
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
 	// Specifies a list of source IP groups.
@@ -350,7 +350,7 @@ type NetworkRuleCollectionRuleObservation struct {
 
 type NetworkRuleCollectionRuleParameters struct {
 
-	// Specifies a list of destination IP addresses (including CIDR and *) or Service Tags.
+	// Specifies a list of destination IP addresses (including CIDR, IP range and *) or Service Tags.
 	// +kubebuilder:validation:Optional
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
@@ -374,7 +374,7 @@ type NetworkRuleCollectionRuleParameters struct {
 	// +kubebuilder:validation:Required
 	Protocols []*string `json:"protocols" tf:"protocols,omitempty"`
 
-	// Specifies a list of source IP addresses (including CIDR and *).
+	// Specifies a list of source IP addresses (including CIDR, IP range and *).
 	// +kubebuilder:validation:Optional
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 

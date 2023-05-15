@@ -164,7 +164,7 @@ type ManagedRulesParameters struct {
 
 type MatchConditionsObservation struct {
 
-	// A list of match values.
+	// A list of match values. This is Required when the operator is not Any.
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// One or more match_variables blocks as defined below.
@@ -173,7 +173,7 @@ type MatchConditionsObservation struct {
 	// Describes if this is negate condition or not
 	NegationCondition *bool `json:"negationCondition,omitempty" tf:"negation_condition,omitempty"`
 
-	// Describes operator to be matched. Possible values are IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith, EndsWith and Regex.
+	// Describes operator to be matched. Possible values are Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith, EndsWith and Regex.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of transformations to do before the match is attempted. Possible values are HtmlEntityDecode, Lowercase, RemoveNulls, Trim, UrlDecode and UrlEncode.
@@ -182,9 +182,9 @@ type MatchConditionsObservation struct {
 
 type MatchConditionsParameters struct {
 
-	// A list of match values.
-	// +kubebuilder:validation:Required
-	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
+	// A list of match values. This is Required when the operator is not Any.
+	// +kubebuilder:validation:Optional
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// One or more match_variables blocks as defined below.
 	// +kubebuilder:validation:Required
@@ -194,7 +194,7 @@ type MatchConditionsParameters struct {
 	// +kubebuilder:validation:Optional
 	NegationCondition *bool `json:"negationCondition,omitempty" tf:"negation_condition,omitempty"`
 
-	// Describes operator to be matched. Possible values are IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith, EndsWith and Regex.
+	// Describes operator to be matched. Possible values are Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith, EndsWith and Regex.
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 

@@ -274,7 +274,7 @@ spec:
                       from the time the resource is created.
                     type: string
                   timezone:
-                    description: 'The timezone of the start time. Defaults to UTC.
+                    description: 'The timezone of the start time. Defaults to Etc/UTC.
                       For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows'
                     type: string
                   weekDays:
@@ -535,7 +535,7 @@ spec:
                       from the time the resource is created.
                     type: string
                   timezone:
-                    description: 'The timezone of the start time. Defaults to UTC.
+                    description: 'The timezone of the start time. Defaults to Etc/UTC.
                       For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows'
                     type: string
                   weekDays:

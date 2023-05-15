@@ -18,7 +18,7 @@ type CorsObservation struct {
 	// A set of headers to be allowed via CORS.
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
-	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and PUT.
+	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// A set of origins to be allowed via CORS.
@@ -37,7 +37,7 @@ type CorsParameters struct {
 	// +kubebuilder:validation:Required
 	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
 
-	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and PUT.
+	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
 	// +kubebuilder:validation:Required
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
@@ -85,19 +85,26 @@ type HealthcareFHIRServiceAuthenticationParameters struct {
 
 type HealthcareFHIRServiceIdentityObservation struct {
 
+	// A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
 	// The ID of the Healthcare FHIR Service.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The ID of the Healthcare FHIR Service.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// The type of identity used for the Healthcare FHIR service. Possible values are SystemAssigned.
+	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type HealthcareFHIRServiceIdentityParameters struct {
 
-	// The type of identity used for the Healthcare FHIR service. Possible values are SystemAssigned.
+	// A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
+	// +kubebuilder:validation:Optional
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
 	// +kubebuilder:validation:Required
 	Type *string `json:"type" tf:"type,omitempty"`
 }

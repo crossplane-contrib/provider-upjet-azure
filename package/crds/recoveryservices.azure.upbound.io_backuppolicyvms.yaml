@@ -104,11 +104,17 @@ spec:
                       type: object
                     type: array
                   instantRestoreResourceGroup:
+                    description: Specifies the instant restore resource group name
+                      as documented in the instant_restore_resource_group block below.
                     items:
                       properties:
                         prefix:
+                          description: The prefix for the instant_restore_resource_group
+                            name.
                           type: string
                         suffix:
+                          description: The suffix for the instant_restore_resource_group
+                            name.
                           type: string
                       required:
                       - prefix
@@ -617,11 +623,17 @@ spec:
                     description: The ID of the VM Backup Policy.
                     type: string
                   instantRestoreResourceGroup:
+                    description: Specifies the instant restore resource group name
+                      as documented in the instant_restore_resource_group block below.
                     items:
                       properties:
                         prefix:
+                          description: The prefix for the instant_restore_resource_group
+                            name.
                           type: string
                         suffix:
+                          description: The suffix for the instant_restore_resource_group
+                            name.
                           type: string
                       type: object
                     type: array

@@ -62,6 +62,7 @@ type BackupPolicyVMObservation struct {
 	// The ID of the VM Backup Policy.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the instant restore resource group name as documented in the instant_restore_resource_group block below.
 	InstantRestoreResourceGroup []InstantRestoreResourceGroupObservation `json:"instantRestoreResourceGroup,omitempty" tf:"instant_restore_resource_group,omitempty"`
 
 	// Specifies the instant restore retention range in days. Possible values are between 1 and 5 when policy_type is V1, and 1 to 30 when policy_type is V2.
@@ -98,6 +99,7 @@ type BackupPolicyVMParameters struct {
 	// +kubebuilder:validation:Optional
 	Backup []BackupPolicyVMBackupParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
+	// Specifies the instant restore resource group name as documented in the instant_restore_resource_group block below.
 	// +kubebuilder:validation:Optional
 	InstantRestoreResourceGroup []InstantRestoreResourceGroupParameters `json:"instantRestoreResourceGroup,omitempty" tf:"instant_restore_resource_group,omitempty"`
 
@@ -251,16 +253,21 @@ type BackupPolicyVMRetentionYearlyParameters struct {
 }
 
 type InstantRestoreResourceGroupObservation struct {
+
+	// The prefix for the instant_restore_resource_group name.
 	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
 
+	// The suffix for the instant_restore_resource_group name.
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }
 
 type InstantRestoreResourceGroupParameters struct {
 
+	// The prefix for the instant_restore_resource_group name.
 	// +kubebuilder:validation:Required
 	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
 
+	// The suffix for the instant_restore_resource_group name.
 	// +kubebuilder:validation:Optional
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
 }

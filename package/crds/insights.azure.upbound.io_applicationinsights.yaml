@@ -207,7 +207,6 @@ spec:
                     type: object
                   workspaceId:
                     description: Specifies the id of a log analytics workspace resource.
-                      Changing this forces a new resource to be created.
                     type: string
                   workspaceIdRef:
                     description: Reference to a Workspace in operationalinsights to
@@ -552,7 +551,6 @@ spec:
                     type: object
                   workspaceId:
                     description: Specifies the id of a log analytics workspace resource.
-                      Changing this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

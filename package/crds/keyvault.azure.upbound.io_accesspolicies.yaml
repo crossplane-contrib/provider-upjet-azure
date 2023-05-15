@@ -84,7 +84,7 @@ spec:
                     description: 'List of key permissions, must be one or more from
                       the following: Backup, Create, Decrypt, Delete, Encrypt, Get,
                       Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update,
-                      Verify, WrapKey, Release, Rotate, GetRotationPolicy, and SetRotationPolicy.'
+                      Verify, WrapKey, Release, Rotate, GetRotationPolicy and SetRotationPolicy.'
                     items:
                       type: string
                     type: array
@@ -408,7 +408,7 @@ spec:
                     description: 'List of key permissions, must be one or more from
                       the following: Backup, Create, Decrypt, Delete, Encrypt, Get,
                       Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update,
-                      Verify, WrapKey, Release, Rotate, GetRotationPolicy, and SetRotationPolicy.'
+                      Verify, WrapKey, Release, Rotate, GetRotationPolicy and SetRotationPolicy.'
                     items:
                       type: string
                     type: array

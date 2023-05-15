@@ -72,9 +72,18 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to the Databricks Access Connector.
+                            Only one User Assigned Managed Identity ID is supported
+                            per Databricks Access Connector resource.
+                          items:
+                            type: string
+                          type: array
                         type:
-                          description: The type of identity to use for this Access
-                            Connector. SystemAssigned is the only possible value.
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on the Databricks Access Connector.
+                            Possible values include SystemAssigned or UserAssigned.
                           type: string
                       required:
                       - type
@@ -373,17 +382,26 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to the Databricks Access Connector.
+                            Only one User Assigned Managed Identity ID is supported
+                            per Databricks Access Connector resource.
+                          items:
+                            type: string
+                          type: array
                         principalId:
-                          description: The Principal ID associated with this system-assigned
-                            managed identity.
+                          description: The Principal ID of the System Assigned Managed
+                            Service Identity that is configured on this Access Connector.
                           type: string
                         tenantId:
-                          description: The Tenant ID associated with this system-assigned
-                            managed identity.
+                          description: The Tenant ID of the System Assigned Managed
+                            Service Identity that is configured on this Access Connector.
                           type: string
                         type:
-                          description: The type of identity to use for this Access
-                            Connector. SystemAssigned is the only possible value.
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on the Databricks Access Connector.
+                            Possible values include SystemAssigned or UserAssigned.
                           type: string
                       type: object
                     type: array

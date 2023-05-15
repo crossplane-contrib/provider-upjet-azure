@@ -369,6 +369,9 @@ type MonitorActionGroupObservation struct {
 	// One or more itsm_receiver blocks as defined below.
 	ItsmReceiver []ItsmReceiverObservation `json:"itsmReceiver,omitempty" tf:"itsm_receiver,omitempty"`
 
+	// The Azure Region where the Action Group should exist. Changing this forces a new Action Group to be created. Defaults to global.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// One or more logic_app_receiver blocks as defined below.
 	LogicAppReceiver []LogicAppReceiverObservation `json:"logicAppReceiver,omitempty" tf:"logic_app_receiver,omitempty"`
 
@@ -424,6 +427,10 @@ type MonitorActionGroupParameters struct {
 	// One or more itsm_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ItsmReceiver []ItsmReceiverParameters `json:"itsmReceiver,omitempty" tf:"itsm_receiver,omitempty"`
+
+	// The Azure Region where the Action Group should exist. Changing this forces a new Action Group to be created. Defaults to global.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// One or more logic_app_receiver blocks as defined below.
 	// +kubebuilder:validation:Optional

@@ -214,7 +214,7 @@ type MonitorMetricAlertCriteriaObservation struct {
 	// One of the metric namespaces to be monitored.
 	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
 
-	// The criteria operator. Possible values are Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan and LessThanOrEqual.
+	// The criteria operator. Possible values are Equals, GreaterThan, GreaterThanOrEqual, LessThan and LessThanOrEqual.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Skip the metric validation to allow creating an alert rule on a custom metric that isn't yet emitted? Defaults to false.
@@ -242,7 +242,7 @@ type MonitorMetricAlertCriteriaParameters struct {
 	// +kubebuilder:validation:Required
 	MetricNamespace *string `json:"metricNamespace" tf:"metric_namespace,omitempty"`
 
-	// The criteria operator. Possible values are Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan and LessThanOrEqual.
+	// The criteria operator. Possible values are Equals, GreaterThan, GreaterThanOrEqual, LessThan and LessThanOrEqual.
 	// +kubebuilder:validation:Required
 	Operator *string `json:"operator" tf:"operator,omitempty"`
 

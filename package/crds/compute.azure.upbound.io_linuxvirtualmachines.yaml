@@ -209,7 +209,8 @@ spec:
                       format. Defaults to 90 minutes (PT1H30M).
                     type: string
                   galleryApplication:
-                    description: A gallery_application block as defined below.
+                    description: One or more gallery_application blocks as defined
+                      below.
                     items:
                       properties:
                         configurationBlobUri:
@@ -978,7 +979,8 @@ spec:
                       format. Defaults to 90 minutes (PT1H30M).
                     type: string
                   galleryApplication:
-                    description: A gallery_application block as defined below.
+                    description: One or more gallery_application blocks as defined
+                      below.
                     items:
                       properties:
                         configurationBlobUri:

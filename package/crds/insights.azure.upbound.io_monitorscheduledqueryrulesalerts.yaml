@@ -414,7 +414,6 @@ spec:
                                   0 and 10000 inclusive.
                                 type: number
                             required:
-                            - metricColumn
                             - metricTriggerType
                             - operator
                             - threshold

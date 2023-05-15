@@ -75,7 +75,7 @@ spec:
                     type: boolean
                   allowGatewayTransit:
                     description: Controls gatewayLinks can be used in the remote virtual
-                      network’s link to the local virtual network.
+                      network’s link to the local virtual network. Defaults to false.
                     type: boolean
                   allowVirtualNetworkAccess:
                     description: Controls if the VMs in the remote virtual network
@@ -237,6 +237,14 @@ spec:
                             - IfNotPresent
                             type: string
                         type: object
+                    type: object
+                  triggers:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of key values pairs that can be used to
+                      sync network routes from the remote virtual network to the local
+                      virtual network. See the trigger example for an example on how
+                      to set it up.
                     type: object
                   useRemoteGateways:
                     description: Controls if remote gateways can be used on the local
@@ -522,7 +530,7 @@ spec:
                     type: boolean
                   allowGatewayTransit:
                     description: Controls gatewayLinks can be used in the remote virtual
-                      network’s link to the local virtual network.
+                      network’s link to the local virtual network. Defaults to false.
                     type: boolean
                   allowVirtualNetworkAccess:
                     description: Controls if the VMs in the remote virtual network
@@ -540,6 +548,14 @@ spec:
                       the virtual network peering. Changing this forces a new resource
                       to be created.
                     type: string
+                  triggers:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of key values pairs that can be used to
+                      sync network routes from the remote virtual network to the local
+                      virtual network. See the trigger example for an example on how
+                      to set it up.
+                    type: object
                   useRemoteGateways:
                     description: Controls if remote gateways can be used on the local
                       virtual network. If the flag is set to true, and allow_gateway_transit

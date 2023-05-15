@@ -151,6 +151,18 @@ spec:
                     description: The name of the service connection. Changing this
                       forces a new resource to be created.
                     type: string
+                  secretStore:
+                    description: An option to store secret value in secure place.
+                      An secret_store block as defined below.
+                    items:
+                      properties:
+                        keyVaultId:
+                          description: The key vault id to store secret.
+                          type: string
+                      required:
+                      - keyVaultId
+                      type: object
+                    type: array
                   springCloudId:
                     description: The ID of the data source spring cloud. Changing
                       this forces a new resource to be created.
@@ -562,6 +574,16 @@ spec:
                     description: The name of the service connection. Changing this
                       forces a new resource to be created.
                     type: string
+                  secretStore:
+                    description: An option to store secret value in secure place.
+                      An secret_store block as defined below.
+                    items:
+                      properties:
+                        keyVaultId:
+                          description: The key vault id to store secret.
+                          type: string
+                      type: object
+                    type: array
                   springCloudId:
                     description: The ID of the data source spring cloud. Changing
                       this forces a new resource to be created.

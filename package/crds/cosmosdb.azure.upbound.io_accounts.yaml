@@ -228,8 +228,7 @@ spec:
                     type: string
                   defaultIdentityType:
                     description: The default identity for accessing Key Vault. Possible
-                      values are FirstPartyIdentity, SystemAssignedIdentity or start
-                      with UserAssignedIdentity.
+                      values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
                     type: string
                   enableAutomaticFailover:
                     description: Enable automatic failover for this Cosmos DB account.
@@ -905,8 +904,7 @@ spec:
                     type: string
                   defaultIdentityType:
                     description: The default identity for accessing Key Vault. Possible
-                      values are FirstPartyIdentity, SystemAssignedIdentity or start
-                      with UserAssignedIdentity.
+                      values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
                     type: string
                   enableAutomaticFailover:
                     description: Enable automatic failover for this Cosmos DB account.

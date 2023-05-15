@@ -14,6 +14,7 @@ import (
 )
 
 type HealthcareMedtechServiceIdentityObservation struct {
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this System Assigned Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
@@ -26,6 +27,9 @@ type HealthcareMedtechServiceIdentityObservation struct {
 }
 
 type HealthcareMedtechServiceIdentityParameters struct {
+
+	// +kubebuilder:validation:Optional
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Healthcare Med Tech Service. Possible values are SystemAssigned.
 	// +kubebuilder:validation:Required

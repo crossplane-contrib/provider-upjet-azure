@@ -81,7 +81,7 @@ spec:
                           description: 'The time frame for pulling data for the query.
                             If custom, then a specific time period must be provided.
                             Possible values include: WeekToDate, MonthToDate, BillingMonthToDate,
-                            TheLastWeek, TheLastMonth, TheLastBillingMonth, Custom.'
+                            TheLast7Days, TheLastMonth, TheLastBillingMonth, Custom.'
                           type: string
                         type:
                           description: The type of the query. Possible values are
@@ -499,7 +499,7 @@ spec:
                           description: 'The time frame for pulling data for the query.
                             If custom, then a specific time period must be provided.
                             Possible values include: WeekToDate, MonthToDate, BillingMonthToDate,
-                            TheLastWeek, TheLastMonth, TheLastBillingMonth, Custom.'
+                            TheLast7Days, TheLastMonth, TheLastBillingMonth, Custom.'
                           type: string
                         type:
                           description: The type of the query. Possible values are

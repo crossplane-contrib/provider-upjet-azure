@@ -167,7 +167,7 @@ spec:
                             type: object
                           type: array
                         systemEvents:
-                          description: Specify the list of system events. Supported
+                          description: Specifies the list of system events. Supported
                             values are connect, connected and disconnected.
                           items:
                             type: string
@@ -180,9 +180,9 @@ spec:
                             http://example.com/api/{hub}/{event}.'
                           type: string
                         userEventPattern:
-                          description: 'Specify the matching event names. There are
-                            3 kind of patterns supported: * * matches any event name
-                            * , Combine multiple events with , for example event1,event2,
+                          description: 'Specifies the matching event names. There
+                            are 3 kind of patterns supported: * * matches any event
+                            name * , Combine multiple events with , for example event1,event2,
                             it matches event event1 and event2 * The single event
                             name, for example event1, it matches event1.'
                           type: string
@@ -190,13 +190,195 @@ spec:
                       - urlTemplate
                       type: object
                     type: array
+                  eventListener:
+                    description: An event_listener block as defined below.
+                    items:
+                      properties:
+                        eventhubName:
+                          description: Specifies the event hub name to receive the
+                            events.
+                          type: string
+                        eventhubNameRef:
+                          description: Reference to a EventHub in eventhub to populate
+                            eventhubName.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        eventhubNameSelector:
+                          description: Selector for a EventHub in eventhub to populate
+                            eventhubName.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        eventhubNamespaceName:
+                          description: Specifies the event hub namespace name to receive
+                            the events.
+                          type: string
+                        eventhubNamespaceNameRef:
+                          description: Reference to a EventHubNamespace in eventhub
+                            to populate eventhubNamespaceName.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        eventhubNamespaceNameSelector:
+                          description: Selector for a EventHubNamespace in eventhub
+                            to populate eventhubNamespaceName.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        systemEventNameFilter:
+                          description: Specifies the list of system events. Supported
+                            values are connected and disconnected.
+                          items:
+                            type: string
+                          type: array
+                        userEventNameFilter:
+                          description: Specifies the list of matching user event names.
+                            ["*"] can be used to match all events.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
                   name:
                     description: The name of the Web Pubsub hub service. Changing
                       this forces a new resource to be created.
                     type: string
                   webPubsubId:
-                    description: Specify the id of the Web Pubsub. Changing this forces
-                      a new resource to be created.
+                    description: Specifies the id of the Web Pubsub. Changing this
+                      forces a new resource to be created.
                     type: string
                   webPubsubIdRef:
                     description: Reference to a WebPubsub in signalrservice to populate
@@ -487,7 +669,7 @@ spec:
                             type: object
                           type: array
                         systemEvents:
-                          description: Specify the list of system events. Supported
+                          description: Specifies the list of system events. Supported
                             values are connect, connected and disconnected.
                           items:
                             type: string
@@ -500,12 +682,38 @@ spec:
                             http://example.com/api/{hub}/{event}.'
                           type: string
                         userEventPattern:
-                          description: 'Specify the matching event names. There are
-                            3 kind of patterns supported: * * matches any event name
-                            * , Combine multiple events with , for example event1,event2,
+                          description: 'Specifies the matching event names. There
+                            are 3 kind of patterns supported: * * matches any event
+                            name * , Combine multiple events with , for example event1,event2,
                             it matches event event1 and event2 * The single event
                             name, for example event1, it matches event1.'
                           type: string
+                      type: object
+                    type: array
+                  eventListener:
+                    description: An event_listener block as defined below.
+                    items:
+                      properties:
+                        eventhubName:
+                          description: Specifies the event hub name to receive the
+                            events.
+                          type: string
+                        eventhubNamespaceName:
+                          description: Specifies the event hub namespace name to receive
+                            the events.
+                          type: string
+                        systemEventNameFilter:
+                          description: Specifies the list of system events. Supported
+                            values are connected and disconnected.
+                          items:
+                            type: string
+                          type: array
+                        userEventNameFilter:
+                          description: Specifies the list of matching user event names.
+                            ["*"] can be used to match all events.
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   id:
@@ -516,8 +724,8 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   webPubsubId:
-                    description: Specify the id of the Web Pubsub. Changing this forces
-                      a new resource to be created.
+                    description: Specifies the id of the Web Pubsub. Changing this
+                      forces a new resource to be created.
                     type: string
                 type: object
               conditions:

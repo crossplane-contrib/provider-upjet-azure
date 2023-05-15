@@ -622,6 +622,7 @@ spec:
                           type: string
                         requireSni:
                           description: Should Server Name Indication be Required?
+                            Defaults to false.
                           type: boolean
                         sslCertificateName:
                           description: The name of the associated SSL Certificate
@@ -1108,7 +1109,7 @@ spec:
                                   determines the order of execution in a set.
                                 type: number
                               url:
-                                description: One url block as defined above
+                                description: One url block as defined below
                                 items:
                                   properties:
                                     components:
@@ -1170,8 +1171,8 @@ spec:
                     items:
                       properties:
                         dataSecretRef:
-                          description: PFX certificate. Required if key_vault_secret_id
-                            is not set.
+                          description: The base64-encoded PFX certificate data. Required
+                            if key_vault_secret_id is not set.
                           properties:
                             key:
                               description: The key to select.
@@ -2114,6 +2115,7 @@ spec:
                           type: string
                         requireSni:
                           description: Should Server Name Indication be Required?
+                            Defaults to false.
                           type: boolean
                         sslCertificateId:
                           description: The ID of the associated SSL Certificate.
@@ -2466,7 +2468,7 @@ spec:
                                   determines the order of execution in a set.
                                 type: number
                               url:
-                                description: One url block as defined above
+                                description: One url block as defined below
                                 items:
                                   properties:
                                     components:

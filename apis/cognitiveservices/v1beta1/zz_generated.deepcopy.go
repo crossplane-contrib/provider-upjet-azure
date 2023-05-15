@@ -81,11 +81,6 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.CustomQuestionAnsweringSearchServiceKey != nil {
-		in, out := &in.CustomQuestionAnsweringSearchServiceKey, &out.CustomQuestionAnsweringSearchServiceKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.CustomSubdomainName != nil {
 		in, out := &in.CustomSubdomainName, &out.CustomSubdomainName
 		*out = new(string)
@@ -240,9 +235,9 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.CustomQuestionAnsweringSearchServiceKey != nil {
-		in, out := &in.CustomQuestionAnsweringSearchServiceKey, &out.CustomQuestionAnsweringSearchServiceKey
-		*out = new(string)
+	if in.CustomQuestionAnsweringSearchServiceKeySecretRef != nil {
+		in, out := &in.CustomQuestionAnsweringSearchServiceKeySecretRef, &out.CustomQuestionAnsweringSearchServiceKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.CustomSubdomainName != nil {

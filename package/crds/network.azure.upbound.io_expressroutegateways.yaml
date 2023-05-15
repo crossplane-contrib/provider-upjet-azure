@@ -68,6 +68,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  allowNonVirtualWanTraffic:
+                    description: Specified whether this gateway accept traffic from
+                      non-Virtual WAN networks. Defaults to false.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -437,6 +441,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  allowNonVirtualWanTraffic:
+                    description: Specified whether this gateway accept traffic from
+                      non-Virtual WAN networks. Defaults to false.
+                    type: boolean
                   id:
                     description: The ID of the ExpressRoute gateway.
                     type: string

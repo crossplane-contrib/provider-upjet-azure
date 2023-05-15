@@ -245,7 +245,7 @@ type RedisCacheParameters struct {
 
 type RedisConfigurationObservation struct {
 
-	// Enable or disable AOF persistence for this Redis Cache.
+	// Enable or disable AOF persistence for this Redis Cache. Defaults to false.
 	AofBackupEnabled *bool `json:"aofBackupEnabled,omitempty" tf:"aof_backup_enabled,omitempty"`
 
 	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
@@ -269,7 +269,7 @@ type RedisConfigurationObservation struct {
 	// Keyspace notifications allows clients to subscribe to Pub/Sub channels in order to receive events affecting the Redis data set in some way. Reference
 	NotifyKeySpaceEvents *string `json:"notifyKeyspaceEvents,omitempty" tf:"notify_keyspace_events,omitempty"`
 
-	// Is Backup Enabled? Only supported on Premium SKUs.
+	// Is Backup Enabled? Only supported on Premium SKUs. Defaults to false.
 	RdbBackupEnabled *bool `json:"rdbBackupEnabled,omitempty" tf:"rdb_backup_enabled,omitempty"`
 
 	// The Backup Frequency in Minutes. Only supported on Premium SKUs. Possible values are: 15, 30, 60, 360, 720 and 1440.
@@ -281,7 +281,7 @@ type RedisConfigurationObservation struct {
 
 type RedisConfigurationParameters struct {
 
-	// Enable or disable AOF persistence for this Redis Cache.
+	// Enable or disable AOF persistence for this Redis Cache. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AofBackupEnabled *bool `json:"aofBackupEnabled,omitempty" tf:"aof_backup_enabled,omitempty"`
 
@@ -317,7 +317,7 @@ type RedisConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	NotifyKeySpaceEvents *string `json:"notifyKeyspaceEvents,omitempty" tf:"notify_keyspace_events,omitempty"`
 
-	// Is Backup Enabled? Only supported on Premium SKUs.
+	// Is Backup Enabled? Only supported on Premium SKUs. Defaults to false.
 	// +kubebuilder:validation:Optional
 	RdbBackupEnabled *bool `json:"rdbBackupEnabled,omitempty" tf:"rdb_backup_enabled,omitempty"`
 

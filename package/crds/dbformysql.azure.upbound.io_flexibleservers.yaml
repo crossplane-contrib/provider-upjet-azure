@@ -107,6 +107,17 @@ spec:
                     description: A customer_managed_key block as defined below.
                     items:
                       properties:
+                        geoBackupKeyVaultKeyId:
+                          description: The ID of the geo backup Key Vault Key. It
+                            can't cross region and need Customer Managed Key in same
+                            region as geo backup.
+                          type: string
+                        geoBackupUserAssignedIdentityId:
+                          description: The geo backup user managed identity id for
+                            a Customer Managed Key. Should be added with identity_ids.
+                            It can't cross region and need identity in same region
+                            as geo backup.
+                          type: string
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key.
                           type: string
@@ -222,18 +233,17 @@ spec:
                       properties:
                         identityIds:
                           description: A list of User Assigned Managed Identity IDs
-                            to be assigned to this API Management Service. Required
-                            if used together with customer_managed_key block.
+                            to be assigned to this MySQL Flexible Server.
                           items:
                             type: string
                           type: array
                         type:
                           description: Specifies the type of Managed Service Identity
-                            that should be configured on this API Management Service.
-                            Should be set to UserAssigned, SystemAssigned, UserAssigned
-                            (to enable both).
+                            that should be configured on this MySQL Flexible Server.
+                            The only possible value is UserAssigned.
                           type: string
                       required:
+                      - identityIds
                       - type
                       type: object
                     type: array
@@ -686,6 +696,17 @@ spec:
                     description: A customer_managed_key block as defined below.
                     items:
                       properties:
+                        geoBackupKeyVaultKeyId:
+                          description: The ID of the geo backup Key Vault Key. It
+                            can't cross region and need Customer Managed Key in same
+                            region as geo backup.
+                          type: string
+                        geoBackupUserAssignedIdentityId:
+                          description: The geo backup user managed identity id for
+                            a Customer Managed Key. Should be added with identity_ids.
+                            It can't cross region and need identity in same region
+                            as geo backup.
+                          type: string
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key.
                           type: string
@@ -733,22 +754,14 @@ spec:
                       properties:
                         identityIds:
                           description: A list of User Assigned Managed Identity IDs
-                            to be assigned to this API Management Service. Required
-                            if used together with customer_managed_key block.
+                            to be assigned to this MySQL Flexible Server.
                           items:
                             type: string
                           type: array
-                        principalId:
-                          description: The ID of the MySQL Flexible Server.
-                          type: string
-                        tenantId:
-                          description: The ID of the MySQL Flexible Server.
-                          type: string
                         type:
                           description: Specifies the type of Managed Service Identity
-                            that should be configured on this API Management Service.
-                            Should be set to UserAssigned, SystemAssigned, UserAssigned
-                            (to enable both).
+                            that should be configured on this MySQL Flexible Server.
+                            The only possible value is UserAssigned.
                           type: string
                       type: object
                     type: array

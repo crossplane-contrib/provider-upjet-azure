@@ -234,6 +234,9 @@ type KubernetesClusterNodePoolObservation struct {
 	// Specifies how the node pool should deal with scaled-down nodes. Allowed values are Delete and Deallocate. Defaults to Delete.
 	ScaleDownMode *string `json:"scaleDownMode,omitempty" tf:"scale_down_mode,omitempty"`
 
+	// The ID of the Snapshot which should be used to create this Node Pool. Changing this forces a new resource to be created.
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
 	// The maximum price you're willing to pay in USD per Virtual Machine. Valid values are -1 (the current on-demand price for a Virtual Machine) or a positive value with up to five decimal places. Changing this forces a new resource to be created.
 	SpotMaxPrice *float64 `json:"spotMaxPrice,omitempty" tf:"spot_max_price,omitempty"`
 
@@ -255,7 +258,7 @@ type KubernetesClusterNodePoolObservation struct {
 	// A windows_profile block as documented below. Changing this forces a new resource to be created.
 	WindowsProfile []KubernetesClusterNodePoolWindowsProfileObservation `json:"windowsProfile,omitempty" tf:"windows_profile,omitempty"`
 
-	// Used to specify the workload runtime. Allowed values are OCIContainer and WasmWasi.
+	// Used to specify the workload runtime. Allowed values are OCIContainer, WasmWasi and KataMshvVmIsolation.
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kubernetes Cluster Node Pool should be located. Changing this forces a new Kubernetes Cluster Node Pool to be created.
@@ -408,6 +411,10 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	ScaleDownMode *string `json:"scaleDownMode,omitempty" tf:"scale_down_mode,omitempty"`
 
+	// The ID of the Snapshot which should be used to create this Node Pool. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	SnapshotID *string `json:"snapshotId,omitempty" tf:"snapshot_id,omitempty"`
+
 	// The maximum price you're willing to pay in USD per Virtual Machine. Valid values are -1 (the current on-demand price for a Virtual Machine) or a positive value with up to five decimal places. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SpotMaxPrice *float64 `json:"spotMaxPrice,omitempty" tf:"spot_max_price,omitempty"`
@@ -446,7 +453,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	WindowsProfile []KubernetesClusterNodePoolWindowsProfileParameters `json:"windowsProfile,omitempty" tf:"windows_profile,omitempty"`
 
-	// Used to specify the workload runtime. Allowed values are OCIContainer and WasmWasi.
+	// Used to specify the workload runtime. Allowed values are OCIContainer, WasmWasi and KataMshvVmIsolation.
 	// +kubebuilder:validation:Optional
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 

@@ -96,8 +96,6 @@ type AccountParameters struct {
 }
 
 type EncryptionObservation struct {
-
-	// The source of the encryption key. Possible values are Microsoft.Automation and Microsoft.Keyvault.
 	KeySource *string `json:"keySource,omitempty" tf:"key_source,omitempty"`
 
 	// The ID of the Key Vault Key which should be used to Encrypt the data in this Automation Account.
@@ -109,7 +107,6 @@ type EncryptionObservation struct {
 
 type EncryptionParameters struct {
 
-	// The source of the encryption key. Possible values are Microsoft.Automation and Microsoft.Keyvault.
 	// +kubebuilder:validation:Optional
 	KeySource *string `json:"keySource,omitempty" tf:"key_source,omitempty"`
 

@@ -69,16 +69,103 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  dataCollectionEndpointId:
+                    description: The resource ID of the Data Collection Endpoint that
+                      this rule can be used with.
+                    type: string
+                  dataCollectionEndpointIdRef:
+                    description: Reference to a MonitorDataCollectionEndpoint in insights
+                      to populate dataCollectionEndpointId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  dataCollectionEndpointIdSelector:
+                    description: Selector for a MonitorDataCollectionEndpoint in insights
+                      to populate dataCollectionEndpointId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   dataFlow:
                     description: One or more data_flow blocks as defined below.
                     items:
                       properties:
+                        builtInTransform:
+                          description: The built-in transform to transform stream
+                            data.
+                          type: string
                         destinations:
                           description: Specifies a list of destination names. A azure_monitor_metrics
                             data source only allows for stream of kind Microsoft-InsightsMetrics.
                           items:
                             type: string
                           type: array
+                        outputStream:
+                          description: The output stream of the transform. Only required
+                            if the data flow changes data to a different stream.
+                          type: string
                         streams:
                           description: Specifies a list of streams. Possible values
                             include but not limited to Microsoft-Event, Microsoft-InsightsMetrics,
@@ -86,6 +173,9 @@ spec:
                           items:
                             type: string
                           type: array
+                        transformKql:
+                          description: The KQL query to transform stream data.
+                          type: string
                       required:
                       - destinations
                       - streams
@@ -97,6 +187,38 @@ spec:
                       via direct calls to the provisioned endpoint.
                     items:
                       properties:
+                        dataImport:
+                          description: A data_import block as defined above.
+                          items:
+                            properties:
+                              eventHubDataSource:
+                                description: An event_hub_data_source block as defined
+                                  below.
+                                items:
+                                  properties:
+                                    consumerGroup:
+                                      description: The Event Hub consumer group name.
+                                      type: string
+                                    name:
+                                      description: The name which should be used for
+                                        this data source. This name should be unique
+                                        across all data sources regardless of type
+                                        within the Data Collection Rule.
+                                      type: string
+                                    stream:
+                                      description: The stream to collect from Event
+                                        Hub. Possible value should be a custom stream
+                                        name.
+                                      type: string
+                                  required:
+                                  - name
+                                  - stream
+                                  type: object
+                                type: array
+                            required:
+                            - eventHubDataSource
+                            type: object
+                          type: array
                         extension:
                           description: One or more extension blocks as defined below.
                           items:
@@ -128,14 +250,103 @@ spec:
                                   data source will be sent to. A stream indicates
                                   what schema will be used for this data and usually
                                   what table in Log Analytics the data will be sent
-                                  to. Possible values include but not limited to Microsoft-Event,and
-                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
-                                  and Microsoft-SecurityEvent.
+                                  to.
                                 items:
                                   type: string
                                 type: array
                             required:
                             - extensionName
+                            - name
+                            - streams
+                            type: object
+                          type: array
+                        iisLog:
+                          description: One or more iis_log blocks as defined below.
+                          items:
+                            properties:
+                              logDirectories:
+                                description: Specifies a list of absolute paths where
+                                  the log files are located.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - name
+                            - streams
+                            type: object
+                          type: array
+                        logFile:
+                          description: One or more log_file blocks as defined below.
+                          items:
+                            properties:
+                              filePatterns:
+                                description: Specifies a list of file patterns where
+                                  the log files are located. For example, C:\\JavaLogs\\*.log.
+                                items:
+                                  type: string
+                                type: array
+                              format:
+                                description: The data format of the log files. possible
+                                  value is text.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              settings:
+                                description: A settings block as defined below.
+                                items:
+                                  properties:
+                                    text:
+                                      description: A text block as defined below.
+                                      items:
+                                        properties:
+                                          recordStartTimestampFormat:
+                                            description: The timestamp format of the
+                                              text log files. Possible values are
+                                              ISO 8601, YYYY-MM-DD HH:MM:SS, M/D/YYYY
+                                              HH:MM:SS AM/PM, Mon DD, YYYY HH:MM:SS,
+                                              yyMMdd HH:mm:ss, ddMMyy HH:mm:ss, MMM
+                                              d hh:mm:ss, dd/MMM/yyyy:HH:mm:ss zzz,and
+                                              yyyy-MM-ddTHH:mm:ssK.
+                                            type: string
+                                        required:
+                                        - recordStartTimestampFormat
+                                        type: object
+                                      type: array
+                                  required:
+                                  - text
+                                  type: object
+                                type: array
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - filePatterns
+                            - format
                             - name
                             - streams
                             type: object
@@ -172,9 +383,7 @@ spec:
                                   data source will be sent to. A stream indicates
                                   what schema will be used for this data and usually
                                   what table in Log Analytics the data will be sent
-                                  to. Possible values include but not limited to Microsoft-Event,and
-                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
-                                  and Microsoft-SecurityEvent.
+                                  to.
                                 items:
                                   type: string
                                 type: array
@@ -182,6 +391,74 @@ spec:
                             - counterSpecifiers
                             - name
                             - samplingFrequencyInSeconds
+                            - streams
+                            type: object
+                          type: array
+                        platformTelemetry:
+                          description: One or more platform_telemetry blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - name
+                            - streams
+                            type: object
+                          type: array
+                        prometheusForwarder:
+                          description: One or more prometheus_forwarder blocks as
+                            defined below.
+                          items:
+                            properties:
+                              labelIncludeFilter:
+                                description: One or more label_include_filter blocks
+                                  as defined above.
+                                items:
+                                  properties:
+                                    label:
+                                      description: The label of the filter. This label
+                                        should be unique across all label_include_fileter
+                                        block. Possible value is microsoft_metrics_include_label.
+                                      type: string
+                                    value:
+                                      description: The value of the filter.
+                                      type: string
+                                  required:
+                                  - label
+                                  - value
+                                  type: object
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - name
                             - streams
                             type: object
                           type: array
@@ -218,9 +495,7 @@ spec:
                                   data source will be sent to. A stream indicates
                                   what schema will be used for this data and usually
                                   what table in Log Analytics the data will be sent
-                                  to. Possible values include but not limited to Microsoft-Event,and
-                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
-                                  and Microsoft-SecurityEvent.
+                                  to.
                                 items:
                                   type: string
                                 type: array
@@ -246,9 +521,7 @@ spec:
                                   data source will be sent to. A stream indicates
                                   what schema will be used for this data and usually
                                   what table in Log Analytics the data will be sent
-                                  to. Possible values include but not limited to Microsoft-Event,and
-                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
-                                  and Microsoft-SecurityEvent.
+                                  to.
                                 items:
                                   type: string
                                 type: array
@@ -263,6 +536,31 @@ spec:
                             - name
                             - streams
                             - xPathQueries
+                            type: object
+                          type: array
+                        windowsFirewallLog:
+                          description: One or more windows_firewall_log blocks as
+                            defined below.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - name
+                            - streams
                             type: object
                           type: array
                       type: object
@@ -285,6 +583,121 @@ spec:
                                   Collection Rule.
                                 type: string
                             required:
+                            - name
+                            type: object
+                          type: array
+                        eventHub:
+                          description: One or more event_hub blocks as defined below.
+                          items:
+                            properties:
+                              eventHubId:
+                                description: The resource ID of the Event Hub.
+                                type: string
+                              eventHubIdRef:
+                                description: Reference to a EventHub in eventhub to
+                                  populate eventHubId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              eventHubIdSelector:
+                                description: Selector for a EventHub in eventhub to
+                                  populate eventHubId.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                            required:
+                            - name
+                            type: object
+                          type: array
+                        eventHubDirect:
+                          description: One or more event_hub blocks as defined below.
+                          items:
+                            properties:
+                              eventHubId:
+                                description: The resource ID of the Event Hub.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                            required:
+                            - eventHubId
                             - name
                             type: object
                           type: array
@@ -386,14 +799,280 @@ spec:
                             - name
                             type: object
                           type: array
+                        monitorAccount:
+                          description: One or more monitor_account blocks as defined
+                            below.
+                          items:
+                            properties:
+                              monitorAccountId:
+                                description: The resource ID of the Monitor Account.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                            required:
+                            - monitorAccountId
+                            - name
+                            type: object
+                          type: array
+                        storageBlob:
+                          description: One or more storage_blob blocks as defined
+                            below.
+                          items:
+                            properties:
+                              containerName:
+                                description: The Storage Container name.
+                                type: string
+                              containerNameRef:
+                                description: Reference to a Container in storage to
+                                  populate containerName.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              containerNameSelector:
+                                description: Selector for a Container in storage to
+                                  populate containerName.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              storageAccountId:
+                                description: The resource ID of the Storage Account.
+                                type: string
+                              storageAccountIdRef:
+                                description: Reference to a Account in storage to
+                                  populate storageAccountId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              storageAccountIdSelector:
+                                description: Selector for a Account in storage to
+                                  populate storageAccountId.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          type: array
+                        storageBlobDirect:
+                          description: One or more storage_blob_direct blocks as defined
+                            below.
+                          items:
+                            properties:
+                              containerName:
+                                description: The Storage Container name.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              storageAccountId:
+                                description: The resource ID of the Storage Account.
+                                type: string
+                            required:
+                            - containerName
+                            - name
+                            - storageAccountId
+                            type: object
+                          type: array
+                        storageTableDirect:
+                          description: One or more storage_table_direct blocks as
+                            defined below.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              storageAccountId:
+                                description: The resource ID of the Storage Account.
+                                type: string
+                              tableName:
+                                description: The Storage Table name.
+                                type: string
+                            required:
+                            - name
+                            - storageAccountId
+                            - tableName
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this Data Collection Rule. Currently,
+                            up to 1 identity is supported.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Data Collection Rule.
+                            Possible values are SystemAssigned and UserAssigned.
+                          type: string
+                      required:
+                      - type
                       type: object
                     type: array
                   kind:
                     description: The kind of the Data Collection Rule. Possible values
-                      are Linux and Windows. A rule of kind Linux does not allow for
-                      windows_event_log data sources. And a rule of kind Windows does
-                      not allow for syslog data sources. If kind is not specified,
-                      all kinds of data sources are allowed.
+                      are Linux, Windows,and AgentDirectToStore. A rule of kind Linux
+                      does not allow for windows_event_log data sources. And a rule
+                      of kind Windows does not allow for syslog data sources. If kind
+                      is not specified, all kinds of data sources are allowed.
                     type: string
                   location:
                     description: The Azure Region where the Data Collection Rule should
@@ -480,6 +1159,40 @@ spec:
                             type: string
                         type: object
                     type: object
+                  streamDeclaration:
+                    description: A stream_declaration block as defined below.
+                    items:
+                      properties:
+                        column:
+                          description: One or more column blocks as defined above.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              type:
+                                description: Specifies the type of Managed Service
+                                  Identity that should be configured on this Data
+                                  Collection Rule. Possible values are SystemAssigned
+                                  and UserAssigned.
+                                type: string
+                            required:
+                            - name
+                            - type
+                            type: object
+                          type: array
+                        streamName:
+                          description: The name of the custom stream. This name should
+                            be unique across all stream_declaration blocks.
+                          type: string
+                      required:
+                      - column
+                      - streamName
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -686,16 +1399,28 @@ spec:
             properties:
               atProvider:
                 properties:
+                  dataCollectionEndpointId:
+                    description: The resource ID of the Data Collection Endpoint that
+                      this rule can be used with.
+                    type: string
                   dataFlow:
                     description: One or more data_flow blocks as defined below.
                     items:
                       properties:
+                        builtInTransform:
+                          description: The built-in transform to transform stream
+                            data.
+                          type: string
                         destinations:
                           description: Specifies a list of destination names. A azure_monitor_metrics
                             data source only allows for stream of kind Microsoft-InsightsMetrics.
                           items:
                             type: string
                           type: array
+                        outputStream:
+                          description: The output stream of the transform. Only required
+                            if the data flow changes data to a different stream.
+                          type: string
                         streams:
                           description: Specifies a list of streams. Possible values
                             include but not limited to Microsoft-Event, Microsoft-InsightsMetrics,
@@ -703,6 +1428,9 @@ spec:
                           items:
                             type: string
                           type: array
+                        transformKql:
+                          description: The KQL query to transform stream data.
+                          type: string
                       type: object
                     type: array
                   dataSources:
@@ -711,6 +1439,33 @@ spec:
                       via direct calls to the provisioned endpoint.
                     items:
                       properties:
+                        dataImport:
+                          description: A data_import block as defined above.
+                          items:
+                            properties:
+                              eventHubDataSource:
+                                description: An event_hub_data_source block as defined
+                                  below.
+                                items:
+                                  properties:
+                                    consumerGroup:
+                                      description: The Event Hub consumer group name.
+                                      type: string
+                                    name:
+                                      description: The name which should be used for
+                                        this data source. This name should be unique
+                                        across all data sources regardless of type
+                                        within the Data Collection Rule.
+                                      type: string
+                                    stream:
+                                      description: The stream to collect from Event
+                                        Hub. Possible value should be a custom stream
+                                        name.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         extension:
                           description: One or more extension blocks as defined below.
                           items:
@@ -742,9 +1497,86 @@ spec:
                                   data source will be sent to. A stream indicates
                                   what schema will be used for this data and usually
                                   what table in Log Analytics the data will be sent
-                                  to. Possible values include but not limited to Microsoft-Event,and
-                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
-                                  and Microsoft-SecurityEvent.
+                                  to.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        iisLog:
+                          description: One or more iis_log blocks as defined below.
+                          items:
+                            properties:
+                              logDirectories:
+                                description: Specifies a list of absolute paths where
+                                  the log files are located.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        logFile:
+                          description: One or more log_file blocks as defined below.
+                          items:
+                            properties:
+                              filePatterns:
+                                description: Specifies a list of file patterns where
+                                  the log files are located. For example, C:\\JavaLogs\\*.log.
+                                items:
+                                  type: string
+                                type: array
+                              format:
+                                description: The data format of the log files. possible
+                                  value is text.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              settings:
+                                description: A settings block as defined below.
+                                items:
+                                  properties:
+                                    text:
+                                      description: A text block as defined below.
+                                      items:
+                                        properties:
+                                          recordStartTimestampFormat:
+                                            description: The timestamp format of the
+                                              text log files. Possible values are
+                                              ISO 8601, YYYY-MM-DD HH:MM:SS, M/D/YYYY
+                                              HH:MM:SS AM/PM, Mon DD, YYYY HH:MM:SS,
+                                              yyMMdd HH:mm:ss, ddMMyy HH:mm:ss, MMM
+                                              d hh:mm:ss, dd/MMM/yyyy:HH:mm:ss zzz,and
+                                              yyyy-MM-ddTHH:mm:ssK.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to.
                                 items:
                                   type: string
                                 type: array
@@ -782,9 +1614,66 @@ spec:
                                   data source will be sent to. A stream indicates
                                   what schema will be used for this data and usually
                                   what table in Log Analytics the data will be sent
-                                  to. Possible values include but not limited to Microsoft-Event,and
-                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
-                                  and Microsoft-SecurityEvent.
+                                  to.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        platformTelemetry:
+                          description: One or more platform_telemetry blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        prometheusForwarder:
+                          description: One or more prometheus_forwarder blocks as
+                            defined below.
+                          items:
+                            properties:
+                              labelIncludeFilter:
+                                description: One or more label_include_filter blocks
+                                  as defined above.
+                                items:
+                                  properties:
+                                    label:
+                                      description: The label of the filter. This label
+                                        should be unique across all label_include_fileter
+                                        block. Possible value is microsoft_metrics_include_label.
+                                      type: string
+                                    value:
+                                      description: The value of the filter.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to.
                                 items:
                                   type: string
                                 type: array
@@ -823,9 +1712,7 @@ spec:
                                   data source will be sent to. A stream indicates
                                   what schema will be used for this data and usually
                                   what table in Log Analytics the data will be sent
-                                  to. Possible values include but not limited to Microsoft-Event,and
-                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
-                                  and Microsoft-SecurityEvent.
+                                  to.
                                 items:
                                   type: string
                                 type: array
@@ -847,9 +1734,7 @@ spec:
                                   data source will be sent to. A stream indicates
                                   what schema will be used for this data and usually
                                   what table in Log Analytics the data will be sent
-                                  to. Possible values include but not limited to Microsoft-Event,and
-                                  Microsoft-WindowsEvent, Microsoft-RomeDetectionEvent,
-                                  and Microsoft-SecurityEvent.
+                                  to.
                                 items:
                                   type: string
                                 type: array
@@ -857,6 +1742,28 @@ spec:
                                 description: Specifies a list of Windows Event Log
                                   queries in XPath expression. Please see this document
                                   for more information.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        windowsFirewallLog:
+                          description: One or more windows_firewall_log blocks as
+                            defined below.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              streams:
+                                description: Specifies a list of streams that this
+                                  data source will be sent to. A stream indicates
+                                  what schema will be used for this data and usually
+                                  what table in Log Analytics the data will be sent
+                                  to.
                                 items:
                                   type: string
                                 type: array
@@ -883,6 +1790,36 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        eventHub:
+                          description: One or more event_hub blocks as defined below.
+                          items:
+                            properties:
+                              eventHubId:
+                                description: The resource ID of the Event Hub.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                            type: object
+                          type: array
+                        eventHubDirect:
+                          description: One or more event_hub blocks as defined below.
+                          items:
+                            properties:
+                              eventHubId:
+                                description: The resource ID of the Event Hub.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                            type: object
+                          type: array
                         logAnalytics:
                           description: One or more log_analytics blocks as defined
                             below.
@@ -899,17 +1836,119 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        monitorAccount:
+                          description: One or more monitor_account blocks as defined
+                            below.
+                          items:
+                            properties:
+                              monitorAccountId:
+                                description: The resource ID of the Monitor Account.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                            type: object
+                          type: array
+                        storageBlob:
+                          description: One or more storage_blob blocks as defined
+                            below.
+                          items:
+                            properties:
+                              containerName:
+                                description: The Storage Container name.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              storageAccountId:
+                                description: The resource ID of the Storage Account.
+                                type: string
+                            type: object
+                          type: array
+                        storageBlobDirect:
+                          description: One or more storage_blob_direct blocks as defined
+                            below.
+                          items:
+                            properties:
+                              containerName:
+                                description: The Storage Container name.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              storageAccountId:
+                                description: The resource ID of the Storage Account.
+                                type: string
+                            type: object
+                          type: array
+                        storageTableDirect:
+                          description: One or more storage_table_direct blocks as
+                            defined below.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              storageAccountId:
+                                description: The resource ID of the Storage Account.
+                                type: string
+                              tableName:
+                                description: The Storage Table name.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   id:
                     description: The ID of the Data Collection Rule.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this Data Collection Rule. Currently,
+                            up to 1 identity is supported.
+                          items:
+                            type: string
+                          type: array
+                        principalId:
+                          description: The Principal ID associated with this Managed
+                            Service Identity.
+                          type: string
+                        tenantId:
+                          description: The Tenant ID associated with this Managed
+                            Service Identity.
+                          type: string
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Data Collection Rule.
+                            Possible values are SystemAssigned and UserAssigned.
+                          type: string
+                      type: object
+                    type: array
+                  immutableId:
+                    description: The immutable ID of the Data Collection Rule.
+                    type: string
                   kind:
                     description: The kind of the Data Collection Rule. Possible values
-                      are Linux and Windows. A rule of kind Linux does not allow for
-                      windows_event_log data sources. And a rule of kind Windows does
-                      not allow for syslog data sources. If kind is not specified,
-                      all kinds of data sources are allowed.
+                      are Linux, Windows,and AgentDirectToStore. A rule of kind Linux
+                      does not allow for windows_event_log data sources. And a rule
+                      of kind Windows does not allow for syslog data sources. If kind
+                      is not specified, all kinds of data sources are allowed.
                     type: string
                   location:
                     description: The Azure Region where the Data Collection Rule should
@@ -921,6 +1960,34 @@ spec:
                       Rule should exist. Changing this forces a new Data Collection
                       Rule to be created.
                     type: string
+                  streamDeclaration:
+                    description: A stream_declaration block as defined below.
+                    items:
+                      properties:
+                        column:
+                          description: One or more column blocks as defined above.
+                          items:
+                            properties:
+                              name:
+                                description: The name which should be used for this
+                                  data source. This name should be unique across all
+                                  data sources regardless of type within the Data
+                                  Collection Rule.
+                                type: string
+                              type:
+                                description: Specifies the type of Managed Service
+                                  Identity that should be configured on this Data
+                                  Collection Rule. Possible values are SystemAssigned
+                                  and UserAssigned.
+                                type: string
+                            type: object
+                          type: array
+                        streamName:
+                          description: The name of the custom stream. This name should
+                            be unique across all stream_declaration blocks.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string

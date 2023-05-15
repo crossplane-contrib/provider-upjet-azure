@@ -69,11 +69,29 @@ spec:
               forProvider:
                 properties:
                   allowedIps:
-                    description: A list of IPv4 addresses or CIDRs that are allowed
-                      access to the search service endpoint.
+                    description: Specifies a list of inbound IPv4 or CIDRs that are
+                      allowed to access the Search Service. If the incoming IP request
+                      is from an IP address which is not included in the allowed_ips
+                      it will be blocked by the Search Services firewall.
                     items:
                       type: string
                     type: array
+                  authenticationFailureMode:
+                    description: Specifies the response that the Search Service should
+                      return for requests that fail authentication. Possible values
+                      include http401WithBearerChallenge or http403.
+                    type: string
+                  customerManagedKeyEnforcementEnabled:
+                    description: Specifies whether the Search Service should enforce
+                      that non-customer resources are encrypted. Defaults to false.
+                    type: boolean
+                  hostingMode:
+                    description: Specifies the Hosting Mode, which allows for High
+                      Density partitions (that allow for up to 1000 indexes) should
+                      be supported. Possible values are highDensity or default. Defaults
+                      to default. Changing this forces a new Search Service to be
+                      created.
+                    type: string
                   identity:
                     description: An identity block as defined below.
                     items:
@@ -87,19 +105,28 @@ spec:
                       - type
                       type: object
                     type: array
+                  localAuthenticationEnabled:
+                    description: Specifies whether the Search Service allows authenticating
+                      using API Keys? Defaults to false.
+                    type: boolean
                   location:
                     description: The Azure Region where the Search Service should
                       exist. Changing this forces a new Search Service to be created.
                     type: string
                   partitionCount:
-                    description: The number of partitions which should be created.
+                    description: Specifies the number of partitions which should be
+                      created. This field cannot be set when using a free or basic
+                      sku (see the Microsoft documentation). Possible values include
+                      1, 2, 3, 4, 6, or 12. Defaults to 1.
                     type: number
                   publicNetworkAccessEnabled:
-                    description: Whether or not public network access is allowed for
-                      this resource. Defaults to true.
+                    description: Specifies whether Public Network Access is allowed
+                      for this resource. Defaults to true.
                     type: boolean
                   replicaCount:
-                    description: The number of replica's which should be created.
+                    description: Specifies the number of Replica's which should be
+                      created for this Search Service. This field cannot be set when
+                      using a free sku (see the Microsoft documentation).
                     type: number
                   resourceGroupName:
                     description: The name of the Resource Group where the Search Service
@@ -183,15 +210,15 @@ spec:
                     type: object
                   sku:
                     description: The SKU which should be used for this Search Service.
-                      Possible values are basic, free, standard, standard2, standard3,
+                      Possible values include basic, free, standard, standard2, standard3,
                       storage_optimized_l1 and storage_optimized_l2. Changing this
                       forces a new Search Service to be created.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags which should be assigned to the
-                      Search Service.
+                    description: Specifies a mapping of tags which should be assigned
+                      to this Search Service.
                     type: object
                 type: object
               managementPolicy:
@@ -391,11 +418,29 @@ spec:
               atProvider:
                 properties:
                   allowedIps:
-                    description: A list of IPv4 addresses or CIDRs that are allowed
-                      access to the search service endpoint.
+                    description: Specifies a list of inbound IPv4 or CIDRs that are
+                      allowed to access the Search Service. If the incoming IP request
+                      is from an IP address which is not included in the allowed_ips
+                      it will be blocked by the Search Services firewall.
                     items:
                       type: string
                     type: array
+                  authenticationFailureMode:
+                    description: Specifies the response that the Search Service should
+                      return for requests that fail authentication. Possible values
+                      include http401WithBearerChallenge or http403.
+                    type: string
+                  customerManagedKeyEnforcementEnabled:
+                    description: Specifies whether the Search Service should enforce
+                      that non-customer resources are encrypted. Defaults to false.
+                    type: boolean
+                  hostingMode:
+                    description: Specifies the Hosting Mode, which allows for High
+                      Density partitions (that allow for up to 1000 indexes) should
+                      be supported. Possible values are highDensity or default. Defaults
+                      to default. Changing this forces a new Search Service to be
+                      created.
+                    type: string
                   id:
                     description: The ID of the Search Service.
                     type: string
@@ -418,19 +463,23 @@ spec:
                           type: string
                       type: object
                     type: array
+                  localAuthenticationEnabled:
+                    description: Specifies whether the Search Service allows authenticating
+                      using API Keys? Defaults to false.
+                    type: boolean
                   location:
                     description: The Azure Region where the Search Service should
                       exist. Changing this forces a new Search Service to be created.
                     type: string
                   partitionCount:
-                    description: The number of partitions which should be created.
+                    description: Specifies the number of partitions which should be
+                      created. This field cannot be set when using a free or basic
+                      sku (see the Microsoft documentation). Possible values include
+                      1, 2, 3, 4, 6, or 12. Defaults to 1.
                     type: number
-                  primaryKey:
-                    description: The Primary Key used for Search Service Administration.
-                    type: string
                   publicNetworkAccessEnabled:
-                    description: Whether or not public network access is allowed for
-                      this resource. Defaults to true.
+                    description: Specifies whether Public Network Access is allowed
+                      for this resource. Defaults to true.
                     type: boolean
                   queryKeys:
                     description: A query_keys block as defined below.
@@ -445,27 +494,26 @@ spec:
                       type: object
                     type: array
                   replicaCount:
-                    description: The number of replica's which should be created.
+                    description: Specifies the number of Replica's which should be
+                      created for this Search Service. This field cannot be set when
+                      using a free sku (see the Microsoft documentation).
                     type: number
                   resourceGroupName:
                     description: The name of the Resource Group where the Search Service
                       should exist. Changing this forces a new Search Service to be
                       created.
                     type: string
-                  secondaryKey:
-                    description: The Secondary Key used for Search Service Administration.
-                    type: string
                   sku:
                     description: The SKU which should be used for this Search Service.
-                      Possible values are basic, free, standard, standard2, standard3,
+                      Possible values include basic, free, standard, standard2, standard3,
                       storage_optimized_l1 and storage_optimized_l2. Changing this
                       forces a new Search Service to be created.
                     type: string
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags which should be assigned to the
-                      Search Service.
+                    description: Specifies a mapping of tags which should be assigned
+                      to this Search Service.
                     type: object
                 type: object
               conditions:

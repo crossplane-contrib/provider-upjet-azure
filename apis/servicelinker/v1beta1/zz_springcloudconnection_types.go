@@ -62,6 +62,19 @@ type AuthenticationParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type SecretStoreObservation struct {
+
+	// The key vault id to store secret.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+}
+
+type SecretStoreParameters struct {
+
+	// The key vault id to store secret.
+	// +kubebuilder:validation:Required
+	KeyVaultID *string `json:"keyVaultId" tf:"key_vault_id,omitempty"`
+}
+
 type SpringCloudConnectionObservation struct {
 
 	// The authentication info. An authentication block as defined below.
@@ -75,6 +88,9 @@ type SpringCloudConnectionObservation struct {
 
 	// The name of the service connection. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// An option to store secret value in secure place. An secret_store block as defined below.
+	SecretStore []SecretStoreObservation `json:"secretStore,omitempty" tf:"secret_store,omitempty"`
 
 	// The ID of the data source spring cloud. Changing this forces a new resource to be created.
 	SpringCloudID *string `json:"springCloudId,omitempty" tf:"spring_cloud_id,omitempty"`
@@ -99,6 +115,10 @@ type SpringCloudConnectionParameters struct {
 	// The name of the service connection. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// An option to store secret value in secure place. An secret_store block as defined below.
+	// +kubebuilder:validation:Optional
+	SecretStore []SecretStoreParameters `json:"secretStore,omitempty" tf:"secret_store,omitempty"`
 
 	// The ID of the data source spring cloud. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudJavaDeployment

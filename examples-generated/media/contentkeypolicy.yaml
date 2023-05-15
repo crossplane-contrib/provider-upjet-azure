@@ -44,7 +44,7 @@ spec:
           compressedDigitalVideoOpl: 400
           digitalVideoOnlyContentRestriction: false
           explicitAnalogTelevisionOutputRestriction:
-          - best_effort: true
+          - bestEffortEnforced: true
             controlBits: 3
           imageConstraintForAnalogComponentVideoRestriction: false
           imageConstraintForAnalogComputerMonitorRestriction: false

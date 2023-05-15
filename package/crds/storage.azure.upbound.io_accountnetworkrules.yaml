@@ -182,8 +182,8 @@ spec:
                         type: object
                     type: object
                   virtualNetworkSubnetIds:
-                    description: A list of virtual network subnet ids to to secure
-                      the storage account.
+                    description: A list of virtual network subnet ids to secure the
+                      storage account.
                     items:
                       type: string
                     type: array
@@ -424,8 +424,8 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   virtualNetworkSubnetIds:
-                    description: A list of virtual network subnet ids to to secure
-                      the storage account.
+                    description: A list of virtual network subnet ids to secure the
+                      storage account.
                     items:
                       type: string
                     type: array

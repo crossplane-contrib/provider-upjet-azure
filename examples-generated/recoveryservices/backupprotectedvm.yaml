@@ -40,6 +40,8 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    retentionDaily:
+    - count: 10
 
 ---
 

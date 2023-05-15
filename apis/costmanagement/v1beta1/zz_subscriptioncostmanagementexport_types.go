@@ -15,7 +15,7 @@ import (
 
 type SubscriptionCostManagementExportExportDataOptionsObservation struct {
 
-	// The time frame for pulling data for the query. If custom, then a specific time period must be provided. Possible values include: WeekToDate, MonthToDate, BillingMonthToDate, TheLastWeek, TheLastMonth, TheLastBillingMonth, Custom.
+	// The time frame for pulling data for the query. If custom, then a specific time period must be provided. Possible values include: WeekToDate, MonthToDate, BillingMonthToDate, TheLast7Days, TheLastMonth, TheLastBillingMonth, Custom.
 	TimeFrame *string `json:"timeFrame,omitempty" tf:"time_frame,omitempty"`
 
 	// The type of the query. Possible values are ActualCost, AmortizedCost and Usage.
@@ -24,7 +24,7 @@ type SubscriptionCostManagementExportExportDataOptionsObservation struct {
 
 type SubscriptionCostManagementExportExportDataOptionsParameters struct {
 
-	// The time frame for pulling data for the query. If custom, then a specific time period must be provided. Possible values include: WeekToDate, MonthToDate, BillingMonthToDate, TheLastWeek, TheLastMonth, TheLastBillingMonth, Custom.
+	// The time frame for pulling data for the query. If custom, then a specific time period must be provided. Possible values include: WeekToDate, MonthToDate, BillingMonthToDate, TheLast7Days, TheLastMonth, TheLastBillingMonth, Custom.
 	// +kubebuilder:validation:Required
 	TimeFrame *string `json:"timeFrame" tf:"time_frame,omitempty"`
 

@@ -23,6 +23,38 @@ spec:
       - connected
       urlTemplate: https://test.com/api/{hub}/{event}
       userEventPattern: event1, event2
+    eventListener:
+    - eventhubNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test1
+      eventhubNamespaceNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
+      systemEventNameFilter:
+      - connected
+      userEventNameFilter:
+      - event1
+      - event2
+    - eventhubNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test1
+      eventhubNamespaceNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
+      systemEventNameFilter:
+      - connected
+      userEventNameFilter:
+      - '*'
+    - eventhubNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test1
+      eventhubNamespaceNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
+      systemEventNameFilter:
+      - connected
+      userEventNameFilter:
+      - event1
     name: tfex_wpsh
     webPubsubIdSelector:
       matchLabels:

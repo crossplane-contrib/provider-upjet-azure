@@ -604,6 +604,10 @@ spec:
                       nodes. Allowed values are Delete and Deallocate. Defaults to
                       Delete.
                     type: string
+                  snapshotId:
+                    description: The ID of the Snapshot which should be used to create
+                      this Node Pool. Changing this forces a new resource to be created.
+                    type: string
                   spotMaxPrice:
                     description: The maximum price you're willing to pay in USD per
                       Virtual Machine. Valid values are -1 (the current on-demand
@@ -730,7 +734,7 @@ spec:
                     type: array
                   workloadRuntime:
                     description: Used to specify the workload runtime. Allowed values
-                      are OCIContainer and WasmWasi.
+                      are OCIContainer, WasmWasi and KataMshvVmIsolation.
                     type: string
                   zones:
                     description: Specifies a list of Availability Zones in which this
@@ -1327,6 +1331,10 @@ spec:
                       nodes. Allowed values are Delete and Deallocate. Defaults to
                       Delete.
                     type: string
+                  snapshotId:
+                    description: The ID of the Snapshot which should be used to create
+                      this Node Pool. Changing this forces a new resource to be created.
+                    type: string
                   spotMaxPrice:
                     description: The maximum price you're willing to pay in USD per
                       Virtual Machine. Valid values are -1 (the current on-demand
@@ -1378,7 +1386,7 @@ spec:
                     type: array
                   workloadRuntime:
                     description: Used to specify the workload runtime. Allowed values
-                      are OCIContainer and WasmWasi.
+                      are OCIContainer, WasmWasi and KataMshvVmIsolation.
                     type: string
                   zones:
                     description: Specifies a list of Availability Zones in which this

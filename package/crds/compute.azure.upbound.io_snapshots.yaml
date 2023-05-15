@@ -119,6 +119,9 @@ spec:
                           type: array
                       type: object
                     type: array
+                  incrementalEnabled:
+                    description: Specifies if the Snapshot is incremental.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -542,6 +545,9 @@ spec:
                   id:
                     description: The Snapshot ID.
                     type: string
+                  incrementalEnabled:
+                    description: Specifies if the Snapshot is incremental.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.

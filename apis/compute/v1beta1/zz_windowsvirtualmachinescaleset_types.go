@@ -618,7 +618,7 @@ type WindowsVirtualMachineScaleSetObservation struct {
 	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
-	// A gallery_application block as defined below.
+	// One or more gallery_application blocks as defined below.
 	GalleryApplication []WindowsVirtualMachineScaleSetGalleryApplicationObservation `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
 	GalleryApplications []WindowsVirtualMachineScaleSetGalleryApplicationsObservation `json:"galleryApplications,omitempty" tf:"gallery_applications,omitempty"`
@@ -897,7 +897,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
-	// A gallery_application block as defined below.
+	// One or more gallery_application blocks as defined below.
 	// +kubebuilder:validation:Optional
 	GalleryApplication []WindowsVirtualMachineScaleSetGalleryApplicationParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 

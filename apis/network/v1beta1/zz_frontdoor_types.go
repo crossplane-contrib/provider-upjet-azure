@@ -233,7 +233,7 @@ type ForwardingConfigurationObservation struct {
 	// Specifies the name of the Backend Pool to forward the incoming traffic to.
 	BackendPoolName *string `json:"backendPoolName,omitempty" tf:"backend_pool_name,omitempty"`
 
-	// Specify the caching duration (in ISO8601 notation e.g. P1DT2H for 1 day and 2 hours). Needs to be greater than 0 and smaller than 365 days. cache_duration works only in combination with cache_enabled set to true.
+	// Specify the minimum caching duration (in ISO8601 notation e.g. P1DT2H for 1 day and 2 hours). Needs to be greater than 0 and smaller than 365 days. cache_duration works only in combination with cache_enabled set to true.
 	CacheDuration *string `json:"cacheDuration,omitempty" tf:"cache_duration,omitempty"`
 
 	// Specifies whether to Enable caching or not. Valid options are true or false. Defaults to false.
@@ -261,7 +261,7 @@ type ForwardingConfigurationParameters struct {
 	// +kubebuilder:validation:Required
 	BackendPoolName *string `json:"backendPoolName" tf:"backend_pool_name,omitempty"`
 
-	// Specify the caching duration (in ISO8601 notation e.g. P1DT2H for 1 day and 2 hours). Needs to be greater than 0 and smaller than 365 days. cache_duration works only in combination with cache_enabled set to true.
+	// Specify the minimum caching duration (in ISO8601 notation e.g. P1DT2H for 1 day and 2 hours). Needs to be greater than 0 and smaller than 365 days. cache_duration works only in combination with cache_enabled set to true.
 	// +kubebuilder:validation:Optional
 	CacheDuration *string `json:"cacheDuration,omitempty" tf:"cache_duration,omitempty"`
 

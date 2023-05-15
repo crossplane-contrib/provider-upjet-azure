@@ -1397,6 +1397,11 @@ func (in *SentinelLogAnalyticsWorkspaceOnboardingObservation) DeepCopyInto(out *
 		*out = new(string)
 		**out = **in
 	}
+	if in.WorkspaceID != nil {
+		in, out := &in.WorkspaceID, &out.WorkspaceID
+		*out = new(string)
+		**out = **in
+	}
 	if in.WorkspaceName != nil {
 		in, out := &in.WorkspaceName, &out.WorkspaceName
 		*out = new(string)
@@ -1436,6 +1441,11 @@ func (in *SentinelLogAnalyticsWorkspaceOnboardingParameters) DeepCopyInto(out *S
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WorkspaceID != nil {
+		in, out := &in.WorkspaceID, &out.WorkspaceID
+		*out = new(string)
+		**out = **in
 	}
 	if in.WorkspaceName != nil {
 		in, out := &in.WorkspaceName, &out.WorkspaceName

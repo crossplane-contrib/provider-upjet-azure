@@ -138,6 +138,41 @@ spec:
                     items:
                       type: string
                     type: array
+                  overrides:
+                    description: One or more overrides blocks as defined below. More
+                      detail about overrides and resource_selectors see policy assignment
+                      structure
+                    items:
+                      properties:
+                        selectors:
+                          description: One or more override_selector as defined below.
+                          items:
+                            properties:
+                              in:
+                                description: The list of allowed values for the specified
+                                  kind. Cannot be used with not_in. Can contain up
+                                  to 50 values.
+                                items:
+                                  type: string
+                                type: array
+                              notIn:
+                                description: The list of not-allowed values for the
+                                  specified kind. Cannot be used with in. Can contain
+                                  up to 50 values.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        value:
+                          description: Specifies the value to override the policy
+                            property. Possible values for policyEffect override listed
+                            policy effects.
+                          type: string
+                      required:
+                      - value
+                      type: object
+                    type: array
                   parameters:
                     description: A JSON mapping of any Parameters for this Policy.
                     type: string
@@ -225,6 +260,46 @@ spec:
                       this should be applied. Changing this forces a new Resource
                       Policy Assignment to be created.
                     type: string
+                  resourceSelectors:
+                    description: One or more resource_selectors blocks as defined
+                      below to filter polices by resource properties.
+                    items:
+                      properties:
+                        name:
+                          description: Specifies a name for the resource selector.
+                          type: string
+                        selectors:
+                          description: One or more resource_selector block as defined
+                            below.
+                          items:
+                            properties:
+                              in:
+                                description: The list of allowed values for the specified
+                                  kind. Cannot be used with not_in. Can contain up
+                                  to 50 values.
+                                items:
+                                  type: string
+                                type: array
+                              kind:
+                                description: Specifies which characteristic will narrow
+                                  down the set of evaluated resources. Possible values
+                                  are resourceLocation,  resourceType and resourceWithoutLocation.
+                                type: string
+                              notIn:
+                                description: The list of not-allowed values for the
+                                  specified kind. Cannot be used with in. Can contain
+                                  up to 50 values.
+                                items:
+                                  type: string
+                                type: array
+                            required:
+                            - kind
+                            type: object
+                          type: array
+                      required:
+                      - selectors
+                      type: object
+                    type: array
                 type: object
               managementPolicy:
                 default: FullControl
@@ -499,6 +574,44 @@ spec:
                     items:
                       type: string
                     type: array
+                  overrides:
+                    description: One or more overrides blocks as defined below. More
+                      detail about overrides and resource_selectors see policy assignment
+                      structure
+                    items:
+                      properties:
+                        selectors:
+                          description: One or more override_selector as defined below.
+                          items:
+                            properties:
+                              in:
+                                description: The list of allowed values for the specified
+                                  kind. Cannot be used with not_in. Can contain up
+                                  to 50 values.
+                                items:
+                                  type: string
+                                type: array
+                              kind:
+                                description: Specifies which characteristic will narrow
+                                  down the set of evaluated resources. Possible values
+                                  are resourceLocation,  resourceType and resourceWithoutLocation.
+                                type: string
+                              notIn:
+                                description: The list of not-allowed values for the
+                                  specified kind. Cannot be used with in. Can contain
+                                  up to 50 values.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        value:
+                          description: Specifies the value to override the policy
+                            property. Possible values for policyEffect override listed
+                            policy effects.
+                          type: string
+                      type: object
+                    type: array
                   parameters:
                     description: A JSON mapping of any Parameters for this Policy.
                     type: string
@@ -511,6 +624,42 @@ spec:
                       this should be applied. Changing this forces a new Resource
                       Policy Assignment to be created.
                     type: string
+                  resourceSelectors:
+                    description: One or more resource_selectors blocks as defined
+                      below to filter polices by resource properties.
+                    items:
+                      properties:
+                        name:
+                          description: Specifies a name for the resource selector.
+                          type: string
+                        selectors:
+                          description: One or more resource_selector block as defined
+                            below.
+                          items:
+                            properties:
+                              in:
+                                description: The list of allowed values for the specified
+                                  kind. Cannot be used with not_in. Can contain up
+                                  to 50 values.
+                                items:
+                                  type: string
+                                type: array
+                              kind:
+                                description: Specifies which characteristic will narrow
+                                  down the set of evaluated resources. Possible values
+                                  are resourceLocation,  resourceType and resourceWithoutLocation.
+                                type: string
+                              notIn:
+                                description: The list of not-allowed values for the
+                                  specified kind. Cannot be used with in. Can contain
+                                  up to 50 values.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               conditions:
                 description: Conditions of the resource.

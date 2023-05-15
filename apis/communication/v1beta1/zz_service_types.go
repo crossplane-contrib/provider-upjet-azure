@@ -15,7 +15,7 @@ import (
 
 type ServiceObservation struct {
 
-	// The location where the Communication service stores its data at rest. Possible values are Africa, Asia Pacific, Australia, Brazil, Canada, Europe, France, Germany, India, Japan, Korea, Norway, Switzerland, UAE, UK and United States. Defaults to United States.
+	// The location where the Communication service stores its data at rest. Possible values are Africa, Asia Pacific, Australia, Brazil, Canada, Europe, France, Germany, India, Japan, Korea, Norway, Switzerland, UAE, UK and United States. Defaults to United States. Changing this forces a new Communication Service to be created.
 	DataLocation *string `json:"dataLocation,omitempty" tf:"data_location,omitempty"`
 
 	// The ID of the Communication Service.
@@ -42,7 +42,7 @@ type ServiceObservation struct {
 
 type ServiceParameters struct {
 
-	// The location where the Communication service stores its data at rest. Possible values are Africa, Asia Pacific, Australia, Brazil, Canada, Europe, France, Germany, India, Japan, Korea, Norway, Switzerland, UAE, UK and United States. Defaults to United States.
+	// The location where the Communication service stores its data at rest. Possible values are Africa, Asia Pacific, Australia, Brazil, Canada, Europe, France, Germany, India, Japan, Korea, Norway, Switzerland, UAE, UK and United States. Defaults to United States. Changing this forces a new Communication Service to be created.
 	// +kubebuilder:validation:Optional
 	DataLocation *string `json:"dataLocation,omitempty" tf:"data_location,omitempty"`
 

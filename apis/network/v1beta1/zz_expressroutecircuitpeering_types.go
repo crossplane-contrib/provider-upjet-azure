@@ -168,6 +168,9 @@ type IPv6Parameters struct {
 
 type MicrosoftPeeringConfigObservation struct {
 
+	// The communities of Bgp Peering specified for microsoft peering.
+	AdvertisedCommunities []*string `json:"advertisedCommunities,omitempty" tf:"advertised_communities,omitempty"`
+
 	// A list of Advertised Public Prefixes.
 	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes,omitempty" tf:"advertised_public_prefixes,omitempty"`
 
@@ -179,6 +182,10 @@ type MicrosoftPeeringConfigObservation struct {
 }
 
 type MicrosoftPeeringConfigParameters struct {
+
+	// The communities of Bgp Peering specified for microsoft peering.
+	// +kubebuilder:validation:Optional
+	AdvertisedCommunities []*string `json:"advertisedCommunities,omitempty" tf:"advertised_communities,omitempty"`
 
 	// A list of Advertised Public Prefixes.
 	// +kubebuilder:validation:Required
@@ -195,6 +202,9 @@ type MicrosoftPeeringConfigParameters struct {
 
 type MicrosoftPeeringObservation struct {
 
+	// The communities of Bgp Peering specified for microsoft peering.
+	AdvertisedCommunities []*string `json:"advertisedCommunities,omitempty" tf:"advertised_communities,omitempty"`
+
 	// A list of Advertised Public Prefixes.
 	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes,omitempty" tf:"advertised_public_prefixes,omitempty"`
 
@@ -206,6 +216,10 @@ type MicrosoftPeeringObservation struct {
 }
 
 type MicrosoftPeeringParameters struct {
+
+	// The communities of Bgp Peering specified for microsoft peering.
+	// +kubebuilder:validation:Optional
+	AdvertisedCommunities []*string `json:"advertisedCommunities,omitempty" tf:"advertised_communities,omitempty"`
 
 	// A list of Advertised Public Prefixes.
 	// +kubebuilder:validation:Optional

@@ -19,8 +19,8 @@ spec:
     siteConfig:
     - {}
     storageAccountAccessKeySecretRef:
-      key: example-key
-      name: example-name
+      key: attribute.primary_access_key
+      name: example-storage-account
       namespace: upbound-system
     storageAccountNameSelector:
       matchLabels:
@@ -78,14 +78,6 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: linuxfuncapp-rg
-
----
-
-apiVersion: v1
-kind: Secret
-metadata:
-  name: example-name
-  namespace: upbound-system
-type: Opaque
-data:
-  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system

@@ -89,6 +89,7 @@ spec:
     - List
     - Decrypt
     - Sign
+    - GetRotationPolicy
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
