@@ -387,6 +387,82 @@ func (mg *BackupPolicyDisk) SetWriteConnectionSecretToReference(r *xpv1.SecretRe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicy of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) GetManagementPolicy() xpv1.ManagementPolicy {
+	return mg.Spec.ManagementPolicy
+}
+
+// GetProviderConfigReference of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this BackupPolicyPostgreSQL.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *BackupPolicyPostgreSQL) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicy of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) SetManagementPolicy(r xpv1.ManagementPolicy) {
+	mg.Spec.ManagementPolicy = r
+}
+
+// SetProviderConfigReference of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this BackupPolicyPostgreSQL.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *BackupPolicyPostgreSQL) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this BackupVault.
 func (mg *BackupVault) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

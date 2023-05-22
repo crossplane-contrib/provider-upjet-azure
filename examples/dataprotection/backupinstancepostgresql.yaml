@@ -3,6 +3,7 @@ kind: BackupInstancePostgreSQL
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource depends on RoleAssignment resource."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -29,6 +30,7 @@ kind: BackupPolicyPostgreSQL
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -51,6 +53,7 @@ kind: BackupVault
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -72,9 +75,10 @@ kind: Vault
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-backup
 spec:
   forProvider:
     location: West Europe
@@ -92,18 +96,31 @@ kind: Secret
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-backupinstancepostgresql
 spec:
   forProvider:
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     valueSecretRef:
-      key: example
+      key: value
       name: example-postgresql-server
       namespace: upbound-system
+
+---
+
+apiVersion: v1
+data:
+  value: dXBib3VuZHJvY2tz
+kind: Secret
+metadata:
+  name: example-postgresql-server
+  namespace: upbound-system
+type: Opaque
+
 
 ---
 
@@ -112,6 +129,7 @@ kind: Database
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -133,6 +151,7 @@ kind: FirewallRule
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -154,9 +173,10 @@ kind: Server
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-backupinstancepostgresql
 spec:
   forProvider:
     administratorLogin: psqladmin
@@ -178,11 +198,23 @@ spec:
 
 ---
 
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+
+---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "This resource is skipping because the parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -197,6 +229,7 @@ kind: RoleAssignment
 metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancepostgresql
+    upjet.upbound.io/manual-intervention: "The scope is generic and context-specific."
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -205,6 +238,3 @@ spec:
     principalId: ${azurerm_data_protection_backup_vault.example.identity.0.principal_id}
     roleDefinitionName: Reader
     scope: ${azurerm_postgresql_server.example.id}
-
----
-

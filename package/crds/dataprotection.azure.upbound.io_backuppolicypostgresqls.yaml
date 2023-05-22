@@ -5,7 +5,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.11.3
   creationTimestamp: null
-  name: backupinstancepostgresqls.dataprotection.azure.upbound.io
+  name: backuppolicypostgresqls.dataprotection.azure.upbound.io
 spec:
   group: dataprotection.azure.upbound.io
   names:
@@ -13,10 +13,10 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: BackupInstancePostgreSQL
-    listKind: BackupInstancePostgreSQLList
-    plural: backupinstancepostgresqls
-    singular: backupinstancepostgresql
+    kind: BackupPolicyPostgreSQL
+    listKind: BackupPolicyPostgreSQLList
+    plural: backuppolicypostgresqls
+    singular: backuppolicypostgresql
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +35,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: BackupInstancePostgreSQL is the Schema for the BackupInstancePostgreSQLs
-          API. Manages a Backup Instance to back up PostgreSQL.
+        description: BackupPolicyPostgreSQL is the Schema for the BackupPolicyPostgreSQLs
+          API. Manages a Backup Policy to back up PostgreSQL.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,8 +51,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: BackupInstancePostgreSQLSpec defines the desired state of
-              BackupInstancePostgreSQL
+            description: BackupPolicyPostgreSQLSpec defines the desired state of BackupPolicyPostgreSQL
             properties:
               deletionPolicy:
                 default: Delete
@@ -69,12 +68,26 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  backupPolicyId:
-                    description: The ID of the Backup Policy.
+                  backupRepeatingTimeIntervals:
+                    description: Specifies a list of repeating time interval. It supports
+                      weekly back. It should follow ISO 8601 repeating time interval.
+                      Changing this forces a new Backup Policy PostgreSQL to be created.
+                    items:
+                      type: string
+                    type: array
+                  defaultRetentionDuration:
+                    description: The duration of default retention rule. It should
+                      follow ISO 8601 duration format. Changing this forces a new
+                      Backup Policy PostgreSQL to be created.
                     type: string
-                  backupPolicyIdRef:
-                    description: Reference to a BackupPolicyPostgreSQL in dataprotection
-                      to populate backupPolicyId.
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Backup Policy
+                      PostgreSQL should exist. Changing this forces a new Backup Policy
+                      PostgreSQL to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -107,9 +120,9 @@ spec:
                     required:
                     - name
                     type: object
-                  backupPolicyIdSelector:
-                    description: Selector for a BackupPolicyPostgreSQL in dataprotection
-                      to populate backupPolicyId.
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -147,174 +160,85 @@ spec:
                             type: string
                         type: object
                     type: object
-                  databaseCredentialKeyVaultSecretId:
-                    description: The ID or versionless ID of the key vault secret
-                      which stores the connection string of the database.
-                    type: string
-                  databaseCredentialKeyVaultSecretIdRef:
-                    description: Reference to a Secret in keyvault to populate databaseCredentialKeyVaultSecretId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  databaseCredentialKeyVaultSecretIdSelector:
-                    description: Selector for a Secret in keyvault to populate databaseCredentialKeyVaultSecretId.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
+                  retentionRule:
+                    description: One or more retention_rule blocks as defined below.
+                      Changing this forces a new Backup Policy PostgreSQL to be created.
+                    items:
+                      properties:
+                        criteria:
+                          description: A criteria block as defined below. Changing
+                            this forces a new Backup Policy PostgreSQL to be created.
+                          items:
+                            properties:
+                              absoluteCriteria:
+                                description: Possible values are AllBackup, FirstOfDay,
+                                  FirstOfWeek, FirstOfMonth and FirstOfYear. These
+                                  values mean the first successful backup of the day/week/month/year.
+                                  Changing this forces a new Backup Policy PostgreSQL
+                                  to be created.
+                                type: string
+                              daysOfWeek:
+                                description: Possible values are Monday, Tuesday,
+                                  Thursday, Friday, Saturday and Sunday. Changing
+                                  this forces a new Backup Policy PostgreSQL to be
+                                  created.
+                                items:
+                                  type: string
+                                type: array
+                              monthsOfYear:
+                                description: Possible values are January, February,
+                                  March, April, May, June, July, August, September,
+                                  October, November and December. Changing this forces
+                                  a new Backup Policy PostgreSQL to be created.
+                                items:
+                                  type: string
+                                type: array
+                              scheduledBackupTimes:
+                                description: Specifies a list of backup times for
+                                  backup in the RFC3339 format. Changing this forces
+                                  a new Backup Policy PostgreSQL to be created.
+                                items:
+                                  type: string
+                                type: array
+                              weeksOfMonth:
+                                description: Possible values are First, Second, Third,
+                                  Fourth and Last. Changing this forces a new Backup
+                                  Policy PostgreSQL to be created.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        duration:
+                          description: Duration after which the backup is deleted.
+                            It should follow ISO 8601 duration format. Changing this
+                            forces a new Backup Policy PostgreSQL to be created.
                           type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  databaseId:
-                    description: The ID of the source database. Changing this forces
-                      a new Backup Instance PostgreSQL to be created.
-                    type: string
-                  databaseIdRef:
-                    description: Reference to a Database in dbforpostgresql to populate
-                      databaseId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  databaseIdSelector:
-                    description: Selector for a Database in dbforpostgresql to populate
-                      databaseId.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
+                        name:
+                          description: The name which should be used for this retention
+                            rule. Changing this forces a new Backup Policy PostgreSQL
+                            to be created.
                           type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  location:
-                    description: The location of the source database. Changing this
-                      forces a new Backup Instance PostgreSQL to be created.
+                        priority:
+                          description: Specifies the priority of the rule. The priority
+                            number must be unique for each rule. The lower the priority
+                            number, the higher the priority of the rule. Changing
+                            this forces a new Backup Policy PostgreSQL to be created.
+                          type: number
+                      required:
+                      - criteria
+                      - duration
+                      - name
+                      - priority
+                      type: object
+                    type: array
+                  vaultName:
+                    description: The name of the Backup Vault where the Backup Policy
+                      PostgreSQL should exist. Changing this forces a new Backup Policy
+                      PostgreSQL to be created.
                     type: string
-                  vaultId:
-                    description: The ID of the Backup Vault within which the PostgreSQL
-                      Backup Instance should exist. Changing this forces a new Backup
-                      Instance PostgreSQL to be created.
-                    type: string
-                  vaultIdRef:
-                    description: Reference to a BackupVault in dataprotection to populate
-                      vaultId.
+                  vaultNameRef:
+                    description: Reference to a BackupVault to populate vaultName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -347,9 +271,8 @@ spec:
                     required:
                     - name
                     type: object
-                  vaultIdSelector:
-                    description: Selector for a BackupVault in dataprotection to populate
-                      vaultId.
+                  vaultNameSelector:
+                    description: Selector for a BackupVault to populate vaultName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -575,36 +498,107 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+            - message: backupRepeatingTimeIntervals is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backupRepeatingTimeIntervals)
+            - message: defaultRetentionDuration is a required parameter
+              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultRetentionDuration)
           status:
-            description: BackupInstancePostgreSQLStatus defines the observed state
-              of BackupInstancePostgreSQL.
+            description: BackupPolicyPostgreSQLStatus defines the observed state of
+              BackupPolicyPostgreSQL.
             properties:
               atProvider:
                 properties:
-                  backupPolicyId:
-                    description: The ID of the Backup Policy.
-                    type: string
-                  databaseCredentialKeyVaultSecretId:
-                    description: The ID or versionless ID of the key vault secret
-                      which stores the connection string of the database.
-                    type: string
-                  databaseId:
-                    description: The ID of the source database. Changing this forces
-                      a new Backup Instance PostgreSQL to be created.
+                  backupRepeatingTimeIntervals:
+                    description: Specifies a list of repeating time interval. It supports
+                      weekly back. It should follow ISO 8601 repeating time interval.
+                      Changing this forces a new Backup Policy PostgreSQL to be created.
+                    items:
+                      type: string
+                    type: array
+                  defaultRetentionDuration:
+                    description: The duration of default retention rule. It should
+                      follow ISO 8601 duration format. Changing this forces a new
+                      Backup Policy PostgreSQL to be created.
                     type: string
                   id:
-                    description: The ID of the Backup Instance PostgreSQL.
+                    description: The ID of the Backup Policy PostgreSQL.
                     type: string
-                  location:
-                    description: The location of the source database. Changing this
-                      forces a new Backup Instance PostgreSQL to be created.
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Backup Policy
+                      PostgreSQL should exist. Changing this forces a new Backup Policy
+                      PostgreSQL to be created.
                     type: string
-                  vaultId:
-                    description: The ID of the Backup Vault within which the PostgreSQL
-                      Backup Instance should exist. Changing this forces a new Backup
-                      Instance PostgreSQL to be created.
+                  retentionRule:
+                    description: One or more retention_rule blocks as defined below.
+                      Changing this forces a new Backup Policy PostgreSQL to be created.
+                    items:
+                      properties:
+                        criteria:
+                          description: A criteria block as defined below. Changing
+                            this forces a new Backup Policy PostgreSQL to be created.
+                          items:
+                            properties:
+                              absoluteCriteria:
+                                description: Possible values are AllBackup, FirstOfDay,
+                                  FirstOfWeek, FirstOfMonth and FirstOfYear. These
+                                  values mean the first successful backup of the day/week/month/year.
+                                  Changing this forces a new Backup Policy PostgreSQL
+                                  to be created.
+                                type: string
+                              daysOfWeek:
+                                description: Possible values are Monday, Tuesday,
+                                  Thursday, Friday, Saturday and Sunday. Changing
+                                  this forces a new Backup Policy PostgreSQL to be
+                                  created.
+                                items:
+                                  type: string
+                                type: array
+                              monthsOfYear:
+                                description: Possible values are January, February,
+                                  March, April, May, June, July, August, September,
+                                  October, November and December. Changing this forces
+                                  a new Backup Policy PostgreSQL to be created.
+                                items:
+                                  type: string
+                                type: array
+                              scheduledBackupTimes:
+                                description: Specifies a list of backup times for
+                                  backup in the RFC3339 format. Changing this forces
+                                  a new Backup Policy PostgreSQL to be created.
+                                items:
+                                  type: string
+                                type: array
+                              weeksOfMonth:
+                                description: Possible values are First, Second, Third,
+                                  Fourth and Last. Changing this forces a new Backup
+                                  Policy PostgreSQL to be created.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        duration:
+                          description: Duration after which the backup is deleted.
+                            It should follow ISO 8601 duration format. Changing this
+                            forces a new Backup Policy PostgreSQL to be created.
+                          type: string
+                        name:
+                          description: The name which should be used for this retention
+                            rule. Changing this forces a new Backup Policy PostgreSQL
+                            to be created.
+                          type: string
+                        priority:
+                          description: Specifies the priority of the rule. The priority
+                            number must be unique for each rule. The lower the priority
+                            number, the higher the priority of the rule. Changing
+                            this forces a new Backup Policy PostgreSQL to be created.
+                          type: number
+                      type: object
+                    type: array
+                  vaultName:
+                    description: The name of the Backup Vault where the Backup Policy
+                      PostgreSQL should exist. Changing this forces a new Backup Policy
+                      PostgreSQL to be created.
                     type: string
                 type: object
               conditions:

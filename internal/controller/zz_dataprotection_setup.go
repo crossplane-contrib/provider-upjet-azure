@@ -14,6 +14,7 @@ import (
 	backupinstancepostgresql "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstancepostgresql"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
 	backuppolicydisk "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicydisk"
+	backuppolicypostgresql "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicypostgresql"
 	backupvault "github.com/upbound/provider-azure/internal/controller/dataprotection/backupvault"
 	resourceguard "github.com/upbound/provider-azure/internal/controller/dataprotection/resourceguard"
 )
@@ -27,6 +28,7 @@ func Setup_dataprotection(mgr ctrl.Manager, o controller.Options) error {
 		backupinstancepostgresql.Setup,
 		backuppolicyblobstorage.Setup,
 		backuppolicydisk.Setup,
+		backuppolicypostgresql.Setup,
 		backupvault.Setup,
 		resourceguard.Setup,
 	} {
