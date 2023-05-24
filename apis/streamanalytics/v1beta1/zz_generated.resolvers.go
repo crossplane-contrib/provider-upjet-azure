@@ -422,6 +422,32 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
+// ResolveReferences of this OutputPowerBI.
+func (mg *OutputPowerBI) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StreamAnalyticsJobID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StreamAnalyticsJobIDRef,
+		Selector:     mg.Spec.ForProvider.StreamAnalyticsJobIDSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StreamAnalyticsJobID")
+	}
+	mg.Spec.ForProvider.StreamAnalyticsJobID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StreamAnalyticsJobIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this OutputServiceBusQueue.
 func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
