@@ -73,6 +73,26 @@ type IdentityParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type MonitoringObservation struct {
+
+	// Enabling/Disabling built-in Azure Monitor alerts for security scenarios and job failure scenarios. Defaults to true.
+	AlertsForAllJobFailuresEnabled *bool `json:"alertsForAllJobFailuresEnabled,omitempty" tf:"alerts_for_all_job_failures_enabled,omitempty"`
+
+	// Enabling/Disabling alerts from the older (classic alerts) solution. Defaults to true. More details could be found here.
+	AlertsForCriticalOperationFailuresEnabled *bool `json:"alertsForCriticalOperationFailuresEnabled,omitempty" tf:"alerts_for_critical_operation_failures_enabled,omitempty"`
+}
+
+type MonitoringParameters struct {
+
+	// Enabling/Disabling built-in Azure Monitor alerts for security scenarios and job failure scenarios. Defaults to true.
+	// +kubebuilder:validation:Optional
+	AlertsForAllJobFailuresEnabled *bool `json:"alertsForAllJobFailuresEnabled,omitempty" tf:"alerts_for_all_job_failures_enabled,omitempty"`
+
+	// Enabling/Disabling alerts from the older (classic alerts) solution. Defaults to true. More details could be found here.
+	// +kubebuilder:validation:Optional
+	AlertsForCriticalOperationFailuresEnabled *bool `json:"alertsForCriticalOperationFailuresEnabled,omitempty" tf:"alerts_for_critical_operation_failures_enabled,omitempty"`
+}
+
 type VaultObservation struct {
 
 	// Whether to enable the Classic experience for VMware replication. If set to false VMware machines will be protected using the new stateless ASR replication appliance. Changing this forces a new resource to be created.
@@ -95,6 +115,9 @@ type VaultObservation struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A monitoring block as defined below.
+	Monitoring []MonitoringObservation `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
 
 	// Is it enabled to access the vault from public networks. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -140,6 +163,10 @@ type VaultParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A monitoring block as defined below.
+	// +kubebuilder:validation:Optional
+	Monitoring []MonitoringParameters `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
 
 	// Is it enabled to access the vault from public networks. Defaults to true.
 	// +kubebuilder:validation:Optional

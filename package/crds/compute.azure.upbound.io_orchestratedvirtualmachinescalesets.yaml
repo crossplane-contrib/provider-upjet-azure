@@ -156,12 +156,8 @@ spec:
                             Premium_ZRS and UltraSSD_LRS.
                           type: string
                         ultraSsdDiskIopsReadWrite:
-                          description: Specifies the Read-Write IOPS for this Data
-                            Disk. Only settable for UltraSSD disks.
                           type: number
                         ultraSsdDiskMbpsReadWrite:
-                          description: Specifies the bandwidth in MB per second for
-                            this Data Disk. Only settable for UltraSSD disks.
                           type: number
                         writeAcceleratorEnabled:
                           description: Specifies if Write Accelerator is enabled on
@@ -1401,12 +1397,8 @@ spec:
                             Premium_ZRS and UltraSSD_LRS.
                           type: string
                         ultraSsdDiskIopsReadWrite:
-                          description: Specifies the Read-Write IOPS for this Data
-                            Disk. Only settable for UltraSSD disks.
                           type: number
                         ultraSsdDiskMbpsReadWrite:
-                          description: Specifies the bandwidth in MB per second for
-                            this Data Disk. Only settable for UltraSSD disks.
                           type: number
                         writeAcceleratorEnabled:
                           description: Specifies if Write Accelerator is enabled on

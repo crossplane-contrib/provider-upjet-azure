@@ -167,9 +167,9 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                   zones:
-                    description: Specifies a list of Availability Zones in which this
-                      NAT Gateway should be located. Changing this forces a new NAT
-                      Gateway to be created.
+                    description: A list of Availability Zones in which this NAT Gateway
+                      should be located. Changing this forces a new NAT Gateway to
+                      be created.
                     items:
                       type: string
                     type: array
@@ -398,9 +398,9 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                   zones:
-                    description: Specifies a list of Availability Zones in which this
-                      NAT Gateway should be located. Changing this forces a new NAT
-                      Gateway to be created.
+                    description: A list of Availability Zones in which this NAT Gateway
+                      should be located. Changing this forces a new NAT Gateway to
+                      be created.
                     items:
                       type: string
                     type: array

@@ -15,7 +15,7 @@ import (
 
 type AzureadAdministratorObservation struct {
 
-	// Specifies whether only AD Users and administrators (like azuread_administrator.0.login_username) can be used to login, or also local database users (like administrator_login). When true, the administrator_login and administrator_login_password properties can be omitted.
+	// Specifies whether only AD Users and administrators (e.g. azuread_administrator.0.login_username) can be used to login, or also local database users (e.g. administrator_login). When true, the administrator_login and administrator_login_password properties can be omitted.
 	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
 	// The login username of the Azure AD Administrator of this SQL Server.
@@ -30,17 +30,37 @@ type AzureadAdministratorObservation struct {
 
 type AzureadAdministratorParameters struct {
 
-	// Specifies whether only AD Users and administrators (like azuread_administrator.0.login_username) can be used to login, or also local database users (like administrator_login). When true, the administrator_login and administrator_login_password properties can be omitted.
+	// Specifies whether only AD Users and administrators (e.g. azuread_administrator.0.login_username) can be used to login, or also local database users (e.g. administrator_login). When true, the administrator_login and administrator_login_password properties can be omitted.
 	// +kubebuilder:validation:Optional
 	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
 	// The login username of the Azure AD Administrator of this SQL Server.
-	// +kubebuilder:validation:Required
-	LoginUsername *string `json:"loginUsername" tf:"login_username,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +kubebuilder:validation:Optional
+	LoginUsername *string `json:"loginUsername,omitempty" tf:"login_username,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate loginUsername.
+	// +kubebuilder:validation:Optional
+	LoginUsernameRef *v1.Reference `json:"loginUsernameRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate loginUsername.
+	// +kubebuilder:validation:Optional
+	LoginUsernameSelector *v1.Selector `json:"loginUsernameSelector,omitempty" tf:"-"`
 
 	// The object id of the Azure AD Administrator of this SQL Server.
-	// +kubebuilder:validation:Required
-	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("principal_id",true)
+	// +kubebuilder:validation:Optional
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate objectId.
+	// +kubebuilder:validation:Optional
+	ObjectIDRef *v1.Reference `json:"objectIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate objectId.
+	// +kubebuilder:validation:Optional
+	ObjectIDSelector *v1.Selector `json:"objectIdSelector,omitempty" tf:"-"`
 
 	// The tenant id of the Azure AD Administrator of this SQL Server.
 	// +kubebuilder:validation:Optional
@@ -117,6 +137,9 @@ type MSSQLServerObservation struct {
 	// A mapping of tags to assign to the resource.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>) to be used as the Customer Managed Key(CMK/BYOK) for the Transparent Data Encryption(TDE) layer.
+	TransparentDataEncryptionKeyVaultKeyID *string `json:"transparentDataEncryptionKeyVaultKeyId,omitempty" tf:"transparent_data_encryption_key_vault_key_id,omitempty"`
+
 	// The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server). Changing this forces a new resource to be created.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -156,8 +179,18 @@ type MSSQLServerParameters struct {
 	OutboundNetworkRestrictionEnabled *bool `json:"outboundNetworkRestrictionEnabled,omitempty" tf:"outbound_network_restriction_enabled,omitempty"`
 
 	// Specifies the primary user managed identity id. Required if type is UserAssigned and should be combined with identity_ids.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentityId.
+	// +kubebuilder:validation:Optional
+	PrimaryUserAssignedIdentityIDRef *v1.Reference `json:"primaryUserAssignedIdentityIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentityId.
+	// +kubebuilder:validation:Optional
+	PrimaryUserAssignedIdentityIDSelector *v1.Selector `json:"primaryUserAssignedIdentityIdSelector,omitempty" tf:"-"`
 
 	// Whether public network access is allowed for this server. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -179,6 +212,20 @@ type MSSQLServerParameters struct {
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>) to be used as the Customer Managed Key(CMK/BYOK) for the Transparent Data Encryption(TDE) layer.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	TransparentDataEncryptionKeyVaultKeyID *string `json:"transparentDataEncryptionKeyVaultKeyId,omitempty" tf:"transparent_data_encryption_key_vault_key_id,omitempty"`
+
+	// Reference to a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	TransparentDataEncryptionKeyVaultKeyIDRef *v1.Reference `json:"transparentDataEncryptionKeyVaultKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	TransparentDataEncryptionKeyVaultKeyIDSelector *v1.Selector `json:"transparentDataEncryptionKeyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// The version for the new server. Valid values are: 2.0 (for v11 server) and 12.0 (for v12 server). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

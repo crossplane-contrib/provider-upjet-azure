@@ -62,10 +62,30 @@ func (in *AzureadAdministratorParameters) DeepCopyInto(out *AzureadAdministrator
 		*out = new(string)
 		**out = **in
 	}
+	if in.LoginUsernameRef != nil {
+		in, out := &in.LoginUsernameRef, &out.LoginUsernameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LoginUsernameSelector != nil {
+		in, out := &in.LoginUsernameSelector, &out.LoginUsernameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ObjectID != nil {
 		in, out := &in.ObjectID, &out.ObjectID
 		*out = new(string)
 		**out = **in
+	}
+	if in.ObjectIDRef != nil {
+		in, out := &in.ObjectIDRef, &out.ObjectIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ObjectIDSelector != nil {
+		in, out := &in.ObjectIDSelector, &out.ObjectIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TenantID != nil {
 		in, out := &in.TenantID, &out.TenantID
@@ -4247,6 +4267,11 @@ func (in *MSSQLServerObservation) DeepCopyInto(out *MSSQLServerObservation) {
 			(*out)[key] = outVal
 		}
 	}
+	if in.TransparentDataEncryptionKeyVaultKeyID != nil {
+		in, out := &in.TransparentDataEncryptionKeyVaultKeyID, &out.TransparentDataEncryptionKeyVaultKeyID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version
 		*out = new(string)
@@ -4316,6 +4341,16 @@ func (in *MSSQLServerParameters) DeepCopyInto(out *MSSQLServerParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrimaryUserAssignedIdentityIDRef != nil {
+		in, out := &in.PrimaryUserAssignedIdentityIDRef, &out.PrimaryUserAssignedIdentityIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PrimaryUserAssignedIdentityIDSelector != nil {
+		in, out := &in.PrimaryUserAssignedIdentityIDSelector, &out.PrimaryUserAssignedIdentityIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
 		*out = new(bool)
@@ -4350,6 +4385,21 @@ func (in *MSSQLServerParameters) DeepCopyInto(out *MSSQLServerParameters) {
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.TransparentDataEncryptionKeyVaultKeyID != nil {
+		in, out := &in.TransparentDataEncryptionKeyVaultKeyID, &out.TransparentDataEncryptionKeyVaultKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.TransparentDataEncryptionKeyVaultKeyIDRef != nil {
+		in, out := &in.TransparentDataEncryptionKeyVaultKeyIDRef, &out.TransparentDataEncryptionKeyVaultKeyIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TransparentDataEncryptionKeyVaultKeyIDSelector != nil {
+		in, out := &in.TransparentDataEncryptionKeyVaultKeyIDSelector, &out.TransparentDataEncryptionKeyVaultKeyIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Version != nil {
 		in, out := &in.Version, &out.Version

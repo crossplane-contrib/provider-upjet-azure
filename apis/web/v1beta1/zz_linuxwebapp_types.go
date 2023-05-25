@@ -695,7 +695,7 @@ type LinuxWebAppAuthSettingsV2CustomOidcV2Observation struct {
 	// The name of the claim that contains the users name.
 	NameClaimType *string `json:"nameClaimType,omitempty" tf:"name_claim_type,omitempty"`
 
-	// The app setting name that contains the client_secret value used for the Custom OIDC Login.
+	// Specifies the endpoint used for OpenID Connect Discovery. For example https://example.com/.well-known/openid-configuration.
 	// The endpoint that contains all the configuration endpoints for this Custom OIDC provider.
 	OpenIDConfigurationEndpoint *string `json:"openidConfigurationEndpoint,omitempty" tf:"openid_configuration_endpoint,omitempty"`
 
@@ -725,7 +725,7 @@ type LinuxWebAppAuthSettingsV2CustomOidcV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	NameClaimType *string `json:"nameClaimType,omitempty" tf:"name_claim_type,omitempty"`
 
-	// The app setting name that contains the client_secret value used for the Custom OIDC Login.
+	// Specifies the endpoint used for OpenID Connect Discovery. For example https://example.com/.well-known/openid-configuration.
 	// The endpoint that contains all the configuration endpoints for this Custom OIDC provider.
 	// +kubebuilder:validation:Required
 	OpenIDConfigurationEndpoint *string `json:"openidConfigurationEndpoint" tf:"openid_configuration_endpoint,omitempty"`

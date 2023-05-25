@@ -345,10 +345,8 @@ type OrchestratedVirtualMachineScaleSetDataDiskObservation struct {
 	// The Type of Storage Account which should back this Data Disk. Possible values include Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS, Premium_LRS, PremiumV2_LRS, Premium_ZRS and UltraSSD_LRS.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
-	// Specifies the Read-Write IOPS for this Data Disk. Only settable for UltraSSD disks.
 	UltraSsdDiskIopsReadWrite *float64 `json:"ultraSsdDiskIopsReadWrite,omitempty" tf:"ultra_ssd_disk_iops_read_write,omitempty"`
 
-	// Specifies the bandwidth in MB per second for this Data Disk. Only settable for UltraSSD disks.
 	UltraSsdDiskMbpsReadWrite *float64 `json:"ultraSsdDiskMbpsReadWrite,omitempty" tf:"ultra_ssd_disk_mbps_read_write,omitempty"`
 
 	// Specifies if Write Accelerator is enabled on the Data Disk. Defaults to false.
@@ -381,11 +379,9 @@ type OrchestratedVirtualMachineScaleSetDataDiskParameters struct {
 	// +kubebuilder:validation:Required
 	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
 
-	// Specifies the Read-Write IOPS for this Data Disk. Only settable for UltraSSD disks.
 	// +kubebuilder:validation:Optional
 	UltraSsdDiskIopsReadWrite *float64 `json:"ultraSsdDiskIopsReadWrite,omitempty" tf:"ultra_ssd_disk_iops_read_write,omitempty"`
 
-	// Specifies the bandwidth in MB per second for this Data Disk. Only settable for UltraSSD disks.
 	// +kubebuilder:validation:Optional
 	UltraSsdDiskMbpsReadWrite *float64 `json:"ultraSsdDiskMbpsReadWrite,omitempty" tf:"ultra_ssd_disk_mbps_read_write,omitempty"`
 

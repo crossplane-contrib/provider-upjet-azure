@@ -606,8 +606,8 @@ spec:
                                   the users name.
                                 type: string
                               openidConfigurationEndpoint:
-                                description: The app setting name that contains the
-                                  client_secret value used for the Custom OIDC Login.
+                                description: Specifies the endpoint used for OpenID
+                                  Connect Discovery. For example https://example.com/.well-known/openid-configuration.
                                   The endpoint that contains all the configuration
                                   endpoints for this Custom OIDC provider.
                                 type: string
@@ -2733,8 +2733,8 @@ spec:
                                   the users name.
                                 type: string
                               openidConfigurationEndpoint:
-                                description: The app setting name that contains the
-                                  client_secret value used for the Custom OIDC Login.
+                                description: Specifies the endpoint used for OpenID
+                                  Connect Discovery. For example https://example.com/.well-known/openid-configuration.
                                   The endpoint that contains all the configuration
                                   endpoints for this Custom OIDC provider.
                                 type: string

@@ -21,7 +21,7 @@ type AacAudioObservation struct {
 	// The number of audio channels. Default to 2.
 	Channels *float64 `json:"channels,omitempty" tf:"channels,omitempty"`
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// The H.264 profile. Possible values are Auto, Baseline, High, High422, High444,or Main. Default to Auto.
@@ -41,7 +41,7 @@ type AacAudioParameters struct {
 	// +kubebuilder:validation:Optional
 	Channels *float64 `json:"channels,omitempty" tf:"channels,omitempty"`
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
@@ -168,6 +168,12 @@ type CodecObservation struct {
 
 	// A h265_video block as defined below.
 	H265Video []H265VideoObservation `json:"h265Video,omitempty" tf:"h265_video,omitempty"`
+
+	// A jpg_image block as defined below.
+	JpgImage []JpgImageObservation `json:"jpgImage,omitempty" tf:"jpg_image,omitempty"`
+
+	// A png_image block as defined below.
+	PngImage []PngImageObservation `json:"pngImage,omitempty" tf:"png_image,omitempty"`
 }
 
 type CodecParameters struct {
@@ -195,30 +201,38 @@ type CodecParameters struct {
 	// A h265_video block as defined below.
 	// +kubebuilder:validation:Optional
 	H265Video []H265VideoParameters `json:"h265Video,omitempty" tf:"h265_video,omitempty"`
+
+	// A jpg_image block as defined below.
+	// +kubebuilder:validation:Optional
+	JpgImage []JpgImageParameters `json:"jpgImage,omitempty" tf:"jpg_image,omitempty"`
+
+	// A png_image block as defined below.
+	// +kubebuilder:validation:Optional
+	PngImage []PngImageParameters `json:"pngImage,omitempty" tf:"png_image,omitempty"`
 }
 
 type CopyAudioObservation struct {
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 }
 
 type CopyAudioParameters struct {
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 }
 
 type CopyVideoObservation struct {
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 }
 
 type CopyVideoParameters struct {
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 }
@@ -292,7 +306,7 @@ type DdAudioObservation struct {
 	// The number of audio channels. Default to 2.
 	Channels *float64 `json:"channels,omitempty" tf:"channels,omitempty"`
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// The sampling rate to use for encoding in Hertz. Default to 48000.
@@ -309,7 +323,7 @@ type DdAudioParameters struct {
 	// +kubebuilder:validation:Optional
 	Channels *float64 `json:"channels,omitempty" tf:"channels,omitempty"`
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
@@ -476,8 +490,14 @@ type FilterParameters struct {
 
 type FormatObservation struct {
 
+	// A jpg block as defined below.
+	Jpg []JpgObservation `json:"jpg,omitempty" tf:"jpg,omitempty"`
+
 	// A mp4 block as defined below.
 	Mp4 []Mp4Observation `json:"mp4,omitempty" tf:"mp4,omitempty"`
+
+	// A png block as defined below.
+	Png []PngObservation `json:"png,omitempty" tf:"png,omitempty"`
 
 	// A transport_stream block as defined below.
 	TransportStream []TransportStreamObservation `json:"transportStream,omitempty" tf:"transport_stream,omitempty"`
@@ -485,9 +505,17 @@ type FormatObservation struct {
 
 type FormatParameters struct {
 
+	// A jpg block as defined below.
+	// +kubebuilder:validation:Optional
+	Jpg []JpgParameters `json:"jpg,omitempty" tf:"jpg,omitempty"`
+
 	// A mp4 block as defined below.
 	// +kubebuilder:validation:Optional
 	Mp4 []Mp4Parameters `json:"mp4,omitempty" tf:"mp4,omitempty"`
+
+	// A png block as defined below.
+	// +kubebuilder:validation:Optional
+	Png []PngParameters `json:"png,omitempty" tf:"png,omitempty"`
 
 	// A transport_stream block as defined below.
 	// +kubebuilder:validation:Optional
@@ -502,7 +530,7 @@ type H264VideoObservation struct {
 	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// One or more layer blocks as defined below.
@@ -514,7 +542,7 @@ type H264VideoObservation struct {
 	// Whether the encoder should insert key frames at scene changes. This flag should be set to true only when the encoder is being configured to produce a single output video. Default to false.
 	SceneChangeDetectionEnabled *bool `json:"sceneChangeDetectionEnabled,omitempty" tf:"scene_change_detection_enabled,omitempty"`
 
-	// Specifies the resizing mode - how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
+	// The resizing mode, which indicates how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
 	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
 
 	// Specifies the synchronization mode for the video. Possible values are Auto, Cfr, Passthrough or Vfr. Default to Auto.
@@ -531,7 +559,7 @@ type H264VideoParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
@@ -547,7 +575,7 @@ type H264VideoParameters struct {
 	// +kubebuilder:validation:Optional
 	SceneChangeDetectionEnabled *bool `json:"sceneChangeDetectionEnabled,omitempty" tf:"scene_change_detection_enabled,omitempty"`
 
-	// Specifies the resizing mode - how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
+	// The resizing mode, which indicates how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
 	// +kubebuilder:validation:Optional
 	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
 
@@ -579,7 +607,7 @@ type H265VideoLayerObservation struct {
 	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
 	Height *string `json:"height,omitempty" tf:"height,omitempty"`
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// The H.264 levels. Currently, the resource support Level up to 6.2. The value can be auto, or a number that matches the H.264 profile. If not specified, the default is auto, which lets the encoder choose the Level that is appropriate for this layer.
@@ -631,7 +659,7 @@ type H265VideoLayerParameters struct {
 	// +kubebuilder:validation:Optional
 	Height *string `json:"height,omitempty" tf:"height,omitempty"`
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
@@ -668,7 +696,7 @@ type H265VideoObservation struct {
 	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// One or more layer blocks as defined below.
@@ -677,7 +705,7 @@ type H265VideoObservation struct {
 	// Whether the encoder should insert key frames at scene changes. This flag should be set to true only when the encoder is being configured to produce a single output video. Default to false.
 	SceneChangeDetectionEnabled *bool `json:"sceneChangeDetectionEnabled,omitempty" tf:"scene_change_detection_enabled,omitempty"`
 
-	// Specifies the resizing mode - how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
+	// The resizing mode, which indicates how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
 	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
 
 	// Specifies the synchronization mode for the video. Possible values are Auto, Cfr, Passthrough or Vfr. Default to Auto.
@@ -694,7 +722,7 @@ type H265VideoParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
@@ -706,13 +734,129 @@ type H265VideoParameters struct {
 	// +kubebuilder:validation:Optional
 	SceneChangeDetectionEnabled *bool `json:"sceneChangeDetectionEnabled,omitempty" tf:"scene_change_detection_enabled,omitempty"`
 
-	// Specifies the resizing mode - how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
+	// The resizing mode, which indicates how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
 	// +kubebuilder:validation:Optional
 	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
 
 	// Specifies the synchronization mode for the video. Possible values are Auto, Cfr, Passthrough or Vfr. Default to Auto.
 	// +kubebuilder:validation:Optional
 	SyncMode *string `json:"syncMode,omitempty" tf:"sync_mode,omitempty"`
+}
+
+type JpgImageLayerObservation struct {
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The compression quality of the JPEG output. Range is from 0 to 100 and the default is 70.
+	Quality *float64 `json:"quality,omitempty" tf:"quality,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type JpgImageLayerParameters struct {
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The compression quality of the JPEG output. Range is from 0 to 100 and the default is 70.
+	// +kubebuilder:validation:Optional
+	Quality *float64 `json:"quality,omitempty" tf:"quality,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type JpgImageObservation struct {
+
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
+
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// One or more layer blocks as defined below.
+	Layer []JpgImageLayerObservation `json:"layer,omitempty" tf:"layer,omitempty"`
+
+	// The position relative to transform preset start time in the input video at which to stop generating thumbnails. The value can be in ISO 8601 format (For example, PT5M30S to stop at 5 minutes and 30 seconds from start time), or a frame count (For example, 300 to stop at the 300th frame from the frame at start time. If this value is 1, it means only producing one thumbnail at start time), or a relative value to the stream duration (For example, 50% to stop at half of stream duration from start time). The default value is 100%, which means to stop at the end of the stream.
+	Range *string `json:"range,omitempty" tf:"range,omitempty"`
+
+	// Sets the number of columns used in thumbnail sprite image. The number of rows are automatically calculated and a VTT file is generated with the coordinate mappings for each thumbnail in the sprite. Note: this value should be a positive integer and a proper value is recommended so that the output image resolution will not go beyond JPEG maximum pixel resolution limit 65535x65535.
+	SpriteColumn *float64 `json:"spriteColumn,omitempty" tf:"sprite_column,omitempty"`
+
+	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+
+	// The intervals at which thumbnails are generated. The value can be in ISO 8601 format (For example, PT05S for one image every 5 seconds), or a frame count (For example, 30 for one image every 30 frames), or a relative value to stream duration (For example, 10% for one image every 10% of stream duration). Note: Step value will affect the first generated thumbnail, which may not be exactly the one specified at transform preset start time. This is due to the encoder, which tries to select the best thumbnail between start time and Step position from start time as the first output. As the default value is 10%, it means if stream has long duration, the first generated thumbnail might be far away from the one specified at start time. Try to select reasonable value for Step if the first thumbnail is expected close to start time, or set Range value at 1 if only one thumbnail is needed at start time.
+	Step *string `json:"step,omitempty" tf:"step,omitempty"`
+
+	// The resizing mode, which indicates how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
+	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
+
+	// Specifies the synchronization mode for the video. Possible values are Auto, Cfr, Passthrough or Vfr. Default to Auto.
+	SyncMode *string `json:"syncMode,omitempty" tf:"sync_mode,omitempty"`
+}
+
+type JpgImageParameters struct {
+
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// +kubebuilder:validation:Optional
+	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
+
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// One or more layer blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Layer []JpgImageLayerParameters `json:"layer,omitempty" tf:"layer,omitempty"`
+
+	// The position relative to transform preset start time in the input video at which to stop generating thumbnails. The value can be in ISO 8601 format (For example, PT5M30S to stop at 5 minutes and 30 seconds from start time), or a frame count (For example, 300 to stop at the 300th frame from the frame at start time. If this value is 1, it means only producing one thumbnail at start time), or a relative value to the stream duration (For example, 50% to stop at half of stream duration from start time). The default value is 100%, which means to stop at the end of the stream.
+	// +kubebuilder:validation:Optional
+	Range *string `json:"range,omitempty" tf:"range,omitempty"`
+
+	// Sets the number of columns used in thumbnail sprite image. The number of rows are automatically calculated and a VTT file is generated with the coordinate mappings for each thumbnail in the sprite. Note: this value should be a positive integer and a proper value is recommended so that the output image resolution will not go beyond JPEG maximum pixel resolution limit 65535x65535.
+	// +kubebuilder:validation:Optional
+	SpriteColumn *float64 `json:"spriteColumn,omitempty" tf:"sprite_column,omitempty"`
+
+	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
+	// +kubebuilder:validation:Required
+	Start *string `json:"start" tf:"start,omitempty"`
+
+	// The intervals at which thumbnails are generated. The value can be in ISO 8601 format (For example, PT05S for one image every 5 seconds), or a frame count (For example, 30 for one image every 30 frames), or a relative value to stream duration (For example, 10% for one image every 10% of stream duration). Note: Step value will affect the first generated thumbnail, which may not be exactly the one specified at transform preset start time. This is due to the encoder, which tries to select the best thumbnail between start time and Step position from start time as the first output. As the default value is 10%, it means if stream has long duration, the first generated thumbnail might be far away from the one specified at start time. Try to select reasonable value for Step if the first thumbnail is expected close to start time, or set Range value at 1 if only one thumbnail is needed at start time.
+	// +kubebuilder:validation:Optional
+	Step *string `json:"step,omitempty" tf:"step,omitempty"`
+
+	// The resizing mode, which indicates how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
+	// +kubebuilder:validation:Optional
+	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
+
+	// Specifies the synchronization mode for the video. Possible values are Auto, Cfr, Passthrough or Vfr. Default to Auto.
+	// +kubebuilder:validation:Optional
+	SyncMode *string `json:"syncMode,omitempty" tf:"sync_mode,omitempty"`
+}
+
+type JpgObservation struct {
+
+	// The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename.
+	FilenamePattern *string `json:"filenamePattern,omitempty" tf:"filename_pattern,omitempty"`
+}
+
+type JpgParameters struct {
+
+	// The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename.
+	// +kubebuilder:validation:Required
+	FilenamePattern *string `json:"filenamePattern" tf:"filename_pattern,omitempty"`
 }
 
 type LayerObservation struct {
@@ -741,7 +885,7 @@ type LayerObservation struct {
 	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
 	Height *string `json:"height,omitempty" tf:"height,omitempty"`
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// The H.264 levels. Currently, the resource support Level up to 6.2. The value can be auto, or a number that matches the H.264 profile. If not specified, the default is auto, which lets the encoder choose the Level that is appropriate for this layer.
@@ -797,7 +941,7 @@ type LayerParameters struct {
 	// +kubebuilder:validation:Optional
 	Height *string `json:"height,omitempty" tf:"height,omitempty"`
 
-	// The alphanumeric label for this layer, which can be used in multiplexing different video and audio layers, or in naming the output file.
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
 	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
@@ -932,6 +1076,108 @@ type OverlayParameters struct {
 	// A video block as defined below.
 	// +kubebuilder:validation:Optional
 	Video []VideoParameters `json:"video,omitempty" tf:"video,omitempty"`
+}
+
+type PngImageLayerObservation struct {
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type PngImageLayerParameters struct {
+
+	// The height of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Height *string `json:"height,omitempty" tf:"height,omitempty"`
+
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// The width of the rectangular region in pixels. This can be absolute pixel value (e.g 100), or relative to the size of the video (For example, 50%).
+	// +kubebuilder:validation:Optional
+	Width *string `json:"width,omitempty" tf:"width,omitempty"`
+}
+
+type PngImageObservation struct {
+
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
+
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// One or more layer blocks as defined below.
+	Layer []PngImageLayerObservation `json:"layer,omitempty" tf:"layer,omitempty"`
+
+	// The position relative to transform preset start time in the input video at which to stop generating thumbnails. The value can be in ISO 8601 format (For example, PT5M30S to stop at 5 minutes and 30 seconds from start time), or a frame count (For example, 300 to stop at the 300th frame from the frame at start time. If this value is 1, it means only producing one thumbnail at start time), or a relative value to the stream duration (For example, 50% to stop at half of stream duration from start time). The default value is 100%, which means to stop at the end of the stream.
+	Range *string `json:"range,omitempty" tf:"range,omitempty"`
+
+	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+
+	// The intervals at which thumbnails are generated. The value can be in ISO 8601 format (For example, PT05S for one image every 5 seconds), or a frame count (For example, 30 for one image every 30 frames), or a relative value to stream duration (For example, 10% for one image every 10% of stream duration). Note: Step value will affect the first generated thumbnail, which may not be exactly the one specified at transform preset start time. This is due to the encoder, which tries to select the best thumbnail between start time and Step position from start time as the first output. As the default value is 10%, it means if stream has long duration, the first generated thumbnail might be far away from the one specified at start time. Try to select reasonable value for Step if the first thumbnail is expected close to start time, or set Range value at 1 if only one thumbnail is needed at start time.
+	Step *string `json:"step,omitempty" tf:"step,omitempty"`
+
+	// The resizing mode, which indicates how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
+	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
+
+	// Specifies the synchronization mode for the video. Possible values are Auto, Cfr, Passthrough or Vfr. Default to Auto.
+	SyncMode *string `json:"syncMode,omitempty" tf:"sync_mode,omitempty"`
+}
+
+type PngImageParameters struct {
+
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// +kubebuilder:validation:Optional
+	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
+
+	// Specifies the label for the codec. The label can be used to control muxing behavior.
+	// +kubebuilder:validation:Optional
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// One or more layer blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Layer []PngImageLayerParameters `json:"layer,omitempty" tf:"layer,omitempty"`
+
+	// The position relative to transform preset start time in the input video at which to stop generating thumbnails. The value can be in ISO 8601 format (For example, PT5M30S to stop at 5 minutes and 30 seconds from start time), or a frame count (For example, 300 to stop at the 300th frame from the frame at start time. If this value is 1, it means only producing one thumbnail at start time), or a relative value to the stream duration (For example, 50% to stop at half of stream duration from start time). The default value is 100%, which means to stop at the end of the stream.
+	// +kubebuilder:validation:Optional
+	Range *string `json:"range,omitempty" tf:"range,omitempty"`
+
+	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
+	// +kubebuilder:validation:Required
+	Start *string `json:"start" tf:"start,omitempty"`
+
+	// The intervals at which thumbnails are generated. The value can be in ISO 8601 format (For example, PT05S for one image every 5 seconds), or a frame count (For example, 30 for one image every 30 frames), or a relative value to stream duration (For example, 10% for one image every 10% of stream duration). Note: Step value will affect the first generated thumbnail, which may not be exactly the one specified at transform preset start time. This is due to the encoder, which tries to select the best thumbnail between start time and Step position from start time as the first output. As the default value is 10%, it means if stream has long duration, the first generated thumbnail might be far away from the one specified at start time. Try to select reasonable value for Step if the first thumbnail is expected close to start time, or set Range value at 1 if only one thumbnail is needed at start time.
+	// +kubebuilder:validation:Optional
+	Step *string `json:"step,omitempty" tf:"step,omitempty"`
+
+	// The resizing mode, which indicates how the input video will be resized to fit the desired output resolution(s). Possible values are AutoFit, AutoSize or None. Default to AutoSize.
+	// +kubebuilder:validation:Optional
+	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
+
+	// Specifies the synchronization mode for the video. Possible values are Auto, Cfr, Passthrough or Vfr. Default to Auto.
+	// +kubebuilder:validation:Optional
+	SyncMode *string `json:"syncMode,omitempty" tf:"sync_mode,omitempty"`
+}
+
+type PngObservation struct {
+
+	// The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename.
+	FilenamePattern *string `json:"filenamePattern,omitempty" tf:"filename_pattern,omitempty"`
+}
+
+type PngParameters struct {
+
+	// The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename.
+	// +kubebuilder:validation:Required
+	FilenamePattern *string `json:"filenamePattern" tf:"filename_pattern,omitempty"`
 }
 
 type PositionObservation struct {

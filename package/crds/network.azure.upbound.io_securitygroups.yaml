@@ -169,8 +169,8 @@ spec:
                           type: string
                         destinationAddressPrefix:
                           description: CIDR or destination IP range or * to match
-                            any IP. Tags such as ‘VirtualNetwork’, ‘AzureLoadBalancer’
-                            and ‘Internet’ can also be used. This is required if destination_address_prefixes
+                            any IP. Tags such as VirtualNetwork, AzureLoadBalancer
+                            and Internet can also be used. This is required if destination_address_prefixes
                             is not specified.
                           type: string
                         destinationAddressPrefixes:
@@ -218,8 +218,8 @@ spec:
                           type: string
                         sourceAddressPrefix:
                           description: CIDR or source IP range or * to match any IP.
-                            Tags such as ‘VirtualNetwork’, ‘AzureLoadBalancer’ and
-                            ‘Internet’ can also be used. This is required if source_address_prefixes
+                            Tags such as VirtualNetwork, AzureLoadBalancer and Internet
+                            can also be used. This is required if source_address_prefixes
                             is not specified.
                           type: string
                         sourceAddressPrefixes:
@@ -475,8 +475,8 @@ spec:
                           type: string
                         destinationAddressPrefix:
                           description: CIDR or destination IP range or * to match
-                            any IP. Tags such as ‘VirtualNetwork’, ‘AzureLoadBalancer’
-                            and ‘Internet’ can also be used. This is required if destination_address_prefixes
+                            any IP. Tags such as VirtualNetwork, AzureLoadBalancer
+                            and Internet can also be used. This is required if destination_address_prefixes
                             is not specified.
                           type: string
                         destinationAddressPrefixes:
@@ -524,8 +524,8 @@ spec:
                           type: string
                         sourceAddressPrefix:
                           description: CIDR or source IP range or * to match any IP.
-                            Tags such as ‘VirtualNetwork’, ‘AzureLoadBalancer’ and
-                            ‘Internet’ can also be used. This is required if source_address_prefixes
+                            Tags such as VirtualNetwork, AzureLoadBalancer and Internet
+                            can also be used. This is required if source_address_prefixes
                             is not specified.
                           type: string
                         sourceAddressPrefixes:
