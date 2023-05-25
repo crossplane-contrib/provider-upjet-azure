@@ -11386,6 +11386,16 @@ func (in *ProductTagParameters) DeepCopyInto(out *ProductTagParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.APIManagementNameRef != nil {
+		in, out := &in.APIManagementNameRef, &out.APIManagementNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.APIManagementNameSelector != nil {
+		in, out := &in.APIManagementNameSelector, &out.APIManagementNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.APIManagementProductID != nil {
 		in, out := &in.APIManagementProductID, &out.APIManagementProductID
 		*out = new(string)

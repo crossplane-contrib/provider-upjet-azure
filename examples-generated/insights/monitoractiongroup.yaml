@@ -13,13 +13,13 @@ spec:
       roleId: de139f84-1756-47ae-9be6-808fbbe84772
       useCommonAlertSchema: true
     automationRunbookReceiver:
-    - automationAccountId: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg-runbooks/providers/microsoft.automation/automationaccounts/aaa001
+    - automationAccountId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-runbooks/providers/Microsoft.Automation/automationAccounts/aaa001
       isGlobalRunbook: true
       name: action_name_1
       runbookName: my runbook
       serviceUri: https://s13events.azure-automation.net/webhooks?token=randomtoken
       useCommonAlertSchema: true
-      webhookResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg-runbooks/providers/microsoft.automation/automationaccounts/aaa001/webhooks/webhook_alert
+      webhookResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-runbooks/providers/Microsoft.Automation/automationAccounts/aaa001/webHooks/webhook_alert
     azureAppPushReceiver:
     - emailAddress: admin@contoso.com
       name: pushtoadmin

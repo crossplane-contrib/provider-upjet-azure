@@ -613,7 +613,7 @@ type HTTPProxyConfigObservation struct {
 	// The proxy address to be used when communicating over HTTPS. Changing this forces a new resource to be created.
 	HTTPSProxy *string `json:"httpsProxy,omitempty" tf:"https_proxy,omitempty"`
 
-	// The list of domains that will not use the proxy for communication. Changing this forces a new resource to be created.
+	// The list of domains that will not use the proxy for communication.
 	NoProxy []*string `json:"noProxy,omitempty" tf:"no_proxy,omitempty"`
 }
 
@@ -627,7 +627,7 @@ type HTTPProxyConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	HTTPSProxy *string `json:"httpsProxy,omitempty" tf:"https_proxy,omitempty"`
 
-	// The list of domains that will not use the proxy for communication. Changing this forces a new resource to be created.
+	// The list of domains that will not use the proxy for communication.
 	// +kubebuilder:validation:Optional
 	NoProxy []*string `json:"noProxy,omitempty" tf:"no_proxy,omitempty"`
 

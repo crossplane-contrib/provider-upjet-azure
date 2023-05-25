@@ -1070,8 +1070,7 @@ spec:
                           type: string
                         noProxy:
                           description: The list of domains that will not use the proxy
-                            for communication. Changing this forces a new resource
-                            to be created.
+                            for communication.
                           items:
                             type: string
                           type: array
@@ -2833,8 +2832,7 @@ spec:
                           type: string
                         noProxy:
                           description: The list of domains that will not use the proxy
-                            for communication. Changing this forces a new resource
-                            to be created.
+                            for communication.
                           items:
                             type: string
                           type: array

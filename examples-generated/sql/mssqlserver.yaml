@@ -14,8 +14,12 @@ spec:
       name: example-secret
       namespace: upbound-system
     azureadAdministrator:
-    - loginUsername: AzureAD Admin
-      objectId: 00000000-0000-0000-0000-000000000000
+    - loginUsernameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      objectIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
     location: West Europe
     minimumTlsVersion: "1.2"
     resourceGroupNameSelector:

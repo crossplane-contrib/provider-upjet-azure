@@ -10,7 +10,8 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
-	v1beta13 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
+	v1beta14 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
+	v1beta13 "github.com/upbound/provider-azure/apis/managedidentity/v1beta1"
 	v1beta12 "github.com/upbound/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	v1beta1 "github.com/upbound/provider-azure/apis/storage/v1beta1"
@@ -520,6 +521,58 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.AzureadAdministrator); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsername),
+			Extract:      resource.ExtractParamPath("name", false),
+			Reference:    mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsernameRef,
+			Selector:     mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsernameSelector,
+			To: reference.To{
+				List:    &v1beta13.UserAssignedIdentityList{},
+				Managed: &v1beta13.UserAssignedIdentity{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsername")
+		}
+		mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsername = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AzureadAdministrator[i3].LoginUsernameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.AzureadAdministrator); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectID),
+			Extract:      resource.ExtractParamPath("principal_id", true),
+			Reference:    mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectIDRef,
+			Selector:     mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectIDSelector,
+			To: reference.To{
+				List:    &v1beta13.UserAssignedIdentityList{},
+				Managed: &v1beta13.UserAssignedIdentity{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectID")
+		}
+		mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.AzureadAdministrator[i3].ObjectIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrimaryUserAssignedIdentityID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.PrimaryUserAssignedIdentityIDRef,
+		Selector:     mg.Spec.ForProvider.PrimaryUserAssignedIdentityIDSelector,
+		To: reference.To{
+			List:    &v1beta13.UserAssignedIdentityList{},
+			Managed: &v1beta13.UserAssignedIdentity{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PrimaryUserAssignedIdentityID")
+	}
+	mg.Spec.ForProvider.PrimaryUserAssignedIdentityID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.PrimaryUserAssignedIdentityIDRef = rsp.ResolvedReference
+
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
@@ -535,6 +588,22 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDRef,
+		Selector:     mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta14.KeyList{},
+			Managed: &v1beta14.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID")
+	}
+	mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -678,8 +747,8 @@ func (mg *MSSQLServerTransparentDataEncryption) ResolveReferences(ctx context.Co
 		Reference:    mg.Spec.ForProvider.KeyVaultKeyIDRef,
 		Selector:     mg.Spec.ForProvider.KeyVaultKeyIDSelector,
 		To: reference.To{
-			List:    &v1beta13.KeyList{},
-			Managed: &v1beta13.Key{},
+			List:    &v1beta14.KeyList{},
+			Managed: &v1beta14.Key{},
 		},
 	})
 	if err != nil {

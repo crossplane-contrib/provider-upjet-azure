@@ -174,8 +174,8 @@ type EndPointParameters struct {
 	EndPointName *string `json:"endPointName" tf:"end_point_name,omitempty"`
 
 	// IP address of an end point.
-	// +kubebuilder:validation:Required
-	IPAddress *string `json:"ipAddress" tf:"ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// TCP port to listen on to receive data.
 	// +kubebuilder:validation:Required

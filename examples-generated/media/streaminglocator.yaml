@@ -65,6 +65,25 @@ spec:
 
 ---
 
+apiVersion: media.azure.upbound.io/v1beta1
+kind: ServicesAccountFilter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta1/streaminglocator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    mediaServicesAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:

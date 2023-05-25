@@ -34,8 +34,17 @@ type ProductTagObservation struct {
 type ProductTagParameters struct {
 
 	// The name of the API Management Service. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// Reference to a Management in apimanagement to populate apiManagementName.
+	// +kubebuilder:validation:Optional
+	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
+
+	// Selector for a Management in apimanagement to populate apiManagementName.
+	// +kubebuilder:validation:Optional
+	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The name of the API Management product. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Product
@@ -101,9 +110,8 @@ type ProductTagStatus struct {
 type ProductTag struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.apiManagementName)",message="apiManagementName is a required parameter"
-	Spec   ProductTagSpec   `json:"spec"`
-	Status ProductTagStatus `json:"status,omitempty"`
+	Spec              ProductTagSpec   `json:"spec"`
+	Status            ProductTagStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

@@ -14,21 +14,16 @@ import (
 )
 
 type AutoscaleRecurrenceObservation struct {
-
-	// A list of schedule blocks as defined below.
 	Schedule []RecurrenceScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// The time zone for the autoscale schedule times.
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
 type AutoscaleRecurrenceParameters struct {
 
-	// A list of schedule blocks as defined below.
 	// +kubebuilder:validation:Required
 	Schedule []RecurrenceScheduleParameters `json:"schedule" tf:"schedule,omitempty"`
 
-	// The time zone for the autoscale schedule times.
 	// +kubebuilder:validation:Required
 	Timezone *string `json:"timezone" tf:"timezone,omitempty"`
 }
@@ -623,20 +618,16 @@ type MetastoresOozieParameters struct {
 }
 
 type RecurrenceScheduleObservation struct {
-
-	// The days of the week to perform autoscale. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
 	Days []*string `json:"days,omitempty" tf:"days,omitempty"`
 
 	// The number of instances which should be run for the Worker Nodes.
 	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
 
-	// The time of day to perform the autoscale in 24hour format.
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 }
 
 type RecurrenceScheduleParameters struct {
 
-	// The days of the week to perform autoscale. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
 	// +kubebuilder:validation:Required
 	Days []*string `json:"days" tf:"days,omitempty"`
 
@@ -644,7 +635,6 @@ type RecurrenceScheduleParameters struct {
 	// +kubebuilder:validation:Required
 	TargetInstanceCount *float64 `json:"targetInstanceCount" tf:"target_instance_count,omitempty"`
 
-	// The time of day to perform the autoscale in 24hour format.
 	// +kubebuilder:validation:Required
 	Time *string `json:"time" tf:"time,omitempty"`
 }
@@ -712,8 +702,6 @@ type RolesHeadNodeParameters struct {
 }
 
 type RolesWorkerNodeObservation struct {
-
-	// A autoscale block as defined below.
 	Autoscale []WorkerNodeAutoscaleObservation `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -740,7 +728,6 @@ type RolesWorkerNodeObservation struct {
 
 type RolesWorkerNodeParameters struct {
 
-	// A autoscale block as defined below.
 	// +kubebuilder:validation:Optional
 	Autoscale []WorkerNodeAutoscaleParameters `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
@@ -904,14 +891,11 @@ type RolesZookeeperNodeScriptActionsParameters struct {
 }
 
 type WorkerNodeAutoscaleObservation struct {
-
-	// A recurrence block as defined below.
 	Recurrence []AutoscaleRecurrenceObservation `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }
 
 type WorkerNodeAutoscaleParameters struct {
 
-	// A recurrence block as defined below.
 	// +kubebuilder:validation:Optional
 	Recurrence []AutoscaleRecurrenceParameters `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }

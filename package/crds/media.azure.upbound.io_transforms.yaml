@@ -282,10 +282,9 @@ spec:
                                               Default to 2.
                                             type: number
                                           label:
-                                            description: The alphanumeric label for
-                                              this layer, which can be used in multiplexing
-                                              different video and audio layers, or
-                                              in naming the output file.
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
                                             type: string
                                           profile:
                                             description: The H.264 profile. Possible
@@ -303,10 +302,9 @@ spec:
                                       items:
                                         properties:
                                           label:
-                                            description: The alphanumeric label for
-                                              this layer, which can be used in multiplexing
-                                              different video and audio layers, or
-                                              in naming the output file.
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
                                             type: string
                                         type: object
                                       type: array
@@ -315,10 +313,9 @@ spec:
                                       items:
                                         properties:
                                           label:
-                                            description: The alphanumeric label for
-                                              this layer, which can be used in multiplexing
-                                              different video and audio layers, or
-                                              in naming the output file.
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
                                             type: string
                                         type: object
                                       type: array
@@ -336,10 +333,9 @@ spec:
                                               Default to 2.
                                             type: number
                                           label:
-                                            description: The alphanumeric label for
-                                              this layer, which can be used in multiplexing
-                                              different video and audio layers, or
-                                              in naming the output file.
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
                                             type: string
                                           samplingRate:
                                             description: The sampling rate to use
@@ -367,10 +363,9 @@ spec:
                                               follow the input source setting.
                                             type: string
                                           label:
-                                            description: The alphanumeric label for
-                                              this layer, which can be used in multiplexing
-                                              different video and audio layers, or
-                                              in naming the output file.
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
                                             type: string
                                           layer:
                                             description: One or more layer blocks
@@ -452,11 +447,9 @@ spec:
                                                     video (For example, 50%).
                                                   type: string
                                                 label:
-                                                  description: The alphanumeric label
-                                                    for this layer, which can be used
-                                                    in multiplexing different video
-                                                    and audio layers, or in naming
-                                                    the output file.
+                                                  description: Specifies the label
+                                                    for the codec. The label can be
+                                                    used to control muxing behavior.
                                                   type: string
                                                 level:
                                                   description: The H.264 levels. Currently,
@@ -522,9 +515,9 @@ spec:
                                               to false.
                                             type: boolean
                                           stretchMode:
-                                            description: Specifies the resizing mode
-                                              - how the input video will be resized
-                                              to fit the desired output resolution(s).
+                                            description: The resizing mode, which
+                                              indicates how the input video will be
+                                              resized to fit the desired output resolution(s).
                                               Possible values are AutoFit, AutoSize
                                               or None. Default to AutoSize.
                                             type: string
@@ -556,10 +549,9 @@ spec:
                                               follow the input source setting.
                                             type: string
                                           label:
-                                            description: The alphanumeric label for
-                                              this layer, which can be used in multiplexing
-                                              different video and audio layers, or
-                                              in naming the output file.
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
                                             type: string
                                           layer:
                                             description: One or more layer blocks
@@ -633,11 +625,9 @@ spec:
                                                     video (For example, 50%).
                                                   type: string
                                                 label:
-                                                  description: The alphanumeric label
-                                                    for this layer, which can be used
-                                                    in multiplexing different video
-                                                    and audio layers, or in naming
-                                                    the output file.
+                                                  description: Specifies the label
+                                                    for the codec. The label can be
+                                                    used to control muxing behavior.
                                                   type: string
                                                 level:
                                                   description: The H.264 levels. Currently,
@@ -698,9 +688,9 @@ spec:
                                               to false.
                                             type: boolean
                                           stretchMode:
-                                            description: Specifies the resizing mode
-                                              - how the input video will be resized
-                                              to fit the desired output resolution(s).
+                                            description: The resizing mode, which
+                                              indicates how the input video will be
+                                              resized to fit the desired output resolution(s).
                                               Possible values are AutoFit, AutoSize
                                               or None. Default to AutoSize.
                                             type: string
@@ -710,6 +700,253 @@ spec:
                                               are Auto, Cfr, Passthrough or Vfr. Default
                                               to Auto.
                                             type: string
+                                        type: object
+                                      type: array
+                                    jpgImage:
+                                      description: A jpg_image block as defined below.
+                                      items:
+                                        properties:
+                                          keyFrameInterval:
+                                            description: The distance between two
+                                              key frames. The value should be non-zero
+                                              in the range 0.5 to 20 seconds, specified
+                                              in ISO 8601 format. The default is 2
+                                              seconds (PT2S). Note that this setting
+                                              is ignored if sync_mode is set to Passthrough,
+                                              where the KeyFrameInterval value will
+                                              follow the input source setting.
+                                            type: string
+                                          label:
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
+                                            type: string
+                                          layer:
+                                            description: One or more layer blocks
+                                              as defined below.
+                                            items:
+                                              properties:
+                                                height:
+                                                  description: The height of the rectangular
+                                                    region in pixels. This can be
+                                                    absolute pixel value (e.g 100),
+                                                    or relative to the size of the
+                                                    video (For example, 50%).
+                                                  type: string
+                                                label:
+                                                  description: Specifies the label
+                                                    for the codec. The label can be
+                                                    used to control muxing behavior.
+                                                  type: string
+                                                quality:
+                                                  description: The compression quality
+                                                    of the JPEG output. Range is from
+                                                    0 to 100 and the default is 70.
+                                                  type: number
+                                                width:
+                                                  description: The width of the rectangular
+                                                    region in pixels. This can be
+                                                    absolute pixel value (e.g 100),
+                                                    or relative to the size of the
+                                                    video (For example, 50%).
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          range:
+                                            description: The position relative to
+                                              transform preset start time in the input
+                                              video at which to stop generating thumbnails.
+                                              The value can be in ISO 8601 format
+                                              (For example, PT5M30S to stop at 5 minutes
+                                              and 30 seconds from start time), or
+                                              a frame count (For example, 300 to stop
+                                              at the 300th frame from the frame at
+                                              start time. If this value is 1, it means
+                                              only producing one thumbnail at start
+                                              time), or a relative value to the stream
+                                              duration (For example, 50% to stop at
+                                              half of stream duration from start time).
+                                              The default value is 100%, which means
+                                              to stop at the end of the stream.
+                                            type: string
+                                          spriteColumn:
+                                            description: 'Sets the number of columns
+                                              used in thumbnail sprite image. The
+                                              number of rows are automatically calculated
+                                              and a VTT file is generated with the
+                                              coordinate mappings for each thumbnail
+                                              in the sprite. Note: this value should
+                                              be a positive integer and a proper value
+                                              is recommended so that the output image
+                                              resolution will not go beyond JPEG maximum
+                                              pixel resolution limit 65535x65535.'
+                                            type: number
+                                          start:
+                                            description: The start position, with
+                                              reference to the input video, at which
+                                              the overlay starts. The value should
+                                              be in ISO 8601 format. For example,
+                                              PT05S to start the overlay at 5 seconds
+                                              into the input video. If not specified
+                                              the overlay starts from the beginning
+                                              of the input video.
+                                            type: string
+                                          step:
+                                            description: 'The intervals at which thumbnails
+                                              are generated. The value can be in ISO
+                                              8601 format (For example, PT05S for
+                                              one image every 5 seconds), or a frame
+                                              count (For example, 30 for one image
+                                              every 30 frames), or a relative value
+                                              to stream duration (For example, 10%
+                                              for one image every 10% of stream duration).
+                                              Note: Step value will affect the first
+                                              generated thumbnail, which may not be
+                                              exactly the one specified at transform
+                                              preset start time. This is due to the
+                                              encoder, which tries to select the best
+                                              thumbnail between start time and Step
+                                              position from start time as the first
+                                              output. As the default value is 10%,
+                                              it means if stream has long duration,
+                                              the first generated thumbnail might
+                                              be far away from the one specified at
+                                              start time. Try to select reasonable
+                                              value for Step if the first thumbnail
+                                              is expected close to start time, or
+                                              set Range value at 1 if only one thumbnail
+                                              is needed at start time.'
+                                            type: string
+                                          stretchMode:
+                                            description: The resizing mode, which
+                                              indicates how the input video will be
+                                              resized to fit the desired output resolution(s).
+                                              Possible values are AutoFit, AutoSize
+                                              or None. Default to AutoSize.
+                                            type: string
+                                          syncMode:
+                                            description: Specifies the synchronization
+                                              mode for the video. Possible values
+                                              are Auto, Cfr, Passthrough or Vfr. Default
+                                              to Auto.
+                                            type: string
+                                        required:
+                                        - start
+                                        type: object
+                                      type: array
+                                    pngImage:
+                                      description: A png_image block as defined below.
+                                      items:
+                                        properties:
+                                          keyFrameInterval:
+                                            description: The distance between two
+                                              key frames. The value should be non-zero
+                                              in the range 0.5 to 20 seconds, specified
+                                              in ISO 8601 format. The default is 2
+                                              seconds (PT2S). Note that this setting
+                                              is ignored if sync_mode is set to Passthrough,
+                                              where the KeyFrameInterval value will
+                                              follow the input source setting.
+                                            type: string
+                                          label:
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
+                                            type: string
+                                          layer:
+                                            description: One or more layer blocks
+                                              as defined below.
+                                            items:
+                                              properties:
+                                                height:
+                                                  description: The height of the rectangular
+                                                    region in pixels. This can be
+                                                    absolute pixel value (e.g 100),
+                                                    or relative to the size of the
+                                                    video (For example, 50%).
+                                                  type: string
+                                                label:
+                                                  description: Specifies the label
+                                                    for the codec. The label can be
+                                                    used to control muxing behavior.
+                                                  type: string
+                                                width:
+                                                  description: The width of the rectangular
+                                                    region in pixels. This can be
+                                                    absolute pixel value (e.g 100),
+                                                    or relative to the size of the
+                                                    video (For example, 50%).
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          range:
+                                            description: The position relative to
+                                              transform preset start time in the input
+                                              video at which to stop generating thumbnails.
+                                              The value can be in ISO 8601 format
+                                              (For example, PT5M30S to stop at 5 minutes
+                                              and 30 seconds from start time), or
+                                              a frame count (For example, 300 to stop
+                                              at the 300th frame from the frame at
+                                              start time. If this value is 1, it means
+                                              only producing one thumbnail at start
+                                              time), or a relative value to the stream
+                                              duration (For example, 50% to stop at
+                                              half of stream duration from start time).
+                                              The default value is 100%, which means
+                                              to stop at the end of the stream.
+                                            type: string
+                                          start:
+                                            description: The start position, with
+                                              reference to the input video, at which
+                                              the overlay starts. The value should
+                                              be in ISO 8601 format. For example,
+                                              PT05S to start the overlay at 5 seconds
+                                              into the input video. If not specified
+                                              the overlay starts from the beginning
+                                              of the input video.
+                                            type: string
+                                          step:
+                                            description: 'The intervals at which thumbnails
+                                              are generated. The value can be in ISO
+                                              8601 format (For example, PT05S for
+                                              one image every 5 seconds), or a frame
+                                              count (For example, 30 for one image
+                                              every 30 frames), or a relative value
+                                              to stream duration (For example, 10%
+                                              for one image every 10% of stream duration).
+                                              Note: Step value will affect the first
+                                              generated thumbnail, which may not be
+                                              exactly the one specified at transform
+                                              preset start time. This is due to the
+                                              encoder, which tries to select the best
+                                              thumbnail between start time and Step
+                                              position from start time as the first
+                                              output. As the default value is 10%,
+                                              it means if stream has long duration,
+                                              the first generated thumbnail might
+                                              be far away from the one specified at
+                                              start time. Try to select reasonable
+                                              value for Step if the first thumbnail
+                                              is expected close to start time, or
+                                              set Range value at 1 if only one thumbnail
+                                              is needed at start time.'
+                                            type: string
+                                          stretchMode:
+                                            description: The resizing mode, which
+                                              indicates how the input video will be
+                                              resized to fit the desired output resolution(s).
+                                              Possible values are AutoFit, AutoSize
+                                              or None. Default to AutoSize.
+                                            type: string
+                                          syncMode:
+                                            description: Specifies the synchronization
+                                              mode for the video. Possible values
+                                              are Auto, Cfr, Passthrough or Vfr. Default
+                                              to Auto.
+                                            type: string
+                                        required:
+                                        - start
                                         type: object
                                       type: array
                                   type: object
@@ -1094,6 +1331,41 @@ spec:
                                   below.
                                 items:
                                   properties:
+                                    jpg:
+                                      description: A jpg block as defined below.
+                                      items:
+                                        properties:
+                                          filenamePattern:
+                                            description: 'The file naming pattern
+                                              used for the creation of output files.
+                                              The following macros are supported in
+                                              the file name: {Basename} - An expansion
+                                              macro that will use the name of the
+                                              input video file. If the base name(the
+                                              file suffix is not included) of the
+                                              input video file is less than 32 characters
+                                              long, the base name of input video files
+                                              will be used. If the length of base
+                                              name of the input video file exceeds
+                                              32 characters, the base name is truncated
+                                              to the first 32 characters in total
+                                              length. {Extension} - The appropriate
+                                              extension for this format. {Label} -
+                                              The label assigned to the codec/layer.
+                                              {Index} - A unique index for thumbnails.
+                                              Only applicable to thumbnails. {AudioStream}
+                                              - string "Audio" plus audio stream number(start
+                                              from 1). {Bitrate} - The audio/video
+                                              bitrate in kbps. Not applicable to thumbnails.
+                                              {Codec} - The type of the audio/video
+                                              codec. {Resolution} - The video resolution.
+                                              Any unsubstituted macros will be collapsed
+                                              and removed from the filename.'
+                                            type: string
+                                        required:
+                                        - filenamePattern
+                                        type: object
+                                      type: array
                                     mp4:
                                       description: A mp4 block as defined below.
                                       items:
@@ -1150,6 +1422,41 @@ spec:
                                               - labels
                                               type: object
                                             type: array
+                                        required:
+                                        - filenamePattern
+                                        type: object
+                                      type: array
+                                    png:
+                                      description: A png block as defined below.
+                                      items:
+                                        properties:
+                                          filenamePattern:
+                                            description: 'The file naming pattern
+                                              used for the creation of output files.
+                                              The following macros are supported in
+                                              the file name: {Basename} - An expansion
+                                              macro that will use the name of the
+                                              input video file. If the base name(the
+                                              file suffix is not included) of the
+                                              input video file is less than 32 characters
+                                              long, the base name of input video files
+                                              will be used. If the length of base
+                                              name of the input video file exceeds
+                                              32 characters, the base name is truncated
+                                              to the first 32 characters in total
+                                              length. {Extension} - The appropriate
+                                              extension for this format. {Label} -
+                                              The label assigned to the codec/layer.
+                                              {Index} - A unique index for thumbnails.
+                                              Only applicable to thumbnails. {AudioStream}
+                                              - string "Audio" plus audio stream number(start
+                                              from 1). {Bitrate} - The audio/video
+                                              bitrate in kbps. Not applicable to thumbnails.
+                                              {Codec} - The type of the audio/video
+                                              codec. {Resolution} - The video resolution.
+                                              Any unsubstituted macros will be collapsed
+                                              and removed from the filename.'
+                                            type: string
                                         required:
                                         - filenamePattern
                                         type: object
@@ -1753,10 +2060,9 @@ spec:
                                               Default to 2.
                                             type: number
                                           label:
-                                            description: The alphanumeric label for
-                                              this layer, which can be used in multiplexing
-                                              different video and audio layers, or
-                                              in naming the output file.
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
                                             type: string
                                           profile:
                                             description: The H.264 profile. Possible
@@ -1774,10 +2080,9 @@ spec:
                                       items:
                                         properties:
                                           label:
-                                            description: The alphanumeric label for
-                                              this layer, which can be used in multiplexing
-                                              different video and audio layers, or
-                                              in naming the output file.
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
                                             type: string
                                         type: object
                                       type: array
@@ -1786,10 +2091,9 @@ spec:
                                       items:
                                         properties:
                                           label:
-                                            description: The alphanumeric label for
-                                              this layer, which can be used in multiplexing
-                                              different video and audio layers, or
-                                              in naming the output file.
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
                                             type: string
                                         type: object
                                       type: array
@@ -1807,10 +2111,9 @@ spec:
                                               Default to 2.
                                             type: number
                                           label:
-                                            description: The alphanumeric label for
-                                              this layer, which can be used in multiplexing
-                                              different video and audio layers, or
-                                              in naming the output file.
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
                                             type: string
                                           samplingRate:
                                             description: The sampling rate to use
@@ -1838,10 +2141,9 @@ spec:
                                               follow the input source setting.
                                             type: string
                                           label:
-                                            description: The alphanumeric label for
-                                              this layer, which can be used in multiplexing
-                                              different video and audio layers, or
-                                              in naming the output file.
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
                                             type: string
                                           layer:
                                             description: One or more layer blocks
@@ -1923,11 +2225,9 @@ spec:
                                                     video (For example, 50%).
                                                   type: string
                                                 label:
-                                                  description: The alphanumeric label
-                                                    for this layer, which can be used
-                                                    in multiplexing different video
-                                                    and audio layers, or in naming
-                                                    the output file.
+                                                  description: Specifies the label
+                                                    for the codec. The label can be
+                                                    used to control muxing behavior.
                                                   type: string
                                                 level:
                                                   description: The H.264 levels. Currently,
@@ -1991,9 +2291,9 @@ spec:
                                               to false.
                                             type: boolean
                                           stretchMode:
-                                            description: Specifies the resizing mode
-                                              - how the input video will be resized
-                                              to fit the desired output resolution(s).
+                                            description: The resizing mode, which
+                                              indicates how the input video will be
+                                              resized to fit the desired output resolution(s).
                                               Possible values are AutoFit, AutoSize
                                               or None. Default to AutoSize.
                                             type: string
@@ -2025,10 +2325,9 @@ spec:
                                               follow the input source setting.
                                             type: string
                                           label:
-                                            description: The alphanumeric label for
-                                              this layer, which can be used in multiplexing
-                                              different video and audio layers, or
-                                              in naming the output file.
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
                                             type: string
                                           layer:
                                             description: One or more layer blocks
@@ -2102,11 +2401,9 @@ spec:
                                                     video (For example, 50%).
                                                   type: string
                                                 label:
-                                                  description: The alphanumeric label
-                                                    for this layer, which can be used
-                                                    in multiplexing different video
-                                                    and audio layers, or in naming
-                                                    the output file.
+                                                  description: Specifies the label
+                                                    for the codec. The label can be
+                                                    used to control muxing behavior.
                                                   type: string
                                                 level:
                                                   description: The H.264 levels. Currently,
@@ -2165,9 +2462,252 @@ spec:
                                               to false.
                                             type: boolean
                                           stretchMode:
-                                            description: Specifies the resizing mode
-                                              - how the input video will be resized
-                                              to fit the desired output resolution(s).
+                                            description: The resizing mode, which
+                                              indicates how the input video will be
+                                              resized to fit the desired output resolution(s).
+                                              Possible values are AutoFit, AutoSize
+                                              or None. Default to AutoSize.
+                                            type: string
+                                          syncMode:
+                                            description: Specifies the synchronization
+                                              mode for the video. Possible values
+                                              are Auto, Cfr, Passthrough or Vfr. Default
+                                              to Auto.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    jpgImage:
+                                      description: A jpg_image block as defined below.
+                                      items:
+                                        properties:
+                                          keyFrameInterval:
+                                            description: The distance between two
+                                              key frames. The value should be non-zero
+                                              in the range 0.5 to 20 seconds, specified
+                                              in ISO 8601 format. The default is 2
+                                              seconds (PT2S). Note that this setting
+                                              is ignored if sync_mode is set to Passthrough,
+                                              where the KeyFrameInterval value will
+                                              follow the input source setting.
+                                            type: string
+                                          label:
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
+                                            type: string
+                                          layer:
+                                            description: One or more layer blocks
+                                              as defined below.
+                                            items:
+                                              properties:
+                                                height:
+                                                  description: The height of the rectangular
+                                                    region in pixels. This can be
+                                                    absolute pixel value (e.g 100),
+                                                    or relative to the size of the
+                                                    video (For example, 50%).
+                                                  type: string
+                                                label:
+                                                  description: Specifies the label
+                                                    for the codec. The label can be
+                                                    used to control muxing behavior.
+                                                  type: string
+                                                quality:
+                                                  description: The compression quality
+                                                    of the JPEG output. Range is from
+                                                    0 to 100 and the default is 70.
+                                                  type: number
+                                                width:
+                                                  description: The width of the rectangular
+                                                    region in pixels. This can be
+                                                    absolute pixel value (e.g 100),
+                                                    or relative to the size of the
+                                                    video (For example, 50%).
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          range:
+                                            description: The position relative to
+                                              transform preset start time in the input
+                                              video at which to stop generating thumbnails.
+                                              The value can be in ISO 8601 format
+                                              (For example, PT5M30S to stop at 5 minutes
+                                              and 30 seconds from start time), or
+                                              a frame count (For example, 300 to stop
+                                              at the 300th frame from the frame at
+                                              start time. If this value is 1, it means
+                                              only producing one thumbnail at start
+                                              time), or a relative value to the stream
+                                              duration (For example, 50% to stop at
+                                              half of stream duration from start time).
+                                              The default value is 100%, which means
+                                              to stop at the end of the stream.
+                                            type: string
+                                          spriteColumn:
+                                            description: 'Sets the number of columns
+                                              used in thumbnail sprite image. The
+                                              number of rows are automatically calculated
+                                              and a VTT file is generated with the
+                                              coordinate mappings for each thumbnail
+                                              in the sprite. Note: this value should
+                                              be a positive integer and a proper value
+                                              is recommended so that the output image
+                                              resolution will not go beyond JPEG maximum
+                                              pixel resolution limit 65535x65535.'
+                                            type: number
+                                          start:
+                                            description: The start position, with
+                                              reference to the input video, at which
+                                              the overlay starts. The value should
+                                              be in ISO 8601 format. For example,
+                                              PT05S to start the overlay at 5 seconds
+                                              into the input video. If not specified
+                                              the overlay starts from the beginning
+                                              of the input video.
+                                            type: string
+                                          step:
+                                            description: 'The intervals at which thumbnails
+                                              are generated. The value can be in ISO
+                                              8601 format (For example, PT05S for
+                                              one image every 5 seconds), or a frame
+                                              count (For example, 30 for one image
+                                              every 30 frames), or a relative value
+                                              to stream duration (For example, 10%
+                                              for one image every 10% of stream duration).
+                                              Note: Step value will affect the first
+                                              generated thumbnail, which may not be
+                                              exactly the one specified at transform
+                                              preset start time. This is due to the
+                                              encoder, which tries to select the best
+                                              thumbnail between start time and Step
+                                              position from start time as the first
+                                              output. As the default value is 10%,
+                                              it means if stream has long duration,
+                                              the first generated thumbnail might
+                                              be far away from the one specified at
+                                              start time. Try to select reasonable
+                                              value for Step if the first thumbnail
+                                              is expected close to start time, or
+                                              set Range value at 1 if only one thumbnail
+                                              is needed at start time.'
+                                            type: string
+                                          stretchMode:
+                                            description: The resizing mode, which
+                                              indicates how the input video will be
+                                              resized to fit the desired output resolution(s).
+                                              Possible values are AutoFit, AutoSize
+                                              or None. Default to AutoSize.
+                                            type: string
+                                          syncMode:
+                                            description: Specifies the synchronization
+                                              mode for the video. Possible values
+                                              are Auto, Cfr, Passthrough or Vfr. Default
+                                              to Auto.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    pngImage:
+                                      description: A png_image block as defined below.
+                                      items:
+                                        properties:
+                                          keyFrameInterval:
+                                            description: The distance between two
+                                              key frames. The value should be non-zero
+                                              in the range 0.5 to 20 seconds, specified
+                                              in ISO 8601 format. The default is 2
+                                              seconds (PT2S). Note that this setting
+                                              is ignored if sync_mode is set to Passthrough,
+                                              where the KeyFrameInterval value will
+                                              follow the input source setting.
+                                            type: string
+                                          label:
+                                            description: Specifies the label for the
+                                              codec. The label can be used to control
+                                              muxing behavior.
+                                            type: string
+                                          layer:
+                                            description: One or more layer blocks
+                                              as defined below.
+                                            items:
+                                              properties:
+                                                height:
+                                                  description: The height of the rectangular
+                                                    region in pixels. This can be
+                                                    absolute pixel value (e.g 100),
+                                                    or relative to the size of the
+                                                    video (For example, 50%).
+                                                  type: string
+                                                label:
+                                                  description: Specifies the label
+                                                    for the codec. The label can be
+                                                    used to control muxing behavior.
+                                                  type: string
+                                                width:
+                                                  description: The width of the rectangular
+                                                    region in pixels. This can be
+                                                    absolute pixel value (e.g 100),
+                                                    or relative to the size of the
+                                                    video (For example, 50%).
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          range:
+                                            description: The position relative to
+                                              transform preset start time in the input
+                                              video at which to stop generating thumbnails.
+                                              The value can be in ISO 8601 format
+                                              (For example, PT5M30S to stop at 5 minutes
+                                              and 30 seconds from start time), or
+                                              a frame count (For example, 300 to stop
+                                              at the 300th frame from the frame at
+                                              start time. If this value is 1, it means
+                                              only producing one thumbnail at start
+                                              time), or a relative value to the stream
+                                              duration (For example, 50% to stop at
+                                              half of stream duration from start time).
+                                              The default value is 100%, which means
+                                              to stop at the end of the stream.
+                                            type: string
+                                          start:
+                                            description: The start position, with
+                                              reference to the input video, at which
+                                              the overlay starts. The value should
+                                              be in ISO 8601 format. For example,
+                                              PT05S to start the overlay at 5 seconds
+                                              into the input video. If not specified
+                                              the overlay starts from the beginning
+                                              of the input video.
+                                            type: string
+                                          step:
+                                            description: 'The intervals at which thumbnails
+                                              are generated. The value can be in ISO
+                                              8601 format (For example, PT05S for
+                                              one image every 5 seconds), or a frame
+                                              count (For example, 30 for one image
+                                              every 30 frames), or a relative value
+                                              to stream duration (For example, 10%
+                                              for one image every 10% of stream duration).
+                                              Note: Step value will affect the first
+                                              generated thumbnail, which may not be
+                                              exactly the one specified at transform
+                                              preset start time. This is due to the
+                                              encoder, which tries to select the best
+                                              thumbnail between start time and Step
+                                              position from start time as the first
+                                              output. As the default value is 10%,
+                                              it means if stream has long duration,
+                                              the first generated thumbnail might
+                                              be far away from the one specified at
+                                              start time. Try to select reasonable
+                                              value for Step if the first thumbnail
+                                              is expected close to start time, or
+                                              set Range value at 1 if only one thumbnail
+                                              is needed at start time.'
+                                            type: string
+                                          stretchMode:
+                                            description: The resizing mode, which
+                                              indicates how the input video will be
+                                              resized to fit the desired output resolution(s).
                                               Possible values are AutoFit, AutoSize
                                               or None. Default to AutoSize.
                                             type: string
@@ -2551,6 +3091,39 @@ spec:
                                   below.
                                 items:
                                   properties:
+                                    jpg:
+                                      description: A jpg block as defined below.
+                                      items:
+                                        properties:
+                                          filenamePattern:
+                                            description: 'The file naming pattern
+                                              used for the creation of output files.
+                                              The following macros are supported in
+                                              the file name: {Basename} - An expansion
+                                              macro that will use the name of the
+                                              input video file. If the base name(the
+                                              file suffix is not included) of the
+                                              input video file is less than 32 characters
+                                              long, the base name of input video files
+                                              will be used. If the length of base
+                                              name of the input video file exceeds
+                                              32 characters, the base name is truncated
+                                              to the first 32 characters in total
+                                              length. {Extension} - The appropriate
+                                              extension for this format. {Label} -
+                                              The label assigned to the codec/layer.
+                                              {Index} - A unique index for thumbnails.
+                                              Only applicable to thumbnails. {AudioStream}
+                                              - string "Audio" plus audio stream number(start
+                                              from 1). {Bitrate} - The audio/video
+                                              bitrate in kbps. Not applicable to thumbnails.
+                                              {Codec} - The type of the audio/video
+                                              codec. {Resolution} - The video resolution.
+                                              Any unsubstituted macros will be collapsed
+                                              and removed from the filename.'
+                                            type: string
+                                        type: object
+                                      type: array
                                     mp4:
                                       description: A mp4 block as defined below.
                                       items:
@@ -2605,6 +3178,39 @@ spec:
                                                   type: array
                                               type: object
                                             type: array
+                                        type: object
+                                      type: array
+                                    png:
+                                      description: A png block as defined below.
+                                      items:
+                                        properties:
+                                          filenamePattern:
+                                            description: 'The file naming pattern
+                                              used for the creation of output files.
+                                              The following macros are supported in
+                                              the file name: {Basename} - An expansion
+                                              macro that will use the name of the
+                                              input video file. If the base name(the
+                                              file suffix is not included) of the
+                                              input video file is less than 32 characters
+                                              long, the base name of input video files
+                                              will be used. If the length of base
+                                              name of the input video file exceeds
+                                              32 characters, the base name is truncated
+                                              to the first 32 characters in total
+                                              length. {Extension} - The appropriate
+                                              extension for this format. {Label} -
+                                              The label assigned to the codec/layer.
+                                              {Index} - A unique index for thumbnails.
+                                              Only applicable to thumbnails. {AudioStream}
+                                              - string "Audio" plus audio stream number(start
+                                              from 1). {Bitrate} - The audio/video
+                                              bitrate in kbps. Not applicable to thumbnails.
+                                              {Codec} - The type of the audio/video
+                                              codec. {Resolution} - The video resolution.
+                                              Any unsubstituted macros will be collapsed
+                                              and removed from the filename.'
+                                            type: string
                                         type: object
                                       type: array
                                     transportStream:

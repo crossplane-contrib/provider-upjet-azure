@@ -142,6 +142,25 @@ spec:
 
 ---
 
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacity: 1
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
 apiVersion: operationsmanagement.azure.upbound.io/v1beta1
 kind: LogAnalyticsSolution
 metadata:

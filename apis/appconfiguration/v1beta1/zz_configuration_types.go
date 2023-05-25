@@ -54,7 +54,7 @@ type ConfigurationObservation struct {
 	// A secondary_write_key block as defined below containing the secondary write access key.
 	SecondaryWriteKey []SecondaryWriteKeyObservation `json:"secondaryWriteKey,omitempty" tf:"secondary_write_key,omitempty"`
 
-	// The SKU name of the App Configuration. Possible values are free and standard.
+	// The SKU name of the App Configuration. Possible values are free and standard. Defaults to free.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// The number of days that items should be retained for once soft-deleted. This field only works for standard sku. This value can be between 1 and 7 days. Defaults to 7. Changing this forces a new resource to be created.
@@ -103,7 +103,7 @@ type ConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The SKU name of the App Configuration. Possible values are free and standard.
+	// The SKU name of the App Configuration. Possible values are free and standard. Defaults to free.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 

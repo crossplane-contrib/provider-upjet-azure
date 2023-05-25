@@ -157,6 +157,9 @@ type WorkspaceObservation struct {
 
 	// Enable V1 API features, enabling v1_legacy_mode may prevent you from using features provided by the v2 API. Defaults to false.
 	V1LegacyModeEnabled *bool `json:"v1LegacyModeEnabled,omitempty" tf:"v1_legacy_mode_enabled,omitempty"`
+
+	// The immutable id associated with this workspace.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
 type WorkspaceParameters struct {

@@ -133,6 +133,22 @@ spec:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  monitoring:
+                    description: A monitoring block as defined below.
+                    items:
+                      properties:
+                        alertsForAllJobFailuresEnabled:
+                          description: Enabling/Disabling built-in Azure Monitor alerts
+                            for security scenarios and job failure scenarios. Defaults
+                            to true.
+                          type: boolean
+                        alertsForCriticalOperationFailuresEnabled:
+                          description: Enabling/Disabling alerts from the older (classic
+                            alerts) solution. Defaults to true. More details could
+                            be found here.
+                          type: boolean
+                      type: object
+                    type: array
                   publicNetworkAccessEnabled:
                     description: Is it enabled to access the vault from public networks.
                       Defaults to true.
@@ -503,6 +519,22 @@ spec:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  monitoring:
+                    description: A monitoring block as defined below.
+                    items:
+                      properties:
+                        alertsForAllJobFailuresEnabled:
+                          description: Enabling/Disabling built-in Azure Monitor alerts
+                            for security scenarios and job failure scenarios. Defaults
+                            to true.
+                          type: boolean
+                        alertsForCriticalOperationFailuresEnabled:
+                          description: Enabling/Disabling alerts from the older (classic
+                            alerts) solution. Defaults to true. More details could
+                            be found here.
+                          type: boolean
+                      type: object
+                    type: array
                   publicNetworkAccessEnabled:
                     description: Is it enabled to access the vault from public networks.
                       Defaults to true.

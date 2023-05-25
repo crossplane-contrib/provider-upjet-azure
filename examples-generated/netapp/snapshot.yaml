@@ -87,7 +87,7 @@ spec:
     storageQuotaInGb: "100"
     subnetIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
     volumePath: my-unique-file-path
 
 ---

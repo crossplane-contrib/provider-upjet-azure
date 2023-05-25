@@ -11,7 +11,7 @@ spec:
     accountId: "0000"
     keyVaultIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: azurerm_key_vault
+        testing.upbound.io/example-name: example
     orgId: ExampleOrgName
     passwordSecretRef:
       key: example-key

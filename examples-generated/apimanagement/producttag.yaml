@@ -8,16 +8,18 @@ metadata:
   name: example
 spec:
   forProvider:
-    apiManagementName: ${data.azurerm_api_management.example.name}
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     apiManagementProductIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     nameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example1
+        testing.upbound.io/example-name: example
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: azurerm_resource_group
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -76,7 +78,7 @@ spec:
   forProvider:
     apiManagementIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: azurerm_api_management
+        testing.upbound.io/example-name: example
 
 ---
 
