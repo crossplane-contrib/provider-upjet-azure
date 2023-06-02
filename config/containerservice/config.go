@@ -47,7 +47,9 @@ func Configure(p *config.Provider) {
 
 		r.Kind = "KubernetesCluster"
 		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"kubelet_identity", "private_link_enabled"},
+			IgnoredFields: []string{"kubelet_identity", "private_link_enabled",
+				"api_server_authorized_ip_ranges", "api_server_access_profile",
+				"microsoft_defender", "oms_agent"},
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			if kc, ok := attr["kube_config_raw"].(string); ok {
