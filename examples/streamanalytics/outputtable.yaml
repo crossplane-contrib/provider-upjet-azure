@@ -3,7 +3,6 @@ kind: OutputTable
 metadata:
   annotations:
     meta.upbound.io/example-id: streamanalytics/v1beta1/outputtable
-    upjet.upbound.io/manual-intervention: "Uptests failed on CI: https://github.com/upbound/platform-core/issues/841"
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -16,7 +15,7 @@ spec:
         testing.upbound.io/example-name: groutputtable
     rowKey: bar
     storageAccountKeySecretRef:
-      key: primary_access_key
+      key: attribute.primary_access_key
       name: example-storage-account
       namespace: upbound-system
     storageAccountNameSelector:
@@ -55,6 +54,9 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: groutputtable
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system
 ---
 apiVersion: storage.azure.upbound.io/v1beta1
 kind: Table
@@ -98,12 +100,3 @@ spec:
           SELECT *
           INTO [YourOutputAlias]
           FROM [YourInputAlias]
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: example-storage-account
-  namespace: upbound-system
-type: Opaque
-data:
-  primary_access_key: key1
