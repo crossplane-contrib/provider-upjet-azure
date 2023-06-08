@@ -37,6 +37,9 @@ spec:
         testing.upbound.io/example-name: example-containerservice
     tags:
       Environment: Production
+    apiServerAccessProfile:
+      - authorizedIpRanges:
+         - 192.168.1.0/24
 
 ---
 

@@ -257,6 +257,7 @@ spec:
                       type: object
                     type: array
                   apiServerAuthorizedIpRanges:
+                    description: Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
                     items:
                       type: string
                     type: array
@@ -2194,6 +2195,7 @@ spec:
                       type: object
                     type: array
                   apiServerAuthorizedIpRanges:
+                    description: Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
                     items:
                       type: string
                     type: array

@@ -902,6 +902,7 @@ type KubernetesClusterObservation struct {
 	// An api_server_access_profile block as defined below.
 	APIServerAccessProfile []APIServerAccessProfileObservation `json:"apiServerAccessProfile,omitempty" tf:"api_server_access_profile,omitempty"`
 
+	// Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
 	APIServerAuthorizedIPRanges []*string `json:"apiServerAuthorizedIpRanges,omitempty" tf:"api_server_authorized_ip_ranges,omitempty"`
 
 	// A aci_connector_linux block as defined below. For more details, please visit Create and configure an AKS cluster to use virtual nodes.
@@ -1078,6 +1079,7 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	APIServerAccessProfile []APIServerAccessProfileParameters `json:"apiServerAccessProfile,omitempty" tf:"api_server_access_profile,omitempty"`
 
+	// Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
 	// +kubebuilder:validation:Optional
 	APIServerAuthorizedIPRanges []*string `json:"apiServerAuthorizedIpRanges,omitempty" tf:"api_server_authorized_ip_ranges,omitempty"`
 

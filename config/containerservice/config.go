@@ -47,7 +47,9 @@ func Configure(p *config.Provider) {
 
 		r.Kind = "KubernetesCluster"
 		r.LateInitializer = config.LateInitializer{
-			IgnoredFields: []string{"kubelet_identity", "private_link_enabled"},
+			IgnoredFields: []string{"kubelet_identity", "private_link_enabled",
+				"api_server_authorized_ip_ranges", "microsoft_defender",
+				"oms_agent"},
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
 			if kc, ok := attr["kube_config_raw"].(string); ok {
@@ -57,6 +59,7 @@ func Configure(p *config.Provider) {
 			}
 			return nil, nil
 		}
+		r.MetaResource.ArgumentDocs["api_server_authorized_ip_ranges"] = "Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`"
 	})
 
 	p.AddResourceConfigurator("azurerm_kubernetes_cluster_node_pool", func(r *config.Resource) {
