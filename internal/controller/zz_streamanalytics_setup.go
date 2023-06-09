@@ -20,6 +20,7 @@ import (
 	outputservicebusqueue "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputservicebusqueue"
 	outputservicebustopic "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputservicebustopic"
 	outputsynapse "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputsynapse"
+	outputtable "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputtable"
 	referenceinputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/referenceinputblob"
 	referenceinputmssql "github.com/upbound/provider-azure/internal/controller/streamanalytics/referenceinputmssql"
 	streaminputblob "github.com/upbound/provider-azure/internal/controller/streamanalytics/streaminputblob"
@@ -42,6 +43,7 @@ func Setup_streamanalytics(mgr ctrl.Manager, o controller.Options) error {
 		outputservicebusqueue.Setup,
 		outputservicebustopic.Setup,
 		outputsynapse.Setup,
+		outputtable.Setup,
 		referenceinputblob.Setup,
 		referenceinputmssql.Setup,
 		streaminputblob.Setup,
