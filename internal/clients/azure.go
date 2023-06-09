@@ -120,6 +120,15 @@ func spAuth(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup
 	ps.Configuration[keyTenantID] = azureCreds[keyAzureTenantID]
 	ps.Configuration[keyClientID] = azureCreds[keyAzureClientID]
 	ps.Configuration[keyClientSecret] = azureCreds[keyAzureClientSecret]
+	if pc.Spec.SubscriptionID != nil {
+		ps.Configuration[keySubscriptionID] = *pc.Spec.SubscriptionID
+	}
+	if pc.Spec.TenantID != nil {
+		ps.Configuration[keyTenantID] = *pc.Spec.TenantID
+	}
+	if pc.Spec.ClientID != nil {
+		ps.Configuration[keyClientID] = *pc.Spec.ClientID
+	}
 	if pc.Spec.Environment != nil {
 		ps.Configuration[keyEnvironment] = *pc.Spec.Environment
 	}
