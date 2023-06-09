@@ -665,6 +665,7 @@ import (
 	outputeventhub "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputeventhub"
 	outputfunction "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputfunction"
 	outputmssql "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputmssql"
+	outputpowerbi "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputpowerbi"
 	outputservicebusqueue "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputservicebusqueue"
 	outputservicebustopic "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputservicebustopic"
 	outputsynapse "github.com/upbound/provider-azure/internal/controller/streamanalytics/outputsynapse"
@@ -1382,6 +1383,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		outputeventhub.Setup,
 		outputfunction.Setup,
 		outputmssql.Setup,
+		outputpowerbi.Setup,
 		outputservicebusqueue.Setup,
 		outputservicebustopic.Setup,
 		outputsynapse.Setup,

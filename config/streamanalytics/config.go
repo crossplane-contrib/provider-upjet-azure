@@ -96,4 +96,10 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+	p.AddResourceConfigurator("azurerm_stream_analytics_output_powerbi", func(r *config.Resource) {
+		r.References["stream_analytics_job_id"] = config.Reference{
+			Type:      "Job",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }
