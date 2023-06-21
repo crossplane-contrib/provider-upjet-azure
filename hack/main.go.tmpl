@@ -86,7 +86,7 @@ func main() {
 
 	mgr, err := ctrl.NewManager(cfg, ctrl.Options{
 		LeaderElection:             *leaderElection,
-		LeaderElectionID:           "crossplane-leader-election-provider-azure-{{ .Group }}",
+		LeaderElectionID:           "crossplane-leader-election-provider-azure{{ if ne .Group "monolith" }}-{{ .Group }}{{ end }}",
 		SyncPeriod:                 syncInterval,
 		LeaderElectionResourceLock: resourcelock.LeasesResourceLock,
 		LeaseDuration:              func() *time.Duration { d := 60 * time.Second; return &d }(),
