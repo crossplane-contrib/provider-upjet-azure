@@ -23,9 +23,9 @@ const (
 	errTrackUsage           = "cannot track ProviderConfig usage"
 	errExtractCredentials   = "cannot extract credentials"
 	errUnmarshalCredentials = "cannot unmarshal Azure credentials as JSON"
-	errSubscriptionIDNotSet = "subscription ID must be set in ProviderConfig when credential source is InjectedIdentity"
-	errTenantIDNotSet       = "tenant ID must be set in ProviderConfig when credential source is InjectedIdentity"
-	errClientIDNotSet       = "Client ID must be set in ProviderConfig when credential source is OIDCTokenFile"
+	errSubscriptionIDNotSet = "subscription ID must be set in ProviderConfig when credential source is InjectedIdentity, OIDCTokenFile or Upbound"
+	errTenantIDNotSet       = "tenant ID must be set in ProviderConfig when credential source is InjectedIdentity, OIDCTokenFile or Upbound"
+	errClientIDNotSet       = "client ID must be set in ProviderConfig when credential source is OIDCTokenFile or Upbound"
 	// Azure service principal credentials file JSON keys
 	keyAzureSubscriptionID = "subscriptionId"
 	keyAzureClientID       = "clientId"
@@ -51,6 +51,9 @@ var (
 	credentialsSourceUserAssignedManagedIdentity   xpv1.CredentialsSource = "UserAssignedManagedIdentity"
 	credentialsSourceSystemAssignedManagedIdentity xpv1.CredentialsSource = "SystemAssignedManagedIdentity"
 	credentialsSourceOIDCTokenFile                 xpv1.CredentialsSource = "OIDCTokenFile"
+	credentialsSourceUpbound                       xpv1.CredentialsSource = "Upbound"
+
+	upboundProviderIdentityTokenFile = "/var/run/secrets/upbound.io/provider/token"
 )
 
 // TerraformSetupBuilder returns Terraform setup with provider specific
@@ -98,6 +101,8 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, sche
 			err = msiAuth(pc, &ps)
 		case credentialsSourceOIDCTokenFile:
 			err = oidcAuth(pc, &ps)
+		case credentialsSourceUpbound:
+			err = upboundAuth(pc, &ps)
 		default:
 			err = spAuth(ctx, pc, &ps, client)
 		}
@@ -172,6 +177,25 @@ func oidcAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 	if pc.Spec.OidcTokenFilePath != nil {
 		ps.Configuration[keyOidcTokenFilePath] = *pc.Spec.OidcTokenFilePath
 	}
+	ps.Configuration[keySubscriptionID] = *pc.Spec.SubscriptionID
+	ps.Configuration[keyTenantID] = *pc.Spec.TenantID
+	ps.Configuration[keyClientID] = *pc.Spec.ClientID
+	ps.Configuration[keyUseOIDC] = "true"
+	return nil
+
+}
+
+func upboundAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
+	if pc.Spec.SubscriptionID == nil || len(*pc.Spec.SubscriptionID) == 0 {
+		return errors.New(errSubscriptionIDNotSet)
+	}
+	if pc.Spec.TenantID == nil || len(*pc.Spec.TenantID) == 0 {
+		return errors.New(errTenantIDNotSet)
+	}
+	if pc.Spec.ClientID == nil || len(*pc.Spec.ClientID) == 0 {
+		return errors.New(errClientIDNotSet)
+	}
+	ps.Configuration[keyOidcTokenFilePath] = upboundProviderIdentityTokenFile
 	ps.Configuration[keySubscriptionID] = *pc.Spec.SubscriptionID
 	ps.Configuration[keyTenantID] = *pc.Spec.TenantID
 	ps.Configuration[keyClientID] = *pc.Spec.ClientID
