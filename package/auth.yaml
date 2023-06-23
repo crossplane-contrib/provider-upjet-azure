@@ -11,10 +11,10 @@ sources:
       Credentials should be provided in the following format:
       ```
       {
-        "subscription_id": "",
-        "client_id": "",
-        "tenant_id": "",
-        "client_secret": ""
+        "subscriptionId": "",
+        "clientId": "",
+        "tenantId": "",
+        "clientSecret": ""
       }
       ```
       
