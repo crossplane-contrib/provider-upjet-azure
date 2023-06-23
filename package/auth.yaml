@@ -89,28 +89,6 @@ sources:
       12. Press *Select*.
       13. Press *Review + assign*.
       14. Make sure everything is correct and press *Review + assign* again.
-      
-      ## Add Upbound IdP to the pool
-      
-      1. Select **Add a provider to pool** and then select **OpenID Connect (OIDC)** with the following details.
-      ```
-      Provider Name: upbound-oidc-provider
-      Provider ID: upbound-oidc-provider (by default, this will be the same as the provider name)
-      Issuer (URL): https://proidc.upbound.io
-      ```
-      2. Select **Allowed audiences** and add `sts.googleapis.com` for **Audience 1**.
-      
-      ## Optional: Configure provider attributes and conditions
-      
-      When Upbound authenticates to GCP it provides an OIDC subject (`sub`) of a managed control plane:
-      `mcp:<account>/<mcp-name>:provider:<provider-name>`. GCP allows specifying conditions via CEL for
-      more fine-grained control of your access scopes.
-      
-      1. In **Attribute Mapping**, configure `google.subject` to `assertion.sub`.
-      2. Select **Attribute Conditions** > **Add Condition**. For example, to authenticate any control plane in the organization:
-      ```
-      google.subject.contains("mcp:<ORGANIZATION_NAME>")
-      ```
 
       ## Find your Client ID, Tenant ID, and Subscription ID
 
