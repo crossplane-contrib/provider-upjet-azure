@@ -1,29 +1,6 @@
 version: '2023-06-23'
 discriminant: spec.credentials.source
 sources:
-  - name: Secret
-    docs: |
-      # Storing Credentials as a Kubernetes Secret
-      
-      **Azure** credentials may be supplied as a **Kubernetes Secret**.
-      Credentials will be stored in this control plane and will only be accessible to installed providers.
-
-      Credentials should be provided in the following format:
-      ```
-      {
-        "subscriptionId": "",
-        "clientId": "",
-        "tenantId": "",
-        "clientSecret": ""
-      }
-      ```
-      
-      See the [Azure documentation](https://learn.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal) for more information on how to generate credentials.
-    additionalResources:
-      - type: Secret
-        ref: spec.credentials.secretRef
-    showFields:
-      - spec.credentials.secretRef
   - name: Upbound
     docs: |
       # Upbound OpenID Connect (OIDC)
