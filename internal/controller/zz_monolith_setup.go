@@ -401,6 +401,7 @@ import (
 	federatedidentitycredential "github.com/upbound/provider-azure/internal/controller/managedidentity/federatedidentitycredential"
 	userassignedidentity "github.com/upbound/provider-azure/internal/controller/managedidentity/userassignedidentity"
 	managementgroup "github.com/upbound/provider-azure/internal/controller/management/managementgroup"
+	managementgroupsubscriptionassociation "github.com/upbound/provider-azure/internal/controller/management/managementgroupsubscriptionassociation"
 	accountmaps "github.com/upbound/provider-azure/internal/controller/maps/account"
 	creator "github.com/upbound/provider-azure/internal/controller/maps/creator"
 	marketplaceagreement "github.com/upbound/provider-azure/internal/controller/marketplaceordering/marketplaceagreement"
@@ -1119,6 +1120,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		federatedidentitycredential.Setup,
 		userassignedidentity.Setup,
 		managementgroup.Setup,
+		managementgroupsubscriptionassociation.Setup,
 		accountmaps.Setup,
 		creator.Setup,
 		marketplaceagreement.Setup,

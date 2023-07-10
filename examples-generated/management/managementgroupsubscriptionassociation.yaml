@@ -1,0 +1,19 @@
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroupSubscriptionAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: management/v1beta1/managementgroupsubscriptionassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_management_group
+    subscriptionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_subscription
+
+---
+
