@@ -446,7 +446,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// /providers/Microsoft.Management/managementGroups/group1
 	"azurerm_management_group": config.TemplatedStringAsIdentifier("name", "/providers/Microsoft.Management/managementGroups/{{ .external_name }}"),
 	// /managementGroup/MyManagementGroup/subscription/12345678-1234-1234-1234-123456789012
-	"azurerm_management_group_subscription_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.management_group_id }}/subscription/{{ .parameters.subscription_id }}"),
+	"azurerm_management_group_subscription_association": managementGroupSubscriptionAssociation(),
 
 	// mariadb
 	"azurerm_mariadb_server":               config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforMariaDB/servers/{{ .external_name }}"),
@@ -1964,6 +1964,43 @@ func storageDataLakeGen2Filesystem() config.ExternalName {
 		w := strings.Split(storageAccountID.(string), "/")
 		storageAccountName := w[len(w)-1]
 		return fmt.Sprintf("https://%s.dfs.core.windows.net/%s", storageAccountName, externalName), nil
+	}
+	return e
+}
+
+// helper function to get the last element of azure id path
+func lastChunkOfAzureID(tfField string, parameters map[string]interface{}) (string, error) {
+	tfFieldVal, ok := parameters[tfField]
+	if !ok {
+		return "", errors.New(fmt.Sprintf("cannot get %s", tfField))
+	}
+	tfFieldValSplit := strings.Split(tfFieldVal.(string), "/")
+	return tfFieldValSplit[len(tfFieldValSplit)-1], nil
+}
+
+// custom function for azurerm_management_group_subscription_association
+// /managementGroup/MyManagementGroup/subscription/12345678-1234-1234-1234-123456789012
+func managementGroupSubscriptionAssociation() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id in tfstate cannot be empty")
+		}
+		w := strings.Split(id.(string), "/")
+		return w[len(w)-1], nil
+	}
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		managementGroupName, err := lastChunkOfAzureID("management_group_id", parameters)
+		if err != nil {
+			return "", err
+		}
+		subscriptionID, err := lastChunkOfAzureID("subscription_id", parameters)
+		if err != nil {
+			return "", err
+		}
+
+		return fmt.Sprintf("/managementGroup/%s/subscription/%s", managementGroupName, subscriptionID), nil
 	}
 	return e
 }
