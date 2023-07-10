@@ -323,9 +323,6 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 
 	// resources
 	//
-	// Managements can be imported using the resource id
-	// /managementGroup/MyManagementGroup/subscription/12345678-1234-1234-1234-123456789012
-	"azurerm_management_group_subscription_association": config.TemplatedStringAsIdentifier("", "{{ .parameters.management_group_id }}/subscription/{{ .parameters.subscription_id }}"),
 	// Management Group Template Deployments can be imported using the resource id
 	// /providers/Microsoft.Management/managementGroups/my-management-group-id/providers/Microsoft.Resources/deployments/deploy1
 	"azurerm_management_group_template_deployment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.management_group_id }}/providers/Microsoft.Resources/deployments/{{ .external_name }}"),
