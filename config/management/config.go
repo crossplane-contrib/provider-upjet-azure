@@ -26,4 +26,8 @@ func Configure(p *config.Provider) {
 		r.UseAsync = false
 		r.Kind = "ManagementGroup"
 	})
+	p.AddResourceConfigurator("azurerm_management_group_subscription_association", func(r *config.Resource) {
+		r.UseAsync = false
+		r.Kind = "ManagementGroupSubscriptionAssociation"
+	})
 }
