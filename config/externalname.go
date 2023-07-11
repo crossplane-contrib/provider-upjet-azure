@@ -1968,16 +1968,6 @@ func storageDataLakeGen2Filesystem() config.ExternalName {
 	return e
 }
 
-// helper function to get the last element of azure id path
-func lastChunkOfAzureID(tfField string, parameters map[string]interface{}) (string, error) {
-	tfFieldVal, ok := parameters[tfField]
-	if !ok {
-		return "", errors.New(fmt.Sprintf("cannot get %s", tfField))
-	}
-	tfFieldValSplit := strings.Split(tfFieldVal.(string), "/")
-	return tfFieldValSplit[len(tfFieldValSplit)-1], nil
-}
-
 // custom function for azurerm_management_group_subscription_association
 // /managementGroup/MyManagementGroup/subscription/12345678-1234-1234-1234-123456789012
 func managementGroupSubscriptionAssociation() config.ExternalName {
@@ -1990,17 +1980,13 @@ func managementGroupSubscriptionAssociation() config.ExternalName {
 		w := strings.Split(id.(string), "/")
 		return w[len(w)-1], nil
 	}
+	// if we construct id according to the full path above, the underlying
+	// terraform non-deterministically fails with
+	//  "could not read properties for Management Group "example-sub""
+	// just populate the id with empty string solves it. Same happens in
+	// isolated test with terraform cli
 	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-		managementGroupName, err := lastChunkOfAzureID("management_group_id", parameters)
-		if err != nil {
-			return "", err
-		}
-		subscriptionID, err := lastChunkOfAzureID("subscription_id", parameters)
-		if err != nil {
-			return "", err
-		}
-
-		return fmt.Sprintf("/managementGroup/%s/subscription/%s", managementGroupName, subscriptionID), nil
+		return "", nil
 	}
 	return e
 }
