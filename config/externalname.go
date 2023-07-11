@@ -1978,7 +1978,7 @@ func managementGroupSubscriptionAssociation() config.ExternalName {
 			return "", errors.New("id in tfstate cannot be empty")
 		}
 		w := strings.Split(id.(string), "/")
-		return w[len(w)-1], nil
+		return fmt.Sprintf("%s/%s", w[len(w)-3], w[len(w)-1]), nil
 	}
 	// if we construct id according to the full path above, the underlying
 	// terraform non-deterministically fails with
