@@ -9,6 +9,8 @@ import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	errors "github.com/pkg/errors"
+	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -35,6 +37,48 @@ func (mg *ManagementGroup) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.ParentManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ParentManagementGroupIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this ManagementGroupSubscriptionAssociation.
+func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.ManagementGroupIDRef,
+		Selector:     mg.Spec.ForProvider.ManagementGroupIDSelector,
+		To: reference.To{
+			List:    &ManagementGroupList{},
+			Managed: &ManagementGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ManagementGroupID")
+	}
+	mg.Spec.ForProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ManagementGroupIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubscriptionID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.SubscriptionIDRef,
+		Selector:     mg.Spec.ForProvider.SubscriptionIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SubscriptionList{},
+			Managed: &v1beta1.Subscription{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SubscriptionID")
+	}
+	mg.Spec.ForProvider.SubscriptionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubscriptionIDRef = rsp.ResolvedReference
 
 	return nil
 }

@@ -1,0 +1,27 @@
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroupSubscriptionAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: management/v1beta1/managementgroupsubscriptionassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example_sub
+    subscriptionId: /subscriptions/${data.azurerm_client_config.current.subscription_id}
+---
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: management/v1beta1/managementgroupsubscriptionassociation
+    uptest.upbound.io/pre-delete-hook: testhooks/delete-management-group-association.sh
+  labels:
+    testing.upbound.io/example-name: example_sub
+  name: example-sub
+spec:
+  forProvider:
+    displayName: UptestSubscriptionGroup

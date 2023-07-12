@@ -443,7 +443,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_integration_service_environment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Logic/integrationServiceEnvironments/{{ .external_name }}"),
 
 	// management
+	// /providers/Microsoft.Management/managementGroups/group1
 	"azurerm_management_group": config.TemplatedStringAsIdentifier("name", "/providers/Microsoft.Management/managementGroups/{{ .external_name }}"),
+	// /managementGroup/MyManagementGroup/subscription/12345678-1234-1234-1234-123456789012
+	"azurerm_management_group_subscription_association": managementGroupSubscriptionAssociation(),
 
 	// mariadb
 	"azurerm_mariadb_server":               config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DBforMariaDB/servers/{{ .external_name }}"),
@@ -1961,6 +1964,29 @@ func storageDataLakeGen2Filesystem() config.ExternalName {
 		w := strings.Split(storageAccountID.(string), "/")
 		storageAccountName := w[len(w)-1]
 		return fmt.Sprintf("https://%s.dfs.core.windows.net/%s", storageAccountName, externalName), nil
+	}
+	return e
+}
+
+// custom function for azurerm_management_group_subscription_association
+// /managementGroup/MyManagementGroup/subscription/12345678-1234-1234-1234-123456789012
+func managementGroupSubscriptionAssociation() config.ExternalName {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]interface{}) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("id in tfstate cannot be empty")
+		}
+		w := strings.Split(id.(string), "/")
+		return fmt.Sprintf("%s/%s", w[len(w)-3], w[len(w)-1]), nil
+	}
+	// if we construct id according to the full path above, the underlying
+	// terraform non-deterministically fails with
+	//  "could not read properties for Management Group "example-sub""
+	// just populate the id with empty string solves it. Same happens in
+	// isolated test with terraform cli
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+		return "", nil
 	}
 	return e
 }
