@@ -1,0 +1,14 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: provider-azure
+  description: "Official Azure Provider for Crossplane by Upbound"
+  links:
+    - url: https://marketplace.upbound.io/providers/upbound/provider-azure/latest/docs/quickstart
+      title: Provider azure Quickstart
+  annotations:
+    github.com/project-slug: upbound/provider-azure
+spec:
+  type: service
+  lifecycle: production
+  owner: team:extensions
