@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type CertificateContactsContactInitParameters struct {
-
-	// E-mail address of the contact.
-	Email *string `json:"email,omitempty" tf:"email,omitempty"`
-
-	// Name of the contact.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Phone number of the contact.
-	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
-}
-
 type CertificateContactsContactObservation struct {
 
 	// E-mail address of the contact.
@@ -40,8 +28,8 @@ type CertificateContactsContactObservation struct {
 type CertificateContactsContactParameters struct {
 
 	// E-mail address of the contact.
-	// +kubebuilder:validation:Optional
-	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+	// +kubebuilder:validation:Required
+	Email *string `json:"email" tf:"email,omitempty"`
 
 	// Name of the contact.
 	// +kubebuilder:validation:Optional
@@ -50,12 +38,6 @@ type CertificateContactsContactParameters struct {
 	// Phone number of the contact.
 	// +kubebuilder:validation:Optional
 	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
-}
-
-type CertificateContactsInitParameters struct {
-
-	// One or more contact blocks as defined below.
-	Contact []CertificateContactsContactInitParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 }
 
 type CertificateContactsObservation struct {
@@ -95,18 +77,6 @@ type CertificateContactsParameters struct {
 type CertificateContactsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CertificateContactsParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider CertificateContactsInitParameters `json:"initProvider,omitempty"`
 }
 
 // CertificateContactsStatus defines the observed state of CertificateContacts.
@@ -127,7 +97,7 @@ type CertificateContactsStatus struct {
 type CertificateContacts struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contact) || has(self.initProvider.contact)",message="contact is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contact)",message="contact is a required parameter"
 	Spec   CertificateContactsSpec   `json:"spec"`
 	Status CertificateContactsStatus `json:"status,omitempty"`
 }

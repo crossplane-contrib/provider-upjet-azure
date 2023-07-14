@@ -13,21 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ManagedStorageAccountSASTokenDefinitionInitParameters struct {
-
-	// The SAS definition token template signed with an arbitrary key. Tokens created according to the SAS definition will have the same properties as the template, but regenerated with a new validity period.
-	SASTemplateURI *string `json:"sasTemplateUri,omitempty" tf:"sas_template_uri,omitempty"`
-
-	// The type of SAS token the SAS definition will create. Possible values are account and service.
-	SASType *string `json:"sasType,omitempty" tf:"sas_type,omitempty"`
-
-	// A mapping of tags which should be assigned to the SAS Definition. Changing this forces a new resource to be created.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Validity period of SAS token. Value needs to be in ISO 8601 duration format.
-	ValidityPeriod *string `json:"validityPeriod,omitempty" tf:"validity_period,omitempty"`
-}
-
 type ManagedStorageAccountSASTokenDefinitionObservation struct {
 
 	// The ID of the Managed Storage Account SAS Definition.
@@ -89,18 +74,6 @@ type ManagedStorageAccountSASTokenDefinitionParameters struct {
 type ManagedStorageAccountSASTokenDefinitionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagedStorageAccountSASTokenDefinitionParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ManagedStorageAccountSASTokenDefinitionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ManagedStorageAccountSASTokenDefinitionStatus defines the observed state of ManagedStorageAccountSASTokenDefinition.
@@ -121,9 +94,9 @@ type ManagedStorageAccountSASTokenDefinitionStatus struct {
 type ManagedStorageAccountSASTokenDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sasTemplateUri) || has(self.initProvider.sasTemplateUri)",message="sasTemplateUri is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sasType) || has(self.initProvider.sasType)",message="sasType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.validityPeriod) || has(self.initProvider.validityPeriod)",message="validityPeriod is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sasTemplateUri)",message="sasTemplateUri is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sasType)",message="sasType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.validityPeriod)",message="validityPeriod is a required parameter"
 	Spec   ManagedStorageAccountSASTokenDefinitionSpec   `json:"spec"`
 	Status ManagedStorageAccountSASTokenDefinitionStatus `json:"status,omitempty"`
 }

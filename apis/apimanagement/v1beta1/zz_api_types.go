@@ -13,72 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type APIInitParameters struct {
-
-	// Type of API. Possible values are graphql, http, soap, and websocket. Defaults to http.
-	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
-
-	// A contact block as documented below.
-	Contact []ContactInitParameters `json:"contact,omitempty" tf:"contact,omitempty"`
-
-	// A description of the API Management API, which may include HTML formatting tags.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// The display name of the API.
-	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
-
-	// A import block as documented below.
-	Import []ImportInitParameters `json:"import,omitempty" tf:"import,omitempty"`
-
-	// A license block as documented below.
-	License []LicenseInitParameters `json:"license,omitempty" tf:"license,omitempty"`
-
-	// An oauth2_authorization block as documented below.
-	Oauth2Authorization []Oauth2AuthorizationInitParameters `json:"oauth2Authorization,omitempty" tf:"oauth2_authorization,omitempty"`
-
-	// An openid_authentication block as documented below.
-	OpenIDAuthentication []OpenIDAuthenticationInitParameters `json:"openidAuthentication,omitempty" tf:"openid_authentication,omitempty"`
-
-	// The Path for this API Management API, which is a relative URL which uniquely identifies this API and all of its resource paths within the API Management Service.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// A list of protocols the operations in this API can be invoked. Possible values are http, https, ws, and wss.
-	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
-
-	// The Revision which used for this API. Changing this forces a new resource to be created.
-	Revision *string `json:"revision,omitempty" tf:"revision,omitempty"`
-
-	// The description of the API Revision of the API Management API.
-	RevisionDescription *string `json:"revisionDescription,omitempty" tf:"revision_description,omitempty"`
-
-	// Absolute URL of the backend service implementing this API.
-	ServiceURL *string `json:"serviceUrl,omitempty" tf:"service_url,omitempty"`
-
-	// Should this API expose a SOAP frontend, rather than a HTTP frontend? Defaults to false.
-	SoapPassThrough *bool `json:"soapPassThrough,omitempty" tf:"soap_pass_through,omitempty"`
-
-	// The API id of the source API, which could be in format azurerm_api_management_api.example.id or in format azurerm_api_management_api.example.id;rev=1
-	SourceAPIID *string `json:"sourceApiId,omitempty" tf:"source_api_id,omitempty"`
-
-	// A subscription_key_parameter_names block as documented below.
-	SubscriptionKeyParameterNames []SubscriptionKeyParameterNamesInitParameters `json:"subscriptionKeyParameterNames,omitempty" tf:"subscription_key_parameter_names,omitempty"`
-
-	// Should this API require a subscription key? Defaults to true.
-	SubscriptionRequired *bool `json:"subscriptionRequired,omitempty" tf:"subscription_required,omitempty"`
-
-	// Absolute URL of the Terms of Service for the API.
-	TermsOfServiceURL *string `json:"termsOfServiceUrl,omitempty" tf:"terms_of_service_url,omitempty"`
-
-	// The Version number of this API, if this API is versioned.
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
-
-	// The description of the API Version of the API Management API.
-	VersionDescription *string `json:"versionDescription,omitempty" tf:"version_description,omitempty"`
-
-	// The ID of the Version Set which this API is associated with.
-	VersionSetID *string `json:"versionSetId,omitempty" tf:"version_set_id,omitempty"`
-}
-
 type APIObservation struct {
 
 	// The Name of the API Management Service where this API should be created. Changing this forces a new resource to be created.
@@ -273,18 +207,6 @@ type APIParameters struct {
 	VersionSetID *string `json:"versionSetId,omitempty" tf:"version_set_id,omitempty"`
 }
 
-type ContactInitParameters struct {
-
-	// The email address of the contact person/organization.
-	Email *string `json:"email,omitempty" tf:"email,omitempty"`
-
-	// The name of the contact person/organization.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Absolute URL of the contact information.
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
-}
-
 type ContactObservation struct {
 
 	// The email address of the contact person/organization.
@@ -312,18 +234,6 @@ type ContactParameters struct {
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
-type ImportInitParameters struct {
-
-	// The format of the content from which the API Definition should be imported. Possible values are: openapi, openapi+json, openapi+json-link, openapi-link, swagger-json, swagger-link-json, wadl-link-json, wadl-xml, wsdl and wsdl-link.
-	ContentFormat *string `json:"contentFormat,omitempty" tf:"content_format,omitempty"`
-
-	// The Content from which the API Definition should be imported. When a content_format of *-link-* is specified this must be a URL, otherwise this must be defined inline.
-	ContentValue *string `json:"contentValue,omitempty" tf:"content_value,omitempty"`
-
-	// A wsdl_selector block as defined below, which allows you to limit the import of a WSDL to only a subset of the document. This can only be specified when content_format is wsdl or wsdl-link.
-	WsdlSelector []WsdlSelectorInitParameters `json:"wsdlSelector,omitempty" tf:"wsdl_selector,omitempty"`
-}
-
 type ImportObservation struct {
 
 	// The format of the content from which the API Definition should be imported. Possible values are: openapi, openapi+json, openapi+json-link, openapi-link, swagger-json, swagger-link-json, wadl-link-json, wadl-xml, wsdl and wsdl-link.
@@ -339,25 +249,16 @@ type ImportObservation struct {
 type ImportParameters struct {
 
 	// The format of the content from which the API Definition should be imported. Possible values are: openapi, openapi+json, openapi+json-link, openapi-link, swagger-json, swagger-link-json, wadl-link-json, wadl-xml, wsdl and wsdl-link.
-	// +kubebuilder:validation:Optional
-	ContentFormat *string `json:"contentFormat,omitempty" tf:"content_format,omitempty"`
+	// +kubebuilder:validation:Required
+	ContentFormat *string `json:"contentFormat" tf:"content_format,omitempty"`
 
 	// The Content from which the API Definition should be imported. When a content_format of *-link-* is specified this must be a URL, otherwise this must be defined inline.
-	// +kubebuilder:validation:Optional
-	ContentValue *string `json:"contentValue,omitempty" tf:"content_value,omitempty"`
+	// +kubebuilder:validation:Required
+	ContentValue *string `json:"contentValue" tf:"content_value,omitempty"`
 
 	// A wsdl_selector block as defined below, which allows you to limit the import of a WSDL to only a subset of the document. This can only be specified when content_format is wsdl or wsdl-link.
 	// +kubebuilder:validation:Optional
 	WsdlSelector []WsdlSelectorParameters `json:"wsdlSelector,omitempty" tf:"wsdl_selector,omitempty"`
-}
-
-type LicenseInitParameters struct {
-
-	// The name of the license .
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Absolute URL of the license.
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type LicenseObservation struct {
@@ -380,15 +281,6 @@ type LicenseParameters struct {
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
-type Oauth2AuthorizationInitParameters struct {
-
-	// OAuth authorization server identifier. The name of an OAuth2 Authorization Server.
-	AuthorizationServerName *string `json:"authorizationServerName,omitempty" tf:"authorization_server_name,omitempty"`
-
-	// Operations scope.
-	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
-}
-
 type Oauth2AuthorizationObservation struct {
 
 	// OAuth authorization server identifier. The name of an OAuth2 Authorization Server.
@@ -401,21 +293,12 @@ type Oauth2AuthorizationObservation struct {
 type Oauth2AuthorizationParameters struct {
 
 	// OAuth authorization server identifier. The name of an OAuth2 Authorization Server.
-	// +kubebuilder:validation:Optional
-	AuthorizationServerName *string `json:"authorizationServerName,omitempty" tf:"authorization_server_name,omitempty"`
+	// +kubebuilder:validation:Required
+	AuthorizationServerName *string `json:"authorizationServerName" tf:"authorization_server_name,omitempty"`
 
 	// Operations scope.
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
-}
-
-type OpenIDAuthenticationInitParameters struct {
-
-	// How to send token to the server. A list of zero or more methods. Valid values are authorizationHeader and query.
-	BearerTokenSendingMethods []*string `json:"bearerTokenSendingMethods,omitempty" tf:"bearer_token_sending_methods,omitempty"`
-
-	// OpenID Connect provider identifier. The name of an OpenID Connect Provider.
-	OpenIDProviderName *string `json:"openidProviderName,omitempty" tf:"openid_provider_name,omitempty"`
 }
 
 type OpenIDAuthenticationObservation struct {
@@ -434,17 +317,8 @@ type OpenIDAuthenticationParameters struct {
 	BearerTokenSendingMethods []*string `json:"bearerTokenSendingMethods,omitempty" tf:"bearer_token_sending_methods,omitempty"`
 
 	// OpenID Connect provider identifier. The name of an OpenID Connect Provider.
-	// +kubebuilder:validation:Optional
-	OpenIDProviderName *string `json:"openidProviderName,omitempty" tf:"openid_provider_name,omitempty"`
-}
-
-type SubscriptionKeyParameterNamesInitParameters struct {
-
-	// The name of the HTTP Header which should be used for the Subscription Key.
-	Header *string `json:"header,omitempty" tf:"header,omitempty"`
-
-	// The name of the QueryString parameter which should be used for the Subscription Key.
-	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+	// +kubebuilder:validation:Required
+	OpenIDProviderName *string `json:"openidProviderName" tf:"openid_provider_name,omitempty"`
 }
 
 type SubscriptionKeyParameterNamesObservation struct {
@@ -459,21 +333,12 @@ type SubscriptionKeyParameterNamesObservation struct {
 type SubscriptionKeyParameterNamesParameters struct {
 
 	// The name of the HTTP Header which should be used for the Subscription Key.
-	// +kubebuilder:validation:Optional
-	Header *string `json:"header,omitempty" tf:"header,omitempty"`
+	// +kubebuilder:validation:Required
+	Header *string `json:"header" tf:"header,omitempty"`
 
 	// The name of the QueryString parameter which should be used for the Subscription Key.
-	// +kubebuilder:validation:Optional
-	Query *string `json:"query,omitempty" tf:"query,omitempty"`
-}
-
-type WsdlSelectorInitParameters struct {
-
-	// The name of endpoint (port) to import from WSDL.
-	EndpointName *string `json:"endpointName,omitempty" tf:"endpoint_name,omitempty"`
-
-	// The name of service to import from WSDL.
-	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+	// +kubebuilder:validation:Required
+	Query *string `json:"query" tf:"query,omitempty"`
 }
 
 type WsdlSelectorObservation struct {
@@ -488,30 +353,18 @@ type WsdlSelectorObservation struct {
 type WsdlSelectorParameters struct {
 
 	// The name of endpoint (port) to import from WSDL.
-	// +kubebuilder:validation:Optional
-	EndpointName *string `json:"endpointName,omitempty" tf:"endpoint_name,omitempty"`
+	// +kubebuilder:validation:Required
+	EndpointName *string `json:"endpointName" tf:"endpoint_name,omitempty"`
 
 	// The name of service to import from WSDL.
-	// +kubebuilder:validation:Optional
-	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+	// +kubebuilder:validation:Required
+	ServiceName *string `json:"serviceName" tf:"service_name,omitempty"`
 }
 
 // APISpec defines the desired state of API
 type APISpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     APIParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider APIInitParameters `json:"initProvider,omitempty"`
 }
 
 // APIStatus defines the observed state of API.
@@ -532,7 +385,7 @@ type APIStatus struct {
 type API struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.revision) || has(self.initProvider.revision)",message="revision is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.revision)",message="revision is a required parameter"
 	Spec   APISpec   `json:"spec"`
 	Status APIStatus `json:"status,omitempty"`
 }

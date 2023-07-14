@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: publicipprefixes.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -161,51 +161,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  sku:
-                    description: The SKU of the Public IP Prefix. Accepted values
-                      are Standard. Defaults to Standard. Changing this forces a new
-                      resource to be created.
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                  zones:
-                    description: Specifies a list of Availability Zones in which this
-                      Public IP Prefix should be located. Changing this forces a new
-                      Public IP Prefix to be created.
-                    items:
-                      type: string
-                    type: array
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  ipVersion:
-                    description: The IP Version to use, IPv6 or IPv4. Changing this
-                      forces a new resource to be created. Default is IPv4.
-                    type: string
-                  location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
-                    type: string
-                  prefixLength:
-                    description: Specifies the number of bits of the prefix. The value
-                      can be set between 0 (4,294,967,296 addresses) and 31 (2 addresses).
-                      Defaults to 28(16 addresses). Changing this forces a new resource
-                      to be created.
-                    type: number
                   sku:
                     description: The SKU of the Public IP Prefix. Accepted values
                       are Standard. Defaults to Standard. Changing this forces a new
@@ -424,8 +379,7 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: PublicIPPrefixStatus defines the observed state of PublicIPPrefix.
             properties:

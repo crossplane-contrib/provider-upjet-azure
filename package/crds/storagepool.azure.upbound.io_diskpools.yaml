@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: diskpools.storagepool.azure.upbound.io
 spec:
   group: storagepool.azure.upbound.io
@@ -246,42 +246,6 @@ spec:
                       type: string
                     type: array
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  location:
-                    description: The Azure Region where the Disk Pool should exist.
-                      Changing this forces a new Disk Pool to be created.
-                    type: string
-                  skuName:
-                    description: The SKU of the Disk Pool. Possible values are Basic_B1,
-                      Standard_S1 and Premium_P1. Changing this forces a new Disk
-                      Pool to be created.
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags which should be assigned to the
-                      Disk Pool.
-                    type: object
-                  zones:
-                    description: Specifies a list of Availability Zones in which this
-                      Disk Pool should be located. Changing this forces a new Disk
-                      Pool to be created.
-                    items:
-                      type: string
-                    type: array
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -482,16 +446,13 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
             - message: skuName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
-                || has(self.initProvider.skuName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)'
             - message: zones is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.zones)
-                || has(self.initProvider.zones)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.zones)'
           status:
             description: DiskPoolStatus defines the observed state of DiskPool.
             properties:

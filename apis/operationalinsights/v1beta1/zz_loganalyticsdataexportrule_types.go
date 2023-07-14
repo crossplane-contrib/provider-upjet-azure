@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type LogAnalyticsDataExportRuleInitParameters struct {
-
-	// Is this Log Analytics Data Export Rule enabled? Possible values include true or false. Defaults to false.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// A list of table names to export to the destination resource, for example: ["Heartbeat", "SecurityEvent"].
-	TableNames []*string `json:"tableNames,omitempty" tf:"table_names,omitempty"`
-}
-
 type LogAnalyticsDataExportRuleObservation struct {
 
 	// The destination resource ID. It should be a storage account, an event hub namespace or an event hub. If the destination is an event hub namespace, an event hub would be created for each table automatically.
@@ -102,18 +93,6 @@ type LogAnalyticsDataExportRuleParameters struct {
 type LogAnalyticsDataExportRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LogAnalyticsDataExportRuleParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider LogAnalyticsDataExportRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // LogAnalyticsDataExportRuleStatus defines the observed state of LogAnalyticsDataExportRule.
@@ -134,7 +113,7 @@ type LogAnalyticsDataExportRuleStatus struct {
 type LogAnalyticsDataExportRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tableNames) || has(self.initProvider.tableNames)",message="tableNames is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tableNames)",message="tableNames is a required parameter"
 	Spec   LogAnalyticsDataExportRuleSpec   `json:"spec"`
 	Status LogAnalyticsDataExportRuleStatus `json:"status,omitempty"`
 }

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: siterecoveryreplicationpolicies.recoveryservices.azure.upbound.io
 spec:
   group: recoveryservices.azure.upbound.io
@@ -236,28 +236,6 @@ spec:
                         type: object
                     type: object
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  applicationConsistentSnapshotFrequencyInMinutes:
-                    description: Specifies the frequency(in minutes) at which to create
-                      application consistent recovery points.
-                    type: number
-                  recoveryPointRetentionInMinutes:
-                    description: The duration in minutes for which the recovery points
-                      need to be stored.
-                    type: number
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -459,12 +437,10 @@ spec:
             - message: applicationConsistentSnapshotFrequencyInMinutes is a required
                 parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.applicationConsistentSnapshotFrequencyInMinutes)
-                || has(self.initProvider.applicationConsistentSnapshotFrequencyInMinutes)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.applicationConsistentSnapshotFrequencyInMinutes)'
             - message: recoveryPointRetentionInMinutes is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.recoveryPointRetentionInMinutes)
-                || has(self.initProvider.recoveryPointRetentionInMinutes)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.recoveryPointRetentionInMinutes)'
           status:
             description: SiteRecoveryReplicationPolicyStatus defines the observed
               state of SiteRecoveryReplicationPolicy.

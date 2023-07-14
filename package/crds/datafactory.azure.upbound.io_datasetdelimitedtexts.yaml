@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: datasetdelimitedtexts.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -93,6 +93,8 @@ spec:
                         path:
                           description: The folder path to the file.
                           type: string
+                      required:
+                      - fileSystem
                       type: object
                     type: array
                   azureBlobStorageLocation:
@@ -122,6 +124,8 @@ spec:
                           description: The folder path to the file. This can be an
                             empty string.
                           type: string
+                      required:
+                      - container
                       type: object
                     type: array
                   columnDelimiter:
@@ -256,6 +260,10 @@ spec:
                           description: The base URL to the web server hosting the
                             file.
                           type: string
+                      required:
+                      - filename
+                      - path
+                      - relativeUrl
                       type: object
                     type: array
                   linkedServiceName:
@@ -371,168 +379,8 @@ spec:
                             Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan.
                             Please note these values are case sensitive.
                           type: string
-                      type: object
-                    type: array
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Dataset.
-                    items:
-                      type: string
-                    type: array
-                  azureBlobFsLocation:
-                    description: An azure_blob_fs_location block as defined below.
-                    items:
-                      properties:
-                        fileSystem:
-                          description: The storage data lake gen2 file system on the
-                            Azure Blob Storage Account hosting the file.
-                          type: string
-                        filename:
-                          description: The filename of the file.
-                          type: string
-                        path:
-                          description: The folder path to the file.
-                          type: string
-                      type: object
-                    type: array
-                  azureBlobStorageLocation:
-                    description: An azure_blob_storage_location block as defined below.
-                    items:
-                      properties:
-                        container:
-                          description: The container on the Azure Blob Storage Account
-                            hosting the file.
-                          type: string
-                        dynamicContainerEnabled:
-                          description: Is the container using dynamic expression,
-                            function or system variables? Defaults to false.
-                          type: boolean
-                        dynamicFilenameEnabled:
-                          description: Is the filename using dynamic expression, function
-                            or system variables? Defaults to false.
-                          type: boolean
-                        dynamicPathEnabled:
-                          description: Is the path using dynamic expression, function
-                            or system variables? Defaults to false.
-                          type: boolean
-                        filename:
-                          description: The filename of the file.
-                          type: string
-                        path:
-                          description: The folder path to the file. This can be an
-                            empty string.
-                          type: string
-                      type: object
-                    type: array
-                  columnDelimiter:
-                    description: The column delimiter. Defaults to ,.
-                    type: string
-                  compressionCodec:
-                    description: The compression codec used to read/write text files.
-                      Valid values are None, bzip2, gzip, deflate, ZipDeflate, TarGzip,
-                      Tar, snappy and lz4. Please note these values are case sensitive.
-                    type: string
-                  compressionLevel:
-                    description: The compression ratio for the Data Factory Dataset.
-                      Valid values are Fastest or Optimal. Please note these values
-                      are case sensitive.
-                    type: string
-                  description:
-                    description: The description for the Data Factory Dataset.
-                    type: string
-                  encoding:
-                    description: The encoding format for the file.
-                    type: string
-                  escapeCharacter:
-                    description: The escape character. Defaults to \.
-                    type: string
-                  firstRowAsHeader:
-                    description: When used as input, treat the first row of data as
-                      headers. When used as output, write the headers into the output
-                      as the first row of data. Defaults to false.
-                    type: boolean
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
-                    type: string
-                  httpServerLocation:
-                    description: A http_server_location block as defined below.
-                    items:
-                      properties:
-                        dynamicFilenameEnabled:
-                          description: Is the filename using dynamic expression, function
-                            or system variables? Defaults to false.
-                          type: boolean
-                        dynamicPathEnabled:
-                          description: Is the path using dynamic expression, function
-                            or system variables? Defaults to false.
-                          type: boolean
-                        filename:
-                          description: The filename of the file on the web server.
-                          type: string
-                        path:
-                          description: The folder path to the file on the web server.
-                          type: string
-                        relativeUrl:
-                          description: The base URL to the web server hosting the
-                            file.
-                          type: string
-                      type: object
-                    type: array
-                  nullValue:
-                    description: The null value string. Defaults to an empty string.
-                      Defaults to "".
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset.
-                    type: object
-                  quoteCharacter:
-                    description: The quote character. Defaults to ".
-                    type: string
-                  rowDelimiter:
-                    description: 'The row delimiter. Defaults to any of the following
-                      values on read: \r\n, \r, \n, and \n or \r\n on write by mapping
-                      data flow and Copy activity respectively.'
-                    type: string
-                  schemaColumn:
-                    description: A schema_column block as defined below.
-                    items:
-                      properties:
-                        description:
-                          description: The description of the column.
-                          type: string
-                        name:
-                          description: The name of the column.
-                          type: string
-                        type:
-                          description: Type of the column. Valid values are Byte,
-                            Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal,
-                            Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan.
-                            Please note these values are case sensitive.
-                          type: string
+                      required:
+                      - name
                       type: object
                     type: array
                 type: object

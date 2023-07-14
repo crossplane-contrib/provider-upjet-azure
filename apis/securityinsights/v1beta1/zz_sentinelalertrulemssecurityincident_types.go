@@ -13,33 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type SentinelAlertRuleMSSecurityIncidentInitParameters struct {
-
-	// The GUID of the alert rule template which is used to create this Sentinel Scheduled Alert Rule. Changing this forces a new Sentinel MS Security Incident Alert Rule to be created.
-	AlertRuleTemplateGUID *string `json:"alertRuleTemplateGuid,omitempty" tf:"alert_rule_template_guid,omitempty"`
-
-	// The description of this Sentinel MS Security Incident Alert Rule.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// The friendly name of this Sentinel MS Security Incident Alert Rule.
-	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
-
-	// Only create incidents when the alert display name doesn't contain text from this list.
-	DisplayNameExcludeFilter []*string `json:"displayNameExcludeFilter,omitempty" tf:"display_name_exclude_filter,omitempty"`
-
-	// Only create incidents when the alert display name contain text from this list, leave empty to apply no filter.
-	DisplayNameFilter []*string `json:"displayNameFilter,omitempty" tf:"display_name_filter,omitempty"`
-
-	// Should this Sentinel MS Security Incident Alert Rule be enabled? Defaults to true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// The Microsoft Security Service from where the alert will be generated. Possible values are Azure Active Directory Identity Protection, Azure Advanced Threat Protection, Azure Security Center, Azure Security Center for IoT, Microsoft Cloud App Security, Microsoft Defender Advanced Threat Protection and Office 365 Advanced Threat Protection.
-	ProductFilter *string `json:"productFilter,omitempty" tf:"product_filter,omitempty"`
-
-	// Only create incidents from alerts when alert severity level is contained in this list. Possible values are High, Medium, Low and Informational.
-	SeverityFilter []*string `json:"severityFilter,omitempty" tf:"severity_filter,omitempty"`
-}
-
 type SentinelAlertRuleMSSecurityIncidentObservation struct {
 
 	// The GUID of the alert rule template which is used to create this Sentinel Scheduled Alert Rule. Changing this forces a new Sentinel MS Security Incident Alert Rule to be created.
@@ -126,18 +99,6 @@ type SentinelAlertRuleMSSecurityIncidentParameters struct {
 type SentinelAlertRuleMSSecurityIncidentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SentinelAlertRuleMSSecurityIncidentParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider SentinelAlertRuleMSSecurityIncidentInitParameters `json:"initProvider,omitempty"`
 }
 
 // SentinelAlertRuleMSSecurityIncidentStatus defines the observed state of SentinelAlertRuleMSSecurityIncident.
@@ -158,9 +119,9 @@ type SentinelAlertRuleMSSecurityIncidentStatus struct {
 type SentinelAlertRuleMSSecurityIncident struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.productFilter) || has(self.initProvider.productFilter)",message="productFilter is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.severityFilter) || has(self.initProvider.severityFilter)",message="severityFilter is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.productFilter)",message="productFilter is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.severityFilter)",message="severityFilter is a required parameter"
 	Spec   SentinelAlertRuleMSSecurityIncidentSpec   `json:"spec"`
 	Status SentinelAlertRuleMSSecurityIncidentStatus `json:"status,omitempty"`
 }

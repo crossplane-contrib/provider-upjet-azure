@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: workspacesecurityalertpolicies.synapse.azure.upbound.io
 spec:
   group: synapse.azure.upbound.io
@@ -268,47 +268,6 @@ spec:
                         type: object
                     type: object
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  disabledAlerts:
-                    description: 'Specifies an array of alerts that are disabled.
-                      Allowed values are: Sql_Injection, Sql_Injection_Vulnerability,
-                      Access_Anomaly, Data_Exfiltration, Unsafe_Action.'
-                    items:
-                      type: string
-                    type: array
-                  emailAccountAdminsEnabled:
-                    description: Boolean flag which specifies if the alert is sent
-                      to the account administrators or not. Defaults to false.
-                    type: boolean
-                  emailAddresses:
-                    description: Specifies an array of email addresses to which the
-                      alert is sent.
-                    items:
-                      type: string
-                    type: array
-                  policyState:
-                    description: Specifies the state of the policy, whether it is
-                      enabled or disabled or a policy has not been applied yet on
-                      the specific workspace. Possible values are Disabled, Enabled
-                      and New.
-                    type: string
-                  retentionDays:
-                    description: Specifies the number of days to keep in the Threat
-                      Detection audit logs. Defaults to 0.
-                    type: number
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -509,8 +468,7 @@ spec:
             x-kubernetes-validations:
             - message: policyState is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.policyState)
-                || has(self.initProvider.policyState)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policyState)'
           status:
             description: WorkspaceSecurityAlertPolicyStatus defines the observed state
               of WorkspaceSecurityAlertPolicy.

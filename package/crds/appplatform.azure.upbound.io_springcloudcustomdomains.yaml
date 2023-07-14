@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: springcloudcustomdomains.appplatform.azure.upbound.io
 spec:
   group: appplatform.azure.upbound.io
@@ -156,35 +156,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  thumbprint:
-                    description: Specifies the thumbprint of the Spring Cloud Certificate
-                      that binds to the Spring Cloud Custom Domain. Required when
-                      certificate_name is specified. Changing this forces a new resource
-                      to be created.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  certificateName:
-                    description: Specifies the name of the Spring Cloud Certificate
-                      that binds to the Spring Cloud Custom Domain. Required when
-                      thumbprint is specified
-                    type: string
-                  name:
-                    description: Specifies the name of the Spring Cloud Custom Domain.
-                      Changing this forces a new resource to be created.
-                    type: string
                   thumbprint:
                     description: Specifies the thumbprint of the Spring Cloud Certificate
                       that binds to the Spring Cloud Custom Domain. Required when
@@ -392,8 +363,7 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
           status:
             description: SpringCloudCustomDomainStatus defines the observed state
               of SpringCloudCustomDomain.

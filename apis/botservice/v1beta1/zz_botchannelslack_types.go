@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type BotChannelSlackInitParameters struct {
-
-	// The Client ID that will be used to authenticate with Slack.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The Slack Landing Page URL.
-	LandingPageURL *string `json:"landingPageUrl,omitempty" tf:"landing_page_url,omitempty"`
-
-	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-}
-
 type BotChannelSlackObservation struct {
 
 	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
@@ -104,18 +92,6 @@ type BotChannelSlackParameters struct {
 type BotChannelSlackSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotChannelSlackParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider BotChannelSlackInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotChannelSlackStatus defines the observed state of BotChannelSlack.
@@ -136,9 +112,9 @@ type BotChannelSlackStatus struct {
 type BotChannelSlack struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId) || has(self.initProvider.clientId)",message="clientId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId)",message="clientId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientSecretSecretRef)",message="clientSecretSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.verificationTokenSecretRef)",message="verificationTokenSecretRef is a required parameter"
 	Spec   BotChannelSlackSpec   `json:"spec"`
 	Status BotChannelSlackStatus `json:"status,omitempty"`

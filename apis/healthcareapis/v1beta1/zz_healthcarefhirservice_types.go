@@ -13,24 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type CorsInitParameters struct {
-
-	// A set of headers to be allowed via CORS.
-	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
-
-	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
-	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
-
-	// A set of origins to be allowed via CORS.
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-
-	// If credentials are allowed via CORS.
-	CredentialsAllowed *bool `json:"credentialsAllowed,omitempty" tf:"credentials_allowed,omitempty"`
-
-	// The max age to be allowed via CORS.
-	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
-}
-
 type CorsObservation struct {
 
 	// A set of headers to be allowed via CORS.
@@ -52,16 +34,16 @@ type CorsObservation struct {
 type CorsParameters struct {
 
 	// A set of headers to be allowed via CORS.
-	// +kubebuilder:validation:Optional
-	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+	// +kubebuilder:validation:Required
+	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
 
 	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
-	// +kubebuilder:validation:Optional
-	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+	// +kubebuilder:validation:Required
+	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// A set of origins to be allowed via CORS.
-	// +kubebuilder:validation:Optional
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+	// +kubebuilder:validation:Required
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// If credentials are allowed via CORS.
 	// +kubebuilder:validation:Optional
@@ -70,19 +52,6 @@ type CorsParameters struct {
 	// The max age to be allowed via CORS.
 	// +kubebuilder:validation:Optional
 	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
-}
-
-type HealthcareFHIRServiceAuthenticationInitParameters struct {
-
-	// The intended audience to receive authentication tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
-	Audience *string `json:"audience,omitempty" tf:"audience,omitempty"`
-
-	// The Azure Active Directory (tenant) that serves as the authentication authority to access the service.
-	// Authority must be registered to Azure AD and in the following format: https://{Azure-AD-endpoint}/{tenant-id}.
-	Authority *string `json:"authority,omitempty" tf:"authority,omitempty"`
-
-	// Whether smart proxy is enabled.
-	SmartProxyEnabled *bool `json:"smartProxyEnabled,omitempty" tf:"smart_proxy_enabled,omitempty"`
 }
 
 type HealthcareFHIRServiceAuthenticationObservation struct {
@@ -101,26 +70,17 @@ type HealthcareFHIRServiceAuthenticationObservation struct {
 type HealthcareFHIRServiceAuthenticationParameters struct {
 
 	// The intended audience to receive authentication tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
-	// +kubebuilder:validation:Optional
-	Audience *string `json:"audience,omitempty" tf:"audience,omitempty"`
+	// +kubebuilder:validation:Required
+	Audience *string `json:"audience" tf:"audience,omitempty"`
 
 	// The Azure Active Directory (tenant) that serves as the authentication authority to access the service.
 	// Authority must be registered to Azure AD and in the following format: https://{Azure-AD-endpoint}/{tenant-id}.
-	// +kubebuilder:validation:Optional
-	Authority *string `json:"authority,omitempty" tf:"authority,omitempty"`
+	// +kubebuilder:validation:Required
+	Authority *string `json:"authority" tf:"authority,omitempty"`
 
 	// Whether smart proxy is enabled.
 	// +kubebuilder:validation:Optional
 	SmartProxyEnabled *bool `json:"smartProxyEnabled,omitempty" tf:"smart_proxy_enabled,omitempty"`
-}
-
-type HealthcareFHIRServiceIdentityInitParameters struct {
-
-	// A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type HealthcareFHIRServiceIdentityObservation struct {
@@ -145,41 +105,8 @@ type HealthcareFHIRServiceIdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type HealthcareFHIRServiceInitParameters struct {
-
-	// A list of the access policies of the service instance.
-	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
-
-	// An authentication block as defined below.
-	Authentication []HealthcareFHIRServiceAuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
-
-	// Specifies the name of the storage account which the operation configuration information is exported to.
-	ConfigurationExportStorageAccountName *string `json:"configurationExportStorageAccountName,omitempty" tf:"configuration_export_storage_account_name,omitempty"`
-
-	// A list of azure container registry settings used for convert data operation of the service instance.
-	ContainerRegistryLoginServerURL []*string `json:"containerRegistryLoginServerUrl,omitempty" tf:"container_registry_login_server_url,omitempty"`
-
-	// A cors block as defined below.
-	Cors []CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
-
-	// An identity block as defined below.
-	Identity []HealthcareFHIRServiceIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// Specifies the kind of the Healthcare FHIR Service. Possible values are: fhir-Stu3 and fhir-R4. Defaults to fhir-R4. Changing this forces a new Healthcare FHIR Service to be created.
-	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
-
-	// Specifies the Azure Region where the Healthcare FHIR Service should be created. Changing this forces a new Healthcare FHIR Service to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// A list of objects describing OCI artifacts for export as defined below.
-	OciArtifact []OciArtifactInitParameters `json:"ociArtifact,omitempty" tf:"oci_artifact,omitempty"`
-
-	// A mapping of tags to assign to the Healthcare FHIR Service.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type HealthcareFHIRServiceObservation struct {
@@ -297,18 +224,6 @@ type HealthcareFHIRServiceParameters struct {
 	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
-type OciArtifactInitParameters struct {
-
-	// A digest of an image within Azure container registry used for export operations of the service instance to narrow the artifacts down.
-	Digest *string `json:"digest,omitempty" tf:"digest,omitempty"`
-
-	// An image within Azure container registry used for export operations of the service instance.
-	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
-
-	// An Azure container registry used for export operations of the service instance.
-	LoginServer *string `json:"loginServer,omitempty" tf:"login_server,omitempty"`
-}
-
 type OciArtifactObservation struct {
 
 	// A digest of an image within Azure container registry used for export operations of the service instance to narrow the artifacts down.
@@ -332,26 +247,14 @@ type OciArtifactParameters struct {
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// An Azure container registry used for export operations of the service instance.
-	// +kubebuilder:validation:Optional
-	LoginServer *string `json:"loginServer,omitempty" tf:"login_server,omitempty"`
+	// +kubebuilder:validation:Required
+	LoginServer *string `json:"loginServer" tf:"login_server,omitempty"`
 }
 
 // HealthcareFHIRServiceSpec defines the desired state of HealthcareFHIRService
 type HealthcareFHIRServiceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HealthcareFHIRServiceParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider HealthcareFHIRServiceInitParameters `json:"initProvider,omitempty"`
 }
 
 // HealthcareFHIRServiceStatus defines the observed state of HealthcareFHIRService.
@@ -372,8 +275,8 @@ type HealthcareFHIRServiceStatus struct {
 type HealthcareFHIRService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authentication) || has(self.initProvider.authentication)",message="authentication is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authentication)",message="authentication is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   HealthcareFHIRServiceSpec   `json:"spec"`
 	Status HealthcareFHIRServiceStatus `json:"status,omitempty"`
 }

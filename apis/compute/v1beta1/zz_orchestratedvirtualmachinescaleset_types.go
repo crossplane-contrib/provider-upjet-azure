@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ExtensionProtectedSettingsFromKeyVaultInitParameters struct {
-
-	// The URL to the Key Vault Secret which stores the protected settings.
-	SecretURL *string `json:"secretUrl,omitempty" tf:"secret_url,omitempty"`
-
-	// The ID of the source Key Vault.
-	SourceVaultID *string `json:"sourceVaultId,omitempty" tf:"source_vault_id,omitempty"`
-}
-
 type ExtensionProtectedSettingsFromKeyVaultObservation struct {
 
 	// The URL to the Key Vault Secret which stores the protected settings.
@@ -34,36 +25,12 @@ type ExtensionProtectedSettingsFromKeyVaultObservation struct {
 type ExtensionProtectedSettingsFromKeyVaultParameters struct {
 
 	// The URL to the Key Vault Secret which stores the protected settings.
-	// +kubebuilder:validation:Optional
-	SecretURL *string `json:"secretUrl,omitempty" tf:"secret_url,omitempty"`
+	// +kubebuilder:validation:Required
+	SecretURL *string `json:"secretUrl" tf:"secret_url,omitempty"`
 
 	// The ID of the source Key Vault.
-	// +kubebuilder:validation:Optional
-	SourceVaultID *string `json:"sourceVaultId,omitempty" tf:"source_vault_id,omitempty"`
-}
-
-type IPConfigurationPublicIPAddressInitParameters struct {
-
-	// The Prefix which should be used for the Domain Name Label for each Virtual Machine Instance. Azure concatenates the Domain Name Label and Virtual Machine Index to create a unique Domain Name Label for each Virtual Machine. Valid values must be between 1 and 26 characters long, start with a lower case letter, end with a lower case letter or number and contains only a-z, 0-9 and hyphens.
-	DomainNameLabel *string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty"`
-
-	// One or more ip_tag blocks as defined above. Changing this forces a new resource to be created.
-	IPTag []PublicIPAddressIPTagInitParameters `json:"ipTag,omitempty" tf:"ip_tag,omitempty"`
-
-	// The Idle Timeout in Minutes for the Public IP Address. Possible values are in the range 4 to 32.
-	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
-
-	// The Name of the Public IP Address Configuration.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The ID of the Public IP Address Prefix from where Public IP Addresses should be allocated. Changing this forces a new resource to be created.
-	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
-
-	// The name of the SKU to be used by this Orcestrated Virtual Machine Scale Set. Valid values include: any of the General purpose, Compute optimized, Memory optimized, Storage optimized, GPU optimized, FPGA optimized, High performance, or Previous generation virtual machine SKUs.
-	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
-
-	// Specifies the version of the image used to create the virtual machines.
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	// +kubebuilder:validation:Required
+	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }
 
 type IPConfigurationPublicIPAddressObservation struct {
@@ -105,8 +72,8 @@ type IPConfigurationPublicIPAddressParameters struct {
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// The Name of the Public IP Address Configuration.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID of the Public IP Address Prefix from where Public IP Addresses should be allocated. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -121,15 +88,6 @@ type IPConfigurationPublicIPAddressParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
-type LinuxConfigurationAdminSSHKeyInitParameters struct {
-
-	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.
-	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
-
-	// The Username for which this Public SSH Key should be configured.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
 type LinuxConfigurationAdminSSHKeyObservation struct {
 
 	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.
@@ -142,39 +100,12 @@ type LinuxConfigurationAdminSSHKeyObservation struct {
 type LinuxConfigurationAdminSSHKeyParameters struct {
 
 	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format.
-	// +kubebuilder:validation:Optional
-	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
+	// +kubebuilder:validation:Required
+	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`
 
 	// The Username for which this Public SSH Key should be configured.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type LinuxConfigurationInitParameters struct {
-
-	// A admin_ssh_key block as documented below.
-	AdminSSHKey []LinuxConfigurationAdminSSHKeyInitParameters `json:"adminSshKey,omitempty" tf:"admin_ssh_key,omitempty"`
-
-	// The username of the local administrator on each Orchestrated Virtual Machine Scale Set instance. Changing this forces a new resource to be created.
-	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
-
-	// The prefix which should be used for the name of the Virtual Machines in this Scale Set. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name_prefix, then you must specify computer_name_prefix. Changing this forces a new resource to be created.
-	ComputerNamePrefix *string `json:"computerNamePrefix,omitempty" tf:"computer_name_prefix,omitempty"`
-
-	// When an admin_password is specified disable_password_authentication must be set to false. Defaults to true.
-	DisablePasswordAuthentication *bool `json:"disablePasswordAuthentication,omitempty" tf:"disable_password_authentication,omitempty"`
-
-	// Specifies the mode of VM Guest Patching for the virtual machines that are associated to the Orchestrated Virtual Machine Scale Set. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
-	PatchAssessmentMode *string `json:"patchAssessmentMode,omitempty" tf:"patch_assessment_mode,omitempty"`
-
-	// Specifies the mode of in-guest patching of this Windows Virtual Machine. Possible values are Manual, AutomaticByOS and AutomaticByPlatform. Defaults to AutomaticByOS. For more information on patch modes please see the product documentation.
-	PatchMode *string `json:"patchMode,omitempty" tf:"patch_mode,omitempty"`
-
-	// Should the Azure VM Agent be provisioned on each Virtual Machine in the Scale Set? Defaults to true. Changing this value forces a new resource to be created.
-	ProvisionVMAgent *bool `json:"provisionVmAgent,omitempty" tf:"provision_vm_agent,omitempty"`
-
-	// One or more secret blocks as defined below.
-	Secret []LinuxConfigurationSecretInitParameters `json:"secret,omitempty" tf:"secret,omitempty"`
+	// +kubebuilder:validation:Required
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type LinuxConfigurationObservation struct {
@@ -215,8 +146,8 @@ type LinuxConfigurationParameters struct {
 	AdminSSHKey []LinuxConfigurationAdminSSHKeyParameters `json:"adminSshKey,omitempty" tf:"admin_ssh_key,omitempty"`
 
 	// The username of the local administrator on each Orchestrated Virtual Machine Scale Set instance. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
+	// +kubebuilder:validation:Required
+	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
 
 	// The prefix which should be used for the name of the Virtual Machines in this Scale Set. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name_prefix, then you must specify computer_name_prefix. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -243,12 +174,6 @@ type LinuxConfigurationParameters struct {
 	Secret []LinuxConfigurationSecretParameters `json:"secret,omitempty" tf:"secret,omitempty"`
 }
 
-type LinuxConfigurationSecretCertificateInitParameters struct {
-
-	// The Secret URL of a Key Vault Certificate.
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
-}
-
 type LinuxConfigurationSecretCertificateObservation struct {
 
 	// The Secret URL of a Key Vault Certificate.
@@ -258,17 +183,8 @@ type LinuxConfigurationSecretCertificateObservation struct {
 type LinuxConfigurationSecretCertificateParameters struct {
 
 	// The Secret URL of a Key Vault Certificate.
-	// +kubebuilder:validation:Optional
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
-}
-
-type LinuxConfigurationSecretInitParameters struct {
-
-	// One or more certificate blocks as defined below.
-	Certificate []LinuxConfigurationSecretCertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
-
-	// The ID of the Key Vault from which all Secrets should be sourced.
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+	// +kubebuilder:validation:Required
+	URL *string `json:"url" tf:"url,omitempty"`
 }
 
 type LinuxConfigurationSecretObservation struct {
@@ -283,36 +199,12 @@ type LinuxConfigurationSecretObservation struct {
 type LinuxConfigurationSecretParameters struct {
 
 	// One or more certificate blocks as defined below.
-	// +kubebuilder:validation:Optional
-	Certificate []LinuxConfigurationSecretCertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
+	// +kubebuilder:validation:Required
+	Certificate []LinuxConfigurationSecretCertificateParameters `json:"certificate" tf:"certificate,omitempty"`
 
 	// The ID of the Key Vault from which all Secrets should be sourced.
-	// +kubebuilder:validation:Optional
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
-}
-
-type NetworkInterfaceIPConfigurationInitParameters struct {
-
-	// A list of Backend Address Pools IDs from a Application Gateway which this Orchestrated Virtual Machine Scale Set should be connected to.
-	ApplicationGatewayBackendAddressPoolIds []*string `json:"applicationGatewayBackendAddressPoolIds,omitempty" tf:"application_gateway_backend_address_pool_ids,omitempty"`
-
-	// A list of Application Security Group IDs which this Orchestrated Virtual Machine Scale Set should be connected to.
-	ApplicationSecurityGroupIds []*string `json:"applicationSecurityGroupIds,omitempty" tf:"application_security_group_ids,omitempty"`
-
-	// A list of Backend Address Pools IDs from a Load Balancer which this Orchestrated Virtual Machine Scale Set should be connected to.
-	LoadBalancerBackendAddressPoolIds []*string `json:"loadBalancerBackendAddressPoolIds,omitempty" tf:"load_balancer_backend_address_pool_ids,omitempty"`
-
-	// The Name of the Public IP Address Configuration.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Is this the Primary IP Configuration? Possible values are true and false. Defaults to false.
-	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
-
-	// A public_ip_address block as defined below.
-	PublicIPAddress []IPConfigurationPublicIPAddressInitParameters `json:"publicIpAddress,omitempty" tf:"public_ip_address,omitempty"`
-
-	// Specifies the version of the image used to create the virtual machines.
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	// +kubebuilder:validation:Required
+	KeyVaultID *string `json:"keyVaultId" tf:"key_vault_id,omitempty"`
 }
 
 type NetworkInterfaceIPConfigurationObservation struct {
@@ -357,8 +249,8 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	LoadBalancerBackendAddressPoolIds []*string `json:"loadBalancerBackendAddressPoolIds,omitempty" tf:"load_balancer_backend_address_pool_ids,omitempty"`
 
 	// The Name of the Public IP Address Configuration.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Is this the Primary IP Configuration? Possible values are true and false. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -387,12 +279,6 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
-type OrchestratedVirtualMachineScaleSetAdditionalCapabilitiesInitParameters struct {
-
-	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Orchestrated Virtual Machine Scale Set? Defaults to false. Changing this forces a new resource to be created.
-	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
-}
-
 type OrchestratedVirtualMachineScaleSetAdditionalCapabilitiesObservation struct {
 
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Orchestrated Virtual Machine Scale Set? Defaults to false. Changing this forces a new resource to be created.
@@ -404,15 +290,6 @@ type OrchestratedVirtualMachineScaleSetAdditionalCapabilitiesParameters struct {
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Orchestrated Virtual Machine Scale Set? Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
-}
-
-type OrchestratedVirtualMachineScaleSetAutomaticInstanceRepairInitParameters struct {
-
-	// Should the automatic instance repair be enabled on this Orchestrated Virtual Machine Scale Set? Possible values are true and false.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Amount of time for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. Possible values are between 30 and 90 minutes. Defaults to 30 minutes. The time duration should be specified in ISO 8601 format (e.g. PT30M to PT90M).
-	GracePeriod *string `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetAutomaticInstanceRepairObservation struct {
@@ -427,18 +304,12 @@ type OrchestratedVirtualMachineScaleSetAutomaticInstanceRepairObservation struct
 type OrchestratedVirtualMachineScaleSetAutomaticInstanceRepairParameters struct {
 
 	// Should the automatic instance repair be enabled on this Orchestrated Virtual Machine Scale Set? Possible values are true and false.
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Required
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Amount of time for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. Possible values are between 30 and 90 minutes. Defaults to 30 minutes. The time duration should be specified in ISO 8601 format (e.g. PT30M to PT90M).
 	// +kubebuilder:validation:Optional
 	GracePeriod *string `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
-}
-
-type OrchestratedVirtualMachineScaleSetBootDiagnosticsInitParameters struct {
-
-	// The Primary/Secondary Endpoint for the Azure Storage Account which should be used to store Boot Diagnostics, including Console Output and Screenshots from the Hypervisor. By including a boot_diagnostics block without passing the storage_account_uri field will cause the API to utilize a Managed Storage Account to store the Boot Diagnostics output.
-	StorageAccountURI *string `json:"storageAccountUri,omitempty" tf:"storage_account_uri,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetBootDiagnosticsObservation struct {
@@ -452,34 +323,6 @@ type OrchestratedVirtualMachineScaleSetBootDiagnosticsParameters struct {
 	// The Primary/Secondary Endpoint for the Azure Storage Account which should be used to store Boot Diagnostics, including Console Output and Screenshots from the Hypervisor. By including a boot_diagnostics block without passing the storage_account_uri field will cause the API to utilize a Managed Storage Account to store the Boot Diagnostics output.
 	// +kubebuilder:validation:Optional
 	StorageAccountURI *string `json:"storageAccountUri,omitempty" tf:"storage_account_uri,omitempty"`
-}
-
-type OrchestratedVirtualMachineScaleSetDataDiskInitParameters struct {
-
-	// The type of Caching which should be used for this Data Disk. Possible values are None, ReadOnly and ReadWrite.
-	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
-
-	// The create option which should be used for this Data Disk. Possible values are Empty and FromImage. Defaults to Empty. (FromImage should only be used if the source image includes data disks).
-	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
-
-	// The ID of the Disk Encryption Set which should be used to encrypt the Data Disk. Changing this forces a new resource to be created.
-	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
-
-	// The size of the Data Disk which should be created.
-	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
-
-	// The Logical Unit Number of the Data Disk, which must be unique within the Virtual Machine.
-	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
-
-	// The Type of Storage Account which should back this Data Disk. Possible values include Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS, Premium_LRS, PremiumV2_LRS, Premium_ZRS and UltraSSD_LRS.
-	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
-
-	UltraSsdDiskIopsReadWrite *float64 `json:"ultraSsdDiskIopsReadWrite,omitempty" tf:"ultra_ssd_disk_iops_read_write,omitempty"`
-
-	UltraSsdDiskMbpsReadWrite *float64 `json:"ultraSsdDiskMbpsReadWrite,omitempty" tf:"ultra_ssd_disk_mbps_read_write,omitempty"`
-
-	// Specifies if Write Accelerator is enabled on the Data Disk. Defaults to false.
-	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetDataDiskObservation struct {
@@ -513,8 +356,8 @@ type OrchestratedVirtualMachineScaleSetDataDiskObservation struct {
 type OrchestratedVirtualMachineScaleSetDataDiskParameters struct {
 
 	// The type of Caching which should be used for this Data Disk. Possible values are None, ReadOnly and ReadWrite.
-	// +kubebuilder:validation:Optional
-	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
+	// +kubebuilder:validation:Required
+	Caching *string `json:"caching" tf:"caching,omitempty"`
 
 	// The create option which should be used for this Data Disk. Possible values are Empty and FromImage. Defaults to Empty. (FromImage should only be used if the source image includes data disks).
 	// +kubebuilder:validation:Optional
@@ -525,16 +368,16 @@ type OrchestratedVirtualMachineScaleSetDataDiskParameters struct {
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
 
 	// The size of the Data Disk which should be created.
-	// +kubebuilder:validation:Optional
-	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+	// +kubebuilder:validation:Required
+	DiskSizeGb *float64 `json:"diskSizeGb" tf:"disk_size_gb,omitempty"`
 
 	// The Logical Unit Number of the Data Disk, which must be unique within the Virtual Machine.
-	// +kubebuilder:validation:Optional
-	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
+	// +kubebuilder:validation:Required
+	Lun *float64 `json:"lun" tf:"lun,omitempty"`
 
 	// The Type of Storage Account which should back this Data Disk. Possible values include Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS, Premium_LRS, PremiumV2_LRS, Premium_ZRS and UltraSSD_LRS.
-	// +kubebuilder:validation:Optional
-	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
+	// +kubebuilder:validation:Required
+	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
 
 	// +kubebuilder:validation:Optional
 	UltraSsdDiskIopsReadWrite *float64 `json:"ultraSsdDiskIopsReadWrite,omitempty" tf:"ultra_ssd_disk_iops_read_write,omitempty"`
@@ -545,39 +388,6 @@ type OrchestratedVirtualMachineScaleSetDataDiskParameters struct {
 	// Specifies if Write Accelerator is enabled on the Data Disk. Defaults to false.
 	// +kubebuilder:validation:Optional
 	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
-}
-
-type OrchestratedVirtualMachineScaleSetExtensionInitParameters struct {
-
-	// Should the latest version of the Extension be used at Deployment Time, if one is available? This won't auto-update the extension on existing installation. Defaults to true.
-	AutoUpgradeMinorVersionEnabled *bool `json:"autoUpgradeMinorVersionEnabled,omitempty" tf:"auto_upgrade_minor_version_enabled,omitempty"`
-
-	// An ordered list of Extension names which Orchestrated Virtual Machine Scale Set should provision after VM creation.
-	ExtensionsToProvisionAfterVMCreation []*string `json:"extensionsToProvisionAfterVmCreation,omitempty" tf:"extensions_to_provision_after_vm_creation,omitempty"`
-
-	// Should failures from the extension be suppressed? Possible values are true or false.
-	FailureSuppressionEnabled *bool `json:"failureSuppressionEnabled,omitempty" tf:"failure_suppression_enabled,omitempty"`
-
-	// A value which, when different to the previous value can be used to force-run the Extension even if the Extension Configuration hasn't changed.
-	ForceExtensionExecutionOnChange *string `json:"forceExtensionExecutionOnChange,omitempty" tf:"force_extension_execution_on_change,omitempty"`
-
-	// The name for the Virtual Machine Scale Set Extension.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A protected_settings_from_key_vault block as defined below.
-	ProtectedSettingsFromKeyVault []ExtensionProtectedSettingsFromKeyVaultInitParameters `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
-
-	// Specifies the Publisher of the Extension.
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
-
-	// A JSON String which specifies Settings for the Extension.
-	Settings *string `json:"settings,omitempty" tf:"settings,omitempty"`
-
-	// Specifies the Type of the Extension.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// Specifies the version of the extension to use, available versions can be found using the Azure CLI.
-	TypeHandlerVersion *string `json:"typeHandlerVersion,omitempty" tf:"type_handler_version,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetExtensionObservation struct {
@@ -632,8 +442,8 @@ type OrchestratedVirtualMachineScaleSetExtensionParameters struct {
 	ForceExtensionExecutionOnChange *string `json:"forceExtensionExecutionOnChange,omitempty" tf:"force_extension_execution_on_change,omitempty"`
 
 	// The name for the Virtual Machine Scale Set Extension.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A protected_settings_from_key_vault block as defined below.
 	// +kubebuilder:validation:Optional
@@ -644,29 +454,20 @@ type OrchestratedVirtualMachineScaleSetExtensionParameters struct {
 	ProtectedSettingsSecretRef *v1.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
 
 	// Specifies the Publisher of the Extension.
-	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	// +kubebuilder:validation:Required
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
 	// A JSON String which specifies Settings for the Extension.
 	// +kubebuilder:validation:Optional
 	Settings *string `json:"settings,omitempty" tf:"settings,omitempty"`
 
 	// Specifies the Type of the Extension.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// Specifies the version of the extension to use, available versions can be found using the Azure CLI.
-	// +kubebuilder:validation:Optional
-	TypeHandlerVersion *string `json:"typeHandlerVersion,omitempty" tf:"type_handler_version,omitempty"`
-}
-
-type OrchestratedVirtualMachineScaleSetIdentityInitParameters struct {
-
-	// Specifies a list of User Managed Identity IDs to be assigned to this Orchestrated Windows Virtual Machine Scale Set.
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The type of Managed Identity that should be configured on this Orchestrated Windows Virtual Machine Scale Set. Only possible value is UserAssigned.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	TypeHandlerVersion *string `json:"typeHandlerVersion" tf:"type_handler_version,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetIdentityObservation struct {
@@ -681,132 +482,12 @@ type OrchestratedVirtualMachineScaleSetIdentityObservation struct {
 type OrchestratedVirtualMachineScaleSetIdentityParameters struct {
 
 	// Specifies a list of User Managed Identity IDs to be assigned to this Orchestrated Windows Virtual Machine Scale Set.
-	// +kubebuilder:validation:Optional
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+	// +kubebuilder:validation:Required
+	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
 	// The type of Managed Identity that should be configured on this Orchestrated Windows Virtual Machine Scale Set. Only possible value is UserAssigned.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type OrchestratedVirtualMachineScaleSetInitParameters struct {
-
-	// An additional_capabilities block as defined below.
-	AdditionalCapabilities []OrchestratedVirtualMachineScaleSetAdditionalCapabilitiesInitParameters `json:"additionalCapabilities,omitempty" tf:"additional_capabilities,omitempty"`
-
-	// An automatic_instance_repair block as defined below.
-	AutomaticInstanceRepair []OrchestratedVirtualMachineScaleSetAutomaticInstanceRepairInitParameters `json:"automaticInstanceRepair,omitempty" tf:"automatic_instance_repair,omitempty"`
-
-	// A boot_diagnostics block as defined below.
-	BootDiagnostics []OrchestratedVirtualMachineScaleSetBootDiagnosticsInitParameters `json:"bootDiagnostics,omitempty" tf:"boot_diagnostics,omitempty"`
-
-	// Specifies the ID of the Capacity Reservation Group which the Virtual Machine Scale Set should be allocated to. Changing this forces a new resource to be created.
-	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
-
-	// One or more data_disk blocks as defined below.
-	DataDisk []OrchestratedVirtualMachineScaleSetDataDiskInitParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
-
-	// Should disks attached to this Virtual Machine Scale Set be encrypted by enabling Encryption at Host?
-	EncryptionAtHostEnabled *bool `json:"encryptionAtHostEnabled,omitempty" tf:"encryption_at_host_enabled,omitempty"`
-
-	// The Policy which should be used Virtual Machines are Evicted from the Scale Set. Possible values are Deallocate and Delete. Changing this forces a new resource to be created.
-	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
-
-	// One or more extension blocks as defined below
-	Extension []OrchestratedVirtualMachineScaleSetExtensionInitParameters `json:"extension,omitempty" tf:"extension,omitempty"`
-
-	// Should extension operations be allowed on the Virtual Machine Scale Set? Possible values are true or false. Defaults to true. Changing this forces a new Orchestrated Virtual Machine Scale Set to be created.
-	ExtensionOperationsEnabled *bool `json:"extensionOperationsEnabled,omitempty" tf:"extension_operations_enabled,omitempty"`
-
-	// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M).
-	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
-
-	// An identity block as defined below.
-	Identity []OrchestratedVirtualMachineScaleSetIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// The number of Virtual Machines in the Orcestrated Virtual Machine Scale Set.
-	Instances *float64 `json:"instances,omitempty" tf:"instances,omitempty"`
-
-	// Specifies the type of on-premise license (also known as Azure Hybrid Use Benefit) which should be used for this Orchestrated Virtual Machine Scale Set. Possible values are None, Windows_Client and Windows_Server.
-	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
-
-	// The Azure location where the Orchestrated Virtual Machine Scale Set should exist. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// The maximum price you're willing to pay for each Orchestrated Virtual Machine in this Scale Set, in US Dollars; which must be greater than the current spot price. If this bid price falls below the current spot price the Virtual Machines in the Scale Set will be evicted using the eviction_policy. Defaults to -1, which means that each Virtual Machine in the Orchestrated Scale Set should not be evicted for price reasons.
-	MaxBidPrice *float64 `json:"maxBidPrice,omitempty" tf:"max_bid_price,omitempty"`
-
-	// One or more network_interface blocks as defined below.
-	NetworkInterface []OrchestratedVirtualMachineScaleSetNetworkInterfaceInitParameters `json:"networkInterface,omitempty" tf:"network_interface,omitempty"`
-
-	// An os_disk block as defined below.
-	OsDisk []OrchestratedVirtualMachineScaleSetOsDiskInitParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
-
-	// An os_profile block as defined below.
-	OsProfile []OsProfileInitParameters `json:"osProfile,omitempty" tf:"os_profile,omitempty"`
-
-	// A plan block as documented below. Changing this forces a new resource to be created.
-	Plan []OrchestratedVirtualMachineScaleSetPlanInitParameters `json:"plan,omitempty" tf:"plan,omitempty"`
-
-	// Specifies the number of fault domains that are used by this Orchestrated Virtual Machine Scale Set. Changing this forces a new resource to be created.
-	PlatformFaultDomainCount *float64 `json:"platformFaultDomainCount,omitempty" tf:"platform_fault_domain_count,omitempty"`
-
-	// The Priority of this Orchestrated Virtual Machine Scale Set. Possible values are Regular and Spot. Defaults to Regular. Changing this value forces a new resource.
-	Priority *string `json:"priority,omitempty" tf:"priority,omitempty"`
-
-	// a priority_mix block as defined below
-	PriorityMix []PriorityMixInitParameters `json:"priorityMix,omitempty" tf:"priority_mix,omitempty"`
-
-	// The ID of the Proximity Placement Group which the Orchestrated Virtual Machine should be assigned to. Changing this forces a new resource to be created.
-	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
-
-	// Should this Virtual Machine Scale Set be limited to a Single Placement Group, which means the number of instances will be capped at 100 Virtual Machines. Possible values are true or false.
-	SinglePlacementGroup *bool `json:"singlePlacementGroup,omitempty" tf:"single_placement_group,omitempty"`
-
-	// The name of the SKU to be used by this Orcestrated Virtual Machine Scale Set. Valid values include: any of the General purpose, Compute optimized, Memory optimized, Storage optimized, GPU optimized, FPGA optimized, High performance, or Previous generation virtual machine SKUs.
-	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
-
-	// The ID of an Image which each Virtual Machine in this Scale Set should be based on. Possible Image ID types include Image IDs, Shared Image IDs, Shared Image Version IDs, Community Gallery Image IDs, Community Gallery Image Version IDs, Shared Gallery Image IDs and Shared Gallery Image Version IDs.
-	SourceImageID *string `json:"sourceImageId,omitempty" tf:"source_image_id,omitempty"`
-
-	// A source_image_reference block as defined below.
-	SourceImageReference []OrchestratedVirtualMachineScaleSetSourceImageReferenceInitParameters `json:"sourceImageReference,omitempty" tf:"source_image_reference,omitempty"`
-
-	// A mapping of tags which should be assigned to this Orchestrated Virtual Machine Scale Set.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// A termination_notification block as defined below.
-	TerminationNotification []OrchestratedVirtualMachineScaleSetTerminationNotificationInitParameters `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
-
-	// Should the Virtual Machines in this Scale Set be strictly evenly distributed across Availability Zones? Defaults to false. Changing this forces a new resource to be created.
-	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
-
-	// Specifies a list of Availability Zones in which this Orchestrated Virtual Machine should be located. Changing this forces a new Orchestrated Virtual Machine to be created.
-	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
-}
-
-type OrchestratedVirtualMachineScaleSetNetworkInterfaceInitParameters struct {
-
-	// A list of IP Addresses of DNS Servers which should be assigned to the Network Interface.
-	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
-
-	// Does this Network Interface support Accelerated Networking? Possible values are true and false. Defaults to false.
-	EnableAcceleratedNetworking *bool `json:"enableAcceleratedNetworking,omitempty" tf:"enable_accelerated_networking,omitempty"`
-
-	// Does this Network Interface support IP Forwarding? Possible values are true and false. Defaults to false.
-	EnableIPForwarding *bool `json:"enableIpForwarding,omitempty" tf:"enable_ip_forwarding,omitempty"`
-
-	// One or more ip_configuration blocks as defined above.
-	IPConfiguration []NetworkInterfaceIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
-
-	// The Name which should be used for this Network Interface. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The ID of a Network Security Group which should be assigned to this Network Interface.
-	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
-
-	// Is this the Primary IP Configuration? Possible values are true and false. Defaults to false.
-	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetNetworkInterfaceObservation struct {
@@ -848,12 +529,12 @@ type OrchestratedVirtualMachineScaleSetNetworkInterfaceParameters struct {
 	EnableIPForwarding *bool `json:"enableIpForwarding,omitempty" tf:"enable_ip_forwarding,omitempty"`
 
 	// One or more ip_configuration blocks as defined above.
-	// +kubebuilder:validation:Optional
-	IPConfiguration []NetworkInterfaceIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+	// +kubebuilder:validation:Required
+	IPConfiguration []NetworkInterfaceIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 
 	// The Name which should be used for this Network Interface. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID of a Network Security Group which should be assigned to this Network Interface.
 	// +kubebuilder:validation:Optional
@@ -969,15 +650,6 @@ type OrchestratedVirtualMachineScaleSetObservation struct {
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
-type OrchestratedVirtualMachineScaleSetOsDiskDiffDiskSettingsInitParameters struct {
-
-	// Specifies the Ephemeral Disk Settings for the OS Disk. At this time the only possible value is Local. Changing this forces a new resource to be created.
-	Option *string `json:"option,omitempty" tf:"option,omitempty"`
-
-	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
-	Placement *string `json:"placement,omitempty" tf:"placement,omitempty"`
-}
-
 type OrchestratedVirtualMachineScaleSetOsDiskDiffDiskSettingsObservation struct {
 
 	// Specifies the Ephemeral Disk Settings for the OS Disk. At this time the only possible value is Local. Changing this forces a new resource to be created.
@@ -990,33 +662,12 @@ type OrchestratedVirtualMachineScaleSetOsDiskDiffDiskSettingsObservation struct 
 type OrchestratedVirtualMachineScaleSetOsDiskDiffDiskSettingsParameters struct {
 
 	// Specifies the Ephemeral Disk Settings for the OS Disk. At this time the only possible value is Local. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Option *string `json:"option,omitempty" tf:"option,omitempty"`
+	// +kubebuilder:validation:Required
+	Option *string `json:"option" tf:"option,omitempty"`
 
 	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Placement *string `json:"placement,omitempty" tf:"placement,omitempty"`
-}
-
-type OrchestratedVirtualMachineScaleSetOsDiskInitParameters struct {
-
-	// The Type of Caching which should be used for the Internal OS Disk. Possible values are None, ReadOnly and ReadWrite.
-	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
-
-	// A diff_disk_settings block as defined above. Changing this forces a new resource to be created.
-	DiffDiskSettings []OrchestratedVirtualMachineScaleSetOsDiskDiffDiskSettingsInitParameters `json:"diffDiskSettings,omitempty" tf:"diff_disk_settings,omitempty"`
-
-	// The ID of the Disk Encryption Set which should be used to encrypt this OS Disk. Changing this forces a new resource to be created.
-	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
-
-	// The Size of the Internal OS Disk in GB, if you wish to vary from the size used in the image this Virtual Machine Scale Set is sourced from.
-	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
-
-	// The Type of Storage Account which should back this the Internal OS Disk. Possible values include Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS, Premium_LRS and Premium_ZRS. Changing this forces a new resource to be created.
-	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
-
-	// Specifies if Write Accelerator is enabled on the OS Disk. Defaults to false.
-	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetOsDiskObservation struct {
@@ -1043,8 +694,8 @@ type OrchestratedVirtualMachineScaleSetOsDiskObservation struct {
 type OrchestratedVirtualMachineScaleSetOsDiskParameters struct {
 
 	// The Type of Caching which should be used for the Internal OS Disk. Possible values are None, ReadOnly and ReadWrite.
-	// +kubebuilder:validation:Optional
-	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
+	// +kubebuilder:validation:Required
+	Caching *string `json:"caching" tf:"caching,omitempty"`
 
 	// A diff_disk_settings block as defined above. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1059,8 +710,8 @@ type OrchestratedVirtualMachineScaleSetOsDiskParameters struct {
 	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
 
 	// The Type of Storage Account which should back this the Internal OS Disk. Possible values include Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS, Premium_LRS and Premium_ZRS. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
+	// +kubebuilder:validation:Required
+	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
 
 	// Specifies if Write Accelerator is enabled on the OS Disk. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -1211,18 +862,6 @@ type OrchestratedVirtualMachineScaleSetParameters struct {
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
-type OrchestratedVirtualMachineScaleSetPlanInitParameters struct {
-
-	// Specifies the name of the image from the marketplace. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Specifies the product of the image from the marketplace. Changing this forces a new resource to be created.
-	Product *string `json:"product,omitempty" tf:"product,omitempty"`
-
-	// Specifies the publisher of the image. Changing this forces a new resource to be created.
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
-}
-
 type OrchestratedVirtualMachineScaleSetPlanObservation struct {
 
 	// Specifies the name of the image from the marketplace. Changing this forces a new resource to be created.
@@ -1238,31 +877,16 @@ type OrchestratedVirtualMachineScaleSetPlanObservation struct {
 type OrchestratedVirtualMachineScaleSetPlanParameters struct {
 
 	// Specifies the name of the image from the marketplace. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the product of the image from the marketplace. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+	// +kubebuilder:validation:Required
+	Product *string `json:"product" tf:"product,omitempty"`
 
 	// Specifies the publisher of the image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
-}
-
-type OrchestratedVirtualMachineScaleSetSourceImageReferenceInitParameters struct {
-
-	// Specifies the offer of the image used to create the virtual machines. Changing this forces a new resource to be created.
-	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
-
-	// Specifies the publisher of the image used to create the virtual machines. Changing this forces a new resource to be created.
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
-
-	// Specifies the SKU of the image used to create the virtual machines.
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
-
-	// Specifies the version of the image used to create the virtual machines.
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	// +kubebuilder:validation:Required
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetSourceImageReferenceObservation struct {
@@ -1283,29 +907,20 @@ type OrchestratedVirtualMachineScaleSetSourceImageReferenceObservation struct {
 type OrchestratedVirtualMachineScaleSetSourceImageReferenceParameters struct {
 
 	// Specifies the offer of the image used to create the virtual machines. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
+	// +kubebuilder:validation:Required
+	Offer *string `json:"offer" tf:"offer,omitempty"`
 
 	// Specifies the publisher of the image used to create the virtual machines. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	// +kubebuilder:validation:Required
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
 	// Specifies the SKU of the image used to create the virtual machines.
-	// +kubebuilder:validation:Optional
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+	// +kubebuilder:validation:Required
+	Sku *string `json:"sku" tf:"sku,omitempty"`
 
 	// Specifies the version of the image used to create the virtual machines.
-	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
-}
-
-type OrchestratedVirtualMachineScaleSetTerminationNotificationInitParameters struct {
-
-	// Should the termination notification be enabled on this Virtual Machine Scale Set? Possible values true or false
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
-	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	// +kubebuilder:validation:Required
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 type OrchestratedVirtualMachineScaleSetTerminationNotificationObservation struct {
@@ -1320,21 +935,12 @@ type OrchestratedVirtualMachineScaleSetTerminationNotificationObservation struct
 type OrchestratedVirtualMachineScaleSetTerminationNotificationParameters struct {
 
 	// Should the termination notification be enabled on this Virtual Machine Scale Set? Possible values true or false
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Required
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
-}
-
-type OsProfileInitParameters struct {
-
-	// A linux_configuration block as documented below.
-	LinuxConfiguration []LinuxConfigurationInitParameters `json:"linuxConfiguration,omitempty" tf:"linux_configuration,omitempty"`
-
-	// A windows_configuration block as documented below.
-	WindowsConfiguration []WindowsConfigurationInitParameters `json:"windowsConfiguration,omitempty" tf:"windows_configuration,omitempty"`
 }
 
 type OsProfileObservation struct {
@@ -1361,15 +967,6 @@ type OsProfileParameters struct {
 	WindowsConfiguration []WindowsConfigurationParameters `json:"windowsConfiguration,omitempty" tf:"windows_configuration,omitempty"`
 }
 
-type PriorityMixInitParameters struct {
-
-	// Specifies the base number of VMs of Regular priority that will be created before any VMs of priority Spot are created. Possible values are integers between 0 and 1000. Defaults to 0.
-	BaseRegularCount *float64 `json:"baseRegularCount,omitempty" tf:"base_regular_count,omitempty"`
-
-	// Specifies the desired percentage of VM instances that are of Regular priority after the base count has been reached. Possible values are integers between 0 and 100. Defaults to 0.
-	RegularPercentageAboveBase *float64 `json:"regularPercentageAboveBase,omitempty" tf:"regular_percentage_above_base,omitempty"`
-}
-
 type PriorityMixObservation struct {
 
 	// Specifies the base number of VMs of Regular priority that will be created before any VMs of priority Spot are created. Possible values are integers between 0 and 1000. Defaults to 0.
@@ -1390,15 +987,6 @@ type PriorityMixParameters struct {
 	RegularPercentageAboveBase *float64 `json:"regularPercentageAboveBase,omitempty" tf:"regular_percentage_above_base,omitempty"`
 }
 
-type PublicIPAddressIPTagInitParameters struct {
-
-	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
-	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
-
-	// The Type of IP Tag, such as FirstPartyUsage. Changing this forces a new resource to be created.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type PublicIPAddressIPTagObservation struct {
 
 	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
@@ -1411,45 +999,12 @@ type PublicIPAddressIPTagObservation struct {
 type PublicIPAddressIPTagParameters struct {
 
 	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
+	// +kubebuilder:validation:Required
+	Tag *string `json:"tag" tf:"tag,omitempty"`
 
 	// The Type of IP Tag, such as FirstPartyUsage. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type WindowsConfigurationInitParameters struct {
-
-	// The username of the local administrator on each Orchestrated Virtual Machine Scale Set instance. Changing this forces a new resource to be created.
-	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
-
-	// The prefix which should be used for the name of the Virtual Machines in this Scale Set. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name_prefix, then you must specify computer_name_prefix. Changing this forces a new resource to be created.
-	ComputerNamePrefix *string `json:"computerNamePrefix,omitempty" tf:"computer_name_prefix,omitempty"`
-
-	// Are automatic updates enabled for this Virtual Machine? Defaults to true.
-	EnableAutomaticUpdates *bool `json:"enableAutomaticUpdates,omitempty" tf:"enable_automatic_updates,omitempty"`
-
-	// Should the VM be patched without requiring a reboot? Possible values are true or false. Defaults to false. For more information about hot patching please see the product documentation.
-	HotpatchingEnabled *bool `json:"hotpatchingEnabled,omitempty" tf:"hotpatching_enabled,omitempty"`
-
-	// Specifies the mode of VM Guest Patching for the virtual machines that are associated to the Orchestrated Virtual Machine Scale Set. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
-	PatchAssessmentMode *string `json:"patchAssessmentMode,omitempty" tf:"patch_assessment_mode,omitempty"`
-
-	// Specifies the mode of in-guest patching of this Windows Virtual Machine. Possible values are Manual, AutomaticByOS and AutomaticByPlatform. Defaults to AutomaticByOS. For more information on patch modes please see the product documentation.
-	PatchMode *string `json:"patchMode,omitempty" tf:"patch_mode,omitempty"`
-
-	// Should the Azure VM Agent be provisioned on each Virtual Machine in the Scale Set? Defaults to true. Changing this value forces a new resource to be created.
-	ProvisionVMAgent *bool `json:"provisionVmAgent,omitempty" tf:"provision_vm_agent,omitempty"`
-
-	// One or more secret blocks as defined below.
-	Secret []WindowsConfigurationSecretInitParameters `json:"secret,omitempty" tf:"secret,omitempty"`
-
-	// Specifies the time zone of the virtual machine, the possible values are defined here.
-	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
-
-	// One or more winrm_listener blocks as defined below. Changing this forces a new resource to be created.
-	WinrmListener []WinrmListenerInitParameters `json:"winrmListener,omitempty" tf:"winrm_listener,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type WindowsConfigurationObservation struct {
@@ -1492,8 +1047,8 @@ type WindowsConfigurationParameters struct {
 	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
 	// The username of the local administrator on each Orchestrated Virtual Machine Scale Set instance. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
+	// +kubebuilder:validation:Required
+	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
 
 	// The prefix which should be used for the name of the Virtual Machines in this Scale Set. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name_prefix, then you must specify computer_name_prefix. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1532,15 +1087,6 @@ type WindowsConfigurationParameters struct {
 	WinrmListener []WinrmListenerParameters `json:"winrmListener,omitempty" tf:"winrm_listener,omitempty"`
 }
 
-type WindowsConfigurationSecretCertificateInitParameters struct {
-
-	// The certificate store on the Virtual Machine where the certificate should be added.
-	Store *string `json:"store,omitempty" tf:"store,omitempty"`
-
-	// The Secret URL of a Key Vault Certificate.
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
-}
-
 type WindowsConfigurationSecretCertificateObservation struct {
 
 	// The certificate store on the Virtual Machine where the certificate should be added.
@@ -1553,21 +1099,12 @@ type WindowsConfigurationSecretCertificateObservation struct {
 type WindowsConfigurationSecretCertificateParameters struct {
 
 	// The certificate store on the Virtual Machine where the certificate should be added.
-	// +kubebuilder:validation:Optional
-	Store *string `json:"store,omitempty" tf:"store,omitempty"`
+	// +kubebuilder:validation:Required
+	Store *string `json:"store" tf:"store,omitempty"`
 
 	// The Secret URL of a Key Vault Certificate.
-	// +kubebuilder:validation:Optional
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
-}
-
-type WindowsConfigurationSecretInitParameters struct {
-
-	// One or more certificate blocks as defined below.
-	Certificate []WindowsConfigurationSecretCertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
-
-	// The ID of the Key Vault from which all Secrets should be sourced.
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+	// +kubebuilder:validation:Required
+	URL *string `json:"url" tf:"url,omitempty"`
 }
 
 type WindowsConfigurationSecretObservation struct {
@@ -1582,21 +1119,12 @@ type WindowsConfigurationSecretObservation struct {
 type WindowsConfigurationSecretParameters struct {
 
 	// One or more certificate blocks as defined below.
-	// +kubebuilder:validation:Optional
-	Certificate []WindowsConfigurationSecretCertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
+	// +kubebuilder:validation:Required
+	Certificate []WindowsConfigurationSecretCertificateParameters `json:"certificate" tf:"certificate,omitempty"`
 
 	// The ID of the Key Vault from which all Secrets should be sourced.
-	// +kubebuilder:validation:Optional
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
-}
-
-type WinrmListenerInitParameters struct {
-
-	// The Secret URL of a Key Vault Certificate, which must be specified when protocol is set to Https. Changing this forces a new resource to be created.
-	CertificateURL *string `json:"certificateUrl,omitempty" tf:"certificate_url,omitempty"`
-
-	// Specifies the protocol of listener. Possible values are Http or Https. Changing this forces a new resource to be created.
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	// +kubebuilder:validation:Required
+	KeyVaultID *string `json:"keyVaultId" tf:"key_vault_id,omitempty"`
 }
 
 type WinrmListenerObservation struct {
@@ -1615,26 +1143,14 @@ type WinrmListenerParameters struct {
 	CertificateURL *string `json:"certificateUrl,omitempty" tf:"certificate_url,omitempty"`
 
 	// Specifies the protocol of listener. Possible values are Http or Https. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	// +kubebuilder:validation:Required
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 }
 
 // OrchestratedVirtualMachineScaleSetSpec defines the desired state of OrchestratedVirtualMachineScaleSet
 type OrchestratedVirtualMachineScaleSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OrchestratedVirtualMachineScaleSetParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider OrchestratedVirtualMachineScaleSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // OrchestratedVirtualMachineScaleSetStatus defines the observed state of OrchestratedVirtualMachineScaleSet.
@@ -1655,8 +1171,8 @@ type OrchestratedVirtualMachineScaleSetStatus struct {
 type OrchestratedVirtualMachineScaleSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platformFaultDomainCount) || has(self.initProvider.platformFaultDomainCount)",message="platformFaultDomainCount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.platformFaultDomainCount)",message="platformFaultDomainCount is a required parameter"
 	Spec   OrchestratedVirtualMachineScaleSetSpec   `json:"spec"`
 	Status OrchestratedVirtualMachineScaleSetStatus `json:"status,omitempty"`
 }

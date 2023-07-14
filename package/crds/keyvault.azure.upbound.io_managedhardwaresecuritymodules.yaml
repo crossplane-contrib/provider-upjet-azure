@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: managedhardwaresecuritymodules.keyvault.azure.upbound.io
 spec:
   group: keyvault.azure.upbound.io
@@ -91,6 +91,9 @@ spec:
                           description: The Default Action to use. Possible values
                             are Allow and Deny.
                           type: string
+                      required:
+                      - bypass
+                      - defaultAction
                       type: object
                     type: array
                   publicNetworkAccessEnabled:
@@ -183,77 +186,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  skuName:
-                    description: The Name of the SKU used for this Key Vault Managed
-                      Hardware Security Module. Possible value is Standard_B1. Changing
-                      this forces a new resource to be created.
-                    type: string
-                  softDeleteRetentionDays:
-                    description: The number of days that items should be retained
-                      for once soft-deleted. This value can be between 7 and 90 days.
-                      Defaults to 90. Changing this forces a new resource to be created.
-                    type: number
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource. Changing
-                      this forces a new resource to be created.
-                    type: object
-                  tenantId:
-                    description: The Azure Active Directory Tenant ID that should
-                      be used for authenticating requests to the key vault Managed
-                      Hardware Security Module. Changing this forces a new resource
-                      to be created.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  adminObjectIds:
-                    description: Specifies a list of administrators object IDs for
-                      the key vault Managed Hardware Security Module. Changing this
-                      forces a new resource to be created.
-                    items:
-                      type: string
-                    type: array
-                  location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
-                    type: string
-                  networkAcls:
-                    description: A network_acls block as defined below.
-                    items:
-                      properties:
-                        bypass:
-                          description: Specifies which traffic can bypass the network
-                            rules. Possible values are AzureServices and None.
-                          type: string
-                        defaultAction:
-                          description: The Default Action to use. Possible values
-                            are Allow and Deny.
-                          type: string
-                      type: object
-                    type: array
-                  publicNetworkAccessEnabled:
-                    description: Whether traffic from public networks is permitted.
-                      Defaults to true. Changing this forces a new resource to be
-                      created.
-                    type: boolean
-                  purgeProtectionEnabled:
-                    description: Is Purge Protection enabled for this Key Vault Managed
-                      Hardware Security Module? Changing this forces a new resource
-                      to be created.
-                    type: boolean
                   skuName:
                     description: The Name of the SKU used for this Key Vault Managed
                       Hardware Security Module. Possible value is Standard_B1. Changing
@@ -477,20 +409,16 @@ spec:
             x-kubernetes-validations:
             - message: adminObjectIds is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.adminObjectIds)
-                || has(self.initProvider.adminObjectIds)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.adminObjectIds)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
             - message: skuName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
-                || has(self.initProvider.skuName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)'
             - message: tenantId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.tenantId)
-                || has(self.initProvider.tenantId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tenantId)'
           status:
             description: ManagedHardwareSecurityModuleStatus defines the observed
               state of ManagedHardwareSecurityModule.

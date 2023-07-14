@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: healthcaremedtechservicefhirdestinations.healthcareapis.azure.upbound.io
 spec:
   group: healthcareapis.azure.upbound.io
@@ -245,35 +245,6 @@ spec:
                         type: object
                     type: object
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  destinationFhirMappingJson:
-                    description: Specifies the destination Fhir mappings of the Med
-                      Tech Service Fhir Destination.
-                    type: string
-                  destinationIdentityResolutionType:
-                    description: Specifies the destination identity resolution type
-                      where the Healthcare Med Tech Service Fhir Destination should
-                      be created. Possible values are Create, Lookup.
-                    type: string
-                  location:
-                    description: Specifies the Azure Region where the Healthcare Med
-                      Tech Service Fhir Destination should be created. Changing this
-                      forces a new Healthcare Med Tech Service Fhir Destination to
-                      be created.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -474,16 +445,13 @@ spec:
             x-kubernetes-validations:
             - message: destinationFhirMappingJson is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.destinationFhirMappingJson)
-                || has(self.initProvider.destinationFhirMappingJson)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.destinationFhirMappingJson)'
             - message: destinationIdentityResolutionType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.destinationIdentityResolutionType)
-                || has(self.initProvider.destinationIdentityResolutionType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.destinationIdentityResolutionType)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: HealthcareMedtechServiceFHIRDestinationStatus defines the
               observed state of HealthcareMedtechServiceFHIRDestination.

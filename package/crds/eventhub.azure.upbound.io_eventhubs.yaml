@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: eventhubs.eventhub.azure.upbound.io
 spec:
   group: eventhub.azure.upbound.io
@@ -93,6 +93,11 @@ spec:
                                 description: The ID of the Blob Storage Account where
                                   messages should be archived.
                                 type: string
+                            required:
+                            - archiveNameFormat
+                            - blobContainerName
+                            - name
+                            - storageAccountId
                             type: object
                           type: array
                         enabled:
@@ -118,6 +123,10 @@ spec:
                             if no events occur during the Capture time window. Defaults
                             to false.
                           type: boolean
+                      required:
+                      - destination
+                      - enabled
+                      - encoding
                       type: object
                     type: array
                   messageRetention:
@@ -285,85 +294,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  status:
-                    description: Specifies the status of the Event Hub resource. Possible
-                      values are Active, Disabled and SendDisabled. Defaults to Active.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  captureDescription:
-                    description: A capture_description block as defined below.
-                    items:
-                      properties:
-                        destination:
-                          description: A destination block as defined below.
-                          items:
-                            properties:
-                              archiveNameFormat:
-                                description: The Blob naming convention for archiving.
-                                  e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}.
-                                  Here all the parameters (Namespace,EventHub .. etc)
-                                  are mandatory irrespective of order
-                                type: string
-                              blobContainerName:
-                                description: The name of the Container within the
-                                  Blob Storage Account where messages should be archived.
-                                type: string
-                              name:
-                                description: Specifies the name of the EventHub resource.
-                                  Changing this forces a new resource to be created.
-                                type: string
-                              storageAccountId:
-                                description: The ID of the Blob Storage Account where
-                                  messages should be archived.
-                                type: string
-                            type: object
-                          type: array
-                        enabled:
-                          description: Specifies if the Capture Description is Enabled.
-                          type: boolean
-                        encoding:
-                          description: Specifies the Encoding used for the Capture
-                            Description. Possible values are Avro and AvroDeflate.
-                          type: string
-                        intervalInSeconds:
-                          description: Specifies the time interval in seconds at which
-                            the capture will happen. Values can be between 60 and
-                            900 seconds. Defaults to 300 seconds.
-                          type: number
-                        sizeLimitInBytes:
-                          description: Specifies the amount of data built up in your
-                            EventHub before a Capture Operation occurs. Value should
-                            be between 10485760 and 524288000 bytes. Defaults to 314572800
-                            bytes.
-                          type: number
-                        skipEmptyArchives:
-                          description: Specifies if empty files should not be emitted
-                            if no events occur during the Capture time window. Defaults
-                            to false.
-                          type: boolean
-                      type: object
-                    type: array
-                  messageRetention:
-                    description: Specifies the number of days to retain the events
-                      for this Event Hub.
-                    type: number
-                  partitionCount:
-                    description: Specifies the current number of shards on the Event
-                      Hub. Changing this will force-recreate the resource.
-                    type: number
                   status:
                     description: Specifies the status of the Event Hub resource. Possible
                       values are Active, Disabled and SendDisabled. Defaults to Active.
@@ -569,12 +499,10 @@ spec:
             x-kubernetes-validations:
             - message: messageRetention is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.messageRetention)
-                || has(self.initProvider.messageRetention)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.messageRetention)'
             - message: partitionCount is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.partitionCount)
-                || has(self.initProvider.partitionCount)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.partitionCount)'
           status:
             description: EventHubStatus defines the observed state of EventHub.
             properties:

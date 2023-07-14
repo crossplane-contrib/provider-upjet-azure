@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: monitordatacollectionrules.insights.azure.upbound.io
 spec:
   group: insights.azure.upbound.io
@@ -175,6 +175,9 @@ spec:
                         transformKql:
                           description: The KQL query to transform stream data.
                           type: string
+                      required:
+                      - destinations
+                      - streams
                       type: object
                     type: array
                   dataSources:
@@ -206,8 +209,13 @@ spec:
                                         Hub. Possible value should be a custom stream
                                         name.
                                       type: string
+                                  required:
+                                  - name
+                                  - stream
                                   type: object
                                 type: array
+                            required:
+                            - eventHubDataSource
                             type: object
                           type: array
                         extension:
@@ -245,6 +253,10 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - extensionName
+                            - name
+                            - streams
                             type: object
                           type: array
                         iisLog:
@@ -272,6 +284,9 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - name
+                            - streams
                             type: object
                           type: array
                         logFile:
@@ -311,8 +326,12 @@ spec:
                                               d hh:mm:ss, dd/MMM/yyyy:HH:mm:ss zzz,and
                                               yyyy-MM-ddTHH:mm:ssK.
                                             type: string
+                                        required:
+                                        - recordStartTimestampFormat
                                         type: object
                                       type: array
+                                  required:
+                                  - text
                                   type: object
                                 type: array
                               streams:
@@ -324,6 +343,11 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - filePatterns
+                            - format
+                            - name
+                            - streams
                             type: object
                           type: array
                         performanceCounter:
@@ -362,6 +386,11 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - counterSpecifiers
+                            - name
+                            - samplingFrequencyInSeconds
+                            - streams
                             type: object
                           type: array
                         platformTelemetry:
@@ -384,6 +413,9 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - name
+                            - streams
                             type: object
                           type: array
                         prometheusForwarder:
@@ -404,6 +436,9 @@ spec:
                                     value:
                                       description: The value of the filter.
                                       type: string
+                                  required:
+                                  - label
+                                  - value
                                   type: object
                                 type: array
                               name:
@@ -421,6 +456,9 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - name
+                            - streams
                             type: object
                           type: array
                         syslog:
@@ -460,6 +498,10 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - facilityNames
+                            - logLevels
+                            - name
                             type: object
                           type: array
                         windowsEventLog:
@@ -489,6 +531,10 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - name
+                            - streams
+                            - xPathQueries
                             type: object
                           type: array
                         windowsFirewallLog:
@@ -511,6 +557,9 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - name
+                            - streams
                             type: object
                           type: array
                       type: object
@@ -532,6 +581,8 @@ spec:
                                   data sources regardless of type within the Data
                                   Collection Rule.
                                 type: string
+                            required:
+                            - name
                             type: object
                           type: array
                         eventHub:
@@ -627,6 +678,8 @@ spec:
                                   data sources regardless of type within the Data
                                   Collection Rule.
                                 type: string
+                            required:
+                            - name
                             type: object
                           type: array
                         eventHubDirect:
@@ -642,6 +695,9 @@ spec:
                                   data sources regardless of type within the Data
                                   Collection Rule.
                                 type: string
+                            required:
+                            - eventHubId
+                            - name
                             type: object
                           type: array
                         logAnalytics:
@@ -738,6 +794,8 @@ spec:
                                         type: string
                                     type: object
                                 type: object
+                            required:
+                            - name
                             type: object
                           type: array
                         monitorAccount:
@@ -754,6 +812,9 @@ spec:
                                   data sources regardless of type within the Data
                                   Collection Rule.
                                 type: string
+                            required:
+                            - monitorAccountId
+                            - name
                             type: object
                           type: array
                         storageBlob:
@@ -933,6 +994,8 @@ spec:
                                         type: string
                                     type: object
                                 type: object
+                            required:
+                            - name
                             type: object
                           type: array
                         storageBlobDirect:
@@ -952,6 +1015,10 @@ spec:
                               storageAccountId:
                                 description: The resource ID of the Storage Account.
                                 type: string
+                            required:
+                            - containerName
+                            - name
+                            - storageAccountId
                             type: object
                           type: array
                         storageTableDirect:
@@ -971,6 +1038,10 @@ spec:
                               tableName:
                                 description: The Storage Table name.
                                 type: string
+                            required:
+                            - name
+                            - storageAccountId
+                            - tableName
                             type: object
                           type: array
                       type: object
@@ -991,6 +1062,8 @@ spec:
                             that should be configured on this Data Collection Rule.
                             Possible values are SystemAssigned and UserAssigned.
                           type: string
+                      required:
+                      - type
                       type: object
                     type: array
                   kind:
@@ -1105,586 +1178,18 @@ spec:
                                   Collection Rule. Possible values are SystemAssigned
                                   and UserAssigned.
                                 type: string
+                            required:
+                            - name
+                            - type
                             type: object
                           type: array
                         streamName:
                           description: The name of the custom stream. This name should
                             be unique across all stream_declaration blocks.
                           type: string
-                      type: object
-                    type: array
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags which should be assigned to the
-                      Data Collection Rule.
-                    type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  dataFlow:
-                    description: One or more data_flow blocks as defined below.
-                    items:
-                      properties:
-                        builtInTransform:
-                          description: The built-in transform to transform stream
-                            data.
-                          type: string
-                        destinations:
-                          description: Specifies a list of destination names. A azure_monitor_metrics
-                            data source only allows for stream of kind Microsoft-InsightsMetrics.
-                          items:
-                            type: string
-                          type: array
-                        outputStream:
-                          description: The output stream of the transform. Only required
-                            if the data flow changes data to a different stream.
-                          type: string
-                        streams:
-                          description: Specifies a list of streams. Possible values
-                            include but not limited to Microsoft-Event, Microsoft-InsightsMetrics,
-                            Microsoft-Perf, Microsoft-Syslog,and Microsoft-WindowsEvent.
-                          items:
-                            type: string
-                          type: array
-                        transformKql:
-                          description: The KQL query to transform stream data.
-                          type: string
-                      type: object
-                    type: array
-                  dataSources:
-                    description: A data_sources block as defined below. This property
-                      is optional and can be omitted if the rule is meant to be used
-                      via direct calls to the provisioned endpoint.
-                    items:
-                      properties:
-                        dataImport:
-                          description: A data_import block as defined above.
-                          items:
-                            properties:
-                              eventHubDataSource:
-                                description: An event_hub_data_source block as defined
-                                  below.
-                                items:
-                                  properties:
-                                    consumerGroup:
-                                      description: The Event Hub consumer group name.
-                                      type: string
-                                    name:
-                                      description: The name which should be used for
-                                        this data source. This name should be unique
-                                        across all data sources regardless of type
-                                        within the Data Collection Rule.
-                                      type: string
-                                    stream:
-                                      description: The stream to collect from Event
-                                        Hub. Possible value should be a custom stream
-                                        name.
-                                      type: string
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
-                        extension:
-                          description: One or more extension blocks as defined below.
-                          items:
-                            properties:
-                              extensionJson:
-                                description: A JSON String which specifies the extension
-                                  setting.
-                                type: string
-                              extensionName:
-                                description: The name of the VM extension.
-                                type: string
-                              inputDataSources:
-                                description: 'Specifies a list of data sources this
-                                  extension needs data from. An item should be a name
-                                  of a supported data source which produces only one
-                                  stream. Supported data sources type: performance_counter,
-                                  windows_event_log,and syslog.'
-                                items:
-                                  type: string
-                                type: array
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                              streams:
-                                description: Specifies a list of streams that this
-                                  data source will be sent to. A stream indicates
-                                  what schema will be used for this data and usually
-                                  what table in Log Analytics the data will be sent
-                                  to.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                        iisLog:
-                          description: One or more iis_log blocks as defined below.
-                          items:
-                            properties:
-                              logDirectories:
-                                description: Specifies a list of absolute paths where
-                                  the log files are located.
-                                items:
-                                  type: string
-                                type: array
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                              streams:
-                                description: Specifies a list of streams that this
-                                  data source will be sent to. A stream indicates
-                                  what schema will be used for this data and usually
-                                  what table in Log Analytics the data will be sent
-                                  to.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                        logFile:
-                          description: One or more log_file blocks as defined below.
-                          items:
-                            properties:
-                              filePatterns:
-                                description: Specifies a list of file patterns where
-                                  the log files are located. For example, C:\\JavaLogs\\*.log.
-                                items:
-                                  type: string
-                                type: array
-                              format:
-                                description: The data format of the log files. possible
-                                  value is text.
-                                type: string
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                              settings:
-                                description: A settings block as defined below.
-                                items:
-                                  properties:
-                                    text:
-                                      description: A text block as defined below.
-                                      items:
-                                        properties:
-                                          recordStartTimestampFormat:
-                                            description: The timestamp format of the
-                                              text log files. Possible values are
-                                              ISO 8601, YYYY-MM-DD HH:MM:SS, M/D/YYYY
-                                              HH:MM:SS AM/PM, Mon DD, YYYY HH:MM:SS,
-                                              yyMMdd HH:mm:ss, ddMMyy HH:mm:ss, MMM
-                                              d hh:mm:ss, dd/MMM/yyyy:HH:mm:ss zzz,and
-                                              yyyy-MM-ddTHH:mm:ssK.
-                                            type: string
-                                        type: object
-                                      type: array
-                                  type: object
-                                type: array
-                              streams:
-                                description: Specifies a list of streams that this
-                                  data source will be sent to. A stream indicates
-                                  what schema will be used for this data and usually
-                                  what table in Log Analytics the data will be sent
-                                  to.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                        performanceCounter:
-                          description: One or more performance_counter blocks as defined
-                            below.
-                          items:
-                            properties:
-                              counterSpecifiers:
-                                description: Specifies a list of specifier names of
-                                  the performance counters you want to collect. To
-                                  get a list of performance counters on Windows, run
-                                  the command typeperf. Please see this document for
-                                  more information.
-                                items:
-                                  type: string
-                                type: array
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                              samplingFrequencyInSeconds:
-                                description: The number of seconds between consecutive
-                                  counter measurements (samples). The value should
-                                  be integer between 1 and 300 inclusive. sampling_frequency_in_seconds
-                                  must be equal to 60 seconds for counters collected
-                                  with Microsoft-InsightsMetrics stream.
-                                type: number
-                              streams:
-                                description: Specifies a list of streams that this
-                                  data source will be sent to. A stream indicates
-                                  what schema will be used for this data and usually
-                                  what table in Log Analytics the data will be sent
-                                  to.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                        platformTelemetry:
-                          description: One or more platform_telemetry blocks as defined
-                            below.
-                          items:
-                            properties:
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                              streams:
-                                description: Specifies a list of streams that this
-                                  data source will be sent to. A stream indicates
-                                  what schema will be used for this data and usually
-                                  what table in Log Analytics the data will be sent
-                                  to.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                        prometheusForwarder:
-                          description: One or more prometheus_forwarder blocks as
-                            defined below.
-                          items:
-                            properties:
-                              labelIncludeFilter:
-                                description: One or more label_include_filter blocks
-                                  as defined above.
-                                items:
-                                  properties:
-                                    label:
-                                      description: The label of the filter. This label
-                                        should be unique across all label_include_fileter
-                                        block. Possible value is microsoft_metrics_include_label.
-                                      type: string
-                                    value:
-                                      description: The value of the filter.
-                                      type: string
-                                  type: object
-                                type: array
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                              streams:
-                                description: Specifies a list of streams that this
-                                  data source will be sent to. A stream indicates
-                                  what schema will be used for this data and usually
-                                  what table in Log Analytics the data will be sent
-                                  to.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                        syslog:
-                          description: One or more syslog blocks as defined below.
-                          items:
-                            properties:
-                              facilityNames:
-                                description: Specifies a list of facility names. Use
-                                  a wildcard * to collect logs for all facility names.
-                                  Possible values are auth, authpriv, cron, daemon,
-                                  kern, lpr, mail, mark, news, syslog, user, uucp,
-                                  local0, local1, local2, local3, local4, local5,
-                                  local6, local7,and *.
-                                items:
-                                  type: string
-                                type: array
-                              logLevels:
-                                description: Specifies a list of log levels. Use a
-                                  wildcard * to collect logs for all log levels. Possible
-                                  values are Debug, Info, Notice, Warning, Error,
-                                  Critical, Alert, Emergency,and *.
-                                items:
-                                  type: string
-                                type: array
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                              streams:
-                                description: Specifies a list of streams that this
-                                  data source will be sent to. A stream indicates
-                                  what schema will be used for this data and usually
-                                  what table in Log Analytics the data will be sent
-                                  to.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                        windowsEventLog:
-                          description: One or more windows_event_log blocks as defined
-                            below.
-                          items:
-                            properties:
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                              streams:
-                                description: Specifies a list of streams that this
-                                  data source will be sent to. A stream indicates
-                                  what schema will be used for this data and usually
-                                  what table in Log Analytics the data will be sent
-                                  to.
-                                items:
-                                  type: string
-                                type: array
-                              xPathQueries:
-                                description: Specifies a list of Windows Event Log
-                                  queries in XPath expression. Please see this document
-                                  for more information.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                        windowsFirewallLog:
-                          description: One or more windows_firewall_log blocks as
-                            defined below.
-                          items:
-                            properties:
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                              streams:
-                                description: Specifies a list of streams that this
-                                  data source will be sent to. A stream indicates
-                                  what schema will be used for this data and usually
-                                  what table in Log Analytics the data will be sent
-                                  to.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  description:
-                    description: The description of the Data Collection Rule.
-                    type: string
-                  destinations:
-                    description: A destinations block as defined below.
-                    items:
-                      properties:
-                        azureMonitorMetrics:
-                          description: A azure_monitor_metrics block as defined above.
-                          items:
-                            properties:
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                            type: object
-                          type: array
-                        eventHub:
-                          description: One or more event_hub blocks as defined below.
-                          items:
-                            properties:
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                            type: object
-                          type: array
-                        eventHubDirect:
-                          description: One or more event_hub blocks as defined below.
-                          items:
-                            properties:
-                              eventHubId:
-                                description: The resource ID of the Event Hub.
-                                type: string
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                            type: object
-                          type: array
-                        logAnalytics:
-                          description: One or more log_analytics blocks as defined
-                            below.
-                          items:
-                            properties:
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                            type: object
-                          type: array
-                        monitorAccount:
-                          description: One or more monitor_account blocks as defined
-                            below.
-                          items:
-                            properties:
-                              monitorAccountId:
-                                description: The resource ID of the Monitor Account.
-                                type: string
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                            type: object
-                          type: array
-                        storageBlob:
-                          description: One or more storage_blob blocks as defined
-                            below.
-                          items:
-                            properties:
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                            type: object
-                          type: array
-                        storageBlobDirect:
-                          description: One or more storage_blob_direct blocks as defined
-                            below.
-                          items:
-                            properties:
-                              containerName:
-                                description: The Storage Container name.
-                                type: string
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                              storageAccountId:
-                                description: The resource ID of the Storage Account.
-                                type: string
-                            type: object
-                          type: array
-                        storageTableDirect:
-                          description: One or more storage_table_direct blocks as
-                            defined below.
-                          items:
-                            properties:
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                              storageAccountId:
-                                description: The resource ID of the Storage Account.
-                                type: string
-                              tableName:
-                                description: The Storage Table name.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  identity:
-                    description: An identity block as defined below.
-                    items:
-                      properties:
-                        identityIds:
-                          description: A list of User Assigned Managed Identity IDs
-                            to be assigned to this Data Collection Rule. Currently,
-                            up to 1 identity is supported.
-                          items:
-                            type: string
-                          type: array
-                        type:
-                          description: Specifies the type of Managed Service Identity
-                            that should be configured on this Data Collection Rule.
-                            Possible values are SystemAssigned and UserAssigned.
-                          type: string
-                      type: object
-                    type: array
-                  kind:
-                    description: The kind of the Data Collection Rule. Possible values
-                      are Linux, Windows,and AgentDirectToStore. A rule of kind Linux
-                      does not allow for windows_event_log data sources. And a rule
-                      of kind Windows does not allow for syslog data sources. If kind
-                      is not specified, all kinds of data sources are allowed.
-                    type: string
-                  location:
-                    description: The Azure Region where the Data Collection Rule should
-                      exist. Changing this forces a new Data Collection Rule to be
-                      created.
-                    type: string
-                  streamDeclaration:
-                    description: A stream_declaration block as defined below.
-                    items:
-                      properties:
-                        column:
-                          description: One or more column blocks as defined above.
-                          items:
-                            properties:
-                              name:
-                                description: The name which should be used for this
-                                  data source. This name should be unique across all
-                                  data sources regardless of type within the Data
-                                  Collection Rule.
-                                type: string
-                              type:
-                                description: Specifies the type of Managed Service
-                                  Identity that should be configured on this Data
-                                  Collection Rule. Possible values are SystemAssigned
-                                  and UserAssigned.
-                                type: string
-                            type: object
-                          type: array
-                        streamName:
-                          description: The name of the custom stream. This name should
-                            be unique across all stream_declaration blocks.
-                          type: string
+                      required:
+                      - column
+                      - streamName
                       type: object
                     type: array
                   tags:
@@ -1894,16 +1399,13 @@ spec:
             x-kubernetes-validations:
             - message: dataFlow is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.dataFlow)
-                || has(self.initProvider.dataFlow)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.dataFlow)'
             - message: destinations is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.destinations)
-                || has(self.initProvider.destinations)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.destinations)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: MonitorDataCollectionRuleStatus defines the observed state
               of MonitorDataCollectionRule.

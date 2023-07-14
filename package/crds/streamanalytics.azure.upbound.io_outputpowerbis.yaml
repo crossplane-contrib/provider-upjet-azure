@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: outputpowerbis.streamanalytics.azure.upbound.io
 spec:
   group: streamanalytics.azure.upbound.io
@@ -155,43 +155,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  table:
-                    description: The name of the Power BI table under the specified
-                      dataset.
-                    type: string
-                  tokenUserDisplayName:
-                    description: The user display name of the user that was used to
-                      obtain the refresh token.
-                    type: string
-                  tokenUserPrincipalName:
-                    description: The user principal name (UPN) of the user that was
-                      used to obtain the refresh token.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  dataset:
-                    description: The name of the Power BI dataset.
-                    type: string
-                  groupId:
-                    description: The ID of the Power BI group, this must be a valid
-                      UUID.
-                    type: string
-                  groupName:
-                    description: The name of the Power BI group. Use this property
-                      to help remember which specific Power BI group id was used.
-                    type: string
                   table:
                     description: The name of the Power BI table under the specified
                       dataset.
@@ -405,20 +368,16 @@ spec:
             x-kubernetes-validations:
             - message: dataset is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.dataset)
-                || has(self.initProvider.dataset)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.dataset)'
             - message: groupId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.groupId)
-                || has(self.initProvider.groupId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.groupId)'
             - message: groupName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.groupName)
-                || has(self.initProvider.groupName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.groupName)'
             - message: table is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.table)
-                || has(self.initProvider.table)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.table)'
           status:
             description: OutputPowerBIStatus defines the observed state of OutputPowerBI.
             properties:

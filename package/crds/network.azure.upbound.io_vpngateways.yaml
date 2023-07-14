@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: vpngateways.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -90,6 +90,8 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - customIps
                             type: object
                           type: array
                         instance1BgpPeeringAddress:
@@ -103,6 +105,8 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - customIps
                             type: object
                           type: array
                         peerWeight:
@@ -110,6 +114,9 @@ spec:
                             BGP Speaker. Changing this forces a new resource to be
                             created.
                           type: number
+                      required:
+                      - asn
+                      - peerWeight
                       type: object
                     type: array
                   location:
@@ -293,87 +300,6 @@ spec:
                             - IfNotPresent
                             type: string
                         type: object
-                    type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  bgpRouteTranslationForNatEnabled:
-                    description: Is BGP route translation for NAT on this VPN Gateway
-                      enabled? Defaults to false.
-                    type: boolean
-                  bgpSettings:
-                    description: A bgp_settings block as defined below.
-                    items:
-                      properties:
-                        asn:
-                          description: The ASN of the BGP Speaker. Changing this forces
-                            a new resource to be created.
-                          type: number
-                        instance0BgpPeeringAddress:
-                          description: An instance_bgp_peering_address block as defined
-                            below.
-                          items:
-                            properties:
-                              customIps:
-                                description: A list of custom BGP peering addresses
-                                  to assign to this instance.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                        instance1BgpPeeringAddress:
-                          description: An instance_bgp_peering_address block as defined
-                            below.
-                          items:
-                            properties:
-                              customIps:
-                                description: A list of custom BGP peering addresses
-                                  to assign to this instance.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                        peerWeight:
-                          description: The weight added to Routes learned from this
-                            BGP Speaker. Changing this forces a new resource to be
-                            created.
-                          type: number
-                      type: object
-                    type: array
-                  location:
-                    description: The Azure location where this VPN Gateway should
-                      be created. Changing this forces a new resource to be created.
-                    type: string
-                  routingPreference:
-                    description: Azure routing preference lets you to choose how your
-                      traffic routes between Azure and the internet. You can choose
-                      to route traffic either via the Microsoft network (default value,
-                      Microsoft Network), or via the ISP network (public internet,
-                      set to Internet). More context of the configuration can be found
-                      in the Microsoft Docs to create a VPN Gateway. Changing this
-                      forces a new resource to be created.
-                    type: string
-                  scaleUnit:
-                    description: The Scale Unit for this VPN Gateway. Defaults to
-                      1.
-                    type: number
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the VPN Gateway.
                     type: object
                 type: object
               managementPolicies:
@@ -576,8 +502,7 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: VPNGatewayStatus defines the observed state of VPNGateway.
             properties:

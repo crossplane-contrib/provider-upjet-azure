@@ -13,33 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ExpressRouteCircuitPeeringInitParameters struct {
-
-	// A boolean value indicating whether the IPv4 peering is enabled. Defaults to true.
-	IPv4Enabled *bool `json:"ipv4Enabled,omitempty" tf:"ipv4_enabled,omitempty"`
-
-	// A ipv6 block as defined below.
-	IPv6 []IPv6InitParameters `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
-
-	// A microsoft_peering_config block as defined below. Required when peering_type is set to MicrosoftPeering and config for IPv4.
-	MicrosoftPeeringConfig []MicrosoftPeeringConfigInitParameters `json:"microsoftPeeringConfig,omitempty" tf:"microsoft_peering_config,omitempty"`
-
-	// The Either a 16-bit or a 32-bit ASN. Can either be public or private.
-	PeerAsn *float64 `json:"peerAsn,omitempty" tf:"peer_asn,omitempty"`
-
-	// A /30 subnet for the primary link. Required when config for IPv4.
-	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix,omitempty" tf:"primary_peer_address_prefix,omitempty"`
-
-	// The ID of the Route Filter. Only available when peering_type is set to MicrosoftPeering.
-	RouteFilterID *string `json:"routeFilterId,omitempty" tf:"route_filter_id,omitempty"`
-
-	// A /30 subnet for the secondary link. Required when config for IPv4.
-	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix,omitempty" tf:"secondary_peer_address_prefix,omitempty"`
-
-	// A valid VLAN ID to establish this peering on.
-	VlanID *float64 `json:"vlanId,omitempty" tf:"vlan_id,omitempty"`
-}
-
 type ExpressRouteCircuitPeeringObservation struct {
 
 	// The ASN used by Azure.
@@ -152,24 +125,6 @@ type ExpressRouteCircuitPeeringParameters struct {
 	VlanID *float64 `json:"vlanId,omitempty" tf:"vlan_id,omitempty"`
 }
 
-type IPv6InitParameters struct {
-
-	// A boolean value indicating whether the IPv6 peering is enabled. Defaults to true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// A microsoft_peering block as defined below.
-	MicrosoftPeering []MicrosoftPeeringInitParameters `json:"microsoftPeering,omitempty" tf:"microsoft_peering,omitempty"`
-
-	// A subnet for the primary link.
-	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix,omitempty" tf:"primary_peer_address_prefix,omitempty"`
-
-	// The ID of the Route Filter. Only available when peering_type is set to MicrosoftPeering.
-	RouteFilterID *string `json:"routeFilterId,omitempty" tf:"route_filter_id,omitempty"`
-
-	// A subnet for the secondary link.
-	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix,omitempty" tf:"secondary_peer_address_prefix,omitempty"`
-}
-
 type IPv6Observation struct {
 
 	// A boolean value indicating whether the IPv6 peering is enabled. Defaults to true.
@@ -199,31 +154,16 @@ type IPv6Parameters struct {
 	MicrosoftPeering []MicrosoftPeeringParameters `json:"microsoftPeering,omitempty" tf:"microsoft_peering,omitempty"`
 
 	// A subnet for the primary link.
-	// +kubebuilder:validation:Optional
-	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix,omitempty" tf:"primary_peer_address_prefix,omitempty"`
+	// +kubebuilder:validation:Required
+	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix" tf:"primary_peer_address_prefix,omitempty"`
 
 	// The ID of the Route Filter. Only available when peering_type is set to MicrosoftPeering.
 	// +kubebuilder:validation:Optional
 	RouteFilterID *string `json:"routeFilterId,omitempty" tf:"route_filter_id,omitempty"`
 
 	// A subnet for the secondary link.
-	// +kubebuilder:validation:Optional
-	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix,omitempty" tf:"secondary_peer_address_prefix,omitempty"`
-}
-
-type MicrosoftPeeringConfigInitParameters struct {
-
-	// The communities of Bgp Peering specified for microsoft peering.
-	AdvertisedCommunities []*string `json:"advertisedCommunities,omitempty" tf:"advertised_communities,omitempty"`
-
-	// A list of Advertised Public Prefixes.
-	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes,omitempty" tf:"advertised_public_prefixes,omitempty"`
-
-	// The CustomerASN of the peering. Defaults to 0.
-	CustomerAsn *float64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
-
-	// The Routing Registry against which the AS number and prefixes are registered. For example: ARIN, RIPE, AFRINIC etc. Defaults to NONE.
-	RoutingRegistryName *string `json:"routingRegistryName,omitempty" tf:"routing_registry_name,omitempty"`
+	// +kubebuilder:validation:Required
+	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix" tf:"secondary_peer_address_prefix,omitempty"`
 }
 
 type MicrosoftPeeringConfigObservation struct {
@@ -248,8 +188,8 @@ type MicrosoftPeeringConfigParameters struct {
 	AdvertisedCommunities []*string `json:"advertisedCommunities,omitempty" tf:"advertised_communities,omitempty"`
 
 	// A list of Advertised Public Prefixes.
-	// +kubebuilder:validation:Optional
-	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes,omitempty" tf:"advertised_public_prefixes,omitempty"`
+	// +kubebuilder:validation:Required
+	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes" tf:"advertised_public_prefixes,omitempty"`
 
 	// The CustomerASN of the peering. Defaults to 0.
 	// +kubebuilder:validation:Optional
@@ -257,21 +197,6 @@ type MicrosoftPeeringConfigParameters struct {
 
 	// The Routing Registry against which the AS number and prefixes are registered. For example: ARIN, RIPE, AFRINIC etc. Defaults to NONE.
 	// +kubebuilder:validation:Optional
-	RoutingRegistryName *string `json:"routingRegistryName,omitempty" tf:"routing_registry_name,omitempty"`
-}
-
-type MicrosoftPeeringInitParameters struct {
-
-	// The communities of Bgp Peering specified for microsoft peering.
-	AdvertisedCommunities []*string `json:"advertisedCommunities,omitempty" tf:"advertised_communities,omitempty"`
-
-	// A list of Advertised Public Prefixes.
-	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes,omitempty" tf:"advertised_public_prefixes,omitempty"`
-
-	// The CustomerASN of the peering. Defaults to 0.
-	CustomerAsn *float64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
-
-	// The Routing Registry against which the AS number and prefixes are registered. For example: ARIN, RIPE, AFRINIC etc. Defaults to NONE.
 	RoutingRegistryName *string `json:"routingRegistryName,omitempty" tf:"routing_registry_name,omitempty"`
 }
 
@@ -313,18 +238,6 @@ type MicrosoftPeeringParameters struct {
 type ExpressRouteCircuitPeeringSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ExpressRouteCircuitPeeringParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ExpressRouteCircuitPeeringInitParameters `json:"initProvider,omitempty"`
 }
 
 // ExpressRouteCircuitPeeringStatus defines the observed state of ExpressRouteCircuitPeering.
@@ -345,7 +258,7 @@ type ExpressRouteCircuitPeeringStatus struct {
 type ExpressRouteCircuitPeering struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vlanId) || has(self.initProvider.vlanId)",message="vlanId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vlanId)",message="vlanId is a required parameter"
 	Spec   ExpressRouteCircuitPeeringSpec   `json:"spec"`
 	Status ExpressRouteCircuitPeeringStatus `json:"status,omitempty"`
 }

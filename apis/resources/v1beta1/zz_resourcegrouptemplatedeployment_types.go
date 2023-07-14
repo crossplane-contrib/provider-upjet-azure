@@ -13,27 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ResourceGroupTemplateDeploymentInitParameters struct {
-
-	// The Debug Level which should be used for this Resource Group Template Deployment. Possible values are none, requestContent, responseContent and requestContent, responseContent.
-	DebugLevel *string `json:"debugLevel,omitempty" tf:"debug_level,omitempty"`
-
-	// The Deployment Mode for this Resource Group Template Deployment. Possible values are Complete (where resources in the Resource Group not specified in the ARM Template will be destroyed) and Incremental (where resources are additive only).
-	DeploymentMode *string `json:"deploymentMode,omitempty" tf:"deployment_mode,omitempty"`
-
-	// The contents of the ARM Template parameters file - containing a JSON list of parameters.
-	ParametersContent *string `json:"parametersContent,omitempty" tf:"parameters_content,omitempty"`
-
-	// A mapping of tags which should be assigned to the Resource Group Template Deployment.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// The contents of the ARM Template which should be deployed into this Resource Group. Cannot be specified with template_spec_version_id.
-	TemplateContent *string `json:"templateContent,omitempty" tf:"template_content,omitempty"`
-
-	// The ID of the Template Spec Version to deploy. Cannot be specified with template_content.
-	TemplateSpecVersionID *string `json:"templateSpecVersionId,omitempty" tf:"template_spec_version_id,omitempty"`
-}
-
 type ResourceGroupTemplateDeploymentObservation struct {
 
 	// The Debug Level which should be used for this Resource Group Template Deployment. Possible values are none, requestContent, responseContent and requestContent, responseContent.
@@ -108,18 +87,6 @@ type ResourceGroupTemplateDeploymentParameters struct {
 type ResourceGroupTemplateDeploymentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourceGroupTemplateDeploymentParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ResourceGroupTemplateDeploymentInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourceGroupTemplateDeploymentStatus defines the observed state of ResourceGroupTemplateDeployment.
@@ -140,7 +107,7 @@ type ResourceGroupTemplateDeploymentStatus struct {
 type ResourceGroupTemplateDeployment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deploymentMode) || has(self.initProvider.deploymentMode)",message="deploymentMode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deploymentMode)",message="deploymentMode is a required parameter"
 	Spec   ResourceGroupTemplateDeploymentSpec   `json:"spec"`
 	Status ResourceGroupTemplateDeploymentStatus `json:"status,omitempty"`
 }

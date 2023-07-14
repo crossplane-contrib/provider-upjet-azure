@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: securitycenterassessmentpolicies.security.azure.upbound.io
 spec:
   group: security.azure.upbound.io
@@ -68,59 +68,6 @@ spec:
                 - Delete
                 type: string
               forProvider:
-                properties:
-                  categories:
-                    description: A list of the categories of resource that is at risk
-                      when the Security Center Assessment is unhealthy. Possible values
-                      are Unknown, Compute, Data, IdentityAndAccess, IoT and Networking.
-                    items:
-                      type: string
-                    type: array
-                  description:
-                    description: The description of the Security Center Assessment.
-                    type: string
-                  displayName:
-                    description: The user-friendly display name of the Security Center
-                      Assessment.
-                    type: string
-                  implementationEffort:
-                    description: The implementation effort which is used to remediate
-                      the Security Center Assessment. Possible values are Low, Moderate
-                      and High.
-                    type: string
-                  remediationDescription:
-                    description: The description which is used to mitigate the security
-                      issue.
-                    type: string
-                  severity:
-                    description: The severity level of the Security Center Assessment.
-                      Possible values are Low, Medium and High. Defaults to Medium.
-                    type: string
-                  threats:
-                    description: A list of the threat impacts for the Security Center
-                      Assessment. Possible values are AccountBreach, DataExfiltration,
-                      DataSpillage, DenialOfService, ElevationOfPrivilege, MaliciousInsider,
-                      MissingCoverage and ThreatResistance.
-                    items:
-                      type: string
-                    type: array
-                  userImpact:
-                    description: The user impact of the Security Center Assessment.
-                      Possible values are Low, Moderate and High.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
                 properties:
                   categories:
                     description: A list of the categories of resource that is at risk
@@ -362,12 +309,10 @@ spec:
             x-kubernetes-validations:
             - message: description is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)
-                || has(self.initProvider.description)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.description)'
             - message: displayName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
-                || has(self.initProvider.displayName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)'
           status:
             description: SecurityCenterAssessmentPolicyStatus defines the observed
               state of SecurityCenterAssessmentPolicy.

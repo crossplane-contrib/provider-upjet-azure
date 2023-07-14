@@ -13,21 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ApplicationInsightsSmartDetectionRuleInitParameters struct {
-
-	// Specifies a list of additional recipients that will be sent emails on this Application Insights Smart Detection Rule.
-	AdditionalEmailRecipients []*string `json:"additionalEmailRecipients,omitempty" tf:"additional_email_recipients,omitempty"`
-
-	// Is the Application Insights Smart Detection Rule enabled? Defaults to true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Specifies the name of the Application Insights Smart Detection Rule. Valid values include Slow page load time, Slow server response time, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Potential memory leak detected, Potential security issue detected and Abnormal rise in daily data volume, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Potential memory leak detected, Potential security issue detected, Abnormal rise in daily data volume. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Do emails get sent to subscription owners? Defaults to true.
-	SendEmailsToSubscriptionOwners *bool `json:"sendEmailsToSubscriptionOwners,omitempty" tf:"send_emails_to_subscription_owners,omitempty"`
-}
-
 type ApplicationInsightsSmartDetectionRuleObservation struct {
 
 	// Specifies a list of additional recipients that will be sent emails on this Application Insights Smart Detection Rule.
@@ -86,18 +71,6 @@ type ApplicationInsightsSmartDetectionRuleParameters struct {
 type ApplicationInsightsSmartDetectionRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApplicationInsightsSmartDetectionRuleParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ApplicationInsightsSmartDetectionRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApplicationInsightsSmartDetectionRuleStatus defines the observed state of ApplicationInsightsSmartDetectionRule.
@@ -118,7 +91,7 @@ type ApplicationInsightsSmartDetectionRuleStatus struct {
 type ApplicationInsightsSmartDetectionRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
 	Spec   ApplicationInsightsSmartDetectionRuleSpec   `json:"spec"`
 	Status ApplicationInsightsSmartDetectionRuleStatus `json:"status,omitempty"`
 }

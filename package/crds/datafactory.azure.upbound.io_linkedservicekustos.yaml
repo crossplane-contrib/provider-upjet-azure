@@ -3,8 +3,8 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
-  name: linkedservicekustos.datafactory.azure.upbound.io
+    controller-gen.kubebuilder.io/version: v0.12.0
+  name: linkedservicekustoes.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
   names:
@@ -14,7 +14,7 @@ spec:
     - azure
     kind: LinkedServiceKusto
     listKind: LinkedServiceKustoList
-    plural: linkedservicekustos
+    plural: linkedservicekustoes
     singular: linkedservicekusto
   scope: Cluster
   versions:
@@ -346,57 +346,6 @@ spec:
                     - name
                     - namespace
                     type: object
-                  tenant:
-                    description: The service principal tenant id or name in which
-                      to authenticate against the Kusto Database.
-                    type: string
-                  useManagedIdentity:
-                    description: Whether to use the Data Factory's managed identity
-                      to authenticate against the Kusto Database.
-                    type: boolean
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Linked Service.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Linked Service.
-                    items:
-                      type: string
-                    type: array
-                  description:
-                    description: The description for the Data Factory Linked Service.
-                    type: string
-                  integrationRuntimeName:
-                    description: The integration runtime reference to associate with
-                      the Data Factory Linked Service.
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Linked Service.
-                    type: object
-                  servicePrincipalId:
-                    description: The service principal id in which to authenticate
-                      against the Kusto Database.
-                    type: string
                   tenant:
                     description: The service principal tenant id or name in which
                       to authenticate against the Kusto Database.

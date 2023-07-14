@@ -13,36 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type EventGridDataConnectionInitParameters struct {
-
-	// Specifies the blob storage event type that needs to be processed. Possible Values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobRenamed. Defaults to Microsoft.Storage.BlobCreated.
-	BlobStorageEventType *string `json:"blobStorageEventType,omitempty" tf:"blob_storage_event_type,omitempty"`
-
-	// Specifies the data format of the EventHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV, TSVE, TXT and W3CLOGFILE.
-	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
-
-	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created.
-	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
-
-	// The resource ID of the event grid that is subscribed to the storage account events.
-	EventGridResourceID *string `json:"eventgridResourceId,omitempty" tf:"eventgrid_resource_id,omitempty"`
-
-	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// Empty for non-managed identity based data connection. For system assigned identity, provide cluster resource Id. For user assigned identity (UAI) provide the UAI resource Id.
-	ManagedIdentityResourceID *string `json:"managedIdentityResourceId,omitempty" tf:"managed_identity_resource_id,omitempty"`
-
-	// Specifies the mapping rule used for the message ingestion. Mapping rule must exist before resource is created.
-	MappingRuleName *string `json:"mappingRuleName,omitempty" tf:"mapping_rule_name,omitempty"`
-
-	// is the first record of every file ignored? Defaults to false.
-	SkipFirstRecord *bool `json:"skipFirstRecord,omitempty" tf:"skip_first_record,omitempty"`
-
-	// Specifies the target table name used for the message ingestion. Table must exist before resource is created.
-	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
-}
-
 type EventGridDataConnectionObservation struct {
 
 	// Specifies the blob storage event type that needs to be processed. Possible Values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobRenamed. Defaults to Microsoft.Storage.BlobCreated.
@@ -217,18 +187,6 @@ type EventGridDataConnectionParameters struct {
 type EventGridDataConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EventGridDataConnectionParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider EventGridDataConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // EventGridDataConnectionStatus defines the observed state of EventGridDataConnection.
@@ -249,7 +207,7 @@ type EventGridDataConnectionStatus struct {
 type EventGridDataConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   EventGridDataConnectionSpec   `json:"spec"`
 	Status EventGridDataConnectionStatus `json:"status,omitempty"`
 }

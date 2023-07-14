@@ -13,27 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type LoadBalancerProbeInitParameters struct {
-
-	// The interval, in seconds between probes to the backend endpoint for health status. The default value is 15, the minimum value is 5.
-	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
-
-	// The number of failed probe attempts after which the backend endpoint is removed from rotation. The default value is 2. NumberOfProbes multiplied by intervalInSeconds value must be greater or equal to 10.Endpoints are returned to rotation when at least one probe is successful.
-	NumberOfProbes *float64 `json:"numberOfProbes,omitempty" tf:"number_of_probes,omitempty"`
-
-	// Port on which the Probe queries the backend endpoint. Possible values range from 1 to 65535, inclusive.
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
-
-	// The number of consecutive successful or failed probes that allow or deny traffic to this endpoint. Possible values range from 1 to 100. The default value is 1.
-	ProbeThreshold *float64 `json:"probeThreshold,omitempty" tf:"probe_threshold,omitempty"`
-
-	// Specifies the protocol of the end point. Possible values are Http, Https or Tcp. If TCP is specified, a received ACK is required for the probe to be successful. If HTTP is specified, a 200 OK response from the specified URI is required for the probe to be successful.
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
-
-	// The URI used for requesting health status from the backend endpoint. Required if protocol is set to Http or Https. Otherwise, it is not allowed.
-	RequestPath *string `json:"requestPath,omitempty" tf:"request_path,omitempty"`
-}
-
 type LoadBalancerProbeObservation struct {
 
 	// The ID of the Load Balancer Probe.
@@ -108,18 +87,6 @@ type LoadBalancerProbeParameters struct {
 type LoadBalancerProbeSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LoadBalancerProbeParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider LoadBalancerProbeInitParameters `json:"initProvider,omitempty"`
 }
 
 // LoadBalancerProbeStatus defines the observed state of LoadBalancerProbe.
@@ -140,7 +107,7 @@ type LoadBalancerProbeStatus struct {
 type LoadBalancerProbe struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.port) || has(self.initProvider.port)",message="port is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.port)",message="port is a required parameter"
 	Spec   LoadBalancerProbeSpec   `json:"spec"`
 	Status LoadBalancerProbeStatus `json:"status,omitempty"`
 }

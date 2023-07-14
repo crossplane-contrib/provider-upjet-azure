@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: streamingpolicies.media.azure.upbound.io
 spec:
   group: media.azure.upbound.io
@@ -84,6 +84,8 @@ spec:
                                   for issuing keys. Changing this forces a new Streaming
                                   Policy to be created.
                                 type: string
+                            required:
+                            - customKeysAcquisitionUrlTemplate
                             type: object
                           type: array
                         defaultContentKey:
@@ -164,6 +166,8 @@ spec:
                                   for issuing keys. Changing this forces a new Streaming
                                   Policy to be created.
                                 type: string
+                            required:
+                            - customKeysAcquisitionUrlTemplate
                             type: object
                           type: array
                         clearTrack:
@@ -191,8 +195,14 @@ spec:
                                       description: The track property value. Changing
                                         this forces a new Streaming Policy to be created.
                                       type: string
+                                  required:
+                                  - operation
+                                  - property
+                                  - value
                                   type: object
                                 type: array
+                            required:
+                            - condition
                             type: object
                           type: array
                         contentKeyToTrackMapping:
@@ -239,10 +249,18 @@ spec:
                                               Changing this forces a new Streaming
                                               Policy to be created.
                                             type: string
+                                        required:
+                                        - operation
+                                        - property
+                                        - value
                                         type: object
                                       type: array
+                                  required:
+                                  - condition
                                   type: object
                                 type: array
+                            required:
+                            - track
                             type: object
                           type: array
                         defaultContentKey:
@@ -628,340 +646,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  commonEncryptionCbcs:
-                    description: A common_encryption_cbcs block as defined below.
-                      Changing this forces a new Streaming Policy to be created.
-                    items:
-                      properties:
-                        clearKeyEncryption:
-                          description: A clear_key_encryption block as defined below.
-                            Changing this forces a new Streaming Policy to be created.
-                          items:
-                            properties:
-                              customKeysAcquisitionUrlTemplate:
-                                description: The URL template for the custom service
-                                  that delivers content keys to the end user. This
-                                  is not required when using Azure Media Services
-                                  for issuing keys. Changing this forces a new Streaming
-                                  Policy to be created.
-                                type: string
-                            type: object
-                          type: array
-                        defaultContentKey:
-                          description: A default_content_key block as defined below.
-                            Changing this forces a new Streaming Policy to be created.
-                          items:
-                            properties:
-                              label:
-                                description: Label can be used to specify Content
-                                  Key when creating a Streaming Locator. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: string
-                              policyName:
-                                description: Policy used by Default Key. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: string
-                            type: object
-                          type: array
-                        drmFairplay:
-                          description: A drm_fairplay block as defined below. Changing
-                            this forces a new Streaming Policy to be created.
-                          items:
-                            properties:
-                              allowPersistentLicense:
-                                description: All license to be persistent or not.
-                                  Changing this forces a new Streaming Policy to be
-                                  created.
-                                type: boolean
-                              customLicenseAcquisitionUrlTemplate:
-                                description: The URL template for the custom service
-                                  that delivers licenses to the end user. This is
-                                  not required when using Azure Media Services for
-                                  issuing licenses. Changing this forces a new Streaming
-                                  Policy to be created.
-                                type: string
-                            type: object
-                          type: array
-                        enabledProtocols:
-                          description: A enabled_protocols block as defined below.
-                            Changing this forces a new Streaming Policy to be created.
-                          items:
-                            properties:
-                              dash:
-                                description: Enable DASH protocol or not. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: boolean
-                              download:
-                                description: Enable Download protocol or not. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: boolean
-                              hls:
-                                description: Enable HLS protocol or not. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: boolean
-                              smoothStreaming:
-                                description: Enable SmoothStreaming protocol or not.
-                                  Changing this forces a new Streaming Policy to be
-                                  created.
-                                type: boolean
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  commonEncryptionCenc:
-                    description: A common_encryption_cenc block as defined below.
-                      Changing this forces a new Streaming Policy to be created.
-                    items:
-                      properties:
-                        clearKeyEncryption:
-                          description: A clear_key_encryption block as defined below.
-                            Changing this forces a new Streaming Policy to be created.
-                          items:
-                            properties:
-                              customKeysAcquisitionUrlTemplate:
-                                description: The URL template for the custom service
-                                  that delivers content keys to the end user. This
-                                  is not required when using Azure Media Services
-                                  for issuing keys. Changing this forces a new Streaming
-                                  Policy to be created.
-                                type: string
-                            type: object
-                          type: array
-                        clearTrack:
-                          description: One or more clear_track blocks as defined below.
-                            Changing this forces a new Streaming Policy to be created.
-                          items:
-                            properties:
-                              condition:
-                                description: One or more condition blocks as defined
-                                  below. Changing this forces a new Streaming Policy
-                                  to be created.
-                                items:
-                                  properties:
-                                    operation:
-                                      description: The track property condition operation.
-                                        Possible value is Equal. Changing this forces
-                                        a new Streaming Policy to be created.
-                                      type: string
-                                    property:
-                                      description: The track property type. Possible
-                                        value is FourCC. Changing this forces a new
-                                        Streaming Policy to be created.
-                                      type: string
-                                    value:
-                                      description: The track property value. Changing
-                                        this forces a new Streaming Policy to be created.
-                                      type: string
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
-                        contentKeyToTrackMapping:
-                          description: One or more content_key_to_track_mapping blocks
-                            as defined below. Changing this forces a new Streaming
-                            Policy to be created.
-                          items:
-                            properties:
-                              label:
-                                description: Label can be used to specify Content
-                                  Key when creating a Streaming Locator. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: string
-                              policyName:
-                                description: Policy used by Default Key. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: string
-                              track:
-                                description: One or more track blocks as defined below.
-                                  Changing this forces a new Streaming Policy to be
-                                  created.
-                                items:
-                                  properties:
-                                    condition:
-                                      description: One or more condition blocks as
-                                        defined below. Changing this forces a new
-                                        Streaming Policy to be created.
-                                      items:
-                                        properties:
-                                          operation:
-                                            description: The track property condition
-                                              operation. Possible value is Equal.
-                                              Changing this forces a new Streaming
-                                              Policy to be created.
-                                            type: string
-                                          property:
-                                            description: The track property type.
-                                              Possible value is FourCC. Changing this
-                                              forces a new Streaming Policy to be
-                                              created.
-                                            type: string
-                                          value:
-                                            description: The track property value.
-                                              Changing this forces a new Streaming
-                                              Policy to be created.
-                                            type: string
-                                        type: object
-                                      type: array
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
-                        defaultContentKey:
-                          description: A default_content_key block as defined below.
-                            Changing this forces a new Streaming Policy to be created.
-                          items:
-                            properties:
-                              label:
-                                description: Label can be used to specify Content
-                                  Key when creating a Streaming Locator. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: string
-                            type: object
-                          type: array
-                        drmPlayready:
-                          description: A drm_playready block as defined below. Changing
-                            this forces a new Streaming Policy to be created.
-                          items:
-                            properties:
-                              customAttributes:
-                                description: Custom attributes for PlayReady. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: string
-                              customLicenseAcquisitionUrlTemplate:
-                                description: The URL template for the custom service
-                                  that delivers licenses to the end user. This is
-                                  not required when using Azure Media Services for
-                                  issuing licenses. Changing this forces a new Streaming
-                                  Policy to be created.
-                                type: string
-                            type: object
-                          type: array
-                        drmWidevineCustomLicenseAcquisitionUrlTemplate:
-                          description: The URL template for the custom service that
-                            delivers licenses to the end user. This is not required
-                            when using Azure Media Services for issuing licenses.
-                            Changing this forces a new Streaming Policy to be created.
-                          type: string
-                        enabledProtocols:
-                          description: A enabled_protocols block as defined below.
-                            Changing this forces a new Streaming Policy to be created.
-                          items:
-                            properties:
-                              dash:
-                                description: Enable DASH protocol or not. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: boolean
-                              download:
-                                description: Enable Download protocol or not. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: boolean
-                              hls:
-                                description: Enable HLS protocol or not. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: boolean
-                              smoothStreaming:
-                                description: Enable SmoothStreaming protocol or not.
-                                  Changing this forces a new Streaming Policy to be
-                                  created.
-                                type: boolean
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  defaultContentKeyPolicyName:
-                    description: Default Content Key used by current Streaming Policy.
-                      Changing this forces a new Streaming Policy to be created.
-                    type: string
-                  envelopeEncryption:
-                    description: A envelope_encryption block as defined below. Changing
-                      this forces a new Streaming Policy to be created.
-                    items:
-                      properties:
-                        customKeysAcquisitionUrlTemplate:
-                          description: The URL template for the custom service that
-                            delivers content keys to the end user. This is not required
-                            when using Azure Media Services for issuing keys. Changing
-                            this forces a new Streaming Policy to be created.
-                          type: string
-                        defaultContentKey:
-                          description: A default_content_key block as defined above.
-                            Changing this forces a new Streaming Policy to be created.
-                          items:
-                            properties:
-                              label:
-                                description: Label can be used to specify Content
-                                  Key when creating a Streaming Locator. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: string
-                              policyName:
-                                description: Policy used by Default Key. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: string
-                            type: object
-                          type: array
-                        enabledProtocols:
-                          description: A enabled_protocols block as defined above.
-                            Changing this forces a new Streaming Policy to be created.
-                          items:
-                            properties:
-                              dash:
-                                description: Enable DASH protocol or not. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: boolean
-                              download:
-                                description: Enable Download protocol or not. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: boolean
-                              hls:
-                                description: Enable HLS protocol or not. Changing
-                                  this forces a new Streaming Policy to be created.
-                                type: boolean
-                              smoothStreaming:
-                                description: Enable SmoothStreaming protocol or not.
-                                  Changing this forces a new Streaming Policy to be
-                                  created.
-                                type: boolean
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  noEncryptionEnabledProtocols:
-                    description: A no_encryption_enabled_protocols block as defined
-                      below. Changing this forces a new Streaming Policy to be created.
-                    items:
-                      properties:
-                        dash:
-                          description: Enable DASH protocol or not. Changing this
-                            forces a new Streaming Policy to be created.
-                          type: boolean
-                        download:
-                          description: Enable Download protocol or not. Changing this
-                            forces a new Streaming Policy to be created.
-                          type: boolean
-                        hls:
-                          description: Enable HLS protocol or not. Changing this forces
-                            a new Streaming Policy to be created.
-                          type: boolean
-                        smoothStreaming:
-                          description: Enable SmoothStreaming protocol or not. Changing
-                            this forces a new Streaming Policy to be created.
-                          type: boolean
-                      type: object
-                    type: array
                 type: object
               managementPolicies:
                 default:

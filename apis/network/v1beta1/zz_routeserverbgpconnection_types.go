@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type RouteServerBGPConnectionInitParameters struct {
-
-	// The peer autonomous system number for the Route Server Bgp Connection. Changing this forces a new resource to be created.
-	PeerAsn *float64 `json:"peerAsn,omitempty" tf:"peer_asn,omitempty"`
-
-	// The peer ip address for the Route Server Bgp Connection. Changing this forces a new resource to be created.
-	PeerIP *string `json:"peerIp,omitempty" tf:"peer_ip,omitempty"`
-}
-
 type RouteServerBGPConnectionObservation struct {
 
 	// The ID of the Route Server Bgp Connection.
@@ -66,18 +57,6 @@ type RouteServerBGPConnectionParameters struct {
 type RouteServerBGPConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RouteServerBGPConnectionParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider RouteServerBGPConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // RouteServerBGPConnectionStatus defines the observed state of RouteServerBGPConnection.
@@ -98,8 +77,8 @@ type RouteServerBGPConnectionStatus struct {
 type RouteServerBGPConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerAsn) || has(self.initProvider.peerAsn)",message="peerAsn is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerIp) || has(self.initProvider.peerIp)",message="peerIp is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerAsn)",message="peerAsn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerIp)",message="peerIp is a required parameter"
 	Spec   RouteServerBGPConnectionSpec   `json:"spec"`
 	Status RouteServerBGPConnectionStatus `json:"status,omitempty"`
 }

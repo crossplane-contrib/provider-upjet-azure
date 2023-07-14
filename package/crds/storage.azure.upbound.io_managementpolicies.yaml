@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: managementpolicies.storage.azure.upbound.io
 spec:
   group: storage.azure.upbound.io
@@ -230,6 +230,9 @@ spec:
                                       description: The filter tag value used for tag
                                         based filtering for blob objects.
                                       type: string
+                                  required:
+                                  - name
+                                  - value
                                   type: object
                                 type: array
                               prefixMatch:
@@ -238,12 +241,19 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - blobTypes
                             type: object
                           type: array
                         name:
                           description: The name of the rule. Rule name is case-sensitive.
                             It must be unique within a policy.
                           type: string
+                      required:
+                      - actions
+                      - enabled
+                      - filters
+                      - name
                       type: object
                     type: array
                   storageAccountId:
@@ -324,199 +334,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  rule:
-                    description: A rule block as documented below.
-                    items:
-                      properties:
-                        actions:
-                          description: An actions block as documented below.
-                          items:
-                            properties:
-                              baseBlob:
-                                description: A base_blob block as documented below.
-                                items:
-                                  properties:
-                                    autoTierToHotFromCoolEnabled:
-                                      description: Whether a blob should automatically
-                                        be tiered from cool back to hot if it's accessed
-                                        again after being tiered to cool. Defaults
-                                        to false.
-                                      type: boolean
-                                    deleteAfterDaysSinceCreationGreaterThan:
-                                      description: The age in days after creation
-                                        to delete the blob snapshot. Must be between
-                                        0 and 99999. Defaults to -1.
-                                      type: number
-                                    deleteAfterDaysSinceLastAccessTimeGreaterThan:
-                                      description: The age in days after last access
-                                        time to delete the blob. Must be between 0
-                                        and 99999. Defaults to -1.
-                                      type: number
-                                    deleteAfterDaysSinceModificationGreaterThan:
-                                      description: The age in days after last modification
-                                        to delete the blob. Must be between 0 and
-                                        99999. Defaults to -1.
-                                      type: number
-                                    tierToArchiveAfterDaysSinceCreationGreaterThan:
-                                      description: The age in days after creation
-                                        to archive storage. Supports blob currently
-                                        at Hot or Cool tier. Must be between 0 and99999.
-                                        Defaults to -1.
-                                      type: number
-                                    tierToArchiveAfterDaysSinceLastAccessTimeGreaterThan:
-                                      description: The age in days after last access
-                                        time to tier blobs to archive storage. Supports
-                                        blob currently at Hot or Cool tier. Must be
-                                        between 0 and99999. Defaults to -1.
-                                      type: number
-                                    tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
-                                      description: The age in days after last tier
-                                        change to the blobs to skip to be archved.
-                                        Must be between 0 and 99999. Defaults to -1.
-                                      type: number
-                                    tierToArchiveAfterDaysSinceModificationGreaterThan:
-                                      description: The age in days after last modification
-                                        to tier blobs to archive storage. Supports
-                                        blob currently at Hot or Cool tier. Must be
-                                        between 0 and 99999. Defaults to -1.
-                                      type: number
-                                    tierToCoolAfterDaysSinceCreationGreaterThan:
-                                      description: The age in days after creation
-                                        to cool storage. Supports blob currently at
-                                        Hot tier. Must be between 0 and 99999. Defaults
-                                        to -1.
-                                      type: number
-                                    tierToCoolAfterDaysSinceLastAccessTimeGreaterThan:
-                                      description: The age in days after last access
-                                        time to tier blobs to cool storage. Supports
-                                        blob currently at Hot tier. Must be between
-                                        0 and 99999. Defaults to -1.
-                                      type: number
-                                    tierToCoolAfterDaysSinceModificationGreaterThan:
-                                      description: The age in days after last modification
-                                        to tier blobs to cool storage. Supports blob
-                                        currently at Hot tier. Must be between 0 and
-                                        99999. Defaults to -1.
-                                      type: number
-                                  type: object
-                                type: array
-                              snapshot:
-                                description: A snapshot block as documented below.
-                                items:
-                                  properties:
-                                    changeTierToArchiveAfterDaysSinceCreation:
-                                      description: The age in days after creation
-                                        to tier blob version to archive storage. Must
-                                        be between 0 and 99999. Defaults to -1.
-                                      type: number
-                                    changeTierToCoolAfterDaysSinceCreation:
-                                      description: The age in days creation create
-                                        to tier blob version to cool storage. Must
-                                        be between 0 and 99999. Defaults to -1.
-                                      type: number
-                                    deleteAfterDaysSinceCreationGreaterThan:
-                                      description: The age in days after creation
-                                        to delete the blob snapshot. Must be between
-                                        0 and 99999. Defaults to -1.
-                                      type: number
-                                    tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
-                                      description: The age in days after last tier
-                                        change to the blobs to skip to be archved.
-                                        Must be between 0 and 99999. Defaults to -1.
-                                      type: number
-                                  type: object
-                                type: array
-                              version:
-                                description: A version block as documented below.
-                                items:
-                                  properties:
-                                    changeTierToArchiveAfterDaysSinceCreation:
-                                      description: The age in days after creation
-                                        to tier blob version to archive storage. Must
-                                        be between 0 and 99999. Defaults to -1.
-                                      type: number
-                                    changeTierToCoolAfterDaysSinceCreation:
-                                      description: The age in days creation create
-                                        to tier blob version to cool storage. Must
-                                        be between 0 and 99999. Defaults to -1.
-                                      type: number
-                                    deleteAfterDaysSinceCreation:
-                                      description: The age in days after creation
-                                        to delete the blob version. Must be between
-                                        0 and 99999. Defaults to -1.
-                                      type: number
-                                    tierToArchiveAfterDaysSinceLastTierChangeGreaterThan:
-                                      description: The age in days after last tier
-                                        change to the blobs to skip to be archved.
-                                        Must be between 0 and 99999. Defaults to -1.
-                                      type: number
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
-                        enabled:
-                          description: Boolean to specify whether the rule is enabled.
-                          type: boolean
-                        filters:
-                          description: A filters block as documented below.
-                          items:
-                            properties:
-                              blobTypes:
-                                description: An array of predefined values. Valid
-                                  options are blockBlob and appendBlob.
-                                items:
-                                  type: string
-                                type: array
-                              matchBlobIndexTag:
-                                description: A match_blob_index_tag block as defined
-                                  below. The block defines the blob index tag based
-                                  filtering for blob objects.
-                                items:
-                                  properties:
-                                    name:
-                                      description: The name of the rule. Rule name
-                                        is case-sensitive. It must be unique within
-                                        a policy.
-                                      type: string
-                                    operation:
-                                      description: The comparison operator which is
-                                        used for object comparison and filtering.
-                                        Possible value is ==. Defaults to ==.
-                                      type: string
-                                    value:
-                                      description: The filter tag value used for tag
-                                        based filtering for blob objects.
-                                      type: string
-                                  type: object
-                                type: array
-                              prefixMatch:
-                                description: An array of strings for prefixes to be
-                                  matched.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                        name:
-                          description: The name of the rule. Rule name is case-sensitive.
-                            It must be unique within a policy.
-                          type: string
-                      type: object
-                    type: array
                 type: object
               managementPolicies:
                 default:

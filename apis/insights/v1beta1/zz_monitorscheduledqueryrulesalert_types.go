@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type MonitorScheduledQueryRulesAlertActionInitParameters struct {
-
-	// Custom payload to be sent for all webhook payloads in alerting action.
-	CustomWebhookPayload *string `json:"customWebhookPayload,omitempty" tf:"custom_webhook_payload,omitempty"`
-
-	// Custom subject override for all email ids in Azure action group.
-	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
-}
-
 type MonitorScheduledQueryRulesAlertActionObservation struct {
 
 	// List of action group reference resource IDs.
@@ -57,55 +48,6 @@ type MonitorScheduledQueryRulesAlertActionParameters struct {
 	// Custom subject override for all email ids in Azure action group.
 	// +kubebuilder:validation:Optional
 	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
-}
-
-type MonitorScheduledQueryRulesAlertInitParameters struct {
-
-	// An action block as defined below.
-	Action []MonitorScheduledQueryRulesAlertActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
-
-	// List of Resource IDs referred into query.
-	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
-
-	// Should the alerts in this Metric Alert be auto resolved? Defaults to false.
-	// -> NOTE auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
-	AutoMitigationEnabled *bool `json:"autoMitigationEnabled,omitempty" tf:"auto_mitigation_enabled,omitempty"`
-
-	// The description of the scheduled query rule.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// Whether this scheduled query rule is enabled. Default is true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Frequency (in minutes) at which rule condition should be evaluated. Values must be between 5 and 1440 (inclusive).
-	Frequency *float64 `json:"frequency,omitempty" tf:"frequency,omitempty"`
-
-	// Specifies the Azure Region where the resource should exist. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// The name of the scheduled query rule. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Log search query.
-	Query *string `json:"query,omitempty" tf:"query,omitempty"`
-
-	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to Number, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
-	QueryType *string `json:"queryType,omitempty" tf:"query_type,omitempty"`
-
-	// Severity of the alert. Possible values include: 0, 1, 2, 3, or 4.
-	Severity *float64 `json:"severity,omitempty" tf:"severity,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Time (in minutes) for which Alerts should be throttled or suppressed. Values must be between 0 and 10000 (inclusive).
-	Throttling *float64 `json:"throttling,omitempty" tf:"throttling,omitempty"`
-
-	// Time window for which data needs to be fetched for query (must be greater than or equal to frequency). Values must be between 5 and 2880 (inclusive).
-	TimeWindow *float64 `json:"timeWindow,omitempty" tf:"time_window,omitempty"`
-
-	// A trigger block as defined below.
-	Trigger []TriggerInitParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
 }
 
 type MonitorScheduledQueryRulesAlertObservation struct {
@@ -257,33 +199,6 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 	Trigger []TriggerParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
 }
 
-type TriggerInitParameters struct {
-
-	// A metric_trigger block as defined above. Trigger condition for metric query rule.
-	MetricTrigger []TriggerMetricTriggerInitParameters `json:"metricTrigger,omitempty" tf:"metric_trigger,omitempty"`
-
-	// Evaluation operation for rule - 'GreaterThan', GreaterThanOrEqual', 'LessThan', or 'LessThanOrEqual'.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// Result or count threshold based on which rule should be triggered. Values must be between 0 and 10000 inclusive.
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
-}
-
-type TriggerMetricTriggerInitParameters struct {
-
-	// Evaluation of metric on a particular column.
-	MetricColumn *string `json:"metricColumn,omitempty" tf:"metric_column,omitempty"`
-
-	// Metric Trigger Type - 'Consecutive' or 'Total'.
-	MetricTriggerType *string `json:"metricTriggerType,omitempty" tf:"metric_trigger_type,omitempty"`
-
-	// Evaluation operation for rule - 'GreaterThan', GreaterThanOrEqual', 'LessThan', or 'LessThanOrEqual'.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// Result or count threshold based on which rule should be triggered. Values must be between 0 and 10000 inclusive.
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
-}
-
 type TriggerMetricTriggerObservation struct {
 
 	// Evaluation of metric on a particular column.
@@ -306,16 +221,16 @@ type TriggerMetricTriggerParameters struct {
 	MetricColumn *string `json:"metricColumn,omitempty" tf:"metric_column,omitempty"`
 
 	// Metric Trigger Type - 'Consecutive' or 'Total'.
-	// +kubebuilder:validation:Optional
-	MetricTriggerType *string `json:"metricTriggerType,omitempty" tf:"metric_trigger_type,omitempty"`
+	// +kubebuilder:validation:Required
+	MetricTriggerType *string `json:"metricTriggerType" tf:"metric_trigger_type,omitempty"`
 
 	// Evaluation operation for rule - 'GreaterThan', GreaterThanOrEqual', 'LessThan', or 'LessThanOrEqual'.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Required
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// Result or count threshold based on which rule should be triggered. Values must be between 0 and 10000 inclusive.
-	// +kubebuilder:validation:Optional
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	// +kubebuilder:validation:Required
+	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 }
 
 type TriggerObservation struct {
@@ -337,30 +252,18 @@ type TriggerParameters struct {
 	MetricTrigger []TriggerMetricTriggerParameters `json:"metricTrigger,omitempty" tf:"metric_trigger,omitempty"`
 
 	// Evaluation operation for rule - 'GreaterThan', GreaterThanOrEqual', 'LessThan', or 'LessThanOrEqual'.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Required
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// Result or count threshold based on which rule should be triggered. Values must be between 0 and 10000 inclusive.
-	// +kubebuilder:validation:Optional
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	// +kubebuilder:validation:Required
+	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 }
 
 // MonitorScheduledQueryRulesAlertSpec defines the desired state of MonitorScheduledQueryRulesAlert
 type MonitorScheduledQueryRulesAlertSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MonitorScheduledQueryRulesAlertParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider MonitorScheduledQueryRulesAlertInitParameters `json:"initProvider,omitempty"`
 }
 
 // MonitorScheduledQueryRulesAlertStatus defines the observed state of MonitorScheduledQueryRulesAlert.
@@ -381,13 +284,13 @@ type MonitorScheduledQueryRulesAlertStatus struct {
 type MonitorScheduledQueryRulesAlert struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action) || has(self.initProvider.action)",message="action is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frequency) || has(self.initProvider.frequency)",message="frequency is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.query) || has(self.initProvider.query)",message="query is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeWindow) || has(self.initProvider.timeWindow)",message="timeWindow is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trigger) || has(self.initProvider.trigger)",message="trigger is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frequency)",message="frequency is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.query)",message="query is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeWindow)",message="timeWindow is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trigger)",message="trigger is a required parameter"
 	Spec   MonitorScheduledQueryRulesAlertSpec   `json:"spec"`
 	Status MonitorScheduledQueryRulesAlertStatus `json:"status,omitempty"`
 }

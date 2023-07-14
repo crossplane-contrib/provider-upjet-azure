@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: eventhubdataconnections.kusto.azure.upbound.io
 spec:
   group: kusto.azure.upbound.io
@@ -500,59 +500,6 @@ spec:
                       ingestion. Table must exist before resource is created.
                     type: string
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  compression:
-                    description: 'Specifies compression type for the connection. Allowed
-                      values: GZip and None. Defaults to None. Changing this forces
-                      a new resource to be created.'
-                    type: string
-                  dataFormat:
-                    description: 'Specifies the data format of the EventHub messages.
-                      Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC,
-                      PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSVE, TSV, TXT,
-                      and W3CLOGFILE.'
-                    type: string
-                  databaseRoutingType:
-                    description: 'Indication for database routing information from
-                      the data connection, by default only database routing information
-                      is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
-                    type: string
-                  eventSystemProperties:
-                    description: Specifies a list of system properties for the Event
-                      Hub.
-                    items:
-                      type: string
-                    type: array
-                  identityId:
-                    description: The resource ID of a managed identity (system or
-                      user assigned) to be used to authenticate with event hub.
-                    type: string
-                  location:
-                    description: The location where the Kusto Database should be created.
-                      Changing this forces a new resource to be created.
-                    type: string
-                  mappingRuleName:
-                    description: Specifies the mapping rule used for the message ingestion.
-                      Mapping rule must exist before resource is created.
-                    type: string
-                  tableName:
-                    description: Specifies the target table name used for the message
-                      ingestion. Table must exist before resource is created.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -753,8 +700,7 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: EventHubDataConnectionStatus defines the observed state of
               EventHubDataConnection.

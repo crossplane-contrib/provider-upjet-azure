@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: sentinelalertrulemssecurityincidents.securityinsights.azure.upbound.io
 spec:
   group: securityinsights.azure.upbound.io
@@ -178,65 +178,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  productFilter:
-                    description: The Microsoft Security Service from where the alert
-                      will be generated. Possible values are Azure Active Directory
-                      Identity Protection, Azure Advanced Threat Protection, Azure
-                      Security Center, Azure Security Center for IoT, Microsoft Cloud
-                      App Security, Microsoft Defender Advanced Threat Protection
-                      and Office 365 Advanced Threat Protection.
-                    type: string
-                  severityFilter:
-                    description: Only create incidents from alerts when alert severity
-                      level is contained in this list. Possible values are High, Medium,
-                      Low and Informational.
-                    items:
-                      type: string
-                    type: array
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  alertRuleTemplateGuid:
-                    description: The GUID of the alert rule template which is used
-                      to create this Sentinel Scheduled Alert Rule. Changing this
-                      forces a new Sentinel MS Security Incident Alert Rule to be
-                      created.
-                    type: string
-                  description:
-                    description: The description of this Sentinel MS Security Incident
-                      Alert Rule.
-                    type: string
-                  displayName:
-                    description: The friendly name of this Sentinel MS Security Incident
-                      Alert Rule.
-                    type: string
-                  displayNameExcludeFilter:
-                    description: Only create incidents when the alert display name
-                      doesn't contain text from this list.
-                    items:
-                      type: string
-                    type: array
-                  displayNameFilter:
-                    description: Only create incidents when the alert display name
-                      contain text from this list, leave empty to apply no filter.
-                    items:
-                      type: string
-                    type: array
-                  enabled:
-                    description: Should this Sentinel MS Security Incident Alert Rule
-                      be enabled? Defaults to true.
-                    type: boolean
                   productFilter:
                     description: The Microsoft Security Service from where the alert
                       will be generated. Possible values are Azure Active Directory
@@ -453,16 +394,13 @@ spec:
             x-kubernetes-validations:
             - message: displayName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
-                || has(self.initProvider.displayName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)'
             - message: productFilter is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.productFilter)
-                || has(self.initProvider.productFilter)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.productFilter)'
             - message: severityFilter is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.severityFilter)
-                || has(self.initProvider.severityFilter)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.severityFilter)'
           status:
             description: SentinelAlertRuleMSSecurityIncidentStatus defines the observed
               state of SentinelAlertRuleMSSecurityIncident.

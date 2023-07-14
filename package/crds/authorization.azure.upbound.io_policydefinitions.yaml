@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: policydefinitions.authorization.azure.upbound.io
 spec:
   group: authorization.azure.upbound.io
@@ -67,59 +67,6 @@ spec:
                 - Delete
                 type: string
               forProvider:
-                properties:
-                  description:
-                    description: The description of the policy definition.
-                    type: string
-                  displayName:
-                    description: The display name of the policy definition.
-                    type: string
-                  managementGroupId:
-                    description: The id of the Management Group where this policy
-                      should be defined. Changing this forces a new resource to be
-                      created.
-                    type: string
-                  metadata:
-                    description: The metadata for the policy definition. This is a
-                      JSON string representing additional metadata that should be
-                      stored with the policy definition.
-                    type: string
-                  mode:
-                    description: The policy resource manager mode that allows you
-                      to specify which resource types will be evaluated. Possible
-                      values are All, Indexed, Microsoft.ContainerService.Data, Microsoft.CustomerLockbox.Data,
-                      Microsoft.DataCatalog.Data, Microsoft.KeyVault.Data, Microsoft.Kubernetes.Data,
-                      Microsoft.MachineLearningServices.Data, Microsoft.Network.Data
-                      and Microsoft.Synapse.Data.
-                    type: string
-                  parameters:
-                    description: Parameters for the policy definition. This field
-                      is a JSON string that allows you to parameterize your policy
-                      definition.
-                    type: string
-                  policyRule:
-                    description: The policy rule for the policy definition. This is
-                      a JSON string representing the rule that contains an if and
-                      a then block.
-                    type: string
-                  policyType:
-                    description: The policy type. Possible values are BuiltIn, Custom,
-                      NotSpecified and Static. Changing this forces a new resource
-                      to be created.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
                 properties:
                   description:
                     description: The description of the policy definition.
@@ -361,16 +308,13 @@ spec:
             x-kubernetes-validations:
             - message: displayName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
-                || has(self.initProvider.displayName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)'
             - message: mode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.mode)
-                || has(self.initProvider.mode)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.mode)'
             - message: policyType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.policyType)
-                || has(self.initProvider.policyType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policyType)'
           status:
             description: PolicyDefinitionStatus defines the observed state of PolicyDefinition.
             properties:

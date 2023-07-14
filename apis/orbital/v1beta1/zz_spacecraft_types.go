@@ -13,45 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type SpacecraftInitParameters struct {
-
-	// A links block as defined below. Changing this forces a new resource to be created.
-	Links []SpacecraftLinksInitParameters `json:"links,omitempty" tf:"links,omitempty"`
-
-	// The location where the Spacecraft exists. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// NORAD ID of the Spacecraft.
-	NoradID *string `json:"noradId,omitempty" tf:"norad_id,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Title of the two line elements (TLE).
-	TitleLine *string `json:"titleLine,omitempty" tf:"title_line,omitempty"`
-
-	// A list of the two line elements (TLE), the first string being the first of the TLE, the second string being the second line of the TLE. Changing this forces a new resource to be created.
-	TwoLineElements []*string `json:"twoLineElements,omitempty" tf:"two_line_elements,omitempty"`
-}
-
-type SpacecraftLinksInitParameters struct {
-
-	// Bandwidth in Mhz.
-	BandwidthMhz *float64 `json:"bandwidthMhz,omitempty" tf:"bandwidth_mhz,omitempty"`
-
-	// Center frequency in Mhz.
-	CenterFrequencyMhz *float64 `json:"centerFrequencyMhz,omitempty" tf:"center_frequency_mhz,omitempty"`
-
-	// Direction if the communication. Possible values are Uplink and Downlink.
-	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
-
-	// Name of the link.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Polarization. Possible values are RHCP, LHCP, linearVertical and linearHorizontal.
-	Polarization *string `json:"polarization,omitempty" tf:"polarization,omitempty"`
-}
-
 type SpacecraftLinksObservation struct {
 
 	// Bandwidth in Mhz.
@@ -73,24 +34,24 @@ type SpacecraftLinksObservation struct {
 type SpacecraftLinksParameters struct {
 
 	// Bandwidth in Mhz.
-	// +kubebuilder:validation:Optional
-	BandwidthMhz *float64 `json:"bandwidthMhz,omitempty" tf:"bandwidth_mhz,omitempty"`
+	// +kubebuilder:validation:Required
+	BandwidthMhz *float64 `json:"bandwidthMhz" tf:"bandwidth_mhz,omitempty"`
 
 	// Center frequency in Mhz.
-	// +kubebuilder:validation:Optional
-	CenterFrequencyMhz *float64 `json:"centerFrequencyMhz,omitempty" tf:"center_frequency_mhz,omitempty"`
+	// +kubebuilder:validation:Required
+	CenterFrequencyMhz *float64 `json:"centerFrequencyMhz" tf:"center_frequency_mhz,omitempty"`
 
 	// Direction if the communication. Possible values are Uplink and Downlink.
-	// +kubebuilder:validation:Optional
-	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
+	// +kubebuilder:validation:Required
+	Direction *string `json:"direction" tf:"direction,omitempty"`
 
 	// Name of the link.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Polarization. Possible values are RHCP, LHCP, linearVertical and linearHorizontal.
-	// +kubebuilder:validation:Optional
-	Polarization *string `json:"polarization,omitempty" tf:"polarization,omitempty"`
+	// +kubebuilder:validation:Required
+	Polarization *string `json:"polarization" tf:"polarization,omitempty"`
 }
 
 type SpacecraftObservation struct {
@@ -164,18 +125,6 @@ type SpacecraftParameters struct {
 type SpacecraftSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpacecraftParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider SpacecraftInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpacecraftStatus defines the observed state of Spacecraft.
@@ -196,11 +145,11 @@ type SpacecraftStatus struct {
 type Spacecraft struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.links) || has(self.initProvider.links)",message="links is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.noradId) || has(self.initProvider.noradId)",message="noradId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.titleLine) || has(self.initProvider.titleLine)",message="titleLine is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.twoLineElements) || has(self.initProvider.twoLineElements)",message="twoLineElements is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.links)",message="links is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.noradId)",message="noradId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.titleLine)",message="titleLine is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.twoLineElements)",message="twoLineElements is a required parameter"
 	Spec   SpacecraftSpec   `json:"spec"`
 	Status SpacecraftStatus `json:"status,omitempty"`
 }

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: springcloudservices.appplatform.azure.upbound.io
 spec:
   group: appplatform.azure.upbound.io
@@ -109,6 +109,7 @@ spec:
                                 type: string
                             required:
                             - passwordSecretRef
+                            - username
                             type: object
                           type: array
                         label:
@@ -150,6 +151,7 @@ spec:
                                       type: string
                                   required:
                                   - passwordSecretRef
+                                  - username
                                   type: object
                                 type: array
                               label:
@@ -236,6 +238,9 @@ spec:
                                   used as the Config Server back end should be started
                                   with http://, https://, git@, or ssh://.
                                 type: string
+                            required:
+                            - name
+                            - uri
                             type: object
                           type: array
                         searchPaths:
@@ -306,6 +311,8 @@ spec:
                             as the Config Server back end, should be started with
                             http://, https://, git@, or ssh://.
                           type: string
+                      required:
+                      - uri
                       type: object
                     type: array
                   location:
@@ -510,6 +517,8 @@ spec:
                                   type: string
                               type: object
                           type: object
+                      required:
+                      - cidrRanges
                       type: object
                     type: array
                   resourceGroupName:
@@ -693,205 +702,6 @@ spec:
                                   type: string
                               type: object
                           type: object
-                        sampleRate:
-                          description: The sampling rate of Application Insights Agent.
-                            Must be between 0.0 and 100.0. Defaults to 10.0.
-                          type: number
-                      type: object
-                    type: array
-                  zoneRedundant:
-                    description: Whether zone redundancy is enabled for this Spring
-                      Cloud Service. Defaults to false.
-                    type: boolean
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  buildAgentPoolSize:
-                    description: Specifies the size for this Spring Cloud Service's
-                      default build agent pool. Possible values are S1, S2, S3, S4
-                      and S5. This field is applicable only for Spring Cloud Service
-                      with enterprise tier.
-                    type: string
-                  configServerGitSetting:
-                    description: A config_server_git_setting block as defined below.
-                      This field is applicable only for Spring Cloud Service with
-                      basic and standard tier.
-                    items:
-                      properties:
-                        httpBasicAuth:
-                          description: A http_basic_auth block as defined below.
-                          items:
-                            properties:
-                              username:
-                                description: The username that's used to access the
-                                  Git repository server, required when the Git repository
-                                  server supports HTTP Basic Authentication.
-                                type: string
-                            type: object
-                          type: array
-                        label:
-                          description: The default label of the Git repository, should
-                            be the branch name, tag name, or commit-id of the repository.
-                          type: string
-                        repository:
-                          description: One or more repository blocks as defined below.
-                          items:
-                            properties:
-                              httpBasicAuth:
-                                description: A http_basic_auth block as defined below.
-                                items:
-                                  properties:
-                                    username:
-                                      description: The username that's used to access
-                                        the Git repository server, required when the
-                                        Git repository server supports HTTP Basic
-                                        Authentication.
-                                      type: string
-                                  type: object
-                                type: array
-                              label:
-                                description: The default label of the Git repository,
-                                  should be the branch name, tag name, or commit-id
-                                  of the repository.
-                                type: string
-                              name:
-                                description: A name to identify on the Git repository,
-                                  required only if repos exists.
-                                type: string
-                              pattern:
-                                description: An array of strings used to match an
-                                  application name. For each pattern, use the {application}/{profile}
-                                  format with wildcards.
-                                items:
-                                  type: string
-                                type: array
-                              searchPaths:
-                                description: An array of strings used to search subdirectories
-                                  of the Git repository.
-                                items:
-                                  type: string
-                                type: array
-                              sshAuth:
-                                description: A ssh_auth block as defined below.
-                                items:
-                                  properties:
-                                    hostKeyAlgorithm:
-                                      description: The host key algorithm, should
-                                        be ssh-dss, ssh-rsa, ecdsa-sha2-nistp256,
-                                        ecdsa-sha2-nistp384, or ecdsa-sha2-nistp521.
-                                        Required only if host-key exists.
-                                      type: string
-                                    strictHostKeyCheckingEnabled:
-                                      description: Indicates whether the Config Server
-                                        instance will fail to start if the host_key
-                                        does not match. Defaults to true.
-                                      type: boolean
-                                  type: object
-                                type: array
-                              uri:
-                                description: The URI of the Git repository that's
-                                  used as the Config Server back end should be started
-                                  with http://, https://, git@, or ssh://.
-                                type: string
-                            type: object
-                          type: array
-                        searchPaths:
-                          description: An array of strings used to search subdirectories
-                            of the Git repository.
-                          items:
-                            type: string
-                          type: array
-                        sshAuth:
-                          description: A ssh_auth block as defined below.
-                          items:
-                            properties:
-                              hostKeyAlgorithm:
-                                description: The host key algorithm, should be ssh-dss,
-                                  ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384,
-                                  or ecdsa-sha2-nistp521. Required only if host-key
-                                  exists.
-                                type: string
-                              strictHostKeyCheckingEnabled:
-                                description: Indicates whether the Config Server instance
-                                  will fail to start if the host_key does not match.
-                                  Defaults to true.
-                                type: boolean
-                            type: object
-                          type: array
-                        uri:
-                          description: The URI of the default Git repository used
-                            as the Config Server back end, should be started with
-                            http://, https://, git@, or ssh://.
-                          type: string
-                      type: object
-                    type: array
-                  location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
-                    type: string
-                  logStreamPublicEndpointEnabled:
-                    description: Should the log stream in vnet injection instance
-                      could be accessed from Internet?
-                    type: boolean
-                  network:
-                    description: A network block as defined below. Changing this forces
-                      a new resource to be created.
-                    items:
-                      properties:
-                        appNetworkResourceGroup:
-                          description: Specifies the Name of the resource group containing
-                            network resources of Azure Spring Cloud Apps. Changing
-                            this forces a new resource to be created.
-                          type: string
-                        cidrRanges:
-                          description: A list of (at least 3) CIDR ranges (at least
-                            /16) which are used to host the Spring Cloud infrastructure,
-                            which must not overlap with any existing CIDR ranges in
-                            the Subnet. Changing this forces a new resource to be
-                            created.
-                          items:
-                            type: string
-                          type: array
-                        readTimeoutSeconds:
-                          description: Ingress read time out in seconds.
-                          type: number
-                        serviceRuntimeNetworkResourceGroup:
-                          description: Specifies the Name of the resource group containing
-                            network resources of Azure Spring Cloud Service Runtime.
-                            Changing this forces a new resource to be created.
-                          type: string
-                      type: object
-                    type: array
-                  serviceRegistryEnabled:
-                    description: Whether enable the default Service Registry. This
-                      field is applicable only for Spring Cloud Service with enterprise
-                      tier.
-                    type: boolean
-                  skuName:
-                    description: Specifies the SKU Name for this Spring Cloud Service.
-                      Possible values are B0, S0 and E0. Defaults to S0. Changing
-                      this forces a new resource to be created.
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                  trace:
-                    description: A trace block as defined below.
-                    items:
-                      properties:
                         sampleRate:
                           description: The sampling rate of Application Insights Agent.
                             Must be between 0.0 and 100.0. Defaults to 10.0.
@@ -1103,8 +913,7 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: SpringCloudServiceStatus defines the observed state of SpringCloudService.
             properties:

@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ActiveDirectoryInitParameters struct {
-
-	// Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
-	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-}
-
 type ActiveDirectoryObservation struct {
 
 	// Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
@@ -38,57 +29,12 @@ type ActiveDirectoryParameters struct {
 	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	// +kubebuilder:validation:Required
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
 	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
-}
-
-type AuthSettingsInitParameters struct {
-
-	// A active_directory block as defined below.
-	ActiveDirectory []ActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
-
-	// Login parameters to send to the OpenID Connect authorization endpoint when a user logs in. Each parameter must be in the form "key=value".
-	AdditionalLoginParams map[string]*string `json:"additionalLoginParams,omitempty" tf:"additional_login_params,omitempty"`
-
-	// External URLs that can be redirected to as part of logging in or logging out of the app.
-	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
-
-	// The default provider to use when multiple providers have been set up. Possible values are AzureActiveDirectory, Facebook, Google, MicrosoftAccount and Twitter.
-	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
-
-	// Is Authentication enabled?
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// A facebook block as defined below.
-	Facebook []FacebookInitParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
-
-	// A google block as defined below.
-	Google []GoogleInitParameters `json:"google,omitempty" tf:"google,omitempty"`
-
-	// Issuer URI. When using Azure Active Directory, this value is the URI of the directory tenant, e.g. https://sts.windows.net/{tenant-guid}/.
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
-
-	// A microsoft block as defined below.
-	Microsoft []MicrosoftInitParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
-
-	// The runtime version of the Authentication/Authorization module.
-	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
-
-	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72.
-	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
-
-	// If enabled the module will durably store platform-specific security tokens that are obtained during login flows. Defaults to false.
-	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
-
-	// A twitter block as defined below.
-	Twitter []TwitterInitParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
-
-	// The action to take when an unauthenticated client attempts to access the app. Possible values are AllowAnonymous and RedirectToLoginPage.
-	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
 }
 
 type AuthSettingsObservation struct {
@@ -155,8 +101,8 @@ type AuthSettingsParameters struct {
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// Is Authentication enabled?
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Required
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// A facebook block as defined below.
 	// +kubebuilder:validation:Optional
@@ -195,15 +141,6 @@ type AuthSettingsParameters struct {
 	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
 }
 
-type ConnectionStringInitParameters struct {
-
-	// The name of the Connection String.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The type of the Connection String. Possible values are APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub, PostgreSQL, RedisCache, ServiceBus, SQLAzure and SQLServer.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type ConnectionStringObservation struct {
 
 	// The name of the Connection String.
@@ -216,25 +153,16 @@ type ConnectionStringObservation struct {
 type ConnectionStringParameters struct {
 
 	// The name of the Connection String.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The type of the Connection String. Possible values are APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub, PostgreSQL, RedisCache, ServiceBus, SQLAzure and SQLServer.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The value for the Connection String.
 	// +kubebuilder:validation:Required
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
-}
-
-type CorsInitParameters struct {
-
-	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
-
-	// Are credentials supported?
-	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
 }
 
 type CorsObservation struct {
@@ -249,21 +177,12 @@ type CorsObservation struct {
 type CorsParameters struct {
 
 	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
-	// +kubebuilder:validation:Optional
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+	// +kubebuilder:validation:Required
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// Are credentials supported?
 	// +kubebuilder:validation:Optional
 	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
-}
-
-type FacebookInitParameters struct {
-
-	// The App ID of the Facebook app used for login
-	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
-
-	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
 type FacebookObservation struct {
@@ -278,8 +197,8 @@ type FacebookObservation struct {
 type FacebookParameters struct {
 
 	// The App ID of the Facebook app used for login
-	// +kubebuilder:validation:Optional
-	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+	// +kubebuilder:validation:Required
+	AppID *string `json:"appId" tf:"app_id,omitempty"`
 
 	// The App Secret of the Facebook app used for Facebook login.
 	// +kubebuilder:validation:Required
@@ -288,60 +207,6 @@ type FacebookParameters struct {
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	// +kubebuilder:validation:Optional
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type FunctionAppInitParameters struct {
-
-	// A map of key-value pairs for App Settings and custom values.
-	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
-
-	// A auth_settings block as defined below.
-	AuthSettings []AuthSettingsInitParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
-
-	// The mode of the Function App's client certificates requirement for incoming requests. Possible values are Required and Optional.
-	ClientCertMode *string `json:"clientCertMode,omitempty" tf:"client_cert_mode,omitempty"`
-
-	// An connection_string block as defined below.
-	ConnectionString []ConnectionStringInitParameters `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
-
-	// The amount of memory in gigabyte-seconds that your application is allowed to consume per day. Setting this value only affects function apps under the consumption plan.
-	DailyMemoryTimeQuota *float64 `json:"dailyMemoryTimeQuota,omitempty" tf:"daily_memory_time_quota,omitempty"`
-
-	// Should the built-in logging of this Function App be enabled? Defaults to true.
-	EnableBuiltinLogging *bool `json:"enableBuiltinLogging,omitempty" tf:"enable_builtin_logging,omitempty"`
-
-	// Is the Function App enabled? Defaults to true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Can the Function App only be accessed via HTTPS? Defaults to false.
-	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
-
-	// An identity block as defined below.
-	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// The User Assigned Identity Id used for looking up KeyVault secrets. The identity must be assigned to the application. See Access vaults with a user-assigned identity for more information.
-	KeyVaultReferenceIdentityID *string `json:"keyVaultReferenceIdentityId,omitempty" tf:"key_vault_reference_identity_id,omitempty"`
-
-	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// Specifies the name of the Function App. Changing this forces a new resource to be created. Limit the function name to 32 characters to avoid naming collisions. For more information about Function App naming rule.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A string indicating the Operating System type for this function app. Possible values are linux and “(empty string). Changing this forces a new resource to be created. Defaults to "".
-	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
-
-	// A site_config object as defined below.
-	SiteConfig []SiteConfigInitParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
-
-	// A source_control block, as defined below.
-	SourceControl []SourceControlInitParameters `json:"sourceControl,omitempty" tf:"source_control,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// The runtime version associated with the Function App. Defaults to ~1.
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type FunctionAppObservation struct {
@@ -543,15 +408,6 @@ type FunctionAppParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
-type GoogleInitParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
 type GoogleObservation struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
@@ -564,8 +420,8 @@ type GoogleObservation struct {
 type GoogleParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	// +kubebuilder:validation:Required
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
 	// +kubebuilder:validation:Required
@@ -574,21 +430,6 @@ type GoogleParameters struct {
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	// +kubebuilder:validation:Optional
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type HeadersInitParameters struct {
-
-	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
-	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
-
-	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
-	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
-
-	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
-	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
-
-	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
-	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
 type HeadersObservation struct {
@@ -623,27 +464,6 @@ type HeadersParameters struct {
 	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
 	// +kubebuilder:validation:Optional
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
-}
-
-type IPRestrictionInitParameters struct {
-
-	// Allow or Deny access for this IP range. Defaults to Allow.
-	Action *string `json:"action,omitempty" tf:"action"`
-
-	// The headers for this specific scm_ip_restriction as defined below.
-	Headers []HeadersInitParameters `json:"headers,omitempty" tf:"headers"`
-
-	// The IP Address used for this IP Restriction in CIDR notation.
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
-
-	// The name for this IP Restriction.
-	Name *string `json:"name,omitempty" tf:"name"`
-
-	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
-	Priority *float64 `json:"priority,omitempty" tf:"priority"`
-
-	// The Service Tag used for this IP Restriction.
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
 }
 
 type IPRestrictionObservation struct {
@@ -711,15 +531,6 @@ type IPRestrictionParameters struct {
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
-type IdentityInitParameters struct {
-
-	// Specifies a list of user managed identity ids to be assigned. Required if type is UserAssigned.
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// Specifies the identity type of the Function App. Possible values are SystemAssigned (where Azure will generate a Service Principal for you), UserAssigned where you can specify the Service Principal IDs in the identity_ids field, and SystemAssigned, UserAssigned which assigns both a system managed identity as well as the specified user assigned identities.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type IdentityObservation struct {
 
 	// Specifies a list of user managed identity ids to be assigned. Required if type is UserAssigned.
@@ -742,17 +553,8 @@ type IdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the identity type of the Function App. Possible values are SystemAssigned (where Azure will generate a Service Principal for you), UserAssigned where you can specify the Service Principal IDs in the identity_ids field, and SystemAssigned, UserAssigned which assigns both a system managed identity as well as the specified user assigned identities.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type MicrosoftInitParameters struct {
-
-	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
-	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type MicrosoftObservation struct {
@@ -767,8 +569,8 @@ type MicrosoftObservation struct {
 type MicrosoftParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	// +kubebuilder:validation:Required
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
 	// +kubebuilder:validation:Required
@@ -777,21 +579,6 @@ type MicrosoftParameters struct {
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	// +kubebuilder:validation:Optional
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
-}
-
-type ScmIPRestrictionHeadersInitParameters struct {
-
-	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
-	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
-
-	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
-	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
-
-	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
-	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
-
-	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
-	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
 type ScmIPRestrictionHeadersObservation struct {
@@ -826,27 +613,6 @@ type ScmIPRestrictionHeadersParameters struct {
 	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
 	// +kubebuilder:validation:Optional
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
-}
-
-type ScmIPRestrictionInitParameters struct {
-
-	// Allow or Deny access for this IP range. Defaults to Allow.
-	Action *string `json:"action,omitempty" tf:"action"`
-
-	// The headers for this specific scm_ip_restriction as defined below.
-	Headers []ScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers"`
-
-	// The IP Address used for this IP Restriction in CIDR notation.
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
-
-	// The name for this IP Restriction.
-	Name *string `json:"name,omitempty" tf:"name"`
-
-	// The priority for this IP Restriction. Restrictions are enforced in priority order. By default, priority is set to 65000 if not specified.
-	Priority *float64 `json:"priority,omitempty" tf:"priority"`
-
-	// The Service Tag used for this IP Restriction.
-	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
 }
 
 type ScmIPRestrictionObservation struct {
@@ -912,72 +678,6 @@ type ScmIPRestrictionParameters struct {
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
-}
-
-type SiteConfigInitParameters struct {
-
-	// Should the Function App be loaded at all times? Defaults to false.
-	AlwaysOn *bool `json:"alwaysOn,omitempty" tf:"always_on,omitempty"`
-
-	// The number of workers this function app can scale out to. Only applicable to apps on the Consumption and Premium plan.
-	AppScaleLimit *float64 `json:"appScaleLimit,omitempty" tf:"app_scale_limit,omitempty"`
-
-	// The name of the slot to automatically swap to during deployment
-	AutoSwapSlotName *string `json:"autoSwapSlotName,omitempty" tf:"auto_swap_slot_name,omitempty"`
-
-	// A cors block as defined below.
-	Cors []CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
-
-	// The version of the .NET framework's CLR used in this function app. Possible values are v4.0 (including .NET Core 2.1 and 3.1), v5.0 and v6.0. For more information on which .NET Framework version to use based on the runtime version you're targeting - please see this table. Defaults to v4.0.
-	DotnetFrameworkVersion *string `json:"dotnetFrameworkVersion,omitempty" tf:"dotnet_framework_version,omitempty"`
-
-	// The number of minimum instances for this function app. Only affects apps on the Premium plan.
-	ElasticInstanceMinimum *float64 `json:"elasticInstanceMinimum,omitempty" tf:"elastic_instance_minimum,omitempty"`
-
-	// State of FTP / FTPS service for this function app. Possible values include: AllAllowed, FtpsOnly and Disabled. Defaults to AllAllowed.
-	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
-
-	// Path which will be checked for this function app health.
-	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
-
-	// Specifies whether or not the HTTP2 protocol should be enabled. Defaults to false.
-	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
-
-	// A List of objects representing IP restrictions as defined below.
-	IPRestriction []IPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
-
-	// Java version hosted by the function app in Azure. Possible values are 1.8, 11 & 17 (In-Preview).
-	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
-
-	// Linux App Framework and version for the AppService, e.g. DOCKER|(golang:latest).
-	LinuxFxVersion *string `json:"linuxFxVersion,omitempty" tf:"linux_fx_version,omitempty"`
-
-	// The minimum supported TLS version for the function app. Possible values are 1.0, 1.1, and 1.2. Defaults to 1.2 for new function apps.
-	MinTLSVersion *string `json:"minTlsVersion,omitempty" tf:"min_tls_version,omitempty"`
-
-	// The number of pre-warmed instances for this function app. Only affects apps on the Premium plan.
-	PreWarmedInstanceCount *float64 `json:"preWarmedInstanceCount,omitempty" tf:"pre_warmed_instance_count,omitempty"`
-
-	// Should Runtime Scale Monitoring be enabled?. Only applicable to apps on the Premium plan. Defaults to false.
-	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
-
-	// A List of objects representing IP restrictions as defined below.
-	ScmIPRestriction []ScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
-
-	// The type of Source Control used by the Function App. Valid values include: BitBucketGit, BitBucketHg, CodePlexGit, CodePlexHg, Dropbox, ExternalGit, ExternalHg, GitHub, LocalGit, None (default), OneDrive, Tfs, VSO, and VSTSRM.
-	ScmType *string `json:"scmType,omitempty" tf:"scm_type,omitempty"`
-
-	// IP security restrictions for scm to use main. Defaults to false.
-	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
-
-	// Should the Function App run in 32 bit mode, rather than 64 bit mode? Defaults to true.
-	Use32BitWorkerProcess *bool `json:"use32BitWorkerProcess,omitempty" tf:"use_32_bit_worker_process,omitempty"`
-
-	// Should all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied? Defaults to false.
-	VnetRouteAllEnabled *bool `json:"vnetRouteAllEnabled,omitempty" tf:"vnet_route_all_enabled,omitempty"`
-
-	// Should WebSockets be enabled?
-	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
 }
 
 type SiteConfigObservation struct {
@@ -1133,9 +833,6 @@ type SiteConfigParameters struct {
 	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
 }
 
-type SiteCredentialInitParameters struct {
-}
-
 type SiteCredentialObservation struct {
 
 	// The password associated with the username, which can be used to publish to this App Service.
@@ -1146,24 +843,6 @@ type SiteCredentialObservation struct {
 }
 
 type SiteCredentialParameters struct {
-}
-
-type SourceControlInitParameters struct {
-
-	// The branch of the remote repository to use. Defaults to 'master'.
-	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
-
-	// Limits to manual integration. Defaults to false if not specified.
-	ManualIntegration *bool `json:"manualIntegration,omitempty" tf:"manual_integration,omitempty"`
-
-	// The URL of the source code repository.
-	RepoURL *string `json:"repoUrl,omitempty" tf:"repo_url,omitempty"`
-
-	// Enable roll-back for the repository. Defaults to false if not specified.
-	RollbackEnabled *bool `json:"rollbackEnabled,omitempty" tf:"rollback_enabled,omitempty"`
-
-	// Use Mercurial if true, otherwise uses Git.
-	UseMercurial *bool `json:"useMercurial,omitempty" tf:"use_mercurial,omitempty"`
 }
 
 type SourceControlObservation struct {
@@ -1207,12 +886,6 @@ type SourceControlParameters struct {
 	UseMercurial *bool `json:"useMercurial,omitempty" tf:"use_mercurial,omitempty"`
 }
 
-type TwitterInitParameters struct {
-
-	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
-}
-
 type TwitterObservation struct {
 
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
@@ -1222,8 +895,8 @@ type TwitterObservation struct {
 type TwitterParameters struct {
 
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// +kubebuilder:validation:Optional
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+	// +kubebuilder:validation:Required
+	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// +kubebuilder:validation:Required
@@ -1234,18 +907,6 @@ type TwitterParameters struct {
 type FunctionAppSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FunctionAppParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider FunctionAppInitParameters `json:"initProvider,omitempty"`
 }
 
 // FunctionAppStatus defines the observed state of FunctionApp.
@@ -1266,8 +927,8 @@ type FunctionAppStatus struct {
 type FunctionApp struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageAccountAccessKeySecretRef)",message="storageAccountAccessKeySecretRef is a required parameter"
 	Spec   FunctionAppSpec   `json:"spec"`
 	Status FunctionAppStatus `json:"status,omitempty"`

@@ -13,12 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type SecurityCenterAutoProvisioningInitParameters struct {
-
-	// Should the security agent be automatically provisioned on Virtual Machines in this subscription? Possible values are On (to install the security agent automatically, if it's missing) or Off (to not install the security agent automatically).
-	AutoProvision *string `json:"autoProvision,omitempty" tf:"auto_provision,omitempty"`
-}
-
 type SecurityCenterAutoProvisioningObservation struct {
 
 	// Should the security agent be automatically provisioned on Virtual Machines in this subscription? Possible values are On (to install the security agent automatically, if it's missing) or Off (to not install the security agent automatically).
@@ -39,18 +33,6 @@ type SecurityCenterAutoProvisioningParameters struct {
 type SecurityCenterAutoProvisioningSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecurityCenterAutoProvisioningParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider SecurityCenterAutoProvisioningInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecurityCenterAutoProvisioningStatus defines the observed state of SecurityCenterAutoProvisioning.
@@ -71,7 +53,7 @@ type SecurityCenterAutoProvisioningStatus struct {
 type SecurityCenterAutoProvisioning struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.autoProvision) || has(self.initProvider.autoProvision)",message="autoProvision is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.autoProvision)",message="autoProvision is a required parameter"
 	Spec   SecurityCenterAutoProvisioningSpec   `json:"spec"`
 	Status SecurityCenterAutoProvisioningStatus `json:"status,omitempty"`
 }

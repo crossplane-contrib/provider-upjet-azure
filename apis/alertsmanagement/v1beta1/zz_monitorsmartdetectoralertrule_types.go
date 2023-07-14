@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ActionGroupInitParameters struct {
-
-	// Specifies a custom email subject if Email Receiver is specified in Monitor Action Group resource.
-	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
-
-	// A JSON String which Specifies the custom webhook payload if Webhook Receiver is specified in Monitor Action Group resource.
-	WebhookPayload *string `json:"webhookPayload,omitempty" tf:"webhook_payload,omitempty"`
-}
-
 type ActionGroupObservation struct {
 
 	// Specifies a custom email subject if Email Receiver is specified in Monitor Action Group resource.
@@ -57,36 +48,6 @@ type ActionGroupParameters struct {
 	// A JSON String which Specifies the custom webhook payload if Webhook Receiver is specified in Monitor Action Group resource.
 	// +kubebuilder:validation:Optional
 	WebhookPayload *string `json:"webhookPayload,omitempty" tf:"webhook_payload,omitempty"`
-}
-
-type MonitorSmartDetectorAlertRuleInitParameters struct {
-
-	// An action_group block as defined below.
-	ActionGroup []ActionGroupInitParameters `json:"actionGroup,omitempty" tf:"action_group,omitempty"`
-
-	// Specifies a description for the Smart Detector Alert Rule.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// Specifies the Built-In Smart Detector type that this alert rule will use. Currently the only possible values are FailureAnomaliesDetector, RequestPerformanceDegradationDetector, DependencyPerformanceDegradationDetector, ExceptionVolumeChangedDetector, TraceSeverityDetector, MemoryLeakDetector.
-	DetectorType *string `json:"detectorType,omitempty" tf:"detector_type,omitempty"`
-
-	// Is the Smart Detector Alert Rule enabled? Defaults to true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Specifies the frequency of this Smart Detector Alert Rule in ISO8601 format.
-	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
-
-	// Specifies the name of the Monitor Smart Detector Alert Rule. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Specifies the severity of this Smart Detector Alert Rule. Possible values are Sev0, Sev1, Sev2, Sev3 or Sev4.
-	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Specifies the duration (in ISO8601 format) to wait before notifying on the alert rule again.
-	ThrottlingDuration *string `json:"throttlingDuration,omitempty" tf:"throttling_duration,omitempty"`
 }
 
 type MonitorSmartDetectorAlertRuleObservation struct {
@@ -198,18 +159,6 @@ type MonitorSmartDetectorAlertRuleParameters struct {
 type MonitorSmartDetectorAlertRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MonitorSmartDetectorAlertRuleParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider MonitorSmartDetectorAlertRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // MonitorSmartDetectorAlertRuleStatus defines the observed state of MonitorSmartDetectorAlertRule.
@@ -230,11 +179,11 @@ type MonitorSmartDetectorAlertRuleStatus struct {
 type MonitorSmartDetectorAlertRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.actionGroup) || has(self.initProvider.actionGroup)",message="actionGroup is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.detectorType) || has(self.initProvider.detectorType)",message="detectorType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frequency) || has(self.initProvider.frequency)",message="frequency is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.severity) || has(self.initProvider.severity)",message="severity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.actionGroup)",message="actionGroup is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.detectorType)",message="detectorType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frequency)",message="frequency is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.severity)",message="severity is a required parameter"
 	Spec   MonitorSmartDetectorAlertRuleSpec   `json:"spec"`
 	Status MonitorSmartDetectorAlertRuleStatus `json:"status,omitempty"`
 }

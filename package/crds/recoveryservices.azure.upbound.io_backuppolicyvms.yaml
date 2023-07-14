@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: backuppolicyvms.recoveryservices.azure.upbound.io
 spec:
   group: recoveryservices.azure.upbound.io
@@ -97,6 +97,9 @@ spec:
                           items:
                             type: string
                           type: array
+                      required:
+                      - frequency
+                      - time
                       type: object
                     type: array
                   instantRestoreResourceGroup:
@@ -112,6 +115,8 @@ spec:
                           description: The suffix for the instant_restore_resource_group
                             name.
                           type: string
+                      required:
+                      - prefix
                       type: object
                     type: array
                   instantRestoreRetentionDays:
@@ -292,6 +297,8 @@ spec:
                           description: The number of daily backups to keep. Must be
                             between 7 and 9999.
                           type: number
+                      required:
+                      - count
                       type: object
                     type: array
                   retentionMonthly:
@@ -316,6 +323,10 @@ spec:
                           items:
                             type: string
                           type: array
+                      required:
+                      - count
+                      - weekdays
+                      - weeks
                       type: object
                     type: array
                   retentionWeekly:
@@ -335,6 +346,9 @@ spec:
                           items:
                             type: string
                           type: array
+                      required:
+                      - count
+                      - weekdays
                       type: object
                     type: array
                   retentionYearly:
@@ -366,167 +380,11 @@ spec:
                           items:
                             type: string
                           type: array
-                      type: object
-                    type: array
-                  timezone:
-                    description: Specifies the timezone. the possible values are defined
-                      here. Defaults to UTC
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  backup:
-                    description: Configures the Policy backup frequency, times & days
-                      as documented in the backup block below.
-                    items:
-                      properties:
-                        frequency:
-                          description: Sets the backup frequency. Possible values
-                            are Hourly, Daily and Weekly.
-                          type: string
-                        hourDuration:
-                          description: Duration of the backup window in hours. Possible
-                            values are between 4 and 24 This is used when frequency
-                            is Hourly.
-                          type: number
-                        hourInterval:
-                          description: Interval in hour at which backup is triggered.
-                            Possible values are 4, 6, 8 and 12. This is used when
-                            frequency is Hourly.
-                          type: number
-                        time:
-                          description: The time of day to perform the backup in 24hour
-                            format.
-                          type: string
-                        weekdays:
-                          description: The days of the week to perform backups on.
-                            Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday,
-                            Friday or Saturday. This is used when frequency is Weekly.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  instantRestoreResourceGroup:
-                    description: Specifies the instant restore resource group name
-                      as documented in the instant_restore_resource_group block below.
-                    items:
-                      properties:
-                        prefix:
-                          description: The prefix for the instant_restore_resource_group
-                            name.
-                          type: string
-                        suffix:
-                          description: The suffix for the instant_restore_resource_group
-                            name.
-                          type: string
-                      type: object
-                    type: array
-                  instantRestoreRetentionDays:
-                    description: Specifies the instant restore retention range in
-                      days. Possible values are between 1 and 5 when policy_type is
-                      V1, and 1 to 30 when policy_type is V2.
-                    type: number
-                  policyType:
-                    description: Type of the Backup Policy. Possible values are V1
-                      and V2 where V2 stands for the Enhanced Policy. Defaults to
-                      V1. Changing this forces a new resource to be created.
-                    type: string
-                  retentionDaily:
-                    description: Configures the policy daily retention as documented
-                      in the retention_daily block below. Required when backup frequency
-                      is Daily.
-                    items:
-                      properties:
-                        count:
-                          description: The number of daily backups to keep. Must be
-                            between 7 and 9999.
-                          type: number
-                      type: object
-                    type: array
-                  retentionMonthly:
-                    description: Configures the policy monthly retention as documented
-                      in the retention_monthly block below.
-                    items:
-                      properties:
-                        count:
-                          description: The number of monthly backups to keep. Must
-                            be between 1 and 9999
-                          type: number
-                        weekdays:
-                          description: The weekday backups to retain . Must be one
-                            of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
-                            or Saturday.
-                          items:
-                            type: string
-                          type: array
-                        weeks:
-                          description: The weeks of the month to retain backups of.
-                            Must be one of First, Second, Third, Fourth, Last.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  retentionWeekly:
-                    description: Configures the policy weekly retention as documented
-                      in the retention_weekly block below. Required when backup frequency
-                      is Weekly.
-                    items:
-                      properties:
-                        count:
-                          description: The number of weekly backups to keep. Must
-                            be between 1 and 9999
-                          type: number
-                        weekdays:
-                          description: The weekday backups to retain. Must be one
-                            of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
-                            or Saturday.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  retentionYearly:
-                    description: Configures the policy yearly retention as documented
-                      in the retention_yearly block below.
-                    items:
-                      properties:
-                        count:
-                          description: The number of yearly backups to keep. Must
-                            be between 1 and 9999
-                          type: number
-                        months:
-                          description: The months of the year to retain backups of.
-                            Must be one of January, February, March, April, May, June,
-                            July, August, September, October, November and December.
-                          items:
-                            type: string
-                          type: array
-                        weekdays:
-                          description: The weekday backups to retain . Must be one
-                            of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
-                            or Saturday.
-                          items:
-                            type: string
-                          type: array
-                        weeks:
-                          description: The weeks of the month to retain backups of.
-                            Must be one of First, Second, Third, Fourth, Last.
-                          items:
-                            type: string
-                          type: array
+                      required:
+                      - count
+                      - months
+                      - weekdays
+                      - weeks
                       type: object
                     type: array
                   timezone:
@@ -734,8 +592,7 @@ spec:
             x-kubernetes-validations:
             - message: backup is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.backup)
-                || has(self.initProvider.backup)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.backup)'
           status:
             description: BackupPolicyVMStatus defines the observed state of BackupPolicyVM.
             properties:

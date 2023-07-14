@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: certificateissuers.keyvault.azure.upbound.io
 spec:
   group: keyvault.azure.upbound.io
@@ -87,6 +87,8 @@ spec:
                         phone:
                           description: Phone number of the admin.
                           type: string
+                      required:
+                      - emailAddress
                       type: object
                     type: array
                   keyVaultId:
@@ -188,50 +190,6 @@ spec:
                     - name
                     - namespace
                     type: object
-                  providerName:
-                    description: 'The name of the third-party Certificate Issuer.
-                      Possible values are: DigiCert, GlobalSign, OneCertV2-PrivateCA,
-                      OneCertV2-PublicCA and SslAdminV2.'
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  accountId:
-                    description: The account number with the third-party Certificate
-                      Issuer.
-                    type: string
-                  admin:
-                    description: One or more admin blocks as defined below.
-                    items:
-                      properties:
-                        emailAddress:
-                          description: E-mail address of the admin.
-                          type: string
-                        firstName:
-                          description: First name of the admin.
-                          type: string
-                        lastName:
-                          description: Last name of the admin.
-                          type: string
-                        phone:
-                          description: Phone number of the admin.
-                          type: string
-                      type: object
-                    type: array
-                  orgId:
-                    description: The ID of the organization as provided to the issuer.
-                    type: string
                   providerName:
                     description: 'The name of the third-party Certificate Issuer.
                       Possible values are: DigiCert, GlobalSign, OneCertV2-PrivateCA,
@@ -438,8 +396,7 @@ spec:
             x-kubernetes-validations:
             - message: providerName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerName)
-                || has(self.initProvider.providerName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerName)'
           status:
             description: CertificateIssuerStatus defines the observed state of CertificateIssuer.
             properties:

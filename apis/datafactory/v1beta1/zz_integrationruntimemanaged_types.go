@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type IntegrationRuntimeManagedCatalogInfoInitParameters struct {
-
-	// Administrator login name for the SQL Server.
-	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
-
-	// Pricing tier for the database that will be created for the SSIS catalog. Valid values are: Basic, Standard, Premium and PremiumRS.
-	PricingTier *string `json:"pricingTier,omitempty" tf:"pricing_tier,omitempty"`
-
-	// The endpoint of an Azure SQL Server that will be used to host the SSIS catalog.
-	ServerEndpoint *string `json:"serverEndpoint,omitempty" tf:"server_endpoint,omitempty"`
-}
-
 type IntegrationRuntimeManagedCatalogInfoObservation struct {
 
 	// Administrator login name for the SQL Server.
@@ -52,14 +40,8 @@ type IntegrationRuntimeManagedCatalogInfoParameters struct {
 	PricingTier *string `json:"pricingTier,omitempty" tf:"pricing_tier,omitempty"`
 
 	// The endpoint of an Azure SQL Server that will be used to host the SSIS catalog.
-	// +kubebuilder:validation:Optional
-	ServerEndpoint *string `json:"serverEndpoint,omitempty" tf:"server_endpoint,omitempty"`
-}
-
-type IntegrationRuntimeManagedCustomSetupScriptInitParameters struct {
-
-	// The blob endpoint for the container which contains a custom setup script that will be run on every node on startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
-	BlobContainerURI *string `json:"blobContainerUri,omitempty" tf:"blob_container_uri,omitempty"`
+	// +kubebuilder:validation:Required
+	ServerEndpoint *string `json:"serverEndpoint" tf:"server_endpoint,omitempty"`
 }
 
 type IntegrationRuntimeManagedCustomSetupScriptObservation struct {
@@ -71,45 +53,12 @@ type IntegrationRuntimeManagedCustomSetupScriptObservation struct {
 type IntegrationRuntimeManagedCustomSetupScriptParameters struct {
 
 	// The blob endpoint for the container which contains a custom setup script that will be run on every node on startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
-	// +kubebuilder:validation:Optional
-	BlobContainerURI *string `json:"blobContainerUri,omitempty" tf:"blob_container_uri,omitempty"`
+	// +kubebuilder:validation:Required
+	BlobContainerURI *string `json:"blobContainerUri" tf:"blob_container_uri,omitempty"`
 
 	// A container SAS token that gives access to the files. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
 	// +kubebuilder:validation:Required
 	SASTokenSecretRef v1.SecretKeySelector `json:"sasTokenSecretRef" tf:"-"`
-}
-
-type IntegrationRuntimeManagedInitParameters struct {
-
-	// A catalog_info block as defined below.
-	CatalogInfo []IntegrationRuntimeManagedCatalogInfoInitParameters `json:"catalogInfo,omitempty" tf:"catalog_info,omitempty"`
-
-	// A custom_setup_script block as defined below.
-	CustomSetupScript []IntegrationRuntimeManagedCustomSetupScriptInitParameters `json:"customSetupScript,omitempty" tf:"custom_setup_script,omitempty"`
-
-	// Integration runtime description.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// The Managed Integration Runtime edition. Valid values are Standard and Enterprise. Defaults to Standard.
-	Edition *string `json:"edition,omitempty" tf:"edition,omitempty"`
-
-	// The type of the license that is used. Valid values are LicenseIncluded and BasePrice. Defaults to LicenseIncluded.
-	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
-
-	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// Defines the maximum parallel executions per node. Defaults to 1. Max is 16.
-	MaxParallelExecutionsPerNode *float64 `json:"maxParallelExecutionsPerNode,omitempty" tf:"max_parallel_executions_per_node,omitempty"`
-
-	// The size of the nodes on which the Managed Integration Runtime runs. Valid values are: Standard_D2_v3, Standard_D4_v3, Standard_D8_v3, Standard_D16_v3, Standard_D32_v3, Standard_D64_v3, Standard_E2_v3, Standard_E4_v3, Standard_E8_v3, Standard_E16_v3, Standard_E32_v3, Standard_E64_v3, Standard_D1_v2, Standard_D2_v2, Standard_D3_v2, Standard_D4_v2, Standard_A4_v2 and Standard_A8_v2
-	NodeSize *string `json:"nodeSize,omitempty" tf:"node_size,omitempty"`
-
-	// Number of nodes for the Managed Integration Runtime. Max is 10. Defaults to 1.
-	NumberOfNodes *float64 `json:"numberOfNodes,omitempty" tf:"number_of_nodes,omitempty"`
-
-	// A vnet_integration block as defined below.
-	VnetIntegration []IntegrationRuntimeManagedVnetIntegrationInitParameters `json:"vnetIntegration,omitempty" tf:"vnet_integration,omitempty"`
 }
 
 type IntegrationRuntimeManagedObservation struct {
@@ -208,12 +157,6 @@ type IntegrationRuntimeManagedParameters struct {
 	VnetIntegration []IntegrationRuntimeManagedVnetIntegrationParameters `json:"vnetIntegration,omitempty" tf:"vnet_integration,omitempty"`
 }
 
-type IntegrationRuntimeManagedVnetIntegrationInitParameters struct {
-
-	// ID of the virtual network to which the nodes of the Managed Integration Runtime will be added.
-	VnetID *string `json:"vnetId,omitempty" tf:"vnet_id,omitempty"`
-}
-
 type IntegrationRuntimeManagedVnetIntegrationObservation struct {
 
 	// Name of the subnet to which the nodes of the Managed Integration Runtime will be added.
@@ -239,26 +182,14 @@ type IntegrationRuntimeManagedVnetIntegrationParameters struct {
 	SubnetNameSelector *v1.Selector `json:"subnetNameSelector,omitempty" tf:"-"`
 
 	// ID of the virtual network to which the nodes of the Managed Integration Runtime will be added.
-	// +kubebuilder:validation:Optional
-	VnetID *string `json:"vnetId,omitempty" tf:"vnet_id,omitempty"`
+	// +kubebuilder:validation:Required
+	VnetID *string `json:"vnetId" tf:"vnet_id,omitempty"`
 }
 
 // IntegrationRuntimeManagedSpec defines the desired state of IntegrationRuntimeManaged
 type IntegrationRuntimeManagedSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IntegrationRuntimeManagedParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider IntegrationRuntimeManagedInitParameters `json:"initProvider,omitempty"`
 }
 
 // IntegrationRuntimeManagedStatus defines the observed state of IntegrationRuntimeManaged.
@@ -279,8 +210,8 @@ type IntegrationRuntimeManagedStatus struct {
 type IntegrationRuntimeManaged struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeSize) || has(self.initProvider.nodeSize)",message="nodeSize is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nodeSize)",message="nodeSize is a required parameter"
 	Spec   IntegrationRuntimeManagedSpec   `json:"spec"`
 	Status IntegrationRuntimeManagedStatus `json:"status,omitempty"`
 }

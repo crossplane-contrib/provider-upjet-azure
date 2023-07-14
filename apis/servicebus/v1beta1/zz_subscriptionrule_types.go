@@ -13,36 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type CorrelationFilterInitParameters struct {
-
-	// Content type of the message.
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
-
-	// Identifier of the correlation.
-	CorrelationID *string `json:"correlationId,omitempty" tf:"correlation_id,omitempty"`
-
-	// Application specific label.
-	Label *string `json:"label,omitempty" tf:"label,omitempty"`
-
-	// Identifier of the message.
-	MessageID *string `json:"messageId,omitempty" tf:"message_id,omitempty"`
-
-	// A list of user defined properties to be included in the filter. Specified as a map of name/value pairs.
-	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
-
-	// Address of the queue to reply to.
-	ReplyTo *string `json:"replyTo,omitempty" tf:"reply_to,omitempty"`
-
-	// Session identifier to reply to.
-	ReplyToSessionID *string `json:"replyToSessionId,omitempty" tf:"reply_to_session_id,omitempty"`
-
-	// Session identifier.
-	SessionID *string `json:"sessionId,omitempty" tf:"session_id,omitempty"`
-
-	// Address to send to.
-	To *string `json:"to,omitempty" tf:"to,omitempty"`
-}
-
 type CorrelationFilterObservation struct {
 
 	// Content type of the message.
@@ -112,21 +82,6 @@ type CorrelationFilterParameters struct {
 	To *string `json:"to,omitempty" tf:"to,omitempty"`
 }
 
-type SubscriptionRuleInitParameters struct {
-
-	// Represents set of actions written in SQL language-based syntax that is performed against a BrokeredMessage.
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
-
-	// A correlation_filter block as documented below to be evaluated against a BrokeredMessage. Required when filter_type is set to CorrelationFilter.
-	CorrelationFilter []CorrelationFilterInitParameters `json:"correlationFilter,omitempty" tf:"correlation_filter,omitempty"`
-
-	// Type of filter to be applied to a BrokeredMessage. Possible values are SqlFilter and CorrelationFilter.
-	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
-
-	// Represents a filter written in SQL language-based syntax that to be evaluated against a BrokeredMessage. Required when filter_type is set to SqlFilter.
-	SQLFilter *string `json:"sqlFilter,omitempty" tf:"sql_filter,omitempty"`
-}
-
 type SubscriptionRuleObservation struct {
 
 	// Represents set of actions written in SQL language-based syntax that is performed against a BrokeredMessage.
@@ -187,18 +142,6 @@ type SubscriptionRuleParameters struct {
 type SubscriptionRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SubscriptionRuleParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider SubscriptionRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // SubscriptionRuleStatus defines the observed state of SubscriptionRule.
@@ -219,7 +162,7 @@ type SubscriptionRuleStatus struct {
 type SubscriptionRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.filterType) || has(self.initProvider.filterType)",message="filterType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.filterType)",message="filterType is a required parameter"
 	Spec   SubscriptionRuleSpec   `json:"spec"`
 	Status SubscriptionRuleStatus `json:"status,omitempty"`
 }

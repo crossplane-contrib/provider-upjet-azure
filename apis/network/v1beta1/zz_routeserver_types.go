@@ -13,21 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type RouteServerInitParameters struct {
-
-	// Whether to enable route exchange between Azure Route Server and the gateway(s)
-	BranchToBranchTrafficEnabled *bool `json:"branchToBranchTrafficEnabled,omitempty" tf:"branch_to_branch_traffic_enabled,omitempty"`
-
-	// Specifies the supported Azure location where the Route Server should exist. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// The SKU of the Route Server. The only possible value is Standard. Changing this forces a new resource to be created.
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
 type RouteServerObservation struct {
 
 	// Whether to enable route exchange between Azure Route Server and the gateway(s)
@@ -125,18 +110,6 @@ type RouteServerParameters struct {
 type RouteServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RouteServerParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider RouteServerInitParameters `json:"initProvider,omitempty"`
 }
 
 // RouteServerStatus defines the observed state of RouteServer.
@@ -157,8 +130,8 @@ type RouteServerStatus struct {
 type RouteServer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku)",message="sku is a required parameter"
 	Spec   RouteServerSpec   `json:"spec"`
 	Status RouteServerStatus `json:"status,omitempty"`
 }

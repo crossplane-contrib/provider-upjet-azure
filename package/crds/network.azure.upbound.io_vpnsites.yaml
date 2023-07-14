@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: vpnsites.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -93,6 +93,9 @@ spec:
                               peeringAddress:
                                 description: The BGP peering IP address.
                                 type: string
+                            required:
+                            - asn
+                            - peeringAddress
                             type: object
                           type: array
                         fqdn:
@@ -113,6 +116,8 @@ spec:
                           description: The speed of the VPN device at the branch location
                             in unit of mbps. Defaults to 0.
                           type: number
+                      required:
+                      - name
                       type: object
                     type: array
                   location:
@@ -317,112 +322,6 @@ spec:
                         type: object
                     type: object
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  addressCidrs:
-                    description: Specifies a list of IP address CIDRs that are located
-                      on your on-premises site. Traffic destined for these address
-                      spaces is routed to your local site.
-                    items:
-                      type: string
-                    type: array
-                  deviceModel:
-                    description: The model of the VPN device.
-                    type: string
-                  deviceVendor:
-                    description: The name of the VPN device vendor.
-                    type: string
-                  link:
-                    description: One or more link blocks as defined below.
-                    items:
-                      properties:
-                        bgp:
-                          description: A bgp block as defined above.
-                          items:
-                            properties:
-                              asn:
-                                description: The BGP speaker's ASN.
-                                type: number
-                              peeringAddress:
-                                description: The BGP peering IP address.
-                                type: string
-                            type: object
-                          type: array
-                        fqdn:
-                          description: The FQDN of this VPN Site Link.
-                          type: string
-                        ipAddress:
-                          description: The IP address of this VPN Site Link.
-                          type: string
-                        name:
-                          description: The name which should be used for this VPN
-                            Site Link.
-                          type: string
-                        providerName:
-                          description: 'The name of the physical link at the VPN Site.
-                            Example: ATT, Verizon.'
-                          type: string
-                        speedInMbps:
-                          description: The speed of the VPN device at the branch location
-                            in unit of mbps. Defaults to 0.
-                          type: number
-                      type: object
-                    type: array
-                  location:
-                    description: The Azure Region where the VPN Site should exist.
-                      Changing this forces a new VPN Site to be created.
-                    type: string
-                  o365Policy:
-                    description: An o365_policy block as defined below.
-                    items:
-                      properties:
-                        trafficCategory:
-                          description: A traffic_category block as defined above.
-                          items:
-                            properties:
-                              allowEndpointEnabled:
-                                description: Is allow endpoint enabled? The Allow
-                                  endpoint is required for connectivity to specific
-                                  O365 services and features, but are not as sensitive
-                                  to network performance and latency as other endpoint
-                                  types. Defaults to false.
-                                type: boolean
-                              defaultEndpointEnabled:
-                                description: Is default endpoint enabled? The Default
-                                  endpoint represents O365 services and dependencies
-                                  that do not require any optimization, and can be
-                                  treated by customer networks as normal Internet
-                                  bound traffic. Defaults to false.
-                                type: boolean
-                              optimizeEndpointEnabled:
-                                description: Is optimize endpoint enabled? The Optimize
-                                  endpoint is required for connectivity to every O365
-                                  service and represents the O365 scenario that is
-                                  the most sensitive to network performance, latency,
-                                  and availability. Defaults to false.
-                                type: boolean
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags which should be assigned to the
-                      VPN Site.
-                    type: object
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -623,8 +522,7 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: VPNSiteStatus defines the observed state of VPNSite.
             properties:

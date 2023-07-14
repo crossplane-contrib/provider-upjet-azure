@@ -13,33 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type TriggerCustomEventInitParameters struct {
-
-	// Specifies if the Data Factory Custom Event Trigger is activated. Defaults to true.
-	Activated *bool `json:"activated,omitempty" tf:"activated,omitempty"`
-
-	// A map of additional properties to associate with the Data Factory Custom Event Trigger.
-	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
-
-	// List of tags that can be used for describing the Data Factory Custom Event Trigger.
-	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
-
-	// The description for the Data Factory Custom Event Trigger.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// List of events that will fire this trigger. At least one event must be specified.
-	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
-
-	// One or more pipeline blocks as defined below.
-	Pipeline []TriggerCustomEventPipelineInitParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
-
-	// The pattern that event subject starts with for trigger to fire.
-	SubjectBeginsWith *string `json:"subjectBeginsWith,omitempty" tf:"subject_begins_with,omitempty"`
-
-	// The pattern that event subject ends with for trigger to fire.
-	SubjectEndsWith *string `json:"subjectEndsWith,omitempty" tf:"subject_ends_with,omitempty"`
-}
-
 type TriggerCustomEventObservation struct {
 
 	// Specifies if the Data Factory Custom Event Trigger is activated. Defaults to true.
@@ -139,12 +112,6 @@ type TriggerCustomEventParameters struct {
 	SubjectEndsWith *string `json:"subjectEndsWith,omitempty" tf:"subject_ends_with,omitempty"`
 }
 
-type TriggerCustomEventPipelineInitParameters struct {
-
-	// The Data Factory Pipeline parameters that the trigger will act on.
-	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-}
-
 type TriggerCustomEventPipelineObservation struct {
 
 	// The Data Factory Pipeline name that the trigger will act on.
@@ -178,18 +145,6 @@ type TriggerCustomEventPipelineParameters struct {
 type TriggerCustomEventSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TriggerCustomEventParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider TriggerCustomEventInitParameters `json:"initProvider,omitempty"`
 }
 
 // TriggerCustomEventStatus defines the observed state of TriggerCustomEvent.
@@ -210,8 +165,8 @@ type TriggerCustomEventStatus struct {
 type TriggerCustomEvent struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.events) || has(self.initProvider.events)",message="events is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pipeline) || has(self.initProvider.pipeline)",message="pipeline is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.events)",message="events is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pipeline)",message="pipeline is a required parameter"
 	Spec   TriggerCustomEventSpec   `json:"spec"`
 	Status TriggerCustomEventStatus `json:"status,omitempty"`
 }

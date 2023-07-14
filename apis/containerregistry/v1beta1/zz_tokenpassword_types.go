@@ -13,12 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type Password1InitParameters struct {
-
-	// The expiration date of the password in RFC3339 format. Changing this forces a new resource to be created.
-	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
-}
-
 type Password1Observation struct {
 
 	// The expiration date of the password in RFC3339 format. Changing this forces a new resource to be created.
@@ -29,12 +23,6 @@ type Password1Parameters struct {
 
 	// The expiration date of the password in RFC3339 format. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
-}
-
-type Password2InitParameters struct {
-
-	// The expiration date of the password in RFC3339 format. Changing this forces a new resource to be created.
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 }
 
@@ -49,15 +37,6 @@ type Password2Parameters struct {
 	// The expiration date of the password in RFC3339 format. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
-}
-
-type TokenPasswordInitParameters struct {
-
-	// One password block as defined below.
-	Password1 []Password1InitParameters `json:"password1,omitempty" tf:"password1,omitempty"`
-
-	// One password block as defined below.
-	Password2 []Password2InitParameters `json:"password2,omitempty" tf:"password2,omitempty"`
 }
 
 type TokenPasswordObservation struct {
@@ -104,18 +83,6 @@ type TokenPasswordParameters struct {
 type TokenPasswordSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TokenPasswordParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider TokenPasswordInitParameters `json:"initProvider,omitempty"`
 }
 
 // TokenPasswordStatus defines the observed state of TokenPassword.
@@ -136,7 +103,7 @@ type TokenPasswordStatus struct {
 type TokenPassword struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.password1) || has(self.initProvider.password1)",message="password1 is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.password1)",message="password1 is a required parameter"
 	Spec   TokenPasswordSpec   `json:"spec"`
 	Status TokenPasswordStatus `json:"status,omitempty"`
 }

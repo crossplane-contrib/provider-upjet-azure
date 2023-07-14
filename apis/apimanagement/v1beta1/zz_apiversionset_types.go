@@ -13,24 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type APIVersionSetInitParameters struct {
-
-	// The description of API Version Set.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// The display name of this API Version Set.
-	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
-
-	// The name of the Header which should be read from Inbound Requests which defines the API Version.
-	VersionHeaderName *string `json:"versionHeaderName,omitempty" tf:"version_header_name,omitempty"`
-
-	// The name of the Query String which should be read from Inbound Requests which defines the API Version.
-	VersionQueryName *string `json:"versionQueryName,omitempty" tf:"version_query_name,omitempty"`
-
-	// Specifies where in an Inbound HTTP Request that the API Version should be read from. Possible values are Header, Query and Segment.
-	VersioningScheme *string `json:"versioningScheme,omitempty" tf:"versioning_scheme,omitempty"`
-}
-
 type APIVersionSetObservation struct {
 
 	// The name of the API Management Service in which the API Version Set should exist. May only contain alphanumeric characters and dashes up to 50 characters in length. Changing this forces a new resource to be created.
@@ -111,18 +93,6 @@ type APIVersionSetParameters struct {
 type APIVersionSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     APIVersionSetParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider APIVersionSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // APIVersionSetStatus defines the observed state of APIVersionSet.
@@ -143,8 +113,8 @@ type APIVersionSetStatus struct {
 type APIVersionSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.versioningScheme) || has(self.initProvider.versioningScheme)",message="versioningScheme is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.versioningScheme)",message="versioningScheme is a required parameter"
 	Spec   APIVersionSetSpec   `json:"spec"`
 	Status APIVersionSetStatus `json:"status,omitempty"`
 }

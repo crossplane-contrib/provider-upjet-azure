@@ -13,54 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type PublicIPInitParameters struct {
-
-	// Defines the allocation method for this IP address. Possible values are Static or Dynamic.
-	AllocationMethod *string `json:"allocationMethod,omitempty" tf:"allocation_method,omitempty"`
-
-	// The DDoS protection mode of the public IP. Possible values are Disabled, Enabled, and VirtualNetworkInherited. Defaults to VirtualNetworkInherited.
-	DDOSProtectionMode *string `json:"ddosProtectionMode,omitempty" tf:"ddos_protection_mode,omitempty"`
-
-	// The ID of DDoS protection plan associated with the public IP.
-	DDOSProtectionPlanID *string `json:"ddosProtectionPlanId,omitempty" tf:"ddos_protection_plan_id,omitempty"`
-
-	// Label for the Domain Name. Will be used to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system.
-	DomainNameLabel *string `json:"domainNameLabel,omitempty" tf:"domain_name_label,omitempty"`
-
-	// Specifies the Edge Zone within the Azure Region where this Public IP should exist. Changing this forces a new Public IP to be created.
-	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
-
-	// A mapping of IP tags to assign to the public IP. Changing this forces a new resource to be created.
-	IPTags map[string]*string `json:"ipTags,omitempty" tf:"ip_tags,omitempty"`
-
-	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created.
-	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
-
-	// Specifies the timeout for the TCP idle connection. The value can be set between 4 and 30 minutes.
-	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
-
-	// Specifies the supported Azure location where the Public IP should exist. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// If specified then public IP address allocated will be provided from the public IP prefix resource. Changing this forces a new resource to be created.
-	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
-
-	// A fully qualified domain name that resolves to this public IP address. If the reverseFqdn is specified, then a PTR DNS record is created pointing from the IP address in the in-addr.arpa domain to the reverse FQDN.
-	ReverseFqdn *string `json:"reverseFqdn,omitempty" tf:"reverse_fqdn,omitempty"`
-
-	// The SKU of the Public IP. Accepted values are Basic and Standard. Defaults to Basic. Changing this forces a new resource to be created.
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
-
-	// The SKU Tier that should be used for the Public IP. Possible values are Regional and Global. Defaults to Regional. Changing this forces a new resource to be created.
-	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// A collection containing the availability zone to allocate the Public IP in. Changing this forces a new resource to be created.
-	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
-}
-
 type PublicIPObservation struct {
 
 	// Defines the allocation method for this IP address. Possible values are Static or Dynamic.
@@ -201,18 +153,6 @@ type PublicIPParameters struct {
 type PublicIPSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PublicIPParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider PublicIPInitParameters `json:"initProvider,omitempty"`
 }
 
 // PublicIPStatus defines the observed state of PublicIP.
@@ -233,8 +173,8 @@ type PublicIPStatus struct {
 type PublicIP struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.allocationMethod) || has(self.initProvider.allocationMethod)",message="allocationMethod is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.allocationMethod)",message="allocationMethod is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   PublicIPSpec   `json:"spec"`
 	Status PublicIPStatus `json:"status,omitempty"`
 }

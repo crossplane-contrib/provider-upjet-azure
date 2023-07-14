@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type EncryptionInitParameters struct {
-
-	// Specifies the URI of the Key Vault Key used to encrypt data. The key may either be versioned (for example https://vault/keys/mykey/version1) or reference a key without a version (for example https://vault/keys/mykey).
-	KeyVaultKeyIdentifier *string `json:"keyVaultKeyIdentifier,omitempty" tf:"key_vault_key_identifier,omitempty"`
-
-	// A managed_identity block as defined below.
-	ManagedIdentity []ManagedIdentityInitParameters `json:"managedIdentity,omitempty" tf:"managed_identity,omitempty"`
-
-	// Specifies the type of key used to encrypt the account data. Possible values are SystemKey and CustomerKey.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type EncryptionObservation struct {
 
 	// The current key used to encrypt the Media Services Account, including the key version.
@@ -55,15 +43,6 @@ type EncryptionParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type IdentityInitParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Media Services Account.
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Media Services Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Media Services Account.
@@ -86,17 +65,8 @@ type IdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Media Services Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type KeyDeliveryAccessControlInitParameters struct {
-
-	// The Default Action to use when no rules match from ip_allow_list. Possible values are Allow and Deny.
-	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
-
-	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Delivery.
-	IPAllowList []*string `json:"ipAllowList,omitempty" tf:"ip_allow_list,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type KeyDeliveryAccessControlObservation struct {
@@ -119,15 +89,6 @@ type KeyDeliveryAccessControlParameters struct {
 	IPAllowList []*string `json:"ipAllowList,omitempty" tf:"ip_allow_list,omitempty"`
 }
 
-type ManagedIdentityInitParameters struct {
-
-	// Whether to use System Assigned Identity. Possible Values are true and false.
-	UseSystemAssignedIdentity *bool `json:"useSystemAssignedIdentity,omitempty" tf:"use_system_assigned_identity,omitempty"`
-
-	// The ID of the User Assigned Identity. This value can only be set when use_system_assigned_identity is false
-	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
-}
-
 type ManagedIdentityObservation struct {
 
 	// Whether to use System Assigned Identity. Possible Values are true and false.
@@ -146,33 +107,6 @@ type ManagedIdentityParameters struct {
 	// The ID of the User Assigned Identity. This value can only be set when use_system_assigned_identity is false
 	// +kubebuilder:validation:Optional
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
-}
-
-type ServicesAccountInitParameters struct {
-
-	// An encryption block as defined below.
-	Encryption []EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
-
-	// An identity block as defined below.
-	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// A key_delivery_access_control block as defined below.
-	KeyDeliveryAccessControl []KeyDeliveryAccessControlInitParameters `json:"keyDeliveryAccessControl,omitempty" tf:"key_delivery_access_control,omitempty"`
-
-	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// Whether public network access is allowed for this server. Defaults to true.
-	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
-
-	// One or more storage_account blocks as defined below.
-	StorageAccount []StorageAccountInitParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
-
-	// Specifies the storage authentication type. Possible value is ManagedIdentity or System.
-	StorageAuthenticationType *string `json:"storageAuthenticationType,omitempty" tf:"storage_authentication_type,omitempty"`
-
-	// A mapping of tags assigned to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ServicesAccountObservation struct {
@@ -256,24 +190,6 @@ type ServicesAccountParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type StorageAccountInitParameters struct {
-
-	// Specifies whether the storage account should be the primary account or not. Defaults to false.
-	IsPrimary *bool `json:"isPrimary,omitempty" tf:"is_primary,omitempty"`
-
-	// A managed_identity block as defined below.
-	ManagedIdentity []StorageAccountManagedIdentityInitParameters `json:"managedIdentity,omitempty" tf:"managed_identity,omitempty"`
-}
-
-type StorageAccountManagedIdentityInitParameters struct {
-
-	// Whether to use System Assigned Identity. Possible Values are true and false.
-	UseSystemAssignedIdentity *bool `json:"useSystemAssignedIdentity,omitempty" tf:"use_system_assigned_identity,omitempty"`
-
-	// The ID of the User Assigned Identity. This value can only be set when use_system_assigned_identity is false
-	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
-}
-
 type StorageAccountManagedIdentityObservation struct {
 
 	// Whether to use System Assigned Identity. Possible Values are true and false.
@@ -335,18 +251,6 @@ type StorageAccountParameters struct {
 type ServicesAccountSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServicesAccountParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ServicesAccountInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServicesAccountStatus defines the observed state of ServicesAccount.
@@ -367,8 +271,8 @@ type ServicesAccountStatus struct {
 type ServicesAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageAccount) || has(self.initProvider.storageAccount)",message="storageAccount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageAccount)",message="storageAccount is a required parameter"
 	Spec   ServicesAccountSpec   `json:"spec"`
 	Status ServicesAccountStatus `json:"status,omitempty"`
 }

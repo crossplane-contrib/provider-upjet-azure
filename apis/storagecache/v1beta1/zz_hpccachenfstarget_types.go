@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type HPCCacheNFSTargetInitParameters struct {
-
-	// Can be specified multiple times to define multiple namespace_junction. Each namespace_juntion block supports fields documented below.
-	NamespaceJunction []NamespaceJunctionInitParameters `json:"namespaceJunction,omitempty" tf:"namespace_junction,omitempty"`
-
-	// The IP address or fully qualified domain name (FQDN) of the HPC Cache NFS target. Changing this forces a new resource to be created.
-	TargetHostName *string `json:"targetHostName,omitempty" tf:"target_host_name,omitempty"`
-
-	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
-	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
-}
-
 type HPCCacheNFSTargetObservation struct {
 
 	// The name HPC Cache, which the HPC Cache NFS Target will be added to. Changing this forces a new resource to be created.
@@ -87,21 +75,6 @@ type HPCCacheNFSTargetParameters struct {
 	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
 }
 
-type NamespaceJunctionInitParameters struct {
-
-	// The name of the access policy applied to this target. Defaults to default.
-	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
-
-	// The NFS export of this NFS target within the HPC Cache NFS Target.
-	NFSExport *string `json:"nfsExport,omitempty" tf:"nfs_export,omitempty"`
-
-	// The client-facing file path of this NFS target within the HPC Cache NFS Target.
-	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
-
-	// The relative subdirectory path from the nfs_export to map to the namespace_path. Defaults to "", in which case the whole nfs_export is exported.
-	TargetPath *string `json:"targetPath,omitempty" tf:"target_path,omitempty"`
-}
-
 type NamespaceJunctionObservation struct {
 
 	// The name of the access policy applied to this target. Defaults to default.
@@ -124,12 +97,12 @@ type NamespaceJunctionParameters struct {
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
 	// The NFS export of this NFS target within the HPC Cache NFS Target.
-	// +kubebuilder:validation:Optional
-	NFSExport *string `json:"nfsExport,omitempty" tf:"nfs_export,omitempty"`
+	// +kubebuilder:validation:Required
+	NFSExport *string `json:"nfsExport" tf:"nfs_export,omitempty"`
 
 	// The client-facing file path of this NFS target within the HPC Cache NFS Target.
-	// +kubebuilder:validation:Optional
-	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
+	// +kubebuilder:validation:Required
+	NamespacePath *string `json:"namespacePath" tf:"namespace_path,omitempty"`
 
 	// The relative subdirectory path from the nfs_export to map to the namespace_path. Defaults to "", in which case the whole nfs_export is exported.
 	// +kubebuilder:validation:Optional
@@ -140,18 +113,6 @@ type NamespaceJunctionParameters struct {
 type HPCCacheNFSTargetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HPCCacheNFSTargetParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider HPCCacheNFSTargetInitParameters `json:"initProvider,omitempty"`
 }
 
 // HPCCacheNFSTargetStatus defines the observed state of HPCCacheNFSTarget.
@@ -172,9 +133,9 @@ type HPCCacheNFSTargetStatus struct {
 type HPCCacheNFSTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespaceJunction) || has(self.initProvider.namespaceJunction)",message="namespaceJunction is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetHostName) || has(self.initProvider.targetHostName)",message="targetHostName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.usageModel) || has(self.initProvider.usageModel)",message="usageModel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespaceJunction)",message="namespaceJunction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetHostName)",message="targetHostName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.usageModel)",message="usageModel is a required parameter"
 	Spec   HPCCacheNFSTargetSpec   `json:"spec"`
 	Status HPCCacheNFSTargetStatus `json:"status,omitempty"`
 }

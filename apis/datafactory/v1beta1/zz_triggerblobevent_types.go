@@ -13,36 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type TriggerBlobEventInitParameters struct {
-
-	// Specifies if the Data Factory Blob Event Trigger is activated. Defaults to true.
-	Activated *bool `json:"activated,omitempty" tf:"activated,omitempty"`
-
-	// A map of additional properties to associate with the Data Factory Blob Event Trigger.
-	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
-
-	// List of tags that can be used for describing the Data Factory Blob Event Trigger.
-	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
-
-	// The pattern that blob path starts with for trigger to fire.
-	BlobPathBeginsWith *string `json:"blobPathBeginsWith,omitempty" tf:"blob_path_begins_with,omitempty"`
-
-	// The pattern that blob path ends with for trigger to fire.
-	BlobPathEndsWith *string `json:"blobPathEndsWith,omitempty" tf:"blob_path_ends_with,omitempty"`
-
-	// The description for the Data Factory Blob Event Trigger.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// List of events that will fire this trigger. Possible values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobDeleted.
-	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
-
-	// are blobs with zero bytes ignored?
-	IgnoreEmptyBlobs *bool `json:"ignoreEmptyBlobs,omitempty" tf:"ignore_empty_blobs,omitempty"`
-
-	// One or more pipeline blocks as defined below.
-	Pipeline []TriggerBlobEventPipelineInitParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
-}
-
 type TriggerBlobEventObservation struct {
 
 	// Specifies if the Data Factory Blob Event Trigger is activated. Defaults to true.
@@ -149,12 +119,6 @@ type TriggerBlobEventParameters struct {
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
-type TriggerBlobEventPipelineInitParameters struct {
-
-	// The Data Factory Pipeline parameters that the trigger will act on.
-	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-}
-
 type TriggerBlobEventPipelineObservation struct {
 
 	// The Data Factory Pipeline name that the trigger will act on.
@@ -188,18 +152,6 @@ type TriggerBlobEventPipelineParameters struct {
 type TriggerBlobEventSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TriggerBlobEventParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider TriggerBlobEventInitParameters `json:"initProvider,omitempty"`
 }
 
 // TriggerBlobEventStatus defines the observed state of TriggerBlobEvent.
@@ -220,8 +172,8 @@ type TriggerBlobEventStatus struct {
 type TriggerBlobEvent struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.events) || has(self.initProvider.events)",message="events is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pipeline) || has(self.initProvider.pipeline)",message="pipeline is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.events)",message="events is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pipeline)",message="pipeline is a required parameter"
 	Spec   TriggerBlobEventSpec   `json:"spec"`
 	Status TriggerBlobEventStatus `json:"status,omitempty"`
 }

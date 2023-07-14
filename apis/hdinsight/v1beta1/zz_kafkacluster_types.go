@@ -13,12 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type KafkaClusterComponentVersionInitParameters struct {
-
-	// The version of Kafka which should be used for this HDInsight Kafka Cluster. Changing this forces a new resource to be created.
-	Kafka *string `json:"kafka,omitempty" tf:"kafka,omitempty"`
-}
-
 type KafkaClusterComponentVersionObservation struct {
 
 	// The version of Kafka which should be used for this HDInsight Kafka Cluster. Changing this forces a new resource to be created.
@@ -28,17 +22,8 @@ type KafkaClusterComponentVersionObservation struct {
 type KafkaClusterComponentVersionParameters struct {
 
 	// The version of Kafka which should be used for this HDInsight Kafka Cluster. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Kafka *string `json:"kafka,omitempty" tf:"kafka,omitempty"`
-}
-
-type KafkaClusterComputeIsolationInitParameters struct {
-
-	// This field indicates whether enable compute isolation or not. Possible values are true or false.
-	ComputeIsolationEnabled *bool `json:"computeIsolationEnabled,omitempty" tf:"compute_isolation_enabled,omitempty"`
-
-	// The name of the host SKU.
-	HostSku *string `json:"hostSku,omitempty" tf:"host_sku,omitempty"`
+	// +kubebuilder:validation:Required
+	Kafka *string `json:"kafka" tf:"kafka,omitempty"`
 }
 
 type KafkaClusterComputeIsolationObservation struct {
@@ -59,21 +44,6 @@ type KafkaClusterComputeIsolationParameters struct {
 	// The name of the host SKU.
 	// +kubebuilder:validation:Optional
 	HostSku *string `json:"hostSku,omitempty" tf:"host_sku,omitempty"`
-}
-
-type KafkaClusterDiskEncryptionInitParameters struct {
-
-	// This is an algorithm identifier for encryption. Possible values are RSA1_5, RSA-OAEP, RSA-OAEP-256.
-	EncryptionAlgorithm *string `json:"encryptionAlgorithm,omitempty" tf:"encryption_algorithm,omitempty"`
-
-	// This is indicator to show whether resource disk encryption is enabled.
-	EncryptionAtHostEnabled *bool `json:"encryptionAtHostEnabled,omitempty" tf:"encryption_at_host_enabled,omitempty"`
-
-	// The ID of the key vault key.
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
-
-	// This is the resource ID of Managed Identity used to access the key vault.
-	KeyVaultManagedIdentityID *string `json:"keyVaultManagedIdentityId,omitempty" tf:"key_vault_managed_identity_id,omitempty"`
 }
 
 type KafkaClusterDiskEncryptionObservation struct {
@@ -110,12 +80,6 @@ type KafkaClusterDiskEncryptionParameters struct {
 	KeyVaultManagedIdentityID *string `json:"keyVaultManagedIdentityId,omitempty" tf:"key_vault_managed_identity_id,omitempty"`
 }
 
-type KafkaClusterExtensionInitParameters struct {
-
-	// The workspace ID of the log analytics extension.
-	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
-}
-
 type KafkaClusterExtensionObservation struct {
 
 	// The workspace ID of the log analytics extension.
@@ -125,18 +89,12 @@ type KafkaClusterExtensionObservation struct {
 type KafkaClusterExtensionParameters struct {
 
 	// The workspace ID of the log analytics extension.
-	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+	// +kubebuilder:validation:Required
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId" tf:"log_analytics_workspace_id,omitempty"`
 
 	// The workspace key of the log analytics extension.
 	// +kubebuilder:validation:Required
 	PrimaryKeySecretRef v1.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
-}
-
-type KafkaClusterGatewayInitParameters struct {
-
-	// The username used for the Ambari Portal. Changing this forces a new resource to be created.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type KafkaClusterGatewayObservation struct {
@@ -152,80 +110,8 @@ type KafkaClusterGatewayParameters struct {
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username used for the Ambari Portal. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type KafkaClusterInitParameters struct {
-
-	// Specifies the Version of HDInsights which should be used for this Cluster. Changing this forces a new resource to be created.
-	ClusterVersion *string `json:"clusterVersion,omitempty" tf:"cluster_version,omitempty"`
-
-	// A component_version block as defined below.
-	ComponentVersion []KafkaClusterComponentVersionInitParameters `json:"componentVersion,omitempty" tf:"component_version,omitempty"`
-
-	// A compute_isolation block as defined below.
-	ComputeIsolation []KafkaClusterComputeIsolationInitParameters `json:"computeIsolation,omitempty" tf:"compute_isolation,omitempty"`
-
-	// One or more disk_encryption block as defined below.
-	DiskEncryption []KafkaClusterDiskEncryptionInitParameters `json:"diskEncryption,omitempty" tf:"disk_encryption,omitempty"`
-
-	// Whether encryption in transit is enabled for this HDInsight Kafka Cluster. Changing this forces a new resource to be created.
-	EncryptionInTransitEnabled *bool `json:"encryptionInTransitEnabled,omitempty" tf:"encryption_in_transit_enabled,omitempty"`
-
-	// An extension block as defined below.
-	Extension []KafkaClusterExtensionInitParameters `json:"extension,omitempty" tf:"extension,omitempty"`
-
-	// A gateway block as defined below.
-	Gateway []KafkaClusterGatewayInitParameters `json:"gateway,omitempty" tf:"gateway,omitempty"`
-
-	// Specifies the Azure Region which this HDInsight Kafka Cluster should exist. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// A metastores block as defined below.
-	Metastores []KafkaClusterMetastoresInitParameters `json:"metastores,omitempty" tf:"metastores,omitempty"`
-
-	// A monitor block as defined below.
-	Monitor []KafkaClusterMonitorInitParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
-
-	// A network block as defined below.
-	Network []KafkaClusterNetworkInitParameters `json:"network,omitempty" tf:"network,omitempty"`
-
-	// A rest_proxy block as defined below.
-	RestProxy []RestProxyInitParameters `json:"restProxy,omitempty" tf:"rest_proxy,omitempty"`
-
-	// A roles block as defined below.
-	Roles []KafkaClusterRolesInitParameters `json:"roles,omitempty" tf:"roles,omitempty"`
-
-	// A security_profile block as defined below. Changing this forces a new resource to be created.
-	SecurityProfile []KafkaClusterSecurityProfileInitParameters `json:"securityProfile,omitempty" tf:"security_profile,omitempty"`
-
-	// One or more storage_account block as defined below.
-	StorageAccount []KafkaClusterStorageAccountInitParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
-
-	// A storage_account_gen2 block as defined below.
-	StorageAccountGen2 []KafkaClusterStorageAccountGen2InitParameters `json:"storageAccountGen2,omitempty" tf:"storage_account_gen2,omitempty"`
-
-	// The minimal supported TLS version. Possible values are 1.0, 1.1 or 1.2. Changing this forces a new resource to be created.
-	TLSMinVersion *string `json:"tlsMinVersion,omitempty" tf:"tls_min_version,omitempty"`
-
-	// A map of Tags which should be assigned to this HDInsight Kafka Cluster.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Specifies the Tier which should be used for this HDInsight Kafka Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
-	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
-}
-
-type KafkaClusterMetastoresAmbariInitParameters struct {
-
-	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
-
-	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
-	Server *string `json:"server,omitempty" tf:"server,omitempty"`
-
-	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	// +kubebuilder:validation:Required
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type KafkaClusterMetastoresAmbariObservation struct {
@@ -243,32 +129,20 @@ type KafkaClusterMetastoresAmbariObservation struct {
 type KafkaClusterMetastoresAmbariParameters struct {
 
 	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+	// +kubebuilder:validation:Required
+	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+	// +kubebuilder:validation:Required
+	Server *string `json:"server" tf:"server,omitempty"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type KafkaClusterMetastoresHiveInitParameters struct {
-
-	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
-
-	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
-	Server *string `json:"server,omitempty" tf:"server,omitempty"`
-
-	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	// +kubebuilder:validation:Required
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type KafkaClusterMetastoresHiveObservation struct {
@@ -286,32 +160,20 @@ type KafkaClusterMetastoresHiveObservation struct {
 type KafkaClusterMetastoresHiveParameters struct {
 
 	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+	// +kubebuilder:validation:Required
+	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+	// +kubebuilder:validation:Required
+	Server *string `json:"server" tf:"server,omitempty"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type KafkaClusterMetastoresInitParameters struct {
-
-	// An ambari block as defined below.
-	Ambari []KafkaClusterMetastoresAmbariInitParameters `json:"ambari,omitempty" tf:"ambari,omitempty"`
-
-	// A hive block as defined below.
-	Hive []KafkaClusterMetastoresHiveInitParameters `json:"hive,omitempty" tf:"hive,omitempty"`
-
-	// An oozie block as defined below.
-	Oozie []KafkaClusterMetastoresOozieInitParameters `json:"oozie,omitempty" tf:"oozie,omitempty"`
+	// +kubebuilder:validation:Required
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type KafkaClusterMetastoresObservation struct {
@@ -324,18 +186,6 @@ type KafkaClusterMetastoresObservation struct {
 
 	// An oozie block as defined below.
 	Oozie []KafkaClusterMetastoresOozieObservation `json:"oozie,omitempty" tf:"oozie,omitempty"`
-}
-
-type KafkaClusterMetastoresOozieInitParameters struct {
-
-	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
-
-	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
-	Server *string `json:"server,omitempty" tf:"server,omitempty"`
-
-	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type KafkaClusterMetastoresOozieObservation struct {
@@ -353,20 +203,20 @@ type KafkaClusterMetastoresOozieObservation struct {
 type KafkaClusterMetastoresOozieParameters struct {
 
 	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+	// +kubebuilder:validation:Required
+	DatabaseName *string `json:"databaseName" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+	// +kubebuilder:validation:Required
+	Server *string `json:"server" tf:"server,omitempty"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	// +kubebuilder:validation:Required
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type KafkaClusterMetastoresParameters struct {
@@ -384,12 +234,6 @@ type KafkaClusterMetastoresParameters struct {
 	Oozie []KafkaClusterMetastoresOozieParameters `json:"oozie,omitempty" tf:"oozie,omitempty"`
 }
 
-type KafkaClusterMonitorInitParameters struct {
-
-	// The Operations Management Suite (OMS) workspace ID.
-	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
-}
-
 type KafkaClusterMonitorObservation struct {
 
 	// The Operations Management Suite (OMS) workspace ID.
@@ -399,21 +243,12 @@ type KafkaClusterMonitorObservation struct {
 type KafkaClusterMonitorParameters struct {
 
 	// The Operations Management Suite (OMS) workspace ID.
-	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+	// +kubebuilder:validation:Required
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId" tf:"log_analytics_workspace_id,omitempty"`
 
 	// The Operations Management Suite (OMS) workspace key.
 	// +kubebuilder:validation:Required
 	PrimaryKeySecretRef v1.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
-}
-
-type KafkaClusterNetworkInitParameters struct {
-
-	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
-	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
-
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
-	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
 type KafkaClusterNetworkObservation struct {
@@ -603,24 +438,6 @@ type KafkaClusterParameters struct {
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
-type KafkaClusterRolesHeadNodeInitParameters struct {
-
-	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
-	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
-
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
-	ScriptActions []KafkaClusterRolesHeadNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
-
-	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-
-	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
-	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
-
-	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
-	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
-}
-
 type KafkaClusterRolesHeadNodeObservation struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -671,28 +488,16 @@ type KafkaClusterRolesHeadNodeParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	// +kubebuilder:validation:Required
+	Username *string `json:"username" tf:"username,omitempty"`
 
 	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
+	// +kubebuilder:validation:Required
+	VMSize *string `json:"vmSize" tf:"vm_size,omitempty"`
 
 	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
-}
-
-type KafkaClusterRolesHeadNodeScriptActionsInitParameters struct {
-
-	// The name of the script action.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The parameters for the script provided.
-	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-
-	// The URI to the script.
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type KafkaClusterRolesHeadNodeScriptActionsObservation struct {
@@ -710,31 +515,16 @@ type KafkaClusterRolesHeadNodeScriptActionsObservation struct {
 type KafkaClusterRolesHeadNodeScriptActionsParameters struct {
 
 	// The name of the script action.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The parameters for the script provided.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The URI to the script.
-	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
-}
-
-type KafkaClusterRolesInitParameters struct {
-
-	// A head_node block as defined above.
-	HeadNode []KafkaClusterRolesHeadNodeInitParameters `json:"headNode,omitempty" tf:"head_node,omitempty"`
-
-	// A kafka_management_node block as defined below.
-	KafkaManagementNode []KafkaManagementNodeInitParameters `json:"kafkaManagementNode,omitempty" tf:"kafka_management_node,omitempty"`
-
-	// A worker_node block as defined below.
-	WorkerNode []KafkaClusterRolesWorkerNodeInitParameters `json:"workerNode,omitempty" tf:"worker_node,omitempty"`
-
-	// A zookeeper_node block as defined below.
-	ZookeeperNode []KafkaClusterRolesZookeeperNodeInitParameters `json:"zookeeperNode,omitempty" tf:"zookeeper_node,omitempty"`
+	// +kubebuilder:validation:Required
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type KafkaClusterRolesObservation struct {
@@ -755,44 +545,20 @@ type KafkaClusterRolesObservation struct {
 type KafkaClusterRolesParameters struct {
 
 	// A head_node block as defined above.
-	// +kubebuilder:validation:Optional
-	HeadNode []KafkaClusterRolesHeadNodeParameters `json:"headNode,omitempty" tf:"head_node,omitempty"`
+	// +kubebuilder:validation:Required
+	HeadNode []KafkaClusterRolesHeadNodeParameters `json:"headNode" tf:"head_node,omitempty"`
 
 	// A kafka_management_node block as defined below.
 	// +kubebuilder:validation:Optional
 	KafkaManagementNode []KafkaManagementNodeParameters `json:"kafkaManagementNode,omitempty" tf:"kafka_management_node,omitempty"`
 
 	// A worker_node block as defined below.
-	// +kubebuilder:validation:Optional
-	WorkerNode []KafkaClusterRolesWorkerNodeParameters `json:"workerNode,omitempty" tf:"worker_node,omitempty"`
+	// +kubebuilder:validation:Required
+	WorkerNode []KafkaClusterRolesWorkerNodeParameters `json:"workerNode" tf:"worker_node,omitempty"`
 
 	// A zookeeper_node block as defined below.
-	// +kubebuilder:validation:Optional
-	ZookeeperNode []KafkaClusterRolesZookeeperNodeParameters `json:"zookeeperNode,omitempty" tf:"zookeeper_node,omitempty"`
-}
-
-type KafkaClusterRolesWorkerNodeInitParameters struct {
-
-	// The number of Data Disks which should be assigned to each Worker Node, which can be between 1 and 8. Changing this forces a new resource to be created.
-	NumberOfDisksPerNode *float64 `json:"numberOfDisksPerNode,omitempty" tf:"number_of_disks_per_node,omitempty"`
-
-	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
-	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
-
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
-	ScriptActions []KafkaClusterRolesWorkerNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
-
-	// The number of instances which should be run for the Worker Nodes.
-	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
-
-	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-
-	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
-	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
-
-	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
-	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
+	// +kubebuilder:validation:Required
+	ZookeeperNode []KafkaClusterRolesZookeeperNodeParameters `json:"zookeeperNode" tf:"zookeeper_node,omitempty"`
 }
 
 type KafkaClusterRolesWorkerNodeObservation struct {
@@ -825,8 +591,8 @@ type KafkaClusterRolesWorkerNodeObservation struct {
 type KafkaClusterRolesWorkerNodeParameters struct {
 
 	// The number of Data Disks which should be assigned to each Worker Node, which can be between 1 and 8. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	NumberOfDisksPerNode *float64 `json:"numberOfDisksPerNode,omitempty" tf:"number_of_disks_per_node,omitempty"`
+	// +kubebuilder:validation:Required
+	NumberOfDisksPerNode *float64 `json:"numberOfDisksPerNode" tf:"number_of_disks_per_node,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -855,32 +621,20 @@ type KafkaClusterRolesWorkerNodeParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The number of instances which should be run for the Worker Nodes.
-	// +kubebuilder:validation:Optional
-	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
+	// +kubebuilder:validation:Required
+	TargetInstanceCount *float64 `json:"targetInstanceCount" tf:"target_instance_count,omitempty"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	// +kubebuilder:validation:Required
+	Username *string `json:"username" tf:"username,omitempty"`
 
 	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
+	// +kubebuilder:validation:Required
+	VMSize *string `json:"vmSize" tf:"vm_size,omitempty"`
 
 	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
-}
-
-type KafkaClusterRolesWorkerNodeScriptActionsInitParameters struct {
-
-	// The name of the script action.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The parameters for the script provided.
-	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-
-	// The URI to the script.
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type KafkaClusterRolesWorkerNodeScriptActionsObservation struct {
@@ -898,34 +652,16 @@ type KafkaClusterRolesWorkerNodeScriptActionsObservation struct {
 type KafkaClusterRolesWorkerNodeScriptActionsParameters struct {
 
 	// The name of the script action.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The parameters for the script provided.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The URI to the script.
-	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
-}
-
-type KafkaClusterRolesZookeeperNodeInitParameters struct {
-
-	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
-	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
-
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
-	ScriptActions []KafkaClusterRolesZookeeperNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
-
-	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-
-	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
-	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
-
-	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
-	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
+	// +kubebuilder:validation:Required
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type KafkaClusterRolesZookeeperNodeObservation struct {
@@ -978,28 +714,16 @@ type KafkaClusterRolesZookeeperNodeParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	// +kubebuilder:validation:Required
+	Username *string `json:"username" tf:"username,omitempty"`
 
 	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
+	// +kubebuilder:validation:Required
+	VMSize *string `json:"vmSize" tf:"vm_size,omitempty"`
 
 	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
-}
-
-type KafkaClusterRolesZookeeperNodeScriptActionsInitParameters struct {
-
-	// The name of the script action.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The parameters for the script provided.
-	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-
-	// The URI to the script.
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type KafkaClusterRolesZookeeperNodeScriptActionsObservation struct {
@@ -1017,37 +741,16 @@ type KafkaClusterRolesZookeeperNodeScriptActionsObservation struct {
 type KafkaClusterRolesZookeeperNodeScriptActionsParameters struct {
 
 	// The name of the script action.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The parameters for the script provided.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The URI to the script.
-	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
-}
-
-type KafkaClusterSecurityProfileInitParameters struct {
-
-	// The resource ID of the Azure Active Directory Domain Service. Changing this forces a new resource to be created.
-	AaddsResourceID *string `json:"aaddsResourceId,omitempty" tf:"aadds_resource_id,omitempty"`
-
-	// A list of the distinguished names for the cluster user groups. Changing this forces a new resource to be created.
-	ClusterUsersGroupDNS []*string `json:"clusterUsersGroupDns,omitempty" tf:"cluster_users_group_dns,omitempty"`
-
-	// The name of the Azure Active Directory Domain. Changing this forces a new resource to be created.
-	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
-
-	// The username of the Azure Active Directory Domain. Changing this forces a new resource to be created.
-	DomainUsername *string `json:"domainUsername,omitempty" tf:"domain_username,omitempty"`
-
-	// A list of the LDAPS URLs to communicate with the Azure Active Directory. Changing this forces a new resource to be created.
-	LdapsUrls []*string `json:"ldapsUrls,omitempty" tf:"ldaps_urls,omitempty"`
-
-	// The User Assigned Identity for the HDInsight Cluster. Changing this forces a new resource to be created.
-	MsiResourceID *string `json:"msiResourceId,omitempty" tf:"msi_resource_id,omitempty"`
+	// +kubebuilder:validation:Required
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type KafkaClusterSecurityProfileObservation struct {
@@ -1074,47 +777,32 @@ type KafkaClusterSecurityProfileObservation struct {
 type KafkaClusterSecurityProfileParameters struct {
 
 	// The resource ID of the Azure Active Directory Domain Service. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	AaddsResourceID *string `json:"aaddsResourceId,omitempty" tf:"aadds_resource_id,omitempty"`
+	// +kubebuilder:validation:Required
+	AaddsResourceID *string `json:"aaddsResourceId" tf:"aadds_resource_id,omitempty"`
 
 	// A list of the distinguished names for the cluster user groups. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ClusterUsersGroupDNS []*string `json:"clusterUsersGroupDns,omitempty" tf:"cluster_users_group_dns,omitempty"`
 
 	// The name of the Azure Active Directory Domain. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+	// +kubebuilder:validation:Required
+	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
 	// The user password of the Azure Active Directory Domain. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	DomainUserPasswordSecretRef v1.SecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
 
 	// The username of the Azure Active Directory Domain. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	DomainUsername *string `json:"domainUsername,omitempty" tf:"domain_username,omitempty"`
+	// +kubebuilder:validation:Required
+	DomainUsername *string `json:"domainUsername" tf:"domain_username,omitempty"`
 
 	// A list of the LDAPS URLs to communicate with the Azure Active Directory. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	LdapsUrls []*string `json:"ldapsUrls,omitempty" tf:"ldaps_urls,omitempty"`
+	// +kubebuilder:validation:Required
+	LdapsUrls []*string `json:"ldapsUrls" tf:"ldaps_urls,omitempty"`
 
 	// The User Assigned Identity for the HDInsight Cluster. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	MsiResourceID *string `json:"msiResourceId,omitempty" tf:"msi_resource_id,omitempty"`
-}
-
-type KafkaClusterStorageAccountGen2InitParameters struct {
-
-	// The ID of the Gen2 Filesystem. Changing this forces a new resource to be created.
-	FileSystemID *string `json:"filesystemId,omitempty" tf:"filesystem_id,omitempty"`
-
-	// Is this the Default Storage Account for the HDInsight Hadoop Cluster? Changing this forces a new resource to be created.
-	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
-
-	// The ID of Managed Identity to use for accessing the Gen2 filesystem. Changing this forces a new resource to be created.
-	ManagedIdentityResourceID *string `json:"managedIdentityResourceId,omitempty" tf:"managed_identity_resource_id,omitempty"`
-
-	// The ID of the Storage Account. Changing this forces a new resource to be created.
-	StorageResourceID *string `json:"storageResourceId,omitempty" tf:"storage_resource_id,omitempty"`
+	// +kubebuilder:validation:Required
+	MsiResourceID *string `json:"msiResourceId" tf:"msi_resource_id,omitempty"`
 }
 
 type KafkaClusterStorageAccountGen2Observation struct {
@@ -1135,29 +823,20 @@ type KafkaClusterStorageAccountGen2Observation struct {
 type KafkaClusterStorageAccountGen2Parameters struct {
 
 	// The ID of the Gen2 Filesystem. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	FileSystemID *string `json:"filesystemId,omitempty" tf:"filesystem_id,omitempty"`
+	// +kubebuilder:validation:Required
+	FileSystemID *string `json:"filesystemId" tf:"filesystem_id,omitempty"`
 
 	// Is this the Default Storage Account for the HDInsight Hadoop Cluster? Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
+	// +kubebuilder:validation:Required
+	IsDefault *bool `json:"isDefault" tf:"is_default,omitempty"`
 
 	// The ID of Managed Identity to use for accessing the Gen2 filesystem. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	ManagedIdentityResourceID *string `json:"managedIdentityResourceId,omitempty" tf:"managed_identity_resource_id,omitempty"`
+	// +kubebuilder:validation:Required
+	ManagedIdentityResourceID *string `json:"managedIdentityResourceId" tf:"managed_identity_resource_id,omitempty"`
 
 	// The ID of the Storage Account. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	StorageResourceID *string `json:"storageResourceId,omitempty" tf:"storage_resource_id,omitempty"`
-}
-
-type KafkaClusterStorageAccountInitParameters struct {
-
-	// Is this the Default Storage Account for the HDInsight Hadoop Cluster? Changing this forces a new resource to be created.
-	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
-
-	// The ID of the Storage Account. Changing this forces a new resource to be created.
-	StorageResourceID *string `json:"storageResourceId,omitempty" tf:"storage_resource_id,omitempty"`
+	// +kubebuilder:validation:Required
+	StorageResourceID *string `json:"storageResourceId" tf:"storage_resource_id,omitempty"`
 }
 
 type KafkaClusterStorageAccountObservation struct {
@@ -1175,8 +854,8 @@ type KafkaClusterStorageAccountObservation struct {
 type KafkaClusterStorageAccountParameters struct {
 
 	// Is this the Default Storage Account for the HDInsight Hadoop Cluster? Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
+	// +kubebuilder:validation:Required
+	IsDefault *bool `json:"isDefault" tf:"is_default,omitempty"`
 
 	// The Access Key which should be used to connect to the Storage Account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
@@ -1199,24 +878,6 @@ type KafkaClusterStorageAccountParameters struct {
 	// The ID of the Storage Account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	StorageResourceID *string `json:"storageResourceId,omitempty" tf:"storage_resource_id,omitempty"`
-}
-
-type KafkaManagementNodeInitParameters struct {
-
-	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
-	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
-
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
-	ScriptActions []KafkaManagementNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
-
-	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-
-	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
-	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
-
-	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
-	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
 type KafkaManagementNodeObservation struct {
@@ -1269,28 +930,16 @@ type KafkaManagementNodeParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	// +kubebuilder:validation:Required
+	Username *string `json:"username" tf:"username,omitempty"`
 
 	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
+	// +kubebuilder:validation:Required
+	VMSize *string `json:"vmSize" tf:"vm_size,omitempty"`
 
 	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
-}
-
-type KafkaManagementNodeScriptActionsInitParameters struct {
-
-	// The name of the script action.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The parameters for the script provided.
-	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-
-	// The URI to the script.
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type KafkaManagementNodeScriptActionsObservation struct {
@@ -1308,25 +957,16 @@ type KafkaManagementNodeScriptActionsObservation struct {
 type KafkaManagementNodeScriptActionsParameters struct {
 
 	// The name of the script action.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The parameters for the script provided.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The URI to the script.
-	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
-}
-
-type RestProxyInitParameters struct {
-
-	// The Azure Active Directory Security Group ID. Changing this forces a new resource to be created.
-	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
-
-	// The Azure Active Directory Security Group name. Changing this forces a new resource to be created.
-	SecurityGroupName *string `json:"securityGroupName,omitempty" tf:"security_group_name,omitempty"`
+	// +kubebuilder:validation:Required
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type RestProxyObservation struct {
@@ -1341,30 +981,18 @@ type RestProxyObservation struct {
 type RestProxyParameters struct {
 
 	// The Azure Active Directory Security Group ID. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	SecurityGroupID *string `json:"securityGroupId,omitempty" tf:"security_group_id,omitempty"`
+	// +kubebuilder:validation:Required
+	SecurityGroupID *string `json:"securityGroupId" tf:"security_group_id,omitempty"`
 
 	// The Azure Active Directory Security Group name. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	SecurityGroupName *string `json:"securityGroupName,omitempty" tf:"security_group_name,omitempty"`
+	// +kubebuilder:validation:Required
+	SecurityGroupName *string `json:"securityGroupName" tf:"security_group_name,omitempty"`
 }
 
 // KafkaClusterSpec defines the desired state of KafkaCluster
 type KafkaClusterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     KafkaClusterParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider KafkaClusterInitParameters `json:"initProvider,omitempty"`
 }
 
 // KafkaClusterStatus defines the observed state of KafkaCluster.
@@ -1385,12 +1013,12 @@ type KafkaClusterStatus struct {
 type KafkaCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clusterVersion) || has(self.initProvider.clusterVersion)",message="clusterVersion is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.componentVersion) || has(self.initProvider.componentVersion)",message="componentVersion is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.gateway) || has(self.initProvider.gateway)",message="gateway is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.roles) || has(self.initProvider.roles)",message="roles is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tier) || has(self.initProvider.tier)",message="tier is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clusterVersion)",message="clusterVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.componentVersion)",message="componentVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.gateway)",message="gateway is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.roles)",message="roles is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tier)",message="tier is a required parameter"
 	Spec   KafkaClusterSpec   `json:"spec"`
 	Status KafkaClusterStatus `json:"status,omitempty"`
 }

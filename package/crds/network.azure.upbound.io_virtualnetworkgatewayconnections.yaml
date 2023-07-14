@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: virtualnetworkgatewayconnections.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -114,6 +114,9 @@ spec:
                           description: single IP address that is part of the azurerm_virtual_network_gateway
                             ip_configuration (second one)
                           type: string
+                      required:
+                      - primary
+                      - secondary
                       type: object
                     type: array
                   dpdTimeoutSeconds:
@@ -186,6 +189,13 @@ spec:
                           description: The IPSec SA lifetime in seconds. Must be at
                             least 300 seconds. Defaults to 27000 seconds.
                           type: number
+                      required:
+                      - dhGroup
+                      - ikeEncryption
+                      - ikeIntegrity
+                      - ipsecEncryption
+                      - ipsecIntegrity
+                      - pfsGroup
                       type: object
                     type: array
                   localAzureIpAddressEnabled:
@@ -479,6 +489,9 @@ spec:
                           items:
                             type: string
                           type: array
+                      required:
+                      - localAddressCidrs
+                      - remoteAddressCidrs
                       type: object
                     type: array
                   type:
@@ -573,169 +586,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  connectionMode:
-                    description: Connection mode to use. Possible values are Default,
-                      InitiatorOnly and ResponderOnly. Defaults to Default. Changing
-                      this value will force a resource to be created.
-                    type: string
-                  connectionProtocol:
-                    description: 'The IKE protocol version to use. Possible values
-                      are IKEv1 and IKEv2, values are IKEv1 and IKEv2. Defaults to
-                      IKEv2. Changing this forces a new resource to be created. ->
-                      Note: Only valid for IPSec connections on virtual network gateways
-                      with SKU VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.'
-                    type: string
-                  customBgpAddresses:
-                    description: A custom_bgp_addresses (Border Gateway Protocol custom
-                      IP Addresses) block which is documented below. The block can
-                      only be used on IPSec / activeactive connections, For details
-                      about see the relevant section in the Azure documentation.
-                    items:
-                      properties:
-                        primary:
-                          description: single IP address that is part of the azurerm_virtual_network_gateway
-                            ip_configuration (first one)
-                          type: string
-                        secondary:
-                          description: single IP address that is part of the azurerm_virtual_network_gateway
-                            ip_configuration (second one)
-                          type: string
-                      type: object
-                    type: array
-                  dpdTimeoutSeconds:
-                    description: The dead peer detection timeout of this connection
-                      in seconds. Changing this forces a new resource to be created.
-                    type: number
-                  egressNatRuleIds:
-                    description: A list of the egress NAT Rule Ids.
-                    items:
-                      type: string
-                    type: array
-                  enableBgp:
-                    description: If true, BGP (Border Gateway Protocol) is enabled
-                      for this connection. Defaults to false.
-                    type: boolean
-                  expressRouteCircuitId:
-                    description: The ID of the Express Route Circuit when creating
-                      an ExpressRoute connection (i.e. when type is ExpressRoute).
-                      The Express Route Circuit can be in the same or in a different
-                      subscription. Changing this forces a new resource to be created.
-                    type: string
-                  expressRouteGatewayBypass:
-                    description: If true, data packets will bypass ExpressRoute Gateway
-                      for data forwarding This is only valid for ExpressRoute connections.
-                    type: boolean
-                  ingressNatRuleIds:
-                    description: A list of the ingress NAT Rule Ids.
-                    items:
-                      type: string
-                    type: array
-                  ipsecPolicy:
-                    description: A ipsec_policy block which is documented below. Only
-                      a single policy can be defined for a connection. For details
-                      on custom policies refer to the relevant section in the Azure
-                      documentation.
-                    items:
-                      properties:
-                        dhGroup:
-                          description: The DH group used in IKE phase 1 for initial
-                            SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048,
-                            DHGroup24, ECP256, ECP384, or None.
-                          type: string
-                        ikeEncryption:
-                          description: The IKE encryption algorithm. Valid options
-                            are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
-                          type: string
-                        ikeIntegrity:
-                          description: The IKE integrity algorithm. Valid options
-                            are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
-                          type: string
-                        ipsecEncryption:
-                          description: The IPSec encryption algorithm. Valid options
-                            are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192,
-                            GCMAES256, or None.
-                          type: string
-                        ipsecIntegrity:
-                          description: The IPSec integrity algorithm. Valid options
-                            are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
-                          type: string
-                        pfsGroup:
-                          description: The DH group used in IKE phase 2 for new child
-                            SA. Valid options are ECP256, ECP384, PFS1, PFS14, PFS2,
-                            PFS2048, PFS24, PFSMM, or None.
-                          type: string
-                        saDatasize:
-                          description: The IPSec SA payload size in KB. Must be at
-                            least 1024 KB. Defaults to 102400000 KB.
-                          type: number
-                        saLifetime:
-                          description: The IPSec SA lifetime in seconds. Must be at
-                            least 300 seconds. Defaults to 27000 seconds.
-                          type: number
-                      type: object
-                    type: array
-                  localAzureIpAddressEnabled:
-                    description: Use private local Azure IP for the connection. Changing
-                      this forces a new resource to be created.
-                    type: boolean
-                  location:
-                    description: The location/region where the connection is located.
-                      Changing this forces a new resource to be created.
-                    type: string
-                  routingWeight:
-                    description: The routing weight. Defaults to 10.
-                    type: number
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                  trafficSelectorPolicy:
-                    description: One or more traffic_selector_policy blocks which
-                      are documented below. A traffic_selector_policy allows to specify
-                      a traffic selector policy proposal to be used in a virtual network
-                      gateway connection. For details about traffic selectors refer
-                      to the relevant section in the Azure documentation.
-                    items:
-                      properties:
-                        localAddressCidrs:
-                          description: List of local CIDRs.
-                          items:
-                            type: string
-                          type: array
-                        remoteAddressCidrs:
-                          description: List of remote CIDRs.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  type:
-                    description: The type of connection. Valid options are IPsec (Site-to-Site),
-                      ExpressRoute (ExpressRoute), and Vnet2Vnet (VNet-to-VNet). Each
-                      connection type requires different mandatory arguments (refer
-                      to the examples above). Changing this forces a new resource
-                      to be created.
-                    type: string
-                  usePolicyBasedTrafficSelectors:
-                    description: If true, policy-based traffic selectors are enabled
-                      for this connection. Enabling policy-based traffic selectors
-                      requires an ipsec_policy block. Defaults to false.
-                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -937,12 +787,10 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
-                || has(self.initProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
           status:
             description: VirtualNetworkGatewayConnectionStatus defines the observed
               state of VirtualNetworkGatewayConnection.

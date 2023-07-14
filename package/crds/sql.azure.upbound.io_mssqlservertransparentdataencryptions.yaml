@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: mssqlservertransparentdataencryptions.sql.azure.upbound.io
 spec:
   group: sql.azure.upbound.io
@@ -230,27 +230,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  autoRotationEnabled:
-                    description: When enabled, the server will continuously check
-                      the key vault for any new versions of the key being used as
-                      the TDE protector. If a new version of the key is detected,
-                      the TDE protector on the server will be automatically rotated
-                      to the latest key version within 60 minutes.
-                    type: boolean
                 type: object
               managementPolicies:
                 default:

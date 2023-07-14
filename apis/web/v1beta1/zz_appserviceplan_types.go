@@ -13,39 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type AppServicePlanInitParameters struct {
-
-	// The ID of the App Service Environment where the App Service Plan should be located. Changing forces a new resource to be created.
-	AppServiceEnvironmentID *string `json:"appServiceEnvironmentId,omitempty" tf:"app_service_environment_id,omitempty"`
-
-	// Whether to create a xenon App Service Plan.
-	IsXenon *bool `json:"isXenon,omitempty" tf:"is_xenon,omitempty"`
-
-	// The kind of the App Service Plan to create. Possible values are Windows (also available as App), Linux, elastic (for Premium Consumption), xenon and FunctionApp (for a Consumption Plan). Defaults to Windows. Changing this forces a new resource to be created.
-	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
-
-	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// The maximum number of total workers allowed for this ElasticScaleEnabled App Service Plan.
-	MaximumElasticWorkerCount *float64 `json:"maximumElasticWorkerCount,omitempty" tf:"maximum_elastic_worker_count,omitempty"`
-
-	// Can Apps assigned to this App Service Plan be scaled independently? If set to false apps assigned to this plan will scale to all instances of the plan.
-	PerSiteScaling *bool `json:"perSiteScaling,omitempty" tf:"per_site_scaling,omitempty"`
-
-	// Is this App Service Plan Reserved.
-	Reserved *bool `json:"reserved,omitempty" tf:"reserved,omitempty"`
-
-	// A sku block as documented below.
-	Sku []SkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Specifies if the App Service Plan should be Zone Redundant. Changing this forces a new resource to be created.
-	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
-}
-
 type AppServicePlanObservation struct {
 
 	// The ID of the App Service Environment where the App Service Plan should be located. Changing forces a new resource to be created.
@@ -144,18 +111,6 @@ type AppServicePlanParameters struct {
 	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
 }
 
-type SkuInitParameters struct {
-
-	// Specifies the number of workers associated with this App Service Plan.
-	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
-
-	// Specifies the plan's instance size.
-	Size *string `json:"size,omitempty" tf:"size,omitempty"`
-
-	// Specifies the plan's pricing tier.
-	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
-}
-
 type SkuObservation struct {
 
 	// Specifies the number of workers associated with this App Service Plan.
@@ -175,30 +130,18 @@ type SkuParameters struct {
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// Specifies the plan's instance size.
-	// +kubebuilder:validation:Optional
-	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+	// +kubebuilder:validation:Required
+	Size *string `json:"size" tf:"size,omitempty"`
 
 	// Specifies the plan's pricing tier.
-	// +kubebuilder:validation:Optional
-	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+	// +kubebuilder:validation:Required
+	Tier *string `json:"tier" tf:"tier,omitempty"`
 }
 
 // AppServicePlanSpec defines the desired state of AppServicePlan
 type AppServicePlanSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppServicePlanParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider AppServicePlanInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppServicePlanStatus defines the observed state of AppServicePlan.
@@ -219,8 +162,8 @@ type AppServicePlanStatus struct {
 type AppServicePlan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku)",message="sku is a required parameter"
 	Spec   AppServicePlanSpec   `json:"spec"`
 	Status AppServicePlanStatus `json:"status,omitempty"`
 }

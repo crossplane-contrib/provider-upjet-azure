@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: functionappfunctions.web.azure.upbound.io
 spec:
   group: web.azure.upbound.io
@@ -89,6 +89,9 @@ spec:
                             this forces a new resource to be created. The filename
                             of the file to be uploaded.
                           type: string
+                      required:
+                      - content
+                      - name
                       type: object
                     type: array
                   functionAppId:
@@ -171,57 +174,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  language:
-                    description: The language the Function is written in. Possible
-                      values are CSharp, Custom, Java, Javascript, Python, PowerShell,
-                      and TypeScript. The language the Function is written in.
-                    type: string
-                  name:
-                    description: The name of the function. Changing this forces a
-                      new resource to be created. The name of the function.
-                    type: string
-                  testData:
-                    description: The test data for the function. The test data for
-                      the function.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  configJson:
-                    description: The config for this Function in JSON format. The
-                      config for this Function in JSON format.
-                    type: string
-                  enabled:
-                    description: Should this function be enabled. Defaults to true.
-                      Should this function be enabled. Defaults to `true`.
-                    type: boolean
-                  file:
-                    description: A file block as detailed below. Changing this forces
-                      a new resource to be created.
-                    items:
-                      properties:
-                        content:
-                          description: The content of the file. Changing this forces
-                            a new resource to be created. The content of the file.
-                          type: string
-                        name:
-                          description: The filename of the file to be uploaded. Changing
-                            this forces a new resource to be created. The filename
-                            of the file to be uploaded.
-                          type: string
-                      type: object
-                    type: array
                   language:
                     description: The language the Function is written in. Possible
                       values are CSharp, Custom, Java, Javascript, Python, PowerShell,
@@ -436,12 +388,10 @@ spec:
             x-kubernetes-validations:
             - message: configJson is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.configJson)
-                || has(self.initProvider.configJson)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.configJson)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
           status:
             description: FunctionAppFunctionStatus defines the observed state of FunctionAppFunction.
             properties:

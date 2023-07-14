@@ -13,27 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type GlobalVMShutdownScheduleInitParameters struct {
-
-	// The time each day when the schedule takes effect. Must match the format HHmm where HH is 00-23 and mm is 00-59 (e.g. 0930, 2300, etc.)
-	DailyRecurrenceTime *string `json:"dailyRecurrenceTime,omitempty" tf:"daily_recurrence_time,omitempty"`
-
-	// Whether to enable the schedule. Possible values are true and false. Defaults to true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// The location where the schedule is created. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// The notification setting of a schedule. A notification_settings as defined below.
-	NotificationSettings []NotificationSettingsInitParameters `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// The time zone ID (e.g. Pacific Standard time). Refer to this guide for a full list of accepted time zone names.
-	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
-}
-
 type GlobalVMShutdownScheduleObservation struct {
 
 	// The time each day when the schedule takes effect. Must match the format HHmm where HH is 00-23 and mm is 00-59 (e.g. 0930, 2300, etc.)
@@ -102,21 +81,6 @@ type GlobalVMShutdownScheduleParameters struct {
 	VirtualMachineIDSelector *v1.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
 }
 
-type NotificationSettingsInitParameters struct {
-
-	// E-mail address to which the notification will be sent.
-	Email *string `json:"email,omitempty" tf:"email,omitempty"`
-
-	// Whether to enable pre-shutdown notifications. Possible values are true and false.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Time in minutes between 15 and 120 before a shutdown event at which a notification will be sent. Defaults to 30.
-	TimeInMinutes *float64 `json:"timeInMinutes,omitempty" tf:"time_in_minutes,omitempty"`
-
-	// The webhook URL to which the notification will be sent.
-	WebhookURL *string `json:"webhookUrl,omitempty" tf:"webhook_url,omitempty"`
-}
-
 type NotificationSettingsObservation struct {
 
 	// E-mail address to which the notification will be sent.
@@ -139,8 +103,8 @@ type NotificationSettingsParameters struct {
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// Whether to enable pre-shutdown notifications. Possible values are true and false.
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Required
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Time in minutes between 15 and 120 before a shutdown event at which a notification will be sent. Defaults to 30.
 	// +kubebuilder:validation:Optional
@@ -155,18 +119,6 @@ type NotificationSettingsParameters struct {
 type GlobalVMShutdownScheduleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GlobalVMShutdownScheduleParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider GlobalVMShutdownScheduleInitParameters `json:"initProvider,omitempty"`
 }
 
 // GlobalVMShutdownScheduleStatus defines the observed state of GlobalVMShutdownSchedule.
@@ -187,10 +139,10 @@ type GlobalVMShutdownScheduleStatus struct {
 type GlobalVMShutdownSchedule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dailyRecurrenceTime) || has(self.initProvider.dailyRecurrenceTime)",message="dailyRecurrenceTime is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.notificationSettings) || has(self.initProvider.notificationSettings)",message="notificationSettings is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timezone) || has(self.initProvider.timezone)",message="timezone is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dailyRecurrenceTime)",message="dailyRecurrenceTime is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.notificationSettings)",message="notificationSettings is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timezone)",message="timezone is a required parameter"
 	Spec   GlobalVMShutdownScheduleSpec   `json:"spec"`
 	Status GlobalVMShutdownScheduleStatus `json:"status,omitempty"`
 }

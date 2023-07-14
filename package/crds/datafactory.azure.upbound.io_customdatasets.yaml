@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: customdatasets.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -278,69 +278,6 @@ spec:
                       Data Factory Dataset.
                     type: string
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Dataset.
-                    items:
-                      type: string
-                    type: array
-                  description:
-                    description: The description for the Data Factory Dataset.
-                    type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
-                    type: string
-                  linkedService:
-                    description: A linked_service block as defined below.
-                    items:
-                      properties:
-                        parameters:
-                          additionalProperties:
-                            type: string
-                          description: A map of parameters to associate with the Data
-                            Factory Linked Service.
-                          type: object
-                      type: object
-                    type: array
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset.
-                    type: object
-                  schemaJson:
-                    description: A JSON object that contains the schema of the Data
-                      Factory Dataset.
-                    type: string
-                  type:
-                    description: The type of dataset that will be associated with
-                      Data Factory. Changing this forces a new resource to be created.
-                    type: string
-                  typePropertiesJson:
-                    description: A JSON object that contains the properties of the
-                      Data Factory Dataset.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -541,16 +478,13 @@ spec:
             x-kubernetes-validations:
             - message: linkedService is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.linkedService)
-                || has(self.initProvider.linkedService)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.linkedService)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
-                || has(self.initProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
             - message: typePropertiesJson is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.typePropertiesJson)
-                || has(self.initProvider.typePropertiesJson)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.typePropertiesJson)'
           status:
             description: CustomDataSetStatus defines the observed state of CustomDataSet.
             properties:

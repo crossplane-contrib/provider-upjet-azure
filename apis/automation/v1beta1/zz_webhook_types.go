@@ -13,24 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type WebhookInitParameters struct {
-
-	// Controls if Webhook is enabled. Defaults to true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// Timestamp when the webhook expires. Changing this forces a new resource to be created.
-	ExpiryTime *string `json:"expiryTime,omitempty" tf:"expiry_time,omitempty"`
-
-	// Specifies the name of the Webhook. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Map of input parameters passed to runbook.
-	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-
-	// Name of the hybrid worker group the Webhook job will run on.
-	RunOnWorkerGroup *string `json:"runOnWorkerGroup,omitempty" tf:"run_on_worker_group,omitempty"`
-}
-
 type WebhookObservation struct {
 
 	// The name of the automation account in which the Webhook is created. Changing this forces a new resource to be created.
@@ -132,18 +114,6 @@ type WebhookParameters struct {
 type WebhookSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WebhookParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider WebhookInitParameters `json:"initProvider,omitempty"`
 }
 
 // WebhookStatus defines the observed state of Webhook.
@@ -164,8 +134,8 @@ type WebhookStatus struct {
 type Webhook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.expiryTime) || has(self.initProvider.expiryTime)",message="expiryTime is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.expiryTime)",message="expiryTime is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
 	Spec   WebhookSpec   `json:"spec"`
 	Status WebhookStatus `json:"status,omitempty"`
 }

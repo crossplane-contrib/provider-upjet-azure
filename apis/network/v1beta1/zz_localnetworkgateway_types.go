@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type BGPSettingsInitParameters struct {
-
-	// The BGP speaker's ASN.
-	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
-
-	// The BGP peering address and BGP identifier of this BGP speaker.
-	BGPPeeringAddress *string `json:"bgpPeeringAddress,omitempty" tf:"bgp_peering_address,omitempty"`
-
-	// The weight added to routes learned from this BGP speaker.
-	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
-}
-
 type BGPSettingsObservation struct {
 
 	// The BGP speaker's ASN.
@@ -40,37 +28,16 @@ type BGPSettingsObservation struct {
 type BGPSettingsParameters struct {
 
 	// The BGP speaker's ASN.
-	// +kubebuilder:validation:Optional
-	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
+	// +kubebuilder:validation:Required
+	Asn *float64 `json:"asn" tf:"asn,omitempty"`
 
 	// The BGP peering address and BGP identifier of this BGP speaker.
-	// +kubebuilder:validation:Optional
-	BGPPeeringAddress *string `json:"bgpPeeringAddress,omitempty" tf:"bgp_peering_address,omitempty"`
+	// +kubebuilder:validation:Required
+	BGPPeeringAddress *string `json:"bgpPeeringAddress" tf:"bgp_peering_address,omitempty"`
 
 	// The weight added to routes learned from this BGP speaker.
 	// +kubebuilder:validation:Optional
 	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
-}
-
-type LocalNetworkGatewayInitParameters struct {
-
-	// The list of string CIDRs representing the address spaces the gateway exposes.
-	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
-
-	// A bgp_settings block as defined below containing the Local Network Gateway's BGP speaker settings.
-	BGPSettings []BGPSettingsInitParameters `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
-
-	// The gateway IP address to connect with.
-	GatewayAddress *string `json:"gatewayAddress,omitempty" tf:"gateway_address,omitempty"`
-
-	// The gateway FQDN to connect with.
-	GatewayFqdn *string `json:"gatewayFqdn,omitempty" tf:"gateway_fqdn,omitempty"`
-
-	// The location/region where the local network gateway is created. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LocalNetworkGatewayObservation struct {
@@ -144,18 +111,6 @@ type LocalNetworkGatewayParameters struct {
 type LocalNetworkGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LocalNetworkGatewayParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider LocalNetworkGatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // LocalNetworkGatewayStatus defines the observed state of LocalNetworkGateway.
@@ -176,7 +131,7 @@ type LocalNetworkGatewayStatus struct {
 type LocalNetworkGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   LocalNetworkGatewaySpec   `json:"spec"`
 	Status LocalNetworkGatewayStatus `json:"status,omitempty"`
 }

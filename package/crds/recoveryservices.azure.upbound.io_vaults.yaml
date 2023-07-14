@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: vaults.recoveryservices.azure.upbound.io
 spec:
   group: recoveryservices.azure.upbound.io
@@ -99,6 +99,9 @@ spec:
                           description: Specifies the user assigned identity ID to
                             be used.
                           type: string
+                      required:
+                      - infrastructureEncryptionEnabled
+                      - keyId
                       type: object
                     type: array
                   identity:
@@ -117,6 +120,8 @@ spec:
                             Possible values are SystemAssigned, UserAssigned, SystemAssigned,
                             UserAssigned (to enable both).
                           type: string
+                      required:
+                      - type
                       type: object
                     type: array
                   immutability:
@@ -227,118 +232,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  sku:
-                    description: 'Sets the vault''s SKU. Possible values include:
-                      Standard, RS0.'
-                    type: string
-                  softDeleteEnabled:
-                    description: Is soft delete enable for this Vault? Defaults to
-                      true.
-                    type: boolean
-                  storageModeType:
-                    description: The storage type of the Recovery Services Vault.
-                      Possible values are GeoRedundant, LocallyRedundant and ZoneRedundant.
-                      Defaults to GeoRedundant.
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  classicVmwareReplicationEnabled:
-                    description: Whether to enable the Classic experience for VMware
-                      replication. If set to false VMware machines will be protected
-                      using the new stateless ASR replication appliance. Changing
-                      this forces a new resource to be created.
-                    type: boolean
-                  crossRegionRestoreEnabled:
-                    description: Is cross region restore enabled for this Vault? Only
-                      can be true, when storage_mode_type is GeoRedundant. Defaults
-                      to false.
-                    type: boolean
-                  encryption:
-                    description: An encryption block as defined below. Required with
-                      identity.
-                    items:
-                      properties:
-                        infrastructureEncryptionEnabled:
-                          description: Enabling/Disabling the Double Encryption state.
-                          type: boolean
-                        keyId:
-                          description: The Key Vault key id used to encrypt this vault.
-                            Key managed by Vault Managed Hardware Security Module
-                            is also supported.
-                          type: string
-                        useSystemAssignedIdentity:
-                          description: Indicate that system assigned identity should
-                            be used or not. Defaults to true.
-                          type: boolean
-                        userAssignedIdentityId:
-                          description: Specifies the user assigned identity ID to
-                            be used.
-                          type: string
-                      type: object
-                    type: array
-                  identity:
-                    description: An identity block as defined below.
-                    items:
-                      properties:
-                        identityIds:
-                          description: A list of User Assigned Managed Identity IDs
-                            to be assigned to this App Configuration.
-                          items:
-                            type: string
-                          type: array
-                        type:
-                          description: Specifies the type of Managed Service Identity
-                            that should be configured on this Recovery Services Vault.
-                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
-                            UserAssigned (to enable both).
-                          type: string
-                      type: object
-                    type: array
-                  immutability:
-                    description: 'Immutability Settings of vault, possible values
-                      include: Locked, Unlocked and Disabled.'
-                    type: string
-                  location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
-                    type: string
-                  monitoring:
-                    description: A monitoring block as defined below.
-                    items:
-                      properties:
-                        alertsForAllJobFailuresEnabled:
-                          description: Enabling/Disabling built-in Azure Monitor alerts
-                            for security scenarios and job failure scenarios. Defaults
-                            to true.
-                          type: boolean
-                        alertsForCriticalOperationFailuresEnabled:
-                          description: Enabling/Disabling alerts from the older (classic
-                            alerts) solution. Defaults to true. More details could
-                            be found here.
-                          type: boolean
-                      type: object
-                    type: array
-                  publicNetworkAccessEnabled:
-                    description: Is it enabled to access the vault from public networks.
-                      Defaults to true.
-                    type: boolean
                   sku:
                     description: 'Sets the vault''s SKU. Possible values include:
                       Standard, RS0.'
@@ -558,12 +451,10 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
             - message: sku is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)
-                || has(self.initProvider.sku)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)'
           status:
             description: VaultStatus defines the observed state of Vault.
             properties:

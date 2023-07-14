@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: assetfilters.media.azure.upbound.io
 spec:
   group: media.azure.upbound.io
@@ -251,129 +251,8 @@ spec:
                                 type: string
                             type: object
                           type: array
-                      type: object
-                    type: array
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  firstQualityBitrate:
-                    description: The first quality bitrate. Sets the first video track
-                      to appear in the Live Streaming playlist to allow HLS native
-                      players to start downloading from this quality level at the
-                      beginning.
-                    type: number
-                  presentationTimeRange:
-                    description: A presentation_time_range block as defined below.
-                    items:
-                      properties:
-                        endInUnits:
-                          description: The absolute end time boundary. Applies to
-                            Video on Demand (VoD). For the Live Streaming presentation,
-                            it is silently ignored and applied when the presentation
-                            ends and the stream becomes VoD. This is a long value
-                            that represents an absolute end point of the presentation,
-                            rounded to the closest next GOP start. The unit is defined
-                            by unit_timescale_in_miliseconds, so an end_in_units of
-                            180 would be for 3 minutes. Use start_in_units and end_in_units
-                            to trim the fragments that will be in the playlist (manifest).
-                            For example, start_in_units set to 20 and end_in_units
-                            set to 60 using unit_timescale_in_miliseconds in 1000
-                            will generate a playlist that contains fragments from
-                            between 20 seconds and 60 seconds of the VoD presentation.
-                            If a fragment straddles the boundary, the entire fragment
-                            will be included in the manifest.
-                          type: number
-                        forceEnd:
-                          description: 'Indicates whether the end_in_units property
-                            must be present. If true, end_in_units must be specified
-                            or a bad request code is returned. Applies to Live Streaming
-                            only. Allowed values: false, true.'
-                          type: boolean
-                        liveBackoffInUnits:
-                          description: The relative to end right edge. Applies to
-                            Live Streaming only. This value defines the latest live
-                            position that a client can seek to. Using this property,
-                            you can delay live playback position and create a server-side
-                            buffer for players. The unit is defined by unit_timescale_in_miliseconds.
-                            The maximum live back off duration is 300 seconds. For
-                            example, a value of 20 means that the latest available
-                            content is 20 seconds delayed from the real live edge.
-                          type: number
-                        presentationWindowInUnits:
-                          description: The relative to end sliding window. Applies
-                            to Live Streaming only. Use presentation_window_in_units
-                            to apply a sliding window of fragments to include in a
-                            playlist. The unit is defined by unit_timescale_in_miliseconds.
-                            For example, set presentation_window_in_units to 120 to
-                            apply a two-minute sliding window. Media within 2 minutes
-                            of the live edge will be included in the playlist. If
-                            a fragment straddles the boundary, the entire fragment
-                            will be included in the playlist. The minimum presentation
-                            window duration is 60 seconds.
-                          type: number
-                        startInUnits:
-                          description: The absolute start time boundary. Applies to
-                            Video on Demand (VoD) or Live Streaming. This is a long
-                            value that represents an absolute start point of the stream.
-                            The value gets rounded to the closest next GOP start.
-                            The unit is defined by unit_timescale_in_miliseconds,
-                            so a start_in_units of 15 would be for 15 seconds. Use
-                            start_in_units and end_in_units to trim the fragments
-                            that will be in the playlist (manifest). For example,
-                            start_in_units set to 20 and end_in_units set to 60 using
-                            unit_timescale_in_miliseconds in 1000 will generate a
-                            playlist that contains fragments from between 20 seconds
-                            and 60 seconds of the VoD presentation. If a fragment
-                            straddles the boundary, the entire fragment will be included
-                            in the manifest.
-                          type: number
-                        unitTimescaleInMiliseconds:
-                          description: Specified as the number of miliseconds in one
-                            unit timescale. For example, if you want to set a start_in_units
-                            at 30 seconds, you would use a value of 30 when using
-                            the unit_timescale_in_miliseconds in 1000. Or if you want
-                            to set start_in_units in 30 miliseconds, you would use
-                            a value of 30 when using the unit_timescale_in_miliseconds
-                            in 1. Applies timescale to start_in_units, start_timescale
-                            and presentation_window_in_timescale and live_backoff_in_timescale.
-                          type: number
-                      type: object
-                    type: array
-                  trackSelection:
-                    description: One or more track_selection blocks as defined below.
-                    items:
-                      properties:
-                        condition:
-                          description: One or more condition blocks as defined above.
-                          items:
-                            properties:
-                              operation:
-                                description: The condition operation to test a track
-                                  property against. Supported values are Equal and
-                                  NotEqual.
-                                type: string
-                              property:
-                                description: The track property to compare. Supported
-                                  values are Bitrate, FourCC, Language, Name and Type.
-                                  Check documentation for more details.
-                                type: string
-                              value:
-                                description: The track property value to match or
-                                  not match.
-                                type: string
-                            type: object
-                          type: array
+                      required:
+                      - condition
                       type: object
                     type: array
                 type: object

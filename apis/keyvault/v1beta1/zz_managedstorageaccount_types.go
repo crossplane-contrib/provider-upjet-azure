@@ -13,21 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ManagedStorageAccountInitParameters struct {
-
-	// Should Storage Account access key be regenerated periodically?
-	RegenerateKeyAutomatically *bool `json:"regenerateKeyAutomatically,omitempty" tf:"regenerate_key_automatically,omitempty"`
-
-	// How often Storage Account access key should be regenerated. Value needs to be in ISO 8601 duration format.
-	RegenerationPeriod *string `json:"regenerationPeriod,omitempty" tf:"regeneration_period,omitempty"`
-
-	// Which Storage Account access key that is managed by Key Vault. Possible values are key1 and key2.
-	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
-
-	// A mapping of tags which should be assigned to the Key Vault Managed Storage Account. Changing this forces a new resource to be created.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
 type ManagedStorageAccountObservation struct {
 
 	// The ID of the Key Vault Managed Storage Account.
@@ -103,18 +88,6 @@ type ManagedStorageAccountParameters struct {
 type ManagedStorageAccountSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagedStorageAccountParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ManagedStorageAccountInitParameters `json:"initProvider,omitempty"`
 }
 
 // ManagedStorageAccountStatus defines the observed state of ManagedStorageAccount.
@@ -135,7 +108,7 @@ type ManagedStorageAccountStatus struct {
 type ManagedStorageAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageAccountKey) || has(self.initProvider.storageAccountKey)",message="storageAccountKey is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageAccountKey)",message="storageAccountKey is a required parameter"
 	Spec   ManagedStorageAccountSpec   `json:"spec"`
 	Status ManagedStorageAccountStatus `json:"status,omitempty"`
 }

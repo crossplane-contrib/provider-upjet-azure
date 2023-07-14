@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type FrontdoorCustomDomainInitParameters struct {
-
-	// The host name of the domain. The host_name field must be the FQDN of your domain(e.g. contoso.fabrikam.com). Changing this forces a new Front Door Custom Domain to be created.
-	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
-
-	// A tls block as defined below.
-	TLS []TLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
-}
-
 type FrontdoorCustomDomainObservation struct {
 
 	// The ID of the Front Door Profile. Changing this forces a new Front Door Profile to be created.
@@ -85,18 +76,6 @@ type FrontdoorCustomDomainParameters struct {
 	TLS []TLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
-type TLSInitParameters struct {
-
-	// Resource ID of the Front Door Secret.
-	CdnFrontdoorSecretID *string `json:"cdnFrontdoorSecretId,omitempty" tf:"cdn_frontdoor_secret_id,omitempty"`
-
-	// Defines the source of the SSL certificate. Possible values include CustomerCertificate and ManagedCertificate. Defaults to ManagedCertificate.
-	CertificateType *string `json:"certificateType,omitempty" tf:"certificate_type,omitempty"`
-
-	// TLS protocol version that will be used for Https. Possible values include TLS10 and TLS12. Defaults to TLS12.
-	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
-}
-
 type TLSObservation struct {
 
 	// Resource ID of the Front Door Secret.
@@ -128,18 +107,6 @@ type TLSParameters struct {
 type FrontdoorCustomDomainSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FrontdoorCustomDomainParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider FrontdoorCustomDomainInitParameters `json:"initProvider,omitempty"`
 }
 
 // FrontdoorCustomDomainStatus defines the observed state of FrontdoorCustomDomain.
@@ -160,8 +127,8 @@ type FrontdoorCustomDomainStatus struct {
 type FrontdoorCustomDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.hostName) || has(self.initProvider.hostName)",message="hostName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tls) || has(self.initProvider.tls)",message="tls is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.hostName)",message="hostName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tls)",message="tls is a required parameter"
 	Spec   FrontdoorCustomDomainSpec   `json:"spec"`
 	Status FrontdoorCustomDomainStatus `json:"status,omitempty"`
 }

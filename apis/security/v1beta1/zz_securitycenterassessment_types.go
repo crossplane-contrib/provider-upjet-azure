@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type SecurityCenterAssessmentInitParameters struct {
-
-	// A map of additional data to associate with the assessment.
-	AdditionalData map[string]*string `json:"additionalData,omitempty" tf:"additional_data,omitempty"`
-
-	// A status block as defined below.
-	Status []StatusInitParameters `json:"status,omitempty" tf:"status,omitempty"`
-}
-
 type SecurityCenterAssessmentObservation struct {
 
 	// A map of additional data to associate with the assessment.
@@ -79,18 +70,6 @@ type SecurityCenterAssessmentParameters struct {
 	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
-type StatusInitParameters struct {
-
-	// Specifies the cause of the assessment status.
-	Cause *string `json:"cause,omitempty" tf:"cause,omitempty"`
-
-	// Specifies the programmatic code of the assessment status. Possible values are Healthy, Unhealthy and NotApplicable.
-	Code *string `json:"code,omitempty" tf:"code,omitempty"`
-
-	// Specifies the human readable description of the assessment status.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-}
-
 type StatusObservation struct {
 
 	// Specifies the cause of the assessment status.
@@ -110,8 +89,8 @@ type StatusParameters struct {
 	Cause *string `json:"cause,omitempty" tf:"cause,omitempty"`
 
 	// Specifies the programmatic code of the assessment status. Possible values are Healthy, Unhealthy and NotApplicable.
-	// +kubebuilder:validation:Optional
-	Code *string `json:"code,omitempty" tf:"code,omitempty"`
+	// +kubebuilder:validation:Required
+	Code *string `json:"code" tf:"code,omitempty"`
 
 	// Specifies the human readable description of the assessment status.
 	// +kubebuilder:validation:Optional
@@ -122,18 +101,6 @@ type StatusParameters struct {
 type SecurityCenterAssessmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecurityCenterAssessmentParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider SecurityCenterAssessmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecurityCenterAssessmentStatus defines the observed state of SecurityCenterAssessment.
@@ -154,7 +121,7 @@ type SecurityCenterAssessmentStatus struct {
 type SecurityCenterAssessment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.status) || has(self.initProvider.status)",message="status is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.status)",message="status is a required parameter"
 	Spec   SecurityCenterAssessmentSpec   `json:"spec"`
 	Status SecurityCenterAssessmentStatus `json:"status,omitempty"`
 }

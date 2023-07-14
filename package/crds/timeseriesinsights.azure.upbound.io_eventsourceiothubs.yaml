@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: eventsourceiothubs.timeseriesinsights.azure.upbound.io
 spec:
   group: timeseriesinsights.azure.upbound.io
@@ -418,38 +418,6 @@ spec:
                       time.
                     type: string
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
-                    type: string
-                  sharedAccessKeyName:
-                    description: Specifies the name of the Shared Access key that
-                      grants the Event Source access to the IotHub.
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                  timestampPropertyName:
-                    description: Specifies the value that will be used as the event
-                      source's timestamp. This value defaults to the event creation
-                      time.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -650,15 +618,13 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
             - message: sharedAccessKeySecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.sharedAccessKeySecretRef)'
             - message: sharedAccessKeyName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sharedAccessKeyName)
-                || has(self.initProvider.sharedAccessKeyName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sharedAccessKeyName)'
           status:
             description: EventSourceIOTHubStatus defines the observed state of EventSourceIOTHub.
             properties:

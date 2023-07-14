@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: accounts.storage.azure.upbound.io
 spec:
   group: storage.azure.upbound.io
@@ -125,12 +125,21 @@ spec:
                                 description: Specifies the security identifier (SID)
                                   for Azure Storage.
                                 type: string
+                            required:
+                            - domainGuid
+                            - domainName
+                            - domainSid
+                            - forestName
+                            - netbiosDomainName
+                            - storageSid
                             type: object
                           type: array
                         directoryType:
                           description: Specifies the directory service used. Possible
                             values are AADDS, AD and AADKERB.
                           type: string
+                      required:
+                      - directoryType
                       type: object
                     type: array
                   blobProperties:
@@ -194,6 +203,12 @@ spec:
                                 description: The number of seconds the client should
                                   cache a preflight response.
                                 type: number
+                            required:
+                            - allowedHeaders
+                            - allowedMethods
+                            - allowedOrigins
+                            - exposedHeaders
+                            - maxAgeInSeconds
                             type: object
                           type: array
                         defaultServiceVersion:
@@ -228,6 +243,8 @@ spec:
                                   azurerm_storage_share should be retained, between
                                   1 and 365 days. Defaults to 7.
                                 type: number
+                            required:
+                            - days
                             type: object
                           type: array
                         versioningEnabled:
@@ -251,6 +268,8 @@ spec:
                           description: Should the Custom Domain Name be validated
                             by using indirect CNAME validation?
                           type: boolean
+                      required:
+                      - name
                       type: object
                     type: array
                   customerManagedKey:
@@ -264,6 +283,9 @@ spec:
                         userAssignedIdentityId:
                           description: The ID of a user assigned identity.
                           type: string
+                      required:
+                      - keyVaultKeyId
+                      - userAssignedIdentityId
                       type: object
                     type: array
                   defaultToOauthAuthentication:
@@ -296,6 +318,8 @@ spec:
                             values are SystemAssigned, UserAssigned, SystemAssigned,
                             UserAssigned (to enable both).
                           type: string
+                      required:
+                      - type
                       type: object
                     type: array
                   immutabilityPolicy:
@@ -324,6 +348,10 @@ spec:
                             a policy in an Unlocked state can transition to a Locked
                             state which cannot be reverted.
                           type: string
+                      required:
+                      - allowProtectedAppendWrites
+                      - periodSinceCreationInDays
+                      - state
                       type: object
                     type: array
                   infrastructureEncryptionEnabled:
@@ -384,6 +412,8 @@ spec:
                                   resource access rule to be granted access. Defaults
                                   to the current tenant id.
                                 type: string
+                            required:
+                            - endpointResourceId
                             type: object
                           type: array
                         virtualNetworkSubnetIds:
@@ -391,6 +421,8 @@ spec:
                           items:
                             type: string
                           type: array
+                      required:
+                      - defaultAction
                       type: object
                     type: array
                   nfsv3Enabled:
@@ -444,6 +476,12 @@ spec:
                                 description: The number of seconds the client should
                                   cache a preflight response.
                                 type: number
+                            required:
+                            - allowedHeaders
+                            - allowedMethods
+                            - allowedOrigins
+                            - exposedHeaders
+                            - maxAgeInSeconds
                             type: object
                           type: array
                         hourMetrics:
@@ -465,6 +503,9 @@ spec:
                               version:
                                 description: The version of storage analytics to configure.
                                 type: string
+                            required:
+                            - enabled
+                            - version
                             type: object
                           type: array
                         logging:
@@ -490,6 +531,11 @@ spec:
                                 description: Indicates whether all write requests
                                   should be logged.
                                 type: boolean
+                            required:
+                            - delete
+                            - read
+                            - version
+                            - write
                             type: object
                           type: array
                         minuteMetrics:
@@ -511,6 +557,9 @@ spec:
                               version:
                                 description: The version of storage analytics to configure.
                                 type: string
+                            required:
+                            - enabled
+                            - version
                             type: object
                           type: array
                       type: object
@@ -625,6 +674,8 @@ spec:
                         expirationPeriod:
                           description: The SAS expiration period in format of DD.HH:MM:SS.
                           type: string
+                      required:
+                      - expirationPeriod
                       type: object
                     type: array
                   sftpEnabled:
@@ -668,624 +719,12 @@ spec:
                                 description: The number of seconds the client should
                                   cache a preflight response.
                                 type: number
-                            type: object
-                          type: array
-                        retentionPolicy:
-                          description: A retention_policy block as defined below.
-                          items:
-                            properties:
-                              days:
-                                description: Specifies the number of days that the
-                                  azurerm_storage_share should be retained, between
-                                  1 and 365 days. Defaults to 7.
-                                type: number
-                            type: object
-                          type: array
-                        smb:
-                          description: A smb block as defined below.
-                          items:
-                            properties:
-                              authenticationTypes:
-                                description: A set of SMB authentication methods.
-                                  Possible values are NTLMv2, and Kerberos.
-                                items:
-                                  type: string
-                                type: array
-                              channelEncryptionType:
-                                description: A set of SMB channel encryption. Possible
-                                  values are AES-128-CCM, AES-128-GCM, and AES-256-GCM.
-                                items:
-                                  type: string
-                                type: array
-                              kerberosTicketEncryptionType:
-                                description: A set of Kerberos ticket encryption.
-                                  Possible values are RC4-HMAC, and AES-256.
-                                items:
-                                  type: string
-                                type: array
-                              multichannelEnabled:
-                                description: Indicates whether multichannel is enabled.
-                                  Defaults to false. This is only supported on Premium
-                                  storage accounts.
-                                type: boolean
-                              versions:
-                                description: A set of SMB protocol versions. Possible
-                                  values are SMB2.1, SMB3.0, and SMB3.1.1.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  sharedAccessKeyEnabled:
-                    description: Indicates whether the storage account permits requests
-                      to be authorized with the account access key via Shared Key.
-                      If false, then all requests, including shared access signatures,
-                      must be authorized with Azure Active Directory (Azure AD). The
-                      default value is true.
-                    type: boolean
-                  staticWebsite:
-                    description: A static_website block as defined below.
-                    items:
-                      properties:
-                        error404Document:
-                          description: The absolute path to a custom webpage that
-                            should be used when a request is made which does not correspond
-                            to an existing file.
-                          type: string
-                        indexDocument:
-                          description: The webpage that Azure Storage serves for requests
-                            to the root of a website or any subfolder. For example,
-                            index.html. The value is case-sensitive.
-                          type: string
-                      type: object
-                    type: array
-                  tableEncryptionKeyType:
-                    description: The encryption type of the table service. Possible
-                      values are Service and Account. Changing this forces a new resource
-                      to be created. Default value is Service.
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  accessTier:
-                    description: Defines the access tier for BlobStorage, FileStorage
-                      and StorageV2 accounts. Valid options are Hot and Cool, defaults
-                      to Hot.
-                    type: string
-                  accountKind:
-                    description: Defines the Kind of account. Valid options are BlobStorage,
-                      BlockBlobStorage, FileStorage, Storage and StorageV2. Defaults
-                      to StorageV2.
-                    type: string
-                  accountReplicationType:
-                    description: Defines the type of replication to use for this storage
-                      account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS.
-                    type: string
-                  accountTier:
-                    description: Defines the Tier to use for this storage account.
-                      Valid options are Standard and Premium. For BlockBlobStorage
-                      and FileStorage accounts only Premium is valid. Changing this
-                      forces a new resource to be created.
-                    type: string
-                  allowNestedItemsToBePublic:
-                    description: Allow or disallow nested items within this Account
-                      to opt into being public. Defaults to true.
-                    type: boolean
-                  allowedCopyScope:
-                    description: Restrict copy to and from Storage Accounts within
-                      an AAD tenant or with Private Links to the same VNet. Possible
-                      values are AAD and PrivateLink.
-                    type: string
-                  azureFilesAuthentication:
-                    description: A azure_files_authentication block as defined below.
-                    items:
-                      properties:
-                        activeDirectory:
-                          description: A active_directory block as defined below.
-                            Required when directory_type is AD.
-                          items:
-                            properties:
-                              domainGuid:
-                                description: Specifies the domain GUID.
-                                type: string
-                              domainName:
-                                description: Specifies the primary domain that the
-                                  AD DNS server is authoritative for.
-                                type: string
-                              domainSid:
-                                description: Specifies the security identifier (SID).
-                                type: string
-                              forestName:
-                                description: Specifies the Active Directory forest.
-                                type: string
-                              netbiosDomainName:
-                                description: Specifies the NetBIOS domain name.
-                                type: string
-                              storageSid:
-                                description: Specifies the security identifier (SID)
-                                  for Azure Storage.
-                                type: string
-                            type: object
-                          type: array
-                        directoryType:
-                          description: Specifies the directory service used. Possible
-                            values are AADDS, AD and AADKERB.
-                          type: string
-                      type: object
-                    type: array
-                  blobProperties:
-                    description: A blob_properties block as defined below.
-                    items:
-                      properties:
-                        changeFeedEnabled:
-                          description: Is the blob service properties for change feed
-                            events enabled? Default to false.
-                          type: boolean
-                        changeFeedRetentionInDays:
-                          description: The duration of change feed events retention
-                            in days. The possible values are between 1 and 146000
-                            days (400 years). Setting this to null (or omit this in
-                            the configuration file) indicates an infinite retention
-                            of the change feed.
-                          type: number
-                        containerDeleteRetentionPolicy:
-                          description: A container_delete_retention_policy block as
-                            defined below.
-                          items:
-                            properties:
-                              days:
-                                description: Specifies the number of days that the
-                                  azurerm_storage_share should be retained, between
-                                  1 and 365 days. Defaults to 7.
-                                type: number
-                            type: object
-                          type: array
-                        corsRule:
-                          description: A cors_rule block as defined below.
-                          items:
-                            properties:
-                              allowedHeaders:
-                                description: A list of headers that are allowed to
-                                  be a part of the cross-origin request.
-                                items:
-                                  type: string
-                                type: array
-                              allowedMethods:
-                                description: A list of HTTP methods that are allowed
-                                  to be executed by the origin. Valid options are
-                                  DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or
-                                  PATCH.
-                                items:
-                                  type: string
-                                type: array
-                              allowedOrigins:
-                                description: A list of origin domains that will be
-                                  allowed by CORS.
-                                items:
-                                  type: string
-                                type: array
-                              exposedHeaders:
-                                description: A list of response headers that are exposed
-                                  to CORS clients.
-                                items:
-                                  type: string
-                                type: array
-                              maxAgeInSeconds:
-                                description: The number of seconds the client should
-                                  cache a preflight response.
-                                type: number
-                            type: object
-                          type: array
-                        defaultServiceVersion:
-                          description: The API Version which should be used by default
-                            for requests to the Data Plane API if an incoming request
-                            doesn't specify an API Version.
-                          type: string
-                        deleteRetentionPolicy:
-                          description: A delete_retention_policy block as defined
-                            below.
-                          items:
-                            properties:
-                              days:
-                                description: Specifies the number of days that the
-                                  azurerm_storage_share should be retained, between
-                                  1 and 365 days. Defaults to 7.
-                                type: number
-                            type: object
-                          type: array
-                        lastAccessTimeEnabled:
-                          description: Is the last access time based tracking enabled?
-                            Default to false.
-                          type: boolean
-                        restorePolicy:
-                          description: A restore_policy block as defined below. This
-                            must be used together with delete_retention_policy set,
-                            versioning_enabled and change_feed_enabled set to true.
-                          items:
-                            properties:
-                              days:
-                                description: Specifies the number of days that the
-                                  azurerm_storage_share should be retained, between
-                                  1 and 365 days. Defaults to 7.
-                                type: number
-                            type: object
-                          type: array
-                        versioningEnabled:
-                          description: Is versioning enabled? Default to false.
-                          type: boolean
-                      type: object
-                    type: array
-                  crossTenantReplicationEnabled:
-                    description: Should cross Tenant replication be enabled? Defaults
-                      to true.
-                    type: boolean
-                  customDomain:
-                    description: A custom_domain block as documented below.
-                    items:
-                      properties:
-                        name:
-                          description: The Custom Domain Name to use for the Storage
-                            Account, which will be validated by Azure.
-                          type: string
-                        useSubdomain:
-                          description: Should the Custom Domain Name be validated
-                            by using indirect CNAME validation?
-                          type: boolean
-                      type: object
-                    type: array
-                  customerManagedKey:
-                    description: A customer_managed_key block as documented below.
-                    items:
-                      properties:
-                        keyVaultKeyId:
-                          description: The ID of the Key Vault Key, supplying a version-less
-                            key ID will enable auto-rotation of this key.
-                          type: string
-                        userAssignedIdentityId:
-                          description: The ID of a user assigned identity.
-                          type: string
-                      type: object
-                    type: array
-                  defaultToOauthAuthentication:
-                    description: Default to Azure Active Directory authorization in
-                      the Azure portal when accessing the Storage Account. The default
-                      value is false
-                    type: boolean
-                  edgeZone:
-                    description: Specifies the Edge Zone within the Azure Region where
-                      this Storage Account should exist. Changing this forces a new
-                      Storage Account to be created.
-                    type: string
-                  enableHttpsTrafficOnly:
-                    description: Boolean flag which forces HTTPS if enabled, see here
-                      for more information. Defaults to true.
-                    type: boolean
-                  identity:
-                    description: An identity block as defined below.
-                    items:
-                      properties:
-                        identityIds:
-                          description: Specifies a list of User Assigned Managed Identity
-                            IDs to be assigned to this Storage Account.
-                          items:
-                            type: string
-                          type: array
-                        type:
-                          description: Specifies the type of Managed Service Identity
-                            that should be configured on this Storage Account. Possible
-                            values are SystemAssigned, UserAssigned, SystemAssigned,
-                            UserAssigned (to enable both).
-                          type: string
-                      type: object
-                    type: array
-                  immutabilityPolicy:
-                    description: An immutability_policy block as defined below. Changing
-                      this forces a new resource to be created.
-                    items:
-                      properties:
-                        allowProtectedAppendWrites:
-                          description: When enabled, new blocks can be written to
-                            an append blob while maintaining immutability protection
-                            and compliance. Only new blocks can be added and any existing
-                            blocks cannot be modified or deleted.
-                          type: boolean
-                        periodSinceCreationInDays:
-                          description: The immutability period for the blobs in the
-                            container since the policy creation, in days.
-                          type: number
-                        state:
-                          description: Defines the mode of the policy. Disabled state
-                            disables the policy, Unlocked state allows increase and
-                            decrease of immutability retention time and also allows
-                            toggling allowProtectedAppendWrites property, Locked state
-                            only allows the increase of the immutability retention
-                            time. A policy can only be created in a Disabled or Unlocked
-                            state and can be toggled between the two states. Only
-                            a policy in an Unlocked state can transition to a Locked
-                            state which cannot be reverted.
-                          type: string
-                      type: object
-                    type: array
-                  infrastructureEncryptionEnabled:
-                    description: Is infrastructure encryption enabled? Changing this
-                      forces a new resource to be created. Defaults to false.
-                    type: boolean
-                  isHnsEnabled:
-                    description: Is Hierarchical Namespace enabled? This can be used
-                      with Azure Data Lake Storage Gen 2 (see here for more information).
-                      Changing this forces a new resource to be created.
-                    type: boolean
-                  largeFileShareEnabled:
-                    description: Is Large File Share Enabled?
-                    type: boolean
-                  location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
-                    type: string
-                  minTlsVersion:
-                    description: The minimum supported TLS version for the storage
-                      account. Possible values are TLS1_0, TLS1_1, and TLS1_2. Defaults
-                      to TLS1_2 for new storage accounts.
-                    type: string
-                  networkRules:
-                    description: A network_rules block as documented below.
-                    items:
-                      properties:
-                        bypass:
-                          description: Specifies whether traffic is bypassed for Logging/Metrics/AzureServices.
-                            Valid options are any combination of Logging, Metrics,
-                            AzureServices, or None.
-                          items:
-                            type: string
-                          type: array
-                        defaultAction:
-                          description: Specifies the default action of allow or deny
-                            when no other rules match. Valid options are Deny or Allow.
-                          type: string
-                        ipRules:
-                          description: List of public IP or IP ranges in CIDR Format.
-                            Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs,
-                            and Private IP address ranges (as defined in RFC 1918),  are
-                            not allowed.
-                          items:
-                            type: string
-                          type: array
-                        privateLinkAccess:
-                          description: One or More private_link_access block as defined
-                            below.
-                          items:
-                            properties:
-                              endpointResourceId:
-                                description: The resource id of the resource access
-                                  rule to be granted access.
-                                type: string
-                              endpointTenantId:
-                                description: The tenant id of the resource of the
-                                  resource access rule to be granted access. Defaults
-                                  to the current tenant id.
-                                type: string
-                            type: object
-                          type: array
-                        virtualNetworkSubnetIds:
-                          description: A list of resource ids for subnets.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  nfsv3Enabled:
-                    description: Is NFSv3 protocol enabled? Changing this forces a
-                      new resource to be created. Defaults to false.
-                    type: boolean
-                  publicNetworkAccessEnabled:
-                    description: Whether the public network access is enabled? Defaults
-                      to true.
-                    type: boolean
-                  queueEncryptionKeyType:
-                    description: The encryption type of the queue service. Possible
-                      values are Service and Account. Changing this forces a new resource
-                      to be created. Default value is Service.
-                    type: string
-                  queueProperties:
-                    description: A queue_properties block as defined below.
-                    items:
-                      properties:
-                        corsRule:
-                          description: A cors_rule block as defined above.
-                          items:
-                            properties:
-                              allowedHeaders:
-                                description: A list of headers that are allowed to
-                                  be a part of the cross-origin request.
-                                items:
-                                  type: string
-                                type: array
-                              allowedMethods:
-                                description: A list of HTTP methods that are allowed
-                                  to be executed by the origin. Valid options are
-                                  DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or
-                                  PATCH.
-                                items:
-                                  type: string
-                                type: array
-                              allowedOrigins:
-                                description: A list of origin domains that will be
-                                  allowed by CORS.
-                                items:
-                                  type: string
-                                type: array
-                              exposedHeaders:
-                                description: A list of response headers that are exposed
-                                  to CORS clients.
-                                items:
-                                  type: string
-                                type: array
-                              maxAgeInSeconds:
-                                description: The number of seconds the client should
-                                  cache a preflight response.
-                                type: number
-                            type: object
-                          type: array
-                        hourMetrics:
-                          description: A hour_metrics block as defined below.
-                          items:
-                            properties:
-                              enabled:
-                                description: Indicates whether minute metrics are
-                                  enabled for the Queue service.
-                                type: boolean
-                              includeApis:
-                                description: Indicates whether metrics should generate
-                                  summary statistics for called API operations.
-                                type: boolean
-                              retentionPolicyDays:
-                                description: Specifies the number of days that logs
-                                  will be retained.
-                                type: number
-                              version:
-                                description: The version of storage analytics to configure.
-                                type: string
-                            type: object
-                          type: array
-                        logging:
-                          description: A logging block as defined below.
-                          items:
-                            properties:
-                              delete:
-                                description: (Defaults to 60 minutes) Used when deleting
-                                  the Storage Account.
-                                type: boolean
-                              read:
-                                description: (Defaults to 5 minutes) Used when retrieving
-                                  the Storage Account.
-                                type: boolean
-                              retentionPolicyDays:
-                                description: Specifies the number of days that logs
-                                  will be retained.
-                                type: number
-                              version:
-                                description: The version of storage analytics to configure.
-                                type: string
-                              write:
-                                description: Indicates whether all write requests
-                                  should be logged.
-                                type: boolean
-                            type: object
-                          type: array
-                        minuteMetrics:
-                          description: A minute_metrics block as defined below.
-                          items:
-                            properties:
-                              enabled:
-                                description: Indicates whether minute metrics are
-                                  enabled for the Queue service.
-                                type: boolean
-                              includeApis:
-                                description: Indicates whether metrics should generate
-                                  summary statistics for called API operations.
-                                type: boolean
-                              retentionPolicyDays:
-                                description: Specifies the number of days that logs
-                                  will be retained.
-                                type: number
-                              version:
-                                description: The version of storage analytics to configure.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  routing:
-                    description: A routing block as defined below.
-                    items:
-                      properties:
-                        choice:
-                          description: Specifies the kind of network routing opted
-                            by the user. Possible values are InternetRouting and MicrosoftRouting.
-                            Defaults to MicrosoftRouting.
-                          type: string
-                        publishInternetEndpoints:
-                          description: Should internet routing storage endpoints be
-                            published? Defaults to false.
-                          type: boolean
-                        publishMicrosoftEndpoints:
-                          description: Should Microsoft routing storage endpoints
-                            be published? Defaults to false.
-                          type: boolean
-                      type: object
-                    type: array
-                  sasPolicy:
-                    description: A sas_policy block as defined below.
-                    items:
-                      properties:
-                        expirationAction:
-                          description: The SAS expiration action. The only possible
-                            value is Log at this moment. Defaults to Log.
-                          type: string
-                        expirationPeriod:
-                          description: The SAS expiration period in format of DD.HH:MM:SS.
-                          type: string
-                      type: object
-                    type: array
-                  sftpEnabled:
-                    description: Boolean, enable SFTP for the storage account
-                    type: boolean
-                  shareProperties:
-                    description: A share_properties block as defined below.
-                    items:
-                      properties:
-                        corsRule:
-                          description: A cors_rule block as defined below.
-                          items:
-                            properties:
-                              allowedHeaders:
-                                description: A list of headers that are allowed to
-                                  be a part of the cross-origin request.
-                                items:
-                                  type: string
-                                type: array
-                              allowedMethods:
-                                description: A list of HTTP methods that are allowed
-                                  to be executed by the origin. Valid options are
-                                  DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or
-                                  PATCH.
-                                items:
-                                  type: string
-                                type: array
-                              allowedOrigins:
-                                description: A list of origin domains that will be
-                                  allowed by CORS.
-                                items:
-                                  type: string
-                                type: array
-                              exposedHeaders:
-                                description: A list of response headers that are exposed
-                                  to CORS clients.
-                                items:
-                                  type: string
-                                type: array
-                              maxAgeInSeconds:
-                                description: The number of seconds the client should
-                                  cache a preflight response.
-                                type: number
+                            required:
+                            - allowedHeaders
+                            - allowedMethods
+                            - allowedOrigins
+                            - exposedHeaders
+                            - maxAgeInSeconds
                             type: object
                           type: array
                         retentionPolicy:
@@ -1570,16 +1009,13 @@ spec:
             x-kubernetes-validations:
             - message: accountReplicationType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountReplicationType)
-                || has(self.initProvider.accountReplicationType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountReplicationType)'
             - message: accountTier is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountTier)
-                || has(self.initProvider.accountTier)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.accountTier)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: AccountStatus defines the observed state of Account.
             properties:

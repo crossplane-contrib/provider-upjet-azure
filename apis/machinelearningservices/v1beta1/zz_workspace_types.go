@@ -13,9 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type EncryptionInitParameters struct {
-}
-
 type EncryptionObservation struct {
 
 	// The Key Vault URI to access the encryption key.
@@ -73,15 +70,6 @@ type EncryptionParameters struct {
 	UserAssignedIdentityIDSelector *v1.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
-type WorkspaceIdentityInitParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Workspace.
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Workspace. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type WorkspaceIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Workspace.
@@ -104,50 +92,8 @@ type WorkspaceIdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Workspace. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type WorkspaceInitParameters struct {
-
-	// The ID of the container registry associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
-	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
-
-	// The description of this Machine Learning Workspace.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// An encryption block as defined below. Changing this forces a new resource to be created.
-	Encryption []EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
-
-	// Display name for this Machine Learning Workspace.
-	FriendlyName *string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
-
-	// Flag to signal High Business Impact (HBI) data in the workspace and reduce diagnostic data collected by the service
-	HighBusinessImpact *bool `json:"highBusinessImpact,omitempty" tf:"high_business_impact,omitempty"`
-
-	// An identity block as defined below.
-	Identity []WorkspaceIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// The compute name for image build of the Machine Learning Workspace.
-	ImageBuildComputeName *string `json:"imageBuildComputeName,omitempty" tf:"image_build_compute_name,omitempty"`
-
-	// Specifies the supported Azure location where the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// Enable public access when this Machine Learning Workspace is behind a VNet. Changing this forces a new resource to be created.
-	PublicAccessBehindVirtualNetworkEnabled *bool `json:"publicAccessBehindVirtualNetworkEnabled,omitempty" tf:"public_access_behind_virtual_network_enabled,omitempty"`
-
-	// Enable public access when this Machine Learning Workspace is behind VNet.
-	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
-
-	// SKU/edition of the Machine Learning Workspace, possible values are Basic. Defaults to Basic.
-	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Enable V1 API features, enabling v1_legacy_mode may prevent you from using features provided by the v2 API. Defaults to false.
-	V1LegacyModeEnabled *bool `json:"v1LegacyModeEnabled,omitempty" tf:"v1_legacy_mode_enabled,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type WorkspaceObservation struct {
@@ -344,18 +290,6 @@ type WorkspaceParameters struct {
 type WorkspaceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WorkspaceParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider WorkspaceInitParameters `json:"initProvider,omitempty"`
 }
 
 // WorkspaceStatus defines the observed state of Workspace.
@@ -376,8 +310,8 @@ type WorkspaceStatus struct {
 type Workspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identity) || has(self.initProvider.identity)",message="identity is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identity)",message="identity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   WorkspaceSpec   `json:"spec"`
 	Status WorkspaceStatus `json:"status,omitempty"`
 }

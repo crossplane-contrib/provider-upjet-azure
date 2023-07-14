@@ -13,10 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type HubProfileInitParameters struct {
-	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
-}
-
 type HubProfileObservation struct {
 	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
 
@@ -27,20 +23,8 @@ type HubProfileObservation struct {
 
 type HubProfileParameters struct {
 
-	// +kubebuilder:validation:Optional
-	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
-}
-
-type KubernetesFleetManagerInitParameters struct {
-
-	// A hub_profile block as defined below. The FleetHubProfile configures the Fleet's hub. Changing this forces a new Kubernetes Fleet Manager to be created.
-	HubProfile []HubProfileInitParameters `json:"hubProfile,omitempty" tf:"hub_profile,omitempty"`
-
-	// The Azure Region where the Kubernetes Fleet Manager should exist. Changing this forces a new Kubernetes Fleet Manager to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// A mapping of tags which should be assigned to the Kubernetes Fleet Manager.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+	// +kubebuilder:validation:Required
+	DNSPrefix *string `json:"dnsPrefix" tf:"dns_prefix,omitempty"`
 }
 
 type KubernetesFleetManagerObservation struct {
@@ -93,18 +77,6 @@ type KubernetesFleetManagerParameters struct {
 type KubernetesFleetManagerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     KubernetesFleetManagerParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider KubernetesFleetManagerInitParameters `json:"initProvider,omitempty"`
 }
 
 // KubernetesFleetManagerStatus defines the observed state of KubernetesFleetManager.
@@ -125,7 +97,7 @@ type KubernetesFleetManagerStatus struct {
 type KubernetesFleetManager struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   KubernetesFleetManagerSpec   `json:"spec"`
 	Status KubernetesFleetManagerStatus `json:"status,omitempty"`
 }

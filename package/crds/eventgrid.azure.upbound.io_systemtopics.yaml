@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: systemtopics.eventgrid.azure.upbound.io
 spec:
   group: eventgrid.azure.upbound.io
@@ -82,6 +82,8 @@ spec:
                             that should be configured on this Event Grid System Topic.
                             Possible values are SystemAssigned, UserAssigned.
                           type: string
+                      required:
+                      - type
                       type: object
                     type: array
                   location:
@@ -246,61 +248,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags which should be assigned to the
-                      Event Grid System Topic.
-                    type: object
-                  topicType:
-                    description: 'The Topic Type of the Event Grid System Topic. The
-                      topic type is validated by Azure and there may be additional
-                      topic types beyond the following: Microsoft.AppConfiguration.ConfigurationStores,
-                      Microsoft.Communication.CommunicationServices, Microsoft.ContainerRegistry.Registries,
-                      Microsoft.Devices.IoTHubs, Microsoft.EventGrid.Domains, Microsoft.EventGrid.Topics,
-                      Microsoft.Eventhub.Namespaces, Microsoft.KeyVault.vaults, Microsoft.MachineLearningServices.Workspaces,
-                      Microsoft.Maps.Accounts, Microsoft.Media.MediaServices, Microsoft.Resources.ResourceGroups,
-                      Microsoft.Resources.Subscriptions, Microsoft.ServiceBus.Namespaces,
-                      Microsoft.SignalRService.SignalR, Microsoft.Storage.StorageAccounts,
-                      Microsoft.Web.ServerFarms and Microsoft.Web.Sites. Changing
-                      this forces a new Event Grid System Topic to be created.'
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  identity:
-                    description: An identity block as defined below.
-                    items:
-                      properties:
-                        identityIds:
-                          description: Specifies a list of User Assigned Managed Identity
-                            IDs to be assigned to this Event Grid System Topic.
-                          items:
-                            type: string
-                          type: array
-                        type:
-                          description: Specifies the type of Managed Service Identity
-                            that should be configured on this Event Grid System Topic.
-                            Possible values are SystemAssigned, UserAssigned.
-                          type: string
-                      type: object
-                    type: array
-                  location:
-                    description: The Azure Region where the Event Grid System Topic
-                      should exist. Changing this forces a new Event Grid System Topic
-                      to be created.
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -521,12 +468,10 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
             - message: topicType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.topicType)
-                || has(self.initProvider.topicType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.topicType)'
           status:
             description: SystemTopicStatus defines the observed state of SystemTopic.
             properties:

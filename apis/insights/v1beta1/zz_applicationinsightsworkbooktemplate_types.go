@@ -13,33 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ApplicationInsightsWorkbookTemplateInitParameters struct {
-
-	// Information about the author of the workbook template.
-	Author *string `json:"author,omitempty" tf:"author,omitempty"`
-
-	// A galleries block as defined below.
-	Galleries []GalleriesInitParameters `json:"galleries,omitempty" tf:"galleries,omitempty"`
-
-	// Key value pairs of localized gallery. Each key is the locale code of languages supported by the Azure portal.
-	Localized *string `json:"localized,omitempty" tf:"localized,omitempty"`
-
-	// Specifies the Azure Region where the Application Insights Workbook Template should exist. Changing this forces a new Application Insights Workbook Template to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// Specifies the name which should be used for this Application Insights Workbook Template. Changing this forces a new Application Insights Workbook Template to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Priority of the template. Determines which template to open when a workbook gallery is opened in viewer mode. Defaults to 0.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-
-	// A mapping of tags which should be assigned to the Application Insights Workbook Template.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Valid JSON object containing workbook template payload.
-	TemplateData *string `json:"templateData,omitempty" tf:"template_data,omitempty"`
-}
-
 type ApplicationInsightsWorkbookTemplateObservation struct {
 
 	// Information about the author of the workbook template.
@@ -121,24 +94,6 @@ type ApplicationInsightsWorkbookTemplateParameters struct {
 	TemplateData *string `json:"templateData,omitempty" tf:"template_data,omitempty"`
 }
 
-type GalleriesInitParameters struct {
-
-	// Category for the gallery.
-	Category *string `json:"category,omitempty" tf:"category,omitempty"`
-
-	// Name of the workbook template in the gallery.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Order of the template within the gallery. Defaults to 0.
-	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
-
-	// Azure resource type supported by the gallery. Defaults to Azure Monitor.
-	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
-
-	// Type of workbook supported by the workbook template. Defaults to workbook.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type GalleriesObservation struct {
 
 	// Category for the gallery.
@@ -160,12 +115,12 @@ type GalleriesObservation struct {
 type GalleriesParameters struct {
 
 	// Category for the gallery.
-	// +kubebuilder:validation:Optional
-	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+	// +kubebuilder:validation:Required
+	Category *string `json:"category" tf:"category,omitempty"`
 
 	// Name of the workbook template in the gallery.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Order of the template within the gallery. Defaults to 0.
 	// +kubebuilder:validation:Optional
@@ -184,18 +139,6 @@ type GalleriesParameters struct {
 type ApplicationInsightsWorkbookTemplateSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApplicationInsightsWorkbookTemplateParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ApplicationInsightsWorkbookTemplateInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApplicationInsightsWorkbookTemplateStatus defines the observed state of ApplicationInsightsWorkbookTemplate.
@@ -216,10 +159,10 @@ type ApplicationInsightsWorkbookTemplateStatus struct {
 type ApplicationInsightsWorkbookTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.galleries) || has(self.initProvider.galleries)",message="galleries is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.templateData) || has(self.initProvider.templateData)",message="templateData is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.galleries)",message="galleries is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.templateData)",message="templateData is a required parameter"
 	Spec   ApplicationInsightsWorkbookTemplateSpec   `json:"spec"`
 	Status ApplicationInsightsWorkbookTemplateStatus `json:"status,omitempty"`
 }

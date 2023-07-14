@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type AzureActiveDirectoryAuthenticationInitParameters struct {
-
-	// The Audience which should be used for authentication.
-	Audience *string `json:"audience,omitempty" tf:"audience,omitempty"`
-
-	// The Issuer which should be used for authentication.
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
-
-	// The Tenant which should be used for authentication.
-	Tenant *string `json:"tenant,omitempty" tf:"tenant,omitempty"`
-}
-
 type AzureActiveDirectoryAuthenticationObservation struct {
 
 	// The Audience which should be used for authentication.
@@ -40,25 +28,16 @@ type AzureActiveDirectoryAuthenticationObservation struct {
 type AzureActiveDirectoryAuthenticationParameters struct {
 
 	// The Audience which should be used for authentication.
-	// +kubebuilder:validation:Optional
-	Audience *string `json:"audience,omitempty" tf:"audience,omitempty"`
+	// +kubebuilder:validation:Required
+	Audience *string `json:"audience" tf:"audience,omitempty"`
 
 	// The Issuer which should be used for authentication.
-	// +kubebuilder:validation:Optional
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+	// +kubebuilder:validation:Required
+	Issuer *string `json:"issuer" tf:"issuer,omitempty"`
 
 	// The Tenant which should be used for authentication.
-	// +kubebuilder:validation:Optional
-	Tenant *string `json:"tenant,omitempty" tf:"tenant,omitempty"`
-}
-
-type ClientRevokedCertificateInitParameters struct {
-
-	// A name used to uniquely identify this certificate.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The Thumbprint of the Certificate.
-	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+	// +kubebuilder:validation:Required
+	Tenant *string `json:"tenant" tf:"tenant,omitempty"`
 }
 
 type ClientRevokedCertificateObservation struct {
@@ -73,21 +52,12 @@ type ClientRevokedCertificateObservation struct {
 type ClientRevokedCertificateParameters struct {
 
 	// A name used to uniquely identify this certificate.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Thumbprint of the Certificate.
-	// +kubebuilder:validation:Optional
-	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
-}
-
-type ClientRootCertificateInitParameters struct {
-
-	// A name used to uniquely identify this certificate.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The Public Key Data associated with the Certificate.
-	PublicCertData *string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty"`
+	// +kubebuilder:validation:Required
+	Thumbprint *string `json:"thumbprint" tf:"thumbprint,omitempty"`
 }
 
 type ClientRootCertificateObservation struct {
@@ -102,21 +72,12 @@ type ClientRootCertificateObservation struct {
 type ClientRootCertificateParameters struct {
 
 	// A name used to uniquely identify this certificate.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Public Key Data associated with the Certificate.
-	// +kubebuilder:validation:Optional
-	PublicCertData *string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty"`
-}
-
-type RadiusClientRootCertificateInitParameters struct {
-
-	// A name used to uniquely identify this certificate.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The Thumbprint of the Certificate.
-	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+	// +kubebuilder:validation:Required
+	PublicCertData *string `json:"publicCertData" tf:"public_cert_data,omitempty"`
 }
 
 type RadiusClientRootCertificateObservation struct {
@@ -131,24 +92,12 @@ type RadiusClientRootCertificateObservation struct {
 type RadiusClientRootCertificateParameters struct {
 
 	// A name used to uniquely identify this certificate.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Thumbprint of the Certificate.
-	// +kubebuilder:validation:Optional
-	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
-}
-
-type RadiusInitParameters struct {
-
-	// One or more client_root_certificate blocks as defined above.
-	ClientRootCertificate []RadiusClientRootCertificateInitParameters `json:"clientRootCertificate,omitempty" tf:"client_root_certificate,omitempty"`
-
-	// One or more server blocks as defined below.
-	Server []ServerInitParameters `json:"server,omitempty" tf:"server,omitempty"`
-
-	// One or more server_root_certificate blocks as defined below.
-	ServerRootCertificate []ServerRootCertificateInitParameters `json:"serverRootCertificate,omitempty" tf:"server_root_certificate,omitempty"`
+	// +kubebuilder:validation:Required
+	Thumbprint *string `json:"thumbprint" tf:"thumbprint,omitempty"`
 }
 
 type RadiusObservation struct {
@@ -178,15 +127,6 @@ type RadiusParameters struct {
 	ServerRootCertificate []ServerRootCertificateParameters `json:"serverRootCertificate,omitempty" tf:"server_root_certificate,omitempty"`
 }
 
-type ServerInitParameters struct {
-
-	// The Address of the Radius Server.
-	Address *string `json:"address,omitempty" tf:"address,omitempty"`
-
-	// The Score of the Radius Server determines the priority of the server. Ranges from 1 to 30.
-	Score *float64 `json:"score,omitempty" tf:"score,omitempty"`
-}
-
 type ServerObservation struct {
 
 	// The Address of the Radius Server.
@@ -199,25 +139,16 @@ type ServerObservation struct {
 type ServerParameters struct {
 
 	// The Address of the Radius Server.
-	// +kubebuilder:validation:Optional
-	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+	// +kubebuilder:validation:Required
+	Address *string `json:"address" tf:"address,omitempty"`
 
 	// The Score of the Radius Server determines the priority of the server. Ranges from 1 to 30.
-	// +kubebuilder:validation:Optional
-	Score *float64 `json:"score,omitempty" tf:"score,omitempty"`
+	// +kubebuilder:validation:Required
+	Score *float64 `json:"score" tf:"score,omitempty"`
 
 	// The Secret used to communicate with the Radius Server.
 	// +kubebuilder:validation:Required
 	SecretSecretRef v1.SecretKeySelector `json:"secretSecretRef" tf:"-"`
-}
-
-type ServerRootCertificateInitParameters struct {
-
-	// A name used to uniquely identify this certificate.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The Public Key Data associated with the Certificate.
-	PublicCertData *string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty"`
 }
 
 type ServerRootCertificateObservation struct {
@@ -232,69 +163,12 @@ type ServerRootCertificateObservation struct {
 type ServerRootCertificateParameters struct {
 
 	// A name used to uniquely identify this certificate.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Public Key Data associated with the Certificate.
-	// +kubebuilder:validation:Optional
-	PublicCertData *string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty"`
-}
-
-type VPNServerConfigurationInitParameters struct {
-
-	// A azure_active_directory_authentication block as defined below.
-	AzureActiveDirectoryAuthentication []AzureActiveDirectoryAuthenticationInitParameters `json:"azureActiveDirectoryAuthentication,omitempty" tf:"azure_active_directory_authentication,omitempty"`
-
-	// One or more client_revoked_certificate blocks as defined below.
-	ClientRevokedCertificate []ClientRevokedCertificateInitParameters `json:"clientRevokedCertificate,omitempty" tf:"client_revoked_certificate,omitempty"`
-
-	// One or more client_root_certificate blocks as defined below.
-	ClientRootCertificate []ClientRootCertificateInitParameters `json:"clientRootCertificate,omitempty" tf:"client_root_certificate,omitempty"`
-
-	// A ipsec_policy block as defined below.
-	IpsecPolicy []VPNServerConfigurationIpsecPolicyInitParameters `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
-
-	// The Azure location where this VPN Server Configuration should be created. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// A radius block as defined below.
-	Radius []RadiusInitParameters `json:"radius,omitempty" tf:"radius,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// A list of Authentication Types applicable for this VPN Server Configuration. Possible values are AAD (Azure Active Directory), Certificate and Radius.
-	VPNAuthenticationTypes []*string `json:"vpnAuthenticationTypes,omitempty" tf:"vpn_authentication_types,omitempty"`
-
-	// A list of VPN Protocols to use for this Server Configuration. Possible values are IkeV2 and OpenVPN.
-	VPNProtocols []*string `json:"vpnProtocols,omitempty" tf:"vpn_protocols,omitempty"`
-}
-
-type VPNServerConfigurationIpsecPolicyInitParameters struct {
-
-	// The DH Group, used in IKE Phase 1. Possible values include DHGroup1, DHGroup2, DHGroup14, DHGroup24, DHGroup2048, ECP256, ECP384 and None.
-	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
-
-	// The IKE encryption algorithm, used for IKE Phase 2. Possible values include AES128, AES192, AES256, DES, DES3, GCMAES128 and GCMAES256.
-	IkeEncryption *string `json:"ikeEncryption,omitempty" tf:"ike_encryption,omitempty"`
-
-	// The IKE encryption integrity algorithm, used for IKE Phase 2. Possible values include GCMAES128, GCMAES256, MD5, SHA1, SHA256 and SHA384.
-	IkeIntegrity *string `json:"ikeIntegrity,omitempty" tf:"ike_integrity,omitempty"`
-
-	// The IPSec encryption algorithm, used for IKE phase 1. Possible values include AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256 and None.
-	IpsecEncryption *string `json:"ipsecEncryption,omitempty" tf:"ipsec_encryption,omitempty"`
-
-	// The IPSec integrity algorithm, used for IKE phase 1. Possible values include GCMAES128, GCMAES192, GCMAES256, MD5, SHA1 and SHA256.
-	IpsecIntegrity *string `json:"ipsecIntegrity,omitempty" tf:"ipsec_integrity,omitempty"`
-
-	// The Pfs Group, used in IKE Phase 2. Possible values include ECP256, ECP384, PFS1, PFS2, PFS14, PFS24, PFS2048, PFSMM and None.
-	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
-
-	// The IPSec Security Association payload size in KB for a Site-to-Site VPN tunnel.
-	SaDataSizeKilobytes *float64 `json:"saDataSizeKilobytes,omitempty" tf:"sa_data_size_kilobytes,omitempty"`
-
-	// The IPSec Security Association lifetime in seconds for a Site-to-Site VPN tunnel.
-	SaLifetimeSeconds *float64 `json:"saLifetimeSeconds,omitempty" tf:"sa_lifetime_seconds,omitempty"`
+	// +kubebuilder:validation:Required
+	PublicCertData *string `json:"publicCertData" tf:"public_cert_data,omitempty"`
 }
 
 type VPNServerConfigurationIpsecPolicyObservation struct {
@@ -327,36 +201,36 @@ type VPNServerConfigurationIpsecPolicyObservation struct {
 type VPNServerConfigurationIpsecPolicyParameters struct {
 
 	// The DH Group, used in IKE Phase 1. Possible values include DHGroup1, DHGroup2, DHGroup14, DHGroup24, DHGroup2048, ECP256, ECP384 and None.
-	// +kubebuilder:validation:Optional
-	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
+	// +kubebuilder:validation:Required
+	DhGroup *string `json:"dhGroup" tf:"dh_group,omitempty"`
 
 	// The IKE encryption algorithm, used for IKE Phase 2. Possible values include AES128, AES192, AES256, DES, DES3, GCMAES128 and GCMAES256.
-	// +kubebuilder:validation:Optional
-	IkeEncryption *string `json:"ikeEncryption,omitempty" tf:"ike_encryption,omitempty"`
+	// +kubebuilder:validation:Required
+	IkeEncryption *string `json:"ikeEncryption" tf:"ike_encryption,omitempty"`
 
 	// The IKE encryption integrity algorithm, used for IKE Phase 2. Possible values include GCMAES128, GCMAES256, MD5, SHA1, SHA256 and SHA384.
-	// +kubebuilder:validation:Optional
-	IkeIntegrity *string `json:"ikeIntegrity,omitempty" tf:"ike_integrity,omitempty"`
+	// +kubebuilder:validation:Required
+	IkeIntegrity *string `json:"ikeIntegrity" tf:"ike_integrity,omitempty"`
 
 	// The IPSec encryption algorithm, used for IKE phase 1. Possible values include AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256 and None.
-	// +kubebuilder:validation:Optional
-	IpsecEncryption *string `json:"ipsecEncryption,omitempty" tf:"ipsec_encryption,omitempty"`
+	// +kubebuilder:validation:Required
+	IpsecEncryption *string `json:"ipsecEncryption" tf:"ipsec_encryption,omitempty"`
 
 	// The IPSec integrity algorithm, used for IKE phase 1. Possible values include GCMAES128, GCMAES192, GCMAES256, MD5, SHA1 and SHA256.
-	// +kubebuilder:validation:Optional
-	IpsecIntegrity *string `json:"ipsecIntegrity,omitempty" tf:"ipsec_integrity,omitempty"`
+	// +kubebuilder:validation:Required
+	IpsecIntegrity *string `json:"ipsecIntegrity" tf:"ipsec_integrity,omitempty"`
 
 	// The Pfs Group, used in IKE Phase 2. Possible values include ECP256, ECP384, PFS1, PFS2, PFS14, PFS24, PFS2048, PFSMM and None.
-	// +kubebuilder:validation:Optional
-	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
+	// +kubebuilder:validation:Required
+	PfsGroup *string `json:"pfsGroup" tf:"pfs_group,omitempty"`
 
 	// The IPSec Security Association payload size in KB for a Site-to-Site VPN tunnel.
-	// +kubebuilder:validation:Optional
-	SaDataSizeKilobytes *float64 `json:"saDataSizeKilobytes,omitempty" tf:"sa_data_size_kilobytes,omitempty"`
+	// +kubebuilder:validation:Required
+	SaDataSizeKilobytes *float64 `json:"saDataSizeKilobytes" tf:"sa_data_size_kilobytes,omitempty"`
 
 	// The IPSec Security Association lifetime in seconds for a Site-to-Site VPN tunnel.
-	// +kubebuilder:validation:Optional
-	SaLifetimeSeconds *float64 `json:"saLifetimeSeconds,omitempty" tf:"sa_lifetime_seconds,omitempty"`
+	// +kubebuilder:validation:Required
+	SaLifetimeSeconds *float64 `json:"saLifetimeSeconds" tf:"sa_lifetime_seconds,omitempty"`
 }
 
 type VPNServerConfigurationObservation struct {
@@ -451,18 +325,6 @@ type VPNServerConfigurationParameters struct {
 type VPNServerConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPNServerConfigurationParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider VPNServerConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPNServerConfigurationStatus defines the observed state of VPNServerConfiguration.
@@ -483,8 +345,8 @@ type VPNServerConfigurationStatus struct {
 type VPNServerConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpnAuthenticationTypes) || has(self.initProvider.vpnAuthenticationTypes)",message="vpnAuthenticationTypes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vpnAuthenticationTypes)",message="vpnAuthenticationTypes is a required parameter"
 	Spec   VPNServerConfigurationSpec   `json:"spec"`
 	Status VPNServerConfigurationStatus `json:"status,omitempty"`
 }

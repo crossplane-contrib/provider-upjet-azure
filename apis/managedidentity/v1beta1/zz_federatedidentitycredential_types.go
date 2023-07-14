@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type FederatedIdentityCredentialInitParameters struct {
-
-	// Specifies the audience for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
-	Audience []*string `json:"audience,omitempty" tf:"audience,omitempty"`
-
-	// Specifies the issuer of this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
-	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
-
-	// Specifies the subject for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
-	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
-}
-
 type FederatedIdentityCredentialObservation struct {
 
 	// Specifies the audience for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
@@ -92,18 +80,6 @@ type FederatedIdentityCredentialParameters struct {
 type FederatedIdentityCredentialSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FederatedIdentityCredentialParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider FederatedIdentityCredentialInitParameters `json:"initProvider,omitempty"`
 }
 
 // FederatedIdentityCredentialStatus defines the observed state of FederatedIdentityCredential.
@@ -124,9 +100,9 @@ type FederatedIdentityCredentialStatus struct {
 type FederatedIdentityCredential struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.audience) || has(self.initProvider.audience)",message="audience is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.issuer) || has(self.initProvider.issuer)",message="issuer is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subject) || has(self.initProvider.subject)",message="subject is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.audience)",message="audience is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.issuer)",message="issuer is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subject)",message="subject is a required parameter"
 	Spec   FederatedIdentityCredentialSpec   `json:"spec"`
 	Status FederatedIdentityCredentialStatus `json:"status,omitempty"`
 }

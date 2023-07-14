@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: appintegrationaccountbatchconfigurations.logic.azure.upbound.io
 spec:
   group: logic.azure.upbound.io
@@ -232,6 +232,9 @@ spec:
                                               Tuesday, Wednesday, Thursday, Friday
                                               and Saturday.
                                             type: string
+                                        required:
+                                        - week
+                                        - weekday
                                         type: object
                                       type: array
                                     weekDays:
@@ -251,6 +254,9 @@ spec:
                               timeZone:
                                 description: The timezone of the start/end time.
                                 type: string
+                            required:
+                            - frequency
+                            - interval
                             type: object
                           type: array
                       type: object
@@ -335,127 +341,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  batchGroupName:
-                    description: The batch group name of the Logic App Integration
-                      Batch Configuration. Changing this forces a new resource to
-                      be created.
-                    type: string
-                  metadata:
-                    additionalProperties:
-                      type: string
-                    description: A JSON mapping of any Metadata for this Logic App
-                      Integration Account Batch Configuration.
-                    type: object
-                  name:
-                    description: The name which should be used for this Logic App
-                      Integration Account Batch Configuration. Only Alphanumeric characters
-                      allowed. Changing this forces a new resource to be created.
-                    type: string
-                  releaseCriteria:
-                    description: A release_criteria block as documented below, which
-                      is used to select the criteria to meet before processing each
-                      batch.
-                    items:
-                      properties:
-                        batchSize:
-                          description: The batch size in bytes for the Logic App Integration
-                            Batch Configuration.
-                          type: number
-                        messageCount:
-                          description: The message count for the Logic App Integration
-                            Batch Configuration.
-                          type: number
-                        recurrence:
-                          description: A recurrence block as documented below.
-                          items:
-                            properties:
-                              endTime:
-                                description: The end time of the schedule, formatted
-                                  as an RFC3339 string.
-                                type: string
-                              frequency:
-                                description: The frequency of the schedule. Possible
-                                  values are Day, Hour, Minute, Month, NotSpecified,
-                                  Second, Week and Year.
-                                type: string
-                              interval:
-                                description: The number of frequencys between runs.
-                                type: number
-                              schedule:
-                                description: A schedule block as documented below.
-                                items:
-                                  properties:
-                                    hours:
-                                      description: A list containing a single item,
-                                        which specifies the Hour interval at which
-                                        this recurrence should be triggered.
-                                      items:
-                                        type: number
-                                      type: array
-                                    minutes:
-                                      description: A list containing a single item
-                                        which specifies the Minute interval at which
-                                        this recurrence should be triggered.
-                                      items:
-                                        type: number
-                                      type: array
-                                    monthDays:
-                                      description: A list of days of the month that
-                                        the job should execute on.
-                                      items:
-                                        type: number
-                                      type: array
-                                    monthly:
-                                      description: A monthly block as documented below.
-                                      items:
-                                        properties:
-                                          week:
-                                            description: The occurrence of the week
-                                              within the month.
-                                            type: number
-                                          weekday:
-                                            description: The day of the occurrence.
-                                              Possible values are Sunday, Monday,
-                                              Tuesday, Wednesday, Thursday, Friday
-                                              and Saturday.
-                                            type: string
-                                        type: object
-                                      type: array
-                                    weekDays:
-                                      description: A list of days of the week that
-                                        the job should execute on. Possible values
-                                        are Sunday, Monday, Tuesday, Wednesday, Thursday,
-                                        Friday and Saturday.
-                                      items:
-                                        type: string
-                                      type: array
-                                  type: object
-                                type: array
-                              startTime:
-                                description: The start time of the schedule, formatted
-                                  as an RFC3339 string.
-                                type: string
-                              timeZone:
-                                description: The timezone of the start/end time.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -657,16 +542,13 @@ spec:
             x-kubernetes-validations:
             - message: batchGroupName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.batchGroupName)
-                || has(self.initProvider.batchGroupName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.batchGroupName)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
             - message: releaseCriteria is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.releaseCriteria)
-                || has(self.initProvider.releaseCriteria)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.releaseCriteria)'
           status:
             description: AppIntegrationAccountBatchConfigurationStatus defines the
               observed state of AppIntegrationAccountBatchConfiguration.

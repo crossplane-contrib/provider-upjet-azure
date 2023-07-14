@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: packetcaptures.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -107,6 +107,8 @@ spec:
                             Mixing ranges with multiple entries not currently supported.
                             Changing this forces a new resource to be created.'
                           type: string
+                      required:
+                      - protocol
                       type: object
                     type: array
                   maximumBytesPerPacket:
@@ -379,93 +381,6 @@ spec:
                       this forces a new resource to be created.
                     type: string
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  filter:
-                    description: One or more filter blocks as defined below. Changing
-                      this forces a new resource to be created.
-                    items:
-                      properties:
-                        localIpAddress:
-                          description: 'The local IP Address to be filtered on. Notation:
-                            "127.0.0.1" for single address entry. "127.0.0.1-127.0.0.255"
-                            for range. "127.0.0.1;127.0.0.5" for multiple entries.
-                            Multiple ranges not currently supported. Mixing ranges
-                            with multiple entries not currently supported. Changing
-                            this forces a new resource to be created.'
-                          type: string
-                        localPort:
-                          description: 'The local port to be filtered on. Notation:
-                            "80" for single port entry."80-85" for range. "80;443;"
-                            for multiple entries. Multiple ranges not currently supported.
-                            Mixing ranges with multiple entries not currently supported.
-                            Changing this forces a new resource to be created.'
-                          type: string
-                        protocol:
-                          description: The Protocol to be filtered on. Possible values
-                            include Any, TCP and UDP. Changing this forces a new resource
-                            to be created.
-                          type: string
-                        remoteIpAddress:
-                          description: 'The remote IP Address to be filtered on. Notation:
-                            "127.0.0.1" for single address entry. "127.0.0.1-127.0.0.255"
-                            for range. "127.0.0.1;127.0.0.5;" for multiple entries.
-                            Multiple ranges not currently supported. Mixing ranges
-                            with multiple entries not currently supported.. Changing
-                            this forces a new resource to be created.'
-                          type: string
-                        remotePort:
-                          description: 'The remote port to be filtered on. Notation:
-                            "80" for single port entry."80-85" for range. "80;443;"
-                            for multiple entries. Multiple ranges not currently supported.
-                            Mixing ranges with multiple entries not currently supported.
-                            Changing this forces a new resource to be created.'
-                          type: string
-                      type: object
-                    type: array
-                  maximumBytesPerPacket:
-                    description: The number of bytes captured per packet. The remaining
-                      bytes are truncated. Defaults to 0 (Entire Packet Captured).
-                      Changing this forces a new resource to be created.
-                    type: number
-                  maximumBytesPerSession:
-                    description: Maximum size of the capture in Bytes. Defaults to
-                      1073741824 (1GB). Changing this forces a new resource to be
-                      created.
-                    type: number
-                  maximumCaptureDuration:
-                    description: The maximum duration of the capture session in seconds.
-                      Defaults to 18000 (5 hours). Changing this forces a new resource
-                      to be created.
-                    type: number
-                  storageLocation:
-                    description: A storage_location block as defined below. Changing
-                      this forces a new resource to be created.
-                    items:
-                      properties:
-                        filePath:
-                          description: A valid local path on the targeting VM. Must
-                            include the name of the capture file (*.cap). For Linux
-                            virtual machine it must start with /var/captures.
-                          type: string
-                      type: object
-                    type: array
-                  targetResourceId:
-                    description: The ID of the Resource to capture packets from. Changing
-                      this forces a new resource to be created.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -666,12 +581,10 @@ spec:
             x-kubernetes-validations:
             - message: storageLocation is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageLocation)
-                || has(self.initProvider.storageLocation)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageLocation)'
             - message: targetResourceId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetResourceId)
-                || has(self.initProvider.targetResourceId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetResourceId)'
           status:
             description: PacketCaptureStatus defines the observed state of PacketCapture.
             properties:

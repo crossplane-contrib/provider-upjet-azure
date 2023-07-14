@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: topics.servicebus.azure.upbound.io
 spec:
   group: servicebus.azure.upbound.io
@@ -185,72 +185,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  requiresDuplicateDetection:
-                    description: Boolean flag which controls whether Changing this
-                      forces a new resource to be created. the Topic requires duplicate
-                      detection. Defaults to false. Changing this forces a new resource
-                      to be created.
-                    type: boolean
-                  status:
-                    description: The Status of the Service Bus Topic. Acceptable values
-                      are Active or Disabled. Defaults to Active.
-                    type: string
-                  supportOrdering:
-                    description: Boolean flag which controls whether the Topic supports
-                      ordering.
-                    type: boolean
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  autoDeleteOnIdle:
-                    description: The ISO 8601 timespan duration of the idle interval
-                      after which the Topic is automatically deleted, minimum of 5
-                      minutes.
-                    type: string
-                  defaultMessageTtl:
-                    description: The ISO 8601 timespan duration of TTL of messages
-                      sent to this topic if no TTL value is set on the message itself.
-                    type: string
-                  duplicateDetectionHistoryTimeWindow:
-                    description: The ISO 8601 timespan duration during which duplicates
-                      can be detected. Defaults to 10 minutes. (PT10M)
-                    type: string
-                  enableBatchedOperations:
-                    description: Boolean flag which controls if server-side batched
-                      operations are enabled.
-                    type: boolean
-                  enableExpress:
-                    description: Boolean flag which controls whether Express Entities
-                      are enabled. An express topic holds a message in memory temporarily
-                      before writing it to persistent storage.
-                    type: boolean
-                  enablePartitioning:
-                    description: Boolean flag which controls whether to enable Changing
-                      this forces a new resource to be created. the topic to be partitioned
-                      across multiple message brokers. Defaults to false. Changing
-                      this forces a new resource to be created.
-                    type: boolean
-                  maxMessageSizeInKilobytes:
-                    description: Integer value which controls the maximum size of
-                      a message allowed on the topic for Premium SKU. For supported
-                      values see the "Large messages support" section of this document.
-                    type: number
-                  maxSizeInMegabytes:
-                    description: Integer value which controls the size of memory allocated
-                      for the topic. For supported values see the "Queue/topic size"
-                      section of this document.
-                    type: number
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether Changing this
                       forces a new resource to be created. the Topic requires duplicate

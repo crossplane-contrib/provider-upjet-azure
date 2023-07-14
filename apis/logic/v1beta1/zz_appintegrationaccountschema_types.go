@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type AppIntegrationAccountSchemaInitParameters struct {
-
-	// The content of the Logic App Integration Account Schema.
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
-
-	// The file name of the Logic App Integration Account Schema.
-	FileName *string `json:"fileName,omitempty" tf:"file_name,omitempty"`
-
-	// The metadata of the Logic App Integration Account Schema.
-	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
-}
-
 type AppIntegrationAccountSchemaObservation struct {
 
 	// The content of the Logic App Integration Account Schema.
@@ -92,18 +80,6 @@ type AppIntegrationAccountSchemaParameters struct {
 type AppIntegrationAccountSchemaSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppIntegrationAccountSchemaParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider AppIntegrationAccountSchemaInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppIntegrationAccountSchemaStatus defines the observed state of AppIntegrationAccountSchema.
@@ -124,7 +100,7 @@ type AppIntegrationAccountSchemaStatus struct {
 type AppIntegrationAccountSchema struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content) || has(self.initProvider.content)",message="content is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content)",message="content is a required parameter"
 	Spec   AppIntegrationAccountSchemaSpec   `json:"spec"`
 	Status AppIntegrationAccountSchemaStatus `json:"status,omitempty"`
 }

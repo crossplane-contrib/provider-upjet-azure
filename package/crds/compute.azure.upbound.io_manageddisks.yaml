@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: manageddisks.compute.azure.upbound.io
 spec:
   group: compute.azure.upbound.io
@@ -130,6 +130,9 @@ spec:
                                 description: The ID of the source Key Vault. This
                                   can be found as id on the azurerm_key_vault resource.
                                 type: string
+                            required:
+                            - secretUrl
+                            - sourceVaultId
                             type: object
                           type: array
                         enabled:
@@ -147,6 +150,9 @@ spec:
                                 description: The ID of the source Key Vault. This
                                   can be found as id on the azurerm_key_vault resource.
                                 type: string
+                            required:
+                            - keyUrl
+                            - sourceVaultId
                             type: object
                           type: array
                       type: object
@@ -416,207 +422,6 @@ spec:
                       resource to be created.
                     type: string
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  createOption:
-                    description: 'The method to use when creating the managed disk.
-                      Changing this forces a new resource to be created. Possible
-                      values include:'
-                    type: string
-                  diskAccessId:
-                    description: The ID of the disk access resource for using private
-                      endpoints on disks.
-                    type: string
-                  diskEncryptionSetId:
-                    description: The ID of a Disk Encryption Set which should be used
-                      to encrypt this Managed Disk. Conflicts with secure_vm_disk_encryption_set_id.
-                    type: string
-                  diskIopsReadOnly:
-                    description: The number of IOPS allowed across all VMs mounting
-                      the shared disk as read-only; only settable for UltraSSD disks
-                      and PremiumV2 disks with shared disk enabled. One operation
-                      can transfer between 4k and 256k bytes.
-                    type: number
-                  diskIopsReadWrite:
-                    description: The number of IOPS allowed for this disk; only settable
-                      for UltraSSD disks and PremiumV2 disks. One operation can transfer
-                      between 4k and 256k bytes.
-                    type: number
-                  diskMbpsReadOnly:
-                    description: The bandwidth allowed across all VMs mounting the
-                      shared disk as read-only; only settable for UltraSSD disks and
-                      PremiumV2 disks with shared disk enabled. MBps means millions
-                      of bytes per second.
-                    type: number
-                  diskMbpsReadWrite:
-                    description: The bandwidth allowed for this disk; only settable
-                      for UltraSSD disks and PremiumV2 disks. MBps means millions
-                      of bytes per second.
-                    type: number
-                  diskSizeGb:
-                    description: Specifies the size of the managed disk to create
-                      in gigabytes. If create_option is Copy or FromImage, then the
-                      value must be equal to or greater than the source's size. The
-                      size can only be increased.
-                    type: number
-                  edgeZone:
-                    description: Specifies the Edge Zone within the Azure Region where
-                      this Managed Disk should exist. Changing this forces a new Managed
-                      Disk to be created.
-                    type: string
-                  encryptionSettings:
-                    description: A encryption_settings block as defined below.
-                    items:
-                      properties:
-                        diskEncryptionKey:
-                          description: A disk_encryption_key block as defined above.
-                          items:
-                            properties:
-                              secretUrl:
-                                description: The URL to the Key Vault Secret used
-                                  as the Disk Encryption Key. This can be found as
-                                  id on the azurerm_key_vault_secret resource.
-                                type: string
-                              sourceVaultId:
-                                description: The ID of the source Key Vault. This
-                                  can be found as id on the azurerm_key_vault resource.
-                                type: string
-                            type: object
-                          type: array
-                        enabled:
-                          type: boolean
-                        keyEncryptionKey:
-                          description: A key_encryption_key block as defined below.
-                          items:
-                            properties:
-                              keyUrl:
-                                description: The URL to the Key Vault Key used as
-                                  the Key Encryption Key. This can be found as id
-                                  on the azurerm_key_vault_key resource.
-                                type: string
-                              sourceVaultId:
-                                description: The ID of the source Key Vault. This
-                                  can be found as id on the azurerm_key_vault resource.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  galleryImageReferenceId:
-                    description: ID of a Gallery Image Version to copy when create_option
-                      is FromImage. This field cannot be specified if image_reference_id
-                      is specified. Changing this forces a new resource to be created.
-                    type: string
-                  hyperVGeneration:
-                    description: The HyperV Generation of the Disk when the source
-                      of an Import or Copy operation targets a source that contains
-                      an operating system. Possible values are V1 and V2. For ImportSecure
-                      it must be set to V2. Changing this forces a new resource to
-                      be created.
-                    type: string
-                  imageReferenceId:
-                    description: ID of an existing platform/marketplace disk image
-                      to copy when create_option is FromImage. This field cannot be
-                      specified if gallery_image_reference_id is specified. Changing
-                      this forces a new resource to be created.
-                    type: string
-                  location:
-                    description: Specified the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
-                    type: string
-                  logicalSectorSize:
-                    description: 'Logical Sector Size. Possible values are: 512 and
-                      4096. Defaults to 4096. Changing this forces a new resource
-                      to be created.'
-                    type: number
-                  maxShares:
-                    description: The maximum number of VMs that can attach to the
-                      disk at the same time. Value greater than one indicates a disk
-                      that can be mounted on multiple VMs at the same time.
-                    type: number
-                  networkAccessPolicy:
-                    description: Policy for accessing the disk via network. Allowed
-                      values are AllowAll, AllowPrivate, and DenyAll.
-                    type: string
-                  onDemandBurstingEnabled:
-                    description: Specifies if On-Demand Bursting is enabled for the
-                      Managed Disk.
-                    type: boolean
-                  osType:
-                    description: Specify a value when the source of an Import, ImportSecure
-                      or Copy operation targets a source that contains an operating
-                      system. Valid values are Linux or Windows.
-                    type: string
-                  publicNetworkAccessEnabled:
-                    description: Whether it is allowed to access the disk via public
-                      network. Defaults to true.
-                    type: boolean
-                  secureVmDiskEncryptionSetId:
-                    description: The ID of the Disk Encryption Set which should be
-                      used to Encrypt this OS Disk when the Virtual Machine is a Confidential
-                      VM. Conflicts with disk_encryption_set_id. Changing this forces
-                      a new resource to be created.
-                    type: string
-                  securityType:
-                    description: Security Type of the Managed Disk when it is used
-                      for a Confidential VM. Possible values are ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey,
-                      ConfidentialVM_DiskEncryptedWithPlatformKey and ConfidentialVM_DiskEncryptedWithCustomerKey.
-                      Changing this forces a new resource to be created.
-                    type: string
-                  sourceUri:
-                    description: URI to a valid VHD file to be used when create_option
-                      is Import or ImportSecure. Changing this forces a new resource
-                      to be created.
-                    type: string
-                  storageAccountId:
-                    description: The ID of the Storage Account where the source_uri
-                      is located. Required when create_option is set to Import or
-                      ImportSecure. Changing this forces a new resource to be created.
-                    type: string
-                  storageAccountType:
-                    description: The type of storage to use for the managed disk.
-                      Possible values are Standard_LRS, StandardSSD_ZRS, Premium_LRS,
-                      PremiumV2_LRS, Premium_ZRS, StandardSSD_LRS or UltraSSD_LRS.
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                  tier:
-                    description: The disk performance tier to use. Possible values
-                      are documented here. This feature is currently supported only
-                      for premium SSDs.
-                    type: string
-                  trustedLaunchEnabled:
-                    description: Specifies if Trusted Launch is enabled for the Managed
-                      Disk. Changing this forces a new resource to be created.
-                    type: boolean
-                  uploadSizeBytes:
-                    description: Specifies the size of the managed disk to create
-                      in bytes. Required when create_option is Upload. The value must
-                      be equal to the source disk to be copied in bytes. Source disk
-                      size could be calculated with ls -l or wc -c. More information
-                      can be found at Copy a managed disk. Changing this forces a
-                      new resource to be created.
-                    type: number
-                  zone:
-                    description: Specifies the Availability Zone in which this Managed
-                      Disk should be located. Changing this property forces a new
-                      resource to be created.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -817,16 +622,13 @@ spec:
             x-kubernetes-validations:
             - message: createOption is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.createOption)
-                || has(self.initProvider.createOption)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.createOption)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
             - message: storageAccountType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageAccountType)
-                || has(self.initProvider.storageAccountType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageAccountType)'
           status:
             description: ManagedDiskStatus defines the observed state of ManagedDisk.
             properties:

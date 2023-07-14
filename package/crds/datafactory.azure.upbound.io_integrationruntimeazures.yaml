@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: integrationruntimeazures.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -162,52 +162,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  description:
-                    description: Integration runtime description.
-                    type: string
-                  location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Use AutoResolve to create an auto-resolve integration
-                      runtime. Changing this forces a new resource to be created.
-                    type: string
-                  timeToLiveMin:
-                    description: Time to live (in minutes) setting of the cluster
-                      which will execute data flow job. Defaults to 0.
-                    type: number
-                  virtualNetworkEnabled:
-                    description: Is Integration Runtime compute provisioned within
-                      Managed Virtual Network? Changing this forces a new resource
-                      to be created.
-                    type: boolean
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  cleanupEnabled:
-                    description: Cluster will not be recycled and it will be used
-                      in next data flow activity run until TTL (time to live) is reached
-                      if this is set as false. Default is true.
-                    type: boolean
-                  computeType:
-                    description: Compute type of the cluster which will execute data
-                      flow job. Valid values are General, ComputeOptimized and MemoryOptimized.
-                      Defaults to General.
-                    type: string
-                  coreCount:
-                    description: Core count of the cluster which will execute data
-                      flow job. Valid values are 8, 16, 32, 48, 80, 144 and 272. Defaults
-                      to 8.
-                    type: number
                   description:
                     description: Integration runtime description.
                     type: string
@@ -426,8 +380,7 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: IntegrationRuntimeAzureStatus defines the observed state
               of IntegrationRuntimeAzure.

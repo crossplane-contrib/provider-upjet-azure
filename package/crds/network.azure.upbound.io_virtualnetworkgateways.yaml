@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: virtualnetworkgateways.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -480,6 +480,9 @@ spec:
                               thumbprint:
                                 description: Specifies the public data of the certificate.
                                 type: string
+                            required:
+                            - name
+                            - thumbprint
                             type: object
                           type: array
                         rootCertificate:
@@ -499,6 +502,9 @@ spec:
                                   argument must not include the -----BEGIN CERTIFICATE-----
                                   or -----END CERTIFICATE----- markers.
                                 type: string
+                            required:
+                            - name
+                            - publicCertData
                             type: object
                           type: array
                         vpnAuthTypes:
@@ -516,230 +522,8 @@ spec:
                           items:
                             type: string
                           type: array
-                      type: object
-                    type: array
-                  vpnType:
-                    description: The routing type of the Virtual Network Gateway.
-                      Valid options are RouteBased or PolicyBased. Defaults to RouteBased.
-                      Changing this forces a new resource to be created.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  activeActive:
-                    description: If true, an active-active Virtual Network Gateway
-                      will be created. An active-active gateway requires a HighPerformance
-                      or an UltraPerformance SKU. If false, an active-standby gateway
-                      will be created. Defaults to false.
-                    type: boolean
-                  bgpSettings:
-                    description: A bgp_settings block which is documented below. In
-                      this block the BGP specific settings can be defined.
-                    items:
-                      properties:
-                        asn:
-                          description: The Autonomous System Number (ASN) to use as
-                            part of the BGP.
-                          type: number
-                        peerWeight:
-                          description: The weight added to routes which have been
-                            learned through BGP peering. Valid values can be between
-                            0 and 100.
-                          type: number
-                        peeringAddresses:
-                          description: A list of peering_addresses as defined below.
-                            Only one peering_addresses block can be specified except
-                            when active_active of this Virtual Network Gateway is
-                            true.
-                          items:
-                            properties:
-                              apipaAddresses:
-                                description: A list of Azure custom APIPA addresses
-                                  assigned to the BGP peer of the Virtual Network
-                                  Gateway.
-                                items:
-                                  type: string
-                                type: array
-                              ipConfigurationName:
-                                description: The name of the IP configuration of this
-                                  Virtual Network Gateway. In case there are multiple
-                                  ip_configuration blocks defined, this property is
-                                  required to specify.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  customRoute:
-                    description: A custom_route block as defined below. Specifies
-                      a custom routes address space for a virtual network gateway
-                      and a VpnClient.
-                    items:
-                      properties:
-                        addressPrefixes:
-                          description: A list of address blocks reserved for this
-                            virtual network in CIDR notation as defined below.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  defaultLocalNetworkGatewayId:
-                    description: The ID of the local network gateway through which
-                      outbound Internet traffic from the virtual network in which
-                      the gateway is created will be routed (forced tunnelling). Refer
-                      to the Azure documentation on forced tunnelling. If not specified,
-                      forced tunnelling is disabled.
-                    type: string
-                  edgeZone:
-                    description: Specifies the Edge Zone within the Azure Region where
-                      this Virtual Network Gateway should exist. Changing this forces
-                      a new Virtual Network Gateway to be created.
-                    type: string
-                  enableBgp:
-                    description: If true, BGP (Border Gateway Protocol) will be enabled
-                      for this Virtual Network Gateway. Defaults to false.
-                    type: boolean
-                  generation:
-                    description: The Generation of the Virtual Network gateway. Possible
-                      values include Generation1, Generation2 or None. Changing this
-                      forces a new resource to be created.
-                    type: string
-                  ipConfiguration:
-                    description: One, two or three ip_configuration blocks documented
-                      below. An active-standby gateway requires exactly one ip_configuration
-                      block, an active-active gateway requires exactly two ip_configuration
-                      blocks whereas an active-active zone redundant gateway with
-                      P2S configuration requires exactly three ip_configuration blocks.
-                    items:
-                      properties:
-                        name:
-                          description: A user-defined name of the IP configuration.
-                            Defaults to vnetGatewayConfig.
-                          type: string
-                        privateIpAddressAllocation:
-                          description: Defines how the private IP address of the gateways
-                            virtual interface is assigned. Valid options are Static
-                            or Dynamic. Defaults to Dynamic.
-                          type: string
-                      type: object
-                    type: array
-                  location:
-                    description: The location/region where the Virtual Network Gateway
-                      is located. Changing this forces a new resource to be created.
-                    type: string
-                  privateIpAddressEnabled:
-                    description: Should private IP be enabled on this gateway for
-                      connections? Changing this forces a new resource to be created.
-                    type: boolean
-                  sku:
-                    description: Configuration of the size and capacity of the virtual
-                      network gateway. Valid options are Basic, Standard, HighPerformance,
-                      UltraPerformance, ErGw1AZ, ErGw2AZ, ErGw3AZ, VpnGw1, VpnGw2,
-                      VpnGw3, VpnGw4,VpnGw5, VpnGw1AZ, VpnGw2AZ, VpnGw3AZ,VpnGw4AZ
-                      and VpnGw5AZ and depend on the type, vpn_type and generation
-                      arguments. A PolicyBased gateway only supports the Basic SKU.
-                      Further, the UltraPerformance SKU is only supported by an ExpressRoute
-                      gateway.
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                  type:
-                    description: The type of the Virtual Network Gateway. Valid options
-                      are Vpn or ExpressRoute. Changing the type forces a new resource
-                      to be created.
-                    type: string
-                  vpnClientConfiguration:
-                    description: A vpn_client_configuration block which is documented
-                      below. In this block the Virtual Network Gateway can be configured
-                      to accept IPSec point-to-site connections.
-                    items:
-                      properties:
-                        aadAudience:
-                          description: The client id of the Azure VPN application.
-                            See Create an Active Directory (AD) tenant for P2S OpenVPN
-                            protocol connections for values
-                          type: string
-                        aadIssuer:
-                          description: The STS url for your tenant
-                          type: string
-                        aadTenant:
-                          description: AzureAD Tenant URL
-                          type: string
-                        addressSpace:
-                          description: The address space out of which IP addresses
-                            for vpn clients will be taken. You can provide more than
-                            one address space, e.g. in CIDR notation.
-                          items:
-                            type: string
-                          type: array
-                        radiusServerAddress:
-                          description: The address of the Radius server.
-                          type: string
-                        radiusServerSecret:
-                          description: The secret used by the Radius server.
-                          type: string
-                        revokedCertificate:
-                          description: One or more revoked_certificate blocks which
-                            are defined below.
-                          items:
-                            properties:
-                              name:
-                                description: A user-defined name of the root certificate.
-                                type: string
-                              thumbprint:
-                                description: Specifies the public data of the certificate.
-                                type: string
-                            type: object
-                          type: array
-                        rootCertificate:
-                          description: One or more root_certificate blocks which are
-                            defined below. These root certificates are used to sign
-                            the client certificate used by the VPN clients to connect
-                            to the gateway.
-                          items:
-                            properties:
-                              name:
-                                description: A user-defined name of the root certificate.
-                                type: string
-                              publicCertData:
-                                description: The public certificate of the root certificate
-                                  authority. The certificate must be provided in Base-64
-                                  encoded X.509 format (PEM). In particular, this
-                                  argument must not include the -----BEGIN CERTIFICATE-----
-                                  or -----END CERTIFICATE----- markers.
-                                type: string
-                            type: object
-                          type: array
-                        vpnAuthTypes:
-                          description: List of the vpn authentication types for the
-                            virtual network gateway. The supported values are AAD,
-                            Radius and Certificate.
-                          items:
-                            type: string
-                          type: array
-                        vpnClientProtocols:
-                          description: List of the protocols supported by the vpn
-                            client. The supported values are SSTP, IkeV2 and OpenVPN.
-                            Values SSTP and IkeV2 are incompatible with the use of
-                            aad_tenant, aad_audience and aad_issuer.
-                          items:
-                            type: string
-                          type: array
+                      required:
+                      - addressSpace
                       type: object
                     type: array
                   vpnType:
@@ -948,20 +732,16 @@ spec:
             x-kubernetes-validations:
             - message: ipConfiguration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ipConfiguration)
-                || has(self.initProvider.ipConfiguration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ipConfiguration)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
             - message: sku is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)
-                || has(self.initProvider.sku)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
-                || has(self.initProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
           status:
             description: VirtualNetworkGatewayStatus defines the observed state of
               VirtualNetworkGateway.

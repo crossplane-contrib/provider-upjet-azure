@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: virtualhubs.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -174,6 +174,9 @@ spec:
                           description: The IP Address that Packets should be forwarded
                             to as the Next Hop.
                           type: string
+                      required:
+                      - addressPrefixes
+                      - nextHopIpAddress
                       type: object
                     type: array
                   sku:
@@ -262,58 +265,6 @@ spec:
                             - IfNotPresent
                             type: string
                         type: object
-                    type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  addressPrefix:
-                    description: The Address Prefix which should be used for this
-                      Virtual Hub. Changing this forces a new resource to be created.
-                      The address prefix subnet cannot be smaller than a .
-                    type: string
-                  hubRoutingPreference:
-                    description: The hub routing preference. Possible values are ExpressRoute,
-                      ASPath and VpnGateway. Defaults to ExpressRoute.
-                    type: string
-                  location:
-                    description: Specifies the supported Azure location where the
-                      Virtual Hub should exist. Changing this forces a new resource
-                      to be created.
-                    type: string
-                  route:
-                    description: One or more route blocks as defined below.
-                    items:
-                      properties:
-                        addressPrefixes:
-                          description: A list of Address Prefixes.
-                          items:
-                            type: string
-                          type: array
-                        nextHopIpAddress:
-                          description: The IP Address that Packets should be forwarded
-                            to as the Next Hop.
-                          type: string
-                      type: object
-                    type: array
-                  sku:
-                    description: The SKU of the Virtual Hub. Possible values are Basic
-                      and Standard. Changing this forces a new resource to be created.
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the Virtual Hub.
                     type: object
                 type: object
               managementPolicies:
@@ -516,8 +467,7 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: VirtualHubStatus defines the observed state of VirtualHub.
             properties:

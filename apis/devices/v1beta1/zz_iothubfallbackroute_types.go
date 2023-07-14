@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type IOTHubFallbackRouteInitParameters struct {
-
-	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
-	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
-
-	// Used to specify whether the fallback route is enabled.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
-	Source *string `json:"source,omitempty" tf:"source,omitempty"`
-}
-
 type IOTHubFallbackRouteObservation struct {
 
 	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
@@ -107,18 +95,6 @@ type IOTHubFallbackRouteParameters struct {
 type IOTHubFallbackRouteSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IOTHubFallbackRouteParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider IOTHubFallbackRouteInitParameters `json:"initProvider,omitempty"`
 }
 
 // IOTHubFallbackRouteStatus defines the observed state of IOTHubFallbackRoute.
@@ -139,7 +115,7 @@ type IOTHubFallbackRouteStatus struct {
 type IOTHubFallbackRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || has(self.initProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled)",message="enabled is a required parameter"
 	Spec   IOTHubFallbackRouteSpec   `json:"spec"`
 	Status IOTHubFallbackRouteStatus `json:"status,omitempty"`
 }

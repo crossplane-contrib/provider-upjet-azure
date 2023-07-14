@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: hybridconnections.relay.azure.upbound.io
 spec:
   group: relay.azure.upbound.io
@@ -244,36 +244,6 @@ spec:
                       settings can be stored.
                     type: string
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  name:
-                    description: Specifies the name of the Azure Relay Hybrid Connection.
-                      Changing this forces a new resource to be created.
-                    type: string
-                  requiresClientAuthorization:
-                    description: Specify if client authorization is needed for this
-                      hybrid connection. True by default. Changing this forces a new
-                      resource to be created. Defaults to true.
-                    type: boolean
-                  userMetadata:
-                    description: The usermetadata is a placeholder to store user-defined
-                      string data for the hybrid connection endpoint. For example,
-                      it can be used to store descriptive data, such as a list of
-                      teams and their contact information. Also, user-defined configuration
-                      settings can be stored.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -474,8 +444,7 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
           status:
             description: HybridConnectionStatus defines the observed state of HybridConnection.
             properties:

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: springcloudappcosmosdbassociations.appplatform.azure.upbound.io
 spec:
   group: appplatform.azure.upbound.io
@@ -333,51 +333,6 @@ spec:
                         type: object
                     type: object
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  apiType:
-                    description: Specifies the API type which should be used when
-                      connecting to the CosmosDB Account. Possible values are cassandra,
-                      gremlin, mongo, sql or table. Changing this forces a new resource
-                      to be created.
-                    type: string
-                  cosmosdbCassandraKeyspaceName:
-                    description: Specifies the name of the Cassandra Keyspace which
-                      the Spring Cloud App should be associated with. Should only
-                      be set when api_type is cassandra.
-                    type: string
-                  cosmosdbGremlinDatabaseName:
-                    description: Specifies the name of the Gremlin Database which
-                      the Spring Cloud App should be associated with. Should only
-                      be set when api_type is gremlin.
-                    type: string
-                  cosmosdbGremlinGraphName:
-                    description: Specifies the name of the Gremlin Graph which the
-                      Spring Cloud App should be associated with. Should only be set
-                      when api_type is gremlin.
-                    type: string
-                  cosmosdbMongoDatabaseName:
-                    description: Specifies the name of the Mongo Database which the
-                      Spring Cloud App should be associated with. Should only be set
-                      when api_type is mongo.
-                    type: string
-                  cosmosdbSqlDatabaseName:
-                    description: Specifies the name of the SQL Database which the
-                      Spring Cloud App should be associated with. Should only be set
-                      when api_type is sql.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -578,8 +533,7 @@ spec:
             x-kubernetes-validations:
             - message: apiType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.apiType)
-                || has(self.initProvider.apiType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.apiType)'
           status:
             description: SpringCloudAppCosmosDBAssociationStatus defines the observed
               state of SpringCloudAppCosmosDBAssociation.

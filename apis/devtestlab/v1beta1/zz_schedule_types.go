@@ -13,12 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type DailyRecurrenceInitParameters struct {
-
-	// The time each day when the schedule takes effect.
-	Time *string `json:"time,omitempty" tf:"time,omitempty"`
-}
-
 type DailyRecurrenceObservation struct {
 
 	// The time each day when the schedule takes effect.
@@ -28,14 +22,8 @@ type DailyRecurrenceObservation struct {
 type DailyRecurrenceParameters struct {
 
 	// The time each day when the schedule takes effect.
-	// +kubebuilder:validation:Optional
-	Time *string `json:"time,omitempty" tf:"time,omitempty"`
-}
-
-type HourlyRecurrenceInitParameters struct {
-
-	// Minutes of the hour the schedule will run.
-	Minute *float64 `json:"minute,omitempty" tf:"minute,omitempty"`
+	// +kubebuilder:validation:Required
+	Time *string `json:"time" tf:"time,omitempty"`
 }
 
 type HourlyRecurrenceObservation struct {
@@ -47,50 +35,8 @@ type HourlyRecurrenceObservation struct {
 type HourlyRecurrenceParameters struct {
 
 	// Minutes of the hour the schedule will run.
-	// +kubebuilder:validation:Optional
-	Minute *float64 `json:"minute,omitempty" tf:"minute,omitempty"`
-}
-
-type ScheduleInitParameters struct {
-
-	// The properties of a daily schedule. If the schedule occurs once each day of the week, specify the daily recurrence. A daily_recurrence block as defined below.
-	DailyRecurrence []DailyRecurrenceInitParameters `json:"dailyRecurrence,omitempty" tf:"daily_recurrence,omitempty"`
-
-	// The properties of an hourly schedule. If the schedule occurs multiple times a day, specify the hourly recurrence. A hourly_recurrence block as defined below.
-	HourlyRecurrence []HourlyRecurrenceInitParameters `json:"hourlyRecurrence,omitempty" tf:"hourly_recurrence,omitempty"`
-
-	// The location where the schedule is created. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// The notification setting of a schedule. A notification_settings as defined below.
-	NotificationSettings []ScheduleNotificationSettingsInitParameters `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
-
-	// The status of this schedule. Possible values are Enabled and Disabled. Defaults to Disabled.
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// The task type of the schedule. Possible values include LabVmsShutdownTask and LabVmAutoStart.
-	TaskType *string `json:"taskType,omitempty" tf:"task_type,omitempty"`
-
-	// The time zone ID (e.g. Pacific Standard time).
-	TimeZoneID *string `json:"timeZoneId,omitempty" tf:"time_zone_id,omitempty"`
-
-	// The properties of a weekly schedule. If the schedule occurs only some days of the week, specify the weekly recurrence. A weekly_recurrence block as defined below.
-	WeeklyRecurrence []WeeklyRecurrenceInitParameters `json:"weeklyRecurrence,omitempty" tf:"weekly_recurrence,omitempty"`
-}
-
-type ScheduleNotificationSettingsInitParameters struct {
-
-	// The status of the notification. Possible values are Enabled and Disabled. Defaults to Disabled
-	Status *string `json:"status,omitempty" tf:"status,omitempty"`
-
-	// Time in minutes before event at which notification will be sent.
-	TimeInMinutes *float64 `json:"timeInMinutes,omitempty" tf:"time_in_minutes,omitempty"`
-
-	// The webhook URL to which the notification will be sent.
-	WebhookURL *string `json:"webhookUrl,omitempty" tf:"webhook_url,omitempty"`
+	// +kubebuilder:validation:Required
+	Minute *float64 `json:"minute" tf:"minute,omitempty"`
 }
 
 type ScheduleNotificationSettingsObservation struct {
@@ -224,15 +170,6 @@ type ScheduleParameters struct {
 	WeeklyRecurrence []WeeklyRecurrenceParameters `json:"weeklyRecurrence,omitempty" tf:"weekly_recurrence,omitempty"`
 }
 
-type WeeklyRecurrenceInitParameters struct {
-
-	// The time when the schedule takes effect.
-	Time *string `json:"time,omitempty" tf:"time,omitempty"`
-
-	// A list of days that this schedule takes effect . Possible values include Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
-	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
-}
-
 type WeeklyRecurrenceObservation struct {
 
 	// The time when the schedule takes effect.
@@ -245,8 +182,8 @@ type WeeklyRecurrenceObservation struct {
 type WeeklyRecurrenceParameters struct {
 
 	// The time when the schedule takes effect.
-	// +kubebuilder:validation:Optional
-	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+	// +kubebuilder:validation:Required
+	Time *string `json:"time" tf:"time,omitempty"`
 
 	// A list of days that this schedule takes effect . Possible values include Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
 	// +kubebuilder:validation:Optional
@@ -257,18 +194,6 @@ type WeeklyRecurrenceParameters struct {
 type ScheduleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ScheduleParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ScheduleInitParameters `json:"initProvider,omitempty"`
 }
 
 // ScheduleStatus defines the observed state of Schedule.
@@ -289,10 +214,10 @@ type ScheduleStatus struct {
 type Schedule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.notificationSettings) || has(self.initProvider.notificationSettings)",message="notificationSettings is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.taskType) || has(self.initProvider.taskType)",message="taskType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeZoneId) || has(self.initProvider.timeZoneId)",message="timeZoneId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.notificationSettings)",message="notificationSettings is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.taskType)",message="taskType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeZoneId)",message="timeZoneId is a required parameter"
 	Spec   ScheduleSpec   `json:"spec"`
 	Status ScheduleStatus `json:"status,omitempty"`
 }

@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type DNSTXTRecordInitParameters struct {
-
-	// A list of values that make up the txt record. Each record block supports fields documented below.
-	Record []DNSTXTRecordRecordInitParameters `json:"record,omitempty" tf:"record,omitempty"`
-
-	// The Time To Live (TTL) of the DNS record in seconds.
-	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
 type DNSTXTRecordObservation struct {
 
 	// The FQDN of the DNS TXT Record.
@@ -90,12 +78,6 @@ type DNSTXTRecordParameters struct {
 	ZoneNameSelector *v1.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
 }
 
-type DNSTXTRecordRecordInitParameters struct {
-
-	// The value of the record. Max length: 1024 characters
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
 type DNSTXTRecordRecordObservation struct {
 
 	// The value of the record. Max length: 1024 characters
@@ -105,26 +87,14 @@ type DNSTXTRecordRecordObservation struct {
 type DNSTXTRecordRecordParameters struct {
 
 	// The value of the record. Max length: 1024 characters
-	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // DNSTXTRecordSpec defines the desired state of DNSTXTRecord
 type DNSTXTRecordSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DNSTXTRecordParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider DNSTXTRecordInitParameters `json:"initProvider,omitempty"`
 }
 
 // DNSTXTRecordStatus defines the observed state of DNSTXTRecord.
@@ -145,8 +115,8 @@ type DNSTXTRecordStatus struct {
 type DNSTXTRecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.record) || has(self.initProvider.record)",message="record is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl) || has(self.initProvider.ttl)",message="ttl is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.record)",message="record is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl)",message="ttl is a required parameter"
 	Spec   DNSTXTRecordSpec   `json:"spec"`
 	Status DNSTXTRecordStatus `json:"status,omitempty"`
 }

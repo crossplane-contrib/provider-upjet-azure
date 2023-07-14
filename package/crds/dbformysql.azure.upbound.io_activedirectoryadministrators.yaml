@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: activedirectoryadministrators.dbformysql.azure.upbound.io
 spec:
   group: dbformysql.azure.upbound.io
@@ -236,31 +236,6 @@ spec:
                     description: The Azure Tenant ID
                     type: string
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  login:
-                    description: The login name of the principal to set as the server
-                      administrator
-                    type: string
-                  objectId:
-                    description: The ID of the principal to set as the server administrator.
-                      For a managed identity this should be the Client ID of the identity.
-                    type: string
-                  tenantId:
-                    description: The Azure Tenant ID
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -461,16 +436,13 @@ spec:
             x-kubernetes-validations:
             - message: login is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.login)
-                || has(self.initProvider.login)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.login)'
             - message: objectId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.objectId)
-                || has(self.initProvider.objectId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.objectId)'
             - message: tenantId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.tenantId)
-                || has(self.initProvider.tenantId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tenantId)'
           status:
             description: ActiveDirectoryAdministratorStatus defines the observed state
               of ActiveDirectoryAdministrator.

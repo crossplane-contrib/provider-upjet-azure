@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: mssqlelasticpools.sql.azure.upbound.io
 spec:
   group: sql.azure.upbound.io
@@ -116,6 +116,9 @@ spec:
                         minCapacity:
                           description: The minimum capacity all databases are guaranteed.
                           type: number
+                      required:
+                      - maxCapacity
+                      - minCapacity
                       type: object
                     type: array
                   resourceGroupName:
@@ -303,110 +306,10 @@ spec:
                             or Premium. For more information see the documentation
                             for your Elasticpool configuration: vCore-based or DTU-based.'
                           type: string
-                      type: object
-                    type: array
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                  zoneRedundant:
-                    description: Whether or not this elastic pool is zone redundant.
-                      tier needs to be Premium for DTU based or BusinessCritical for
-                      vCore based sku.
-                    type: boolean
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  licenseType:
-                    description: Specifies the license type applied to this database.
-                      Possible values are LicenseIncluded and BasePrice.
-                    type: string
-                  location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
-                    type: string
-                  maintenanceConfigurationName:
-                    description: The name of the Public Maintenance Configuration
-                      window to apply to the elastic pool. Valid values include SQL_Default,
-                      SQL_EastUS_DB_1, SQL_EastUS2_DB_1, SQL_SoutheastAsia_DB_1, SQL_AustraliaEast_DB_1,
-                      SQL_NorthEurope_DB_1, SQL_SouthCentralUS_DB_1, SQL_WestUS2_DB_1,
-                      SQL_UKSouth_DB_1, SQL_WestEurope_DB_1, SQL_EastUS_DB_2, SQL_EastUS2_DB_2,
-                      SQL_WestUS2_DB_2, SQL_SoutheastAsia_DB_2, SQL_AustraliaEast_DB_2,
-                      SQL_NorthEurope_DB_2, SQL_SouthCentralUS_DB_2, SQL_UKSouth_DB_2,
-                      SQL_WestEurope_DB_2, SQL_AustraliaSoutheast_DB_1, SQL_BrazilSouth_DB_1,
-                      SQL_CanadaCentral_DB_1, SQL_CanadaEast_DB_1, SQL_CentralUS_DB_1,
-                      SQL_EastAsia_DB_1, SQL_FranceCentral_DB_1, SQL_GermanyWestCentral_DB_1,
-                      SQL_CentralIndia_DB_1, SQL_SouthIndia_DB_1, SQL_JapanEast_DB_1,
-                      SQL_JapanWest_DB_1, SQL_NorthCentralUS_DB_1, SQL_UKWest_DB_1,
-                      SQL_WestUS_DB_1, SQL_AustraliaSoutheast_DB_2, SQL_BrazilSouth_DB_2,
-                      SQL_CanadaCentral_DB_2, SQL_CanadaEast_DB_2, SQL_CentralUS_DB_2,
-                      SQL_EastAsia_DB_2, SQL_FranceCentral_DB_2, SQL_GermanyWestCentral_DB_2,
-                      SQL_CentralIndia_DB_2, SQL_SouthIndia_DB_2, SQL_JapanEast_DB_2,
-                      SQL_JapanWest_DB_2, SQL_NorthCentralUS_DB_2, SQL_UKWest_DB_2,
-                      SQL_WestUS_DB_2, SQL_WestCentralUS_DB_1, SQL_FranceSouth_DB_1,
-                      SQL_WestCentralUS_DB_2, SQL_FranceSouth_DB_2, SQL_SwitzerlandNorth_DB_1,
-                      SQL_SwitzerlandNorth_DB_2, SQL_BrazilSoutheast_DB_1, SQL_UAENorth_DB_1,
-                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2. Defaults to SQL_Default.
-                    type: string
-                  maxSizeBytes:
-                    description: The max data size of the elastic pool in bytes. Conflicts
-                      with max_size_gb.
-                    type: number
-                  maxSizeGb:
-                    description: The max data size of the elastic pool in gigabytes.
-                      Conflicts with max_size_bytes.
-                    type: number
-                  perDatabaseSettings:
-                    description: A per_database_settings block as defined below.
-                    items:
-                      properties:
-                        maxCapacity:
-                          description: The maximum capacity any one database can consume.
-                          type: number
-                        minCapacity:
-                          description: The minimum capacity all databases are guaranteed.
-                          type: number
-                      type: object
-                    type: array
-                  sku:
-                    description: A sku block as defined below.
-                    items:
-                      properties:
-                        capacity:
-                          description: 'The scale up/out capacity, representing server''s
-                            compute units. For more information see the documentation
-                            for your Elasticpool configuration: vCore-based or DTU-based.'
-                          type: number
-                        family:
-                          description: The family of hardware Gen4, Gen5, Fsv2 or
-                            DC.
-                          type: string
-                        name:
-                          description: Specifies the SKU Name for this Elasticpool.
-                            The name of the SKU, will be either vCore based tier +
-                            family pattern (e.g. GP_Gen4, BC_Gen5) or the DTU based
-                            BasicPool, StandardPool, or PremiumPool pattern. Possible
-                            values are BasicPool, StandardPool, PremiumPool, GP_Gen4,
-                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5 and BC_DC.
-                          type: string
-                        tier:
-                          description: 'The tier of the particular SKU. Possible values
-                            are GeneralPurpose, BusinessCritical, Basic, Standard,
-                            or Premium. For more information see the documentation
-                            for your Elasticpool configuration: vCore-based or DTU-based.'
-                          type: string
+                      required:
+                      - capacity
+                      - name
+                      - tier
                       type: object
                     type: array
                   tags:
@@ -620,16 +523,13 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
             - message: perDatabaseSettings is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.perDatabaseSettings)
-                || has(self.initProvider.perDatabaseSettings)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.perDatabaseSettings)'
             - message: sku is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)
-                || has(self.initProvider.sku)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)'
           status:
             description: MSSQLElasticPoolStatus defines the observed state of MSSQLElasticPool.
             properties:

@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type FunctionJavascriptUdaInitParameters struct {
-
-	// One or more input blocks as defined below.
-	Input []InputInitParameters `json:"input,omitempty" tf:"input,omitempty"`
-
-	// An output block as defined below.
-	Output []OutputInitParameters `json:"output,omitempty" tf:"output,omitempty"`
-
-	// The JavaScript of this UDA Function.
-	Script *string `json:"script,omitempty" tf:"script,omitempty"`
-}
-
 type FunctionJavascriptUdaObservation struct {
 
 	// The ID of the Stream Analytics JavaScript UDA Function.
@@ -72,15 +60,6 @@ type FunctionJavascriptUdaParameters struct {
 	StreamAnalyticsJobIDSelector *v1.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
 }
 
-type InputInitParameters struct {
-
-	// Is this input parameter a configuration parameter? Defaults to false.
-	ConfigurationParameter *bool `json:"configurationParameter,omitempty" tf:"configuration_parameter,omitempty"`
-
-	// The input data type of this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type InputObservation struct {
 
 	// Is this input parameter a configuration parameter? Defaults to false.
@@ -97,14 +76,8 @@ type InputParameters struct {
 	ConfigurationParameter *bool `json:"configurationParameter,omitempty" tf:"configuration_parameter,omitempty"`
 
 	// The input data type of this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type OutputInitParameters struct {
-
-	// The output data type from this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type OutputObservation struct {
@@ -116,26 +89,14 @@ type OutputObservation struct {
 type OutputParameters struct {
 
 	// The output data type from this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // FunctionJavascriptUdaSpec defines the desired state of FunctionJavascriptUda
 type FunctionJavascriptUdaSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FunctionJavascriptUdaParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider FunctionJavascriptUdaInitParameters `json:"initProvider,omitempty"`
 }
 
 // FunctionJavascriptUdaStatus defines the observed state of FunctionJavascriptUda.
@@ -152,13 +113,13 @@ type FunctionJavascriptUdaStatus struct {
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}
+// +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure},path=functionjavascriptudas
 type FunctionJavascriptUda struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.input) || has(self.initProvider.input)",message="input is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.output) || has(self.initProvider.output)",message="output is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.script) || has(self.initProvider.script)",message="script is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.input)",message="input is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.output)",message="output is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.script)",message="script is a required parameter"
 	Spec   FunctionJavascriptUdaSpec   `json:"spec"`
 	Status FunctionJavascriptUdaStatus `json:"status,omitempty"`
 }

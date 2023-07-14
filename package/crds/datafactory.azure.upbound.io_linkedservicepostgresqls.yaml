@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: linkedservicepostgresqls.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -164,50 +164,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  description:
-                    description: The description for the Data Factory Linked Service
-                      PostgreSQL.
-                    type: string
-                  integrationRuntimeName:
-                    description: The integration runtime reference to associate with
-                      the Data Factory Linked Service PostgreSQL.
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Linked Service PostgreSQL.
-                    type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Linked Service PostgreSQL.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Linked Service PostgreSQL.
-                    items:
-                      type: string
-                    type: array
-                  connectionString:
-                    description: The connection string in which to authenticate with
-                      PostgreSQL.
-                    type: string
                   description:
                     description: The description for the Data Factory Linked Service
                       PostgreSQL.
@@ -423,8 +379,7 @@ spec:
             x-kubernetes-validations:
             - message: connectionString is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.connectionString)
-                || has(self.initProvider.connectionString)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.connectionString)'
           status:
             description: LinkedServicePostgreSQLStatus defines the observed state
               of LinkedServicePostgreSQL.

@@ -13,17 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type FileInitParameters struct {
-
-	// The content of the file. Changing this forces a new resource to be created.
-	// The content of the file.
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
-
-	// The filename of the file to be uploaded. Changing this forces a new resource to be created.
-	// The filename of the file to be uploaded.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
 type FileObservation struct {
 
 	// The content of the file. Changing this forces a new resource to be created.
@@ -39,39 +28,13 @@ type FileParameters struct {
 
 	// The content of the file. Changing this forces a new resource to be created.
 	// The content of the file.
-	// +kubebuilder:validation:Optional
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+	// +kubebuilder:validation:Required
+	Content *string `json:"content" tf:"content,omitempty"`
 
 	// The filename of the file to be uploaded. Changing this forces a new resource to be created.
 	// The filename of the file to be uploaded.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
-type FunctionAppFunctionInitParameters struct {
-
-	// The config for this Function in JSON format.
-	// The config for this Function in JSON format.
-	ConfigJSON *string `json:"configJson,omitempty" tf:"config_json,omitempty"`
-
-	// Should this function be enabled. Defaults to true.
-	// Should this function be enabled. Defaults to `true`.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// A file block as detailed below. Changing this forces a new resource to be created.
-	File []FileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
-
-	// The language the Function is written in. Possible values are CSharp, Custom, Java, Javascript, Python, PowerShell, and TypeScript.
-	// The language the Function is written in.
-	Language *string `json:"language,omitempty" tf:"language,omitempty"`
-
-	// The name of the function. Changing this forces a new resource to be created.
-	// The name of the function.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The test data for the function.
-	// The test data for the function.
-	TestData *string `json:"testData,omitempty" tf:"test_data,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type FunctionAppFunctionObservation struct {
@@ -186,18 +149,6 @@ type FunctionAppFunctionParameters struct {
 type FunctionAppFunctionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FunctionAppFunctionParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider FunctionAppFunctionInitParameters `json:"initProvider,omitempty"`
 }
 
 // FunctionAppFunctionStatus defines the observed state of FunctionAppFunction.
@@ -218,8 +169,8 @@ type FunctionAppFunctionStatus struct {
 type FunctionAppFunction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.configJson) || has(self.initProvider.configJson)",message="configJson is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.configJson)",message="configJson is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
 	Spec   FunctionAppFunctionSpec   `json:"spec"`
 	Status FunctionAppFunctionStatus `json:"status,omitempty"`
 }

@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ExpressRouteCircuitConnectionInitParameters struct {
-
-	// The IPv4 address space from which to allocate customer address for global reach. Changing this forces a new Express Route Circuit Connection to be created.
-	AddressPrefixIPv4 *string `json:"addressPrefixIpv4,omitempty" tf:"address_prefix_ipv4,omitempty"`
-
-	// The IPv6 address space from which to allocate customer addresses for global reach.
-	AddressPrefixIPv6 *string `json:"addressPrefixIpv6,omitempty" tf:"address_prefix_ipv6,omitempty"`
-}
-
 type ExpressRouteCircuitConnectionObservation struct {
 
 	// The IPv4 address space from which to allocate customer address for global reach. Changing this forces a new Express Route Circuit Connection to be created.
@@ -87,18 +78,6 @@ type ExpressRouteCircuitConnectionParameters struct {
 type ExpressRouteCircuitConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ExpressRouteCircuitConnectionParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ExpressRouteCircuitConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ExpressRouteCircuitConnectionStatus defines the observed state of ExpressRouteCircuitConnection.
@@ -119,7 +98,7 @@ type ExpressRouteCircuitConnectionStatus struct {
 type ExpressRouteCircuitConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressPrefixIpv4) || has(self.initProvider.addressPrefixIpv4)",message="addressPrefixIpv4 is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressPrefixIpv4)",message="addressPrefixIpv4 is a required parameter"
 	Spec   ExpressRouteCircuitConnectionSpec   `json:"spec"`
 	Status ExpressRouteCircuitConnectionStatus `json:"status,omitempty"`
 }

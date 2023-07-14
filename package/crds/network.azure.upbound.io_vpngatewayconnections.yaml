@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: vpngatewayconnections.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -183,8 +183,12 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - routeTableIds
                             type: object
                           type: array
+                      required:
+                      - associatedRouteTable
                       type: object
                     type: array
                   trafficSelectorPolicy:
@@ -204,6 +208,9 @@ spec:
                           items:
                             type: string
                           type: array
+                      required:
+                      - localAddressRanges
+                      - remoteAddressRanges
                       type: object
                     type: array
                   vpnGatewayId:
@@ -317,6 +324,9 @@ spec:
                                 description: The ID of the IP Configuration which
                                   belongs to the VPN Gateway.
                                 type: string
+                            required:
+                            - ipAddress
+                            - ipConfigurationId
                             type: object
                           type: array
                         egressNatRuleIds:
@@ -375,6 +385,15 @@ spec:
                                   called Quick Mode or Phase 2 SA) lifetime in seconds
                                   for the site to site VPN tunnel.
                                 type: number
+                            required:
+                            - dhGroup
+                            - encryptionAlgorithm
+                            - ikeEncryptionAlgorithm
+                            - ikeIntegrityAlgorithm
+                            - integrityAlgorithm
+                            - pfsGroup
+                            - saDataSizeKb
+                            - saLifetimeSec
                             type: object
                           type: array
                         localAzureIpAddressEnabled:
@@ -408,205 +427,9 @@ spec:
                           description: The ID of the connected VPN Site Link. Changing
                             this forces a new VPN Gateway Connection to be created.
                           type: string
-                      type: object
-                    type: array
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  internetSecurityEnabled:
-                    description: Whether Internet Security is enabled for this VPN
-                      Connection. Defaults to false.
-                    type: boolean
-                  routing:
-                    description: A routing block as defined below. If this is not
-                      specified, there will be a default route table created implicitly.
-                    items:
-                      properties:
-                        associatedRouteTable:
-                          description: The ID of the Route Table associated with this
-                            VPN Connection.
-                          type: string
-                        inboundRouteMapId:
-                          description: The resource ID of the Route Map associated
-                            with this Routing Configuration for inbound learned routes.
-                          type: string
-                        outboundRouteMapId:
-                          description: The resource ID of the Route Map associated
-                            with this Routing Configuration for outbound advertised
-                            routes.
-                          type: string
-                        propagatedRouteTable:
-                          description: A propagated_route_table block as defined below.
-                          items:
-                            properties:
-                              labels:
-                                description: A list of labels to assign to this route
-                                  table.
-                                items:
-                                  type: string
-                                type: array
-                              routeTableIds:
-                                description: A list of Route Table IDs to associated
-                                  with this VPN Gateway Connection.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  trafficSelectorPolicy:
-                    description: One or more traffic_selector_policy blocks as defined
-                      below.
-                    items:
-                      properties:
-                        localAddressRanges:
-                          description: A list of local address spaces in CIDR format
-                            for this VPN Gateway Connection.
-                          items:
-                            type: string
-                          type: array
-                        remoteAddressRanges:
-                          description: A list of remote address spaces in CIDR format
-                            for this VPN Gateway Connection.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  vpnLink:
-                    description: One or more vpn_link blocks as defined below.
-                    items:
-                      properties:
-                        bandwidthMbps:
-                          description: The expected connection bandwidth in MBPS.
-                            Defaults to 10.
-                          type: number
-                        bgpEnabled:
-                          description: Should the BGP be enabled? Defaults to false.
-                            Changing this forces a new VPN Gateway Connection to be
-                            created.
-                          type: boolean
-                        connectionMode:
-                          description: The connection mode of this VPN Link. Possible
-                            values are Default, InitiatorOnly and ResponderOnly. Defaults
-                            to Default.
-                          type: string
-                        customBgpAddress:
-                          description: One or more custom_bgp_address blocks as defined
-                            below.
-                          items:
-                            properties:
-                              ipAddress:
-                                description: The custom bgp ip address which belongs
-                                  to the IP Configuration.
-                                type: string
-                              ipConfigurationId:
-                                description: The ID of the IP Configuration which
-                                  belongs to the VPN Gateway.
-                                type: string
-                            type: object
-                          type: array
-                        egressNatRuleIds:
-                          description: A list of the egress NAT Rule Ids.
-                          items:
-                            type: string
-                          type: array
-                        ingressNatRuleIds:
-                          description: A list of the ingress NAT Rule Ids.
-                          items:
-                            type: string
-                          type: array
-                        ipsecPolicy:
-                          description: One or more ipsec_policy blocks as defined
-                            above.
-                          items:
-                            properties:
-                              dhGroup:
-                                description: The DH Group used in IKE Phase 1 for
-                                  initial SA. Possible values are None, DHGroup1,
-                                  DHGroup2, DHGroup14, DHGroup24, DHGroup2048, ECP256,
-                                  ECP384.
-                                type: string
-                              encryptionAlgorithm:
-                                description: The IPSec encryption algorithm (IKE phase
-                                  1). Possible values are AES128, AES192, AES256,
-                                  DES, DES3, GCMAES128, GCMAES192, GCMAES256, None.
-                                type: string
-                              ikeEncryptionAlgorithm:
-                                description: The IKE encryption algorithm (IKE phase
-                                  2). Possible values are DES, DES3, AES128, AES192,
-                                  AES256, GCMAES128, GCMAES256.
-                                type: string
-                              ikeIntegrityAlgorithm:
-                                description: The IKE integrity algorithm (IKE phase
-                                  2). Possible values are MD5, SHA1, SHA256, SHA384,
-                                  GCMAES128, GCMAES256.
-                                type: string
-                              integrityAlgorithm:
-                                description: The IPSec integrity algorithm (IKE phase
-                                  1). Possible values are MD5, SHA1, SHA256, GCMAES128,
-                                  GCMAES192, GCMAES256.
-                                type: string
-                              pfsGroup:
-                                description: The Pfs Group used in IKE Phase 2 for
-                                  the new child SA. Possible values are None, PFS1,
-                                  PFS2, PFS14, PFS24, PFS2048, PFSMM, ECP256, ECP384.
-                                type: string
-                              saDataSizeKb:
-                                description: The IPSec Security Association (also
-                                  called Quick Mode or Phase 2 SA) payload size in
-                                  KB for the site to site VPN tunnel.
-                                type: number
-                              saLifetimeSec:
-                                description: The IPSec Security Association (also
-                                  called Quick Mode or Phase 2 SA) lifetime in seconds
-                                  for the site to site VPN tunnel.
-                                type: number
-                            type: object
-                          type: array
-                        localAzureIpAddressEnabled:
-                          description: Whether to use local Azure IP to initiate connection?
-                            Defaults to false.
-                          type: boolean
-                        name:
-                          description: The name which should be used for this VPN
-                            Link Connection.
-                          type: string
-                        policyBasedTrafficSelectorEnabled:
-                          description: Whether to enable policy-based traffic selectors?
-                            Defaults to false.
-                          type: boolean
-                        protocol:
-                          description: The protocol used for this VPN Link Connection.
-                            Possible values are IKEv1 and IKEv2. Defaults to IKEv2.
-                          type: string
-                        ratelimitEnabled:
-                          description: Should the rate limit be enabled? Defaults
-                            to false.
-                          type: boolean
-                        routeWeight:
-                          description: Routing weight for this VPN Link Connection.
-                            Defaults to 0.
-                          type: number
-                        sharedKey:
-                          description: SharedKey for this VPN Link Connection.
-                          type: string
-                        vpnSiteLinkId:
-                          description: The ID of the connected VPN Site Link. Changing
-                            this forces a new VPN Gateway Connection to be created.
-                          type: string
+                      required:
+                      - name
+                      - vpnSiteLinkId
                       type: object
                     type: array
                 type: object
@@ -810,8 +633,7 @@ spec:
             x-kubernetes-validations:
             - message: vpnLink is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.vpnLink)
-                || has(self.initProvider.vpnLink)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vpnLink)'
           status:
             description: VPNGatewayConnectionStatus defines the observed state of
               VPNGatewayConnection.

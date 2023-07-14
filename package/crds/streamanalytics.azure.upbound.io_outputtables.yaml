@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: outputtables.streamanalytics.azure.upbound.io
 spec:
   group: streamanalytics.azure.upbound.io
@@ -342,38 +342,6 @@ spec:
                 required:
                 - streamAnalyticsJobName
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  batchSize:
-                    description: The number of records for a batch operation. Must
-                      be between 1 and 100.
-                    type: number
-                  columnsToRemove:
-                    description: A list of the column names to be removed from output
-                      event entities.
-                    items:
-                      type: string
-                    type: array
-                  partitionKey:
-                    description: The name of the output column that contains the partition
-                      key.
-                    type: string
-                  rowKey:
-                    description: The name of the output column that contains the row
-                      key.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -574,16 +542,13 @@ spec:
             x-kubernetes-validations:
             - message: batchSize is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.batchSize)
-                || has(self.initProvider.batchSize)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.batchSize)'
             - message: partitionKey is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.partitionKey)
-                || has(self.initProvider.partitionKey)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.partitionKey)'
             - message: rowKey is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rowKey)
-                || has(self.initProvider.rowKey)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.rowKey)'
             - message: storageAccountKeySecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.storageAccountKeySecretRef)'

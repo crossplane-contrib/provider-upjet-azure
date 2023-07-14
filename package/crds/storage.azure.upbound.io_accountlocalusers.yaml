@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: accountlocalusers.storage.azure.upbound.io
 spec:
   group: storage.azure.upbound.io
@@ -187,6 +187,9 @@ spec:
                           description: The storage service used by this Storage Account
                             Local User. Possible values are blob and file.
                           type: string
+                      required:
+                      - permissions
+                      - service
                       type: object
                     type: array
                   sshAuthorizedKey:
@@ -201,6 +204,8 @@ spec:
                           description: The public key value of this SSH authorized
                             key.
                           type: string
+                      required:
+                      - key
                       type: object
                     type: array
                   sshKeyEnabled:
@@ -289,81 +294,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  homeDirectory:
-                    description: The home directory of the Storage Account Local User.
-                    type: string
-                  permissionScope:
-                    description: One or more permission_scope blocks as defined below.
-                    items:
-                      properties:
-                        permissions:
-                          description: A permissions block as defined below.
-                          items:
-                            properties:
-                              create:
-                                description: (Defaults to 30 minutes) Used when creating
-                                  the Storage Account Local User.
-                                type: boolean
-                              delete:
-                                description: (Defaults to 30 minutes) Used when deleting
-                                  the Storage Account Local User.
-                                type: boolean
-                              list:
-                                description: Specifies if the Local User has the list
-                                  permission for this scope. Defaults to false.
-                                type: boolean
-                              read:
-                                description: (Defaults to 5 minutes) Used when retrieving
-                                  the Storage Account Local User.
-                                type: boolean
-                              write:
-                                description: Specifies if the Local User has the write
-                                  permission for this scope. Defaults to false.
-                                type: boolean
-                            type: object
-                          type: array
-                        service:
-                          description: The storage service used by this Storage Account
-                            Local User. Possible values are blob and file.
-                          type: string
-                      type: object
-                    type: array
-                  sshAuthorizedKey:
-                    description: One or more ssh_authorized_key blocks as defined
-                      below.
-                    items:
-                      properties:
-                        description:
-                          description: The description of this SSH authorized key.
-                          type: string
-                        key:
-                          description: The public key value of this SSH authorized
-                            key.
-                          type: string
-                      type: object
-                    type: array
-                  sshKeyEnabled:
-                    description: Specifies whether SSH Key Authentication is enabled.
-                      Defaults to false.
-                    type: boolean
-                  sshPasswordEnabled:
-                    description: Specifies whether SSH Password Authentication is
-                      enabled. Defaults to false.
-                    type: boolean
                 type: object
               managementPolicies:
                 default:

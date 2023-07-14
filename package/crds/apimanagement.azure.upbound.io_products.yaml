@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: products.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -254,47 +254,6 @@ spec:
                       process.
                     type: string
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  approvalRequired:
-                    description: Do subscribers need to be approved prior to being
-                      able to use the Product?
-                    type: boolean
-                  description:
-                    description: A description of this Product, which may include
-                      HTML formatting tags.
-                    type: string
-                  displayName:
-                    description: The Display Name for this API Management Product.
-                    type: string
-                  published:
-                    description: Is this Product Published?
-                    type: boolean
-                  subscriptionRequired:
-                    description: Is a Subscription required to access API's included
-                      in this Product? Defaults to true.
-                    type: boolean
-                  subscriptionsLimit:
-                    description: The number of subscriptions a user can have to this
-                      Product at the same time.
-                    type: number
-                  terms:
-                    description: The Terms and Conditions for this Product, which
-                      must be accepted by Developers before they can begin the Subscription
-                      process.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -495,12 +454,10 @@ spec:
             x-kubernetes-validations:
             - message: displayName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
-                || has(self.initProvider.displayName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)'
             - message: published is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.published)
-                || has(self.initProvider.published)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.published)'
           status:
             description: ProductStatus defines the observed state of Product.
             properties:

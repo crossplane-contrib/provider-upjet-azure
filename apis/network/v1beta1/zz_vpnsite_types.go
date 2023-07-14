@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type BGPInitParameters struct {
-
-	// The BGP speaker's ASN.
-	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
-
-	// The BGP peering IP address.
-	PeeringAddress *string `json:"peeringAddress,omitempty" tf:"peering_address,omitempty"`
-}
-
 type BGPObservation struct {
 
 	// The BGP speaker's ASN.
@@ -34,33 +25,12 @@ type BGPObservation struct {
 type BGPParameters struct {
 
 	// The BGP speaker's ASN.
-	// +kubebuilder:validation:Optional
-	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
+	// +kubebuilder:validation:Required
+	Asn *float64 `json:"asn" tf:"asn,omitempty"`
 
 	// The BGP peering IP address.
-	// +kubebuilder:validation:Optional
-	PeeringAddress *string `json:"peeringAddress,omitempty" tf:"peering_address,omitempty"`
-}
-
-type LinkInitParameters struct {
-
-	// A bgp block as defined above.
-	BGP []BGPInitParameters `json:"bgp,omitempty" tf:"bgp,omitempty"`
-
-	// The FQDN of this VPN Site Link.
-	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
-
-	// The IP address of this VPN Site Link.
-	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
-
-	// The name which should be used for this VPN Site Link.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The name of the physical link at the VPN Site. Example: ATT, Verizon.
-	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
-
-	// The speed of the VPN device at the branch location in unit of mbps. Defaults to 0.
-	SpeedInMbps *float64 `json:"speedInMbps,omitempty" tf:"speed_in_mbps,omitempty"`
+	// +kubebuilder:validation:Required
+	PeeringAddress *string `json:"peeringAddress" tf:"peering_address,omitempty"`
 }
 
 type LinkObservation struct {
@@ -102,8 +72,8 @@ type LinkParameters struct {
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The name which should be used for this VPN Site Link.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The name of the physical link at the VPN Site. Example: ATT, Verizon.
 	// +kubebuilder:validation:Optional
@@ -112,12 +82,6 @@ type LinkParameters struct {
 	// The speed of the VPN device at the branch location in unit of mbps. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	SpeedInMbps *float64 `json:"speedInMbps,omitempty" tf:"speed_in_mbps,omitempty"`
-}
-
-type O365PolicyInitParameters struct {
-
-	// A traffic_category block as defined above.
-	TrafficCategory []TrafficCategoryInitParameters `json:"trafficCategory,omitempty" tf:"traffic_category,omitempty"`
 }
 
 type O365PolicyObservation struct {
@@ -131,18 +95,6 @@ type O365PolicyParameters struct {
 	// A traffic_category block as defined above.
 	// +kubebuilder:validation:Optional
 	TrafficCategory []TrafficCategoryParameters `json:"trafficCategory,omitempty" tf:"traffic_category,omitempty"`
-}
-
-type TrafficCategoryInitParameters struct {
-
-	// Is allow endpoint enabled? The Allow endpoint is required for connectivity to specific O365 services and features, but are not as sensitive to network performance and latency as other endpoint types. Defaults to false.
-	AllowEndpointEnabled *bool `json:"allowEndpointEnabled,omitempty" tf:"allow_endpoint_enabled,omitempty"`
-
-	// Is default endpoint enabled? The Default endpoint represents O365 services and dependencies that do not require any optimization, and can be treated by customer networks as normal Internet bound traffic. Defaults to false.
-	DefaultEndpointEnabled *bool `json:"defaultEndpointEnabled,omitempty" tf:"default_endpoint_enabled,omitempty"`
-
-	// Is optimize endpoint enabled? The Optimize endpoint is required for connectivity to every O365 service and represents the O365 scenario that is the most sensitive to network performance, latency, and availability. Defaults to false.
-	OptimizeEndpointEnabled *bool `json:"optimizeEndpointEnabled,omitempty" tf:"optimize_endpoint_enabled,omitempty"`
 }
 
 type TrafficCategoryObservation struct {
@@ -170,30 +122,6 @@ type TrafficCategoryParameters struct {
 	// Is optimize endpoint enabled? The Optimize endpoint is required for connectivity to every O365 service and represents the O365 scenario that is the most sensitive to network performance, latency, and availability. Defaults to false.
 	// +kubebuilder:validation:Optional
 	OptimizeEndpointEnabled *bool `json:"optimizeEndpointEnabled,omitempty" tf:"optimize_endpoint_enabled,omitempty"`
-}
-
-type VPNSiteInitParameters struct {
-
-	// Specifies a list of IP address CIDRs that are located on your on-premises site. Traffic destined for these address spaces is routed to your local site.
-	AddressCidrs []*string `json:"addressCidrs,omitempty" tf:"address_cidrs,omitempty"`
-
-	// The model of the VPN device.
-	DeviceModel *string `json:"deviceModel,omitempty" tf:"device_model,omitempty"`
-
-	// The name of the VPN device vendor.
-	DeviceVendor *string `json:"deviceVendor,omitempty" tf:"device_vendor,omitempty"`
-
-	// One or more link blocks as defined below.
-	Link []LinkInitParameters `json:"link,omitempty" tf:"link,omitempty"`
-
-	// The Azure Region where the VPN Site should exist. Changing this forces a new VPN Site to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// An o365_policy block as defined below.
-	O365Policy []O365PolicyInitParameters `json:"o365Policy,omitempty" tf:"o365_policy,omitempty"`
-
-	// A mapping of tags which should be assigned to the VPN Site.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VPNSiteObservation struct {
@@ -291,18 +219,6 @@ type VPNSiteParameters struct {
 type VPNSiteSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPNSiteParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider VPNSiteInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPNSiteStatus defines the observed state of VPNSite.
@@ -323,7 +239,7 @@ type VPNSiteStatus struct {
 type VPNSite struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   VPNSiteSpec   `json:"spec"`
 	Status VPNSiteStatus `json:"status,omitempty"`
 }

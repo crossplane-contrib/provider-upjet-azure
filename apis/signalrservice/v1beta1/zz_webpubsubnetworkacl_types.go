@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type WebPubsubNetworkACLInitParameters struct {
-
-	// The default action to control the network access when no other rule matches. Possible values are Allow and Deny. Defaults to Deny.
-	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
-
-	// A private_endpoint block as defined below.
-	PrivateEndpoint []WebPubsubNetworkACLPrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
-
-	// A public_network block as defined below.
-	PublicNetwork []WebPubsubNetworkACLPublicNetworkInitParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
-}
-
 type WebPubsubNetworkACLObservation struct {
 
 	// The default action to control the network access when no other rule matches. Possible values are Allow and Deny. Defaults to Deny.
@@ -72,15 +60,6 @@ type WebPubsubNetworkACLParameters struct {
 	WebPubsubIDSelector *v1.Selector `json:"webPubsubIdSelector,omitempty" tf:"-"`
 }
 
-type WebPubsubNetworkACLPrivateEndpointInitParameters struct {
-
-	// The allowed request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
-	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
-
-	// The denied request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
-	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
-}
-
 type WebPubsubNetworkACLPrivateEndpointObservation struct {
 
 	// The allowed request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
@@ -118,15 +97,6 @@ type WebPubsubNetworkACLPrivateEndpointParameters struct {
 	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 }
 
-type WebPubsubNetworkACLPublicNetworkInitParameters struct {
-
-	// The allowed request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
-	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
-
-	// The denied request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
-	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
-}
-
 type WebPubsubNetworkACLPublicNetworkObservation struct {
 
 	// The allowed request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
@@ -151,18 +121,6 @@ type WebPubsubNetworkACLPublicNetworkParameters struct {
 type WebPubsubNetworkACLSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WebPubsubNetworkACLParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider WebPubsubNetworkACLInitParameters `json:"initProvider,omitempty"`
 }
 
 // WebPubsubNetworkACLStatus defines the observed state of WebPubsubNetworkACL.
@@ -183,7 +141,7 @@ type WebPubsubNetworkACLStatus struct {
 type WebPubsubNetworkACL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicNetwork) || has(self.initProvider.publicNetwork)",message="publicNetwork is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicNetwork)",message="publicNetwork is a required parameter"
 	Spec   WebPubsubNetworkACLSpec   `json:"spec"`
 	Status WebPubsubNetworkACLStatus `json:"status,omitempty"`
 }

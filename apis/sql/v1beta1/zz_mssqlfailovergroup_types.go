@@ -13,21 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type MSSQLFailoverGroupInitParameters struct {
-
-	// A partner_server block as defined below.
-	PartnerServer []PartnerServerInitParameters `json:"partnerServer,omitempty" tf:"partner_server,omitempty"`
-
-	// A read_write_endpoint_failover_policy block as defined below.
-	ReadWriteEndpointFailoverPolicy []ReadWriteEndpointFailoverPolicyInitParameters `json:"readWriteEndpointFailoverPolicy,omitempty" tf:"read_write_endpoint_failover_policy,omitempty"`
-
-	// Whether failover is enabled for the readonly endpoint. Defaults to false.
-	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
 type MSSQLFailoverGroupObservation struct {
 
 	// A set of database names to include in the failover group.
@@ -99,9 +84,6 @@ type MSSQLFailoverGroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type PartnerServerInitParameters struct {
-}
-
 type PartnerServerObservation struct {
 
 	// The ID of a partner SQL server to include in the failover group.
@@ -131,15 +113,6 @@ type PartnerServerParameters struct {
 	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 }
 
-type ReadWriteEndpointFailoverPolicyInitParameters struct {
-
-	// The grace period in minutes, before failover with data loss is attempted for the read-write endpoint. Required when mode is Automatic.
-	GraceMinutes *float64 `json:"graceMinutes,omitempty" tf:"grace_minutes,omitempty"`
-
-	// The failover policy of the read-write endpoint for the failover group. Possible values are Automatic or Manual.
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
-}
-
 type ReadWriteEndpointFailoverPolicyObservation struct {
 
 	// The grace period in minutes, before failover with data loss is attempted for the read-write endpoint. Required when mode is Automatic.
@@ -156,26 +129,14 @@ type ReadWriteEndpointFailoverPolicyParameters struct {
 	GraceMinutes *float64 `json:"graceMinutes,omitempty" tf:"grace_minutes,omitempty"`
 
 	// The failover policy of the read-write endpoint for the failover group. Possible values are Automatic or Manual.
-	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Required
+	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
 // MSSQLFailoverGroupSpec defines the desired state of MSSQLFailoverGroup
 type MSSQLFailoverGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MSSQLFailoverGroupParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider MSSQLFailoverGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLFailoverGroupStatus defines the observed state of MSSQLFailoverGroup.
@@ -196,8 +157,8 @@ type MSSQLFailoverGroupStatus struct {
 type MSSQLFailoverGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partnerServer) || has(self.initProvider.partnerServer)",message="partnerServer is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.readWriteEndpointFailoverPolicy) || has(self.initProvider.readWriteEndpointFailoverPolicy)",message="readWriteEndpointFailoverPolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partnerServer)",message="partnerServer is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.readWriteEndpointFailoverPolicy)",message="readWriteEndpointFailoverPolicy is a required parameter"
 	Spec   MSSQLFailoverGroupSpec   `json:"spec"`
 	Status MSSQLFailoverGroupStatus `json:"status,omitempty"`
 }

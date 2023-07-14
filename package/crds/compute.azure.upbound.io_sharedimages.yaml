@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: sharedimages.compute.azure.upbound.io
 spec:
   group: compute.azure.upbound.io
@@ -206,6 +206,10 @@ spec:
                           description: The Name of the SKU for this Gallery Image.
                             Changing this forces a new resource to be created.
                           type: string
+                      required:
+                      - offer
+                      - publisher
+                      - sku
                       type: object
                     type: array
                   location:
@@ -251,6 +255,8 @@ spec:
                           description: The Purchase Plan Publisher for this Gallery
                             Image. Changing this forces a new resource to be created.
                           type: string
+                      required:
+                      - name
                       type: object
                     type: array
                   releaseNoteUri:
@@ -337,146 +343,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  specialized:
-                    description: Specifies that the Operating System used inside this
-                      Image has not been Generalized (for example, sysprep on Windows
-                      has not been run). Changing this forces a new resource to be
-                      created.
-                    type: boolean
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the Shared Image.
-                    type: object
-                  trustedLaunchEnabled:
-                    description: Specifies if Trusted Launch has to be enabled for
-                      the Virtual Machine created from the Shared Image. Changing
-                      this forces a new resource to be created.
-                    type: boolean
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  acceleratedNetworkSupportEnabled:
-                    description: Specifies if the Shared Image supports Accelerated
-                      Network. Changing this forces a new resource to be created.
-                    type: boolean
-                  architecture:
-                    description: CPU architecture supported by an OS. Possible values
-                      are x64 and Arm64. Defaults to x64. Changing this forces a new
-                      resource to be created.
-                    type: string
-                  confidentialVmEnabled:
-                    description: Specifies if Confidential Virtual Machines enabled.
-                      It will enable all the features of trusted, with higher confidentiality
-                      features for isolate machines or encrypted data. Available for
-                      Gen2 machines. Changing this forces a new resource to be created.
-                    type: boolean
-                  confidentialVmSupported:
-                    description: Specifies if supports creation of both Confidential
-                      virtual machines and Gen2 virtual machines with standard security
-                      from a compatible Gen2 OS disk VHD or Gen2 Managed image. Changing
-                      this forces a new resource to be created.
-                    type: boolean
-                  description:
-                    description: A description of this Shared Image.
-                    type: string
-                  diskTypesNotAllowed:
-                    description: One or more Disk Types not allowed for the Image.
-                      Possible values include Standard_LRS and Premium_LRS.
-                    items:
-                      type: string
-                    type: array
-                  endOfLifeDate:
-                    description: The end of life date in RFC3339 format of the Image.
-                    type: string
-                  eula:
-                    description: The End User Licence Agreement for the Shared Image.
-                      Changing this forces a new resource to be created.
-                    type: string
-                  hyperVGeneration:
-                    description: The generation of HyperV that the Virtual Machine
-                      used to create the Shared Image is based on. Possible values
-                      are V1 and V2. Defaults to V1. Changing this forces a new resource
-                      to be created.
-                    type: string
-                  identifier:
-                    description: An identifier block as defined below.
-                    items:
-                      properties:
-                        offer:
-                          description: The Offer Name for this Shared Image. Changing
-                            this forces a new resource to be created.
-                          type: string
-                        publisher:
-                          description: The Publisher Name for this Gallery Image.
-                            Changing this forces a new resource to be created.
-                          type: string
-                        sku:
-                          description: The Name of the SKU for this Gallery Image.
-                            Changing this forces a new resource to be created.
-                          type: string
-                      type: object
-                    type: array
-                  location:
-                    description: Specifies the supported Azure location where the
-                      Shared Image Gallery exists. Changing this forces a new resource
-                      to be created.
-                    type: string
-                  maxRecommendedMemoryInGb:
-                    description: Maximum memory in GB recommended for the Image.
-                    type: number
-                  maxRecommendedVcpuCount:
-                    description: Maximum count of vCPUs recommended for the Image.
-                    type: number
-                  minRecommendedMemoryInGb:
-                    description: Minimum memory in GB recommended for the Image.
-                    type: number
-                  minRecommendedVcpuCount:
-                    description: Minimum count of vCPUs recommended for the Image.
-                    type: number
-                  osType:
-                    description: The type of Operating System present in this Shared
-                      Image. Possible values are Linux and Windows. Changing this
-                      forces a new resource to be created.
-                    type: string
-                  privacyStatementUri:
-                    description: The URI containing the Privacy Statement associated
-                      with this Shared Image. Changing this forces a new resource
-                      to be created.
-                    type: string
-                  purchasePlan:
-                    description: A purchase_plan block as defined below.
-                    items:
-                      properties:
-                        name:
-                          description: The Purchase Plan Name for this Shared Image.
-                            Changing this forces a new resource to be created.
-                          type: string
-                        product:
-                          description: The Purchase Plan Product for this Gallery
-                            Image. Changing this forces a new resource to be created.
-                          type: string
-                        publisher:
-                          description: The Purchase Plan Publisher for this Gallery
-                            Image. Changing this forces a new resource to be created.
-                          type: string
-                      type: object
-                    type: array
-                  releaseNoteUri:
-                    description: The URI containing the Release Notes associated with
-                      this Shared Image.
-                    type: string
                   specialized:
                     description: Specifies that the Operating System used inside this
                       Image has not been Generalized (for example, sysprep on Windows
@@ -694,16 +560,13 @@ spec:
             x-kubernetes-validations:
             - message: identifier is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.identifier)
-                || has(self.initProvider.identifier)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.identifier)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
             - message: osType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.osType)
-                || has(self.initProvider.osType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.osType)'
           status:
             description: SharedImageStatus defines the observed state of SharedImage.
             properties:

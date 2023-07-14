@@ -13,12 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type CassandraTableAutoscaleSettingsInitParameters struct {
-
-	// The maximum throughput of the Cassandra Table (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
-	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
-}
-
 type CassandraTableAutoscaleSettingsObservation struct {
 
 	// The maximum throughput of the Cassandra Table (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
@@ -30,24 +24,6 @@ type CassandraTableAutoscaleSettingsParameters struct {
 	// The maximum throughput of the Cassandra Table (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
 	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
-}
-
-type CassandraTableInitParameters struct {
-
-	// Time to live of the Analytical Storage. Possible values are between -1 and 2147483647 except 0. -1 means the Analytical Storage never expires. Changing this forces a new resource to be created.
-	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
-
-	// An autoscale_settings block as defined below.
-	AutoscaleSettings []CassandraTableAutoscaleSettingsInitParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
-
-	// Time to live of the Cosmos DB Cassandra table. Possible values are at least -1. -1 means the Cassandra table never expires.
-	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
-
-	// A schema block as defined below.
-	Schema []SchemaInitParameters `json:"schema,omitempty" tf:"schema,omitempty"`
-
-	// The throughput of Cassandra KeySpace (RU/s). Must be set in increments of 100. The minimum value is 400.
-	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
 type CassandraTableObservation struct {
@@ -111,15 +87,6 @@ type CassandraTableParameters struct {
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
-type ClusterKeyInitParameters struct {
-
-	// Name of the column to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Order of the key. Currently supported values are Asc and Desc.
-	OrderBy *string `json:"orderBy,omitempty" tf:"order_by,omitempty"`
-}
-
 type ClusterKeyObservation struct {
 
 	// Name of the column to be created.
@@ -132,21 +99,12 @@ type ClusterKeyObservation struct {
 type ClusterKeyParameters struct {
 
 	// Name of the column to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Order of the key. Currently supported values are Asc and Desc.
-	// +kubebuilder:validation:Optional
-	OrderBy *string `json:"orderBy,omitempty" tf:"order_by,omitempty"`
-}
-
-type ColumnInitParameters struct {
-
-	// Name of the column to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Type of the column to be created.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	OrderBy *string `json:"orderBy" tf:"order_by,omitempty"`
 }
 
 type ColumnObservation struct {
@@ -161,18 +119,12 @@ type ColumnObservation struct {
 type ColumnParameters struct {
 
 	// Name of the column to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Type of the column to be created.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type PartitionKeyInitParameters struct {
-
-	// Name of the column to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type PartitionKeyObservation struct {
@@ -184,20 +136,8 @@ type PartitionKeyObservation struct {
 type PartitionKeyParameters struct {
 
 	// Name of the column to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
-type SchemaInitParameters struct {
-
-	// One or more cluster_key blocks as defined below.
-	ClusterKey []ClusterKeyInitParameters `json:"clusterKey,omitempty" tf:"cluster_key,omitempty"`
-
-	// One or more column blocks as defined below.
-	Column []ColumnInitParameters `json:"column,omitempty" tf:"column,omitempty"`
-
-	// One or more partition_key blocks as defined below.
-	PartitionKey []PartitionKeyInitParameters `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type SchemaObservation struct {
@@ -219,30 +159,18 @@ type SchemaParameters struct {
 	ClusterKey []ClusterKeyParameters `json:"clusterKey,omitempty" tf:"cluster_key,omitempty"`
 
 	// One or more column blocks as defined below.
-	// +kubebuilder:validation:Optional
-	Column []ColumnParameters `json:"column,omitempty" tf:"column,omitempty"`
+	// +kubebuilder:validation:Required
+	Column []ColumnParameters `json:"column" tf:"column,omitempty"`
 
 	// One or more partition_key blocks as defined below.
-	// +kubebuilder:validation:Optional
-	PartitionKey []PartitionKeyParameters `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+	// +kubebuilder:validation:Required
+	PartitionKey []PartitionKeyParameters `json:"partitionKey" tf:"partition_key,omitempty"`
 }
 
 // CassandraTableSpec defines the desired state of CassandraTable
 type CassandraTableSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CassandraTableParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider CassandraTableInitParameters `json:"initProvider,omitempty"`
 }
 
 // CassandraTableStatus defines the observed state of CassandraTable.
@@ -263,7 +191,7 @@ type CassandraTableStatus struct {
 type CassandraTable struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schema) || has(self.initProvider.schema)",message="schema is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schema)",message="schema is a required parameter"
 	Spec   CassandraTableSpec   `json:"spec"`
 	Status CassandraTableStatus `json:"status,omitempty"`
 }

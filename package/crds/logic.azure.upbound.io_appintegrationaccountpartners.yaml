@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: appintegrationaccountpartners.logic.azure.upbound.io
 spec:
   group: logic.azure.upbound.io
@@ -80,6 +80,9 @@ spec:
                           description: The value that identifies the documents that
                             your logic apps receive.
                           type: string
+                      required:
+                      - qualifier
+                      - value
                       type: object
                     type: array
                   integrationAccountName:
@@ -246,38 +249,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  businessIdentity:
-                    description: A business_identity block as documented below.
-                    items:
-                      properties:
-                        qualifier:
-                          description: The authenticating body that provides unique
-                            business identities to organizations.
-                          type: string
-                        value:
-                          description: The value that identifies the documents that
-                            your logic apps receive.
-                          type: string
-                      type: object
-                    type: array
-                  metadata:
-                    description: A JSON mapping of any Metadata for this Logic App
-                      Integration Account Partner.
-                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -479,8 +450,7 @@ spec:
             x-kubernetes-validations:
             - message: businessIdentity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.businessIdentity)
-                || has(self.initProvider.businessIdentity)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.businessIdentity)'
           status:
             description: AppIntegrationAccountPartnerStatus defines the observed state
               of AppIntegrationAccountPartner.

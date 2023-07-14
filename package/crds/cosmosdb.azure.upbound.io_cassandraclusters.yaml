@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: cassandraclusters.cosmosdb.azure.upbound.io
 spec:
   group: cosmosdb.azure.upbound.io
@@ -200,6 +200,8 @@ spec:
                             that should be configured on this Cassandra Cluster. The
                             only possible value is SystemAssigned.
                           type: string
+                      required:
+                      - type
                       type: object
                     type: array
                   location:
@@ -290,77 +292,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags assigned to the resource.
-                    type: object
-                  version:
-                    description: The version of Cassandra what the Cluster converges
-                      to run. Possible values are 3.11 and 4.0. Defaults to 3.11.
-                      Changing this forces a new Cassandra Cluster to be created.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  authenticationMethod:
-                    description: The authentication method that is used to authenticate
-                      clients. Possible values are None and Cassandra. Defaults to
-                      Cassandra.
-                    type: string
-                  clientCertificatePems:
-                    description: A list of TLS certificates that is used to authorize
-                      client connecting to the Cassandra Cluster.
-                    items:
-                      type: string
-                    type: array
-                  externalGossipCertificatePems:
-                    description: A list of TLS certificates that is used to authorize
-                      gossip from unmanaged Cassandra Data Center.
-                    items:
-                      type: string
-                    type: array
-                  externalSeedNodeIpAddresses:
-                    description: A list of IP Addresses of the seed nodes in unmanaged
-                      the Cassandra Data Center which will be added to the seed node
-                      lists of all managed nodes.
-                    items:
-                      type: string
-                    type: array
-                  hoursBetweenBackups:
-                    description: The number of hours to wait between taking a backup
-                      of the Cassandra Cluster. Defaults to 24.
-                    type: number
-                  identity:
-                    description: An identity block as defined below.
-                    items:
-                      properties:
-                        type:
-                          description: Specifies the type of Managed Service Identity
-                            that should be configured on this Cassandra Cluster. The
-                            only possible value is SystemAssigned.
-                          type: string
-                      type: object
-                    type: array
-                  location:
-                    description: The Azure Region where the Cassandra Cluster should
-                      exist. Changing this forces a new Cassandra Cluster to be created.
-                    type: string
-                  repairEnabled:
-                    description: Is the automatic repair enabled on the Cassandra
-                      Cluster? Defaults to true.
-                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -575,8 +506,7 @@ spec:
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultAdminPasswordSecretRef)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: CassandraClusterStatus defines the observed state of CassandraCluster.
             properties:

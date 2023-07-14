@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: contactprofiles.orbital.azure.upbound.io
 spec:
   group: orbital.azure.upbound.io
@@ -120,6 +120,10 @@ spec:
                                       description: Protocol of an end point. Possible
                                         values are TCP and UDP.
                                       type: string
+                                  required:
+                                  - endPointName
+                                  - port
+                                  - protocol
                                   type: object
                                 type: array
                               modulationConfiguration:
@@ -133,6 +137,11 @@ spec:
                                 description: The name of the contact profile. Changing
                                   this forces a new resource to be created.
                                 type: string
+                            required:
+                            - bandwidthMhz
+                            - centerFrequencyMhz
+                            - endPoint
+                            - name
                             type: object
                           type: array
                         direction:
@@ -146,6 +155,11 @@ spec:
                           description: Polarization of the link. Possible values are
                             LHCP, RHCP, linearVertical and linearHorizontal.
                           type: string
+                      required:
+                      - channels
+                      - direction
+                      - name
+                      - polarization
                       type: object
                     type: array
                   location:
@@ -319,119 +333,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  autoTracking:
-                    description: Auto-tracking configurations for a spacecraft. Possible
-                      values are disabled, xBand and sBand.
-                    type: string
-                  eventHubUri:
-                    description: ARM resource identifier of the Event Hub used for
-                      telemetry. Requires granting Orbital Resource Provider the rights
-                      to send telemetry into the hub.
-                    type: string
-                  links:
-                    description: A list of spacecraft links. A links block as defined
-                      below. Changing this forces a new resource to be created.
-                    items:
-                      properties:
-                        channels:
-                          description: A list of contact profile link channels. A
-                            channels block as defined below. Changing this forces
-                            a new resource to be created.
-                          items:
-                            properties:
-                              bandwidthMhz:
-                                description: Bandwidth in MHz.
-                                type: number
-                              centerFrequencyMhz:
-                                description: Center frequency in MHz.
-                                type: number
-                              demodulationConfiguration:
-                                description: Copy of the modem configuration file
-                                  such as Kratos QRadio or Kratos QuantumRx. Only
-                                  valid for downlink directions. If provided, the
-                                  modem connects to the customer endpoint and sends
-                                  demodulated data instead of a VITA.49 stream.
-                                type: string
-                              endPoint:
-                                description: Customer End point to store/retrieve
-                                  data during a contact. An end_point block as defined
-                                  below.
-                                items:
-                                  properties:
-                                    endPointName:
-                                      description: Name of an end point.
-                                      type: string
-                                    ipAddress:
-                                      description: IP address of an end point.
-                                      type: string
-                                    port:
-                                      description: TCP port to listen on to receive
-                                        data.
-                                      type: string
-                                    protocol:
-                                      description: Protocol of an end point. Possible
-                                        values are TCP and UDP.
-                                      type: string
-                                  type: object
-                                type: array
-                              modulationConfiguration:
-                                description: Copy of the modem configuration file
-                                  such as Kratos QRadio. Only valid for uplink directions.
-                                  If provided, the modem connects to the customer
-                                  endpoint and accepts commands from the customer
-                                  instead of a VITA.49 stream.
-                                type: string
-                              name:
-                                description: The name of the contact profile. Changing
-                                  this forces a new resource to be created.
-                                type: string
-                            type: object
-                          type: array
-                        direction:
-                          description: Direction of the link. Possible values are
-                            Uplink and Downlink.
-                          type: string
-                        name:
-                          description: Name of the link.
-                          type: string
-                        polarization:
-                          description: Polarization of the link. Possible values are
-                            LHCP, RHCP, linearVertical and linearHorizontal.
-                          type: string
-                      type: object
-                    type: array
-                  location:
-                    description: The location where the contact profile exists. Changing
-                      this forces a new resource to be created.
-                    type: string
-                  minimumElevationDegrees:
-                    description: Maximum elevation of the antenna during the contact
-                      in decimal degrees.
-                    type: number
-                  minimumVariableContactDuration:
-                    description: Minimum viable contact duration in ISO 8601 format.
-                      Used for listing the available contacts with a spacecraft at
-                      a given ground station.
-                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -638,20 +539,16 @@ spec:
             x-kubernetes-validations:
             - message: autoTracking is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.autoTracking)
-                || has(self.initProvider.autoTracking)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.autoTracking)'
             - message: links is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.links)
-                || has(self.initProvider.links)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.links)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
             - message: minimumVariableContactDuration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.minimumVariableContactDuration)
-                || has(self.initProvider.minimumVariableContactDuration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.minimumVariableContactDuration)'
           status:
             description: ContactProfileStatus defines the observed state of ContactProfile.
             properties:

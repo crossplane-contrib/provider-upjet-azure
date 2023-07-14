@@ -13,24 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type AuthenticationInitParameters struct {
-
-	// Client ID for userAssignedIdentity or servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate. When type is set to userAssignedIdentity, client_id and subscription_id should be either both specified or both not specified.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// Username or account name for secret auth. name and secret should be either both specified or both not specified when type is set to secret.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Principal ID for servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate.
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
-
-	// Subscription ID for userAssignedIdentity. subscription_id and client_id should be either both specified or both not specified.
-	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
-
-	// The authentication type. Possible values are systemAssignedIdentity, userAssignedIdentity, servicePrincipalSecret, servicePrincipalCertificate, secret. Changing this forces a new resource to be created.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type AuthenticationObservation struct {
 
 	// Client ID for userAssignedIdentity or servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate. When type is set to userAssignedIdentity, client_id and subscription_id should be either both specified or both not specified.
@@ -76,14 +58,8 @@ type AuthenticationParameters struct {
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// The authentication type. Possible values are systemAssignedIdentity, userAssignedIdentity, servicePrincipalSecret, servicePrincipalCertificate, secret. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type SecretStoreInitParameters struct {
-
-	// The key vault id to store secret.
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SecretStoreObservation struct {
@@ -95,26 +71,8 @@ type SecretStoreObservation struct {
 type SecretStoreParameters struct {
 
 	// The key vault id to store secret.
-	// +kubebuilder:validation:Optional
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
-}
-
-type SpringCloudConnectionInitParameters struct {
-
-	// The authentication info. An authentication block as defined below.
-	Authentication []AuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
-
-	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
-	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
-
-	// The name of the service connection. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// An option to store secret value in secure place. An secret_store block as defined below.
-	SecretStore []SecretStoreInitParameters `json:"secretStore,omitempty" tf:"secret_store,omitempty"`
-
-	// The type of the VNet solution. Possible values are serviceEndpoint, privateLink.
-	VnetSolution *string `json:"vnetSolution,omitempty" tf:"vnet_solution,omitempty"`
+	// +kubebuilder:validation:Required
+	KeyVaultID *string `json:"keyVaultId" tf:"key_vault_id,omitempty"`
 }
 
 type SpringCloudConnectionObservation struct {
@@ -199,18 +157,6 @@ type SpringCloudConnectionParameters struct {
 type SpringCloudConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudConnectionParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider SpringCloudConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudConnectionStatus defines the observed state of SpringCloudConnection.
@@ -231,8 +177,8 @@ type SpringCloudConnectionStatus struct {
 type SpringCloudConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authentication) || has(self.initProvider.authentication)",message="authentication is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authentication)",message="authentication is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
 	Spec   SpringCloudConnectionSpec   `json:"spec"`
 	Status SpringCloudConnectionStatus `json:"status,omitempty"`
 }

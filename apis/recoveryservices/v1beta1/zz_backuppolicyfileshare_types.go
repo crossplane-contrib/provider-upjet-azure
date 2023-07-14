@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type BackupInitParameters struct {
-
-	// Sets the backup frequency. Currently, only Daily is supported
-	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
-
-	// The time of day to perform the backup in 24-hour format. Times must be either on the hour or half hour (e.g. 12:00, 12:30, 13:00, etc.)
-	Time *string `json:"time,omitempty" tf:"time,omitempty"`
-}
-
 type BackupObservation struct {
 
 	// Sets the backup frequency. Currently, only Daily is supported
@@ -34,33 +25,12 @@ type BackupObservation struct {
 type BackupParameters struct {
 
 	// Sets the backup frequency. Currently, only Daily is supported
-	// +kubebuilder:validation:Optional
-	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+	// +kubebuilder:validation:Required
+	Frequency *string `json:"frequency" tf:"frequency,omitempty"`
 
 	// The time of day to perform the backup in 24-hour format. Times must be either on the hour or half hour (e.g. 12:00, 12:30, 13:00, etc.)
-	// +kubebuilder:validation:Optional
-	Time *string `json:"time,omitempty" tf:"time,omitempty"`
-}
-
-type BackupPolicyFileShareInitParameters struct {
-
-	// Configures the Policy backup frequency and times as documented in the backup block below.
-	Backup []BackupInitParameters `json:"backup,omitempty" tf:"backup,omitempty"`
-
-	// Configures the policy daily retention as documented in the retention_daily block below.
-	RetentionDaily []RetentionDailyInitParameters `json:"retentionDaily,omitempty" tf:"retention_daily,omitempty"`
-
-	// Configures the policy monthly retention as documented in the retention_monthly block below.
-	RetentionMonthly []RetentionMonthlyInitParameters `json:"retentionMonthly,omitempty" tf:"retention_monthly,omitempty"`
-
-	// Configures the policy weekly retention as documented in the retention_weekly block below.
-	RetentionWeekly []RetentionWeeklyInitParameters `json:"retentionWeekly,omitempty" tf:"retention_weekly,omitempty"`
-
-	// Configures the policy yearly retention as documented in the retention_yearly block below.
-	RetentionYearly []RetentionYearlyInitParameters `json:"retentionYearly,omitempty" tf:"retention_yearly,omitempty"`
-
-	// Specifies the timezone. the possible values are defined here. Defaults to UTC
-	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+	// +kubebuilder:validation:Required
+	Time *string `json:"time" tf:"time,omitempty"`
 }
 
 type BackupPolicyFileShareObservation struct {
@@ -146,12 +116,6 @@ type BackupPolicyFileShareParameters struct {
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
-type RetentionDailyInitParameters struct {
-
-	// The number of daily backups to keep. Must be between 1 and 200 (inclusive)
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
-}
-
 type RetentionDailyObservation struct {
 
 	// The number of daily backups to keep. Must be between 1 and 200 (inclusive)
@@ -161,20 +125,8 @@ type RetentionDailyObservation struct {
 type RetentionDailyParameters struct {
 
 	// The number of daily backups to keep. Must be between 1 and 200 (inclusive)
-	// +kubebuilder:validation:Optional
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
-}
-
-type RetentionMonthlyInitParameters struct {
-
-	// The number of monthly backups to keep. Must be between 1 and 120
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
-
-	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
-	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
-
-	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
-	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
+	// +kubebuilder:validation:Required
+	Count *float64 `json:"count" tf:"count,omitempty"`
 }
 
 type RetentionMonthlyObservation struct {
@@ -192,25 +144,16 @@ type RetentionMonthlyObservation struct {
 type RetentionMonthlyParameters struct {
 
 	// The number of monthly backups to keep. Must be between 1 and 120
-	// +kubebuilder:validation:Optional
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+	// +kubebuilder:validation:Required
+	Count *float64 `json:"count" tf:"count,omitempty"`
 
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
-	// +kubebuilder:validation:Optional
-	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
+	// +kubebuilder:validation:Required
+	Weekdays []*string `json:"weekdays" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
-	// +kubebuilder:validation:Optional
-	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
-}
-
-type RetentionWeeklyInitParameters struct {
-
-	// The number of daily backups to keep. Must be between 1 and 200 (inclusive)
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
-
-	// The weekday backups to retain. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
-	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
+	// +kubebuilder:validation:Required
+	Weeks []*string `json:"weeks" tf:"weeks,omitempty"`
 }
 
 type RetentionWeeklyObservation struct {
@@ -225,27 +168,12 @@ type RetentionWeeklyObservation struct {
 type RetentionWeeklyParameters struct {
 
 	// The number of daily backups to keep. Must be between 1 and 200 (inclusive)
-	// +kubebuilder:validation:Optional
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+	// +kubebuilder:validation:Required
+	Count *float64 `json:"count" tf:"count,omitempty"`
 
 	// The weekday backups to retain. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
-	// +kubebuilder:validation:Optional
-	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
-}
-
-type RetentionYearlyInitParameters struct {
-
-	// The number of yearly backups to keep. Must be between 1 and 10
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
-
-	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, Augest, September, October, November and December.
-	Months []*string `json:"months,omitempty" tf:"months,omitempty"`
-
-	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
-	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
-
-	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
-	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
+	// +kubebuilder:validation:Required
+	Weekdays []*string `json:"weekdays" tf:"weekdays,omitempty"`
 }
 
 type RetentionYearlyObservation struct {
@@ -266,38 +194,26 @@ type RetentionYearlyObservation struct {
 type RetentionYearlyParameters struct {
 
 	// The number of yearly backups to keep. Must be between 1 and 10
-	// +kubebuilder:validation:Optional
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+	// +kubebuilder:validation:Required
+	Count *float64 `json:"count" tf:"count,omitempty"`
 
 	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, Augest, September, October, November and December.
-	// +kubebuilder:validation:Optional
-	Months []*string `json:"months,omitempty" tf:"months,omitempty"`
+	// +kubebuilder:validation:Required
+	Months []*string `json:"months" tf:"months,omitempty"`
 
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
-	// +kubebuilder:validation:Optional
-	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
+	// +kubebuilder:validation:Required
+	Weekdays []*string `json:"weekdays" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
-	// +kubebuilder:validation:Optional
-	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
+	// +kubebuilder:validation:Required
+	Weeks []*string `json:"weeks" tf:"weeks,omitempty"`
 }
 
 // BackupPolicyFileShareSpec defines the desired state of BackupPolicyFileShare
 type BackupPolicyFileShareSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BackupPolicyFileShareParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider BackupPolicyFileShareInitParameters `json:"initProvider,omitempty"`
 }
 
 // BackupPolicyFileShareStatus defines the observed state of BackupPolicyFileShare.
@@ -318,8 +234,8 @@ type BackupPolicyFileShareStatus struct {
 type BackupPolicyFileShare struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backup) || has(self.initProvider.backup)",message="backup is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.retentionDaily) || has(self.initProvider.retentionDaily)",message="retentionDaily is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backup)",message="backup is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.retentionDaily)",message="retentionDaily is a required parameter"
 	Spec   BackupPolicyFileShareSpec   `json:"spec"`
 	Status BackupPolicyFileShareStatus `json:"status,omitempty"`
 }

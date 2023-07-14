@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: namedvalues.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -254,6 +254,8 @@ spec:
                         secretId:
                           description: The resource ID of the Key Vault Secret.
                           type: string
+                      required:
+                      - secretId
                       type: object
                     type: array
                   valueSecretRef:
@@ -273,49 +275,6 @@ spec:
                     - name
                     - namespace
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  displayName:
-                    description: The display name of this API Management Named Value.
-                    type: string
-                  secret:
-                    description: Specifies whether the API Management Named Value
-                      is secret. Valid values are true or false. The default value
-                      is false.
-                    type: boolean
-                  tags:
-                    description: A list of tags to be applied to the API Management
-                      Named Value.
-                    items:
-                      type: string
-                    type: array
-                  valueFromKeyVault:
-                    description: A value_from_key_vault block as defined below.
-                    items:
-                      properties:
-                        identityClientId:
-                          description: The client ID of User Assigned Identity, for
-                            the API Management Service, which will be used to access
-                            the key vault secret. The System Assigned Identity will
-                            be used in absence.
-                          type: string
-                        secretId:
-                          description: The resource ID of the Key Vault Secret.
-                          type: string
-                      type: object
-                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -517,8 +476,7 @@ spec:
             x-kubernetes-validations:
             - message: displayName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
-                || has(self.initProvider.displayName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)'
           status:
             description: NamedValueStatus defines the observed state of NamedValue.
             properties:

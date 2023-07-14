@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: snapshotpolicies.netapp.azure.upbound.io
 spec:
   group: netapp.azure.upbound.io
@@ -162,6 +162,10 @@ spec:
                           description: How many hourly snapshots to keep, valid range
                             is from 0 to 255.
                           type: number
+                      required:
+                      - hour
+                      - minute
+                      - snapshotsToKeep
                       type: object
                     type: array
                   enabled:
@@ -181,6 +185,9 @@ spec:
                           description: How many hourly snapshots to keep, valid range
                             is from 0 to 255.
                           type: number
+                      required:
+                      - minute
+                      - snapshotsToKeep
                       type: object
                     type: array
                   location:
@@ -210,6 +217,11 @@ spec:
                           description: How many hourly snapshots to keep, valid range
                             is from 0 to 255.
                           type: number
+                      required:
+                      - daysOfMonth
+                      - hour
+                      - minute
+                      - snapshotsToKeep
                       type: object
                     type: array
                   resourceGroupName:
@@ -320,117 +332,11 @@ spec:
                           description: How many hourly snapshots to keep, valid range
                             is from 0 to 255.
                           type: number
-                      type: object
-                    type: array
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  dailySchedule:
-                    description: Sets a daily snapshot schedule. See details in below
-                      daily_schedule block.
-                    items:
-                      properties:
-                        hour:
-                          description: Hour of the day that the snapshots will be
-                            created, valid range is from 0 to 23.
-                          type: number
-                        minute:
-                          description: Minute of the hour that the snapshots will
-                            be created, valid range is from 0 to 59.
-                          type: number
-                        snapshotsToKeep:
-                          description: How many hourly snapshots to keep, valid range
-                            is from 0 to 255.
-                          type: number
-                      type: object
-                    type: array
-                  enabled:
-                    description: Defines that the NetApp Snapshot Policy is enabled
-                      or not.
-                    type: boolean
-                  hourlySchedule:
-                    description: Sets an hourly snapshot schedule. See details in
-                      below hourly_schedule block.
-                    items:
-                      properties:
-                        minute:
-                          description: Minute of the hour that the snapshots will
-                            be created, valid range is from 0 to 59.
-                          type: number
-                        snapshotsToKeep:
-                          description: How many hourly snapshots to keep, valid range
-                            is from 0 to 255.
-                          type: number
-                      type: object
-                    type: array
-                  location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
-                    type: string
-                  monthlySchedule:
-                    description: Sets a monthly snapshot schedule. See details in
-                      below monthly_schedule block.
-                    items:
-                      properties:
-                        daysOfMonth:
-                          description: List of the days of the month when the snapshots
-                            will be created, valid range is from 1 to 30.
-                          items:
-                            type: number
-                          type: array
-                        hour:
-                          description: Hour of the day that the snapshots will be
-                            created, valid range is from 0 to 23.
-                          type: number
-                        minute:
-                          description: Minute of the hour that the snapshots will
-                            be created, valid range is from 0 to 59.
-                          type: number
-                        snapshotsToKeep:
-                          description: How many hourly snapshots to keep, valid range
-                            is from 0 to 255.
-                          type: number
-                      type: object
-                    type: array
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                  weeklySchedule:
-                    description: Sets a weekly snapshot schedule. See details in below
-                      weekly_schedule block.
-                    items:
-                      properties:
-                        daysOfWeek:
-                          description: List of the week days using English names when
-                            the snapshots will be created.
-                          items:
-                            type: string
-                          type: array
-                        hour:
-                          description: Hour of the day that the snapshots will be
-                            created, valid range is from 0 to 23.
-                          type: number
-                        minute:
-                          description: Minute of the hour that the snapshots will
-                            be created, valid range is from 0 to 59.
-                          type: number
-                        snapshotsToKeep:
-                          description: How many hourly snapshots to keep, valid range
-                            is from 0 to 255.
-                          type: number
+                      required:
+                      - daysOfWeek
+                      - hour
+                      - minute
+                      - snapshotsToKeep
                       type: object
                     type: array
                 type: object
@@ -634,12 +540,10 @@ spec:
             x-kubernetes-validations:
             - message: enabled is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)
-                || has(self.initProvider.enabled)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: SnapshotPolicyStatus defines the observed state of SnapshotPolicy.
             properties:

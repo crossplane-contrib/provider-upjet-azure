@@ -13,27 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type OutputServiceBusQueueInitParameters struct {
-
-	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
-	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
-
-	// The name of the Stream Output. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A list of property columns to add to the Service Bus Queue output.
-	PropertyColumns []*string `json:"propertyColumns,omitempty" tf:"property_columns,omitempty"`
-
-	// A serialization block as defined below.
-	Serialization []OutputServiceBusQueueSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
-
-	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required if authentication_mode is ConnectionString.
-	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
-
-	// A key-value pair of system property columns that will be attached to the outgoing messages for the Service Bus Queue Output.
-	SystemPropertyColumns map[string]*string `json:"systemPropertyColumns,omitempty" tf:"system_property_columns,omitempty"`
-}
-
 type OutputServiceBusQueueObservation struct {
 
 	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
@@ -153,21 +132,6 @@ type OutputServiceBusQueueParameters struct {
 	SystemPropertyColumns map[string]*string `json:"systemPropertyColumns,omitempty" tf:"system_property_columns,omitempty"`
 }
 
-type OutputServiceBusQueueSerializationInitParameters struct {
-
-	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
-	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
-
-	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
-	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
-
-	// Specifies the format of the JSON the output will be written in. Possible values are Array and LineSeparated.
-	Format *string `json:"format,omitempty" tf:"format,omitempty"`
-
-	// The serialization format used for outgoing data streams. Possible values are Avro, Csv, Json and Parquet.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type OutputServiceBusQueueSerializationObservation struct {
 
 	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
@@ -198,26 +162,14 @@ type OutputServiceBusQueueSerializationParameters struct {
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The serialization format used for outgoing data streams. Possible values are Avro, Csv, Json and Parquet.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // OutputServiceBusQueueSpec defines the desired state of OutputServiceBusQueue
 type OutputServiceBusQueueSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OutputServiceBusQueueParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider OutputServiceBusQueueInitParameters `json:"initProvider,omitempty"`
 }
 
 // OutputServiceBusQueueStatus defines the observed state of OutputServiceBusQueue.
@@ -238,8 +190,8 @@ type OutputServiceBusQueueStatus struct {
 type OutputServiceBusQueue struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serialization) || has(self.initProvider.serialization)",message="serialization is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serialization)",message="serialization is a required parameter"
 	Spec   OutputServiceBusQueueSpec   `json:"spec"`
 	Status OutputServiceBusQueueStatus `json:"status,omitempty"`
 }

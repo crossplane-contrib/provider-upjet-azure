@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: frontdoorrulesengines.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -307,6 +307,8 @@ spec:
                                   RequestFilename, RequestFilenameExtension,RequestHeader,RequestBody
                                   or RequestScheme.
                                 type: string
+                            required:
+                            - operator
                             type: object
                           type: array
                         name:
@@ -316,114 +318,9 @@ spec:
                           description: Priority of the rule, must be unique per rules
                             engine definition.
                           type: number
-                      type: object
-                    type: array
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  enabled:
-                    description: Whether this Rules engine configuration is enabled?
-                      Defaults to true.
-                    type: boolean
-                  rule:
-                    description: A rule block as defined below.
-                    items:
-                      properties:
-                        action:
-                          description: An action block as defined below.
-                          items:
-                            properties:
-                              requestHeader:
-                                description: A request_header block as defined below.
-                                items:
-                                  properties:
-                                    headerActionType:
-                                      description: can be set to Overwrite, Append
-                                        or Delete.
-                                      type: string
-                                    headerName:
-                                      description: header name (string).
-                                      type: string
-                                    value:
-                                      description: value name (string).
-                                      type: string
-                                  type: object
-                                type: array
-                              responseHeader:
-                                description: A response_header block as defined below.
-                                items:
-                                  properties:
-                                    headerActionType:
-                                      description: can be set to Overwrite, Append
-                                        or Delete.
-                                      type: string
-                                    headerName:
-                                      description: header name (string).
-                                      type: string
-                                    value:
-                                      description: value name (string).
-                                      type: string
-                                  type: object
-                                type: array
-                            type: object
-                          type: array
-                        matchCondition:
-                          description: One or more match_condition block as defined
-                            below.
-                          items:
-                            properties:
-                              negateCondition:
-                                description: can be set to true or false to negate
-                                  the given condition. Defaults to true.
-                                type: boolean
-                              operator:
-                                description: can be set to Any, IPMatch, GeoMatch,
-                                  Equal, Contains, LessThan, GreaterThan, LessThanOrEqual,
-                                  GreaterThanOrEqual, BeginsWith or EndsWith
-                                type: string
-                              selector:
-                                description: match against a specific key when variable
-                                  is set to PostArgs or RequestHeader. It cannot be
-                                  used with QueryString and RequestMethod.
-                                type: string
-                              transform:
-                                description: can be set to one or more values out
-                                  of Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
-                                  and UrlEncode
-                                items:
-                                  type: string
-                                type: array
-                              value:
-                                description: value name (string).
-                                items:
-                                  type: string
-                                type: array
-                              variable:
-                                description: can be set to IsMobile, RemoteAddr, RequestMethod,
-                                  QueryString, PostArgs, RequestURI, RequestPath,
-                                  RequestFilename, RequestFilenameExtension,RequestHeader,RequestBody
-                                  or RequestScheme.
-                                type: string
-                            type: object
-                          type: array
-                        name:
-                          description: The name of the rule.
-                          type: string
-                        priority:
-                          description: Priority of the rule, must be unique per rules
-                            engine definition.
-                          type: number
+                      required:
+                      - name
+                      - priority
                       type: object
                     type: array
                 type: object

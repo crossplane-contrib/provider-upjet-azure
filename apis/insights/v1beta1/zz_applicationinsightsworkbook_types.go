@@ -13,39 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ApplicationInsightsWorkbookInitParameters struct {
-
-	// Workbook category, as defined by the user at creation time. There may be additional category types beyond the following: workbook, sentinel. Defaults to workbook.
-	Category *string `json:"category,omitempty" tf:"category,omitempty"`
-
-	// Configuration of this particular workbook. Configuration data is a string containing valid JSON.
-	DataJSON *string `json:"dataJson,omitempty" tf:"data_json,omitempty"`
-
-	// Specifies the description of the workbook.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// Specifies the user-defined name (display name) of the workbook.
-	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
-
-	// An identity block as defined below. Changing this forces a new Workbook to be created.
-	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// Specifies the Azure Region where the Workbook should exist. Changing this forces a new Workbook to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// Specifies the name of this Workbook as a UUID/GUID. It should not contain any uppercase letters. Changing this forces a new Workbook to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Resource ID for a source resource. It should not contain any uppercase letters. Defaults to azure monitor.
-	SourceID *string `json:"sourceId,omitempty" tf:"source_id,omitempty"`
-
-	// Specifies the Resource Manager ID of the Storage Container when bring your own storage is used. Changing this forces a new Workbook to be created.
-	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
-
-	// A mapping of tags which should be assigned to the Workbook.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
 type ApplicationInsightsWorkbookObservation struct {
 
 	// Workbook category, as defined by the user at creation time. There may be additional category types beyond the following: workbook, sentinel. Defaults to workbook.
@@ -141,15 +108,6 @@ type ApplicationInsightsWorkbookParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type IdentityInitParameters struct {
-
-	// The list of User Assigned Managed Identity IDs assigned to this Workbook. Changing this forces a new resource to be created.
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// The type of Managed Service Identity that is configured on this Workbook. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned. Changing this forces a new resource to be created.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type IdentityObservation struct {
 
 	// The list of User Assigned Managed Identity IDs assigned to this Workbook. Changing this forces a new resource to be created.
@@ -172,26 +130,14 @@ type IdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of Managed Service Identity that is configured on this Workbook. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // ApplicationInsightsWorkbookSpec defines the desired state of ApplicationInsightsWorkbook
 type ApplicationInsightsWorkbookSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApplicationInsightsWorkbookParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ApplicationInsightsWorkbookInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApplicationInsightsWorkbookStatus defines the observed state of ApplicationInsightsWorkbook.
@@ -212,10 +158,10 @@ type ApplicationInsightsWorkbookStatus struct {
 type ApplicationInsightsWorkbook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataJson) || has(self.initProvider.dataJson)",message="dataJson is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataJson)",message="dataJson is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
 	Spec   ApplicationInsightsWorkbookSpec   `json:"spec"`
 	Status ApplicationInsightsWorkbookStatus `json:"status,omitempty"`
 }

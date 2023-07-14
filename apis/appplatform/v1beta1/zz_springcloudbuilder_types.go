@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type BuildPackGroupInitParameters struct {
-
-	// Specifies a list of the build pack's ID.
-	BuildPackIds []*string `json:"buildPackIds,omitempty" tf:"build_pack_ids,omitempty"`
-
-	// The name which should be used for this build pack group.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
 type BuildPackGroupObservation struct {
 
 	// Specifies a list of the build pack's ID.
@@ -38,20 +29,8 @@ type BuildPackGroupParameters struct {
 	BuildPackIds []*string `json:"buildPackIds,omitempty" tf:"build_pack_ids,omitempty"`
 
 	// The name which should be used for this build pack group.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
-type SpringCloudBuilderInitParameters struct {
-
-	// One or more build_pack_group blocks as defined below.
-	BuildPackGroup []BuildPackGroupInitParameters `json:"buildPackGroup,omitempty" tf:"build_pack_group,omitempty"`
-
-	// The name which should be used for this Spring Cloud Builder. Changing this forces a new Spring Cloud Builder to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A stack block as defined below.
-	Stack []StackInitParameters `json:"stack,omitempty" tf:"stack,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type SpringCloudBuilderObservation struct {
@@ -101,15 +80,6 @@ type SpringCloudBuilderParameters struct {
 	Stack []StackParameters `json:"stack,omitempty" tf:"stack,omitempty"`
 }
 
-type StackInitParameters struct {
-
-	// Specifies the ID of the ClusterStack.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// Specifies the version of the ClusterStack
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
-}
-
 type StackObservation struct {
 
 	// Specifies the ID of the ClusterStack.
@@ -122,30 +92,18 @@ type StackObservation struct {
 type StackParameters struct {
 
 	// Specifies the ID of the ClusterStack.
-	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	// +kubebuilder:validation:Required
+	ID *string `json:"id" tf:"id,omitempty"`
 
 	// Specifies the version of the ClusterStack
-	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	// +kubebuilder:validation:Required
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 // SpringCloudBuilderSpec defines the desired state of SpringCloudBuilder
 type SpringCloudBuilderSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudBuilderParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider SpringCloudBuilderInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudBuilderStatus defines the observed state of SpringCloudBuilder.
@@ -166,9 +124,9 @@ type SpringCloudBuilderStatus struct {
 type SpringCloudBuilder struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.buildPackGroup) || has(self.initProvider.buildPackGroup)",message="buildPackGroup is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.stack) || has(self.initProvider.stack)",message="stack is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.buildPackGroup)",message="buildPackGroup is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.stack)",message="stack is a required parameter"
 	Spec   SpringCloudBuilderSpec   `json:"spec"`
 	Status SpringCloudBuilderStatus `json:"status,omitempty"`
 }

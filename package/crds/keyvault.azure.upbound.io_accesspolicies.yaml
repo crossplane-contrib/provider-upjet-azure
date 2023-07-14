@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: accesspolicies.keyvault.azure.upbound.io
 spec:
   group: keyvault.azure.upbound.io
@@ -164,67 +164,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  objectId:
-                    description: The object ID of a user, service principal or security
-                      group in the Azure Active Directory tenant for the vault. The
-                      object ID of a service principal can be fetched from  azuread_service_principal.object_id.
-                      The object ID must be unique for the list of access policies.
-                      Changing this forces a new resource to be created.
-                    type: string
-                  secretPermissions:
-                    description: 'List of secret permissions, must be one or more
-                      from the following: Backup, Delete, Get, List, Purge, Recover,
-                      Restore and Set.'
-                    items:
-                      type: string
-                    type: array
-                  storagePermissions:
-                    description: 'List of storage permissions, must be one or more
-                      from the following: Backup, Delete, DeleteSAS, Get, GetSAS,
-                      List, ListSAS, Purge, Recover, RegenerateKey, Restore, Set,
-                      SetSAS and Update.'
-                    items:
-                      type: string
-                    type: array
-                  tenantId:
-                    description: The Azure Active Directory tenant ID that should
-                      be used for authenticating requests to the key vault. Changing
-                      this forces a new resource to be created.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  applicationId:
-                    description: The object ID of an Application in Azure Active Directory.
-                      Changing this forces a new resource to be created.
-                    type: string
-                  certificatePermissions:
-                    description: 'List of certificate permissions, must be one or
-                      more from the following: Backup, Create, Delete, DeleteIssuers,
-                      Get, GetIssuers, Import, List, ListIssuers, ManageContacts,
-                      ManageIssuers, Purge, Recover, Restore, SetIssuers and Update.'
-                    items:
-                      type: string
-                    type: array
-                  keyPermissions:
-                    description: 'List of key permissions, must be one or more from
-                      the following: Backup, Create, Decrypt, Delete, Encrypt, Get,
-                      Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update,
-                      Verify, WrapKey, Release, Rotate, GetRotationPolicy and SetRotationPolicy.'
-                    items:
-                      type: string
-                    type: array
                   objectId:
                     description: The object ID of a user, service principal or security
                       group in the Azure Active Directory tenant for the vault. The
@@ -453,12 +392,10 @@ spec:
             x-kubernetes-validations:
             - message: objectId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.objectId)
-                || has(self.initProvider.objectId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.objectId)'
             - message: tenantId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.tenantId)
-                || has(self.initProvider.tenantId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tenantId)'
           status:
             description: AccessPolicyStatus defines the observed state of AccessPolicy.
             properties:

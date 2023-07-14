@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type IdentifierInitParameters struct {
-
-	// The Offer Name for this Shared Image. Changing this forces a new resource to be created.
-	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
-
-	// The Publisher Name for this Gallery Image. Changing this forces a new resource to be created.
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
-
-	// The Name of the SKU for this Gallery Image. Changing this forces a new resource to be created.
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
-}
-
 type IdentifierObservation struct {
 
 	// The Offer Name for this Shared Image. Changing this forces a new resource to be created.
@@ -40,28 +28,16 @@ type IdentifierObservation struct {
 type IdentifierParameters struct {
 
 	// The Offer Name for this Shared Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
+	// +kubebuilder:validation:Required
+	Offer *string `json:"offer" tf:"offer,omitempty"`
 
 	// The Publisher Name for this Gallery Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	// +kubebuilder:validation:Required
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
 	// The Name of the SKU for this Gallery Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
-}
-
-type PurchasePlanInitParameters struct {
-
-	// The Purchase Plan Name for this Shared Image. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The Purchase Plan Product for this Gallery Image. Changing this forces a new resource to be created.
-	Product *string `json:"product,omitempty" tf:"product,omitempty"`
-
-	// The Purchase Plan Publisher for this Gallery Image. Changing this forces a new resource to be created.
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	// +kubebuilder:validation:Required
+	Sku *string `json:"sku" tf:"sku,omitempty"`
 }
 
 type PurchasePlanObservation struct {
@@ -79,8 +55,8 @@ type PurchasePlanObservation struct {
 type PurchasePlanParameters struct {
 
 	// The Purchase Plan Name for this Shared Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Purchase Plan Product for this Gallery Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -89,75 +65,6 @@ type PurchasePlanParameters struct {
 	// The Purchase Plan Publisher for this Gallery Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
-}
-
-type SharedImageInitParameters struct {
-
-	// Specifies if the Shared Image supports Accelerated Network. Changing this forces a new resource to be created.
-	AcceleratedNetworkSupportEnabled *bool `json:"acceleratedNetworkSupportEnabled,omitempty" tf:"accelerated_network_support_enabled,omitempty"`
-
-	// CPU architecture supported by an OS. Possible values are x64 and Arm64. Defaults to x64. Changing this forces a new resource to be created.
-	Architecture *string `json:"architecture,omitempty" tf:"architecture,omitempty"`
-
-	// Specifies if Confidential Virtual Machines enabled. It will enable all the features of trusted, with higher confidentiality features for isolate machines or encrypted data. Available for Gen2 machines. Changing this forces a new resource to be created.
-	ConfidentialVMEnabled *bool `json:"confidentialVmEnabled,omitempty" tf:"confidential_vm_enabled,omitempty"`
-
-	// Specifies if supports creation of both Confidential virtual machines and Gen2 virtual machines with standard security from a compatible Gen2 OS disk VHD or Gen2 Managed image. Changing this forces a new resource to be created.
-	ConfidentialVMSupported *bool `json:"confidentialVmSupported,omitempty" tf:"confidential_vm_supported,omitempty"`
-
-	// A description of this Shared Image.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// One or more Disk Types not allowed for the Image. Possible values include Standard_LRS and Premium_LRS.
-	DiskTypesNotAllowed []*string `json:"diskTypesNotAllowed,omitempty" tf:"disk_types_not_allowed,omitempty"`
-
-	// The end of life date in RFC3339 format of the Image.
-	EndOfLifeDate *string `json:"endOfLifeDate,omitempty" tf:"end_of_life_date,omitempty"`
-
-	// The End User Licence Agreement for the Shared Image. Changing this forces a new resource to be created.
-	Eula *string `json:"eula,omitempty" tf:"eula,omitempty"`
-
-	// The generation of HyperV that the Virtual Machine used to create the Shared Image is based on. Possible values are V1 and V2. Defaults to V1. Changing this forces a new resource to be created.
-	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
-
-	// An identifier block as defined below.
-	Identifier []IdentifierInitParameters `json:"identifier,omitempty" tf:"identifier,omitempty"`
-
-	// Specifies the supported Azure location where the Shared Image Gallery exists. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// Maximum memory in GB recommended for the Image.
-	MaxRecommendedMemoryInGb *float64 `json:"maxRecommendedMemoryInGb,omitempty" tf:"max_recommended_memory_in_gb,omitempty"`
-
-	// Maximum count of vCPUs recommended for the Image.
-	MaxRecommendedVcpuCount *float64 `json:"maxRecommendedVcpuCount,omitempty" tf:"max_recommended_vcpu_count,omitempty"`
-
-	// Minimum memory in GB recommended for the Image.
-	MinRecommendedMemoryInGb *float64 `json:"minRecommendedMemoryInGb,omitempty" tf:"min_recommended_memory_in_gb,omitempty"`
-
-	// Minimum count of vCPUs recommended for the Image.
-	MinRecommendedVcpuCount *float64 `json:"minRecommendedVcpuCount,omitempty" tf:"min_recommended_vcpu_count,omitempty"`
-
-	// The type of Operating System present in this Shared Image. Possible values are Linux and Windows. Changing this forces a new resource to be created.
-	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
-
-	// The URI containing the Privacy Statement associated with this Shared Image. Changing this forces a new resource to be created.
-	PrivacyStatementURI *string `json:"privacyStatementUri,omitempty" tf:"privacy_statement_uri,omitempty"`
-
-	// A purchase_plan block as defined below.
-	PurchasePlan []PurchasePlanInitParameters `json:"purchasePlan,omitempty" tf:"purchase_plan,omitempty"`
-
-	// The URI containing the Release Notes associated with this Shared Image.
-	ReleaseNoteURI *string `json:"releaseNoteUri,omitempty" tf:"release_note_uri,omitempty"`
-
-	// Specifies that the Operating System used inside this Image has not been Generalized (for example, sysprep on Windows has not been run). Changing this forces a new resource to be created.
-	Specialized *bool `json:"specialized,omitempty" tf:"specialized,omitempty"`
-
-	// A mapping of tags to assign to the Shared Image.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// Specifies if Trusted Launch has to be enabled for the Virtual Machine created from the Shared Image. Changing this forces a new resource to be created.
-	TrustedLaunchEnabled *bool `json:"trustedLaunchEnabled,omitempty" tf:"trusted_launch_enabled,omitempty"`
 }
 
 type SharedImageObservation struct {
@@ -359,18 +266,6 @@ type SharedImageParameters struct {
 type SharedImageSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SharedImageParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider SharedImageInitParameters `json:"initProvider,omitempty"`
 }
 
 // SharedImageStatus defines the observed state of SharedImage.
@@ -391,9 +286,9 @@ type SharedImageStatus struct {
 type SharedImage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identifier) || has(self.initProvider.identifier)",message="identifier is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.osType) || has(self.initProvider.osType)",message="osType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identifier)",message="identifier is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.osType)",message="osType is a required parameter"
 	Spec   SharedImageSpec   `json:"spec"`
 	Status SharedImageStatus `json:"status,omitempty"`
 }

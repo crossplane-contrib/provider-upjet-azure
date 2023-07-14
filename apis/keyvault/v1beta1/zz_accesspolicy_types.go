@@ -13,30 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type AccessPolicyInitParameters_2 struct {
-
-	// The object ID of an Application in Azure Active Directory. Changing this forces a new resource to be created.
-	ApplicationID *string `json:"applicationId,omitempty" tf:"application_id,omitempty"`
-
-	// List of certificate permissions, must be one or more from the following: Backup, Create, Delete, DeleteIssuers, Get, GetIssuers, Import, List, ListIssuers, ManageContacts, ManageIssuers, Purge, Recover, Restore, SetIssuers and Update.
-	CertificatePermissions []*string `json:"certificatePermissions,omitempty" tf:"certificate_permissions,omitempty"`
-
-	// List of key permissions, must be one or more from the following: Backup, Create, Decrypt, Delete, Encrypt, Get, Import, List, Purge, Recover, Restore, Sign, UnwrapKey, Update, Verify, WrapKey, Release, Rotate, GetRotationPolicy and SetRotationPolicy.
-	KeyPermissions []*string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty"`
-
-	// The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID of a service principal can be fetched from  azuread_service_principal.object_id. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created.
-	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
-
-	// List of secret permissions, must be one or more from the following: Backup, Delete, Get, List, Purge, Recover, Restore and Set.
-	SecretPermissions []*string `json:"secretPermissions,omitempty" tf:"secret_permissions,omitempty"`
-
-	// List of storage permissions, must be one or more from the following: Backup, Delete, DeleteSAS, Get, GetSAS, List, ListSAS, Purge, Recover, RegenerateKey, Restore, Set, SetSAS and Update.
-	StoragePermissions []*string `json:"storagePermissions,omitempty" tf:"storage_permissions,omitempty"`
-
-	// The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Changing this forces a new resource to be created.
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
-}
-
 type AccessPolicyObservation_2 struct {
 
 	// The object ID of an Application in Azure Active Directory. Changing this forces a new resource to be created.
@@ -116,18 +92,6 @@ type AccessPolicyParameters_2 struct {
 type AccessPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AccessPolicyParameters_2 `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider AccessPolicyInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // AccessPolicyStatus defines the observed state of AccessPolicy.
@@ -148,8 +112,8 @@ type AccessPolicyStatus struct {
 type AccessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.objectId) || has(self.initProvider.objectId)",message="objectId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tenantId) || has(self.initProvider.tenantId)",message="tenantId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.objectId)",message="objectId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tenantId)",message="tenantId is a required parameter"
 	Spec   AccessPolicySpec   `json:"spec"`
 	Status AccessPolicyStatus `json:"status,omitempty"`
 }

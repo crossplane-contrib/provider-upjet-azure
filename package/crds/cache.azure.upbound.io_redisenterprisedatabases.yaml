@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: redisenterprisedatabases.cache.azure.upbound.io
 spec:
   group: cache.azure.upbound.io
@@ -192,6 +192,8 @@ spec:
                             and RedisJSON. Changing this forces a new Redis Enterprise
                             Database to be created.
                           type: string
+                      required:
+                      - name
                       type: object
                     type: array
                   port:
@@ -279,71 +281,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  clientProtocol:
-                    description: Specifies whether redis clients can connect using
-                      TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted.
-                      Possible values are Encrypted and Plaintext. Defaults to Encrypted.
-                      Changing this forces a new Redis Enterprise Database to be created.
-                    type: string
-                  clusteringPolicy:
-                    description: Clustering policy - default is OSSCluster. Specified
-                      at create time. Possible values are EnterpriseCluster and OSSCluster.
-                      Defaults to OSSCluster. Changing this forces a new Redis Enterprise
-                      Database to be created.
-                    type: string
-                  evictionPolicy:
-                    description: Redis eviction policy - default is VolatileLRU. Possible
-                      values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU,
-                      VolatileLFU, VolatileTTL, VolatileRandom and NoEviction. Changing
-                      this forces a new Redis Enterprise Database to be created.
-                    type: string
-                  linkedDatabaseGroupNickname:
-                    description: Nickname of the group of linked databases. Changing
-                      this force a new Redis Enterprise Geo Database to be created.
-                    type: string
-                  linkedDatabaseId:
-                    description: A list of database resources to link with this database
-                      with a maximum of 5.
-                    items:
-                      type: string
-                    type: array
-                  module:
-                    description: A module block as defined below. Changing this forces
-                      a new resource to be created.
-                    items:
-                      properties:
-                        args:
-                          description: Configuration options for the module (e.g.
-                            ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces
-                            a new resource to be created. Defaults to "".
-                          type: string
-                        name:
-                          description: The name which should be used for this module.
-                            Possible values are RedisBloom, RedisTimeSeries, RediSearch
-                            and RedisJSON. Changing this forces a new Redis Enterprise
-                            Database to be created.
-                          type: string
-                      type: object
-                    type: array
-                  port:
-                    description: TCP port of the database endpoint. Specified at create
-                      time. Defaults to an available port. Changing this forces a
-                      new Redis Enterprise Database to be created. Defaults to 10000.
-                    type: number
                 type: object
               managementPolicies:
                 default:

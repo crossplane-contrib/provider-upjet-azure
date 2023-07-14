@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: iothubroutes.devices.azure.upbound.io
 spec:
   group: devices.azure.upbound.io
@@ -245,40 +245,6 @@ spec:
                       Invalid, TwinChangeEvents.'
                     type: string
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  condition:
-                    description: 'The condition that is evaluated to apply the routing
-                      rule. If no condition is provided, it evaluates to true by default.
-                      For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.'
-                    type: string
-                  enabled:
-                    description: Specifies whether a route is enabled.
-                    type: boolean
-                  endpointNames:
-                    description: The list of endpoints to which messages that satisfy
-                      the condition are routed. Currently only one endpoint is allowed.
-                    items:
-                      type: string
-                    type: array
-                  source:
-                    description: 'The source that the routing rule is to be applied
-                      to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents,
-                      DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents,
-                      Invalid, TwinChangeEvents.'
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -479,16 +445,13 @@ spec:
             x-kubernetes-validations:
             - message: enabled is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)
-                || has(self.initProvider.enabled)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)'
             - message: endpointNames is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.endpointNames)
-                || has(self.initProvider.endpointNames)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.endpointNames)'
             - message: source is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.source)
-                || has(self.initProvider.source)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.source)'
           status:
             description: IOTHubRouteStatus defines the observed state of IOTHubRoute.
             properties:

@@ -13,21 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type DataLakeGen2PathAceInitParameters struct {
-
-	// Specifies the Object ID of the Azure Active Directory User or Group that the entry relates to. Only valid for user or group entries.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// Specifies the permissions for the entry in rwx form. For example, rwx gives full permissions but r-- only gives read permissions.
-	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
-
-	// Specifies whether the ACE represents an access entry or a default entry. Default value is access.
-	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
-
-	// Specifies the type of entry. Can be user, group, mask or other.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type DataLakeGen2PathAceObservation struct {
 
 	// Specifies the Object ID of the Azure Active Directory User or Group that the entry relates to. Only valid for user or group entries.
@@ -50,34 +35,16 @@ type DataLakeGen2PathAceParameters struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the permissions for the entry in rwx form. For example, rwx gives full permissions but r-- only gives read permissions.
-	// +kubebuilder:validation:Optional
-	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+	// +kubebuilder:validation:Required
+	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
 
 	// Specifies whether the ACE represents an access entry or a default entry. Default value is access.
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Specifies the type of entry. Can be user, group, mask or other.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type DataLakeGen2PathInitParameters struct {
-
-	// One or more ace blocks as defined below to specify the entries for the ACL for the path.
-	Ace []DataLakeGen2PathAceInitParameters `json:"ace,omitempty" tf:"ace,omitempty"`
-
-	// Specifies the Object ID of the Azure Active Directory Group to make the owning group. Possible values also include $superuser.
-	Group *string `json:"group,omitempty" tf:"group,omitempty"`
-
-	// Specifies the Object ID of the Azure Active Directory User to make the owning user. Possible values also include $superuser.
-	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
-
-	// The path which should be created within the Data Lake Gen2 File System in the Storage Account. Changing this forces a new resource to be created.
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
-
-	// Specifies the type for path to create. Currently only directory is supported. Changing this forces a new resource to be created.
-	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type DataLakeGen2PathObservation struct {
@@ -161,18 +128,6 @@ type DataLakeGen2PathParameters struct {
 type DataLakeGen2PathSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DataLakeGen2PathParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider DataLakeGen2PathInitParameters `json:"initProvider,omitempty"`
 }
 
 // DataLakeGen2PathStatus defines the observed state of DataLakeGen2Path.
@@ -193,8 +148,8 @@ type DataLakeGen2PathStatus struct {
 type DataLakeGen2Path struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.path) || has(self.initProvider.path)",message="path is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resource) || has(self.initProvider.resource)",message="resource is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.path)",message="path is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resource)",message="resource is a required parameter"
 	Spec   DataLakeGen2PathSpec   `json:"spec"`
 	Status DataLakeGen2PathStatus `json:"status,omitempty"`
 }

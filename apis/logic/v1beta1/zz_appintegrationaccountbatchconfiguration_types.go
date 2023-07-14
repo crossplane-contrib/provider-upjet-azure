@@ -13,21 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type AppIntegrationAccountBatchConfigurationInitParameters struct {
-
-	// The batch group name of the Logic App Integration Batch Configuration. Changing this forces a new resource to be created.
-	BatchGroupName *string `json:"batchGroupName,omitempty" tf:"batch_group_name,omitempty"`
-
-	// A JSON mapping of any Metadata for this Logic App Integration Account Batch Configuration.
-	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
-
-	// The name which should be used for this Logic App Integration Account Batch Configuration. Only Alphanumeric characters allowed. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A release_criteria block as documented below, which is used to select the criteria to meet before processing each batch.
-	ReleaseCriteria []ReleaseCriteriaInitParameters `json:"releaseCriteria,omitempty" tf:"release_criteria,omitempty"`
-}
-
 type AppIntegrationAccountBatchConfigurationObservation struct {
 
 	// The batch group name of the Logic App Integration Batch Configuration. Changing this forces a new resource to be created.
@@ -98,15 +83,6 @@ type AppIntegrationAccountBatchConfigurationParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
-type MonthlyInitParameters struct {
-
-	// The occurrence of the week within the month.
-	Week *float64 `json:"week,omitempty" tf:"week,omitempty"`
-
-	// The day of the occurrence. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
-	Weekday *string `json:"weekday,omitempty" tf:"weekday,omitempty"`
-}
-
 type MonthlyObservation struct {
 
 	// The occurrence of the week within the month.
@@ -119,33 +95,12 @@ type MonthlyObservation struct {
 type MonthlyParameters struct {
 
 	// The occurrence of the week within the month.
-	// +kubebuilder:validation:Optional
-	Week *float64 `json:"week,omitempty" tf:"week,omitempty"`
+	// +kubebuilder:validation:Required
+	Week *float64 `json:"week" tf:"week,omitempty"`
 
 	// The day of the occurrence. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
-	// +kubebuilder:validation:Optional
-	Weekday *string `json:"weekday,omitempty" tf:"weekday,omitempty"`
-}
-
-type RecurrenceInitParameters struct {
-
-	// The end time of the schedule, formatted as an RFC3339 string.
-	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
-
-	// The frequency of the schedule. Possible values are Day, Hour, Minute, Month, NotSpecified, Second, Week and Year.
-	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
-
-	// The number of frequencys between runs.
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
-
-	// A schedule block as documented below.
-	Schedule []ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
-
-	// The start time of the schedule, formatted as an RFC3339 string.
-	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
-
-	// The timezone of the start/end time.
-	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
+	// +kubebuilder:validation:Required
+	Weekday *string `json:"weekday" tf:"weekday,omitempty"`
 }
 
 type RecurrenceObservation struct {
@@ -176,12 +131,12 @@ type RecurrenceParameters struct {
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
 	// The frequency of the schedule. Possible values are Day, Hour, Minute, Month, NotSpecified, Second, Week and Year.
-	// +kubebuilder:validation:Optional
-	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+	// +kubebuilder:validation:Required
+	Frequency *string `json:"frequency" tf:"frequency,omitempty"`
 
 	// The number of frequencys between runs.
-	// +kubebuilder:validation:Optional
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	// +kubebuilder:validation:Required
+	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
 	// A schedule block as documented below.
 	// +kubebuilder:validation:Optional
@@ -194,18 +149,6 @@ type RecurrenceParameters struct {
 	// The timezone of the start/end time.
 	// +kubebuilder:validation:Optional
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
-}
-
-type ReleaseCriteriaInitParameters struct {
-
-	// The batch size in bytes for the Logic App Integration Batch Configuration.
-	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
-
-	// The message count for the Logic App Integration Batch Configuration.
-	MessageCount *float64 `json:"messageCount,omitempty" tf:"message_count,omitempty"`
-
-	// A recurrence block as documented below.
-	Recurrence []RecurrenceInitParameters `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }
 
 type ReleaseCriteriaObservation struct {
@@ -233,24 +176,6 @@ type ReleaseCriteriaParameters struct {
 	// A recurrence block as documented below.
 	// +kubebuilder:validation:Optional
 	Recurrence []RecurrenceParameters `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
-}
-
-type ScheduleInitParameters struct {
-
-	// A list containing a single item, which specifies the Hour interval at which this recurrence should be triggered.
-	Hours []*float64 `json:"hours,omitempty" tf:"hours,omitempty"`
-
-	// A list containing a single item which specifies the Minute interval at which this recurrence should be triggered.
-	Minutes []*float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
-
-	// A list of days of the month that the job should execute on.
-	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
-
-	// A monthly block as documented below.
-	Monthly []MonthlyInitParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
-
-	// A list of days of the week that the job should execute on. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
-	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
 }
 
 type ScheduleObservation struct {
@@ -298,18 +223,6 @@ type ScheduleParameters struct {
 type AppIntegrationAccountBatchConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppIntegrationAccountBatchConfigurationParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider AppIntegrationAccountBatchConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppIntegrationAccountBatchConfigurationStatus defines the observed state of AppIntegrationAccountBatchConfiguration.
@@ -330,9 +243,9 @@ type AppIntegrationAccountBatchConfigurationStatus struct {
 type AppIntegrationAccountBatchConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.batchGroupName) || has(self.initProvider.batchGroupName)",message="batchGroupName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.releaseCriteria) || has(self.initProvider.releaseCriteria)",message="releaseCriteria is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.batchGroupName)",message="batchGroupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.releaseCriteria)",message="releaseCriteria is a required parameter"
 	Spec   AppIntegrationAccountBatchConfigurationSpec   `json:"spec"`
 	Status AppIntegrationAccountBatchConfigurationStatus `json:"status,omitempty"`
 }

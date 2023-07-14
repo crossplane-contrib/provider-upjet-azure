@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: sqlpoolworkloadgroups.synapse.azure.upbound.io
 spec:
   group: synapse.azure.upbound.io
@@ -164,40 +164,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  importance:
-                    description: The workload group importance level. Defaults to
-                      normal.
-                    type: string
-                  maxResourcePercent:
-                    description: The workload group cap percentage resource.
-                    type: number
-                  maxResourcePercentPerRequest:
-                    description: The workload group request maximum grant percentage.
-                      Defaults to 3.
-                    type: number
-                  minResourcePercent:
-                    description: The workload group minimum percentage resource.
-                    type: number
-                  minResourcePercentPerRequest:
-                    description: The workload group request minimum grant percentage.
-                    type: number
-                  queryExecutionTimeoutInSeconds:
-                    description: The workload group query execution timeout.
-                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -399,12 +365,10 @@ spec:
             x-kubernetes-validations:
             - message: maxResourcePercent is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.maxResourcePercent)
-                || has(self.initProvider.maxResourcePercent)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.maxResourcePercent)'
             - message: minResourcePercent is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.minResourcePercent)
-                || has(self.initProvider.minResourcePercent)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.minResourcePercent)'
           status:
             description: SQLPoolWorkloadGroupStatus defines the observed state of
               SQLPoolWorkloadGroup.

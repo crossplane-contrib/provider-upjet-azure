@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type CriteriaDimensionInitParameters struct {
-
-	// Specifies the name which should be used for this Monitor Scheduled Query Rule. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Operator for dimension values. Possible values are Exclude,and Include.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// List of dimension values. Use a wildcard * to collect all.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
 type CriteriaDimensionObservation struct {
 
 	// Specifies the name which should be used for this Monitor Scheduled Query Rule. Changing this forces a new resource to be created.
@@ -40,25 +28,16 @@ type CriteriaDimensionObservation struct {
 type CriteriaDimensionParameters struct {
 
 	// Specifies the name which should be used for this Monitor Scheduled Query Rule. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Operator for dimension values. Possible values are Exclude,and Include.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Required
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// List of dimension values. Use a wildcard * to collect all.
-	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type FailingPeriodsInitParameters struct {
-
-	// Specifies the number of violations to trigger an alert. Should be smaller or equal to number_of_evaluation_periods. Possible value is integer between 1 and 6.
-	MinimumFailingPeriodsToTriggerAlert *float64 `json:"minimumFailingPeriodsToTriggerAlert,omitempty" tf:"minimum_failing_periods_to_trigger_alert,omitempty"`
-
-	// Specifies the number of aggregated look-back points. The look-back time window is calculated based on the aggregation granularity window_duration and the selected number of aggregated points. Possible value is integer between 1 and 6.
-	NumberOfEvaluationPeriods *float64 `json:"numberOfEvaluationPeriods,omitempty" tf:"number_of_evaluation_periods,omitempty"`
+	// +kubebuilder:validation:Required
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type FailingPeriodsObservation struct {
@@ -73,21 +52,12 @@ type FailingPeriodsObservation struct {
 type FailingPeriodsParameters struct {
 
 	// Specifies the number of violations to trigger an alert. Should be smaller or equal to number_of_evaluation_periods. Possible value is integer between 1 and 6.
-	// +kubebuilder:validation:Optional
-	MinimumFailingPeriodsToTriggerAlert *float64 `json:"minimumFailingPeriodsToTriggerAlert,omitempty" tf:"minimum_failing_periods_to_trigger_alert,omitempty"`
+	// +kubebuilder:validation:Required
+	MinimumFailingPeriodsToTriggerAlert *float64 `json:"minimumFailingPeriodsToTriggerAlert" tf:"minimum_failing_periods_to_trigger_alert,omitempty"`
 
 	// Specifies the number of aggregated look-back points. The look-back time window is calculated based on the aggregation granularity window_duration and the selected number of aggregated points. Possible value is integer between 1 and 6.
-	// +kubebuilder:validation:Optional
-	NumberOfEvaluationPeriods *float64 `json:"numberOfEvaluationPeriods,omitempty" tf:"number_of_evaluation_periods,omitempty"`
-}
-
-type MonitorScheduledQueryRulesAlertV2ActionInitParameters struct {
-
-	// List of Action Group resource IDs to invoke when the alert fires.
-	ActionGroups []*string `json:"actionGroups,omitempty" tf:"action_groups,omitempty"`
-
-	// Specifies the properties of an alert payload.
-	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
+	// +kubebuilder:validation:Required
+	NumberOfEvaluationPeriods *float64 `json:"numberOfEvaluationPeriods" tf:"number_of_evaluation_periods,omitempty"`
 }
 
 type MonitorScheduledQueryRulesAlertV2ActionObservation struct {
@@ -108,33 +78,6 @@ type MonitorScheduledQueryRulesAlertV2ActionParameters struct {
 	// Specifies the properties of an alert payload.
 	// +kubebuilder:validation:Optional
 	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
-}
-
-type MonitorScheduledQueryRulesAlertV2CriteriaInitParameters struct {
-
-	// A dimension block as defined below.
-	Dimension []CriteriaDimensionInitParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
-
-	// A failing_periods block as defined below.
-	FailingPeriods []FailingPeriodsInitParameters `json:"failingPeriods,omitempty" tf:"failing_periods,omitempty"`
-
-	// Specifies the column containing the metric measure number.
-	MetricMeasureColumn *string `json:"metricMeasureColumn,omitempty" tf:"metric_measure_column,omitempty"`
-
-	// Specifies the criteria operator. Possible values are Equal, GreaterThan, GreaterThanOrEqual, LessThan,and LessThanOrEqual.
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
-
-	// The query to run on logs. The results returned by this query are used to populate the alert.
-	Query *string `json:"query,omitempty" tf:"query,omitempty"`
-
-	// Specifies the column containing the resource ID. The content of the column must be an uri formatted as resource ID.
-	ResourceIDColumn *string `json:"resourceIdColumn,omitempty" tf:"resource_id_column,omitempty"`
-
-	// Specifies the criteria threshold value that activates the alert.
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
-
-	// The type of aggregation to apply to the data points in aggregation granularity. Possible values are Average, Count, Maximum, Minimum,and Total.
-	TimeAggregationMethod *string `json:"timeAggregationMethod,omitempty" tf:"time_aggregation_method,omitempty"`
 }
 
 type MonitorScheduledQueryRulesAlertV2CriteriaObservation struct {
@@ -179,75 +122,24 @@ type MonitorScheduledQueryRulesAlertV2CriteriaParameters struct {
 	MetricMeasureColumn *string `json:"metricMeasureColumn,omitempty" tf:"metric_measure_column,omitempty"`
 
 	// Specifies the criteria operator. Possible values are Equal, GreaterThan, GreaterThanOrEqual, LessThan,and LessThanOrEqual.
-	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Required
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// The query to run on logs. The results returned by this query are used to populate the alert.
-	// +kubebuilder:validation:Optional
-	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+	// +kubebuilder:validation:Required
+	Query *string `json:"query" tf:"query,omitempty"`
 
 	// Specifies the column containing the resource ID. The content of the column must be an uri formatted as resource ID.
 	// +kubebuilder:validation:Optional
 	ResourceIDColumn *string `json:"resourceIdColumn,omitempty" tf:"resource_id_column,omitempty"`
 
 	// Specifies the criteria threshold value that activates the alert.
-	// +kubebuilder:validation:Optional
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	// +kubebuilder:validation:Required
+	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 
 	// The type of aggregation to apply to the data points in aggregation granularity. Possible values are Average, Count, Maximum, Minimum,and Total.
-	// +kubebuilder:validation:Optional
-	TimeAggregationMethod *string `json:"timeAggregationMethod,omitempty" tf:"time_aggregation_method,omitempty"`
-}
-
-type MonitorScheduledQueryRulesAlertV2InitParameters struct {
-
-	// An action block as defined below.
-	Action []MonitorScheduledQueryRulesAlertV2ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
-
-	// Specifies the flag that indicates whether the alert should be automatically resolved or not. Value should be true or false. The default is false.
-	AutoMitigationEnabled *bool `json:"autoMitigationEnabled,omitempty" tf:"auto_mitigation_enabled,omitempty"`
-
-	// A criteria block as defined below.
-	Criteria []MonitorScheduledQueryRulesAlertV2CriteriaInitParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
-
-	// Specifies the description of the scheduled query rule.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// Specifies the display name of the alert rule.
-	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
-
-	// Specifies the flag which indicates whether this scheduled query rule is enabled. Value should be true or false. The default is true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// How often the scheduled query rule is evaluated, represented in ISO 8601 duration format. Possible values are PT1M, PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H, PT5H, PT6H, P1D.
-	EvaluationFrequency *string `json:"evaluationFrequency,omitempty" tf:"evaluation_frequency,omitempty"`
-
-	// Specifies the Azure Region where the Monitor Scheduled Query Rule should exist. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// Mute actions for the chosen period of time in ISO 8601 duration format after the alert is fired. Possible values are PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H, PT5H, PT6H, P1D and P2D.
-	MuteActionsAfterAlertDuration *string `json:"muteActionsAfterAlertDuration,omitempty" tf:"mute_actions_after_alert_duration,omitempty"`
-
-	// Set this if the alert evaluation period is different from the query time range. If not specified, the value is window_duration*number_of_evaluation_periods. Possible values are PT5M, PT10M, PT15M, PT20M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H, PT5H, PT6H, P1D and P2D.
-	QueryTimeRangeOverride *string `json:"queryTimeRangeOverride,omitempty" tf:"query_time_range_override,omitempty"`
-
-	// Severity of the alert. Should be an integer between 0 and 4. Value of 0 is severest.
-	Severity *float64 `json:"severity,omitempty" tf:"severity,omitempty"`
-
-	// Specifies the flag which indicates whether the provided query should be validated or not. The default is false.
-	SkipQueryValidation *bool `json:"skipQueryValidation,omitempty" tf:"skip_query_validation,omitempty"`
-
-	// A mapping of tags which should be assigned to the Monitor Scheduled Query Rule.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// List of resource type of the target resource(s) on which the alert is created/updated. For example if the scope is a resource group and targetResourceTypes is Microsoft.Compute/virtualMachines, then a different alert will be fired for each virtual machine in the resource group which meet the alert criteria.
-	TargetResourceTypes []*string `json:"targetResourceTypes,omitempty" tf:"target_resource_types,omitempty"`
-
-	// Specifies the period of time in ISO 8601 duration format on which the Scheduled Query Rule will be executed (bin size). If evaluation_frequency is PT1M, possible values are PT1M, PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H, PT5H, and PT6H. Otherwise, possible values are PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H, PT5H, PT6H, P1D, and P2D.
-	WindowDuration *string `json:"windowDuration,omitempty" tf:"window_duration,omitempty"`
-
-	// Specifies the flag which indicates whether this scheduled query rule check if storage is configured. Value should be true or false. The default is false.
-	WorkspaceAlertsStorageEnabled *bool `json:"workspaceAlertsStorageEnabled,omitempty" tf:"workspace_alerts_storage_enabled,omitempty"`
+	// +kubebuilder:validation:Required
+	TimeAggregationMethod *string `json:"timeAggregationMethod" tf:"time_aggregation_method,omitempty"`
 }
 
 type MonitorScheduledQueryRulesAlertV2Observation struct {
@@ -417,18 +309,6 @@ type MonitorScheduledQueryRulesAlertV2Parameters struct {
 type MonitorScheduledQueryRulesAlertV2Spec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MonitorScheduledQueryRulesAlertV2Parameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider MonitorScheduledQueryRulesAlertV2InitParameters `json:"initProvider,omitempty"`
 }
 
 // MonitorScheduledQueryRulesAlertV2Status defines the observed state of MonitorScheduledQueryRulesAlertV2.
@@ -449,10 +329,10 @@ type MonitorScheduledQueryRulesAlertV2Status struct {
 type MonitorScheduledQueryRulesAlertV2 struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.criteria) || has(self.initProvider.criteria)",message="criteria is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.severity) || has(self.initProvider.severity)",message="severity is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.windowDuration) || has(self.initProvider.windowDuration)",message="windowDuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.criteria)",message="criteria is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.severity)",message="severity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.windowDuration)",message="windowDuration is a required parameter"
 	Spec   MonitorScheduledQueryRulesAlertV2Spec   `json:"spec"`
 	Status MonitorScheduledQueryRulesAlertV2Status `json:"status,omitempty"`
 }

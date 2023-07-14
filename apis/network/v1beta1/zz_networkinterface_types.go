@@ -13,30 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type NetworkInterfaceIPConfigurationInitParameters struct {
-
-	// The Frontend IP Configuration ID of a Gateway SKU Load Balancer.
-	GatewayLoadBalancerFrontendIPConfigurationID *string `json:"gatewayLoadBalancerFrontendIpConfigurationId,omitempty" tf:"gateway_load_balancer_frontend_ip_configuration_id,omitempty"`
-
-	// A name used for this IP Configuration.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Is this the Primary IP Configuration? Must be true for the first ip_configuration when multiple are specified. Defaults to false.
-	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
-
-	// The Static IP Address which should be used.
-	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
-
-	// The allocation method used for the Private IP Address. Possible values are Dynamic and Static.
-	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
-
-	// The IP Version to use. Possible values are IPv4 or IPv6. Defaults to IPv4.
-	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
-
-	// Reference to a Public IP Address to associate with this NIC
-	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
-}
-
 type NetworkInterfaceIPConfigurationObservation struct {
 
 	// The Frontend IP Configuration ID of a Gateway SKU Load Balancer.
@@ -71,8 +47,8 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	GatewayLoadBalancerFrontendIPConfigurationID *string `json:"gatewayLoadBalancerFrontendIpConfigurationId,omitempty" tf:"gateway_load_balancer_frontend_ip_configuration_id,omitempty"`
 
 	// A name used for this IP Configuration.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Is this the Primary IP Configuration? Must be true for the first ip_configuration when multiple are specified. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -83,8 +59,8 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
 	// The allocation method used for the Private IP Address. Possible values are Dynamic and Static.
-	// +kubebuilder:validation:Optional
-	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
+	// +kubebuilder:validation:Required
+	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation" tf:"private_ip_address_allocation,omitempty"`
 
 	// The IP Version to use. Possible values are IPv4 or IPv6. Defaults to IPv4.
 	// +kubebuilder:validation:Optional
@@ -107,33 +83,6 @@ type NetworkInterfaceIPConfigurationParameters struct {
 	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
-}
-
-type NetworkInterfaceInitParameters struct {
-
-	// A list of IP Addresses defining the DNS Servers which should be used for this Network Interface.
-	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
-
-	// Specifies the Edge Zone within the Azure Region where this Network Interface should exist. Changing this forces a new Network Interface to be created.
-	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
-
-	// Should Accelerated Networking be enabled? Defaults to false.
-	EnableAcceleratedNetworking *bool `json:"enableAcceleratedNetworking,omitempty" tf:"enable_accelerated_networking,omitempty"`
-
-	// Should IP Forwarding be enabled? Defaults to false.
-	EnableIPForwarding *bool `json:"enableIpForwarding,omitempty" tf:"enable_ip_forwarding,omitempty"`
-
-	// One or more ip_configuration blocks as defined below.
-	IPConfiguration []NetworkInterfaceIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
-
-	// The (relative) DNS Name used for internal communications between Virtual Machines in the same Virtual Network.
-	InternalDNSNameLabel *string `json:"internalDnsNameLabel,omitempty" tf:"internal_dns_name_label,omitempty"`
-
-	// The location where the Network Interface should exist. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type NetworkInterfaceObservation struct {
@@ -239,18 +188,6 @@ type NetworkInterfaceParameters struct {
 type NetworkInterfaceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NetworkInterfaceParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider NetworkInterfaceInitParameters `json:"initProvider,omitempty"`
 }
 
 // NetworkInterfaceStatus defines the observed state of NetworkInterface.
@@ -271,8 +208,8 @@ type NetworkInterfaceStatus struct {
 type NetworkInterface struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipConfiguration) || has(self.initProvider.ipConfiguration)",message="ipConfiguration is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipConfiguration)",message="ipConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   NetworkInterfaceSpec   `json:"spec"`
 	Status NetworkInterfaceStatus `json:"status,omitempty"`
 }

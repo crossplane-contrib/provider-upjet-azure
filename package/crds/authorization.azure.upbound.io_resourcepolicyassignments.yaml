@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: resourcepolicyassignments.authorization.azure.upbound.io
 spec:
   group: authorization.azure.upbound.io
@@ -94,6 +94,8 @@ spec:
                             added to this Policy Definition. Possible values are SystemAssigned
                             and UserAssigned.
                           type: string
+                      required:
+                      - type
                       type: object
                     type: array
                   location:
@@ -124,6 +126,8 @@ spec:
                             is the ID of the policy definition that the non-compliance
                             message applies to.
                           type: string
+                      required:
+                      - content
                       type: object
                     type: array
                   notScopes:
@@ -164,6 +168,8 @@ spec:
                             property. Possible values for policyEffect override listed
                             policy effects.
                           type: string
+                      required:
+                      - value
                       type: object
                     type: array
                   parameters:
@@ -285,164 +291,12 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - kind
                             type: object
                           type: array
-                      type: object
-                    type: array
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  description:
-                    description: A description which should be used for this Policy
-                      Assignment.
-                    type: string
-                  displayName:
-                    description: The Display Name for this Policy Assignment.
-                    type: string
-                  enforce:
-                    description: Specifies if this Policy should be enforced or not?
-                      Defaults to true.
-                    type: boolean
-                  identity:
-                    description: An identity block as defined below.
-                    items:
-                      properties:
-                        identityIds:
-                          description: A list of User Managed Identity IDs which should
-                            be assigned to the Policy Definition.
-                          items:
-                            type: string
-                          type: array
-                        type:
-                          description: The Type of Managed Identity which should be
-                            added to this Policy Definition. Possible values are SystemAssigned
-                            and UserAssigned.
-                          type: string
-                      type: object
-                    type: array
-                  location:
-                    description: The Azure Region where the Policy Assignment should
-                      exist. Changing this forces a new Policy Assignment to be created.
-                    type: string
-                  metadata:
-                    description: A JSON mapping of any Metadata for this Policy.
-                    type: string
-                  name:
-                    description: The name which should be used for this Policy Assignment.
-                      Changing this forces a new Resource Policy Assignment to be
-                      created.
-                    type: string
-                  nonComplianceMessage:
-                    description: One or more non_compliance_message blocks as defined
-                      below.
-                    items:
-                      properties:
-                        content:
-                          description: The non-compliance message text. When assigning
-                            policy sets (initiatives), unless policy_definition_reference_id
-                            is specified then this message will be the default for
-                            all policies.
-                          type: string
-                        policyDefinitionReferenceId:
-                          description: When assigning policy sets (initiatives), this
-                            is the ID of the policy definition that the non-compliance
-                            message applies to.
-                          type: string
-                      type: object
-                    type: array
-                  notScopes:
-                    description: Specifies a list of Resource Scopes (for example
-                      a Subscription, or a Resource Group) within this Management
-                      Group which are excluded from this Policy.
-                    items:
-                      type: string
-                    type: array
-                  overrides:
-                    description: One or more overrides blocks as defined below. More
-                      detail about overrides and resource_selectors see policy assignment
-                      structure
-                    items:
-                      properties:
-                        selectors:
-                          description: One or more override_selector as defined below.
-                          items:
-                            properties:
-                              in:
-                                description: The list of allowed values for the specified
-                                  kind. Cannot be used with not_in. Can contain up
-                                  to 50 values.
-                                items:
-                                  type: string
-                                type: array
-                              notIn:
-                                description: The list of not-allowed values for the
-                                  specified kind. Cannot be used with in. Can contain
-                                  up to 50 values.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
-                        value:
-                          description: Specifies the value to override the policy
-                            property. Possible values for policyEffect override listed
-                            policy effects.
-                          type: string
-                      type: object
-                    type: array
-                  parameters:
-                    description: A JSON mapping of any Parameters for this Policy.
-                    type: string
-                  resourceId:
-                    description: The ID of the Resource (or Resource Scope) where
-                      this should be applied. Changing this forces a new Resource
-                      Policy Assignment to be created.
-                    type: string
-                  resourceSelectors:
-                    description: One or more resource_selectors blocks as defined
-                      below to filter polices by resource properties.
-                    items:
-                      properties:
-                        name:
-                          description: Specifies a name for the resource selector.
-                          type: string
-                        selectors:
-                          description: One or more resource_selector block as defined
-                            below.
-                          items:
-                            properties:
-                              in:
-                                description: The list of allowed values for the specified
-                                  kind. Cannot be used with not_in. Can contain up
-                                  to 50 values.
-                                items:
-                                  type: string
-                                type: array
-                              kind:
-                                description: Specifies which characteristic will narrow
-                                  down the set of evaluated resources. Possible values
-                                  are resourceLocation,  resourceType and resourceWithoutLocation.
-                                type: string
-                              notIn:
-                                description: The list of not-allowed values for the
-                                  specified kind. Cannot be used with in. Can contain
-                                  up to 50 values.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
+                      required:
+                      - selectors
                       type: object
                     type: array
                 type: object
@@ -646,12 +500,10 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
             - message: resourceId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceId)
-                || has(self.initProvider.resourceId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.resourceId)'
           status:
             description: ResourcePolicyAssignmentStatus defines the observed state
               of ResourcePolicyAssignment.

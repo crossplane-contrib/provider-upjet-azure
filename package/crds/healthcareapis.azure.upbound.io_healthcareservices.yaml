@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: healthcareservices.healthcareapis.azure.upbound.io
 spec:
   group: healthcareapis.azure.upbound.io
@@ -230,103 +230,6 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  accessPolicyObjectIds:
-                    description: A set of Azure object IDs that are allowed to access
-                      the Service.
-                    items:
-                      type: string
-                    type: array
-                  authenticationConfiguration:
-                    description: An authentication_configuration block as defined
-                      below.
-                    items:
-                      properties:
-                        audience:
-                          description: The intended audience to receive authentication
-                            tokens for the service. The default value is https://azurehealthcareapis.com
-                          type: string
-                        authority:
-                          description: 'The Azure Active Directory (tenant) that serves
-                            as the authentication authority to access the service.
-                            Authority must be registered to Azure AD and in the following
-                            format: https://{Azure-AD-endpoint}/{tenant-id}.'
-                          type: string
-                        smartProxyEnabled:
-                          description: (Boolean) Enables the 'SMART on FHIR' option
-                            for mobile and web implementations.
-                          type: boolean
-                      type: object
-                    type: array
-                  corsConfiguration:
-                    description: A cors_configuration block as defined below.
-                    items:
-                      properties:
-                        allowCredentials:
-                          description: (Boolean) If credentials are allowed via CORS.
-                          type: boolean
-                        allowedHeaders:
-                          description: A set of headers to be allowed via CORS.
-                          items:
-                            type: string
-                          type: array
-                        allowedMethods:
-                          description: The methods to be allowed via CORS. Possible
-                            values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH
-                            and PUT.
-                          items:
-                            type: string
-                          type: array
-                        allowedOrigins:
-                          description: A set of origins to be allowed via CORS.
-                          items:
-                            type: string
-                          type: array
-                        maxAgeInSeconds:
-                          description: The max age to be allowed via CORS.
-                          type: number
-                      type: object
-                    type: array
-                  cosmosdbKeyVaultKeyVersionlessId:
-                    description: A versionless Key Vault Key ID for CMK encryption
-                      of the backing database. Changing this forces a new resource
-                      to be created.
-                    type: string
-                  cosmosdbThroughput:
-                    description: The provisioned throughput for the backing database.
-                      Range of 400-100000. Defaults to 1000.
-                    type: number
-                  kind:
-                    description: 'The type of the service. Values at time of publication
-                      are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.'
-                    type: string
-                  location:
-                    description: Specifies the supported Azure Region where the Service
-                      should be created. Changing this forces a new resource to be
-                      created.
-                    type: string
-                  publicNetworkAccessEnabled:
-                    description: Whether public network access is enabled or disabled
-                      for this service instance. Defaults to true.
-                    type: boolean
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -527,8 +430,7 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: HealthcareServiceStatus defines the observed state of HealthcareService.
             properties:

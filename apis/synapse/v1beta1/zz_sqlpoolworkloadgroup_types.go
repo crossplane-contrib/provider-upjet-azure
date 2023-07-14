@@ -13,27 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type SQLPoolWorkloadGroupInitParameters struct {
-
-	// The workload group importance level. Defaults to normal.
-	Importance *string `json:"importance,omitempty" tf:"importance,omitempty"`
-
-	// The workload group cap percentage resource.
-	MaxResourcePercent *float64 `json:"maxResourcePercent,omitempty" tf:"max_resource_percent,omitempty"`
-
-	// The workload group request maximum grant percentage. Defaults to 3.
-	MaxResourcePercentPerRequest *float64 `json:"maxResourcePercentPerRequest,omitempty" tf:"max_resource_percent_per_request,omitempty"`
-
-	// The workload group minimum percentage resource.
-	MinResourcePercent *float64 `json:"minResourcePercent,omitempty" tf:"min_resource_percent,omitempty"`
-
-	// The workload group request minimum grant percentage.
-	MinResourcePercentPerRequest *float64 `json:"minResourcePercentPerRequest,omitempty" tf:"min_resource_percent_per_request,omitempty"`
-
-	// The workload group query execution timeout.
-	QueryExecutionTimeoutInSeconds *float64 `json:"queryExecutionTimeoutInSeconds,omitempty" tf:"query_execution_timeout_in_seconds,omitempty"`
-}
-
 type SQLPoolWorkloadGroupObservation struct {
 
 	// The ID of the Synapse SQL Pool Workload Group.
@@ -106,18 +85,6 @@ type SQLPoolWorkloadGroupParameters struct {
 type SQLPoolWorkloadGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SQLPoolWorkloadGroupParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider SQLPoolWorkloadGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // SQLPoolWorkloadGroupStatus defines the observed state of SQLPoolWorkloadGroup.
@@ -138,8 +105,8 @@ type SQLPoolWorkloadGroupStatus struct {
 type SQLPoolWorkloadGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxResourcePercent) || has(self.initProvider.maxResourcePercent)",message="maxResourcePercent is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minResourcePercent) || has(self.initProvider.minResourcePercent)",message="minResourcePercent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxResourcePercent)",message="maxResourcePercent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minResourcePercent)",message="minResourcePercent is a required parameter"
 	Spec   SQLPoolWorkloadGroupSpec   `json:"spec"`
 	Status SQLPoolWorkloadGroupStatus `json:"status,omitempty"`
 }

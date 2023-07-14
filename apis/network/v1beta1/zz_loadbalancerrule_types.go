@@ -13,42 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type LoadBalancerRuleInitParameters struct {
-
-	// A list of reference to a Backend Address Pool over which this Load Balancing Rule operates.
-	BackendAddressPoolIds []*string `json:"backendAddressPoolIds,omitempty" tf:"backend_address_pool_ids,omitempty"`
-
-	// The port used for internal connections on the endpoint. Possible values range between 0 and 65535, inclusive.
-	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
-
-	// Is snat enabled for this Load Balancer Rule? Default false.
-	DisableOutboundSnat *bool `json:"disableOutboundSnat,omitempty" tf:"disable_outbound_snat,omitempty"`
-
-	// Are the Floating IPs enabled for this Load Balncer Rule? A "floating” IP is reassigned to a secondary server in case the primary server fails. Required to configure a SQL AlwaysOn Availability Group. Defaults to false.
-	EnableFloatingIP *bool `json:"enableFloatingIp,omitempty" tf:"enable_floating_ip,omitempty"`
-
-	// Is TCP Reset enabled for this Load Balancer Rule?
-	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
-
-	// The name of the frontend IP configuration to which the rule is associated.
-	FrontendIPConfigurationName *string `json:"frontendIpConfigurationName,omitempty" tf:"frontend_ip_configuration_name,omitempty"`
-
-	// The port for the external endpoint. Port numbers for each Rule must be unique within the Load Balancer. Possible values range between 0 and 65534, inclusive.
-	FrontendPort *float64 `json:"frontendPort,omitempty" tf:"frontend_port,omitempty"`
-
-	// Specifies the idle timeout in minutes for TCP connections. Valid values are between 4 and 30 minutes. Defaults to 4 minutes.
-	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
-
-	// Specifies the load balancing distribution type to be used by the Load Balancer. Possible values are: Default – The load balancer is configured to use a 5 tuple hash to map traffic to available servers. SourceIP – The load balancer is configured to use a 2 tuple hash to map traffic to available servers. SourceIPProtocol – The load balancer is configured to use a 3 tuple hash to map traffic to available servers. Also known as Session Persistence, where the options are called None, Client IP and Client IP and Protocol respectively.
-	LoadDistribution *string `json:"loadDistribution,omitempty" tf:"load_distribution,omitempty"`
-
-	// A reference to a Probe used by this Load Balancing Rule.
-	ProbeID *string `json:"probeId,omitempty" tf:"probe_id,omitempty"`
-
-	// The transport protocol for the external endpoint. Possible values are Tcp, Udp or All.
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
-}
-
 type LoadBalancerRuleObservation struct {
 
 	// A list of reference to a Backend Address Pool over which this Load Balancing Rule operates.
@@ -159,18 +123,6 @@ type LoadBalancerRuleParameters struct {
 type LoadBalancerRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LoadBalancerRuleParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider LoadBalancerRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // LoadBalancerRuleStatus defines the observed state of LoadBalancerRule.
@@ -191,10 +143,10 @@ type LoadBalancerRuleStatus struct {
 type LoadBalancerRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backendPort) || has(self.initProvider.backendPort)",message="backendPort is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frontendIpConfigurationName) || has(self.initProvider.frontendIpConfigurationName)",message="frontendIpConfigurationName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frontendPort) || has(self.initProvider.frontendPort)",message="frontendPort is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocol) || has(self.initProvider.protocol)",message="protocol is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backendPort)",message="backendPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frontendIpConfigurationName)",message="frontendIpConfigurationName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frontendPort)",message="frontendPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocol)",message="protocol is a required parameter"
 	Spec   LoadBalancerRuleSpec   `json:"spec"`
 	Status LoadBalancerRuleStatus `json:"status,omitempty"`
 }

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: sqlroledefinitions.cosmosdb.azure.upbound.io
 spec:
   group: cosmosdb.azure.upbound.io
@@ -168,6 +168,8 @@ spec:
                           items:
                             type: string
                           type: array
+                      required:
+                      - dataActions
                       type: object
                     type: array
                   resourceGroupName:
@@ -250,56 +252,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  roleDefinitionId:
-                    description: The GUID as the name of the Cosmos DB SQL Role Definition
-                      - one will be generated if not specified. Changing this forces
-                      a new resource to be created.
-                    type: string
-                  type:
-                    description: The type of the Cosmos DB SQL Role Definition. Possible
-                      values are BuiltInRole and CustomRole. Defaults to CustomRole.
-                      Changing this forces a new resource to be created.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  assignableScopes:
-                    description: A list of fully qualified scopes at or below which
-                      Role Assignments may be created using this Cosmos DB SQL Role
-                      Definition. It will allow application of this Cosmos DB SQL
-                      Role Definition on the entire Database Account or any underlying
-                      Database/Collection. Scopes higher than Database Account are
-                      not enforceable as assignable scopes.
-                    items:
-                      type: string
-                    type: array
-                  name:
-                    description: An user-friendly name for the Cosmos DB SQL Role
-                      Definition which must be unique for the Database Account.
-                    type: string
-                  permissions:
-                    description: A permissions block as defined below.
-                    items:
-                      properties:
-                        dataActions:
-                          description: A list of data actions that are allowed for
-                            the Cosmos DB SQL Role Definition.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
                   roleDefinitionId:
                     description: The GUID as the name of the Cosmos DB SQL Role Definition
                       - one will be generated if not specified. Changing this forces
@@ -511,16 +463,13 @@ spec:
             x-kubernetes-validations:
             - message: assignableScopes is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.assignableScopes)
-                || has(self.initProvider.assignableScopes)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.assignableScopes)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
             - message: permissions is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.permissions)
-                || has(self.initProvider.permissions)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.permissions)'
           status:
             description: SQLRoleDefinitionStatus defines the observed state of SQLRoleDefinition.
             properties:

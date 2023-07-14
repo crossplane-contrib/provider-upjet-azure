@@ -13,33 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ResourcePolicyRemediationInitParameters struct {
-
-	// A number between 0.0 to 1.0 representing the percentage failure threshold. The remediation will fail if the percentage of failed remediation operations (i.e. failed deployments) exceeds this threshold.
-	FailurePercentage *float64 `json:"failurePercentage,omitempty" tf:"failure_percentage,omitempty"`
-
-	// A list of the resource locations that will be remediated.
-	LocationFilters []*string `json:"locationFilters,omitempty" tf:"location_filters,omitempty"`
-
-	// The name of the Policy Remediation. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Determines how many resources to remediate at any given time. Can be used to increase or reduce the pace of the remediation. If not provided, the default parallel deployments value is used.
-	ParallelDeployments *float64 `json:"parallelDeployments,omitempty" tf:"parallel_deployments,omitempty"`
-
-	// The unique ID for the policy definition within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
-	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
-
-	// The unique ID for the policy definition reference within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
-	PolicyDefinitionReferenceID *string `json:"policyDefinitionReferenceId,omitempty" tf:"policy_definition_reference_id,omitempty"`
-
-	// Determines the max number of resources that can be remediated by the remediation job. If not provided, the default resource count is used.
-	ResourceCount *float64 `json:"resourceCount,omitempty" tf:"resource_count,omitempty"`
-
-	// The way that resources to remediate are discovered. Possible values are ExistingNonCompliant, ReEvaluateCompliance. Defaults to ExistingNonCompliant.
-	ResourceDiscoveryMode *string `json:"resourceDiscoveryMode,omitempty" tf:"resource_discovery_mode,omitempty"`
-}
-
 type ResourcePolicyRemediationObservation struct {
 
 	// A number between 0.0 to 1.0 representing the percentage failure threshold. The remediation will fail if the percentage of failed remediation operations (i.e. failed deployments) exceeds this threshold.
@@ -143,18 +116,6 @@ type ResourcePolicyRemediationParameters struct {
 type ResourcePolicyRemediationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourcePolicyRemediationParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ResourcePolicyRemediationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourcePolicyRemediationStatus defines the observed state of ResourcePolicyRemediation.
@@ -175,7 +136,7 @@ type ResourcePolicyRemediationStatus struct {
 type ResourcePolicyRemediation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
 	Spec   ResourcePolicyRemediationSpec   `json:"spec"`
 	Status ResourcePolicyRemediationStatus `json:"status,omitempty"`
 }

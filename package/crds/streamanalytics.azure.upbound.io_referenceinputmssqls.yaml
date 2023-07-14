@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: referenceinputmssqls.streamanalytics.azure.upbound.io
 spec:
   group: streamanalytics.azure.upbound.io
@@ -350,46 +350,6 @@ spec:
                 required:
                 - streamAnalyticsJobName
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  deltaSnapshotQuery:
-                    description: The query used to retrieve incremental changes in
-                      the reference data from the MS SQL database. Cannot be set when
-                      refresh_type is Static.
-                    type: string
-                  fullSnapshotQuery:
-                    description: The query used to retrieve the reference data from
-                      the MS SQL database.
-                    type: string
-                  refreshIntervalDuration:
-                    description: The frequency in hh:mm:ss with which the reference
-                      data should be retrieved from the MS SQL database e.g. 00:20:00
-                      for every 20 minutes. Must be set when refresh_type is RefreshPeriodicallyWithFull
-                      or RefreshPeriodicallyWithDelta.
-                    type: string
-                  refreshType:
-                    description: Defines whether and how the reference data should
-                      be refreshed. Accepted values are Static, RefreshPeriodicallyWithFull
-                      and RefreshPeriodicallyWithDelta.
-                    type: string
-                  table:
-                    description: The name of the table in the Azure SQL database.
-                    type: string
-                  username:
-                    description: The username to connect to the MS SQL database.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -590,19 +550,16 @@ spec:
             x-kubernetes-validations:
             - message: fullSnapshotQuery is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.fullSnapshotQuery)
-                || has(self.initProvider.fullSnapshotQuery)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.fullSnapshotQuery)'
             - message: passwordSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)'
             - message: refreshType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.refreshType)
-                || has(self.initProvider.refreshType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.refreshType)'
             - message: username is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.username)
-                || has(self.initProvider.username)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.username)'
           status:
             description: ReferenceInputMSSQLStatus defines the observed state of ReferenceInputMSSQL.
             properties:

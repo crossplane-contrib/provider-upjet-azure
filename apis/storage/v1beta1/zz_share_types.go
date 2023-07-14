@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ACLInitParameters struct {
-
-	// An access_policy block as defined below.
-	AccessPolicy []AccessPolicyInitParameters `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
-
-	// The ID which should be used for this Shared Identifier.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-}
-
 type ACLObservation struct {
 
 	// An access_policy block as defined below.
@@ -38,20 +29,8 @@ type ACLParameters struct {
 	AccessPolicy []AccessPolicyParameters `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
 	// The ID which should be used for this Shared Identifier.
-	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-}
-
-type AccessPolicyInitParameters struct {
-
-	// The time at which this Access Policy should be valid until, in ISO8601 format.
-	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
-
-	// The permissions which should be associated with this Shared Identifier. Possible value is combination of r (read), w (write), d (delete), and l (list).
-	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
-
-	// The time at which this Access Policy should be valid from, in ISO8601 format.
-	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+	// +kubebuilder:validation:Required
+	ID *string `json:"id" tf:"id,omitempty"`
 }
 
 type AccessPolicyObservation struct {
@@ -73,30 +52,12 @@ type AccessPolicyParameters struct {
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 
 	// The permissions which should be associated with this Shared Identifier. Possible value is combination of r (read), w (write), d (delete), and l (list).
-	// +kubebuilder:validation:Optional
-	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+	// +kubebuilder:validation:Required
+	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
 
 	// The time at which this Access Policy should be valid from, in ISO8601 format.
 	// +kubebuilder:validation:Optional
 	Start *string `json:"start,omitempty" tf:"start,omitempty"`
-}
-
-type ShareInitParameters struct {
-
-	// One or more acl blocks as defined below.
-	ACL []ACLInitParameters `json:"acl,omitempty" tf:"acl,omitempty"`
-
-	// The access tier of the File Share. Possible values are Hot, Cool and TransactionOptimized, Premium.
-	AccessTier *string `json:"accessTier,omitempty" tf:"access_tier,omitempty"`
-
-	// The protocol used for the share. Possible values are SMB and NFS. The SMB indicates the share can be accessed by SMBv3.0, SMBv2.1 and REST. The NFS indicates the share can be accessed by NFSv4.1. Defaults to SMB. Changing this forces a new resource to be created.
-	EnabledProtocol *string `json:"enabledProtocol,omitempty" tf:"enabled_protocol,omitempty"`
-
-	// A mapping of MetaData for this File Share.
-	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
-
-	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).
-	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
 }
 
 type ShareObservation struct {
@@ -169,18 +130,6 @@ type ShareParameters struct {
 type ShareSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ShareParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ShareInitParameters `json:"initProvider,omitempty"`
 }
 
 // ShareStatus defines the observed state of Share.
@@ -201,7 +150,7 @@ type ShareStatus struct {
 type Share struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.quota) || has(self.initProvider.quota)",message="quota is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.quota)",message="quota is a required parameter"
 	Spec   ShareSpec   `json:"spec"`
 	Status ShareStatus `json:"status,omitempty"`
 }

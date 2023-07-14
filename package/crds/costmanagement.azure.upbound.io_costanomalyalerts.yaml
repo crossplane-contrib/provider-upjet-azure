@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: costanomalyalerts.costmanagement.azure.upbound.io
 spec:
   group: costmanagement.azure.upbound.io
@@ -66,38 +66,6 @@ spec:
                 - Delete
                 type: string
               forProvider:
-                properties:
-                  displayName:
-                    description: The display name which should be used for this Cost
-                      Anomaly Alert.
-                    type: string
-                  emailAddresses:
-                    description: Specifies a list of email addresses which the Anomaly
-                      Alerts are send to.
-                    items:
-                      type: string
-                    type: array
-                  emailSubject:
-                    description: The email subject of the Cost Anomaly Alerts. Maximum
-                      length of the subject is 70.
-                    type: string
-                  message:
-                    description: The message of the Cost Anomaly Alert. Maximum length
-                      of the message is 250.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
                 properties:
                   displayName:
                     description: The display name which should be used for this Cost
@@ -318,16 +286,13 @@ spec:
             x-kubernetes-validations:
             - message: displayName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
-                || has(self.initProvider.displayName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)'
             - message: emailAddresses is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.emailAddresses)
-                || has(self.initProvider.emailAddresses)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.emailAddresses)'
             - message: emailSubject is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.emailSubject)
-                || has(self.initProvider.emailSubject)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.emailSubject)'
           status:
             description: CostAnomalyAlertStatus defines the observed state of CostAnomalyAlert.
             properties:

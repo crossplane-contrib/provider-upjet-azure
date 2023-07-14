@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: users.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -265,41 +265,6 @@ spec:
                       blocked and pending.
                     type: string
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  confirmation:
-                    description: The kind of confirmation email which will be sent
-                      to this user. Possible values are invite and signup. Changing
-                      this forces a new resource to be created.
-                    type: string
-                  email:
-                    description: The email address associated with this user.
-                    type: string
-                  firstName:
-                    description: The first name for this user.
-                    type: string
-                  lastName:
-                    description: The last name for this user.
-                    type: string
-                  note:
-                    description: A note about this user.
-                    type: string
-                  state:
-                    description: The state of this user. Possible values are active,
-                      blocked and pending.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -500,16 +465,13 @@ spec:
             x-kubernetes-validations:
             - message: email is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.email)
-                || has(self.initProvider.email)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.email)'
             - message: firstName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.firstName)
-                || has(self.initProvider.firstName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.firstName)'
             - message: lastName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.lastName)
-                || has(self.initProvider.lastName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.lastName)'
           status:
             description: UserStatus defines the observed state of User.
             properties:

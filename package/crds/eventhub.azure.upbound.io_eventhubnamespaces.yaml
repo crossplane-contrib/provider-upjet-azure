@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: eventhubnamespaces.eventhub.azure.upbound.io
 spec:
   group: eventhub.azure.upbound.io
@@ -96,6 +96,8 @@ spec:
                             that should be configured on this Event Hub Namespace.
                             Possible values are SystemAssigned or UserAssigned.
                           type: string
+                      required:
+                      - type
                       type: object
                     type: array
                   localAuthenticationEnabled:
@@ -339,129 +341,6 @@ spec:
                       forces a new resource to be created. Defaults to false.
                     type: boolean
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  autoInflateEnabled:
-                    description: Is Auto Inflate enabled for the EventHub Namespace?
-                    type: boolean
-                  capacity:
-                    description: Specifies the Capacity / Throughput Units for a Standard
-                      SKU namespace. Default capacity has a maximum of 2, but can
-                      be increased in blocks of 2 on a committed purchase basis. Defaults
-                      to 1.
-                    type: number
-                  dedicatedClusterId:
-                    description: Specifies the ID of the EventHub Dedicated Cluster
-                      where this Namespace should created. Changing this forces a
-                      new resource to be created.
-                    type: string
-                  identity:
-                    description: An identity block as defined below.
-                    items:
-                      properties:
-                        identityIds:
-                          description: Specifies a list of User Assigned Managed Identity
-                            IDs to be assigned to this EventHub namespace.
-                          items:
-                            type: string
-                          type: array
-                        type:
-                          description: Specifies the type of Managed Service Identity
-                            that should be configured on this Event Hub Namespace.
-                            Possible values are SystemAssigned or UserAssigned.
-                          type: string
-                      type: object
-                    type: array
-                  localAuthenticationEnabled:
-                    description: Is SAS authentication enabled for the EventHub Namespace?
-                      Defaults to true.
-                    type: boolean
-                  location:
-                    description: Specifies the supported Azure location where the
-                      resource exists. Changing this forces a new resource to be created.
-                    type: string
-                  maximumThroughputUnits:
-                    description: Specifies the maximum number of throughput units
-                      when Auto Inflate is Enabled. Valid values range from 1 - 20.
-                    type: number
-                  minimumTlsVersion:
-                    description: 'The minimum supported TLS version for this EventHub
-                      Namespace. Valid values are: 1.0, 1.1 and 1.2. The current default
-                      minimum TLS version is 1.2.'
-                    type: string
-                  networkRulesets:
-                    description: A network_rulesets block as defined below.
-                    items:
-                      properties:
-                        defaultAction:
-                          description: The default action to take when a rule is not
-                            matched. Possible values are Allow and Deny.
-                          type: string
-                        ipRule:
-                          description: One or more ip_rule blocks as defined below.
-                          items:
-                            properties:
-                              action:
-                                description: The action to take when the rule is matched.
-                                  Possible values are Allow.
-                                type: string
-                              ipMask:
-                                description: The IP mask to match on.
-                                type: string
-                            type: object
-                          type: array
-                        publicNetworkAccessEnabled:
-                          description: Is public network access enabled for the EventHub
-                            Namespace? Defaults to true.
-                          type: boolean
-                        trustedServiceAccessEnabled:
-                          description: Whether Trusted Microsoft Services are allowed
-                            to bypass firewall.
-                          type: boolean
-                        virtualNetworkRule:
-                          description: One or more virtual_network_rule blocks as
-                            defined below.
-                          items:
-                            properties:
-                              ignoreMissingVirtualNetworkServiceEndpoint:
-                                description: Are missing virtual network service endpoints
-                                  ignored?
-                                type: boolean
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  publicNetworkAccessEnabled:
-                    description: Is public network access enabled for the EventHub
-                      Namespace? Defaults to true.
-                    type: boolean
-                  sku:
-                    description: Defines which tier to use. Valid options are Basic,
-                      Standard, and Premium. Please note that setting this field to
-                      Premium will force the creation of a new resource.
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                  zoneRedundant:
-                    description: Specifies if the EventHub Namespace should be Zone
-                      Redundant (created across Availability Zones). Changing this
-                      forces a new resource to be created. Defaults to false.
-                    type: boolean
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -662,12 +541,10 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
             - message: sku is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)
-                || has(self.initProvider.sku)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)'
           status:
             description: EventHubNamespaceStatus defines the observed state of EventHubNamespace.
             properties:

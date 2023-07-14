@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: sentinelalertrulefusions.securityinsights.azure.upbound.io
 spec:
   group: securityinsights.azure.upbound.io
@@ -196,74 +196,13 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                            required:
+                            - name
+                            - severitiesAllowed
                             type: object
                           type: array
-                      type: object
-                    type: array
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  alertRuleTemplateGuid:
-                    description: The GUID of the alert rule template which is used
-                      for this Sentinel Fusion Alert Rule. Changing this forces a
-                      new Sentinel Fusion Alert Rule to be created.
-                    type: string
-                  enabled:
-                    description: Should this Sentinel Fusion Alert Rule be enabled?
-                      Defaults to true.
-                    type: boolean
-                  name:
-                    description: The name which should be used for this Sentinel Fusion
-                      Alert Rule. Changing this forces a new Sentinel Fusion Alert
-                      Rule to be created.
-                    type: string
-                  source:
-                    description: One or more source blocks as defined below.
-                    items:
-                      properties:
-                        enabled:
-                          description: Whether this source signal is enabled or disabled
-                            in Fusion detection? Defaults to true.
-                          type: boolean
-                        name:
-                          description: The name of the Fusion source signal. Refer
-                            to Fusion alert rule template for supported values.
-                          type: string
-                        subType:
-                          description: One or more sub_type blocks as defined below.
-                          items:
-                            properties:
-                              enabled:
-                                description: Whether this source subtype under source
-                                  signal is enabled or disabled in Fusion detection.
-                                  Defaults to true.
-                                type: boolean
-                              name:
-                                description: The Name of the source subtype under
-                                  a given source signal in Fusion detection. Refer
-                                  to Fusion alert rule template for supported values.
-                                type: string
-                              severitiesAllowed:
-                                description: A list of severities that are enabled
-                                  for this source subtype consumed in Fusion detection.
-                                  Possible values for each element are High, Medium,
-                                  Low, Informational.
-                                items:
-                                  type: string
-                                type: array
-                            type: object
-                          type: array
+                      required:
+                      - name
                       type: object
                     type: array
                 type: object
@@ -467,12 +406,10 @@ spec:
             x-kubernetes-validations:
             - message: alertRuleTemplateGuid is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.alertRuleTemplateGuid)
-                || has(self.initProvider.alertRuleTemplateGuid)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.alertRuleTemplateGuid)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || has(self.initProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
           status:
             description: SentinelAlertRuleFusionStatus defines the observed state
               of SentinelAlertRuleFusion.

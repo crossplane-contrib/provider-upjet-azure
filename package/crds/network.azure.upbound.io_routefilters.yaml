@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: routefilters.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -151,53 +151,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  rule:
-                    description: A rule block as defined below.
-                    items:
-                      properties:
-                        access:
-                          description: The access type of the rule. The only possible
-                            value is Allow.
-                          type: string
-                        communities:
-                          description: The collection for bgp community values to
-                            filter on. e.g. ['12076:5010','12076:5020'].
-                          items:
-                            type: string
-                          type: array
-                        name:
-                          description: The name of the route filter rule.
-                          type: string
-                        ruleType:
-                          description: The rule type of the rule. The only possible
-                            value is Community.
-                          type: string
-                      type: object
-                    type: array
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags which should be assigned to the
-                      Route Filter.
-                    type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  location:
-                    description: The Azure Region where the Route Filter should exist.
-                      Changing this forces a new Route Filter to be created.
-                    type: string
                   rule:
                     description: A rule block as defined below.
                     items:
@@ -428,8 +381,7 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: RouteFilterStatus defines the observed state of RouteFilter.
             properties:

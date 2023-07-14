@@ -13,30 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type LoadBalancerFrontendIPConfigurationInitParameters struct {
-
-	// The Frontend IP Configuration ID of a Gateway SKU Load Balancer.
-	GatewayLoadBalancerFrontendIPConfigurationID *string `json:"gatewayLoadBalancerFrontendIpConfigurationId,omitempty" tf:"gateway_load_balancer_frontend_ip_configuration_id,omitempty"`
-
-	// Specifies the name of the frontend IP configuration.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Private IP Address to assign to the Load Balancer. The last one and first four IPs in any range are reserved and cannot be manually assigned.
-	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
-
-	// The allocation method for the Private IP Address used by this Load Balancer. Possible values as Dynamic and Static.
-	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
-
-	// The version of IP that the Private IP Address is. Possible values are IPv4 or IPv6.
-	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
-
-	// The ID of a Public IP Prefix which should be associated with the Load Balancer. Public IP Prefix can only be used with outbound rules.
-	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
-
-	// Specifies a list of Availability Zones in which the IP Address for this Load Balancer should be located.
-	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
-}
-
 type LoadBalancerFrontendIPConfigurationObservation struct {
 
 	// The Frontend IP Configuration ID of a Gateway SKU Load Balancer.
@@ -86,8 +62,8 @@ type LoadBalancerFrontendIPConfigurationParameters struct {
 	GatewayLoadBalancerFrontendIPConfigurationID *string `json:"gatewayLoadBalancerFrontendIpConfigurationId,omitempty" tf:"gateway_load_balancer_frontend_ip_configuration_id,omitempty"`
 
 	// Specifies the name of the frontend IP configuration.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Private IP Address to assign to the Load Balancer. The last one and first four IPs in any range are reserved and cannot be manually assigned.
 	// +kubebuilder:validation:Optional
@@ -136,27 +112,6 @@ type LoadBalancerFrontendIPConfigurationParameters struct {
 	// Specifies a list of Availability Zones in which the IP Address for this Load Balancer should be located.
 	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
-}
-
-type LoadBalancerInitParameters struct {
-
-	// Specifies the Edge Zone within the Azure Region where this Load Balancer should exist. Changing this forces a new Load Balancer to be created.
-	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
-
-	// One or multiple frontend_ip_configuration blocks as documented below.
-	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationInitParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
-
-	// Specifies the supported Azure Region where the Load Balancer should be created. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// The SKU of the Azure Load Balancer. Accepted values are Basic, Standard and Gateway. Defaults to Basic. Changing this forces a new resource to be created.
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
-
-	// sku_tier -  The SKU tier of this Load Balancer. Possible values are Global and Regional. Defaults to Regional. Changing this forces a new resource to be created.
-	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LoadBalancerObservation struct {
@@ -236,18 +191,6 @@ type LoadBalancerParameters struct {
 type LoadBalancerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LoadBalancerParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider LoadBalancerInitParameters `json:"initProvider,omitempty"`
 }
 
 // LoadBalancerStatus defines the observed state of LoadBalancer.
@@ -268,7 +211,7 @@ type LoadBalancerStatus struct {
 type LoadBalancer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   LoadBalancerSpec   `json:"spec"`
 	Status LoadBalancerStatus `json:"status,omitempty"`
 }

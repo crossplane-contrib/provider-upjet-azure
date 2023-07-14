@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: iothubsharedaccesspolicies.devices.azure.upbound.io
 spec:
   group: devices.azure.upbound.io
@@ -238,37 +238,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  serviceConnect:
-                    description: Adds ServiceConnect permission to this Shared Access
-                      Account. It allows sending and receiving on the cloud-side endpoints.
-                    type: boolean
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  deviceConnect:
-                    description: Adds DeviceConnect permission to this Shared Access
-                      Account. It allows sending and receiving on the device-side
-                      endpoints.
-                    type: boolean
-                  registryRead:
-                    description: Adds RegistryRead permission to this Shared Access
-                      Account. It allows read access to the identity registry.
-                    type: boolean
-                  registryWrite:
-                    description: Adds RegistryWrite permission to this Shared Access
-                      Account. It allows write access to the identity registry.
-                    type: boolean
                   serviceConnect:
                     description: Adds ServiceConnect permission to this Shared Access
                       Account. It allows sending and receiving on the cloud-side endpoints.

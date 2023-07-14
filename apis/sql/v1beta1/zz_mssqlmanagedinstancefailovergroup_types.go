@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type MSSQLManagedInstanceFailoverGroupInitParameters struct {
-
-	// A read_write_endpoint_failover_policy block as defined below.
-	ReadWriteEndpointFailoverPolicy []MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyInitParameters `json:"readWriteEndpointFailoverPolicy,omitempty" tf:"read_write_endpoint_failover_policy,omitempty"`
-
-	// Failover policy for the read-only endpoint. Defaults to true.
-	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
-}
-
 type MSSQLManagedInstanceFailoverGroupObservation struct {
 
 	// The ID of the Managed Instance Failover Group.
@@ -92,15 +83,6 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
 }
 
-type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyInitParameters struct {
-
-	// Applies only if mode is Automatic. The grace period in minutes before failover with data loss is attempted.
-	GraceMinutes *float64 `json:"graceMinutes,omitempty" tf:"grace_minutes,omitempty"`
-
-	// The failover mode. Possible values are Automatic or Manual.
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
-}
-
 type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyObservation struct {
 
 	// Applies only if mode is Automatic. The grace period in minutes before failover with data loss is attempted.
@@ -117,11 +99,8 @@ type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyParameters 
 	GraceMinutes *float64 `json:"graceMinutes,omitempty" tf:"grace_minutes,omitempty"`
 
 	// The failover mode. Possible values are Automatic or Manual.
-	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
-}
-
-type PartnerRegionInitParameters struct {
+	// +kubebuilder:validation:Required
+	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
 type PartnerRegionObservation struct {
@@ -140,18 +119,6 @@ type PartnerRegionParameters struct {
 type MSSQLManagedInstanceFailoverGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MSSQLManagedInstanceFailoverGroupParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider MSSQLManagedInstanceFailoverGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLManagedInstanceFailoverGroupStatus defines the observed state of MSSQLManagedInstanceFailoverGroup.
@@ -172,7 +139,7 @@ type MSSQLManagedInstanceFailoverGroupStatus struct {
 type MSSQLManagedInstanceFailoverGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.readWriteEndpointFailoverPolicy) || has(self.initProvider.readWriteEndpointFailoverPolicy)",message="readWriteEndpointFailoverPolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.readWriteEndpointFailoverPolicy)",message="readWriteEndpointFailoverPolicy is a required parameter"
 	Spec   MSSQLManagedInstanceFailoverGroupSpec   `json:"spec"`
 	Status MSSQLManagedInstanceFailoverGroupStatus `json:"status,omitempty"`
 }

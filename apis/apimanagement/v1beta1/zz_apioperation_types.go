@@ -13,30 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type APIOperationInitParameters struct {
-
-	// A description for this API Operation, which may include HTML formatting tags.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// The Display Name for this API Management Operation.
-	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
-
-	// The HTTP Method used for this API Management Operation, like GET, DELETE, PUT or POST - but not limited to these values.
-	Method *string `json:"method,omitempty" tf:"method,omitempty"`
-
-	// A request block as defined below.
-	Request []RequestInitParameters `json:"request,omitempty" tf:"request,omitempty"`
-
-	// One or more response blocks as defined below.
-	Response []ResponseInitParameters `json:"response,omitempty" tf:"response,omitempty"`
-
-	// One or more template_parameter blocks as defined below.
-	TemplateParameter []TemplateParameterInitParameters `json:"templateParameter,omitempty" tf:"template_parameter,omitempty"`
-
-	// The relative URL Template identifying the target resource for this operation, which may include parameters.
-	URLTemplate *string `json:"urlTemplate,omitempty" tf:"url_template,omitempty"`
-}
-
 type APIOperationObservation struct {
 
 	// The Name of the API Management Service where the API exists. Changing this forces a new resource to be created.
@@ -143,24 +119,6 @@ type APIOperationParameters struct {
 	URLTemplate *string `json:"urlTemplate,omitempty" tf:"url_template,omitempty"`
 }
 
-type ExampleInitParameters struct {
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A URL that points to the literal example.
-	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A short description for this example.
-	Summary *string `json:"summary,omitempty" tf:"summary,omitempty"`
-
-	// The example of the representation.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
 type ExampleObservation struct {
 
 	// A description of this Template Parameter.
@@ -190,8 +148,8 @@ type ExampleParameters struct {
 	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A short description for this example.
 	// +kubebuilder:validation:Optional
@@ -199,24 +157,6 @@ type ExampleParameters struct {
 
 	// The example of the representation.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type FormParameterExampleInitParameters struct {
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A URL that points to the literal example.
-	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A short description for this example.
-	Summary *string `json:"summary,omitempty" tf:"summary,omitempty"`
-
-	// The example of the representation.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -249,8 +189,8 @@ type FormParameterExampleParameters struct {
 	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A short description for this example.
 	// +kubebuilder:validation:Optional
@@ -259,36 +199,6 @@ type FormParameterExampleParameters struct {
 	// The example of the representation.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type FormParameterInitParameters struct {
-
-	// The default value for this Template Parameter.
-	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// One or more example blocks as defined above.
-	Example []FormParameterExampleInitParameters `json:"example,omitempty" tf:"example,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Is this Template Parameter Required?
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
-
-	// The name of the Schema.
-	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
-
-	// The Type of this Template Parameter, such as a string.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// The type name defined by the Schema.
-	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
-
-	// One or more acceptable values for this Template Parameter.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type FormParameterObservation struct {
@@ -336,20 +246,20 @@ type FormParameterParameters struct {
 	Example []FormParameterExampleParameters `json:"example,omitempty" tf:"example,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Is this Template Parameter Required?
-	// +kubebuilder:validation:Optional
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+	// +kubebuilder:validation:Required
+	Required *bool `json:"required" tf:"required,omitempty"`
 
 	// The name of the Schema.
 	// +kubebuilder:validation:Optional
 	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
 
 	// The Type of this Template Parameter, such as a string.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The type name defined by the Schema.
 	// +kubebuilder:validation:Optional
@@ -358,24 +268,6 @@ type FormParameterParameters struct {
 	// One or more acceptable values for this Template Parameter.
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type HeaderExampleInitParameters struct {
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A URL that points to the literal example.
-	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A short description for this example.
-	Summary *string `json:"summary,omitempty" tf:"summary,omitempty"`
-
-	// The example of the representation.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type HeaderExampleObservation struct {
@@ -407,8 +299,8 @@ type HeaderExampleParameters struct {
 	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A short description for this example.
 	// +kubebuilder:validation:Optional
@@ -417,36 +309,6 @@ type HeaderExampleParameters struct {
 	// The example of the representation.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type HeaderInitParameters struct {
-
-	// The default value for this Template Parameter.
-	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// One or more example blocks as defined above.
-	Example []ExampleInitParameters `json:"example,omitempty" tf:"example,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Is this Template Parameter Required?
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
-
-	// The name of the Schema.
-	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
-
-	// The Type of this Template Parameter, such as a string.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// The type name defined by the Schema.
-	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
-
-	// One or more acceptable values for this Template Parameter.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type HeaderObservation struct {
@@ -494,20 +356,20 @@ type HeaderParameters struct {
 	Example []ExampleParameters `json:"example,omitempty" tf:"example,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Is this Template Parameter Required?
-	// +kubebuilder:validation:Optional
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+	// +kubebuilder:validation:Required
+	Required *bool `json:"required" tf:"required,omitempty"`
 
 	// The name of the Schema.
 	// +kubebuilder:validation:Optional
 	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
 
 	// The Type of this Template Parameter, such as a string.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The type name defined by the Schema.
 	// +kubebuilder:validation:Optional
@@ -516,24 +378,6 @@ type HeaderParameters struct {
 	// One or more acceptable values for this Template Parameter.
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type QueryParameterExampleInitParameters struct {
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A URL that points to the literal example.
-	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A short description for this example.
-	Summary *string `json:"summary,omitempty" tf:"summary,omitempty"`
-
-	// The example of the representation.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type QueryParameterExampleObservation struct {
@@ -565,8 +409,8 @@ type QueryParameterExampleParameters struct {
 	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A short description for this example.
 	// +kubebuilder:validation:Optional
@@ -575,36 +419,6 @@ type QueryParameterExampleParameters struct {
 	// The example of the representation.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type QueryParameterInitParameters struct {
-
-	// The default value for this Template Parameter.
-	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// One or more example blocks as defined above.
-	Example []QueryParameterExampleInitParameters `json:"example,omitempty" tf:"example,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Is this Template Parameter Required?
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
-
-	// The name of the Schema.
-	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
-
-	// The Type of this Template Parameter, such as a string.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// The type name defined by the Schema.
-	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
-
-	// One or more acceptable values for this Template Parameter.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type QueryParameterObservation struct {
@@ -652,20 +466,20 @@ type QueryParameterParameters struct {
 	Example []QueryParameterExampleParameters `json:"example,omitempty" tf:"example,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Is this Template Parameter Required?
-	// +kubebuilder:validation:Optional
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+	// +kubebuilder:validation:Required
+	Required *bool `json:"required" tf:"required,omitempty"`
 
 	// The name of the Schema.
 	// +kubebuilder:validation:Optional
 	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
 
 	// The Type of this Template Parameter, such as a string.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The type name defined by the Schema.
 	// +kubebuilder:validation:Optional
@@ -674,24 +488,6 @@ type QueryParameterParameters struct {
 	// One or more acceptable values for this Template Parameter.
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type RepresentationExampleInitParameters struct {
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A URL that points to the literal example.
-	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A short description for this example.
-	Summary *string `json:"summary,omitempty" tf:"summary,omitempty"`
-
-	// The example of the representation.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RepresentationExampleObservation struct {
@@ -723,8 +519,8 @@ type RepresentationExampleParameters struct {
 	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A short description for this example.
 	// +kubebuilder:validation:Optional
@@ -732,24 +528,6 @@ type RepresentationExampleParameters struct {
 
 	// The example of the representation.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type RepresentationFormParameterExampleInitParameters struct {
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A URL that points to the literal example.
-	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A short description for this example.
-	Summary *string `json:"summary,omitempty" tf:"summary,omitempty"`
-
-	// The example of the representation.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -782,8 +560,8 @@ type RepresentationFormParameterExampleParameters struct {
 	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A short description for this example.
 	// +kubebuilder:validation:Optional
@@ -792,36 +570,6 @@ type RepresentationFormParameterExampleParameters struct {
 	// The example of the representation.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type RepresentationFormParameterInitParameters struct {
-
-	// The default value for this Template Parameter.
-	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// One or more example blocks as defined above.
-	Example []RepresentationFormParameterExampleInitParameters `json:"example,omitempty" tf:"example,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Is this Template Parameter Required?
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
-
-	// The name of the Schema.
-	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
-
-	// The Type of this Template Parameter, such as a string.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// The type name defined by the Schema.
-	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
-
-	// One or more acceptable values for this Template Parameter.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type RepresentationFormParameterObservation struct {
@@ -869,20 +617,20 @@ type RepresentationFormParameterParameters struct {
 	Example []RepresentationFormParameterExampleParameters `json:"example,omitempty" tf:"example,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Is this Template Parameter Required?
-	// +kubebuilder:validation:Optional
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+	// +kubebuilder:validation:Required
+	Required *bool `json:"required" tf:"required,omitempty"`
 
 	// The name of the Schema.
 	// +kubebuilder:validation:Optional
 	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
 
 	// The Type of this Template Parameter, such as a string.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The type name defined by the Schema.
 	// +kubebuilder:validation:Optional
@@ -891,24 +639,6 @@ type RepresentationFormParameterParameters struct {
 	// One or more acceptable values for this Template Parameter.
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type RepresentationInitParameters struct {
-
-	// The Content Type of this representation, such as application/json.
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
-
-	// One or more example blocks as defined above.
-	Example []RepresentationExampleInitParameters `json:"example,omitempty" tf:"example,omitempty"`
-
-	// One or more form_parameter block as defined above.
-	FormParameter []FormParameterInitParameters `json:"formParameter,omitempty" tf:"form_parameter,omitempty"`
-
-	// The name of the Schema.
-	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
-
-	// The type name defined by the Schema.
-	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 }
 
 type RepresentationObservation struct {
@@ -932,8 +662,8 @@ type RepresentationObservation struct {
 type RepresentationParameters struct {
 
 	// The Content Type of this representation, such as application/json.
-	// +kubebuilder:validation:Optional
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	// +kubebuilder:validation:Required
+	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
 	// One or more example blocks as defined above.
 	// +kubebuilder:validation:Optional
@@ -950,21 +680,6 @@ type RepresentationParameters struct {
 	// The type name defined by the Schema.
 	// +kubebuilder:validation:Optional
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
-}
-
-type RequestInitParameters struct {
-
-	// A description of the HTTP Request, which may include HTML tags.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// One or more header blocks as defined above.
-	Header []HeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
-
-	// One or more query_parameter blocks as defined above.
-	QueryParameter []QueryParameterInitParameters `json:"queryParameter,omitempty" tf:"query_parameter,omitempty"`
-
-	// One or more representation blocks as defined below.
-	Representation []RepresentationInitParameters `json:"representation,omitempty" tf:"representation,omitempty"`
 }
 
 type RequestObservation struct {
@@ -999,36 +714,6 @@ type RequestParameters struct {
 	// One or more representation blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Representation []RepresentationParameters `json:"representation,omitempty" tf:"representation,omitempty"`
-}
-
-type ResponseHeaderInitParameters struct {
-
-	// The default value for this Template Parameter.
-	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// One or more example blocks as defined above.
-	Example []HeaderExampleInitParameters `json:"example,omitempty" tf:"example,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Is this Template Parameter Required?
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
-
-	// The name of the Schema.
-	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
-
-	// The Type of this Template Parameter, such as a string.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// The type name defined by the Schema.
-	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
-
-	// One or more acceptable values for this Template Parameter.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type ResponseHeaderObservation struct {
@@ -1076,20 +761,20 @@ type ResponseHeaderParameters struct {
 	Example []HeaderExampleParameters `json:"example,omitempty" tf:"example,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Is this Template Parameter Required?
-	// +kubebuilder:validation:Optional
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+	// +kubebuilder:validation:Required
+	Required *bool `json:"required" tf:"required,omitempty"`
 
 	// The name of the Schema.
 	// +kubebuilder:validation:Optional
 	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
 
 	// The Type of this Template Parameter, such as a string.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The type name defined by the Schema.
 	// +kubebuilder:validation:Optional
@@ -1098,21 +783,6 @@ type ResponseHeaderParameters struct {
 	// One or more acceptable values for this Template Parameter.
 	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
-}
-
-type ResponseInitParameters struct {
-
-	// A description of the HTTP Response, which may include HTML tags.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// One or more header blocks as defined above.
-	Header []ResponseHeaderInitParameters `json:"header,omitempty" tf:"header,omitempty"`
-
-	// One or more representation blocks as defined below.
-	Representation []ResponseRepresentationInitParameters `json:"representation,omitempty" tf:"representation,omitempty"`
-
-	// The HTTP Status Code.
-	StatusCode *float64 `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type ResponseObservation struct {
@@ -1145,26 +815,8 @@ type ResponseParameters struct {
 	Representation []ResponseRepresentationParameters `json:"representation,omitempty" tf:"representation,omitempty"`
 
 	// The HTTP Status Code.
-	// +kubebuilder:validation:Optional
-	StatusCode *float64 `json:"statusCode,omitempty" tf:"status_code,omitempty"`
-}
-
-type ResponseRepresentationExampleInitParameters struct {
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A URL that points to the literal example.
-	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A short description for this example.
-	Summary *string `json:"summary,omitempty" tf:"summary,omitempty"`
-
-	// The example of the representation.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	// +kubebuilder:validation:Required
+	StatusCode *float64 `json:"statusCode" tf:"status_code,omitempty"`
 }
 
 type ResponseRepresentationExampleObservation struct {
@@ -1196,8 +848,8 @@ type ResponseRepresentationExampleParameters struct {
 	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A short description for this example.
 	// +kubebuilder:validation:Optional
@@ -1206,24 +858,6 @@ type ResponseRepresentationExampleParameters struct {
 	// The example of the representation.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type ResponseRepresentationInitParameters struct {
-
-	// The Content Type of this representation, such as application/json.
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
-
-	// One or more example blocks as defined above.
-	Example []ResponseRepresentationExampleInitParameters `json:"example,omitempty" tf:"example,omitempty"`
-
-	// One or more form_parameter block as defined above.
-	FormParameter []RepresentationFormParameterInitParameters `json:"formParameter,omitempty" tf:"form_parameter,omitempty"`
-
-	// The name of the Schema.
-	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
-
-	// The type name defined by the Schema.
-	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 }
 
 type ResponseRepresentationObservation struct {
@@ -1247,8 +881,8 @@ type ResponseRepresentationObservation struct {
 type ResponseRepresentationParameters struct {
 
 	// The Content Type of this representation, such as application/json.
-	// +kubebuilder:validation:Optional
-	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+	// +kubebuilder:validation:Required
+	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 
 	// One or more example blocks as defined above.
 	// +kubebuilder:validation:Optional
@@ -1265,24 +899,6 @@ type ResponseRepresentationParameters struct {
 	// The type name defined by the Schema.
 	// +kubebuilder:validation:Optional
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
-}
-
-type TemplateParameterExampleInitParameters struct {
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// A URL that points to the literal example.
-	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A short description for this example.
-	Summary *string `json:"summary,omitempty" tf:"summary,omitempty"`
-
-	// The example of the representation.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type TemplateParameterExampleObservation struct {
@@ -1314,8 +930,8 @@ type TemplateParameterExampleParameters struct {
 	ExternalValue *string `json:"externalValue,omitempty" tf:"external_value,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A short description for this example.
 	// +kubebuilder:validation:Optional
@@ -1324,36 +940,6 @@ type TemplateParameterExampleParameters struct {
 	// The example of the representation.
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
-type TemplateParameterInitParameters struct {
-
-	// The default value for this Template Parameter.
-	DefaultValue *string `json:"defaultValue,omitempty" tf:"default_value,omitempty"`
-
-	// A description of this Template Parameter.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// One or more example blocks as defined above.
-	Example []TemplateParameterExampleInitParameters `json:"example,omitempty" tf:"example,omitempty"`
-
-	// The Name of this Template Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Is this Template Parameter Required?
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
-
-	// The name of the Schema.
-	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
-
-	// The Type of this Template Parameter, such as a string.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// The type name defined by the Schema.
-	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
-
-	// One or more acceptable values for this Template Parameter.
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type TemplateParameterObservation struct {
@@ -1401,20 +987,20 @@ type TemplateParameterParameters struct {
 	Example []TemplateParameterExampleParameters `json:"example,omitempty" tf:"example,omitempty"`
 
 	// The Name of this Template Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Is this Template Parameter Required?
-	// +kubebuilder:validation:Optional
-	Required *bool `json:"required,omitempty" tf:"required,omitempty"`
+	// +kubebuilder:validation:Required
+	Required *bool `json:"required" tf:"required,omitempty"`
 
 	// The name of the Schema.
 	// +kubebuilder:validation:Optional
 	SchemaID *string `json:"schemaId,omitempty" tf:"schema_id,omitempty"`
 
 	// The Type of this Template Parameter, such as a string.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The type name defined by the Schema.
 	// +kubebuilder:validation:Optional
@@ -1429,18 +1015,6 @@ type TemplateParameterParameters struct {
 type APIOperationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     APIOperationParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider APIOperationInitParameters `json:"initProvider,omitempty"`
 }
 
 // APIOperationStatus defines the observed state of APIOperation.
@@ -1461,9 +1035,9 @@ type APIOperationStatus struct {
 type APIOperation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.method) || has(self.initProvider.method)",message="method is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.urlTemplate) || has(self.initProvider.urlTemplate)",message="urlTemplate is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.method)",message="method is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.urlTemplate)",message="urlTemplate is a required parameter"
 	Spec   APIOperationSpec   `json:"spec"`
 	Status APIOperationStatus `json:"status,omitempty"`
 }

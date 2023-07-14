@@ -13,21 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type SentinelAlertRuleFusionInitParameters struct {
-
-	// The GUID of the alert rule template which is used for this Sentinel Fusion Alert Rule. Changing this forces a new Sentinel Fusion Alert Rule to be created.
-	AlertRuleTemplateGUID *string `json:"alertRuleTemplateGuid,omitempty" tf:"alert_rule_template_guid,omitempty"`
-
-	// Should this Sentinel Fusion Alert Rule be enabled? Defaults to true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// The name which should be used for this Sentinel Fusion Alert Rule. Changing this forces a new Sentinel Fusion Alert Rule to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// One or more source blocks as defined below.
-	Source []SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
-}
-
 type SentinelAlertRuleFusionObservation struct {
 
 	// The GUID of the alert rule template which is used for this Sentinel Fusion Alert Rule. Changing this forces a new Sentinel Fusion Alert Rule to be created.
@@ -82,18 +67,6 @@ type SentinelAlertRuleFusionParameters struct {
 	Source []SourceParameters `json:"source,omitempty" tf:"source,omitempty"`
 }
 
-type SourceInitParameters struct {
-
-	// Whether this source signal is enabled or disabled in Fusion detection? Defaults to true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// The name of the Fusion source signal. Refer to Fusion alert rule template for supported values.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// One or more sub_type blocks as defined below.
-	SubType []SubTypeInitParameters `json:"subType,omitempty" tf:"sub_type,omitempty"`
-}
-
 type SourceObservation struct {
 
 	// Whether this source signal is enabled or disabled in Fusion detection? Defaults to true.
@@ -113,24 +86,12 @@ type SourceParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the Fusion source signal. Refer to Fusion alert rule template for supported values.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// One or more sub_type blocks as defined below.
 	// +kubebuilder:validation:Optional
 	SubType []SubTypeParameters `json:"subType,omitempty" tf:"sub_type,omitempty"`
-}
-
-type SubTypeInitParameters struct {
-
-	// Whether this source subtype under source signal is enabled or disabled in Fusion detection. Defaults to true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// The Name of the source subtype under a given source signal in Fusion detection. Refer to Fusion alert rule template for supported values.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A list of severities that are enabled for this source subtype consumed in Fusion detection. Possible values for each element are High, Medium, Low, Informational.
-	SeveritiesAllowed []*string `json:"severitiesAllowed,omitempty" tf:"severities_allowed,omitempty"`
 }
 
 type SubTypeObservation struct {
@@ -152,30 +113,18 @@ type SubTypeParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The Name of the source subtype under a given source signal in Fusion detection. Refer to Fusion alert rule template for supported values.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A list of severities that are enabled for this source subtype consumed in Fusion detection. Possible values for each element are High, Medium, Low, Informational.
-	// +kubebuilder:validation:Optional
-	SeveritiesAllowed []*string `json:"severitiesAllowed,omitempty" tf:"severities_allowed,omitempty"`
+	// +kubebuilder:validation:Required
+	SeveritiesAllowed []*string `json:"severitiesAllowed" tf:"severities_allowed,omitempty"`
 }
 
 // SentinelAlertRuleFusionSpec defines the desired state of SentinelAlertRuleFusion
 type SentinelAlertRuleFusionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SentinelAlertRuleFusionParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider SentinelAlertRuleFusionInitParameters `json:"initProvider,omitempty"`
 }
 
 // SentinelAlertRuleFusionStatus defines the observed state of SentinelAlertRuleFusion.
@@ -196,8 +145,8 @@ type SentinelAlertRuleFusionStatus struct {
 type SentinelAlertRuleFusion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.alertRuleTemplateGuid) || has(self.initProvider.alertRuleTemplateGuid)",message="alertRuleTemplateGuid is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.alertRuleTemplateGuid)",message="alertRuleTemplateGuid is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
 	Spec   SentinelAlertRuleFusionSpec   `json:"spec"`
 	Status SentinelAlertRuleFusionStatus `json:"status,omitempty"`
 }

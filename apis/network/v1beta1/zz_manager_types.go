@@ -13,9 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type CrossTenantScopesInitParameters struct {
-}
-
 type CrossTenantScopesObservation struct {
 
 	// List of management groups.
@@ -29,24 +26,6 @@ type CrossTenantScopesObservation struct {
 }
 
 type CrossTenantScopesParameters struct {
-}
-
-type ManagerInitParameters struct {
-
-	// A description of the network manager.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// Specifies the Azure Region where the Network Managers should exist. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// A scope block as defined below.
-	Scope []ScopeInitParameters `json:"scope,omitempty" tf:"scope,omitempty"`
-
-	// A list of configuration deployment type. Possible values are Connectivity and SecurityAdmin, corresponds to if Connectivity Configuration and Security Admin Configuration is allowed for the Network Manager.
-	ScopeAccesses []*string `json:"scopeAccesses,omitempty" tf:"scope_accesses,omitempty"`
-
-	// A mapping of tags which should be assigned to the Network Managers.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ManagerObservation struct {
@@ -112,15 +91,6 @@ type ManagerParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type ScopeInitParameters struct {
-
-	// A list of management group IDs.
-	ManagementGroupIds []*string `json:"managementGroupIds,omitempty" tf:"management_group_ids,omitempty"`
-
-	// A list of subscription IDs.
-	SubscriptionIds []*string `json:"subscriptionIds,omitempty" tf:"subscription_ids,omitempty"`
-}
-
 type ScopeObservation struct {
 
 	// A list of management group IDs.
@@ -145,18 +115,6 @@ type ScopeParameters struct {
 type ManagerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagerParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ManagerInitParameters `json:"initProvider,omitempty"`
 }
 
 // ManagerStatus defines the observed state of Manager.
@@ -177,9 +135,9 @@ type ManagerStatus struct {
 type Manager struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope) || has(self.initProvider.scope)",message="scope is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scopeAccesses) || has(self.initProvider.scopeAccesses)",message="scopeAccesses is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope)",message="scope is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scopeAccesses)",message="scopeAccesses is a required parameter"
 	Spec   ManagerSpec   `json:"spec"`
 	Status ManagerStatus `json:"status,omitempty"`
 }

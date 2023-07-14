@@ -13,12 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type BasicAuthenticationInitParameters struct {
-
-	// The username which can be used to authenticate to the OData endpoint.
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
 type BasicAuthenticationObservation struct {
 
 	// The username which can be used to authenticate to the OData endpoint.
@@ -32,32 +26,8 @@ type BasicAuthenticationParameters struct {
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username which can be used to authenticate to the OData endpoint.
-	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
-}
-
-type LinkedServiceODataInitParameters struct {
-
-	// A map of additional properties to associate with the Data Factory Linked Service OData.
-	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
-
-	// List of tags that can be used for describing the Data Factory Linked Service OData.
-	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
-
-	// A basic_authentication block as defined below.
-	BasicAuthentication []BasicAuthenticationInitParameters `json:"basicAuthentication,omitempty" tf:"basic_authentication,omitempty"`
-
-	// The description for the Data Factory Linked Service OData.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// The integration runtime reference to associate with the Data Factory Linked Service OData.
-	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
-
-	// A map of parameters to associate with the Data Factory Linked Service OData.
-	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-
-	// The URL of the OData service endpoint.
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+	// +kubebuilder:validation:Required
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type LinkedServiceODataObservation struct {
@@ -139,18 +109,6 @@ type LinkedServiceODataParameters struct {
 type LinkedServiceODataSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LinkedServiceODataParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider LinkedServiceODataInitParameters `json:"initProvider,omitempty"`
 }
 
 // LinkedServiceODataStatus defines the observed state of LinkedServiceOData.
@@ -171,7 +129,7 @@ type LinkedServiceODataStatus struct {
 type LinkedServiceOData struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.url) || has(self.initProvider.url)",message="url is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.url)",message="url is a required parameter"
 	Spec   LinkedServiceODataSpec   `json:"spec"`
 	Status LinkedServiceODataStatus `json:"status,omitempty"`
 }

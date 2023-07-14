@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type DNSInitParameters struct {
-
-	// Whether to enable DNS proxy on Firewalls attached to this Firewall Policy? Defaults to false.
-	ProxyEnabled *bool `json:"proxyEnabled,omitempty" tf:"proxy_enabled,omitempty"`
-
-	// A list of custom DNS servers' IP addresses.
-	Servers []*string `json:"servers,omitempty" tf:"servers,omitempty"`
-}
-
 type DNSObservation struct {
 
 	// Whether to enable DNS proxy on Firewalls attached to this Firewall Policy? Defaults to false.
@@ -40,27 +31,6 @@ type DNSParameters struct {
 	// A list of custom DNS servers' IP addresses.
 	// +kubebuilder:validation:Optional
 	Servers []*string `json:"servers,omitempty" tf:"servers,omitempty"`
-}
-
-type ExplicitProxyInitParameters struct {
-
-	// Whether the pac file port and url need to be provided.
-	EnablePacFile *bool `json:"enablePacFile,omitempty" tf:"enable_pac_file,omitempty"`
-
-	// Whether the explicit proxy is enabled for this Firewall Policy.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// The port number for explicit http protocol.
-	HTTPPort *float64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
-
-	// The port number for explicit proxy https protocol.
-	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
-
-	// Specifies a SAS URL for PAC file.
-	PacFile *string `json:"pacFile,omitempty" tf:"pac_file,omitempty"`
-
-	// Specifies a port number for firewall to serve PAC file.
-	PacFilePort *float64 `json:"pacFilePort,omitempty" tf:"pac_file_port,omitempty"`
 }
 
 type ExplicitProxyObservation struct {
@@ -111,15 +81,6 @@ type ExplicitProxyParameters struct {
 	PacFilePort *float64 `json:"pacFilePort,omitempty" tf:"pac_file_port,omitempty"`
 }
 
-type FirewallPolicyIdentityInitParameters struct {
-
-	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Firewall Policy.
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
-
-	// Specifies the type of Managed Service Identity that should be configured on this Firewall Policy. Only possible value is UserAssigned.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type FirewallPolicyIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Firewall Policy.
@@ -132,60 +93,12 @@ type FirewallPolicyIdentityObservation struct {
 type FirewallPolicyIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Firewall Policy.
-	// +kubebuilder:validation:Optional
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+	// +kubebuilder:validation:Required
+	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Firewall Policy. Only possible value is UserAssigned.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
-type FirewallPolicyInitParameters struct {
-
-	// Whether enable auto learn private ip range.
-	AutoLearnPrivateRangesEnabled *bool `json:"autoLearnPrivateRangesEnabled,omitempty" tf:"auto_learn_private_ranges_enabled,omitempty"`
-
-	// The ID of the base Firewall Policy.
-	BasePolicyID *string `json:"basePolicyId,omitempty" tf:"base_policy_id,omitempty"`
-
-	// A dns block as defined below.
-	DNS []DNSInitParameters `json:"dns,omitempty" tf:"dns,omitempty"`
-
-	// A explicit_proxy block as defined below.
-	ExplicitProxy []ExplicitProxyInitParameters `json:"explicitProxy,omitempty" tf:"explicit_proxy,omitempty"`
-
-	// An identity block as defined below.
-	Identity []FirewallPolicyIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
-
-	// An insights block as defined below.
-	Insights []InsightsInitParameters `json:"insights,omitempty" tf:"insights,omitempty"`
-
-	// A intrusion_detection block as defined below.
-	IntrusionDetection []IntrusionDetectionInitParameters `json:"intrusionDetection,omitempty" tf:"intrusion_detection,omitempty"`
-
-	// The Azure Region where the Firewall Policy should exist. Changing this forces a new Firewall Policy to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// A list of private IP ranges to which traffic will not be SNAT.
-	PrivateIPRanges []*string `json:"privateIpRanges,omitempty" tf:"private_ip_ranges,omitempty"`
-
-	// Whether SQL Redirect traffic filtering is allowed. Enabling this flag requires no rule using ports between 11000-11999.
-	SQLRedirectAllowed *bool `json:"sqlRedirectAllowed,omitempty" tf:"sql_redirect_allowed,omitempty"`
-
-	// The SKU Tier of the Firewall Policy. Possible values are Standard, Premium and Basic. Changing this forces a new Firewall Policy to be created.
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
-
-	// A tls_certificate block as defined below.
-	TLSCertificate []TLSCertificateInitParameters `json:"tlsCertificate,omitempty" tf:"tls_certificate,omitempty"`
-
-	// A mapping of tags which should be assigned to the Firewall Policy.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// A threat_intelligence_allowlist block as defined below.
-	ThreatIntelligenceAllowlist []ThreatIntelligenceAllowlistInitParameters `json:"threatIntelligenceAllowlist,omitempty" tf:"threat_intelligence_allowlist,omitempty"`
-
-	// The operation mode for Threat Intelligence. Possible values are Alert, Deny and Off. Defaults to Alert.
-	ThreatIntelligenceMode *string `json:"threatIntelligenceMode,omitempty" tf:"threat_intelligence_mode,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type FirewallPolicyObservation struct {
@@ -327,21 +240,6 @@ type FirewallPolicyParameters struct {
 	ThreatIntelligenceMode *string `json:"threatIntelligenceMode,omitempty" tf:"threat_intelligence_mode,omitempty"`
 }
 
-type InsightsInitParameters struct {
-
-	// The ID of the default Log Analytics Workspace that the Firewalls associated with this Firewall Policy will send their logs to, when there is no location matches in the log_analytics_workspace.
-	DefaultLogAnalyticsWorkspaceID *string `json:"defaultLogAnalyticsWorkspaceId,omitempty" tf:"default_log_analytics_workspace_id,omitempty"`
-
-	// Whether the insights functionality is enabled for this Firewall Policy.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// A list of log_analytics_workspace block as defined below.
-	LogAnalyticsWorkspace []LogAnalyticsWorkspaceInitParameters `json:"logAnalyticsWorkspace,omitempty" tf:"log_analytics_workspace,omitempty"`
-
-	// The log retention period in days.
-	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
-}
-
 type InsightsObservation struct {
 
 	// The ID of the default Log Analytics Workspace that the Firewalls associated with this Firewall Policy will send their logs to, when there is no location matches in the log_analytics_workspace.
@@ -360,12 +258,12 @@ type InsightsObservation struct {
 type InsightsParameters struct {
 
 	// The ID of the default Log Analytics Workspace that the Firewalls associated with this Firewall Policy will send their logs to, when there is no location matches in the log_analytics_workspace.
-	// +kubebuilder:validation:Optional
-	DefaultLogAnalyticsWorkspaceID *string `json:"defaultLogAnalyticsWorkspaceId,omitempty" tf:"default_log_analytics_workspace_id,omitempty"`
+	// +kubebuilder:validation:Required
+	DefaultLogAnalyticsWorkspaceID *string `json:"defaultLogAnalyticsWorkspaceId" tf:"default_log_analytics_workspace_id,omitempty"`
 
 	// Whether the insights functionality is enabled for this Firewall Policy.
-	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Required
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// A list of log_analytics_workspace block as defined below.
 	// +kubebuilder:validation:Optional
@@ -374,21 +272,6 @@ type InsightsParameters struct {
 	// The log retention period in days.
 	// +kubebuilder:validation:Optional
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
-}
-
-type IntrusionDetectionInitParameters struct {
-
-	// In which mode you want to run intrusion detection: Off, Alert or Deny.
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
-
-	// A list of Private IP address ranges to identify traffic direction. By default, only ranges defined by IANA RFC 1918 are considered private IP addresses.
-	PrivateRanges []*string `json:"privateRanges,omitempty" tf:"private_ranges,omitempty"`
-
-	// One or more signature_overrides blocks as defined below.
-	SignatureOverrides []SignatureOverridesInitParameters `json:"signatureOverrides,omitempty" tf:"signature_overrides,omitempty"`
-
-	// One or more traffic_bypass blocks as defined below.
-	TrafficBypass []TrafficBypassInitParameters `json:"trafficBypass,omitempty" tf:"traffic_bypass,omitempty"`
 }
 
 type IntrusionDetectionObservation struct {
@@ -425,15 +308,6 @@ type IntrusionDetectionParameters struct {
 	TrafficBypass []TrafficBypassParameters `json:"trafficBypass,omitempty" tf:"traffic_bypass,omitempty"`
 }
 
-type LogAnalyticsWorkspaceInitParameters struct {
-
-	// The location of the Firewalls, that when matches this Log Analytics Workspace will be used to consume their logs.
-	FirewallLocation *string `json:"firewallLocation,omitempty" tf:"firewall_location,omitempty"`
-
-	// 12-digit number (id) which identifies your signature.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-}
-
 type LogAnalyticsWorkspaceObservation struct {
 
 	// The location of the Firewalls, that when matches this Log Analytics Workspace will be used to consume their logs.
@@ -446,21 +320,12 @@ type LogAnalyticsWorkspaceObservation struct {
 type LogAnalyticsWorkspaceParameters struct {
 
 	// The location of the Firewalls, that when matches this Log Analytics Workspace will be used to consume their logs.
-	// +kubebuilder:validation:Optional
-	FirewallLocation *string `json:"firewallLocation,omitempty" tf:"firewall_location,omitempty"`
+	// +kubebuilder:validation:Required
+	FirewallLocation *string `json:"firewallLocation" tf:"firewall_location,omitempty"`
 
 	// 12-digit number (id) which identifies your signature.
-	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-}
-
-type SignatureOverridesInitParameters struct {
-
-	// 12-digit number (id) which identifies your signature.
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
-
-	// state can be any of Off, Alert or Deny.
-	State *string `json:"state,omitempty" tf:"state,omitempty"`
+	// +kubebuilder:validation:Required
+	ID *string `json:"id" tf:"id,omitempty"`
 }
 
 type SignatureOverridesObservation struct {
@@ -483,15 +348,6 @@ type SignatureOverridesParameters struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
-type TLSCertificateInitParameters struct {
-
-	// The ID of the Key Vault, where the secret or certificate is stored.
-	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
-
-	// The name of the certificate.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
 type TLSCertificateObservation struct {
 
 	// The ID of the Key Vault, where the secret or certificate is stored.
@@ -504,21 +360,12 @@ type TLSCertificateObservation struct {
 type TLSCertificateParameters struct {
 
 	// The ID of the Key Vault, where the secret or certificate is stored.
-	// +kubebuilder:validation:Optional
-	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+	// +kubebuilder:validation:Required
+	KeyVaultSecretID *string `json:"keyVaultSecretId" tf:"key_vault_secret_id,omitempty"`
 
 	// The name of the certificate.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
-type ThreatIntelligenceAllowlistInitParameters struct {
-
-	// A list of FQDNs that will be skipped for threat detection.
-	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
-
-	// A list of IP addresses or CIDR ranges that will be skipped for threat detection.
-	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ThreatIntelligenceAllowlistObservation struct {
@@ -539,33 +386,6 @@ type ThreatIntelligenceAllowlistParameters struct {
 	// A list of IP addresses or CIDR ranges that will be skipped for threat detection.
 	// +kubebuilder:validation:Optional
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
-}
-
-type TrafficBypassInitParameters struct {
-
-	// The description for this bypass traffic setting.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// Specifies a list of destination IP addresses that shall be bypassed by intrusion detection.
-	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
-
-	// Specifies a list of destination IP groups that shall be bypassed by intrusion detection.
-	DestinationIPGroups []*string `json:"destinationIpGroups,omitempty" tf:"destination_ip_groups,omitempty"`
-
-	// Specifies a list of destination IP ports that shall be bypassed by intrusion detection.
-	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
-
-	// The name which should be used for this bypass traffic setting.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The protocols any of ANY, TCP, ICMP, UDP that shall be bypassed by intrusion detection.
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
-
-	// Specifies a list of source addresses that shall be bypassed by intrusion detection.
-	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
-
-	// Specifies a list of source IP groups that shall be bypassed by intrusion detection.
-	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 }
 
 type TrafficBypassObservation struct {
@@ -614,12 +434,12 @@ type TrafficBypassParameters struct {
 	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
 
 	// The name which should be used for this bypass traffic setting.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The protocols any of ANY, TCP, ICMP, UDP that shall be bypassed by intrusion detection.
-	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	// +kubebuilder:validation:Required
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// Specifies a list of source addresses that shall be bypassed by intrusion detection.
 	// +kubebuilder:validation:Optional
@@ -634,18 +454,6 @@ type TrafficBypassParameters struct {
 type FirewallPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FirewallPolicyParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider FirewallPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // FirewallPolicyStatus defines the observed state of FirewallPolicy.
@@ -666,7 +474,7 @@ type FirewallPolicyStatus struct {
 type FirewallPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   FirewallPolicySpec   `json:"spec"`
 	Status FirewallPolicyStatus `json:"status,omitempty"`
 }

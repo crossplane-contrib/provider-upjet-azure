@@ -13,33 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type FrontdoorOriginInitParameters struct {
-
-	// Specifies whether certificate name checks are enabled for this origin.
-	CertificateNameCheckEnabled *bool `json:"certificateNameCheckEnabled,omitempty" tf:"certificate_name_check_enabled,omitempty"`
-
-	// Should the origin be enabled? Possible values are true or false. Defaults to true.
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
-
-	// The value of the HTTP port. Must be between 1 and 65535. Defaults to 80.
-	HTTPPort *float64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
-
-	// The value of the HTTPS port. Must be between 1 and 65535. Defaults to 443.
-	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
-
-	// Should the origin be enabled? Possible values are true or false. Defaults to true.
-	HealthProbesEnabled *bool `json:"healthProbesEnabled,omitempty" tf:"health_probes_enabled,omitempty"`
-
-	// Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy. Must be between 1 and 5 (inclusive). Defaults to 1.
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
-
-	// A private_link block as defined below.
-	PrivateLink []PrivateLinkInitParameters `json:"privateLink,omitempty" tf:"private_link,omitempty"`
-
-	// The weight of the origin in a given origin group for load balancing. Must be between 1 and 1000. Defaults to 500.
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
-}
-
 type FrontdoorOriginObservation struct {
 
 	// The ID of the Front Door Origin Group within which this Front Door Origin should exist. Changing this forces a new Front Door Origin to be created.
@@ -156,15 +129,6 @@ type FrontdoorOriginParameters struct {
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
-type PrivateLinkInitParameters struct {
-
-	// Specifies the request message that will be submitted to the private_link_target_id when requesting the private link endpoint connection. Values must be between 1 and 140 characters in length. Defaults to Access request for CDN FrontDoor Private Link Origin.
-	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
-
-	// Specifies the type of target for this Private Link Endpoint. Possible values are blob, blob_secondary, web and sites.
-	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
-}
-
 type PrivateLinkObservation struct {
 
 	// Specifies the location where the Private Link resource should exist. Changing this forces a new resource to be created.
@@ -223,18 +187,6 @@ type PrivateLinkParameters struct {
 type FrontdoorOriginSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FrontdoorOriginParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider FrontdoorOriginInitParameters `json:"initProvider,omitempty"`
 }
 
 // FrontdoorOriginStatus defines the observed state of FrontdoorOrigin.
@@ -255,7 +207,7 @@ type FrontdoorOriginStatus struct {
 type FrontdoorOrigin struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateNameCheckEnabled) || has(self.initProvider.certificateNameCheckEnabled)",message="certificateNameCheckEnabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateNameCheckEnabled)",message="certificateNameCheckEnabled is a required parameter"
 	Spec   FrontdoorOriginSpec   `json:"spec"`
 	Status FrontdoorOriginStatus `json:"status,omitempty"`
 }

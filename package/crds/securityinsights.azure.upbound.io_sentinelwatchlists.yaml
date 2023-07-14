@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: sentinelwatchlists.securityinsights.azure.upbound.io
 spec:
   group: securityinsights.azure.upbound.io
@@ -172,45 +172,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  defaultDuration:
-                    description: The default duration in ISO8601 duration form of
-                      this Sentinel Watchlist. Changing this forces a new Sentinel
-                      Watchlist to be created.
-                    type: string
-                  description:
-                    description: The description of this Sentinel Watchlist. Changing
-                      this forces a new Sentinel Watchlist to be created.
-                    type: string
-                  displayName:
-                    description: The display name of this Sentinel Watchlist. Changing
-                      this forces a new Sentinel Watchlist to be created.
-                    type: string
-                  itemSearchKey:
-                    description: The key used to optimize query performance when using
-                      Watchlist for joins with other data. Changing this forces a
-                      new Sentinel Watchlist to be created.
-                    type: string
-                  labels:
-                    description: Specifies a list of labels related to this Sentinel
-                      Watchlist. Changing this forces a new Sentinel Watchlist to
-                      be created.
-                    items:
-                      type: string
-                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -412,12 +373,10 @@ spec:
             x-kubernetes-validations:
             - message: displayName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
-                || has(self.initProvider.displayName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)'
             - message: itemSearchKey is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.itemSearchKey)
-                || has(self.initProvider.itemSearchKey)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.itemSearchKey)'
           status:
             description: SentinelWatchlistStatus defines the observed state of SentinelWatchlist.
             properties:

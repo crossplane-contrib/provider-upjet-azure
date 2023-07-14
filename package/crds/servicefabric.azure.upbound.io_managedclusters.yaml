@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: managedclusters.servicefabric.azure.upbound.io
 spec:
   group: servicefabric.azure.upbound.io
@@ -85,6 +85,10 @@ spec:
                               tenantId:
                                 description: The ID of the Tenant.
                                 type: string
+                            required:
+                            - clientApplicationId
+                            - clusterApplicationId
+                            - tenantId
                             type: object
                           type: array
                         certificate:
@@ -101,6 +105,9 @@ spec:
                                 description: The type of the certificate. Can be AdminClient
                                   or ReadOnlyClient.
                                 type: string
+                            required:
+                            - thumbprint
+                            - type
                             type: object
                           type: array
                       type: object
@@ -125,6 +132,10 @@ spec:
                         value:
                           description: Parameter value.
                           type: string
+                      required:
+                      - parameter
+                      - section
+                      - value
                       type: object
                     type: array
                   dnsName:
@@ -160,6 +171,11 @@ spec:
                           description: The transport protocol used in this rule. Can
                             be one of tcp or udp.
                           type: string
+                      required:
+                      - backendPort
+                      - frontendPort
+                      - probeProtocol
+                      - protocol
                       type: object
                     type: array
                   location:
@@ -255,17 +271,34 @@ spec:
                                       description: The URL of a certificate that has
                                         been uploaded to Key Vault as a secret
                                       type: string
+                                  required:
+                                  - store
+                                  - url
                                   type: object
                                 type: array
                               vaultId:
                                 description: The ID of the Vault that contain the
                                   certificates.
                                 type: string
+                            required:
+                            - certificates
+                            - vaultId
                             type: object
                           type: array
                         vmSize:
                           description: The size of the instances in this node type.
                           type: string
+                      required:
+                      - applicationPortRange
+                      - dataDiskSizeGb
+                      - ephemeralPortRange
+                      - name
+                      - vmImageOffer
+                      - vmImagePublisher
+                      - vmImageSku
+                      - vmImageVersion
+                      - vmInstanceCount
+                      - vmSize
                       type: object
                     type: array
                   passwordSecretRef:
@@ -366,240 +399,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  sku:
-                    description: SKU for this cluster. Changing this forces a new
-                      resource to be created. Default is Basic, allowed values are
-                      either Basic or Standard.
-                    type: string
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags which should be assigned to the
-                      Resource Group.
-                    type: object
-                  upgradeWave:
-                    description: Upgrade wave for the fabric runtime. Default is Wave0,
-                      allowed value must be one of Wave0, Wave1, or Wave2.
-                    type: string
-                  username:
-                    description: Administrator password for the VMs that will be created
-                      as part of this cluster.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  authentication:
-                    description: Controls how connections to the cluster are authenticated.
-                      A authentication block as defined below.
-                    items:
-                      properties:
-                        activeDirectory:
-                          description: A active_directory block as defined above.
-                          items:
-                            properties:
-                              clientApplicationId:
-                                description: The ID of the Client Application.
-                                type: string
-                              clusterApplicationId:
-                                description: The ID of the Cluster Application.
-                                type: string
-                              tenantId:
-                                description: The ID of the Tenant.
-                                type: string
-                            type: object
-                          type: array
-                        certificate:
-                          description: One or more certificate blocks as defined below.
-                          items:
-                            properties:
-                              commonName:
-                                description: The certificate's CN.
-                                type: string
-                              thumbprint:
-                                description: The thumbprint of the certificate.
-                                type: string
-                              type:
-                                description: The type of the certificate. Can be AdminClient
-                                  or ReadOnlyClient.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  backupServiceEnabled:
-                    description: If true, backup service is enabled.
-                    type: boolean
-                  clientConnectionPort:
-                    description: Port to use when connecting to the cluster.
-                    type: number
-                  customFabricSetting:
-                    description: One or more custom_fabric_setting blocks as defined
-                      below.
-                    items:
-                      properties:
-                        parameter:
-                          description: Parameter name.
-                          type: string
-                        section:
-                          description: Section name.
-                          type: string
-                        value:
-                          description: Parameter value.
-                          type: string
-                      type: object
-                    type: array
-                  dnsName:
-                    description: Hostname for the cluster. If unset the cluster's
-                      name will be used..
-                    type: string
-                  dnsServiceEnabled:
-                    description: If true, DNS service is enabled.
-                    type: boolean
-                  httpGatewayPort:
-                    description: Port that should be used by the Service Fabric Explorer
-                      to visualize applications and cluster status.
-                    type: number
-                  lbRule:
-                    description: One or more lb_rule blocks as defined below.
-                    items:
-                      properties:
-                        backendPort:
-                          description: LB Backend port.
-                          type: number
-                        frontendPort:
-                          description: LB Frontend port.
-                          type: number
-                        probeProtocol:
-                          description: Protocol for the probe. Can be one of tcp,
-                            udp, http, or https.
-                          type: string
-                        probeRequestPath:
-                          description: Path for the probe to check, when probe protocol
-                            is set to http.
-                          type: string
-                        protocol:
-                          description: The transport protocol used in this rule. Can
-                            be one of tcp or udp.
-                          type: string
-                      type: object
-                    type: array
-                  location:
-                    description: The Azure Region where the Resource Group should
-                      exist. Changing this forces a new Resource Group to be created.
-                    type: string
-                  nodeType:
-                    description: One or more node_type blocks as defined below.
-                    items:
-                      properties:
-                        applicationPortRange:
-                          description: Sets the port range available for applications.
-                            Format is <from_port>-<to_port>, for example 10000-20000.
-                          type: string
-                        capacities:
-                          additionalProperties:
-                            type: string
-                          description: Specifies a list of key/value pairs used to
-                            set capacity tags for this node type.
-                          type: object
-                        dataDiskSizeGb:
-                          description: The size of the data disk in gigabytes..
-                          type: number
-                        dataDiskType:
-                          description: The type of the disk to use for storing data.
-                            It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
-                          type: string
-                        ephemeralPortRange:
-                          description: Sets the port range available for the OS. Format
-                            is <from_port>-<to_port>, for example 10000-20000. There
-                            has to be at least 255 ports available and cannot overlap
-                            with application_port_range..
-                          type: string
-                        multiplePlacementGroupsEnabled:
-                          description: If set the node type can be composed of multiple
-                            placement groups.
-                          type: boolean
-                        name:
-                          description: The name which should be used for this node
-                            type.
-                          type: string
-                        placementProperties:
-                          additionalProperties:
-                            type: string
-                          description: Specifies a list of placement tags that can
-                            be used to indicate where services should run..
-                          type: object
-                        primary:
-                          description: If set to true, system services will run on
-                            this node type. Only one node type should be marked as
-                            primary. Primary node type cannot be deleted or changed
-                            once they're created.
-                          type: boolean
-                        stateless:
-                          description: If set to true, only stateless workloads can
-                            run on this node type.
-                          type: boolean
-                        vmImageOffer:
-                          description: The offer type of the marketplace image cluster
-                            VMs will use.
-                          type: string
-                        vmImagePublisher:
-                          description: The publisher of the marketplace image cluster
-                            VMs will use.
-                          type: string
-                        vmImageSku:
-                          description: The SKU of the marketplace image cluster VMs
-                            will use.
-                          type: string
-                        vmImageVersion:
-                          description: The version of the marketplace image cluster
-                            VMs will use.
-                          type: string
-                        vmInstanceCount:
-                          description: The number of instances this node type will
-                            launch.
-                          type: number
-                        vmSecrets:
-                          description: One or more vm_secrets blocks as defined below.
-                          items:
-                            properties:
-                              certificates:
-                                description: One or more certificates blocks as defined
-                                  above.
-                                items:
-                                  properties:
-                                    store:
-                                      description: The certificate store on the Virtual
-                                        Machine to which the certificate should be
-                                        added.
-                                      type: string
-                                    url:
-                                      description: The URL of a certificate that has
-                                        been uploaded to Key Vault as a secret
-                                      type: string
-                                  type: object
-                                type: array
-                              vaultId:
-                                description: The ID of the Vault that contain the
-                                  certificates.
-                                type: string
-                            type: object
-                          type: array
-                        vmSize:
-                          description: The size of the instances in this node type.
-                          type: string
-                      type: object
-                    type: array
                   sku:
                     description: SKU for this cluster. Changing this forces a new
                       resource to be created. Default is Basic, allowed values are
@@ -820,20 +619,16 @@ spec:
             x-kubernetes-validations:
             - message: clientConnectionPort is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.clientConnectionPort)
-                || has(self.initProvider.clientConnectionPort)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.clientConnectionPort)'
             - message: httpGatewayPort is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.httpGatewayPort)
-                || has(self.initProvider.httpGatewayPort)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.httpGatewayPort)'
             - message: lbRule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.lbRule)
-                || has(self.initProvider.lbRule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.lbRule)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: ManagedClusterStatus defines the observed state of ManagedCluster.
             properties:

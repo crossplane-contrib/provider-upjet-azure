@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: hpccacheblobnfstargets.storagecache.azure.upbound.io
 spec:
   group: storagecache.azure.upbound.io
@@ -247,39 +247,6 @@ spec:
                       and WRITE_WORKLOAD_CLOUDWS.'
                     type: string
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  accessPolicyName:
-                    description: The name of the access policy applied to this target.
-                      Defaults to default.
-                    type: string
-                  namespacePath:
-                    description: The client-facing file path of the HPC Cache Blob
-                      NFS Target.
-                    type: string
-                  storageContainerId:
-                    description: The Resource Manager ID of the Storage Container
-                      used as the HPC Cache Blob NFS Target. Changing this forces
-                      a new resource to be created.
-                    type: string
-                  usageModel:
-                    description: 'The type of usage of the HPC Cache Blob NFS Target.
-                      Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180,
-                      WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
-                      and WRITE_WORKLOAD_CLOUDWS.'
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -480,16 +447,13 @@ spec:
             x-kubernetes-validations:
             - message: namespacePath is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.namespacePath)
-                || has(self.initProvider.namespacePath)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.namespacePath)'
             - message: storageContainerId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageContainerId)
-                || has(self.initProvider.storageContainerId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageContainerId)'
             - message: usageModel is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.usageModel)
-                || has(self.initProvider.usageModel)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.usageModel)'
           status:
             description: HPCCacheBlobNFSTargetStatus defines the observed state of
               HPCCacheBlobNFSTarget.

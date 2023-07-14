@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: firewallnatrulecollections.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -278,74 +278,13 @@ spec:
                         translatedPort:
                           description: The port of the service behind the Firewall.
                           type: string
-                      type: object
-                    type: array
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  action:
-                    description: Specifies the action the rule will apply to matching
-                      traffic. Possible values are Dnat and Snat.
-                    type: string
-                  priority:
-                    description: Specifies the priority of the rule collection. Possible
-                      values are between 100 - 65000.
-                    type: number
-                  rule:
-                    description: One or more rule blocks as defined below.
-                    items:
-                      properties:
-                        description:
-                          description: Specifies a description for the rule.
-                          type: string
-                        destinationAddresses:
-                          description: A list of destination IP addresses and/or IP
-                            ranges.
-                          items:
-                            type: string
-                          type: array
-                        destinationPorts:
-                          description: A list of destination ports.
-                          items:
-                            type: string
-                          type: array
-                        name:
-                          description: Specifies the name of the rule.
-                          type: string
-                        protocols:
-                          description: A list of protocols. Possible values are Any,
-                            ICMP, TCP and UDP. If action is Dnat, protocols can only
-                            be TCP and UDP.
-                          items:
-                            type: string
-                          type: array
-                        sourceAddresses:
-                          description: A list of source IP addresses and/or IP ranges.
-                          items:
-                            type: string
-                          type: array
-                        sourceIpGroups:
-                          description: A list of source IP Group IDs for the rule.
-                          items:
-                            type: string
-                          type: array
-                        translatedAddress:
-                          description: The address of the service behind the Firewall.
-                          type: string
-                        translatedPort:
-                          description: The port of the service behind the Firewall.
-                          type: string
+                      required:
+                      - destinationAddresses
+                      - destinationPorts
+                      - name
+                      - protocols
+                      - translatedAddress
+                      - translatedPort
                       type: object
                     type: array
                 type: object
@@ -549,16 +488,13 @@ spec:
             x-kubernetes-validations:
             - message: action is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.action)
-                || has(self.initProvider.action)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.action)'
             - message: priority is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.priority)
-                || has(self.initProvider.priority)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.priority)'
             - message: rule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)
-                || has(self.initProvider.rule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.rule)'
           status:
             description: FirewallNATRuleCollectionStatus defines the observed state
               of FirewallNATRuleCollection.

@@ -13,36 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type LinkedServiceSynapseInitParameters struct {
-
-	// A map of additional properties to associate with the Data Factory Linked Service Synapse.
-	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
-
-	// List of tags that can be used for describing the Data Factory Linked Service Synapse.
-	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
-
-	// The connection string in which to authenticate with the Synapse.
-	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
-
-	// The description for the Data Factory Linked Service Synapse.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// The integration runtime reference to associate with the Data Factory Linked Service Synapse.
-	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
-
-	// A key_vault_password block as defined below. Use this argument to store Synapse password in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service.
-	KeyVaultPassword []LinkedServiceSynapseKeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
-
-	// A map of parameters to associate with the Data Factory Linked Service Synapse.
-	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
-}
-
-type LinkedServiceSynapseKeyVaultPasswordInitParameters struct {
-
-	// Specifies the secret name in Azure Key Vault that stores Synapse password.
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
-}
-
 type LinkedServiceSynapseKeyVaultPasswordObservation struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
@@ -68,8 +38,8 @@ type LinkedServiceSynapseKeyVaultPasswordParameters struct {
 	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the secret name in Azure Key Vault that stores Synapse password.
-	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+	// +kubebuilder:validation:Required
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceSynapseObservation struct {
@@ -151,18 +121,6 @@ type LinkedServiceSynapseParameters struct {
 type LinkedServiceSynapseSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LinkedServiceSynapseParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider LinkedServiceSynapseInitParameters `json:"initProvider,omitempty"`
 }
 
 // LinkedServiceSynapseStatus defines the observed state of LinkedServiceSynapse.
@@ -183,7 +141,7 @@ type LinkedServiceSynapseStatus struct {
 type LinkedServiceSynapse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionString) || has(self.initProvider.connectionString)",message="connectionString is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionString)",message="connectionString is a required parameter"
 	Spec   LinkedServiceSynapseSpec   `json:"spec"`
 	Status LinkedServiceSynapseStatus `json:"status,omitempty"`
 }

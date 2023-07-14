@@ -13,12 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type CustomRouteInitParameters struct {
-
-	// A list of address blocks reserved for this virtual network in CIDR notation as defined below.
-	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
-}
-
 type CustomRouteObservation struct {
 
 	// A list of address blocks reserved for this virtual network in CIDR notation as defined below.
@@ -30,15 +24,6 @@ type CustomRouteParameters struct {
 	// A list of address blocks reserved for this virtual network in CIDR notation as defined below.
 	// +kubebuilder:validation:Optional
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
-}
-
-type PeeringAddressesInitParameters struct {
-
-	// A list of Azure custom APIPA addresses assigned to the BGP peer of the Virtual Network Gateway.
-	ApipaAddresses []*string `json:"apipaAddresses,omitempty" tf:"apipa_addresses,omitempty"`
-
-	// The name of the IP configuration of this Virtual Network Gateway. In case there are multiple ip_configuration blocks defined, this property is required to specify.
-	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
 }
 
 type PeeringAddressesObservation struct {
@@ -67,15 +52,6 @@ type PeeringAddressesParameters struct {
 	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
 }
 
-type RevokedCertificateInitParameters struct {
-
-	// A user-defined name of the root certificate.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Specifies the public data of the certificate.
-	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
-}
-
 type RevokedCertificateObservation struct {
 
 	// A user-defined name of the root certificate.
@@ -88,21 +64,12 @@ type RevokedCertificateObservation struct {
 type RevokedCertificateParameters struct {
 
 	// A user-defined name of the root certificate.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the public data of the certificate.
-	// +kubebuilder:validation:Optional
-	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
-}
-
-type RootCertificateInitParameters struct {
-
-	// A user-defined name of the root certificate.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM). In particular, this argument must not include the -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers.
-	PublicCertData *string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty"`
+	// +kubebuilder:validation:Required
+	Thumbprint *string `json:"thumbprint" tf:"thumbprint,omitempty"`
 }
 
 type RootCertificateObservation struct {
@@ -117,50 +84,12 @@ type RootCertificateObservation struct {
 type RootCertificateParameters struct {
 
 	// A user-defined name of the root certificate.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM). In particular, this argument must not include the -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers.
-	// +kubebuilder:validation:Optional
-	PublicCertData *string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty"`
-}
-
-type VPNClientConfigurationInitParameters struct {
-
-	// The client id of the Azure VPN application.
-	// See Create an Active Directory (AD) tenant for P2S OpenVPN protocol connections for values
-	AADAudience *string `json:"aadAudience,omitempty" tf:"aad_audience,omitempty"`
-
-	// The STS url for your tenant
-	AADIssuer *string `json:"aadIssuer,omitempty" tf:"aad_issuer,omitempty"`
-
-	// AzureAD Tenant URL
-	AADTenant *string `json:"aadTenant,omitempty" tf:"aad_tenant,omitempty"`
-
-	// The address space out of which IP addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation.
-	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
-
-	// The address of the Radius server.
-	RadiusServerAddress *string `json:"radiusServerAddress,omitempty" tf:"radius_server_address,omitempty"`
-
-	// The secret used by the Radius server.
-	RadiusServerSecret *string `json:"radiusServerSecret,omitempty" tf:"radius_server_secret,omitempty"`
-
-	// One or more revoked_certificate blocks which are defined below.
-	RevokedCertificate []RevokedCertificateInitParameters `json:"revokedCertificate,omitempty" tf:"revoked_certificate,omitempty"`
-
-	// One or more root_certificate blocks which are defined below. These root certificates are used to sign the client certificate used by the VPN clients to connect to the gateway.
-	RootCertificate []RootCertificateInitParameters `json:"rootCertificate,omitempty" tf:"root_certificate,omitempty"`
-
-	// List of the vpn authentication types for the virtual network gateway.
-	// The supported values are AAD, Radius and Certificate.
-	VPNAuthTypes []*string `json:"vpnAuthTypes,omitempty" tf:"vpn_auth_types,omitempty"`
-
-	// List of the protocols supported by the vpn client.
-	// The supported values are SSTP, IkeV2 and OpenVPN.
-	// Values SSTP and IkeV2 are incompatible with the use of
-	// aad_tenant, aad_audience and aad_issuer.
-	VPNClientProtocols []*string `json:"vpnClientProtocols,omitempty" tf:"vpn_client_protocols,omitempty"`
+	// +kubebuilder:validation:Required
+	PublicCertData *string `json:"publicCertData" tf:"public_cert_data,omitempty"`
 }
 
 type VPNClientConfigurationObservation struct {
@@ -217,8 +146,8 @@ type VPNClientConfigurationParameters struct {
 	AADTenant *string `json:"aadTenant,omitempty" tf:"aad_tenant,omitempty"`
 
 	// The address space out of which IP addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation.
-	// +kubebuilder:validation:Optional
-	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
+	// +kubebuilder:validation:Required
+	AddressSpace []*string `json:"addressSpace" tf:"address_space,omitempty"`
 
 	// The address of the Radius server.
 	// +kubebuilder:validation:Optional
@@ -249,18 +178,6 @@ type VPNClientConfigurationParameters struct {
 	VPNClientProtocols []*string `json:"vpnClientProtocols,omitempty" tf:"vpn_client_protocols,omitempty"`
 }
 
-type VirtualNetworkGatewayBGPSettingsInitParameters struct {
-
-	// The Autonomous System Number (ASN) to use as part of the BGP.
-	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
-
-	// The weight added to routes which have been learned through BGP peering. Valid values can be between 0 and 100.
-	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
-
-	// A list of peering_addresses as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
-	PeeringAddresses []PeeringAddressesInitParameters `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
-}
-
 type VirtualNetworkGatewayBGPSettingsObservation struct {
 
 	// The Autonomous System Number (ASN) to use as part of the BGP.
@@ -286,15 +203,6 @@ type VirtualNetworkGatewayBGPSettingsParameters struct {
 	// A list of peering_addresses as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
 	// +kubebuilder:validation:Optional
 	PeeringAddresses []PeeringAddressesParameters `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
-}
-
-type VirtualNetworkGatewayIPConfigurationInitParameters struct {
-
-	// A user-defined name of the IP configuration. Defaults to vnetGatewayConfig.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Defines how the private IP address of the gateways virtual interface is assigned. Valid options are Static or Dynamic. Defaults to Dynamic.
-	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 }
 
 type VirtualNetworkGatewayIPConfigurationObservation struct {
@@ -349,57 +257,6 @@ type VirtualNetworkGatewayIPConfigurationParameters struct {
 	// Selector for a Subnet to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
-}
-
-type VirtualNetworkGatewayInitParameters struct {
-
-	// If true, an active-active Virtual Network Gateway will be created. An active-active gateway requires a HighPerformance or an UltraPerformance SKU. If false, an active-standby gateway will be created. Defaults to false.
-	ActiveActive *bool `json:"activeActive,omitempty" tf:"active_active,omitempty"`
-
-	// A bgp_settings block which is documented below. In this block the BGP specific settings can be defined.
-	BGPSettings []VirtualNetworkGatewayBGPSettingsInitParameters `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
-
-	// A custom_route block as defined below. Specifies a custom routes address space for a virtual network gateway and a VpnClient.
-	CustomRoute []CustomRouteInitParameters `json:"customRoute,omitempty" tf:"custom_route,omitempty"`
-
-	// The ID of the local network gateway through which outbound Internet traffic from the virtual network in which the gateway is created will be routed (forced tunnelling). Refer to the Azure documentation on forced tunnelling. If not specified, forced tunnelling is disabled.
-	DefaultLocalNetworkGatewayID *string `json:"defaultLocalNetworkGatewayId,omitempty" tf:"default_local_network_gateway_id,omitempty"`
-
-	// Specifies the Edge Zone within the Azure Region where this Virtual Network Gateway should exist. Changing this forces a new Virtual Network Gateway to be created.
-	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
-
-	// If true, BGP (Border Gateway Protocol) will be enabled for this Virtual Network Gateway. Defaults to false.
-	EnableBGP *bool `json:"enableBgp,omitempty" tf:"enable_bgp,omitempty"`
-
-	// The Generation of the Virtual Network gateway. Possible values include Generation1, Generation2 or None. Changing this forces a new resource to be created.
-	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
-
-	// One, two or three ip_configuration blocks documented below.
-	// An active-standby gateway requires exactly one ip_configuration block,
-	// an active-active gateway requires exactly two ip_configuration blocks whereas
-	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
-	IPConfiguration []VirtualNetworkGatewayIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
-
-	// The location/region where the Virtual Network Gateway is located. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// Should private IP be enabled on this gateway for connections? Changing this forces a new resource to be created.
-	PrivateIPAddressEnabled *bool `json:"privateIpAddressEnabled,omitempty" tf:"private_ip_address_enabled,omitempty"`
-
-	// Configuration of the size and capacity of the virtual network gateway. Valid options are Basic, Standard, HighPerformance, UltraPerformance, ErGw1AZ, ErGw2AZ, ErGw3AZ, VpnGw1, VpnGw2, VpnGw3, VpnGw4,VpnGw5, VpnGw1AZ, VpnGw2AZ, VpnGw3AZ,VpnGw4AZ and VpnGw5AZ and depend on the type, vpn_type and generation arguments. A PolicyBased gateway only supports the Basic SKU. Further, the UltraPerformance SKU is only supported by an ExpressRoute gateway.
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// The type of the Virtual Network Gateway. Valid options are Vpn or ExpressRoute. Changing the type forces a new resource to be created.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-
-	// A vpn_client_configuration block which is documented below. In this block the Virtual Network Gateway can be configured to accept IPSec point-to-site connections.
-	VPNClientConfiguration []VPNClientConfigurationInitParameters `json:"vpnClientConfiguration,omitempty" tf:"vpn_client_configuration,omitempty"`
-
-	// The routing type of the Virtual Network Gateway. Valid options are RouteBased or PolicyBased. Defaults to RouteBased. Changing this forces a new resource to be created.
-	VPNType *string `json:"vpnType,omitempty" tf:"vpn_type,omitempty"`
 }
 
 type VirtualNetworkGatewayObservation struct {
@@ -542,18 +399,6 @@ type VirtualNetworkGatewayParameters struct {
 type VirtualNetworkGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VirtualNetworkGatewayParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider VirtualNetworkGatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // VirtualNetworkGatewayStatus defines the observed state of VirtualNetworkGateway.
@@ -574,10 +419,10 @@ type VirtualNetworkGatewayStatus struct {
 type VirtualNetworkGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipConfiguration) || has(self.initProvider.ipConfiguration)",message="ipConfiguration is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipConfiguration)",message="ipConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
 	Spec   VirtualNetworkGatewaySpec   `json:"spec"`
 	Status VirtualNetworkGatewayStatus `json:"status,omitempty"`
 }

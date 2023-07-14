@@ -13,36 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ServicePlanInitParameters struct {
-
-	// The ID of the App Service Environment to create this Service Plan in.
-	AppServiceEnvironmentID *string `json:"appServiceEnvironmentId,omitempty" tf:"app_service_environment_id,omitempty"`
-
-	// The Azure Region where the Service Plan should exist. Changing this forces a new AppService to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// The maximum number of workers to use in an Elastic SKU Plan. Cannot be set unless using an Elastic SKU.
-	MaximumElasticWorkerCount *float64 `json:"maximumElasticWorkerCount,omitempty" tf:"maximum_elastic_worker_count,omitempty"`
-
-	// The O/S type for the App Services to be hosted in this plan. Possible values include Windows, Linux, and WindowsContainer. Changing this forces a new resource to be created.
-	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
-
-	// Should Per Site Scaling be enabled. Defaults to false.
-	PerSiteScalingEnabled *bool `json:"perSiteScalingEnabled,omitempty" tf:"per_site_scaling_enabled,omitempty"`
-
-	// The SKU for the plan. Possible values include B1, B2, B3, D1, F1, I1, I2, I3, I1v2, I2v2, I3v2, I4v2, I5v2, I6v2, P1v2, P2v2, P3v2, P1v3, P2v3, P3v3, P1mv3, P2mv3, P3mv3, P4mv3, P5mv3, S1, S2, S3, SHARED, EP1, EP2, EP3, WS1, WS2, WS3, and Y1.
-	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
-
-	// A mapping of tags which should be assigned to the AppService.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// The number of Workers (instances) to be allocated.
-	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
-
-	// Should the Service Plan balance across Availability Zones in the region. Changing this forces a new resource to be created.
-	ZoneBalancingEnabled *bool `json:"zoneBalancingEnabled,omitempty" tf:"zone_balancing_enabled,omitempty"`
-}
-
 type ServicePlanObservation struct {
 
 	// The ID of the App Service Environment to create this Service Plan in.
@@ -141,18 +111,6 @@ type ServicePlanParameters struct {
 type ServicePlanSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServicePlanParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ServicePlanInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServicePlanStatus defines the observed state of ServicePlan.
@@ -173,9 +131,9 @@ type ServicePlanStatus struct {
 type ServicePlan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.osType) || has(self.initProvider.osType)",message="osType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.osType)",message="osType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName)",message="skuName is a required parameter"
 	Spec   ServicePlanSpec   `json:"spec"`
 	Status ServicePlanStatus `json:"status,omitempty"`
 }

@@ -13,15 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type MSSQLFirewallRuleInitParameters struct {
-
-	// The ending IP address to allow through the firewall for this rule.
-	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
-
-	// The starting IP address to allow through the firewall for this rule.
-	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
-}
-
 type MSSQLFirewallRuleObservation struct {
 
 	// The ending IP address to allow through the firewall for this rule.
@@ -66,18 +57,6 @@ type MSSQLFirewallRuleParameters struct {
 type MSSQLFirewallRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MSSQLFirewallRuleParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider MSSQLFirewallRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLFirewallRuleStatus defines the observed state of MSSQLFirewallRule.
@@ -98,8 +77,8 @@ type MSSQLFirewallRuleStatus struct {
 type MSSQLFirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endIpAddress) || has(self.initProvider.endIpAddress)",message="endIpAddress is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.startIpAddress) || has(self.initProvider.startIpAddress)",message="startIpAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endIpAddress)",message="endIpAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.startIpAddress)",message="startIpAddress is a required parameter"
 	Spec   MSSQLFirewallRuleSpec   `json:"spec"`
 	Status MSSQLFirewallRuleStatus `json:"status,omitempty"`
 }

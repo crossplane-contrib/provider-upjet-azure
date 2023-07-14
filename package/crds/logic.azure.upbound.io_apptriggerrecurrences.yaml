@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: apptriggerrecurrences.logic.azure.upbound.io
 spec:
   group: logic.azure.upbound.io
@@ -154,63 +154,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  schedule:
-                    description: A schedule block as specified below.
-                    items:
-                      properties:
-                        atTheseHours:
-                          description: Specifies a list of hours when the trigger
-                            should run. Valid values are between 0 and 23.
-                          items:
-                            type: number
-                          type: array
-                        atTheseMinutes:
-                          description: Specifies a list of minutes when the trigger
-                            should run. Valid values are between 0 and 59.
-                          items:
-                            type: number
-                          type: array
-                        onTheseDays:
-                          description: Specifies a list of days when the trigger should
-                            run. Valid values include Monday, Tuesday, Wednesday,
-                            Thursday, Friday, Saturday, and Sunday.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  startTime:
-                    description: 'Specifies the start date and time for this trigger
-                      in RFC3339 format: 2000-01-02T03:04:05Z.'
-                    type: string
-                  timeZone:
-                    description: Specifies the time zone for this trigger. Supported
-                      time zone options are listed here
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  frequency:
-                    description: Specifies the Frequency at which this Trigger should
-                      be run. Possible values include Month, Week, Day, Hour, Minute
-                      and Second.
-                    type: string
-                  interval:
-                    description: Specifies interval used for the Frequency, for example
-                      a value of 4 for interval and hour for frequency would run the
-                      Trigger every 4 hours.
-                    type: number
                   schedule:
                     description: A schedule block as specified below.
                     items:
@@ -445,12 +388,10 @@ spec:
             x-kubernetes-validations:
             - message: frequency is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.frequency)
-                || has(self.initProvider.frequency)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.frequency)'
             - message: interval is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.interval)
-                || has(self.initProvider.interval)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.interval)'
           status:
             description: AppTriggerRecurrenceStatus defines the observed state of
               AppTriggerRecurrence.

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: kubernetesclusters.containerservice.azure.upbound.io
 spec:
   group: containerservice.azure.upbound.io
@@ -413,6 +413,8 @@ spec:
                         sgxQuoteHelperEnabled:
                           description: Should the SGX quote helper be enabled?
                           type: boolean
+                      required:
+                      - sgxQuoteHelperEnabled
                       type: object
                     type: array
                   defaultNodePool:
@@ -920,6 +922,8 @@ spec:
                                   which will be added to the Node Pool size during
                                   an upgrade.
                                 type: string
+                            required:
+                            - maxSurge
                             type: object
                           type: array
                         vmSize:
@@ -1019,6 +1023,9 @@ spec:
                           items:
                             type: string
                           type: array
+                      required:
+                      - name
+                      - vmSize
                       type: object
                     type: array
                   diskEncryptionSetId:
@@ -1103,6 +1110,8 @@ spec:
                             that should be configured on this Kubernetes Cluster.
                             Possible values are SystemAssigned or UserAssigned.
                           type: string
+                      required:
+                      - type
                       type: object
                     type: array
                   imageCleanerEnabled:
@@ -1240,6 +1249,8 @@ spec:
                             access and enables private link. The default value is
                             Public.
                           type: string
+                      required:
+                      - keyVaultKeyId
                       type: object
                     type: array
                   keyVaultSecretsProvider:
@@ -1308,8 +1319,13 @@ spec:
                                 description: The Public SSH Key used to access the
                                   cluster.
                                 type: string
+                            required:
+                            - keyData
                             type: object
                           type: array
+                      required:
+                      - adminUsername
+                      - sshKey
                       type: object
                     type: array
                   localAccountDisabled:
@@ -1343,6 +1359,9 @@ spec:
                                 items:
                                   type: number
                                 type: array
+                            required:
+                            - day
+                            - hours
                             type: object
                           type: array
                         notAllowed:
@@ -1357,6 +1376,9 @@ spec:
                                 description: The start of a time span, formatted as
                                   an RFC3339 string.
                                 type: string
+                            required:
+                            - end
+                            - start
                             type: object
                           type: array
                       type: object
@@ -1370,6 +1392,8 @@ spec:
                             where the audit logs collected by Microsoft Defender should
                             be sent to.
                           type: string
+                      required:
+                      - logAnalyticsWorkspaceId
                       type: object
                     type: array
                   monitorMetrics:
@@ -1537,6 +1561,8 @@ spec:
                           items:
                             type: string
                           type: array
+                      required:
+                      - networkPlugin
                       type: object
                     type: array
                   nodeResourceGroup:
@@ -1558,6 +1584,8 @@ spec:
                           description: Is managed identity authentication for monitoring
                             enabled?
                           type: boolean
+                      required:
+                      - logAnalyticsWorkspaceId
                       type: object
                     type: array
                   openServiceMeshEnabled:
@@ -1760,6 +1788,8 @@ spec:
                           description: The mode of the service mesh. Possible value
                             is Istio.
                           type: string
+                      required:
+                      - mode
                       type: object
                     type: array
                   servicePrincipal:
@@ -1788,6 +1818,7 @@ spec:
                           - namespace
                           type: object
                       required:
+                      - clientId
                       - clientSecretSecretRef
                       type: object
                     type: array
@@ -1837,6 +1868,8 @@ spec:
                             when Web App Routing is enabled. For Bring-Your-Own DNS
                             zones this property should be set to an empty string "".
                           type: string
+                      required:
+                      - dnsZoneId
                       type: object
                     type: array
                   windowsProfile:
@@ -1881,6 +1914,9 @@ spec:
                                   the DNS server in the VNet which was used to create
                                   the managed cluster.
                                 type: string
+                            required:
+                            - dnsServer
+                            - rootDomain
                             type: object
                           type: array
                         license:
@@ -1888,1210 +1924,8 @@ spec:
                             should be used for Node Pool Windows Virtual Machine.
                             At this time the only possible value is Windows_Server.
                           type: string
-                      type: object
-                    type: array
-                  workloadAutoscalerProfile:
-                    description: A workload_autoscaler_profile block defined below.
-                    items:
-                      properties:
-                        kedaEnabled:
-                          description: Specifies whether KEDA Autoscaler can be used
-                            for workloads.
-                          type: boolean
-                        verticalPodAutoscalerEnabled:
-                          description: Specifies whether Vertical Pod Autoscaler should
-                            be enabled.
-                          type: boolean
-                      type: object
-                    type: array
-                  workloadIdentityEnabled:
-                    description: Specifies whether Azure AD Workload Identity should
-                      be enabled for the Cluster. Defaults to false.
-                    type: boolean
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  aciConnectorLinux:
-                    description: A aci_connector_linux block as defined below. For
-                      more details, please visit Create and configure an AKS cluster
-                      to use virtual nodes.
-                    items:
-                      type: object
-                    type: array
-                  apiServerAccessProfile:
-                    description: An api_server_access_profile block as defined below.
-                    items:
-                      properties:
-                        authorizedIpRanges:
-                          description: Set of authorized IP ranges to allow access
-                            to API server, e.g. ["198.51.100.0/24"].
-                          items:
-                            type: string
-                          type: array
-                        vnetIntegrationEnabled:
-                          description: Should API Server VNet Integration be enabled?
-                            For more details please visit Use API Server VNet Integration.
-                          type: boolean
-                      type: object
-                    type: array
-                  apiServerAuthorizedIpRanges:
-                    description: Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
-                    items:
-                      type: string
-                    type: array
-                  autoScalerProfile:
-                    description: A auto_scaler_profile block as defined below.
-                    items:
-                      properties:
-                        balanceSimilarNodeGroups:
-                          description: Detect similar node groups and balance the
-                            number of nodes between them. Defaults to false.
-                          type: boolean
-                        emptyBulkDeleteMax:
-                          description: Maximum number of empty nodes that can be deleted
-                            at the same time. Defaults to 10.
-                          type: string
-                        expander:
-                          description: Expander to use. Possible values are least-waste,
-                            priority, most-pods and random. Defaults to random.
-                          type: string
-                        maxGracefulTerminationSec:
-                          description: Maximum number of seconds the cluster autoscaler
-                            waits for pod termination when trying to scale down a
-                            node. Defaults to 600.
-                          type: string
-                        maxNodeProvisioningTime:
-                          description: Maximum time the autoscaler waits for a node
-                            to be provisioned. Defaults to 15m.
-                          type: string
-                        maxUnreadyNodes:
-                          description: Maximum Number of allowed unready nodes. Defaults
-                            to 3.
-                          type: number
-                        maxUnreadyPercentage:
-                          description: Maximum percentage of unready nodes the cluster
-                            autoscaler will stop if the percentage is exceeded. Defaults
-                            to 45.
-                          type: number
-                        newPodScaleUpDelay:
-                          description: For scenarios like burst/batch scale where
-                            you don't want CA to act before the kubernetes scheduler
-                            could schedule all the pods, you can tell CA to ignore
-                            unscheduled pods before they're a certain age. Defaults
-                            to 10s.
-                          type: string
-                        scaleDownDelayAfterAdd:
-                          description: How long after the scale up of AKS nodes the
-                            scale down evaluation resumes. Defaults to 10m.
-                          type: string
-                        scaleDownDelayAfterDelete:
-                          description: How long after node deletion that scale down
-                            evaluation resumes. Defaults to the value used for scan_interval.
-                          type: string
-                        scaleDownDelayAfterFailure:
-                          description: How long after scale down failure that scale
-                            down evaluation resumes. Defaults to 3m.
-                          type: string
-                        scaleDownUnneeded:
-                          description: How long a node should be unneeded before it
-                            is eligible for scale down. Defaults to 10m.
-                          type: string
-                        scaleDownUnready:
-                          description: How long an unready node should be unneeded
-                            before it is eligible for scale down. Defaults to 20m.
-                          type: string
-                        scaleDownUtilizationThreshold:
-                          description: Node utilization level, defined as sum of requested
-                            resources divided by capacity, below which a node can
-                            be considered for scale down. Defaults to 0.5.
-                          type: string
-                        scanInterval:
-                          description: How often the AKS Cluster should be re-evaluated
-                            for scale up/down. Defaults to 10s.
-                          type: string
-                        skipNodesWithLocalStorage:
-                          description: If true cluster autoscaler will never delete
-                            nodes with pods with local storage, for example, EmptyDir
-                            or HostPath. Defaults to true.
-                          type: boolean
-                        skipNodesWithSystemPods:
-                          description: If true cluster autoscaler will never delete
-                            nodes with pods from kube-system (except for DaemonSet
-                            or mirror pods). Defaults to true.
-                          type: boolean
-                      type: object
-                    type: array
-                  automaticChannelUpgrade:
-                    description: The upgrade channel for this Kubernetes Cluster.
-                      Possible values are patch, rapid, node-image and stable. Omitting
-                      this field sets this value to none.
-                    type: string
-                  azureActiveDirectoryRoleBasedAccessControl:
-                    description: A azure_active_directory_role_based_access_control
-                      block as defined below.
-                    items:
-                      properties:
-                        adminGroupObjectIds:
-                          description: A list of Object IDs of Azure Active Directory
-                            Groups which should have Admin Role on the Cluster.
-                          items:
-                            type: string
-                          type: array
-                        azureRbacEnabled:
-                          description: Is Role Based Access Control based on Azure
-                            AD enabled?
-                          type: boolean
-                        clientAppId:
-                          description: The Client ID of an Azure Active Directory
-                            Application.
-                          type: string
-                        managed:
-                          description: Is the Azure Active Directory integration Managed,
-                            meaning that Azure will create/manage the Service Principal
-                            used for integration.
-                          type: boolean
-                        serverAppId:
-                          description: The Server ID of an Azure Active Directory
-                            Application.
-                          type: string
-                        tenantId:
-                          description: The Tenant ID used for Azure Active Directory
-                            Application. If this isn't specified the Tenant ID of
-                            the current Subscription is used.
-                          type: string
-                      type: object
-                    type: array
-                  azurePolicyEnabled:
-                    description: Should the Azure Policy Add-On be enabled? For more
-                      details please visit Understand Azure Policy for Azure Kubernetes
-                      Service
-                    type: boolean
-                  confidentialComputing:
-                    description: A confidential_computing block as defined below.
-                      For more details please the documentation
-                    items:
-                      properties:
-                        sgxQuoteHelperEnabled:
-                          description: Should the SGX quote helper be enabled?
-                          type: boolean
-                      type: object
-                    type: array
-                  defaultNodePool:
-                    description: A default_node_pool block as defined below.
-                    items:
-                      properties:
-                        capacityReservationGroupId:
-                          description: Specifies the ID of the Capacity Reservation
-                            Group within which this AKS Cluster should be created.
-                            Changing this forces a new resource to be created.
-                          type: string
-                        customCaTrustEnabled:
-                          description: Specifies whether to trust a Custom CA.
-                          type: boolean
-                        enableAutoScaling:
-                          description: Should the Kubernetes Auto Scaler be enabled
-                            for this Node Pool?
-                          type: boolean
-                        enableHostEncryption:
-                          description: Should the nodes in the Default Node Pool have
-                            host encryption enabled? Changing this forces a new resource
-                            to be created.
-                          type: boolean
-                        enableNodePublicIp:
-                          description: Should nodes in this Node Pool have a Public
-                            IP Address? Changing this forces a new resource to be
-                            created.
-                          type: boolean
-                        fipsEnabled:
-                          description: Should the nodes in this Node Pool have Federal
-                            Information Processing Standard enabled? Changing this
-                            forces a new resource to be created.
-                          type: boolean
-                        hostGroupId:
-                          description: Specifies the ID of the Host Group within which
-                            this AKS Cluster should be created. Changing this forces
-                            a new resource to be created.
-                          type: string
-                        kubeletConfig:
-                          description: A kubelet_config block as defined below. Changing
-                            this forces a new resource to be created.
-                          items:
-                            properties:
-                              allowedUnsafeSysctls:
-                                description: Specifies the allow list of unsafe sysctls
-                                  command or patterns (ending in *). Changing this
-                                  forces a new resource to be created.
-                                items:
-                                  type: string
-                                type: array
-                              containerLogMaxLine:
-                                description: Specifies the maximum number of container
-                                  log files that can be present for a container. must
-                                  be at least 2. Changing this forces a new resource
-                                  to be created.
-                                type: number
-                              containerLogMaxSizeMb:
-                                description: Specifies the maximum size (e.g. 10MB)
-                                  of container log file before it is rotated. Changing
-                                  this forces a new resource to be created.
-                                type: number
-                              cpuCfsQuotaEnabled:
-                                description: Is CPU CFS quota enforcement for containers
-                                  enabled? Changing this forces a new resource to
-                                  be created.
-                                type: boolean
-                              cpuCfsQuotaPeriod:
-                                description: Specifies the CPU CFS quota period value.
-                                  Changing this forces a new resource to be created.
-                                type: string
-                              cpuManagerPolicy:
-                                description: Specifies the CPU Manager policy to use.
-                                  Possible values are none and static, Changing this
-                                  forces a new resource to be created.
-                                type: string
-                              imageGcHighThreshold:
-                                description: Specifies the percent of disk usage above
-                                  which image garbage collection is always run. Must
-                                  be between 0 and 100. Changing this forces a new
-                                  resource to be created.
-                                type: number
-                              imageGcLowThreshold:
-                                description: Specifies the percent of disk usage lower
-                                  than which image garbage collection is never run.
-                                  Must be between 0 and 100. Changing this forces
-                                  a new resource to be created.
-                                type: number
-                              podMaxPid:
-                                description: Specifies the maximum number of processes
-                                  per pod. Changing this forces a new resource to
-                                  be created.
-                                type: number
-                              topologyManagerPolicy:
-                                description: Specifies the Topology Manager policy
-                                  to use. Possible values are none, best-effort, restricted
-                                  or single-numa-node. Changing this forces a new
-                                  resource to be created.
-                                type: string
-                            type: object
-                          type: array
-                        kubeletDiskType:
-                          description: The type of disk used by kubelet. Possible
-                            values are OS and Temporary.
-                          type: string
-                        linuxOsConfig:
-                          description: A linux_os_config block as defined below. Changing
-                            this forces a new resource to be created.
-                          items:
-                            properties:
-                              swapFileSizeMb:
-                                description: Specifies the size of the swap file on
-                                  each node in MB. Changing this forces a new resource
-                                  to be created.
-                                type: number
-                              sysctlConfig:
-                                description: A sysctl_config block as defined below.
-                                  Changing this forces a new resource to be created.
-                                items:
-                                  properties:
-                                    fsAioMaxNr:
-                                      description: The sysctl setting fs.aio-max-nr.
-                                        Must be between 65536 and 6553500. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    fsFileMax:
-                                      description: The sysctl setting fs.file-max.
-                                        Must be between 8192 and 12000500. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    fsInotifyMaxUserWatches:
-                                      description: The sysctl setting fs.inotify.max_user_watches.
-                                        Must be between 781250 and 2097152. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    fsNrOpen:
-                                      description: The sysctl setting fs.nr_open.
-                                        Must be between 8192 and 20000500. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    kernelThreadsMax:
-                                      description: The sysctl setting kernel.threads-max.
-                                        Must be between 20 and 513785. Changing this
-                                        forces a new resource to be created.
-                                      type: number
-                                    netCoreNetdevMaxBacklog:
-                                      description: The sysctl setting net.core.netdev_max_backlog.
-                                        Must be between 1000 and 3240000. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    netCoreOptmemMax:
-                                      description: The sysctl setting net.core.optmem_max.
-                                        Must be between 20480 and 4194304. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    netCoreRmemDefault:
-                                      description: The sysctl setting net.core.rmem_default.
-                                        Must be between 212992 and 134217728. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    netCoreRmemMax:
-                                      description: The sysctl setting net.core.rmem_max.
-                                        Must be between 212992 and 134217728. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    netCoreSomaxconn:
-                                      description: The sysctl setting net.core.somaxconn.
-                                        Must be between 4096 and 3240000. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    netCoreWmemDefault:
-                                      description: The sysctl setting net.core.wmem_default.
-                                        Must be between 212992 and 134217728. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    netCoreWmemMax:
-                                      description: The sysctl setting net.core.wmem_max.
-                                        Must be between 212992 and 134217728. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    netIpv4IpLocalPortRangeMax:
-                                      description: The sysctl setting net.ipv4.ip_local_port_range
-                                        max value. Must be between 1024 and 60999.
-                                        Changing this forces a new resource to be
-                                        created.
-                                      type: number
-                                    netIpv4IpLocalPortRangeMin:
-                                      description: The sysctl setting net.ipv4.ip_local_port_range
-                                        min value. Must be between 1024 and 60999.
-                                        Changing this forces a new resource to be
-                                        created.
-                                      type: number
-                                    netIpv4NeighDefaultGcThresh1:
-                                      description: The sysctl setting net.ipv4.neigh.default.gc_thresh1.
-                                        Must be between 128 and 80000. Changing this
-                                        forces a new resource to be created.
-                                      type: number
-                                    netIpv4NeighDefaultGcThresh2:
-                                      description: The sysctl setting net.ipv4.neigh.default.gc_thresh2.
-                                        Must be between 512 and 90000. Changing this
-                                        forces a new resource to be created.
-                                      type: number
-                                    netIpv4NeighDefaultGcThresh3:
-                                      description: The sysctl setting net.ipv4.neigh.default.gc_thresh3.
-                                        Must be between 1024 and 100000. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    netIpv4TcpFinTimeout:
-                                      description: The sysctl setting net.ipv4.tcp_fin_timeout.
-                                        Must be between 5 and 120. Changing this forces
-                                        a new resource to be created.
-                                      type: number
-                                    netIpv4TcpKeepaliveIntvl:
-                                      description: The sysctl setting net.ipv4.tcp_keepalive_intvl.
-                                        Must be between 10 and 75. Changing this forces
-                                        a new resource to be created.
-                                      type: number
-                                    netIpv4TcpKeepaliveProbes:
-                                      description: The sysctl setting net.ipv4.tcp_keepalive_probes.
-                                        Must be between 1 and 15. Changing this forces
-                                        a new resource to be created.
-                                      type: number
-                                    netIpv4TcpKeepaliveTime:
-                                      description: The sysctl setting net.ipv4.tcp_keepalive_time.
-                                        Must be between 30 and 432000. Changing this
-                                        forces a new resource to be created.
-                                      type: number
-                                    netIpv4TcpMaxSynBacklog:
-                                      description: The sysctl setting net.ipv4.tcp_max_syn_backlog.
-                                        Must be between 128 and 3240000. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    netIpv4TcpMaxTwBuckets:
-                                      description: The sysctl setting net.ipv4.tcp_max_tw_buckets.
-                                        Must be between 8000 and 1440000. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    netIpv4TcpTwReuse:
-                                      description: The sysctl setting net.ipv4.tcp_tw_reuse.
-                                        Changing this forces a new resource to be
-                                        created.
-                                      type: boolean
-                                    netNetfilterNfConntrackBuckets:
-                                      description: The sysctl setting net.netfilter.nf_conntrack_buckets.
-                                        Must be between 65536 and 147456. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    netNetfilterNfConntrackMax:
-                                      description: The sysctl setting net.netfilter.nf_conntrack_max.
-                                        Must be between 131072 and 1048576. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    vmMaxMapCount:
-                                      description: The sysctl setting vm.max_map_count.
-                                        Must be between 65530 and 262144. Changing
-                                        this forces a new resource to be created.
-                                      type: number
-                                    vmSwappiness:
-                                      description: The sysctl setting vm.swappiness.
-                                        Must be between 0 and 100. Changing this forces
-                                        a new resource to be created.
-                                      type: number
-                                    vmVfsCachePressure:
-                                      description: The sysctl setting vm.vfs_cache_pressure.
-                                        Must be between 0 and 100. Changing this forces
-                                        a new resource to be created.
-                                      type: number
-                                  type: object
-                                type: array
-                              transparentHugePageDefrag:
-                                description: specifies the defrag configuration for
-                                  Transparent Huge Page. Possible values are always,
-                                  defer, defer+madvise, madvise and never. Changing
-                                  this forces a new resource to be created.
-                                type: string
-                              transparentHugePageEnabled:
-                                description: Specifies the Transparent Huge Page enabled
-                                  configuration. Possible values are always, madvise
-                                  and never. Changing this forces a new resource to
-                                  be created.
-                                type: string
-                            type: object
-                          type: array
-                        maxCount:
-                          description: The maximum number of nodes which should exist
-                            in this Node Pool. If specified this must be between 1
-                            and 1000.
-                          type: number
-                        maxPods:
-                          description: The maximum number of pods that can run on
-                            each agent. Changing this forces a new resource to be
-                            created.
-                          type: number
-                        messageOfTheDay:
-                          description: A base64-encoded string which will be written
-                            to /etc/motd after decoding. This allows customization
-                            of the message of the day for Linux nodes. It cannot be
-                            specified for Windows nodes and must be a static string
-                            (i.e. will be printed raw and not executed as a script).
-                            Changing this forces a new resource to be created.
-                          type: string
-                        minCount:
-                          description: The minimum number of nodes which should exist
-                            in this Node Pool. If specified this must be between 1
-                            and 1000.
-                          type: number
-                        name:
-                          description: The name which should be used for the default
-                            Kubernetes Node Pool. Changing this forces a new resource
-                            to be created.
-                          type: string
-                        nodeCount:
-                          description: The initial number of nodes which should exist
-                            in this Node Pool. If specified this must be between 1
-                            and 1000 and between min_count and max_count.
-                          type: number
-                        nodeLabels:
-                          additionalProperties:
-                            type: string
-                          description: A map of Kubernetes labels which should be
-                            applied to nodes in the Default Node Pool.
-                          type: object
-                        nodeNetworkProfile:
-                          description: A node_network_profile block as documented
-                            below.
-                          items:
-                            properties:
-                              nodePublicIpTags:
-                                additionalProperties:
-                                  type: string
-                                description: Specifies a mapping of tags to the instance-level
-                                  public IPs. Changing this forces a new resource
-                                  to be created.
-                                type: object
-                            type: object
-                          type: array
-                        nodePublicIpPrefixId:
-                          description: Resource ID for the Public IP Addresses Prefix
-                            for the nodes in this Node Pool. enable_node_public_ip
-                            should be true. Changing this forces a new resource to
-                            be created.
-                          type: string
-                        nodeTaints:
-                          description: A list of the taints added to new nodes during
-                            node pool create and scale. Changing this forces a new
-                            resource to be created.
-                          items:
-                            type: string
-                          type: array
-                        onlyCriticalAddonsEnabled:
-                          description: Enabling this option will taint default node
-                            pool with CriticalAddonsOnly=true:NoSchedule taint. Changing
-                            this forces a new resource to be created.
-                          type: boolean
-                        orchestratorVersion:
-                          description: Version of Kubernetes used for the Agents.
-                            If not specified, the default node pool will be created
-                            with the version specified by kubernetes_version. If both
-                            are unspecified, the latest recommended version will be
-                            used at provisioning time (but won't auto-upgrade). AKS
-                            does not require an exact patch version to be specified,
-                            minor version aliases such as 1.22 are also supported.
-                            - The minor version's latest GA patch is automatically
-                            chosen in that case. More details can be found in the
-                            documentation.
-                          type: string
-                        osDiskSizeGb:
-                          description: The size of the OS Disk which should be used
-                            for each agent in the Node Pool. Changing this forces
-                            a new resource to be created.
-                          type: number
-                        osDiskType:
-                          description: The type of disk which should be used for the
-                            Operating System. Possible values are Ephemeral and Managed.
-                            Defaults to Managed. Changing this forces a new resource
-                            to be created.
-                          type: string
-                        osSku:
-                          description: 'Specifies the OS SKU used by the agent pool.
-                            Possible values include: Ubuntu, CBLMariner, Mariner,
-                            Windows2019, Windows2022. If not specified, the default
-                            is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows.
-                            And the default Windows OSSKU will be changed to Windows2022
-                            after Windows2019 is deprecated. Changing this forces
-                            a new resource to be created.'
-                          type: string
-                        proximityPlacementGroupId:
-                          description: The ID of the Proximity Placement Group. Changing
-                            this forces a new resource to be created.
-                          type: string
-                        scaleDownMode:
-                          description: Specifies the autoscaling behaviour of the
-                            Kubernetes Cluster. Allowed values are Delete and Deallocate.
-                            Defaults to Delete.
-                          type: string
-                        tags:
-                          additionalProperties:
-                            type: string
-                          description: A mapping of tags to assign to the Node Pool.
-                          type: object
-                        temporaryNameForRotation:
-                          description: Specifies the name of the temporary node pool
-                            used to cycle the default node pool for VM resizing.
-                          type: string
-                        type:
-                          description: The type of Node Pool which should be created.
-                            Possible values are AvailabilitySet and VirtualMachineScaleSets.
-                            Defaults to VirtualMachineScaleSets. Changing this forces
-                            a new resource to be created.
-                          type: string
-                        ultraSsdEnabled:
-                          description: Used to specify whether the UltraSSD is enabled
-                            in the Default Node Pool. Defaults to false. See the documentation
-                            for more information. Changing this forces a new resource
-                            to be created.
-                          type: boolean
-                        upgradeSettings:
-                          description: A upgrade_settings block as documented below.
-                          items:
-                            properties:
-                              maxSurge:
-                                description: The maximum number or percentage of nodes
-                                  which will be added to the Node Pool size during
-                                  an upgrade.
-                                type: string
-                            type: object
-                          type: array
-                        vmSize:
-                          description: The size of the Virtual Machine, such as Standard_DS2_v2.
-                          type: string
-                        workloadRuntime:
-                          description: Specifies the workload runtime used by the
-                            node pool. Possible values are OCIContainer and KataMshvVmIsolation.
-                          type: string
-                        zones:
-                          description: Specifies a list of Availability Zones in which
-                            this Kubernetes Cluster should be located. Changing this
-                            forces a new Kubernetes Cluster to be created.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  diskEncryptionSetId:
-                    description: The ID of the Disk Encryption Set which should be
-                      used for the Nodes and Volumes. More information can be found
-                      in the documentation. Changing this forces a new resource to
-                      be created.
-                    type: string
-                  dnsPrefix:
-                    description: DNS prefix specified when creating the managed cluster.
-                      Possible values must begin and end with a letter or number,
-                      contain only letters, numbers, and hyphens and be between 1
-                      and 54 characters in length. Changing this forces a new resource
-                      to be created.
-                    type: string
-                  dnsPrefixPrivateCluster:
-                    description: Specifies the DNS prefix to use with private clusters.
-                      Changing this forces a new resource to be created.
-                    type: string
-                  edgeZone:
-                    description: Specifies the Edge Zone within the Azure Region where
-                      this Managed Kubernetes Cluster should exist. Changing this
-                      forces a new resource to be created.
-                    type: string
-                  enablePodSecurityPolicy:
-                    type: boolean
-                  httpApplicationRoutingEnabled:
-                    description: Should HTTP Application Routing be enabled?
-                    type: boolean
-                  httpProxyConfig:
-                    description: A http_proxy_config block as defined below.
-                    items:
-                      properties:
-                        httpProxy:
-                          description: The proxy address to be used when communicating
-                            over HTTP. Changing this forces a new resource to be created.
-                          type: string
-                        httpsProxy:
-                          description: The proxy address to be used when communicating
-                            over HTTPS. Changing this forces a new resource to be
-                            created.
-                          type: string
-                        noProxy:
-                          description: The list of domains that will not use the proxy
-                            for communication.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  identity:
-                    description: An identity block as defined below. One of either
-                      identity or service_principal must be specified.
-                    items:
-                      properties:
-                        identityIds:
-                          description: Specifies a list of User Assigned Managed Identity
-                            IDs to be assigned to this Kubernetes Cluster.
-                          items:
-                            type: string
-                          type: array
-                        type:
-                          description: Specifies the type of Managed Service Identity
-                            that should be configured on this Kubernetes Cluster.
-                            Possible values are SystemAssigned or UserAssigned.
-                          type: string
-                      type: object
-                    type: array
-                  imageCleanerEnabled:
-                    description: Specifies whether Image Cleaner is enabled.
-                    type: boolean
-                  imageCleanerIntervalHours:
-                    description: Specifies the interval in hours when images should
-                      be cleaned up. Defaults to 48.
-                    type: number
-                  ingressApplicationGateway:
-                    description: An ingress_application_gateway block as defined below.
-                    items:
-                      properties:
-                        gatewayId:
-                          description: The ID of the Application Gateway to integrate
-                            with the ingress controller of this Kubernetes Cluster.
-                            See this page for further details.
-                          type: string
-                        gatewayName:
-                          description: The name of the Application Gateway to be used
-                            or created in the Nodepool Resource Group, which in turn
-                            will be integrated with the ingress controller of this
-                            Kubernetes Cluster. See this page for further details.
-                          type: string
-                        subnetCidr:
-                          description: The subnet CIDR to be used to create an Application
-                            Gateway, which in turn will be integrated with the ingress
-                            controller of this Kubernetes Cluster. See this page for
-                            further details.
-                          type: string
-                      type: object
-                    type: array
-                  keyManagementService:
-                    description: A key_management_service block as defined below.
-                      For more details, please visit Key Management Service (KMS)
-                      etcd encryption to an AKS cluster.
-                    items:
-                      properties:
-                        keyVaultKeyId:
-                          description: Identifier of Azure Key Vault key. See key
-                            identifier format for more details. When Azure Key Vault
-                            key management service is enabled, this field is required
-                            and must be a valid key identifier. When enabled is false,
-                            leave the field empty.
-                          type: string
-                        keyVaultNetworkAccess:
-                          description: Network access of the key vault Network access
-                            of key vault. The possible values are Public and Private.
-                            Public means the key vault allows public access from all
-                            networks. Private means the key vault disables public
-                            access and enables private link. The default value is
-                            Public.
-                          type: string
-                      type: object
-                    type: array
-                  keyVaultSecretsProvider:
-                    description: A key_vault_secrets_provider block as defined below.
-                    items:
-                      properties:
-                        secretRotationEnabled:
-                          description: Should the secret store CSI driver on the AKS
-                            cluster be enabled?
-                          type: boolean
-                        secretRotationInterval:
-                          description: The interval to poll for secret rotation. This
-                            attribute is only set when secret_rotation is true and
-                            defaults to 2m.
-                          type: string
-                      type: object
-                    type: array
-                  kubeletIdentity:
-                    description: A kubelet_identity block as defined below.
-                    items:
-                      properties:
-                        clientId:
-                          description: The Client ID of the user-defined Managed Identity
-                            to be assigned to the Kubelets. If not specified a Managed
-                            Identity is created automatically. Changing this forces
-                            a new resource to be created.
-                          type: string
-                        objectId:
-                          description: The Object ID of the user-defined Managed Identity
-                            assigned to the Kubelets.If not specified a Managed Identity
-                            is created automatically. Changing this forces a new resource
-                            to be created.
-                          type: string
-                        userAssignedIdentityId:
-                          description: The ID of the User Assigned Identity assigned
-                            to the Kubelets. If not specified a Managed Identity is
-                            created automatically. Changing this forces a new resource
-                            to be created.
-                          type: string
-                      type: object
-                    type: array
-                  kubernetesVersion:
-                    description: Version of Kubernetes specified when creating the
-                      AKS managed cluster. If not specified, the latest recommended
-                      version will be used at provisioning time (but won't auto-upgrade).
-                      AKS does not require an exact patch version to be specified,
-                      minor version aliases such as 1.22 are also supported. - The
-                      minor version's latest GA patch is automatically chosen in that
-                      case. More details can be found in the documentation.
-                    type: string
-                  linuxProfile:
-                    description: A linux_profile block as defined below.
-                    items:
-                      properties:
-                        adminUsername:
-                          description: The Admin Username for the Cluster. Changing
-                            this forces a new resource to be created.
-                          type: string
-                        sshKey:
-                          description: An ssh_key block. Only one is currently allowed.
-                            Changing this will update the key on all node pools. More
-                            information can be found in the documentation.
-                          items:
-                            properties:
-                              keyData:
-                                description: The Public SSH Key used to access the
-                                  cluster.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  localAccountDisabled:
-                    description: If true local accounts will be disabled. See the
-                      documentation for more information.
-                    type: boolean
-                  location:
-                    description: The location where the Managed Kubernetes Cluster
-                      should be created. Changing this forces a new resource to be
-                      created.
-                    type: string
-                  maintenanceWindow:
-                    description: A maintenance_window block as defined below.
-                    items:
-                      properties:
-                        allowed:
-                          description: One or more allowed blocks as defined below.
-                          items:
-                            properties:
-                              day:
-                                description: A day in a week. Possible values are
-                                  Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
-                                  and Saturday.
-                                type: string
-                              hours:
-                                description: An array of hour slots in a day. For
-                                  example, specifying 1 will allow maintenance from
-                                  1:00am to 2:00am. Specifying 1, 2 will allow maintenance
-                                  from 1:00am to 3:00m. Possible values are between
-                                  0 and 23.
-                                items:
-                                  type: number
-                                type: array
-                            type: object
-                          type: array
-                        notAllowed:
-                          description: One or more not_allowed block as defined below.
-                          items:
-                            properties:
-                              end:
-                                description: The end of a time span, formatted as
-                                  an RFC3339 string.
-                                type: string
-                              start:
-                                description: The start of a time span, formatted as
-                                  an RFC3339 string.
-                                type: string
-                            type: object
-                          type: array
-                      type: object
-                    type: array
-                  microsoftDefender:
-                    description: A microsoft_defender block as defined below.
-                    items:
-                      properties:
-                        logAnalyticsWorkspaceId:
-                          description: Specifies the ID of the Log Analytics Workspace
-                            where the audit logs collected by Microsoft Defender should
-                            be sent to.
-                          type: string
-                      type: object
-                    type: array
-                  monitorMetrics:
-                    description: Specifies a Prometheus add-on profile for the Kubernetes
-                      Cluster. A monitor_metrics block as defined below.
-                    items:
-                      properties:
-                        annotationsAllowed:
-                          description: Specifies a comma-separated list of Kubernetes
-                            annotation keys that will be used in the resource's labels
-                            metric.
-                          type: string
-                        labelsAllowed:
-                          description: Specifies a Comma-separated list of additional
-                            Kubernetes label keys that will be used in the resource's
-                            labels metric.
-                          type: string
-                      type: object
-                    type: array
-                  networkProfile:
-                    description: A network_profile block as defined below.
-                    items:
-                      properties:
-                        dnsServiceIp:
-                          description: IP address within the Kubernetes service address
-                            range that will be used by cluster service discovery (kube-dns).
-                            Changing this forces a new resource to be created.
-                          type: string
-                        dockerBridgeCidr:
-                          description: IP address (in CIDR notation) used as the Docker
-                            bridge IP address on nodes. Changing this forces a new
-                            resource to be created.
-                          type: string
-                        ebpfDataPlane:
-                          description: Specifies the eBPF data plane used for building
-                            the Kubernetes network. Possible value is cilium. Changing
-                            this forces a new resource to be created.
-                          type: string
-                        ipVersions:
-                          description: Specifies a list of IP versions the Kubernetes
-                            Cluster will use to assign IP addresses to its nodes and
-                            pods. Possible values are IPv4 and/or IPv6. IPv4 must
-                            always be specified. Changing this forces a new resource
-                            to be created.
-                          items:
-                            type: string
-                          type: array
-                        loadBalancerProfile:
-                          description: A load_balancer_profile block as defined below.
-                            This can only be specified when load_balancer_sku is set
-                            to standard. Changing this forces a new resource to be
-                            created.
-                          items:
-                            properties:
-                              idleTimeoutInMinutes:
-                                description: Desired outbound flow idle timeout in
-                                  minutes for the cluster load balancer. Must be between
-                                  4 and 120 inclusive. Defaults to 4.
-                                type: number
-                              managedOutboundIpCount:
-                                description: Count of desired managed outbound IPs
-                                  for the cluster load balancer. Must be between 1
-                                  and 100 inclusive.
-                                type: number
-                              managedOutboundIpv6Count:
-                                description: The desired number of IPv6 outbound IPs
-                                  created and managed by Azure for the cluster load
-                                  balancer. Must be in the range of 1 to 100 (inclusive).
-                                  The default value is 0 for single-stack and 1 for
-                                  dual-stack.
-                                type: number
-                              outboundIpAddressIds:
-                                description: The ID of the Public IP Addresses which
-                                  should be used for outbound communication for the
-                                  cluster load balancer.
-                                items:
-                                  type: string
-                                type: array
-                              outboundIpPrefixIds:
-                                description: The ID of the outbound Public IP Address
-                                  Prefixes which should be used for the cluster load
-                                  balancer.
-                                items:
-                                  type: string
-                                type: array
-                              outboundPortsAllocated:
-                                description: Number of desired SNAT port for each
-                                  VM in the clusters load balancer. Must be between
-                                  0 and 64000 inclusive. Defaults to 0.
-                                type: number
-                            type: object
-                          type: array
-                        loadBalancerSku:
-                          description: Specifies the SKU of the Load Balancer used
-                            for this Kubernetes Cluster. Possible values are basic
-                            and standard. Defaults to standard. Changing this forces
-                            a new resource to be created.
-                          type: string
-                        natGatewayProfile:
-                          description: A nat_gateway_profile block as defined below.
-                          items:
-                            properties:
-                              idleTimeoutInMinutes:
-                                description: Desired outbound flow idle timeout in
-                                  minutes for the cluster load balancer. Must be between
-                                  4 and 120 inclusive. Defaults to 4.
-                                type: number
-                              managedOutboundIpCount:
-                                description: Count of desired managed outbound IPs
-                                  for the cluster load balancer. Must be between 1
-                                  and 100 inclusive.
-                                type: number
-                            type: object
-                          type: array
-                        networkMode:
-                          description: Network mode to be used with Azure CNI. Possible
-                            values are bridge and transparent. Changing this forces
-                            a new resource to be created.
-                          type: string
-                        networkPlugin:
-                          description: Network plugin to use for networking. Currently
-                            supported values are azure, kubenet and none. Changing
-                            this forces a new resource to be created.
-                          type: string
-                        networkPluginMode:
-                          description: Specifies the network plugin mode used for
-                            building the Kubernetes network. Possible value is Overlay.
-                            Changing this forces a new resource to be created.
-                          type: string
-                        networkPolicy:
-                          description: Sets up network policy to be used with Azure
-                            CNI. Network policy allows us to control the traffic flow
-                            between pods. Currently supported values are calico and
-                            azure. Changing this forces a new resource to be created.
-                          type: string
-                        outboundType:
-                          description: The outbound (egress) routing method which
-                            should be used for this Kubernetes Cluster. Possible values
-                            are loadBalancer, userDefinedRouting, managedNATGateway
-                            and userAssignedNATGateway. Defaults to loadBalancer.
-                            Changing this forces a new resource to be created.
-                          type: string
-                        podCidr:
-                          description: The CIDR to use for pod IP addresses. This
-                            field can only be set when network_plugin is set to kubenet.
-                            Changing this forces a new resource to be created.
-                          type: string
-                        podCidrs:
-                          description: A list of CIDRs to use for pod IP addresses.
-                            For single-stack networking a single IPv4 CIDR is expected.
-                            For dual-stack networking an IPv4 and IPv6 CIDR are expected.
-                            Changing this forces a new resource to be created.
-                          items:
-                            type: string
-                          type: array
-                        serviceCidr:
-                          description: The Network Range used by the Kubernetes service.
-                            Changing this forces a new resource to be created.
-                          type: string
-                        serviceCidrs:
-                          description: A list of CIDRs to use for Kubernetes services.
-                            For single-stack networking a single IPv4 CIDR is expected.
-                            For dual-stack networking an IPv4 and IPv6 CIDR are expected.
-                            Changing this forces a new resource to be created.
-                          items:
-                            type: string
-                          type: array
-                      type: object
-                    type: array
-                  nodeResourceGroup:
-                    description: The auto-generated Resource Group which contains
-                      the resources for this Managed Kubernetes Cluster.
-                    type: string
-                  oidcIssuerEnabled:
-                    description: Enable or Disable the OIDC issuer URL
-                    type: boolean
-                  omsAgent:
-                    description: An oms_agent block as defined below.
-                    items:
-                      properties:
-                        logAnalyticsWorkspaceId:
-                          description: The ID of the Log Analytics Workspace which
-                            the OMS Agent should send data to.
-                          type: string
-                        msiAuthForMonitoringEnabled:
-                          description: Is managed identity authentication for monitoring
-                            enabled?
-                          type: boolean
-                      type: object
-                    type: array
-                  openServiceMeshEnabled:
-                    description: Is Open Service Mesh enabled? For more details, please
-                      visit Open Service Mesh for AKS.
-                    type: boolean
-                  privateClusterEnabled:
-                    description: Should this Kubernetes Cluster have its API server
-                      only exposed on internal IP addresses? This provides a Private
-                      IP Address for the Kubernetes API on the Virtual Network where
-                      the Kubernetes Cluster is located. Defaults to false. Changing
-                      this forces a new resource to be created.
-                    type: boolean
-                  privateClusterPublicFqdnEnabled:
-                    description: Specifies whether a Public FQDN for this Private
-                      Cluster should be added. Defaults to false.
-                    type: boolean
-                  publicNetworkAccessEnabled:
-                    description: Whether public network access is allowed for this
-                      Kubernetes Cluster. Defaults to true. Changing this forces a
-                      new resource to be created.
-                    type: boolean
-                  roleBasedAccessControlEnabled:
-                    description: Whether Role Based Access Control for the Kubernetes
-                      Cluster should be enabled. Defaults to true. Changing this forces
-                      a new resource to be created.
-                    type: boolean
-                  runCommandEnabled:
-                    description: Whether to enable run command for the cluster or
-                      not. Defaults to true.
-                    type: boolean
-                  serviceMeshProfile:
-                    description: A service_mesh_profile block as defined below.
-                    items:
-                      properties:
-                        mode:
-                          description: The mode of the service mesh. Possible value
-                            is Istio.
-                          type: string
-                      type: object
-                    type: array
-                  servicePrincipal:
-                    description: A service_principal block as documented below. One
-                      of either identity or service_principal must be specified.
-                    items:
-                      properties:
-                        clientId:
-                          description: The Client ID for the Service Principal.
-                          type: string
-                      type: object
-                    type: array
-                  skuTier:
-                    description: The SKU Tier that should be used for this Kubernetes
-                      Cluster. Possible values are Free, and Standard (which includes
-                      the Uptime SLA). Defaults to Free.
-                    type: string
-                  storageProfile:
-                    description: A storage_profile block as defined below.
-                    items:
-                      properties:
-                        blobDriverEnabled:
-                          description: Is the Blob CSI driver enabled? Defaults to
-                            false.
-                          type: boolean
-                        diskDriverEnabled:
-                          description: Is the Disk CSI driver enabled? Defaults to
-                            true.
-                          type: boolean
-                        diskDriverVersion:
-                          description: Disk CSI Driver version to be used. Possible
-                            values are v1 and v2. Defaults to v1.
-                          type: string
-                        fileDriverEnabled:
-                          description: Is the File CSI driver enabled? Defaults to
-                            true.
-                          type: boolean
-                        snapshotControllerEnabled:
-                          description: Is the Snapshot Controller enabled? Defaults
-                            to true.
-                          type: boolean
-                      type: object
-                    type: array
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
-                  webAppRouting:
-                    description: A web_app_routing block as defined below.
-                    items:
-                      properties:
-                        dnsZoneId:
-                          description: Specifies the ID of the DNS Zone in which DNS
-                            entries are created for applications deployed to the cluster
-                            when Web App Routing is enabled. For Bring-Your-Own DNS
-                            zones this property should be set to an empty string "".
-                          type: string
-                      type: object
-                    type: array
-                  windowsProfile:
-                    description: A windows_profile block as defined below.
-                    items:
-                      properties:
-                        adminUsername:
-                          description: The Admin Username for Windows VMs. Changing
-                            this forces a new resource to be created.
-                          type: string
-                        gmsa:
-                          description: A gmsa block as defined below.
-                          items:
-                            properties:
-                              dnsServer:
-                                description: Specifies the DNS server for Windows
-                                  gMSA. Set this to an empty string if you have configured
-                                  the DNS server in the VNet which was used to create
-                                  the managed cluster.
-                                type: string
-                              rootDomain:
-                                description: Specifies the root domain name for Windows
-                                  gMSA. Set this to an empty string if you have configured
-                                  the DNS server in the VNet which was used to create
-                                  the managed cluster.
-                                type: string
-                            type: object
-                          type: array
-                        license:
-                          description: Specifies the type of on-premise license which
-                            should be used for Node Pool Windows Virtual Machine.
-                            At this time the only possible value is Windows_Server.
-                          type: string
+                      required:
+                      - adminUsername
                       type: object
                     type: array
                   workloadAutoscalerProfile:
@@ -3313,12 +2147,10 @@ spec:
             x-kubernetes-validations:
             - message: defaultNodePool is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultNodePool)
-                || has(self.initProvider.defaultNodePool)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultNodePool)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || has(self.initProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
           status:
             description: KubernetesClusterStatus defines the observed state of KubernetesCluster.
             properties:

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: openidconnectproviders.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -270,29 +270,6 @@ spec:
                         type: object
                     type: object
                 type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  description:
-                    description: A description of this OpenID Connect Provider.
-                    type: string
-                  displayName:
-                    description: A user-friendly name for this OpenID Connect Provider.
-                    type: string
-                  metadataEndpoint:
-                    description: The URI of the Metadata endpoint.
-                    type: string
-                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -499,12 +476,10 @@ spec:
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.clientSecretSecretRef)'
             - message: displayName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
-                || has(self.initProvider.displayName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)'
             - message: metadataEndpoint is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.metadataEndpoint)
-                || has(self.initProvider.metadataEndpoint)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.metadataEndpoint)'
           status:
             description: OpenIDConnectProviderStatus defines the observed state of
               OpenIDConnectProvider.

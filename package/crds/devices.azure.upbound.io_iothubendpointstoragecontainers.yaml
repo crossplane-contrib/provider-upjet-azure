@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: iothubendpointstoragecontainers.devices.azure.upbound.io
 spec:
   group: devices.azure.upbound.io
@@ -355,55 +355,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  authenticationType:
-                    description: Type used to authenticate against the storage endpoint.
-                      Possible values are keyBased and identityBased. Defaults to
-                      keyBased.
-                    type: string
-                  batchFrequencyInSeconds:
-                    description: Time interval at which blobs are written to storage.
-                      Value should be between 60 and 720 seconds. Default value is
-                      300 seconds.
-                    type: number
-                  encoding:
-                    description: Encoding that is used to serialize messages to blobs.
-                      Supported values are Avro, AvroDeflate and JSON. Default value
-                      is Avro. Changing this forces a new resource to be created.
-                    type: string
-                  endpointUri:
-                    description: URI of the Storage Container endpoint. This corresponds
-                      to the primary_blob_endpoint of the parent storage account.
-                      This attribute can only be specified and is mandatory when authentication_type
-                      is identityBased.
-                    type: string
-                  fileNameFormat:
-                    description: File name format for the blob. Default format is
-                      {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters
-                      are mandatory but can be reordered.
-                    type: string
-                  identityId:
-                    description: ID of the User Managed Identity used to authenticate
-                      against the storage endpoint.
-                    type: string
-                  maxChunkSizeInBytes:
-                    description: Maximum number of bytes for each blob written to
-                      storage. Value should be between 10485760(10MB) and 524288000(500MB).
-                      Default value is 314572800(300MB).
-                    type: number
                 type: object
               managementPolicies:
                 default:

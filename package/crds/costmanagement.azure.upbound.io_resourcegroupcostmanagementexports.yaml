@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: resourcegroupcostmanagementexports.costmanagement.azure.upbound.io
 spec:
   group: costmanagement.azure.upbound.io
@@ -86,6 +86,9 @@ spec:
                           description: The type of the query. Possible values are
                             ActualCost, AmortizedCost and Usage.
                           type: string
+                      required:
+                      - timeFrame
+                      - type
                       type: object
                     type: array
                   exportDataStorageLocation:
@@ -180,6 +183,8 @@ spec:
                             be uploaded. Changing this forces a new resource to be
                             created.
                           type: string
+                      required:
+                      - rootFolderPath
                       type: object
                     type: array
                   recurrencePeriodEndDate:
@@ -271,61 +276,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  active:
-                    description: Is the cost management export active? Default is
-                      true.
-                    type: boolean
-                  exportDataOptions:
-                    description: A export_data_options block as defined below.
-                    items:
-                      properties:
-                        timeFrame:
-                          description: 'The time frame for pulling data for the query.
-                            If custom, then a specific time period must be provided.
-                            Possible values include: WeekToDate, MonthToDate, BillingMonthToDate,
-                            TheLast7Days, TheLastMonth, TheLastBillingMonth, Custom.'
-                          type: string
-                        type:
-                          description: The type of the query. Possible values are
-                            ActualCost, AmortizedCost and Usage.
-                          type: string
-                      type: object
-                    type: array
-                  exportDataStorageLocation:
-                    description: A export_data_storage_location block as defined below.
-                    items:
-                      properties:
-                        rootFolderPath:
-                          description: The path of the directory where exports will
-                            be uploaded. Changing this forces a new resource to be
-                            created.
-                          type: string
-                      type: object
-                    type: array
-                  recurrencePeriodEndDate:
-                    description: The date the export will stop capturing information.
-                    type: string
-                  recurrencePeriodStartDate:
-                    description: The date the export will start capturing information.
-                    type: string
-                  recurrenceType:
-                    description: How often the requested information will be exported.
-                      Valid values include Annually, Daily, Monthly, Weekly.
-                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -527,24 +477,19 @@ spec:
             x-kubernetes-validations:
             - message: exportDataOptions is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.exportDataOptions)
-                || has(self.initProvider.exportDataOptions)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.exportDataOptions)'
             - message: exportDataStorageLocation is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.exportDataStorageLocation)
-                || has(self.initProvider.exportDataStorageLocation)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.exportDataStorageLocation)'
             - message: recurrencePeriodEndDate is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.recurrencePeriodEndDate)
-                || has(self.initProvider.recurrencePeriodEndDate)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.recurrencePeriodEndDate)'
             - message: recurrencePeriodStartDate is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.recurrencePeriodStartDate)
-                || has(self.initProvider.recurrencePeriodStartDate)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.recurrencePeriodStartDate)'
             - message: recurrenceType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.recurrenceType)
-                || has(self.initProvider.recurrenceType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.recurrenceType)'
           status:
             description: ResourceGroupCostManagementExportStatus defines the observed
               state of ResourceGroupCostManagementExport.

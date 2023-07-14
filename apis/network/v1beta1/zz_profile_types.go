@@ -13,12 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ContainerNetworkInterfaceIPConfigurationInitParameters struct {
-
-	// Specifies the name of the Network Profile. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
 type ContainerNetworkInterfaceIPConfigurationObservation struct {
 
 	// Specifies the name of the Network Profile. Changing this forces a new resource to be created.
@@ -31,8 +25,8 @@ type ContainerNetworkInterfaceIPConfigurationObservation struct {
 type ContainerNetworkInterfaceIPConfigurationParameters struct {
 
 	// Specifies the name of the Network Profile. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Reference to the subnet associated with the IP Configuration.
 	// +crossplane:generate:reference:type=Subnet
@@ -49,15 +43,6 @@ type ContainerNetworkInterfaceIPConfigurationParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
-type ContainerNetworkInterfaceInitParameters struct {
-
-	// One or more ip_configuration blocks as documented below.
-	IPConfiguration []ContainerNetworkInterfaceIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
-
-	// Specifies the name of the IP Configuration.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
 type ContainerNetworkInterfaceObservation struct {
 
 	// One or more ip_configuration blocks as documented below.
@@ -70,24 +55,12 @@ type ContainerNetworkInterfaceObservation struct {
 type ContainerNetworkInterfaceParameters struct {
 
 	// One or more ip_configuration blocks as documented below.
-	// +kubebuilder:validation:Optional
-	IPConfiguration []ContainerNetworkInterfaceIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+	// +kubebuilder:validation:Required
+	IPConfiguration []ContainerNetworkInterfaceIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 
 	// Specifies the name of the IP Configuration.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-}
-
-type ProfileInitParameters struct {
-
-	// A container_network_interface block as documented below.
-	ContainerNetworkInterface []ContainerNetworkInterfaceInitParameters `json:"containerNetworkInterface,omitempty" tf:"container_network_interface,omitempty"`
-
-	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ProfileObservation struct {
@@ -143,18 +116,6 @@ type ProfileParameters struct {
 type ProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ProfileParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // ProfileStatus defines the observed state of Profile.
@@ -175,8 +136,8 @@ type ProfileStatus struct {
 type Profile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.containerNetworkInterface) || has(self.initProvider.containerNetworkInterface)",message="containerNetworkInterface is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.containerNetworkInterface)",message="containerNetworkInterface is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   ProfileSpec   `json:"spec"`
 	Status ProfileStatus `json:"status,omitempty"`
 }

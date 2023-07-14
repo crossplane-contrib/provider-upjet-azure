@@ -13,24 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type SpringCloudDevToolPortalInitParameters struct {
-
-	// Should the Accelerator plugin be enabled?
-	ApplicationAcceleratorEnabled *bool `json:"applicationAcceleratorEnabled,omitempty" tf:"application_accelerator_enabled,omitempty"`
-
-	// Should the Application Live View be enabled?
-	ApplicationLiveViewEnabled *bool `json:"applicationLiveViewEnabled,omitempty" tf:"application_live_view_enabled,omitempty"`
-
-	// The name which should be used for this Spring Cloud Dev Tool Portal. The only possible value is default. Changing this forces a new Spring Cloud Dev Tool Portal to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// Is public network access enabled?
-	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
-
-	// A sso block as defined below.
-	Sso []SpringCloudDevToolPortalSsoInitParameters `json:"sso,omitempty" tf:"sso,omitempty"`
-}
-
 type SpringCloudDevToolPortalObservation struct {
 
 	// Should the Accelerator plugin be enabled?
@@ -92,21 +74,6 @@ type SpringCloudDevToolPortalParameters struct {
 	Sso []SpringCloudDevToolPortalSsoParameters `json:"sso,omitempty" tf:"sso,omitempty"`
 }
 
-type SpringCloudDevToolPortalSsoInitParameters struct {
-
-	// Specifies the public identifier for the application.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// Specifies the secret known only to the application and the authorization server.
-	ClientSecret *string `json:"clientSecret,omitempty" tf:"client_secret,omitempty"`
-
-	// Specifies the URI of a JSON file with generic OIDC provider configuration.
-	MetadataURL *string `json:"metadataUrl,omitempty" tf:"metadata_url,omitempty"`
-
-	// Specifies a list of specific actions applications can be allowed to do on a user's behalf.
-	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
-}
-
 type SpringCloudDevToolPortalSsoObservation struct {
 
 	// Specifies the public identifier for the application.
@@ -145,18 +112,6 @@ type SpringCloudDevToolPortalSsoParameters struct {
 type SpringCloudDevToolPortalSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudDevToolPortalParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider SpringCloudDevToolPortalInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudDevToolPortalStatus defines the observed state of SpringCloudDevToolPortal.
@@ -177,7 +132,7 @@ type SpringCloudDevToolPortalStatus struct {
 type SpringCloudDevToolPortal struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
 	Spec   SpringCloudDevToolPortalSpec   `json:"spec"`
 	Status SpringCloudDevToolPortalStatus `json:"status,omitempty"`
 }

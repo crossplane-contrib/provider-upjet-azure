@@ -13,24 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type AppIntegrationAccountInitParameters struct {
-
-	// The resource ID of the Integration Service Environment. Changing this forces a new Logic App Integration Account to be created.
-	IntegrationServiceEnvironmentID *string `json:"integrationServiceEnvironmentId,omitempty" tf:"integration_service_environment_id,omitempty"`
-
-	// The Azure Region where the Logic App Integration Account should exist. Changing this forces a new Logic App Integration Account to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// The name which should be used for this Logic App Integration Account. Changing this forces a new Logic App Integration Account to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The SKU name of the Logic App Integration Account. Possible Values are Basic, Free and Standard.
-	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
-
-	// A mapping of tags which should be assigned to the Logic App Integration Account.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-}
-
 type AppIntegrationAccountObservation struct {
 
 	// The ID of the Logic App Integration Account.
@@ -95,18 +77,6 @@ type AppIntegrationAccountParameters struct {
 type AppIntegrationAccountSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppIntegrationAccountParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider AppIntegrationAccountInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppIntegrationAccountStatus defines the observed state of AppIntegrationAccount.
@@ -127,9 +97,9 @@ type AppIntegrationAccountStatus struct {
 type AppIntegrationAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName)",message="skuName is a required parameter"
 	Spec   AppIntegrationAccountSpec   `json:"spec"`
 	Status AppIntegrationAccountStatus `json:"status,omitempty"`
 }

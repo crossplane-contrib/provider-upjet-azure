@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: loadbalanceroutboundrules.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -164,6 +164,8 @@ spec:
                         name:
                           description: The name of the Frontend IP Configuration.
                           type: string
+                      required:
+                      - name
                       type: object
                     type: array
                   idleTimeoutInMinutes:
@@ -247,47 +249,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  protocol:
-                    description: The transport protocol for the external endpoint.
-                      Possible values are Udp, Tcp or All.
-                    type: string
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  allocatedOutboundPorts:
-                    description: The number of outbound ports to be used for NAT.
-                      Defaults to 1024.
-                    type: number
-                  enableTcpReset:
-                    description: Receive bidirectional TCP Reset on TCP flow idle
-                      timeout or unexpected connection termination. This element is
-                      only used when the protocol is set to TCP.
-                    type: boolean
-                  frontendIpConfiguration:
-                    description: One or more frontend_ip_configuration blocks as defined
-                      below.
-                    items:
-                      properties:
-                        name:
-                          description: The name of the Frontend IP Configuration.
-                          type: string
-                      type: object
-                    type: array
-                  idleTimeoutInMinutes:
-                    description: The timeout for the TCP idle connection Defaults
-                      to 4.
-                    type: number
                   protocol:
                     description: The transport protocol for the external endpoint.
                       Possible values are Udp, Tcp or All.
@@ -493,8 +454,7 @@ spec:
             x-kubernetes-validations:
             - message: protocol is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)
-                || has(self.initProvider.protocol)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)'
           status:
             description: LoadBalancerOutboundRuleStatus defines the observed state
               of LoadBalancerOutboundRule.

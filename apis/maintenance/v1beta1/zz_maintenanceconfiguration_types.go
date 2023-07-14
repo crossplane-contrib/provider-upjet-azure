@@ -13,18 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type InstallPatchesInitParameters struct {
-
-	// A linux block as defined above. This property only applies when scope is set to InGuestPatch
-	Linux []LinuxInitParameters `json:"linux,omitempty" tf:"linux,omitempty"`
-
-	// Possible reboot preference as defined by the user based on which it would be decided to reboot the machine or not after the patch operation is completed. Possible values are Always, IfRequired and Never. This property only applies when scope is set to InGuestPatch.
-	Reboot *string `json:"reboot,omitempty" tf:"reboot,omitempty"`
-
-	// A windows block as defined above. This property only applies when scope is set to InGuestPatch
-	Windows []WindowsInitParameters `json:"windows,omitempty" tf:"windows,omitempty"`
-}
-
 type InstallPatchesObservation struct {
 
 	// A linux block as defined above. This property only applies when scope is set to InGuestPatch
@@ -52,18 +40,6 @@ type InstallPatchesParameters struct {
 	Windows []WindowsParameters `json:"windows,omitempty" tf:"windows,omitempty"`
 }
 
-type LinuxInitParameters struct {
-
-	// List of Classification category of patches to be patched. Possible values are Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools and Updates.
-	ClassificationsToInclude []*string `json:"classificationsToInclude,omitempty" tf:"classifications_to_include,omitempty"`
-
-	// List of package names to be excluded from patching.
-	PackageNamesMaskToExclude []*string `json:"packageNamesMaskToExclude,omitempty" tf:"package_names_mask_to_exclude,omitempty"`
-
-	// List of package names to be included for patching.
-	PackageNamesMaskToInclude []*string `json:"packageNamesMaskToInclude,omitempty" tf:"package_names_mask_to_include,omitempty"`
-}
-
 type LinuxObservation struct {
 
 	// List of Classification category of patches to be patched. Possible values are Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools and Updates.
@@ -89,33 +65,6 @@ type LinuxParameters struct {
 	// List of package names to be included for patching.
 	// +kubebuilder:validation:Optional
 	PackageNamesMaskToInclude []*string `json:"packageNamesMaskToInclude,omitempty" tf:"package_names_mask_to_include,omitempty"`
-}
-
-type MaintenanceConfigurationInitParameters struct {
-
-	// The in guest user patch mode. Possible values are Platform or User. Must be specified when scope is InGuestPatch.
-	InGuestUserPatchMode *string `json:"inGuestUserPatchMode,omitempty" tf:"in_guest_user_patch_mode,omitempty"`
-
-	// An install_patches block as defined below.
-	InstallPatches []InstallPatchesInitParameters `json:"installPatches,omitempty" tf:"install_patches,omitempty"`
-
-	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// A mapping of properties to assign to the resource.
-	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
-
-	// The scope of the Maintenance Configuration. Possible values are Extension, Host, InGuestPatch, OSImage, SQLDB or SQLManagedInstance.
-	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
-
-	// A mapping of tags to assign to the resource. The key could not contain upper case letter.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// The visibility of the Maintenance Configuration. The only allowable value is Custom.
-	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
-
-	// A window block as defined below.
-	Window []WindowInitParameters `json:"window,omitempty" tf:"window,omitempty"`
 }
 
 type MaintenanceConfigurationObservation struct {
@@ -199,24 +148,6 @@ type MaintenanceConfigurationParameters struct {
 	Window []WindowParameters `json:"window,omitempty" tf:"window,omitempty"`
 }
 
-type WindowInitParameters struct {
-
-	// The duration of the maintenance window in HH:mm format.
-	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
-
-	// Effective expiration date of the maintenance window in YYYY-MM-DD hh:mm format.
-	ExpirationDateTime *string `json:"expirationDateTime,omitempty" tf:"expiration_date_time,omitempty"`
-
-	// The rate at which a maintenance window is expected to recur. The rate can be expressed as daily, weekly, or monthly schedules.
-	RecurEvery *string `json:"recurEvery,omitempty" tf:"recur_every,omitempty"`
-
-	// Effective start date of the maintenance window in YYYY-MM-DD hh:mm format.
-	StartDateTime *string `json:"startDateTime,omitempty" tf:"start_date_time,omitempty"`
-
-	// The time zone for the maintenance window. A list of timezones can be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell.
-	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
-}
-
 type WindowObservation struct {
 
 	// The duration of the maintenance window in HH:mm format.
@@ -250,24 +181,12 @@ type WindowParameters struct {
 	RecurEvery *string `json:"recurEvery,omitempty" tf:"recur_every,omitempty"`
 
 	// Effective start date of the maintenance window in YYYY-MM-DD hh:mm format.
-	// +kubebuilder:validation:Optional
-	StartDateTime *string `json:"startDateTime,omitempty" tf:"start_date_time,omitempty"`
+	// +kubebuilder:validation:Required
+	StartDateTime *string `json:"startDateTime" tf:"start_date_time,omitempty"`
 
 	// The time zone for the maintenance window. A list of timezones can be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell.
-	// +kubebuilder:validation:Optional
-	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
-}
-
-type WindowsInitParameters struct {
-
-	// List of Classification category of patches to be patched. Possible values are Critical, Security, UpdateRollup, FeaturePack, ServicePack, Definition, Tools and Updates.
-	ClassificationsToInclude []*string `json:"classificationsToInclude,omitempty" tf:"classifications_to_include,omitempty"`
-
-	// List of KB numbers to be excluded from patching.
-	KbNumbersToExclude []*string `json:"kbNumbersToExclude,omitempty" tf:"kb_numbers_to_exclude,omitempty"`
-
-	// List of KB numbers to be included for patching.
-	KbNumbersToInclude []*string `json:"kbNumbersToInclude,omitempty" tf:"kb_numbers_to_include,omitempty"`
+	// +kubebuilder:validation:Required
+	TimeZone *string `json:"timeZone" tf:"time_zone,omitempty"`
 }
 
 type WindowsObservation struct {
@@ -301,18 +220,6 @@ type WindowsParameters struct {
 type MaintenanceConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MaintenanceConfigurationParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider MaintenanceConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // MaintenanceConfigurationStatus defines the observed state of MaintenanceConfiguration.
@@ -333,8 +240,8 @@ type MaintenanceConfigurationStatus struct {
 type MaintenanceConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope) || has(self.initProvider.scope)",message="scope is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope)",message="scope is a required parameter"
 	Spec   MaintenanceConfigurationSpec   `json:"spec"`
 	Status MaintenanceConfigurationStatus `json:"status,omitempty"`
 }

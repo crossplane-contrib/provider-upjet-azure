@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: securitycenterworkspaces.security.azure.upbound.io
 spec:
   group: security.azure.upbound.io
@@ -152,25 +152,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  scope:
-                    description: The scope of VMs to send their security data to the
-                      desired workspace, unless overridden by a setting with more
-                      specific scope.
-                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -372,8 +353,7 @@ spec:
             x-kubernetes-validations:
             - message: scope is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.scope)
-                || has(self.initProvider.scope)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.scope)'
           status:
             description: SecurityCenterWorkspaceStatus defines the observed state
               of SecurityCenterWorkspace.

@@ -13,24 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type NATGatewayInitParameters struct {
-
-	// The idle timeout which should be used in minutes. Defaults to 4.
-	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
-
-	// Specifies the supported Azure location where the NAT Gateway should exist. Changing this forces a new resource to be created.
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
-
-	// The SKU which should be used. At this time the only supported value is Standard. Defaults to Standard.
-	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
-
-	// A mapping of tags to assign to the resource.
-	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
-
-	// A list of Availability Zones in which this NAT Gateway should be located. Changing this forces a new NAT Gateway to be created.
-	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
-}
-
 type NATGatewayObservation struct {
 
 	// The ID of the NAT Gateway.
@@ -98,18 +80,6 @@ type NATGatewayParameters struct {
 type NATGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NATGatewayParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider NATGatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // NATGatewayStatus defines the observed state of NATGateway.
@@ -130,7 +100,7 @@ type NATGatewayStatus struct {
 type NATGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
 	Spec   NATGatewaySpec   `json:"spec"`
 	Status NATGatewayStatus `json:"status,omitempty"`
 }

@@ -13,51 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type AuthorizationServerInitParameters struct {
-
-	// The OAUTH Authorization Endpoint.
-	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
-
-	// The HTTP Verbs supported by the Authorization Endpoint. Possible values are DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT and TRACE.
-	AuthorizationMethods []*string `json:"authorizationMethods,omitempty" tf:"authorization_methods,omitempty"`
-
-	// The mechanism by which Access Tokens are passed to the API. Possible values are authorizationHeader and query.
-	BearerTokenSendingMethods []*string `json:"bearerTokenSendingMethods,omitempty" tf:"bearer_token_sending_methods,omitempty"`
-
-	// The Authentication Methods supported by the Token endpoint of this Authorization Server.. Possible values are Basic and Body.
-	ClientAuthenticationMethod []*string `json:"clientAuthenticationMethod,omitempty" tf:"client_authentication_method,omitempty"`
-
-	// The Client/App ID registered with this Authorization Server.
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
-
-	// The URI of page where Client/App Registration is performed for this Authorization Server.
-	ClientRegistrationEndpoint *string `json:"clientRegistrationEndpoint,omitempty" tf:"client_registration_endpoint,omitempty"`
-
-	// The Default Scope used when requesting an Access Token, specified as a string containing space-delimited values.
-	DefaultScope *string `json:"defaultScope,omitempty" tf:"default_scope,omitempty"`
-
-	// A description of the Authorization Server, which may contain HTML formatting tags.
-	Description *string `json:"description,omitempty" tf:"description,omitempty"`
-
-	// The user-friendly name of this Authorization Server.
-	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
-
-	// Form of Authorization Grants required when requesting an Access Token. Possible values are authorizationCode, clientCredentials, implicit and resourceOwnerPassword.
-	GrantTypes []*string `json:"grantTypes,omitempty" tf:"grant_types,omitempty"`
-
-	// The username associated with the Resource Owner.
-	ResourceOwnerUsername *string `json:"resourceOwnerUsername,omitempty" tf:"resource_owner_username,omitempty"`
-
-	// Does this Authorization Server support State? If this is set to true the client may use the state parameter to raise protocol security.
-	SupportState *bool `json:"supportState,omitempty" tf:"support_state,omitempty"`
-
-	// A token_body_parameter block as defined below.
-	TokenBodyParameter []TokenBodyParameterInitParameters `json:"tokenBodyParameter,omitempty" tf:"token_body_parameter,omitempty"`
-
-	// The OAUTH Token Endpoint.
-	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
-}
-
 type AuthorizationServerObservation struct {
 
 	// The name of the API Management Service in which this Authorization Server should be created. Changing this forces a new resource to be created.
@@ -205,15 +160,6 @@ type AuthorizationServerParameters struct {
 	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 }
 
-type TokenBodyParameterInitParameters struct {
-
-	// The Name of the Parameter.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The Value of the Parameter.
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
-}
-
 type TokenBodyParameterObservation struct {
 
 	// The Name of the Parameter.
@@ -226,30 +172,18 @@ type TokenBodyParameterObservation struct {
 type TokenBodyParameterParameters struct {
 
 	// The Name of the Parameter.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	// +kubebuilder:validation:Required
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Value of the Parameter.
-	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	// +kubebuilder:validation:Required
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // AuthorizationServerSpec defines the desired state of AuthorizationServer
 type AuthorizationServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AuthorizationServerParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider AuthorizationServerInitParameters `json:"initProvider,omitempty"`
 }
 
 // AuthorizationServerStatus defines the observed state of AuthorizationServer.
@@ -270,12 +204,12 @@ type AuthorizationServerStatus struct {
 type AuthorizationServer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorizationEndpoint) || has(self.initProvider.authorizationEndpoint)",message="authorizationEndpoint is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorizationMethods) || has(self.initProvider.authorizationMethods)",message="authorizationMethods is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId) || has(self.initProvider.clientId)",message="clientId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientRegistrationEndpoint) || has(self.initProvider.clientRegistrationEndpoint)",message="clientRegistrationEndpoint is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.grantTypes) || has(self.initProvider.grantTypes)",message="grantTypes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorizationEndpoint)",message="authorizationEndpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authorizationMethods)",message="authorizationMethods is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId)",message="clientId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientRegistrationEndpoint)",message="clientRegistrationEndpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.grantTypes)",message="grantTypes is a required parameter"
 	Spec   AuthorizationServerSpec   `json:"spec"`
 	Status AuthorizationServerStatus `json:"status,omitempty"`
 }

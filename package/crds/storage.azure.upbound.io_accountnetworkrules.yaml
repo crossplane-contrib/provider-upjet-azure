@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: accountnetworkrules.storage.azure.upbound.io
 spec:
   group: storage.azure.upbound.io
@@ -99,6 +99,8 @@ spec:
                             access rule to be granted access. Defaults to the current
                             tenant id.
                           type: string
+                      required:
+                      - endpointResourceId
                       type: object
                     type: array
                   storageAccountId:
@@ -178,60 +180,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  virtualNetworkSubnetIds:
-                    description: A list of virtual network subnet ids to secure the
-                      storage account.
-                    items:
-                      type: string
-                    type: array
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  bypass:
-                    description: Specifies whether traffic is bypassed for Logging/Metrics/AzureServices.
-                      Valid options are any combination of Logging, Metrics, AzureServices,
-                      or None.
-                    items:
-                      type: string
-                    type: array
-                  defaultAction:
-                    description: Specifies the default action of allow or deny when
-                      no other rules match. Valid options are Deny or Allow.
-                    type: string
-                  ipRules:
-                    description: List of public IP or IP ranges in CIDR Format. Only
-                      IPv4 addresses are allowed. Private IP address ranges (as defined
-                      in RFC 1918) are not allowed.
-                    items:
-                      type: string
-                    type: array
-                  privateLinkAccess:
-                    description: One or More private_link_access block as defined
-                      below.
-                    items:
-                      properties:
-                        endpointResourceId:
-                          description: The resource id of the resource access rule
-                            to be granted access.
-                          type: string
-                        endpointTenantId:
-                          description: The tenant id of the resource of the resource
-                            access rule to be granted access. Defaults to the current
-                            tenant id.
-                          type: string
-                      type: object
-                    type: array
                   virtualNetworkSubnetIds:
                     description: A list of virtual network subnet ids to secure the
                       storage account.
@@ -439,8 +387,7 @@ spec:
             x-kubernetes-validations:
             - message: defaultAction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultAction)
-                || has(self.initProvider.defaultAction)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultAction)'
           status:
             description: AccountNetworkRulesStatus defines the observed state of AccountNetworkRules.
             properties:

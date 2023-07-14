@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.1
+    controller-gen.kubebuilder.io/version: v0.12.0
   name: gateways.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -170,45 +170,8 @@ spec:
                           description: The country or region where the resource is
                             located.
                           type: string
-                      type: object
-                    type: array
-                type: object
-              initProvider:
-                description: THIS IS AN ALPHA FIELD. Do not use it in production.
-                  It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. InitProvider
-                  holds the same fields as ForProvider, with the exception of Identifier
-                  and other resource reference fields. The fields that are in InitProvider
-                  are merged into ForProvider when the resource is created. The same
-                  fields are also added to the terraform ignore_changes hook, to avoid
-                  updating them after creation. This is useful for fields that are
-                  required on creation, but we do not desire to update them after
-                  creation, for example because of an external controller is managing
-                  them, like an autoscaler.
-                properties:
-                  description:
-                    description: The description of the API Management Gateway.
-                    type: string
-                  locationData:
-                    description: A location_data block as documented below.
-                    items:
-                      properties:
-                        city:
-                          description: The city or locality where the resource is
-                            located.
-                          type: string
-                        district:
-                          description: The district, state, or province where the
-                            resource is located.
-                          type: string
-                        name:
-                          description: A canonical name for the geographic or physical
-                            location.
-                          type: string
-                        region:
-                          description: The country or region where the resource is
-                            located.
-                          type: string
+                      required:
+                      - name
                       type: object
                     type: array
                 type: object
@@ -412,8 +375,7 @@ spec:
             x-kubernetes-validations:
             - message: locationData is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.locationData)
-                || has(self.initProvider.locationData)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.locationData)'
           status:
             description: GatewayStatus defines the observed state of Gateway.
             properties:

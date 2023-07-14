@@ -13,24 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ApplicationInsightsAnalyticsItemInitParameters struct {
-
-	// The content for the Analytics Item, for example the query text if type is query.
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
-
-	// The alias to use for the function. Required when type is function.
-	FunctionAlias *string `json:"functionAlias,omitempty" tf:"function_alias,omitempty"`
-
-	// Specifies the name of the Application Insights Analytics Item. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The scope for the Analytics Item. Can be shared or user. Changing this forces a new resource to be created. Must be shared for functions.
-	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
-
-	// The type of Analytics Item to create. Can be one of query, function, folder, recent. Changing this forces a new resource to be created.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type ApplicationInsightsAnalyticsItemObservation struct {
 
 	// The ID of the Application Insights component on which the Analytics Item exists. Changing this forces a new resource to be created.
@@ -105,18 +87,6 @@ type ApplicationInsightsAnalyticsItemParameters struct {
 type ApplicationInsightsAnalyticsItemSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApplicationInsightsAnalyticsItemParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider ApplicationInsightsAnalyticsItemInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApplicationInsightsAnalyticsItemStatus defines the observed state of ApplicationInsightsAnalyticsItem.
@@ -137,10 +107,10 @@ type ApplicationInsightsAnalyticsItemStatus struct {
 type ApplicationInsightsAnalyticsItem struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content) || has(self.initProvider.content)",message="content is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope) || has(self.initProvider.scope)",message="scope is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content)",message="content is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope)",message="scope is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
 	Spec   ApplicationInsightsAnalyticsItemSpec   `json:"spec"`
 	Status ApplicationInsightsAnalyticsItemStatus `json:"status,omitempty"`
 }

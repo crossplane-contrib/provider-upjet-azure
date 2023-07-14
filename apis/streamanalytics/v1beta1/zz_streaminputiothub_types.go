@@ -13,21 +13,6 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type StreamInputIOTHubInitParameters struct {
-
-	// The IoT Hub endpoint to connect to (ie. messages/events, messages/operationsMonitoringEvents, etc.).
-	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
-
-	// The name of the Stream Input IoTHub. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// A serialization block as defined below.
-	Serialization []StreamInputIOTHubSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
-
-	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
-	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
-}
-
 type StreamInputIOTHubObservation struct {
 
 	// The IoT Hub endpoint to connect to (ie. messages/events, messages/operationsMonitoringEvents, etc.).
@@ -133,18 +118,6 @@ type StreamInputIOTHubParameters struct {
 	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 }
 
-type StreamInputIOTHubSerializationInitParameters struct {
-
-	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
-	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
-
-	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
-	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
-
-	// The serialization format used for incoming data streams. Possible values are Avro, Csv and Json.
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
-}
-
 type StreamInputIOTHubSerializationObservation struct {
 
 	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
@@ -168,26 +141,14 @@ type StreamInputIOTHubSerializationParameters struct {
 	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
 
 	// The serialization format used for incoming data streams. Possible values are Avro, Csv and Json.
-	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	// +kubebuilder:validation:Required
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // StreamInputIOTHubSpec defines the desired state of StreamInputIOTHub
 type StreamInputIOTHubSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StreamInputIOTHubParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
-	InitProvider StreamInputIOTHubInitParameters `json:"initProvider,omitempty"`
 }
 
 // StreamInputIOTHubStatus defines the observed state of StreamInputIOTHub.
@@ -208,11 +169,11 @@ type StreamInputIOTHubStatus struct {
 type StreamInputIOTHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpoint) || has(self.initProvider.endpoint)",message="endpoint is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serialization) || has(self.initProvider.serialization)",message="serialization is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpoint)",message="endpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serialization)",message="serialization is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sharedAccessPolicyKeySecretRef)",message="sharedAccessPolicyKeySecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sharedAccessPolicyName) || has(self.initProvider.sharedAccessPolicyName)",message="sharedAccessPolicyName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sharedAccessPolicyName)",message="sharedAccessPolicyName is a required parameter"
 	Spec   StreamInputIOTHubSpec   `json:"spec"`
 	Status StreamInputIOTHubStatus `json:"status,omitempty"`
 }
