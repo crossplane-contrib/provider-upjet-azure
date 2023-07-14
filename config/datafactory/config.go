@@ -27,4 +27,12 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"pipeline_name", "pipeline"},
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_data_factory_linked_service_kusto", func(r *config.Resource) {
+		r.Path = "linkedservicekustoes"
+	})
+
+	p.AddResourceConfigurator("azurerm_data_factory_integration_runtime_azure_ssis", func(r *config.Resource) {
+		r.Path = "integrationruntimeazuressis"
+	})
 }

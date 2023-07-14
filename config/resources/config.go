@@ -29,6 +29,7 @@ func Configure(p *config.Provider) {
 			Type:      "github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
+		r.Path = "resourcedeploymentscriptazureclicli"
 	})
 	p.AddResourceConfigurator("azurerm_resource_deployment_script_azure_power_shell", func(r *config.Resource) {
 		r.References["identity.identity_ids"] = config.Reference{

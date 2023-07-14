@@ -86,4 +86,8 @@ func Configure(p *config.Provider) {
 			Type: "IOTHubEndpointStorageContainer",
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_iothub_dps", func(r *config.Resource) {
+		r.Path = "iothubdps"
+	})
 }
