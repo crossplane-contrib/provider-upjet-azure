@@ -139,6 +139,9 @@ func Configure(p *config.Provider) {
 			Type:      "MSSQLServer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"maintenance_configuration_name", "elastic_pool_id"},
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_outbound_firewall_rule", func(r *config.Resource) {
