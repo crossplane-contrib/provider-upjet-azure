@@ -17,10 +17,14 @@ limitations under the License.
 package containerservice
 
 import (
+	"encoding/base64"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	"github.com/pkg/errors"
 	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/provider-azure/apis/rconfig"
+	"github.com/upbound/provider-azure/config/common"
 )
 
 // Configure configures kubernetes group
@@ -52,9 +56,37 @@ func Configure(p *config.Provider) {
 				"oms_agent"},
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
+			caData, err := common.GetField(attr, "kube_config[0].cluster_ca_certificate")
+			if err != nil {
+				return nil, err
+			}
+			caDataBytes, err := base64.StdEncoding.DecodeString(caData)
+			if err != nil {
+				return nil, errors.Wrapf(err, "cannot serialize cluster ca data")
+			}
+			clientCertData, err := common.GetField(attr, "kube_config[0].client_certificate")
+			if err != nil {
+				return nil, err
+			}
+			clientCertDataBytes, err := base64.StdEncoding.DecodeString(clientCertData)
+			if err != nil {
+				return nil, errors.Wrapf(err, "cannot serialize cluster client cert data")
+			}
+			clientKeyData, err := common.GetField(attr, "kube_config[0].client_key")
+			if err != nil {
+				return nil, err
+			}
+			clientKeyDataBytes, err := base64.StdEncoding.DecodeString(clientKeyData)
+			if err != nil {
+				return nil, errors.Wrapf(err, "cannot serialize cluster client key data")
+			}
+
 			if kc, ok := attr["kube_config_raw"].(string); ok {
 				return map[string][]byte{
-					"kubeconfig": []byte(kc),
+					"kubeconfig":                      []byte(kc),
+					"kubeconfig.clustercacertificate": caDataBytes,
+					"kubeconfig.clientcertificate":    clientCertDataBytes,
+					"kubeconfig.clientkey":            clientKeyDataBytes,
 				}, nil
 			}
 			return nil, nil
