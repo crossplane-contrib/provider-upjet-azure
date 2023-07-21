@@ -2,34 +2,101 @@ apiVersion: compute.azure.upbound.io/v1beta1
 kind: WindowsVirtualMachineScaleSet
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: compute/v1beta1/windowsvirtualmachinescaleset
+  labels:
+    testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     adminPasswordSecretRef:
-      key: example-key
+      key: password
       name: example-secret
-      namespace: crossplane-system
+      namespace: upbound-system
     adminUsername: adminuser
     instances: 1
     location: West Europe
     networkInterface:
-    - ipConfiguration:
-      - name: internal
+      - ipConfiguration:
+          - name: internal
+            primary: true
+            subnetIdSelector:
+              matchLabels:
+                testing.upbound.io/example-name: internal
+        name: example
         primary: true
-        subnetId: ...
-        subnetIdRef:
-          name: internal
-      name: example
-      primary: true
     osDisk:
-    - caching: ReadWrite
-      storageAccountType: Standard_LRS
-    resourceGroupNameRef:
-      name: example-compute
+      - caching: ReadWrite
+        storageAccountType: Standard_LRS
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     sku: Standard_F2
     sourceImageReference:
-    - offer: WindowsServer
-      publisher: MicrosoftWindowsServer
-      sku: 2016-Datacenter-Server-Core
-      version: latest
+      - offer: WindowsServer
+        publisher: MicrosoftWindowsServer
+        sku: 2016-Datacenter-Server-Core
+        version: latest
+
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/windowsvirtualmachinescaleset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/windowsvirtualmachinescaleset
+  labels:
+    testing.upbound.io/example-name: internal
+  name: internal
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.0.2.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/windowsvirtualmachinescaleset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+      - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/windowsvirtualmachinescaleset
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw== # testPassword!123

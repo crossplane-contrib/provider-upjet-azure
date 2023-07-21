@@ -680,6 +680,7 @@ type WindowsVirtualMachineScaleSetObservation struct {
 	// A scale_in block as defined below.
 	ScaleIn []WindowsVirtualMachineScaleSetScaleInObservation `json:"scaleIn,omitempty" tf:"scale_in,omitempty"`
 
+	// Deprecated: scaleInPolicy will be removed in favour of the scaleIn code block.
 	ScaleInPolicy *string `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
 
 	// One or more secret blocks as defined below.
@@ -985,6 +986,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ScaleIn []WindowsVirtualMachineScaleSetScaleInParameters `json:"scaleIn,omitempty" tf:"scale_in,omitempty"`
 
+	// Deprecated: scaleInPolicy will be removed in favour of the scaleIn code block.
 	// +kubebuilder:validation:Optional
 	ScaleInPolicy *string `json:"scaleInPolicy,omitempty" tf:"scale_in_policy,omitempty"`
 

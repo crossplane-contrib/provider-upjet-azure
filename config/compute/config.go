@@ -36,6 +36,13 @@ func Configure(p *config.Provider) {
 				"virtual_machine_scale_set_id"},
 		}
 	})
+	p.AddResourceConfigurator("azurerm_windows_virtual_machine_scale_set", func(r *config.Resource) {
+		// In version 3.21.0 the `scale_in_policy` parameter was removed, and replaced by `scale_in`
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"scale_in_policy"},
+		}
+		r.MetaResource.ArgumentDocs["scale_in_policy"] = "Deprecated: scaleInPolicy will be removed in favour of the scaleIn code block."
+	})
 	/* Note on testing:
 	* - create a storage account
 	* - upload a text file with *.vhd extension
