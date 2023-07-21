@@ -41,6 +41,7 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"scale_in_policy"},
 		}
+		r.MetaResource.ArgumentDocs["scale_in_policy"] = "Deprecated: scaleInPolicy will be removed in favour of the scaleIn code block."
 	})
 	/* Note on testing:
 	* - create a storage account
