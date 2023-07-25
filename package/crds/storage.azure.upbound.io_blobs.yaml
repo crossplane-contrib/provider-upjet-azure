@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: blobs.storage.azure.upbound.io
 spec:
   group: storage.azure.upbound.io
@@ -280,6 +280,68 @@ spec:
                       resource to be created.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accessTier:
+                    description: The access tier of the storage blob. Possible values
+                      are Archive, Cool and Hot.
+                    type: string
+                  cacheControl:
+                    description: Controls the cache control header content of the
+                      response when blob is requested .
+                    type: string
+                  contentMd5:
+                    description: The MD5 sum of the blob contents. Cannot be defined
+                      if source_uri is defined, or if blob type is Append or Page.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  contentType:
+                    description: The content type of the storage blob. Cannot be defined
+                      if source_uri is defined. Defaults to application/octet-stream.
+                    type: string
+                  metadata:
+                    additionalProperties:
+                      type: string
+                    description: A map of custom blob metadata.
+                    type: object
+                  parallelism:
+                    description: The number of workers per CPU core to run for concurrent
+                      uploads. Defaults to 8. Changing this forces a new resource
+                      to be created.
+                    type: number
+                  size:
+                    description: Used only for page blobs to specify the size in bytes
+                      of the blob to be created. Must be a multiple of 512. Defaults
+                      to 0. Changing this forces a new resource to be created.
+                    type: number
+                  source:
+                    description: An absolute path to a file on the local system. This
+                      field cannot be specified for Append blobs and cannot be specified
+                      if source_content or source_uri is specified. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  sourceContent:
+                    description: The content for this blob which should be defined
+                      inline. This field can only be specified for Block blobs and
+                      cannot be specified if source or source_uri is specified. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  sourceUri:
+                    description: The URI of an existing blob, or a file in the Azure
+                      File service, to use as the source contents for the blob to
+                      be created. Changing this forces a new resource to be created.
+                      This field cannot be specified for Append blobs and cannot be
+                      specified if source or source_content is specified.
+                    type: string
+                  type:
+                    description: The type of the storage blob to be created. Possible
+                      values are Append, Block or Page. Changing this forces a new
+                      resource to be created.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -480,7 +542,8 @@ spec:
             x-kubernetes-validations:
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: BlobStatus defines the observed state of Blob.
             properties:

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: outputsynapses.streamanalytics.azure.upbound.io
 spec:
   group: streamanalytics.azure.upbound.io
@@ -331,6 +331,26 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - passwordSecretRef
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  database:
+                    description: The name of the Azure SQL database. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  server:
+                    description: The name of the SQL server containing the Azure SQL
+                      database. Changing this forces a new resource to be created.
+                    type: string
+                  table:
+                    description: The name of the table in the Azure SQL database.
+                      Changing this forces a new resource to be created.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -532,16 +552,19 @@ spec:
             x-kubernetes-validations:
             - message: database is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.database)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.database)
+                || has(self.initProvider.database)'
             - message: passwordSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)'
             - message: server is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.server)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.server)
+                || has(self.initProvider.server)'
             - message: table is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.table)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.table)
+                || has(self.initProvider.table)'
           status:
             description: OutputSynapseStatus defines the observed state of OutputSynapse.
             properties:

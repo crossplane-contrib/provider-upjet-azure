@@ -79,6 +79,15 @@ func (tr *Cluster) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Cluster
+func (tr *Cluster) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Cluster using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Cluster) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *ManagedCluster) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this ManagedCluster
+func (tr *ManagedCluster) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ManagedCluster using its observed tfState.

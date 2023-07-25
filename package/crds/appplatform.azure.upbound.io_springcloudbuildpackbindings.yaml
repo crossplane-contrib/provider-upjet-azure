@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: springcloudbuildpackbindings.appplatform.azure.upbound.io
 spec:
   group: appplatform.azure.upbound.io
@@ -170,6 +170,35 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  bindingType:
+                    description: Specifies the Build Pack Binding Type. Allowed values
+                      are ApacheSkyWalking, AppDynamics, ApplicationInsights, Dynatrace,
+                      ElasticAPM and NewRelic.
+                    type: string
+                  launch:
+                    description: A launch block as defined below.
+                    items:
+                      properties:
+                        properties:
+                          additionalProperties:
+                            type: string
+                          description: Specifies a map of non-sensitive properties
+                            for launchProperties.
+                          type: object
+                        secrets:
+                          additionalProperties:
+                            type: string
+                          description: Specifies a map of sensitive properties for
+                            launchProperties.
+                          type: object
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

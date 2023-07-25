@@ -13,6 +13,69 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ClusterInitParameters struct {
+
+	// List of allowed FQDNs(Fully Qualified Domain Name) for egress from Cluster.
+	AllowedFqdns []*string `json:"allowedFqdns,omitempty" tf:"allowed_fqdns,omitempty"`
+
+	// The list of ips in the format of CIDR allowed to connect to the cluster.
+	AllowedIPRanges []*string `json:"allowedIpRanges,omitempty" tf:"allowed_ip_ranges,omitempty"`
+
+	// Specifies if the cluster could be automatically stopped (due to lack of data or no activity for many days). Defaults to true.
+	AutoStopEnabled *bool `json:"autoStopEnabled,omitempty" tf:"auto_stop_enabled,omitempty"`
+
+	// Specifies if the cluster's disks are encrypted.
+	DiskEncryptionEnabled *bool `json:"diskEncryptionEnabled,omitempty" tf:"disk_encryption_enabled,omitempty"`
+
+	// Is the cluster's double encryption enabled? Changing this forces a new resource to be created.
+	DoubleEncryptionEnabled *bool `json:"doubleEncryptionEnabled,omitempty" tf:"double_encryption_enabled,omitempty"`
+
+	// . The engine type that will be used in the backend. Possible values are V2 and V3. Defaults to V2. Changing this forces a new Kusto Cluster to be created.
+	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// An list of language_extensions to enable. Valid values are: PYTHON and R.
+	LanguageExtensions []*string `json:"languageExtensions,omitempty" tf:"language_extensions,omitempty"`
+
+	// The location where the Kusto Cluster should be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// An optimized_auto_scale block as defined below.
+	OptimizedAutoScale []OptimizedAutoScaleInitParameters `json:"optimizedAutoScale,omitempty" tf:"optimized_auto_scale,omitempty"`
+
+	// Whether to restrict outbound network access. Value is optional but if passed in, must be true or false, default is false.
+	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
+
+	// Indicates what public IP type to create - IPv4 (default), or DualStack (both IPv4 and IPv6).
+	PublicIPType *string `json:"publicIpType,omitempty" tf:"public_ip_type,omitempty"`
+
+	// Is the public network access enabled? Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Specifies if the purge operations are enabled.
+	PurgeEnabled *bool `json:"purgeEnabled,omitempty" tf:"purge_enabled,omitempty"`
+
+	// A sku block as defined below.
+	Sku []SkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// Specifies if the streaming ingest is enabled.
+	StreamingIngestionEnabled *bool `json:"streamingIngestionEnabled,omitempty" tf:"streaming_ingestion_enabled,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies a list of tenant IDs that are trusted by the cluster. Default setting trusts all other tenants. Use trusted_external_tenants = ["*"] to explicitly allow all other tenants, trusted_external_tenants = ["MyTenantOnly"] for only your tenant or trusted_external_tenants = ["<tenantId1>", "<tenantIdx>"] to allow specific other tenants.
+	TrustedExternalTenants []*string `json:"trustedExternalTenants,omitempty" tf:"trusted_external_tenants,omitempty"`
+
+	// A virtual_network_configuration block as defined below. Changing this forces a new resource to be created.
+	VirtualNetworkConfiguration []VirtualNetworkConfigurationInitParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
+
+	// Specifies a list of Availability Zones in which this Kusto Cluster should be located. Changing this forces a new Kusto Cluster to be created.
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
+}
+
 type ClusterObservation struct {
 
 	// List of allowed FQDNs(Fully Qualified Domain Name) for egress from Cluster.
@@ -91,59 +154,45 @@ type ClusterObservation struct {
 type ClusterParameters struct {
 
 	// List of allowed FQDNs(Fully Qualified Domain Name) for egress from Cluster.
-	// +kubebuilder:validation:Optional
 	AllowedFqdns []*string `json:"allowedFqdns,omitempty" tf:"allowed_fqdns,omitempty"`
 
 	// The list of ips in the format of CIDR allowed to connect to the cluster.
-	// +kubebuilder:validation:Optional
 	AllowedIPRanges []*string `json:"allowedIpRanges,omitempty" tf:"allowed_ip_ranges,omitempty"`
 
 	// Specifies if the cluster could be automatically stopped (due to lack of data or no activity for many days). Defaults to true.
-	// +kubebuilder:validation:Optional
 	AutoStopEnabled *bool `json:"autoStopEnabled,omitempty" tf:"auto_stop_enabled,omitempty"`
 
 	// Specifies if the cluster's disks are encrypted.
-	// +kubebuilder:validation:Optional
 	DiskEncryptionEnabled *bool `json:"diskEncryptionEnabled,omitempty" tf:"disk_encryption_enabled,omitempty"`
 
 	// Is the cluster's double encryption enabled? Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	DoubleEncryptionEnabled *bool `json:"doubleEncryptionEnabled,omitempty" tf:"double_encryption_enabled,omitempty"`
 
 	// . The engine type that will be used in the backend. Possible values are V2 and V3. Defaults to V2. Changing this forces a new Kusto Cluster to be created.
-	// +kubebuilder:validation:Optional
 	Engine *string `json:"engine,omitempty" tf:"engine,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// An list of language_extensions to enable. Valid values are: PYTHON and R.
-	// +kubebuilder:validation:Optional
 	LanguageExtensions []*string `json:"languageExtensions,omitempty" tf:"language_extensions,omitempty"`
 
 	// The location where the Kusto Cluster should be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// An optimized_auto_scale block as defined below.
-	// +kubebuilder:validation:Optional
 	OptimizedAutoScale []OptimizedAutoScaleParameters `json:"optimizedAutoScale,omitempty" tf:"optimized_auto_scale,omitempty"`
 
 	// Whether to restrict outbound network access. Value is optional but if passed in, must be true or false, default is false.
-	// +kubebuilder:validation:Optional
 	OutboundNetworkAccessRestricted *bool `json:"outboundNetworkAccessRestricted,omitempty" tf:"outbound_network_access_restricted,omitempty"`
 
 	// Indicates what public IP type to create - IPv4 (default), or DualStack (both IPv4 and IPv6).
-	// +kubebuilder:validation:Optional
 	PublicIPType *string `json:"publicIpType,omitempty" tf:"public_ip_type,omitempty"`
 
 	// Is the public network access enabled? Defaults to true.
-	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// Specifies if the purge operations are enabled.
-	// +kubebuilder:validation:Optional
 	PurgeEnabled *bool `json:"purgeEnabled,omitempty" tf:"purge_enabled,omitempty"`
 
 	// Specifies the Resource Group where the Kusto Cluster should exist. Changing this forces a new resource to be created.
@@ -160,28 +209,31 @@ type ClusterParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A sku block as defined below.
-	// +kubebuilder:validation:Optional
 	Sku []SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Specifies if the streaming ingest is enabled.
-	// +kubebuilder:validation:Optional
 	StreamingIngestionEnabled *bool `json:"streamingIngestionEnabled,omitempty" tf:"streaming_ingestion_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a list of tenant IDs that are trusted by the cluster. Default setting trusts all other tenants. Use trusted_external_tenants = ["*"] to explicitly allow all other tenants, trusted_external_tenants = ["MyTenantOnly"] for only your tenant or trusted_external_tenants = ["<tenantId1>", "<tenantIdx>"] to allow specific other tenants.
-	// +kubebuilder:validation:Optional
 	TrustedExternalTenants []*string `json:"trustedExternalTenants,omitempty" tf:"trusted_external_tenants,omitempty"`
 
 	// A virtual_network_configuration block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	VirtualNetworkConfiguration []VirtualNetworkConfigurationParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kusto Cluster should be located. Changing this forces a new Kusto Cluster to be created.
-	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kusto Cluster.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that is configured on this Kusto Cluster. Possible values are: SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
@@ -202,12 +254,19 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kusto Cluster.
-	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that is configured on this Kusto Cluster. Possible values are: SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type OptimizedAutoScaleInitParameters struct {
+
+	// The maximum number of allowed instances. Must between 0 and 1000.
+	MaximumInstances *float64 `json:"maximumInstances,omitempty" tf:"maximum_instances,omitempty"`
+
+	// The minimum number of allowed instances. Must between 0 and 1000.
+	MinimumInstances *float64 `json:"minimumInstances,omitempty" tf:"minimum_instances,omitempty"`
 }
 
 type OptimizedAutoScaleObservation struct {
@@ -222,12 +281,19 @@ type OptimizedAutoScaleObservation struct {
 type OptimizedAutoScaleParameters struct {
 
 	// The maximum number of allowed instances. Must between 0 and 1000.
-	// +kubebuilder:validation:Required
-	MaximumInstances *float64 `json:"maximumInstances" tf:"maximum_instances,omitempty"`
+	MaximumInstances *float64 `json:"maximumInstances,omitempty" tf:"maximum_instances,omitempty"`
 
 	// The minimum number of allowed instances. Must between 0 and 1000.
-	// +kubebuilder:validation:Required
-	MinimumInstances *float64 `json:"minimumInstances" tf:"minimum_instances,omitempty"`
+	MinimumInstances *float64 `json:"minimumInstances,omitempty" tf:"minimum_instances,omitempty"`
+}
+
+type SkuInitParameters struct {
+
+	// Specifies the node count for the cluster. Boundaries depend on the SKU name.
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// The name of the SKU. Valid values are: Dev(No SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D11_v2, Standard_D12_v2, Standard_D13_v2, Standard_D14_v2, Standard_D16d_v5, Standard_D32d_v4, Standard_D32d_v5, Standard_DS13_v2+1TB_PS, Standard_DS13_v2+2TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS14_v2+4TB_PS, Standard_E16a_v4, Standard_E16ads_v5, Standard_E16as_v4+3TB_PS, Standard_E16as_v4+4TB_PS, Standard_E16as_v5+3TB_PS, Standard_E16as_v5+4TB_PS, Standard_E16s_v4+3TB_PS, Standard_E16s_v4+4TB_PS, Standard_E16s_v5+3TB_PS, Standard_E16s_v5+4TB_PS, Standard_E2a_v4, Standard_E2ads_v5,Standard_E4a_v4, Standard_E4ads_v5, Standard_E64i_v3, Standard_E80ids_v4, Standard_E8a_v4, Standard_E8ads_v5, Standard_E8as_v4+1TB_PS, Standard_E8as_v4+2TB_PS, Standard_E8as_v5+1TB_PS, Standard_E8as_v5+2TB_PS, Standard_E8s_v4+1TB_PS, Standard_E8s_v4+2TB_PS, Standard_E8s_v5+1TB_PS, Standard_E8s_v5+2TB_PS, Standard_L16s, Standard_L16s_v2, Standard_L4s, Standard_L8s, Standard_L8s_v2, "Standard_L8s_v3", Standard_L16s_v3, Standard_L8as_v3, Standard_L16as_v3, Standard_EC8as_v5+1TB_PS, Standard_EC8as_v5+2TB_PS, Standard_EC16as_v5+3TB_PS, Standard_EC16as_v5+4TB_PS, Standard_EC8ads_v5, Standard_EC16ads_v5, Standard_E2d_v4, Standard_E4d_v4, Standard_E8d_v4, Standard_E16d_v4, Standard_E2d_v5, Standard_E4d_v5, Standard_E8d_v5 and Standard_E16d_v5.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type SkuObservation struct {
@@ -242,12 +308,19 @@ type SkuObservation struct {
 type SkuParameters struct {
 
 	// Specifies the node count for the cluster. Boundaries depend on the SKU name.
-	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// The name of the SKU. Valid values are: Dev(No SLA)_Standard_D11_v2, Dev(No SLA)_Standard_E2a_v4, Standard_D11_v2, Standard_D12_v2, Standard_D13_v2, Standard_D14_v2, Standard_D16d_v5, Standard_D32d_v4, Standard_D32d_v5, Standard_DS13_v2+1TB_PS, Standard_DS13_v2+2TB_PS, Standard_DS14_v2+3TB_PS, Standard_DS14_v2+4TB_PS, Standard_E16a_v4, Standard_E16ads_v5, Standard_E16as_v4+3TB_PS, Standard_E16as_v4+4TB_PS, Standard_E16as_v5+3TB_PS, Standard_E16as_v5+4TB_PS, Standard_E16s_v4+3TB_PS, Standard_E16s_v4+4TB_PS, Standard_E16s_v5+3TB_PS, Standard_E16s_v5+4TB_PS, Standard_E2a_v4, Standard_E2ads_v5,Standard_E4a_v4, Standard_E4ads_v5, Standard_E64i_v3, Standard_E80ids_v4, Standard_E8a_v4, Standard_E8ads_v5, Standard_E8as_v4+1TB_PS, Standard_E8as_v4+2TB_PS, Standard_E8as_v5+1TB_PS, Standard_E8as_v5+2TB_PS, Standard_E8s_v4+1TB_PS, Standard_E8s_v4+2TB_PS, Standard_E8s_v5+1TB_PS, Standard_E8s_v5+2TB_PS, Standard_L16s, Standard_L16s_v2, Standard_L4s, Standard_L8s, Standard_L8s_v2, "Standard_L8s_v3", Standard_L16s_v3, Standard_L8as_v3, Standard_L16as_v3, Standard_EC8as_v5+1TB_PS, Standard_EC8as_v5+2TB_PS, Standard_EC16as_v5+3TB_PS, Standard_EC16as_v5+4TB_PS, Standard_EC8ads_v5, Standard_EC16ads_v5, Standard_E2d_v4, Standard_E4d_v4, Standard_E8d_v4, Standard_E16d_v4, Standard_E2d_v5, Standard_E4d_v5, Standard_E8d_v5 and Standard_E16d_v5.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type VirtualNetworkConfigurationInitParameters struct {
+
+	// Data management's service public IP address resource id.
+	DataManagementPublicIPID *string `json:"dataManagementPublicIpId,omitempty" tf:"data_management_public_ip_id,omitempty"`
+
+	// Engine service's public IP address resource id.
+	EnginePublicIPID *string `json:"enginePublicIpId,omitempty" tf:"engine_public_ip_id,omitempty"`
 }
 
 type VirtualNetworkConfigurationObservation struct {
@@ -265,12 +338,10 @@ type VirtualNetworkConfigurationObservation struct {
 type VirtualNetworkConfigurationParameters struct {
 
 	// Data management's service public IP address resource id.
-	// +kubebuilder:validation:Required
-	DataManagementPublicIPID *string `json:"dataManagementPublicIpId" tf:"data_management_public_ip_id,omitempty"`
+	DataManagementPublicIPID *string `json:"dataManagementPublicIpId,omitempty" tf:"data_management_public_ip_id,omitempty"`
 
 	// Engine service's public IP address resource id.
-	// +kubebuilder:validation:Required
-	EnginePublicIPID *string `json:"enginePublicIpId" tf:"engine_public_ip_id,omitempty"`
+	EnginePublicIPID *string `json:"enginePublicIpId,omitempty" tf:"engine_public_ip_id,omitempty"`
 
 	// The subnet resource id.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
@@ -291,6 +362,10 @@ type VirtualNetworkConfigurationParameters struct {
 type ClusterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ClusterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ClusterInitParameters `json:"initProvider,omitempty"`
 }
 
 // ClusterStatus defines the observed state of Cluster.
@@ -311,8 +386,8 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
 	Spec   ClusterSpec   `json:"spec"`
 	Status ClusterStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DataShareInitParameters struct {
+
+	// The Data Share's description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The kind of the Data Share. Possible values are CopyBased and InPlace. Changing this forces a new Data Share to be created.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// A snapshot_schedule block as defined below.
+	SnapshotSchedule []SnapshotScheduleInitParameters `json:"snapshotSchedule,omitempty" tf:"snapshot_schedule,omitempty"`
+
+	// The terms of the Data Share.
+	Terms *string `json:"terms,omitempty" tf:"terms,omitempty"`
+}
+
 type DataShareObservation struct {
 
 	// The ID of the Data Share account in which the Data Share is created. Changing this forces a new Data Share to be created.
@@ -51,20 +66,28 @@ type DataShareParameters struct {
 	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// The Data Share's description.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The kind of the Data Share. Possible values are CopyBased and InPlace. Changing this forces a new Data Share to be created.
-	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// A snapshot_schedule block as defined below.
-	// +kubebuilder:validation:Optional
 	SnapshotSchedule []SnapshotScheduleParameters `json:"snapshotSchedule,omitempty" tf:"snapshot_schedule,omitempty"`
 
 	// The terms of the Data Share.
-	// +kubebuilder:validation:Optional
 	Terms *string `json:"terms,omitempty" tf:"terms,omitempty"`
+}
+
+type SnapshotScheduleInitParameters struct {
+
+	// The name of the snapshot schedule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The interval of the synchronization with the source data. Possible values are Hour and Day.
+	Recurrence *string `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
+
+	// The synchronization with the source data's start time.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
 type SnapshotScheduleObservation struct {
@@ -82,22 +105,23 @@ type SnapshotScheduleObservation struct {
 type SnapshotScheduleParameters struct {
 
 	// The name of the snapshot schedule.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The interval of the synchronization with the source data. Possible values are Hour and Day.
-	// +kubebuilder:validation:Required
-	Recurrence *string `json:"recurrence" tf:"recurrence,omitempty"`
+	Recurrence *string `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 
 	// The synchronization with the source data's start time.
-	// +kubebuilder:validation:Required
-	StartTime *string `json:"startTime" tf:"start_time,omitempty"`
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
 // DataShareSpec defines the desired state of DataShare
 type DataShareSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DataShareParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DataShareInitParameters `json:"initProvider,omitempty"`
 }
 
 // DataShareStatus defines the observed state of DataShare.
@@ -118,7 +142,7 @@ type DataShareStatus struct {
 type DataShare struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.kind)",message="kind is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.kind) || has(self.initProvider.kind)",message="kind is a required parameter"
 	Spec   DataShareSpec   `json:"spec"`
 	Status DataShareStatus `json:"status,omitempty"`
 }

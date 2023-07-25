@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type APNSCredentialInitParameters struct {
+
+	// The Application Mode which defines which server the APNS Messages should be sent to. Possible values are Production and Sandbox.
+	ApplicationMode *string `json:"applicationMode,omitempty" tf:"application_mode,omitempty"`
+
+	// The Bundle ID of the iOS/macOS application to send push notifications for, such as com.hashicorp.example.
+	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
+
+	// The Apple Push Notifications Service (APNS) Key.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// The ID of the team the Token.
+	TeamID *string `json:"teamId,omitempty" tf:"team_id,omitempty"`
+}
+
 type APNSCredentialObservation struct {
 
 	// The Application Mode which defines which server the APNS Messages should be sent to. Possible values are Production and Sandbox.
@@ -31,24 +46,22 @@ type APNSCredentialObservation struct {
 type APNSCredentialParameters struct {
 
 	// The Application Mode which defines which server the APNS Messages should be sent to. Possible values are Production and Sandbox.
-	// +kubebuilder:validation:Required
-	ApplicationMode *string `json:"applicationMode" tf:"application_mode,omitempty"`
+	ApplicationMode *string `json:"applicationMode,omitempty" tf:"application_mode,omitempty"`
 
 	// The Bundle ID of the iOS/macOS application to send push notifications for, such as com.hashicorp.example.
-	// +kubebuilder:validation:Required
-	BundleID *string `json:"bundleId" tf:"bundle_id,omitempty"`
+	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
 
 	// The Apple Push Notifications Service (APNS) Key.
-	// +kubebuilder:validation:Required
-	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// The ID of the team the Token.
-	// +kubebuilder:validation:Required
-	TeamID *string `json:"teamId" tf:"team_id,omitempty"`
+	TeamID *string `json:"teamId,omitempty" tf:"team_id,omitempty"`
 
 	// The Push Token associated with the Apple Developer Account. This is the contents of the key downloaded from the Apple Developer Portal between the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- blocks.
-	// +kubebuilder:validation:Required
 	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
+}
+
+type GCMCredentialInitParameters struct {
 }
 
 type GCMCredentialObservation struct {
@@ -57,8 +70,22 @@ type GCMCredentialObservation struct {
 type GCMCredentialParameters struct {
 
 	// The API Key associated with the Google Cloud Messaging service.
-	// +kubebuilder:validation:Required
 	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
+}
+
+type NotificationHubInitParameters struct {
+
+	// A apns_credential block as defined below.
+	APNSCredential []APNSCredentialInitParameters `json:"apnsCredential,omitempty" tf:"apns_credential,omitempty"`
+
+	// A gcm_credential block as defined below.
+	GCMCredential []GCMCredentialInitParameters `json:"gcmCredential,omitempty" tf:"gcm_credential,omitempty"`
+
+	// The Azure Region in which this Notification Hub Namespace exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type NotificationHubObservation struct {
@@ -88,15 +115,12 @@ type NotificationHubObservation struct {
 type NotificationHubParameters struct {
 
 	// A apns_credential block as defined below.
-	// +kubebuilder:validation:Optional
 	APNSCredential []APNSCredentialParameters `json:"apnsCredential,omitempty" tf:"apns_credential,omitempty"`
 
 	// A gcm_credential block as defined below.
-	// +kubebuilder:validation:Optional
 	GCMCredential []GCMCredentialParameters `json:"gcmCredential,omitempty" tf:"gcm_credential,omitempty"`
 
 	// The Azure Region in which this Notification Hub Namespace exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Notification Hub Namespace in which to create this Notification Hub. Changing this forces a new resource to be created.
@@ -126,7 +150,6 @@ type NotificationHubParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -134,6 +157,10 @@ type NotificationHubParameters struct {
 type NotificationHubSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NotificationHubParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider NotificationHubInitParameters `json:"initProvider,omitempty"`
 }
 
 // NotificationHubStatus defines the observed state of NotificationHub.
@@ -154,7 +181,7 @@ type NotificationHubStatus struct {
 type NotificationHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   NotificationHubSpec   `json:"spec"`
 	Status NotificationHubStatus `json:"status,omitempty"`
 }

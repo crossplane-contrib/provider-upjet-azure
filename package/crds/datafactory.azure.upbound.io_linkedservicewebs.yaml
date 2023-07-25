@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: linkedservicewebs.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -193,6 +193,48 @@ spec:
                     - key
                     - name
                     - namespace
+                    type: object
+                  url:
+                    description: The URL of the web service endpoint (e.g. https://www.microsoft.com).
+                    type: string
+                  username:
+                    description: The username for Basic authentication. Required if
+                      authentication_type sets to Basic.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Linked Service.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Linked Service.
+                    items:
+                      type: string
+                    type: array
+                  authenticationType:
+                    description: The type of authentication used to connect to the
+                      web table source. Valid options are Anonymous, Basic and ClientCertificate.
+                    type: string
+                  description:
+                    description: The description for the Data Factory Linked Service.
+                    type: string
+                  integrationRuntimeName:
+                    description: The integration runtime reference to associate with
+                      the Data Factory Linked Service.
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of parameters to associate with the Data Factory
+                      Linked Service.
                     type: object
                   url:
                     description: The URL of the web service endpoint (e.g. https://www.microsoft.com).
@@ -402,10 +444,12 @@ spec:
             x-kubernetes-validations:
             - message: authenticationType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.authenticationType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.authenticationType)
+                || has(self.initProvider.authenticationType)'
             - message: url is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.url)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.url)
+                || has(self.initProvider.url)'
           status:
             description: LinkedServiceWebStatus defines the observed state of LinkedServiceWeb.
             properties:

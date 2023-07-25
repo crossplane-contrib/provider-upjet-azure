@@ -43,7 +43,6 @@ type SentinelLogAnalyticsWorkspaceOnboardingObservation struct {
 type SentinelLogAnalyticsWorkspaceOnboardingParameters struct {
 
 	// Specifies if the Workspace is using Customer managed key. Defaults to false. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
 	// Specifies the name of the Resource Group where the Security Insights Sentinel Onboarding States should exist. Changing this forces the Log Analytics Workspace off the board and onboard again.
@@ -60,7 +59,6 @@ type SentinelLogAnalyticsWorkspaceOnboardingParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Security Insights Sentinel Onboarding States.
-	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
 	// Specifies the Workspace Name. Changing this forces the Log Analytics Workspace off the board and onboard again. Changing this forces a new resource to be created.
@@ -84,14 +82,6 @@ type SentinelLogAnalyticsWorkspaceOnboardingSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider SentinelLogAnalyticsWorkspaceOnboardingInitParameters `json:"initProvider,omitempty"`
 }
 

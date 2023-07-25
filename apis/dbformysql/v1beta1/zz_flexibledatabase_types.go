@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FlexibleDatabaseInitParameters struct {
+
+	// Specifies the Charset for the MySQL Database, which needs to be a valid MySQL Charset. Changing this forces a new resource to be created.
+	Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
+
+	// Specifies the Collation for the MySQL Database, which needs to be a valid MySQL Collation. Changing this forces a new resource to be created.
+	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
+}
+
 type FlexibleDatabaseObservation struct {
 
 	// Specifies the Charset for the MySQL Database, which needs to be a valid MySQL Charset. Changing this forces a new resource to be created.
@@ -34,11 +43,9 @@ type FlexibleDatabaseObservation struct {
 type FlexibleDatabaseParameters struct {
 
 	// Specifies the Charset for the MySQL Database, which needs to be a valid MySQL Charset. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
 
 	// Specifies the Collation for the MySQL Database, which needs to be a valid MySQL Collation. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
 	// The name of the resource group in which the MySQL Server exists. Changing this forces a new resource to be created.
@@ -72,6 +79,10 @@ type FlexibleDatabaseParameters struct {
 type FlexibleDatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FlexibleDatabaseParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FlexibleDatabaseInitParameters `json:"initProvider,omitempty"`
 }
 
 // FlexibleDatabaseStatus defines the observed state of FlexibleDatabase.
@@ -92,8 +103,8 @@ type FlexibleDatabaseStatus struct {
 type FlexibleDatabase struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.charset)",message="charset is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.collation)",message="collation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.charset) || has(self.initProvider.charset)",message="charset is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.collation) || has(self.initProvider.collation)",message="collation is a required parameter"
 	Spec   FlexibleDatabaseSpec   `json:"spec"`
 	Status FlexibleDatabaseStatus `json:"status,omitempty"`
 }

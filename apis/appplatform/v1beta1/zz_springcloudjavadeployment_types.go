@@ -58,23 +58,18 @@ type SpringCloudJavaDeploymentObservation struct {
 type SpringCloudJavaDeploymentParameters struct {
 
 	// Specifies the environment variables of the Spring Cloud Deployment as a map of key-value pairs.
-	// +kubebuilder:validation:Optional
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// Specifies the required instance count of the Spring Cloud Deployment. Possible Values are between 1 and 500. Defaults to 1 if not specified.
-	// +kubebuilder:validation:Optional
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// Specifies the jvm option of the Spring Cloud Deployment.
-	// +kubebuilder:validation:Optional
 	JvmOptions *string `json:"jvmOptions,omitempty" tf:"jvm_options,omitempty"`
 
 	// A quota block as defined below.
-	// +kubebuilder:validation:Optional
 	Quota []SpringCloudJavaDeploymentQuotaParameters `json:"quota,omitempty" tf:"quota,omitempty"`
 
 	// Specifies the runtime version of the Spring Cloud Deployment. Possible Values are Java_8, Java_11 and Java_17. Defaults to Java_8.
-	// +kubebuilder:validation:Optional
 	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
 
 	// Specifies the id of the Spring Cloud Application in which to create the Deployment. Changing this forces a new resource to be created.
@@ -113,11 +108,9 @@ type SpringCloudJavaDeploymentQuotaObservation struct {
 type SpringCloudJavaDeploymentQuotaParameters struct {
 
 	// Specifies the required cpu of the Spring Cloud Deployment. Possible Values are 500m, 1, 2, 3 and 4. Defaults to 1 if not specified.
-	// +kubebuilder:validation:Optional
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not specified.
-	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }
 
@@ -128,14 +121,6 @@ type SpringCloudJavaDeploymentSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider SpringCloudJavaDeploymentInitParameters `json:"initProvider,omitempty"`
 }
 

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ShareDirectoryInitParameters struct {
+
+	// A mapping of metadata to assign to this Directory.
+	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type ShareDirectoryObservation struct {
 
 	// The ID of the Directory within the File Share.
@@ -34,11 +43,9 @@ type ShareDirectoryObservation struct {
 type ShareDirectoryParameters struct {
 
 	// A mapping of metadata to assign to this Directory.
-	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the File Share where this Directory should be created. Changing this forces a new resource to be created.
@@ -72,6 +79,10 @@ type ShareDirectoryParameters struct {
 type ShareDirectorySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ShareDirectoryParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ShareDirectoryInitParameters `json:"initProvider,omitempty"`
 }
 
 // ShareDirectoryStatus defines the observed state of ShareDirectory.
@@ -92,7 +103,7 @@ type ShareDirectoryStatus struct {
 type ShareDirectory struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ShareDirectorySpec   `json:"spec"`
 	Status ShareDirectoryStatus `json:"status,omitempty"`
 }

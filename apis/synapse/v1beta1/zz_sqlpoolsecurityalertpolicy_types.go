@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SQLPoolSecurityAlertPolicyInitParameters struct {
+
+	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
+	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
+
+	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
+	EmailAccountAdminsEnabled *bool `json:"emailAccountAdminsEnabled,omitempty" tf:"email_account_admins_enabled,omitempty"`
+
+	// Specifies an array of email addresses to which the alert is sent.
+	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
+
+	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific SQL pool. Possible values are Disabled, Enabled and New.
+	PolicyState *string `json:"policyState,omitempty" tf:"policy_state,omitempty"`
+
+	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
+	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+}
+
 type SQLPoolSecurityAlertPolicyObservation struct {
 
 	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
@@ -43,23 +61,18 @@ type SQLPoolSecurityAlertPolicyObservation struct {
 type SQLPoolSecurityAlertPolicyParameters struct {
 
 	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
-	// +kubebuilder:validation:Optional
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
 	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
-	// +kubebuilder:validation:Optional
 	EmailAccountAdminsEnabled *bool `json:"emailAccountAdminsEnabled,omitempty" tf:"email_account_admins_enabled,omitempty"`
 
 	// Specifies an array of email addresses to which the alert is sent.
-	// +kubebuilder:validation:Optional
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific SQL pool. Possible values are Disabled, Enabled and New.
-	// +kubebuilder:validation:Optional
 	PolicyState *string `json:"policyState,omitempty" tf:"policy_state,omitempty"`
 
 	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
-	// +kubebuilder:validation:Optional
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
 	// Specifies the ID of the Synapse SQL Pool. Changing this forces a new resource to be created.
@@ -77,7 +90,6 @@ type SQLPoolSecurityAlertPolicyParameters struct {
 	SQLPoolIDSelector *v1.Selector `json:"sqlPoolIdSelector,omitempty" tf:"-"`
 
 	// Specifies the identifier key of the Threat Detection audit storage account.
-	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
@@ -99,6 +111,10 @@ type SQLPoolSecurityAlertPolicyParameters struct {
 type SQLPoolSecurityAlertPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SQLPoolSecurityAlertPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SQLPoolSecurityAlertPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // SQLPoolSecurityAlertPolicyStatus defines the observed state of SQLPoolSecurityAlertPolicy.
@@ -119,7 +135,7 @@ type SQLPoolSecurityAlertPolicyStatus struct {
 type SQLPoolSecurityAlertPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyState)",message="policyState is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policyState) || has(self.initProvider.policyState)",message="policyState is a required parameter"
 	Spec   SQLPoolSecurityAlertPolicySpec   `json:"spec"`
 	Status SQLPoolSecurityAlertPolicyStatus `json:"status,omitempty"`
 }

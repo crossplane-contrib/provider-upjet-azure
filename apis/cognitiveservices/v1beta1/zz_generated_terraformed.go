@@ -79,6 +79,15 @@ func (tr *Account) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Account
+func (tr *Account) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Account using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Account) LateInitialize(attrs []byte) (bool, error) {

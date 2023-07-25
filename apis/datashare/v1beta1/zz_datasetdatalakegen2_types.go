@@ -49,7 +49,6 @@ type DataSetDataLakeGen2Observation struct {
 type DataSetDataLakeGen2Parameters struct {
 
 	// The path of the file in the data lake file system to be shared with the receiver. Conflicts with folder_path Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
-	// +kubebuilder:validation:Optional
 	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
 
 	// The name of the data lake file system to be shared with the receiver. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
@@ -66,7 +65,6 @@ type DataSetDataLakeGen2Parameters struct {
 	FileSystemNameSelector *v1.Selector `json:"fileSystemNameSelector,omitempty" tf:"-"`
 
 	// The folder path in the data lake file system to be shared with the receiver. Conflicts with file_path Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
-	// +kubebuilder:validation:Optional
 	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
 
 	// The resource ID of the Data Share where this Data Share Data Lake Gen2 Dataset should be created. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
@@ -105,14 +103,6 @@ type DataSetDataLakeGen2Spec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider DataSetDataLakeGen2InitParameters `json:"initProvider,omitempty"`
 }
 

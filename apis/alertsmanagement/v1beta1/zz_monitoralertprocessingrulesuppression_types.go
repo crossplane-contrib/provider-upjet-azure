@@ -34,11 +34,9 @@ type ConditionAlertRuleNameObservation struct {
 type ConditionAlertRuleNameParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -63,11 +61,9 @@ type ConditionMonitorConditionObservation struct {
 type ConditionMonitorConditionParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -92,11 +88,9 @@ type ConditionSignalTypeObservation struct {
 type ConditionSignalTypeParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -121,11 +115,9 @@ type ConditionTargetResourceGroupObservation struct {
 type ConditionTargetResourceGroupParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -150,11 +142,9 @@ type ConditionTargetResourceObservation struct {
 type ConditionTargetResourceParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -179,11 +169,9 @@ type MonitorAlertProcessingRuleSuppressionConditionAlertContextObservation struc
 type MonitorAlertProcessingRuleSuppressionConditionAlertContextParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -208,11 +196,9 @@ type MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDObservation struct
 type MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -237,11 +223,9 @@ type MonitorAlertProcessingRuleSuppressionConditionDescriptionObservation struct
 type MonitorAlertProcessingRuleSuppressionConditionDescriptionParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -302,11 +286,9 @@ type MonitorAlertProcessingRuleSuppressionConditionMonitorServiceObservation str
 type MonitorAlertProcessingRuleSuppressionConditionMonitorServiceParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -349,47 +331,36 @@ type MonitorAlertProcessingRuleSuppressionConditionObservation struct {
 type MonitorAlertProcessingRuleSuppressionConditionParameters struct {
 
 	// A alert_context block as defined above.
-	// +kubebuilder:validation:Optional
 	AlertContext []MonitorAlertProcessingRuleSuppressionConditionAlertContextParameters `json:"alertContext,omitempty" tf:"alert_context,omitempty"`
 
 	// A alert_rule_id block as defined above.
-	// +kubebuilder:validation:Optional
 	AlertRuleID []MonitorAlertProcessingRuleSuppressionConditionAlertRuleIDParameters `json:"alertRuleId,omitempty" tf:"alert_rule_id,omitempty"`
 
 	// A alert_rule_name block as defined above.
-	// +kubebuilder:validation:Optional
 	AlertRuleName []ConditionAlertRuleNameParameters `json:"alertRuleName,omitempty" tf:"alert_rule_name,omitempty"`
 
 	// A description block as defined below.
-	// +kubebuilder:validation:Optional
 	Description []MonitorAlertProcessingRuleSuppressionConditionDescriptionParameters `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A monitor_condition block as defined below.
-	// +kubebuilder:validation:Optional
 	MonitorCondition []ConditionMonitorConditionParameters `json:"monitorCondition,omitempty" tf:"monitor_condition,omitempty"`
 
 	// A monitor_service block as defined below.
-	// +kubebuilder:validation:Optional
 	MonitorService []MonitorAlertProcessingRuleSuppressionConditionMonitorServiceParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
-	// +kubebuilder:validation:Optional
 	Severity []MonitorAlertProcessingRuleSuppressionConditionSeverityParameters `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A signal_type block as defined below.
-	// +kubebuilder:validation:Optional
 	SignalType []ConditionSignalTypeParameters `json:"signalType,omitempty" tf:"signal_type,omitempty"`
 
 	// A target_resource block as defined below.
-	// +kubebuilder:validation:Optional
 	TargetResource []ConditionTargetResourceParameters `json:"targetResource,omitempty" tf:"target_resource,omitempty"`
 
 	// A target_resource_group block as defined below.
-	// +kubebuilder:validation:Optional
 	TargetResourceGroup []ConditionTargetResourceGroupParameters `json:"targetResourceGroup,omitempty" tf:"target_resource_group,omitempty"`
 
 	// A target_resource_type block as defined below.
-	// +kubebuilder:validation:Optional
 	TargetResourceType []MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeParameters `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 }
 
@@ -414,11 +385,9 @@ type MonitorAlertProcessingRuleSuppressionConditionSeverityObservation struct {
 type MonitorAlertProcessingRuleSuppressionConditionSeverityParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -443,11 +412,9 @@ type MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeObservation
 type MonitorAlertProcessingRuleSuppressionConditionTargetResourceTypeParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
-	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
-	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -499,15 +466,12 @@ type MonitorAlertProcessingRuleSuppressionObservation struct {
 type MonitorAlertProcessingRuleSuppressionParameters struct {
 
 	// A condition block as defined below.
-	// +kubebuilder:validation:Optional
 	Condition []MonitorAlertProcessingRuleSuppressionConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// Specifies a description for the Alert Processing Rule.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Should the Alert Processing Rule be enabled? Defaults to true.
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the Resource Group where the Alert Processing Rule should exist. Changing this forces a new Alert Processing Rule to be created.
@@ -524,7 +488,6 @@ type MonitorAlertProcessingRuleSuppressionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A schedule block as defined below.
-	// +kubebuilder:validation:Optional
 	Schedule []MonitorAlertProcessingRuleSuppressionScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// A list of resource IDs which will be the target of Alert Processing Rule.
@@ -542,7 +505,6 @@ type MonitorAlertProcessingRuleSuppressionParameters struct {
 	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Alert Processing Rule.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -579,19 +541,15 @@ type MonitorAlertProcessingRuleSuppressionScheduleObservation struct {
 type MonitorAlertProcessingRuleSuppressionScheduleParameters struct {
 
 	// Specifies the Alert Processing Rule effective start time (Y-m-d'T'H:M:S).
-	// +kubebuilder:validation:Optional
 	EffectiveFrom *string `json:"effectiveFrom,omitempty" tf:"effective_from,omitempty"`
 
 	// Specifies the Alert Processing Rule effective end time (Y-m-d'T'H:M:S).
-	// +kubebuilder:validation:Optional
 	EffectiveUntil *string `json:"effectiveUntil,omitempty" tf:"effective_until,omitempty"`
 
 	// A recurrence block as defined above.
-	// +kubebuilder:validation:Optional
 	Recurrence []ScheduleRecurrenceParameters `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 
 	// The time zone (e.g. Pacific Standard time, Eastern Standard Time). Defaults to UTC. possible values are defined here.
-	// +kubebuilder:validation:Optional
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
@@ -616,11 +574,9 @@ type RecurrenceDailyObservation struct {
 type RecurrenceDailyParameters struct {
 
 	// Specifies the recurrence end time (H:M:S).
-	// +kubebuilder:validation:Optional
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
 	// Specifies the recurrence start time (H:M:S).
-	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
@@ -651,15 +607,12 @@ type RecurrenceMonthlyObservation struct {
 type RecurrenceMonthlyParameters struct {
 
 	// Specifies a list of dayOfMonth to recurrence. Possible values are integers between 1 - 31.
-	// +kubebuilder:validation:Optional
 	DaysOfMonth []*float64 `json:"daysOfMonth,omitempty" tf:"days_of_month,omitempty"`
 
 	// Specifies the recurrence end time (H:M:S).
-	// +kubebuilder:validation:Optional
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
 	// Specifies the recurrence start time (H:M:S).
-	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
@@ -690,15 +643,12 @@ type RecurrenceWeeklyObservation struct {
 type RecurrenceWeeklyParameters struct {
 
 	// Specifies a list of dayOfWeek to recurrence. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, and Saturday.
-	// +kubebuilder:validation:Optional
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
 	// Specifies the recurrence end time (H:M:S).
-	// +kubebuilder:validation:Optional
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
 	// Specifies the recurrence start time (H:M:S).
-	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
@@ -729,15 +679,12 @@ type ScheduleRecurrenceObservation struct {
 type ScheduleRecurrenceParameters struct {
 
 	// One or more daily blocks as defined above.
-	// +kubebuilder:validation:Optional
 	Daily []RecurrenceDailyParameters `json:"daily,omitempty" tf:"daily,omitempty"`
 
 	// One or more monthly blocks as defined above.
-	// +kubebuilder:validation:Optional
 	Monthly []RecurrenceMonthlyParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
 
 	// One or more weekly blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Weekly []RecurrenceWeeklyParameters `json:"weekly,omitempty" tf:"weekly,omitempty"`
 }
 
@@ -748,14 +695,6 @@ type MonitorAlertProcessingRuleSuppressionSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider MonitorAlertProcessingRuleSuppressionInitParameters `json:"initProvider,omitempty"`
 }
 

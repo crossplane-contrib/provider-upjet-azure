@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: frontdoororigingroups.cdn.azure.upbound.io
 spec:
   group: cdn.azure.upbound.io
@@ -170,9 +170,69 @@ spec:
                             that is made. Possible values are GET and HEAD. Defaults
                             to HEAD.
                           type: string
-                      required:
-                      - intervalInSeconds
-                      - protocol
+                      type: object
+                    type: array
+                  loadBalancing:
+                    description: A load_balancing block as defined below.
+                    items:
+                      properties:
+                        additionalLatencyInMilliseconds:
+                          description: Specifies the additional latency in milliseconds
+                            for probes to fall into the lowest latency bucket. Possible
+                            values are between 0 and 1000 milliseconds (inclusive).
+                            Defaults to 50.
+                          type: number
+                        sampleSize:
+                          description: Specifies the number of samples to consider
+                            for load balancing decisions. Possible values are between
+                            0 and 255 (inclusive). Defaults to 4.
+                          type: number
+                        successfulSamplesRequired:
+                          description: Specifies the number of samples within the
+                            sample period that must succeed. Possible values are between
+                            0 and 255 (inclusive). Defaults to 3.
+                          type: number
+                      type: object
+                    type: array
+                  restoreTrafficTimeToHealedOrNewEndpointInMinutes:
+                    description: Specifies the amount of time which should elapse
+                      before shifting traffic to another endpoint when a healthy endpoint
+                      becomes unhealthy or a new endpoint is added. Possible values
+                      are between 0 and 50 minutes (inclusive). Default is 10 minutes.
+                    type: number
+                  sessionAffinityEnabled:
+                    description: Specifies whether session affinity should be enabled
+                      on this host. Defaults to true.
+                    type: boolean
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  healthProbe:
+                    description: A health_probe block as defined below.
+                    items:
+                      properties:
+                        intervalInSeconds:
+                          description: Specifies the number of seconds between health
+                            probes. Possible values are between 5 and 31536000 seconds
+                            (inclusive).
+                          type: number
+                        path:
+                          description: Specifies the path relative to the origin that
+                            is used to determine the health of the origin. Defaults
+                            to /.
+                          type: string
+                        protocol:
+                          description: Specifies the protocol to use for health probe.
+                            Possible values are Http and Https.
+                          type: string
+                        requestType:
+                          description: Specifies the type of health probe request
+                            that is made. Possible values are GET and HEAD. Defaults
+                            to HEAD.
+                          type: string
                       type: object
                     type: array
                   loadBalancing:
@@ -408,7 +468,8 @@ spec:
             x-kubernetes-validations:
             - message: loadBalancing is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.loadBalancing)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.loadBalancing)
+                || has(self.initProvider.loadBalancing)'
           status:
             description: FrontdoorOriginGroupStatus defines the observed state of
               FrontdoorOriginGroup.

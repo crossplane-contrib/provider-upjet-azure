@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type InputAssetInitParameters struct {
+
+	// A label that is assigned to a JobInputClip, that is used to satisfy a reference used in the Transform. For example, a Transform can be authored so as to take an image file with the label 'xyz' and apply it as an overlay onto the input video before it is encoded. When submitting a Job, exactly one of the JobInputs should be the image file, and it should have the label 'xyz'. Changing this forces a new resource to be created.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+}
+
 type InputAssetObservation struct {
 
 	// A label that is assigned to a JobInputClip, that is used to satisfy a reference used in the Transform. For example, a Transform can be authored so as to take an image file with the label 'xyz' and apply it as an overlay onto the input video before it is encoded. When submitting a Job, exactly one of the JobInputs should be the image file, and it should have the label 'xyz'. Changing this forces a new resource to be created.
@@ -25,7 +31,6 @@ type InputAssetObservation struct {
 type InputAssetParameters struct {
 
 	// A label that is assigned to a JobInputClip, that is used to satisfy a reference used in the Transform. For example, a Transform can be authored so as to take an image file with the label 'xyz' and apply it as an overlay onto the input video before it is encoded. When submitting a Job, exactly one of the JobInputs should be the image file, and it should have the label 'xyz'. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// The name of the input Asset. Changing this forces a new Media Job to be created.
@@ -40,6 +45,21 @@ type InputAssetParameters struct {
 	// Selector for a Asset in media to populate name.
 	// +kubebuilder:validation:Optional
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+}
+
+type JobInitParameters struct {
+
+	// Optional customer supplied description of the Job.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A input_asset block as defined below. Changing this forces a new Media Job to be created.
+	InputAsset []InputAssetInitParameters `json:"inputAsset,omitempty" tf:"input_asset,omitempty"`
+
+	// One or more output_asset blocks as defined below. Changing this forces a new Media Job to be created.
+	OutputAsset []OutputAssetInitParameters `json:"outputAsset,omitempty" tf:"output_asset,omitempty"`
+
+	// Priority with which the job should be processed. Higher priority jobs are processed before lower priority jobs. If not set, the default is normal. Changing this forces a new Media Job to be created. Possible values are High, Normal and Low.
+	Priority *string `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 type JobObservation struct {
@@ -72,11 +92,9 @@ type JobObservation struct {
 type JobParameters struct {
 
 	// Optional customer supplied description of the Job.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A input_asset block as defined below. Changing this forces a new Media Job to be created.
-	// +kubebuilder:validation:Optional
 	InputAsset []InputAssetParameters `json:"inputAsset,omitempty" tf:"input_asset,omitempty"`
 
 	// The Media Services account name. Changing this forces a new Transform to be created.
@@ -93,11 +111,9 @@ type JobParameters struct {
 	MediaServicesAccountNameSelector *v1.Selector `json:"mediaServicesAccountNameSelector,omitempty" tf:"-"`
 
 	// One or more output_asset blocks as defined below. Changing this forces a new Media Job to be created.
-	// +kubebuilder:validation:Optional
 	OutputAsset []OutputAssetParameters `json:"outputAsset,omitempty" tf:"output_asset,omitempty"`
 
 	// Priority with which the job should be processed. Higher priority jobs are processed before lower priority jobs. If not set, the default is normal. Changing this forces a new Media Job to be created. Possible values are High, Normal and Low.
-	// +kubebuilder:validation:Optional
 	Priority *string `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The name of the Resource Group where the Media Job should exist. Changing this forces a new Media Job to be created.
@@ -127,6 +143,12 @@ type JobParameters struct {
 	TransformNameSelector *v1.Selector `json:"transformNameSelector,omitempty" tf:"-"`
 }
 
+type OutputAssetInitParameters struct {
+
+	// A label that is assigned to a JobOutput in order to help uniquely identify it. This is useful when your Transform has more than one TransformOutput, whereby your Job has more than one JobOutput. In such cases, when you submit the Job, you will add two or more JobOutputs, in the same order as TransformOutputs in the Transform. Subsequently, when you retrieve the Job, either through events or on a GET request, you can use the label to easily identify the JobOutput. If a label is not provided, a default value of '{presetName}_{outputIndex}' will be used, where the preset name is the name of the preset in the corresponding TransformOutput and the output index is the relative index of the this JobOutput within the Job. Note that this index is the same as the relative index of the corresponding TransformOutput within its Transform. Changing this forces a new resource to be created.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+}
+
 type OutputAssetObservation struct {
 
 	// A label that is assigned to a JobOutput in order to help uniquely identify it. This is useful when your Transform has more than one TransformOutput, whereby your Job has more than one JobOutput. In such cases, when you submit the Job, you will add two or more JobOutputs, in the same order as TransformOutputs in the Transform. Subsequently, when you retrieve the Job, either through events or on a GET request, you can use the label to easily identify the JobOutput. If a label is not provided, a default value of '{presetName}_{outputIndex}' will be used, where the preset name is the name of the preset in the corresponding TransformOutput and the output index is the relative index of the this JobOutput within the Job. Note that this index is the same as the relative index of the corresponding TransformOutput within its Transform. Changing this forces a new resource to be created.
@@ -139,7 +161,6 @@ type OutputAssetObservation struct {
 type OutputAssetParameters struct {
 
 	// A label that is assigned to a JobOutput in order to help uniquely identify it. This is useful when your Transform has more than one TransformOutput, whereby your Job has more than one JobOutput. In such cases, when you submit the Job, you will add two or more JobOutputs, in the same order as TransformOutputs in the Transform. Subsequently, when you retrieve the Job, either through events or on a GET request, you can use the label to easily identify the JobOutput. If a label is not provided, a default value of '{presetName}_{outputIndex}' will be used, where the preset name is the name of the preset in the corresponding TransformOutput and the output index is the relative index of the this JobOutput within the Job. Note that this index is the same as the relative index of the corresponding TransformOutput within its Transform. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// The name of the output Asset. Changing this forces a new Media Job to be created.
@@ -160,6 +181,10 @@ type OutputAssetParameters struct {
 type JobSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     JobParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider JobInitParameters `json:"initProvider,omitempty"`
 }
 
 // JobStatus defines the observed state of Job.
@@ -180,8 +205,8 @@ type JobStatus struct {
 type Job struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inputAsset)",message="inputAsset is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outputAsset)",message="outputAsset is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inputAsset) || has(self.initProvider.inputAsset)",message="inputAsset is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outputAsset) || has(self.initProvider.outputAsset)",message="outputAsset is a required parameter"
 	Spec   JobSpec   `json:"spec"`
 	Status JobStatus `json:"status,omitempty"`
 }

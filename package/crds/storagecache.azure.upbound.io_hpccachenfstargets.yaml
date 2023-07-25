@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: hpccachenfstargets.storagecache.azure.upbound.io
 spec:
   group: storagecache.azure.upbound.io
@@ -170,9 +170,6 @@ spec:
                             to map to the namespace_path. Defaults to "", in which
                             case the whole nfs_export is exported.
                           type: string
-                      required:
-                      - namespacePath
-                      - nfsExport
                       type: object
                     type: array
                   resourceGroupName:
@@ -255,6 +252,48 @@ spec:
                             type: string
                         type: object
                     type: object
+                  targetHostName:
+                    description: The IP address or fully qualified domain name (FQDN)
+                      of the HPC Cache NFS target. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  usageModel:
+                    description: 'The type of usage of the HPC Cache NFS Target. Possible
+                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15,
+                      WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
+                      and WRITE_WORKLOAD_CLOUDWS.'
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  namespaceJunction:
+                    description: Can be specified multiple times to define multiple
+                      namespace_junction. Each namespace_juntion block supports fields
+                      documented below.
+                    items:
+                      properties:
+                        accessPolicyName:
+                          description: The name of the access policy applied to this
+                            target. Defaults to default.
+                          type: string
+                        namespacePath:
+                          description: The client-facing file path of this NFS target
+                            within the HPC Cache NFS Target.
+                          type: string
+                        nfsExport:
+                          description: The NFS export of this NFS target within the
+                            HPC Cache NFS Target.
+                          type: string
+                        targetPath:
+                          description: The relative subdirectory path from the nfs_export
+                            to map to the namespace_path. Defaults to "", in which
+                            case the whole nfs_export is exported.
+                          type: string
+                      type: object
+                    type: array
                   targetHostName:
                     description: The IP address or fully qualified domain name (FQDN)
                       of the HPC Cache NFS target. Changing this forces a new resource
@@ -467,13 +506,16 @@ spec:
             x-kubernetes-validations:
             - message: namespaceJunction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.namespaceJunction)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.namespaceJunction)
+                || has(self.initProvider.namespaceJunction)'
             - message: targetHostName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetHostName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetHostName)
+                || has(self.initProvider.targetHostName)'
             - message: usageModel is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.usageModel)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.usageModel)
+                || has(self.initProvider.usageModel)'
           status:
             description: HPCCacheNFSTargetStatus defines the observed state of HPCCacheNFSTarget.
             properties:

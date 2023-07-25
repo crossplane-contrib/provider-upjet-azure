@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: outputeventhubs.streamanalytics.azure.upbound.io
 spec:
   group: streamanalytics.azure.upbound.io
@@ -259,8 +259,6 @@ spec:
                             data streams. Possible values are Avro, Csv, Json and
                             Parquet.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   servicebusNamespace:
@@ -371,6 +369,56 @@ spec:
                     type: string
                 required:
                 - streamAnalyticsJobName
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  authenticationMode:
+                    description: The authentication mode for the Stream Output. Possible
+                      values are Msi and ConnectionString. Defaults to ConnectionString.
+                    type: string
+                  partitionKey:
+                    description: The column that is used for the Event Hub partition
+                      key.
+                    type: string
+                  propertyColumns:
+                    description: A list of property columns to add to the Event Hub
+                      output.
+                    items:
+                      type: string
+                    type: array
+                  serialization:
+                    description: A serialization block as defined below.
+                    items:
+                      properties:
+                        encoding:
+                          description: The encoding of the incoming data in the case
+                            of input and the encoding of outgoing data in the case
+                            of output. It currently can only be set to UTF8.
+                          type: string
+                        fieldDelimiter:
+                          description: "The delimiter that will be used to separate
+                            comma-separated value (CSV) records. Possible values are
+                            \  (space), , (comma), \t (tab), | (pipe) and ;."
+                          type: string
+                        format:
+                          description: Specifies the format of the JSON the output
+                            will be written in. Possible values are Array and LineSeparated.
+                          type: string
+                        type:
+                          description: The serialization format used for outgoing
+                            data streams. Possible values are Avro, Csv, Json and
+                            Parquet.
+                          type: string
+                      type: object
+                    type: array
+                  sharedAccessPolicyName:
+                    description: The shared access policy name for the Event Hub,
+                      Service Bus Queue, Service Bus Topic, etc. Required when authentication_mode
+                      is set to ConnectionString.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -572,7 +620,8 @@ spec:
             x-kubernetes-validations:
             - message: serialization is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.serialization)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.serialization)
+                || has(self.initProvider.serialization)'
           status:
             description: OutputEventHubStatus defines the observed state of OutputEventHub.
             properties:

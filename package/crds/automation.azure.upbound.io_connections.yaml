@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: connections.automation.azure.upbound.io
 spec:
   group: automation.azure.upbound.io
@@ -242,6 +242,28 @@ spec:
                       types have required field values as below:'
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A description for this Connection.
+                    type: string
+                  type:
+                    description: The type of the Connection - can be either builtin
+                      type such as Azure, AzureClassicCertificate, and AzureServicePrincipal,
+                      or a user defined types. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  values:
+                    additionalProperties:
+                      type: string
+                    description: 'A mapping of key value pairs passed to the connection.
+                      Different type needs different parameters in the values. Builtin
+                      types have required field values as below:'
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -442,10 +464,12 @@ spec:
             x-kubernetes-validations:
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
             - message: values is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.values)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.values)
+                || has(self.initProvider.values)'
           status:
             description: ConnectionStatus defines the observed state of Connection.
             properties:

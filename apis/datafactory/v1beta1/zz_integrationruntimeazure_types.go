@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IntegrationRuntimeAzureInitParameters struct {
+
+	// Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.
+	CleanupEnabled *bool `json:"cleanupEnabled,omitempty" tf:"cleanup_enabled,omitempty"`
+
+	// Compute type of the cluster which will execute data flow job. Valid values are General, ComputeOptimized and MemoryOptimized. Defaults to General.
+	ComputeType *string `json:"computeType,omitempty" tf:"compute_type,omitempty"`
+
+	// Core count of the cluster which will execute data flow job. Valid values are 8, 16, 32, 48, 80, 144 and 272. Defaults to 8.
+	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
+
+	// Integration runtime description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Use AutoResolve to create an auto-resolve integration runtime. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Time to live (in minutes) setting of the cluster which will execute data flow job. Defaults to 0.
+	TimeToLiveMin *float64 `json:"timeToLiveMin,omitempty" tf:"time_to_live_min,omitempty"`
+
+	// Is Integration Runtime compute provisioned within Managed Virtual Network? Changing this forces a new resource to be created.
+	VirtualNetworkEnabled *bool `json:"virtualNetworkEnabled,omitempty" tf:"virtual_network_enabled,omitempty"`
+}
+
 type IntegrationRuntimeAzureObservation struct {
 
 	// Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.
@@ -45,15 +69,12 @@ type IntegrationRuntimeAzureObservation struct {
 type IntegrationRuntimeAzureParameters struct {
 
 	// Cluster will not be recycled and it will be used in next data flow activity run until TTL (time to live) is reached if this is set as false. Default is true.
-	// +kubebuilder:validation:Optional
 	CleanupEnabled *bool `json:"cleanupEnabled,omitempty" tf:"cleanup_enabled,omitempty"`
 
 	// Compute type of the cluster which will execute data flow job. Valid values are General, ComputeOptimized and MemoryOptimized. Defaults to General.
-	// +kubebuilder:validation:Optional
 	ComputeType *string `json:"computeType,omitempty" tf:"compute_type,omitempty"`
 
 	// Core count of the cluster which will execute data flow job. Valid values are 8, 16, 32, 48, 80, 144 and 272. Defaults to 8.
-	// +kubebuilder:validation:Optional
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -71,19 +92,15 @@ type IntegrationRuntimeAzureParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// Integration runtime description.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Use AutoResolve to create an auto-resolve integration runtime. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Time to live (in minutes) setting of the cluster which will execute data flow job. Defaults to 0.
-	// +kubebuilder:validation:Optional
 	TimeToLiveMin *float64 `json:"timeToLiveMin,omitempty" tf:"time_to_live_min,omitempty"`
 
 	// Is Integration Runtime compute provisioned within Managed Virtual Network? Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	VirtualNetworkEnabled *bool `json:"virtualNetworkEnabled,omitempty" tf:"virtual_network_enabled,omitempty"`
 }
 
@@ -91,6 +108,10 @@ type IntegrationRuntimeAzureParameters struct {
 type IntegrationRuntimeAzureSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IntegrationRuntimeAzureParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider IntegrationRuntimeAzureInitParameters `json:"initProvider,omitempty"`
 }
 
 // IntegrationRuntimeAzureStatus defines the observed state of IntegrationRuntimeAzure.
@@ -111,7 +132,7 @@ type IntegrationRuntimeAzureStatus struct {
 type IntegrationRuntimeAzure struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   IntegrationRuntimeAzureSpec   `json:"spec"`
 	Status IntegrationRuntimeAzureStatus `json:"status,omitempty"`
 }

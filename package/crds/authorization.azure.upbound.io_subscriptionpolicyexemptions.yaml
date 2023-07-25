@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: subscriptionpolicyexemptions.authorization.azure.upbound.io
 spec:
   group: authorization.azure.upbound.io
@@ -167,6 +167,42 @@ spec:
                             type: string
                         type: object
                     type: object
+                  policyDefinitionReferenceIds:
+                    description: The policy definition reference ID list when the
+                      associated policy assignment is an assignment of a policy set
+                      definition.
+                    items:
+                      type: string
+                    type: array
+                  subscriptionId:
+                    description: The Subscription ID where the Policy Exemption should
+                      be applied. Changing this forces a new resource to be created.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A description to use for this Policy Exemption.
+                    type: string
+                  displayName:
+                    description: A friendly display name to use for this Policy Exemption.
+                    type: string
+                  exemptionCategory:
+                    description: The category of this policy exemption. Possible values
+                      are Waiver and Mitigated.
+                    type: string
+                  expiresOn:
+                    description: The expiration date and time in UTC ISO 8601 format
+                      of this policy exemption.
+                    type: string
+                  metadata:
+                    description: The metadata for this policy exemption. This is a
+                      JSON string representing additional metadata that should be
+                      stored with the policy exemption.
+                    type: string
                   policyDefinitionReferenceIds:
                     description: The policy definition reference ID list when the
                       associated policy assignment is an assignment of a policy set
@@ -379,10 +415,12 @@ spec:
             x-kubernetes-validations:
             - message: exemptionCategory is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.exemptionCategory)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.exemptionCategory)
+                || has(self.initProvider.exemptionCategory)'
             - message: subscriptionId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.subscriptionId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.subscriptionId)
+                || has(self.initProvider.subscriptionId)'
           status:
             description: SubscriptionPolicyExemptionStatus defines the observed state
               of SubscriptionPolicyExemption.

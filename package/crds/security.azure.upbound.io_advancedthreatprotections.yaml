@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: advancedthreatprotections.security.azure.upbound.io
 spec:
   group: security.azure.upbound.io
@@ -67,6 +67,21 @@ spec:
                 - Delete
                 type: string
               forProvider:
+                properties:
+                  enabled:
+                    description: Should Advanced Threat Protection be enabled on this
+                      resource?
+                    type: boolean
+                  targetResourceId:
+                    description: The ID of the Azure Resource which to enable Advanced
+                      Threat Protection on. Changing this forces a new resource to
+                      be created.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
                 properties:
                   enabled:
                     description: Should Advanced Threat Protection be enabled on this
@@ -278,10 +293,12 @@ spec:
             x-kubernetes-validations:
             - message: enabled is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)
+                || has(self.initProvider.enabled)'
             - message: targetResourceId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetResourceId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetResourceId)
+                || has(self.initProvider.targetResourceId)'
           status:
             description: AdvancedThreatProtectionStatus defines the observed state
               of AdvancedThreatProtection.

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: linkedserviceodata.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -108,7 +108,6 @@ spec:
                           type: string
                       required:
                       - passwordSecretRef
-                      - username
                       type: object
                     type: array
                   dataFactoryId:
@@ -190,6 +189,51 @@ spec:
                             type: string
                         type: object
                     type: object
+                  description:
+                    description: The description for the Data Factory Linked Service
+                      OData.
+                    type: string
+                  integrationRuntimeName:
+                    description: The integration runtime reference to associate with
+                      the Data Factory Linked Service OData.
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of parameters to associate with the Data Factory
+                      Linked Service OData.
+                    type: object
+                  url:
+                    description: The URL of the OData service endpoint.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Linked Service OData.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Linked Service OData.
+                    items:
+                      type: string
+                    type: array
+                  basicAuthentication:
+                    description: A basic_authentication block as defined below.
+                    items:
+                      properties:
+                        username:
+                          description: The username which can be used to authenticate
+                            to the OData endpoint.
+                          type: string
+                      type: object
+                    type: array
                   description:
                     description: The description for the Data Factory Linked Service
                       OData.
@@ -408,7 +452,8 @@ spec:
             x-kubernetes-validations:
             - message: url is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.url)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.url)
+                || has(self.initProvider.url)'
           status:
             description: LinkedServiceODataStatus defines the observed state of LinkedServiceOData.
             properties:

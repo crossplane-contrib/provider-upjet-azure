@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: customproviders.customproviders.azure.upbound.io
 spec:
   group: customproviders.azure.upbound.io
@@ -78,9 +78,6 @@ spec:
                         name:
                           description: Specifies the name of the action.
                           type: string
-                      required:
-                      - endpoint
-                      - name
                       type: object
                     type: array
                   location:
@@ -183,9 +180,6 @@ spec:
                             resource request. Valid values are Proxy and Proxy,Cache.
                             This value defaults to ResourceTypeRoutingProxy.
                           type: string
-                      required:
-                      - endpoint
-                      - name
                       type: object
                     type: array
                   tags:
@@ -202,8 +196,63 @@ spec:
                           description: The endpoint where the validation specification
                             is located.
                           type: string
-                      required:
-                      - specification
+                      type: object
+                    type: array
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  action:
+                    description: Any number of action block as defined below. One
+                      of resource_type or action must be specified.
+                    items:
+                      properties:
+                        endpoint:
+                          description: Specifies the endpoint of the action.
+                          type: string
+                        name:
+                          description: Specifies the name of the action.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  resourceType:
+                    description: Any number of resource_type block as defined below.
+                      One of resource_type or action must be specified.
+                    items:
+                      properties:
+                        endpoint:
+                          description: Specifies the endpoint of the route definition.
+                          type: string
+                        name:
+                          description: Specifies the name of the route definition.
+                          type: string
+                        routingType:
+                          description: The routing type that is supported for the
+                            resource request. Valid values are Proxy and Proxy,Cache.
+                            This value defaults to ResourceTypeRoutingProxy.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource. Changing
+                      this forces a new resource to be created.
+                    type: object
+                  validation:
+                    description: Any number of validation block as defined below.
+                    items:
+                      properties:
+                        specification:
+                          description: The endpoint where the validation specification
+                            is located.
+                          type: string
                       type: object
                     type: array
                 type: object
@@ -407,7 +456,8 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
           status:
             description: CustomProviderStatus defines the observed state of CustomProvider.
             properties:

@@ -42,7 +42,6 @@ type FunctionAppActiveSlotParameters struct {
 
 	// The swap action should overwrite the Production slot's network configuration with the configuration from this slot. Defaults to true. Changing this forces a new resource to be created.
 	// The swap action should overwrite the Production slot's network configuration with the configuration from this slot. Defaults to `true`.
-	// +kubebuilder:validation:Optional
 	OverwriteNetworkConfig *bool `json:"overwriteNetworkConfig,omitempty" tf:"overwrite_network_config,omitempty"`
 
 	// The ID of the Slot to swap with Production.
@@ -68,14 +67,6 @@ type FunctionAppActiveSlotSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider FunctionAppActiveSlotInitParameters `json:"initProvider,omitempty"`
 }
 

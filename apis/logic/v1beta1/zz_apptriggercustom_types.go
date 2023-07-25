@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppTriggerCustomInitParameters struct {
+
+	// Specifies the JSON Blob defining the Body of this Custom Trigger.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+}
+
 type AppTriggerCustomObservation struct {
 
 	// Specifies the JSON Blob defining the Body of this Custom Trigger.
@@ -28,7 +34,6 @@ type AppTriggerCustomObservation struct {
 type AppTriggerCustomParameters struct {
 
 	// Specifies the JSON Blob defining the Body of this Custom Trigger.
-	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
@@ -50,6 +55,10 @@ type AppTriggerCustomParameters struct {
 type AppTriggerCustomSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppTriggerCustomParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AppTriggerCustomInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppTriggerCustomStatus defines the observed state of AppTriggerCustom.
@@ -70,7 +79,7 @@ type AppTriggerCustomStatus struct {
 type AppTriggerCustom struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body)",message="body is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || has(self.initProvider.body)",message="body is a required parameter"
 	Spec   AppTriggerCustomSpec   `json:"spec"`
 	Status AppTriggerCustomStatus `json:"status,omitempty"`
 }

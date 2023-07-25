@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: expressroutecircuitpeerings.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -194,9 +194,6 @@ spec:
                         secondaryPeerAddressPrefix:
                           description: A subnet for the secondary link.
                           type: string
-                      required:
-                      - primaryPeerAddressPrefix
-                      - secondaryPeerAddressPrefix
                       type: object
                     type: array
                   microsoftPeeringConfig:
@@ -225,8 +222,6 @@ spec:
                             number and prefixes are registered. For example: ARIN,
                             RIPE, AFRINIC etc. Defaults to NONE.'
                           type: string
-                      required:
-                      - advertisedPublicPrefixes
                       type: object
                     type: array
                   peerAsn:
@@ -342,6 +337,109 @@ spec:
                     - name
                     - namespace
                     type: object
+                  vlanId:
+                    description: A valid VLAN ID to establish this peering on.
+                    type: number
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  ipv4Enabled:
+                    description: A boolean value indicating whether the IPv4 peering
+                      is enabled. Defaults to true.
+                    type: boolean
+                  ipv6:
+                    description: A ipv6 block as defined below.
+                    items:
+                      properties:
+                        enabled:
+                          description: A boolean value indicating whether the IPv6
+                            peering is enabled. Defaults to true.
+                          type: boolean
+                        microsoftPeering:
+                          description: A microsoft_peering block as defined below.
+                          items:
+                            properties:
+                              advertisedCommunities:
+                                description: The communities of Bgp Peering specified
+                                  for microsoft peering.
+                                items:
+                                  type: string
+                                type: array
+                              advertisedPublicPrefixes:
+                                description: A list of Advertised Public Prefixes.
+                                items:
+                                  type: string
+                                type: array
+                              customerAsn:
+                                description: The CustomerASN of the peering. Defaults
+                                  to 0.
+                                type: number
+                              routingRegistryName:
+                                description: 'The Routing Registry against which the
+                                  AS number and prefixes are registered. For example:
+                                  ARIN, RIPE, AFRINIC etc. Defaults to NONE.'
+                                type: string
+                            type: object
+                          type: array
+                        primaryPeerAddressPrefix:
+                          description: A subnet for the primary link.
+                          type: string
+                        routeFilterId:
+                          description: The ID of the Route Filter. Only available
+                            when peering_type is set to MicrosoftPeering.
+                          type: string
+                        secondaryPeerAddressPrefix:
+                          description: A subnet for the secondary link.
+                          type: string
+                      type: object
+                    type: array
+                  microsoftPeeringConfig:
+                    description: A microsoft_peering_config block as defined below.
+                      Required when peering_type is set to MicrosoftPeering and config
+                      for IPv4.
+                    items:
+                      properties:
+                        advertisedCommunities:
+                          description: The communities of Bgp Peering specified for
+                            microsoft peering.
+                          items:
+                            type: string
+                          type: array
+                        advertisedPublicPrefixes:
+                          description: A list of Advertised Public Prefixes.
+                          items:
+                            type: string
+                          type: array
+                        customerAsn:
+                          description: The CustomerASN of the peering. Defaults to
+                            0.
+                          type: number
+                        routingRegistryName:
+                          description: 'The Routing Registry against which the AS
+                            number and prefixes are registered. For example: ARIN,
+                            RIPE, AFRINIC etc. Defaults to NONE.'
+                          type: string
+                      type: object
+                    type: array
+                  peerAsn:
+                    description: The Either a 16-bit or a 32-bit ASN. Can either be
+                      public or private.
+                    type: number
+                  primaryPeerAddressPrefix:
+                    description: A /30 subnet for the primary link. Required when
+                      config for IPv4.
+                    type: string
+                  routeFilterId:
+                    description: The ID of the Route Filter. Only available when peering_type
+                      is set to MicrosoftPeering.
+                    type: string
+                  secondaryPeerAddressPrefix:
+                    description: A /30 subnet for the secondary link. Required when
+                      config for IPv4.
+                    type: string
                   vlanId:
                     description: A valid VLAN ID to establish this peering on.
                     type: number
@@ -546,7 +644,8 @@ spec:
             x-kubernetes-validations:
             - message: vlanId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.vlanId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vlanId)
+                || has(self.initProvider.vlanId)'
           status:
             description: ExpressRouteCircuitPeeringStatus defines the observed state
               of ExpressRouteCircuitPeering.

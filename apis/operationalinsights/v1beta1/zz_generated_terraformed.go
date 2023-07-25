@@ -79,6 +79,15 @@ func (tr *LogAnalyticsDataExportRule) GetInitParameters() (map[string]any, error
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this LogAnalyticsDataExportRule
+func (tr *LogAnalyticsDataExportRule) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this LogAnalyticsDataExportRule using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LogAnalyticsDataExportRule) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *LogAnalyticsDataSourceWindowsEvent) GetInitParameters() (map[string]an
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this LogAnalyticsDataSourceWindowsEvent
+func (tr *LogAnalyticsDataSourceWindowsEvent) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this LogAnalyticsDataSourceWindowsEvent using its observed tfState.
@@ -247,6 +265,15 @@ func (tr *LogAnalyticsDataSourceWindowsPerformanceCounter) GetInitParameters() (
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this LogAnalyticsDataSourceWindowsPerformanceCounter
+func (tr *LogAnalyticsDataSourceWindowsPerformanceCounter) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this LogAnalyticsDataSourceWindowsPerformanceCounter using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LogAnalyticsDataSourceWindowsPerformanceCounter) LateInitialize(attrs []byte) (bool, error) {
@@ -329,6 +356,15 @@ func (tr *LogAnalyticsLinkedService) GetInitParameters() (map[string]any, error)
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this LogAnalyticsLinkedService
+func (tr *LogAnalyticsLinkedService) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this LogAnalyticsLinkedService using its observed tfState.
@@ -415,6 +451,15 @@ func (tr *LogAnalyticsLinkedStorageAccount) GetInitParameters() (map[string]any,
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this LogAnalyticsLinkedStorageAccount
+func (tr *LogAnalyticsLinkedStorageAccount) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this LogAnalyticsLinkedStorageAccount using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LogAnalyticsLinkedStorageAccount) LateInitialize(attrs []byte) (bool, error) {
@@ -497,6 +542,15 @@ func (tr *LogAnalyticsQueryPack) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this LogAnalyticsQueryPack
+func (tr *LogAnalyticsQueryPack) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this LogAnalyticsQueryPack using its observed tfState.
@@ -583,6 +637,15 @@ func (tr *LogAnalyticsQueryPackQuery) GetInitParameters() (map[string]any, error
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this LogAnalyticsQueryPackQuery
+func (tr *LogAnalyticsQueryPackQuery) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this LogAnalyticsQueryPackQuery using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LogAnalyticsQueryPackQuery) LateInitialize(attrs []byte) (bool, error) {
@@ -667,6 +730,15 @@ func (tr *LogAnalyticsSavedSearch) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this LogAnalyticsSavedSearch
+func (tr *LogAnalyticsSavedSearch) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this LogAnalyticsSavedSearch using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LogAnalyticsSavedSearch) LateInitialize(attrs []byte) (bool, error) {
@@ -749,6 +821,15 @@ func (tr *Workspace) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this Workspace
+func (tr *Workspace) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Workspace using its observed tfState.

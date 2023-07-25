@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ProximityPlacementGroupInitParameters struct {
+
+	// Specifies the supported sizes of Virtual Machines that can be created in the Proximity Placement Group.
+	AllowedVMSizes []*string `json:"allowedVmSizes,omitempty" tf:"allowed_vm_sizes,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the supported zone of the Proximity Placement Group. Changing this forces a new resource to be created.
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
 type ProximityPlacementGroupObservation struct {
 
 	// Specifies the supported sizes of Virtual Machines that can be created in the Proximity Placement Group.
@@ -37,11 +52,9 @@ type ProximityPlacementGroupObservation struct {
 type ProximityPlacementGroupParameters struct {
 
 	// Specifies the supported sizes of Virtual Machines that can be created in the Proximity Placement Group.
-	// +kubebuilder:validation:Optional
 	AllowedVMSizes []*string `json:"allowedVmSizes,omitempty" tf:"allowed_vm_sizes,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the availability set. Changing this forces a new resource to be created.
@@ -58,11 +71,9 @@ type ProximityPlacementGroupParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the supported zone of the Proximity Placement Group. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
@@ -70,6 +81,10 @@ type ProximityPlacementGroupParameters struct {
 type ProximityPlacementGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ProximityPlacementGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ProximityPlacementGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // ProximityPlacementGroupStatus defines the observed state of ProximityPlacementGroup.
@@ -90,7 +105,7 @@ type ProximityPlacementGroupStatus struct {
 type ProximityPlacementGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   ProximityPlacementGroupSpec   `json:"spec"`
 	Status ProximityPlacementGroupStatus `json:"status,omitempty"`
 }

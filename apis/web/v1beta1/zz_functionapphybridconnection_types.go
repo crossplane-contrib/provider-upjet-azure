@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FunctionAppHybridConnectionInitParameters struct {
+
+	// The hostname of the endpoint.
+	// The hostname of the endpoint.
+	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
+
+	// The port to use for the endpoint
+	// The port to use for the endpoint
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The name of the Relay key with Send permission to use. Defaults to RootManageSharedAccessKey
+	// The name of the Relay key with `Send` permission to use. Defaults to `RootManageSharedAccessKey`
+	SendKeyName *string `json:"sendKeyName,omitempty" tf:"send_key_name,omitempty"`
+}
+
 type FunctionAppHybridConnectionObservation struct {
 
 	// The ID of the Function App for this Hybrid Connection. Changing this forces a new resource to be created.
@@ -74,12 +89,10 @@ type FunctionAppHybridConnectionParameters struct {
 
 	// The hostname of the endpoint.
 	// The hostname of the endpoint.
-	// +kubebuilder:validation:Optional
 	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// The port to use for the endpoint
 	// The port to use for the endpoint
-	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The ID of the Relay Hybrid Connection to use. Changing this forces a new resource to be created.
@@ -99,7 +112,6 @@ type FunctionAppHybridConnectionParameters struct {
 
 	// The name of the Relay key with Send permission to use. Defaults to RootManageSharedAccessKey
 	// The name of the Relay key with `Send` permission to use. Defaults to `RootManageSharedAccessKey`
-	// +kubebuilder:validation:Optional
 	SendKeyName *string `json:"sendKeyName,omitempty" tf:"send_key_name,omitempty"`
 }
 
@@ -107,6 +119,10 @@ type FunctionAppHybridConnectionParameters struct {
 type FunctionAppHybridConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FunctionAppHybridConnectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FunctionAppHybridConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // FunctionAppHybridConnectionStatus defines the observed state of FunctionAppHybridConnection.
@@ -127,8 +143,8 @@ type FunctionAppHybridConnectionStatus struct {
 type FunctionAppHybridConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.hostname)",message="hostname is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.port)",message="port is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.hostname) || has(self.initProvider.hostname)",message="hostname is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.port) || has(self.initProvider.port)",message="port is a required parameter"
 	Spec   FunctionAppHybridConnectionSpec   `json:"spec"`
 	Status FunctionAppHybridConnectionStatus `json:"status,omitempty"`
 }

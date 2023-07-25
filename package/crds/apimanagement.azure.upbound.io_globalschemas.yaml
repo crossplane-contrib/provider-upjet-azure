@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: globalschemas.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -237,6 +237,23 @@ spec:
                       Schema.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: The description of the schema.
+                    type: string
+                  type:
+                    description: The content type of the Schema. Possible values are
+                      xml and json.
+                    type: string
+                  value:
+                    description: The string defining the document representing the
+                      Schema.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -437,10 +454,12 @@ spec:
             x-kubernetes-validations:
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
             - message: value is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.value)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.value)
+                || has(self.initProvider.value)'
           status:
             description: GlobalSchemaStatus defines the observed state of GlobalSchema.
             properties:

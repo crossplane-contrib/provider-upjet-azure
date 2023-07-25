@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: apptriggerhttprequests.logic.azure.upbound.io
 spec:
   group: logic.azure.upbound.io
@@ -144,6 +144,23 @@ spec:
                             type: string
                         type: object
                     type: object
+                  method:
+                    description: Specifies the HTTP Method which the request be using.
+                      Possible values include DELETE, GET, PATCH, POST or PUT.
+                    type: string
+                  relativePath:
+                    description: Specifies the Relative Path used for this Request.
+                    type: string
+                  schema:
+                    description: A JSON Blob defining the Schema of the incoming request.
+                      This needs to be valid JSON.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
                   method:
                     description: Specifies the HTTP Method which the request be using.
                       Possible values include DELETE, GET, PATCH, POST or PUT.
@@ -356,7 +373,8 @@ spec:
             x-kubernetes-validations:
             - message: schema is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.schema)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.schema)
+                || has(self.initProvider.schema)'
           status:
             description: AppTriggerHTTPRequestStatus defines the observed state of
               AppTriggerHTTPRequest.

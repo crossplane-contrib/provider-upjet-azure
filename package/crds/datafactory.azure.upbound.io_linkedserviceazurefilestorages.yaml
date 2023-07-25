@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: linkedserviceazurefilestorages.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -205,9 +205,6 @@ spec:
                           description: Specifies the secret name in Azure Key Vault
                             that stores Azure File Storage password.
                           type: string
-                      required:
-                      - linkedServiceName
-                      - secretName
                       type: object
                     type: array
                   parameters:
@@ -232,6 +229,65 @@ spec:
                     - key
                     - name
                     - namespace
+                    type: object
+                  userId:
+                    description: The user ID to log in the server.
+                    type: string
+                required:
+                - connectionStringSecretRef
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Linked Service.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Linked Service.
+                    items:
+                      type: string
+                    type: array
+                  description:
+                    description: The description for the Data Factory Linked Service.
+                    type: string
+                  fileShare:
+                    description: The name of the file share.
+                    type: string
+                  host:
+                    description: The Host name of the server.
+                    type: string
+                  integrationRuntimeName:
+                    description: The integration runtime reference to associate with
+                      the Data Factory Linked Service.
+                    type: string
+                  keyVaultPassword:
+                    description: A key_vault_password block as defined below. Use
+                      this argument to store Azure File Storage password in an existing
+                      Key Vault. It needs an existing Key Vault Data Factory Linked
+                      Service.
+                    items:
+                      properties:
+                        linkedServiceName:
+                          description: Specifies the name of an existing Key Vault
+                            Data Factory Linked Service.
+                          type: string
+                        secretName:
+                          description: Specifies the secret name in Azure Key Vault
+                            that stores Azure File Storage password.
+                          type: string
+                      type: object
+                    type: array
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of parameters to associate with the Data Factory
+                      Linked Service.
                     type: object
                   userId:
                     description: The user ID to log in the server.

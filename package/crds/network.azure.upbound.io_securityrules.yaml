@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: securityrules.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -310,6 +310,96 @@ spec:
                       type: string
                     type: array
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  access:
+                    description: Specifies whether network traffic is allowed or denied.
+                      Possible values are Allow and Deny.
+                    type: string
+                  description:
+                    description: A description for this rule. Restricted to 140 characters.
+                    type: string
+                  destinationAddressPrefix:
+                    description: 'CIDR or destination IP range or * to match any IP.
+                      Tags such as VirtualNetwork, AzureLoadBalancer and Internet
+                      can also be used. Besides, it also supports all available Service
+                      Tags like ‘Sql.WestEurope‘, ‘Storage.EastUS‘, etc. You can list
+                      the available service tags with the CLI: shell az network list-service-tags
+                      --location westcentralus. For further information please see
+                      Azure CLI - az network list-service-tags. This is required if
+                      destination_address_prefixes is not specified.'
+                    type: string
+                  destinationAddressPrefixes:
+                    description: List of destination address prefixes. Tags may not
+                      be used. This is required if destination_address_prefix is not
+                      specified.
+                    items:
+                      type: string
+                    type: array
+                  destinationApplicationSecurityGroupIds:
+                    description: A List of destination Application Security Group
+                      IDs
+                    items:
+                      type: string
+                    type: array
+                  destinationPortRange:
+                    description: Destination Port or Range. Integer or range between
+                      0 and 65535 or * to match any. This is required if destination_port_ranges
+                      is not specified.
+                    type: string
+                  destinationPortRanges:
+                    description: List of destination ports or port ranges. This is
+                      required if destination_port_range is not specified.
+                    items:
+                      type: string
+                    type: array
+                  direction:
+                    description: The direction specifies if rule will be evaluated
+                      on incoming or outgoing traffic. Possible values are Inbound
+                      and Outbound.
+                    type: string
+                  priority:
+                    description: Specifies the priority of the rule. The value can
+                      be between 100 and 4096. The priority number must be unique
+                      for each rule in the collection. The lower the priority number,
+                      the higher the priority of the rule.
+                    type: number
+                  protocol:
+                    description: Network protocol this rule applies to. Possible values
+                      include Tcp, Udp, Icmp, Esp, Ah or * (which matches all).
+                    type: string
+                  sourceAddressPrefix:
+                    description: CIDR or source IP range or * to match any IP. Tags
+                      such as VirtualNetwork, AzureLoadBalancer and Internet can also
+                      be used. This is required if source_address_prefixes is not
+                      specified.
+                    type: string
+                  sourceAddressPrefixes:
+                    description: List of source address prefixes. Tags may not be
+                      used. This is required if source_address_prefix is not specified.
+                    items:
+                      type: string
+                    type: array
+                  sourceApplicationSecurityGroupIds:
+                    description: A List of source Application Security Group IDs
+                    items:
+                      type: string
+                    type: array
+                  sourcePortRange:
+                    description: Source Port or Range. Integer or range between 0
+                      and 65535 or * to match any. This is required if source_port_ranges
+                      is not specified.
+                    type: string
+                  sourcePortRanges:
+                    description: List of source ports or port ranges. This is required
+                      if source_port_range is not specified.
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -510,16 +600,20 @@ spec:
             x-kubernetes-validations:
             - message: access is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.access)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.access)
+                || has(self.initProvider.access)'
             - message: direction is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.direction)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.direction)
+                || has(self.initProvider.direction)'
             - message: priority is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.priority)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.priority)
+                || has(self.initProvider.priority)'
             - message: protocol is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)
+                || has(self.initProvider.protocol)'
           status:
             description: SecurityRuleStatus defines the observed state of SecurityRule.
             properties:

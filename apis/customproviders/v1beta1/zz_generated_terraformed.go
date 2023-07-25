@@ -79,6 +79,15 @@ func (tr *CustomProvider) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this CustomProvider
+func (tr *CustomProvider) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this CustomProvider using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *CustomProvider) LateInitialize(attrs []byte) (bool, error) {

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CertificateContactsContactInitParameters struct {
+
+	// E-mail address of the contact.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// Name of the contact.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Phone number of the contact.
+	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
+}
+
 type CertificateContactsContactObservation struct {
 
 	// E-mail address of the contact.
@@ -28,16 +40,19 @@ type CertificateContactsContactObservation struct {
 type CertificateContactsContactParameters struct {
 
 	// E-mail address of the contact.
-	// +kubebuilder:validation:Required
-	Email *string `json:"email" tf:"email,omitempty"`
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// Name of the contact.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Phone number of the contact.
-	// +kubebuilder:validation:Optional
 	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
+}
+
+type CertificateContactsInitParameters struct {
+
+	// One or more contact blocks as defined below.
+	Contact []CertificateContactsContactInitParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 }
 
 type CertificateContactsObservation struct {
@@ -55,7 +70,6 @@ type CertificateContactsObservation struct {
 type CertificateContactsParameters struct {
 
 	// One or more contact blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Contact []CertificateContactsContactParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
 	// The ID of the Key Vault. Changing this forces a new resource to be created.
@@ -77,6 +91,10 @@ type CertificateContactsParameters struct {
 type CertificateContactsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CertificateContactsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CertificateContactsInitParameters `json:"initProvider,omitempty"`
 }
 
 // CertificateContactsStatus defines the observed state of CertificateContacts.
@@ -97,7 +115,7 @@ type CertificateContactsStatus struct {
 type CertificateContacts struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contact)",message="contact is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contact) || has(self.initProvider.contact)",message="contact is a required parameter"
 	Spec   CertificateContactsSpec   `json:"spec"`
 	Status CertificateContactsStatus `json:"status,omitempty"`
 }

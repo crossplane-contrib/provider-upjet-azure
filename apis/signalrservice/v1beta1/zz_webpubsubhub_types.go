@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthInitParameters struct {
+}
+
 type AuthObservation struct {
 
 	// Specify the identity ID of the target resource.
@@ -36,6 +39,21 @@ type AuthParameters struct {
 	ManagedIdentityIDSelector *v1.Selector `json:"managedIdentityIdSelector,omitempty" tf:"-"`
 }
 
+type EventHandlerInitParameters struct {
+
+	// An auth block as defined below.
+	Auth []AuthInitParameters `json:"auth,omitempty" tf:"auth,omitempty"`
+
+	// Specifies the list of system events. Supported values are connect, connected and disconnected.
+	SystemEvents []*string `json:"systemEvents,omitempty" tf:"system_events,omitempty"`
+
+	// The Event Handler URL Template. Two predefined parameters {hub} and {event} are available to use in the template. The value of the EventHandler URL is dynamically calculated when the client request comes in. Example: http://example.com/api/{hub}/{event}.
+	URLTemplate *string `json:"urlTemplate,omitempty" tf:"url_template,omitempty"`
+
+	// Specifies the matching event names. There are 3 kind of patterns supported: * * matches any event name * , Combine multiple events with , for example event1,event2, it matches event event1 and event2 * The single event name, for example event1, it matches event1.
+	UserEventPattern *string `json:"userEventPattern,omitempty" tf:"user_event_pattern,omitempty"`
+}
+
 type EventHandlerObservation struct {
 
 	// An auth block as defined below.
@@ -54,20 +72,25 @@ type EventHandlerObservation struct {
 type EventHandlerParameters struct {
 
 	// An auth block as defined below.
-	// +kubebuilder:validation:Optional
 	Auth []AuthParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// Specifies the list of system events. Supported values are connect, connected and disconnected.
-	// +kubebuilder:validation:Optional
 	SystemEvents []*string `json:"systemEvents,omitempty" tf:"system_events,omitempty"`
 
 	// The Event Handler URL Template. Two predefined parameters {hub} and {event} are available to use in the template. The value of the EventHandler URL is dynamically calculated when the client request comes in. Example: http://example.com/api/{hub}/{event}.
-	// +kubebuilder:validation:Required
-	URLTemplate *string `json:"urlTemplate" tf:"url_template,omitempty"`
+	URLTemplate *string `json:"urlTemplate,omitempty" tf:"url_template,omitempty"`
 
 	// Specifies the matching event names. There are 3 kind of patterns supported: * * matches any event name * , Combine multiple events with , for example event1,event2, it matches event event1 and event2 * The single event name, for example event1, it matches event1.
-	// +kubebuilder:validation:Optional
 	UserEventPattern *string `json:"userEventPattern,omitempty" tf:"user_event_pattern,omitempty"`
+}
+
+type EventListenerInitParameters struct {
+
+	// Specifies the list of system events. Supported values are connected and disconnected.
+	SystemEventNameFilter []*string `json:"systemEventNameFilter,omitempty" tf:"system_event_name_filter,omitempty"`
+
+	// Specifies the list of matching user event names. ["*"] can be used to match all events.
+	UserEventNameFilter []*string `json:"userEventNameFilter,omitempty" tf:"user_event_name_filter,omitempty"`
 }
 
 type EventListenerObservation struct {
@@ -114,12 +137,26 @@ type EventListenerParameters struct {
 	EventHubNamespaceNameSelector *v1.Selector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the list of system events. Supported values are connected and disconnected.
-	// +kubebuilder:validation:Optional
 	SystemEventNameFilter []*string `json:"systemEventNameFilter,omitempty" tf:"system_event_name_filter,omitempty"`
 
 	// Specifies the list of matching user event names. ["*"] can be used to match all events.
-	// +kubebuilder:validation:Optional
 	UserEventNameFilter []*string `json:"userEventNameFilter,omitempty" tf:"user_event_name_filter,omitempty"`
+}
+
+type WebPubsubHubInitParameters struct {
+
+	// Is anonymous connections are allowed for this hub? Defaults to false.
+	// Possible values are true, false.
+	AnonymousConnectionsEnabled *bool `json:"anonymousConnectionsEnabled,omitempty" tf:"anonymous_connections_enabled,omitempty"`
+
+	// An event_handler block as defined below.
+	EventHandler []EventHandlerInitParameters `json:"eventHandler,omitempty" tf:"event_handler,omitempty"`
+
+	// An event_listener block as defined below.
+	EventListener []EventListenerInitParameters `json:"eventListener,omitempty" tf:"event_listener,omitempty"`
+
+	// The name of the Web Pubsub hub service. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type WebPubsubHubObservation struct {
@@ -148,19 +185,15 @@ type WebPubsubHubParameters struct {
 
 	// Is anonymous connections are allowed for this hub? Defaults to false.
 	// Possible values are true, false.
-	// +kubebuilder:validation:Optional
 	AnonymousConnectionsEnabled *bool `json:"anonymousConnectionsEnabled,omitempty" tf:"anonymous_connections_enabled,omitempty"`
 
 	// An event_handler block as defined below.
-	// +kubebuilder:validation:Optional
 	EventHandler []EventHandlerParameters `json:"eventHandler,omitempty" tf:"event_handler,omitempty"`
 
 	// An event_listener block as defined below.
-	// +kubebuilder:validation:Optional
 	EventListener []EventListenerParameters `json:"eventListener,omitempty" tf:"event_listener,omitempty"`
 
 	// The name of the Web Pubsub hub service. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the id of the Web Pubsub. Changing this forces a new resource to be created.
@@ -182,6 +215,10 @@ type WebPubsubHubParameters struct {
 type WebPubsubHubSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WebPubsubHubParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider WebPubsubHubInitParameters `json:"initProvider,omitempty"`
 }
 
 // WebPubsubHubStatus defines the observed state of WebPubsubHub.
@@ -202,7 +239,7 @@ type WebPubsubHubStatus struct {
 type WebPubsubHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   WebPubsubHubSpec   `json:"spec"`
 	Status WebPubsubHubStatus `json:"status,omitempty"`
 }

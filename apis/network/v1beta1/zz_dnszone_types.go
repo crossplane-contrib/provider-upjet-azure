@@ -62,11 +62,9 @@ type DNSZoneParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// An soa_record block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SoaRecord []SoaRecordParameters `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -135,39 +133,30 @@ type SoaRecordObservation struct {
 type SoaRecordParameters struct {
 
 	// The email contact for the SOA record.
-	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// The expire time for the SOA record. Defaults to 2419200.
-	// +kubebuilder:validation:Optional
 	ExpireTime *float64 `json:"expireTime,omitempty" tf:"expire_time,omitempty"`
 
 	// The domain name of the authoritative name server for the SOA record.
-	// +kubebuilder:validation:Optional
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// The minimum Time To Live for the SOA record. By convention, it is used to determine the negative caching duration. Defaults to 300.
-	// +kubebuilder:validation:Optional
 	MinimumTTL *float64 `json:"minimumTtl,omitempty" tf:"minimum_ttl,omitempty"`
 
 	// The refresh time for the SOA record. Defaults to 3600.
-	// +kubebuilder:validation:Optional
 	RefreshTime *float64 `json:"refreshTime,omitempty" tf:"refresh_time,omitempty"`
 
 	// The retry time for the SOA record. Defaults to 300.
-	// +kubebuilder:validation:Optional
 	RetryTime *float64 `json:"retryTime,omitempty" tf:"retry_time,omitempty"`
 
 	// The serial number for the SOA record. Defaults to 1.
-	// +kubebuilder:validation:Optional
 	SerialNumber *float64 `json:"serialNumber,omitempty" tf:"serial_number,omitempty"`
 
 	// The Time To Live of the SOA Record in seconds. Defaults to 3600.
-	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the Record Set.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -178,14 +167,6 @@ type DNSZoneSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider DNSZoneInitParameters `json:"initProvider,omitempty"`
 }
 

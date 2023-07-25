@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ResourcePolicyRemediationInitParameters struct {
+
+	// A number between 0.0 to 1.0 representing the percentage failure threshold. The remediation will fail if the percentage of failed remediation operations (i.e. failed deployments) exceeds this threshold.
+	FailurePercentage *float64 `json:"failurePercentage,omitempty" tf:"failure_percentage,omitempty"`
+
+	// A list of the resource locations that will be remediated.
+	LocationFilters []*string `json:"locationFilters,omitempty" tf:"location_filters,omitempty"`
+
+	// The name of the Policy Remediation. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Determines how many resources to remediate at any given time. Can be used to increase or reduce the pace of the remediation. If not provided, the default parallel deployments value is used.
+	ParallelDeployments *float64 `json:"parallelDeployments,omitempty" tf:"parallel_deployments,omitempty"`
+
+	// The unique ID for the policy definition within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
+	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
+
+	// The unique ID for the policy definition reference within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
+	PolicyDefinitionReferenceID *string `json:"policyDefinitionReferenceId,omitempty" tf:"policy_definition_reference_id,omitempty"`
+
+	// Determines the max number of resources that can be remediated by the remediation job. If not provided, the default resource count is used.
+	ResourceCount *float64 `json:"resourceCount,omitempty" tf:"resource_count,omitempty"`
+
+	// The way that resources to remediate are discovered. Possible values are ExistingNonCompliant, ReEvaluateCompliance. Defaults to ExistingNonCompliant.
+	ResourceDiscoveryMode *string `json:"resourceDiscoveryMode,omitempty" tf:"resource_discovery_mode,omitempty"`
+}
+
 type ResourcePolicyRemediationObservation struct {
 
 	// A number between 0.0 to 1.0 representing the percentage failure threshold. The remediation will fail if the percentage of failed remediation operations (i.e. failed deployments) exceeds this threshold.
@@ -52,19 +79,15 @@ type ResourcePolicyRemediationObservation struct {
 type ResourcePolicyRemediationParameters struct {
 
 	// A number between 0.0 to 1.0 representing the percentage failure threshold. The remediation will fail if the percentage of failed remediation operations (i.e. failed deployments) exceeds this threshold.
-	// +kubebuilder:validation:Optional
 	FailurePercentage *float64 `json:"failurePercentage,omitempty" tf:"failure_percentage,omitempty"`
 
 	// A list of the resource locations that will be remediated.
-	// +kubebuilder:validation:Optional
 	LocationFilters []*string `json:"locationFilters,omitempty" tf:"location_filters,omitempty"`
 
 	// The name of the Policy Remediation. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Determines how many resources to remediate at any given time. Can be used to increase or reduce the pace of the remediation. If not provided, the default parallel deployments value is used.
-	// +kubebuilder:validation:Optional
 	ParallelDeployments *float64 `json:"parallelDeployments,omitempty" tf:"parallel_deployments,omitempty"`
 
 	// The ID of the Policy Assignment that should be remediated.
@@ -82,19 +105,15 @@ type ResourcePolicyRemediationParameters struct {
 	PolicyAssignmentIDSelector *v1.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The unique ID for the policy definition within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
-	// +kubebuilder:validation:Optional
 	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
 
 	// The unique ID for the policy definition reference within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
-	// +kubebuilder:validation:Optional
 	PolicyDefinitionReferenceID *string `json:"policyDefinitionReferenceId,omitempty" tf:"policy_definition_reference_id,omitempty"`
 
 	// Determines the max number of resources that can be remediated by the remediation job. If not provided, the default resource count is used.
-	// +kubebuilder:validation:Optional
 	ResourceCount *float64 `json:"resourceCount,omitempty" tf:"resource_count,omitempty"`
 
 	// The way that resources to remediate are discovered. Possible values are ExistingNonCompliant, ReEvaluateCompliance. Defaults to ExistingNonCompliant.
-	// +kubebuilder:validation:Optional
 	ResourceDiscoveryMode *string `json:"resourceDiscoveryMode,omitempty" tf:"resource_discovery_mode,omitempty"`
 
 	// The Resource ID at which the Policy Remediation should be applied. Changing this forces a new resource to be created.
@@ -116,6 +135,10 @@ type ResourcePolicyRemediationParameters struct {
 type ResourcePolicyRemediationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourcePolicyRemediationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ResourcePolicyRemediationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourcePolicyRemediationStatus defines the observed state of ResourcePolicyRemediation.
@@ -136,7 +159,7 @@ type ResourcePolicyRemediationStatus struct {
 type ResourcePolicyRemediation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ResourcePolicyRemediationSpec   `json:"spec"`
 	Status ResourcePolicyRemediationStatus `json:"status,omitempty"`
 }

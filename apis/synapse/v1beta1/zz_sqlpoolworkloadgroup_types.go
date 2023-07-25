@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SQLPoolWorkloadGroupInitParameters struct {
+
+	// The workload group importance level. Defaults to normal.
+	Importance *string `json:"importance,omitempty" tf:"importance,omitempty"`
+
+	// The workload group cap percentage resource.
+	MaxResourcePercent *float64 `json:"maxResourcePercent,omitempty" tf:"max_resource_percent,omitempty"`
+
+	// The workload group request maximum grant percentage. Defaults to 3.
+	MaxResourcePercentPerRequest *float64 `json:"maxResourcePercentPerRequest,omitempty" tf:"max_resource_percent_per_request,omitempty"`
+
+	// The workload group minimum percentage resource.
+	MinResourcePercent *float64 `json:"minResourcePercent,omitempty" tf:"min_resource_percent,omitempty"`
+
+	// The workload group request minimum grant percentage.
+	MinResourcePercentPerRequest *float64 `json:"minResourcePercentPerRequest,omitempty" tf:"min_resource_percent_per_request,omitempty"`
+
+	// The workload group query execution timeout.
+	QueryExecutionTimeoutInSeconds *float64 `json:"queryExecutionTimeoutInSeconds,omitempty" tf:"query_execution_timeout_in_seconds,omitempty"`
+}
+
 type SQLPoolWorkloadGroupObservation struct {
 
 	// The ID of the Synapse SQL Pool Workload Group.
@@ -43,27 +64,21 @@ type SQLPoolWorkloadGroupObservation struct {
 type SQLPoolWorkloadGroupParameters struct {
 
 	// The workload group importance level. Defaults to normal.
-	// +kubebuilder:validation:Optional
 	Importance *string `json:"importance,omitempty" tf:"importance,omitempty"`
 
 	// The workload group cap percentage resource.
-	// +kubebuilder:validation:Optional
 	MaxResourcePercent *float64 `json:"maxResourcePercent,omitempty" tf:"max_resource_percent,omitempty"`
 
 	// The workload group request maximum grant percentage. Defaults to 3.
-	// +kubebuilder:validation:Optional
 	MaxResourcePercentPerRequest *float64 `json:"maxResourcePercentPerRequest,omitempty" tf:"max_resource_percent_per_request,omitempty"`
 
 	// The workload group minimum percentage resource.
-	// +kubebuilder:validation:Optional
 	MinResourcePercent *float64 `json:"minResourcePercent,omitempty" tf:"min_resource_percent,omitempty"`
 
 	// The workload group request minimum grant percentage.
-	// +kubebuilder:validation:Optional
 	MinResourcePercentPerRequest *float64 `json:"minResourcePercentPerRequest,omitempty" tf:"min_resource_percent_per_request,omitempty"`
 
 	// The workload group query execution timeout.
-	// +kubebuilder:validation:Optional
 	QueryExecutionTimeoutInSeconds *float64 `json:"queryExecutionTimeoutInSeconds,omitempty" tf:"query_execution_timeout_in_seconds,omitempty"`
 
 	// The ID of the Synapse SQL Pool. Changing this forces a new Synapse SQL Pool Workload Group to be created.
@@ -85,6 +100,10 @@ type SQLPoolWorkloadGroupParameters struct {
 type SQLPoolWorkloadGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SQLPoolWorkloadGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SQLPoolWorkloadGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // SQLPoolWorkloadGroupStatus defines the observed state of SQLPoolWorkloadGroup.
@@ -105,8 +124,8 @@ type SQLPoolWorkloadGroupStatus struct {
 type SQLPoolWorkloadGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxResourcePercent)",message="maxResourcePercent is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minResourcePercent)",message="minResourcePercent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxResourcePercent) || has(self.initProvider.maxResourcePercent)",message="maxResourcePercent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minResourcePercent) || has(self.initProvider.minResourcePercent)",message="minResourcePercent is a required parameter"
 	Spec   SQLPoolWorkloadGroupSpec   `json:"spec"`
 	Status SQLPoolWorkloadGroupStatus `json:"status,omitempty"`
 }

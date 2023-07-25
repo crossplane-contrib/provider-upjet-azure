@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MaintenanceAssignmentVirtualMachineInitParameters struct {
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+}
+
 type MaintenanceAssignmentVirtualMachineObservation struct {
 
 	// The ID of the Maintenance Assignment.
@@ -31,7 +37,6 @@ type MaintenanceAssignmentVirtualMachineObservation struct {
 type MaintenanceAssignmentVirtualMachineParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the ID of the Maintenance Configuration Resource. Changing this forces a new resource to be created.
@@ -67,6 +72,10 @@ type MaintenanceAssignmentVirtualMachineParameters struct {
 type MaintenanceAssignmentVirtualMachineSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MaintenanceAssignmentVirtualMachineParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider MaintenanceAssignmentVirtualMachineInitParameters `json:"initProvider,omitempty"`
 }
 
 // MaintenanceAssignmentVirtualMachineStatus defines the observed state of MaintenanceAssignmentVirtualMachine.
@@ -87,7 +96,7 @@ type MaintenanceAssignmentVirtualMachineStatus struct {
 type MaintenanceAssignmentVirtualMachine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   MaintenanceAssignmentVirtualMachineSpec   `json:"spec"`
 	Status MaintenanceAssignmentVirtualMachineStatus `json:"status,omitempty"`
 }

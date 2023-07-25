@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: providers.attestation.azure.upbound.io
 spec:
   group: attestation.azure.upbound.io
@@ -168,6 +168,47 @@ spec:
                             type: string
                         type: object
                     type: object
+                  sgxEnclavePolicyBase64:
+                    description: Specifies the base64 URI Encoded RFC 7519 JWT that
+                      should be used for the TPM Policy.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Attestation Provider.
+                    type: object
+                  tpmPolicyBase64:
+                    description: Specifies the base64 URI Encoded RFC 7519 JWT that
+                      should be used for the TPM Policy.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  location:
+                    description: The Azure Region where the Attestation Provider should
+                      exist. Changing this forces a new resource to be created.
+                    type: string
+                  openEnclavePolicyBase64:
+                    description: Specifies the base64 URI Encoded RFC 7519 JWT that
+                      should be used for the TPM Policy.
+                    type: string
+                  policy:
+                    items:
+                      properties:
+                        data:
+                          type: string
+                        environmentType:
+                          type: string
+                      type: object
+                    type: array
+                  policySigningCertificateData:
+                    description: A valid X.509 certificate (Section 4 of RFC4648).
+                      Changing this forces a new resource to be created.
+                    type: string
                   sgxEnclavePolicyBase64:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
                       should be used for the TPM Policy.
@@ -383,7 +424,8 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
           status:
             description: ProviderStatus defines the observed state of Provider.
             properties:

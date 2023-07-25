@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PolicyInitParameters struct {
+
+	// The name of the VPN Server Configuration Policy member.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The attribute type of the VPN Server Configuration Policy member. Possible values are AADGroupId, CertificateGroupId and RadiusAzureGroupId.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The value of the attribute that is used for the VPN Server Configuration Policy member.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type PolicyObservation struct {
 
 	// The name of the VPN Server Configuration Policy member.
@@ -28,16 +40,25 @@ type PolicyObservation struct {
 type PolicyParameters struct {
 
 	// The name of the VPN Server Configuration Policy member.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The attribute type of the VPN Server Configuration Policy member. Possible values are AADGroupId, CertificateGroupId and RadiusAzureGroupId.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The value of the attribute that is used for the VPN Server Configuration Policy member.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type VPNServerConfigurationPolicyGroupInitParameters struct {
+
+	// Is this a default VPN Server Configuration Policy Group? Defaults to false. Changing this forces a new resource to be created.
+	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
+
+	// One or more policy blocks as documented below.
+	Policy []PolicyInitParameters `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// The priority of this VPN Server Configuration Policy Group. Defaults to 0.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 type VPNServerConfigurationPolicyGroupObservation struct {
@@ -61,15 +82,12 @@ type VPNServerConfigurationPolicyGroupObservation struct {
 type VPNServerConfigurationPolicyGroupParameters struct {
 
 	// Is this a default VPN Server Configuration Policy Group? Defaults to false. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
 	// One or more policy blocks as documented below.
-	// +kubebuilder:validation:Optional
 	Policy []PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The priority of this VPN Server Configuration Policy Group. Defaults to 0.
-	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The ID of the VPN Server Configuration that the VPN Server Configuration Policy Group belongs to. Changing this forces a new resource to be created.
@@ -91,6 +109,10 @@ type VPNServerConfigurationPolicyGroupParameters struct {
 type VPNServerConfigurationPolicyGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VPNServerConfigurationPolicyGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VPNServerConfigurationPolicyGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // VPNServerConfigurationPolicyGroupStatus defines the observed state of VPNServerConfigurationPolicyGroup.
@@ -111,7 +133,7 @@ type VPNServerConfigurationPolicyGroupStatus struct {
 type VPNServerConfigurationPolicyGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy)",message="policy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.policy) || has(self.initProvider.policy)",message="policy is a required parameter"
 	Spec   VPNServerConfigurationPolicyGroupSpec   `json:"spec"`
 	Status VPNServerConfigurationPolicyGroupStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SQLTriggerInitParameters struct {
+
+	// Body of the Trigger.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
+	// The operation the trigger is associated with. Possible values are All, Create, Update, Delete and Replace.
+	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+
+	// Type of the Trigger. Possible values are Pre and Post.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type SQLTriggerObservation struct {
 
 	// Body of the Trigger.
@@ -34,7 +46,6 @@ type SQLTriggerObservation struct {
 type SQLTriggerParameters struct {
 
 	// Body of the Trigger.
-	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The id of the Cosmos DB SQL Container to create the SQL Trigger within. Changing this forces a new SQL Trigger to be created.
@@ -52,11 +63,9 @@ type SQLTriggerParameters struct {
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
 	// The operation the trigger is associated with. Possible values are All, Create, Update, Delete and Replace.
-	// +kubebuilder:validation:Optional
 	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
 
 	// Type of the Trigger. Possible values are Pre and Post.
-	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -64,6 +73,10 @@ type SQLTriggerParameters struct {
 type SQLTriggerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SQLTriggerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SQLTriggerInitParameters `json:"initProvider,omitempty"`
 }
 
 // SQLTriggerStatus defines the observed state of SQLTrigger.
@@ -84,9 +97,9 @@ type SQLTriggerStatus struct {
 type SQLTrigger struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body)",message="body is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operation)",message="operation is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || has(self.initProvider.body)",message="body is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.operation) || has(self.initProvider.operation)",message="operation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   SQLTriggerSpec   `json:"spec"`
 	Status SQLTriggerStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EventSourceEventHubInitParameters struct {
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the value that will be used as the event source's timestamp. This value defaults to the event creation time.
+	TimestampPropertyName *string `json:"timestampPropertyName,omitempty" tf:"timestamp_property_name,omitempty"`
+}
+
 type EventSourceEventHubObservation struct {
 
 	// Specifies the name of the EventHub Consumer Group that holds the partitions from which events will be read.
@@ -103,7 +115,6 @@ type EventSourceEventHubParameters struct {
 	EventSourceResourceIDSelector *v1.Selector `json:"eventSourceResourceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the EventHub Namespace name.
@@ -133,15 +144,12 @@ type EventSourceEventHubParameters struct {
 	SharedAccessKeyNameSelector *v1.Selector `json:"sharedAccessKeyNameSelector,omitempty" tf:"-"`
 
 	// Specifies the value of the Shared Access Policy key that grants the Time Series Insights service read access to the EventHub.
-	// +kubebuilder:validation:Optional
 	SharedAccessKeySecretRef v1.SecretKeySelector `json:"sharedAccessKeySecretRef" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the value that will be used as the event source's timestamp. This value defaults to the event creation time.
-	// +kubebuilder:validation:Optional
 	TimestampPropertyName *string `json:"timestampPropertyName,omitempty" tf:"timestamp_property_name,omitempty"`
 }
 
@@ -149,6 +157,10 @@ type EventSourceEventHubParameters struct {
 type EventSourceEventHubSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EventSourceEventHubParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EventSourceEventHubInitParameters `json:"initProvider,omitempty"`
 }
 
 // EventSourceEventHubStatus defines the observed state of EventSourceEventHub.
@@ -169,7 +181,7 @@ type EventSourceEventHubStatus struct {
 type EventSourceEventHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sharedAccessKeySecretRef)",message="sharedAccessKeySecretRef is a required parameter"
 	Spec   EventSourceEventHubSpec   `json:"spec"`
 	Status EventSourceEventHubStatus `json:"status,omitempty"`

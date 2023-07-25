@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BotChannelLineInitParameters struct {
+
+	// One or more line_channel blocks as defined below.
+	LineChannel []LineChannelInitParameters `json:"lineChannel,omitempty" tf:"line_channel,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+}
+
 type BotChannelLineObservation struct {
 
 	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
@@ -48,11 +57,9 @@ type BotChannelLineParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// One or more line_channel blocks as defined below.
-	// +kubebuilder:validation:Optional
 	LineChannel []LineChannelParameters `json:"lineChannel,omitempty" tf:"line_channel,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group where the Line Channel should be created. Changing this forces a new resource to be created.
@@ -69,17 +76,18 @@ type BotChannelLineParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
+type LineChannelInitParameters struct {
+}
+
 type LineChannelObservation struct {
 }
 
 type LineChannelParameters struct {
 
 	// The access token which is used to call the Line Channel API.
-	// +kubebuilder:validation:Required
 	AccessTokenSecretRef v1.SecretKeySelector `json:"accessTokenSecretRef" tf:"-"`
 
 	// The secret which is used to access the Line Channel.
-	// +kubebuilder:validation:Required
 	SecretSecretRef v1.SecretKeySelector `json:"secretSecretRef" tf:"-"`
 }
 
@@ -87,6 +95,10 @@ type LineChannelParameters struct {
 type BotChannelLineSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotChannelLineParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BotChannelLineInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotChannelLineStatus defines the observed state of BotChannelLine.
@@ -107,8 +119,8 @@ type BotChannelLineStatus struct {
 type BotChannelLine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lineChannel)",message="lineChannel is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lineChannel) || has(self.initProvider.lineChannel)",message="lineChannel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   BotChannelLineSpec   `json:"spec"`
 	Status BotChannelLineStatus `json:"status,omitempty"`
 }

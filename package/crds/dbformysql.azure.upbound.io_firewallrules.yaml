@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: firewallrules.dbformysql.azure.upbound.io
 spec:
   group: dbformysql.azure.upbound.io
@@ -232,6 +232,20 @@ spec:
                       Firewall Rule.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  endIpAddress:
+                    description: Specifies the End IP Address associated with this
+                      Firewall Rule.
+                    type: string
+                  startIpAddress:
+                    description: Specifies the Start IP Address associated with this
+                      Firewall Rule.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -432,10 +446,12 @@ spec:
             x-kubernetes-validations:
             - message: endIpAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.endIpAddress)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.endIpAddress)
+                || has(self.initProvider.endIpAddress)'
             - message: startIpAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.startIpAddress)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.startIpAddress)
+                || has(self.initProvider.startIpAddress)'
           status:
             description: FirewallRuleStatus defines the observed state of FirewallRule.
             properties:

@@ -34,11 +34,9 @@ type AutomaticUpdateObservation struct {
 type AutomaticUpdateParameters struct {
 
 	// The automation account ID which holds the automatic update runbook and authenticates to Azure resources.
-	// +kubebuilder:validation:Optional
 	AutomationAccountID *string `json:"automationAccountId,omitempty" tf:"automation_account_id,omitempty"`
 
 	// Should the Mobility service installed on Azure virtual machines be automatically updated. Defaults to false.
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
@@ -78,7 +76,6 @@ type SiteRecoveryProtectionContainerMappingObservation struct {
 type SiteRecoveryProtectionContainerMappingParameters struct {
 
 	// a automatic_update block defined as below.
-	// +kubebuilder:validation:Optional
 	AutomaticUpdate []AutomaticUpdateParameters `json:"automaticUpdate,omitempty" tf:"automatic_update,omitempty"`
 
 	// Name of fabric that should contains the protection container to map. Changing this forces a new resource to be created.
@@ -169,14 +166,6 @@ type SiteRecoveryProtectionContainerMappingSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider SiteRecoveryProtectionContainerMappingInitParameters `json:"initProvider,omitempty"`
 }
 

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: hpccacheaccesspolicies.storagecache.azure.upbound.io
 spec:
   group: storagecache.azure.upbound.io
@@ -106,9 +106,6 @@ spec:
                         suidEnabled:
                           description: Whether SUID is allowed?
                           type: boolean
-                      required:
-                      - access
-                      - scope
                       type: object
                     type: array
                   hpcCacheId:
@@ -191,6 +188,53 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accessRule:
+                    description: Up to three access_rule blocks as defined below.
+                    items:
+                      properties:
+                        access:
+                          description: 'The access level for this rule. Possible values
+                            are: rw, ro, no.'
+                          type: string
+                        anonymousGid:
+                          description: The anonymous GID used when root_squash_enabled
+                            is true.
+                          type: number
+                        anonymousUid:
+                          description: The anonymous UID used when root_squash_enabled
+                            is true.
+                          type: number
+                        filter:
+                          description: 'The filter applied to the scope for this rule.
+                            The filter''s format depends on its scope: default scope
+                            matches all clients and has no filter value; network scope
+                            takes a CIDR format; host takes an IP address or fully
+                            qualified domain name. If a client does not match any
+                            filter rule and there is no default rule, access is denied.'
+                          type: string
+                        rootSquashEnabled:
+                          description: Whether to enable root squash?
+                          type: boolean
+                        scope:
+                          description: 'The scope of this rule. The scope and (potentially)
+                            the filter determine which clients match the rule. Possible
+                            values are: default, network, host.'
+                          type: string
+                        submountAccessEnabled:
+                          description: Whether allow access to subdirectories under
+                            the root export?
+                          type: boolean
+                        suidEnabled:
+                          description: Whether SUID is allowed?
+                          type: boolean
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -392,7 +436,8 @@ spec:
             x-kubernetes-validations:
             - message: accessRule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.accessRule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.accessRule)
+                || has(self.initProvider.accessRule)'
           status:
             description: HPCCacheAccessPolicyStatus defines the observed state of
               HPCCacheAccessPolicy.

@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MSSQLServerSecurityAlertPolicyInitParameters struct {
+
+	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
+	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
+
+	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
+	EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
+
+	// Specifies an array of email addresses to which the alert is sent.
+	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
+
+	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
+	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+
+	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+}
+
 type MSSQLServerSecurityAlertPolicyObservation struct {
 
 	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
@@ -46,15 +64,12 @@ type MSSQLServerSecurityAlertPolicyObservation struct {
 type MSSQLServerSecurityAlertPolicyParameters struct {
 
 	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
-	// +kubebuilder:validation:Optional
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
 	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
-	// +kubebuilder:validation:Optional
 	EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
 	// Specifies an array of email addresses to which the alert is sent.
-	// +kubebuilder:validation:Optional
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// The name of the resource group that contains the MS SQL Server. Changing this forces a new resource to be created.
@@ -71,7 +86,6 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
-	// +kubebuilder:validation:Optional
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
 	// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
@@ -88,11 +102,9 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
-	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Specifies the identifier key of the Threat Detection audit storage account. This is mandatory when you use storage_endpoint to specify a storage account blob endpoint.
-	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
@@ -114,6 +126,10 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 type MSSQLServerSecurityAlertPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MSSQLServerSecurityAlertPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider MSSQLServerSecurityAlertPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLServerSecurityAlertPolicyStatus defines the observed state of MSSQLServerSecurityAlertPolicy.
@@ -134,7 +150,7 @@ type MSSQLServerSecurityAlertPolicyStatus struct {
 type MSSQLServerSecurityAlertPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.state)",message="state is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.state) || has(self.initProvider.state)",message="state is a required parameter"
 	Spec   MSSQLServerSecurityAlertPolicySpec   `json:"spec"`
 	Status MSSQLServerSecurityAlertPolicyStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SourceControlTokenInitParameters struct {
+
+	// The Token type. Possible values include Bitbucket, Dropbox, Github, and OneDrive.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type SourceControlTokenObservation struct {
 
 	// The ID of the App Service Source GitHub Token.
@@ -25,15 +31,12 @@ type SourceControlTokenObservation struct {
 type SourceControlTokenParameters struct {
 
 	// The Access Token.
-	// +kubebuilder:validation:Optional
 	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 
 	// The Access Token Secret.
-	// +kubebuilder:validation:Optional
 	TokenSecretSecretRef *v1.SecretKeySelector `json:"tokenSecretSecretRef,omitempty" tf:"-"`
 
 	// The Token type. Possible values include Bitbucket, Dropbox, Github, and OneDrive.
-	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -41,6 +44,10 @@ type SourceControlTokenParameters struct {
 type SourceControlTokenSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SourceControlTokenParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SourceControlTokenInitParameters `json:"initProvider,omitempty"`
 }
 
 // SourceControlTokenStatus defines the observed state of SourceControlToken.
@@ -62,7 +69,7 @@ type SourceControlToken struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tokenSecretRef)",message="tokenSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   SourceControlTokenSpec   `json:"spec"`
 	Status SourceControlTokenStatus `json:"status,omitempty"`
 }

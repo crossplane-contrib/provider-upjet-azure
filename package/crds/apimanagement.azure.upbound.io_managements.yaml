@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: managements.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -186,8 +186,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - location
                       type: object
                     type: array
                   certificate:
@@ -237,7 +235,6 @@ spec:
                           type: string
                       required:
                       - encodedCertificateSecretRef
-                      - storeName
                       type: object
                     type: array
                   clientCertificateEnabled:
@@ -300,8 +297,6 @@ spec:
                             Possible values are SystemAssigned, UserAssigned, SystemAssigned,
                             UserAssigned (to enable both).
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   location:
@@ -515,8 +510,6 @@ spec:
                           description: Should anonymous users be redirected to the
                             sign in page?
                           type: boolean
-                      required:
-                      - enabled
                       type: object
                     type: array
                   signUp:
@@ -542,14 +535,8 @@ spec:
                                 description: The Terms of Service which users are
                                   required to agree to in order to sign up.
                                 type: string
-                            required:
-                            - consentRequired
-                            - enabled
                             type: object
                           type: array
-                      required:
-                      - enabled
-                      - termsOfService
                       type: object
                     type: array
                   skuName:
@@ -572,8 +559,6 @@ spec:
                           description: Should the access to the management API be
                             enabled?
                           type: boolean
-                      required:
-                      - enabled
                       type: object
                     type: array
                   virtualNetworkConfiguration:
@@ -663,6 +648,303 @@ spec:
                                   type: string
                               type: object
                           type: object
+                      type: object
+                    type: array
+                  virtualNetworkType:
+                    description: 'The type of virtual network you want to use, valid
+                      values include: None, External, Internal.'
+                    type: string
+                  zones:
+                    description: Specifies a list of Availability Zones in which this
+                      API Management service should be located. Changing this forces
+                      a new API Management service to be created.
+                    items:
+                      type: string
+                    type: array
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  additionalLocation:
+                    description: One or more additional_location blocks as defined
+                      below.
+                    items:
+                      properties:
+                        capacity:
+                          description: The number of compute units in this region.
+                            Defaults to the capacity of the main region.
+                          type: number
+                        gatewayDisabled:
+                          description: Only valid for an Api Management service deployed
+                            in multiple locations. This can be used to disable the
+                            gateway in this additional location.
+                          type: boolean
+                        location:
+                          description: The name of the Azure Region in which the API
+                            Management Service should be expanded to.
+                          type: string
+                        publicIpAddressId:
+                          description: ID of a standard SKU IPv4 Public IP.
+                          type: string
+                        virtualNetworkConfiguration:
+                          description: A virtual_network_configuration block as defined
+                            below. Required when virtual_network_type is External
+                            or Internal.
+                          items:
+                            type: object
+                          type: array
+                        zones:
+                          description: A list of availability zones. Changing this
+                            forces a new resource to be created.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  certificate:
+                    description: One or more (up to 10) certificate blocks as defined
+                      below.
+                    items:
+                      properties:
+                        storeName:
+                          description: The name of the Certificate Store where this
+                            certificate should be stored. Possible values are CertificateAuthority
+                            and Root.
+                          type: string
+                      type: object
+                    type: array
+                  clientCertificateEnabled:
+                    description: Enforce a client certificate to be presented on each
+                      request to the gateway? This is only supported when SKU type
+                      is Consumption.
+                    type: boolean
+                  delegation:
+                    description: A delegation block as defined below.
+                    items:
+                      properties:
+                        subscriptionsEnabled:
+                          description: Should subscription requests be delegated to
+                            an external url? Defaults to false.
+                          type: boolean
+                        url:
+                          description: The delegation URL.
+                          type: string
+                        userRegistrationEnabled:
+                          description: Should user registration requests be delegated
+                            to an external url? Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  gatewayDisabled:
+                    description: Disable the gateway in main region? This is only
+                      supported when additional_location is set.
+                    type: boolean
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this API Management Service.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this API Management Service.
+                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: The Azure location where the API Management Service
+                      exists. Changing this forces a new resource to be created.
+                    type: string
+                  minApiVersion:
+                    description: The version which the control plane API calls to
+                      API Management service are limited with version equal to or
+                      newer than.
+                    type: string
+                  notificationSenderEmail:
+                    description: Email address from which the notification will be
+                      sent.
+                    type: string
+                  policy:
+                    description: A policy block as defined below.
+                    items:
+                      properties:
+                        xmlContent:
+                          description: The XML Content for this Policy.
+                          type: string
+                        xmlLink:
+                          description: A link to an API Management Policy XML Document,
+                            which must be publicly available.
+                          type: string
+                      type: object
+                    type: array
+                  protocols:
+                    description: A protocols block as defined below.
+                    items:
+                      properties:
+                        enableHttp2:
+                          description: Should HTTP/2 be supported by the API Management
+                            Service? Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  publicIpAddressId:
+                    description: ID of a standard SKU IPv4 Public IP.
+                    type: string
+                  publicNetworkAccessEnabled:
+                    description: Is public access to the service allowed?. Defaults
+                      to true
+                    type: boolean
+                  publisherEmail:
+                    description: The email of publisher/company.
+                    type: string
+                  publisherName:
+                    description: The name of publisher/company.
+                    type: string
+                  security:
+                    description: A security block as defined below.
+                    items:
+                      properties:
+                        enableBackendSsl30:
+                          description: Should SSL 3.0 be enabled on the backend of
+                            the gateway? Defaults to false.
+                          type: boolean
+                        enableBackendTls10:
+                          description: Should TLS 1.0 be enabled on the backend of
+                            the gateway? Defaults to false.
+                          type: boolean
+                        enableBackendTls11:
+                          description: Should TLS 1.1 be enabled on the backend of
+                            the gateway? Defaults to false.
+                          type: boolean
+                        enableFrontendSsl30:
+                          description: Should SSL 3.0 be enabled on the frontend of
+                            the gateway? Defaults to false.
+                          type: boolean
+                        enableFrontendTls10:
+                          description: Should TLS 1.0 be enabled on the frontend of
+                            the gateway? Defaults to false.
+                          type: boolean
+                        enableFrontendTls11:
+                          description: Should TLS 1.1 be enabled on the frontend of
+                            the gateway? Defaults to false.
+                          type: boolean
+                        tlsEcdheEcdsaWithAes128CbcShaCiphersEnabled:
+                          description: Should the TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsEcdheEcdsaWithAes256CbcShaCiphersEnabled:
+                          description: Should the TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsEcdheRsaWithAes128CbcShaCiphersEnabled:
+                          description: Should the TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsEcdheRsaWithAes256CbcShaCiphersEnabled:
+                          description: Should the TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsRsaWithAes128CbcSha256CiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_128_CBC_SHA256
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsRsaWithAes128CbcShaCiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_128_CBC_SHA cipher
+                            be enabled? Defaults to false.
+                          type: boolean
+                        tlsRsaWithAes128GcmSha256CiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_128_GCM_SHA256
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsRsaWithAes256CbcSha256CiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_256_CBC_SHA256
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tlsRsaWithAes256CbcShaCiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_256_CBC_SHA cipher
+                            be enabled? Defaults to false.
+                          type: boolean
+                        tlsRsaWithAes256GcmSha384CiphersEnabled:
+                          description: Should the TLS_RSA_WITH_AES_256_GCM_SHA384
+                            cipher be enabled? Defaults to false.
+                          type: boolean
+                        tripleDesCiphersEnabled:
+                          description: Should the TLS_RSA_WITH_3DES_EDE_CBC_SHA cipher
+                            be enabled for alL TLS versions (1.0, 1.1 and 1.2)?
+                          type: boolean
+                      type: object
+                    type: array
+                  signIn:
+                    description: A sign_in block as defined below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Should anonymous users be redirected to the
+                            sign in page?
+                          type: boolean
+                      type: object
+                    type: array
+                  signUp:
+                    description: A sign_up block as defined below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Can users sign up on the development portal?
+                          type: boolean
+                        termsOfService:
+                          description: A terms_of_service block as defined below.
+                          items:
+                            properties:
+                              consentRequired:
+                                description: Should the user be asked for consent
+                                  during sign up?
+                                type: boolean
+                              enabled:
+                                description: Should Terms of Service be displayed
+                                  during sign up?.
+                                type: boolean
+                              text:
+                                description: The Terms of Service which users are
+                                  required to agree to in order to sign up.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  skuName:
+                    description: 'sku_name is a string consisting of two parts separated
+                      by an underscore(_). The first part is the name, valid values
+                      include: Consumption, Developer, Basic, Standard and Premium.
+                      The second part is the capacity (e.g. the number of deployed
+                      units of the sku), which must be a positive integer (e.g. Developer_1).'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags assigned to the resource.
+                    type: object
+                  tenantAccess:
+                    description: A tenant_access block as defined below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Should the access to the management API be
+                            enabled?
+                          type: boolean
+                      type: object
+                    type: array
+                  virtualNetworkConfiguration:
+                    description: A virtual_network_configuration block as defined
+                      below. Required when virtual_network_type is External or Internal.
+                    items:
                       type: object
                     type: array
                   virtualNetworkType:
@@ -877,16 +1159,20 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: publisherEmail is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.publisherEmail)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.publisherEmail)
+                || has(self.initProvider.publisherEmail)'
             - message: publisherName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.publisherName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.publisherName)
+                || has(self.initProvider.publisherName)'
             - message: skuName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
+                || has(self.initProvider.skuName)'
           status:
             description: ManagementStatus defines the observed state of Management.
             properties:

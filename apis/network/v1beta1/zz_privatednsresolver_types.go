@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PrivateDNSResolverInitParameters struct {
+
+	// Specifies the Azure Region where the Private DNS Resolver should exist. Changing this forces a new Private DNS Resolver to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags which should be assigned to the Private DNS Resolver.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type PrivateDNSResolverObservation struct {
 
 	// The ID of the DNS Resolver.
@@ -34,7 +43,6 @@ type PrivateDNSResolverObservation struct {
 type PrivateDNSResolverParameters struct {
 
 	// Specifies the Azure Region where the Private DNS Resolver should exist. Changing this forces a new Private DNS Resolver to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group where the Private DNS Resolver should exist. Changing this forces a new Private DNS Resolver to be created.
@@ -51,7 +59,6 @@ type PrivateDNSResolverParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Private DNS Resolver.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Network that is linked to the Private DNS Resolver. Changing this forces a new Private DNS Resolver to be created.
@@ -73,6 +80,10 @@ type PrivateDNSResolverParameters struct {
 type PrivateDNSResolverSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PrivateDNSResolverParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PrivateDNSResolverInitParameters `json:"initProvider,omitempty"`
 }
 
 // PrivateDNSResolverStatus defines the observed state of PrivateDNSResolver.
@@ -93,7 +104,7 @@ type PrivateDNSResolverStatus struct {
 type PrivateDNSResolver struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   PrivateDNSResolverSpec   `json:"spec"`
 	Status PrivateDNSResolverStatus `json:"status,omitempty"`
 }

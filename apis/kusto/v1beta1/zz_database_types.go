@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DatabaseInitParameters struct {
+
+	// The time the data that should be kept in cache for fast queries as ISO 8601 timespan. Default is unlimited. For more information see: ISO 8601 Timespan
+	HotCachePeriod *string `json:"hotCachePeriod,omitempty" tf:"hot_cache_period,omitempty"`
+
+	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The time the data should be kept before it stops being accessible to queries as ISO 8601 timespan. Default is unlimited. For more information see: ISO 8601 Timespan
+	SoftDeletePeriod *string `json:"softDeletePeriod,omitempty" tf:"soft_delete_period,omitempty"`
+}
+
 type DatabaseObservation struct {
 
 	// Specifies the name of the Kusto Cluster this database will be added to. Changing this forces a new resource to be created.
@@ -53,11 +65,9 @@ type DatabaseParameters struct {
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The time the data that should be kept in cache for fast queries as ISO 8601 timespan. Default is unlimited. For more information see: ISO 8601 Timespan
-	// +kubebuilder:validation:Optional
 	HotCachePeriod *string `json:"hotCachePeriod,omitempty" tf:"hot_cache_period,omitempty"`
 
 	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the Resource Group where the Kusto Database should exist. Changing this forces a new resource to be created.
@@ -74,7 +84,6 @@ type DatabaseParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The time the data should be kept before it stops being accessible to queries as ISO 8601 timespan. Default is unlimited. For more information see: ISO 8601 Timespan
-	// +kubebuilder:validation:Optional
 	SoftDeletePeriod *string `json:"softDeletePeriod,omitempty" tf:"soft_delete_period,omitempty"`
 }
 
@@ -82,6 +91,10 @@ type DatabaseParameters struct {
 type DatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DatabaseParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DatabaseInitParameters `json:"initProvider,omitempty"`
 }
 
 // DatabaseStatus defines the observed state of Database.
@@ -102,7 +115,7 @@ type DatabaseStatus struct {
 type Database struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   DatabaseSpec   `json:"spec"`
 	Status DatabaseStatus `json:"status,omitempty"`
 }

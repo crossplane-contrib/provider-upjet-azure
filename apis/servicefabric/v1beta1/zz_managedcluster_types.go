@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ActiveDirectoryInitParameters struct {
+
+	// The ID of the Client Application.
+	ClientApplicationID *string `json:"clientApplicationId,omitempty" tf:"client_application_id,omitempty"`
+
+	// The ID of the Cluster Application.
+	ClusterApplicationID *string `json:"clusterApplicationId,omitempty" tf:"cluster_application_id,omitempty"`
+
+	// The ID of the Tenant.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
 type ActiveDirectoryObservation struct {
 
 	// The ID of the Client Application.
@@ -28,16 +40,25 @@ type ActiveDirectoryObservation struct {
 type ActiveDirectoryParameters struct {
 
 	// The ID of the Client Application.
-	// +kubebuilder:validation:Required
-	ClientApplicationID *string `json:"clientApplicationId" tf:"client_application_id,omitempty"`
+	ClientApplicationID *string `json:"clientApplicationId,omitempty" tf:"client_application_id,omitempty"`
 
 	// The ID of the Cluster Application.
-	// +kubebuilder:validation:Required
-	ClusterApplicationID *string `json:"clusterApplicationId" tf:"cluster_application_id,omitempty"`
+	ClusterApplicationID *string `json:"clusterApplicationId,omitempty" tf:"cluster_application_id,omitempty"`
 
 	// The ID of the Tenant.
-	// +kubebuilder:validation:Required
-	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
+type AuthenticationCertificateInitParameters struct {
+
+	// The certificate's CN.
+	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
+
+	// The thumbprint of the certificate.
+	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+
+	// The type of the certificate. Can be AdminClient or ReadOnlyClient.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type AuthenticationCertificateObservation struct {
@@ -55,16 +76,22 @@ type AuthenticationCertificateObservation struct {
 type AuthenticationCertificateParameters struct {
 
 	// The certificate's CN.
-	// +kubebuilder:validation:Optional
 	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
 
 	// The thumbprint of the certificate.
-	// +kubebuilder:validation:Required
-	Thumbprint *string `json:"thumbprint" tf:"thumbprint,omitempty"`
+	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
 
 	// The type of the certificate. Can be AdminClient or ReadOnlyClient.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type AuthenticationInitParameters struct {
+
+	// A active_directory block as defined above.
+	ActiveDirectory []ActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// One or more certificate blocks as defined below.
+	Certificate []AuthenticationCertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 }
 
 type AuthenticationObservation struct {
@@ -79,12 +106,19 @@ type AuthenticationObservation struct {
 type AuthenticationParameters struct {
 
 	// A active_directory block as defined above.
-	// +kubebuilder:validation:Optional
 	ActiveDirectory []ActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
 	// One or more certificate blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Certificate []AuthenticationCertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
+}
+
+type CertificatesInitParameters struct {
+
+	// The certificate store on the Virtual Machine to which the certificate should be added.
+	Store *string `json:"store,omitempty" tf:"store,omitempty"`
+
+	// The URL of a certificate that has been uploaded to Key Vault as a secret
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type CertificatesObservation struct {
@@ -99,12 +133,22 @@ type CertificatesObservation struct {
 type CertificatesParameters struct {
 
 	// The certificate store on the Virtual Machine to which the certificate should be added.
-	// +kubebuilder:validation:Required
-	Store *string `json:"store" tf:"store,omitempty"`
+	Store *string `json:"store,omitempty" tf:"store,omitempty"`
 
 	// The URL of a certificate that has been uploaded to Key Vault as a secret
-	// +kubebuilder:validation:Required
-	URL *string `json:"url" tf:"url,omitempty"`
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+}
+
+type CustomFabricSettingInitParameters struct {
+
+	// Parameter name.
+	Parameter *string `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// Section name.
+	Section *string `json:"section,omitempty" tf:"section,omitempty"`
+
+	// Parameter value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type CustomFabricSettingObservation struct {
@@ -122,16 +166,31 @@ type CustomFabricSettingObservation struct {
 type CustomFabricSettingParameters struct {
 
 	// Parameter name.
-	// +kubebuilder:validation:Required
-	Parameter *string `json:"parameter" tf:"parameter,omitempty"`
+	Parameter *string `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// Section name.
-	// +kubebuilder:validation:Required
-	Section *string `json:"section" tf:"section,omitempty"`
+	Section *string `json:"section,omitempty" tf:"section,omitempty"`
 
 	// Parameter value.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type LBRuleInitParameters struct {
+
+	// LB Backend port.
+	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
+
+	// LB Frontend port.
+	FrontendPort *float64 `json:"frontendPort,omitempty" tf:"frontend_port,omitempty"`
+
+	// Protocol for the probe. Can be one of tcp, udp, http, or https.
+	ProbeProtocol *string `json:"probeProtocol,omitempty" tf:"probe_protocol,omitempty"`
+
+	// Path for the probe to check, when probe protocol is set to http.
+	ProbeRequestPath *string `json:"probeRequestPath,omitempty" tf:"probe_request_path,omitempty"`
+
+	// The transport protocol used in this rule. Can be one of tcp or udp.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type LBRuleObservation struct {
@@ -155,24 +214,118 @@ type LBRuleObservation struct {
 type LBRuleParameters struct {
 
 	// LB Backend port.
-	// +kubebuilder:validation:Required
-	BackendPort *float64 `json:"backendPort" tf:"backend_port,omitempty"`
+	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
 
 	// LB Frontend port.
-	// +kubebuilder:validation:Required
-	FrontendPort *float64 `json:"frontendPort" tf:"frontend_port,omitempty"`
+	FrontendPort *float64 `json:"frontendPort,omitempty" tf:"frontend_port,omitempty"`
 
 	// Protocol for the probe. Can be one of tcp, udp, http, or https.
-	// +kubebuilder:validation:Required
-	ProbeProtocol *string `json:"probeProtocol" tf:"probe_protocol,omitempty"`
+	ProbeProtocol *string `json:"probeProtocol,omitempty" tf:"probe_protocol,omitempty"`
 
 	// Path for the probe to check, when probe protocol is set to http.
-	// +kubebuilder:validation:Optional
 	ProbeRequestPath *string `json:"probeRequestPath,omitempty" tf:"probe_request_path,omitempty"`
 
 	// The transport protocol used in this rule. Can be one of tcp or udp.
-	// +kubebuilder:validation:Required
-	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+}
+
+type ManagedClusterInitParameters struct {
+
+	// Controls how connections to the cluster are authenticated. A authentication block as defined below.
+	Authentication []AuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// If true, backup service is enabled.
+	BackupServiceEnabled *bool `json:"backupServiceEnabled,omitempty" tf:"backup_service_enabled,omitempty"`
+
+	// Port to use when connecting to the cluster.
+	ClientConnectionPort *float64 `json:"clientConnectionPort,omitempty" tf:"client_connection_port,omitempty"`
+
+	// One or more custom_fabric_setting blocks as defined below.
+	CustomFabricSetting []CustomFabricSettingInitParameters `json:"customFabricSetting,omitempty" tf:"custom_fabric_setting,omitempty"`
+
+	// Hostname for the cluster. If unset the cluster's name will be used..
+	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
+
+	// If true, DNS service is enabled.
+	DNSServiceEnabled *bool `json:"dnsServiceEnabled,omitempty" tf:"dns_service_enabled,omitempty"`
+
+	// Port that should be used by the Service Fabric Explorer to visualize applications and cluster status.
+	HTTPGatewayPort *float64 `json:"httpGatewayPort,omitempty" tf:"http_gateway_port,omitempty"`
+
+	// One or more lb_rule blocks as defined below.
+	LBRule []LBRuleInitParameters `json:"lbRule,omitempty" tf:"lb_rule,omitempty"`
+
+	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// One or more node_type blocks as defined below.
+	NodeType []ManagedClusterNodeTypeInitParameters `json:"nodeType,omitempty" tf:"node_type,omitempty"`
+
+	// SKU for this cluster. Changing this forces a new resource to be created. Default is Basic, allowed values are either Basic or Standard.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags which should be assigned to the Resource Group.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Upgrade wave for the fabric runtime. Default is Wave0, allowed value must be one of Wave0, Wave1, or Wave2.
+	UpgradeWave *string `json:"upgradeWave,omitempty" tf:"upgrade_wave,omitempty"`
+
+	// Administrator password for the VMs that will be created as part of this cluster.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type ManagedClusterNodeTypeInitParameters struct {
+
+	// Sets the port range available for applications. Format is <from_port>-<to_port>, for example 10000-20000.
+	ApplicationPortRange *string `json:"applicationPortRange,omitempty" tf:"application_port_range,omitempty"`
+
+	// Specifies a list of key/value pairs used to set capacity tags for this node type.
+	Capacities map[string]*string `json:"capacities,omitempty" tf:"capacities,omitempty"`
+
+	// The size of the data disk in gigabytes..
+	DataDiskSizeGb *float64 `json:"dataDiskSizeGb,omitempty" tf:"data_disk_size_gb,omitempty"`
+
+	// The type of the disk to use for storing data. It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
+	DataDiskType *string `json:"dataDiskType,omitempty" tf:"data_disk_type,omitempty"`
+
+	// Sets the port range available for the OS. Format is <from_port>-<to_port>, for example 10000-20000. There has to be at least 255 ports available and cannot overlap with application_port_range..
+	EphemeralPortRange *string `json:"ephemeralPortRange,omitempty" tf:"ephemeral_port_range,omitempty"`
+
+	// If set the node type can be composed of multiple placement groups.
+	MultiplePlacementGroupsEnabled *bool `json:"multiplePlacementGroupsEnabled,omitempty" tf:"multiple_placement_groups_enabled,omitempty"`
+
+	// The name which should be used for this node type.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies a list of placement tags that can be used to indicate where services should run..
+	PlacementProperties map[string]*string `json:"placementProperties,omitempty" tf:"placement_properties,omitempty"`
+
+	// If set to true, system services will run on this node type. Only one node type should be marked as primary. Primary node type cannot be deleted or changed once they're created.
+	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// If set to true, only stateless workloads can run on this node type.
+	Stateless *bool `json:"stateless,omitempty" tf:"stateless,omitempty"`
+
+	// The offer type of the marketplace image cluster VMs will use.
+	VMImageOffer *string `json:"vmImageOffer,omitempty" tf:"vm_image_offer,omitempty"`
+
+	// The publisher of the marketplace image cluster VMs will use.
+	VMImagePublisher *string `json:"vmImagePublisher,omitempty" tf:"vm_image_publisher,omitempty"`
+
+	// The SKU of the marketplace image cluster VMs will use.
+	VMImageSku *string `json:"vmImageSku,omitempty" tf:"vm_image_sku,omitempty"`
+
+	// The version of the marketplace image cluster VMs will use.
+	VMImageVersion *string `json:"vmImageVersion,omitempty" tf:"vm_image_version,omitempty"`
+
+	// The number of instances this node type will launch.
+	VMInstanceCount *float64 `json:"vmInstanceCount,omitempty" tf:"vm_instance_count,omitempty"`
+
+	// One or more vm_secrets blocks as defined below.
+	VMSecrets []VMSecretsInitParameters `json:"vmSecrets,omitempty" tf:"vm_secrets,omitempty"`
+
+	// The size of the instances in this node type.
+	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 }
 
 type ManagedClusterNodeTypeObservation struct {
@@ -235,72 +388,55 @@ type ManagedClusterNodeTypeObservation struct {
 type ManagedClusterNodeTypeParameters struct {
 
 	// Sets the port range available for applications. Format is <from_port>-<to_port>, for example 10000-20000.
-	// +kubebuilder:validation:Required
-	ApplicationPortRange *string `json:"applicationPortRange" tf:"application_port_range,omitempty"`
+	ApplicationPortRange *string `json:"applicationPortRange,omitempty" tf:"application_port_range,omitempty"`
 
 	// Specifies a list of key/value pairs used to set capacity tags for this node type.
-	// +kubebuilder:validation:Optional
 	Capacities map[string]*string `json:"capacities,omitempty" tf:"capacities,omitempty"`
 
 	// The size of the data disk in gigabytes..
-	// +kubebuilder:validation:Required
-	DataDiskSizeGb *float64 `json:"dataDiskSizeGb" tf:"data_disk_size_gb,omitempty"`
+	DataDiskSizeGb *float64 `json:"dataDiskSizeGb,omitempty" tf:"data_disk_size_gb,omitempty"`
 
 	// The type of the disk to use for storing data. It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
-	// +kubebuilder:validation:Optional
 	DataDiskType *string `json:"dataDiskType,omitempty" tf:"data_disk_type,omitempty"`
 
 	// Sets the port range available for the OS. Format is <from_port>-<to_port>, for example 10000-20000. There has to be at least 255 ports available and cannot overlap with application_port_range..
-	// +kubebuilder:validation:Required
-	EphemeralPortRange *string `json:"ephemeralPortRange" tf:"ephemeral_port_range,omitempty"`
+	EphemeralPortRange *string `json:"ephemeralPortRange,omitempty" tf:"ephemeral_port_range,omitempty"`
 
 	// If set the node type can be composed of multiple placement groups.
-	// +kubebuilder:validation:Optional
 	MultiplePlacementGroupsEnabled *bool `json:"multiplePlacementGroupsEnabled,omitempty" tf:"multiple_placement_groups_enabled,omitempty"`
 
 	// The name which should be used for this node type.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies a list of placement tags that can be used to indicate where services should run..
-	// +kubebuilder:validation:Optional
 	PlacementProperties map[string]*string `json:"placementProperties,omitempty" tf:"placement_properties,omitempty"`
 
 	// If set to true, system services will run on this node type. Only one node type should be marked as primary. Primary node type cannot be deleted or changed once they're created.
-	// +kubebuilder:validation:Optional
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
 
 	// If set to true, only stateless workloads can run on this node type.
-	// +kubebuilder:validation:Optional
 	Stateless *bool `json:"stateless,omitempty" tf:"stateless,omitempty"`
 
 	// The offer type of the marketplace image cluster VMs will use.
-	// +kubebuilder:validation:Required
-	VMImageOffer *string `json:"vmImageOffer" tf:"vm_image_offer,omitempty"`
+	VMImageOffer *string `json:"vmImageOffer,omitempty" tf:"vm_image_offer,omitempty"`
 
 	// The publisher of the marketplace image cluster VMs will use.
-	// +kubebuilder:validation:Required
-	VMImagePublisher *string `json:"vmImagePublisher" tf:"vm_image_publisher,omitempty"`
+	VMImagePublisher *string `json:"vmImagePublisher,omitempty" tf:"vm_image_publisher,omitempty"`
 
 	// The SKU of the marketplace image cluster VMs will use.
-	// +kubebuilder:validation:Required
-	VMImageSku *string `json:"vmImageSku" tf:"vm_image_sku,omitempty"`
+	VMImageSku *string `json:"vmImageSku,omitempty" tf:"vm_image_sku,omitempty"`
 
 	// The version of the marketplace image cluster VMs will use.
-	// +kubebuilder:validation:Required
-	VMImageVersion *string `json:"vmImageVersion" tf:"vm_image_version,omitempty"`
+	VMImageVersion *string `json:"vmImageVersion,omitempty" tf:"vm_image_version,omitempty"`
 
 	// The number of instances this node type will launch.
-	// +kubebuilder:validation:Required
-	VMInstanceCount *float64 `json:"vmInstanceCount" tf:"vm_instance_count,omitempty"`
+	VMInstanceCount *float64 `json:"vmInstanceCount,omitempty" tf:"vm_instance_count,omitempty"`
 
 	// One or more vm_secrets blocks as defined below.
-	// +kubebuilder:validation:Optional
 	VMSecrets []VMSecretsParameters `json:"vmSecrets,omitempty" tf:"vm_secrets,omitempty"`
 
 	// The size of the instances in this node type.
-	// +kubebuilder:validation:Required
-	VMSize *string `json:"vmSize" tf:"vm_size,omitempty"`
+	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 }
 
 type ManagedClusterObservation struct {
@@ -357,47 +493,36 @@ type ManagedClusterObservation struct {
 type ManagedClusterParameters struct {
 
 	// Controls how connections to the cluster are authenticated. A authentication block as defined below.
-	// +kubebuilder:validation:Optional
 	Authentication []AuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
 	// If true, backup service is enabled.
-	// +kubebuilder:validation:Optional
 	BackupServiceEnabled *bool `json:"backupServiceEnabled,omitempty" tf:"backup_service_enabled,omitempty"`
 
 	// Port to use when connecting to the cluster.
-	// +kubebuilder:validation:Optional
 	ClientConnectionPort *float64 `json:"clientConnectionPort,omitempty" tf:"client_connection_port,omitempty"`
 
 	// One or more custom_fabric_setting blocks as defined below.
-	// +kubebuilder:validation:Optional
 	CustomFabricSetting []CustomFabricSettingParameters `json:"customFabricSetting,omitempty" tf:"custom_fabric_setting,omitempty"`
 
 	// Hostname for the cluster. If unset the cluster's name will be used..
-	// +kubebuilder:validation:Optional
 	DNSName *string `json:"dnsName,omitempty" tf:"dns_name,omitempty"`
 
 	// If true, DNS service is enabled.
-	// +kubebuilder:validation:Optional
 	DNSServiceEnabled *bool `json:"dnsServiceEnabled,omitempty" tf:"dns_service_enabled,omitempty"`
 
 	// Port that should be used by the Service Fabric Explorer to visualize applications and cluster status.
-	// +kubebuilder:validation:Optional
 	HTTPGatewayPort *float64 `json:"httpGatewayPort,omitempty" tf:"http_gateway_port,omitempty"`
 
 	// One or more lb_rule blocks as defined below.
-	// +kubebuilder:validation:Optional
 	LBRule []LBRuleParameters `json:"lbRule,omitempty" tf:"lb_rule,omitempty"`
 
 	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// One or more node_type blocks as defined below.
-	// +kubebuilder:validation:Optional
 	NodeType []ManagedClusterNodeTypeParameters `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// Administrator password for the VMs that will be created as part of this cluster.
-	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Resource Group should exist. Changing this forces a new Resource Group to be created.
@@ -414,20 +539,25 @@ type ManagedClusterParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// SKU for this cluster. Changing this forces a new resource to be created. Default is Basic, allowed values are either Basic or Standard.
-	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Group.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Upgrade wave for the fabric runtime. Default is Wave0, allowed value must be one of Wave0, Wave1, or Wave2.
-	// +kubebuilder:validation:Optional
 	UpgradeWave *string `json:"upgradeWave,omitempty" tf:"upgrade_wave,omitempty"`
 
 	// Administrator password for the VMs that will be created as part of this cluster.
-	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type VMSecretsInitParameters struct {
+
+	// One or more certificates blocks as defined above.
+	Certificates []CertificatesInitParameters `json:"certificates,omitempty" tf:"certificates,omitempty"`
+
+	// The ID of the Vault that contain the certificates.
+	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 }
 
 type VMSecretsObservation struct {
@@ -442,18 +572,20 @@ type VMSecretsObservation struct {
 type VMSecretsParameters struct {
 
 	// One or more certificates blocks as defined above.
-	// +kubebuilder:validation:Required
-	Certificates []CertificatesParameters `json:"certificates" tf:"certificates,omitempty"`
+	Certificates []CertificatesParameters `json:"certificates,omitempty" tf:"certificates,omitempty"`
 
 	// The ID of the Vault that contain the certificates.
-	// +kubebuilder:validation:Required
-	VaultID *string `json:"vaultId" tf:"vault_id,omitempty"`
+	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 }
 
 // ManagedClusterSpec defines the desired state of ManagedCluster
 type ManagedClusterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagedClusterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ManagedClusterInitParameters `json:"initProvider,omitempty"`
 }
 
 // ManagedClusterStatus defines the observed state of ManagedCluster.
@@ -474,10 +606,10 @@ type ManagedClusterStatus struct {
 type ManagedCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientConnectionPort)",message="clientConnectionPort is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.httpGatewayPort)",message="httpGatewayPort is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lbRule)",message="lbRule is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientConnectionPort) || has(self.initProvider.clientConnectionPort)",message="clientConnectionPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.httpGatewayPort) || has(self.initProvider.httpGatewayPort)",message="httpGatewayPort is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lbRule) || has(self.initProvider.lbRule)",message="lbRule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   ManagedClusterSpec   `json:"spec"`
 	Status ManagedClusterStatus `json:"status,omitempty"`
 }

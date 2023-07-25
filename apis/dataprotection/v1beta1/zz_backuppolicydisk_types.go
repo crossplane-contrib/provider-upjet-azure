@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BackupPolicyDiskInitParameters struct {
+
+	// Specifies a list of repeating time interval. It should follow ISO 8601 repeating time interval . Changing this forces a new Backup Policy Disk to be created.
+	BackupRepeatingTimeIntervals []*string `json:"backupRepeatingTimeIntervals,omitempty" tf:"backup_repeating_time_intervals,omitempty"`
+
+	// The duration of default retention rule. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Disk to be created.
+	DefaultRetentionDuration *string `json:"defaultRetentionDuration,omitempty" tf:"default_retention_duration,omitempty"`
+
+	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy Disk to be created.
+	RetentionRule []RetentionRuleInitParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
+}
+
 type BackupPolicyDiskObservation struct {
 
 	// Specifies a list of repeating time interval. It should follow ISO 8601 repeating time interval . Changing this forces a new Backup Policy Disk to be created.
@@ -34,15 +46,12 @@ type BackupPolicyDiskObservation struct {
 type BackupPolicyDiskParameters struct {
 
 	// Specifies a list of repeating time interval. It should follow ISO 8601 repeating time interval . Changing this forces a new Backup Policy Disk to be created.
-	// +kubebuilder:validation:Optional
 	BackupRepeatingTimeIntervals []*string `json:"backupRepeatingTimeIntervals,omitempty" tf:"backup_repeating_time_intervals,omitempty"`
 
 	// The duration of default retention rule. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Disk to be created.
-	// +kubebuilder:validation:Optional
 	DefaultRetentionDuration *string `json:"defaultRetentionDuration,omitempty" tf:"default_retention_duration,omitempty"`
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy Disk to be created.
-	// +kubebuilder:validation:Optional
 	RetentionRule []RetentionRuleParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
 
 	// The ID of the Backup Vault within which the Backup Policy Disk should exist. Changing this forces a new Backup Policy Disk to be created.
@@ -60,6 +69,12 @@ type BackupPolicyDiskParameters struct {
 	VaultIDSelector *v1.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
 }
 
+type CriteriaInitParameters struct {
+
+	// Possible values are FirstOfDay and FirstOfWeek. Changing this forces a new Backup Policy Disk to be created.
+	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
+}
+
 type CriteriaObservation struct {
 
 	// Possible values are FirstOfDay and FirstOfWeek. Changing this forces a new Backup Policy Disk to be created.
@@ -69,8 +84,22 @@ type CriteriaObservation struct {
 type CriteriaParameters struct {
 
 	// Possible values are FirstOfDay and FirstOfWeek. Changing this forces a new Backup Policy Disk to be created.
-	// +kubebuilder:validation:Optional
 	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
+}
+
+type RetentionRuleInitParameters struct {
+
+	// A criteria block as defined below. Changing this forces a new Backup Policy Disk to be created.
+	Criteria []CriteriaInitParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
+
+	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Disk to be created.
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// The name which should be used for this retention rule. Changing this forces a new Backup Policy Disk to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Retention Tag priority. Changing this forces a new Backup Policy Disk to be created.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 type RetentionRuleObservation struct {
@@ -91,26 +120,26 @@ type RetentionRuleObservation struct {
 type RetentionRuleParameters struct {
 
 	// A criteria block as defined below. Changing this forces a new Backup Policy Disk to be created.
-	// +kubebuilder:validation:Required
-	Criteria []CriteriaParameters `json:"criteria" tf:"criteria,omitempty"`
+	Criteria []CriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
 	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Disk to be created.
-	// +kubebuilder:validation:Required
-	Duration *string `json:"duration" tf:"duration,omitempty"`
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// The name which should be used for this retention rule. Changing this forces a new Backup Policy Disk to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Retention Tag priority. Changing this forces a new Backup Policy Disk to be created.
-	// +kubebuilder:validation:Required
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
 // BackupPolicyDiskSpec defines the desired state of BackupPolicyDisk
 type BackupPolicyDiskSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BackupPolicyDiskParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BackupPolicyDiskInitParameters `json:"initProvider,omitempty"`
 }
 
 // BackupPolicyDiskStatus defines the observed state of BackupPolicyDisk.
@@ -131,8 +160,8 @@ type BackupPolicyDiskStatus struct {
 type BackupPolicyDisk struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backupRepeatingTimeIntervals)",message="backupRepeatingTimeIntervals is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultRetentionDuration)",message="defaultRetentionDuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backupRepeatingTimeIntervals) || has(self.initProvider.backupRepeatingTimeIntervals)",message="backupRepeatingTimeIntervals is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultRetentionDuration) || has(self.initProvider.defaultRetentionDuration)",message="defaultRetentionDuration is a required parameter"
 	Spec   BackupPolicyDiskSpec   `json:"spec"`
 	Status BackupPolicyDiskStatus `json:"status,omitempty"`
 }

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: datashares.datashare.azure.upbound.io
 spec:
   group: datashare.azure.upbound.io
@@ -167,10 +167,39 @@ spec:
                           description: The synchronization with the source data's
                             start time.
                           type: string
-                      required:
-                      - name
-                      - recurrence
-                      - startTime
+                      type: object
+                    type: array
+                  terms:
+                    description: The terms of the Data Share.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: The Data Share's description.
+                    type: string
+                  kind:
+                    description: The kind of the Data Share. Possible values are CopyBased
+                      and InPlace. Changing this forces a new Data Share to be created.
+                    type: string
+                  snapshotSchedule:
+                    description: A snapshot_schedule block as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: The name of the snapshot schedule.
+                          type: string
+                        recurrence:
+                          description: The interval of the synchronization with the
+                            source data. Possible values are Hour and Day.
+                          type: string
+                        startTime:
+                          description: The synchronization with the source data's
+                            start time.
+                          type: string
                       type: object
                     type: array
                   terms:
@@ -377,7 +406,8 @@ spec:
             x-kubernetes-validations:
             - message: kind is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.kind)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.kind)
+                || has(self.initProvider.kind)'
           status:
             description: DataShareStatus defines the observed state of DataShare.
             properties:

@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SecurityCenterAssessmentPolicyInitParameters struct {
+
+	// A list of the categories of resource that is at risk when the Security Center Assessment is unhealthy. Possible values are Unknown, Compute, Data, IdentityAndAccess, IoT and Networking.
+	Categories []*string `json:"categories,omitempty" tf:"categories,omitempty"`
+
+	// The description of the Security Center Assessment.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The user-friendly display name of the Security Center Assessment.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The implementation effort which is used to remediate the Security Center Assessment. Possible values are Low, Moderate and High.
+	ImplementationEffort *string `json:"implementationEffort,omitempty" tf:"implementation_effort,omitempty"`
+
+	// The description which is used to mitigate the security issue.
+	RemediationDescription *string `json:"remediationDescription,omitempty" tf:"remediation_description,omitempty"`
+
+	// The severity level of the Security Center Assessment. Possible values are Low, Medium and High. Defaults to Medium.
+	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
+
+	// A list of the threat impacts for the Security Center Assessment. Possible values are AccountBreach, DataExfiltration, DataSpillage, DenialOfService, ElevationOfPrivilege, MaliciousInsider, MissingCoverage and ThreatResistance.
+	Threats []*string `json:"threats,omitempty" tf:"threats,omitempty"`
+
+	// The user impact of the Security Center Assessment. Possible values are Low, Moderate and High.
+	UserImpact *string `json:"userImpact,omitempty" tf:"user_impact,omitempty"`
+}
+
 type SecurityCenterAssessmentPolicyObservation struct {
 
 	// A list of the categories of resource that is at risk when the Security Center Assessment is unhealthy. Possible values are Unknown, Compute, Data, IdentityAndAccess, IoT and Networking.
@@ -49,35 +76,27 @@ type SecurityCenterAssessmentPolicyObservation struct {
 type SecurityCenterAssessmentPolicyParameters struct {
 
 	// A list of the categories of resource that is at risk when the Security Center Assessment is unhealthy. Possible values are Unknown, Compute, Data, IdentityAndAccess, IoT and Networking.
-	// +kubebuilder:validation:Optional
 	Categories []*string `json:"categories,omitempty" tf:"categories,omitempty"`
 
 	// The description of the Security Center Assessment.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The user-friendly display name of the Security Center Assessment.
-	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The implementation effort which is used to remediate the Security Center Assessment. Possible values are Low, Moderate and High.
-	// +kubebuilder:validation:Optional
 	ImplementationEffort *string `json:"implementationEffort,omitempty" tf:"implementation_effort,omitempty"`
 
 	// The description which is used to mitigate the security issue.
-	// +kubebuilder:validation:Optional
 	RemediationDescription *string `json:"remediationDescription,omitempty" tf:"remediation_description,omitempty"`
 
 	// The severity level of the Security Center Assessment. Possible values are Low, Medium and High. Defaults to Medium.
-	// +kubebuilder:validation:Optional
 	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A list of the threat impacts for the Security Center Assessment. Possible values are AccountBreach, DataExfiltration, DataSpillage, DenialOfService, ElevationOfPrivilege, MaliciousInsider, MissingCoverage and ThreatResistance.
-	// +kubebuilder:validation:Optional
 	Threats []*string `json:"threats,omitempty" tf:"threats,omitempty"`
 
 	// The user impact of the Security Center Assessment. Possible values are Low, Moderate and High.
-	// +kubebuilder:validation:Optional
 	UserImpact *string `json:"userImpact,omitempty" tf:"user_impact,omitempty"`
 }
 
@@ -85,6 +104,10 @@ type SecurityCenterAssessmentPolicyParameters struct {
 type SecurityCenterAssessmentPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecurityCenterAssessmentPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SecurityCenterAssessmentPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecurityCenterAssessmentPolicyStatus defines the observed state of SecurityCenterAssessmentPolicy.
@@ -105,8 +128,8 @@ type SecurityCenterAssessmentPolicyStatus struct {
 type SecurityCenterAssessmentPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description)",message="description is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.description) || has(self.initProvider.description)",message="description is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
 	Spec   SecurityCenterAssessmentPolicySpec   `json:"spec"`
 	Status SecurityCenterAssessmentPolicyStatus `json:"status,omitempty"`
 }

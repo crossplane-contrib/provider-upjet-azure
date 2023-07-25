@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccessConnectorInitParameters struct {
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AccessConnectorObservation struct {
 
 	// The ID of the Databricks Access Connector in the Azure management plane.
@@ -34,11 +46,9 @@ type AccessConnectorObservation struct {
 type AccessConnectorParameters struct {
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group in which the Databricks Access Connector should exist. Changing this forces a new resource to be created.
@@ -55,8 +65,16 @@ type AccessConnectorParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to the Databricks Access Connector. Only one User Assigned Managed Identity ID is supported per Databricks Access Connector resource.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on the Databricks Access Connector. Possible values include SystemAssigned or UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
@@ -77,18 +95,20 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to the Databricks Access Connector. Only one User Assigned Managed Identity ID is supported per Databricks Access Connector resource.
-	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on the Databricks Access Connector. Possible values include SystemAssigned or UserAssigned.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // AccessConnectorSpec defines the desired state of AccessConnector
 type AccessConnectorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AccessConnectorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AccessConnectorInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccessConnectorStatus defines the observed state of AccessConnector.
@@ -109,7 +129,7 @@ type AccessConnectorStatus struct {
 type AccessConnector struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   AccessConnectorSpec   `json:"spec"`
 	Status AccessConnectorStatus `json:"status,omitempty"`
 }

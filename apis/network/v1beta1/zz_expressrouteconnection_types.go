@@ -61,11 +61,9 @@ type ExpressRouteConnectionObservation struct {
 type ExpressRouteConnectionParameters struct {
 
 	// The authorization key to establish the Express Route Connection.
-	// +kubebuilder:validation:Optional
 	AuthorizationKey *string `json:"authorizationKey,omitempty" tf:"authorization_key,omitempty"`
 
 	// Is Internet security enabled for this Express Route Connection?
-	// +kubebuilder:validation:Optional
 	EnableInternetSecurity *bool `json:"enableInternetSecurity,omitempty" tf:"enable_internet_security,omitempty"`
 
 	// The ID of the Express Route Circuit Peering that this Express Route Connection connects with. Changing this forces a new resource to be created.
@@ -83,7 +81,6 @@ type ExpressRouteConnectionParameters struct {
 	ExpressRouteCircuitPeeringIDSelector *v1.Selector `json:"expressRouteCircuitPeeringIdSelector,omitempty" tf:"-"`
 
 	// Specified whether Fast Path is enabled for Virtual Wan Firewall Hub. Defaults to false.
-	// +kubebuilder:validation:Optional
 	ExpressRouteGatewayBypassEnabled *bool `json:"expressRouteGatewayBypassEnabled,omitempty" tf:"express_route_gateway_bypass_enabled,omitempty"`
 
 	// The ID of the Express Route Gateway that this Express Route Connection connects with. Changing this forces a new resource to be created.
@@ -101,11 +98,9 @@ type ExpressRouteConnectionParameters struct {
 	ExpressRouteGatewayIDSelector *v1.Selector `json:"expressRouteGatewayIdSelector,omitempty" tf:"-"`
 
 	// A routing block as defined below.
-	// +kubebuilder:validation:Optional
 	Routing []RoutingParameters `json:"routing,omitempty" tf:"routing,omitempty"`
 
 	// The routing weight associated to the Express Route Connection. Possible value is between 0 and 32000. Defaults to 0.
-	// +kubebuilder:validation:Optional
 	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
 }
 
@@ -130,11 +125,9 @@ type PropagatedRouteTableObservation struct {
 type PropagatedRouteTableParameters struct {
 
 	// The list of labels to logically group route tables.
-	// +kubebuilder:validation:Optional
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A list of IDs of the Virtual Hub Route Table to propagate routes from Express Route Connection to the route table.
-	// +kubebuilder:validation:Optional
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 }
 
@@ -171,19 +164,15 @@ type RoutingObservation struct {
 type RoutingParameters struct {
 
 	// The ID of the Virtual Hub Route Table associated with this Express Route Connection.
-	// +kubebuilder:validation:Optional
 	AssociatedRouteTableID *string `json:"associatedRouteTableId,omitempty" tf:"associated_route_table_id,omitempty"`
 
 	// The ID of the Route Map associated with this Express Route Connection for inbound routes.
-	// +kubebuilder:validation:Optional
 	InboundRouteMapID *string `json:"inboundRouteMapId,omitempty" tf:"inbound_route_map_id,omitempty"`
 
 	// The ID of the Route Map associated with this Express Route Connection for outbound routes.
-	// +kubebuilder:validation:Optional
 	OutboundRouteMapID *string `json:"outboundRouteMapId,omitempty" tf:"outbound_route_map_id,omitempty"`
 
 	// A propagated_route_table block as defined below.
-	// +kubebuilder:validation:Optional
 	PropagatedRouteTable []PropagatedRouteTableParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
 }
 
@@ -194,14 +183,6 @@ type ExpressRouteConnectionSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider ExpressRouteConnectionInitParameters `json:"initProvider,omitempty"`
 }
 

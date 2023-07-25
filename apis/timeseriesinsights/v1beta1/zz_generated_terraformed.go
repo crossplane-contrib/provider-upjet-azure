@@ -79,6 +79,15 @@ func (tr *EventSourceEventHub) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this EventSourceEventHub
+func (tr *EventSourceEventHub) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this EventSourceEventHub using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EventSourceEventHub) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *EventSourceIOTHub) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this EventSourceIOTHub
+func (tr *EventSourceIOTHub) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this EventSourceIOTHub using its observed tfState.
@@ -247,6 +265,15 @@ func (tr *Gen2Environment) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Gen2Environment
+func (tr *Gen2Environment) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Gen2Environment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Gen2Environment) LateInitialize(attrs []byte) (bool, error) {
@@ -331,6 +358,15 @@ func (tr *ReferenceDataSet) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this ReferenceDataSet
+func (tr *ReferenceDataSet) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ReferenceDataSet using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ReferenceDataSet) LateInitialize(attrs []byte) (bool, error) {
@@ -413,6 +449,15 @@ func (tr *StandardEnvironment) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this StandardEnvironment
+func (tr *StandardEnvironment) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this StandardEnvironment using its observed tfState.

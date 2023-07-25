@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EncryptionScopeInitParameters struct {
+
+	// Is a secondary layer of encryption with Platform Managed Keys for data applied? Changing this forces a new resource to be created.
+	InfrastructureEncryptionRequired *bool `json:"infrastructureEncryptionRequired,omitempty" tf:"infrastructure_encryption_required,omitempty"`
+
+	// The ID of the Key Vault Key. Required when source is Microsoft.KeyVault.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The source of the Storage Encryption Scope. Possible values are Microsoft.KeyVault and Microsoft.Storage.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+}
+
 type EncryptionScopeObservation struct {
 
 	// The ID of the Storage Encryption Scope.
@@ -34,15 +46,12 @@ type EncryptionScopeObservation struct {
 type EncryptionScopeParameters struct {
 
 	// Is a secondary layer of encryption with Platform Managed Keys for data applied? Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	InfrastructureEncryptionRequired *bool `json:"infrastructureEncryptionRequired,omitempty" tf:"infrastructure_encryption_required,omitempty"`
 
 	// The ID of the Key Vault Key. Required when source is Microsoft.KeyVault.
-	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
 	// The source of the Storage Encryption Scope. Possible values are Microsoft.KeyVault and Microsoft.Storage.
-	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// The ID of the Storage Account where this Storage Encryption Scope is created. Changing this forces a new Storage Encryption Scope to be created.
@@ -64,6 +73,10 @@ type EncryptionScopeParameters struct {
 type EncryptionScopeSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EncryptionScopeParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EncryptionScopeInitParameters `json:"initProvider,omitempty"`
 }
 
 // EncryptionScopeStatus defines the observed state of EncryptionScope.
@@ -84,7 +97,7 @@ type EncryptionScopeStatus struct {
 type EncryptionScope struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.source)",message="source is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.source) || has(self.initProvider.source)",message="source is a required parameter"
 	Spec   EncryptionScopeSpec   `json:"spec"`
 	Status EncryptionScopeStatus `json:"status,omitempty"`
 }

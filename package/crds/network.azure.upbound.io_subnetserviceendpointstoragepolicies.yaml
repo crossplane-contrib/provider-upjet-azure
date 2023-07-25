@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: subnetserviceendpointstoragepolicies.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -86,9 +86,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - name
-                      - serviceResources
                       type: object
                     type: array
                   location:
@@ -176,6 +173,43 @@ spec:
                             type: string
                         type: object
                     type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Subnet Service Endpoint Storage Policy.
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  definition:
+                    description: A definition block as defined below
+                    items:
+                      properties:
+                        description:
+                          description: The description of this Subnet Service Endpoint
+                            Storage Policy Definition.
+                          type: string
+                        name:
+                          description: The name which should be used for this Subnet
+                            Service Endpoint Storage Policy Definition.
+                          type: string
+                        serviceResources:
+                          description: Specifies a list of resources that this Subnet
+                            Service Endpoint Storage Policy Definition applies to.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  location:
+                    description: The Azure Region where the Subnet Service Endpoint
+                      Storage Policy should exist. Changing this forces a new Subnet
+                      Service Endpoint Storage Policy to be created.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -383,7 +417,8 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
           status:
             description: SubnetServiceEndpointStoragePolicyStatus defines the observed
               state of SubnetServiceEndpointStoragePolicy.

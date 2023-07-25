@@ -79,6 +79,15 @@ func (tr *KubernetesCluster) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this KubernetesCluster
+func (tr *KubernetesCluster) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this KubernetesCluster using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *KubernetesCluster) LateInitialize(attrs []byte) (bool, error) {
@@ -167,6 +176,15 @@ func (tr *KubernetesClusterNodePool) GetInitParameters() (map[string]any, error)
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this KubernetesClusterNodePool
+func (tr *KubernetesClusterNodePool) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this KubernetesClusterNodePool using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *KubernetesClusterNodePool) LateInitialize(attrs []byte) (bool, error) {
@@ -249,6 +267,15 @@ func (tr *KubernetesFleetManager) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this KubernetesFleetManager
+func (tr *KubernetesFleetManager) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this KubernetesFleetManager using its observed tfState.

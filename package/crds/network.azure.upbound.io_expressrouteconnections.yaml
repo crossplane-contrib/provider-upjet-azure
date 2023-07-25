@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: expressrouteconnections.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -237,6 +237,66 @@ spec:
                             type: string
                         type: object
                     type: object
+                  routing:
+                    description: A routing block as defined below.
+                    items:
+                      properties:
+                        associatedRouteTableId:
+                          description: The ID of the Virtual Hub Route Table associated
+                            with this Express Route Connection.
+                          type: string
+                        inboundRouteMapId:
+                          description: The ID of the Route Map associated with this
+                            Express Route Connection for inbound routes.
+                          type: string
+                        outboundRouteMapId:
+                          description: The ID of the Route Map associated with this
+                            Express Route Connection for outbound routes.
+                          type: string
+                        propagatedRouteTable:
+                          description: A propagated_route_table block as defined below.
+                          items:
+                            properties:
+                              labels:
+                                description: The list of labels to logically group
+                                  route tables.
+                                items:
+                                  type: string
+                                type: array
+                              routeTableIds:
+                                description: A list of IDs of the Virtual Hub Route
+                                  Table to propagate routes from Express Route Connection
+                                  to the route table.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  routingWeight:
+                    description: The routing weight associated to the Express Route
+                      Connection. Possible value is between 0 and 32000. Defaults
+                      to 0.
+                    type: number
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  authorizationKey:
+                    description: The authorization key to establish the Express Route
+                      Connection.
+                    type: string
+                  enableInternetSecurity:
+                    description: Is Internet security enabled for this Express Route
+                      Connection?
+                    type: boolean
+                  expressRouteGatewayBypassEnabled:
+                    description: Specified whether Fast Path is enabled for Virtual
+                      Wan Firewall Hub. Defaults to false.
+                    type: boolean
                   routing:
                     description: A routing block as defined below.
                     items:

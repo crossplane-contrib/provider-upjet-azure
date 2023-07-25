@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: triggerblobevents.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -354,6 +354,60 @@ spec:
                         type: object
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  activated:
+                    description: Specifies if the Data Factory Blob Event Trigger
+                      is activated. Defaults to true.
+                    type: boolean
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Blob Event Trigger.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Blob Event Trigger.
+                    items:
+                      type: string
+                    type: array
+                  blobPathBeginsWith:
+                    description: The pattern that blob path starts with for trigger
+                      to fire.
+                    type: string
+                  blobPathEndsWith:
+                    description: The pattern that blob path ends with for trigger
+                      to fire.
+                    type: string
+                  description:
+                    description: The description for the Data Factory Blob Event Trigger.
+                    type: string
+                  events:
+                    description: List of events that will fire this trigger. Possible
+                      values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobDeleted.
+                    items:
+                      type: string
+                    type: array
+                  ignoreEmptyBlobs:
+                    description: are blobs with zero bytes ignored?
+                    type: boolean
+                  pipeline:
+                    description: One or more pipeline blocks as defined below.
+                    items:
+                      properties:
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: The Data Factory Pipeline parameters that the
+                            trigger will act on.
+                          type: object
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -554,10 +608,12 @@ spec:
             x-kubernetes-validations:
             - message: events is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.events)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.events)
+                || has(self.initProvider.events)'
             - message: pipeline is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.pipeline)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.pipeline)
+                || has(self.initProvider.pipeline)'
           status:
             description: TriggerBlobEventStatus defines the observed state of TriggerBlobEvent.
             properties:

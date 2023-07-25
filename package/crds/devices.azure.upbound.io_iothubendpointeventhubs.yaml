@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: iothubendpointeventhubs.devices.azure.upbound.io
 spec:
   group: devices.azure.upbound.io
@@ -261,6 +261,30 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  authenticationType:
+                    description: Type used to authenticate against the Event Hub endpoint.
+                      Possible values are keyBased and identityBased. Defaults to
+                      keyBased.
+                    type: string
+                  endpointUri:
+                    description: URI of the Event Hubs Namespace endpoint. This attribute
+                      can only be specified and is mandatory when authentication_type
+                      is identityBased.
+                    type: string
+                  entityPath:
+                    description: Name of the Event Hub. This attribute can only be
+                      specified and is mandatory when authentication_type is identityBased.
+                    type: string
+                  identityId:
+                    description: ID of the User Managed Identity used to authenticate
+                      against the Event Hub endpoint.
+                    type: string
                 type: object
               managementPolicies:
                 default:

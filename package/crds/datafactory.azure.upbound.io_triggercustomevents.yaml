@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: triggercustomevents.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -352,6 +352,58 @@ spec:
                       to fire.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  activated:
+                    description: Specifies if the Data Factory Custom Event Trigger
+                      is activated. Defaults to true.
+                    type: boolean
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Custom Event Trigger.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Custom Event Trigger.
+                    items:
+                      type: string
+                    type: array
+                  description:
+                    description: The description for the Data Factory Custom Event
+                      Trigger.
+                    type: string
+                  events:
+                    description: List of events that will fire this trigger. At least
+                      one event must be specified.
+                    items:
+                      type: string
+                    type: array
+                  pipeline:
+                    description: One or more pipeline blocks as defined below.
+                    items:
+                      properties:
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: The Data Factory Pipeline parameters that the
+                            trigger will act on.
+                          type: object
+                      type: object
+                    type: array
+                  subjectBeginsWith:
+                    description: The pattern that event subject starts with for trigger
+                      to fire.
+                    type: string
+                  subjectEndsWith:
+                    description: The pattern that event subject ends with for trigger
+                      to fire.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -552,10 +604,12 @@ spec:
             x-kubernetes-validations:
             - message: events is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.events)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.events)
+                || has(self.initProvider.events)'
             - message: pipeline is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.pipeline)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.pipeline)
+                || has(self.initProvider.pipeline)'
           status:
             description: TriggerCustomEventStatus defines the observed state of TriggerCustomEvent.
             properties:

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FeatureInitParameters struct {
+
+	// Specifies the name of the feature to register.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Should this feature be Registered or Unregistered?
+	Registered *bool `json:"registered,omitempty" tf:"registered,omitempty"`
+}
+
 type FeatureObservation struct {
 
 	// Specifies the name of the feature to register.
@@ -25,12 +34,19 @@ type FeatureObservation struct {
 type FeatureParameters struct {
 
 	// Specifies the name of the feature to register.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Should this feature be Registered or Unregistered?
-	// +kubebuilder:validation:Required
-	Registered *bool `json:"registered" tf:"registered,omitempty"`
+	Registered *bool `json:"registered,omitempty" tf:"registered,omitempty"`
+}
+
+type ResourceProviderRegistrationInitParameters struct {
+
+	// A list of feature blocks as defined below.
+	Feature []FeatureInitParameters `json:"feature,omitempty" tf:"feature,omitempty"`
+
+	// The namespace of the Resource Provider which should be registered. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type ResourceProviderRegistrationObservation struct {
@@ -47,11 +63,9 @@ type ResourceProviderRegistrationObservation struct {
 type ResourceProviderRegistrationParameters struct {
 
 	// A list of feature blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Feature []FeatureParameters `json:"feature,omitempty" tf:"feature,omitempty"`
 
 	// The namespace of the Resource Provider which should be registered. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -59,6 +73,10 @@ type ResourceProviderRegistrationParameters struct {
 type ResourceProviderRegistrationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourceProviderRegistrationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ResourceProviderRegistrationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourceProviderRegistrationStatus defines the observed state of ResourceProviderRegistration.
@@ -79,7 +97,7 @@ type ResourceProviderRegistrationStatus struct {
 type ResourceProviderRegistration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ResourceProviderRegistrationSpec   `json:"spec"`
 	Status ResourceProviderRegistrationStatus `json:"status,omitempty"`
 }

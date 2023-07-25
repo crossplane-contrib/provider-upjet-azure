@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IOTHubEnrichmentInitParameters struct {
+
+	// The list of endpoints which will be enriched.
+	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+
+	// The key of the enrichment. Changing this forces a new resource to be created.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The value of the enrichment. Value can be any static string, the name of the IoT hub sending the message (use $iothubname) or information from the device twin (ex: $twin.tags.latitude)
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type IOTHubEnrichmentObservation struct {
 
 	// The list of endpoints which will be enriched.
@@ -37,7 +49,6 @@ type IOTHubEnrichmentObservation struct {
 type IOTHubEnrichmentParameters struct {
 
 	// The list of endpoints which will be enriched.
-	// +kubebuilder:validation:Optional
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
 	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
@@ -54,7 +65,6 @@ type IOTHubEnrichmentParameters struct {
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// The key of the enrichment. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The name of the resource group under which the IoTHub resource is created. Changing this forces a new resource to be created.
@@ -71,7 +81,6 @@ type IOTHubEnrichmentParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The value of the enrichment. Value can be any static string, the name of the IoT hub sending the message (use $iothubname) or information from the device twin (ex: $twin.tags.latitude)
-	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -79,6 +88,10 @@ type IOTHubEnrichmentParameters struct {
 type IOTHubEnrichmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IOTHubEnrichmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider IOTHubEnrichmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // IOTHubEnrichmentStatus defines the observed state of IOTHubEnrichment.
@@ -99,9 +112,9 @@ type IOTHubEnrichmentStatus struct {
 type IOTHubEnrichment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointNames)",message="endpointNames is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.key)",message="key is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value)",message="value is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointNames) || has(self.initProvider.endpointNames)",message="endpointNames is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.key) || has(self.initProvider.key)",message="key is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value) || has(self.initProvider.value)",message="value is a required parameter"
 	Spec   IOTHubEnrichmentSpec   `json:"spec"`
 	Status IOTHubEnrichmentStatus `json:"status,omitempty"`
 }

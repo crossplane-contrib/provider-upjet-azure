@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: managers.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -154,6 +154,49 @@ spec:
                             type: string
                         type: object
                     type: object
+                  scope:
+                    description: A scope block as defined below.
+                    items:
+                      properties:
+                        managementGroupIds:
+                          description: A list of management group IDs.
+                          items:
+                            type: string
+                          type: array
+                        subscriptionIds:
+                          description: A list of subscription IDs.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  scopeAccesses:
+                    description: A list of configuration deployment type. Possible
+                      values are Connectivity and SecurityAdmin, corresponds to if
+                      Connectivity Configuration and Security Admin Configuration
+                      is allowed for the Network Manager.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Network Managers.
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A description of the network manager.
+                    type: string
+                  location:
+                    description: Specifies the Azure Region where the Network Managers
+                      should exist. Changing this forces a new resource to be created.
+                    type: string
                   scope:
                     description: A scope block as defined below.
                     items:
@@ -385,13 +428,16 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: scope is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.scope)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.scope)
+                || has(self.initProvider.scope)'
             - message: scopeAccesses is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.scopeAccesses)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.scopeAccesses)
+                || has(self.initProvider.scopeAccesses)'
           status:
             description: ManagerStatus defines the observed state of Manager.
             properties:

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: services.search.azure.upbound.io
 spec:
   group: search.azure.upbound.io
@@ -100,8 +100,6 @@ spec:
                             that should be configured on this Search Service. The
                             only possible value is SystemAssigned.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   localAuthenticationEnabled:
@@ -207,6 +205,82 @@ spec:
                             type: string
                         type: object
                     type: object
+                  sku:
+                    description: The SKU which should be used for this Search Service.
+                      Possible values include basic, free, standard, standard2, standard3,
+                      storage_optimized_l1 and storage_optimized_l2. Changing this
+                      forces a new Search Service to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: Specifies a mapping of tags which should be assigned
+                      to this Search Service.
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  allowedIps:
+                    description: Specifies a list of inbound IPv4 or CIDRs that are
+                      allowed to access the Search Service. If the incoming IP request
+                      is from an IP address which is not included in the allowed_ips
+                      it will be blocked by the Search Services firewall.
+                    items:
+                      type: string
+                    type: array
+                  authenticationFailureMode:
+                    description: Specifies the response that the Search Service should
+                      return for requests that fail authentication. Possible values
+                      include http401WithBearerChallenge or http403.
+                    type: string
+                  customerManagedKeyEnforcementEnabled:
+                    description: Specifies whether the Search Service should enforce
+                      that non-customer resources are encrypted. Defaults to false.
+                    type: boolean
+                  hostingMode:
+                    description: Specifies the Hosting Mode, which allows for High
+                      Density partitions (that allow for up to 1000 indexes) should
+                      be supported. Possible values are highDensity or default. Defaults
+                      to default. Changing this forces a new Search Service to be
+                      created.
+                    type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Search Service. The
+                            only possible value is SystemAssigned.
+                          type: string
+                      type: object
+                    type: array
+                  localAuthenticationEnabled:
+                    description: Specifies whether the Search Service allows authenticating
+                      using API Keys? Defaults to false.
+                    type: boolean
+                  location:
+                    description: The Azure Region where the Search Service should
+                      exist. Changing this forces a new Search Service to be created.
+                    type: string
+                  partitionCount:
+                    description: Specifies the number of partitions which should be
+                      created. This field cannot be set when using a free or basic
+                      sku (see the Microsoft documentation). Possible values include
+                      1, 2, 3, 4, 6, or 12. Defaults to 1.
+                    type: number
+                  publicNetworkAccessEnabled:
+                    description: Specifies whether Public Network Access is allowed
+                      for this resource. Defaults to true.
+                    type: boolean
+                  replicaCount:
+                    description: Specifies the number of Replica's which should be
+                      created for this Search Service. This field cannot be set when
+                      using a free sku (see the Microsoft documentation).
+                    type: number
                   sku:
                     description: The SKU which should be used for this Search Service.
                       Possible values include basic, free, standard, standard2, standard3,
@@ -420,10 +494,12 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: sku is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)
+                || has(self.initProvider.sku)'
           status:
             description: ServiceStatus defines the observed state of Service.
             properties:

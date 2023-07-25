@@ -79,6 +79,15 @@ func (tr *FirewallRule) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this FirewallRule
+func (tr *FirewallRule) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this FirewallRule using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FirewallRule) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *IntegrationRuntimeAzure) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this IntegrationRuntimeAzure
+func (tr *IntegrationRuntimeAzure) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this IntegrationRuntimeAzure using its observed tfState.
@@ -247,6 +265,15 @@ func (tr *IntegrationRuntimeSelfHosted) GetInitParameters() (map[string]any, err
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this IntegrationRuntimeSelfHosted
+func (tr *IntegrationRuntimeSelfHosted) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this IntegrationRuntimeSelfHosted using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IntegrationRuntimeSelfHosted) LateInitialize(attrs []byte) (bool, error) {
@@ -329,6 +356,15 @@ func (tr *LinkedService) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this LinkedService
+func (tr *LinkedService) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this LinkedService using its observed tfState.
@@ -415,6 +451,15 @@ func (tr *ManagedPrivateEndpoint) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this ManagedPrivateEndpoint
+func (tr *ManagedPrivateEndpoint) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ManagedPrivateEndpoint using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ManagedPrivateEndpoint) LateInitialize(attrs []byte) (bool, error) {
@@ -497,6 +542,15 @@ func (tr *PrivateLinkHub) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this PrivateLinkHub
+func (tr *PrivateLinkHub) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this PrivateLinkHub using its observed tfState.
@@ -583,6 +637,15 @@ func (tr *RoleAssignment) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this RoleAssignment
+func (tr *RoleAssignment) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this RoleAssignment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *RoleAssignment) LateInitialize(attrs []byte) (bool, error) {
@@ -665,6 +728,15 @@ func (tr *SparkPool) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this SparkPool
+func (tr *SparkPool) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SparkPool using its observed tfState.
@@ -751,6 +823,15 @@ func (tr *SQLPool) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this SQLPool
+func (tr *SQLPool) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this SQLPool using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SQLPool) LateInitialize(attrs []byte) (bool, error) {
@@ -833,6 +914,15 @@ func (tr *SQLPoolExtendedAuditingPolicy) GetInitParameters() (map[string]any, er
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this SQLPoolExtendedAuditingPolicy
+func (tr *SQLPoolExtendedAuditingPolicy) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SQLPoolExtendedAuditingPolicy using its observed tfState.
@@ -919,6 +1009,15 @@ func (tr *SQLPoolSecurityAlertPolicy) GetInitParameters() (map[string]any, error
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this SQLPoolSecurityAlertPolicy
+func (tr *SQLPoolSecurityAlertPolicy) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this SQLPoolSecurityAlertPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SQLPoolSecurityAlertPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -1001,6 +1100,15 @@ func (tr *SQLPoolWorkloadClassifier) GetInitParameters() (map[string]any, error)
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this SQLPoolWorkloadClassifier
+func (tr *SQLPoolWorkloadClassifier) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SQLPoolWorkloadClassifier using its observed tfState.
@@ -1087,6 +1195,15 @@ func (tr *SQLPoolWorkloadGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this SQLPoolWorkloadGroup
+func (tr *SQLPoolWorkloadGroup) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this SQLPoolWorkloadGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SQLPoolWorkloadGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -1169,6 +1286,15 @@ func (tr *Workspace) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this Workspace
+func (tr *Workspace) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Workspace using its observed tfState.
@@ -1255,6 +1381,15 @@ func (tr *WorkspaceAADAdmin) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this WorkspaceAADAdmin
+func (tr *WorkspaceAADAdmin) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this WorkspaceAADAdmin using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *WorkspaceAADAdmin) LateInitialize(attrs []byte) (bool, error) {
@@ -1337,6 +1472,15 @@ func (tr *WorkspaceExtendedAuditingPolicy) GetInitParameters() (map[string]any, 
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this WorkspaceExtendedAuditingPolicy
+func (tr *WorkspaceExtendedAuditingPolicy) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this WorkspaceExtendedAuditingPolicy using its observed tfState.
@@ -1423,6 +1567,15 @@ func (tr *WorkspaceSecurityAlertPolicy) GetInitParameters() (map[string]any, err
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this WorkspaceSecurityAlertPolicy
+func (tr *WorkspaceSecurityAlertPolicy) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this WorkspaceSecurityAlertPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *WorkspaceSecurityAlertPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -1507,6 +1660,15 @@ func (tr *WorkspaceSQLAADAdmin) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this WorkspaceSQLAADAdmin
+func (tr *WorkspaceSQLAADAdmin) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this WorkspaceSQLAADAdmin using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *WorkspaceSQLAADAdmin) LateInitialize(attrs []byte) (bool, error) {
@@ -1589,6 +1751,15 @@ func (tr *WorkspaceVulnerabilityAssessment) GetInitParameters() (map[string]any,
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this WorkspaceVulnerabilityAssessment
+func (tr *WorkspaceVulnerabilityAssessment) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this WorkspaceVulnerabilityAssessment using its observed tfState.

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: apipolicies.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -300,6 +300,19 @@ spec:
                             type: string
                         type: object
                     type: object
+                  xmlContent:
+                    description: The XML Content for this Policy as a string.
+                    type: string
+                  xmlLink:
+                    description: A link to a Policy XML Document, which must be publicly
+                      available.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
                   xmlContent:
                     description: The XML Content for this Policy as a string.
                     type: string

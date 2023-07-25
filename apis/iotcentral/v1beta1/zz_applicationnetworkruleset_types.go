@@ -46,15 +46,12 @@ type ApplicationNetworkRuleSetObservation struct {
 type ApplicationNetworkRuleSetParameters struct {
 
 	// Whether these IP Rules apply for device connectivity to IoT Hub and Device Provisioning Service associated with this IoT Central Application. Possible values are true, false. Defaults to true
-	// +kubebuilder:validation:Optional
 	ApplyToDevice *bool `json:"applyToDevice,omitempty" tf:"apply_to_device,omitempty"`
 
 	// Specifies the default action for the IoT Central Application Network Rule Set. Possible values are Allow and Deny. Defaults to Deny.
-	// +kubebuilder:validation:Optional
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// One or more ip_rule blocks as defined below.
-	// +kubebuilder:validation:Optional
 	IPRule []IPRuleParameters `json:"ipRule,omitempty" tf:"ip_rule,omitempty"`
 
 	// The ID of the IoT Central Application. Changing this forces a new resource to be created.
@@ -93,11 +90,9 @@ type IPRuleObservation struct {
 type IPRuleParameters struct {
 
 	// The IP address range in CIDR notation for the IP Rule.
-	// +kubebuilder:validation:Optional
 	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
 
 	// The name of the IP Rule
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -108,14 +103,6 @@ type ApplicationNetworkRuleSetSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider ApplicationNetworkRuleSetInitParameters `json:"initProvider,omitempty"`
 }
 

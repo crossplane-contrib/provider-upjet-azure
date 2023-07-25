@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: securitycentersettings.security.azure.upbound.io
 spec:
   group: security.azure.upbound.io
@@ -66,6 +66,20 @@ spec:
                 - Delete
                 type: string
               forProvider:
+                properties:
+                  enabled:
+                    description: Boolean flag to enable/disable data access.
+                    type: boolean
+                  settingName:
+                    description: The setting to manage. Possible values are MCAS ,
+                      WDATP and SENTINEL. Changing this forces a new resource to be
+                      created.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
                 properties:
                   enabled:
                     description: Boolean flag to enable/disable data access.
@@ -276,10 +290,12 @@ spec:
             x-kubernetes-validations:
             - message: enabled is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)
+                || has(self.initProvider.enabled)'
             - message: settingName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.settingName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.settingName)
+                || has(self.initProvider.settingName)'
           status:
             description: SecurityCenterSettingStatus defines the observed state of
               SecurityCenterSetting.

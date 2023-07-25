@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: hadoopclusters.hdinsight.azure.upbound.io
 spec:
   group: hdinsight.azure.upbound.io
@@ -81,8 +81,6 @@ spec:
                             for this HDInsight Hadoop Cluster. Changing this forces
                             a new resource to be created.
                           type: string
-                      required:
-                      - hadoop
                       type: object
                     type: array
                   computeIsolation:
@@ -144,7 +142,6 @@ spec:
                           - namespace
                           type: object
                       required:
-                      - logAnalyticsWorkspaceId
                       - primaryKeySecretRef
                       type: object
                     type: array
@@ -175,7 +172,6 @@ spec:
                           type: string
                       required:
                       - passwordSecretRef
-                      - username
                       type: object
                     type: array
                   location:
@@ -227,10 +223,7 @@ spec:
                                   new resource to be created.
                                 type: string
                             required:
-                            - databaseName
                             - passwordSecretRef
-                            - server
-                            - username
                             type: object
                           type: array
                         hive:
@@ -273,10 +266,7 @@ spec:
                                   new resource to be created.
                                 type: string
                             required:
-                            - databaseName
                             - passwordSecretRef
-                            - server
-                            - username
                             type: object
                           type: array
                         oozie:
@@ -319,10 +309,7 @@ spec:
                                   new resource to be created.
                                 type: string
                             required:
-                            - databaseName
                             - passwordSecretRef
-                            - server
-                            - username
                             type: object
                           type: array
                       type: object
@@ -354,7 +341,6 @@ spec:
                           - namespace
                           type: object
                       required:
-                      - logAnalyticsWorkspaceId
                       - primaryKeySecretRef
                       type: object
                     type: array
@@ -507,9 +493,6 @@ spec:
                                         to run during the installation of the edge
                                         node.
                                       type: string
-                                  required:
-                                  - name
-                                  - uri
                                   type: object
                                 type: array
                               targetInstanceCount:
@@ -534,9 +517,6 @@ spec:
                                         to run during the installation of the edge
                                         node.
                                       type: string
-                                  required:
-                                  - name
-                                  - uri
                                   type: object
                                 type: array
                               vmSize:
@@ -572,10 +552,6 @@ spec:
                                   and Standard_NC24. Changing this forces a new resource
                                   to be created.
                                 type: string
-                            required:
-                            - installScriptAction
-                            - targetInstanceCount
-                            - vmSize
                             type: object
                           type: array
                         headNode:
@@ -619,9 +595,6 @@ spec:
                                         to run during the installation of the edge
                                         node.
                                       type: string
-                                  required:
-                                  - name
-                                  - uri
                                   type: object
                                 type: array
                               sshKeys:
@@ -760,9 +733,6 @@ spec:
                                   and Standard_NC24. Changing this forces a new resource
                                   to be created.
                                 type: string
-                            required:
-                            - username
-                            - vmSize
                             type: object
                           type: array
                         workerNode:
@@ -787,9 +757,6 @@ spec:
                                               nodes to autoscale to based on the cluster's
                                               activity.
                                             type: number
-                                        required:
-                                        - maxInstanceCount
-                                        - minInstanceCount
                                         type: object
                                       type: array
                                     recurrence:
@@ -820,19 +787,12 @@ spec:
                                                     perform the autoscale in 24hour
                                                     format.
                                                   type: string
-                                              required:
-                                              - days
-                                              - targetInstanceCount
-                                              - time
                                               type: object
                                             type: array
                                           timezone:
                                             description: The time zone for the autoscale
                                               schedule times.
                                             type: string
-                                        required:
-                                        - schedule
-                                        - timezone
                                         type: object
                                       type: array
                                   type: object
@@ -874,9 +834,6 @@ spec:
                                         to run during the installation of the edge
                                         node.
                                       type: string
-                                  required:
-                                  - name
-                                  - uri
                                   type: object
                                 type: array
                               sshKeys:
@@ -1019,10 +976,6 @@ spec:
                                   and Standard_NC24. Changing this forces a new resource
                                   to be created.
                                 type: string
-                            required:
-                            - targetInstanceCount
-                            - username
-                            - vmSize
                             type: object
                           type: array
                         zookeeperNode:
@@ -1066,9 +1019,6 @@ spec:
                                         to run during the installation of the edge
                                         node.
                                       type: string
-                                  required:
-                                  - name
-                                  - uri
                                   type: object
                                 type: array
                               sshKeys:
@@ -1207,15 +1157,8 @@ spec:
                                   and Standard_NC24. Changing this forces a new resource
                                   to be created.
                                 type: string
-                            required:
-                            - username
-                            - vmSize
                             type: object
                           type: array
-                      required:
-                      - headNode
-                      - workerNode
-                      - zookeeperNode
                       type: object
                     type: array
                   securityProfile:
@@ -1273,12 +1216,7 @@ spec:
                             Cluster. Changing this forces a new resource to be created.
                           type: string
                       required:
-                      - aaddsResourceId
-                      - domainName
                       - domainUserPasswordSecretRef
-                      - domainUsername
-                      - ldapsUrls
-                      - msiResourceId
                       type: object
                     type: array
                   storageAccount:
@@ -1396,7 +1334,6 @@ spec:
                             forces a new resource to be created.
                           type: string
                       required:
-                      - isDefault
                       - storageAccountKeySecretRef
                       type: object
                     type: array
@@ -1422,11 +1359,683 @@ spec:
                           description: The ID of the Storage Account. Changing this
                             forces a new resource to be created.
                           type: string
-                      required:
-                      - filesystemId
-                      - isDefault
-                      - managedIdentityResourceId
-                      - storageResourceId
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A map of Tags which should be assigned to this HDInsight
+                      Hadoop Cluster.
+                    type: object
+                  tier:
+                    description: Specifies the Tier which should be used for this
+                      HDInsight Hadoop Cluster. Possible values are Standard or Premium.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  tlsMinVersion:
+                    description: The minimal supported TLS version. Possible values
+                      are 1.0, 1.1 or 1.2. Changing this forces a new resource to
+                      be created.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  clusterVersion:
+                    description: Specifies the Version of HDInsights which should
+                      be used for this Cluster. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  componentVersion:
+                    description: A component_version block as defined below.
+                    items:
+                      properties:
+                        hadoop:
+                          description: The version of Hadoop which should be used
+                            for this HDInsight Hadoop Cluster. Changing this forces
+                            a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  computeIsolation:
+                    description: A compute_isolation block as defined below.
+                    items:
+                      properties:
+                        computeIsolationEnabled:
+                          description: This field indicates whether enable compute
+                            isolation or not. Possible values are true or false.
+                          type: boolean
+                        hostSku:
+                          description: The name of the host SKU.
+                          type: string
+                      type: object
+                    type: array
+                  diskEncryption:
+                    description: One or more disk_encryption block as defined below.
+                    items:
+                      properties:
+                        encryptionAlgorithm:
+                          description: This is an algorithm identifier for encryption.
+                            Possible values are RSA1_5, RSA-OAEP, RSA-OAEP-256.
+                          type: string
+                        encryptionAtHostEnabled:
+                          description: This is indicator to show whether resource
+                            disk encryption is enabled.
+                          type: boolean
+                        keyVaultKeyId:
+                          description: The ID of the key vault key.
+                          type: string
+                        keyVaultManagedIdentityId:
+                          description: This is the resource ID of Managed Identity
+                            used to access the key vault.
+                          type: string
+                      type: object
+                    type: array
+                  extension:
+                    description: An extension block as defined below.
+                    items:
+                      properties:
+                        logAnalyticsWorkspaceId:
+                          description: The workspace ID of the log analytics extension.
+                          type: string
+                      type: object
+                    type: array
+                  gateway:
+                    description: A gateway block as defined below.
+                    items:
+                      properties:
+                        username:
+                          description: The username used for the Ambari Portal. Changing
+                            this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: Specifies the Azure Region which this HDInsight Hadoop
+                      Cluster should exist. Changing this forces a new resource to
+                      be created.
+                    type: string
+                  metastores:
+                    description: A metastores block as defined below.
+                    items:
+                      properties:
+                        ambari:
+                          description: An ambari block as defined below.
+                          items:
+                            properties:
+                              databaseName:
+                                description: The external Oozie metastore's existing
+                                  SQL database. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                              server:
+                                description: The fully-qualified domain name (FQDN)
+                                  of the SQL server to use for the external Oozie
+                                  metastore. Changing this forces a new resource to
+                                  be created.
+                                type: string
+                              username:
+                                description: The Username of the local administrator
+                                  for the Zookeeper Nodes. Changing this forces a
+                                  new resource to be created.
+                                type: string
+                            type: object
+                          type: array
+                        hive:
+                          description: A hive block as defined below.
+                          items:
+                            properties:
+                              databaseName:
+                                description: The external Oozie metastore's existing
+                                  SQL database. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                              server:
+                                description: The fully-qualified domain name (FQDN)
+                                  of the SQL server to use for the external Oozie
+                                  metastore. Changing this forces a new resource to
+                                  be created.
+                                type: string
+                              username:
+                                description: The Username of the local administrator
+                                  for the Zookeeper Nodes. Changing this forces a
+                                  new resource to be created.
+                                type: string
+                            type: object
+                          type: array
+                        oozie:
+                          description: An oozie block as defined below.
+                          items:
+                            properties:
+                              databaseName:
+                                description: The external Oozie metastore's existing
+                                  SQL database. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                              server:
+                                description: The fully-qualified domain name (FQDN)
+                                  of the SQL server to use for the external Oozie
+                                  metastore. Changing this forces a new resource to
+                                  be created.
+                                type: string
+                              username:
+                                description: The Username of the local administrator
+                                  for the Zookeeper Nodes. Changing this forces a
+                                  new resource to be created.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  monitor:
+                    description: A monitor block as defined below.
+                    items:
+                      properties:
+                        logAnalyticsWorkspaceId:
+                          description: The Operations Management Suite (OMS) workspace
+                            ID.
+                          type: string
+                      type: object
+                    type: array
+                  network:
+                    description: A network block as defined below.
+                    items:
+                      properties:
+                        connectionDirection:
+                          description: The direction of the resource provider connection.
+                            Possible values include Inbound or Outbound. Defaults
+                            to Inbound. Changing this forces a new resource to be
+                            created.
+                          type: string
+                        privateLinkEnabled:
+                          description: Is the private link enabled? Possible values
+                            include True or False. Defaults to False. Changing this
+                            forces a new resource to be created.
+                          type: boolean
+                      type: object
+                    type: array
+                  roles:
+                    description: A roles block as defined below.
+                    items:
+                      properties:
+                        edgeNode:
+                          description: A edge_node block as defined below.
+                          items:
+                            properties:
+                              httpsEndpoints:
+                                description: The HTTPS Connectivity Endpoint for this
+                                  HDInsight Hadoop Cluster.
+                                items:
+                                  properties:
+                                    accessModes:
+                                      description: A list of access modes for the
+                                        application.
+                                      items:
+                                        type: string
+                                      type: array
+                                    destinationPort:
+                                      description: The destination port to connect
+                                        to.
+                                      type: number
+                                    disableGatewayAuth:
+                                      description: The value indicates whether the
+                                        gateway authentication is enabled or not.
+                                      type: boolean
+                                    privateIpAddress:
+                                      description: The private ip address of the endpoint.
+                                      type: string
+                                    subDomainSuffix:
+                                      description: The application's subdomain suffix.
+                                      type: string
+                                  type: object
+                                type: array
+                              installScriptAction:
+                                description: A install_script_action block as defined
+                                  below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the uninstall script
+                                        action.
+                                      type: string
+                                    parameters:
+                                      description: The parameters for the script.
+                                      type: string
+                                    uri:
+                                      description: The URI pointing to the script
+                                        to run during the installation of the edge
+                                        node.
+                                      type: string
+                                  type: object
+                                type: array
+                              targetInstanceCount:
+                                description: The number of instances which should
+                                  be run for the Worker Nodes.
+                                type: number
+                              uninstallScriptActions:
+                                description: A uninstall_script_actions block as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the uninstall script
+                                        action.
+                                      type: string
+                                    parameters:
+                                      description: The parameters for the script.
+                                      type: string
+                                    uri:
+                                      description: The URI pointing to the script
+                                        to run during the installation of the edge
+                                        node.
+                                      type: string
+                                  type: object
+                                type: array
+                              vmSize:
+                                description: The Size of the Virtual Machine which
+                                  should be used as the Zookeeper Nodes. Possible
+                                  values are ExtraSmall, Small, Medium, Large, ExtraLarge,
+                                  A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                                  Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                                  Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                                  Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                                  Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                                  Standard_D3_V2, Standard_D4_V2, Standard_D5_V2,
+                                  Standard_D11_V2, Standard_D12_V2, Standard_D13_V2,
+                                  Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2,
+                                  Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                                  Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                                  Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3,
+                                  Standard_E8_V3, Standard_E16_V3, Standard_E20_V3,
+                                  Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3,
+                                  Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3,
+                                  Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3,
+                                  Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4,
+                                  Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                                  Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                                  Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                                  Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                                  Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                                  Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                                  Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                                  Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                                  Standard_F64s_V2, Standard_F72s_V2, Standard_GS1,
+                                  Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5
+                                  and Standard_NC24. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                            type: object
+                          type: array
+                        headNode:
+                          description: A head_node block as defined above.
+                          items:
+                            properties:
+                              scriptActions:
+                                description: The script action which will run on the
+                                  cluster. Changing this forces a new resource to
+                                  be created.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the uninstall script
+                                        action.
+                                      type: string
+                                    parameters:
+                                      description: The parameters for the script.
+                                      type: string
+                                    uri:
+                                      description: The URI pointing to the script
+                                        to run during the installation of the edge
+                                        node.
+                                      type: string
+                                  type: object
+                                type: array
+                              sshKeys:
+                                description: A list of SSH Keys which should be used
+                                  for the local administrator on the Zookeeper Nodes.
+                                  Changing this forces a new resource to be created.
+                                items:
+                                  type: string
+                                type: array
+                              username:
+                                description: The Username of the local administrator
+                                  for the Zookeeper Nodes. Changing this forces a
+                                  new resource to be created.
+                                type: string
+                              virtualNetworkId:
+                                description: The ID of the Virtual Network where the
+                                  Zookeeper Nodes should be provisioned within. Changing
+                                  this forces a new resource to be created.
+                                type: string
+                              vmSize:
+                                description: The Size of the Virtual Machine which
+                                  should be used as the Zookeeper Nodes. Possible
+                                  values are ExtraSmall, Small, Medium, Large, ExtraLarge,
+                                  A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                                  Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                                  Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                                  Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                                  Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                                  Standard_D3_V2, Standard_D4_V2, Standard_D5_V2,
+                                  Standard_D11_V2, Standard_D12_V2, Standard_D13_V2,
+                                  Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2,
+                                  Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                                  Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                                  Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3,
+                                  Standard_E8_V3, Standard_E16_V3, Standard_E20_V3,
+                                  Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3,
+                                  Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3,
+                                  Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3,
+                                  Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4,
+                                  Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                                  Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                                  Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                                  Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                                  Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                                  Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                                  Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                                  Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                                  Standard_F64s_V2, Standard_F72s_V2, Standard_GS1,
+                                  Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5
+                                  and Standard_NC24. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                            type: object
+                          type: array
+                        workerNode:
+                          description: A worker_node block as defined below.
+                          items:
+                            properties:
+                              autoscale:
+                                description: A autoscale block as defined below.
+                                items:
+                                  properties:
+                                    capacity:
+                                      description: A capacity block as defined below.
+                                      items:
+                                        properties:
+                                          maxInstanceCount:
+                                            description: The maximum number of worker
+                                              nodes to autoscale to based on the cluster's
+                                              activity.
+                                            type: number
+                                          minInstanceCount:
+                                            description: The minimum number of worker
+                                              nodes to autoscale to based on the cluster's
+                                              activity.
+                                            type: number
+                                        type: object
+                                      type: array
+                                    recurrence:
+                                      description: A recurrence block as defined below.
+                                      items:
+                                        properties:
+                                          schedule:
+                                            description: A list of schedule blocks
+                                              as defined below.
+                                            items:
+                                              properties:
+                                                days:
+                                                  description: The days of the week
+                                                    to perform autoscale. Possible
+                                                    values are Monday, Tuesday, Wednesday,
+                                                    Thursday, Friday, Saturday and
+                                                    Sunday.
+                                                  items:
+                                                    type: string
+                                                  type: array
+                                                targetInstanceCount:
+                                                  description: The number of instances
+                                                    which should be run for the Worker
+                                                    Nodes.
+                                                  type: number
+                                                time:
+                                                  description: The time of day to
+                                                    perform the autoscale in 24hour
+                                                    format.
+                                                  type: string
+                                              type: object
+                                            type: array
+                                          timezone:
+                                            description: The time zone for the autoscale
+                                              schedule times.
+                                            type: string
+                                        type: object
+                                      type: array
+                                  type: object
+                                type: array
+                              scriptActions:
+                                description: The script action which will run on the
+                                  cluster. Changing this forces a new resource to
+                                  be created.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the uninstall script
+                                        action.
+                                      type: string
+                                    parameters:
+                                      description: The parameters for the script.
+                                      type: string
+                                    uri:
+                                      description: The URI pointing to the script
+                                        to run during the installation of the edge
+                                        node.
+                                      type: string
+                                  type: object
+                                type: array
+                              sshKeys:
+                                description: A list of SSH Keys which should be used
+                                  for the local administrator on the Zookeeper Nodes.
+                                  Changing this forces a new resource to be created.
+                                items:
+                                  type: string
+                                type: array
+                              targetInstanceCount:
+                                description: The number of instances which should
+                                  be run for the Worker Nodes.
+                                type: number
+                              username:
+                                description: The Username of the local administrator
+                                  for the Zookeeper Nodes. Changing this forces a
+                                  new resource to be created.
+                                type: string
+                              virtualNetworkId:
+                                description: The ID of the Virtual Network where the
+                                  Zookeeper Nodes should be provisioned within. Changing
+                                  this forces a new resource to be created.
+                                type: string
+                              vmSize:
+                                description: The Size of the Virtual Machine which
+                                  should be used as the Zookeeper Nodes. Possible
+                                  values are ExtraSmall, Small, Medium, Large, ExtraLarge,
+                                  A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                                  Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                                  Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                                  Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                                  Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                                  Standard_D3_V2, Standard_D4_V2, Standard_D5_V2,
+                                  Standard_D11_V2, Standard_D12_V2, Standard_D13_V2,
+                                  Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2,
+                                  Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                                  Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                                  Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3,
+                                  Standard_E8_V3, Standard_E16_V3, Standard_E20_V3,
+                                  Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3,
+                                  Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3,
+                                  Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3,
+                                  Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4,
+                                  Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                                  Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                                  Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                                  Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                                  Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                                  Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                                  Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                                  Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                                  Standard_F64s_V2, Standard_F72s_V2, Standard_GS1,
+                                  Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5
+                                  and Standard_NC24. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                            type: object
+                          type: array
+                        zookeeperNode:
+                          description: A zookeeper_node block as defined below.
+                          items:
+                            properties:
+                              scriptActions:
+                                description: The script action which will run on the
+                                  cluster. Changing this forces a new resource to
+                                  be created.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name of the uninstall script
+                                        action.
+                                      type: string
+                                    parameters:
+                                      description: The parameters for the script.
+                                      type: string
+                                    uri:
+                                      description: The URI pointing to the script
+                                        to run during the installation of the edge
+                                        node.
+                                      type: string
+                                  type: object
+                                type: array
+                              sshKeys:
+                                description: A list of SSH Keys which should be used
+                                  for the local administrator on the Zookeeper Nodes.
+                                  Changing this forces a new resource to be created.
+                                items:
+                                  type: string
+                                type: array
+                              username:
+                                description: The Username of the local administrator
+                                  for the Zookeeper Nodes. Changing this forces a
+                                  new resource to be created.
+                                type: string
+                              virtualNetworkId:
+                                description: The ID of the Virtual Network where the
+                                  Zookeeper Nodes should be provisioned within. Changing
+                                  this forces a new resource to be created.
+                                type: string
+                              vmSize:
+                                description: The Size of the Virtual Machine which
+                                  should be used as the Zookeeper Nodes. Possible
+                                  values are ExtraSmall, Small, Medium, Large, ExtraLarge,
+                                  A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                                  Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                                  Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                                  Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                                  Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                                  Standard_D3_V2, Standard_D4_V2, Standard_D5_V2,
+                                  Standard_D11_V2, Standard_D12_V2, Standard_D13_V2,
+                                  Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2,
+                                  Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                                  Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                                  Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3,
+                                  Standard_E8_V3, Standard_E16_V3, Standard_E20_V3,
+                                  Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3,
+                                  Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3,
+                                  Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3,
+                                  Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4,
+                                  Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                                  Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                                  Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                                  Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                                  Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                                  Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                                  Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                                  Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                                  Standard_F64s_V2, Standard_F72s_V2, Standard_GS1,
+                                  Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5
+                                  and Standard_NC24. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  securityProfile:
+                    description: A security_profile block as defined below. Changing
+                      this forces a new resource to be created.
+                    items:
+                      properties:
+                        aaddsResourceId:
+                          description: The resource ID of the Azure Active Directory
+                            Domain Service. Changing this forces a new resource to
+                            be created.
+                          type: string
+                        clusterUsersGroupDns:
+                          description: A list of the distinguished names for the cluster
+                            user groups. Changing this forces a new resource to be
+                            created.
+                          items:
+                            type: string
+                          type: array
+                        domainName:
+                          description: The name of the Azure Active Directory Domain.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        domainUsername:
+                          description: The username of the Azure Active Directory
+                            Domain. Changing this forces a new resource to be created.
+                          type: string
+                        ldapsUrls:
+                          description: A list of the LDAPS URLs to communicate with
+                            the Azure Active Directory. Changing this forces a new
+                            resource to be created.
+                          items:
+                            type: string
+                          type: array
+                        msiResourceId:
+                          description: The User Assigned Identity for the HDInsight
+                            Cluster. Changing this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  storageAccount:
+                    description: One or more storage_account block as defined below.
+                    items:
+                      properties:
+                        isDefault:
+                          description: Is this the Default Storage Account for the
+                            HDInsight Hadoop Cluster? Changing this forces a new resource
+                            to be created.
+                          type: boolean
+                        storageResourceId:
+                          description: The ID of the Storage Account. Changing this
+                            forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  storageAccountGen2:
+                    description: A storage_account_gen2 block as defined below.
+                    items:
+                      properties:
+                        filesystemId:
+                          description: The ID of the Gen2 Filesystem. Changing this
+                            forces a new resource to be created.
+                          type: string
+                        isDefault:
+                          description: Is this the Default Storage Account for the
+                            HDInsight Hadoop Cluster? Changing this forces a new resource
+                            to be created.
+                          type: boolean
+                        managedIdentityResourceId:
+                          description: The ID of Managed Identity to use for accessing
+                            the Gen2 filesystem. Changing this forces a new resource
+                            to be created.
+                          type: string
+                        storageResourceId:
+                          description: The ID of the Storage Account. Changing this
+                            forces a new resource to be created.
+                          type: string
                       type: object
                     type: array
                   tags:
@@ -1646,22 +2255,28 @@ spec:
             x-kubernetes-validations:
             - message: clusterVersion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.clusterVersion)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.clusterVersion)
+                || has(self.initProvider.clusterVersion)'
             - message: componentVersion is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.componentVersion)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.componentVersion)
+                || has(self.initProvider.componentVersion)'
             - message: gateway is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.gateway)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.gateway)
+                || has(self.initProvider.gateway)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: roles is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.roles)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.roles)
+                || has(self.initProvider.roles)'
             - message: tier is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.tier)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tier)
+                || has(self.initProvider.tier)'
           status:
             description: HadoopClusterStatus defines the observed state of HadoopCluster.
             properties:

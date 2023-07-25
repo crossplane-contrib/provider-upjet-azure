@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FunctionJavascriptUdaInitParameters struct {
+
+	// One or more input blocks as defined below.
+	Input []InputInitParameters `json:"input,omitempty" tf:"input,omitempty"`
+
+	// An output block as defined below.
+	Output []OutputInitParameters `json:"output,omitempty" tf:"output,omitempty"`
+
+	// The JavaScript of this UDA Function.
+	Script *string `json:"script,omitempty" tf:"script,omitempty"`
+}
+
 type FunctionJavascriptUdaObservation struct {
 
 	// The ID of the Stream Analytics JavaScript UDA Function.
@@ -34,15 +46,12 @@ type FunctionJavascriptUdaObservation struct {
 type FunctionJavascriptUdaParameters struct {
 
 	// One or more input blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Input []InputParameters `json:"input,omitempty" tf:"input,omitempty"`
 
 	// An output block as defined below.
-	// +kubebuilder:validation:Optional
 	Output []OutputParameters `json:"output,omitempty" tf:"output,omitempty"`
 
 	// The JavaScript of this UDA Function.
-	// +kubebuilder:validation:Optional
 	Script *string `json:"script,omitempty" tf:"script,omitempty"`
 
 	// The resource ID of the Stream Analytics Job where this Function should be created. Changing this forces a new resource to be created.
@@ -60,6 +69,15 @@ type FunctionJavascriptUdaParameters struct {
 	StreamAnalyticsJobIDSelector *v1.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
 }
 
+type InputInitParameters struct {
+
+	// Is this input parameter a configuration parameter? Defaults to false.
+	ConfigurationParameter *bool `json:"configurationParameter,omitempty" tf:"configuration_parameter,omitempty"`
+
+	// The input data type of this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type InputObservation struct {
 
 	// Is this input parameter a configuration parameter? Defaults to false.
@@ -72,12 +90,16 @@ type InputObservation struct {
 type InputParameters struct {
 
 	// Is this input parameter a configuration parameter? Defaults to false.
-	// +kubebuilder:validation:Optional
 	ConfigurationParameter *bool `json:"configurationParameter,omitempty" tf:"configuration_parameter,omitempty"`
 
 	// The input data type of this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type OutputInitParameters struct {
+
+	// The output data type from this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OutputObservation struct {
@@ -89,14 +111,17 @@ type OutputObservation struct {
 type OutputParameters struct {
 
 	// The output data type from this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // FunctionJavascriptUdaSpec defines the desired state of FunctionJavascriptUda
 type FunctionJavascriptUdaSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FunctionJavascriptUdaParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FunctionJavascriptUdaInitParameters `json:"initProvider,omitempty"`
 }
 
 // FunctionJavascriptUdaStatus defines the observed state of FunctionJavascriptUda.
@@ -117,9 +142,9 @@ type FunctionJavascriptUdaStatus struct {
 type FunctionJavascriptUda struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.input)",message="input is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.output)",message="output is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.script)",message="script is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.input) || has(self.initProvider.input)",message="input is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.output) || has(self.initProvider.output)",message="output is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.script) || has(self.initProvider.script)",message="script is a required parameter"
 	Spec   FunctionJavascriptUdaSpec   `json:"spec"`
 	Status FunctionJavascriptUdaStatus `json:"status,omitempty"`
 }

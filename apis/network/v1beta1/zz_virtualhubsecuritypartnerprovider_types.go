@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VirtualHubSecurityPartnerProviderInitParameters struct {
+
+	// The Azure Region where the Security Partner Provider should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The security provider name. Possible values are ZScaler, IBoss and Checkpoint is allowed. Changing this forces a new resource to be created.
+	SecurityProviderName *string `json:"securityProviderName,omitempty" tf:"security_provider_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Security Partner Provider.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type VirtualHubSecurityPartnerProviderObservation struct {
 
 	// The ID of the Security Partner Provider.
@@ -37,7 +49,6 @@ type VirtualHubSecurityPartnerProviderObservation struct {
 type VirtualHubSecurityPartnerProviderParameters struct {
 
 	// The Azure Region where the Security Partner Provider should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Security Partner Provider should exist. Changing this forces a new resource to be created.
@@ -54,11 +65,9 @@ type VirtualHubSecurityPartnerProviderParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The security provider name. Possible values are ZScaler, IBoss and Checkpoint is allowed. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SecurityProviderName *string `json:"securityProviderName,omitempty" tf:"security_provider_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Security Partner Provider.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Hub within which this Security Partner Provider should be created. Changing this forces a new resource to be created.
@@ -80,6 +89,10 @@ type VirtualHubSecurityPartnerProviderParameters struct {
 type VirtualHubSecurityPartnerProviderSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VirtualHubSecurityPartnerProviderParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VirtualHubSecurityPartnerProviderInitParameters `json:"initProvider,omitempty"`
 }
 
 // VirtualHubSecurityPartnerProviderStatus defines the observed state of VirtualHubSecurityPartnerProvider.
@@ -100,8 +113,8 @@ type VirtualHubSecurityPartnerProviderStatus struct {
 type VirtualHubSecurityPartnerProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.securityProviderName)",message="securityProviderName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.securityProviderName) || has(self.initProvider.securityProviderName)",message="securityProviderName is a required parameter"
 	Spec   VirtualHubSecurityPartnerProviderSpec   `json:"spec"`
 	Status VirtualHubSecurityPartnerProviderStatus `json:"status,omitempty"`
 }

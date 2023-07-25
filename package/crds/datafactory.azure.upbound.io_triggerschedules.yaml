@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: triggerschedules.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -184,8 +184,6 @@ spec:
                           description: The pipeline parameters that the trigger will
                             act upon.
                           type: object
-                      required:
-                      - name
                       type: object
                     type: array
                   pipelineName:
@@ -322,8 +320,118 @@ spec:
                                   runs. For example, a monthly property with a weekday
                                   value of Sunday means every Sunday of the month.
                                 type: string
-                            required:
-                            - weekday
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  startTime:
+                    description: The time the Schedule Trigger will start. This defaults
+                      to the current time. The time will be represented in UTC.
+                    type: string
+                  timeZone:
+                    description: The timezone of the start/end time.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  activated:
+                    description: Specifies if the Data Factory Schedule Trigger is
+                      activated. Defaults to true.
+                    type: boolean
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Schedule Trigger.
+                    items:
+                      type: string
+                    type: array
+                  description:
+                    description: The Schedule Trigger's description.
+                    type: string
+                  endTime:
+                    description: The time the Schedule Trigger should end. The time
+                      will be represented in UTC.
+                    type: string
+                  frequency:
+                    description: The trigger frequency. Valid values include Minute,
+                      Hour, Day, Week, Month. Defaults to Minute.
+                    type: string
+                  interval:
+                    description: The interval for how often the trigger occurs. This
+                      defaults to 1.
+                    type: number
+                  pipeline:
+                    description: block as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: Reference pipeline name.
+                          type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: The pipeline parameters that the trigger will
+                            act upon.
+                          type: object
+                      type: object
+                    type: array
+                  pipelineParameters:
+                    additionalProperties:
+                      type: string
+                    description: The pipeline parameters that the trigger will act
+                      upon.
+                    type: object
+                  schedule:
+                    description: A schedule block as defined below, which further
+                      specifies the recurrence schedule for the trigger. A schedule
+                      is capable of limiting or increasing the number of trigger executions
+                      specified by the frequency and interval properties.
+                    items:
+                      properties:
+                        daysOfMonth:
+                          description: Day(s) of the month on which the trigger is
+                            scheduled. This value can be specified with a monthly
+                            frequency only.
+                          items:
+                            type: number
+                          type: array
+                        daysOfWeek:
+                          description: Days of the week on which the trigger is scheduled.
+                            This value can be specified only with a weekly frequency.
+                          items:
+                            type: string
+                          type: array
+                        hours:
+                          description: Hours of the day on which the trigger is scheduled.
+                          items:
+                            type: number
+                          type: array
+                        minutes:
+                          description: Minutes of the hour on which the trigger is
+                            scheduled.
+                          items:
+                            type: number
+                          type: array
+                        monthly:
+                          description: A monthly block as documented below, which
+                            specifies the days of the month on which the trigger is
+                            scheduled. The value can be specified only with a monthly
+                            frequency.
+                          items:
+                            properties:
+                              week:
+                                description: The occurrence of the specified day during
+                                  the month. For example, a monthly property with
+                                  weekday and week values of Sunday, -1 means the
+                                  last Sunday of the month.
+                                type: number
+                              weekday:
+                                description: The day of the week on which the trigger
+                                  runs. For example, a monthly property with a weekday
+                                  value of Sunday means every Sunday of the month.
+                                type: string
                             type: object
                           type: array
                       type: object

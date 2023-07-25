@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DNSARecordInitParameters struct {
+
+	// List of IPv4 Addresses. Conflicts with target_resource_id.
+	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DNSARecordObservation struct {
 
 	// The FQDN of the DNS A Record.
@@ -43,7 +55,6 @@ type DNSARecordObservation struct {
 type DNSARecordParameters struct {
 
 	// List of IPv4 Addresses. Conflicts with target_resource_id.
-	// +kubebuilder:validation:Optional
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
@@ -60,11 +71,9 @@ type DNSARecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure resource id of the target object. Conflicts with records.
@@ -99,6 +108,10 @@ type DNSARecordParameters struct {
 type DNSARecordSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DNSARecordParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DNSARecordInitParameters `json:"initProvider,omitempty"`
 }
 
 // DNSARecordStatus defines the observed state of DNSARecord.
@@ -119,7 +132,7 @@ type DNSARecordStatus struct {
 type DNSARecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl) || has(self.initProvider.ttl)",message="ttl is a required parameter"
 	Spec   DNSARecordSpec   `json:"spec"`
 	Status DNSARecordStatus `json:"status,omitempty"`
 }

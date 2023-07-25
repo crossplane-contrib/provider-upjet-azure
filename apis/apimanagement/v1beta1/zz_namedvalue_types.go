@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NamedValueInitParameters struct {
+
+	// The display name of this API Management Named Value.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Specifies whether the API Management Named Value is secret. Valid values are true or false. The default value is false.
+	Secret *bool `json:"secret,omitempty" tf:"secret,omitempty"`
+
+	// A list of tags to be applied to the API Management Named Value.
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A value_from_key_vault block as defined below.
+	ValueFromKeyVault []ValueFromKeyVaultInitParameters `json:"valueFromKeyVault,omitempty" tf:"value_from_key_vault,omitempty"`
+}
+
 type NamedValueObservation struct {
 
 	// The name of the API Management Service in which the API Management Named Value should exist. Changing this forces a new resource to be created.
@@ -53,7 +68,6 @@ type NamedValueParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The display name of this API Management Named Value.
-	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The name of the Resource Group in which the API Management Named Value should exist. Changing this forces a new resource to be created.
@@ -70,20 +84,25 @@ type NamedValueParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies whether the API Management Named Value is secret. Valid values are true or false. The default value is false.
-	// +kubebuilder:validation:Optional
 	Secret *bool `json:"secret,omitempty" tf:"secret,omitempty"`
 
 	// A list of tags to be applied to the API Management Named Value.
-	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A value_from_key_vault block as defined below.
-	// +kubebuilder:validation:Optional
 	ValueFromKeyVault []ValueFromKeyVaultParameters `json:"valueFromKeyVault,omitempty" tf:"value_from_key_vault,omitempty"`
 
 	// The value of this API Management Named Value.
-	// +kubebuilder:validation:Optional
 	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
+}
+
+type ValueFromKeyVaultInitParameters struct {
+
+	// The client ID of User Assigned Identity, for the API Management Service, which will be used to access the key vault secret. The System Assigned Identity will be used in absence.
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// The resource ID of the Key Vault Secret.
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 }
 
 type ValueFromKeyVaultObservation struct {
@@ -98,18 +117,20 @@ type ValueFromKeyVaultObservation struct {
 type ValueFromKeyVaultParameters struct {
 
 	// The client ID of User Assigned Identity, for the API Management Service, which will be used to access the key vault secret. The System Assigned Identity will be used in absence.
-	// +kubebuilder:validation:Optional
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
 
 	// The resource ID of the Key Vault Secret.
-	// +kubebuilder:validation:Required
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 }
 
 // NamedValueSpec defines the desired state of NamedValue
 type NamedValueSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NamedValueParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider NamedValueInitParameters `json:"initProvider,omitempty"`
 }
 
 // NamedValueStatus defines the observed state of NamedValue.
@@ -130,7 +151,7 @@ type NamedValueStatus struct {
 type NamedValue struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
 	Spec   NamedValueSpec   `json:"spec"`
 	Status NamedValueStatus `json:"status,omitempty"`
 }

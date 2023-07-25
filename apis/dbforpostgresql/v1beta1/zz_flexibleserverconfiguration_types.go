@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FlexibleServerConfigurationInitParameters struct {
+
+	// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type FlexibleServerConfigurationObservation struct {
 
 	// The ID of the PostgreSQL Configuration.
@@ -31,7 +40,6 @@ type FlexibleServerConfigurationObservation struct {
 type FlexibleServerConfigurationParameters struct {
 
 	// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the PostgreSQL Flexible Server where we want to change configuration. Changing this forces a new PostgreSQL Flexible Server Configuration resource.
@@ -49,7 +57,6 @@ type FlexibleServerConfigurationParameters struct {
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values.
-	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -57,6 +64,10 @@ type FlexibleServerConfigurationParameters struct {
 type FlexibleServerConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FlexibleServerConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FlexibleServerConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // FlexibleServerConfigurationStatus defines the observed state of FlexibleServerConfiguration.
@@ -77,8 +88,8 @@ type FlexibleServerConfigurationStatus struct {
 type FlexibleServerConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value)",message="value is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value) || has(self.initProvider.value)",message="value is a required parameter"
 	Spec   FlexibleServerConfigurationSpec   `json:"spec"`
 	Status FlexibleServerConfigurationStatus `json:"status,omitempty"`
 }

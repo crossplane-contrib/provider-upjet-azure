@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: botchannelwebchats.botservice.azure.upbound.io
 spec:
   group: botservice.azure.upbound.io
@@ -236,6 +236,21 @@ spec:
                       type: string
                     type: array
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  siteNames:
+                    description: A list of Web Chat Site names.
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -436,10 +451,12 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: siteNames is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.siteNames)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.siteNames)
+                || has(self.initProvider.siteNames)'
           status:
             description: BotChannelWebChatStatus defines the observed state of BotChannelWebChat.
             properties:

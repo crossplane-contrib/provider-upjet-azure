@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SubnetInitParameters struct {
+
+	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny.
+	UseInVirtualMachineCreation *string `json:"useInVirtualMachineCreation,omitempty" tf:"use_in_virtual_machine_creation,omitempty"`
+
+	// Can Virtual Machines in this Subnet use Public IP Addresses? Possible values are Allow, Default and Deny.
+	UsePublicIPAddress *string `json:"usePublicIpAddress,omitempty" tf:"use_public_ip_address,omitempty"`
+}
+
 type SubnetObservation struct {
 
 	// The name of the Subnet for this Virtual Network.
@@ -28,12 +37,25 @@ type SubnetObservation struct {
 type SubnetParameters struct {
 
 	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny.
-	// +kubebuilder:validation:Optional
 	UseInVirtualMachineCreation *string `json:"useInVirtualMachineCreation,omitempty" tf:"use_in_virtual_machine_creation,omitempty"`
 
 	// Can Virtual Machines in this Subnet use Public IP Addresses? Possible values are Allow, Default and Deny.
-	// +kubebuilder:validation:Optional
 	UsePublicIPAddress *string `json:"usePublicIpAddress,omitempty" tf:"use_public_ip_address,omitempty"`
+}
+
+type VirtualNetworkInitParameters struct {
+
+	// A description for the Virtual Network.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the name of the Dev Test Virtual Network. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A subnet block as defined below.
+	Subnet []SubnetInitParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VirtualNetworkObservation struct {
@@ -66,7 +88,6 @@ type VirtualNetworkObservation struct {
 type VirtualNetworkParameters struct {
 
 	// A description for the Virtual Network.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the name of the Dev Test Lab in which the Virtual Network should be created. Changing this forces a new resource to be created.
@@ -83,7 +104,6 @@ type VirtualNetworkParameters struct {
 	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Dev Test Virtual Network. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
@@ -100,11 +120,9 @@ type VirtualNetworkParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A subnet block as defined below.
-	// +kubebuilder:validation:Optional
 	Subnet []SubnetParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -112,6 +130,10 @@ type VirtualNetworkParameters struct {
 type VirtualNetworkSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VirtualNetworkParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VirtualNetworkInitParameters `json:"initProvider,omitempty"`
 }
 
 // VirtualNetworkStatus defines the observed state of VirtualNetwork.
@@ -132,7 +154,7 @@ type VirtualNetworkStatus struct {
 type VirtualNetwork struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   VirtualNetworkSpec   `json:"spec"`
 	Status VirtualNetworkStatus `json:"status,omitempty"`
 }

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: configurations.dbforpostgresql.azure.upbound.io
 spec:
   group: dbforpostgresql.azure.upbound.io
@@ -234,6 +234,22 @@ spec:
                       this forces a new resource to be created.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  name:
+                    description: Specifies the name of the PostgreSQL Configuration,
+                      which needs to be a valid PostgreSQL configuration name. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  value:
+                    description: Specifies the value of the PostgreSQL Configuration.
+                      See the PostgreSQL documentation for valid values. Changing
+                      this forces a new resource to be created.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -434,10 +450,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: value is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.value)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.value)
+                || has(self.initProvider.value)'
           status:
             description: ConfigurationStatus defines the observed state of Configuration.
             properties:

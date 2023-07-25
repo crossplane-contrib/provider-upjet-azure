@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IOTHubDPSInitParameters struct {
+
+	// The allocation policy of the IoT Device Provisioning Service (Hashed, GeoLatency or Static). Defaults to Hashed.
+	AllocationPolicy *string `json:"allocationPolicy,omitempty" tf:"allocation_policy,omitempty"`
+
+	// Specifies if the IoT Device Provisioning Service has data residency and disaster recovery enabled. Defaults to false. Changing this forces a new resource to be created.
+	DataResidencyEnabled *bool `json:"dataResidencyEnabled,omitempty" tf:"data_residency_enabled,omitempty"`
+
+	// An ip_filter_rule block as defined below.
+	IPFilterRule []IPFilterRuleInitParameters `json:"ipFilterRule,omitempty" tf:"ip_filter_rule,omitempty"`
+
+	// A linked_hub block as defined below.
+	LinkedHub []LinkedHubInitParameters `json:"linkedHub,omitempty" tf:"linked_hub,omitempty"`
+
+	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Whether requests from Public Network are allowed. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// A sku block as defined below.
+	Sku []IOTHubDPSSkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type IOTHubDPSObservation struct {
 
 	// The allocation policy of the IoT Device Provisioning Service (Hashed, GeoLatency or Static). Defaults to Hashed.
@@ -58,27 +85,21 @@ type IOTHubDPSObservation struct {
 type IOTHubDPSParameters struct {
 
 	// The allocation policy of the IoT Device Provisioning Service (Hashed, GeoLatency or Static). Defaults to Hashed.
-	// +kubebuilder:validation:Optional
 	AllocationPolicy *string `json:"allocationPolicy,omitempty" tf:"allocation_policy,omitempty"`
 
 	// Specifies if the IoT Device Provisioning Service has data residency and disaster recovery enabled. Defaults to false. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	DataResidencyEnabled *bool `json:"dataResidencyEnabled,omitempty" tf:"data_residency_enabled,omitempty"`
 
 	// An ip_filter_rule block as defined below.
-	// +kubebuilder:validation:Optional
 	IPFilterRule []IPFilterRuleParameters `json:"ipFilterRule,omitempty" tf:"ip_filter_rule,omitempty"`
 
 	// A linked_hub block as defined below.
-	// +kubebuilder:validation:Optional
 	LinkedHub []LinkedHubParameters `json:"linkedHub,omitempty" tf:"linked_hub,omitempty"`
 
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether requests from Public Network are allowed. Defaults to true.
-	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group under which the Iot Device Provisioning Service resource has to be created. Changing this forces a new resource to be created.
@@ -95,12 +116,19 @@ type IOTHubDPSParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A sku block as defined below.
-	// +kubebuilder:validation:Optional
 	Sku []IOTHubDPSSkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type IOTHubDPSSkuInitParameters struct {
+
+	// The number of provisioned IoT Device Provisioning Service units.
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// The name of the sku. Currently can only be set to S1.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type IOTHubDPSSkuObservation struct {
@@ -115,12 +143,25 @@ type IOTHubDPSSkuObservation struct {
 type IOTHubDPSSkuParameters struct {
 
 	// The number of provisioned IoT Device Provisioning Service units.
-	// +kubebuilder:validation:Required
-	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// The name of the sku. Currently can only be set to S1.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type IPFilterRuleInitParameters struct {
+
+	// The desired action for requests captured by this rule. Possible values are Accept, Reject
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The IP address range in CIDR notation for the rule.
+	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
+
+	// The name of the filter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Target for requests captured by this rule. Possible values are All, DeviceApi and ServiceApi.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
 type IPFilterRuleObservation struct {
@@ -141,20 +182,28 @@ type IPFilterRuleObservation struct {
 type IPFilterRuleParameters struct {
 
 	// The desired action for requests captured by this rule. Possible values are Accept, Reject
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The IP address range in CIDR notation for the rule.
-	// +kubebuilder:validation:Required
-	IPMask *string `json:"ipMask" tf:"ip_mask,omitempty"`
+	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
 
 	// The name of the filter.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Target for requests captured by this rule. Possible values are All, DeviceApi and ServiceApi.
-	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+}
+
+type LinkedHubInitParameters struct {
+
+	// The weight applied to the IoT Hub. Defaults to 1.
+	AllocationWeight *float64 `json:"allocationWeight,omitempty" tf:"allocation_weight,omitempty"`
+
+	// Determines whether to apply allocation policies to the IoT Hub. Defaults to true.
+	ApplyAllocationPolicy *bool `json:"applyAllocationPolicy,omitempty" tf:"apply_allocation_policy,omitempty"`
+
+	// The location of the IoT hub.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 }
 
 type LinkedHubObservation struct {
@@ -175,26 +224,26 @@ type LinkedHubObservation struct {
 type LinkedHubParameters struct {
 
 	// The weight applied to the IoT Hub. Defaults to 1.
-	// +kubebuilder:validation:Optional
 	AllocationWeight *float64 `json:"allocationWeight,omitempty" tf:"allocation_weight,omitempty"`
 
 	// Determines whether to apply allocation policies to the IoT Hub. Defaults to true.
-	// +kubebuilder:validation:Optional
 	ApplyAllocationPolicy *bool `json:"applyAllocationPolicy,omitempty" tf:"apply_allocation_policy,omitempty"`
 
 	// The connection string to connect to the IoT Hub.
-	// +kubebuilder:validation:Required
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The location of the IoT hub.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 }
 
 // IOTHubDPSSpec defines the desired state of IOTHubDPS
 type IOTHubDPSSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IOTHubDPSParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider IOTHubDPSInitParameters `json:"initProvider,omitempty"`
 }
 
 // IOTHubDPSStatus defines the observed state of IOTHubDPS.
@@ -215,8 +264,8 @@ type IOTHubDPSStatus struct {
 type IOTHubDPS struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
 	Spec   IOTHubDPSSpec   `json:"spec"`
 	Status IOTHubDPSStatus `json:"status,omitempty"`
 }

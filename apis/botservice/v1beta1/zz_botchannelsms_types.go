@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BotChannelSMSInitParameters struct {
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The phone number for the SMS Channel.
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+
+	// The account security identifier (SID) for the SMS Channel.
+	SMSChannelAccountSecurityID *string `json:"smsChannelAccountSecurityId,omitempty" tf:"sms_channel_account_security_id,omitempty"`
+}
+
 type BotChannelSMSObservation struct {
 
 	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
@@ -51,11 +63,9 @@ type BotChannelSMSParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The phone number for the SMS Channel.
-	// +kubebuilder:validation:Optional
 	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 
 	// The name of the resource group where the SMS Channel should be created. Changing this forces a new resource to be created.
@@ -72,11 +82,9 @@ type BotChannelSMSParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The account security identifier (SID) for the SMS Channel.
-	// +kubebuilder:validation:Optional
 	SMSChannelAccountSecurityID *string `json:"smsChannelAccountSecurityId,omitempty" tf:"sms_channel_account_security_id,omitempty"`
 
 	// The authorization token for the SMS Channel.
-	// +kubebuilder:validation:Optional
 	SMSChannelAuthTokenSecretRef v1.SecretKeySelector `json:"smsChannelAuthTokenSecretRef" tf:"-"`
 }
 
@@ -84,6 +92,10 @@ type BotChannelSMSParameters struct {
 type BotChannelSMSSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotChannelSMSParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BotChannelSMSInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotChannelSMSStatus defines the observed state of BotChannelSMS.
@@ -104,9 +116,9 @@ type BotChannelSMSStatus struct {
 type BotChannelSMS struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.phoneNumber)",message="phoneNumber is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.smsChannelAccountSecurityId)",message="smsChannelAccountSecurityId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.phoneNumber) || has(self.initProvider.phoneNumber)",message="phoneNumber is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.smsChannelAccountSecurityId) || has(self.initProvider.smsChannelAccountSecurityId)",message="smsChannelAccountSecurityId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.smsChannelAuthTokenSecretRef)",message="smsChannelAuthTokenSecretRef is a required parameter"
 	Spec   BotChannelSMSSpec   `json:"spec"`
 	Status BotChannelSMSStatus `json:"status,omitempty"`

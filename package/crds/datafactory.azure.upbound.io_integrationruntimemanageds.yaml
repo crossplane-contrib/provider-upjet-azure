@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: integrationruntimemanageds.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -101,8 +101,6 @@ spec:
                           description: The endpoint of an Azure SQL Server that will
                             be used to host the SSIS catalog.
                           type: string
-                      required:
-                      - serverEndpoint
                       type: object
                     type: array
                   customSetupScript:
@@ -135,7 +133,6 @@ spec:
                           - namespace
                           type: object
                       required:
-                      - blobContainerUri
                       - sasTokenSecretRef
                       type: object
                     type: array
@@ -339,8 +336,83 @@ spec:
                           description: ID of the virtual network to which the nodes
                             of the Managed Integration Runtime will be added.
                           type: string
-                      required:
-                      - vnetId
+                      type: object
+                    type: array
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  catalogInfo:
+                    description: A catalog_info block as defined below.
+                    items:
+                      properties:
+                        administratorLogin:
+                          description: Administrator login name for the SQL Server.
+                          type: string
+                        pricingTier:
+                          description: 'Pricing tier for the database that will be
+                            created for the SSIS catalog. Valid values are: Basic,
+                            Standard, Premium and PremiumRS.'
+                          type: string
+                        serverEndpoint:
+                          description: The endpoint of an Azure SQL Server that will
+                            be used to host the SSIS catalog.
+                          type: string
+                      type: object
+                    type: array
+                  customSetupScript:
+                    description: A custom_setup_script block as defined below.
+                    items:
+                      properties:
+                        blobContainerUri:
+                          description: The blob endpoint for the container which contains
+                            a custom setup script that will be run on every node on
+                            startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup
+                            for more information.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: Integration runtime description.
+                    type: string
+                  edition:
+                    description: The Managed Integration Runtime edition. Valid values
+                      are Standard and Enterprise. Defaults to Standard.
+                    type: string
+                  licenseType:
+                    description: The type of the license that is used. Valid values
+                      are LicenseIncluded and BasePrice. Defaults to LicenseIncluded.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  maxParallelExecutionsPerNode:
+                    description: Defines the maximum parallel executions per node.
+                      Defaults to 1. Max is 16.
+                    type: number
+                  nodeSize:
+                    description: 'The size of the nodes on which the Managed Integration
+                      Runtime runs. Valid values are: Standard_D2_v3, Standard_D4_v3,
+                      Standard_D8_v3, Standard_D16_v3, Standard_D32_v3, Standard_D64_v3,
+                      Standard_E2_v3, Standard_E4_v3, Standard_E8_v3, Standard_E16_v3,
+                      Standard_E32_v3, Standard_E64_v3, Standard_D1_v2, Standard_D2_v2,
+                      Standard_D3_v2, Standard_D4_v2, Standard_A4_v2 and Standard_A8_v2'
+                    type: string
+                  numberOfNodes:
+                    description: Number of nodes for the Managed Integration Runtime.
+                      Max is 10. Defaults to 1.
+                    type: number
+                  vnetIntegration:
+                    description: A vnet_integration block as defined below.
+                    items:
+                      properties:
+                        vnetId:
+                          description: ID of the virtual network to which the nodes
+                            of the Managed Integration Runtime will be added.
+                          type: string
                       type: object
                     type: array
                 type: object
@@ -544,10 +616,12 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: nodeSize is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeSize)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeSize)
+                || has(self.initProvider.nodeSize)'
           status:
             description: IntegrationRuntimeManagedStatus defines the observed state
               of IntegrationRuntimeManaged.

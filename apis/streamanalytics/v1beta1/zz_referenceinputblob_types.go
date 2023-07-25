@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ReferenceInputBlobInitParameters struct {
+
+	// The authentication mode for the Stream Analytics Reference Input. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
+	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
+	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
+
+	// The name of the Reference Input Blob. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The blob path pattern. Not a regular expression. It represents a pattern against which blob names will be matched to determine whether or not they should be included as input or output to the job.
+	PathPattern *string `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
+
+	// A serialization block as defined below.
+	Serialization []ReferenceInputBlobSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
+
+	// The time format. Wherever {time} appears in path_pattern, the value of this property is used as the time format instead.
+	TimeFormat *string `json:"timeFormat,omitempty" tf:"time_format,omitempty"`
+}
+
 type ReferenceInputBlobObservation struct {
 
 	// The authentication mode for the Stream Analytics Reference Input. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
@@ -52,19 +73,15 @@ type ReferenceInputBlobObservation struct {
 type ReferenceInputBlobParameters struct {
 
 	// The authentication mode for the Stream Analytics Reference Input. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
-	// +kubebuilder:validation:Optional
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
-	// +kubebuilder:validation:Optional
 	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
 
 	// The name of the Reference Input Blob. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The blob path pattern. Not a regular expression. It represents a pattern against which blob names will be matched to determine whether or not they should be included as input or output to the job.
-	// +kubebuilder:validation:Optional
 	PathPattern *string `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
@@ -81,11 +98,9 @@ type ReferenceInputBlobParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
-	// +kubebuilder:validation:Optional
 	Serialization []ReferenceInputBlobSerializationParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The Access Key which should be used to connect to this Storage Account. Required if authentication_mode is ConnectionString.
-	// +kubebuilder:validation:Optional
 	StorageAccountKeySecretRef *v1.SecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Storage Account that has the blob container with reference data.
@@ -128,8 +143,19 @@ type ReferenceInputBlobParameters struct {
 	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// The time format. Wherever {time} appears in path_pattern, the value of this property is used as the time format instead.
-	// +kubebuilder:validation:Optional
 	TimeFormat *string `json:"timeFormat,omitempty" tf:"time_format,omitempty"`
+}
+
+type ReferenceInputBlobSerializationInitParameters struct {
+
+	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
+	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
+
+	// The serialization format used for the reference data. Possible values are Avro, Csv and Json.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ReferenceInputBlobSerializationObservation struct {
@@ -147,22 +173,23 @@ type ReferenceInputBlobSerializationObservation struct {
 type ReferenceInputBlobSerializationParameters struct {
 
 	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
-	// +kubebuilder:validation:Optional
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
-	// +kubebuilder:validation:Optional
 	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
 
 	// The serialization format used for the reference data. Possible values are Avro, Csv and Json.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // ReferenceInputBlobSpec defines the desired state of ReferenceInputBlob
 type ReferenceInputBlobSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ReferenceInputBlobParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ReferenceInputBlobInitParameters `json:"initProvider,omitempty"`
 }
 
 // ReferenceInputBlobStatus defines the observed state of ReferenceInputBlob.
@@ -183,11 +210,11 @@ type ReferenceInputBlobStatus struct {
 type ReferenceInputBlob struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dateFormat)",message="dateFormat is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pathPattern)",message="pathPattern is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serialization)",message="serialization is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeFormat)",message="timeFormat is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dateFormat) || has(self.initProvider.dateFormat)",message="dateFormat is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pathPattern) || has(self.initProvider.pathPattern)",message="pathPattern is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serialization) || has(self.initProvider.serialization)",message="serialization is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeFormat) || has(self.initProvider.timeFormat)",message="timeFormat is a required parameter"
 	Spec   ReferenceInputBlobSpec   `json:"spec"`
 	Status ReferenceInputBlobStatus `json:"status,omitempty"`
 }

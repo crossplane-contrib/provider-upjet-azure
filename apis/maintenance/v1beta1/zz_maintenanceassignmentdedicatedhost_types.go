@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MaintenanceAssignmentDedicatedHostInitParameters struct {
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+}
+
 type MaintenanceAssignmentDedicatedHostObservation struct {
 
 	// Specifies the Dedicated Host ID to which the Maintenance Configuration will be assigned. Changing this forces a new resource to be created.
@@ -45,7 +51,6 @@ type MaintenanceAssignmentDedicatedHostParameters struct {
 	DedicatedHostIDSelector *v1.Selector `json:"dedicatedHostIdSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the ID of the Maintenance Configuration Resource. Changing this forces a new resource to be created.
@@ -67,6 +72,10 @@ type MaintenanceAssignmentDedicatedHostParameters struct {
 type MaintenanceAssignmentDedicatedHostSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MaintenanceAssignmentDedicatedHostParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider MaintenanceAssignmentDedicatedHostInitParameters `json:"initProvider,omitempty"`
 }
 
 // MaintenanceAssignmentDedicatedHostStatus defines the observed state of MaintenanceAssignmentDedicatedHost.
@@ -87,7 +96,7 @@ type MaintenanceAssignmentDedicatedHostStatus struct {
 type MaintenanceAssignmentDedicatedHost struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   MaintenanceAssignmentDedicatedHostSpec   `json:"spec"`
 	Status MaintenanceAssignmentDedicatedHostStatus `json:"status,omitempty"`
 }

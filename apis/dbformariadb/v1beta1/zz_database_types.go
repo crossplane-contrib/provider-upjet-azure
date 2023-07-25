@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DatabaseInitParameters struct {
+
+	// Specifies the Charset for the MariaDB Database, which needs to be a valid MariaDB Charset. Changing this forces a new resource to be created.
+	Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
+
+	// Specifies the Collation for the MariaDB Database, which needs to be a valid MariaDB Collation. Changing this forces a new resource to be created.
+	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
+}
+
 type DatabaseObservation struct {
 
 	// Specifies the Charset for the MariaDB Database, which needs to be a valid MariaDB Charset. Changing this forces a new resource to be created.
@@ -34,11 +43,9 @@ type DatabaseObservation struct {
 type DatabaseParameters struct {
 
 	// Specifies the Charset for the MariaDB Database, which needs to be a valid MariaDB Charset. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
 
 	// Specifies the Collation for the MariaDB Database, which needs to be a valid MariaDB Collation. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
 	// The name of the resource group in which the MariaDB Server exists. Changing this forces a new resource to be created.
@@ -72,6 +79,10 @@ type DatabaseParameters struct {
 type DatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DatabaseParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DatabaseInitParameters `json:"initProvider,omitempty"`
 }
 
 // DatabaseStatus defines the observed state of Database.
@@ -92,8 +103,8 @@ type DatabaseStatus struct {
 type Database struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.charset)",message="charset is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.collation)",message="collation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.charset) || has(self.initProvider.charset)",message="charset is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.collation) || has(self.initProvider.collation)",message="collation is a required parameter"
 	Spec   DatabaseSpec   `json:"spec"`
 	Status DatabaseStatus `json:"status,omitempty"`
 }

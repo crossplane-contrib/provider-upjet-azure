@@ -13,6 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BotWebAppInitParameters struct {
+
+	// The Application Insights Application ID to associate with the Web App Bot.
+	DeveloperAppInsightsApplicationID *string `json:"developerAppInsightsApplicationId,omitempty" tf:"developer_app_insights_application_id,omitempty"`
+
+	// The Application Insights Key to associate with the Web App Bot.
+	DeveloperAppInsightsKey *string `json:"developerAppInsightsKey,omitempty" tf:"developer_app_insights_key,omitempty"`
+
+	// The name of the Web App Bot will be displayed as. This defaults to name if not specified.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The Web App Bot endpoint.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A list of LUIS App IDs to associate with the Web App Bot.
+	LuisAppIds []*string `json:"luisAppIds,omitempty" tf:"luis_app_ids,omitempty"`
+
+	// The Microsoft Application ID for the Web App Bot. Changing this forces a new resource to be created.
+	MicrosoftAppID *string `json:"microsoftAppId,omitempty" tf:"microsoft_app_id,omitempty"`
+
+	// The SKU of the Web App Bot. Valid values include F0 or S1. Changing this forces a new resource to be created.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type BotWebAppObservation struct {
 
 	// The Application Insights Application ID to associate with the Web App Bot.
@@ -52,39 +82,30 @@ type BotWebAppObservation struct {
 type BotWebAppParameters struct {
 
 	// The Application Insights API Key to associate with the Web App Bot.
-	// +kubebuilder:validation:Optional
 	DeveloperAppInsightsAPIKeySecretRef *v1.SecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
 
 	// The Application Insights Application ID to associate with the Web App Bot.
-	// +kubebuilder:validation:Optional
 	DeveloperAppInsightsApplicationID *string `json:"developerAppInsightsApplicationId,omitempty" tf:"developer_app_insights_application_id,omitempty"`
 
 	// The Application Insights Key to associate with the Web App Bot.
-	// +kubebuilder:validation:Optional
 	DeveloperAppInsightsKey *string `json:"developerAppInsightsKey,omitempty" tf:"developer_app_insights_key,omitempty"`
 
 	// The name of the Web App Bot will be displayed as. This defaults to name if not specified.
-	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The Web App Bot endpoint.
-	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A list of LUIS App IDs to associate with the Web App Bot.
-	// +kubebuilder:validation:Optional
 	LuisAppIds []*string `json:"luisAppIds,omitempty" tf:"luis_app_ids,omitempty"`
 
 	// The LUIS key to associate with the Web App Bot.
-	// +kubebuilder:validation:Optional
 	LuisKeySecretRef *v1.SecretKeySelector `json:"luisKeySecretRef,omitempty" tf:"-"`
 
 	// The Microsoft Application ID for the Web App Bot. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	MicrosoftAppID *string `json:"microsoftAppId,omitempty" tf:"microsoft_app_id,omitempty"`
 
 	// The name of the resource group in which to create the Web App Bot. Changing this forces a new resource to be created.
@@ -101,11 +122,9 @@ type BotWebAppParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the Web App Bot. Valid values include F0 or S1. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -113,6 +132,10 @@ type BotWebAppParameters struct {
 type BotWebAppSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotWebAppParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BotWebAppInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotWebAppStatus defines the observed state of BotWebApp.
@@ -133,9 +156,9 @@ type BotWebAppStatus struct {
 type BotWebApp struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.microsoftAppId)",message="microsoftAppId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.microsoftAppId) || has(self.initProvider.microsoftAppId)",message="microsoftAppId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
 	Spec   BotWebAppSpec   `json:"spec"`
 	Status BotWebAppStatus `json:"status,omitempty"`
 }

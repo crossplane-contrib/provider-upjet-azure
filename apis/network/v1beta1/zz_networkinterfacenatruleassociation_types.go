@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NetworkInterfaceNatRuleAssociationInitParameters struct {
+
+	// The Name of the IP Configuration within the Network Interface which should be connected to the NAT Rule. Changing this forces a new resource to be created.
+	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
+}
+
 type NetworkInterfaceNatRuleAssociationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -29,7 +35,6 @@ type NetworkInterfaceNatRuleAssociationObservation struct {
 type NetworkInterfaceNatRuleAssociationParameters struct {
 
 	// The Name of the IP Configuration within the Network Interface which should be connected to the NAT Rule. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
 
 	// The ID of the Load Balancer NAT Rule which this Network Interface which should be connected to. Changing this forces a new resource to be created.
@@ -65,6 +70,10 @@ type NetworkInterfaceNatRuleAssociationParameters struct {
 type NetworkInterfaceNatRuleAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NetworkInterfaceNatRuleAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider NetworkInterfaceNatRuleAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // NetworkInterfaceNatRuleAssociationStatus defines the observed state of NetworkInterfaceNatRuleAssociation.
@@ -85,7 +94,7 @@ type NetworkInterfaceNatRuleAssociationStatus struct {
 type NetworkInterfaceNatRuleAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipConfigurationName)",message="ipConfigurationName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipConfigurationName) || has(self.initProvider.ipConfigurationName)",message="ipConfigurationName is a required parameter"
 	Spec   NetworkInterfaceNatRuleAssociationSpec   `json:"spec"`
 	Status NetworkInterfaceNatRuleAssociationStatus `json:"status,omitempty"`
 }

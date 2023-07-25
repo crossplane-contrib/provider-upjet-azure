@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: subscriptionrules.servicebus.azure.upbound.io
 spec:
   group: servicebus.azure.upbound.io
@@ -198,6 +198,63 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  action:
+                    description: Represents set of actions written in SQL language-based
+                      syntax that is performed against a BrokeredMessage.
+                    type: string
+                  correlationFilter:
+                    description: A correlation_filter block as documented below to
+                      be evaluated against a BrokeredMessage. Required when filter_type
+                      is set to CorrelationFilter.
+                    items:
+                      properties:
+                        contentType:
+                          description: Content type of the message.
+                          type: string
+                        correlationId:
+                          description: Identifier of the correlation.
+                          type: string
+                        label:
+                          description: Application specific label.
+                          type: string
+                        messageId:
+                          description: Identifier of the message.
+                          type: string
+                        properties:
+                          additionalProperties:
+                            type: string
+                          description: A list of user defined properties to be included
+                            in the filter. Specified as a map of name/value pairs.
+                          type: object
+                        replyTo:
+                          description: Address of the queue to reply to.
+                          type: string
+                        replyToSessionId:
+                          description: Session identifier to reply to.
+                          type: string
+                        sessionId:
+                          description: Session identifier.
+                          type: string
+                        to:
+                          description: Address to send to.
+                          type: string
+                      type: object
+                    type: array
+                  filterType:
+                    description: Type of filter to be applied to a BrokeredMessage.
+                      Possible values are SqlFilter and CorrelationFilter.
+                    type: string
+                  sqlFilter:
+                    description: Represents a filter written in SQL language-based
+                      syntax that to be evaluated against a BrokeredMessage. Required
+                      when filter_type is set to SqlFilter.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -399,7 +456,8 @@ spec:
             x-kubernetes-validations:
             - message: filterType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.filterType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.filterType)
+                || has(self.initProvider.filterType)'
           status:
             description: SubscriptionRuleStatus defines the observed state of SubscriptionRule.
             properties:

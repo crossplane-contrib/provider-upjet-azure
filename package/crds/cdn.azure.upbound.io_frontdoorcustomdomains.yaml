@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: frontdoorcustomdomains.cdn.azure.upbound.io
 spec:
   group: cdn.azure.upbound.io
@@ -254,6 +254,36 @@ spec:
                       type: object
                     type: array
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  hostName:
+                    description: The host name of the domain. The host_name field
+                      must be the FQDN of your domain(e.g. contoso.fabrikam.com).
+                      Changing this forces a new Front Door Custom Domain to be created.
+                    type: string
+                  tls:
+                    description: A tls block as defined below.
+                    items:
+                      properties:
+                        cdnFrontdoorSecretId:
+                          description: Resource ID of the Front Door Secret.
+                          type: string
+                        certificateType:
+                          description: Defines the source of the SSL certificate.
+                            Possible values include CustomerCertificate and ManagedCertificate.
+                            Defaults to ManagedCertificate.
+                          type: string
+                        minimumTlsVersion:
+                          description: TLS protocol version that will be used for
+                            Https. Possible values include TLS10 and TLS12. Defaults
+                            to TLS12.
+                          type: string
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -454,10 +484,12 @@ spec:
             x-kubernetes-validations:
             - message: hostName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.hostName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.hostName)
+                || has(self.initProvider.hostName)'
             - message: tls is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.tls)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tls)
+                || has(self.initProvider.tls)'
           status:
             description: FrontdoorCustomDomainStatus defines the observed state of
               FrontdoorCustomDomain.

@@ -79,6 +79,15 @@ func (tr *IntegrationServiceEnvironment) GetInitParameters() (map[string]any, er
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this IntegrationServiceEnvironment
+func (tr *IntegrationServiceEnvironment) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this IntegrationServiceEnvironment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IntegrationServiceEnvironment) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *AppActionCustom) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this AppActionCustom
+func (tr *AppActionCustom) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this AppActionCustom using its observed tfState.
@@ -247,6 +265,15 @@ func (tr *AppActionHTTP) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this AppActionHTTP
+func (tr *AppActionHTTP) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this AppActionHTTP using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AppActionHTTP) LateInitialize(attrs []byte) (bool, error) {
@@ -329,6 +356,15 @@ func (tr *AppIntegrationAccount) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this AppIntegrationAccount
+func (tr *AppIntegrationAccount) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this AppIntegrationAccount using its observed tfState.
@@ -415,6 +451,15 @@ func (tr *AppIntegrationAccountBatchConfiguration) GetInitParameters() (map[stri
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this AppIntegrationAccountBatchConfiguration
+func (tr *AppIntegrationAccountBatchConfiguration) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this AppIntegrationAccountBatchConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AppIntegrationAccountBatchConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -497,6 +542,15 @@ func (tr *AppIntegrationAccountPartner) GetInitParameters() (map[string]any, err
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this AppIntegrationAccountPartner
+func (tr *AppIntegrationAccountPartner) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this AppIntegrationAccountPartner using its observed tfState.
@@ -583,6 +637,15 @@ func (tr *AppIntegrationAccountSchema) GetInitParameters() (map[string]any, erro
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this AppIntegrationAccountSchema
+func (tr *AppIntegrationAccountSchema) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this AppIntegrationAccountSchema using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AppIntegrationAccountSchema) LateInitialize(attrs []byte) (bool, error) {
@@ -665,6 +728,15 @@ func (tr *AppIntegrationAccountSession) GetInitParameters() (map[string]any, err
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this AppIntegrationAccountSession
+func (tr *AppIntegrationAccountSession) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this AppIntegrationAccountSession using its observed tfState.
@@ -751,6 +823,15 @@ func (tr *AppTriggerCustom) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this AppTriggerCustom
+func (tr *AppTriggerCustom) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this AppTriggerCustom using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AppTriggerCustom) LateInitialize(attrs []byte) (bool, error) {
@@ -833,6 +914,15 @@ func (tr *AppTriggerHTTPRequest) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this AppTriggerHTTPRequest
+func (tr *AppTriggerHTTPRequest) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this AppTriggerHTTPRequest using its observed tfState.
@@ -919,6 +1009,15 @@ func (tr *AppTriggerRecurrence) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this AppTriggerRecurrence
+func (tr *AppTriggerRecurrence) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this AppTriggerRecurrence using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AppTriggerRecurrence) LateInitialize(attrs []byte) (bool, error) {
@@ -1001,6 +1100,15 @@ func (tr *AppWorkflow) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this AppWorkflow
+func (tr *AppWorkflow) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this AppWorkflow using its observed tfState.

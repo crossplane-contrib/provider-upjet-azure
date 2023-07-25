@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SecurityCenterWorkspaceInitParameters struct {
+
+	// The scope of VMs to send their security data to the desired workspace, unless overridden by a setting with more specific scope.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+}
+
 type SecurityCenterWorkspaceObservation struct {
 
 	// The Security Center Workspace ID.
@@ -28,7 +34,6 @@ type SecurityCenterWorkspaceObservation struct {
 type SecurityCenterWorkspaceParameters struct {
 
 	// The scope of VMs to send their security data to the desired workspace, unless overridden by a setting with more specific scope.
-	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// The ID of the Log Analytics Workspace to save the data in.
@@ -50,6 +55,10 @@ type SecurityCenterWorkspaceParameters struct {
 type SecurityCenterWorkspaceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecurityCenterWorkspaceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SecurityCenterWorkspaceInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecurityCenterWorkspaceStatus defines the observed state of SecurityCenterWorkspace.
@@ -70,7 +79,7 @@ type SecurityCenterWorkspaceStatus struct {
 type SecurityCenterWorkspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope)",message="scope is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope) || has(self.initProvider.scope)",message="scope is a required parameter"
 	Spec   SecurityCenterWorkspaceSpec   `json:"spec"`
 	Status SecurityCenterWorkspaceStatus `json:"status,omitempty"`
 }

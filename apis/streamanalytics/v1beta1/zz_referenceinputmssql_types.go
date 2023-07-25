@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ReferenceInputMSSQLInitParameters struct {
+
+	// The query used to retrieve incremental changes in the reference data from the MS SQL database. Cannot be set when refresh_type is Static.
+	DeltaSnapshotQuery *string `json:"deltaSnapshotQuery,omitempty" tf:"delta_snapshot_query,omitempty"`
+
+	// The query used to retrieve the reference data from the MS SQL database.
+	FullSnapshotQuery *string `json:"fullSnapshotQuery,omitempty" tf:"full_snapshot_query,omitempty"`
+
+	// The frequency in hh:mm:ss with which the reference data should be retrieved from the MS SQL database e.g. 00:20:00 for every 20 minutes. Must be set when refresh_type is RefreshPeriodicallyWithFull or RefreshPeriodicallyWithDelta.
+	RefreshIntervalDuration *string `json:"refreshIntervalDuration,omitempty" tf:"refresh_interval_duration,omitempty"`
+
+	// Defines whether and how the reference data should be refreshed. Accepted values are Static, RefreshPeriodicallyWithFull and RefreshPeriodicallyWithDelta.
+	RefreshType *string `json:"refreshType,omitempty" tf:"refresh_type,omitempty"`
+
+	// The name of the table in the Azure SQL database.
+	Table *string `json:"table,omitempty" tf:"table,omitempty"`
+
+	// The username to connect to the MS SQL database.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
 type ReferenceInputMSSQLObservation struct {
 
 	// The MS SQL database name where the reference data exists.
@@ -65,23 +86,18 @@ type ReferenceInputMSSQLParameters struct {
 	DatabaseSelector *v1.Selector `json:"databaseSelector,omitempty" tf:"-"`
 
 	// The query used to retrieve incremental changes in the reference data from the MS SQL database. Cannot be set when refresh_type is Static.
-	// +kubebuilder:validation:Optional
 	DeltaSnapshotQuery *string `json:"deltaSnapshotQuery,omitempty" tf:"delta_snapshot_query,omitempty"`
 
 	// The query used to retrieve the reference data from the MS SQL database.
-	// +kubebuilder:validation:Optional
 	FullSnapshotQuery *string `json:"fullSnapshotQuery,omitempty" tf:"full_snapshot_query,omitempty"`
 
 	// The password to connect to the MS SQL database.
-	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The frequency in hh:mm:ss with which the reference data should be retrieved from the MS SQL database e.g. 00:20:00 for every 20 minutes. Must be set when refresh_type is RefreshPeriodicallyWithFull or RefreshPeriodicallyWithDelta.
-	// +kubebuilder:validation:Optional
 	RefreshIntervalDuration *string `json:"refreshIntervalDuration,omitempty" tf:"refresh_interval_duration,omitempty"`
 
 	// Defines whether and how the reference data should be refreshed. Accepted values are Static, RefreshPeriodicallyWithFull and RefreshPeriodicallyWithDelta.
-	// +kubebuilder:validation:Optional
 	RefreshType *string `json:"refreshType,omitempty" tf:"refresh_type,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job should exist. Changing this forces a new resource to be created.
@@ -116,11 +132,9 @@ type ReferenceInputMSSQLParameters struct {
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name,omitempty"`
 
 	// The name of the table in the Azure SQL database.
-	// +kubebuilder:validation:Optional
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
 	// The username to connect to the MS SQL database.
-	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -128,6 +142,10 @@ type ReferenceInputMSSQLParameters struct {
 type ReferenceInputMSSQLSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ReferenceInputMSSQLParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ReferenceInputMSSQLInitParameters `json:"initProvider,omitempty"`
 }
 
 // ReferenceInputMSSQLStatus defines the observed state of ReferenceInputMSSQL.
@@ -148,10 +166,10 @@ type ReferenceInputMSSQLStatus struct {
 type ReferenceInputMSSQL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.fullSnapshotQuery)",message="fullSnapshotQuery is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.fullSnapshotQuery) || has(self.initProvider.fullSnapshotQuery)",message="fullSnapshotQuery is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.refreshType)",message="refreshType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.username)",message="username is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.refreshType) || has(self.initProvider.refreshType)",message="refreshType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.username) || has(self.initProvider.username)",message="username is a required parameter"
 	Spec   ReferenceInputMSSQLSpec   `json:"spec"`
 	Status ReferenceInputMSSQLStatus `json:"status,omitempty"`
 }

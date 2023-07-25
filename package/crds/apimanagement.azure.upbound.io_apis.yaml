@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: apis.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -203,14 +203,8 @@ spec:
                               serviceName:
                                 description: The name of service to import from WSDL.
                                 type: string
-                            required:
-                            - endpointName
-                            - serviceName
                             type: object
                           type: array
-                      required:
-                      - contentFormat
-                      - contentValue
                       type: object
                     type: array
                   license:
@@ -236,8 +230,6 @@ spec:
                         scope:
                           description: Operations scope.
                           type: string
-                      required:
-                      - authorizationServerName
                       type: object
                     type: array
                   openidAuthentication:
@@ -255,8 +247,6 @@ spec:
                           description: OpenID Connect provider identifier. The name
                             of an OpenID Connect Provider.
                           type: string
-                      required:
-                      - openidProviderName
                       type: object
                     type: array
                   path:
@@ -382,9 +372,178 @@ spec:
                           description: The name of the QueryString parameter which
                             should be used for the Subscription Key.
                           type: string
-                      required:
-                      - header
-                      - query
+                      type: object
+                    type: array
+                  subscriptionRequired:
+                    description: Should this API require a subscription key? Defaults
+                      to true.
+                    type: boolean
+                  termsOfServiceUrl:
+                    description: Absolute URL of the Terms of Service for the API.
+                    type: string
+                  version:
+                    description: The Version number of this API, if this API is versioned.
+                    type: string
+                  versionDescription:
+                    description: The description of the API Version of the API Management
+                      API.
+                    type: string
+                  versionSetId:
+                    description: The ID of the Version Set which this API is associated
+                      with.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  apiType:
+                    description: Type of API. Possible values are graphql, http, soap,
+                      and websocket. Defaults to http.
+                    type: string
+                  contact:
+                    description: A contact block as documented below.
+                    items:
+                      properties:
+                        email:
+                          description: The email address of the contact person/organization.
+                          type: string
+                        name:
+                          description: The name of the contact person/organization.
+                          type: string
+                        url:
+                          description: Absolute URL of the contact information.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: A description of the API Management API, which may
+                      include HTML formatting tags.
+                    type: string
+                  displayName:
+                    description: The display name of the API.
+                    type: string
+                  import:
+                    description: A import block as documented below.
+                    items:
+                      properties:
+                        contentFormat:
+                          description: 'The format of the content from which the API
+                            Definition should be imported. Possible values are: openapi,
+                            openapi+json, openapi+json-link, openapi-link, swagger-json,
+                            swagger-link-json, wadl-link-json, wadl-xml, wsdl and
+                            wsdl-link.'
+                          type: string
+                        contentValue:
+                          description: The Content from which the API Definition should
+                            be imported. When a content_format of *-link-* is specified
+                            this must be a URL, otherwise this must be defined inline.
+                          type: string
+                        wsdlSelector:
+                          description: A wsdl_selector block as defined below, which
+                            allows you to limit the import of a WSDL to only a subset
+                            of the document. This can only be specified when content_format
+                            is wsdl or wsdl-link.
+                          items:
+                            properties:
+                              endpointName:
+                                description: The name of endpoint (port) to import
+                                  from WSDL.
+                                type: string
+                              serviceName:
+                                description: The name of service to import from WSDL.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  license:
+                    description: A license block as documented below.
+                    items:
+                      properties:
+                        name:
+                          description: The name of the license .
+                          type: string
+                        url:
+                          description: Absolute URL of the license.
+                          type: string
+                      type: object
+                    type: array
+                  oauth2Authorization:
+                    description: An oauth2_authorization block as documented below.
+                    items:
+                      properties:
+                        authorizationServerName:
+                          description: OAuth authorization server identifier. The
+                            name of an OAuth2 Authorization Server.
+                          type: string
+                        scope:
+                          description: Operations scope.
+                          type: string
+                      type: object
+                    type: array
+                  openidAuthentication:
+                    description: An openid_authentication block as documented below.
+                    items:
+                      properties:
+                        bearerTokenSendingMethods:
+                          description: How to send token to the server. A list of
+                            zero or more methods. Valid values are authorizationHeader
+                            and query.
+                          items:
+                            type: string
+                          type: array
+                        openidProviderName:
+                          description: OpenID Connect provider identifier. The name
+                            of an OpenID Connect Provider.
+                          type: string
+                      type: object
+                    type: array
+                  path:
+                    description: The Path for this API Management API, which is a
+                      relative URL which uniquely identifies this API and all of its
+                      resource paths within the API Management Service.
+                    type: string
+                  protocols:
+                    description: A list of protocols the operations in this API can
+                      be invoked. Possible values are http, https, ws, and wss.
+                    items:
+                      type: string
+                    type: array
+                  revision:
+                    description: The Revision which used for this API. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  revisionDescription:
+                    description: The description of the API Revision of the API Management
+                      API.
+                    type: string
+                  serviceUrl:
+                    description: Absolute URL of the backend service implementing
+                      this API.
+                    type: string
+                  soapPassThrough:
+                    description: Should this API expose a SOAP frontend, rather than
+                      a HTTP frontend? Defaults to false.
+                    type: boolean
+                  sourceApiId:
+                    description: The API id of the source API, which could be in format
+                      azurerm_api_management_api.example.id or in format azurerm_api_management_api.example.id;rev=1
+                    type: string
+                  subscriptionKeyParameterNames:
+                    description: A subscription_key_parameter_names block as documented
+                      below.
+                    items:
+                      properties:
+                        header:
+                          description: The name of the HTTP Header which should be
+                            used for the Subscription Key.
+                          type: string
+                        query:
+                          description: The name of the QueryString parameter which
+                            should be used for the Subscription Key.
+                          type: string
                       type: object
                     type: array
                   subscriptionRequired:
@@ -606,7 +765,8 @@ spec:
             x-kubernetes-validations:
             - message: revision is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.revision)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.revision)
+                || has(self.initProvider.revision)'
           status:
             description: APIStatus defines the observed state of API.
             properties:

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: certificateissuers.keyvault.azure.upbound.io
 spec:
   group: keyvault.azure.upbound.io
@@ -87,8 +87,6 @@ spec:
                         phone:
                           description: Phone number of the admin.
                           type: string
-                      required:
-                      - emailAddress
                       type: object
                     type: array
                   keyVaultId:
@@ -190,6 +188,42 @@ spec:
                     - name
                     - namespace
                     type: object
+                  providerName:
+                    description: 'The name of the third-party Certificate Issuer.
+                      Possible values are: DigiCert, GlobalSign, OneCertV2-PrivateCA,
+                      OneCertV2-PublicCA and SslAdminV2.'
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accountId:
+                    description: The account number with the third-party Certificate
+                      Issuer.
+                    type: string
+                  admin:
+                    description: One or more admin blocks as defined below.
+                    items:
+                      properties:
+                        emailAddress:
+                          description: E-mail address of the admin.
+                          type: string
+                        firstName:
+                          description: First name of the admin.
+                          type: string
+                        lastName:
+                          description: Last name of the admin.
+                          type: string
+                        phone:
+                          description: Phone number of the admin.
+                          type: string
+                      type: object
+                    type: array
+                  orgId:
+                    description: The ID of the organization as provided to the issuer.
+                    type: string
                   providerName:
                     description: 'The name of the third-party Certificate Issuer.
                       Possible values are: DigiCert, GlobalSign, OneCertV2-PrivateCA,
@@ -396,7 +430,8 @@ spec:
             x-kubernetes-validations:
             - message: providerName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.providerName)
+                || has(self.initProvider.providerName)'
           status:
             description: CertificateIssuerStatus defines the observed state of CertificateIssuer.
             properties:

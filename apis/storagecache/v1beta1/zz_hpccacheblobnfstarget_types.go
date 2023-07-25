@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HPCCacheBlobNFSTargetInitParameters struct {
+
+	// The name of the access policy applied to this target. Defaults to default.
+	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
+
+	// The client-facing file path of the HPC Cache Blob NFS Target.
+	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
+
+	// The Resource Manager ID of the Storage Container used as the HPC Cache Blob NFS Target. Changing this forces a new resource to be created.
+	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
+
+	// The type of usage of the HPC Cache Blob NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
+	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
+}
+
 type HPCCacheBlobNFSTargetObservation struct {
 
 	// The name of the access policy applied to this target. Defaults to default.
@@ -40,7 +55,6 @@ type HPCCacheBlobNFSTargetObservation struct {
 type HPCCacheBlobNFSTargetParameters struct {
 
 	// The name of the access policy applied to this target. Defaults to default.
-	// +kubebuilder:validation:Optional
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
 	// The name of the HPC Cache, which the HPC Cache Blob NFS Target will be added to. Changing this forces a new HPC Cache Blob NFS Target to be created.
@@ -57,7 +71,6 @@ type HPCCacheBlobNFSTargetParameters struct {
 	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
 	// The client-facing file path of the HPC Cache Blob NFS Target.
-	// +kubebuilder:validation:Optional
 	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
 
 	// The name of the Resource Group where the HPC Cache Blob NFS Target should exist. Changing this forces a new HPC Cache Blob NFS Target to be created.
@@ -74,11 +87,9 @@ type HPCCacheBlobNFSTargetParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Resource Manager ID of the Storage Container used as the HPC Cache Blob NFS Target. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
 	// The type of usage of the HPC Cache Blob NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
-	// +kubebuilder:validation:Optional
 	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
 }
 
@@ -86,6 +97,10 @@ type HPCCacheBlobNFSTargetParameters struct {
 type HPCCacheBlobNFSTargetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HPCCacheBlobNFSTargetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider HPCCacheBlobNFSTargetInitParameters `json:"initProvider,omitempty"`
 }
 
 // HPCCacheBlobNFSTargetStatus defines the observed state of HPCCacheBlobNFSTarget.
@@ -106,9 +121,9 @@ type HPCCacheBlobNFSTargetStatus struct {
 type HPCCacheBlobNFSTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespacePath)",message="namespacePath is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageContainerId)",message="storageContainerId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.usageModel)",message="usageModel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespacePath) || has(self.initProvider.namespacePath)",message="namespacePath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageContainerId) || has(self.initProvider.storageContainerId)",message="storageContainerId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.usageModel) || has(self.initProvider.usageModel)",message="usageModel is a required parameter"
 	Spec   HPCCacheBlobNFSTargetSpec   `json:"spec"`
 	Status HPCCacheBlobNFSTargetStatus `json:"status,omitempty"`
 }

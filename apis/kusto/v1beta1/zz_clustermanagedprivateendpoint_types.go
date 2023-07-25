@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ClusterManagedPrivateEndpointInitParameters struct {
+
+	// The group id in which the managed private endpoint is created. Changing this forces a new resource to be created.
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	// The user request message.
+	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
+}
+
 type ClusterManagedPrivateEndpointObservation struct {
 
 	// The name of the Kusto Cluster. Changing this forces a new resource to be created.
@@ -52,7 +61,6 @@ type ClusterManagedPrivateEndpointParameters struct {
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The group id in which the managed private endpoint is created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
 	// The ARM resource ID of the resource for which the managed private endpoint is created. Changing this forces a new resource to be created.
@@ -84,7 +92,6 @@ type ClusterManagedPrivateEndpointParameters struct {
 	PrivateLinkResourceRegionSelector *v1.Selector `json:"privateLinkResourceRegionSelector,omitempty" tf:"-"`
 
 	// The user request message.
-	// +kubebuilder:validation:Optional
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
 	// Specifies the Resource Group where the Kusto Cluster should exist. Changing this forces a new resource to be created.
@@ -105,6 +112,10 @@ type ClusterManagedPrivateEndpointParameters struct {
 type ClusterManagedPrivateEndpointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ClusterManagedPrivateEndpointParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ClusterManagedPrivateEndpointInitParameters `json:"initProvider,omitempty"`
 }
 
 // ClusterManagedPrivateEndpointStatus defines the observed state of ClusterManagedPrivateEndpoint.
@@ -125,7 +136,7 @@ type ClusterManagedPrivateEndpointStatus struct {
 type ClusterManagedPrivateEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupId)",message="groupId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupId) || has(self.initProvider.groupId)",message="groupId is a required parameter"
 	Spec   ClusterManagedPrivateEndpointSpec   `json:"spec"`
 	Status ClusterManagedPrivateEndpointStatus `json:"status,omitempty"`
 }

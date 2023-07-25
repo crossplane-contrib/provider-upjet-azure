@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type WindowsVirtualMachineGalleryImageReferenceInitParameters struct {
+
+	// The Offer of the Gallery Image. Changing this forces a new resource to be created.
+	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
+
+	// The Publisher of the Gallery Image. Changing this forces a new resource to be created.
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+
+	// The SKU of the Gallery Image. Changing this forces a new resource to be created.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// The Version of the Gallery Image. Changing this forces a new resource to be created.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
 type WindowsVirtualMachineGalleryImageReferenceObservation struct {
 
 	// The Offer of the Gallery Image. Changing this forces a new resource to be created.
@@ -31,20 +46,25 @@ type WindowsVirtualMachineGalleryImageReferenceObservation struct {
 type WindowsVirtualMachineGalleryImageReferenceParameters struct {
 
 	// The Offer of the Gallery Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Offer *string `json:"offer" tf:"offer,omitempty"`
+	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
 
 	// The Publisher of the Gallery Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 
 	// The SKU of the Gallery Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Sku *string `json:"sku" tf:"sku,omitempty"`
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// The Version of the Gallery Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Version *string `json:"version" tf:"version,omitempty"`
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type WindowsVirtualMachineInboundNATRuleInitParameters struct {
+
+	// The Backend Port associated with this NAT Rule. Changing this forces a new resource to be created.
+	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
+
+	// The Protocol used for this NAT Rule. Possible values are Tcp and Udp.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type WindowsVirtualMachineInboundNATRuleObservation struct {
@@ -62,12 +82,46 @@ type WindowsVirtualMachineInboundNATRuleObservation struct {
 type WindowsVirtualMachineInboundNATRuleParameters struct {
 
 	// The Backend Port associated with this NAT Rule. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	BackendPort *float64 `json:"backendPort" tf:"backend_port,omitempty"`
+	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
 
 	// The Protocol used for this NAT Rule. Possible values are Tcp and Udp.
-	// +kubebuilder:validation:Required
-	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+}
+
+type WindowsVirtualMachineInitParameters struct {
+
+	// Can this Virtual Machine be claimed by users? Defaults to true.
+	AllowClaim *bool `json:"allowClaim,omitempty" tf:"allow_claim,omitempty"`
+
+	// Should the Virtual Machine be created without a Public IP Address? Changing this forces a new resource to be created.
+	DisallowPublicIPAddress *bool `json:"disallowPublicIpAddress,omitempty" tf:"disallow_public_ip_address,omitempty"`
+
+	// A gallery_image_reference block as defined below.
+	GalleryImageReference []WindowsVirtualMachineGalleryImageReferenceInitParameters `json:"galleryImageReference,omitempty" tf:"gallery_image_reference,omitempty"`
+
+	// One or more inbound_nat_rule blocks as defined below. Changing this forces a new resource to be created.
+	InboundNATRule []WindowsVirtualMachineInboundNATRuleInitParameters `json:"inboundNatRule,omitempty" tf:"inbound_nat_rule,omitempty"`
+
+	// Specifies the supported Azure location where the Dev Test Lab exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the Dev Test Machine. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Any notes about the Virtual Machine.
+	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
+
+	// The Machine Size to use for this Virtual Machine, such as Standard_F2. Changing this forces a new resource to be created.
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	// The type of Storage to use on this Virtual Machine. Possible values are Standard and Premium.
+	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Username associated with the local administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type WindowsVirtualMachineObservation struct {
@@ -130,19 +184,15 @@ type WindowsVirtualMachineObservation struct {
 type WindowsVirtualMachineParameters struct {
 
 	// Can this Virtual Machine be claimed by users? Defaults to true.
-	// +kubebuilder:validation:Optional
 	AllowClaim *bool `json:"allowClaim,omitempty" tf:"allow_claim,omitempty"`
 
 	// Should the Virtual Machine be created without a Public IP Address? Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	DisallowPublicIPAddress *bool `json:"disallowPublicIpAddress,omitempty" tf:"disallow_public_ip_address,omitempty"`
 
 	// A gallery_image_reference block as defined below.
-	// +kubebuilder:validation:Optional
 	GalleryImageReference []WindowsVirtualMachineGalleryImageReferenceParameters `json:"galleryImageReference,omitempty" tf:"gallery_image_reference,omitempty"`
 
 	// One or more inbound_nat_rule blocks as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	InboundNATRule []WindowsVirtualMachineInboundNATRuleParameters `json:"inboundNatRule,omitempty" tf:"inbound_nat_rule,omitempty"`
 
 	// Specifies the name of the Dev Test Lab in which the Virtual Machine should be created. Changing this forces a new resource to be created.
@@ -186,19 +236,15 @@ type WindowsVirtualMachineParameters struct {
 	LabVirtualNetworkIDSelector *v1.Selector `json:"labVirtualNetworkIdSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the Dev Test Lab exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Dev Test Machine. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Any notes about the Virtual Machine.
-	// +kubebuilder:validation:Optional
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
 	// The Password associated with the username used to login to this Virtual Machine. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
@@ -215,19 +261,15 @@ type WindowsVirtualMachineParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Machine Size to use for this Virtual Machine, such as Standard_F2. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
 	// The type of Storage to use on this Virtual Machine. Possible values are Standard and Premium.
-	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Username associated with the local administrator on this Virtual Machine. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -235,6 +277,10 @@ type WindowsVirtualMachineParameters struct {
 type WindowsVirtualMachineSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WindowsVirtualMachineParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider WindowsVirtualMachineInitParameters `json:"initProvider,omitempty"`
 }
 
 // WindowsVirtualMachineStatus defines the observed state of WindowsVirtualMachine.
@@ -255,13 +301,13 @@ type WindowsVirtualMachineStatus struct {
 type WindowsVirtualMachine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.galleryImageReference)",message="galleryImageReference is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.galleryImageReference) || has(self.initProvider.galleryImageReference)",message="galleryImageReference is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.size)",message="size is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageType)",message="storageType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.username)",message="username is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.size) || has(self.initProvider.size)",message="size is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageType) || has(self.initProvider.storageType)",message="storageType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.username) || has(self.initProvider.username)",message="username is a required parameter"
 	Spec   WindowsVirtualMachineSpec   `json:"spec"`
 	Status WindowsVirtualMachineStatus `json:"status,omitempty"`
 }

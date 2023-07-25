@@ -40,11 +40,9 @@ type VirtualHubRouteTableObservation struct {
 type VirtualHubRouteTableParameters struct {
 
 	// List of labels associated with this route table.
-	// +kubebuilder:validation:Optional
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A route block as defined below.
-	// +kubebuilder:validation:Optional
 	Route []VirtualHubRouteTableRouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 
 	// The ID of the Virtual Hub within which this route table should be created. Changing this forces a new resource to be created.
@@ -98,15 +96,12 @@ type VirtualHubRouteTableRouteObservation struct {
 type VirtualHubRouteTableRouteParameters struct {
 
 	// A list of destination addresses for this route.
-	// +kubebuilder:validation:Optional
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// The type of destinations. Possible values are CIDR, ResourceId and Service.
-	// +kubebuilder:validation:Optional
 	DestinationsType *string `json:"destinationsType,omitempty" tf:"destinations_type,omitempty"`
 
 	// The name which should be used for this route.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The next hop's resource ID.
@@ -124,7 +119,6 @@ type VirtualHubRouteTableRouteParameters struct {
 	NextHopSelector *v1.Selector `json:"nextHopSelector,omitempty" tf:"-"`
 
 	// The type of next hop. Currently the only possible value is ResourceId. Defaults to ResourceId.
-	// +kubebuilder:validation:Optional
 	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
 }
 
@@ -135,14 +129,6 @@ type VirtualHubRouteTableSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider VirtualHubRouteTableInitParameters `json:"initProvider,omitempty"`
 }
 

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SQLRoleAssignmentInitParameters struct {
+
+	// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+}
+
 type SQLRoleAssignmentObservation struct {
 
 	// The name of the Cosmos DB Account. Changing this forces a new resource to be created.
@@ -53,11 +62,9 @@ type SQLRoleAssignmentParameters struct {
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The GUID as the name of the Cosmos DB SQL Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Principal (Client) in Azure Active Directory. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The name of the Resource Group in which the Cosmos DB SQL Role Assignment is created. Changing this forces a new resource to be created.
@@ -106,6 +113,10 @@ type SQLRoleAssignmentParameters struct {
 type SQLRoleAssignmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SQLRoleAssignmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SQLRoleAssignmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // SQLRoleAssignmentStatus defines the observed state of SQLRoleAssignment.
@@ -126,7 +137,7 @@ type SQLRoleAssignmentStatus struct {
 type SQLRoleAssignment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalId)",message="principalId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalId) || has(self.initProvider.principalId)",message="principalId is a required parameter"
 	Spec   SQLRoleAssignmentSpec   `json:"spec"`
 	Status SQLRoleAssignmentStatus `json:"status,omitempty"`
 }

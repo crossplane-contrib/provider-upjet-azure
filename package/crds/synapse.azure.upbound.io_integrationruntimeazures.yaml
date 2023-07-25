@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: integrationruntimeazures.synapse.azure.upbound.io
 spec:
   group: synapse.azure.upbound.io
@@ -165,6 +165,35 @@ spec:
                             type: string
                         type: object
                     type: object
+                  timeToLiveMin:
+                    description: Time to live (in minutes) setting of the cluster
+                      which will execute data flow job. Defaults to 0.
+                    type: number
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  computeType:
+                    description: Compute type of the cluster which will execute data
+                      flow job. Valid values are General, ComputeOptimized and MemoryOptimized.
+                      Defaults to General.
+                    type: string
+                  coreCount:
+                    description: Core count of the cluster which will execute data
+                      flow job. Valid values are 8, 16, 32, 48, 80, 144 and 272. Defaults
+                      to 8.
+                    type: number
+                  description:
+                    description: Integration runtime description.
+                    type: string
+                  location:
+                    description: The Azure Region where the Synapse Azure Integration
+                      Runtime should exist. Use AutoResolve to create an auto-resolve
+                      integration runtime. Changing this forces a new Synapse Azure
+                      Integration Runtime to be created.
+                    type: string
                   timeToLiveMin:
                     description: Time to live (in minutes) setting of the cluster
                       which will execute data flow job. Defaults to 0.
@@ -370,7 +399,8 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
           status:
             description: IntegrationRuntimeAzureStatus defines the observed state
               of IntegrationRuntimeAzure.

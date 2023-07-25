@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SQLStoredProcedureInitParameters struct {
+
+	// The body of the stored procedure.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+}
+
 type SQLStoredProcedureObservation struct {
 
 	// The name of the Cosmos DB Account to create the stored procedure within. Changing this forces a new resource to be created.
@@ -50,7 +56,6 @@ type SQLStoredProcedureParameters struct {
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The body of the stored procedure.
-	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The name of the Cosmos DB SQL Container to create the stored procedure within. Changing this forces a new resource to be created.
@@ -97,6 +102,10 @@ type SQLStoredProcedureParameters struct {
 type SQLStoredProcedureSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SQLStoredProcedureParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SQLStoredProcedureInitParameters `json:"initProvider,omitempty"`
 }
 
 // SQLStoredProcedureStatus defines the observed state of SQLStoredProcedure.
@@ -117,7 +126,7 @@ type SQLStoredProcedureStatus struct {
 type SQLStoredProcedure struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body)",message="body is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || has(self.initProvider.body)",message="body is a required parameter"
 	Spec   SQLStoredProcedureSpec   `json:"spec"`
 	Status SQLStoredProcedureStatus `json:"status,omitempty"`
 }

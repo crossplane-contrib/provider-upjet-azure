@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SecurityCenterSettingInitParameters struct {
+
+	// Boolean flag to enable/disable data access.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The setting to manage. Possible values are MCAS , WDATP and SENTINEL. Changing this forces a new resource to be created.
+	SettingName *string `json:"settingName,omitempty" tf:"setting_name,omitempty"`
+}
+
 type SecurityCenterSettingObservation struct {
 
 	// Boolean flag to enable/disable data access.
@@ -28,11 +37,9 @@ type SecurityCenterSettingObservation struct {
 type SecurityCenterSettingParameters struct {
 
 	// Boolean flag to enable/disable data access.
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The setting to manage. Possible values are MCAS , WDATP and SENTINEL. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SettingName *string `json:"settingName,omitempty" tf:"setting_name,omitempty"`
 }
 
@@ -40,6 +47,10 @@ type SecurityCenterSettingParameters struct {
 type SecurityCenterSettingSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecurityCenterSettingParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SecurityCenterSettingInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecurityCenterSettingStatus defines the observed state of SecurityCenterSetting.
@@ -60,8 +71,8 @@ type SecurityCenterSettingStatus struct {
 type SecurityCenterSetting struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled)",message="enabled is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.settingName)",message="settingName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || has(self.initProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.settingName) || has(self.initProvider.settingName)",message="settingName is a required parameter"
 	Spec   SecurityCenterSettingSpec   `json:"spec"`
 	Status SecurityCenterSettingStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConnectionConfigurationInitParameters struct {
+
+	// Should Internet Security be enabled to secure internet traffic? Changing this forces a new resource to be created. Defaults to false.
+	InternetSecurityEnabled *bool `json:"internetSecurityEnabled,omitempty" tf:"internet_security_enabled,omitempty"`
+
+	// The Name which should be used for this Connection Configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A route block as defined below.
+	Route []RouteInitParameters `json:"route,omitempty" tf:"route,omitempty"`
+
+	// A vpn_client_address_pool block as defined below.
+	VPNClientAddressPool []VPNClientAddressPoolInitParameters `json:"vpnClientAddressPool,omitempty" tf:"vpn_client_address_pool,omitempty"`
+}
+
 type ConnectionConfigurationObservation struct {
 
 	// Should Internet Security be enabled to secure internet traffic? Changing this forces a new resource to be created. Defaults to false.
@@ -31,20 +46,37 @@ type ConnectionConfigurationObservation struct {
 type ConnectionConfigurationParameters struct {
 
 	// Should Internet Security be enabled to secure internet traffic? Changing this forces a new resource to be created. Defaults to false.
-	// +kubebuilder:validation:Optional
 	InternetSecurityEnabled *bool `json:"internetSecurityEnabled,omitempty" tf:"internet_security_enabled,omitempty"`
 
 	// The Name which should be used for this Connection Configuration.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A route block as defined below.
-	// +kubebuilder:validation:Optional
 	Route []RouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 
 	// A vpn_client_address_pool block as defined below.
-	// +kubebuilder:validation:Required
-	VPNClientAddressPool []VPNClientAddressPoolParameters `json:"vpnClientAddressPool" tf:"vpn_client_address_pool,omitempty"`
+	VPNClientAddressPool []VPNClientAddressPoolParameters `json:"vpnClientAddressPool,omitempty" tf:"vpn_client_address_pool,omitempty"`
+}
+
+type PointToSiteVPNGatewayInitParameters struct {
+
+	// A connection_configuration block as defined below.
+	ConnectionConfiguration []ConnectionConfigurationInitParameters `json:"connectionConfiguration,omitempty" tf:"connection_configuration,omitempty"`
+
+	// A list of IP Addresses of DNS Servers for the Point-to-Site VPN Gateway.
+	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Is the Routing Preference for the Public IP Interface of the VPN Gateway enabled? Defaults to false. Changing this forces a new resource to be created.
+	RoutingPreferenceInternetEnabled *bool `json:"routingPreferenceInternetEnabled,omitempty" tf:"routing_preference_internet_enabled,omitempty"`
+
+	// The Scale Unit for this Point-to-Site VPN Gateway.
+	ScaleUnit *float64 `json:"scaleUnit,omitempty" tf:"scale_unit,omitempty"`
+
+	// A mapping of tags to assign to the Point-to-Site VPN Gateway.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PointToSiteVPNGatewayObservation struct {
@@ -83,15 +115,12 @@ type PointToSiteVPNGatewayObservation struct {
 type PointToSiteVPNGatewayParameters struct {
 
 	// A connection_configuration block as defined below.
-	// +kubebuilder:validation:Optional
 	ConnectionConfiguration []ConnectionConfigurationParameters `json:"connectionConfiguration,omitempty" tf:"connection_configuration,omitempty"`
 
 	// A list of IP Addresses of DNS Servers for the Point-to-Site VPN Gateway.
-	// +kubebuilder:validation:Optional
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Point-to-Site VPN Gateway. Changing this forces a new resource to be created.
@@ -108,15 +137,12 @@ type PointToSiteVPNGatewayParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Is the Routing Preference for the Public IP Interface of the VPN Gateway enabled? Defaults to false. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	RoutingPreferenceInternetEnabled *bool `json:"routingPreferenceInternetEnabled,omitempty" tf:"routing_preference_internet_enabled,omitempty"`
 
 	// The Scale Unit for this Point-to-Site VPN Gateway.
-	// +kubebuilder:validation:Optional
 	ScaleUnit *float64 `json:"scaleUnit,omitempty" tf:"scale_unit,omitempty"`
 
 	// A mapping of tags to assign to the Point-to-Site VPN Gateway.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the VPN Server Configuration which this Point-to-Site VPN Gateway should use. Changing this forces a new resource to be created.
@@ -148,6 +174,21 @@ type PointToSiteVPNGatewayParameters struct {
 	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
+type RouteInitParameters struct {
+
+	// The Virtual Hub Route Table resource id associated with this Routing Configuration.
+	AssociatedRouteTableID *string `json:"associatedRouteTableId,omitempty" tf:"associated_route_table_id,omitempty"`
+
+	// The resource ID of the Route Map associated with this Routing Configuration for inbound learned routes.
+	InboundRouteMapID *string `json:"inboundRouteMapId,omitempty" tf:"inbound_route_map_id,omitempty"`
+
+	// The resource ID of the Route Map associated with this Routing Configuration for outbound advertised routes.
+	OutboundRouteMapID *string `json:"outboundRouteMapId,omitempty" tf:"outbound_route_map_id,omitempty"`
+
+	// A propagated_route_table block as defined below.
+	PropagatedRouteTable []RoutePropagatedRouteTableInitParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
+}
+
 type RouteObservation struct {
 
 	// The Virtual Hub Route Table resource id associated with this Routing Configuration.
@@ -166,20 +207,25 @@ type RouteObservation struct {
 type RouteParameters struct {
 
 	// The Virtual Hub Route Table resource id associated with this Routing Configuration.
-	// +kubebuilder:validation:Required
-	AssociatedRouteTableID *string `json:"associatedRouteTableId" tf:"associated_route_table_id,omitempty"`
+	AssociatedRouteTableID *string `json:"associatedRouteTableId,omitempty" tf:"associated_route_table_id,omitempty"`
 
 	// The resource ID of the Route Map associated with this Routing Configuration for inbound learned routes.
-	// +kubebuilder:validation:Optional
 	InboundRouteMapID *string `json:"inboundRouteMapId,omitempty" tf:"inbound_route_map_id,omitempty"`
 
 	// The resource ID of the Route Map associated with this Routing Configuration for outbound advertised routes.
-	// +kubebuilder:validation:Optional
 	OutboundRouteMapID *string `json:"outboundRouteMapId,omitempty" tf:"outbound_route_map_id,omitempty"`
 
 	// A propagated_route_table block as defined below.
-	// +kubebuilder:validation:Optional
 	PropagatedRouteTable []RoutePropagatedRouteTableParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
+}
+
+type RoutePropagatedRouteTableInitParameters struct {
+
+	// The list of Virtual Hub Route Table resource id which the routes will be propagated to.
+	Ids []*string `json:"ids,omitempty" tf:"ids,omitempty"`
+
+	// The list of labels to logically group Virtual Hub Route Tables which the routes will be propagated to.
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
 type RoutePropagatedRouteTableObservation struct {
@@ -194,12 +240,16 @@ type RoutePropagatedRouteTableObservation struct {
 type RoutePropagatedRouteTableParameters struct {
 
 	// The list of Virtual Hub Route Table resource id which the routes will be propagated to.
-	// +kubebuilder:validation:Required
-	Ids []*string `json:"ids" tf:"ids,omitempty"`
+	Ids []*string `json:"ids,omitempty" tf:"ids,omitempty"`
 
 	// The list of labels to logically group Virtual Hub Route Tables which the routes will be propagated to.
-	// +kubebuilder:validation:Optional
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+}
+
+type VPNClientAddressPoolInitParameters struct {
+
+	// A list of CIDR Ranges which should be used as Address Prefixes.
+	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 }
 
 type VPNClientAddressPoolObservation struct {
@@ -211,14 +261,17 @@ type VPNClientAddressPoolObservation struct {
 type VPNClientAddressPoolParameters struct {
 
 	// A list of CIDR Ranges which should be used as Address Prefixes.
-	// +kubebuilder:validation:Required
-	AddressPrefixes []*string `json:"addressPrefixes" tf:"address_prefixes,omitempty"`
+	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 }
 
 // PointToSiteVPNGatewaySpec defines the desired state of PointToSiteVPNGateway
 type PointToSiteVPNGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PointToSiteVPNGatewayParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PointToSiteVPNGatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // PointToSiteVPNGatewayStatus defines the observed state of PointToSiteVPNGateway.
@@ -239,9 +292,9 @@ type PointToSiteVPNGatewayStatus struct {
 type PointToSiteVPNGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionConfiguration)",message="connectionConfiguration is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scaleUnit)",message="scaleUnit is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionConfiguration) || has(self.initProvider.connectionConfiguration)",message="connectionConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scaleUnit) || has(self.initProvider.scaleUnit)",message="scaleUnit is a required parameter"
 	Spec   PointToSiteVPNGatewaySpec   `json:"spec"`
 	Status PointToSiteVPNGatewayStatus `json:"status,omitempty"`
 }

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: appactionhttps.logic.azure.upbound.io
 spec:
   group: logic.azure.upbound.io
@@ -180,9 +180,54 @@ spec:
                             will be triggered. Possible values include Succeeded,
                             Failed, Skipped and TimedOut.
                           type: string
-                      required:
-                      - actionName
-                      - actionResult
+                      type: object
+                    type: array
+                  uri:
+                    description: Specifies the URI which will be called when this
+                      HTTP Action is triggered.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  body:
+                    description: Specifies the HTTP Body that should be sent to the
+                      uri when this HTTP Action is triggered.
+                    type: string
+                  headers:
+                    additionalProperties:
+                      type: string
+                    description: Specifies a Map of Key-Value Pairs that should be
+                      sent to the uri when this HTTP Action is triggered.
+                    type: object
+                  method:
+                    description: Specifies the HTTP Method which should be used for
+                      this HTTP Action. Possible values include DELETE, GET, PATCH,
+                      POST and PUT.
+                    type: string
+                  queries:
+                    additionalProperties:
+                      type: string
+                    description: Specifies a Map of Key-Value Pairs that should be
+                      sent to the uri when this HTTP Action is triggered.
+                    type: object
+                  runAfter:
+                    description: Specifies the place of the HTTP Action in the Logic
+                      App Workflow. If not specified, the HTTP Action is right after
+                      the Trigger. A run_after block is as defined below.
+                    items:
+                      properties:
+                        actionName:
+                          description: Specifies the name of the precedent HTTP Action.
+                          type: string
+                        actionResult:
+                          description: Specifies the expected result of the precedent
+                            HTTP Action, only after which the current HTTP Action
+                            will be triggered. Possible values include Succeeded,
+                            Failed, Skipped and TimedOut.
+                          type: string
                       type: object
                     type: array
                   uri:
@@ -390,10 +435,12 @@ spec:
             x-kubernetes-validations:
             - message: method is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.method)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.method)
+                || has(self.initProvider.method)'
             - message: uri is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.uri)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.uri)
+                || has(self.initProvider.uri)'
           status:
             description: AppActionHTTPStatus defines the observed state of AppActionHTTP.
             properties:

@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PoolInitParameters struct {
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// QoS Type of the pool. Valid values include Auto or Manual.
+	QosType *string `json:"qosType,omitempty" tf:"qos_type,omitempty"`
+
+	// The service level of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
+	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
+
+	// Provisioned size of the pool in TB. Value must be between 4 and 500.
+	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type PoolObservation struct {
 
 	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
@@ -56,11 +74,9 @@ type PoolParameters struct {
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// QoS Type of the pool. Valid values include Auto or Manual.
-	// +kubebuilder:validation:Optional
 	QosType *string `json:"qosType,omitempty" tf:"qos_type,omitempty"`
 
 	// The name of the resource group where the NetApp Pool should be created. Changing this forces a new resource to be created.
@@ -77,15 +93,12 @@ type PoolParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The service level of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
 	// Provisioned size of the pool in TB. Value must be between 4 and 500.
-	// +kubebuilder:validation:Optional
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -93,6 +106,10 @@ type PoolParameters struct {
 type PoolSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PoolParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PoolInitParameters `json:"initProvider,omitempty"`
 }
 
 // PoolStatus defines the observed state of Pool.
@@ -113,9 +130,9 @@ type PoolStatus struct {
 type Pool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceLevel)",message="serviceLevel is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sizeInTb)",message="sizeInTb is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceLevel) || has(self.initProvider.serviceLevel)",message="serviceLevel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sizeInTb) || has(self.initProvider.sizeInTb)",message="sizeInTb is a required parameter"
 	Spec   PoolSpec   `json:"spec"`
 	Status PoolStatus `json:"status,omitempty"`
 }

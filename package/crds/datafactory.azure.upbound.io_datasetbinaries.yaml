@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: datasetbinaries.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -105,8 +105,6 @@ spec:
                         path:
                           description: The folder path to the file in the blob container.
                           type: string
-                      required:
-                      - container
                       type: object
                     type: array
                   compression:
@@ -122,8 +120,6 @@ spec:
                             Possible values are BZip2, Deflate, GZip, Tar, TarGZip
                             and ZipDeflate.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   dataFactoryId:
@@ -234,10 +230,6 @@ spec:
                           description: The base URL to the web server hosting the
                             file.
                           type: string
-                      required:
-                      - filename
-                      - path
-                      - relativeUrl
                       type: object
                     type: array
                   linkedServiceName:
@@ -343,9 +335,124 @@ spec:
                         path:
                           description: The folder path to the file on the SFTP server.
                           type: string
-                      required:
-                      - filename
-                      - path
+                      type: object
+                    type: array
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Binary Dataset.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Binary Dataset.
+                    items:
+                      type: string
+                    type: array
+                  azureBlobStorageLocation:
+                    description: A azure_blob_storage_location block as defined below.
+                    items:
+                      properties:
+                        container:
+                          description: The container on the Azure Blob Storage Account
+                            hosting the file.
+                          type: string
+                        dynamicContainerEnabled:
+                          description: Is the container using dynamic expression,
+                            function or system variables? Defaults to false.
+                          type: boolean
+                        dynamicFilenameEnabled:
+                          description: Is the filename using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        dynamicPathEnabled:
+                          description: Is the path using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        filename:
+                          description: The filename of the file in the blob container.
+                          type: string
+                        path:
+                          description: The folder path to the file in the blob container.
+                          type: string
+                      type: object
+                    type: array
+                  compression:
+                    description: A compression block as defined below.
+                    items:
+                      properties:
+                        level:
+                          description: The level of compression. Possible values are
+                            Fastest and Optimal.
+                          type: string
+                        type:
+                          description: The type of compression used during transport.
+                            Possible values are BZip2, Deflate, GZip, Tar, TarGZip
+                            and ZipDeflate.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: The description for the Data Factory Dataset.
+                    type: string
+                  folder:
+                    description: The folder that this Dataset is in. If not specified,
+                      the Dataset will appear at the root level.
+                    type: string
+                  httpServerLocation:
+                    description: A http_server_location block as defined below.
+                    items:
+                      properties:
+                        dynamicFilenameEnabled:
+                          description: Is the filename using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        dynamicPathEnabled:
+                          description: Is the path using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        filename:
+                          description: The filename of the file on the web server.
+                          type: string
+                        path:
+                          description: The folder path to the file on the web server.
+                          type: string
+                        relativeUrl:
+                          description: The base URL to the web server hosting the
+                            file.
+                          type: string
+                      type: object
+                    type: array
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: Specifies a list of parameters to associate with
+                      the Data Factory Binary Dataset.
+                    type: object
+                  sftpServerLocation:
+                    description: A sftp_server_location block as defined below.
+                    items:
+                      properties:
+                        dynamicFilenameEnabled:
+                          description: Is the filename using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        dynamicPathEnabled:
+                          description: Is the path using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        filename:
+                          description: The filename of the file on the SFTP server.
+                          type: string
+                        path:
+                          description: The folder path to the file on the SFTP server.
+                          type: string
                       type: object
                     type: array
                 type: object

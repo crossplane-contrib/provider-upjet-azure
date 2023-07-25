@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: virtualhubroutetables.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -173,10 +173,6 @@ spec:
                           description: The type of next hop. Currently the only possible
                             value is ResourceId. Defaults to ResourceId.
                           type: string
-                      required:
-                      - destinations
-                      - destinationsType
-                      - name
                       type: object
                     type: array
                   virtualHubId:
@@ -259,6 +255,39 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  labels:
+                    description: List of labels associated with this route table.
+                    items:
+                      type: string
+                    type: array
+                  route:
+                    description: A route block as defined below.
+                    items:
+                      properties:
+                        destinations:
+                          description: A list of destination addresses for this route.
+                          items:
+                            type: string
+                          type: array
+                        destinationsType:
+                          description: The type of destinations. Possible values are
+                            CIDR, ResourceId and Service.
+                          type: string
+                        name:
+                          description: The name which should be used for this route.
+                          type: string
+                        nextHopType:
+                          description: The type of next hop. Currently the only possible
+                            value is ResourceId. Defaults to ResourceId.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

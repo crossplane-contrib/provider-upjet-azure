@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: mssqlmanagedinstancefailovergroups.sql.azure.upbound.io
 spec:
   group: sql.azure.upbound.io
@@ -242,8 +242,6 @@ spec:
                           description: The failover mode. Possible values are Automatic
                             or Manual.
                           type: string
-                      required:
-                      - mode
                       type: object
                     type: array
                   readonlyEndpointFailoverPolicyEnabled:
@@ -252,6 +250,31 @@ spec:
                     type: boolean
                 required:
                 - location
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  readWriteEndpointFailoverPolicy:
+                    description: A read_write_endpoint_failover_policy block as defined
+                      below.
+                    items:
+                      properties:
+                        graceMinutes:
+                          description: Applies only if mode is Automatic. The grace
+                            period in minutes before failover with data loss is attempted.
+                          type: number
+                        mode:
+                          description: The failover mode. Possible values are Automatic
+                            or Manual.
+                          type: string
+                      type: object
+                    type: array
+                  readonlyEndpointFailoverPolicyEnabled:
+                    description: Failover policy for the read-only endpoint. Defaults
+                      to true.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -453,7 +476,8 @@ spec:
             x-kubernetes-validations:
             - message: readWriteEndpointFailoverPolicy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.readWriteEndpointFailoverPolicy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.readWriteEndpointFailoverPolicy)
+                || has(self.initProvider.readWriteEndpointFailoverPolicy)'
           status:
             description: MSSQLManagedInstanceFailoverGroupStatus defines the observed
               state of MSSQLManagedInstanceFailoverGroup.

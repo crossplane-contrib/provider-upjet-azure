@@ -79,6 +79,15 @@ func (tr *ManagementLock) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this ManagementLock
+func (tr *ManagementLock) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ManagementLock using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ManagementLock) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *PolicyDefinition) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this PolicyDefinition
+func (tr *PolicyDefinition) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this PolicyDefinition using its observed tfState.
@@ -247,6 +265,15 @@ func (tr *ResourceGroupPolicyAssignment) GetInitParameters() (map[string]any, er
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this ResourceGroupPolicyAssignment
+func (tr *ResourceGroupPolicyAssignment) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ResourceGroupPolicyAssignment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ResourceGroupPolicyAssignment) LateInitialize(attrs []byte) (bool, error) {
@@ -329,6 +356,15 @@ func (tr *ResourcePolicyAssignment) GetInitParameters() (map[string]any, error) 
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this ResourcePolicyAssignment
+func (tr *ResourcePolicyAssignment) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ResourcePolicyAssignment using its observed tfState.
@@ -415,6 +451,15 @@ func (tr *ResourcePolicyExemption) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this ResourcePolicyExemption
+func (tr *ResourcePolicyExemption) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ResourcePolicyExemption using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ResourcePolicyExemption) LateInitialize(attrs []byte) (bool, error) {
@@ -497,6 +542,15 @@ func (tr *RoleAssignment) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this RoleAssignment
+func (tr *RoleAssignment) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this RoleAssignment using its observed tfState.
@@ -584,6 +638,15 @@ func (tr *RoleDefinition) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this RoleDefinition
+func (tr *RoleDefinition) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this RoleDefinition using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *RoleDefinition) LateInitialize(attrs []byte) (bool, error) {
@@ -668,6 +731,15 @@ func (tr *SubscriptionPolicyAssignment) GetInitParameters() (map[string]any, err
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this SubscriptionPolicyAssignment
+func (tr *SubscriptionPolicyAssignment) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this SubscriptionPolicyAssignment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SubscriptionPolicyAssignment) LateInitialize(attrs []byte) (bool, error) {
@@ -750,6 +822,15 @@ func (tr *SubscriptionPolicyExemption) GetInitParameters() (map[string]any, erro
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this SubscriptionPolicyExemption
+func (tr *SubscriptionPolicyExemption) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SubscriptionPolicyExemption using its observed tfState.

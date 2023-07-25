@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: mssqlmanagedinstances.sql.azure.upbound.io
 spec:
   group: sql.azure.upbound.io
@@ -188,8 +188,6 @@ spec:
                             that should be configured on this SQL Managed Instance.
                             Possible values are SystemAssigned, UserAssigned.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   licenseType:
@@ -407,6 +405,98 @@ spec:
                       Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs,
                       or 4, 8, 16, 24, 32, 40, 64, or 80 for Gen5 SKUs.
                     type: number
+                required:
+                - administratorLoginPasswordSecretRef
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  administratorLogin:
+                    description: The administrator login name for the new SQL Managed
+                      Instance. Changing this forces a new resource to be created.
+                    type: string
+                  collation:
+                    description: Specifies how the SQL Managed Instance will be collated.
+                      Default value is SQL_Latin1_General_CP1_CI_AS. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this SQL Managed Instance. Required
+                            when type is set to UserAssigned.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this SQL Managed Instance.
+                            Possible values are SystemAssigned, UserAssigned.
+                          type: string
+                      type: object
+                    type: array
+                  licenseType:
+                    description: What type of license the Managed Instance will use.
+                      Possible values are LicenseIncluded and BasePrice.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  maintenanceConfigurationName:
+                    description: The name of the Public Maintenance Configuration
+                      window to apply to the SQL Managed Instance. Valid values include
+                      SQL_Default or an Azure Location in the format SQL_{Location}_MI_{Size}(for
+                      example SQL_EastUS_MI_1). Defaults to SQL_Default.
+                    type: string
+                  minimumTlsVersion:
+                    description: The Minimum TLS Version. Default value is 1.2 Valid
+                      values include 1.0, 1.1, 1.2.
+                    type: string
+                  proxyOverride:
+                    description: Specifies how the SQL Managed Instance will be accessed.
+                      Default value is Default. Valid values include Default, Proxy,
+                      and Redirect.
+                    type: string
+                  publicDataEndpointEnabled:
+                    description: Is the public data endpoint enabled? Default value
+                      is false.
+                    type: boolean
+                  skuName:
+                    description: Specifies the SKU Name for the SQL Managed Instance.
+                      Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH,
+                      BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
+                    type: string
+                  storageAccountType:
+                    description: Specifies the storage account type used to store
+                      backups for this database. Changing this forces a new resource
+                      to be created. Possible values are GRS, LRS and ZRS. The default
+                      value is GRS.
+                    type: string
+                  storageSizeInGb:
+                    description: Maximum storage space for the SQL Managed instance.
+                      This should be a multiple of 32 (GB).
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  timezoneId:
+                    description: The TimeZone ID that the SQL Managed Instance will
+                      be operating in. Default value is UTC. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  vcores:
+                    description: Number of cores that should be assigned to the SQL
+                      Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs,
+                      or 4, 8, 16, 24, 32, 40, 64, or 80 for Gen5 SKUs.
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -608,25 +698,31 @@ spec:
             x-kubernetes-validations:
             - message: administratorLogin is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.administratorLogin)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.administratorLogin)
+                || has(self.initProvider.administratorLogin)'
             - message: administratorLoginPasswordSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.administratorLoginPasswordSecretRef)'
             - message: licenseType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.licenseType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.licenseType)
+                || has(self.initProvider.licenseType)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: skuName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
+                || has(self.initProvider.skuName)'
             - message: storageSizeInGb is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageSizeInGb)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageSizeInGb)
+                || has(self.initProvider.storageSizeInGb)'
             - message: vcores is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.vcores)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vcores)
+                || has(self.initProvider.vcores)'
           status:
             description: MSSQLManagedInstanceStatus defines the observed state of
               MSSQLManagedInstance.

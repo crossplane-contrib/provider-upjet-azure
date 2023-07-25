@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PrivateDNSMXRecordInitParameters struct {
+
+	// One or more record blocks as defined below.
+	Record []PrivateDNSMXRecordRecordInitParameters `json:"record,omitempty" tf:"record,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type PrivateDNSMXRecordObservation struct {
 
 	// The FQDN of the DNS MX Record.
@@ -40,7 +52,6 @@ type PrivateDNSMXRecordObservation struct {
 type PrivateDNSMXRecordParameters struct {
 
 	// One or more record blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Record []PrivateDNSMXRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
@@ -57,11 +68,9 @@ type PrivateDNSMXRecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
@@ -78,6 +87,15 @@ type PrivateDNSMXRecordParameters struct {
 	ZoneNameSelector *v1.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
 }
 
+type PrivateDNSMXRecordRecordInitParameters struct {
+
+	// The FQDN of the exchange to MX record points to.
+	Exchange *string `json:"exchange,omitempty" tf:"exchange,omitempty"`
+
+	// The preference of the MX record.
+	Preference *float64 `json:"preference,omitempty" tf:"preference,omitempty"`
+}
+
 type PrivateDNSMXRecordRecordObservation struct {
 
 	// The FQDN of the exchange to MX record points to.
@@ -90,18 +108,20 @@ type PrivateDNSMXRecordRecordObservation struct {
 type PrivateDNSMXRecordRecordParameters struct {
 
 	// The FQDN of the exchange to MX record points to.
-	// +kubebuilder:validation:Required
-	Exchange *string `json:"exchange" tf:"exchange,omitempty"`
+	Exchange *string `json:"exchange,omitempty" tf:"exchange,omitempty"`
 
 	// The preference of the MX record.
-	// +kubebuilder:validation:Required
-	Preference *float64 `json:"preference" tf:"preference,omitempty"`
+	Preference *float64 `json:"preference,omitempty" tf:"preference,omitempty"`
 }
 
 // PrivateDNSMXRecordSpec defines the desired state of PrivateDNSMXRecord
 type PrivateDNSMXRecordSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PrivateDNSMXRecordParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PrivateDNSMXRecordInitParameters `json:"initProvider,omitempty"`
 }
 
 // PrivateDNSMXRecordStatus defines the observed state of PrivateDNSMXRecord.
@@ -122,8 +142,8 @@ type PrivateDNSMXRecordStatus struct {
 type PrivateDNSMXRecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.record)",message="record is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.record) || has(self.initProvider.record)",message="record is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl) || has(self.initProvider.ttl)",message="ttl is a required parameter"
 	Spec   PrivateDNSMXRecordSpec   `json:"spec"`
 	Status PrivateDNSMXRecordStatus `json:"status,omitempty"`
 }

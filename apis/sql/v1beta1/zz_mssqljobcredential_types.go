@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MSSQLJobCredentialInitParameters struct {
+
+	// The username part of the credential.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
 type MSSQLJobCredentialObservation struct {
 
 	// The ID of the Elastic Job Credential.
@@ -42,11 +48,9 @@ type MSSQLJobCredentialParameters struct {
 	JobAgentIDSelector *v1.Selector `json:"jobAgentIdSelector,omitempty" tf:"-"`
 
 	// The password part of the credential.
-	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username part of the credential.
-	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -54,6 +58,10 @@ type MSSQLJobCredentialParameters struct {
 type MSSQLJobCredentialSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MSSQLJobCredentialParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider MSSQLJobCredentialInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLJobCredentialStatus defines the observed state of MSSQLJobCredential.
@@ -75,7 +83,7 @@ type MSSQLJobCredential struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.username)",message="username is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.username) || has(self.initProvider.username)",message="username is a required parameter"
 	Spec   MSSQLJobCredentialSpec   `json:"spec"`
 	Status MSSQLJobCredentialStatus `json:"status,omitempty"`
 }

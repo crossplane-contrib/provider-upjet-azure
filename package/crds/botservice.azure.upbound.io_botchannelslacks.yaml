@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: botchannelslacks.botservice.azure.upbound.io
 spec:
   group: botservice.azure.upbound.io
@@ -290,6 +290,26 @@ spec:
                     - name
                     - namespace
                     type: object
+                required:
+                - clientSecretSecretRef
+                - verificationTokenSecretRef
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  clientId:
+                    description: The Client ID that will be used to authenticate with
+                      Slack.
+                    type: string
+                  landingPageUrl:
+                    description: The Slack Landing Page URL.
+                    type: string
+                  location:
+                    description: The supported Azure location where the resource exists.
+                      Changing this forces a new resource to be created.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -491,13 +511,15 @@ spec:
             x-kubernetes-validations:
             - message: clientId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.clientId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.clientId)
+                || has(self.initProvider.clientId)'
             - message: clientSecretSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.clientSecretSecretRef)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: verificationTokenSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.verificationTokenSecretRef)'

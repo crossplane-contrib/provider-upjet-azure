@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: configurations.appconfiguration.azure.upbound.io
 spec:
   group: appconfiguration.azure.upbound.io
@@ -253,8 +253,6 @@ spec:
                             values are SystemAssigned, UserAssigned, SystemAssigned,
                             UserAssigned (to enable both).
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   localAuthEnabled:
@@ -353,6 +351,66 @@ spec:
                             type: string
                         type: object
                     type: object
+                  sku:
+                    description: The SKU name of the App Configuration. Possible values
+                      are free and standard. Defaults to free.
+                    type: string
+                  softDeleteRetentionDays:
+                    description: The number of days that items should be retained
+                      for once soft-deleted. This field only works for standard sku.
+                      This value can be between 1 and 7 days. Defaults to 7. Changing
+                      this forces a new resource to be created.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  encryption:
+                    description: An encryption block as defined below.
+                    items:
+                      type: object
+                    type: array
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this App Configuration.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this App Configuration. Possible
+                            values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
+                          type: string
+                      type: object
+                    type: array
+                  localAuthEnabled:
+                    description: Whether local authentication methods is enabled.
+                      Defaults to true.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  publicNetworkAccess:
+                    description: The Public Network Access setting of the App Configuration.
+                      Possible values are Enabled and Disabled.
+                    type: string
+                  purgeProtectionEnabled:
+                    description: Whether Purge Protection is enabled. This field only
+                      works for standard sku. Defaults to false.
+                    type: boolean
                   sku:
                     description: The SKU name of the App Configuration. Possible values
                       are free and standard. Defaults to free.
@@ -569,7 +627,8 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
           status:
             description: ConfigurationStatus defines the observed state of Configuration.
             properties:

@@ -37,7 +37,6 @@ type IOTHubDPSCertificateObservation struct {
 type IOTHubDPSCertificateParameters struct {
 
 	// The Base-64 representation of the X509 leaf certificate .cer file or just a .pem file content.
-	// +kubebuilder:validation:Optional
 	CertificateContentSecretRef v1.SecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
 	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
@@ -54,7 +53,6 @@ type IOTHubDPSCertificateParameters struct {
 	IOTDPSNameSelector *v1.Selector `json:"iotDpsNameSelector,omitempty" tf:"-"`
 
 	// Specifies if the certificate is created in verified state. Defaults to false. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	IsVerified *bool `json:"isVerified,omitempty" tf:"is_verified,omitempty"`
 
 	// The name of the resource group under which the Iot Device Provisioning Service Certificate resource has to be created. Changing this forces a new resource to be created.
@@ -78,14 +76,6 @@ type IOTHubDPSCertificateSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider IOTHubDPSCertificateInitParameters `json:"initProvider,omitempty"`
 }
 

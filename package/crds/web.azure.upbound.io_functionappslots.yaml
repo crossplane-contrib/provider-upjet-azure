@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: functionappslots.web.azure.upbound.io
 spec:
   group: web.azure.upbound.io
@@ -188,8 +188,6 @@ spec:
                                 - name
                                 - namespace
                                 type: object
-                            required:
-                            - clientId
                             type: object
                           type: array
                         additionalLoginParams:
@@ -246,7 +244,6 @@ spec:
                                   type: string
                                 type: array
                             required:
-                            - appId
                             - appSecretSecretRef
                             type: object
                           type: array
@@ -283,7 +280,6 @@ spec:
                                   type: string
                                 type: array
                             required:
-                            - clientId
                             - clientSecretSecretRef
                             type: object
                           type: array
@@ -324,7 +320,6 @@ spec:
                                   type: string
                                 type: array
                             required:
-                            - clientId
                             - clientSecretSecretRef
                             type: object
                           type: array
@@ -369,7 +364,6 @@ spec:
                                 - namespace
                                 type: object
                             required:
-                            - consumerKey
                             - consumerSecretSecretRef
                             type: object
                           type: array
@@ -378,8 +372,6 @@ spec:
                             client attempts to access the app. Possible values are
                             AllowAnonymous and RedirectToLoginPage.
                           type: string
-                      required:
-                      - enabled
                       type: object
                     type: array
                   connectionString:
@@ -412,8 +404,6 @@ spec:
                           - namespace
                           type: object
                       required:
-                      - name
-                      - type
                       - valueSecretRef
                       type: object
                     type: array
@@ -530,8 +520,6 @@ spec:
                             both a system managed identity as well as the specified
                             user assigned identities.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   location:
@@ -654,8 +642,6 @@ spec:
                               supportCredentials:
                                 description: Are credentials supported?
                                 type: boolean
-                            required:
-                            - allowedOrigins
                             type: object
                           type: array
                         dotnetFrameworkVersion:
@@ -1117,6 +1103,431 @@ spec:
                     description: The runtime version associated with the Function
                       App. Defaults to ~1.
                     type: string
+                required:
+                - storageAccountAccessKeySecretRef
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  appSettings:
+                    additionalProperties:
+                      type: string
+                    description: A key-value pair of App Settings.
+                    type: object
+                  authSettings:
+                    description: An auth_settings block as defined below.
+                    items:
+                      properties:
+                        activeDirectory:
+                          description: An active_directory block as defined below.
+                          items:
+                            properties:
+                              allowedAudiences:
+                                description: Allowed audience values to consider when
+                                  validating JWTs issued by Azure Active Directory.
+                                items:
+                                  type: string
+                                type: array
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication.
+                                type: string
+                            type: object
+                          type: array
+                        additionalLoginParams:
+                          additionalProperties:
+                            type: string
+                          description: login parameters to send to the OpenID Connect
+                            authorization endpoint when a user logs in. Each parameter
+                            must be in the form "key=value".
+                          type: object
+                        allowedExternalRedirectUrls:
+                          description: External URLs that can be redirected to as
+                            part of logging in or logging out of the app.
+                          items:
+                            type: string
+                          type: array
+                        defaultProvider:
+                          description: The default provider to use when multiple providers
+                            have been set up. Possible values are AzureActiveDirectory,
+                            Facebook, Google, MicrosoftAccount and Twitter.
+                          type: string
+                        enabled:
+                          description: Is Authentication enabled?
+                          type: boolean
+                        facebook:
+                          description: A facebook block as defined below.
+                          items:
+                            properties:
+                              appId:
+                                description: The App ID of the Facebook app used for
+                                  login
+                                type: string
+                              oauthScopes:
+                                description: The OAuth 2.0 scopes that will be requested
+                                  as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        google:
+                          description: A google block as defined below.
+                          items:
+                            properties:
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication.
+                                type: string
+                              oauthScopes:
+                                description: The OAuth 2.0 scopes that will be requested
+                                  as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        issuer:
+                          description: Issuer URI. When using Azure Active Directory,
+                            this value is the URI of the directory tenant, e.g. https://sts.windows.net/{tenant-guid}/.
+                          type: string
+                        microsoft:
+                          description: A microsoft block as defined below.
+                          items:
+                            properties:
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication.
+                                type: string
+                              oauthScopes:
+                                description: The OAuth 2.0 scopes that will be requested
+                                  as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        runtimeVersion:
+                          description: The runtime version of the Authentication/Authorization
+                            module.
+                          type: string
+                        tokenRefreshExtensionHours:
+                          description: The number of hours after session token expiration
+                            that a session token can be used to call the token refresh
+                            API. Defaults to 72.
+                          type: number
+                        tokenStoreEnabled:
+                          description: If enabled the module will durably store platform-specific
+                            security tokens that are obtained during login flows.
+                            Defaults to false.
+                          type: boolean
+                        twitter:
+                          description: A twitter block as defined below.
+                          items:
+                            properties:
+                              consumerKey:
+                                description: The OAuth 1.0a consumer key of the Twitter
+                                  application used for sign-in.
+                                type: string
+                            type: object
+                          type: array
+                        unauthenticatedClientAction:
+                          description: The action to take when an unauthenticated
+                            client attempts to access the app. Possible values are
+                            AllowAnonymous and RedirectToLoginPage.
+                          type: string
+                      type: object
+                    type: array
+                  connectionString:
+                    description: A connection_string block as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: The name of the Connection String.
+                          type: string
+                        type:
+                          description: The type of the Connection String. Possible
+                            values are APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub,
+                            PostgreSQL, RedisCache, ServiceBus, SQLAzure and SQLServer.
+                          type: string
+                      type: object
+                    type: array
+                  dailyMemoryTimeQuota:
+                    description: The amount of memory in gigabyte-seconds that your
+                      application is allowed to consume per day. Setting this value
+                      only affects function apps under the consumption plan.
+                    type: number
+                  enableBuiltinLogging:
+                    description: Should the built-in logging of the Function App be
+                      enabled? Defaults to true.
+                    type: boolean
+                  enabled:
+                    description: Is the Function App enabled? Defaults to true.
+                    type: boolean
+                  httpsOnly:
+                    description: Can the Function App only be accessed via HTTPS?
+                      Defaults to false.
+                    type: boolean
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of user managed identity ids
+                            to be assigned. Required if type is UserAssigned.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the identity type of the Function
+                            App. Possible values are SystemAssigned (where Azure will
+                            generate a Service Principal for you), UserAssigned where
+                            you can specify the Service Principal IDs in the identity_ids
+                            field, and SystemAssigned, UserAssigned which assigns
+                            both a system managed identity as well as the specified
+                            user assigned identities.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  osType:
+                    description: A string indicating the Operating System type for
+                      this function app. The only possible value is linux. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  siteConfig:
+                    description: A site_config object as defined below.
+                    items:
+                      properties:
+                        alwaysOn:
+                          description: Should the Function App be loaded at all times?
+                            Defaults to false.
+                          type: boolean
+                        appScaleLimit:
+                          description: The number of workers this function app can
+                            scale out to. Only applicable to apps on the Consumption
+                            and Premium plan.
+                          type: number
+                        autoSwapSlotName:
+                          description: The name of the slot to automatically swap
+                            to during deployment
+                          type: string
+                        cors:
+                          description: A cors block as defined below.
+                          items:
+                            properties:
+                              allowedOrigins:
+                                description: A list of origins which should be able
+                                  to make cross-origin calls. * can be used to allow
+                                  all calls.
+                                items:
+                                  type: string
+                                type: array
+                              supportCredentials:
+                                description: Are credentials supported?
+                                type: boolean
+                            type: object
+                          type: array
+                        dotnetFrameworkVersion:
+                          description: The version of the .NET framework's CLR used
+                            in this function app. Possible values are v4.0 (including
+                            .NET Core 2.1 and 3.1), v5.0 and v6.0. For more information
+                            on which .NET Framework version to use based on the runtime
+                            version you're targeting - please see this table. Defaults
+                            to v4.0.
+                          type: string
+                        elasticInstanceMinimum:
+                          description: The number of minimum instances for this function
+                            app. Only applicable to apps on the Premium plan.
+                          type: number
+                        ftpsState:
+                          description: 'State of FTP / FTPS service for this function
+                            app. Possible values include: AllAllowed, FtpsOnly and
+                            Disabled.'
+                          type: string
+                        healthCheckPath:
+                          description: Path which will be checked for this function
+                            app health.
+                          type: string
+                        http2Enabled:
+                          description: Specifies whether or not the HTTP2 protocol
+                            should be enabled. Defaults to false.
+                          type: boolean
+                        ipRestriction:
+                          description: A List of objects representing IP restrictions
+                            as defined below.
+                          items:
+                            properties:
+                              action:
+                                description: Allow or Deny access for this IP range.
+                                  Defaults to Allow.
+                                type: string
+                              headers:
+                                description: The headers for this specific scm_ip_restriction
+                                  as defined below.
+                                items:
+                                  properties:
+                                    xAzureFdid:
+                                      description: A list of allowed Azure FrontDoor
+                                        IDs in UUID notation with a maximum of 8.
+                                      items:
+                                        type: string
+                                      type: array
+                                    xFdHealthProbe:
+                                      description: A list to allow the Azure FrontDoor
+                                        health probe header. Only allowed value is
+                                        "1".
+                                      items:
+                                        type: string
+                                      type: array
+                                    xForwardedFor:
+                                      description: A list of allowed 'X-Forwarded-For'
+                                        IPs in CIDR notation with a maximum of 8
+                                      items:
+                                        type: string
+                                      type: array
+                                    xForwardedHost:
+                                      description: A list of allowed 'X-Forwarded-Host'
+                                        domains with a maximum of 8.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              ipAddress:
+                                description: The IP Address used for this IP Restriction
+                                  in CIDR notation.
+                                type: string
+                              name:
+                                description: The name for this IP Restriction.
+                                type: string
+                              priority:
+                                description: The priority for this IP Restriction.
+                                  Restrictions are enforced in priority order. By
+                                  default, priority is set to 65000 if not specified.
+                                type: number
+                              serviceTag:
+                                description: The Service Tag used for this IP Restriction.
+                                type: string
+                            type: object
+                          type: array
+                        javaVersion:
+                          description: Java version hosted by the function app in
+                            Azure. Possible values are 1.8, 11 & 17 (In-Preview).
+                          type: string
+                        linuxFxVersion:
+                          description: Linux App Framework and version for the AppService,
+                            e.g. DOCKER|(golang:latest).
+                          type: string
+                        minTlsVersion:
+                          description: The minimum supported TLS version for the function
+                            app. Possible values are 1.0, 1.1, and 1.2. Defaults to
+                            1.2 for new function apps.
+                          type: string
+                        preWarmedInstanceCount:
+                          description: The number of pre-warmed instances for this
+                            function app. Only affects apps on the Premium plan.
+                          type: number
+                        runtimeScaleMonitoringEnabled:
+                          description: Should Runtime Scale Monitoring be enabled?.
+                            Only applicable to apps on the Premium plan. Defaults
+                            to false.
+                          type: boolean
+                        scmIpRestriction:
+                          description: A List of objects representing IP restrictions
+                            as defined below.
+                          items:
+                            properties:
+                              action:
+                                description: Allow or Deny access for this IP range.
+                                  Defaults to Allow.
+                                type: string
+                              headers:
+                                description: The headers for this specific scm_ip_restriction
+                                  as defined below.
+                                items:
+                                  properties:
+                                    xAzureFdid:
+                                      description: A list of allowed Azure FrontDoor
+                                        IDs in UUID notation with a maximum of 8.
+                                      items:
+                                        type: string
+                                      type: array
+                                    xFdHealthProbe:
+                                      description: A list to allow the Azure FrontDoor
+                                        health probe header. Only allowed value is
+                                        "1".
+                                      items:
+                                        type: string
+                                      type: array
+                                    xForwardedFor:
+                                      description: A list of allowed 'X-Forwarded-For'
+                                        IPs in CIDR notation with a maximum of 8
+                                      items:
+                                        type: string
+                                      type: array
+                                    xForwardedHost:
+                                      description: A list of allowed 'X-Forwarded-Host'
+                                        domains with a maximum of 8.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              ipAddress:
+                                description: The IP Address used for this IP Restriction
+                                  in CIDR notation.
+                                type: string
+                              name:
+                                description: The name for this IP Restriction.
+                                type: string
+                              priority:
+                                description: The priority for this IP Restriction.
+                                  Restrictions are enforced in priority order. By
+                                  default, priority is set to 65000 if not specified.
+                                type: number
+                              serviceTag:
+                                description: The Service Tag used for this IP Restriction.
+                                type: string
+                            type: object
+                          type: array
+                        scmType:
+                          description: 'The type of Source Control used by this function
+                            App. Valid values include: BitBucketGit, BitBucketHg,
+                            CodePlexGit, CodePlexHg, Dropbox, ExternalGit, ExternalHg,
+                            GitHub, LocalGit, None (default), OneDrive, Tfs, VSO,
+                            and VSTSRM.'
+                          type: string
+                        scmUseMainIpRestriction:
+                          description: IP security restrictions for scm to use main.
+                            Defaults to false.
+                          type: boolean
+                        use32BitWorkerProcess:
+                          description: Should the Function App run in 32 bit mode,
+                            rather than 64 bit mode? Defaults to true.
+                          type: boolean
+                        vnetRouteAllEnabled:
+                          description: Is the Function App enabled? Defaults to true.
+                          type: boolean
+                        websocketsEnabled:
+                          description: Should WebSockets be enabled?
+                          type: boolean
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  version:
+                    description: The runtime version associated with the Function
+                      App. Defaults to ~1.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -1318,7 +1729,8 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: storageAccountAccessKeySecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.storageAccountAccessKeySecretRef)'

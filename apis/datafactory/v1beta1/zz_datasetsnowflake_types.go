@@ -79,11 +79,9 @@ type DataSetSnowflakeObservation struct {
 type DataSetSnowflakeParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Dataset Snowflake.
-	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Dataset Snowflake.
-	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -101,11 +99,9 @@ type DataSetSnowflakeParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Dataset Snowflake.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
-	// +kubebuilder:validation:Optional
 	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Dataset with.
@@ -122,19 +118,15 @@ type DataSetSnowflakeParameters struct {
 	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Dataset Snowflake.
-	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A schema_column block as defined below.
-	// +kubebuilder:validation:Optional
 	SchemaColumn []DataSetSnowflakeSchemaColumnParameters `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
 
 	// The schema name of the Data Factory Dataset Snowflake.
-	// +kubebuilder:validation:Optional
 	SchemaName *string `json:"schemaName,omitempty" tf:"schema_name,omitempty"`
 
 	// The table name of the Data Factory Dataset Snowflake.
-	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
@@ -171,19 +163,15 @@ type DataSetSnowflakeSchemaColumnObservation struct {
 type DataSetSnowflakeSchemaColumnParameters struct {
 
 	// The name of the column.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The total number of digits allowed.
-	// +kubebuilder:validation:Optional
 	Precision *float64 `json:"precision,omitempty" tf:"precision,omitempty"`
 
 	// The number of digits allowed to the right of the decimal point.
-	// +kubebuilder:validation:Optional
 	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
 
 	// Type of the column. Valid values are NUMBER, DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT“FLOAT4, FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR, CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE, DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ, TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please note these values are case sensitive.
-	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -194,14 +182,6 @@ type DataSetSnowflakeSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider DataSetSnowflakeInitParameters `json:"initProvider,omitempty"`
 }
 

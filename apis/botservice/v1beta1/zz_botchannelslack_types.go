@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BotChannelSlackInitParameters struct {
+
+	// The Client ID that will be used to authenticate with Slack.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The Slack Landing Page URL.
+	LandingPageURL *string `json:"landingPageUrl,omitempty" tf:"landing_page_url,omitempty"`
+
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+}
+
 type BotChannelSlackObservation struct {
 
 	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
@@ -51,19 +63,15 @@ type BotChannelSlackParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// The Client ID that will be used to authenticate with Slack.
-	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The Client Secret that will be used to authenticate with Slack.
-	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The Slack Landing Page URL.
-	// +kubebuilder:validation:Optional
 	LandingPageURL *string `json:"landingPageUrl,omitempty" tf:"landing_page_url,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.
@@ -80,11 +88,9 @@ type BotChannelSlackParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Signing Secret that will be used to sign the requests.
-	// +kubebuilder:validation:Optional
 	SigningSecretSecretRef *v1.SecretKeySelector `json:"signingSecretSecretRef,omitempty" tf:"-"`
 
 	// The Verification Token that will be used to authenticate with Slack.
-	// +kubebuilder:validation:Optional
 	VerificationTokenSecretRef v1.SecretKeySelector `json:"verificationTokenSecretRef" tf:"-"`
 }
 
@@ -92,6 +98,10 @@ type BotChannelSlackParameters struct {
 type BotChannelSlackSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotChannelSlackParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BotChannelSlackInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotChannelSlackStatus defines the observed state of BotChannelSlack.
@@ -112,9 +122,9 @@ type BotChannelSlackStatus struct {
 type BotChannelSlack struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId)",message="clientId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId) || has(self.initProvider.clientId)",message="clientId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientSecretSecretRef)",message="clientSecretSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.verificationTokenSecretRef)",message="verificationTokenSecretRef is a required parameter"
 	Spec   BotChannelSlackSpec   `json:"spec"`
 	Status BotChannelSlackStatus `json:"status,omitempty"`

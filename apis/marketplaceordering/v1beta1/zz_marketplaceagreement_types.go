@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MarketplaceAgreementInitParameters struct {
+
+	// The Offer of the Marketplace Image. Changing this forces a new resource to be created.
+	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
+
+	// The Plan of the Marketplace Image. Changing this forces a new resource to be created.
+	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
+
+	// The Publisher of the Marketplace Image. Changing this forces a new resource to be created.
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+}
+
 type MarketplaceAgreementObservation struct {
 
 	// The ID of the Marketplace Agreement.
@@ -35,15 +47,12 @@ type MarketplaceAgreementObservation struct {
 type MarketplaceAgreementParameters struct {
 
 	// The Offer of the Marketplace Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
 
 	// The Plan of the Marketplace Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
 
 	// The Publisher of the Marketplace Image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 }
 
@@ -51,6 +60,10 @@ type MarketplaceAgreementParameters struct {
 type MarketplaceAgreementSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MarketplaceAgreementParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider MarketplaceAgreementInitParameters `json:"initProvider,omitempty"`
 }
 
 // MarketplaceAgreementStatus defines the observed state of MarketplaceAgreement.
@@ -71,9 +84,9 @@ type MarketplaceAgreementStatus struct {
 type MarketplaceAgreement struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.offer)",message="offer is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.plan)",message="plan is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publisher)",message="publisher is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.offer) || has(self.initProvider.offer)",message="offer is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.plan) || has(self.initProvider.plan)",message="plan is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publisher) || has(self.initProvider.publisher)",message="publisher is a required parameter"
 	Spec   MarketplaceAgreementSpec   `json:"spec"`
 	Status MarketplaceAgreementStatus `json:"status,omitempty"`
 }

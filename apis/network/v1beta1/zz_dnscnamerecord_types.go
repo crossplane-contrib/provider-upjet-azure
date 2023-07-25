@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DNSCNAMERecordInitParameters struct {
+
+	// The target of the CNAME.
+	Record *string `json:"record,omitempty" tf:"record,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DNSCNAMERecordObservation struct {
 
 	// The FQDN of the DNS CName Record.
@@ -43,7 +55,6 @@ type DNSCNAMERecordObservation struct {
 type DNSCNAMERecordParameters struct {
 
 	// The target of the CNAME.
-	// +kubebuilder:validation:Optional
 	Record *string `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
@@ -60,11 +71,9 @@ type DNSCNAMERecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure resource id of the target object. Conflicts with record.
@@ -99,6 +108,10 @@ type DNSCNAMERecordParameters struct {
 type DNSCNAMERecordSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DNSCNAMERecordParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DNSCNAMERecordInitParameters `json:"initProvider,omitempty"`
 }
 
 // DNSCNAMERecordStatus defines the observed state of DNSCNAMERecord.
@@ -119,7 +132,7 @@ type DNSCNAMERecordStatus struct {
 type DNSCNAMERecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl) || has(self.initProvider.ttl)",message="ttl is a required parameter"
 	Spec   DNSCNAMERecordSpec   `json:"spec"`
 	Status DNSCNAMERecordStatus `json:"status,omitempty"`
 }

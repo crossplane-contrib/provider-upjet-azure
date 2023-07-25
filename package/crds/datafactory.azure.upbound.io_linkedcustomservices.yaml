@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: linkedcustomservices.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -177,8 +177,59 @@ spec:
                           description: A map of parameters to associate with the integration
                             runtime.
                           type: object
-                      required:
-                      - name
+                      type: object
+                    type: array
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of parameters to associate with the Data Factory
+                      Linked Service.
+                    type: object
+                  type:
+                    description: The type of data stores that will be connected to
+                      Data Factory. For full list of supported data stores, please
+                      refer to Azure Data Factory connector. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  typePropertiesJson:
+                    description: A JSON object that contains the properties of the
+                      Data Factory Linked Service.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Linked Service.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Linked Service.
+                    items:
+                      type: string
+                    type: array
+                  description:
+                    description: The description for the Data Factory Linked Service.
+                    type: string
+                  integrationRuntime:
+                    description: An integration_runtime block as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: The integration runtime reference to associate
+                            with the Data Factory Linked Service.
+                          type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: A map of parameters to associate with the integration
+                            runtime.
+                          type: object
                       type: object
                     type: array
                   parameters:
@@ -398,10 +449,12 @@ spec:
             x-kubernetes-validations:
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
             - message: typePropertiesJson is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.typePropertiesJson)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.typePropertiesJson)
+                || has(self.initProvider.typePropertiesJson)'
           status:
             description: LinkedCustomServiceStatus defines the observed state of LinkedCustomService.
             properties:

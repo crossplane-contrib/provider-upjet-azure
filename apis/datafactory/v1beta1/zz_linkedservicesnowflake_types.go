@@ -13,6 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LinkedServiceSnowflakeInitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The connection string in which to authenticate with Snowflake.
+	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A key_vault_password block as defined below. Use this argument to store Snowflake password in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service.
+	KeyVaultPassword []LinkedServiceSnowflakeKeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+}
+
+type LinkedServiceSnowflakeKeyVaultPasswordInitParameters struct {
+
+	// Specifies the secret name in Azure Key Vault that stores Snowflake password.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+}
+
 type LinkedServiceSnowflakeKeyVaultPasswordObservation struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
@@ -38,8 +68,7 @@ type LinkedServiceSnowflakeKeyVaultPasswordParameters struct {
 	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the secret name in Azure Key Vault that stores Snowflake password.
-	// +kubebuilder:validation:Required
-	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceSnowflakeObservation struct {
@@ -75,15 +104,12 @@ type LinkedServiceSnowflakeObservation struct {
 type LinkedServiceSnowflakeParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The connection string in which to authenticate with Snowflake.
-	// +kubebuilder:validation:Optional
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -101,19 +127,15 @@ type LinkedServiceSnowflakeParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The integration runtime reference to associate with the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A key_vault_password block as defined below. Use this argument to store Snowflake password in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	KeyVaultPassword []LinkedServiceSnowflakeKeyVaultPasswordParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -121,6 +143,10 @@ type LinkedServiceSnowflakeParameters struct {
 type LinkedServiceSnowflakeSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LinkedServiceSnowflakeParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LinkedServiceSnowflakeInitParameters `json:"initProvider,omitempty"`
 }
 
 // LinkedServiceSnowflakeStatus defines the observed state of LinkedServiceSnowflake.
@@ -141,7 +167,7 @@ type LinkedServiceSnowflakeStatus struct {
 type LinkedServiceSnowflake struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionString)",message="connectionString is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionString) || has(self.initProvider.connectionString)",message="connectionString is a required parameter"
 	Spec   LinkedServiceSnowflakeSpec   `json:"spec"`
 	Status LinkedServiceSnowflakeStatus `json:"status,omitempty"`
 }

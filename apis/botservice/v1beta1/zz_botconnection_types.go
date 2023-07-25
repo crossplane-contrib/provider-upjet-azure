@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BotConnectionInitParameters struct {
+
+	// The Client ID that will be used to authenticate with the service provider.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A map of additional parameters to apply to the connection.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The Scopes at which the connection should be applied.
+	Scopes *string `json:"scopes,omitempty" tf:"scopes,omitempty"`
+
+	// The name of the service provider that will be associated with this connection. Changing this forces a new resource to be created.
+	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type BotConnectionObservation struct {
 
 	// The name of the Bot Resource this connection will be associated with. Changing this forces a new resource to be created.
@@ -60,19 +81,15 @@ type BotConnectionParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// The Client ID that will be used to authenticate with the service provider.
-	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The Client Secret that will be used to authenticate with the service provider.
-	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A map of additional parameters to apply to the connection.
-	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The name of the resource group in which to create the Bot Connection. Changing this forces a new resource to be created.
@@ -89,15 +106,12 @@ type BotConnectionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Scopes at which the connection should be applied.
-	// +kubebuilder:validation:Optional
 	Scopes *string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
 	// The name of the service provider that will be associated with this connection. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -105,6 +119,10 @@ type BotConnectionParameters struct {
 type BotConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotConnectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BotConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotConnectionStatus defines the observed state of BotConnection.
@@ -125,10 +143,10 @@ type BotConnectionStatus struct {
 type BotConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId)",message="clientId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId) || has(self.initProvider.clientId)",message="clientId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientSecretSecretRef)",message="clientSecretSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceProviderName)",message="serviceProviderName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serviceProviderName) || has(self.initProvider.serviceProviderName)",message="serviceProviderName is a required parameter"
 	Spec   BotConnectionSpec   `json:"spec"`
 	Status BotConnectionStatus `json:"status,omitempty"`
 }

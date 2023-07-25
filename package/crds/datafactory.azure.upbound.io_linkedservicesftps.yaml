@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: linkedservicesftps.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -198,6 +198,60 @@ spec:
                     - key
                     - name
                     - namespace
+                    type: object
+                  port:
+                    description: The TCP port number that the SFTP server uses to
+                      listen for client connection. Default value is 22.
+                    type: number
+                  skipHostKeyValidation:
+                    description: Whether to validate host key fingerprint while connecting.
+                      If set to false, host_key_fingerprint must also be set.
+                    type: boolean
+                  username:
+                    description: The username used to log on to the SFTP server.
+                    type: string
+                required:
+                - passwordSecretRef
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Linked Service.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Linked Service.
+                    items:
+                      type: string
+                    type: array
+                  authenticationType:
+                    description: The type of authentication used to connect to the
+                      web table source. Valid options are Anonymous, Basic and ClientCertificate.
+                    type: string
+                  description:
+                    description: The description for the Data Factory Linked Service.
+                    type: string
+                  host:
+                    description: The SFTP server hostname.
+                    type: string
+                  hostKeyFingerprint:
+                    description: The host key fingerprint of the SFTP server.
+                    type: string
+                  integrationRuntimeName:
+                    description: The integration runtime reference to associate with
+                      the Data Factory Linked Service.
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of parameters to associate with the Data Factory
+                      Linked Service.
                     type: object
                   port:
                     description: The TCP port number that the SFTP server uses to
@@ -411,19 +465,23 @@ spec:
             x-kubernetes-validations:
             - message: authenticationType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.authenticationType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.authenticationType)
+                || has(self.initProvider.authenticationType)'
             - message: host is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.host)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.host)
+                || has(self.initProvider.host)'
             - message: passwordSecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)'
             - message: port is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.port)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.port)
+                || has(self.initProvider.port)'
             - message: username is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.username)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.username)
+                || has(self.initProvider.username)'
           status:
             description: LinkedServiceSFTPStatus defines the observed state of LinkedServiceSFTP.
             properties:

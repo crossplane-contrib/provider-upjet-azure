@@ -79,6 +79,15 @@ func (tr *HPCCache) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this HPCCache
+func (tr *HPCCache) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this HPCCache using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *HPCCache) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *HPCCacheAccessPolicy) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this HPCCacheAccessPolicy
+func (tr *HPCCacheAccessPolicy) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this HPCCacheAccessPolicy using its observed tfState.
@@ -247,6 +265,15 @@ func (tr *HPCCacheBlobNFSTarget) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this HPCCacheBlobNFSTarget
+func (tr *HPCCacheBlobNFSTarget) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this HPCCacheBlobNFSTarget using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *HPCCacheBlobNFSTarget) LateInitialize(attrs []byte) (bool, error) {
@@ -331,6 +358,15 @@ func (tr *HPCCacheBlobTarget) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this HPCCacheBlobTarget
+func (tr *HPCCacheBlobTarget) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this HPCCacheBlobTarget using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *HPCCacheBlobTarget) LateInitialize(attrs []byte) (bool, error) {
@@ -413,6 +449,15 @@ func (tr *HPCCacheNFSTarget) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this HPCCacheNFSTarget
+func (tr *HPCCacheNFSTarget) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this HPCCacheNFSTarget using its observed tfState.

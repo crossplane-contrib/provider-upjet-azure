@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BotChannelDirectLineInitParameters struct {
+
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A site represents a client application that you want to connect to your bot. Multiple site blocks may be defined as below
+	Site []SiteInitParameters `json:"site,omitempty" tf:"site,omitempty"`
+}
+
 type BotChannelDirectLineObservation struct {
 
 	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
@@ -48,7 +57,6 @@ type BotChannelDirectLineParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.
@@ -65,8 +73,28 @@ type BotChannelDirectLineParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A site represents a client application that you want to connect to your bot. Multiple site blocks may be defined as below
-	// +kubebuilder:validation:Optional
 	Site []SiteParameters `json:"site,omitempty" tf:"site,omitempty"`
+}
+
+type SiteInitParameters struct {
+
+	// Enables/Disables this site. Enabled by default Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Enables additional security measures for this site, see Enhanced Directline Authentication Features. Disabled by default.
+	EnhancedAuthenticationEnabled *bool `json:"enhancedAuthenticationEnabled,omitempty" tf:"enhanced_authentication_enabled,omitempty"`
+
+	// The name of the site
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// This field is required when is_secure_site_enabled is enabled. Determines which origins can establish a Directline conversation for this site.
+	TrustedOrigins []*string `json:"trustedOrigins,omitempty" tf:"trusted_origins,omitempty"`
+
+	// Enables v1 of the Directline protocol for this site. Enabled by default Defaults to true.
+	V1Allowed *bool `json:"v1Allowed,omitempty" tf:"v1_allowed,omitempty"`
+
+	// Enables v3 of the Directline protocol for this site. Enabled by default Defaults to true.
+	V3Allowed *bool `json:"v3Allowed,omitempty" tf:"v3_allowed,omitempty"`
 }
 
 type SiteObservation struct {
@@ -96,27 +124,21 @@ type SiteObservation struct {
 type SiteParameters struct {
 
 	// Enables/Disables this site. Enabled by default Defaults to true.
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Enables additional security measures for this site, see Enhanced Directline Authentication Features. Disabled by default.
-	// +kubebuilder:validation:Optional
 	EnhancedAuthenticationEnabled *bool `json:"enhancedAuthenticationEnabled,omitempty" tf:"enhanced_authentication_enabled,omitempty"`
 
 	// The name of the site
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// This field is required when is_secure_site_enabled is enabled. Determines which origins can establish a Directline conversation for this site.
-	// +kubebuilder:validation:Optional
 	TrustedOrigins []*string `json:"trustedOrigins,omitempty" tf:"trusted_origins,omitempty"`
 
 	// Enables v1 of the Directline protocol for this site. Enabled by default Defaults to true.
-	// +kubebuilder:validation:Optional
 	V1Allowed *bool `json:"v1Allowed,omitempty" tf:"v1_allowed,omitempty"`
 
 	// Enables v3 of the Directline protocol for this site. Enabled by default Defaults to true.
-	// +kubebuilder:validation:Optional
 	V3Allowed *bool `json:"v3Allowed,omitempty" tf:"v3_allowed,omitempty"`
 }
 
@@ -124,6 +146,10 @@ type SiteParameters struct {
 type BotChannelDirectLineSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotChannelDirectLineParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BotChannelDirectLineInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotChannelDirectLineStatus defines the observed state of BotChannelDirectLine.
@@ -144,8 +170,8 @@ type BotChannelDirectLineStatus struct {
 type BotChannelDirectLine struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.site)",message="site is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.site) || has(self.initProvider.site)",message="site is a required parameter"
 	Spec   BotChannelDirectLineSpec   `json:"spec"`
 	Status BotChannelDirectLineStatus `json:"status,omitempty"`
 }

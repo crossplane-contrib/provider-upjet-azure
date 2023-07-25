@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: shares.storage.azure.upbound.io
 spec:
   group: storage.azure.upbound.io
@@ -92,16 +92,12 @@ spec:
                                 description: The time at which this Access Policy
                                   should be valid from, in ISO8601 format.
                                 type: string
-                            required:
-                            - permissions
                             type: object
                           type: array
                         id:
                           description: The ID which should be used for this Shared
                             Identifier.
                           type: string
-                      required:
-                      - id
                       type: object
                     type: array
                   enabledProtocol:
@@ -200,6 +196,64 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  accessTier:
+                    description: The access tier of the File Share. Possible values
+                      are Hot, Cool and TransactionOptimized, Premium.
+                    type: string
+                  acl:
+                    description: One or more acl blocks as defined below.
+                    items:
+                      properties:
+                        accessPolicy:
+                          description: An access_policy block as defined below.
+                          items:
+                            properties:
+                              expiry:
+                                description: The time at which this Access Policy
+                                  should be valid until, in ISO8601 format.
+                                type: string
+                              permissions:
+                                description: The permissions which should be associated
+                                  with this Shared Identifier. Possible value is combination
+                                  of r (read), w (write), d (delete), and l (list).
+                                type: string
+                              start:
+                                description: The time at which this Access Policy
+                                  should be valid from, in ISO8601 format.
+                                type: string
+                            type: object
+                          type: array
+                        id:
+                          description: The ID which should be used for this Shared
+                            Identifier.
+                          type: string
+                      type: object
+                    type: array
+                  enabledProtocol:
+                    description: The protocol used for the share. Possible values
+                      are SMB and NFS. The SMB indicates the share can be accessed
+                      by SMBv3.0, SMBv2.1 and REST. The NFS indicates the share can
+                      be accessed by NFSv4.1. Defaults to SMB. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  metadata:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of MetaData for this File Share.
+                    type: object
+                  quota:
+                    description: The maximum size of the share, in gigabytes. For
+                      Standard storage accounts, this must be 1GB (or higher) and
+                      at most 5120 GB (5 TB). For Premium FileStorage storage accounts,
+                      this must be greater than 100 GB and at most 102400 GB (100
+                      TB).
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -401,7 +455,8 @@ spec:
             x-kubernetes-validations:
             - message: quota is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.quota)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.quota)
+                || has(self.initProvider.quota)'
           status:
             description: ShareStatus defines the observed state of Share.
             properties:

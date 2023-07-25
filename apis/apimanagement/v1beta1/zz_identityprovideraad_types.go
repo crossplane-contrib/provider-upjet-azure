@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IdentityProviderAADInitParameters struct {
+
+	// List of allowed AAD Tenants.
+	AllowedTenants []*string `json:"allowedTenants,omitempty" tf:"allowed_tenants,omitempty"`
+
+	// Client Id of the Application in the AAD Identity Provider.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The AAD Tenant to use instead of Common when logging into Active Directory
+	SigninTenant *string `json:"signinTenant,omitempty" tf:"signin_tenant,omitempty"`
+}
+
 type IdentityProviderAADObservation struct {
 
 	// The Name of the API Management Service where this AAD Identity Provider should be created. Changing this forces a new resource to be created.
@@ -50,15 +62,12 @@ type IdentityProviderAADParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// List of allowed AAD Tenants.
-	// +kubebuilder:validation:Optional
 	AllowedTenants []*string `json:"allowedTenants,omitempty" tf:"allowed_tenants,omitempty"`
 
 	// Client Id of the Application in the AAD Identity Provider.
-	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Client secret of the Application in the AAD Identity Provider.
-	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
@@ -75,7 +84,6 @@ type IdentityProviderAADParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The AAD Tenant to use instead of Common when logging into Active Directory
-	// +kubebuilder:validation:Optional
 	SigninTenant *string `json:"signinTenant,omitempty" tf:"signin_tenant,omitempty"`
 }
 
@@ -83,6 +91,10 @@ type IdentityProviderAADParameters struct {
 type IdentityProviderAADSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IdentityProviderAADParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider IdentityProviderAADInitParameters `json:"initProvider,omitempty"`
 }
 
 // IdentityProviderAADStatus defines the observed state of IdentityProviderAAD.
@@ -103,8 +115,8 @@ type IdentityProviderAADStatus struct {
 type IdentityProviderAAD struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.allowedTenants)",message="allowedTenants is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId)",message="clientId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.allowedTenants) || has(self.initProvider.allowedTenants)",message="allowedTenants is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId) || has(self.initProvider.clientId)",message="clientId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientSecretSecretRef)",message="clientSecretSecretRef is a required parameter"
 	Spec   IdentityProviderAADSpec   `json:"spec"`
 	Status IdentityProviderAADStatus `json:"status,omitempty"`

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: schedules.automation.azure.upbound.io
 spec:
   group: automation.azure.upbound.io
@@ -183,9 +183,6 @@ spec:
                           description: Occurrence of the week within the month. Must
                             be between 1 and 5. -1 for last week within the month.
                           type: number
-                      required:
-                      - day
-                      - occurrence
                       type: object
                     type: array
                   resourceGroupName:
@@ -267,6 +264,67 @@ spec:
                             type: string
                         type: object
                     type: object
+                  startTime:
+                    description: Start time of the schedule. Must be at least five
+                      minutes in the future. Defaults to seven minutes in the future
+                      from the time the resource is created.
+                    type: string
+                  timezone:
+                    description: 'The timezone of the start time. Defaults to Etc/UTC.
+                      For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows'
+                    type: string
+                  weekDays:
+                    description: List of days of the week that the job should execute
+                      on. Only valid when frequency is Week. Possible values are Monday,
+                      Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
+                    items:
+                      type: string
+                    type: array
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A description for this Schedule.
+                    type: string
+                  expiryTime:
+                    description: The end time of the schedule.
+                    type: string
+                  frequency:
+                    description: The frequency of the schedule. - can be either OneTime,
+                      Day, Hour, Week, or Month.
+                    type: string
+                  interval:
+                    description: The number of frequencys between runs. Only valid
+                      when frequency is Day, Hour, Week, or Month and defaults to
+                      1.
+                    type: number
+                  monthDays:
+                    description: List of days of the month that the job should execute
+                      on. Must be between 1 and 31. -1 for last day of the month.
+                      Only valid when frequency is Month.
+                    items:
+                      type: number
+                    type: array
+                  monthlyOccurrence:
+                    description: List of monthly_occurrence blocks as defined below
+                      to specifies occurrences of days within a month. Only valid
+                      when frequency is Month. The monthly_occurrence block supports
+                      fields documented below.
+                    items:
+                      properties:
+                        day:
+                          description: Day of the occurrence. Must be one of Monday,
+                            Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+                          type: string
+                        occurrence:
+                          description: Occurrence of the week within the month. Must
+                            be between 1 and 5. -1 for last week within the month.
+                          type: number
+                      type: object
+                    type: array
                   startTime:
                     description: Start time of the schedule. Must be at least five
                       minutes in the future. Defaults to seven minutes in the future
@@ -484,7 +542,8 @@ spec:
             x-kubernetes-validations:
             - message: frequency is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.frequency)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.frequency)
+                || has(self.initProvider.frequency)'
           status:
             description: ScheduleStatus defines the observed state of Schedule.
             properties:

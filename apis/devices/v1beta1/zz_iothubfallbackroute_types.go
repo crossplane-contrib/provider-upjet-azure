@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IOTHubFallbackRouteInitParameters struct {
+
+	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// Used to specify whether the fallback route is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+}
+
 type IOTHubFallbackRouteObservation struct {
 
 	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
@@ -40,11 +52,9 @@ type IOTHubFallbackRouteObservation struct {
 type IOTHubFallbackRouteParameters struct {
 
 	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
-	// +kubebuilder:validation:Optional
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// Used to specify whether the fallback route is enabled.
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
@@ -87,7 +97,6 @@ type IOTHubFallbackRouteParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
-	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
@@ -95,6 +104,10 @@ type IOTHubFallbackRouteParameters struct {
 type IOTHubFallbackRouteSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IOTHubFallbackRouteParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider IOTHubFallbackRouteInitParameters `json:"initProvider,omitempty"`
 }
 
 // IOTHubFallbackRouteStatus defines the observed state of IOTHubFallbackRoute.
@@ -115,7 +128,7 @@ type IOTHubFallbackRouteStatus struct {
 type IOTHubFallbackRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || has(self.initProvider.enabled)",message="enabled is a required parameter"
 	Spec   IOTHubFallbackRouteSpec   `json:"spec"`
 	Status IOTHubFallbackRouteStatus `json:"status,omitempty"`
 }

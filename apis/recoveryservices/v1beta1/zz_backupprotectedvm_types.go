@@ -66,11 +66,9 @@ type BackupProtectedVMParameters struct {
 	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// A list of Disks' Logical Unit Numbers(LUN) to be excluded for VM Protection.
-	// +kubebuilder:validation:Optional
 	ExcludeDiskLuns []*float64 `json:"excludeDiskLuns,omitempty" tf:"exclude_disk_luns,omitempty"`
 
 	// A list of Disks' Logical Unit Numbers(LUN) to be included for VM Protection.
-	// +kubebuilder:validation:Optional
 	IncludeDiskLuns []*float64 `json:"includeDiskLuns,omitempty" tf:"include_disk_luns,omitempty"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
@@ -100,7 +98,6 @@ type BackupProtectedVMParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the VM to backup. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SourceVMID *string `json:"sourceVmId,omitempty" tf:"source_vm_id,omitempty"`
 }
 
@@ -111,14 +108,6 @@ type BackupProtectedVMSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider BackupProtectedVMInitParameters `json:"initProvider,omitempty"`
 }
 

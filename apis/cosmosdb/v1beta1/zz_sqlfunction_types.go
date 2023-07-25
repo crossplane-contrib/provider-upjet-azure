@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SQLFunctionInitParameters struct {
+
+	// Body of the User Defined Function.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+}
+
 type SQLFunctionObservation struct {
 
 	// Body of the User Defined Function.
@@ -28,7 +34,6 @@ type SQLFunctionObservation struct {
 type SQLFunctionParameters struct {
 
 	// Body of the User Defined Function.
-	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The id of the Cosmos DB SQL Container to create the SQL User Defined Function within. Changing this forces a new SQL User Defined Function to be created.
@@ -50,6 +55,10 @@ type SQLFunctionParameters struct {
 type SQLFunctionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SQLFunctionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SQLFunctionInitParameters `json:"initProvider,omitempty"`
 }
 
 // SQLFunctionStatus defines the observed state of SQLFunction.
@@ -70,7 +79,7 @@ type SQLFunctionStatus struct {
 type SQLFunction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body)",message="body is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || has(self.initProvider.body)",message="body is a required parameter"
 	Spec   SQLFunctionSpec   `json:"spec"`
 	Status SQLFunctionStatus `json:"status,omitempty"`
 }

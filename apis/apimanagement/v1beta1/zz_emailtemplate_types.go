@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EmailTemplateInitParameters struct {
+
+	// The body of the Email. Its format has to be a well-formed HTML document.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
+	// The subject of the Email.
+	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
+}
+
 type EmailTemplateObservation struct {
 
 	// The name of the API Management Service in which the Email Template should exist. Changing this forces a new API Management Email Template to be created.
@@ -56,7 +65,6 @@ type EmailTemplateParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The body of the Email. Its format has to be a well-formed HTML document.
-	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The name of the Resource Group where the API Management Email Template should exist. Changing this forces a new API Management Email Template to be created.
@@ -73,7 +81,6 @@ type EmailTemplateParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The subject of the Email.
-	// +kubebuilder:validation:Optional
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
 	// The name of the Email Template. Possible values are AccountClosedDeveloper, ApplicationApprovedNotificationMessage, ConfirmSignUpIdentityDefault, EmailChangeIdentityDefault, InviteUserNotificationMessage, NewCommentNotificationMessage, NewDeveloperNotificationMessage, NewIssueNotificationMessage, PasswordResetByAdminNotificationMessage, PasswordResetIdentityDefault, PurchaseDeveloperNotificationMessage, QuotaLimitApproachingDeveloperNotificationMessage, RejectDeveloperNotificationMessage, RequestDeveloperNotificationMessage. Changing this forces a new API Management Email Template to be created.
@@ -85,6 +92,10 @@ type EmailTemplateParameters struct {
 type EmailTemplateSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EmailTemplateParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EmailTemplateInitParameters `json:"initProvider,omitempty"`
 }
 
 // EmailTemplateStatus defines the observed state of EmailTemplate.
@@ -105,8 +116,8 @@ type EmailTemplateStatus struct {
 type EmailTemplate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body)",message="body is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subject)",message="subject is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || has(self.initProvider.body)",message="body is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subject) || has(self.initProvider.subject)",message="subject is a required parameter"
 	Spec   EmailTemplateSpec   `json:"spec"`
 	Status EmailTemplateStatus `json:"status,omitempty"`
 }

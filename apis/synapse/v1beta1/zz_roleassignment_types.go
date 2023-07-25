@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RoleAssignmentInitParameters struct {
+
+	// The ID of the Principal (User, Group or Service Principal) to assign the Synapse Role Definition to. Changing this forces a new resource to be created.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Role Name of the Synapse Built-In Role. Changing this forces a new resource to be created.
+	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
+
+	// The Synapse Spark Pool which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
+	SynapseSparkPoolID *string `json:"synapseSparkPoolId,omitempty" tf:"synapse_spark_pool_id,omitempty"`
+}
+
 type RoleAssignmentObservation struct {
 
 	// The Synapse Role Assignment ID.
@@ -34,15 +46,12 @@ type RoleAssignmentObservation struct {
 type RoleAssignmentParameters struct {
 
 	// The ID of the Principal (User, Group or Service Principal) to assign the Synapse Role Definition to. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Role Name of the Synapse Built-In Role. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
 
 	// The Synapse Spark Pool which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SynapseSparkPoolID *string `json:"synapseSparkPoolId,omitempty" tf:"synapse_spark_pool_id,omitempty"`
 
 	// The Synapse Workspace which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
@@ -64,6 +73,10 @@ type RoleAssignmentParameters struct {
 type RoleAssignmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RoleAssignmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider RoleAssignmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // RoleAssignmentStatus defines the observed state of RoleAssignment.
@@ -84,8 +97,8 @@ type RoleAssignmentStatus struct {
 type RoleAssignment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalId)",message="principalId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.roleName)",message="roleName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalId) || has(self.initProvider.principalId)",message="principalId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.roleName) || has(self.initProvider.roleName)",message="roleName is a required parameter"
 	Spec   RoleAssignmentSpec   `json:"spec"`
 	Status RoleAssignmentStatus `json:"status,omitempty"`
 }

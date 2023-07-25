@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ExportDataOptionsInitParameters struct {
+
+	// The time frame for pulling data for the query. If custom, then a specific time period must be provided. Possible values include: WeekToDate, MonthToDate, BillingMonthToDate, TheLast7Days, TheLastMonth, TheLastBillingMonth, Custom.
+	TimeFrame *string `json:"timeFrame,omitempty" tf:"time_frame,omitempty"`
+
+	// The type of the query. Possible values are ActualCost, AmortizedCost and Usage.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type ExportDataOptionsObservation struct {
 
 	// The time frame for pulling data for the query. If custom, then a specific time period must be provided. Possible values include: WeekToDate, MonthToDate, BillingMonthToDate, TheLast7Days, TheLastMonth, TheLastBillingMonth, Custom.
@@ -25,12 +34,16 @@ type ExportDataOptionsObservation struct {
 type ExportDataOptionsParameters struct {
 
 	// The time frame for pulling data for the query. If custom, then a specific time period must be provided. Possible values include: WeekToDate, MonthToDate, BillingMonthToDate, TheLast7Days, TheLastMonth, TheLastBillingMonth, Custom.
-	// +kubebuilder:validation:Required
-	TimeFrame *string `json:"timeFrame" tf:"time_frame,omitempty"`
+	TimeFrame *string `json:"timeFrame,omitempty" tf:"time_frame,omitempty"`
 
 	// The type of the query. Possible values are ActualCost, AmortizedCost and Usage.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ExportDataStorageLocationInitParameters struct {
+
+	// The path of the directory where exports will be uploaded. Changing this forces a new resource to be created.
+	RootFolderPath *string `json:"rootFolderPath,omitempty" tf:"root_folder_path,omitempty"`
 }
 
 type ExportDataStorageLocationObservation struct {
@@ -59,8 +72,28 @@ type ExportDataStorageLocationParameters struct {
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
 	// The path of the directory where exports will be uploaded. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	RootFolderPath *string `json:"rootFolderPath" tf:"root_folder_path,omitempty"`
+	RootFolderPath *string `json:"rootFolderPath,omitempty" tf:"root_folder_path,omitempty"`
+}
+
+type ResourceGroupCostManagementExportInitParameters struct {
+
+	// Is the cost management export active? Default is true.
+	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
+
+	// A export_data_options block as defined below.
+	ExportDataOptions []ExportDataOptionsInitParameters `json:"exportDataOptions,omitempty" tf:"export_data_options,omitempty"`
+
+	// A export_data_storage_location block as defined below.
+	ExportDataStorageLocation []ExportDataStorageLocationInitParameters `json:"exportDataStorageLocation,omitempty" tf:"export_data_storage_location,omitempty"`
+
+	// The date the export will stop capturing information.
+	RecurrencePeriodEndDate *string `json:"recurrencePeriodEndDate,omitempty" tf:"recurrence_period_end_date,omitempty"`
+
+	// The date the export will start capturing information.
+	RecurrencePeriodStartDate *string `json:"recurrencePeriodStartDate,omitempty" tf:"recurrence_period_start_date,omitempty"`
+
+	// How often the requested information will be exported. Valid values include Annually, Daily, Monthly, Weekly.
+	RecurrenceType *string `json:"recurrenceType,omitempty" tf:"recurrence_type,omitempty"`
 }
 
 type ResourceGroupCostManagementExportObservation struct {
@@ -93,27 +126,21 @@ type ResourceGroupCostManagementExportObservation struct {
 type ResourceGroupCostManagementExportParameters struct {
 
 	// Is the cost management export active? Default is true.
-	// +kubebuilder:validation:Optional
 	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
 
 	// A export_data_options block as defined below.
-	// +kubebuilder:validation:Optional
 	ExportDataOptions []ExportDataOptionsParameters `json:"exportDataOptions,omitempty" tf:"export_data_options,omitempty"`
 
 	// A export_data_storage_location block as defined below.
-	// +kubebuilder:validation:Optional
 	ExportDataStorageLocation []ExportDataStorageLocationParameters `json:"exportDataStorageLocation,omitempty" tf:"export_data_storage_location,omitempty"`
 
 	// The date the export will stop capturing information.
-	// +kubebuilder:validation:Optional
 	RecurrencePeriodEndDate *string `json:"recurrencePeriodEndDate,omitempty" tf:"recurrence_period_end_date,omitempty"`
 
 	// The date the export will start capturing information.
-	// +kubebuilder:validation:Optional
 	RecurrencePeriodStartDate *string `json:"recurrencePeriodStartDate,omitempty" tf:"recurrence_period_start_date,omitempty"`
 
 	// How often the requested information will be exported. Valid values include Annually, Daily, Monthly, Weekly.
-	// +kubebuilder:validation:Optional
 	RecurrenceType *string `json:"recurrenceType,omitempty" tf:"recurrence_type,omitempty"`
 
 	// The id of the resource group on which to create an export. Changing this forces a new resource to be created.
@@ -135,6 +162,10 @@ type ResourceGroupCostManagementExportParameters struct {
 type ResourceGroupCostManagementExportSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourceGroupCostManagementExportParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ResourceGroupCostManagementExportInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourceGroupCostManagementExportStatus defines the observed state of ResourceGroupCostManagementExport.
@@ -155,11 +186,11 @@ type ResourceGroupCostManagementExportStatus struct {
 type ResourceGroupCostManagementExport struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exportDataOptions)",message="exportDataOptions is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exportDataStorageLocation)",message="exportDataStorageLocation is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recurrencePeriodEndDate)",message="recurrencePeriodEndDate is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recurrencePeriodStartDate)",message="recurrencePeriodStartDate is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recurrenceType)",message="recurrenceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exportDataOptions) || has(self.initProvider.exportDataOptions)",message="exportDataOptions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exportDataStorageLocation) || has(self.initProvider.exportDataStorageLocation)",message="exportDataStorageLocation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recurrencePeriodEndDate) || has(self.initProvider.recurrencePeriodEndDate)",message="recurrencePeriodEndDate is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recurrencePeriodStartDate) || has(self.initProvider.recurrencePeriodStartDate)",message="recurrencePeriodStartDate is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recurrenceType) || has(self.initProvider.recurrenceType)",message="recurrenceType is a required parameter"
 	Spec   ResourceGroupCostManagementExportSpec   `json:"spec"`
 	Status ResourceGroupCostManagementExportStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SiteRecoveryNetworkMappingInitParameters struct {
+
+	// The name of the network mapping. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the ASR fabric where mapping should be created. Changing this forces a new resource to be created.
+	SourceRecoveryFabricName *string `json:"sourceRecoveryFabricName,omitempty" tf:"source_recovery_fabric_name,omitempty"`
+
+	// The Azure Site Recovery fabric object corresponding to the recovery Azure region. Changing this forces a new resource to be created.
+	TargetRecoveryFabricName *string `json:"targetRecoveryFabricName,omitempty" tf:"target_recovery_fabric_name,omitempty"`
+}
+
 type SiteRecoveryNetworkMappingObservation struct {
 
 	// The ID of the Site Recovery Network Mapping.
@@ -43,7 +55,6 @@ type SiteRecoveryNetworkMappingObservation struct {
 type SiteRecoveryNetworkMappingParameters struct {
 
 	// The name of the network mapping. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.
@@ -87,7 +98,6 @@ type SiteRecoveryNetworkMappingParameters struct {
 	SourceNetworkIDSelector *v1.Selector `json:"sourceNetworkIdSelector,omitempty" tf:"-"`
 
 	// Specifies the ASR fabric where mapping should be created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SourceRecoveryFabricName *string `json:"sourceRecoveryFabricName,omitempty" tf:"source_recovery_fabric_name,omitempty"`
 
 	// The id of the recovery network. Changing this forces a new resource to be created.
@@ -105,7 +115,6 @@ type SiteRecoveryNetworkMappingParameters struct {
 	TargetNetworkIDSelector *v1.Selector `json:"targetNetworkIdSelector,omitempty" tf:"-"`
 
 	// The Azure Site Recovery fabric object corresponding to the recovery Azure region. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	TargetRecoveryFabricName *string `json:"targetRecoveryFabricName,omitempty" tf:"target_recovery_fabric_name,omitempty"`
 }
 
@@ -113,6 +122,10 @@ type SiteRecoveryNetworkMappingParameters struct {
 type SiteRecoveryNetworkMappingSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SiteRecoveryNetworkMappingParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SiteRecoveryNetworkMappingInitParameters `json:"initProvider,omitempty"`
 }
 
 // SiteRecoveryNetworkMappingStatus defines the observed state of SiteRecoveryNetworkMapping.
@@ -133,9 +146,9 @@ type SiteRecoveryNetworkMappingStatus struct {
 type SiteRecoveryNetworkMapping struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceRecoveryFabricName)",message="sourceRecoveryFabricName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetRecoveryFabricName)",message="targetRecoveryFabricName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceRecoveryFabricName) || has(self.initProvider.sourceRecoveryFabricName)",message="sourceRecoveryFabricName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetRecoveryFabricName) || has(self.initProvider.targetRecoveryFabricName)",message="targetRecoveryFabricName is a required parameter"
 	Spec   SiteRecoveryNetworkMappingSpec   `json:"spec"`
 	Status SiteRecoveryNetworkMappingStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HealthBotInitParameters struct {
+
+	// Specifies The Azure Region where the resource exists. Changing this force a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name which should be used for the SKU of the service. Possible values are C0, F0 and S1.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the service.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type HealthBotObservation struct {
 
 	// The management portal url.
@@ -37,7 +49,6 @@ type HealthBotObservation struct {
 type HealthBotParameters struct {
 
 	// Specifies The Azure Region where the resource exists. Changing this force a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies The name of the Resource Group in which to create the Healthbot Service. changing this forces a new resource to be created.
@@ -54,11 +65,9 @@ type HealthBotParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name which should be used for the SKU of the service. Possible values are C0, F0 and S1.
-	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the service.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -66,6 +75,10 @@ type HealthBotParameters struct {
 type HealthBotSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HealthBotParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider HealthBotInitParameters `json:"initProvider,omitempty"`
 }
 
 // HealthBotStatus defines the observed state of HealthBot.
@@ -86,8 +99,8 @@ type HealthBotStatus struct {
 type HealthBot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
 	Spec   HealthBotSpec   `json:"spec"`
 	Status HealthBotStatus `json:"status,omitempty"`
 }

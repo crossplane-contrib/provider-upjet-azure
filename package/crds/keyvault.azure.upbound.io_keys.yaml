@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: keys.keyvault.azure.upbound.io
 spec:
   group: keyvault.azure.upbound.io
@@ -171,6 +171,76 @@ spec:
                             type: string
                         type: object
                     type: object
+                  notBeforeDate:
+                    description: Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
+                    type: string
+                  rotationPolicy:
+                    description: A rotation_policy block as defined below.
+                    items:
+                      properties:
+                        automatic:
+                          description: An automatic block as defined below.
+                          items:
+                            properties:
+                              timeAfterCreation:
+                                description: Rotate automatically at a duration after
+                                  create as an ISO 8601 duration.
+                                type: string
+                              timeBeforeExpiry:
+                                description: Rotate automatically at a duration before
+                                  expiry as an ISO 8601 duration.
+                                type: string
+                            type: object
+                          type: array
+                        expireAfter:
+                          description: Expire a Key Vault Key after given duration
+                            as an ISO 8601 duration.
+                          type: string
+                        notifyBeforeExpiry:
+                          description: Notify at a given duration before expiry as
+                            an ISO 8601 duration. Default is P30D.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  curve:
+                    description: Specifies the curve to use when creating an EC key.
+                      Possible values are P-256, P-256K, P-384, and P-521. This field
+                      will be required in a future release if key_type is EC or EC-HSM.
+                      The API will default to P-256 if nothing is specified. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  expirationDate:
+                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
+                    type: string
+                  keyOpts:
+                    description: 'A list of JSON web key operations. Possible values
+                      include: decrypt, encrypt, sign, unwrapKey, verify and wrapKey.
+                      Please note these values are case sensitive.'
+                    items:
+                      type: string
+                    type: array
+                  keySize:
+                    description: 'Specifies the Size of the RSA key to create in bytes.
+                      For example, 1024 or 2048. Note: This field is required if key_type
+                      is RSA or RSA-HSM. Changing this forces a new resource to be
+                      created.'
+                    type: number
+                  keyType:
+                    description: Specifies the Key Type to use for this Key Vault
+                      Key. Possible values are EC (Elliptic Curve), EC-HSM, RSA and
+                      RSA-HSM. Changing this forces a new resource to be created.
+                    type: string
                   notBeforeDate:
                     description: Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
                     type: string
@@ -408,10 +478,12 @@ spec:
             x-kubernetes-validations:
             - message: keyOpts is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.keyOpts)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.keyOpts)
+                || has(self.initProvider.keyOpts)'
             - message: keyType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.keyType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.keyType)
+                || has(self.initProvider.keyType)'
           status:
             description: KeyStatus defines the observed state of Key.
             properties:

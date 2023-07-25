@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: springcloudconnections.servicelinker.azure.upbound.io
 spec:
   group: servicelinker.azure.upbound.io
@@ -137,8 +137,6 @@ spec:
                             servicePrincipalCertificate, secret. Changing this forces
                             a new resource to be created.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   clientType:
@@ -158,8 +156,6 @@ spec:
                         keyVaultId:
                           description: The key vault id to store secret.
                           type: string
-                      required:
-                      - keyVaultId
                       type: object
                     type: array
                   springCloudId:
@@ -324,6 +320,70 @@ spec:
                             type: string
                         type: object
                     type: object
+                  vnetSolution:
+                    description: The type of the VNet solution. Possible values are
+                      serviceEndpoint, privateLink.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  authentication:
+                    description: The authentication info. An authentication block
+                      as defined below.
+                    items:
+                      properties:
+                        clientId:
+                          description: Client ID for userAssignedIdentity or servicePrincipal
+                            auth. Should be specified when type is set to servicePrincipalSecret
+                            or servicePrincipalCertificate. When type is set to userAssignedIdentity,
+                            client_id and subscription_id should be either both specified
+                            or both not specified.
+                          type: string
+                        name:
+                          description: Username or account name for secret auth. name
+                            and secret should be either both specified or both not
+                            specified when type is set to secret.
+                          type: string
+                        principalId:
+                          description: Principal ID for servicePrincipal auth. Should
+                            be specified when type is set to servicePrincipalSecret
+                            or servicePrincipalCertificate.
+                          type: string
+                        subscriptionId:
+                          description: Subscription ID for userAssignedIdentity. subscription_id
+                            and client_id should be either both specified or both
+                            not specified.
+                          type: string
+                        type:
+                          description: The authentication type. Possible values are
+                            systemAssignedIdentity, userAssignedIdentity, servicePrincipalSecret,
+                            servicePrincipalCertificate, secret. Changing this forces
+                            a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  clientType:
+                    description: The application client type. Possible values are
+                      none, dotnet, java, python, go, php, ruby, django, nodejs and
+                      springBoot.
+                    type: string
+                  name:
+                    description: The name of the service connection. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  secretStore:
+                    description: An option to store secret value in secure place.
+                      An secret_store block as defined below.
+                    items:
+                      properties:
+                        keyVaultId:
+                          description: The key vault id to store secret.
+                          type: string
+                      type: object
+                    type: array
                   vnetSolution:
                     description: The type of the VNet solution. Possible values are
                       serviceEndpoint, privateLink.
@@ -529,10 +589,12 @@ spec:
             x-kubernetes-validations:
             - message: authentication is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.authentication)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.authentication)
+                || has(self.initProvider.authentication)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: SpringCloudConnectionStatus defines the observed state of
               SpringCloudConnection.

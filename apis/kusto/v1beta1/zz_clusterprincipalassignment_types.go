@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ClusterPrincipalAssignmentInitParameters struct {
+
+	// The object id of the principal. Changing this forces a new resource to be created.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The type of the principal. Valid values include App, Group, User. Changing this forces a new resource to be created.
+	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
+
+	// The cluster role assigned to the principal. Valid values include AllDatabasesAdmin and AllDatabasesViewer. Changing this forces a new resource to be created.
+	Role *string `json:"role,omitempty" tf:"role,omitempty"`
+
+	// The tenant id in which the principal resides. Changing this forces a new resource to be created.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
 type ClusterPrincipalAssignmentObservation struct {
 
 	// The name of the cluster in which to create the resource. Changing this forces a new resource to be created.
@@ -59,11 +74,9 @@ type ClusterPrincipalAssignmentParameters struct {
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The object id of the principal. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The type of the principal. Valid values include App, Group, User. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 
 	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
@@ -80,11 +93,9 @@ type ClusterPrincipalAssignmentParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The cluster role assigned to the principal. Valid values include AllDatabasesAdmin and AllDatabasesViewer. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Role *string `json:"role,omitempty" tf:"role,omitempty"`
 
 	// The tenant id in which the principal resides. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
@@ -92,6 +103,10 @@ type ClusterPrincipalAssignmentParameters struct {
 type ClusterPrincipalAssignmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ClusterPrincipalAssignmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ClusterPrincipalAssignmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // ClusterPrincipalAssignmentStatus defines the observed state of ClusterPrincipalAssignment.
@@ -112,10 +127,10 @@ type ClusterPrincipalAssignmentStatus struct {
 type ClusterPrincipalAssignment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalId)",message="principalId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalType)",message="principalType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.role)",message="role is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tenantId)",message="tenantId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalId) || has(self.initProvider.principalId)",message="principalId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalType) || has(self.initProvider.principalType)",message="principalType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.role) || has(self.initProvider.role)",message="role is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tenantId) || has(self.initProvider.tenantId)",message="tenantId is a required parameter"
 	Spec   ClusterPrincipalAssignmentSpec   `json:"spec"`
 	Status ClusterPrincipalAssignmentStatus `json:"status,omitempty"`
 }

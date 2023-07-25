@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: sqlcontainers.cosmosdb.azure.upbound.io
 spec:
   group: cosmosdb.azure.upbound.io
@@ -180,8 +180,6 @@ spec:
                           description: 'Indicates the conflict resolution mode. Possible
                             values include: LastWriterWins, Custom.'
                           type: string
-                      required:
-                      - mode
                       type: object
                     type: array
                   databaseName:
@@ -293,13 +291,8 @@ spec:
                                         Point, and Polygon will be applied to the
                                         path.
                                       type: string
-                                  required:
-                                  - order
-                                  - path
                                   type: object
                                 type: array
-                            required:
-                            - index
                             type: object
                           type: array
                         excludedPath:
@@ -314,8 +307,6 @@ spec:
                                   spatial types including LineString, MultiPolygon,
                                   Point, and Polygon will be applied to the path.
                                 type: string
-                            required:
-                            - path
                             type: object
                           type: array
                         includedPath:
@@ -330,8 +321,6 @@ spec:
                                   spatial types including LineString, MultiPolygon,
                                   Point, and Polygon will be applied to the path.
                                 type: string
-                            required:
-                            - path
                             type: object
                           type: array
                         indexingMode:
@@ -349,8 +338,6 @@ spec:
                                   spatial types including LineString, MultiPolygon,
                                   Point, and Polygon will be applied to the path.
                                 type: string
-                            required:
-                            - path
                             type: object
                           type: array
                       type: object
@@ -459,8 +446,158 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - paths
+                      type: object
+                    type: array
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  analyticalStorageTtl:
+                    description: The default time to live of Analytical Storage for
+                      this SQL container. If present and the value is set to -1, it
+                      is equal to infinity, and items don’t expire by default. If
+                      present and the value is set to some number n – items will expire
+                      n seconds after their last modified time.
+                    type: number
+                  autoscaleSettings:
+                    description: An autoscale_settings block as defined below. Requires
+                      partition_key_path to be set.
+                    items:
+                      properties:
+                        maxThroughput:
+                          description: The maximum throughput of the SQL container
+                            (RU/s). Must be between 1,000 and 1,000,000. Must be set
+                            in increments of 1,000. Conflicts with throughput.
+                          type: number
+                      type: object
+                    type: array
+                  conflictResolutionPolicy:
+                    description: A conflict_resolution_policy blocks as defined below.
+                      Changing this forces a new resource to be created.
+                    items:
+                      properties:
+                        conflictResolutionPath:
+                          description: The conflict resolution path in the case of
+                            LastWriterWins mode.
+                          type: string
+                        conflictResolutionProcedure:
+                          description: The procedure to resolve conflicts in the case
+                            of Custom mode.
+                          type: string
+                        mode:
+                          description: 'Indicates the conflict resolution mode. Possible
+                            values include: LastWriterWins, Custom.'
+                          type: string
+                      type: object
+                    type: array
+                  defaultTtl:
+                    description: The default time to live of SQL container. If missing,
+                      items are not expired automatically. If present and the value
+                      is set to -1, it is equal to infinity, and items don’t expire
+                      by default. If present and the value is set to some number n
+                      – items will expire n seconds after their last modified time.
+                    type: number
+                  indexingPolicy:
+                    description: An indexing_policy block as defined below.
+                    items:
+                      properties:
+                        compositeIndex:
+                          description: One or more composite_index blocks as defined
+                            below.
+                          items:
+                            properties:
+                              index:
+                                description: One or more index blocks as defined below.
+                                items:
+                                  properties:
+                                    order:
+                                      description: Order of the index. Possible values
+                                        are Ascending or Descending.
+                                      type: string
+                                    path:
+                                      description: Path for which the indexing behaviour
+                                        applies to. According to the service design,
+                                        all spatial types including LineString, MultiPolygon,
+                                        Point, and Polygon will be applied to the
+                                        path.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        excludedPath:
+                          description: One or more excluded_path blocks as defined
+                            below. Either included_path or excluded_path must contain
+                            the path /*
+                          items:
+                            properties:
+                              path:
+                                description: Path for which the indexing behaviour
+                                  applies to. According to the service design, all
+                                  spatial types including LineString, MultiPolygon,
+                                  Point, and Polygon will be applied to the path.
+                                type: string
+                            type: object
+                          type: array
+                        includedPath:
+                          description: One or more included_path blocks as defined
+                            below. Either included_path or excluded_path must contain
+                            the path /*
+                          items:
+                            properties:
+                              path:
+                                description: Path for which the indexing behaviour
+                                  applies to. According to the service design, all
+                                  spatial types including LineString, MultiPolygon,
+                                  Point, and Polygon will be applied to the path.
+                                type: string
+                            type: object
+                          type: array
+                        indexingMode:
+                          description: 'Indicates the indexing mode. Possible values
+                            include: consistent and none. Defaults to consistent.'
+                          type: string
+                        spatialIndex:
+                          description: One or more spatial_index blocks as defined
+                            below.
+                          items:
+                            properties:
+                              path:
+                                description: Path for which the indexing behaviour
+                                  applies to. According to the service design, all
+                                  spatial types including LineString, MultiPolygon,
+                                  Point, and Polygon will be applied to the path.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  partitionKeyPath:
+                    description: Define a partition key. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  partitionKeyVersion:
+                    description: Define a partition key version. Changing this forces
+                      a new resource to be created. Possible values are 1and 2. This
+                      should be set to 2 in order to use large partition keys.
+                    type: number
+                  throughput:
+                    description: The throughput of SQL container (RU/s). Must be set
+                      in increments of 100. The minimum value is 400.
+                    type: number
+                  uniqueKey:
+                    description: One or more unique_key blocks as defined below. Changing
+                      this forces a new resource to be created.
+                    items:
+                      properties:
+                        paths:
+                          description: A list of paths to use for this unique key.
+                            Changing this forces a new resource to be created.
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                 type: object
@@ -664,7 +801,8 @@ spec:
             x-kubernetes-validations:
             - message: partitionKeyPath is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.partitionKeyPath)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.partitionKeyPath)
+                || has(self.initProvider.partitionKeyPath)'
           status:
             description: SQLContainerStatus defines the observed state of SQLContainer.
             properties:

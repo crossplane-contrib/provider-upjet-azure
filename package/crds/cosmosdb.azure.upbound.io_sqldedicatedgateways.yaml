@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: sqldedicatedgateways.cosmosdb.azure.upbound.io
 spec:
   group: cosmosdb.azure.upbound.io
@@ -144,6 +144,21 @@ spec:
                             type: string
                         type: object
                     type: object
+                  instanceCount:
+                    description: The instance count for the CosmosDB SQL Dedicated
+                      Gateway. Possible value is between 1 and 5.
+                    type: number
+                  instanceSize:
+                    description: The instance size for the CosmosDB SQL Dedicated
+                      Gateway. Changing this forces a new resource to be created.
+                      Possible values are Cosmos.D4s, Cosmos.D8s and Cosmos.D16s.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
                   instanceCount:
                     description: The instance count for the CosmosDB SQL Dedicated
                       Gateway. Possible value is between 1 and 5.
@@ -354,10 +369,12 @@ spec:
             x-kubernetes-validations:
             - message: instanceCount is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceCount)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceCount)
+                || has(self.initProvider.instanceCount)'
             - message: instanceSize is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceSize)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.instanceSize)
+                || has(self.initProvider.instanceSize)'
           status:
             description: SQLDedicatedGatewayStatus defines the observed state of SQLDedicatedGateway.
             properties:

@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NotificationRecipientUserInitParameters struct {
+
+	// The Notification Name to be received. Changing this forces a new API Management Notification Recipient User to be created. Possible values are AccountClosedPublisher, BCC, NewApplicationNotificationMessage, NewIssuePublisherNotificationMessage, PurchasePublisherNotificationMessage, QuotaLimitApproachingPublisherNotificationMessage, and RequestPublisherNotificationMessage.
+	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
+}
+
 type NotificationRecipientUserObservation struct {
 
 	// The ID of the API Management Service from which to create this Notification Recipient User. Changing this forces a new API Management Notification Recipient User to be created.
@@ -45,7 +51,6 @@ type NotificationRecipientUserParameters struct {
 	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
 	// The Notification Name to be received. Changing this forces a new API Management Notification Recipient User to be created. Possible values are AccountClosedPublisher, BCC, NewApplicationNotificationMessage, NewIssuePublisherNotificationMessage, PurchasePublisherNotificationMessage, QuotaLimitApproachingPublisherNotificationMessage, and RequestPublisherNotificationMessage.
-	// +kubebuilder:validation:Optional
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
 	// The recipient user ID. Changing this forces a new API Management Notification Recipient User to be created.
@@ -66,6 +71,10 @@ type NotificationRecipientUserParameters struct {
 type NotificationRecipientUserSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NotificationRecipientUserParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider NotificationRecipientUserInitParameters `json:"initProvider,omitempty"`
 }
 
 // NotificationRecipientUserStatus defines the observed state of NotificationRecipientUser.
@@ -86,7 +95,7 @@ type NotificationRecipientUserStatus struct {
 type NotificationRecipientUser struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.notificationType)",message="notificationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.notificationType) || has(self.initProvider.notificationType)",message="notificationType is a required parameter"
 	Spec   NotificationRecipientUserSpec   `json:"spec"`
 	Status NotificationRecipientUserStatus `json:"status,omitempty"`
 }

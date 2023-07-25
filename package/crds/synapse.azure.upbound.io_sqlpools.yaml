@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: sqlpools.synapse.azure.upbound.io
 spec:
   group: synapse.azure.upbound.io
@@ -106,9 +106,6 @@ spec:
                             which is to restore. Changing this forces a new Synapse
                             SQL Pool to be created.
                           type: string
-                      required:
-                      - pointInTime
-                      - sourceDatabaseId
                       type: object
                     type: array
                   skuName:
@@ -195,6 +192,65 @@ spec:
                             type: string
                         type: object
                     type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Synapse SQL Pool.
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  collation:
+                    description: The name of the collation to use with this pool,
+                      only applicable when create_mode is set to Default. Azure default
+                      is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  createMode:
+                    description: 'Specifies how to create the SQL Pool. Valid values
+                      are: Default, Recovery or PointInTimeRestore. Must be Default
+                      to create a new database. Defaults to Default. Changing this
+                      forces a new resource to be created.'
+                    type: string
+                  dataEncrypted:
+                    description: Is transparent data encryption enabled?
+                    type: boolean
+                  geoBackupPolicyEnabled:
+                    description: Is geo-backup policy enabled? Defaults to true.
+                    type: boolean
+                  recoveryDatabaseId:
+                    description: The ID of the Synapse SQL Pool or SQL Database which
+                      is to back up, only applicable when create_mode is set to Recovery.
+                      Changing this forces a new Synapse SQL Pool to be created.
+                    type: string
+                  restore:
+                    description: A restore block as defined below. only applicable
+                      when create_mode is set to PointInTimeRestore. Changing this
+                      forces a new resource to be created.
+                    items:
+                      properties:
+                        pointInTime:
+                          description: Specifies the Snapshot time to restore formatted
+                            as an RFC3339 date string. Changing this forces a new
+                            Synapse SQL Pool to be created.
+                          type: string
+                        sourceDatabaseId:
+                          description: The ID of the Synapse SQL Pool or SQL Database
+                            which is to restore. Changing this forces a new Synapse
+                            SQL Pool to be created.
+                          type: string
+                      type: object
+                    type: array
+                  skuName:
+                    description: Specifies the SKU Name for this Synapse SQL Pool.
+                      Possible values are DW100c, DW200c, DW300c, DW400c, DW500c,
+                      DW1000c, DW1500c, DW2000c, DW2500c, DW3000c, DW5000c, DW6000c,
+                      DW7500c, DW10000c, DW15000c or DW30000c.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -402,7 +458,8 @@ spec:
             x-kubernetes-validations:
             - message: skuName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
+                || has(self.initProvider.skuName)'
           status:
             description: SQLPoolStatus defines the observed state of SQLPool.
             properties:

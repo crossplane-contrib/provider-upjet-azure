@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: cassandratables.cosmosdb.azure.upbound.io
 spec:
   group: cosmosdb.azure.upbound.io
@@ -181,9 +181,6 @@ spec:
                                 description: Order of the key. Currently supported
                                   values are Asc and Desc.
                                 type: string
-                            required:
-                            - name
-                            - orderBy
                             type: object
                           type: array
                         column:
@@ -196,9 +193,6 @@ spec:
                               type:
                                 description: Type of the column to be created.
                                 type: string
-                            required:
-                            - name
-                            - type
                             type: object
                           type: array
                         partitionKey:
@@ -209,13 +203,80 @@ spec:
                               name:
                                 description: Name of the column to be created.
                                 type: string
-                            required:
-                            - name
                             type: object
                           type: array
-                      required:
-                      - column
-                      - partitionKey
+                      type: object
+                    type: array
+                  throughput:
+                    description: The throughput of Cassandra KeySpace (RU/s). Must
+                      be set in increments of 100. The minimum value is 400.
+                    type: number
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  analyticalStorageTtl:
+                    description: Time to live of the Analytical Storage. Possible
+                      values are between -1 and 2147483647 except 0. -1 means the
+                      Analytical Storage never expires. Changing this forces a new
+                      resource to be created.
+                    type: number
+                  autoscaleSettings:
+                    description: An autoscale_settings block as defined below.
+                    items:
+                      properties:
+                        maxThroughput:
+                          description: The maximum throughput of the Cassandra Table
+                            (RU/s). Must be between 1,000 and 1,000,000. Must be set
+                            in increments of 1,000. Conflicts with throughput.
+                          type: number
+                      type: object
+                    type: array
+                  defaultTtl:
+                    description: Time to live of the Cosmos DB Cassandra table. Possible
+                      values are at least -1. -1 means the Cassandra table never expires.
+                    type: number
+                  schema:
+                    description: A schema block as defined below.
+                    items:
+                      properties:
+                        clusterKey:
+                          description: One or more cluster_key blocks as defined below.
+                          items:
+                            properties:
+                              name:
+                                description: Name of the column to be created.
+                                type: string
+                              orderBy:
+                                description: Order of the key. Currently supported
+                                  values are Asc and Desc.
+                                type: string
+                            type: object
+                          type: array
+                        column:
+                          description: One or more column blocks as defined below.
+                          items:
+                            properties:
+                              name:
+                                description: Name of the column to be created.
+                                type: string
+                              type:
+                                description: Type of the column to be created.
+                                type: string
+                            type: object
+                          type: array
+                        partitionKey:
+                          description: One or more partition_key blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: Name of the column to be created.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   throughput:
@@ -423,7 +484,8 @@ spec:
             x-kubernetes-validations:
             - message: schema is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.schema)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.schema)
+                || has(self.initProvider.schema)'
           status:
             description: CassandraTableStatus defines the observed state of CassandraTable.
             properties:

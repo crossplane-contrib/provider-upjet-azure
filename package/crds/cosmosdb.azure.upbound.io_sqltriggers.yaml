@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: sqltriggers.cosmosdb.azure.upbound.io
 spec:
   group: cosmosdb.azure.upbound.io
@@ -148,6 +148,23 @@ spec:
                             type: string
                         type: object
                     type: object
+                  operation:
+                    description: The operation the trigger is associated with. Possible
+                      values are All, Create, Update, Delete and Replace.
+                    type: string
+                  type:
+                    description: Type of the Trigger. Possible values are Pre and
+                      Post.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  body:
+                    description: Body of the Trigger.
+                    type: string
                   operation:
                     description: The operation the trigger is associated with. Possible
                       values are All, Create, Update, Delete and Replace.
@@ -357,13 +374,16 @@ spec:
             x-kubernetes-validations:
             - message: body is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.body)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.body)
+                || has(self.initProvider.body)'
             - message: operation is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.operation)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.operation)
+                || has(self.initProvider.operation)'
             - message: type is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
             description: SQLTriggerStatus defines the observed state of SQLTrigger.
             properties:

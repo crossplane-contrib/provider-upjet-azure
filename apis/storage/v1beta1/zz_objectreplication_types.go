@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ObjectReplicationInitParameters struct {
+
+	// One or more rules blocks as defined below.
+	Rules []ObjectReplicationRulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
+}
+
 type ObjectReplicationObservation struct {
 
 	// The ID of the Object Replication in the destination storage account.
@@ -51,7 +57,6 @@ type ObjectReplicationParameters struct {
 	DestinationStorageAccountIDSelector *v1.Selector `json:"destinationStorageAccountIdSelector,omitempty" tf:"-"`
 
 	// One or more rules blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Rules []ObjectReplicationRulesParameters `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// The ID of the source storage account. Changing this forces a new Storage Object Replication to be created.
@@ -67,6 +72,15 @@ type ObjectReplicationParameters struct {
 	// Selector for a Account in storage to populate sourceStorageAccountId.
 	// +kubebuilder:validation:Optional
 	SourceStorageAccountIDSelector *v1.Selector `json:"sourceStorageAccountIdSelector,omitempty" tf:"-"`
+}
+
+type ObjectReplicationRulesInitParameters struct {
+
+	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z.
+	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
+
+	// Specifies a list of filters prefixes, the blobs whose names begin with which will be replicated.
+	FilterOutBlobsWithPrefix []*string `json:"filterOutBlobsWithPrefix,omitempty" tf:"filter_out_blobs_with_prefix,omitempty"`
 }
 
 type ObjectReplicationRulesObservation struct {
@@ -89,7 +103,6 @@ type ObjectReplicationRulesObservation struct {
 type ObjectReplicationRulesParameters struct {
 
 	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z.
-	// +kubebuilder:validation:Optional
 	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
 
 	// The destination storage container name. Changing this forces a new Storage Object Replication to be created.
@@ -106,7 +119,6 @@ type ObjectReplicationRulesParameters struct {
 	DestinationContainerNameSelector *v1.Selector `json:"destinationContainerNameSelector,omitempty" tf:"-"`
 
 	// Specifies a list of filters prefixes, the blobs whose names begin with which will be replicated.
-	// +kubebuilder:validation:Optional
 	FilterOutBlobsWithPrefix []*string `json:"filterOutBlobsWithPrefix,omitempty" tf:"filter_out_blobs_with_prefix,omitempty"`
 
 	// The source storage container name. Changing this forces a new Storage Object Replication to be created.
@@ -127,6 +139,10 @@ type ObjectReplicationRulesParameters struct {
 type ObjectReplicationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ObjectReplicationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ObjectReplicationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ObjectReplicationStatus defines the observed state of ObjectReplication.
@@ -147,7 +163,7 @@ type ObjectReplicationStatus struct {
 type ObjectReplication struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rules)",message="rules is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rules) || has(self.initProvider.rules)",message="rules is a required parameter"
 	Spec   ObjectReplicationSpec   `json:"spec"`
 	Status ObjectReplicationStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ExpressRouteCircuitConnectionInitParameters struct {
+
+	// The IPv4 address space from which to allocate customer address for global reach. Changing this forces a new Express Route Circuit Connection to be created.
+	AddressPrefixIPv4 *string `json:"addressPrefixIpv4,omitempty" tf:"address_prefix_ipv4,omitempty"`
+
+	// The IPv6 address space from which to allocate customer addresses for global reach.
+	AddressPrefixIPv6 *string `json:"addressPrefixIpv6,omitempty" tf:"address_prefix_ipv6,omitempty"`
+}
+
 type ExpressRouteCircuitConnectionObservation struct {
 
 	// The IPv4 address space from which to allocate customer address for global reach. Changing this forces a new Express Route Circuit Connection to be created.
@@ -34,15 +43,12 @@ type ExpressRouteCircuitConnectionObservation struct {
 type ExpressRouteCircuitConnectionParameters struct {
 
 	// The IPv4 address space from which to allocate customer address for global reach. Changing this forces a new Express Route Circuit Connection to be created.
-	// +kubebuilder:validation:Optional
 	AddressPrefixIPv4 *string `json:"addressPrefixIpv4,omitempty" tf:"address_prefix_ipv4,omitempty"`
 
 	// The IPv6 address space from which to allocate customer addresses for global reach.
-	// +kubebuilder:validation:Optional
 	AddressPrefixIPv6 *string `json:"addressPrefixIpv6,omitempty" tf:"address_prefix_ipv6,omitempty"`
 
 	// The authorization key which is associated with the Express Route Circuit Connection.
-	// +kubebuilder:validation:Optional
 	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the peered Express Route Circuit Private Peering. Changing this forces a new Express Route Circuit Connection to be created.
@@ -78,6 +84,10 @@ type ExpressRouteCircuitConnectionParameters struct {
 type ExpressRouteCircuitConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ExpressRouteCircuitConnectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ExpressRouteCircuitConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ExpressRouteCircuitConnectionStatus defines the observed state of ExpressRouteCircuitConnection.
@@ -98,7 +108,7 @@ type ExpressRouteCircuitConnectionStatus struct {
 type ExpressRouteCircuitConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressPrefixIpv4)",message="addressPrefixIpv4 is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressPrefixIpv4) || has(self.initProvider.addressPrefixIpv4)",message="addressPrefixIpv4 is a required parameter"
 	Spec   ExpressRouteCircuitConnectionSpec   `json:"spec"`
 	Status ExpressRouteCircuitConnectionStatus `json:"status,omitempty"`
 }

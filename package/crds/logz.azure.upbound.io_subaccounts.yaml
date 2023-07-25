@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: subaccounts.logz.azure.upbound.io
 spec:
   group: logz.azure.upbound.io
@@ -183,11 +183,53 @@ spec:
                             40 characters in length. Changing this forces a new logz
                             Sub Account to be created.
                           type: string
-                      required:
-                      - email
-                      - firstName
-                      - lastName
-                      - phoneNumber
+                      type: object
+                    type: array
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  enabled:
+                    description: Whether the resource monitoring is enabled? Defaults
+                      to true.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      logz Sub Account.
+                    type: object
+                  user:
+                    description: A user block as defined below. Changing this forces
+                      a new resource to be created.
+                    items:
+                      properties:
+                        email:
+                          description: Email of the user used by Logz for contacting
+                            them if needed. A valid email address consists of an email
+                            prefix and an email domain. The prefix and domain may
+                            contain only letters, numbers, underscores, periods and
+                            dashes. Changing this forces a new logz Sub Account to
+                            be created.
+                          type: string
+                        firstName:
+                          description: First Name of the user. Possible values must
+                            be between 1 and 50 characters in length. Changing this
+                            forces a new logz Sub Account to be created.
+                          type: string
+                        lastName:
+                          description: Last Name of the user. Possible values must
+                            be between 1 and 50 characters in length. Changing this
+                            forces a new logz Sub Account to be created.
+                          type: string
+                        phoneNumber:
+                          description: Phone number of the user used by Logz for contacting
+                            them if needed. Possible values must be between 1 and
+                            40 characters in length. Changing this forces a new logz
+                            Sub Account to be created.
+                          type: string
                       type: object
                     type: array
                 type: object
@@ -391,7 +433,8 @@ spec:
             x-kubernetes-validations:
             - message: user is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.user)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.user)
+                || has(self.initProvider.user)'
           status:
             description: SubAccountStatus defines the observed state of SubAccount.
             properties:

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: managedprivateendpoints.streamanalytics.azure.upbound.io
 spec:
   group: streamanalytics.azure.upbound.io
@@ -311,6 +311,17 @@ spec:
                         type: object
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  subresourceName:
+                    description: Specifies the sub resource name which the Stream
+                      Analytics Private Endpoint is able to connect to. Changing this
+                      forces a new resource to be created.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -511,7 +522,8 @@ spec:
             x-kubernetes-validations:
             - message: subresourceName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.subresourceName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.subresourceName)
+                || has(self.initProvider.subresourceName)'
           status:
             description: ManagedPrivateEndpointStatus defines the observed state of
               ManagedPrivateEndpoint.

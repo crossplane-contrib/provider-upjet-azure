@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HPCCacheBlobTargetInitParameters struct {
+
+	// The name of the access policy applied to this target. Defaults to default.
+	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
+
+	// The client-facing file path of the HPC Cache Blob Target.
+	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
+}
+
 type HPCCacheBlobTargetObservation struct {
 
 	// The name of the access policy applied to this target. Defaults to default.
@@ -37,7 +46,6 @@ type HPCCacheBlobTargetObservation struct {
 type HPCCacheBlobTargetParameters struct {
 
 	// The name of the access policy applied to this target. Defaults to default.
-	// +kubebuilder:validation:Optional
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
 	// The name HPC Cache, which the HPC Cache Blob Target will be added to. Changing this forces a new resource to be created.
@@ -54,7 +62,6 @@ type HPCCacheBlobTargetParameters struct {
 	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
 	// The client-facing file path of the HPC Cache Blob Target.
-	// +kubebuilder:validation:Optional
 	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
 
 	// The name of the Resource Group in which to create the HPC Cache Blob Target. Changing this forces a new resource to be created.
@@ -89,6 +96,10 @@ type HPCCacheBlobTargetParameters struct {
 type HPCCacheBlobTargetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HPCCacheBlobTargetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider HPCCacheBlobTargetInitParameters `json:"initProvider,omitempty"`
 }
 
 // HPCCacheBlobTargetStatus defines the observed state of HPCCacheBlobTarget.
@@ -109,7 +120,7 @@ type HPCCacheBlobTargetStatus struct {
 type HPCCacheBlobTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespacePath)",message="namespacePath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespacePath) || has(self.initProvider.namespacePath)",message="namespacePath is a required parameter"
 	Spec   HPCCacheBlobTargetSpec   `json:"spec"`
 	Status HPCCacheBlobTargetStatus `json:"status,omitempty"`
 }

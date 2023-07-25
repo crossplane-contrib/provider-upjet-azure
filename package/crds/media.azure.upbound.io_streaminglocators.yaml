@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: streaminglocators.media.azure.upbound.io
 spec:
   group: media.azure.upbound.io
@@ -368,6 +368,78 @@ spec:
                       Streaming Locator to be created.'
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  alternativeMediaId:
+                    description: Alternative Media ID of this Streaming Locator. Changing
+                      this forces a new Streaming Locator to be created.
+                    type: string
+                  contentKey:
+                    description: One or more content_key blocks as defined below.
+                      Changing this forces a new Streaming Locator to be created.
+                    items:
+                      properties:
+                        contentKeyId:
+                          description: ID of Content Key. Changing this forces a new
+                            Streaming Locator to be created.
+                          type: string
+                        labelReferenceInStreamingPolicy:
+                          description: Label of Content Key as specified in the Streaming
+                            Policy. Changing this forces a new Streaming Locator to
+                            be created.
+                          type: string
+                        policyName:
+                          description: Content Key Policy used by Content Key. Changing
+                            this forces a new Streaming Locator to be created.
+                          type: string
+                        type:
+                          description: Encryption type of Content Key. Supported values
+                            are CommonEncryptionCbcs, CommonEncryptionCenc or EnvelopeEncryption.
+                            Changing this forces a new Streaming Locator to be created.
+                          type: string
+                        value:
+                          description: Value of Content Key. Changing this forces
+                            a new Streaming Locator to be created.
+                          type: string
+                      type: object
+                    type: array
+                  defaultContentKeyPolicyName:
+                    description: Name of the default Content Key Policy used by this
+                      Streaming Locator.Changing this forces a new Streaming Locator
+                      to be created.
+                    type: string
+                  endTime:
+                    description: The end time of the Streaming Locator. Changing this
+                      forces a new Streaming Locator to be created.
+                    type: string
+                  filterNames:
+                    description: A list of names of asset or account filters which
+                      apply to this Streaming Locator. Changing this forces a new
+                      Streaming Locator to be created.
+                    items:
+                      type: string
+                    type: array
+                  startTime:
+                    description: The start time of the Streaming Locator. Changing
+                      this forces a new Streaming Locator to be created.
+                    type: string
+                  streamingLocatorId:
+                    description: The ID of the Streaming Locator. Changing this forces
+                      a new Streaming Locator to be created.
+                    type: string
+                  streamingPolicyName:
+                    description: 'Name of the Streaming Policy used by this Streaming
+                      Locator. Either specify the name of Streaming Policy you created
+                      or use one of the predefined Streaming Policies. The predefined
+                      Streaming Policies available are: Predefined_DownloadOnly, Predefined_ClearStreamingOnly,
+                      Predefined_DownloadAndClearStreaming, Predefined_ClearKey, Predefined_MultiDrmCencStreaming
+                      and Predefined_MultiDrmStreaming. Changing this forces a new
+                      Streaming Locator to be created.'
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -568,7 +640,8 @@ spec:
             x-kubernetes-validations:
             - message: streamingPolicyName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.streamingPolicyName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.streamingPolicyName)
+                || has(self.initProvider.streamingPolicyName)'
           status:
             description: StreamingLocatorStatus defines the observed state of StreamingLocator.
             properties:

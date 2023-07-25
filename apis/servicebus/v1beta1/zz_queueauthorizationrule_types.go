@@ -46,11 +46,9 @@ type QueueAuthorizationRuleObservation struct {
 type QueueAuthorizationRuleParameters struct {
 
 	// Does this Authorization Rule have Listen permissions to the ServiceBus Queue? Defaults to false.
-	// +kubebuilder:validation:Optional
 	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
 
 	// Does this Authorization Rule have Manage permissions to the ServiceBus Queue? When this property is true - both listen and send must be too. Defaults to false.
-	// +kubebuilder:validation:Optional
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Specifies the ID of the ServiceBus Queue. Changing this forces a new resource to be created.
@@ -68,7 +66,6 @@ type QueueAuthorizationRuleParameters struct {
 	QueueIDSelector *v1.Selector `json:"queueIdSelector,omitempty" tf:"-"`
 
 	// Does this Authorization Rule have Send permissions to the ServiceBus Queue? Defaults to false.
-	// +kubebuilder:validation:Optional
 	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 
@@ -79,14 +76,6 @@ type QueueAuthorizationRuleSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider QueueAuthorizationRuleInitParameters `json:"initProvider,omitempty"`
 }
 

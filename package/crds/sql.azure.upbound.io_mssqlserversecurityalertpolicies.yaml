@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: mssqlserversecurityalertpolicies.sql.azure.upbound.io
 spec:
   group: sql.azure.upbound.io
@@ -348,6 +348,39 @@ spec:
                         type: object
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  disabledAlerts:
+                    description: 'Specifies an array of alerts that are disabled.
+                      Allowed values are: Sql_Injection, Sql_Injection_Vulnerability,
+                      Access_Anomaly, Data_Exfiltration, Unsafe_Action.'
+                    items:
+                      type: string
+                    type: array
+                  emailAccountAdmins:
+                    description: Boolean flag which specifies if the alert is sent
+                      to the account administrators or not. Defaults to false.
+                    type: boolean
+                  emailAddresses:
+                    description: Specifies an array of email addresses to which the
+                      alert is sent.
+                    items:
+                      type: string
+                    type: array
+                  retentionDays:
+                    description: Specifies the number of days to keep in the Threat
+                      Detection audit logs. Defaults to 0.
+                    type: number
+                  state:
+                    description: Specifies the state of the policy, whether it is
+                      enabled or disabled or a policy has not been applied yet on
+                      the specific database server. Possible values are Disabled,
+                      Enabled and New.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -548,7 +581,8 @@ spec:
             x-kubernetes-validations:
             - message: state is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.state)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.state)
+                || has(self.initProvider.state)'
           status:
             description: MSSQLServerSecurityAlertPolicyStatus defines the observed
               state of MSSQLServerSecurityAlertPolicy.

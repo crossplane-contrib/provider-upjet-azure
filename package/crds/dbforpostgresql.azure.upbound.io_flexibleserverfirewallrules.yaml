@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: flexibleserverfirewallrules.dbforpostgresql.azure.upbound.io
 spec:
   group: dbforpostgresql.azure.upbound.io
@@ -151,6 +151,20 @@ spec:
                             type: string
                         type: object
                     type: object
+                  startIpAddress:
+                    description: The Start IP Address associated with this PostgreSQL
+                      Flexible Server Firewall Rule.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  endIpAddress:
+                    description: The End IP Address associated with this PostgreSQL
+                      Flexible Server Firewall Rule.
+                    type: string
                   startIpAddress:
                     description: The Start IP Address associated with this PostgreSQL
                       Flexible Server Firewall Rule.
@@ -356,10 +370,12 @@ spec:
             x-kubernetes-validations:
             - message: endIpAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.endIpAddress)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.endIpAddress)
+                || has(self.initProvider.endIpAddress)'
             - message: startIpAddress is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.startIpAddress)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.startIpAddress)
+                || has(self.initProvider.startIpAddress)'
           status:
             description: FlexibleServerFirewallRuleStatus defines the observed state
               of FlexibleServerFirewallRule.

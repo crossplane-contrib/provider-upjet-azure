@@ -79,6 +79,15 @@ func (tr *ResourceGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this ResourceGroup
+func (tr *ResourceGroup) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ResourceGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ResourceGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -163,6 +172,15 @@ func (tr *ResourceProviderRegistration) GetInitParameters() (map[string]any, err
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this ResourceProviderRegistration
+func (tr *ResourceProviderRegistration) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ResourceProviderRegistration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ResourceProviderRegistration) LateInitialize(attrs []byte) (bool, error) {
@@ -245,6 +263,15 @@ func (tr *Subscription) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this Subscription
+func (tr *Subscription) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Subscription using its observed tfState.

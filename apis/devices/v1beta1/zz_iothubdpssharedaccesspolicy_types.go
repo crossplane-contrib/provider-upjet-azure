@@ -61,11 +61,9 @@ type IOTHubDPSSharedAccessPolicyObservation struct {
 type IOTHubDPSSharedAccessPolicyParameters struct {
 
 	// Adds EnrollmentRead permission to this Shared Access Account. It allows read access to enrollment data.
-	// +kubebuilder:validation:Optional
 	EnrollmentRead *bool `json:"enrollmentRead,omitempty" tf:"enrollment_read,omitempty"`
 
 	// Adds EnrollmentWrite permission to this Shared Access Account. It allows write access to enrollment data.
-	// +kubebuilder:validation:Optional
 	EnrollmentWrite *bool `json:"enrollmentWrite,omitempty" tf:"enrollment_write,omitempty"`
 
 	// The name of the IoT Hub Device Provisioning service to which this Shared Access Policy belongs. Changing this forces a new resource to be created.
@@ -82,11 +80,9 @@ type IOTHubDPSSharedAccessPolicyParameters struct {
 	IOTHubDPSNameSelector *v1.Selector `json:"iothubDpsNameSelector,omitempty" tf:"-"`
 
 	// Adds RegistrationStatusRead permission to this Shared Access Account. It allows read access to device registrations.
-	// +kubebuilder:validation:Optional
 	RegistrationRead *bool `json:"registrationRead,omitempty" tf:"registration_read,omitempty"`
 
 	// Adds RegistrationStatusWrite permission to this Shared Access Account. It allows write access to device registrations.
-	// +kubebuilder:validation:Optional
 	RegistrationWrite *bool `json:"registrationWrite,omitempty" tf:"registration_write,omitempty"`
 
 	// The name of the resource group under which the IotHub Shared Access Policy resource has to be created. Changing this forces a new resource to be created.
@@ -103,7 +99,6 @@ type IOTHubDPSSharedAccessPolicyParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Adds ServiceConfig permission to this Shared Access Account. It allows configuration of the Device Provisioning Service.
-	// +kubebuilder:validation:Optional
 	ServiceConfig *bool `json:"serviceConfig,omitempty" tf:"service_config,omitempty"`
 }
 
@@ -114,14 +109,6 @@ type IOTHubDPSSharedAccessPolicySpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider IOTHubDPSSharedAccessPolicyInitParameters `json:"initProvider,omitempty"`
 }
 

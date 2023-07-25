@@ -61,11 +61,9 @@ type LinkedServiceKeyVaultObservation struct {
 type LinkedServiceKeyVaultParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service Key Vault.
-	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service Key Vault.
-	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -83,11 +81,9 @@ type LinkedServiceKeyVaultParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service Key Vault.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The integration runtime reference to associate with the Data Factory Linked Service Key Vault.
-	// +kubebuilder:validation:Optional
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// The ID the Azure Key Vault resource.
@@ -105,7 +101,6 @@ type LinkedServiceKeyVaultParameters struct {
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Linked Service Key Vault.
-	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -116,14 +111,6 @@ type LinkedServiceKeyVaultSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider LinkedServiceKeyVaultInitParameters `json:"initProvider,omitempty"`
 }
 

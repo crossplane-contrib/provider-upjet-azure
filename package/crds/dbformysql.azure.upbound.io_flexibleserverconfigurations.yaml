@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: flexibleserverconfigurations.dbformysql.azure.upbound.io
 spec:
   group: dbformysql.azure.upbound.io
@@ -232,6 +232,17 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  value:
+                    description: Specifies the value of the MySQL Flexible Server
+                      Configuration. See the MySQL documentation for valid values.
+                      Changing this forces a new resource to be created.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -432,7 +443,8 @@ spec:
             x-kubernetes-validations:
             - message: value is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.value)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.value)
+                || has(self.initProvider.value)'
           status:
             description: FlexibleServerConfigurationStatus defines the observed state
               of FlexibleServerConfiguration.

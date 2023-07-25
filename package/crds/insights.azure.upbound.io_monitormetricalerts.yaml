@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: monitormetricalerts.insights.azure.upbound.io
 spec:
   group: insights.azure.upbound.io
@@ -176,10 +176,6 @@ spec:
                         webTestId:
                           description: The ID of the Application Insights Web Test.
                           type: string
-                      required:
-                      - componentId
-                      - failedLocationCount
-                      - webTestId
                       type: object
                     type: array
                   autoMitigate:
@@ -212,10 +208,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - name
-                            - operator
-                            - values
                             type: object
                           type: array
                         metricName:
@@ -238,12 +230,6 @@ spec:
                           description: The criteria threshold value that activates
                             the alert.
                           type: number
-                      required:
-                      - aggregation
-                      - metricName
-                      - metricNamespace
-                      - operator
-                      - threshold
                       type: object
                     type: array
                   description:
@@ -279,10 +265,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - name
-                            - operator
-                            - values
                             type: object
                           type: array
                         evaluationFailureCount:
@@ -314,12 +296,6 @@ spec:
                           description: Skip the metric validation to allow creating
                             an alert rule on a custom metric that isn't yet emitted?
                           type: boolean
-                      required:
-                      - aggregation
-                      - alertSensitivity
-                      - metricName
-                      - metricNamespace
-                      - operator
                       type: object
                     type: array
                   enabled:
@@ -494,6 +470,196 @@ spec:
                             type: string
                         type: object
                     type: object
+                  severity:
+                    description: The severity of this Metric Alert. Possible values
+                      are 0, 1, 2, 3 and 4. Defaults to 3.
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  targetResourceLocation:
+                    description: The location of the target resource. The location
+                      of the target pluginsdk. Required when using subscription, resource
+                      group scope or multiple scopes.
+                    type: string
+                  targetResourceType:
+                    description: The resource type (e.g. Microsoft.Compute/virtualMachines)
+                      of the target resource. The resource type (e.g. Microsoft.Compute/virtualMachines)
+                      of the target pluginsdk. Required when using subscription, resource
+                      group scope or multiple scopes.
+                    type: string
+                  windowSize:
+                    description: The period of time that is used to monitor alert
+                      activity, represented in ISO 8601 duration format. This value
+                      must be greater than frequency. Possible values are PT1M, PT5M,
+                      PT15M, PT30M, PT1H, PT6H, PT12H and P1D. Defaults to PT5M.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  action:
+                    description: One or more action blocks as defined below.
+                    items:
+                      properties:
+                        webhookProperties:
+                          additionalProperties:
+                            type: string
+                          description: The map of custom string properties to include
+                            with the post operation. These data are appended to the
+                            webhook payload.
+                          type: object
+                      type: object
+                    type: array
+                  applicationInsightsWebTestLocationAvailabilityCriteria:
+                    description: A application_insights_web_test_location_availability_criteria
+                      block as defined below.
+                    items:
+                      properties:
+                        componentId:
+                          description: The ID of the Application Insights Resource.
+                          type: string
+                        failedLocationCount:
+                          description: The number of failed locations.
+                          type: number
+                        webTestId:
+                          description: The ID of the Application Insights Web Test.
+                          type: string
+                      type: object
+                    type: array
+                  autoMitigate:
+                    description: Should the alerts in this Metric Alert be auto resolved?
+                      Defaults to true.
+                    type: boolean
+                  criteria:
+                    description: One or more (static) criteria blocks as defined below.
+                    items:
+                      properties:
+                        aggregation:
+                          description: The statistic that runs over the metric values.
+                            Possible values are Average, Count, Minimum, Maximum and
+                            Total.
+                          type: string
+                        dimension:
+                          description: One or more dimension blocks as defined below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the Metric Alert. Changing
+                                  this forces a new resource to be created.
+                                type: string
+                              operator:
+                                description: The criteria operator. Possible values
+                                  are LessThan, GreaterThan and GreaterOrLessThan.
+                                type: string
+                              values:
+                                description: The list of dimension values.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        metricName:
+                          description: One of the metric names to be monitored.
+                          type: string
+                        metricNamespace:
+                          description: One of the metric namespaces to be monitored.
+                          type: string
+                        operator:
+                          description: The criteria operator. Possible values are
+                            Equals, GreaterThan, GreaterThanOrEqual, LessThan and
+                            LessThanOrEqual.
+                          type: string
+                        skipMetricValidation:
+                          description: Skip the metric validation to allow creating
+                            an alert rule on a custom metric that isn't yet emitted?
+                            Defaults to false.
+                          type: boolean
+                        threshold:
+                          description: The criteria threshold value that activates
+                            the alert.
+                          type: number
+                      type: object
+                    type: array
+                  description:
+                    description: The description of this Metric Alert.
+                    type: string
+                  dynamicCriteria:
+                    description: A dynamic_criteria block as defined below.
+                    items:
+                      properties:
+                        aggregation:
+                          description: The statistic that runs over the metric values.
+                            Possible values are Average, Count, Minimum, Maximum and
+                            Total.
+                          type: string
+                        alertSensitivity:
+                          description: The extent of deviation required to trigger
+                            an alert. Possible values are Low, Medium and High.
+                          type: string
+                        dimension:
+                          description: One or more dimension blocks as defined below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the Metric Alert. Changing
+                                  this forces a new resource to be created.
+                                type: string
+                              operator:
+                                description: The criteria operator. Possible values
+                                  are LessThan, GreaterThan and GreaterOrLessThan.
+                                type: string
+                              values:
+                                description: The list of dimension values.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        evaluationFailureCount:
+                          description: The number of violations to trigger an alert.
+                            Should be smaller or equal to evaluation_total_count.
+                            Defaults to 4.
+                          type: number
+                        evaluationTotalCount:
+                          description: The number of aggregated lookback points. The
+                            lookback time window is calculated based on the aggregation
+                            granularity (window_size) and the selected number of aggregated
+                            points. Defaults to 4.
+                          type: number
+                        ignoreDataBefore:
+                          description: The ISO8601 date from which to start learning
+                            the metric historical data and calculate the dynamic thresholds.
+                          type: string
+                        metricName:
+                          description: One of the metric names to be monitored.
+                          type: string
+                        metricNamespace:
+                          description: One of the metric namespaces to be monitored.
+                          type: string
+                        operator:
+                          description: The criteria operator. Possible values are
+                            LessThan, GreaterThan and GreaterOrLessThan.
+                          type: string
+                        skipMetricValidation:
+                          description: Skip the metric validation to allow creating
+                            an alert rule on a custom metric that isn't yet emitted?
+                          type: boolean
+                      type: object
+                    type: array
+                  enabled:
+                    description: Should this Metric Alert be enabled? Defaults to
+                      true.
+                    type: boolean
+                  frequency:
+                    description: The evaluation frequency of this Metric Alert, represented
+                      in ISO 8601 duration format. Possible values are PT1M, PT5M,
+                      PT15M, PT30M and PT1H. Defaults to PT1M.
+                    type: string
                   severity:
                     description: The severity of this Metric Alert. Possible values
                       are 0, 1, 2, 3 and 4. Defaults to 3.

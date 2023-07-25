@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: sentinelautomationrules.securityinsights.azure.upbound.io
 spec:
   group: securityinsights.azure.upbound.io
@@ -100,8 +100,6 @@ spec:
                           description: 'The status to set to the incident. Possible
                             values are: Active, Closed, New.'
                           type: string
-                      required:
-                      - order
                       type: object
                     type: array
                   actionPlaybook:
@@ -118,9 +116,6 @@ spec:
                         tenantId:
                           description: The ID of the Tenant that owns the playbook.
                           type: string
-                      required:
-                      - logicAppId
-                      - order
                       type: object
                     type: array
                   condition:
@@ -157,10 +152,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - operator
-                      - property
-                      - values
                       type: object
                     type: array
                   conditionJson:
@@ -259,6 +250,132 @@ spec:
                             type: string
                         type: object
                     type: object
+                  name:
+                    description: The UUID which should be used for this Sentinel Automation
+                      Rule. Changing this forces a new Sentinel Automation Rule to
+                      be created.
+                    type: string
+                  order:
+                    description: The order of this Sentinel Automation Rule. Possible
+                      values varies between 1 and 1000.
+                    type: number
+                  triggersOn:
+                    description: Specifies what triggers this automation rule. Possible
+                      values are Alerts and Incidents. Defaults to Incidents.
+                    type: string
+                  triggersWhen:
+                    description: Specifies when will this automation rule be triggered.
+                      Possible values are Created and Updated. Defaults to Created.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  actionIncident:
+                    description: One or more action_incident blocks as defined below.
+                    items:
+                      properties:
+                        classification:
+                          description: 'The classification of the incident, when closing
+                            it. Possible values are: BenignPositive_SuspiciousButExpected,
+                            FalsePositive_InaccurateData, FalsePositive_IncorrectAlertLogic,
+                            TruePositive_SuspiciousActivity and Undetermined.'
+                          type: string
+                        classificationComment:
+                          description: The comment why the incident is to be closed.
+                          type: string
+                        labels:
+                          description: Specifies a list of labels to add to the incident.
+                          items:
+                            type: string
+                          type: array
+                        order:
+                          description: The execution order of this action.
+                          type: number
+                        ownerId:
+                          description: The object ID of the entity this incident is
+                            assigned to.
+                          type: string
+                        severity:
+                          description: The severity to add to the incident. Possible
+                            values are High, Informational, Low and Medium.
+                          type: string
+                        status:
+                          description: 'The status to set to the incident. Possible
+                            values are: Active, Closed, New.'
+                          type: string
+                      type: object
+                    type: array
+                  actionPlaybook:
+                    description: One or more action_playbook blocks as defined below.
+                    items:
+                      properties:
+                        logicAppId:
+                          description: The ID of the Logic App that defines the playbook's
+                            logic.
+                          type: string
+                        order:
+                          description: The execution order of this action.
+                          type: number
+                        tenantId:
+                          description: The ID of the Tenant that owns the playbook.
+                          type: string
+                      type: object
+                    type: array
+                  condition:
+                    description: One or more condition blocks as defined below.
+                    items:
+                      properties:
+                        operator:
+                          description: 'The operator to use for evaluate the condition.
+                            Possible values include: Equals, NotEquals, Contains,
+                            NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith.'
+                          type: string
+                        property:
+                          description: 'The property to use for evaluate the condition.
+                            Possible values include: AccountAadTenantId, AccountAadUserId,
+                            AccountNTDomain, AccountName, AccountObjectGuid, AccountPUID,
+                            AccountSid, AccountUPNSuffix, AzureResourceResourceId,
+                            AzureResourceSubscriptionId, CloudApplicationAppId, CloudApplicationAppName,
+                            DNSDomainName, FileDirectory, FileHashValue, FileName,
+                            HostAzureID, HostNTDomain, HostName, HostNetBiosName,
+                            HostOSVersion, IPAddress, IncidentDescription, IncidentProviderName,
+                            IncidentRelatedAnalyticRuleIds, IncidentSeverity, IncidentStatus,
+                            IncidentTactics, IncidentTitle, IoTDeviceId, IoTDeviceModel,
+                            IoTDeviceName, IoTDeviceOperatingSystem, IoTDeviceType,
+                            IoTDeviceVendor, MailMessageDeliveryAction, MailMessageDeliveryLocation,
+                            MailMessageP1Sender, MailMessageP2Sender, MailMessageRecipient,
+                            MailMessageSenderIP, MailMessageSubject, MailboxDisplayName,
+                            MailboxPrimaryAddress, MailboxUPN, MalwareCategory, MalwareName,
+                            ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData,
+                            Url.'
+                          type: string
+                        values:
+                          description: Specifies a list of values to use for evaluate
+                            the condition.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  conditionJson:
+                    description: A JSON array of one or more condition JSON objects
+                      as is defined here.
+                    type: string
+                  displayName:
+                    description: The display name which should be used for this Sentinel
+                      Automation Rule.
+                    type: string
+                  enabled:
+                    description: Whether this Sentinel Automation Rule is enabled?
+                      Defaults to true.
+                    type: boolean
+                  expiration:
+                    description: The time in RFC3339 format of kind UTC that determines
+                      when this Automation Rule should expire and be disabled.
+                    type: string
                   name:
                     description: The UUID which should be used for this Sentinel Automation
                       Rule. Changing this forces a new Sentinel Automation Rule to
@@ -477,13 +594,16 @@ spec:
             x-kubernetes-validations:
             - message: displayName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
+                || has(self.initProvider.displayName)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: order is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.order)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.order)
+                || has(self.initProvider.order)'
           status:
             description: SentinelAutomationRuleStatus defines the observed state of
               SentinelAutomationRule.

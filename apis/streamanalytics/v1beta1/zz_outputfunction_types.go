@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OutputFunctionInitParameters struct {
+
+	// The maximum number of events in each batch that's sent to the function. Defaults to 100.
+	BatchMaxCount *float64 `json:"batchMaxCount,omitempty" tf:"batch_max_count,omitempty"`
+
+	// The maximum batch size in bytes that's sent to the function. Defaults to 262144 (256 kB).
+	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
+
+	// The name of the function in the Function App.
+	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+}
+
 type OutputFunctionObservation struct {
 
 	// The maximum number of events in each batch that's sent to the function. Defaults to 100.
@@ -40,15 +52,12 @@ type OutputFunctionObservation struct {
 type OutputFunctionParameters struct {
 
 	// The API key for the Function.
-	// +kubebuilder:validation:Optional
 	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 
 	// The maximum number of events in each batch that's sent to the function. Defaults to 100.
-	// +kubebuilder:validation:Optional
 	BatchMaxCount *float64 `json:"batchMaxCount,omitempty" tf:"batch_max_count,omitempty"`
 
 	// The maximum batch size in bytes that's sent to the function. Defaults to 262144 (256 kB).
-	// +kubebuilder:validation:Optional
 	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
 
 	// The name of the Function App.
@@ -66,7 +75,6 @@ type OutputFunctionParameters struct {
 	FunctionAppSelector *v1.Selector `json:"functionAppSelector,omitempty" tf:"-"`
 
 	// The name of the function in the Function App.
-	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Output should exist. Changing this forces a new resource to be created.
@@ -100,6 +108,10 @@ type OutputFunctionParameters struct {
 type OutputFunctionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OutputFunctionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider OutputFunctionInitParameters `json:"initProvider,omitempty"`
 }
 
 // OutputFunctionStatus defines the observed state of OutputFunction.
@@ -121,7 +133,7 @@ type OutputFunction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.apiKeySecretRef)",message="apiKeySecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.functionName)",message="functionName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.functionName) || has(self.initProvider.functionName)",message="functionName is a required parameter"
 	Spec   OutputFunctionSpec   `json:"spec"`
 	Status OutputFunctionStatus `json:"status,omitempty"`
 }

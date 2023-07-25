@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: eventsubscriptions.eventgrid.azure.upbound.io
 spec:
   group: eventgrid.azure.upbound.io
@@ -85,9 +85,6 @@ spec:
                                 description: Specifies a single value to compare to
                                   when using a single value operator.
                                 type: boolean
-                            required:
-                            - key
-                            - value
                             type: object
                           type: array
                         isNotNull:
@@ -100,8 +97,6 @@ spec:
                                   data that you want to use for filtering. Type of
                                   the field can be a number, boolean, or string.
                                 type: string
-                            required:
-                            - key
                             type: object
                           type: array
                         isNullOrUndefined:
@@ -114,8 +109,6 @@ spec:
                                   data that you want to use for filtering. Type of
                                   the field can be a number, boolean, or string.
                                 type: string
-                            required:
-                            - key
                             type: object
                           type: array
                         numberGreaterThan:
@@ -132,9 +125,6 @@ spec:
                                 description: Specifies a single value to compare to
                                   when using a single value operator.
                                 type: number
-                            required:
-                            - key
-                            - value
                             type: object
                           type: array
                         numberGreaterThanOrEquals:
@@ -151,9 +141,6 @@ spec:
                                 description: Specifies a single value to compare to
                                   when using a single value operator.
                                 type: number
-                            required:
-                            - key
-                            - value
                             type: object
                           type: array
                         numberIn:
@@ -172,9 +159,6 @@ spec:
                                 items:
                                   type: number
                                 type: array
-                            required:
-                            - key
-                            - values
                             type: object
                           type: array
                         numberInRange:
@@ -195,9 +179,6 @@ spec:
                                     type: number
                                   type: array
                                 type: array
-                            required:
-                            - key
-                            - values
                             type: object
                           type: array
                         numberLessThan:
@@ -214,9 +195,6 @@ spec:
                                 description: Specifies a single value to compare to
                                   when using a single value operator.
                                 type: number
-                            required:
-                            - key
-                            - value
                             type: object
                           type: array
                         numberLessThanOrEquals:
@@ -233,9 +211,6 @@ spec:
                                 description: Specifies a single value to compare to
                                   when using a single value operator.
                                 type: number
-                            required:
-                            - key
-                            - value
                             type: object
                           type: array
                         numberNotIn:
@@ -254,9 +229,6 @@ spec:
                                 items:
                                   type: number
                                 type: array
-                            required:
-                            - key
-                            - values
                             type: object
                           type: array
                         numberNotInRange:
@@ -277,9 +249,6 @@ spec:
                                     type: number
                                   type: array
                                 type: array
-                            required:
-                            - key
-                            - values
                             type: object
                           type: array
                         stringBeginsWith:
@@ -298,9 +267,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - key
-                            - values
                             type: object
                           type: array
                         stringContains:
@@ -319,9 +285,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - key
-                            - values
                             type: object
                           type: array
                         stringEndsWith:
@@ -340,9 +303,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - key
-                            - values
                             type: object
                           type: array
                         stringIn:
@@ -361,9 +321,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - key
-                            - values
                             type: object
                           type: array
                         stringNotBeginsWith:
@@ -382,9 +339,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - key
-                            - values
                             type: object
                           type: array
                         stringNotContains:
@@ -403,9 +357,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - key
-                            - values
                             type: object
                           type: array
                         stringNotEndsWith:
@@ -424,9 +375,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - key
-                            - values
                             type: object
                           type: array
                         stringNotIn:
@@ -445,9 +393,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - key
-                            - values
                             type: object
                           type: array
                       type: object
@@ -472,8 +417,6 @@ spec:
                         preferredBatchSizeInKilobytes:
                           description: Preferred batch size in Kilobytes.
                           type: number
-                      required:
-                      - functionId
                       type: object
                     type: array
                   deadLetterIdentity:
@@ -488,8 +431,6 @@ spec:
                         userAssignedIdentity:
                           description: The user identity associated with the resource.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   deliveryIdentity:
@@ -504,8 +445,6 @@ spec:
                         userAssignedIdentity:
                           description: The user identity associated with the resource.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   deliveryProperty:
@@ -546,9 +485,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - headerName
-                      - type
                       type: object
                     type: array
                   eventDeliverySchema:
@@ -595,9 +531,6 @@ spec:
                           description: Specifies the maximum number of delivery retry
                             attempts for events.
                           type: number
-                      required:
-                      - eventTimeToLive
-                      - maxDeliveryAttempts
                       type: object
                     type: array
                   scope:
@@ -699,9 +632,6 @@ spec:
                           description: Specifies the name of the Storage blob container
                             that is the destination of the deadletter events.
                           type: string
-                      required:
-                      - storageAccountId
-                      - storageBlobContainerName
                       type: object
                     type: array
                   storageQueueEndpoint:
@@ -919,8 +849,534 @@ spec:
                           description: Specifies the url of the webhook where the
                             Event Subscription will receive events.
                           type: string
-                      required:
-                      - url
+                      type: object
+                    type: array
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  advancedFilter:
+                    description: A advanced_filter block as defined below.
+                    items:
+                      properties:
+                        boolEquals:
+                          description: Compares a value of an event using a single
+                            boolean value.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              value:
+                                description: Specifies a single value to compare to
+                                  when using a single value operator.
+                                type: boolean
+                            type: object
+                          type: array
+                        isNotNull:
+                          description: Evaluates if a value of an event isn't NULL
+                            or undefined.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                            type: object
+                          type: array
+                        isNullOrUndefined:
+                          description: Evaluates if a value of an event is NULL or
+                            undefined.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                            type: object
+                          type: array
+                        numberGreaterThan:
+                          description: Compares a value of an event using a single
+                            floating point number.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              value:
+                                description: Specifies a single value to compare to
+                                  when using a single value operator.
+                                type: number
+                            type: object
+                          type: array
+                        numberGreaterThanOrEquals:
+                          description: Compares a value of an event using a single
+                            floating point number.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              value:
+                                description: Specifies a single value to compare to
+                                  when using a single value operator.
+                                type: number
+                            type: object
+                          type: array
+                        numberIn:
+                          description: Compares a value of an event using multiple
+                            floating point numbers.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              values:
+                                description: Specifies an array of values to compare
+                                  to when using a multiple values operator.
+                                items:
+                                  type: number
+                                type: array
+                            type: object
+                          type: array
+                        numberInRange:
+                          description: Compares a value of an event using multiple
+                            floating point number ranges.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              values:
+                                description: Specifies an array of values to compare
+                                  to when using a multiple values operator.
+                                items:
+                                  items:
+                                    type: number
+                                  type: array
+                                type: array
+                            type: object
+                          type: array
+                        numberLessThan:
+                          description: Compares a value of an event using a single
+                            floating point number.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              value:
+                                description: Specifies a single value to compare to
+                                  when using a single value operator.
+                                type: number
+                            type: object
+                          type: array
+                        numberLessThanOrEquals:
+                          description: Compares a value of an event using a single
+                            floating point number.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              value:
+                                description: Specifies a single value to compare to
+                                  when using a single value operator.
+                                type: number
+                            type: object
+                          type: array
+                        numberNotIn:
+                          description: Compares a value of an event using multiple
+                            floating point numbers.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              values:
+                                description: Specifies an array of values to compare
+                                  to when using a multiple values operator.
+                                items:
+                                  type: number
+                                type: array
+                            type: object
+                          type: array
+                        numberNotInRange:
+                          description: Compares a value of an event using multiple
+                            floating point number ranges.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              values:
+                                description: Specifies an array of values to compare
+                                  to when using a multiple values operator.
+                                items:
+                                  items:
+                                    type: number
+                                  type: array
+                                type: array
+                            type: object
+                          type: array
+                        stringBeginsWith:
+                          description: Compares a value of an event using multiple
+                            string values.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              values:
+                                description: Specifies an array of values to compare
+                                  to when using a multiple values operator.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        stringContains:
+                          description: Compares a value of an event using multiple
+                            string values.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              values:
+                                description: Specifies an array of values to compare
+                                  to when using a multiple values operator.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        stringEndsWith:
+                          description: Compares a value of an event using multiple
+                            string values.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              values:
+                                description: Specifies an array of values to compare
+                                  to when using a multiple values operator.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        stringIn:
+                          description: Compares a value of an event using multiple
+                            string values.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              values:
+                                description: Specifies an array of values to compare
+                                  to when using a multiple values operator.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        stringNotBeginsWith:
+                          description: Compares a value of an event using multiple
+                            string values.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              values:
+                                description: Specifies an array of values to compare
+                                  to when using a multiple values operator.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        stringNotContains:
+                          description: Compares a value of an event using multiple
+                            string values.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              values:
+                                description: Specifies an array of values to compare
+                                  to when using a multiple values operator.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        stringNotEndsWith:
+                          description: Compares a value of an event using multiple
+                            string values.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              values:
+                                description: Specifies an array of values to compare
+                                  to when using a multiple values operator.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        stringNotIn:
+                          description: Compares a value of an event using multiple
+                            string values.
+                          items:
+                            properties:
+                              key:
+                                description: Specifies the field within the event
+                                  data that you want to use for filtering. Type of
+                                  the field can be a number, boolean, or string.
+                                type: string
+                              values:
+                                description: Specifies an array of values to compare
+                                  to when using a multiple values operator.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  advancedFilteringOnArraysEnabled:
+                    description: Specifies whether advanced filters should be evaluated
+                      against an array of values instead of expecting a singular value.
+                      Defaults to false.
+                    type: boolean
+                  azureFunctionEndpoint:
+                    description: An azure_function_endpoint block as defined below.
+                    items:
+                      properties:
+                        functionId:
+                          description: Specifies the ID of the Function where the
+                            Event Subscription will receive events. This must be the
+                            functions ID in format {function_app.id}/functions/{name}.
+                          type: string
+                        maxEventsPerBatch:
+                          description: Maximum number of events per batch.
+                          type: number
+                        preferredBatchSizeInKilobytes:
+                          description: Preferred batch size in Kilobytes.
+                          type: number
+                      type: object
+                    type: array
+                  deadLetterIdentity:
+                    description: A dead_letter_identity block as defined below.
+                    items:
+                      properties:
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that is used for dead lettering. Allowed value is SystemAssigned,
+                            UserAssigned.
+                          type: string
+                        userAssignedIdentity:
+                          description: The user identity associated with the resource.
+                          type: string
+                      type: object
+                    type: array
+                  deliveryIdentity:
+                    description: A delivery_identity block as defined below.
+                    items:
+                      properties:
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that is used for event delivery. Allowed value is SystemAssigned,
+                            UserAssigned.
+                          type: string
+                        userAssignedIdentity:
+                          description: The user identity associated with the resource.
+                          type: string
+                      type: object
+                    type: array
+                  deliveryProperty:
+                    description: One or more delivery_property blocks as defined below.
+                    items:
+                      properties:
+                        headerName:
+                          description: The name of the header to send on to the destination
+                          type: string
+                        secret:
+                          description: True if the value is a secret and should be
+                            protected, otherwise false. If True, then this value won't
+                            be returned from Azure API calls
+                          type: boolean
+                        sourceField:
+                          description: If the type is Dynamic, then provide the payload
+                            field to be used as the value. Valid source fields differ
+                            by subscription type.
+                          type: string
+                        type:
+                          description: Either Static or Dynamic
+                          type: string
+                      type: object
+                    type: array
+                  eventDeliverySchema:
+                    description: 'Specifies the event delivery schema for the event
+                      subscription. Possible values include: EventGridSchema, CloudEventSchemaV1_0,
+                      CustomInputSchema. Defaults to EventGridSchema. Changing this
+                      forces a new resource to be created.'
+                    type: string
+                  eventhubEndpointId:
+                    description: Specifies the id where the Event Hub is located.
+                    type: string
+                  expirationTimeUtc:
+                    description: Specifies the expiration time of the event subscription
+                      (Datetime Format RFC 3339).
+                    type: string
+                  hybridConnectionEndpointId:
+                    description: Specifies the id where the Hybrid Connection is located.
+                    type: string
+                  includedEventTypes:
+                    description: A list of applicable event types that need to be
+                      part of the event subscription.
+                    items:
+                      type: string
+                    type: array
+                  labels:
+                    description: A list of labels to assign to the event subscription.
+                    items:
+                      type: string
+                    type: array
+                  name:
+                    description: Specifies the name of the EventGrid Event Subscription
+                      resource. Changing this forces a new resource to be created.
+                    type: string
+                  retryPolicy:
+                    description: A retry_policy block as defined below.
+                    items:
+                      properties:
+                        eventTimeToLive:
+                          description: Specifies the time to live (in minutes) for
+                            events. Supported range is 1 to 1440. See official documentation
+                            for more details.
+                          type: number
+                        maxDeliveryAttempts:
+                          description: Specifies the maximum number of delivery retry
+                            attempts for events.
+                          type: number
+                      type: object
+                    type: array
+                  serviceBusQueueEndpointId:
+                    description: Specifies the id where the Service Bus Queue is located.
+                    type: string
+                  serviceBusTopicEndpointId:
+                    description: Specifies the id where the Service Bus Topic is located.
+                    type: string
+                  storageBlobDeadLetterDestination:
+                    description: A storage_blob_dead_letter_destination block as defined
+                      below.
+                    items:
+                      properties:
+                        storageAccountId:
+                          description: Specifies the id of the storage account id
+                            where the storage blob is located.
+                          type: string
+                        storageBlobContainerName:
+                          description: Specifies the name of the Storage blob container
+                            that is the destination of the deadletter events.
+                          type: string
+                      type: object
+                    type: array
+                  storageQueueEndpoint:
+                    description: A storage_queue_endpoint block as defined below.
+                    items:
+                      properties:
+                        queueMessageTimeToLiveInSeconds:
+                          description: Storage queue message time to live in seconds.
+                          type: number
+                      type: object
+                    type: array
+                  subjectFilter:
+                    description: A subject_filter block as defined below.
+                    items:
+                      properties:
+                        caseSensitive:
+                          description: Specifies if subject_begins_with and subject_ends_with
+                            case sensitive. This value
+                          type: boolean
+                        subjectBeginsWith:
+                          description: A string to filter events for an event subscription
+                            based on a resource path prefix.
+                          type: string
+                        subjectEndsWith:
+                          description: A string to filter events for an event subscription
+                            based on a resource path suffix.
+                          type: string
+                      type: object
+                    type: array
+                  webhookEndpoint:
+                    description: A webhook_endpoint block as defined below.
+                    items:
+                      properties:
+                        activeDirectoryAppIdOrUri:
+                          description: The Azure Active Directory Application ID or
+                            URI to get the access token that will be included as the
+                            bearer token in delivery requests.
+                          type: string
+                        activeDirectoryTenantId:
+                          description: The Azure Active Directory Tenant ID to get
+                            the access token that will be included as the bearer token
+                            in delivery requests.
+                          type: string
+                        maxEventsPerBatch:
+                          description: Maximum number of events per batch.
+                          type: number
+                        preferredBatchSizeInKilobytes:
+                          description: Preferred batch size in Kilobytes.
+                          type: number
+                        url:
+                          description: Specifies the url of the webhook where the
+                            Event Subscription will receive events.
+                          type: string
                       type: object
                     type: array
                 type: object
@@ -1124,7 +1580,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: EventSubscriptionStatus defines the observed state of EventSubscription.
             properties:

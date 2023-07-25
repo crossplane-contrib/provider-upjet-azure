@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BackupPolicyBlobStorageInitParameters struct {
+
+	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
+	RetentionDuration *string `json:"retentionDuration,omitempty" tf:"retention_duration,omitempty"`
+}
+
 type BackupPolicyBlobStorageObservation struct {
 
 	// The ID of the Backup Policy Blob Storage.
@@ -28,7 +34,6 @@ type BackupPolicyBlobStorageObservation struct {
 type BackupPolicyBlobStorageParameters struct {
 
 	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
-	// +kubebuilder:validation:Optional
 	RetentionDuration *string `json:"retentionDuration,omitempty" tf:"retention_duration,omitempty"`
 
 	// The ID of the Backup Vault within which the Backup Policy Blob Storage should exist. Changing this forces a new Backup Policy Blob Storage to be created.
@@ -50,6 +55,10 @@ type BackupPolicyBlobStorageParameters struct {
 type BackupPolicyBlobStorageSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BackupPolicyBlobStorageParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BackupPolicyBlobStorageInitParameters `json:"initProvider,omitempty"`
 }
 
 // BackupPolicyBlobStorageStatus defines the observed state of BackupPolicyBlobStorage.
@@ -70,7 +79,7 @@ type BackupPolicyBlobStorageStatus struct {
 type BackupPolicyBlobStorage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.retentionDuration)",message="retentionDuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.retentionDuration) || has(self.initProvider.retentionDuration)",message="retentionDuration is a required parameter"
 	Spec   BackupPolicyBlobStorageSpec   `json:"spec"`
 	Status BackupPolicyBlobStorageStatus `json:"status,omitempty"`
 }

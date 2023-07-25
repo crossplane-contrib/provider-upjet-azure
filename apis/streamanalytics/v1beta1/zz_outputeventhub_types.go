@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OutputEventHubInitParameters struct {
+
+	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
+	// The column that is used for the Event Hub partition key.
+	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+
+	// A list of property columns to add to the Event Hub output.
+	PropertyColumns []*string `json:"propertyColumns,omitempty" tf:"property_columns,omitempty"`
+
+	// A serialization block as defined below.
+	Serialization []OutputEventHubSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
+
+	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required when authentication_mode is set to ConnectionString.
+	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
+}
+
 type OutputEventHubObservation struct {
 
 	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
@@ -49,7 +67,6 @@ type OutputEventHubObservation struct {
 type OutputEventHubParameters struct {
 
 	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
-	// +kubebuilder:validation:Optional
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The name of the Event Hub.
@@ -66,11 +83,9 @@ type OutputEventHubParameters struct {
 	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// The column that is used for the Event Hub partition key.
-	// +kubebuilder:validation:Optional
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
 	// A list of property columns to add to the Event Hub output.
-	// +kubebuilder:validation:Optional
 	PropertyColumns []*string `json:"propertyColumns,omitempty" tf:"property_columns,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
@@ -87,7 +102,6 @@ type OutputEventHubParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
-	// +kubebuilder:validation:Optional
 	Serialization []OutputEventHubSerializationParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The namespace that is associated with the desired Event Hub, Service Bus Queue, Service Bus Topic, etc.
@@ -104,16 +118,29 @@ type OutputEventHubParameters struct {
 	ServiceBusNamespaceSelector *v1.Selector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
 	// The shared access policy key for the specified shared access policy. Required when authentication_mode is set to ConnectionString.
-	// +kubebuilder:validation:Optional
 	SharedAccessPolicyKeySecretRef *v1.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required when authentication_mode is set to ConnectionString.
-	// +kubebuilder:validation:Optional
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Required
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name,omitempty"`
+}
+
+type OutputEventHubSerializationInitParameters struct {
+
+	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
+	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
+
+	// Specifies the format of the JSON the output will be written in. Possible values are Array and LineSeparated.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// The serialization format used for outgoing data streams. Possible values are Avro, Csv, Json and Parquet.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type OutputEventHubSerializationObservation struct {
@@ -134,26 +161,26 @@ type OutputEventHubSerializationObservation struct {
 type OutputEventHubSerializationParameters struct {
 
 	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
-	// +kubebuilder:validation:Optional
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
-	// +kubebuilder:validation:Optional
 	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
 
 	// Specifies the format of the JSON the output will be written in. Possible values are Array and LineSeparated.
-	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The serialization format used for outgoing data streams. Possible values are Avro, Csv, Json and Parquet.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // OutputEventHubSpec defines the desired state of OutputEventHub
 type OutputEventHubSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OutputEventHubParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider OutputEventHubInitParameters `json:"initProvider,omitempty"`
 }
 
 // OutputEventHubStatus defines the observed state of OutputEventHub.
@@ -174,7 +201,7 @@ type OutputEventHubStatus struct {
 type OutputEventHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serialization)",message="serialization is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serialization) || has(self.initProvider.serialization)",message="serialization is a required parameter"
 	Spec   OutputEventHubSpec   `json:"spec"`
 	Status OutputEventHubStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NetworkACLInitParameters struct {
+
+	// The default action to control the network access when no other rule matches. Possible values are Allow and Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// A private_endpoint block as defined below.
+	PrivateEndpoint []PrivateEndpointInitParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
+
+	// A public_network block as defined below.
+	PublicNetwork []PublicNetworkInitParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
+}
+
 type NetworkACLObservation struct {
 
 	// The default action to control the network access when no other rule matches. Possible values are Allow and Deny.
@@ -34,15 +46,12 @@ type NetworkACLObservation struct {
 type NetworkACLParameters struct {
 
 	// The default action to control the network access when no other rule matches. Possible values are Allow and Deny.
-	// +kubebuilder:validation:Optional
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// A private_endpoint block as defined below.
-	// +kubebuilder:validation:Optional
 	PrivateEndpoint []PrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// A public_network block as defined below.
-	// +kubebuilder:validation:Optional
 	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
 	// The ID of the SignalR service. Changing this forces a new resource to be created.
@@ -60,6 +69,15 @@ type NetworkACLParameters struct {
 	SignalrServiceIDSelector *v1.Selector `json:"signalrServiceIdSelector,omitempty" tf:"-"`
 }
 
+type PrivateEndpointInitParameters struct {
+
+	// The allowed request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
+
+	// The denied request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
+}
+
 type PrivateEndpointObservation struct {
 
 	// The allowed request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
@@ -75,11 +93,9 @@ type PrivateEndpointObservation struct {
 type PrivateEndpointParameters struct {
 
 	// The allowed request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
-	// +kubebuilder:validation:Optional
 	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
 
 	// The denied request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
-	// +kubebuilder:validation:Optional
 	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 
 	// The ID of the Private Endpoint which is based on the SignalR service.
@@ -97,6 +113,15 @@ type PrivateEndpointParameters struct {
 	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 }
 
+type PublicNetworkInitParameters struct {
+
+	// The allowed request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
+
+	// The denied request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
+}
+
 type PublicNetworkObservation struct {
 
 	// The allowed request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
@@ -109,11 +134,9 @@ type PublicNetworkObservation struct {
 type PublicNetworkParameters struct {
 
 	// The allowed request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
-	// +kubebuilder:validation:Optional
 	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
 
 	// The denied request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
-	// +kubebuilder:validation:Optional
 	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 }
 
@@ -121,6 +144,10 @@ type PublicNetworkParameters struct {
 type NetworkACLSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NetworkACLParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider NetworkACLInitParameters `json:"initProvider,omitempty"`
 }
 
 // NetworkACLStatus defines the observed state of NetworkACL.
@@ -141,8 +168,8 @@ type NetworkACLStatus struct {
 type NetworkACL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultAction)",message="defaultAction is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicNetwork)",message="publicNetwork is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultAction) || has(self.initProvider.defaultAction)",message="defaultAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicNetwork) || has(self.initProvider.publicNetwork)",message="publicNetwork is a required parameter"
 	Spec   NetworkACLSpec   `json:"spec"`
 	Status NetworkACLStatus `json:"status,omitempty"`
 }

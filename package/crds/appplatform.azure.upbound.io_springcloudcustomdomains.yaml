@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: springcloudcustomdomains.appplatform.azure.upbound.io
 spec:
   group: appplatform.azure.upbound.io
@@ -156,6 +156,27 @@ spec:
                             type: string
                         type: object
                     type: object
+                  thumbprint:
+                    description: Specifies the thumbprint of the Spring Cloud Certificate
+                      that binds to the Spring Cloud Custom Domain. Required when
+                      certificate_name is specified. Changing this forces a new resource
+                      to be created.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  certificateName:
+                    description: Specifies the name of the Spring Cloud Certificate
+                      that binds to the Spring Cloud Custom Domain. Required when
+                      thumbprint is specified
+                    type: string
+                  name:
+                    description: Specifies the name of the Spring Cloud Custom Domain.
+                      Changing this forces a new resource to be created.
+                    type: string
                   thumbprint:
                     description: Specifies the thumbprint of the Spring Cloud Certificate
                       that binds to the Spring Cloud Custom Domain. Required when
@@ -363,7 +384,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: SpringCloudCustomDomainStatus defines the observed state
               of SpringCloudCustomDomain.

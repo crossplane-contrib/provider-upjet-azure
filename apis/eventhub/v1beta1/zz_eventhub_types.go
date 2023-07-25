@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CaptureDescriptionInitParameters struct {
+
+	// A destination block as defined below.
+	Destination []DestinationInitParameters `json:"destination,omitempty" tf:"destination,omitempty"`
+
+	// Specifies if the Capture Description is Enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Specifies the Encoding used for the Capture Description. Possible values are Avro and AvroDeflate.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// Specifies the time interval in seconds at which the capture will happen. Values can be between 60 and 900 seconds. Defaults to 300 seconds.
+	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
+
+	// Specifies the amount of data built up in your EventHub before a Capture Operation occurs. Value should be between 10485760 and 524288000 bytes. Defaults to 314572800 bytes.
+	SizeLimitInBytes *float64 `json:"sizeLimitInBytes,omitempty" tf:"size_limit_in_bytes,omitempty"`
+
+	// Specifies if empty files should not be emitted if no events occur during the Capture time window. Defaults to false.
+	SkipEmptyArchives *bool `json:"skipEmptyArchives,omitempty" tf:"skip_empty_archives,omitempty"`
+}
+
 type CaptureDescriptionObservation struct {
 
 	// A destination block as defined below.
@@ -37,28 +58,37 @@ type CaptureDescriptionObservation struct {
 type CaptureDescriptionParameters struct {
 
 	// A destination block as defined below.
-	// +kubebuilder:validation:Required
-	Destination []DestinationParameters `json:"destination" tf:"destination,omitempty"`
+	Destination []DestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Specifies if the Capture Description is Enabled.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Specifies the Encoding used for the Capture Description. Possible values are Avro and AvroDeflate.
-	// +kubebuilder:validation:Required
-	Encoding *string `json:"encoding" tf:"encoding,omitempty"`
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// Specifies the time interval in seconds at which the capture will happen. Values can be between 60 and 900 seconds. Defaults to 300 seconds.
-	// +kubebuilder:validation:Optional
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
 	// Specifies the amount of data built up in your EventHub before a Capture Operation occurs. Value should be between 10485760 and 524288000 bytes. Defaults to 314572800 bytes.
-	// +kubebuilder:validation:Optional
 	SizeLimitInBytes *float64 `json:"sizeLimitInBytes,omitempty" tf:"size_limit_in_bytes,omitempty"`
 
 	// Specifies if empty files should not be emitted if no events occur during the Capture time window. Defaults to false.
-	// +kubebuilder:validation:Optional
 	SkipEmptyArchives *bool `json:"skipEmptyArchives,omitempty" tf:"skip_empty_archives,omitempty"`
+}
+
+type DestinationInitParameters struct {
+
+	// The Blob naming convention for archiving. e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order
+	ArchiveNameFormat *string `json:"archiveNameFormat,omitempty" tf:"archive_name_format,omitempty"`
+
+	// The name of the Container within the Blob Storage Account where messages should be archived.
+	BlobContainerName *string `json:"blobContainerName,omitempty" tf:"blob_container_name,omitempty"`
+
+	// Specifies the name of the EventHub resource. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Blob Storage Account where messages should be archived.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 }
 
 type DestinationObservation struct {
@@ -79,20 +109,31 @@ type DestinationObservation struct {
 type DestinationParameters struct {
 
 	// The Blob naming convention for archiving. e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order
-	// +kubebuilder:validation:Required
-	ArchiveNameFormat *string `json:"archiveNameFormat" tf:"archive_name_format,omitempty"`
+	ArchiveNameFormat *string `json:"archiveNameFormat,omitempty" tf:"archive_name_format,omitempty"`
 
 	// The name of the Container within the Blob Storage Account where messages should be archived.
-	// +kubebuilder:validation:Required
-	BlobContainerName *string `json:"blobContainerName" tf:"blob_container_name,omitempty"`
+	BlobContainerName *string `json:"blobContainerName,omitempty" tf:"blob_container_name,omitempty"`
 
 	// Specifies the name of the EventHub resource. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Blob Storage Account where messages should be archived.
-	// +kubebuilder:validation:Required
-	StorageAccountID *string `json:"storageAccountId" tf:"storage_account_id,omitempty"`
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+}
+
+type EventHubInitParameters struct {
+
+	// A capture_description block as defined below.
+	CaptureDescription []CaptureDescriptionInitParameters `json:"captureDescription,omitempty" tf:"capture_description,omitempty"`
+
+	// Specifies the number of days to retain the events for this Event Hub.
+	MessageRetention *float64 `json:"messageRetention,omitempty" tf:"message_retention,omitempty"`
+
+	// Specifies the current number of shards on the Event Hub. Changing this will force-recreate the resource.
+	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
+
+	// Specifies the status of the Event Hub resource. Possible values are Active, Disabled and SendDisabled. Defaults to Active.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
 type EventHubObservation struct {
@@ -125,11 +166,9 @@ type EventHubObservation struct {
 type EventHubParameters struct {
 
 	// A capture_description block as defined below.
-	// +kubebuilder:validation:Optional
 	CaptureDescription []CaptureDescriptionParameters `json:"captureDescription,omitempty" tf:"capture_description,omitempty"`
 
 	// Specifies the number of days to retain the events for this Event Hub.
-	// +kubebuilder:validation:Optional
 	MessageRetention *float64 `json:"messageRetention,omitempty" tf:"message_retention,omitempty"`
 
 	// Specifies the name of the EventHub Namespace. Changing this forces a new resource to be created.
@@ -146,7 +185,6 @@ type EventHubParameters struct {
 	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the current number of shards on the Event Hub. Changing this will force-recreate the resource.
-	// +kubebuilder:validation:Optional
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// The name of the resource group in which the EventHub's parent Namespace exists. Changing this forces a new resource to be created.
@@ -163,7 +201,6 @@ type EventHubParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the status of the Event Hub resource. Possible values are Active, Disabled and SendDisabled. Defaults to Active.
-	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
@@ -171,6 +208,10 @@ type EventHubParameters struct {
 type EventHubSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EventHubParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider EventHubInitParameters `json:"initProvider,omitempty"`
 }
 
 // EventHubStatus defines the observed state of EventHub.
@@ -191,8 +232,8 @@ type EventHubStatus struct {
 type EventHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.messageRetention)",message="messageRetention is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partitionCount)",message="partitionCount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.messageRetention) || has(self.initProvider.messageRetention)",message="messageRetention is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partitionCount) || has(self.initProvider.partitionCount)",message="partitionCount is a required parameter"
 	Spec   EventHubSpec   `json:"spec"`
 	Status EventHubStatus `json:"status,omitempty"`
 }

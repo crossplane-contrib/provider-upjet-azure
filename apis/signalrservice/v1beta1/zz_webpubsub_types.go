@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type WebPubsubIdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Web PubSub.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Web PubSub. Possible values are SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type WebPubsubIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Web PubSub.
@@ -31,12 +40,61 @@ type WebPubsubIdentityObservation struct {
 type WebPubsubIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Web PubSub.
-	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Web PubSub. Possible values are SystemAssigned, UserAssigned.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type WebPubsubInitParameters struct {
+
+	// Whether to enable AAD auth? Defaults to true.
+	AADAuthEnabled *bool `json:"aadAuthEnabled,omitempty" tf:"aad_auth_enabled,omitempty"`
+
+	// Specifies the number of units associated with this Web PubSub resource. Valid values are: Free: 1, Standard: 1, 2, 5, 10, 20, 50, 100.
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// An identity block as defined below.
+	Identity []WebPubsubIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// A live_trace block as defined below.
+	LiveTrace []WebPubsubLiveTraceInitParameters `json:"liveTrace,omitempty" tf:"live_trace,omitempty"`
+
+	// Whether to enable local auth? Defaults to true.
+	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
+
+	// Specifies the supported Azure location where the Web PubSub service exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Web PubSub service. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Whether to enable public network access? Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Specifies which SKU to use. Possible values are Free_F1, Standard_S1, and Premium_P1.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// Whether to request client certificate during TLS handshake? Defaults to false.
+	TLSClientCertEnabled *bool `json:"tlsClientCertEnabled,omitempty" tf:"tls_client_cert_enabled,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type WebPubsubLiveTraceInitParameters struct {
+
+	// Whether the log category ConnectivityLogs is enabled? Defaults to true
+	ConnectivityLogsEnabled *bool `json:"connectivityLogsEnabled,omitempty" tf:"connectivity_logs_enabled,omitempty"`
+
+	// Whether the live trace is enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Whether the log category HttpRequestLogs is enabled? Defaults to true
+	HTTPRequestLogsEnabled *bool `json:"httpRequestLogsEnabled,omitempty" tf:"http_request_logs_enabled,omitempty"`
+
+	// Whether the log category MessagingLogs is enabled? Defaults to true
+	MessagingLogsEnabled *bool `json:"messagingLogsEnabled,omitempty" tf:"messaging_logs_enabled,omitempty"`
 }
 
 type WebPubsubLiveTraceObservation struct {
@@ -57,19 +115,15 @@ type WebPubsubLiveTraceObservation struct {
 type WebPubsubLiveTraceParameters struct {
 
 	// Whether the log category ConnectivityLogs is enabled? Defaults to true
-	// +kubebuilder:validation:Optional
 	ConnectivityLogsEnabled *bool `json:"connectivityLogsEnabled,omitempty" tf:"connectivity_logs_enabled,omitempty"`
 
 	// Whether the live trace is enabled? Defaults to true.
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Whether the log category HttpRequestLogs is enabled? Defaults to true
-	// +kubebuilder:validation:Optional
 	HTTPRequestLogsEnabled *bool `json:"httpRequestLogsEnabled,omitempty" tf:"http_request_logs_enabled,omitempty"`
 
 	// Whether the log category MessagingLogs is enabled? Defaults to true
-	// +kubebuilder:validation:Optional
 	MessagingLogsEnabled *bool `json:"messagingLogsEnabled,omitempty" tf:"messaging_logs_enabled,omitempty"`
 }
 
@@ -132,35 +186,27 @@ type WebPubsubObservation struct {
 type WebPubsubParameters struct {
 
 	// Whether to enable AAD auth? Defaults to true.
-	// +kubebuilder:validation:Optional
 	AADAuthEnabled *bool `json:"aadAuthEnabled,omitempty" tf:"aad_auth_enabled,omitempty"`
 
 	// Specifies the number of units associated with this Web PubSub resource. Valid values are: Free: 1, Standard: 1, 2, 5, 10, 20, 50, 100.
-	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []WebPubsubIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// A live_trace block as defined below.
-	// +kubebuilder:validation:Optional
 	LiveTrace []WebPubsubLiveTraceParameters `json:"liveTrace,omitempty" tf:"live_trace,omitempty"`
 
 	// Whether to enable local auth? Defaults to true.
-	// +kubebuilder:validation:Optional
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the Web PubSub service exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Web PubSub service. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Whether to enable public network access? Defaults to true.
-	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Web PubSub service. Changing this forces a new resource to be created.
@@ -177,15 +223,12 @@ type WebPubsubParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies which SKU to use. Possible values are Free_F1, Standard_S1, and Premium_P1.
-	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Whether to request client certificate during TLS handshake? Defaults to false.
-	// +kubebuilder:validation:Optional
 	TLSClientCertEnabled *bool `json:"tlsClientCertEnabled,omitempty" tf:"tls_client_cert_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -193,6 +236,10 @@ type WebPubsubParameters struct {
 type WebPubsubSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WebPubsubParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider WebPubsubInitParameters `json:"initProvider,omitempty"`
 }
 
 // WebPubsubStatus defines the observed state of WebPubsub.
@@ -213,9 +260,9 @@ type WebPubsubStatus struct {
 type WebPubsub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
 	Spec   WebPubsubSpec   `json:"spec"`
 	Status WebPubsubStatus `json:"status,omitempty"`
 }

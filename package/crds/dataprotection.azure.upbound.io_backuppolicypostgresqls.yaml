@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: backuppolicypostgresqls.dataprotection.azure.upbound.io
 spec:
   group: dataprotection.azure.upbound.io
@@ -224,11 +224,6 @@ spec:
                             number, the higher the priority of the rule. Changing
                             this forces a new Backup Policy PostgreSQL to be created.
                           type: number
-                      required:
-                      - criteria
-                      - duration
-                      - name
-                      - priority
                       type: object
                     type: array
                   vaultName:
@@ -309,6 +304,91 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  backupRepeatingTimeIntervals:
+                    description: Specifies a list of repeating time interval. It supports
+                      weekly back. It should follow ISO 8601 repeating time interval.
+                      Changing this forces a new Backup Policy PostgreSQL to be created.
+                    items:
+                      type: string
+                    type: array
+                  defaultRetentionDuration:
+                    description: The duration of default retention rule. It should
+                      follow ISO 8601 duration format. Changing this forces a new
+                      Backup Policy PostgreSQL to be created.
+                    type: string
+                  retentionRule:
+                    description: One or more retention_rule blocks as defined below.
+                      Changing this forces a new Backup Policy PostgreSQL to be created.
+                    items:
+                      properties:
+                        criteria:
+                          description: A criteria block as defined below. Changing
+                            this forces a new Backup Policy PostgreSQL to be created.
+                          items:
+                            properties:
+                              absoluteCriteria:
+                                description: Possible values are AllBackup, FirstOfDay,
+                                  FirstOfWeek, FirstOfMonth and FirstOfYear. These
+                                  values mean the first successful backup of the day/week/month/year.
+                                  Changing this forces a new Backup Policy PostgreSQL
+                                  to be created.
+                                type: string
+                              daysOfWeek:
+                                description: Possible values are Monday, Tuesday,
+                                  Thursday, Friday, Saturday and Sunday. Changing
+                                  this forces a new Backup Policy PostgreSQL to be
+                                  created.
+                                items:
+                                  type: string
+                                type: array
+                              monthsOfYear:
+                                description: Possible values are January, February,
+                                  March, April, May, June, July, August, September,
+                                  October, November and December. Changing this forces
+                                  a new Backup Policy PostgreSQL to be created.
+                                items:
+                                  type: string
+                                type: array
+                              scheduledBackupTimes:
+                                description: Specifies a list of backup times for
+                                  backup in the RFC3339 format. Changing this forces
+                                  a new Backup Policy PostgreSQL to be created.
+                                items:
+                                  type: string
+                                type: array
+                              weeksOfMonth:
+                                description: Possible values are First, Second, Third,
+                                  Fourth and Last. Changing this forces a new Backup
+                                  Policy PostgreSQL to be created.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        duration:
+                          description: Duration after which the backup is deleted.
+                            It should follow ISO 8601 duration format. Changing this
+                            forces a new Backup Policy PostgreSQL to be created.
+                          type: string
+                        name:
+                          description: The name which should be used for this retention
+                            rule. Changing this forces a new Backup Policy PostgreSQL
+                            to be created.
+                          type: string
+                        priority:
+                          description: Specifies the priority of the rule. The priority
+                            number must be unique for each rule. The lower the priority
+                            number, the higher the priority of the rule. Changing
+                            this forces a new Backup Policy PostgreSQL to be created.
+                          type: number
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -510,10 +590,12 @@ spec:
             x-kubernetes-validations:
             - message: backupRepeatingTimeIntervals is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.backupRepeatingTimeIntervals)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.backupRepeatingTimeIntervals)
+                || has(self.initProvider.backupRepeatingTimeIntervals)'
             - message: defaultRetentionDuration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultRetentionDuration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.defaultRetentionDuration)
+                || has(self.initProvider.defaultRetentionDuration)'
           status:
             description: BackupPolicyPostgreSQLStatus defines the observed state of
               BackupPolicyPostgreSQL.

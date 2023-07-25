@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: iothubs.devices.azure.upbound.io
 spec:
   group: devices.azure.upbound.io
@@ -179,7 +179,6 @@ spec:
                           type: string
                       required:
                       - connectionStringSecretRef
-                      - containerName
                       type: object
                     type: array
                   identity:
@@ -198,8 +197,6 @@ spec:
                             are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
                             (to enable both).
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   location:
@@ -242,9 +239,6 @@ spec:
                                 description: The name of the sku. Possible values
                                   are B1, B2, B3, F1, S1, S2, and S3.
                                 type: string
-                            required:
-                            - ipMask
-                            - name
                             type: object
                           type: array
                       type: object
@@ -343,9 +337,190 @@ spec:
                           description: The name of the sku. Possible values are B1,
                             B2, B3, F1, S1, S2, and S3.
                           type: string
-                      required:
-                      - capacity
-                      - name
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  cloudToDevice:
+                    description: A cloud_to_device block as defined below.
+                    items:
+                      properties:
+                        defaultTtl:
+                          description: The default time to live for cloud-to-device
+                            messages, specified as an ISO 8601 timespan duration.
+                            This value must be between 1 minute and 48 hours. Defaults
+                            to PT1H.
+                          type: string
+                        feedback:
+                          description: A feedback block as defined below.
+                          items:
+                            properties:
+                              lockDuration:
+                                description: The lock duration for the file upload
+                                  notifications queue, specified as an ISO 8601 timespan
+                                  duration. This value must be between 5 and 300 seconds.
+                                  Defaults to PT1M.
+                                type: string
+                              maxDeliveryCount:
+                                description: The number of times the IoT Hub attempts
+                                  to deliver a file upload notification message. Defaults
+                                  to 10.
+                                type: number
+                              timeToLive:
+                                description: The retention time for service-bound
+                                  feedback messages, specified as an ISO 8601 timespan
+                                  duration. This value must be between 1 minute and
+                                  48 hours. Defaults to PT1H.
+                                type: string
+                            type: object
+                          type: array
+                        maxDeliveryCount:
+                          description: The maximum delivery count for cloud-to-device
+                            per-device queues. This value must be between 1 and 100.
+                            Defaults to 10.
+                          type: number
+                      type: object
+                    type: array
+                  eventHubPartitionCount:
+                    description: The number of device-to-cloud partitions used by
+                      backing event hubs. Must be between 2 and 128.
+                    type: number
+                  eventHubRetentionInDays:
+                    description: The event hub retention to use in days. Must be between
+                      1 and 7.
+                    type: number
+                  fileUpload:
+                    description: A file_upload block as defined below.
+                    items:
+                      properties:
+                        authenticationType:
+                          description: The type used to authenticate against the storage
+                            account. Possible values are keyBased and identityBased.
+                            Defaults to keyBased.
+                          type: string
+                        containerName:
+                          description: The name of the root container where the files
+                            should be uploaded to. The container need not exist but
+                            should be creatable using the connection_string specified.
+                          type: string
+                        defaultTtl:
+                          description: The period of time for which a file upload
+                            notification message is available to consume before it
+                            expires, specified as an ISO 8601 timespan duration. This
+                            value must be between 1 minute and 48 hours. Defaults
+                            to PT1H.
+                          type: string
+                        identityId:
+                          description: The ID of the User Managed Identity used to
+                            authenticate against the storage account.
+                          type: string
+                        lockDuration:
+                          description: The lock duration for the file upload notifications
+                            queue, specified as an ISO 8601 timespan duration. This
+                            value must be between 5 and 300 seconds. Defaults to PT1M.
+                          type: string
+                        maxDeliveryCount:
+                          description: The number of times the IoT Hub attempts to
+                            deliver a file upload notification message. Defaults to
+                            10.
+                          type: number
+                        notifications:
+                          description: Used to specify whether file notifications
+                            are sent to IoT Hub on upload. Defaults to false.
+                          type: boolean
+                        sasTtl:
+                          description: The period of time for which the SAS URI generated
+                            by IoT Hub for file upload is valid, specified as an ISO
+                            8601 timespan duration. This value must be between 1 minute
+                            and 24 hours. Defaults to PT1H.
+                          type: string
+                      type: object
+                    type: array
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this IoT Hub.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this IoT Hub. Possible values
+                            are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
+                            (to enable both).
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource has to be created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  minTlsVersion:
+                    description: Specifies the minimum TLS version to support for
+                      this hub. The only valid value is 1.2. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  networkRuleSet:
+                    description: A network_rule_set block as defined below.
+                    items:
+                      properties:
+                        applyToBuiltinEventhubEndpoint:
+                          description: Determines if Network Rule Set is also applied
+                            to the BuiltIn EventHub EndPoint of the IotHub. Defaults
+                            to false.
+                          type: boolean
+                        defaultAction:
+                          description: Default Action for Network Rule Set. Possible
+                            values are Deny, Allow. Defaults to Deny.
+                          type: string
+                        ipRule:
+                          description: One or more ip_rule blocks as defined below.
+                          items:
+                            properties:
+                              action:
+                                description: The desired action for requests captured
+                                  by this rule. Possible values are Allow. Defaults
+                                  to Allow.
+                                type: string
+                              ipMask:
+                                description: The IP address range in CIDR notation
+                                  for the IP rule.
+                                type: string
+                              name:
+                                description: The name of the sku. Possible values
+                                  are B1, B2, B3, F1, S1, S2, and S3.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  publicNetworkAccessEnabled:
+                    description: Is the IotHub resource accessible from a public network?
+                    type: boolean
+                  sku:
+                    description: A sku block as defined below.
+                    items:
+                      properties:
+                        capacity:
+                          description: The number of provisioned IoT Hub units.
+                          type: number
+                        name:
+                          description: The name of the sku. Possible values are B1,
+                            B2, B3, F1, S1, S2, and S3.
+                          type: string
                       type: object
                     type: array
                   tags:
@@ -554,10 +729,12 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: sku is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)
+                || has(self.initProvider.sku)'
           status:
             description: IOTHubStatus defines the observed state of IOTHub.
             properties:

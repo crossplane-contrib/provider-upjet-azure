@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: hybridrunbookworkergroups.automation.azure.upbound.io
 spec:
   group: automation.azure.upbound.io
@@ -161,6 +161,26 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  automationAccountName:
+                    description: The name of the Automation Account in which the Runbook
+                      Worker Group is created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  credentialName:
+                    description: The name of resource type azurerm_automation_credential
+                      to use for hybrid worker.
+                    type: string
+                  name:
+                    description: The name which should be used for this Automation
+                      Account Runbook Worker Group. Changing this forces a new resource
+                      to be created.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -362,10 +382,12 @@ spec:
             x-kubernetes-validations:
             - message: automationAccountName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.automationAccountName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.automationAccountName)
+                || has(self.initProvider.automationAccountName)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: HybridRunBookWorkerGroupStatus defines the observed state
               of HybridRunBookWorkerGroup.

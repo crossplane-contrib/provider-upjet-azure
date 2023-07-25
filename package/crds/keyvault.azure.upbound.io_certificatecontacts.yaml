@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: certificatecontacts.keyvault.azure.upbound.io
 spec:
   group: keyvault.azure.upbound.io
@@ -80,8 +80,6 @@ spec:
                         phone:
                           description: Phone number of the contact.
                           type: string
-                      required:
-                      - email
                       type: object
                     type: array
                   keyVaultId:
@@ -161,6 +159,27 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  contact:
+                    description: One or more contact blocks as defined below.
+                    items:
+                      properties:
+                        email:
+                          description: E-mail address of the contact.
+                          type: string
+                        name:
+                          description: Name of the contact.
+                          type: string
+                        phone:
+                          description: Phone number of the contact.
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -362,7 +381,8 @@ spec:
             x-kubernetes-validations:
             - message: contact is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.contact)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.contact)
+                || has(self.initProvider.contact)'
           status:
             description: CertificateContactsStatus defines the observed state of CertificateContacts.
             properties:

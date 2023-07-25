@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DDoSProtectionPlanInitParameters struct {
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DDoSProtectionPlanObservation struct {
 
 	// The ID of the DDoS Protection Plan
@@ -34,7 +43,6 @@ type DDoSProtectionPlanObservation struct {
 type DDoSProtectionPlanParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
@@ -51,7 +59,6 @@ type DDoSProtectionPlanParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -59,6 +66,10 @@ type DDoSProtectionPlanParameters struct {
 type DDoSProtectionPlanSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DDoSProtectionPlanParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DDoSProtectionPlanInitParameters `json:"initProvider,omitempty"`
 }
 
 // DDoSProtectionPlanStatus defines the observed state of DDoSProtectionPlan.
@@ -79,7 +90,7 @@ type DDoSProtectionPlanStatus struct {
 type DDoSProtectionPlan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   DDoSProtectionPlanSpec   `json:"spec"`
 	Status DDoSProtectionPlanStatus `json:"status,omitempty"`
 }

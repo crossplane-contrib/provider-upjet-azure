@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: loadbalancerprobes.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -149,6 +149,45 @@ spec:
                             type: string
                         type: object
                     type: object
+                  numberOfProbes:
+                    description: The number of failed probe attempts after which the
+                      backend endpoint is removed from rotation. The default value
+                      is 2. NumberOfProbes multiplied by intervalInSeconds value must
+                      be greater or equal to 10.Endpoints are returned to rotation
+                      when at least one probe is successful.
+                    type: number
+                  port:
+                    description: Port on which the Probe queries the backend endpoint.
+                      Possible values range from 1 to 65535, inclusive.
+                    type: number
+                  probeThreshold:
+                    description: The number of consecutive successful or failed probes
+                      that allow or deny traffic to this endpoint. Possible values
+                      range from 1 to 100. The default value is 1.
+                    type: number
+                  protocol:
+                    description: Specifies the protocol of the end point. Possible
+                      values are Http, Https or Tcp. If TCP is specified, a received
+                      ACK is required for the probe to be successful. If HTTP is specified,
+                      a 200 OK response from the specified URI is required for the
+                      probe to be successful.
+                    type: string
+                  requestPath:
+                    description: The URI used for requesting health status from the
+                      backend endpoint. Required if protocol is set to Http or Https.
+                      Otherwise, it is not allowed.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  intervalInSeconds:
+                    description: The interval, in seconds between probes to the backend
+                      endpoint for health status. The default value is 15, the minimum
+                      value is 5.
+                    type: number
                   numberOfProbes:
                     description: The number of failed probe attempts after which the
                       backend endpoint is removed from rotation. The default value
@@ -378,7 +417,8 @@ spec:
             x-kubernetes-validations:
             - message: port is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.port)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.port)
+                || has(self.initProvider.port)'
           status:
             description: LoadBalancerProbeStatus defines the observed state of LoadBalancerProbe.
             properties:

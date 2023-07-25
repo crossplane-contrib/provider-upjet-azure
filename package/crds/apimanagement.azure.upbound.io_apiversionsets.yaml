@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: apiversionsets.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -248,6 +248,31 @@ spec:
                       Query and Segment.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: The description of API Version Set.
+                    type: string
+                  displayName:
+                    description: The display name of this API Version Set.
+                    type: string
+                  versionHeaderName:
+                    description: The name of the Header which should be read from
+                      Inbound Requests which defines the API Version.
+                    type: string
+                  versionQueryName:
+                    description: The name of the Query String which should be read
+                      from Inbound Requests which defines the API Version.
+                    type: string
+                  versioningScheme:
+                    description: Specifies where in an Inbound HTTP Request that the
+                      API Version should be read from. Possible values are Header,
+                      Query and Segment.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -448,10 +473,12 @@ spec:
             x-kubernetes-validations:
             - message: displayName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
+                || has(self.initProvider.displayName)'
             - message: versioningScheme is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.versioningScheme)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.versioningScheme)
+                || has(self.initProvider.versioningScheme)'
           status:
             description: APIVersionSetStatus defines the observed state of APIVersionSet.
             properties:

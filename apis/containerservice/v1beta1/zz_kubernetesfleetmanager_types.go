@@ -13,6 +13,10 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HubProfileInitParameters struct {
+	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
+}
+
 type HubProfileObservation struct {
 	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
 
@@ -22,9 +26,19 @@ type HubProfileObservation struct {
 }
 
 type HubProfileParameters struct {
+	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
+}
 
-	// +kubebuilder:validation:Required
-	DNSPrefix *string `json:"dnsPrefix" tf:"dns_prefix,omitempty"`
+type KubernetesFleetManagerInitParameters struct {
+
+	// A hub_profile block as defined below. The FleetHubProfile configures the Fleet's hub. Changing this forces a new Kubernetes Fleet Manager to be created.
+	HubProfile []HubProfileInitParameters `json:"hubProfile,omitempty" tf:"hub_profile,omitempty"`
+
+	// The Azure Region where the Kubernetes Fleet Manager should exist. Changing this forces a new Kubernetes Fleet Manager to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags which should be assigned to the Kubernetes Fleet Manager.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type KubernetesFleetManagerObservation struct {
@@ -48,11 +62,9 @@ type KubernetesFleetManagerObservation struct {
 type KubernetesFleetManagerParameters struct {
 
 	// A hub_profile block as defined below. The FleetHubProfile configures the Fleet's hub. Changing this forces a new Kubernetes Fleet Manager to be created.
-	// +kubebuilder:validation:Optional
 	HubProfile []HubProfileParameters `json:"hubProfile,omitempty" tf:"hub_profile,omitempty"`
 
 	// The Azure Region where the Kubernetes Fleet Manager should exist. Changing this forces a new Kubernetes Fleet Manager to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group within which this Kubernetes Fleet Manager should exist. Changing this forces a new Kubernetes Fleet Manager to be created.
@@ -69,7 +81,6 @@ type KubernetesFleetManagerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Kubernetes Fleet Manager.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -77,6 +88,10 @@ type KubernetesFleetManagerParameters struct {
 type KubernetesFleetManagerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     KubernetesFleetManagerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider KubernetesFleetManagerInitParameters `json:"initProvider,omitempty"`
 }
 
 // KubernetesFleetManagerStatus defines the observed state of KubernetesFleetManager.
@@ -97,7 +112,7 @@ type KubernetesFleetManagerStatus struct {
 type KubernetesFleetManager struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   KubernetesFleetManagerSpec   `json:"spec"`
 	Status KubernetesFleetManagerStatus `json:"status,omitempty"`
 }

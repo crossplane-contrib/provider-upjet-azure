@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SSHPublicKeyInitParameters struct {
+
+	// The Azure Region where the SSH Public Key should exist. Changing this forces a new SSH Public Key to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// SSH public key used to authenticate to a virtual machine through ssh. the provided public key needs to be at least 2048-bit and in ssh-rsa format.
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
+
+	// A mapping of tags which should be assigned to the SSH Public Key.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type SSHPublicKeyObservation struct {
 
 	// The ID of the SSH Public Key.
@@ -34,11 +46,9 @@ type SSHPublicKeyObservation struct {
 type SSHPublicKeyParameters struct {
 
 	// The Azure Region where the SSH Public Key should exist. Changing this forces a new SSH Public Key to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// SSH public key used to authenticate to a virtual machine through ssh. the provided public key needs to be at least 2048-bit and in ssh-rsa format.
-	// +kubebuilder:validation:Optional
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// The name of the Resource Group where the SSH Public Key should exist. Changing this forces a new SSH Public Key to be created.
@@ -55,7 +65,6 @@ type SSHPublicKeyParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the SSH Public Key.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -63,6 +72,10 @@ type SSHPublicKeyParameters struct {
 type SSHPublicKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SSHPublicKeyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SSHPublicKeyInitParameters `json:"initProvider,omitempty"`
 }
 
 // SSHPublicKeyStatus defines the observed state of SSHPublicKey.
@@ -83,8 +96,8 @@ type SSHPublicKeyStatus struct {
 type SSHPublicKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicKey)",message="publicKey is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicKey) || has(self.initProvider.publicKey)",message="publicKey is a required parameter"
 	Spec   SSHPublicKeySpec   `json:"spec"`
 	Status SSHPublicKeyStatus `json:"status,omitempty"`
 }

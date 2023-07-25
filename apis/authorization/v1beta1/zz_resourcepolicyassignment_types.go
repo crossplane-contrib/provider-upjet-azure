@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OverridesSelectorsInitParameters struct {
+
+	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
+	In []*string `json:"in,omitempty" tf:"in,omitempty"`
+
+	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
+	NotIn []*string `json:"notIn,omitempty" tf:"not_in,omitempty"`
+}
+
 type OverridesSelectorsObservation struct {
 
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
@@ -28,12 +37,19 @@ type OverridesSelectorsObservation struct {
 type OverridesSelectorsParameters struct {
 
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
-	// +kubebuilder:validation:Optional
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
-	// +kubebuilder:validation:Optional
 	NotIn []*string `json:"notIn,omitempty" tf:"not_in,omitempty"`
+}
+
+type ResourcePolicyAssignmentIdentityInitParameters struct {
+
+	// A list of User Managed Identity IDs which should be assigned to the Policy Definition.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Type of Managed Identity which should be added to this Policy Definition. Possible values are SystemAssigned and UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ResourcePolicyAssignmentIdentityObservation struct {
@@ -54,12 +70,61 @@ type ResourcePolicyAssignmentIdentityObservation struct {
 type ResourcePolicyAssignmentIdentityParameters struct {
 
 	// A list of User Managed Identity IDs which should be assigned to the Policy Definition.
-	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Type of Managed Identity which should be added to this Policy Definition. Possible values are SystemAssigned and UserAssigned.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ResourcePolicyAssignmentInitParameters struct {
+
+	// A description which should be used for this Policy Assignment.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The Display Name for this Policy Assignment.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Specifies if this Policy should be enforced or not? Defaults to true.
+	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
+
+	// An identity block as defined below.
+	Identity []ResourcePolicyAssignmentIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where the Policy Assignment should exist. Changing this forces a new Policy Assignment to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A JSON mapping of any Metadata for this Policy.
+	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name which should be used for this Policy Assignment. Changing this forces a new Resource Policy Assignment to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more non_compliance_message blocks as defined below.
+	NonComplianceMessage []ResourcePolicyAssignmentNonComplianceMessageInitParameters `json:"nonComplianceMessage,omitempty" tf:"non_compliance_message,omitempty"`
+
+	// Specifies a list of Resource Scopes (for example a Subscription, or a Resource Group) within this Management Group which are excluded from this Policy.
+	NotScopes []*string `json:"notScopes,omitempty" tf:"not_scopes,omitempty"`
+
+	// One or more overrides blocks as defined below. More detail about overrides and resource_selectors see policy assignment structure
+	Overrides []ResourcePolicyAssignmentOverridesInitParameters `json:"overrides,omitempty" tf:"overrides,omitempty"`
+
+	// A JSON mapping of any Parameters for this Policy.
+	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The ID of the Resource (or Resource Scope) where this should be applied. Changing this forces a new Resource Policy Assignment to be created.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
+	ResourceSelectors []ResourcePolicyAssignmentResourceSelectorsInitParameters `json:"resourceSelectors,omitempty" tf:"resource_selectors,omitempty"`
+}
+
+type ResourcePolicyAssignmentNonComplianceMessageInitParameters struct {
+
+	// The non-compliance message text. When assigning policy sets (initiatives), unless policy_definition_reference_id is specified then this message will be the default for all policies.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// When assigning policy sets (initiatives), this is the ID of the policy definition that the non-compliance message applies to.
+	PolicyDefinitionReferenceID *string `json:"policyDefinitionReferenceId,omitempty" tf:"policy_definition_reference_id,omitempty"`
 }
 
 type ResourcePolicyAssignmentNonComplianceMessageObservation struct {
@@ -74,11 +139,9 @@ type ResourcePolicyAssignmentNonComplianceMessageObservation struct {
 type ResourcePolicyAssignmentNonComplianceMessageParameters struct {
 
 	// The non-compliance message text. When assigning policy sets (initiatives), unless policy_definition_reference_id is specified then this message will be the default for all policies.
-	// +kubebuilder:validation:Required
-	Content *string `json:"content" tf:"content,omitempty"`
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// When assigning policy sets (initiatives), this is the ID of the policy definition that the non-compliance message applies to.
-	// +kubebuilder:validation:Optional
 	PolicyDefinitionReferenceID *string `json:"policyDefinitionReferenceId,omitempty" tf:"policy_definition_reference_id,omitempty"`
 }
 
@@ -130,6 +193,15 @@ type ResourcePolicyAssignmentObservation struct {
 	ResourceSelectors []ResourcePolicyAssignmentResourceSelectorsObservation `json:"resourceSelectors,omitempty" tf:"resource_selectors,omitempty"`
 }
 
+type ResourcePolicyAssignmentOverridesInitParameters struct {
+
+	// One or more override_selector as defined below.
+	Selectors []OverridesSelectorsInitParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
+
+	// Specifies the value to override the policy property. Possible values for policyEffect override listed policy effects.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type ResourcePolicyAssignmentOverridesObservation struct {
 
 	// One or more override_selector as defined below.
@@ -142,58 +214,45 @@ type ResourcePolicyAssignmentOverridesObservation struct {
 type ResourcePolicyAssignmentOverridesParameters struct {
 
 	// One or more override_selector as defined below.
-	// +kubebuilder:validation:Optional
 	Selectors []OverridesSelectorsParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
 
 	// Specifies the value to override the policy property. Possible values for policyEffect override listed policy effects.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ResourcePolicyAssignmentParameters struct {
 
 	// A description which should be used for this Policy Assignment.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Display Name for this Policy Assignment.
-	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Specifies if this Policy should be enforced or not? Defaults to true.
-	// +kubebuilder:validation:Optional
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []ResourcePolicyAssignmentIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Policy Assignment should exist. Changing this forces a new Policy Assignment to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A JSON mapping of any Metadata for this Policy.
-	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name which should be used for this Policy Assignment. Changing this forces a new Resource Policy Assignment to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more non_compliance_message blocks as defined below.
-	// +kubebuilder:validation:Optional
 	NonComplianceMessage []ResourcePolicyAssignmentNonComplianceMessageParameters `json:"nonComplianceMessage,omitempty" tf:"non_compliance_message,omitempty"`
 
 	// Specifies a list of Resource Scopes (for example a Subscription, or a Resource Group) within this Management Group which are excluded from this Policy.
-	// +kubebuilder:validation:Optional
 	NotScopes []*string `json:"notScopes,omitempty" tf:"not_scopes,omitempty"`
 
 	// One or more overrides blocks as defined below. More detail about overrides and resource_selectors see policy assignment structure
-	// +kubebuilder:validation:Optional
 	Overrides []ResourcePolicyAssignmentOverridesParameters `json:"overrides,omitempty" tf:"overrides,omitempty"`
 
 	// A JSON mapping of any Parameters for this Policy.
-	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
@@ -211,12 +270,19 @@ type ResourcePolicyAssignmentParameters struct {
 	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Resource (or Resource Scope) where this should be applied. Changing this forces a new Resource Policy Assignment to be created.
-	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
-	// +kubebuilder:validation:Optional
 	ResourceSelectors []ResourcePolicyAssignmentResourceSelectorsParameters `json:"resourceSelectors,omitempty" tf:"resource_selectors,omitempty"`
+}
+
+type ResourcePolicyAssignmentResourceSelectorsInitParameters struct {
+
+	// Specifies a name for the resource selector.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more resource_selector block as defined below.
+	Selectors []ResourcePolicyAssignmentResourceSelectorsSelectorsInitParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
 }
 
 type ResourcePolicyAssignmentResourceSelectorsObservation struct {
@@ -231,12 +297,22 @@ type ResourcePolicyAssignmentResourceSelectorsObservation struct {
 type ResourcePolicyAssignmentResourceSelectorsParameters struct {
 
 	// Specifies a name for the resource selector.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more resource_selector block as defined below.
-	// +kubebuilder:validation:Required
-	Selectors []ResourcePolicyAssignmentResourceSelectorsSelectorsParameters `json:"selectors" tf:"selectors,omitempty"`
+	Selectors []ResourcePolicyAssignmentResourceSelectorsSelectorsParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
+}
+
+type ResourcePolicyAssignmentResourceSelectorsSelectorsInitParameters struct {
+
+	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
+	In []*string `json:"in,omitempty" tf:"in,omitempty"`
+
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
+	NotIn []*string `json:"notIn,omitempty" tf:"not_in,omitempty"`
 }
 
 type ResourcePolicyAssignmentResourceSelectorsSelectorsObservation struct {
@@ -254,15 +330,12 @@ type ResourcePolicyAssignmentResourceSelectorsSelectorsObservation struct {
 type ResourcePolicyAssignmentResourceSelectorsSelectorsParameters struct {
 
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
-	// +kubebuilder:validation:Optional
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
 	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
-	// +kubebuilder:validation:Required
-	Kind *string `json:"kind" tf:"kind,omitempty"`
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
-	// +kubebuilder:validation:Optional
 	NotIn []*string `json:"notIn,omitempty" tf:"not_in,omitempty"`
 }
 
@@ -270,6 +343,10 @@ type ResourcePolicyAssignmentResourceSelectorsSelectorsParameters struct {
 type ResourcePolicyAssignmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourcePolicyAssignmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ResourcePolicyAssignmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourcePolicyAssignmentStatus defines the observed state of ResourcePolicyAssignment.
@@ -290,8 +367,8 @@ type ResourcePolicyAssignmentStatus struct {
 type ResourcePolicyAssignment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceId)",message="resourceId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.resourceId) || has(self.initProvider.resourceId)",message="resourceId is a required parameter"
 	Spec   ResourcePolicyAssignmentSpec   `json:"spec"`
 	Status ResourcePolicyAssignmentStatus `json:"status,omitempty"`
 }

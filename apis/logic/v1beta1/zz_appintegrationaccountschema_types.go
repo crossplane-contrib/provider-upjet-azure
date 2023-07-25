@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppIntegrationAccountSchemaInitParameters struct {
+
+	// The content of the Logic App Integration Account Schema.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The file name of the Logic App Integration Account Schema.
+	FileName *string `json:"fileName,omitempty" tf:"file_name,omitempty"`
+
+	// The metadata of the Logic App Integration Account Schema.
+	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+}
+
 type AppIntegrationAccountSchemaObservation struct {
 
 	// The content of the Logic App Integration Account Schema.
@@ -37,11 +49,9 @@ type AppIntegrationAccountSchemaObservation struct {
 type AppIntegrationAccountSchemaParameters struct {
 
 	// The content of the Logic App Integration Account Schema.
-	// +kubebuilder:validation:Optional
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The file name of the Logic App Integration Account Schema.
-	// +kubebuilder:validation:Optional
 	FileName *string `json:"fileName,omitempty" tf:"file_name,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Schema to be created.
@@ -59,7 +69,6 @@ type AppIntegrationAccountSchemaParameters struct {
 	IntegrationAccountNameSelector *v1.Selector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
 
 	// The metadata of the Logic App Integration Account Schema.
-	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Schema should exist. Changing this forces a new Logic App Integration Account Schema to be created.
@@ -80,6 +89,10 @@ type AppIntegrationAccountSchemaParameters struct {
 type AppIntegrationAccountSchemaSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppIntegrationAccountSchemaParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AppIntegrationAccountSchemaInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppIntegrationAccountSchemaStatus defines the observed state of AppIntegrationAccountSchema.
@@ -100,7 +113,7 @@ type AppIntegrationAccountSchemaStatus struct {
 type AppIntegrationAccountSchema struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content)",message="content is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content) || has(self.initProvider.content)",message="content is a required parameter"
 	Spec   AppIntegrationAccountSchemaSpec   `json:"spec"`
 	Status AppIntegrationAccountSchemaStatus `json:"status,omitempty"`
 }

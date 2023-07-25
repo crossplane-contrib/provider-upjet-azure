@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: authorizationservers.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -326,9 +326,84 @@ spec:
                         value:
                           description: The Value of the Parameter.
                           type: string
-                      required:
-                      - name
-                      - value
+                      type: object
+                    type: array
+                  tokenEndpoint:
+                    description: The OAUTH Token Endpoint.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  authorizationEndpoint:
+                    description: The OAUTH Authorization Endpoint.
+                    type: string
+                  authorizationMethods:
+                    description: The HTTP Verbs supported by the Authorization Endpoint.
+                      Possible values are DELETE, GET, HEAD, OPTIONS, PATCH, POST,
+                      PUT and TRACE.
+                    items:
+                      type: string
+                    type: array
+                  bearerTokenSendingMethods:
+                    description: The mechanism by which Access Tokens are passed to
+                      the API. Possible values are authorizationHeader and query.
+                    items:
+                      type: string
+                    type: array
+                  clientAuthenticationMethod:
+                    description: The Authentication Methods supported by the Token
+                      endpoint of this Authorization Server.. Possible values are
+                      Basic and Body.
+                    items:
+                      type: string
+                    type: array
+                  clientId:
+                    description: The Client/App ID registered with this Authorization
+                      Server.
+                    type: string
+                  clientRegistrationEndpoint:
+                    description: The URI of page where Client/App Registration is
+                      performed for this Authorization Server.
+                    type: string
+                  defaultScope:
+                    description: The Default Scope used when requesting an Access
+                      Token, specified as a string containing space-delimited values.
+                    type: string
+                  description:
+                    description: A description of the Authorization Server, which
+                      may contain HTML formatting tags.
+                    type: string
+                  displayName:
+                    description: The user-friendly name of this Authorization Server.
+                    type: string
+                  grantTypes:
+                    description: Form of Authorization Grants required when requesting
+                      an Access Token. Possible values are authorizationCode, clientCredentials,
+                      implicit and resourceOwnerPassword.
+                    items:
+                      type: string
+                    type: array
+                  resourceOwnerUsername:
+                    description: The username associated with the Resource Owner.
+                    type: string
+                  supportState:
+                    description: Does this Authorization Server support State? If
+                      this is set to true the client may use the state parameter to
+                      raise protocol security.
+                    type: boolean
+                  tokenBodyParameter:
+                    description: A token_body_parameter block as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: The Name of the Parameter.
+                          type: string
+                        value:
+                          description: The Value of the Parameter.
+                          type: string
                       type: object
                     type: array
                   tokenEndpoint:
@@ -535,22 +610,28 @@ spec:
             x-kubernetes-validations:
             - message: authorizationEndpoint is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.authorizationEndpoint)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.authorizationEndpoint)
+                || has(self.initProvider.authorizationEndpoint)'
             - message: authorizationMethods is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.authorizationMethods)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.authorizationMethods)
+                || has(self.initProvider.authorizationMethods)'
             - message: clientId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.clientId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.clientId)
+                || has(self.initProvider.clientId)'
             - message: clientRegistrationEndpoint is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.clientRegistrationEndpoint)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.clientRegistrationEndpoint)
+                || has(self.initProvider.clientRegistrationEndpoint)'
             - message: displayName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.displayName)
+                || has(self.initProvider.displayName)'
             - message: grantTypes is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.grantTypes)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.grantTypes)
+                || has(self.initProvider.grantTypes)'
           status:
             description: AuthorizationServerStatus defines the observed state of AuthorizationServer.
             properties:

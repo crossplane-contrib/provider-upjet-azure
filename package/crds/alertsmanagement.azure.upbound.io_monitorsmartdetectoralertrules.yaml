@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: monitorsmartdetectoralertrules.alertsmanagement.azure.upbound.io
 spec:
   group: alertsmanagement.azure.upbound.io
@@ -371,6 +371,63 @@ spec:
                       before notifying on the alert rule again.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  actionGroup:
+                    description: An action_group block as defined below.
+                    items:
+                      properties:
+                        emailSubject:
+                          description: Specifies a custom email subject if Email Receiver
+                            is specified in Monitor Action Group resource.
+                          type: string
+                        webhookPayload:
+                          description: A JSON String which Specifies the custom webhook
+                            payload if Webhook Receiver is specified in Monitor Action
+                            Group resource.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: Specifies a description for the Smart Detector Alert
+                      Rule.
+                    type: string
+                  detectorType:
+                    description: Specifies the Built-In Smart Detector type that this
+                      alert rule will use. Currently the only possible values are
+                      FailureAnomaliesDetector, RequestPerformanceDegradationDetector,
+                      DependencyPerformanceDegradationDetector, ExceptionVolumeChangedDetector,
+                      TraceSeverityDetector, MemoryLeakDetector.
+                    type: string
+                  enabled:
+                    description: Is the Smart Detector Alert Rule enabled? Defaults
+                      to true.
+                    type: boolean
+                  frequency:
+                    description: Specifies the frequency of this Smart Detector Alert
+                      Rule in ISO8601 format.
+                    type: string
+                  name:
+                    description: Specifies the name of the Monitor Smart Detector
+                      Alert Rule. Changing this forces a new resource to be created.
+                    type: string
+                  severity:
+                    description: Specifies the severity of this Smart Detector Alert
+                      Rule. Possible values are Sev0, Sev1, Sev2, Sev3 or Sev4.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  throttlingDuration:
+                    description: Specifies the duration (in ISO8601 format) to wait
+                      before notifying on the alert rule again.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -571,19 +628,24 @@ spec:
             x-kubernetes-validations:
             - message: actionGroup is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.actionGroup)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.actionGroup)
+                || has(self.initProvider.actionGroup)'
             - message: detectorType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.detectorType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.detectorType)
+                || has(self.initProvider.detectorType)'
             - message: frequency is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.frequency)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.frequency)
+                || has(self.initProvider.frequency)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: severity is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.severity)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.severity)
+                || has(self.initProvider.severity)'
           status:
             description: MonitorSmartDetectorAlertRuleStatus defines the observed
               state of MonitorSmartDetectorAlertRule.

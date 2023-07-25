@@ -13,6 +13,54 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BotChannelsRegistrationInitParameters struct {
+
+	// The CMK Key Vault Key URL to encrypt the Bot Channels Registration with the Customer Managed Encryption Key.
+	CmkKeyVaultURL *string `json:"cmkKeyVaultUrl,omitempty" tf:"cmk_key_vault_url,omitempty"`
+
+	// The description of the Bot Channels Registration.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The Application Insights Application ID to associate with the Bot Channels Registration.
+	DeveloperAppInsightsApplicationID *string `json:"developerAppInsightsApplicationId,omitempty" tf:"developer_app_insights_application_id,omitempty"`
+
+	// The Application Insights Key to associate with the Bot Channels Registration.
+	DeveloperAppInsightsKey *string `json:"developerAppInsightsKey,omitempty" tf:"developer_app_insights_key,omitempty"`
+
+	// The name of the Bot Channels Registration will be displayed as. This defaults to name if not specified.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The Bot Channels Registration endpoint.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// The icon URL to visually identify the Bot Channels Registration.
+	IconURL *string `json:"iconUrl,omitempty" tf:"icon_url,omitempty"`
+
+	// Is the Bot Channels Registration in an isolated network?
+	IsolatedNetworkEnabled *bool `json:"isolatedNetworkEnabled,omitempty" tf:"isolated_network_enabled,omitempty"`
+
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The Microsoft Application ID for the Bot Channels Registration. Changing this forces a new resource to be created.
+	MicrosoftAppID *string `json:"microsoftAppId,omitempty" tf:"microsoft_app_id,omitempty"`
+
+	// Specifies the name of the Bot Channels Registration. Changing this forces a new resource to be created. Must be globally unique.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Is the Bot Channels Registration in an isolated network?
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The SKU of the Bot Channels Registration. Valid values include F0 or S1. Changing this forces a new resource to be created.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// Is the streaming endpoint enabled for the Bot Channels Registration. Defaults to false.
+	StreamingEndpointEnabled *bool `json:"streamingEndpointEnabled,omitempty" tf:"streaming_endpoint_enabled,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type BotChannelsRegistrationObservation struct {
 
 	// The CMK Key Vault Key URL to encrypt the Bot Channels Registration with the Customer Managed Encryption Key.
@@ -70,55 +118,42 @@ type BotChannelsRegistrationObservation struct {
 type BotChannelsRegistrationParameters struct {
 
 	// The CMK Key Vault Key URL to encrypt the Bot Channels Registration with the Customer Managed Encryption Key.
-	// +kubebuilder:validation:Optional
 	CmkKeyVaultURL *string `json:"cmkKeyVaultUrl,omitempty" tf:"cmk_key_vault_url,omitempty"`
 
 	// The description of the Bot Channels Registration.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Application Insights API Key to associate with the Bot Channels Registration.
-	// +kubebuilder:validation:Optional
 	DeveloperAppInsightsAPIKeySecretRef *v1.SecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
 
 	// The Application Insights Application ID to associate with the Bot Channels Registration.
-	// +kubebuilder:validation:Optional
 	DeveloperAppInsightsApplicationID *string `json:"developerAppInsightsApplicationId,omitempty" tf:"developer_app_insights_application_id,omitempty"`
 
 	// The Application Insights Key to associate with the Bot Channels Registration.
-	// +kubebuilder:validation:Optional
 	DeveloperAppInsightsKey *string `json:"developerAppInsightsKey,omitempty" tf:"developer_app_insights_key,omitempty"`
 
 	// The name of the Bot Channels Registration will be displayed as. This defaults to name if not specified.
-	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The Bot Channels Registration endpoint.
-	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// The icon URL to visually identify the Bot Channels Registration.
-	// +kubebuilder:validation:Optional
 	IconURL *string `json:"iconUrl,omitempty" tf:"icon_url,omitempty"`
 
 	// Is the Bot Channels Registration in an isolated network?
-	// +kubebuilder:validation:Optional
 	IsolatedNetworkEnabled *bool `json:"isolatedNetworkEnabled,omitempty" tf:"isolated_network_enabled,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Microsoft Application ID for the Bot Channels Registration. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	MicrosoftAppID *string `json:"microsoftAppId,omitempty" tf:"microsoft_app_id,omitempty"`
 
 	// Specifies the name of the Bot Channels Registration. Changing this forces a new resource to be created. Must be globally unique.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Is the Bot Channels Registration in an isolated network?
-	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Bot Channels Registration. Changing this forces a new resource to be created.
@@ -135,15 +170,12 @@ type BotChannelsRegistrationParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the Bot Channels Registration. Valid values include F0 or S1. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Is the streaming endpoint enabled for the Bot Channels Registration. Defaults to false.
-	// +kubebuilder:validation:Optional
 	StreamingEndpointEnabled *bool `json:"streamingEndpointEnabled,omitempty" tf:"streaming_endpoint_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -151,6 +183,10 @@ type BotChannelsRegistrationParameters struct {
 type BotChannelsRegistrationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotChannelsRegistrationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BotChannelsRegistrationInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotChannelsRegistrationStatus defines the observed state of BotChannelsRegistration.
@@ -171,10 +207,10 @@ type BotChannelsRegistrationStatus struct {
 type BotChannelsRegistration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.microsoftAppId)",message="microsoftAppId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.microsoftAppId) || has(self.initProvider.microsoftAppId)",message="microsoftAppId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
 	Spec   BotChannelsRegistrationSpec   `json:"spec"`
 	Status BotChannelsRegistrationStatus `json:"status,omitempty"`
 }

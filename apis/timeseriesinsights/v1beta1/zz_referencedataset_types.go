@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type KeyPropertyInitParameters struct {
+
+	// The name of the key property. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The data type of the key property. Valid values include Bool, DateTime, Double, String. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type KeyPropertyObservation struct {
 
 	// The name of the key property. Changing this forces a new resource to be created.
@@ -25,12 +34,25 @@ type KeyPropertyObservation struct {
 type KeyPropertyParameters struct {
 
 	// The name of the key property. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The data type of the key property. Valid values include Bool, DateTime, Double, String. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ReferenceDataSetInitParameters struct {
+
+	// The comparison behavior that will be used to compare keys. Valid values include Ordinal and OrdinalIgnoreCase. Defaults to Ordinal. Changing this forces a new resource to be created.
+	DataStringComparisonBehavior *string `json:"dataStringComparisonBehavior,omitempty" tf:"data_string_comparison_behavior,omitempty"`
+
+	// A key_property block as defined below. Changing this forces a new resource to be created.
+	KeyProperty []KeyPropertyInitParameters `json:"keyProperty,omitempty" tf:"key_property,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ReferenceDataSetObservation struct {
@@ -57,19 +79,15 @@ type ReferenceDataSetObservation struct {
 type ReferenceDataSetParameters struct {
 
 	// The comparison behavior that will be used to compare keys. Valid values include Ordinal and OrdinalIgnoreCase. Defaults to Ordinal. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	DataStringComparisonBehavior *string `json:"dataStringComparisonBehavior,omitempty" tf:"data_string_comparison_behavior,omitempty"`
 
 	// A key_property block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	KeyProperty []KeyPropertyParameters `json:"keyProperty,omitempty" tf:"key_property,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The resource ID of the Azure IoT Time Series Insights Environment in which to create the Azure IoT Time Series Insights Reference Data Set. Changing this forces a new resource to be created.
@@ -91,6 +109,10 @@ type ReferenceDataSetParameters struct {
 type ReferenceDataSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ReferenceDataSetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ReferenceDataSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // ReferenceDataSetStatus defines the observed state of ReferenceDataSet.
@@ -111,8 +133,8 @@ type ReferenceDataSetStatus struct {
 type ReferenceDataSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyProperty)",message="keyProperty is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyProperty) || has(self.initProvider.keyProperty)",message="keyProperty is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   ReferenceDataSetSpec   `json:"spec"`
 	Status ReferenceDataSetStatus `json:"status,omitempty"`
 }

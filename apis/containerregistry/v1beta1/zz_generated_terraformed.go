@@ -79,6 +79,15 @@ func (tr *ContainerConnectedRegistry) GetInitParameters() (map[string]any, error
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this ContainerConnectedRegistry
+func (tr *ContainerConnectedRegistry) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ContainerConnectedRegistry using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ContainerConnectedRegistry) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *Registry) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this Registry
+func (tr *Registry) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Registry using its observed tfState.
@@ -248,6 +266,15 @@ func (tr *AgentPool) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this AgentPool
+func (tr *AgentPool) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this AgentPool using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AgentPool) LateInitialize(attrs []byte) (bool, error) {
@@ -330,6 +357,15 @@ func (tr *ScopeMap) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this ScopeMap
+func (tr *ScopeMap) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ScopeMap using its observed tfState.
@@ -416,6 +452,15 @@ func (tr *Token) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Token
+func (tr *Token) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Token using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Token) LateInitialize(attrs []byte) (bool, error) {
@@ -500,6 +545,15 @@ func (tr *TokenPassword) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this TokenPassword
+func (tr *TokenPassword) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this TokenPassword using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *TokenPassword) LateInitialize(attrs []byte) (bool, error) {
@@ -582,6 +636,15 @@ func (tr *Webhook) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this Webhook
+func (tr *Webhook) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Webhook using its observed tfState.

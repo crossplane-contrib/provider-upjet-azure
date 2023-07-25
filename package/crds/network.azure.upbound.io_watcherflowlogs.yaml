@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: watcherflowlogs.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -320,9 +320,6 @@ spec:
                         enabled:
                           description: Boolean flag to enable/disable retention.
                           type: boolean
-                      required:
-                      - days
-                      - enabled
                       type: object
                     type: array
                   storageAccountId:
@@ -584,9 +581,58 @@ spec:
                                   type: string
                               type: object
                           type: object
-                      required:
-                      - enabled
-                      - workspaceRegion
+                      type: object
+                    type: array
+                  version:
+                    description: The version (revision) of the flow log. Possible
+                      values are 1 and 2.
+                    type: number
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  enabled:
+                    description: Should Network Flow Logging be Enabled?
+                    type: boolean
+                  location:
+                    description: The location where the Network Watcher Flow Log resides.
+                      Changing this forces a new resource to be created. Defaults
+                      to the location of the Network Watcher.
+                    type: string
+                  retentionPolicy:
+                    description: A retention_policy block as documented below.
+                    items:
+                      properties:
+                        days:
+                          description: The number of days to retain flow log records.
+                          type: number
+                        enabled:
+                          description: Boolean flag to enable/disable retention.
+                          type: boolean
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Network Watcher Flow Log.
+                    type: object
+                  trafficAnalytics:
+                    description: A traffic_analytics block as documented below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Boolean flag to enable/disable traffic analytics.
+                          type: boolean
+                        intervalInMinutes:
+                          description: How frequently service should do flow analytics
+                            in minutes. Defaults to 60.
+                          type: number
+                        workspaceRegion:
+                          description: The location of the attached workspace.
+                          type: string
                       type: object
                     type: array
                   version:
@@ -794,10 +840,12 @@ spec:
             x-kubernetes-validations:
             - message: enabled is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.enabled)
+                || has(self.initProvider.enabled)'
             - message: retentionPolicy is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.retentionPolicy)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.retentionPolicy)
+                || has(self.initProvider.retentionPolicy)'
           status:
             description: WatcherFlowLogStatus defines the observed state of WatcherFlowLog.
             properties:

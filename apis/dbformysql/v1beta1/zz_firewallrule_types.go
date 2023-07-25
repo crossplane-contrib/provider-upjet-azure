@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FirewallRuleInitParameters struct {
+
+	// Specifies the End IP Address associated with this Firewall Rule.
+	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
+
+	// Specifies the Start IP Address associated with this Firewall Rule.
+	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
+}
+
 type FirewallRuleObservation struct {
 
 	// Specifies the End IP Address associated with this Firewall Rule.
@@ -34,7 +43,6 @@ type FirewallRuleObservation struct {
 type FirewallRuleParameters struct {
 
 	// Specifies the End IP Address associated with this Firewall Rule.
-	// +kubebuilder:validation:Optional
 	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
 	// The name of the resource group in which the MySQL Server exists. Changing this forces a new resource to be created.
@@ -64,7 +72,6 @@ type FirewallRuleParameters struct {
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// Specifies the Start IP Address associated with this Firewall Rule.
-	// +kubebuilder:validation:Optional
 	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 }
 
@@ -72,6 +79,10 @@ type FirewallRuleParameters struct {
 type FirewallRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FirewallRuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FirewallRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // FirewallRuleStatus defines the observed state of FirewallRule.
@@ -92,8 +103,8 @@ type FirewallRuleStatus struct {
 type FirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endIpAddress)",message="endIpAddress is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.startIpAddress)",message="startIpAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endIpAddress) || has(self.initProvider.endIpAddress)",message="endIpAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.startIpAddress) || has(self.initProvider.startIpAddress)",message="startIpAddress is a required parameter"
 	Spec   FirewallRuleSpec   `json:"spec"`
 	Status FirewallRuleStatus `json:"status,omitempty"`
 }

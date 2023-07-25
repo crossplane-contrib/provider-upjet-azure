@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FlexibleServerFirewallRuleInitParameters struct {
+
+	// The End IP Address associated with this PostgreSQL Flexible Server Firewall Rule.
+	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
+
+	// The Start IP Address associated with this PostgreSQL Flexible Server Firewall Rule.
+	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
+}
+
 type FlexibleServerFirewallRuleObservation struct {
 
 	// The End IP Address associated with this PostgreSQL Flexible Server Firewall Rule.
@@ -31,7 +40,6 @@ type FlexibleServerFirewallRuleObservation struct {
 type FlexibleServerFirewallRuleParameters struct {
 
 	// The End IP Address associated with this PostgreSQL Flexible Server Firewall Rule.
-	// +kubebuilder:validation:Optional
 	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
 	// The ID of the PostgreSQL Flexible Server from which to create this PostgreSQL Flexible Server Firewall Rule. Changing this forces a new PostgreSQL Flexible Server Firewall Rule to be created.
@@ -49,7 +57,6 @@ type FlexibleServerFirewallRuleParameters struct {
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// The Start IP Address associated with this PostgreSQL Flexible Server Firewall Rule.
-	// +kubebuilder:validation:Optional
 	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 }
 
@@ -57,6 +64,10 @@ type FlexibleServerFirewallRuleParameters struct {
 type FlexibleServerFirewallRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FlexibleServerFirewallRuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FlexibleServerFirewallRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // FlexibleServerFirewallRuleStatus defines the observed state of FlexibleServerFirewallRule.
@@ -77,8 +88,8 @@ type FlexibleServerFirewallRuleStatus struct {
 type FlexibleServerFirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endIpAddress)",message="endIpAddress is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.startIpAddress)",message="startIpAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endIpAddress) || has(self.initProvider.endIpAddress)",message="endIpAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.startIpAddress) || has(self.initProvider.startIpAddress)",message="startIpAddress is a required parameter"
 	Spec   FlexibleServerFirewallRuleSpec   `json:"spec"`
 	Status FlexibleServerFirewallRuleStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConnectionInitParameters struct {
+
+	// A description for this Connection.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The type of the Connection - can be either builtin type such as Azure, AzureClassicCertificate, and AzureServicePrincipal, or a user defined types. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// A mapping of key value pairs passed to the connection. Different type needs different parameters in the values. Builtin types have required field values as below:
+	Values map[string]*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type ConnectionObservation struct {
 
 	// The name of the automation account in which the Connection is created. Changing this forces a new resource to be created.
@@ -50,7 +62,6 @@ type ConnectionParameters struct {
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// A description for this Connection.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the resource group in which the Connection is created. Changing this forces a new resource to be created.
@@ -67,11 +78,9 @@ type ConnectionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The type of the Connection - can be either builtin type such as Azure, AzureClassicCertificate, and AzureServicePrincipal, or a user defined types. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A mapping of key value pairs passed to the connection. Different type needs different parameters in the values. Builtin types have required field values as below:
-	// +kubebuilder:validation:Optional
 	Values map[string]*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -79,6 +88,10 @@ type ConnectionParameters struct {
 type ConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConnectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConnectionStatus defines the observed state of Connection.
@@ -99,8 +112,8 @@ type ConnectionStatus struct {
 type Connection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.values)",message="values is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.values) || has(self.initProvider.values)",message="values is a required parameter"
 	Spec   ConnectionSpec   `json:"spec"`
 	Status ConnectionStatus `json:"status,omitempty"`
 }

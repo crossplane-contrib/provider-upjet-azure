@@ -13,6 +13,42 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ComputeClusterInitParameters struct {
+
+	// The description of the Machine Learning compute. Changing this forces a new Machine Learning Compute Cluster to be created.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// An identity block as defined below. Changing this forces a new Machine Learning Compute Cluster to be created.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
+	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
+
+	// The Azure Region where the Machine Learning Compute Cluster should exist. Changing this forces a new Machine Learning Compute Cluster to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name which should be used for this Machine Learning Compute Cluster. Changing this forces a new Machine Learning Compute Cluster to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Credentials for an administrator user account that will be created on each compute node. A ssh block as defined below. Changing this forces a new Machine Learning Compute Cluster to be created.
+	SSH []SSHInitParameters `json:"ssh,omitempty" tf:"ssh,omitempty"`
+
+	// A boolean value indicating whether enable the public SSH port. Changing this forces a new Machine Learning Compute Cluster to be created.
+	SSHPublicAccessEnabled *bool `json:"sshPublicAccessEnabled,omitempty" tf:"ssh_public_access_enabled,omitempty"`
+
+	// A scale_settings block as defined below. Changing this forces a new Machine Learning Compute Cluster to be created.
+	ScaleSettings []ScaleSettingsInitParameters `json:"scaleSettings,omitempty" tf:"scale_settings,omitempty"`
+
+	// A mapping of tags which should be assigned to the Machine Learning Compute Cluster. Changing this forces a new Machine Learning Compute Cluster to be created.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The priority of the VM. Changing this forces a new Machine Learning Compute Cluster to be created. Accepted values are Dedicated and LowPriority.
+	VMPriority *string `json:"vmPriority,omitempty" tf:"vm_priority,omitempty"`
+
+	// The size of the VM. Changing this forces a new Machine Learning Compute Cluster to be created.
+	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
+}
+
 type ComputeClusterObservation struct {
 
 	// The description of the Machine Learning compute. Changing this forces a new Machine Learning Compute Cluster to be created.
@@ -61,19 +97,15 @@ type ComputeClusterObservation struct {
 type ComputeClusterParameters struct {
 
 	// The description of the Machine Learning compute. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An identity block as defined below. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Optional
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// The Azure Region where the Machine Learning Compute Cluster should exist. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Compute Cluster to be created.
@@ -91,19 +123,15 @@ type ComputeClusterParameters struct {
 	MachineLearningWorkspaceIDSelector *v1.Selector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this Machine Learning Compute Cluster. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Credentials for an administrator user account that will be created on each compute node. A ssh block as defined below. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Optional
 	SSH []SSHParameters `json:"ssh,omitempty" tf:"ssh,omitempty"`
 
 	// A boolean value indicating whether enable the public SSH port. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Optional
 	SSHPublicAccessEnabled *bool `json:"sshPublicAccessEnabled,omitempty" tf:"ssh_public_access_enabled,omitempty"`
 
 	// A scale_settings block as defined below. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Optional
 	ScaleSettings []ScaleSettingsParameters `json:"scaleSettings,omitempty" tf:"scale_settings,omitempty"`
 
 	// The ID of the Subnet that the Compute Cluster should reside in. Changing this forces a new Machine Learning Compute Cluster to be created.
@@ -121,16 +149,22 @@ type ComputeClusterParameters struct {
 	SubnetResourceIDSelector *v1.Selector `json:"subnetResourceIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Machine Learning Compute Cluster. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The priority of the VM. Changing this forces a new Machine Learning Compute Cluster to be created. Accepted values are Dedicated and LowPriority.
-	// +kubebuilder:validation:Optional
 	VMPriority *string `json:"vmPriority,omitempty" tf:"vm_priority,omitempty"`
 
 	// The size of the VM. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Optional
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Cluster. Changing this forces a new resource to be created.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
@@ -151,12 +185,22 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Cluster. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type SSHInitParameters struct {
+
+	// Password of the administrator user account. Changing this forces a new Machine Learning Compute Cluster to be created.
+	AdminPassword *string `json:"adminPassword,omitempty" tf:"admin_password,omitempty"`
+
+	// Name of the administrator user account which can be used to SSH to nodes. Changing this forces a new Machine Learning Compute Cluster to be created.
+	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
+
+	// SSH public key of the administrator user account. Changing this forces a new Machine Learning Compute Cluster to be created.
+	KeyValue *string `json:"keyValue,omitempty" tf:"key_value,omitempty"`
 }
 
 type SSHObservation struct {
@@ -174,16 +218,25 @@ type SSHObservation struct {
 type SSHParameters struct {
 
 	// Password of the administrator user account. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Optional
 	AdminPassword *string `json:"adminPassword,omitempty" tf:"admin_password,omitempty"`
 
 	// Name of the administrator user account which can be used to SSH to nodes. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Required
-	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
+	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
 
 	// SSH public key of the administrator user account. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Optional
 	KeyValue *string `json:"keyValue,omitempty" tf:"key_value,omitempty"`
+}
+
+type ScaleSettingsInitParameters struct {
+
+	// Maximum node count. Changing this forces a new Machine Learning Compute Cluster to be created.
+	MaxNodeCount *float64 `json:"maxNodeCount,omitempty" tf:"max_node_count,omitempty"`
+
+	// Minimal node count. Changing this forces a new Machine Learning Compute Cluster to be created.
+	MinNodeCount *float64 `json:"minNodeCount,omitempty" tf:"min_node_count,omitempty"`
+
+	// Node Idle Time Before Scale Down: defines the time until the compute is shutdown when it has gone into Idle state. Is defined according to W3C XML schema standard for duration. Changing this forces a new Machine Learning Compute Cluster to be created.
+	ScaleDownNodesAfterIdleDuration *string `json:"scaleDownNodesAfterIdleDuration,omitempty" tf:"scale_down_nodes_after_idle_duration,omitempty"`
 }
 
 type ScaleSettingsObservation struct {
@@ -201,22 +254,23 @@ type ScaleSettingsObservation struct {
 type ScaleSettingsParameters struct {
 
 	// Maximum node count. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Required
-	MaxNodeCount *float64 `json:"maxNodeCount" tf:"max_node_count,omitempty"`
+	MaxNodeCount *float64 `json:"maxNodeCount,omitempty" tf:"max_node_count,omitempty"`
 
 	// Minimal node count. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Required
-	MinNodeCount *float64 `json:"minNodeCount" tf:"min_node_count,omitempty"`
+	MinNodeCount *float64 `json:"minNodeCount,omitempty" tf:"min_node_count,omitempty"`
 
 	// Node Idle Time Before Scale Down: defines the time until the compute is shutdown when it has gone into Idle state. Is defined according to W3C XML schema standard for duration. Changing this forces a new Machine Learning Compute Cluster to be created.
-	// +kubebuilder:validation:Required
-	ScaleDownNodesAfterIdleDuration *string `json:"scaleDownNodesAfterIdleDuration" tf:"scale_down_nodes_after_idle_duration,omitempty"`
+	ScaleDownNodesAfterIdleDuration *string `json:"scaleDownNodesAfterIdleDuration,omitempty" tf:"scale_down_nodes_after_idle_duration,omitempty"`
 }
 
 // ComputeClusterSpec defines the desired state of ComputeCluster
 type ComputeClusterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ComputeClusterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ComputeClusterInitParameters `json:"initProvider,omitempty"`
 }
 
 // ComputeClusterStatus defines the observed state of ComputeCluster.
@@ -237,11 +291,11 @@ type ComputeClusterStatus struct {
 type ComputeCluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scaleSettings)",message="scaleSettings is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vmPriority)",message="vmPriority is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vmSize)",message="vmSize is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scaleSettings) || has(self.initProvider.scaleSettings)",message="scaleSettings is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vmPriority) || has(self.initProvider.vmPriority)",message="vmPriority is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vmSize) || has(self.initProvider.vmSize)",message="vmSize is a required parameter"
 	Spec   ComputeClusterSpec   `json:"spec"`
 	Status ComputeClusterStatus `json:"status,omitempty"`
 }

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: outputfunctions.streamanalytics.azure.upbound.io
 spec:
   group: streamanalytics.azure.upbound.io
@@ -330,6 +330,25 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - apiKeySecretRef
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  batchMaxCount:
+                    description: The maximum number of events in each batch that's
+                      sent to the function. Defaults to 100.
+                    type: number
+                  batchMaxInBytes:
+                    description: The maximum batch size in bytes that's sent to the
+                      function. Defaults to 262144 (256 kB).
+                    type: number
+                  functionName:
+                    description: The name of the function in the Function App.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -534,7 +553,8 @@ spec:
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.apiKeySecretRef)'
             - message: functionName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.functionName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.functionName)
+                || has(self.initProvider.functionName)'
           status:
             description: OutputFunctionStatus defines the observed state of OutputFunction.
             properties:

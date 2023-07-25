@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UserAssignedIdentityInitParameters struct {
+
+	// The Azure Region where the User Assigned Identity should exist. Changing this forces a new User Assigned Identity to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of this User Assigned Identity. Changing this forces a new User Assigned Identity to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A mapping of tags which should be assigned to the User Assigned Identity.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type UserAssignedIdentityObservation struct {
 
 	// The ID of the app associated with the Identity.
@@ -43,11 +55,9 @@ type UserAssignedIdentityObservation struct {
 type UserAssignedIdentityParameters struct {
 
 	// The Azure Region where the User Assigned Identity should exist. Changing this forces a new User Assigned Identity to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of this User Assigned Identity. Changing this forces a new User Assigned Identity to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the name of the Resource Group within which this User Assigned Identity should exist. Changing this forces a new User Assigned Identity to be created.
@@ -64,7 +74,6 @@ type UserAssignedIdentityParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the User Assigned Identity.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -72,6 +81,10 @@ type UserAssignedIdentityParameters struct {
 type UserAssignedIdentitySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserAssignedIdentityParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UserAssignedIdentityInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserAssignedIdentityStatus defines the observed state of UserAssignedIdentity.
@@ -92,8 +105,8 @@ type UserAssignedIdentityStatus struct {
 type UserAssignedIdentity struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   UserAssignedIdentitySpec   `json:"spec"`
 	Status UserAssignedIdentityStatus `json:"status,omitempty"`
 }

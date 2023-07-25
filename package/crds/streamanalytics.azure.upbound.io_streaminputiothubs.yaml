@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: streaminputiothubs.streamanalytics.azure.upbound.io
 spec:
   group: streamanalytics.azure.upbound.io
@@ -329,8 +329,6 @@ spec:
                           description: The serialization format used for incoming
                             data streams. Possible values are Avro, Csv and Json.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   sharedAccessPolicyKeySecretRef:
@@ -432,6 +430,46 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - sharedAccessPolicyKeySecretRef
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  endpoint:
+                    description: The IoT Hub endpoint to connect to (ie. messages/events,
+                      messages/operationsMonitoringEvents, etc.).
+                    type: string
+                  name:
+                    description: The name of the Stream Input IoTHub. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  serialization:
+                    description: A serialization block as defined below.
+                    items:
+                      properties:
+                        encoding:
+                          description: The encoding of the incoming data in the case
+                            of input and the encoding of outgoing data in the case
+                            of output. It currently can only be set to UTF8.
+                          type: string
+                        fieldDelimiter:
+                          description: "The delimiter that will be used to separate
+                            comma-separated value (CSV) records. Possible values are
+                            \  (space), , (comma), \t (tab), | (pipe) and ;."
+                          type: string
+                        type:
+                          description: The serialization format used for incoming
+                            data streams. Possible values are Avro, Csv and Json.
+                          type: string
+                      type: object
+                    type: array
+                  sharedAccessPolicyName:
+                    description: The shared access policy name for the Event Hub,
+                      Service Bus Queue, Service Bus Topic, etc.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -633,19 +671,23 @@ spec:
             x-kubernetes-validations:
             - message: endpoint is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.endpoint)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.endpoint)
+                || has(self.initProvider.endpoint)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: serialization is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.serialization)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.serialization)
+                || has(self.initProvider.serialization)'
             - message: sharedAccessPolicyKeySecretRef is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.sharedAccessPolicyKeySecretRef)'
             - message: sharedAccessPolicyName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sharedAccessPolicyName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sharedAccessPolicyName)
+                || has(self.initProvider.sharedAccessPolicyName)'
           status:
             description: StreamInputIOTHubStatus defines the observed state of StreamInputIOTHub.
             properties:

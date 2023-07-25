@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: policies.devtestlab.azure.upbound.io
 spec:
   group: devtestlab.azure.upbound.io
@@ -257,6 +257,43 @@ spec:
                     description: The Threshold for this Policy.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: A description for the Policy.
+                    type: string
+                  evaluatorType:
+                    description: 'The Evaluation Type used for this Policy. Possible
+                      values include: ''AllowedValuesPolicy'', ''MaxValuePolicy''.
+                      Changing this forces a new resource to be created.'
+                    type: string
+                  factData:
+                    description: The Fact Data for this Policy.
+                    type: string
+                  name:
+                    description: Specifies the name of the Dev Test Policy. Possible
+                      values are GalleryImage, LabPremiumVmCount, LabTargetCost, LabVmCount,
+                      LabVmSize, UserOwnedLabPremiumVmCount, UserOwnedLabVmCount and
+                      UserOwnedLabVmCountInSubnet. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  policySetName:
+                    description: Specifies the name of the Policy Set within the Dev
+                      Test Lab where this policy should be created. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  threshold:
+                    description: The Threshold for this Policy.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -457,16 +494,20 @@ spec:
             x-kubernetes-validations:
             - message: evaluatorType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.evaluatorType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.evaluatorType)
+                || has(self.initProvider.evaluatorType)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: policySetName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.policySetName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.policySetName)
+                || has(self.initProvider.policySetName)'
             - message: threshold is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.threshold)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.threshold)
+                || has(self.initProvider.threshold)'
           status:
             description: PolicyStatus defines the observed state of Policy.
             properties:

@@ -22,7 +22,6 @@ type ApplicationInsightsObservation struct {
 type ApplicationInsightsParameters struct {
 
 	// The instrumentation key used to push data to Application Insights.
-	// +kubebuilder:validation:Required
 	InstrumentationKeySecretRef v1.SecretKeySelector `json:"instrumentationKeySecretRef" tf:"-"`
 }
 
@@ -41,11 +40,9 @@ type EventHubObservation struct {
 type EventHubParameters struct {
 
 	// The connection string of an EventHub Namespace.
-	// +kubebuilder:validation:Required
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The name of an EventHub.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -107,19 +104,15 @@ type LoggerParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// An application_insights block as documented below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	ApplicationInsights []ApplicationInsightsParameters `json:"applicationInsights,omitempty" tf:"application_insights,omitempty"`
 
 	// Specifies whether records should be buffered in the Logger prior to publishing. Defaults to true.
-	// +kubebuilder:validation:Optional
 	Buffered *bool `json:"buffered,omitempty" tf:"buffered,omitempty"`
 
 	// A description of this Logger.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An eventhub block as documented below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	EventHub []EventHubParameters `json:"eventhub,omitempty" tf:"eventhub,omitempty"`
 
 	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
@@ -157,14 +150,6 @@ type LoggerSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider LoggerInitParameters `json:"initProvider,omitempty"`
 }
 

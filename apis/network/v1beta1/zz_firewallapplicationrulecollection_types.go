@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FirewallApplicationRuleCollectionInitParameters struct {
+
+	// Specifies the action the rule will apply to matching traffic. Possible values are Allow and Deny.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Specifies the priority of the rule collection. Possible values are between 100 - 65000.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// One or more rule blocks as defined below.
+	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
 type FirewallApplicationRuleCollectionObservation struct {
 
 	// Specifies the action the rule will apply to matching traffic. Possible values are Allow and Deny.
@@ -36,7 +48,6 @@ type FirewallApplicationRuleCollectionObservation struct {
 type FirewallApplicationRuleCollectionParameters struct {
 
 	// Specifies the action the rule will apply to matching traffic. Possible values are Allow and Deny.
-	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Specifies the name of the Firewall in which the Application Rule Collection should be created. Changing this forces a new resource to be created.
@@ -53,7 +64,6 @@ type FirewallApplicationRuleCollectionParameters struct {
 	AzureFirewallNameSelector *v1.Selector `json:"azureFirewallNameSelector,omitempty" tf:"-"`
 
 	// Specifies the priority of the rule collection. Possible values are between 100 - 65000.
-	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Specifies the name of the Resource Group in which the Firewall exists. Changing this forces a new resource to be created.
@@ -70,8 +80,16 @@ type FirewallApplicationRuleCollectionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more rule blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
+type ProtocolInitParameters struct {
+
+	// Specify a port for the connection.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// Specifies the type of connection. Possible values are Http, Https and Mssql.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ProtocolObservation struct {
@@ -86,12 +104,34 @@ type ProtocolObservation struct {
 type ProtocolParameters struct {
 
 	// Specify a port for the connection.
-	// +kubebuilder:validation:Required
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Specifies the type of connection. Possible values are Http, Https and Mssql.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type RuleInitParameters struct {
+
+	// Specifies a description for the rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A list of FQDN tags. Possible values are AppServiceEnvironment, AzureBackup, AzureKubernetesService, HDInsight, MicrosoftActiveProtectionService, WindowsDiagnostics, WindowsUpdate and WindowsVirtualDesktop.
+	FqdnTags []*string `json:"fqdnTags,omitempty" tf:"fqdn_tags,omitempty"`
+
+	// Specifies the name of the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more protocol blocks as defined below.
+	Protocol []ProtocolInitParameters `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// A list of source IP addresses and/or IP ranges.
+	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
+
+	// A list of source IP Group IDs for the rule.
+	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
+
+	// A list of FQDNs.
+	TargetFqdns []*string `json:"targetFqdns,omitempty" tf:"target_fqdns,omitempty"`
 }
 
 type RuleObservation struct {
@@ -121,31 +161,24 @@ type RuleObservation struct {
 type RuleParameters struct {
 
 	// Specifies a description for the rule.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A list of FQDN tags. Possible values are AppServiceEnvironment, AzureBackup, AzureKubernetesService, HDInsight, MicrosoftActiveProtectionService, WindowsDiagnostics, WindowsUpdate and WindowsVirtualDesktop.
-	// +kubebuilder:validation:Optional
 	FqdnTags []*string `json:"fqdnTags,omitempty" tf:"fqdn_tags,omitempty"`
 
 	// Specifies the name of the rule.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more protocol blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Protocol []ProtocolParameters `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// A list of source IP addresses and/or IP ranges.
-	// +kubebuilder:validation:Optional
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
 	// A list of source IP Group IDs for the rule.
-	// +kubebuilder:validation:Optional
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 
 	// A list of FQDNs.
-	// +kubebuilder:validation:Optional
 	TargetFqdns []*string `json:"targetFqdns,omitempty" tf:"target_fqdns,omitempty"`
 }
 
@@ -153,6 +186,10 @@ type RuleParameters struct {
 type FirewallApplicationRuleCollectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FirewallApplicationRuleCollectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FirewallApplicationRuleCollectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // FirewallApplicationRuleCollectionStatus defines the observed state of FirewallApplicationRuleCollection.
@@ -173,9 +210,9 @@ type FirewallApplicationRuleCollectionStatus struct {
 type FirewallApplicationRuleCollection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action)",message="action is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.priority)",message="priority is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule)",message="rule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action) || has(self.initProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.priority) || has(self.initProvider.priority)",message="priority is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule) || has(self.initProvider.rule)",message="rule is a required parameter"
 	Spec   FirewallApplicationRuleCollectionSpec   `json:"spec"`
 	Status FirewallApplicationRuleCollectionStatus `json:"status,omitempty"`
 }

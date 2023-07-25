@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: frontdoorroutes.cdn.azure.upbound.io
 spec:
   group: cdn.azure.upbound.io
@@ -550,6 +550,83 @@ spec:
                       type: string
                     type: array
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  cache:
+                    description: A cache block as defined below.
+                    items:
+                      properties:
+                        compressionEnabled:
+                          description: Is content compression enabled? Possible values
+                            are true or false. Defaults to false.
+                          type: boolean
+                        contentTypesToCompress:
+                          description: A list of one or more Content types (formerly
+                            known as MIME types) to compress. Possible values include
+                            application/eot, application/font, application/font-sfnt,
+                            application/javascript, application/json, application/opentype,
+                            application/otf, application/pkcs7-mime, application/truetype,
+                            application/ttf, application/vnd.ms-fontobject, application/xhtml+xml,
+                            application/xml, application/xml+rss, application/x-font-opentype,
+                            application/x-font-truetype, application/x-font-ttf, application/x-httpd-cgi,
+                            application/x-mpegurl, application/x-opentype, application/x-otf,
+                            application/x-perl, application/x-ttf, application/x-javascript,
+                            font/eot, font/ttf, font/otf, font/opentype, image/svg+xml,
+                            text/css, text/csv, text/html, text/javascript, text/js,
+                            text/plain, text/richtext, text/tab-separated-values,
+                            text/xml, text/x-script, text/x-component or text/x-java-source.
+                          items:
+                            type: string
+                          type: array
+                        queryStringCachingBehavior:
+                          description: Defines how the Front Door Route will cache
+                            requests that include query strings. Possible values include
+                            IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings
+                            or UseQueryString. Defaults it IgnoreQueryString.
+                          type: string
+                        queryStrings:
+                          description: Query strings to include or ignore.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  cdnFrontdoorOriginPath:
+                    description: A directory path on the Front Door Origin that can
+                      be used to retrieve content (e.g. contoso.cloudapp.net/originpath).
+                    type: string
+                  enabled:
+                    description: Is this Front Door Route enabled? Possible values
+                      are true or false. Defaults to true.
+                    type: boolean
+                  forwardingProtocol:
+                    description: The Protocol that will be use when forwarding traffic
+                      to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest.
+                    type: string
+                  httpsRedirectEnabled:
+                    description: Automatically redirect HTTP traffic to HTTPS traffic?
+                      Possible values are true or false. Defaults to true.
+                    type: boolean
+                  linkToDefaultDomain:
+                    description: Should this Front Door Route be linked to the default
+                      endpoint? Possible values include true or false. Defaults to
+                      true.
+                    type: boolean
+                  patternsToMatch:
+                    description: The route patterns of the rule.
+                    items:
+                      type: string
+                    type: array
+                  supportedProtocols:
+                    description: One or more Protocols supported by this Front Door
+                      Route. Possible values are Http or Https.
+                    items:
+                      type: string
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -750,10 +827,12 @@ spec:
             x-kubernetes-validations:
             - message: patternsToMatch is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.patternsToMatch)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.patternsToMatch)
+                || has(self.initProvider.patternsToMatch)'
             - message: supportedProtocols is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.supportedProtocols)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.supportedProtocols)
+                || has(self.initProvider.supportedProtocols)'
           status:
             description: FrontdoorRouteStatus defines the observed state of FrontdoorRoute.
             properties:

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: gen2environments.timeseriesinsights.azure.upbound.io
 spec:
   group: timeseriesinsights.azure.upbound.io
@@ -284,6 +284,44 @@ spec:
                       query.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  idProperties:
+                    description: A list of property ids for the Azure IoT Time Series
+                      Insights Gen2 Environment. Changing this forces a new resource
+                      to be created.
+                    items:
+                      type: string
+                    type: array
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  skuName:
+                    description: Specifies the SKU Name for this IoT Time Series Insights
+                      Gen2 Environment. Currently it supports only L1. For gen2, capacity
+                      cannot be specified. Changing this forces a new resource to
+                      be created.
+                    type: string
+                  storage:
+                    description: A storage block as defined below.
+                    items:
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  warmStoreDataRetentionTime:
+                    description: Specifies the ISO8601 timespan specifying the minimum
+                      number of days the environment's events will be available for
+                      query.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -484,16 +522,20 @@ spec:
             x-kubernetes-validations:
             - message: idProperties is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.idProperties)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.idProperties)
+                || has(self.initProvider.idProperties)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: skuName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
+                || has(self.initProvider.skuName)'
             - message: storage is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.storage)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.storage)
+                || has(self.initProvider.storage)'
           status:
             description: Gen2EnvironmentStatus defines the observed state of Gen2Environment.
             properties:

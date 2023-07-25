@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: hybridconnectionauthorizationrules.relay.azure.upbound.io
 spec:
   group: relay.azure.upbound.io
@@ -320,6 +320,25 @@ spec:
                             type: string
                         type: object
                     type: object
+                  send:
+                    description: Grants send access to this Authorization Rule. Defaults
+                      to false.
+                    type: boolean
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  listen:
+                    description: Grants listen access to this Authorization Rule.
+                      Defaults to false.
+                    type: boolean
+                  manage:
+                    description: Grants manage access to this Authorization Rule.
+                      When this property is true - both listen and send must be set
+                      to true too. Defaults to false.
+                    type: boolean
                   send:
                     description: Grants send access to this Authorization Rule. Defaults
                       to false.

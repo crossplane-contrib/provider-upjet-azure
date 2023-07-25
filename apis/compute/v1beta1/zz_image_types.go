@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DataDiskInitParameters struct {
+
+	// Specifies the URI in Azure storage of the blob that you want to use to create the image.
+	BlobURI *string `json:"blobUri,omitempty" tf:"blob_uri,omitempty"`
+
+	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
+	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
+
+	// Specifies the logical unit number of the data disk.
+	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
+
+	// Specifies the ID of the managed disk resource that you want to use to create the image. Changing this forces a new resource to be created.
+	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
+
+	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
+	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+}
+
 type DataDiskObservation struct {
 
 	// Specifies the URI in Azure storage of the blob that you want to use to create the image.
@@ -34,24 +52,44 @@ type DataDiskObservation struct {
 type DataDiskParameters struct {
 
 	// Specifies the URI in Azure storage of the blob that you want to use to create the image.
-	// +kubebuilder:validation:Optional
 	BlobURI *string `json:"blobUri,omitempty" tf:"blob_uri,omitempty"`
 
 	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
-	// +kubebuilder:validation:Optional
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
 	// Specifies the logical unit number of the data disk.
-	// +kubebuilder:validation:Optional
 	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
 
 	// Specifies the ID of the managed disk resource that you want to use to create the image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
 	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
-	// +kubebuilder:validation:Optional
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
+}
+
+type ImageInitParameters struct {
+
+	// One or more data_disk elements as defined below.
+	DataDisk []DataDiskInitParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
+
+	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. The default is V1. Changing this forces a new resource to be created.
+	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
+
+	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// One or more os_disk elements as defined below. Changing this forces a new resource to be created.
+	OsDisk []OsDiskInitParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
+
+	// The Virtual Machine ID from which to create the image.
+	SourceVirtualMachineID *string `json:"sourceVirtualMachineId,omitempty" tf:"source_virtual_machine_id,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Is zone resiliency enabled? Defaults to false. Changing this forces a new resource to be created.
+	ZoneResilient *bool `json:"zoneResilient,omitempty" tf:"zone_resilient,omitempty"`
 }
 
 type ImageObservation struct {
@@ -89,20 +127,16 @@ type ImageObservation struct {
 type ImageParameters struct {
 
 	// One or more data_disk elements as defined below.
-	// +kubebuilder:validation:Optional
 	DataDisk []DataDiskParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
 	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. The default is V1. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
 	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// One or more os_disk elements as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	OsDisk []OsDiskParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
 	// The name of the resource group in which to create. Changing this forces a new resource to be created.
@@ -120,16 +154,34 @@ type ImageParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Virtual Machine ID from which to create the image.
-	// +kubebuilder:validation:Optional
 	SourceVirtualMachineID *string `json:"sourceVirtualMachineId,omitempty" tf:"source_virtual_machine_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Is zone resiliency enabled? Defaults to false. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	ZoneResilient *bool `json:"zoneResilient,omitempty" tf:"zone_resilient,omitempty"`
+}
+
+type OsDiskInitParameters struct {
+
+	// Specifies the URI in Azure storage of the blob that you want to use to create the image. Changing this forces a new resource to be created.
+	BlobURI *string `json:"blobUri,omitempty" tf:"blob_uri,omitempty"`
+
+	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
+	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
+
+	// Specifies the ID of the managed disk resource that you want to use to create the image.
+	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
+
+	// Specifies the state of the operating system contained in the blob. Currently, the only value is Generalized. Possible values are Generalized and Specialized.
+	OsState *string `json:"osState,omitempty" tf:"os_state,omitempty"`
+
+	// Specifies the type of operating system contained in the virtual machine image. Possible values are: Windows or Linux.
+	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
+
+	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
+	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
 }
 
 type OsDiskObservation struct {
@@ -156,27 +208,21 @@ type OsDiskObservation struct {
 type OsDiskParameters struct {
 
 	// Specifies the URI in Azure storage of the blob that you want to use to create the image. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	BlobURI *string `json:"blobUri,omitempty" tf:"blob_uri,omitempty"`
 
 	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
-	// +kubebuilder:validation:Optional
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
 	// Specifies the ID of the managed disk resource that you want to use to create the image.
-	// +kubebuilder:validation:Optional
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
 	// Specifies the state of the operating system contained in the blob. Currently, the only value is Generalized. Possible values are Generalized and Specialized.
-	// +kubebuilder:validation:Optional
 	OsState *string `json:"osState,omitempty" tf:"os_state,omitempty"`
 
 	// Specifies the type of operating system contained in the virtual machine image. Possible values are: Windows or Linux.
-	// +kubebuilder:validation:Optional
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
 	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
-	// +kubebuilder:validation:Optional
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
 }
 
@@ -184,6 +230,10 @@ type OsDiskParameters struct {
 type ImageSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ImageParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ImageInitParameters `json:"initProvider,omitempty"`
 }
 
 // ImageStatus defines the observed state of Image.
@@ -204,7 +254,7 @@ type ImageStatus struct {
 type Image struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   ImageSpec   `json:"spec"`
 	Status ImageStatus `json:"status,omitempty"`
 }

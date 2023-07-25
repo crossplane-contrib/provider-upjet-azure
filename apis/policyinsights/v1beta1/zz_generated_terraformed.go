@@ -79,6 +79,15 @@ func (tr *ResourcePolicyRemediation) GetInitParameters() (map[string]any, error)
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this ResourcePolicyRemediation
+func (tr *ResourcePolicyRemediation) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ResourcePolicyRemediation using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ResourcePolicyRemediation) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *SubscriptionPolicyRemediation) GetInitParameters() (map[string]any, er
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this SubscriptionPolicyRemediation
+func (tr *SubscriptionPolicyRemediation) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SubscriptionPolicyRemediation using its observed tfState.

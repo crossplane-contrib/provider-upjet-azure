@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: ledgers.confidentialledger.azure.upbound.io
 spec:
   group: confidentialledger.azure.upbound.io
@@ -85,10 +85,6 @@ spec:
                           description: Specifies the Tenant ID for this AzureAD Service
                             Principal.
                           type: string
-                      required:
-                      - ledgerRoleName
-                      - principalId
-                      - tenantId
                       type: object
                     type: array
                   certificateBasedSecurityPrincipal:
@@ -106,9 +102,6 @@ spec:
                             used by this identity to authenticate with the Confidential
                             Ledger.
                           type: string
-                      required:
-                      - ledgerRoleName
-                      - pemPublicKey
                       type: object
                     type: array
                   ledgerType:
@@ -200,6 +193,64 @@ spec:
                             type: string
                         type: object
                     type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the Confidential Ledger.
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  azureadBasedServicePrincipal:
+                    description: A list of azuread_based_service_principal blocks
+                      as defined below.
+                    items:
+                      properties:
+                        ledgerRoleName:
+                          description: Specifies the Ledger Role to grant this AzureAD
+                            Service Principal. Possible values are Administrator,
+                            Contributor and Reader.
+                          type: string
+                        principalId:
+                          description: Specifies the Principal ID of the AzureAD Service
+                            Principal.
+                          type: string
+                        tenantId:
+                          description: Specifies the Tenant ID for this AzureAD Service
+                            Principal.
+                          type: string
+                      type: object
+                    type: array
+                  certificateBasedSecurityPrincipal:
+                    description: A list of certificate_based_security_principal blocks
+                      as defined below.
+                    items:
+                      properties:
+                        ledgerRoleName:
+                          description: Specifies the Ledger Role to grant this Certificate
+                            Security Principal. Possible values are Administrator,
+                            Contributor and Reader.
+                          type: string
+                        pemPublicKey:
+                          description: The public key, in PEM format, of the certificate
+                            used by this identity to authenticate with the Confidential
+                            Ledger.
+                          type: string
+                      type: object
+                    type: array
+                  ledgerType:
+                    description: Specifies the type of Confidential Ledger. Possible
+                      values are Private and Public. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      Confidential Ledger exists. Changing this forces a new resource
+                      to be created.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -406,13 +457,16 @@ spec:
             x-kubernetes-validations:
             - message: azureadBasedServicePrincipal is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.azureadBasedServicePrincipal)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.azureadBasedServicePrincipal)
+                || has(self.initProvider.azureadBasedServicePrincipal)'
             - message: ledgerType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.ledgerType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.ledgerType)
+                || has(self.initProvider.ledgerType)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
           status:
             description: LedgerStatus defines the observed state of Ledger.
             properties:

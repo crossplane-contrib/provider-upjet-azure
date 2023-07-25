@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: functionjavascriptudas.streamanalytics.azure.upbound.io
 spec:
   group: streamanalytics.azure.upbound.io
@@ -81,8 +81,6 @@ spec:
                             Possible values include any, array, bigint, datetime,
                             float, nvarchar(max) and record.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   output:
@@ -94,8 +92,6 @@ spec:
                             Possible values include any, array, bigint, datetime,
                             float, nvarchar(max) and record.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   script:
@@ -179,6 +175,41 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  input:
+                    description: One or more input blocks as defined below.
+                    items:
+                      properties:
+                        configurationParameter:
+                          description: Is this input parameter a configuration parameter?
+                            Defaults to false.
+                          type: boolean
+                        type:
+                          description: The input data type of this JavaScript Function.
+                            Possible values include any, array, bigint, datetime,
+                            float, nvarchar(max) and record.
+                          type: string
+                      type: object
+                    type: array
+                  output:
+                    description: An output block as defined below.
+                    items:
+                      properties:
+                        type:
+                          description: The output data type from this JavaScript Function.
+                            Possible values include any, array, bigint, datetime,
+                            float, nvarchar(max) and record.
+                          type: string
+                      type: object
+                    type: array
+                  script:
+                    description: The JavaScript of this UDA Function.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -380,13 +411,16 @@ spec:
             x-kubernetes-validations:
             - message: input is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.input)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.input)
+                || has(self.initProvider.input)'
             - message: output is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.output)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.output)
+                || has(self.initProvider.output)'
             - message: script is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.script)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.script)
+                || has(self.initProvider.script)'
           status:
             description: FunctionJavascriptUdaStatus defines the observed state of
               FunctionJavascriptUda.

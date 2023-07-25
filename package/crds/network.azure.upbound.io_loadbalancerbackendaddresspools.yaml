@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: loadbalancerbackendaddresspools.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -168,11 +168,40 @@ spec:
                             Tunnel Interface. Possible values are None, Internal and
                             External.
                           type: string
-                      required:
-                      - identifier
-                      - port
-                      - protocol
-                      - type
+                      type: object
+                    type: array
+                  virtualNetworkId:
+                    description: The ID of the Virtual Network within which the Backend
+                      Address Pool should exist.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  tunnelInterface:
+                    description: One or more tunnel_interface blocks as defined below.
+                    items:
+                      properties:
+                        identifier:
+                          description: The unique identifier of this Gateway Lodbalancer
+                            Tunnel Interface.
+                          type: number
+                        port:
+                          description: The port number that this Gateway Lodbalancer
+                            Tunnel Interface listens to.
+                          type: number
+                        protocol:
+                          description: The protocol used for this Gateway Lodbalancer
+                            Tunnel Interface. Possible values are None, Native and
+                            VXLAN.
+                          type: string
+                        type:
+                          description: The traffic type of this Gateway Lodbalancer
+                            Tunnel Interface. Possible values are None, Internal and
+                            External.
+                          type: string
                       type: object
                     type: array
                   virtualNetworkId:

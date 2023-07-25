@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ACLAccessPolicyInitParameters struct {
+
+	// The ISO8061 UTC time at which this Access Policy should be valid until.
+	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
+
+	// The permissions which should associated with this Shared Identifier.
+	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// The ISO8061 UTC time at which this Access Policy should be valid from.
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+}
+
 type ACLAccessPolicyObservation struct {
 
 	// The ISO8061 UTC time at which this Access Policy should be valid until.
@@ -28,16 +40,22 @@ type ACLAccessPolicyObservation struct {
 type ACLAccessPolicyParameters struct {
 
 	// The ISO8061 UTC time at which this Access Policy should be valid until.
-	// +kubebuilder:validation:Required
-	Expiry *string `json:"expiry" tf:"expiry,omitempty"`
+	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 
 	// The permissions which should associated with this Shared Identifier.
-	// +kubebuilder:validation:Required
-	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
+	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The ISO8061 UTC time at which this Access Policy should be valid from.
-	// +kubebuilder:validation:Required
-	Start *string `json:"start" tf:"start,omitempty"`
+	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+}
+
+type TableACLInitParameters struct {
+
+	// An access_policy block as defined below.
+	AccessPolicy []ACLAccessPolicyInitParameters `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
+
+	// The ID which should be used for this Shared Identifier.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
 type TableACLObservation struct {
@@ -52,12 +70,19 @@ type TableACLObservation struct {
 type TableACLParameters struct {
 
 	// An access_policy block as defined below.
-	// +kubebuilder:validation:Optional
 	AccessPolicy []ACLAccessPolicyParameters `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
 	// The ID which should be used for this Shared Identifier.
-	// +kubebuilder:validation:Required
-	ID *string `json:"id" tf:"id,omitempty"`
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+}
+
+type TableInitParameters struct {
+
+	// One or more acl blocks as defined below.
+	ACL []TableACLInitParameters `json:"acl,omitempty" tf:"acl,omitempty"`
+
+	// The name of the storage table. Only Alphanumeric characters allowed, starting with a letter. Must be unique within the storage account the table is located. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type TableObservation struct {
@@ -78,11 +103,9 @@ type TableObservation struct {
 type TableParameters struct {
 
 	// One or more acl blocks as defined below.
-	// +kubebuilder:validation:Optional
 	ACL []TableACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// The name of the storage table. Only Alphanumeric characters allowed, starting with a letter. Must be unique within the storage account the table is located. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the storage account in which to create the storage table. Changing this forces a new resource to be created.
@@ -103,6 +126,10 @@ type TableParameters struct {
 type TableSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TableParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TableInitParameters `json:"initProvider,omitempty"`
 }
 
 // TableStatus defines the observed state of Table.
@@ -123,7 +150,7 @@ type TableStatus struct {
 type Table struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   TableSpec   `json:"spec"`
 	Status TableStatus `json:"status,omitempty"`
 }

@@ -61,7 +61,6 @@ type SubscriptionObservation struct {
 type SubscriptionParameters struct {
 
 	// The ID of the API which should be assigned to this Subscription. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
 
 	// The name of the API Management Service where this Subscription should be created. Changing this forces a new resource to be created.
@@ -78,11 +77,9 @@ type SubscriptionParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// Determines whether tracing can be enabled. Defaults to true.
-	// +kubebuilder:validation:Optional
 	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
 
 	// The primary subscription key to use for the subscription.
-	// +kubebuilder:validation:Optional
 	PrimaryKeySecretRef *v1.SecretKeySelector `json:"primaryKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the Product which should be assigned to this Subscription. Changing this forces a new resource to be created.
@@ -113,15 +110,12 @@ type SubscriptionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The secondary subscription key to use for the subscription.
-	// +kubebuilder:validation:Optional
 	SecondaryKeySecretRef *v1.SecretKeySelector `json:"secondaryKeySecretRef,omitempty" tf:"-"`
 
 	// The state of this Subscription. Possible values are active, cancelled, expired, rejected, submitted and suspended. Defaults to submitted.
-	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// An Identifier which should used as the ID of this Subscription. If not specified a new Subscription ID will be generated. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// The ID of the User which should be assigned to this Subscription. Changing this forces a new resource to be created.
@@ -146,14 +140,6 @@ type SubscriptionSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider SubscriptionInitParameters `json:"initProvider,omitempty"`
 }
 

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EncryptionInitParameters struct {
+
+	// Enabling/Disabling the Double Encryption state.
+	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
+
+	// The Key Vault key id used to encrypt this vault. Key managed by Vault Managed Hardware Security Module is also supported.
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Indicate that system assigned identity should be used or not. Defaults to true.
+	UseSystemAssignedIdentity *bool `json:"useSystemAssignedIdentity,omitempty" tf:"use_system_assigned_identity,omitempty"`
+
+	// Specifies the user assigned identity ID to be used.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+}
+
 type EncryptionObservation struct {
 
 	// Enabling/Disabling the Double Encryption state.
@@ -31,20 +46,25 @@ type EncryptionObservation struct {
 type EncryptionParameters struct {
 
 	// Enabling/Disabling the Double Encryption state.
-	// +kubebuilder:validation:Required
-	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled" tf:"infrastructure_encryption_enabled,omitempty"`
+	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
 
 	// The Key Vault key id used to encrypt this vault. Key managed by Vault Managed Hardware Security Module is also supported.
-	// +kubebuilder:validation:Required
-	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
 	// Indicate that system assigned identity should be used or not. Defaults to true.
-	// +kubebuilder:validation:Optional
 	UseSystemAssignedIdentity *bool `json:"useSystemAssignedIdentity,omitempty" tf:"use_system_assigned_identity,omitempty"`
 
 	// Specifies the user assigned identity ID to be used.
-	// +kubebuilder:validation:Optional
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Recovery Services Vault. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
@@ -65,12 +85,19 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
-	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Recovery Services Vault. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type MonitoringInitParameters struct {
+
+	// Enabling/Disabling built-in Azure Monitor alerts for security scenarios and job failure scenarios. Defaults to true.
+	AlertsForAllJobFailuresEnabled *bool `json:"alertsForAllJobFailuresEnabled,omitempty" tf:"alerts_for_all_job_failures_enabled,omitempty"`
+
+	// Enabling/Disabling alerts from the older (classic alerts) solution. Defaults to true. More details could be found here.
+	AlertsForCriticalOperationFailuresEnabled *bool `json:"alertsForCriticalOperationFailuresEnabled,omitempty" tf:"alerts_for_critical_operation_failures_enabled,omitempty"`
 }
 
 type MonitoringObservation struct {
@@ -85,12 +112,49 @@ type MonitoringObservation struct {
 type MonitoringParameters struct {
 
 	// Enabling/Disabling built-in Azure Monitor alerts for security scenarios and job failure scenarios. Defaults to true.
-	// +kubebuilder:validation:Optional
 	AlertsForAllJobFailuresEnabled *bool `json:"alertsForAllJobFailuresEnabled,omitempty" tf:"alerts_for_all_job_failures_enabled,omitempty"`
 
 	// Enabling/Disabling alerts from the older (classic alerts) solution. Defaults to true. More details could be found here.
-	// +kubebuilder:validation:Optional
 	AlertsForCriticalOperationFailuresEnabled *bool `json:"alertsForCriticalOperationFailuresEnabled,omitempty" tf:"alerts_for_critical_operation_failures_enabled,omitempty"`
+}
+
+type VaultInitParameters struct {
+
+	// Whether to enable the Classic experience for VMware replication. If set to false VMware machines will be protected using the new stateless ASR replication appliance. Changing this forces a new resource to be created.
+	ClassicVMwareReplicationEnabled *bool `json:"classicVmwareReplicationEnabled,omitempty" tf:"classic_vmware_replication_enabled,omitempty"`
+
+	// Is cross region restore enabled for this Vault? Only can be true, when storage_mode_type is GeoRedundant. Defaults to false.
+	CrossRegionRestoreEnabled *bool `json:"crossRegionRestoreEnabled,omitempty" tf:"cross_region_restore_enabled,omitempty"`
+
+	// An encryption block as defined below. Required with identity.
+	Encryption []EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Immutability Settings of vault, possible values include: Locked, Unlocked and Disabled.
+	Immutability *string `json:"immutability,omitempty" tf:"immutability,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A monitoring block as defined below.
+	Monitoring []MonitoringInitParameters `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
+
+	// Is it enabled to access the vault from public networks. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Sets the vault's SKU. Possible values include: Standard, RS0.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// Is soft delete enable for this Vault? Defaults to true.
+	SoftDeleteEnabled *bool `json:"softDeleteEnabled,omitempty" tf:"soft_delete_enabled,omitempty"`
+
+	// The storage type of the Recovery Services Vault. Possible values are GeoRedundant, LocallyRedundant and ZoneRedundant. Defaults to GeoRedundant.
+	StorageModeType *string `json:"storageModeType,omitempty" tf:"storage_mode_type,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type VaultObservation struct {
@@ -141,35 +205,27 @@ type VaultObservation struct {
 type VaultParameters struct {
 
 	// Whether to enable the Classic experience for VMware replication. If set to false VMware machines will be protected using the new stateless ASR replication appliance. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	ClassicVMwareReplicationEnabled *bool `json:"classicVmwareReplicationEnabled,omitempty" tf:"classic_vmware_replication_enabled,omitempty"`
 
 	// Is cross region restore enabled for this Vault? Only can be true, when storage_mode_type is GeoRedundant. Defaults to false.
-	// +kubebuilder:validation:Optional
 	CrossRegionRestoreEnabled *bool `json:"crossRegionRestoreEnabled,omitempty" tf:"cross_region_restore_enabled,omitempty"`
 
 	// An encryption block as defined below. Required with identity.
-	// +kubebuilder:validation:Optional
 	Encryption []EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Immutability Settings of vault, possible values include: Locked, Unlocked and Disabled.
-	// +kubebuilder:validation:Optional
 	Immutability *string `json:"immutability,omitempty" tf:"immutability,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A monitoring block as defined below.
-	// +kubebuilder:validation:Optional
 	Monitoring []MonitoringParameters `json:"monitoring,omitempty" tf:"monitoring,omitempty"`
 
 	// Is it enabled to access the vault from public networks. Defaults to true.
-	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Recovery Services Vault. Changing this forces a new resource to be created.
@@ -186,19 +242,15 @@ type VaultParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Sets the vault's SKU. Possible values include: Standard, RS0.
-	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Is soft delete enable for this Vault? Defaults to true.
-	// +kubebuilder:validation:Optional
 	SoftDeleteEnabled *bool `json:"softDeleteEnabled,omitempty" tf:"soft_delete_enabled,omitempty"`
 
 	// The storage type of the Recovery Services Vault. Possible values are GeoRedundant, LocallyRedundant and ZoneRedundant. Defaults to GeoRedundant.
-	// +kubebuilder:validation:Optional
 	StorageModeType *string `json:"storageModeType,omitempty" tf:"storage_mode_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -206,6 +258,10 @@ type VaultParameters struct {
 type VaultSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VaultParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider VaultInitParameters `json:"initProvider,omitempty"`
 }
 
 // VaultStatus defines the observed state of Vault.
@@ -226,8 +282,8 @@ type VaultStatus struct {
 type Vault struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
 	Spec   VaultSpec   `json:"spec"`
 	Status VaultStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ManagedPrivateEndpointInitParameters struct {
+
+	// Specifies the name which should be used for this Managed Private Endpoint. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the sub resource name which the Synapse Private Endpoint is able to connect to. Changing this forces a new resource to be created.
+	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
+}
+
 type ManagedPrivateEndpointObservation struct {
 
 	// The Synapse Managed Private Endpoint ID.
@@ -34,11 +43,9 @@ type ManagedPrivateEndpointObservation struct {
 type ManagedPrivateEndpointParameters struct {
 
 	// Specifies the name which should be used for this Managed Private Endpoint. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the sub resource name which the Synapse Private Endpoint is able to connect to. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 
 	// The ID of the Synapse Workspace on which to create the Managed Private Endpoint. Changing this forces a new resource to be created.
@@ -74,6 +81,10 @@ type ManagedPrivateEndpointParameters struct {
 type ManagedPrivateEndpointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagedPrivateEndpointParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ManagedPrivateEndpointInitParameters `json:"initProvider,omitempty"`
 }
 
 // ManagedPrivateEndpointStatus defines the observed state of ManagedPrivateEndpoint.
@@ -94,8 +105,8 @@ type ManagedPrivateEndpointStatus struct {
 type ManagedPrivateEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subresourceName)",message="subresourceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subresourceName) || has(self.initProvider.subresourceName)",message="subresourceName is a required parameter"
 	Spec   ManagedPrivateEndpointSpec   `json:"spec"`
 	Status ManagedPrivateEndpointStatus `json:"status,omitempty"`
 }

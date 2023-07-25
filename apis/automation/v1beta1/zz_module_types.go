@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HashInitParameters struct {
+
+	// Specifies the algorithm used for the hash content.
+	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
+
+	// The hash value of the content.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type HashObservation struct {
 
 	// Specifies the algorithm used for the hash content.
@@ -25,12 +34,25 @@ type HashObservation struct {
 type HashParameters struct {
 
 	// Specifies the algorithm used for the hash content.
-	// +kubebuilder:validation:Required
-	Algorithm *string `json:"algorithm" tf:"algorithm,omitempty"`
+	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
 
 	// The hash value of the content.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ModuleInitParameters struct {
+
+	// A module_link block as defined below.
+	ModuleLink []ModuleLinkInitParameters `json:"moduleLink,omitempty" tf:"module_link,omitempty"`
+}
+
+type ModuleLinkInitParameters struct {
+
+	// A hash block as defined below.
+	Hash []HashInitParameters `json:"hash,omitempty" tf:"hash,omitempty"`
+
+	// The URI of the module content (zip or nupkg).
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ModuleLinkObservation struct {
@@ -45,12 +67,10 @@ type ModuleLinkObservation struct {
 type ModuleLinkParameters struct {
 
 	// A hash block as defined below.
-	// +kubebuilder:validation:Optional
 	Hash []HashParameters `json:"hash,omitempty" tf:"hash,omitempty"`
 
 	// The URI of the module content (zip or nupkg).
-	// +kubebuilder:validation:Required
-	URI *string `json:"uri" tf:"uri,omitempty"`
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ModuleObservation struct {
@@ -84,7 +104,6 @@ type ModuleParameters struct {
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// A module_link block as defined below.
-	// +kubebuilder:validation:Optional
 	ModuleLink []ModuleLinkParameters `json:"moduleLink,omitempty" tf:"module_link,omitempty"`
 
 	// The name of the resource group in which the Module is created. Changing this forces a new resource to be created.
@@ -105,6 +124,10 @@ type ModuleParameters struct {
 type ModuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ModuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ModuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // ModuleStatus defines the observed state of Module.
@@ -125,7 +148,7 @@ type ModuleStatus struct {
 type Module struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.moduleLink)",message="moduleLink is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.moduleLink) || has(self.initProvider.moduleLink)",message="moduleLink is a required parameter"
 	Spec   ModuleSpec   `json:"spec"`
 	Status ModuleStatus `json:"status,omitempty"`
 }

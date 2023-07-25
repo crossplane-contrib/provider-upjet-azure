@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: monitoractiongroups.insights.azure.upbound.io
 spec:
   group: insights.azure.upbound.io
@@ -80,9 +80,6 @@ spec:
                         useCommonAlertSchema:
                           description: Enables or disables the common alert schema.
                           type: boolean
-                      required:
-                      - name
-                      - roleId
                       type: object
                     type: array
                   automationRunbookReceiver:
@@ -113,13 +110,6 @@ spec:
                           description: The resource id for webhook linked to this
                             runbook.
                           type: string
-                      required:
-                      - automationAccountId
-                      - isGlobalRunbook
-                      - name
-                      - runbookName
-                      - serviceUri
-                      - webhookResourceId
                       type: object
                     type: array
                   azureAppPushReceiver:
@@ -135,9 +125,6 @@ spec:
                         name:
                           description: The name of the Azure app push receiver.
                           type: string
-                      required:
-                      - emailAddress
-                      - name
                       type: object
                     type: array
                   azureFunctionReceiver:
@@ -161,11 +148,6 @@ spec:
                         useCommonAlertSchema:
                           description: Enables or disables the common alert schema.
                           type: boolean
-                      required:
-                      - functionAppResourceId
-                      - functionName
-                      - httpTriggerUrl
-                      - name
                       type: object
                     type: array
                   emailReceiver:
@@ -183,9 +165,6 @@ spec:
                         useCommonAlertSchema:
                           description: Enables or disables the common alert schema.
                           type: boolean
-                      required:
-                      - emailAddress
-                      - name
                       type: object
                     type: array
                   enabled:
@@ -223,8 +202,6 @@ spec:
                         useCommonAlertSchema:
                           description: Indicates whether to use common alert schema.
                           type: boolean
-                      required:
-                      - name
                       type: object
                     type: array
                   itsmReceiver:
@@ -251,12 +228,6 @@ spec:
                             this connection is defined. Format is <subscription id>|<workspace
                             id>, for example 00000000-0000-0000-0000-000000000000|00000000-0000-0000-0000-000000000000.
                           type: string
-                      required:
-                      - connectionId
-                      - name
-                      - region
-                      - ticketConfiguration
-                      - workspaceId
                       type: object
                     type: array
                   location:
@@ -281,10 +252,6 @@ spec:
                         useCommonAlertSchema:
                           description: Enables or disables the common alert schema.
                           type: boolean
-                      required:
-                      - callbackUrl
-                      - name
-                      - resourceId
                       type: object
                     type: array
                   resourceGroupName:
@@ -386,10 +353,6 @@ spec:
                         phoneNumber:
                           description: The phone number of the SMS receiver.
                           type: string
-                      required:
-                      - countryCode
-                      - name
-                      - phoneNumber
                       type: object
                     type: array
                   tags:
@@ -410,10 +373,6 @@ spec:
                         phoneNumber:
                           description: The phone number of the voice receiver.
                           type: string
-                      required:
-                      - countryCode
-                      - name
-                      - phoneNumber
                       type: object
                     type: array
                   webhookReceiver:
@@ -434,8 +393,6 @@ spec:
                               tenantId:
                                 description: The tenant id for AAD auth.
                                 type: string
-                            required:
-                            - objectId
                             type: object
                           type: array
                         name:
@@ -449,9 +406,273 @@ spec:
                         useCommonAlertSchema:
                           description: Enables or disables the common alert schema.
                           type: boolean
-                      required:
-                      - name
-                      - serviceUri
+                      type: object
+                    type: array
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  armRoleReceiver:
+                    description: One or more arm_role_receiver blocks as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: The name of the ARM role receiver.
+                          type: string
+                        roleId:
+                          description: The arm role id.
+                          type: string
+                        useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
+                          type: boolean
+                      type: object
+                    type: array
+                  automationRunbookReceiver:
+                    description: One or more automation_runbook_receiver blocks as
+                      defined below.
+                    items:
+                      properties:
+                        automationAccountId:
+                          description: The automation account ID which holds this
+                            runbook and authenticates to Azure resources.
+                          type: string
+                        isGlobalRunbook:
+                          description: Indicates whether this instance is global runbook.
+                          type: boolean
+                        name:
+                          description: The name of the automation runbook receiver.
+                          type: string
+                        runbookName:
+                          description: The name for this runbook.
+                          type: string
+                        serviceUri:
+                          description: The URI where webhooks should be sent.
+                          type: string
+                        useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
+                          type: boolean
+                        webhookResourceId:
+                          description: The resource id for webhook linked to this
+                            runbook.
+                          type: string
+                      type: object
+                    type: array
+                  azureAppPushReceiver:
+                    description: One or more azure_app_push_receiver blocks as defined
+                      below.
+                    items:
+                      properties:
+                        emailAddress:
+                          description: The email address of the user signed into the
+                            mobile app who will receive push notifications from this
+                            receiver.
+                          type: string
+                        name:
+                          description: The name of the Azure app push receiver.
+                          type: string
+                      type: object
+                    type: array
+                  azureFunctionReceiver:
+                    description: One or more azure_function_receiver blocks as defined
+                      below.
+                    items:
+                      properties:
+                        functionAppResourceId:
+                          description: The Azure resource ID of the function app.
+                          type: string
+                        functionName:
+                          description: The function name in the function app.
+                          type: string
+                        httpTriggerUrl:
+                          description: The HTTP trigger url where HTTP request sent
+                            to.
+                          type: string
+                        name:
+                          description: The name of the Azure Function receiver.
+                          type: string
+                        useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
+                          type: boolean
+                      type: object
+                    type: array
+                  emailReceiver:
+                    description: One or more email_receiver blocks as defined below.
+                    items:
+                      properties:
+                        emailAddress:
+                          description: The email address of this receiver.
+                          type: string
+                        name:
+                          description: The name of the email receiver. Names must
+                            be unique (case-insensitive) across all receivers within
+                            an action group.
+                          type: string
+                        useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
+                          type: boolean
+                      type: object
+                    type: array
+                  enabled:
+                    description: Whether this action group is enabled. If an action
+                      group is not enabled, then none of its receivers will receive
+                      communications. Defaults to true.
+                    type: boolean
+                  eventHubReceiver:
+                    description: One or more event_hub_receiver blocks as defined
+                      below.
+                    items:
+                      properties:
+                        eventHubId:
+                          description: The resource ID of the respective Event Hub.
+                          type: string
+                        eventHubName:
+                          description: The name of the specific Event Hub queue.
+                          type: string
+                        eventHubNamespace:
+                          description: The namespace name of the Event Hub.
+                          type: string
+                        name:
+                          description: The name of the EventHub Receiver, must be
+                            unique within action group.
+                          type: string
+                        subscriptionId:
+                          description: The ID for the subscription containing this
+                            Event Hub. Default to the subscription ID of the Action
+                            Group.
+                          type: string
+                        tenantId:
+                          description: The Tenant ID for the subscription containing
+                            this Event Hub.
+                          type: string
+                        useCommonAlertSchema:
+                          description: Indicates whether to use common alert schema.
+                          type: boolean
+                      type: object
+                    type: array
+                  itsmReceiver:
+                    description: One or more itsm_receiver blocks as defined below.
+                    items:
+                      properties:
+                        connectionId:
+                          description: The unique connection identifier of the ITSM
+                            connection.
+                          type: string
+                        name:
+                          description: The name of the ITSM receiver.
+                          type: string
+                        region:
+                          description: The region of the workspace.
+                          type: string
+                        ticketConfiguration:
+                          description: A JSON blob for the configurations of the ITSM
+                            action. CreateMultipleWorkItems option will be part of
+                            this blob as well.
+                          type: string
+                        workspaceId:
+                          description: The Azure Log Analytics workspace ID where
+                            this connection is defined. Format is <subscription id>|<workspace
+                            id>, for example 00000000-0000-0000-0000-000000000000|00000000-0000-0000-0000-000000000000.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: The Azure Region where the Action Group should exist.
+                      Changing this forces a new Action Group to be created. Defaults
+                      to global.
+                    type: string
+                  logicAppReceiver:
+                    description: One or more logic_app_receiver blocks as defined
+                      below.
+                    items:
+                      properties:
+                        callbackUrl:
+                          description: The callback url where HTTP request sent to.
+                          type: string
+                        name:
+                          description: The name of the logic app receiver.
+                          type: string
+                        resourceId:
+                          description: The Azure resource ID of the logic app.
+                          type: string
+                        useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
+                          type: boolean
+                      type: object
+                    type: array
+                  shortName:
+                    description: The short name of the action group. This will be
+                      used in SMS messages.
+                    type: string
+                  smsReceiver:
+                    description: One or more sms_receiver blocks as defined below.
+                    items:
+                      properties:
+                        countryCode:
+                          description: The country code of the SMS receiver.
+                          type: string
+                        name:
+                          description: The name of the SMS receiver. Names must be
+                            unique (case-insensitive) across all receivers within
+                            an action group.
+                          type: string
+                        phoneNumber:
+                          description: The phone number of the SMS receiver.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  voiceReceiver:
+                    description: One or more voice_receiver blocks as defined below.
+                    items:
+                      properties:
+                        countryCode:
+                          description: The country code of the voice receiver.
+                          type: string
+                        name:
+                          description: The name of the voice receiver.
+                          type: string
+                        phoneNumber:
+                          description: The phone number of the voice receiver.
+                          type: string
+                      type: object
+                    type: array
+                  webhookReceiver:
+                    description: One or more webhook_receiver blocks as defined below.
+                    items:
+                      properties:
+                        aadAuth:
+                          description: The aad_auth block as defined below
+                          items:
+                            properties:
+                              identifierUri:
+                                description: The identifier URI for AAD auth.
+                                type: string
+                              objectId:
+                                description: The webhook application object Id for
+                                  AAD auth.
+                                type: string
+                              tenantId:
+                                description: The tenant id for AAD auth.
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          description: The name of the webhook receiver. Names must
+                            be unique (case-insensitive) across all receivers within
+                            an action group.
+                          type: string
+                        serviceUri:
+                          description: The URI where webhooks should be sent.
+                          type: string
+                        useCommonAlertSchema:
+                          description: Enables or disables the common alert schema.
+                          type: boolean
                       type: object
                     type: array
                 type: object
@@ -655,7 +876,8 @@ spec:
             x-kubernetes-validations:
             - message: shortName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.shortName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.shortName)
+                || has(self.initProvider.shortName)'
           status:
             description: MonitorActionGroupStatus defines the observed state of MonitorActionGroup.
             properties:

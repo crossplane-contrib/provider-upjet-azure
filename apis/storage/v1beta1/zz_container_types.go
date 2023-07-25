@@ -49,11 +49,9 @@ type ContainerObservation struct {
 type ContainerParameters struct {
 
 	// The Access Level configured for this Container. Possible values are blob, container or private. Defaults to private.
-	// +kubebuilder:validation:Optional
 	ContainerAccessType *string `json:"containerAccessType,omitempty" tf:"container_access_type,omitempty"`
 
 	// A mapping of MetaData for this Container. All metadata keys should be lowercase.
-	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the Storage Account where the Container should be created. Changing this forces a new resource to be created.
@@ -77,14 +75,6 @@ type ContainerSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider ContainerInitParameters `json:"initProvider,omitempty"`
 }
 

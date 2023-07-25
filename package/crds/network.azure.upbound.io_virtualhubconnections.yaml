@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: virtualhubconnections.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -357,6 +357,60 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  internetSecurityEnabled:
+                    description: Should Internet Security be enabled to secure internet
+                      traffic? Defaults to false.
+                    type: boolean
+                  routing:
+                    description: A routing block as defined below.
+                    items:
+                      properties:
+                        propagatedRouteTable:
+                          description: A propagated_route_table block as defined below.
+                          items:
+                            properties:
+                              labels:
+                                description: The list of labels to assign to this
+                                  route table.
+                                items:
+                                  type: string
+                                type: array
+                              routeTableIds:
+                                description: A list of Route Table IDs to associated
+                                  with this Virtual Hub Connection.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        staticVnetRoute:
+                          description: A static_vnet_route block as defined below.
+                          items:
+                            properties:
+                              addressPrefixes:
+                                description: A list of CIDR Ranges which should be
+                                  used as Address Prefixes.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name which should be used for this
+                                  Static Route.
+                                type: string
+                              nextHopIpAddress:
+                                description: The IP Address which should be used for
+                                  the Next Hop.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:

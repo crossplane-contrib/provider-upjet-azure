@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CreatorInitParameters struct {
+
+	// The Azure Region where the Azure Maps Creator should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The storage units to be allocated. Integer values from 1 to 100, inclusive.
+	StorageUnits *float64 `json:"storageUnits,omitempty" tf:"storage_units,omitempty"`
+
+	// A mapping of tags which should be assigned to the Azure Maps Creator.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type CreatorObservation struct {
 
 	// The ID of the Azure Maps Creator.
@@ -34,7 +46,6 @@ type CreatorObservation struct {
 type CreatorParameters struct {
 
 	// The Azure Region where the Azure Maps Creator should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Azure Maps Creator. Changing this forces a new resource to be created.
@@ -52,11 +63,9 @@ type CreatorParameters struct {
 	MapsAccountIDSelector *v1.Selector `json:"mapsAccountIdSelector,omitempty" tf:"-"`
 
 	// The storage units to be allocated. Integer values from 1 to 100, inclusive.
-	// +kubebuilder:validation:Optional
 	StorageUnits *float64 `json:"storageUnits,omitempty" tf:"storage_units,omitempty"`
 
 	// A mapping of tags which should be assigned to the Azure Maps Creator.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -64,6 +73,10 @@ type CreatorParameters struct {
 type CreatorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CreatorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CreatorInitParameters `json:"initProvider,omitempty"`
 }
 
 // CreatorStatus defines the observed state of Creator.
@@ -84,8 +97,8 @@ type CreatorStatus struct {
 type Creator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageUnits)",message="storageUnits is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageUnits) || has(self.initProvider.storageUnits)",message="storageUnits is a required parameter"
 	Spec   CreatorSpec   `json:"spec"`
 	Status CreatorStatus `json:"status,omitempty"`
 }

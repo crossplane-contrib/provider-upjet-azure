@@ -68,7 +68,6 @@ type SpringCloudAppRedisAssociationParameters struct {
 	RedisCacheIDSelector *v1.Selector `json:"redisCacheIdSelector,omitempty" tf:"-"`
 
 	// Should SSL be used when connecting to Redis? Defaults to true.
-	// +kubebuilder:validation:Optional
 	SSLEnabled *bool `json:"sslEnabled,omitempty" tf:"ssl_enabled,omitempty"`
 
 	// Specifies the Spring Cloud Application resource ID in which the Association is created. Changing this forces a new resource to be created.
@@ -93,14 +92,6 @@ type SpringCloudAppRedisAssociationSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider SpringCloudAppRedisAssociationInitParameters `json:"initProvider,omitempty"`
 }
 

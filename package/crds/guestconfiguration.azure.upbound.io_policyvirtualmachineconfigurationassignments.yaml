@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: policyvirtualmachineconfigurationassignments.guestconfiguration.azure.upbound.io
 spec:
   group: guestconfiguration.azure.upbound.io
@@ -100,9 +100,6 @@ spec:
                                 description: The value to check the configuration
                                   parameter with.
                                 type: string
-                            required:
-                            - name
-                            - value
                             type: object
                           type: array
                         version:
@@ -196,6 +193,56 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  configuration:
+                    description: A configuration block as defined below.
+                    items:
+                      properties:
+                        assignmentType:
+                          description: The assignment type for the Guest Configuration
+                            Assignment. Possible values are Audit, ApplyAndAutoCorrect,
+                            ApplyAndMonitor and DeployAndAutoCorrect.
+                          type: string
+                        contentHash:
+                          description: The content hash for the Guest Configuration
+                            package.
+                          type: string
+                        contentUri:
+                          description: The content URI where the Guest Configuration
+                            package is stored.
+                          type: string
+                        parameter:
+                          description: One or more parameter blocks as defined below
+                            which define what configuration parameters and values
+                            against.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the configuration parameter
+                                  to check.
+                                type: string
+                              value:
+                                description: The value to check the configuration
+                                  parameter with.
+                                type: string
+                            type: object
+                          type: array
+                        version:
+                          description: The version of the Guest Configuration that
+                            will be assigned in this Guest Configuration Assignment.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: The Azure location where the Policy Virtual Machine
+                      Configuration Assignment should exist. Changing this forces
+                      a new resource to be created.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -397,10 +444,12 @@ spec:
             x-kubernetes-validations:
             - message: configuration is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.configuration)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.configuration)
+                || has(self.initProvider.configuration)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
           status:
             description: PolicyVirtualMachineConfigurationAssignmentStatus defines
               the observed state of PolicyVirtualMachineConfigurationAssignment.

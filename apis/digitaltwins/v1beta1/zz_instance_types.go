@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IdentityInitParameters struct {
+
+	// The type of Managed Service Identity that is configured on this Digital Twins instance. The only possible value is SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type IdentityObservation struct {
 
 	// The ID of the Digital Twins instance.
@@ -28,8 +34,19 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// The type of Managed Service Identity that is configured on this Digital Twins instance. The only possible value is SystemAssigned.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type InstanceInitParameters struct {
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where the Digital Twins instance should exist. Changing this forces a new Digital Twins instance to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags which should be assigned to the Digital Twins instance.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type InstanceObservation struct {
@@ -56,11 +73,9 @@ type InstanceObservation struct {
 type InstanceParameters struct {
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Digital Twins instance should exist. Changing this forces a new Digital Twins instance to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Digital Twins instance should exist. Changing this forces a new Digital Twins instance to be created.
@@ -77,7 +92,6 @@ type InstanceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Digital Twins instance.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -85,6 +99,10 @@ type InstanceParameters struct {
 type InstanceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     InstanceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider InstanceInitParameters `json:"initProvider,omitempty"`
 }
 
 // InstanceStatus defines the observed state of Instance.
@@ -105,7 +123,7 @@ type InstanceStatus struct {
 type Instance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   InstanceSpec   `json:"spec"`
 	Status InstanceStatus `json:"status,omitempty"`
 }

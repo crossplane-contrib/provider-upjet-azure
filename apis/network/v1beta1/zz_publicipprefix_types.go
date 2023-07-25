@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PublicIPPrefixInitParameters struct {
+
+	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created. Default is IPv4.
+	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the number of bits of the prefix. The value can be set between 0 (4,294,967,296 addresses) and 31 (2 addresses). Defaults to 28(16 addresses). Changing this forces a new resource to be created.
+	PrefixLength *float64 `json:"prefixLength,omitempty" tf:"prefix_length,omitempty"`
+
+	// The SKU of the Public IP Prefix. Accepted values are Standard. Defaults to Standard. Changing this forces a new resource to be created.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies a list of Availability Zones in which this Public IP Prefix should be located. Changing this forces a new Public IP Prefix to be created.
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
+}
+
 type PublicIPPrefixObservation struct {
 
 	// The Public IP Prefix ID.
@@ -46,15 +67,12 @@ type PublicIPPrefixObservation struct {
 type PublicIPPrefixParameters struct {
 
 	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created. Default is IPv4.
-	// +kubebuilder:validation:Optional
 	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the number of bits of the prefix. The value can be set between 0 (4,294,967,296 addresses) and 31 (2 addresses). Defaults to 28(16 addresses). Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	PrefixLength *float64 `json:"prefixLength,omitempty" tf:"prefix_length,omitempty"`
 
 	// The name of the resource group in which to create the Public IP Prefix. Changing this forces a new resource to be created.
@@ -71,15 +89,12 @@ type PublicIPPrefixParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the Public IP Prefix. Accepted values are Standard. Defaults to Standard. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Public IP Prefix should be located. Changing this forces a new Public IP Prefix to be created.
-	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -87,6 +102,10 @@ type PublicIPPrefixParameters struct {
 type PublicIPPrefixSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PublicIPPrefixParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PublicIPPrefixInitParameters `json:"initProvider,omitempty"`
 }
 
 // PublicIPPrefixStatus defines the observed state of PublicIPPrefix.
@@ -107,7 +126,7 @@ type PublicIPPrefixStatus struct {
 type PublicIPPrefix struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   PublicIPPrefixSpec   `json:"spec"`
 	Status PublicIPPrefixStatus `json:"status,omitempty"`
 }

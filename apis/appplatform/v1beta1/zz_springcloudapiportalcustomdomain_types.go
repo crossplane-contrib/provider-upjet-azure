@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SpringCloudAPIPortalCustomDomainInitParameters struct {
+
+	// The name which should be used for this Spring Cloud API Portal Domain. Changing this forces a new Spring Cloud API Portal Domain to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud API Portal Domain.
+	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+}
+
 type SpringCloudAPIPortalCustomDomainObservation struct {
 
 	// The ID of the Spring Cloud API Portal Domain.
@@ -31,7 +40,6 @@ type SpringCloudAPIPortalCustomDomainObservation struct {
 type SpringCloudAPIPortalCustomDomainParameters struct {
 
 	// The name which should be used for this Spring Cloud API Portal Domain. Changing this forces a new Spring Cloud API Portal Domain to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Spring Cloud API Portal. Changing this forces a new Spring Cloud API Portal Domain to be created.
@@ -49,7 +57,6 @@ type SpringCloudAPIPortalCustomDomainParameters struct {
 	SpringCloudAPIPortalIDSelector *v1.Selector `json:"springCloudApiPortalIdSelector,omitempty" tf:"-"`
 
 	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud API Portal Domain.
-	// +kubebuilder:validation:Optional
 	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
 }
 
@@ -57,6 +64,10 @@ type SpringCloudAPIPortalCustomDomainParameters struct {
 type SpringCloudAPIPortalCustomDomainSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudAPIPortalCustomDomainParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SpringCloudAPIPortalCustomDomainInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudAPIPortalCustomDomainStatus defines the observed state of SpringCloudAPIPortalCustomDomain.
@@ -77,7 +88,7 @@ type SpringCloudAPIPortalCustomDomainStatus struct {
 type SpringCloudAPIPortalCustomDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   SpringCloudAPIPortalCustomDomainSpec   `json:"spec"`
 	Status SpringCloudAPIPortalCustomDomainStatus `json:"status,omitempty"`
 }

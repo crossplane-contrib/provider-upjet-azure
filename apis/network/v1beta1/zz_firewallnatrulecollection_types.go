@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FirewallNATRuleCollectionInitParameters struct {
+
+	// Specifies the action the rule will apply to matching traffic. Possible values are Dnat and Snat.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Specifies the priority of the rule collection. Possible values are between 100 - 65000.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// One or more rule blocks as defined below.
+	Rule []FirewallNATRuleCollectionRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
 type FirewallNATRuleCollectionObservation struct {
 
 	// Specifies the action the rule will apply to matching traffic. Possible values are Dnat and Snat.
@@ -36,7 +48,6 @@ type FirewallNATRuleCollectionObservation struct {
 type FirewallNATRuleCollectionParameters struct {
 
 	// Specifies the action the rule will apply to matching traffic. Possible values are Dnat and Snat.
-	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Specifies the name of the Firewall in which the NAT Rule Collection should be created. Changing this forces a new resource to be created.
@@ -53,7 +64,6 @@ type FirewallNATRuleCollectionParameters struct {
 	AzureFirewallNameSelector *v1.Selector `json:"azureFirewallNameSelector,omitempty" tf:"-"`
 
 	// Specifies the priority of the rule collection. Possible values are between 100 - 65000.
-	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Specifies the name of the Resource Group in which the Firewall exists. Changing this forces a new resource to be created.
@@ -70,8 +80,37 @@ type FirewallNATRuleCollectionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more rule blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Rule []FirewallNATRuleCollectionRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+}
+
+type FirewallNATRuleCollectionRuleInitParameters struct {
+
+	// Specifies a description for the rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A list of destination IP addresses and/or IP ranges.
+	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
+
+	// A list of destination ports.
+	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
+
+	// Specifies the name of the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of protocols. Possible values are Any, ICMP, TCP and UDP. If action is Dnat, protocols can only be TCP and UDP.
+	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+
+	// A list of source IP addresses and/or IP ranges.
+	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
+
+	// A list of source IP Group IDs for the rule.
+	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
+
+	// The address of the service behind the Firewall.
+	TranslatedAddress *string `json:"translatedAddress,omitempty" tf:"translated_address,omitempty"`
+
+	// The port of the service behind the Firewall.
+	TranslatedPort *string `json:"translatedPort,omitempty" tf:"translated_port,omitempty"`
 }
 
 type FirewallNATRuleCollectionRuleObservation struct {
@@ -107,46 +146,41 @@ type FirewallNATRuleCollectionRuleObservation struct {
 type FirewallNATRuleCollectionRuleParameters struct {
 
 	// Specifies a description for the rule.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A list of destination IP addresses and/or IP ranges.
-	// +kubebuilder:validation:Required
-	DestinationAddresses []*string `json:"destinationAddresses" tf:"destination_addresses,omitempty"`
+	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
 	// A list of destination ports.
-	// +kubebuilder:validation:Required
-	DestinationPorts []*string `json:"destinationPorts" tf:"destination_ports,omitempty"`
+	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
 
 	// Specifies the name of the rule.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of protocols. Possible values are Any, ICMP, TCP and UDP. If action is Dnat, protocols can only be TCP and UDP.
-	// +kubebuilder:validation:Required
-	Protocols []*string `json:"protocols" tf:"protocols,omitempty"`
+	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// A list of source IP addresses and/or IP ranges.
-	// +kubebuilder:validation:Optional
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
 	// A list of source IP Group IDs for the rule.
-	// +kubebuilder:validation:Optional
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 
 	// The address of the service behind the Firewall.
-	// +kubebuilder:validation:Required
-	TranslatedAddress *string `json:"translatedAddress" tf:"translated_address,omitempty"`
+	TranslatedAddress *string `json:"translatedAddress,omitempty" tf:"translated_address,omitempty"`
 
 	// The port of the service behind the Firewall.
-	// +kubebuilder:validation:Required
-	TranslatedPort *string `json:"translatedPort" tf:"translated_port,omitempty"`
+	TranslatedPort *string `json:"translatedPort,omitempty" tf:"translated_port,omitempty"`
 }
 
 // FirewallNATRuleCollectionSpec defines the desired state of FirewallNATRuleCollection
 type FirewallNATRuleCollectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FirewallNATRuleCollectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FirewallNATRuleCollectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // FirewallNATRuleCollectionStatus defines the observed state of FirewallNATRuleCollection.
@@ -167,9 +201,9 @@ type FirewallNATRuleCollectionStatus struct {
 type FirewallNATRuleCollection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action)",message="action is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.priority)",message="priority is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule)",message="rule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.action) || has(self.initProvider.action)",message="action is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.priority) || has(self.initProvider.priority)",message="priority is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rule) || has(self.initProvider.rule)",message="rule is a required parameter"
 	Spec   FirewallNATRuleCollectionSpec   `json:"spec"`
 	Status FirewallNATRuleCollectionStatus `json:"status,omitempty"`
 }

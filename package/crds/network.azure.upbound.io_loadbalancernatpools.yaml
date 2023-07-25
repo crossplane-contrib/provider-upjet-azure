@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: loadbalancernatpools.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -261,6 +261,49 @@ spec:
                     description: Is TCP Reset enabled for this Load Balancer Rule?
                     type: boolean
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  backendPort:
+                    description: The port used for the internal endpoint. Possible
+                      values range between 1 and 65535, inclusive.
+                    type: number
+                  floatingIpEnabled:
+                    description: Are the floating IPs enabled for this Load Balancer
+                      Rule? A floating IP is reassigned to a secondary server in case
+                      the primary server fails. Required to configure a SQL AlwaysOn
+                      Availability Group.
+                    type: boolean
+                  frontendIpConfigurationName:
+                    description: The name of the frontend IP configuration exposing
+                      this rule.
+                    type: string
+                  frontendPortEnd:
+                    description: The last port number in the range of external ports
+                      that will be used to provide Inbound NAT to NICs associated
+                      with this Load Balancer. Possible values range between 1 and
+                      65534, inclusive.
+                    type: number
+                  frontendPortStart:
+                    description: The first port number in the range of external ports
+                      that will be used to provide Inbound NAT to NICs associated
+                      with this Load Balancer. Possible values range between 1 and
+                      65534, inclusive.
+                    type: number
+                  idleTimeoutInMinutes:
+                    description: Specifies the idle timeout in minutes for TCP connections.
+                      Valid values are between 4 and 30. Defaults to 4.
+                    type: number
+                  protocol:
+                    description: The transport protocol for the external endpoint.
+                      Possible values are All, Tcp and Udp.
+                    type: string
+                  tcpResetEnabled:
+                    description: Is TCP Reset enabled for this Load Balancer Rule?
+                    type: boolean
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -461,19 +504,24 @@ spec:
             x-kubernetes-validations:
             - message: backendPort is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.backendPort)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.backendPort)
+                || has(self.initProvider.backendPort)'
             - message: frontendIpConfigurationName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.frontendIpConfigurationName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.frontendIpConfigurationName)
+                || has(self.initProvider.frontendIpConfigurationName)'
             - message: frontendPortEnd is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.frontendPortEnd)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.frontendPortEnd)
+                || has(self.initProvider.frontendPortEnd)'
             - message: frontendPortStart is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.frontendPortStart)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.frontendPortStart)
+                || has(self.initProvider.frontendPortStart)'
             - message: protocol is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)
+                || has(self.initProvider.protocol)'
           status:
             description: LoadBalancerNatPoolStatus defines the observed state of LoadBalancerNatPool.
             properties:

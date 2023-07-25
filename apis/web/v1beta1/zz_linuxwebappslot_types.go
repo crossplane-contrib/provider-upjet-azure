@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ApplicationLogsAzureBlobStorageInitParameters struct {
+
+	// The level at which to log. Possible values include Error, Warning, Information, Verbose and Off. NOTE: this field is not available for http_logs
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// The retention period in days. A values of 0 means no retention.
+	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
+
+	// SAS url to an Azure blob container with read/write/list/delete permissions.
+	SASURL *string `json:"sasUrl,omitempty" tf:"sas_url,omitempty"`
+}
+
 type ApplicationLogsAzureBlobStorageObservation struct {
 
 	// The level at which to log. Possible values include Error, Warning, Information, Verbose and Off. NOTE: this field is not available for http_logs
@@ -28,16 +40,22 @@ type ApplicationLogsAzureBlobStorageObservation struct {
 type ApplicationLogsAzureBlobStorageParameters struct {
 
 	// The level at which to log. Possible values include Error, Warning, Information, Verbose and Off. NOTE: this field is not available for http_logs
-	// +kubebuilder:validation:Required
-	Level *string `json:"level" tf:"level,omitempty"`
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
 	// The retention period in days. A values of 0 means no retention.
-	// +kubebuilder:validation:Required
-	RetentionInDays *float64 `json:"retentionInDays" tf:"retention_in_days,omitempty"`
+	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// SAS url to an Azure blob container with read/write/list/delete permissions.
-	// +kubebuilder:validation:Required
-	SASURL *string `json:"sasUrl" tf:"sas_url,omitempty"`
+	SASURL *string `json:"sasUrl,omitempty" tf:"sas_url,omitempty"`
+}
+
+type AutoHealSettingActionInitParameters struct {
+
+	// Predefined action to be taken to an Auto Heal trigger. Possible values include: Recycle.
+	ActionType *string `json:"actionType,omitempty" tf:"action_type,omitempty"`
+
+	// The minimum amount of time in hh:mm:ss the Linux Web App must have been running before the defined action will be run in the event of a trigger.
+	MinimumProcessExecutionTime *string `json:"minimumProcessExecutionTime,omitempty" tf:"minimum_process_execution_time,omitempty"`
 }
 
 type AutoHealSettingActionObservation struct {
@@ -52,12 +70,22 @@ type AutoHealSettingActionObservation struct {
 type AutoHealSettingActionParameters struct {
 
 	// Predefined action to be taken to an Auto Heal trigger. Possible values include: Recycle.
-	// +kubebuilder:validation:Required
-	ActionType *string `json:"actionType" tf:"action_type,omitempty"`
+	ActionType *string `json:"actionType,omitempty" tf:"action_type,omitempty"`
 
 	// The minimum amount of time in hh:mm:ss the Linux Web App must have been running before the defined action will be run in the event of a trigger.
-	// +kubebuilder:validation:Optional
 	MinimumProcessExecutionTime *string `json:"minimumProcessExecutionTime,omitempty" tf:"minimum_process_execution_time,omitempty"`
+}
+
+type AutoHealSettingTriggerInitParameters struct {
+
+	// A requests block as defined above.
+	Requests []TriggerRequestsInitParameters `json:"requests,omitempty" tf:"requests,omitempty"`
+
+	// One or more slow_request blocks as defined above.
+	SlowRequest []TriggerSlowRequestInitParameters `json:"slowRequest,omitempty" tf:"slow_request,omitempty"`
+
+	// One or more status_code blocks as defined above.
+	StatusCode []TriggerStatusCodeInitParameters `json:"statusCode,omitempty" tf:"status_code,omitempty"`
 }
 
 type AutoHealSettingTriggerObservation struct {
@@ -75,16 +103,22 @@ type AutoHealSettingTriggerObservation struct {
 type AutoHealSettingTriggerParameters struct {
 
 	// A requests block as defined above.
-	// +kubebuilder:validation:Optional
 	Requests []TriggerRequestsParameters `json:"requests,omitempty" tf:"requests,omitempty"`
 
 	// One or more slow_request blocks as defined above.
-	// +kubebuilder:validation:Optional
 	SlowRequest []TriggerSlowRequestParameters `json:"slowRequest,omitempty" tf:"slow_request,omitempty"`
 
 	// One or more status_code blocks as defined above.
-	// +kubebuilder:validation:Optional
 	StatusCode []TriggerStatusCodeParameters `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+}
+
+type HTTPLogsFileSystemInitParameters struct {
+
+	// The retention period in days. A values of 0 means no retention.
+	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
+
+	// The maximum size in megabytes that log files can use.
+	RetentionInMb *float64 `json:"retentionInMb,omitempty" tf:"retention_in_mb,omitempty"`
 }
 
 type HTTPLogsFileSystemObservation struct {
@@ -99,12 +133,25 @@ type HTTPLogsFileSystemObservation struct {
 type HTTPLogsFileSystemParameters struct {
 
 	// The retention period in days. A values of 0 means no retention.
-	// +kubebuilder:validation:Required
-	RetentionInDays *float64 `json:"retentionInDays" tf:"retention_in_days,omitempty"`
+	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// The maximum size in megabytes that log files can use.
-	// +kubebuilder:validation:Required
-	RetentionInMb *float64 `json:"retentionInMb" tf:"retention_in_mb,omitempty"`
+	RetentionInMb *float64 `json:"retentionInMb,omitempty" tf:"retention_in_mb,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsActiveDirectoryInitParameters struct {
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the Client to use to authenticate with Azure Active Directory.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 }
 
 type LinuxWebAppSlotAuthSettingsActiveDirectoryObservation struct {
@@ -126,23 +173,34 @@ type LinuxWebAppSlotAuthSettingsActiveDirectoryParameters struct {
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
 	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
-	// +kubebuilder:validation:Optional
 	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with Azure Active Directory.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
-	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
-	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsFacebookInitParameters struct {
+
+	// The App ID of the Facebook app used for login.
+	// The App ID of the Facebook app used for login.
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
+	// The app setting name that contains the app_secret value used for Facebook Login.
+	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
+	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, "wl.basic" is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
 type LinuxWebAppSlotAuthSettingsFacebookObservation struct {
@@ -164,22 +222,33 @@ type LinuxWebAppSlotAuthSettingsFacebookParameters struct {
 
 	// The App ID of the Facebook app used for login.
 	// The App ID of the Facebook app used for login.
-	// +kubebuilder:validation:Required
-	AppID *string `json:"appId" tf:"app_id,omitempty"`
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
 	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
 	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
-	// +kubebuilder:validation:Optional
 	AppSecretSecretRef *v1.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
 	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
-	// +kubebuilder:validation:Optional
 	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
 
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, "wl.basic" is used as the default scope.
 	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
-	// +kubebuilder:validation:Optional
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsGithubInitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the GitHub app used for login.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, "wl.basic" is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
@@ -202,22 +271,33 @@ type LinuxWebAppSlotAuthSettingsGithubParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the GitHub app used for login.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
-	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
-	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, "wl.basic" is used as the default scope.
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
-	// +kubebuilder:validation:Optional
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsGoogleInitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Google web application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, "wl.basic" is used as the default scope.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
@@ -240,22 +320,90 @@ type LinuxWebAppSlotAuthSettingsGoogleParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Google web application.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
-	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
-	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, "wl.basic" is used as the default scope.
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
-	// +kubebuilder:validation:Optional
+	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsInitParameters struct {
+
+	// An active_directory block as defined above.
+	ActiveDirectory []LinuxWebAppSlotAuthSettingsActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
+
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
+	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
+
+	// The default authentication provider to use when multiple providers are configured. Possible values include: BuiltInAuthenticationProviderAzureActiveDirectory, BuiltInAuthenticationProviderFacebook, BuiltInAuthenticationProviderGoogle, BuiltInAuthenticationProviderMicrosoftAccount, BuiltInAuthenticationProviderTwitter, BuiltInAuthenticationProviderGithub
+	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
+	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
+
+	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
+	// Should the Authentication / Authorization feature be enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A facebook block as defined below.
+	Facebook []LinuxWebAppSlotAuthSettingsFacebookInitParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
+
+	// A github block as defined below.
+	Github []LinuxWebAppSlotAuthSettingsGithubInitParameters `json:"github,omitempty" tf:"github,omitempty"`
+
+	// A google block as defined below.
+	Google []LinuxWebAppSlotAuthSettingsGoogleInitParameters `json:"google,omitempty" tf:"google,omitempty"`
+
+	// The OpenID Connect Issuer URI that represents the entity that issues access tokens for this Linux Web App.
+	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
+	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
+
+	// A microsoft block as defined below.
+	Microsoft []LinuxWebAppSlotAuthSettingsMicrosoftInitParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
+
+	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
+	// The RuntimeVersion of the Authentication / Authorization feature in use.
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
+
+	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
+	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
+	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+
+	// A twitter block as defined below.
+	Twitter []LinuxWebAppSlotAuthSettingsTwitterInitParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
+
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
+	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
+	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsMicrosoftInitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, "wl.basic" is used as the default scope.
+	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
@@ -278,22 +426,18 @@ type LinuxWebAppSlotAuthSettingsMicrosoftParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
-	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
-	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, "wl.basic" is used as the default scope.
 	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
-	// +kubebuilder:validation:Optional
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
@@ -357,73 +501,69 @@ type LinuxWebAppSlotAuthSettingsObservation struct {
 type LinuxWebAppSlotAuthSettingsParameters struct {
 
 	// An active_directory block as defined above.
-	// +kubebuilder:validation:Optional
 	ActiveDirectory []LinuxWebAppSlotAuthSettingsActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
 	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
 	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
-	// +kubebuilder:validation:Optional
 	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
 	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
 	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
-	// +kubebuilder:validation:Optional
 	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
 
 	// The default authentication provider to use when multiple providers are configured. Possible values include: BuiltInAuthenticationProviderAzureActiveDirectory, BuiltInAuthenticationProviderFacebook, BuiltInAuthenticationProviderGoogle, BuiltInAuthenticationProviderMicrosoftAccount, BuiltInAuthenticationProviderTwitter, BuiltInAuthenticationProviderGithub
 	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
-	// +kubebuilder:validation:Optional
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
 	// Should the Authentication / Authorization feature be enabled?
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A facebook block as defined below.
-	// +kubebuilder:validation:Optional
 	Facebook []LinuxWebAppSlotAuthSettingsFacebookParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
 
 	// A github block as defined below.
-	// +kubebuilder:validation:Optional
 	Github []LinuxWebAppSlotAuthSettingsGithubParameters `json:"github,omitempty" tf:"github,omitempty"`
 
 	// A google block as defined below.
-	// +kubebuilder:validation:Optional
 	Google []LinuxWebAppSlotAuthSettingsGoogleParameters `json:"google,omitempty" tf:"google,omitempty"`
 
 	// The OpenID Connect Issuer URI that represents the entity that issues access tokens for this Linux Web App.
 	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
-	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// A microsoft block as defined below.
-	// +kubebuilder:validation:Optional
 	Microsoft []LinuxWebAppSlotAuthSettingsMicrosoftParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
 
 	// The RuntimeVersion of the Authentication / Authorization feature in use for the Linux Web App.
 	// The RuntimeVersion of the Authentication / Authorization feature in use.
-	// +kubebuilder:validation:Optional
 	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
 
 	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
 	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
-	// +kubebuilder:validation:Optional
 	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
 
 	// Should the Linux Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
 	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
-	// +kubebuilder:validation:Optional
 	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
 
 	// A twitter block as defined below.
-	// +kubebuilder:validation:Optional
 	Twitter []LinuxWebAppSlotAuthSettingsTwitterParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
 
 	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
 	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
-	// +kubebuilder:validation:Optional
 	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsTwitterInitParameters struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
 }
 
 type LinuxWebAppSlotAuthSettingsTwitterObservation struct {
@@ -441,18 +581,66 @@ type LinuxWebAppSlotAuthSettingsTwitterParameters struct {
 
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// +kubebuilder:validation:Required
-	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
-	// +kubebuilder:validation:Optional
 	ConsumerSecretSecretRef *v1.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
-	// +kubebuilder:validation:Optional
 	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsV2ActiveDirectoryV2InitParameters struct {
+
+	// The list of allowed Applications for the Default Authorisation Policy.
+	// The list of allowed Applications for the Default Authorisation Policy.
+	AllowedApplications []*string `json:"allowedApplications,omitempty" tf:"allowed_applications,omitempty"`
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The list of allowed Group Names for the Default Authorisation Policy.
+	// The list of allowed Group Names for the Default Authorisation Policy.
+	AllowedGroups []*string `json:"allowedGroups,omitempty" tf:"allowed_groups,omitempty"`
+
+	// The list of allowed Identities for the Default Authorisation Policy.
+	// The list of allowed Identities for the Default Authorisation Policy.
+	AllowedIdentities []*string `json:"allowedIdentities,omitempty" tf:"allowed_identities,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the Client to use to authenticate with Azure Active Directory.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The thumbprint of the certificate used for signing purposes.
+	// The thumbprint of the certificate used for signing purposes.
+	ClientSecretCertificateThumbprint *string `json:"clientSecretCertificateThumbprint,omitempty" tf:"client_secret_certificate_thumbprint,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The App Setting name that contains the client secret of the Client.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// A list of Allowed Client Applications in the JWT Claim.
+	// A list of Allowed Client Applications in the JWT Claim.
+	JwtAllowedClientApplications []*string `json:"jwtAllowedClientApplications,omitempty" tf:"jwt_allowed_client_applications,omitempty"`
+
+	// A list of Allowed Groups in the JWT Claim.
+	// A list of Allowed Groups in the JWT Claim.
+	JwtAllowedGroups []*string `json:"jwtAllowedGroups,omitempty" tf:"jwt_allowed_groups,omitempty"`
+
+	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
+	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
+	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
+
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
+	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
+
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
+	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
 
 type LinuxWebAppSlotAuthSettingsV2ActiveDirectoryV2Observation struct {
@@ -510,63 +698,62 @@ type LinuxWebAppSlotAuthSettingsV2ActiveDirectoryV2Parameters struct {
 
 	// The list of allowed Applications for the Default Authorisation Policy.
 	// The list of allowed Applications for the Default Authorisation Policy.
-	// +kubebuilder:validation:Optional
 	AllowedApplications []*string `json:"allowedApplications,omitempty" tf:"allowed_applications,omitempty"`
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
 	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
-	// +kubebuilder:validation:Optional
 	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
 
 	// The list of allowed Group Names for the Default Authorisation Policy.
 	// The list of allowed Group Names for the Default Authorisation Policy.
-	// +kubebuilder:validation:Optional
 	AllowedGroups []*string `json:"allowedGroups,omitempty" tf:"allowed_groups,omitempty"`
 
 	// The list of allowed Identities for the Default Authorisation Policy.
 	// The list of allowed Identities for the Default Authorisation Policy.
-	// +kubebuilder:validation:Optional
 	AllowedIdentities []*string `json:"allowedIdentities,omitempty" tf:"allowed_identities,omitempty"`
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with Azure Active Directory.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The thumbprint of the certificate used for signing purposes.
 	// The thumbprint of the certificate used for signing purposes.
-	// +kubebuilder:validation:Optional
 	ClientSecretCertificateThumbprint *string `json:"clientSecretCertificateThumbprint,omitempty" tf:"client_secret_certificate_thumbprint,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The App Setting name that contains the client secret of the Client.
-	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// A list of Allowed Client Applications in the JWT Claim.
 	// A list of Allowed Client Applications in the JWT Claim.
-	// +kubebuilder:validation:Optional
 	JwtAllowedClientApplications []*string `json:"jwtAllowedClientApplications,omitempty" tf:"jwt_allowed_client_applications,omitempty"`
 
 	// A list of Allowed Groups in the JWT Claim.
 	// A list of Allowed Groups in the JWT Claim.
-	// +kubebuilder:validation:Optional
 	JwtAllowedGroups []*string `json:"jwtAllowedGroups,omitempty" tf:"jwt_allowed_groups,omitempty"`
 
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
-	// +kubebuilder:validation:Optional
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
-	// +kubebuilder:validation:Required
-	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
+	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
 	// Should the www-authenticate provider should be omitted from the request? Defaults to false
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
-	// +kubebuilder:validation:Optional
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsV2AppleV2InitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Apple web application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for Apple Login.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 }
 
 type LinuxWebAppSlotAuthSettingsV2AppleV2Observation struct {
@@ -587,13 +774,18 @@ type LinuxWebAppSlotAuthSettingsV2AppleV2Parameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Apple web application.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Apple Login.
-	// +kubebuilder:validation:Required
-	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsV2AzureStaticWebAppV2InitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the Client to use to authenticate with Azure Static Web App Authentication.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 }
 
 type LinuxWebAppSlotAuthSettingsV2AzureStaticWebAppV2Observation struct {
@@ -607,8 +799,30 @@ type LinuxWebAppSlotAuthSettingsV2AzureStaticWebAppV2Parameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with Azure Static Web App Authentication.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsV2CustomOidcV2InitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the Client to use to authenticate with this Custom OIDC.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The name which should be used for this Storage Account.
+	// The name of the Custom OIDC Authentication Provider.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the claim that contains the users name.
+	// The name of the claim that contains the users name.
+	NameClaimType *string `json:"nameClaimType,omitempty" tf:"name_claim_type,omitempty"`
+
+	// The app setting name that contains the client_secret value used for the Custom OIDC Login.
+	// The endpoint that contains all the configuration endpoints for this Custom OIDC provider.
+	OpenIDConfigurationEndpoint *string `json:"openidConfigurationEndpoint,omitempty" tf:"openid_configuration_endpoint,omitempty"`
+
+	// The list of the scopes that should be requested while authenticating.
+	// The list of the scopes that should be requested while authenticating.
+	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 }
 
 type LinuxWebAppSlotAuthSettingsV2CustomOidcV2Observation struct {
@@ -662,28 +876,42 @@ type LinuxWebAppSlotAuthSettingsV2CustomOidcV2Parameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with this Custom OIDC.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The name which should be used for this Storage Account.
 	// The name of the Custom OIDC Authentication Provider.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the claim that contains the users name.
 	// The name of the claim that contains the users name.
-	// +kubebuilder:validation:Optional
 	NameClaimType *string `json:"nameClaimType,omitempty" tf:"name_claim_type,omitempty"`
 
 	// The app setting name that contains the client_secret value used for the Custom OIDC Login.
 	// The endpoint that contains all the configuration endpoints for this Custom OIDC provider.
-	// +kubebuilder:validation:Required
-	OpenIDConfigurationEndpoint *string `json:"openidConfigurationEndpoint" tf:"openid_configuration_endpoint,omitempty"`
+	OpenIDConfigurationEndpoint *string `json:"openidConfigurationEndpoint,omitempty" tf:"openid_configuration_endpoint,omitempty"`
 
 	// The list of the scopes that should be requested while authenticating.
 	// The list of the scopes that should be requested while authenticating.
-	// +kubebuilder:validation:Optional
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsV2FacebookV2InitParameters struct {
+
+	// The App ID of the Facebook app used for login.
+	// The App ID of the Facebook app used for login.
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
+	// The app setting name that contains the app_secret value used for Facebook Login.
+	// The app setting name that contains the `app_secret` value used for Facebook Login.
+	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
+
+	// The version of the Facebook API to be used while logging in.
+	// The version of the Facebook API to be used while logging in.
+	GraphAPIVersion *string `json:"graphApiVersion,omitempty" tf:"graph_api_version,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// Specifies a list of scopes to be requested as part of Facebook Login authentication.
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
 type LinuxWebAppSlotAuthSettingsV2FacebookV2Observation struct {
@@ -709,22 +937,33 @@ type LinuxWebAppSlotAuthSettingsV2FacebookV2Parameters struct {
 
 	// The App ID of the Facebook app used for login.
 	// The App ID of the Facebook app used for login.
-	// +kubebuilder:validation:Required
-	AppID *string `json:"appId" tf:"app_id,omitempty"`
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
 	// The app setting name that contains the `app_secret` value used for Facebook Login.
-	// +kubebuilder:validation:Required
-	AppSecretSettingName *string `json:"appSecretSettingName" tf:"app_secret_setting_name,omitempty"`
+	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
 
 	// The version of the Facebook API to be used while logging in.
 	// The version of the Facebook API to be used while logging in.
-	// +kubebuilder:validation:Optional
 	GraphAPIVersion *string `json:"graphApiVersion,omitempty" tf:"graph_api_version,omitempty"`
 
 	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
 	// Specifies a list of scopes to be requested as part of Facebook Login authentication.
-	// +kubebuilder:validation:Optional
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsV2GithubV2InitParameters struct {
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The ID of the GitHub app used for login.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for GitHub Login.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
@@ -747,17 +986,33 @@ type LinuxWebAppSlotAuthSettingsV2GithubV2Parameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the GitHub app used for login.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for GitHub Login.
-	// +kubebuilder:validation:Required
-	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
-	// +kubebuilder:validation:Optional
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsV2GoogleV2InitParameters struct {
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed Audiences that will be requested as part of Google Sign-In authentication.
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OpenID Connect Client ID for the Google web application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name that contains the `client_secret` value used for Google Login.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// Specifies a list of Login scopes that will be requested as part of Google Sign-In authentication.
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
@@ -784,23 +1039,147 @@ type LinuxWebAppSlotAuthSettingsV2GoogleV2Parameters struct {
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
 	// Specifies a list of Allowed Audiences that will be requested as part of Google Sign-In authentication.
-	// +kubebuilder:validation:Optional
 	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Google web application.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Google Login.
-	// +kubebuilder:validation:Required
-	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
 	// Specifies a list of Login scopes that will be requested as part of Google Sign-In authentication.
-	// +kubebuilder:validation:Optional
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsV2InitParameters struct {
+
+	// An active_directory_v2 block as defined below.
+	ActiveDirectoryV2 []LinuxWebAppSlotAuthSettingsV2ActiveDirectoryV2InitParameters `json:"activeDirectoryV2,omitempty" tf:"active_directory_v2,omitempty"`
+
+	// An apple_v2 block as defined below.
+	AppleV2 []LinuxWebAppSlotAuthSettingsV2AppleV2InitParameters `json:"appleV2,omitempty" tf:"apple_v2,omitempty"`
+
+	// Should the AuthV2 Settings be enabled. Defaults to false.
+	// Should the AuthV2 Settings be enabled. Defaults to `false`
+	AuthEnabled *bool `json:"authEnabled,omitempty" tf:"auth_enabled,omitempty"`
+
+	// An azure_static_web_app_v2 block as defined below.
+	AzureStaticWebAppV2 []LinuxWebAppSlotAuthSettingsV2AzureStaticWebAppV2InitParameters `json:"azureStaticWebAppV2,omitempty" tf:"azure_static_web_app_v2,omitempty"`
+
+	// The path to the App Auth settings.
+	// The path to the App Auth settings. **Note:** Relative Paths are evaluated from the Site Root directory.
+	ConfigFilePath *string `json:"configFilePath,omitempty" tf:"config_file_path,omitempty"`
+
+	// Zero or more custom_oidc_v2 blocks as defined below.
+	CustomOidcV2 []LinuxWebAppSlotAuthSettingsV2CustomOidcV2InitParameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
+
+	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
+
+	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
+	// The paths which should be excluded from the `unauthenticated_action` when it is set to `RedirectToLoginPage`.
+	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
+
+	// A facebook_v2 block as defined below.
+	FacebookV2 []LinuxWebAppSlotAuthSettingsV2FacebookV2InitParameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
+
+	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
+
+	// The name of the custom header containing the host of the request.
+	// The name of the header containing the host of the request.
+	ForwardProxyCustomHostHeaderName *string `json:"forwardProxyCustomHostHeaderName,omitempty" tf:"forward_proxy_custom_host_header_name,omitempty"`
+
+	// The name of the custom header containing the scheme of the request.
+	// The name of the header containing the scheme of the request.
+	ForwardProxyCustomSchemeHeaderName *string `json:"forwardProxyCustomSchemeHeaderName,omitempty" tf:"forward_proxy_custom_scheme_header_name,omitempty"`
+
+	// A github_v2 block as defined below.
+	GithubV2 []LinuxWebAppSlotAuthSettingsV2GithubV2InitParameters `json:"githubV2,omitempty" tf:"github_v2,omitempty"`
+
+	// A google_v2 block as defined below.
+	GoogleV2 []LinuxWebAppSlotAuthSettingsV2GoogleV2InitParameters `json:"googleV2,omitempty" tf:"google_v2,omitempty"`
+
+	// The prefix that should precede all the authentication and authorisation paths. Defaults to /.auth.
+	// The prefix that should precede all the authentication and authorisation paths. Defaults to `/.auth`
+	HTTPRouteAPIPrefix *string `json:"httpRouteApiPrefix,omitempty" tf:"http_route_api_prefix,omitempty"`
+
+	// A login block as defined below.
+	Login []LinuxWebAppSlotAuthSettingsV2LoginInitParameters `json:"login,omitempty" tf:"login,omitempty"`
+
+	// A microsoft_v2 block as defined below.
+	MicrosoftV2 []LinuxWebAppSlotAuthSettingsV2MicrosoftV2InitParameters `json:"microsoftV2,omitempty" tf:"microsoft_v2,omitempty"`
+
+	// Should the authentication flow be used for all requests.
+	// Should the authentication flow be used for all requests.
+	RequireAuthentication *bool `json:"requireAuthentication,omitempty" tf:"require_authentication,omitempty"`
+
+	// Should HTTPS be required on connections? Defaults to true.
+	// Should HTTPS be required on connections? Defaults to true.
+	RequireHTTPS *bool `json:"requireHttps,omitempty" tf:"require_https,omitempty"`
+
+	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to ~1.
+	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to `~1`
+	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
+
+	// A twitter_v2 block as defined below.
+	TwitterV2 []LinuxWebAppSlotAuthSettingsV2TwitterV2InitParameters `json:"twitterV2,omitempty" tf:"twitter_v2,omitempty"`
+
+	// The action to take for requests made without authentication. Possible values include RedirectToLoginPage, AllowAnonymous, Return401, and Return403. Defaults to RedirectToLoginPage.
+	// The action to take for requests made without authentication. Possible values include `RedirectToLoginPage`, `AllowAnonymous`, `Return401`, and `Return403`. Defaults to `RedirectToLoginPage`.
+	UnauthenticatedAction *string `json:"unauthenticatedAction,omitempty" tf:"unauthenticated_action,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsV2LoginInitParameters struct {
+
+	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends.
+	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends. **Note:** URLs within the current domain are always implicitly allowed.
+	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
+
+	// The method by which cookies expire. Possible values include: FixedTime, and IdentityProviderDerived. Defaults to FixedTime.
+	// The method by which cookies expire. Possible values include: `FixedTime`, and `IdentityProviderDerived`. Defaults to `FixedTime`.
+	CookieExpirationConvention *string `json:"cookieExpirationConvention,omitempty" tf:"cookie_expiration_convention,omitempty"`
+
+	// The time after the request is made when the session cookie should expire. Defaults to 08:00:00.
+	// The time after the request is made when the session cookie should expire. Defaults to `08:00:00`.
+	CookieExpirationTime *string `json:"cookieExpirationTime,omitempty" tf:"cookie_expiration_time,omitempty"`
+
+	// The endpoint to which logout requests should be made.
+	// The endpoint to which logout requests should be made.
+	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
+
+	// The time after the request is made when the nonce should expire. Defaults to 00:05:00.
+	// The time after the request is made when the nonce should expire. Defaults to `00:05:00`.
+	NonceExpirationTime *string `json:"nonceExpirationTime,omitempty" tf:"nonce_expiration_time,omitempty"`
+
+	// Should the fragments from the request be preserved after the login request is made. Defaults to false.
+	// Should the fragments from the request be preserved after the login request is made. Defaults to `false`.
+	PreserveURLFragmentsForLogins *bool `json:"preserveUrlFragmentsForLogins,omitempty" tf:"preserve_url_fragments_for_logins,omitempty"`
+
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
+	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	TokenRefreshExtensionTime *float64 `json:"tokenRefreshExtensionTime,omitempty" tf:"token_refresh_extension_time,omitempty"`
+
+	// Should the Token Store configuration Enabled. Defaults to false
+	// Should the Token Store configuration Enabled. Defaults to `false`
+	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
+
+	// The directory path in the App Filesystem in which the tokens will be stored.
+	// The directory path in the App Filesystem in which the tokens will be stored.
+	TokenStorePath *string `json:"tokenStorePath,omitempty" tf:"token_store_path,omitempty"`
+
+	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
+	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
+	TokenStoreSASSettingName *string `json:"tokenStoreSasSettingName,omitempty" tf:"token_store_sas_setting_name,omitempty"`
+
+	// Should the nonce be validated while completing the login flow. Defaults to true.
+	// Should the nonce be validated while completing the login flow. Defaults to `true`.
+	ValidateNonce *bool `json:"validateNonce,omitempty" tf:"validate_nonce,omitempty"`
 }
 
 type LinuxWebAppSlotAuthSettingsV2LoginObservation struct {
@@ -854,58 +1233,66 @@ type LinuxWebAppSlotAuthSettingsV2LoginParameters struct {
 
 	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends.
 	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends. **Note:** URLs within the current domain are always implicitly allowed.
-	// +kubebuilder:validation:Optional
 	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
 
 	// The method by which cookies expire. Possible values include: FixedTime, and IdentityProviderDerived. Defaults to FixedTime.
 	// The method by which cookies expire. Possible values include: `FixedTime`, and `IdentityProviderDerived`. Defaults to `FixedTime`.
-	// +kubebuilder:validation:Optional
 	CookieExpirationConvention *string `json:"cookieExpirationConvention,omitempty" tf:"cookie_expiration_convention,omitempty"`
 
 	// The time after the request is made when the session cookie should expire. Defaults to 08:00:00.
 	// The time after the request is made when the session cookie should expire. Defaults to `08:00:00`.
-	// +kubebuilder:validation:Optional
 	CookieExpirationTime *string `json:"cookieExpirationTime,omitempty" tf:"cookie_expiration_time,omitempty"`
 
 	// The endpoint to which logout requests should be made.
 	// The endpoint to which logout requests should be made.
-	// +kubebuilder:validation:Optional
 	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
 
 	// The time after the request is made when the nonce should expire. Defaults to 00:05:00.
 	// The time after the request is made when the nonce should expire. Defaults to `00:05:00`.
-	// +kubebuilder:validation:Optional
 	NonceExpirationTime *string `json:"nonceExpirationTime,omitempty" tf:"nonce_expiration_time,omitempty"`
 
 	// Should the fragments from the request be preserved after the login request is made. Defaults to false.
 	// Should the fragments from the request be preserved after the login request is made. Defaults to `false`.
-	// +kubebuilder:validation:Optional
 	PreserveURLFragmentsForLogins *bool `json:"preserveUrlFragmentsForLogins,omitempty" tf:"preserve_url_fragments_for_logins,omitempty"`
 
 	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
 	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
-	// +kubebuilder:validation:Optional
 	TokenRefreshExtensionTime *float64 `json:"tokenRefreshExtensionTime,omitempty" tf:"token_refresh_extension_time,omitempty"`
 
 	// Should the Token Store configuration Enabled. Defaults to false
 	// Should the Token Store configuration Enabled. Defaults to `false`
-	// +kubebuilder:validation:Optional
 	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
 
 	// The directory path in the App Filesystem in which the tokens will be stored.
 	// The directory path in the App Filesystem in which the tokens will be stored.
-	// +kubebuilder:validation:Optional
 	TokenStorePath *string `json:"tokenStorePath,omitempty" tf:"token_store_path,omitempty"`
 
 	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
 	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
-	// +kubebuilder:validation:Optional
 	TokenStoreSASSettingName *string `json:"tokenStoreSasSettingName,omitempty" tf:"token_store_sas_setting_name,omitempty"`
 
 	// Should the nonce be validated while completing the login flow. Defaults to true.
 	// Should the nonce be validated while completing the login flow. Defaults to `true`.
-	// +kubebuilder:validation:Optional
 	ValidateNonce *bool `json:"validateNonce,omitempty" tf:"validate_nonce,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsV2MicrosoftV2InitParameters struct {
+
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
+
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+
+	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
+	// The list of Login scopes that will be requested as part of Microsoft Account authentication.
+	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
 type LinuxWebAppSlotAuthSettingsV2MicrosoftV2Observation struct {
@@ -931,22 +1318,18 @@ type LinuxWebAppSlotAuthSettingsV2MicrosoftV2Parameters struct {
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
-	// +kubebuilder:validation:Optional
 	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
-	// +kubebuilder:validation:Required
-	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
-	// +kubebuilder:validation:Required
-	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
+	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
 	// The list of Login scopes that will be requested as part of Microsoft Account authentication.
-	// +kubebuilder:validation:Optional
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
@@ -1034,104 +1417,93 @@ type LinuxWebAppSlotAuthSettingsV2Observation struct {
 type LinuxWebAppSlotAuthSettingsV2Parameters struct {
 
 	// An active_directory_v2 block as defined below.
-	// +kubebuilder:validation:Optional
 	ActiveDirectoryV2 []LinuxWebAppSlotAuthSettingsV2ActiveDirectoryV2Parameters `json:"activeDirectoryV2,omitempty" tf:"active_directory_v2,omitempty"`
 
 	// An apple_v2 block as defined below.
-	// +kubebuilder:validation:Optional
 	AppleV2 []LinuxWebAppSlotAuthSettingsV2AppleV2Parameters `json:"appleV2,omitempty" tf:"apple_v2,omitempty"`
 
 	// Should the AuthV2 Settings be enabled. Defaults to false.
 	// Should the AuthV2 Settings be enabled. Defaults to `false`
-	// +kubebuilder:validation:Optional
 	AuthEnabled *bool `json:"authEnabled,omitempty" tf:"auth_enabled,omitempty"`
 
 	// An azure_static_web_app_v2 block as defined below.
-	// +kubebuilder:validation:Optional
 	AzureStaticWebAppV2 []LinuxWebAppSlotAuthSettingsV2AzureStaticWebAppV2Parameters `json:"azureStaticWebAppV2,omitempty" tf:"azure_static_web_app_v2,omitempty"`
 
 	// The path to the App Auth settings.
 	// The path to the App Auth settings. **Note:** Relative Paths are evaluated from the Site Root directory.
-	// +kubebuilder:validation:Optional
 	ConfigFilePath *string `json:"configFilePath,omitempty" tf:"config_file_path,omitempty"`
 
 	// Zero or more custom_oidc_v2 blocks as defined below.
-	// +kubebuilder:validation:Optional
 	CustomOidcV2 []LinuxWebAppSlotAuthSettingsV2CustomOidcV2Parameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
 	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
 	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
-	// +kubebuilder:validation:Optional
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
 	// The paths which should be excluded from the `unauthenticated_action` when it is set to `RedirectToLoginPage`.
-	// +kubebuilder:validation:Optional
 	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
 
 	// A facebook_v2 block as defined below.
-	// +kubebuilder:validation:Optional
 	FacebookV2 []LinuxWebAppSlotAuthSettingsV2FacebookV2Parameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
 	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
-	// +kubebuilder:validation:Optional
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
 
 	// The name of the custom header containing the host of the request.
 	// The name of the header containing the host of the request.
-	// +kubebuilder:validation:Optional
 	ForwardProxyCustomHostHeaderName *string `json:"forwardProxyCustomHostHeaderName,omitempty" tf:"forward_proxy_custom_host_header_name,omitempty"`
 
 	// The name of the custom header containing the scheme of the request.
 	// The name of the header containing the scheme of the request.
-	// +kubebuilder:validation:Optional
 	ForwardProxyCustomSchemeHeaderName *string `json:"forwardProxyCustomSchemeHeaderName,omitempty" tf:"forward_proxy_custom_scheme_header_name,omitempty"`
 
 	// A github_v2 block as defined below.
-	// +kubebuilder:validation:Optional
 	GithubV2 []LinuxWebAppSlotAuthSettingsV2GithubV2Parameters `json:"githubV2,omitempty" tf:"github_v2,omitempty"`
 
 	// A google_v2 block as defined below.
-	// +kubebuilder:validation:Optional
 	GoogleV2 []LinuxWebAppSlotAuthSettingsV2GoogleV2Parameters `json:"googleV2,omitempty" tf:"google_v2,omitempty"`
 
 	// The prefix that should precede all the authentication and authorisation paths. Defaults to /.auth.
 	// The prefix that should precede all the authentication and authorisation paths. Defaults to `/.auth`
-	// +kubebuilder:validation:Optional
 	HTTPRouteAPIPrefix *string `json:"httpRouteApiPrefix,omitempty" tf:"http_route_api_prefix,omitempty"`
 
 	// A login block as defined below.
-	// +kubebuilder:validation:Required
-	Login []LinuxWebAppSlotAuthSettingsV2LoginParameters `json:"login" tf:"login,omitempty"`
+	Login []LinuxWebAppSlotAuthSettingsV2LoginParameters `json:"login,omitempty" tf:"login,omitempty"`
 
 	// A microsoft_v2 block as defined below.
-	// +kubebuilder:validation:Optional
 	MicrosoftV2 []LinuxWebAppSlotAuthSettingsV2MicrosoftV2Parameters `json:"microsoftV2,omitempty" tf:"microsoft_v2,omitempty"`
 
 	// Should the authentication flow be used for all requests.
 	// Should the authentication flow be used for all requests.
-	// +kubebuilder:validation:Optional
 	RequireAuthentication *bool `json:"requireAuthentication,omitempty" tf:"require_authentication,omitempty"`
 
 	// Should HTTPS be required on connections? Defaults to true.
 	// Should HTTPS be required on connections? Defaults to true.
-	// +kubebuilder:validation:Optional
 	RequireHTTPS *bool `json:"requireHttps,omitempty" tf:"require_https,omitempty"`
 
 	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to ~1.
 	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to `~1`
-	// +kubebuilder:validation:Optional
 	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
 
 	// A twitter_v2 block as defined below.
-	// +kubebuilder:validation:Optional
 	TwitterV2 []LinuxWebAppSlotAuthSettingsV2TwitterV2Parameters `json:"twitterV2,omitempty" tf:"twitter_v2,omitempty"`
 
 	// The action to take for requests made without authentication. Possible values include RedirectToLoginPage, AllowAnonymous, Return401, and Return403. Defaults to RedirectToLoginPage.
 	// The action to take for requests made without authentication. Possible values include `RedirectToLoginPage`, `AllowAnonymous`, `Return401`, and `Return403`. Defaults to `RedirectToLoginPage`.
-	// +kubebuilder:validation:Optional
 	UnauthenticatedAction *string `json:"unauthenticatedAction,omitempty" tf:"unauthenticated_action,omitempty"`
+}
+
+type LinuxWebAppSlotAuthSettingsV2TwitterV2InitParameters struct {
+
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
 }
 
 type LinuxWebAppSlotAuthSettingsV2TwitterV2Observation struct {
@@ -1149,13 +1521,25 @@ type LinuxWebAppSlotAuthSettingsV2TwitterV2Parameters struct {
 
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
-	// +kubebuilder:validation:Required
-	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
+	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
 
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// +kubebuilder:validation:Required
-	ConsumerSecretSettingName *string `json:"consumerSecretSettingName" tf:"consumer_secret_setting_name,omitempty"`
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
+}
+
+type LinuxWebAppSlotBackupInitParameters struct {
+
+	// Should this backup job be enabled? Defaults to true.
+	// Should this backup job be enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The name which should be used for this Backup.
+	// The name which should be used for this Backup.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// An schedule block as defined below.
+	Schedule []LinuxWebAppSlotBackupScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 }
 
 type LinuxWebAppSlotBackupObservation struct {
@@ -1176,22 +1560,41 @@ type LinuxWebAppSlotBackupParameters struct {
 
 	// Should this backup job be enabled? Defaults to true.
 	// Should this backup job be enabled?
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name which should be used for this Backup.
 	// The name which should be used for this Backup.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An schedule block as defined below.
-	// +kubebuilder:validation:Required
-	Schedule []LinuxWebAppSlotBackupScheduleParameters `json:"schedule" tf:"schedule,omitempty"`
+	Schedule []LinuxWebAppSlotBackupScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The SAS URL to the container.
 	// The SAS URL to the container.
-	// +kubebuilder:validation:Required
 	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
+}
+
+type LinuxWebAppSlotBackupScheduleInitParameters struct {
+
+	// How often the backup should be executed (e.g. for weekly backup, this should be set to 7 and frequency_unit should be set to Day).
+	// How often the backup should be executed (e.g. for weekly backup, this should be set to `7` and `frequency_unit` should be set to `Day`).
+	FrequencyInterval *float64 `json:"frequencyInterval,omitempty" tf:"frequency_interval,omitempty"`
+
+	// The unit of time for how often the backup should take place. Possible values include: Day, Hour
+	// The unit of time for how often the backup should take place. Possible values include: `Day` and `Hour`.
+	FrequencyUnit *string `json:"frequencyUnit,omitempty" tf:"frequency_unit,omitempty"`
+
+	// Should the service keep at least one backup, regardless of the age of backup? Defaults to false.
+	// Should the service keep at least one backup, regardless of age of backup. Defaults to `false`.
+	KeepAtLeastOneBackup *bool `json:"keepAtLeastOneBackup,omitempty" tf:"keep_at_least_one_backup,omitempty"`
+
+	// After how many days backups should be deleted. Defaults to 30.
+	// After how many days backups should be deleted.
+	RetentionPeriodDays *float64 `json:"retentionPeriodDays,omitempty" tf:"retention_period_days,omitempty"`
+
+	// When the schedule should start working in RFC-3339 format.
+	// When the schedule should start working in RFC-3339 format.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
 type LinuxWebAppSlotBackupScheduleObservation struct {
@@ -1224,28 +1627,34 @@ type LinuxWebAppSlotBackupScheduleParameters struct {
 
 	// How often the backup should be executed (e.g. for weekly backup, this should be set to 7 and frequency_unit should be set to Day).
 	// How often the backup should be executed (e.g. for weekly backup, this should be set to `7` and `frequency_unit` should be set to `Day`).
-	// +kubebuilder:validation:Required
-	FrequencyInterval *float64 `json:"frequencyInterval" tf:"frequency_interval,omitempty"`
+	FrequencyInterval *float64 `json:"frequencyInterval,omitempty" tf:"frequency_interval,omitempty"`
 
 	// The unit of time for how often the backup should take place. Possible values include: Day, Hour
 	// The unit of time for how often the backup should take place. Possible values include: `Day` and `Hour`.
-	// +kubebuilder:validation:Required
-	FrequencyUnit *string `json:"frequencyUnit" tf:"frequency_unit,omitempty"`
+	FrequencyUnit *string `json:"frequencyUnit,omitempty" tf:"frequency_unit,omitempty"`
 
 	// Should the service keep at least one backup, regardless of the age of backup? Defaults to false.
 	// Should the service keep at least one backup, regardless of age of backup. Defaults to `false`.
-	// +kubebuilder:validation:Optional
 	KeepAtLeastOneBackup *bool `json:"keepAtLeastOneBackup,omitempty" tf:"keep_at_least_one_backup,omitempty"`
 
 	// After how many days backups should be deleted. Defaults to 30.
 	// After how many days backups should be deleted.
-	// +kubebuilder:validation:Optional
 	RetentionPeriodDays *float64 `json:"retentionPeriodDays,omitempty" tf:"retention_period_days,omitempty"`
 
 	// When the schedule should start working in RFC-3339 format.
 	// When the schedule should start working in RFC-3339 format.
-	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+}
+
+type LinuxWebAppSlotConnectionStringInitParameters struct {
+
+	// The name of the Connection String.
+	// The name which should be used for this Connection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of database. Possible values include APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub, PostgreSQL, RedisCache, ServiceBus, SQLAzure, and SQLServer.
+	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LinuxWebAppSlotConnectionStringObservation struct {
@@ -1263,18 +1672,24 @@ type LinuxWebAppSlotConnectionStringParameters struct {
 
 	// The name of the Connection String.
 	// The name which should be used for this Connection.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Type of database. Possible values include APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub, PostgreSQL, RedisCache, ServiceBus, SQLAzure, and SQLServer.
 	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The connection string value.
 	// The connection string value.
-	// +kubebuilder:validation:Required
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+}
+
+type LinuxWebAppSlotIdentityInitParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Web App Slot.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Linux Web App Slot. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LinuxWebAppSlotIdentityObservation struct {
@@ -1295,12 +1710,90 @@ type LinuxWebAppSlotIdentityObservation struct {
 type LinuxWebAppSlotIdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Web App Slot.
-	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Linux Web App Slot. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type LinuxWebAppSlotInitParameters struct {
+
+	// A map of key-value pairs of App Settings.
+	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
+
+	// An auth_settings block as defined below.
+	AuthSettings []LinuxWebAppSlotAuthSettingsInitParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
+
+	// An auth_settings_v2 block as defined below.
+	AuthSettingsV2 []LinuxWebAppSlotAuthSettingsV2InitParameters `json:"authSettingsV2,omitempty" tf:"auth_settings_v2,omitempty"`
+
+	// A backup block as defined below.
+	Backup []LinuxWebAppSlotBackupInitParameters `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// Should Client Affinity be enabled?
+	ClientAffinityEnabled *bool `json:"clientAffinityEnabled,omitempty" tf:"client_affinity_enabled,omitempty"`
+
+	// Should Client Certificates be enabled?
+	ClientCertificateEnabled *bool `json:"clientCertificateEnabled,omitempty" tf:"client_certificate_enabled,omitempty"`
+
+	// Paths to exclude when using client certificates, separated by ;
+	// Paths to exclude when using client certificates, separated by ;
+	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
+
+	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_cert_enabled is false
+	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
+
+	// One or more connection_string blocks as defined below.
+	ConnectionString []LinuxWebAppSlotConnectionStringInitParameters `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+
+	// Should the Linux Web App be enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Should the Linux Web App require HTTPS connections.
+	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
+
+	// An identity block as defined below.
+	Identity []LinuxWebAppSlotIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The User Assigned Identity ID used for accessing KeyVault secrets. The identity must be assigned to the application in the identity block. For more information see - Access vaults with a user-assigned identity.
+	KeyVaultReferenceIdentityID *string `json:"keyVaultReferenceIdentityId,omitempty" tf:"key_vault_reference_identity_id,omitempty"`
+
+	// A logs block as defined below.
+	Logs []LinuxWebAppSlotLogsInitParameters `json:"logs,omitempty" tf:"logs,omitempty"`
+
+	// The name which should be used for this Linux Web App Slot. Changing this forces a new Linux Web App Slot to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Service Plan in which to run this slot. If not specified the same Service Plan as the Linux Web App will be used.
+	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
+
+	// A site_config block as defined below.
+	SiteConfig []LinuxWebAppSlotSiteConfigInitParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
+
+	// One or more storage_account blocks as defined below.
+	StorageAccount []LinuxWebAppSlotStorageAccountInitParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
+
+	// A mapping of tags that should be assigned to the Linux Web App.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The local path and filename of the Zip packaged application to deploy to this Linux Web App.
+	// The local path and filename of the Zip packaged application to deploy to this Windows Web App. **Note:** Using this value requires `WEBSITE_RUN_FROM_PACKAGE=1` on the App in `app_settings`.
+	ZipDeployFile *string `json:"zipDeployFile,omitempty" tf:"zip_deploy_file,omitempty"`
+}
+
+type LinuxWebAppSlotLogsInitParameters struct {
+
+	// A application_logs block as defined above.
+	ApplicationLogs []LogsApplicationLogsInitParameters `json:"applicationLogs,omitempty" tf:"application_logs,omitempty"`
+
+	// Should detailed error messages be enabled?
+	DetailedErrorMessages *bool `json:"detailedErrorMessages,omitempty" tf:"detailed_error_messages,omitempty"`
+
+	// Should the failed request tracing be enabled?
+	FailedRequestTracing *bool `json:"failedRequestTracing,omitempty" tf:"failed_request_tracing,omitempty"`
+
+	// An http_logs block as defined above.
+	HTTPLogs []LogsHTTPLogsInitParameters `json:"httpLogs,omitempty" tf:"http_logs,omitempty"`
 }
 
 type LinuxWebAppSlotLogsObservation struct {
@@ -1321,19 +1814,15 @@ type LinuxWebAppSlotLogsObservation struct {
 type LinuxWebAppSlotLogsParameters struct {
 
 	// A application_logs block as defined above.
-	// +kubebuilder:validation:Optional
 	ApplicationLogs []LogsApplicationLogsParameters `json:"applicationLogs,omitempty" tf:"application_logs,omitempty"`
 
 	// Should detailed error messages be enabled?
-	// +kubebuilder:validation:Optional
 	DetailedErrorMessages *bool `json:"detailedErrorMessages,omitempty" tf:"detailed_error_messages,omitempty"`
 
 	// Should the failed request tracing be enabled?
-	// +kubebuilder:validation:Optional
 	FailedRequestTracing *bool `json:"failedRequestTracing,omitempty" tf:"failed_request_tracing,omitempty"`
 
 	// An http_logs block as defined above.
-	// +kubebuilder:validation:Optional
 	HTTPLogs []LogsHTTPLogsParameters `json:"httpLogs,omitempty" tf:"http_logs,omitempty"`
 }
 
@@ -1452,80 +1941,61 @@ type LinuxWebAppSlotParameters struct {
 	AppServiceIDSelector *v1.Selector `json:"appServiceIdSelector,omitempty" tf:"-"`
 
 	// A map of key-value pairs of App Settings.
-	// +kubebuilder:validation:Optional
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// An auth_settings block as defined below.
-	// +kubebuilder:validation:Optional
 	AuthSettings []LinuxWebAppSlotAuthSettingsParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
 
 	// An auth_settings_v2 block as defined below.
-	// +kubebuilder:validation:Optional
 	AuthSettingsV2 []LinuxWebAppSlotAuthSettingsV2Parameters `json:"authSettingsV2,omitempty" tf:"auth_settings_v2,omitempty"`
 
 	// A backup block as defined below.
-	// +kubebuilder:validation:Optional
 	Backup []LinuxWebAppSlotBackupParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	// Should Client Affinity be enabled?
-	// +kubebuilder:validation:Optional
 	ClientAffinityEnabled *bool `json:"clientAffinityEnabled,omitempty" tf:"client_affinity_enabled,omitempty"`
 
 	// Should Client Certificates be enabled?
-	// +kubebuilder:validation:Optional
 	ClientCertificateEnabled *bool `json:"clientCertificateEnabled,omitempty" tf:"client_certificate_enabled,omitempty"`
 
 	// Paths to exclude when using client certificates, separated by ;
 	// Paths to exclude when using client certificates, separated by ;
-	// +kubebuilder:validation:Optional
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
 	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_cert_enabled is false
-	// +kubebuilder:validation:Optional
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
 	// One or more connection_string blocks as defined below.
-	// +kubebuilder:validation:Optional
 	ConnectionString []LinuxWebAppSlotConnectionStringParameters `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// Should the Linux Web App be enabled? Defaults to true.
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Should the Linux Web App require HTTPS connections.
-	// +kubebuilder:validation:Optional
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []LinuxWebAppSlotIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The User Assigned Identity ID used for accessing KeyVault secrets. The identity must be assigned to the application in the identity block. For more information see - Access vaults with a user-assigned identity.
-	// +kubebuilder:validation:Optional
 	KeyVaultReferenceIdentityID *string `json:"keyVaultReferenceIdentityId,omitempty" tf:"key_vault_reference_identity_id,omitempty"`
 
 	// A logs block as defined below.
-	// +kubebuilder:validation:Optional
 	Logs []LinuxWebAppSlotLogsParameters `json:"logs,omitempty" tf:"logs,omitempty"`
 
 	// The name which should be used for this Linux Web App Slot. Changing this forces a new Linux Web App Slot to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Service Plan in which to run this slot. If not specified the same Service Plan as the Linux Web App will be used.
-	// +kubebuilder:validation:Optional
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
 
 	// A site_config block as defined below.
-	// +kubebuilder:validation:Optional
 	SiteConfig []LinuxWebAppSlotSiteConfigParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
 	// One or more storage_account blocks as defined below.
-	// +kubebuilder:validation:Optional
 	StorageAccount []LinuxWebAppSlotStorageAccountParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
 
 	// A mapping of tags that should be assigned to the Linux Web App.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
@@ -1544,8 +2014,43 @@ type LinuxWebAppSlotParameters struct {
 
 	// The local path and filename of the Zip packaged application to deploy to this Linux Web App.
 	// The local path and filename of the Zip packaged application to deploy to this Windows Web App. **Note:** Using this value requires `WEBSITE_RUN_FROM_PACKAGE=1` on the App in `app_settings`.
-	// +kubebuilder:validation:Optional
 	ZipDeployFile *string `json:"zipDeployFile,omitempty" tf:"zip_deploy_file,omitempty"`
+}
+
+type LinuxWebAppSlotSiteConfigApplicationStackInitParameters struct {
+
+	// The Docker image reference, including repository host as needed.
+	DockerImage *string `json:"dockerImage,omitempty" tf:"docker_image,omitempty"`
+
+	// The image Tag to use. e.g. latest.
+	DockerImageTag *string `json:"dockerImageTag,omitempty" tf:"docker_image_tag,omitempty"`
+
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0 and 7.0.
+	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
+
+	// The version of Go to use. Possible values include 1.18, and 1.19.
+	GoVersion *string `json:"goVersion,omitempty" tf:"go_version,omitempty"`
+
+	// The Java server type. Possible values include JAVA, TOMCAT, and JBOSSEAP.
+	JavaServer *string `json:"javaServer,omitempty" tf:"java_server,omitempty"`
+
+	// The Version of the java_server to use.
+	JavaServerVersion *string `json:"javaServerVersion,omitempty" tf:"java_server_version,omitempty"`
+
+	// The Version of Java to use. Possible values include 8, 11, and 17.
+	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
+
+	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, and 18-lts. This property conflicts with java_version.
+	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
+
+	// The version of PHP to run. Possible values are 8.0, 8.1 and 8.2.
+	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
+
+	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10 and 3.11.
+	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
+
+	// Te version of Ruby to run. Possible values include 2.6 and 2.7.
+	RubyVersion *string `json:"rubyVersion,omitempty" tf:"ruby_version,omitempty"`
 }
 
 type LinuxWebAppSlotSiteConfigApplicationStackObservation struct {
@@ -1587,48 +2092,48 @@ type LinuxWebAppSlotSiteConfigApplicationStackObservation struct {
 type LinuxWebAppSlotSiteConfigApplicationStackParameters struct {
 
 	// The Docker image reference, including repository host as needed.
-	// +kubebuilder:validation:Optional
 	DockerImage *string `json:"dockerImage,omitempty" tf:"docker_image,omitempty"`
 
 	// The image Tag to use. e.g. latest.
-	// +kubebuilder:validation:Optional
 	DockerImageTag *string `json:"dockerImageTag,omitempty" tf:"docker_image_tag,omitempty"`
 
 	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0 and 7.0.
-	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Go to use. Possible values include 1.18, and 1.19.
-	// +kubebuilder:validation:Optional
 	GoVersion *string `json:"goVersion,omitempty" tf:"go_version,omitempty"`
 
 	// The Java server type. Possible values include JAVA, TOMCAT, and JBOSSEAP.
-	// +kubebuilder:validation:Optional
 	JavaServer *string `json:"javaServer,omitempty" tf:"java_server,omitempty"`
 
 	// The Version of the java_server to use.
-	// +kubebuilder:validation:Optional
 	JavaServerVersion *string `json:"javaServerVersion,omitempty" tf:"java_server_version,omitempty"`
 
 	// The Version of Java to use. Possible values include 8, 11, and 17.
-	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
 	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, and 18-lts. This property conflicts with java_version.
-	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PHP to run. Possible values are 8.0, 8.1 and 8.2.
-	// +kubebuilder:validation:Optional
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
 	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10 and 3.11.
-	// +kubebuilder:validation:Optional
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// Te version of Ruby to run. Possible values include 2.6 and 2.7.
-	// +kubebuilder:validation:Optional
 	RubyVersion *string `json:"rubyVersion,omitempty" tf:"ruby_version,omitempty"`
+}
+
+type LinuxWebAppSlotSiteConfigCorsInitParameters struct {
+
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+
+	// Whether CORS requests with credentials are allowed. Defaults to false
+	// Are credentials allowed in CORS requests? Defaults to `false`.
+	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
 }
 
 type LinuxWebAppSlotSiteConfigCorsObservation struct {
@@ -1646,13 +2151,26 @@ type LinuxWebAppSlotSiteConfigCorsParameters struct {
 
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
-	// +kubebuilder:validation:Optional
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Whether CORS requests with credentials are allowed. Defaults to false
 	// Are credentials allowed in CORS requests? Defaults to `false`.
-	// +kubebuilder:validation:Optional
 	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
+}
+
+type LinuxWebAppSlotSiteConfigIPRestrictionHeadersInitParameters struct {
+
+	// Specifies a list of Azure Front Door IDs.
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
+
+	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
+
+	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
+
+	// Specifies a list of Hosts for which matching should be applied.
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
 type LinuxWebAppSlotSiteConfigIPRestrictionHeadersObservation struct {
@@ -1673,20 +2191,42 @@ type LinuxWebAppSlotSiteConfigIPRestrictionHeadersObservation struct {
 type LinuxWebAppSlotSiteConfigIPRestrictionHeadersParameters struct {
 
 	// Specifies a list of Azure Front Door IDs.
-	// +kubebuilder:validation:Optional
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
 
 	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
-	// +kubebuilder:validation:Optional
 	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
 
 	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
-	// +kubebuilder:validation:Optional
 	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
 
 	// Specifies a list of Hosts for which matching should be applied.
-	// +kubebuilder:validation:Optional
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
+}
+
+type LinuxWebAppSlotSiteConfigIPRestrictionInitParameters struct {
+
+	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are `Allow` or `Deny`.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// A headers block as defined above.
+	Headers []LinuxWebAppSlotSiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The name which should be used for this Storage Account.
+	// The name which should be used for this `ip_restriction`.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority value of this ip_restriction. Defaults to 65000.
+	// The priority value of this `ip_restriction`.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Service Tag used for this IP Restriction.
+	// The Service Tag used for this IP Restriction.
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
 }
 
 type LinuxWebAppSlotSiteConfigIPRestrictionObservation struct {
@@ -1723,31 +2263,25 @@ type LinuxWebAppSlotSiteConfigIPRestrictionParameters struct {
 
 	// The action to take. Possible values are Allow or Deny.
 	// The action to take. Possible values are `Allow` or `Deny`.
-	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A headers block as defined above.
-	// +kubebuilder:validation:Optional
 	Headers []LinuxWebAppSlotSiteConfigIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
-	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The name which should be used for this Storage Account.
 	// The name which should be used for this `ip_restriction`.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The priority value of this ip_restriction. Defaults to 65000.
 	// The priority value of this `ip_restriction`.
-	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The Service Tag used for this IP Restriction.
 	// The Service Tag used for this IP Restriction.
-	// +kubebuilder:validation:Optional
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
@@ -1764,6 +2298,101 @@ type LinuxWebAppSlotSiteConfigIPRestrictionParameters struct {
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+}
+
+type LinuxWebAppSlotSiteConfigInitParameters struct {
+
+	// The URL to the API Definition for this Linux Web App Slot.
+	APIDefinitionURL *string `json:"apiDefinitionUrl,omitempty" tf:"api_definition_url,omitempty"`
+
+	// The API Management API ID this Linux Web App Slot is associated with.
+	APIManagementAPIID *string `json:"apiManagementApiId,omitempty" tf:"api_management_api_id,omitempty"`
+
+	// If this Linux Web App is Always On enabled. Defaults to true.
+	AlwaysOn *bool `json:"alwaysOn,omitempty" tf:"always_on,omitempty"`
+
+	// The App command line to launch.
+	AppCommandLine *string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
+
+	// A application_stack block as defined above.
+	ApplicationStack []LinuxWebAppSlotSiteConfigApplicationStackInitParameters `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
+
+	// Should Auto heal rules be enabled? Required with auto_heal_setting.
+	AutoHealEnabled *bool `json:"autoHealEnabled,omitempty" tf:"auto_heal_enabled,omitempty"`
+
+	// A auto_heal_setting block as defined above. Required with auto_heal.
+	AutoHealSetting []SiteConfigAutoHealSettingInitParameters `json:"autoHealSetting,omitempty" tf:"auto_heal_setting,omitempty"`
+
+	// The Linux Web App Slot Name to automatically swap to when deployment to that slot is successfully completed.
+	AutoSwapSlotName *string `json:"autoSwapSlotName,omitempty" tf:"auto_swap_slot_name,omitempty"`
+
+	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
+	ContainerRegistryManagedIdentityClientID *string `json:"containerRegistryManagedIdentityClientId,omitempty" tf:"container_registry_managed_identity_client_id,omitempty"`
+
+	// Should connections for Azure Container Registry use Managed Identity.
+	ContainerRegistryUseManagedIdentity *bool `json:"containerRegistryUseManagedIdentity,omitempty" tf:"container_registry_use_managed_identity,omitempty"`
+
+	// A cors block as defined above.
+	Cors []LinuxWebAppSlotSiteConfigCorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// Specifies a list of Default Documents for the Linux Web App.
+	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
+
+	// The State of FTP / FTPS service. Possible values include AllAllowed, FtpsOnly, and Disabled.
+	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
+
+	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
+
+	// The path to the Health Check.
+	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
+
+	// Should the HTTP2 be enabled?
+	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
+
+	// One or more ip_restriction blocks as defined above.
+	IPRestriction []LinuxWebAppSlotSiteConfigIPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+
+	// The Site load balancing. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
+	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
+
+	// Use Local MySQL. Defaults to false.
+	LocalMySQLEnabled *bool `json:"localMysqlEnabled,omitempty" tf:"local_mysql_enabled,omitempty"`
+
+	// Managed pipeline mode. Possible values include: Integrated, Classic.
+	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
+
+	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
+	// Should Remote Debugging be enabled? Defaults to false.
+	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
+
+	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
+
+	// One or more scm_ip_restriction blocks as defined above.
+	ScmIPRestriction []LinuxWebAppSlotSiteConfigScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
+	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
+
+	// Should the Linux Web App ip_restriction configuration be used for the SCM also.
+	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
+
+	// Should the Linux Web App use a 32-bit worker? Defaults to true.
+	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
+
+	// Should all outbound traffic have NAT Gateways, Network Security Groups and User Defined Routes applied? Defaults to false.
+	// Should all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied? Defaults to `false`.
+	VnetRouteAllEnabled *bool `json:"vnetRouteAllEnabled,omitempty" tf:"vnet_route_all_enabled,omitempty"`
+
+	// Should Web Sockets be enabled? Defaults to false.
+	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
+
+	// The number of Workers for this Linux App Service Slot.
+	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 }
 
 type LinuxWebAppSlotSiteConfigObservation struct {
@@ -1871,126 +2500,111 @@ type LinuxWebAppSlotSiteConfigObservation struct {
 type LinuxWebAppSlotSiteConfigParameters struct {
 
 	// The URL to the API Definition for this Linux Web App Slot.
-	// +kubebuilder:validation:Optional
 	APIDefinitionURL *string `json:"apiDefinitionUrl,omitempty" tf:"api_definition_url,omitempty"`
 
 	// The API Management API ID this Linux Web App Slot is associated with.
-	// +kubebuilder:validation:Optional
 	APIManagementAPIID *string `json:"apiManagementApiId,omitempty" tf:"api_management_api_id,omitempty"`
 
 	// If this Linux Web App is Always On enabled. Defaults to true.
-	// +kubebuilder:validation:Optional
 	AlwaysOn *bool `json:"alwaysOn,omitempty" tf:"always_on,omitempty"`
 
 	// The App command line to launch.
-	// +kubebuilder:validation:Optional
 	AppCommandLine *string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
 
 	// A application_stack block as defined above.
-	// +kubebuilder:validation:Optional
 	ApplicationStack []LinuxWebAppSlotSiteConfigApplicationStackParameters `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
 
 	// Should Auto heal rules be enabled? Required with auto_heal_setting.
-	// +kubebuilder:validation:Optional
 	AutoHealEnabled *bool `json:"autoHealEnabled,omitempty" tf:"auto_heal_enabled,omitempty"`
 
 	// A auto_heal_setting block as defined above. Required with auto_heal.
-	// +kubebuilder:validation:Optional
 	AutoHealSetting []SiteConfigAutoHealSettingParameters `json:"autoHealSetting,omitempty" tf:"auto_heal_setting,omitempty"`
 
 	// The Linux Web App Slot Name to automatically swap to when deployment to that slot is successfully completed.
-	// +kubebuilder:validation:Optional
 	AutoSwapSlotName *string `json:"autoSwapSlotName,omitempty" tf:"auto_swap_slot_name,omitempty"`
 
 	// The Client ID of the Managed Service Identity to use for connections to the Azure Container Registry.
-	// +kubebuilder:validation:Optional
 	ContainerRegistryManagedIdentityClientID *string `json:"containerRegistryManagedIdentityClientId,omitempty" tf:"container_registry_managed_identity_client_id,omitempty"`
 
 	// Should connections for Azure Container Registry use Managed Identity.
-	// +kubebuilder:validation:Optional
 	ContainerRegistryUseManagedIdentity *bool `json:"containerRegistryUseManagedIdentity,omitempty" tf:"container_registry_use_managed_identity,omitempty"`
 
 	// A cors block as defined above.
-	// +kubebuilder:validation:Optional
 	Cors []LinuxWebAppSlotSiteConfigCorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// Specifies a list of Default Documents for the Linux Web App.
-	// +kubebuilder:validation:Optional
 	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
 
 	// The State of FTP / FTPS service. Possible values include AllAllowed, FtpsOnly, and Disabled.
-	// +kubebuilder:validation:Optional
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
 	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
-	// +kubebuilder:validation:Optional
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
 	// The path to the Health Check.
-	// +kubebuilder:validation:Optional
 	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
 
 	// Should the HTTP2 be enabled?
-	// +kubebuilder:validation:Optional
 	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 
 	// One or more ip_restriction blocks as defined above.
-	// +kubebuilder:validation:Optional
 	IPRestriction []LinuxWebAppSlotSiteConfigIPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
 	// The Site load balancing. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
-	// +kubebuilder:validation:Optional
 	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
 
 	// Use Local MySQL. Defaults to false.
-	// +kubebuilder:validation:Optional
 	LocalMySQLEnabled *bool `json:"localMysqlEnabled,omitempty" tf:"local_mysql_enabled,omitempty"`
 
 	// Managed pipeline mode. Possible values include: Integrated, Classic.
-	// +kubebuilder:validation:Optional
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// Should Remote Debugging be enabled? Defaults to false.
-	// +kubebuilder:validation:Optional
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
 	// The Remote Debugging Version. Possible values include VS2017 and VS2019
-	// +kubebuilder:validation:Optional
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
-	// +kubebuilder:validation:Optional
 	ScmIPRestriction []LinuxWebAppSlotSiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
-	// +kubebuilder:validation:Optional
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	// Should the Linux Web App ip_restriction configuration be used for the SCM also.
-	// +kubebuilder:validation:Optional
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
 	// Should the Linux Web App use a 32-bit worker? Defaults to true.
-	// +kubebuilder:validation:Optional
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
 	// Should all outbound traffic have NAT Gateways, Network Security Groups and User Defined Routes applied? Defaults to false.
 	// Should all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied? Defaults to `false`.
-	// +kubebuilder:validation:Optional
 	VnetRouteAllEnabled *bool `json:"vnetRouteAllEnabled,omitempty" tf:"vnet_route_all_enabled,omitempty"`
 
 	// Should Web Sockets be enabled? Defaults to false.
-	// +kubebuilder:validation:Optional
 	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
 
 	// The number of Workers for this Linux App Service Slot.
-	// +kubebuilder:validation:Optional
 	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
+}
+
+type LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersInitParameters struct {
+
+	// Specifies a list of Azure Front Door IDs.
+	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
+
+	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
+	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
+
+	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
+	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
+
+	// Specifies a list of Hosts for which matching should be applied.
+	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
 type LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersObservation struct {
@@ -2011,20 +2625,42 @@ type LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersObservation struct {
 type LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersParameters struct {
 
 	// Specifies a list of Azure Front Door IDs.
-	// +kubebuilder:validation:Optional
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
 
 	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
-	// +kubebuilder:validation:Optional
 	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
 
 	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
-	// +kubebuilder:validation:Optional
 	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
 
 	// Specifies a list of Hosts for which matching should be applied.
-	// +kubebuilder:validation:Optional
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
+}
+
+type LinuxWebAppSlotSiteConfigScmIPRestrictionInitParameters struct {
+
+	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are `Allow` or `Deny`.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// A headers block as defined above.
+	Headers []LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
+	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The name which should be used for this Storage Account.
+	// The name which should be used for this `ip_restriction`.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority value of this ip_restriction. Defaults to 65000.
+	// The priority value of this `ip_restriction`.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The Service Tag used for this IP Restriction.
+	// The Service Tag used for this IP Restriction.
+	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
 }
 
 type LinuxWebAppSlotSiteConfigScmIPRestrictionObservation struct {
@@ -2061,31 +2697,25 @@ type LinuxWebAppSlotSiteConfigScmIPRestrictionParameters struct {
 
 	// The action to take. Possible values are Allow or Deny.
 	// The action to take. Possible values are `Allow` or `Deny`.
-	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A headers block as defined above.
-	// +kubebuilder:validation:Optional
 	Headers []LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
-	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The name which should be used for this Storage Account.
 	// The name which should be used for this `ip_restriction`.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The priority value of this ip_restriction. Defaults to 65000.
 	// The priority value of this `ip_restriction`.
-	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The Service Tag used for this IP Restriction.
 	// The Service Tag used for this IP Restriction.
-	// +kubebuilder:validation:Optional
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
@@ -2104,6 +2734,9 @@ type LinuxWebAppSlotSiteConfigScmIPRestrictionParameters struct {
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
+type LinuxWebAppSlotSiteCredentialInitParameters struct {
+}
+
 type LinuxWebAppSlotSiteCredentialObservation struct {
 
 	// The Site Credentials Username used for publishing.
@@ -2114,6 +2747,24 @@ type LinuxWebAppSlotSiteCredentialObservation struct {
 }
 
 type LinuxWebAppSlotSiteCredentialParameters struct {
+}
+
+type LinuxWebAppSlotStorageAccountInitParameters struct {
+
+	// The Name of the Storage Account.
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// The path at which to mount the storage share.
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+
+	// The name which should be used for this Storage Account.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Name of the File Share or Container Name for Blob storage.
+	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
+
+	// The Azure Storage Type. Possible values include AzureFiles and AzureBlob
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type LinuxWebAppSlotStorageAccountObservation struct {
@@ -2137,28 +2788,31 @@ type LinuxWebAppSlotStorageAccountObservation struct {
 type LinuxWebAppSlotStorageAccountParameters struct {
 
 	// The Access key for the storage account.
-	// +kubebuilder:validation:Required
 	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
 
 	// The Name of the Storage Account.
-	// +kubebuilder:validation:Required
-	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
+	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
 	// The path at which to mount the storage share.
-	// +kubebuilder:validation:Optional
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 
 	// The name which should be used for this Storage Account.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Name of the File Share or Container Name for Blob storage.
-	// +kubebuilder:validation:Required
-	ShareName *string `json:"shareName" tf:"share_name,omitempty"`
+	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
 
 	// The Azure Storage Type. Possible values include AzureFiles and AzureBlob
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type LogsApplicationLogsInitParameters struct {
+
+	// A azure_blob_storage_http block as defined above.
+	AzureBlobStorage []ApplicationLogsAzureBlobStorageInitParameters `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
+
+	// Log level. Possible values include Verbose, Information, Warning, and Error.
+	FileSystemLevel *string `json:"fileSystemLevel,omitempty" tf:"file_system_level,omitempty"`
 }
 
 type LogsApplicationLogsObservation struct {
@@ -2173,12 +2827,16 @@ type LogsApplicationLogsObservation struct {
 type LogsApplicationLogsParameters struct {
 
 	// A azure_blob_storage_http block as defined above.
-	// +kubebuilder:validation:Optional
 	AzureBlobStorage []ApplicationLogsAzureBlobStorageParameters `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
 	// Log level. Possible values include Verbose, Information, Warning, and Error.
-	// +kubebuilder:validation:Required
-	FileSystemLevel *string `json:"fileSystemLevel" tf:"file_system_level,omitempty"`
+	FileSystemLevel *string `json:"fileSystemLevel,omitempty" tf:"file_system_level,omitempty"`
+}
+
+type LogsHTTPLogsAzureBlobStorageInitParameters struct {
+
+	// The retention period in days. A values of 0 means no retention.
+	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 }
 
 type LogsHTTPLogsAzureBlobStorageObservation struct {
@@ -2190,12 +2848,19 @@ type LogsHTTPLogsAzureBlobStorageObservation struct {
 type LogsHTTPLogsAzureBlobStorageParameters struct {
 
 	// The retention period in days. A values of 0 means no retention.
-	// +kubebuilder:validation:Optional
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// SAS url to an Azure blob container with read/write/list/delete permissions.
-	// +kubebuilder:validation:Required
 	SASURLSecretRef v1.SecretKeySelector `json:"sasurlSecretRef" tf:"-"`
+}
+
+type LogsHTTPLogsInitParameters struct {
+
+	// A azure_blob_storage_http block as defined above.
+	AzureBlobStorage []LogsHTTPLogsAzureBlobStorageInitParameters `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
+
+	// A file_system block as defined above.
+	FileSystem []HTTPLogsFileSystemInitParameters `json:"fileSystem,omitempty" tf:"file_system,omitempty"`
 }
 
 type LogsHTTPLogsObservation struct {
@@ -2210,12 +2875,19 @@ type LogsHTTPLogsObservation struct {
 type LogsHTTPLogsParameters struct {
 
 	// A azure_blob_storage_http block as defined above.
-	// +kubebuilder:validation:Optional
 	AzureBlobStorage []LogsHTTPLogsAzureBlobStorageParameters `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
 	// A file_system block as defined above.
-	// +kubebuilder:validation:Optional
 	FileSystem []HTTPLogsFileSystemParameters `json:"fileSystem,omitempty" tf:"file_system,omitempty"`
+}
+
+type SiteConfigAutoHealSettingInitParameters struct {
+
+	// The action to take. Possible values are Allow or Deny.
+	Action []AutoHealSettingActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
+
+	// A trigger block as defined below.
+	Trigger []AutoHealSettingTriggerInitParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
 }
 
 type SiteConfigAutoHealSettingObservation struct {
@@ -2230,12 +2902,19 @@ type SiteConfigAutoHealSettingObservation struct {
 type SiteConfigAutoHealSettingParameters struct {
 
 	// The action to take. Possible values are Allow or Deny.
-	// +kubebuilder:validation:Optional
 	Action []AutoHealSettingActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A trigger block as defined below.
-	// +kubebuilder:validation:Optional
 	Trigger []AutoHealSettingTriggerParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
+}
+
+type TriggerRequestsInitParameters struct {
+
+	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The time interval in the form hh:mm:ss.
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
 }
 
 type TriggerRequestsObservation struct {
@@ -2250,12 +2929,25 @@ type TriggerRequestsObservation struct {
 type TriggerRequestsParameters struct {
 
 	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
-	// +kubebuilder:validation:Required
-	Count *float64 `json:"count" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The time interval in the form hh:mm:ss.
-	// +kubebuilder:validation:Required
-	Interval *string `json:"interval" tf:"interval,omitempty"`
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+}
+
+type TriggerSlowRequestInitParameters struct {
+
+	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The time interval in the form hh:mm:ss.
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The path to which this rule status code applies.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
+	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
 }
 
 type TriggerSlowRequestObservation struct {
@@ -2276,20 +2968,37 @@ type TriggerSlowRequestObservation struct {
 type TriggerSlowRequestParameters struct {
 
 	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
-	// +kubebuilder:validation:Required
-	Count *float64 `json:"count" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The time interval in the form hh:mm:ss.
-	// +kubebuilder:validation:Required
-	Interval *string `json:"interval" tf:"interval,omitempty"`
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The path to which this rule status code applies.
-	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
-	// +kubebuilder:validation:Required
-	TimeTaken *string `json:"timeTaken" tf:"time_taken,omitempty"`
+	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
+}
+
+type TriggerStatusCodeInitParameters struct {
+
+	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The time interval in the form hh:mm:ss.
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The path to which this rule status code applies.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The status code for this rule, accepts single status codes and status code ranges. e.g. 500 or 400-499. Possible values are integers between 101 and 599
+	StatusCodeRange *string `json:"statusCodeRange,omitempty" tf:"status_code_range,omitempty"`
+
+	// The Request Sub Status of the Status Code.
+	SubStatus *float64 `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
+
+	// The Win32 Status Code of the Request.
+	Win32Status *string `json:"win32Status,omitempty" tf:"win32_status,omitempty"`
 }
 
 type TriggerStatusCodeObservation struct {
@@ -2316,27 +3025,21 @@ type TriggerStatusCodeObservation struct {
 type TriggerStatusCodeParameters struct {
 
 	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
-	// +kubebuilder:validation:Required
-	Count *float64 `json:"count" tf:"count,omitempty"`
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The time interval in the form hh:mm:ss.
-	// +kubebuilder:validation:Required
-	Interval *string `json:"interval" tf:"interval,omitempty"`
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// The path to which this rule status code applies.
-	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The status code for this rule, accepts single status codes and status code ranges. e.g. 500 or 400-499. Possible values are integers between 101 and 599
-	// +kubebuilder:validation:Required
-	StatusCodeRange *string `json:"statusCodeRange" tf:"status_code_range,omitempty"`
+	StatusCodeRange *string `json:"statusCodeRange,omitempty" tf:"status_code_range,omitempty"`
 
 	// The Request Sub Status of the Status Code.
-	// +kubebuilder:validation:Optional
 	SubStatus *float64 `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
 
 	// The Win32 Status Code of the Request.
-	// +kubebuilder:validation:Optional
 	Win32Status *string `json:"win32Status,omitempty" tf:"win32_status,omitempty"`
 }
 
@@ -2344,6 +3047,10 @@ type TriggerStatusCodeParameters struct {
 type LinuxWebAppSlotSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LinuxWebAppSlotParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LinuxWebAppSlotInitParameters `json:"initProvider,omitempty"`
 }
 
 // LinuxWebAppSlotStatus defines the observed state of LinuxWebAppSlot.
@@ -2364,8 +3071,8 @@ type LinuxWebAppSlotStatus struct {
 type LinuxWebAppSlot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.siteConfig)",message="siteConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.siteConfig) || has(self.initProvider.siteConfig)",message="siteConfig is a required parameter"
 	Spec   LinuxWebAppSlotSpec   `json:"spec"`
 	Status LinuxWebAppSlotStatus `json:"status,omitempty"`
 }

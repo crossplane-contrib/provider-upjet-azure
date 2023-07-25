@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: eventgriddataconnections.kusto.azure.upbound.io
 spec:
   group: kusto.azure.upbound.io
@@ -582,6 +582,54 @@ spec:
                       ingestion. Table must exist before resource is created.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  blobStorageEventType:
+                    description: Specifies the blob storage event type that needs
+                      to be processed. Possible Values are Microsoft.Storage.BlobCreated
+                      and Microsoft.Storage.BlobRenamed. Defaults to Microsoft.Storage.BlobCreated.
+                    type: string
+                  dataFormat:
+                    description: 'Specifies the data format of the EventHub messages.
+                      Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC,
+                      PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV, TSVE, TXT and
+                      W3CLOGFILE.'
+                    type: string
+                  databaseRoutingType:
+                    description: 'Indication for database routing information from
+                      the data connection, by default only database routing information
+                      is allowed. Allowed values: Single, Multi. Changing this forces
+                      a new resource to be created.'
+                    type: string
+                  eventgridResourceId:
+                    description: The resource ID of the event grid that is subscribed
+                      to the storage account events.
+                    type: string
+                  location:
+                    description: The location where the Kusto Database should be created.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  managedIdentityResourceId:
+                    description: Empty for non-managed identity based data connection.
+                      For system assigned identity, provide cluster resource Id. For
+                      user assigned identity (UAI) provide the UAI resource Id.
+                    type: string
+                  mappingRuleName:
+                    description: Specifies the mapping rule used for the message ingestion.
+                      Mapping rule must exist before resource is created.
+                    type: string
+                  skipFirstRecord:
+                    description: is the first record of every file ignored? Defaults
+                      to false.
+                    type: boolean
+                  tableName:
+                    description: Specifies the target table name used for the message
+                      ingestion. Table must exist before resource is created.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -782,7 +830,8 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
           status:
             description: EventGridDataConnectionStatus defines the observed state
               of EventGridDataConnection.

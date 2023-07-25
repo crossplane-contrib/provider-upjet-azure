@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: appserviceplans.web.azure.upbound.io
 spec:
   group: web.azure.upbound.io
@@ -192,9 +192,68 @@ spec:
                         tier:
                           description: Specifies the plan's pricing tier.
                           type: string
-                      required:
-                      - size
-                      - tier
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  zoneRedundant:
+                    description: Specifies if the App Service Plan should be Zone
+                      Redundant. Changing this forces a new resource to be created.
+                    type: boolean
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  appServiceEnvironmentId:
+                    description: The ID of the App Service Environment where the App
+                      Service Plan should be located. Changing forces a new resource
+                      to be created.
+                    type: string
+                  isXenon:
+                    description: Whether to create a xenon App Service Plan.
+                    type: boolean
+                  kind:
+                    description: The kind of the App Service Plan to create. Possible
+                      values are Windows (also available as App), Linux, elastic (for
+                      Premium Consumption), xenon and FunctionApp (for a Consumption
+                      Plan). Defaults to Windows. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  maximumElasticWorkerCount:
+                    description: The maximum number of total workers allowed for this
+                      ElasticScaleEnabled App Service Plan.
+                    type: number
+                  perSiteScaling:
+                    description: Can Apps assigned to this App Service Plan be scaled
+                      independently? If set to false apps assigned to this plan will
+                      scale to all instances of the plan.
+                    type: boolean
+                  reserved:
+                    description: Is this App Service Plan Reserved.
+                    type: boolean
+                  sku:
+                    description: A sku block as documented below.
+                    items:
+                      properties:
+                        capacity:
+                          description: Specifies the number of workers associated
+                            with this App Service Plan.
+                          type: number
+                        size:
+                          description: Specifies the plan's instance size.
+                          type: string
+                        tier:
+                          description: Specifies the plan's pricing tier.
+                          type: string
                       type: object
                     type: array
                   tags:
@@ -407,10 +466,12 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: sku is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)
+                || has(self.initProvider.sku)'
           status:
             description: AppServicePlanStatus defines the observed state of AppServicePlan.
             properties:

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: modules.automation.azure.upbound.io
 spec:
   group: automation.azure.upbound.io
@@ -161,16 +161,11 @@ spec:
                               value:
                                 description: The hash value of the content.
                                 type: string
-                            required:
-                            - algorithm
-                            - value
                             type: object
                           type: array
                         uri:
                           description: The URI of the module content (zip or nupkg).
                           type: string
-                      required:
-                      - uri
                       type: object
                     type: array
                   resourceGroupName:
@@ -252,6 +247,34 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  moduleLink:
+                    description: A module_link block as defined below.
+                    items:
+                      properties:
+                        hash:
+                          description: A hash block as defined below.
+                          items:
+                            properties:
+                              algorithm:
+                                description: Specifies the algorithm used for the
+                                  hash content.
+                                type: string
+                              value:
+                                description: The hash value of the content.
+                                type: string
+                            type: object
+                          type: array
+                        uri:
+                          description: The URI of the module content (zip or nupkg).
+                          type: string
+                      type: object
+                    type: array
                 type: object
               managementPolicies:
                 default:
@@ -453,7 +476,8 @@ spec:
             x-kubernetes-validations:
             - message: moduleLink is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.moduleLink)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.moduleLink)
+                || has(self.initProvider.moduleLink)'
           status:
             description: ModuleStatus defines the observed state of Module.
             properties:

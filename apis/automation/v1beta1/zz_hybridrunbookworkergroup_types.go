@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HybridRunBookWorkerGroupInitParameters struct {
+
+	// The name of the Automation Account in which the Runbook Worker Group is created. Changing this forces a new resource to be created.
+	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
+
+	// The name of resource type azurerm_automation_credential to use for hybrid worker.
+	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
+
+	// The name which should be used for this Automation Account Runbook Worker Group. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type HybridRunBookWorkerGroupObservation struct {
 
 	// The name of the Automation Account in which the Runbook Worker Group is created. Changing this forces a new resource to be created.
@@ -34,15 +46,12 @@ type HybridRunBookWorkerGroupObservation struct {
 type HybridRunBookWorkerGroupParameters struct {
 
 	// The name of the Automation Account in which the Runbook Worker Group is created. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 
 	// The name of resource type azurerm_automation_credential to use for hybrid worker.
-	// +kubebuilder:validation:Optional
 	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
 
 	// The name which should be used for this Automation Account Runbook Worker Group. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Automation should exist. Changing this forces a new Automation to be created.
@@ -63,6 +72,10 @@ type HybridRunBookWorkerGroupParameters struct {
 type HybridRunBookWorkerGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HybridRunBookWorkerGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider HybridRunBookWorkerGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // HybridRunBookWorkerGroupStatus defines the observed state of HybridRunBookWorkerGroup.
@@ -83,8 +96,8 @@ type HybridRunBookWorkerGroupStatus struct {
 type HybridRunBookWorkerGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.automationAccountName)",message="automationAccountName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.automationAccountName) || has(self.initProvider.automationAccountName)",message="automationAccountName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   HybridRunBookWorkerGroupSpec   `json:"spec"`
 	Status HybridRunBookWorkerGroupStatus `json:"status,omitempty"`
 }

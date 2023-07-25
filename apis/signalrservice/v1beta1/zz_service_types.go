@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CorsInitParameters struct {
+
+	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+}
+
 type CorsObservation struct {
 
 	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
@@ -22,8 +28,16 @@ type CorsObservation struct {
 type CorsParameters struct {
 
 	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
-	// +kubebuilder:validation:Required
-	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this signalR.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this signalR. Possible values are SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
@@ -44,12 +58,25 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this signalR.
-	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this signalR. Possible values are SystemAssigned, UserAssigned.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type LiveTraceInitParameters struct {
+
+	// Whether the log category ConnectivityLogs is enabled? Defaults to true
+	ConnectivityLogsEnabled *bool `json:"connectivityLogsEnabled,omitempty" tf:"connectivity_logs_enabled,omitempty"`
+
+	// Whether the live trace is enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Whether the log category HttpRequestLogs is enabled? Defaults to true
+	HTTPRequestLogsEnabled *bool `json:"httpRequestLogsEnabled,omitempty" tf:"http_request_logs_enabled,omitempty"`
+
+	// Whether the log category MessagingLogs is enabled? Defaults to true
+	MessagingLogsEnabled *bool `json:"messagingLogsEnabled,omitempty" tf:"messaging_logs_enabled,omitempty"`
 }
 
 type LiveTraceObservation struct {
@@ -70,20 +97,70 @@ type LiveTraceObservation struct {
 type LiveTraceParameters struct {
 
 	// Whether the log category ConnectivityLogs is enabled? Defaults to true
-	// +kubebuilder:validation:Optional
 	ConnectivityLogsEnabled *bool `json:"connectivityLogsEnabled,omitempty" tf:"connectivity_logs_enabled,omitempty"`
 
 	// Whether the live trace is enabled? Defaults to true.
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Whether the log category HttpRequestLogs is enabled? Defaults to true
-	// +kubebuilder:validation:Optional
 	HTTPRequestLogsEnabled *bool `json:"httpRequestLogsEnabled,omitempty" tf:"http_request_logs_enabled,omitempty"`
 
 	// Whether the log category MessagingLogs is enabled? Defaults to true
-	// +kubebuilder:validation:Optional
 	MessagingLogsEnabled *bool `json:"messagingLogsEnabled,omitempty" tf:"messaging_logs_enabled,omitempty"`
+}
+
+type ServiceInitParameters struct {
+
+	// Whether to enable AAD auth? Defaults to true.
+	AADAuthEnabled *bool `json:"aadAuthEnabled,omitempty" tf:"aad_auth_enabled,omitempty"`
+
+	// Specifies if Connectivity Logs are enabled or not. Defaults to false.
+	ConnectivityLogsEnabled *bool `json:"connectivityLogsEnabled,omitempty" tf:"connectivity_logs_enabled,omitempty"`
+
+	// A cors block as documented below.
+	Cors []CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// Specifies if Http Request Logs are enabled or not. Defaults to false.
+	HTTPRequestLogsEnabled *bool `json:"httpRequestLogsEnabled,omitempty" tf:"http_request_logs_enabled,omitempty"`
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// A live_trace block as defined below.
+	LiveTrace []LiveTraceInitParameters `json:"liveTrace,omitempty" tf:"live_trace,omitempty"`
+
+	// Specifies if Live Trace is enabled or not. Defaults to false.
+	LiveTraceEnabled *bool `json:"liveTraceEnabled,omitempty" tf:"live_trace_enabled,omitempty"`
+
+	// Whether to enable local auth? Defaults to true.
+	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
+
+	// Specifies the supported Azure location where the SignalR service exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies if Messaging Logs are enabled or not. Defaults to false.
+	MessagingLogsEnabled *bool `json:"messagingLogsEnabled,omitempty" tf:"messaging_logs_enabled,omitempty"`
+
+	// Whether to enable public network access? Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Specifies the client connection timeout. Defaults to 30.
+	ServerlessConnectionTimeoutInSeconds *float64 `json:"serverlessConnectionTimeoutInSeconds,omitempty" tf:"serverless_connection_timeout_in_seconds,omitempty"`
+
+	// Specifies the service mode. Possible values are Classic, Default and Serverless. Defaults to Default.
+	ServiceMode *string `json:"serviceMode,omitempty" tf:"service_mode,omitempty"`
+
+	// A sku block as documented below.
+	Sku []SkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// Whether to request client certificate during TLS handshake? Defaults to false.
+	TLSClientCertEnabled *bool `json:"tlsClientCertEnabled,omitempty" tf:"tls_client_cert_enabled,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// An upstream_endpoint block as documented below. Using this block requires the SignalR service to be Serverless. When creating multiple blocks they will be processed in the order they are defined in.
+	UpstreamEndpoint []UpstreamEndpointInitParameters `json:"upstreamEndpoint,omitempty" tf:"upstream_endpoint,omitempty"`
 }
 
 type ServiceObservation struct {
@@ -161,47 +238,36 @@ type ServiceObservation struct {
 type ServiceParameters struct {
 
 	// Whether to enable AAD auth? Defaults to true.
-	// +kubebuilder:validation:Optional
 	AADAuthEnabled *bool `json:"aadAuthEnabled,omitempty" tf:"aad_auth_enabled,omitempty"`
 
 	// Specifies if Connectivity Logs are enabled or not. Defaults to false.
-	// +kubebuilder:validation:Optional
 	ConnectivityLogsEnabled *bool `json:"connectivityLogsEnabled,omitempty" tf:"connectivity_logs_enabled,omitempty"`
 
 	// A cors block as documented below.
-	// +kubebuilder:validation:Optional
 	Cors []CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// Specifies if Http Request Logs are enabled or not. Defaults to false.
-	// +kubebuilder:validation:Optional
 	HTTPRequestLogsEnabled *bool `json:"httpRequestLogsEnabled,omitempty" tf:"http_request_logs_enabled,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// A live_trace block as defined below.
-	// +kubebuilder:validation:Optional
 	LiveTrace []LiveTraceParameters `json:"liveTrace,omitempty" tf:"live_trace,omitempty"`
 
 	// Specifies if Live Trace is enabled or not. Defaults to false.
-	// +kubebuilder:validation:Optional
 	LiveTraceEnabled *bool `json:"liveTraceEnabled,omitempty" tf:"live_trace_enabled,omitempty"`
 
 	// Whether to enable local auth? Defaults to true.
-	// +kubebuilder:validation:Optional
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the SignalR service exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies if Messaging Logs are enabled or not. Defaults to false.
-	// +kubebuilder:validation:Optional
 	MessagingLogsEnabled *bool `json:"messagingLogsEnabled,omitempty" tf:"messaging_logs_enabled,omitempty"`
 
 	// Whether to enable public network access? Defaults to true.
-	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which to create the SignalR service. Changing this forces a new resource to be created.
@@ -218,28 +284,31 @@ type ServiceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the client connection timeout. Defaults to 30.
-	// +kubebuilder:validation:Optional
 	ServerlessConnectionTimeoutInSeconds *float64 `json:"serverlessConnectionTimeoutInSeconds,omitempty" tf:"serverless_connection_timeout_in_seconds,omitempty"`
 
 	// Specifies the service mode. Possible values are Classic, Default and Serverless. Defaults to Default.
-	// +kubebuilder:validation:Optional
 	ServiceMode *string `json:"serviceMode,omitempty" tf:"service_mode,omitempty"`
 
 	// A sku block as documented below.
-	// +kubebuilder:validation:Optional
 	Sku []SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Whether to request client certificate during TLS handshake? Defaults to false.
-	// +kubebuilder:validation:Optional
 	TLSClientCertEnabled *bool `json:"tlsClientCertEnabled,omitempty" tf:"tls_client_cert_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// An upstream_endpoint block as documented below. Using this block requires the SignalR service to be Serverless. When creating multiple blocks they will be processed in the order they are defined in.
-	// +kubebuilder:validation:Optional
 	UpstreamEndpoint []UpstreamEndpointParameters `json:"upstreamEndpoint,omitempty" tf:"upstream_endpoint,omitempty"`
+}
+
+type SkuInitParameters struct {
+
+	// Specifies the number of units associated with this SignalR service. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90 and 100.
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// Specifies which tier to use. Valid values are Free_F1, Standard_S1 and Premium_P1.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type SkuObservation struct {
@@ -254,12 +323,25 @@ type SkuObservation struct {
 type SkuParameters struct {
 
 	// Specifies the number of units associated with this SignalR service. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90 and 100.
-	// +kubebuilder:validation:Required
-	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// Specifies which tier to use. Valid values are Free_F1, Standard_S1 and Premium_P1.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type UpstreamEndpointInitParameters struct {
+
+	// The categories to match on, or * for all.
+	CategoryPattern []*string `json:"categoryPattern,omitempty" tf:"category_pattern,omitempty"`
+
+	// The events to match on, or * for all.
+	EventPattern []*string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
+
+	// The hubs to match on, or * for all.
+	HubPattern []*string `json:"hubPattern,omitempty" tf:"hub_pattern,omitempty"`
+
+	// The upstream URL Template. This can be a url or a template such as http://host.com/{hub}/api/{category}/{event}.
+	URLTemplate *string `json:"urlTemplate,omitempty" tf:"url_template,omitempty"`
 }
 
 type UpstreamEndpointObservation struct {
@@ -280,26 +362,26 @@ type UpstreamEndpointObservation struct {
 type UpstreamEndpointParameters struct {
 
 	// The categories to match on, or * for all.
-	// +kubebuilder:validation:Required
-	CategoryPattern []*string `json:"categoryPattern" tf:"category_pattern,omitempty"`
+	CategoryPattern []*string `json:"categoryPattern,omitempty" tf:"category_pattern,omitempty"`
 
 	// The events to match on, or * for all.
-	// +kubebuilder:validation:Required
-	EventPattern []*string `json:"eventPattern" tf:"event_pattern,omitempty"`
+	EventPattern []*string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
 
 	// The hubs to match on, or * for all.
-	// +kubebuilder:validation:Required
-	HubPattern []*string `json:"hubPattern" tf:"hub_pattern,omitempty"`
+	HubPattern []*string `json:"hubPattern,omitempty" tf:"hub_pattern,omitempty"`
 
 	// The upstream URL Template. This can be a url or a template such as http://host.com/{hub}/api/{category}/{event}.
-	// +kubebuilder:validation:Required
-	URLTemplate *string `json:"urlTemplate" tf:"url_template,omitempty"`
+	URLTemplate *string `json:"urlTemplate,omitempty" tf:"url_template,omitempty"`
 }
 
 // ServiceSpec defines the desired state of Service
 type ServiceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServiceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ServiceInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServiceStatus defines the observed state of Service.
@@ -320,8 +402,8 @@ type ServiceStatus struct {
 type Service struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
 	Spec   ServiceSpec   `json:"spec"`
 	Status ServiceStatus `json:"status,omitempty"`
 }

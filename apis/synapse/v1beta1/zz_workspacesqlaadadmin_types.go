@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type WorkspaceSQLAADAdminInitParameters struct {
+
+	// The login name of the Azure AD Administrator of this Synapse Workspace.
+	Login *string `json:"login,omitempty" tf:"login,omitempty"`
+
+	// The object id of the Azure AD Administrator of this Synapse Workspace.
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	// The tenant id of the Azure AD Administrator of this Synapse Workspace.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
 type WorkspaceSQLAADAdminObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -32,11 +44,9 @@ type WorkspaceSQLAADAdminObservation struct {
 type WorkspaceSQLAADAdminParameters struct {
 
 	// The login name of the Azure AD Administrator of this Synapse Workspace.
-	// +kubebuilder:validation:Optional
 	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
 	// The object id of the Azure AD Administrator of this Synapse Workspace.
-	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// The ID of the Synapse Workspace where the Azure AD Administrator should be configured.
@@ -54,7 +64,6 @@ type WorkspaceSQLAADAdminParameters struct {
 	SynapseWorkspaceIDSelector *v1.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The tenant id of the Azure AD Administrator of this Synapse Workspace.
-	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
@@ -62,6 +71,10 @@ type WorkspaceSQLAADAdminParameters struct {
 type WorkspaceSQLAADAdminSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WorkspaceSQLAADAdminParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider WorkspaceSQLAADAdminInitParameters `json:"initProvider,omitempty"`
 }
 
 // WorkspaceSQLAADAdminStatus defines the observed state of WorkspaceSQLAADAdmin.
@@ -82,9 +95,9 @@ type WorkspaceSQLAADAdminStatus struct {
 type WorkspaceSQLAADAdmin struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.login)",message="login is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.objectId)",message="objectId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tenantId)",message="tenantId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.login) || has(self.initProvider.login)",message="login is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.objectId) || has(self.initProvider.objectId)",message="objectId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tenantId) || has(self.initProvider.tenantId)",message="tenantId is a required parameter"
 	Spec   WorkspaceSQLAADAdminSpec   `json:"spec"`
 	Status WorkspaceSQLAADAdminStatus `json:"status,omitempty"`
 }

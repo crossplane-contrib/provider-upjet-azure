@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: siterecoverynetworkmappings.recoveryservices.azure.upbound.io
 spec:
   group: recoveryservices.azure.upbound.io
@@ -399,6 +399,25 @@ spec:
                       to be created.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  name:
+                    description: The name of the network mapping. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  sourceRecoveryFabricName:
+                    description: Specifies the ASR fabric where mapping should be
+                      created. Changing this forces a new resource to be created.
+                    type: string
+                  targetRecoveryFabricName:
+                    description: The Azure Site Recovery fabric object corresponding
+                      to the recovery Azure region. Changing this forces a new resource
+                      to be created.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -599,13 +618,16 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: sourceRecoveryFabricName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceRecoveryFabricName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sourceRecoveryFabricName)
+                || has(self.initProvider.sourceRecoveryFabricName)'
             - message: targetRecoveryFabricName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetRecoveryFabricName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetRecoveryFabricName)
+                || has(self.initProvider.targetRecoveryFabricName)'
           status:
             description: SiteRecoveryNetworkMappingStatus defines the observed state
               of SiteRecoveryNetworkMapping.

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: activedirectoryadministrators.dbforpostgresql.azure.upbound.io
 spec:
   group: dbforpostgresql.azure.upbound.io
@@ -237,6 +237,23 @@ spec:
                     description: The Azure Tenant ID
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  login:
+                    description: The login name of the principal to set as the server
+                      administrator
+                    type: string
+                  objectId:
+                    description: The ID of the principal to set as the server administrator.
+                      For a managed identity this should be the Client ID of the identity.
+                    type: string
+                  tenantId:
+                    description: The Azure Tenant ID
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -437,13 +454,16 @@ spec:
             x-kubernetes-validations:
             - message: login is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.login)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.login)
+                || has(self.initProvider.login)'
             - message: objectId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.objectId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.objectId)
+                || has(self.initProvider.objectId)'
             - message: tenantId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.tenantId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tenantId)
+                || has(self.initProvider.tenantId)'
           status:
             description: ActiveDirectoryAdministratorStatus defines the observed state
               of ActiveDirectoryAdministrator.

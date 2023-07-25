@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type UserInitParameters struct {
+
+	// The kind of confirmation email which will be sent to this user. Possible values are invite and signup. Changing this forces a new resource to be created.
+	Confirmation *string `json:"confirmation,omitempty" tf:"confirmation,omitempty"`
+
+	// The email address associated with this user.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// The first name for this user.
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
+
+	// The last name for this user.
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// A note about this user.
+	Note *string `json:"note,omitempty" tf:"note,omitempty"`
+
+	// The state of this user. Possible values are active, blocked and pending.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+}
+
 type UserObservation struct {
 
 	// The name of the API Management Service in which the User should be created. Changing this forces a new resource to be created.
@@ -59,27 +80,21 @@ type UserParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The kind of confirmation email which will be sent to this user. Possible values are invite and signup. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Confirmation *string `json:"confirmation,omitempty" tf:"confirmation,omitempty"`
 
 	// The email address associated with this user.
-	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// The first name for this user.
-	// +kubebuilder:validation:Optional
 	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
 
 	// The last name for this user.
-	// +kubebuilder:validation:Optional
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
 	// A note about this user.
-	// +kubebuilder:validation:Optional
 	Note *string `json:"note,omitempty" tf:"note,omitempty"`
 
 	// The password associated with this user.
-	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
@@ -96,7 +111,6 @@ type UserParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The state of this user. Possible values are active, blocked and pending.
-	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 
@@ -104,6 +118,10 @@ type UserParameters struct {
 type UserSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     UserParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider UserInitParameters `json:"initProvider,omitempty"`
 }
 
 // UserStatus defines the observed state of User.
@@ -124,9 +142,9 @@ type UserStatus struct {
 type User struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.email)",message="email is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.firstName)",message="firstName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lastName)",message="lastName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.email) || has(self.initProvider.email)",message="email is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.firstName) || has(self.initProvider.firstName)",message="firstName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lastName) || has(self.initProvider.lastName)",message="lastName is a required parameter"
 	Spec   UserSpec   `json:"spec"`
 	Status UserStatus `json:"status,omitempty"`
 }

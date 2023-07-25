@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DNSConfigInitParameters struct {
+
+	// The relative domain name, this is combined with the domain name used by Traffic Manager to form the FQDN which is exported as documented below. Changing this forces a new resource to be created.
+	RelativeName *string `json:"relativeName,omitempty" tf:"relative_name,omitempty"`
+
+	// The TTL value of the Profile used by Local DNS resolvers and clients.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+}
+
 type DNSConfigObservation struct {
 
 	// The relative domain name, this is combined with the domain name used by Traffic Manager to form the FQDN which is exported as documented below. Changing this forces a new resource to be created.
@@ -25,12 +34,19 @@ type DNSConfigObservation struct {
 type DNSConfigParameters struct {
 
 	// The relative domain name, this is combined with the domain name used by Traffic Manager to form the FQDN which is exported as documented below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	RelativeName *string `json:"relativeName" tf:"relative_name,omitempty"`
+	RelativeName *string `json:"relativeName,omitempty" tf:"relative_name,omitempty"`
 
 	// The TTL value of the Profile used by Local DNS resolvers and clients.
-	// +kubebuilder:validation:Required
-	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+}
+
+type MonitorConfigCustomHeaderInitParameters struct {
+
+	// The name of the Traffic Manager profile. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of custom header. Applicable for HTTP and HTTPS protocol.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type MonitorConfigCustomHeaderObservation struct {
@@ -45,12 +61,37 @@ type MonitorConfigCustomHeaderObservation struct {
 type MonitorConfigCustomHeaderParameters struct {
 
 	// The name of the Traffic Manager profile. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of custom header. Applicable for HTTP and HTTPS protocol.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type MonitorConfigInitParameters struct {
+
+	// One or more custom_header blocks as defined below.
+	CustomHeader []MonitorConfigCustomHeaderInitParameters `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
+
+	// A list of status code ranges in the format of 100-101.
+	ExpectedStatusCodeRanges []*string `json:"expectedStatusCodeRanges,omitempty" tf:"expected_status_code_ranges,omitempty"`
+
+	// The interval used to check the endpoint health from a Traffic Manager probing agent. You can specify two values here: 30 (normal probing) and 10 (fast probing). The default value is 30.
+	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
+
+	// The path used by the monitoring checks. Required when protocol is set to HTTP or HTTPS - cannot be set when protocol is set to TCP.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The port number used by the monitoring checks.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The protocol used by the monitoring checks, supported values are HTTP, HTTPS and TCP.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The amount of time the Traffic Manager probing agent should wait before considering that check a failure when a health check probe is sent to the endpoint. If interval_in_seconds is set to 30, then timeout_in_seconds can be between 5 and 10. The default value is 10. If interval_in_seconds is set to 10, then valid values are between 5 and 9 and timeout_in_seconds is required.
+	TimeoutInSeconds *float64 `json:"timeoutInSeconds,omitempty" tf:"timeout_in_seconds,omitempty"`
+
+	// The number of failures a Traffic Manager probing agent tolerates before marking that endpoint as unhealthy. Valid values are between 0 and 9. The default value is 3
+	ToleratedNumberOfFailures *float64 `json:"toleratedNumberOfFailures,omitempty" tf:"tolerated_number_of_failures,omitempty"`
 }
 
 type MonitorConfigObservation struct {
@@ -83,36 +124,52 @@ type MonitorConfigObservation struct {
 type MonitorConfigParameters struct {
 
 	// One or more custom_header blocks as defined below.
-	// +kubebuilder:validation:Optional
 	CustomHeader []MonitorConfigCustomHeaderParameters `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
 
 	// A list of status code ranges in the format of 100-101.
-	// +kubebuilder:validation:Optional
 	ExpectedStatusCodeRanges []*string `json:"expectedStatusCodeRanges,omitempty" tf:"expected_status_code_ranges,omitempty"`
 
 	// The interval used to check the endpoint health from a Traffic Manager probing agent. You can specify two values here: 30 (normal probing) and 10 (fast probing). The default value is 30.
-	// +kubebuilder:validation:Optional
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
 	// The path used by the monitoring checks. Required when protocol is set to HTTP or HTTPS - cannot be set when protocol is set to TCP.
-	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The port number used by the monitoring checks.
-	// +kubebuilder:validation:Required
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The protocol used by the monitoring checks, supported values are HTTP, HTTPS and TCP.
-	// +kubebuilder:validation:Required
-	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// The amount of time the Traffic Manager probing agent should wait before considering that check a failure when a health check probe is sent to the endpoint. If interval_in_seconds is set to 30, then timeout_in_seconds can be between 5 and 10. The default value is 10. If interval_in_seconds is set to 10, then valid values are between 5 and 9 and timeout_in_seconds is required.
-	// +kubebuilder:validation:Optional
 	TimeoutInSeconds *float64 `json:"timeoutInSeconds,omitempty" tf:"timeout_in_seconds,omitempty"`
 
 	// The number of failures a Traffic Manager probing agent tolerates before marking that endpoint as unhealthy. Valid values are between 0 and 9. The default value is 3
-	// +kubebuilder:validation:Optional
 	ToleratedNumberOfFailures *float64 `json:"toleratedNumberOfFailures,omitempty" tf:"tolerated_number_of_failures,omitempty"`
+}
+
+type TrafficManagerProfileInitParameters struct {
+
+	// This block specifies the DNS configuration of the Profile, it supports the fields documented below.
+	DNSConfig []DNSConfigInitParameters `json:"dnsConfig,omitempty" tf:"dns_config,omitempty"`
+
+	// The amount of endpoints to return for DNS queries to this Profile. Possible values range from 1 to 8.
+	MaxReturn *float64 `json:"maxReturn,omitempty" tf:"max_return,omitempty"`
+
+	// This block specifies the Endpoint monitoring configuration for the Profile, it supports the fields documented below.
+	MonitorConfig []MonitorConfigInitParameters `json:"monitorConfig,omitempty" tf:"monitor_config,omitempty"`
+
+	// The status of the profile, can be set to either Enabled or Disabled. Defaults to Enabled.
+	ProfileStatus *string `json:"profileStatus,omitempty" tf:"profile_status,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the algorithm used to route traffic. Possible values are Geographic, Weighted, Performance, Priority, Subnet and MultiValue.
+	TrafficRoutingMethod *string `json:"trafficRoutingMethod,omitempty" tf:"traffic_routing_method,omitempty"`
+
+	// Indicates whether Traffic View is enabled for the Traffic Manager profile.
+	TrafficViewEnabled *bool `json:"trafficViewEnabled,omitempty" tf:"traffic_view_enabled,omitempty"`
 }
 
 type TrafficManagerProfileObservation struct {
@@ -151,19 +208,15 @@ type TrafficManagerProfileObservation struct {
 type TrafficManagerProfileParameters struct {
 
 	// This block specifies the DNS configuration of the Profile, it supports the fields documented below.
-	// +kubebuilder:validation:Optional
 	DNSConfig []DNSConfigParameters `json:"dnsConfig,omitempty" tf:"dns_config,omitempty"`
 
 	// The amount of endpoints to return for DNS queries to this Profile. Possible values range from 1 to 8.
-	// +kubebuilder:validation:Optional
 	MaxReturn *float64 `json:"maxReturn,omitempty" tf:"max_return,omitempty"`
 
 	// This block specifies the Endpoint monitoring configuration for the Profile, it supports the fields documented below.
-	// +kubebuilder:validation:Optional
 	MonitorConfig []MonitorConfigParameters `json:"monitorConfig,omitempty" tf:"monitor_config,omitempty"`
 
 	// The status of the profile, can be set to either Enabled or Disabled. Defaults to Enabled.
-	// +kubebuilder:validation:Optional
 	ProfileStatus *string `json:"profileStatus,omitempty" tf:"profile_status,omitempty"`
 
 	// The name of the resource group in which to create the Traffic Manager profile. Changing this forces a new resource to be created.
@@ -180,15 +233,12 @@ type TrafficManagerProfileParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the algorithm used to route traffic. Possible values are Geographic, Weighted, Performance, Priority, Subnet and MultiValue.
-	// +kubebuilder:validation:Optional
 	TrafficRoutingMethod *string `json:"trafficRoutingMethod,omitempty" tf:"traffic_routing_method,omitempty"`
 
 	// Indicates whether Traffic View is enabled for the Traffic Manager profile.
-	// +kubebuilder:validation:Optional
 	TrafficViewEnabled *bool `json:"trafficViewEnabled,omitempty" tf:"traffic_view_enabled,omitempty"`
 }
 
@@ -196,6 +246,10 @@ type TrafficManagerProfileParameters struct {
 type TrafficManagerProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TrafficManagerProfileParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider TrafficManagerProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // TrafficManagerProfileStatus defines the observed state of TrafficManagerProfile.
@@ -216,9 +270,9 @@ type TrafficManagerProfileStatus struct {
 type TrafficManagerProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dnsConfig)",message="dnsConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.monitorConfig)",message="monitorConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trafficRoutingMethod)",message="trafficRoutingMethod is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dnsConfig) || has(self.initProvider.dnsConfig)",message="dnsConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.monitorConfig) || has(self.initProvider.monitorConfig)",message="monitorConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trafficRoutingMethod) || has(self.initProvider.trafficRoutingMethod)",message="trafficRoutingMethod is a required parameter"
 	Spec   TrafficManagerProfileSpec   `json:"spec"`
 	Status TrafficManagerProfileStatus `json:"status,omitempty"`
 }

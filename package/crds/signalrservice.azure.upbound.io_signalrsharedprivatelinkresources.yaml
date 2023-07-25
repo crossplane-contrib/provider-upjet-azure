@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: signalrsharedprivatelinkresources.signalrservice.azure.upbound.io
 spec:
   group: signalrservice.azure.upbound.io
@@ -239,6 +239,25 @@ spec:
                         type: object
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  name:
+                    description: The name of the Signalr Shared Private Link Resource.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  requestMessage:
+                    description: The request message for requesting approval of the
+                      Shared Private Link Enabled Remote Resource.
+                    type: string
+                  subResourceName:
+                    description: The sub resource name which the Signalr Private Endpoint
+                      can connect to. Possible values are sites, vault. Changing this
+                      forces a new resource to be created.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -439,10 +458,12 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: subResourceName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.subResourceName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.subResourceName)
+                || has(self.initProvider.subResourceName)'
           status:
             description: SignalrSharedPrivateLinkResourceStatus defines the observed
               state of SignalrSharedPrivateLinkResource.

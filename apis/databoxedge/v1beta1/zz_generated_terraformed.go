@@ -79,6 +79,15 @@ func (tr *Device) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Device
+func (tr *Device) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Device using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Device) LateInitialize(attrs []byte) (bool, error) {

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: queueauthorizationrules.servicebus.azure.upbound.io
 spec:
   group: servicebus.azure.upbound.io
@@ -153,6 +153,25 @@ spec:
                             type: string
                         type: object
                     type: object
+                  send:
+                    description: Does this Authorization Rule have Send permissions
+                      to the ServiceBus Queue? Defaults to false.
+                    type: boolean
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  listen:
+                    description: Does this Authorization Rule have Listen permissions
+                      to the ServiceBus Queue? Defaults to false.
+                    type: boolean
+                  manage:
+                    description: Does this Authorization Rule have Manage permissions
+                      to the ServiceBus Queue? When this property is true - both listen
+                      and send must be too. Defaults to false.
+                    type: boolean
                   send:
                     description: Does this Authorization Rule have Send permissions
                       to the ServiceBus Queue? Defaults to false.

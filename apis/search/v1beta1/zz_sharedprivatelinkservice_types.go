@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SharedPrivateLinkServiceInitParameters struct {
+
+	// Specify the request message for requesting approval of the Shared Private Link Enabled Remote Resource.
+	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
+
+	// Specify the sub resource name which the Azure Search Private Endpoint is able to connect to. Changing this forces a new resource to be created.
+	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
+}
+
 type SharedPrivateLinkServiceObservation struct {
 
 	// The ID of the Azure Search Shared Private Link resource.
@@ -37,7 +46,6 @@ type SharedPrivateLinkServiceObservation struct {
 type SharedPrivateLinkServiceParameters struct {
 
 	// Specify the request message for requesting approval of the Shared Private Link Enabled Remote Resource.
-	// +kubebuilder:validation:Optional
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
 	// Specify the id of the Azure Search Service. Changing this forces a new resource to be created.
@@ -55,7 +63,6 @@ type SharedPrivateLinkServiceParameters struct {
 	SearchServiceIDSelector *v1.Selector `json:"searchServiceIdSelector,omitempty" tf:"-"`
 
 	// Specify the sub resource name which the Azure Search Private Endpoint is able to connect to. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 
 	// Specify the ID of the Shared Private Link Enabled Remote Resource which this Azure Search Private Endpoint should be connected to. Changing this forces a new resource to be created.
@@ -77,6 +84,10 @@ type SharedPrivateLinkServiceParameters struct {
 type SharedPrivateLinkServiceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SharedPrivateLinkServiceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SharedPrivateLinkServiceInitParameters `json:"initProvider,omitempty"`
 }
 
 // SharedPrivateLinkServiceStatus defines the observed state of SharedPrivateLinkService.
@@ -97,7 +108,7 @@ type SharedPrivateLinkServiceStatus struct {
 type SharedPrivateLinkService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subresourceName)",message="subresourceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subresourceName) || has(self.initProvider.subresourceName)",message="subresourceName is a required parameter"
 	Spec   SharedPrivateLinkServiceSpec   `json:"spec"`
 	Status SharedPrivateLinkServiceStatus `json:"status,omitempty"`
 }

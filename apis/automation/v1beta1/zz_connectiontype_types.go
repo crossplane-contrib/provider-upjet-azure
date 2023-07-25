@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConnectionTypeInitParameters struct {
+
+	// One or more field blocks as defined below. Changing this forces a new Automation to be created.
+	Field []FieldInitParameters `json:"field,omitempty" tf:"field,omitempty"`
+
+	// Whether the connection type is global. Changing this forces a new Automation to be created.
+	IsGlobal *bool `json:"isGlobal,omitempty" tf:"is_global,omitempty"`
+
+	// The name which should be used for this Automation Connection Type. Changing this forces a new Automation to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type ConnectionTypeObservation struct {
 
 	// The name of the automation account in which the Connection is created. Changing this forces a new resource to be created.
@@ -50,15 +62,12 @@ type ConnectionTypeParameters struct {
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// One or more field blocks as defined below. Changing this forces a new Automation to be created.
-	// +kubebuilder:validation:Optional
 	Field []FieldParameters `json:"field,omitempty" tf:"field,omitempty"`
 
 	// Whether the connection type is global. Changing this forces a new Automation to be created.
-	// +kubebuilder:validation:Optional
 	IsGlobal *bool `json:"isGlobal,omitempty" tf:"is_global,omitempty"`
 
 	// The name which should be used for this Automation Connection Type. Changing this forces a new Automation to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Automation should exist. Changing this forces a new Automation to be created.
@@ -73,6 +82,21 @@ type ConnectionTypeParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+}
+
+type FieldInitParameters struct {
+
+	// Whether to set the isEncrypted flag of the connection field definition.
+	IsEncrypted *bool `json:"isEncrypted,omitempty" tf:"is_encrypted,omitempty"`
+
+	// Whether to set the isOptional flag of the connection field definition.
+	IsOptional *bool `json:"isOptional,omitempty" tf:"is_optional,omitempty"`
+
+	// The name which should be used for this connection field definition.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The type of the connection field definition.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type FieldObservation struct {
@@ -93,26 +117,26 @@ type FieldObservation struct {
 type FieldParameters struct {
 
 	// Whether to set the isEncrypted flag of the connection field definition.
-	// +kubebuilder:validation:Optional
 	IsEncrypted *bool `json:"isEncrypted,omitempty" tf:"is_encrypted,omitempty"`
 
 	// Whether to set the isOptional flag of the connection field definition.
-	// +kubebuilder:validation:Optional
 	IsOptional *bool `json:"isOptional,omitempty" tf:"is_optional,omitempty"`
 
 	// The name which should be used for this connection field definition.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The type of the connection field definition.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // ConnectionTypeSpec defines the desired state of ConnectionType
 type ConnectionTypeSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConnectionTypeParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ConnectionTypeInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConnectionTypeStatus defines the observed state of ConnectionType.
@@ -133,8 +157,8 @@ type ConnectionTypeStatus struct {
 type ConnectionType struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.field)",message="field is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.field) || has(self.initProvider.field)",message="field is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ConnectionTypeSpec   `json:"spec"`
 	Status ConnectionTypeStatus `json:"status,omitempty"`
 }

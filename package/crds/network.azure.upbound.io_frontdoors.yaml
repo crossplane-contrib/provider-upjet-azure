@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: frontdoors.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -106,11 +106,6 @@ spec:
                                 description: Weight of this endpoint for load balancing
                                   purposes. Defaults to 50.
                                 type: number
-                            required:
-                            - address
-                            - hostHeader
-                            - httpPort
-                            - httpsPort
                             type: object
                           type: array
                         healthProbeName:
@@ -124,11 +119,6 @@ spec:
                         name:
                           description: Specifies the name of the Backend Pool.
                           type: string
-                      required:
-                      - backend
-                      - healthProbeName
-                      - loadBalancingName
-                      - name
                       type: object
                     type: array
                   backendPoolHealthProbe:
@@ -158,8 +148,6 @@ spec:
                           description: Protocol scheme to use for the Health Probe.
                             Possible values are Http and Https. Defaults to Http.
                           type: string
-                      required:
-                      - name
                       type: object
                     type: array
                   backendPoolLoadBalancing:
@@ -182,8 +170,6 @@ spec:
                           description: The number of samples within the sample period
                             that must succeed. Defaults to 2.
                           type: number
-                      required:
-                      - name
                       type: object
                     type: array
                   backendPoolSettings:
@@ -201,8 +187,6 @@ spec:
                             to all backend pools, this setting will have no effect
                             on HTTP requests. Permitted values are true or false.
                           type: boolean
-                      required:
-                      - enforceBackendPoolsCertificateNameCheck
                       type: object
                     type: array
                   friendlyName:
@@ -232,9 +216,6 @@ spec:
                           description: Defines the Web Application Firewall policy
                             ID for each host.
                           type: string
-                      required:
-                      - hostName
-                      - name
                       type: object
                     type: array
                   loadBalancerEnabled:
@@ -385,8 +366,6 @@ spec:
                                   options are HttpOnly, HttpsOnly, or MatchRequest.
                                   Defaults to HttpsOnly.
                                 type: string
-                            required:
-                            - backendPoolName
                             type: object
                           type: array
                         frontendEndpoints:
@@ -432,16 +411,287 @@ spec:
                                 description: Status code for the redirect. Valida
                                   options are Moved, Found, TemporaryRedirect, PermanentRedirect.
                                 type: string
-                            required:
-                            - redirectProtocol
-                            - redirectType
                             type: object
                           type: array
-                      required:
-                      - acceptedProtocols
-                      - frontendEndpoints
-                      - name
-                      - patternsToMatch
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  backendPool:
+                    description: A backend_pool block as defined below.
+                    items:
+                      properties:
+                        backend:
+                          description: A backend block as defined below.
+                          items:
+                            properties:
+                              address:
+                                description: Location of the backend (IP address or
+                                  FQDN)
+                                type: string
+                              enabled:
+                                description: Enable or Disable use of this Backend
+                                  Routing Rule. Permitted values are true or false.
+                                  Defaults to true.
+                                type: boolean
+                              hostHeader:
+                                description: The value to use as the host header sent
+                                  to the backend.
+                                type: string
+                              httpPort:
+                                description: The HTTP TCP port number. Possible values
+                                  are between 1 - 65535.
+                                type: number
+                              httpsPort:
+                                description: The HTTPS TCP port number. Possible values
+                                  are between 1 - 65535.
+                                type: number
+                              priority:
+                                description: Priority to use for load balancing. Higher
+                                  priorities will not be used for load balancing if
+                                  any lower priority backend is healthy. Defaults
+                                  to 1.
+                                type: number
+                              weight:
+                                description: Weight of this endpoint for load balancing
+                                  purposes. Defaults to 50.
+                                type: number
+                            type: object
+                          type: array
+                        healthProbeName:
+                          description: Specifies the name of the backend_pool_health_probe
+                            block within this resource to use for this Backend Pool.
+                          type: string
+                        loadBalancingName:
+                          description: Specifies the name of the backend_pool_load_balancing
+                            block within this resource to use for this Backend Pool.
+                          type: string
+                        name:
+                          description: Specifies the name of the Backend Pool.
+                          type: string
+                      type: object
+                    type: array
+                  backendPoolHealthProbe:
+                    description: A backend_pool_health_probe block as defined below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Is this health probe enabled? Defaults to true.
+                          type: boolean
+                        intervalInSeconds:
+                          description: The number of seconds between each Health Probe.
+                            Defaults to 120.
+                          type: number
+                        name:
+                          description: Specifies the name of the Health Probe.
+                          type: string
+                        path:
+                          description: The path to use for the Health Probe. Default
+                            is /.
+                          type: string
+                        probeMethod:
+                          description: 'Specifies HTTP method the health probe uses
+                            when querying the backend pool instances. Possible values
+                            include: Get and Head. Defaults to GET.'
+                          type: string
+                        protocol:
+                          description: Protocol scheme to use for the Health Probe.
+                            Possible values are Http and Https. Defaults to Http.
+                          type: string
+                      type: object
+                    type: array
+                  backendPoolLoadBalancing:
+                    description: A backend_pool_load_balancing block as defined below.
+                    items:
+                      properties:
+                        additionalLatencyMilliseconds:
+                          description: The additional latency in milliseconds for
+                            probes to fall into the lowest latency bucket. Defaults
+                            to 0.
+                          type: number
+                        name:
+                          description: Specifies the name of the Load Balancer.
+                          type: string
+                        sampleSize:
+                          description: The number of samples to consider for load
+                            balancing decisions. Defaults to 4.
+                          type: number
+                        successfulSamplesRequired:
+                          description: The number of samples within the sample period
+                            that must succeed. Defaults to 2.
+                          type: number
+                      type: object
+                    type: array
+                  backendPoolSettings:
+                    description: A backend_pool_settings block as defined below.
+                    items:
+                      properties:
+                        backendPoolsSendReceiveTimeoutSeconds:
+                          description: Specifies the send and receive timeout on forwarding
+                            request to the backend. When the timeout is reached, the
+                            request fails and returns. Possible values are between
+                            0 - 240. Defaults to 60.
+                          type: number
+                        enforceBackendPoolsCertificateNameCheck:
+                          description: Enforce certificate name check on HTTPS requests
+                            to all backend pools, this setting will have no effect
+                            on HTTP requests. Permitted values are true or false.
+                          type: boolean
+                      type: object
+                    type: array
+                  friendlyName:
+                    description: A friendly name for the Front Door service.
+                    type: string
+                  frontendEndpoint:
+                    description: A frontend_endpoint block as defined below.
+                    items:
+                      properties:
+                        hostName:
+                          description: Specifies the host name of the frontend_endpoint.
+                            Must be a domain name. In order to use a name.azurefd.net
+                            domain, the name value must match the Front Door name.
+                          type: string
+                        name:
+                          description: Specifies the name of the frontend_endpoint.
+                          type: string
+                        sessionAffinityEnabled:
+                          description: Whether to allow session affinity on this host.
+                            Valid options are true or false Defaults to false.
+                          type: boolean
+                        sessionAffinityTtlSeconds:
+                          description: The TTL to use in seconds for session affinity,
+                            if applicable. Defaults to 0.
+                          type: number
+                        webApplicationFirewallPolicyLinkId:
+                          description: Defines the Web Application Firewall policy
+                            ID for each host.
+                          type: string
+                      type: object
+                    type: array
+                  loadBalancerEnabled:
+                    description: Should the Front Door Load Balancer be Enabled? Defaults
+                      to true.
+                    type: boolean
+                  routingRule:
+                    description: A routing_rule block as defined below.
+                    items:
+                      properties:
+                        acceptedProtocols:
+                          description: Protocol schemes to match for the Backend Routing
+                            Rule. Possible values are Http and Https.
+                          items:
+                            type: string
+                          type: array
+                        enabled:
+                          description: Enable or Disable use of this Backend Routing
+                            Rule. Permitted values are true or false. Defaults to
+                            true.
+                          type: boolean
+                        forwardingConfiguration:
+                          description: A forwarding_configuration block as defined
+                            below.
+                          items:
+                            properties:
+                              backendPoolName:
+                                description: Specifies the name of the Backend Pool
+                                  to forward the incoming traffic to.
+                                type: string
+                              cacheDuration:
+                                description: Specify the minimum caching duration
+                                  (in ISO8601 notation e.g. P1DT2H for 1 day and 2
+                                  hours). Needs to be greater than 0 and smaller than
+                                  365 days. cache_duration works only in combination
+                                  with cache_enabled set to true.
+                                type: string
+                              cacheEnabled:
+                                description: Specifies whether to Enable caching or
+                                  not. Valid options are true or false. Defaults to
+                                  false.
+                                type: boolean
+                              cacheQueryParameterStripDirective:
+                                description: Defines cache behaviour in relation to
+                                  query string parameters. Valid options are StripAll,
+                                  StripAllExcept, StripOnly or StripNone. Defaults
+                                  to StripAll.
+                                type: string
+                              cacheQueryParameters:
+                                description: Specify query parameters (array). Works
+                                  only in combination with cache_query_parameter_strip_directive
+                                  set to StripAllExcept or StripOnly.
+                                items:
+                                  type: string
+                                type: array
+                              cacheUseDynamicCompression:
+                                description: Whether to use dynamic compression when
+                                  caching. Valid options are true or false. Defaults
+                                  to false.
+                                type: boolean
+                              customForwardingPath:
+                                description: Path to use when constructing the request
+                                  to forward to the backend. This functions as a URL
+                                  Rewrite. Default behaviour preserves the URL path.
+                                type: string
+                              forwardingProtocol:
+                                description: Protocol to use when redirecting. Valid
+                                  options are HttpOnly, HttpsOnly, or MatchRequest.
+                                  Defaults to HttpsOnly.
+                                type: string
+                            type: object
+                          type: array
+                        frontendEndpoints:
+                          description: The names of the frontend_endpoint blocks within
+                            this resource to associate with this routing_rule.
+                          items:
+                            type: string
+                          type: array
+                        name:
+                          description: Specifies the name of the Routing Rule.
+                          type: string
+                        patternsToMatch:
+                          description: The route patterns for the Backend Routing
+                            Rule.
+                          items:
+                            type: string
+                          type: array
+                        redirectConfiguration:
+                          description: A redirect_configuration block as defined below.
+                          items:
+                            properties:
+                              customFragment:
+                                description: The destination fragment in the portion
+                                  of URL after '#'. Set this to add a fragment to
+                                  the redirect URL.
+                                type: string
+                              customHost:
+                                description: Set this to change the URL for the redirection.
+                                type: string
+                              customPath:
+                                description: The path to retain as per the incoming
+                                  request, or update in the URL for the redirection.
+                                type: string
+                              customQueryString:
+                                description: Replace any existing query string from
+                                  the incoming request URL.
+                                type: string
+                              redirectProtocol:
+                                description: Protocol to use when redirecting. Valid
+                                  options are HttpOnly, HttpsOnly, or MatchRequest.
+                                type: string
+                              redirectType:
+                                description: Status code for the redirect. Valida
+                                  options are Moved, Found, TemporaryRedirect, PermanentRedirect.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   tags:
@@ -650,19 +900,24 @@ spec:
             x-kubernetes-validations:
             - message: backendPool is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.backendPool)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.backendPool)
+                || has(self.initProvider.backendPool)'
             - message: backendPoolHealthProbe is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.backendPoolHealthProbe)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.backendPoolHealthProbe)
+                || has(self.initProvider.backendPoolHealthProbe)'
             - message: backendPoolLoadBalancing is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.backendPoolLoadBalancing)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.backendPoolLoadBalancing)
+                || has(self.initProvider.backendPoolLoadBalancing)'
             - message: frontendEndpoint is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.frontendEndpoint)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.frontendEndpoint)
+                || has(self.initProvider.frontendEndpoint)'
             - message: routingRule is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.routingRule)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.routingRule)
+                || has(self.initProvider.routingRule)'
           status:
             description: FrontDoorStatus defines the observed state of FrontDoor.
             properties:

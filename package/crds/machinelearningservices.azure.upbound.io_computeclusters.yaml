@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: computeclusters.machinelearningservices.azure.upbound.io
 spec:
   group: machinelearningservices.azure.upbound.io
@@ -91,8 +91,6 @@ spec:
                             SystemAssigned, UserAssigned (to enable both). Changing
                             this forces a new resource to be created.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   localAuthEnabled:
@@ -209,10 +207,6 @@ spec:
                             standard for duration. Changing this forces a new Machine
                             Learning Compute Cluster to be created.'
                           type: string
-                      required:
-                      - maxNodeCount
-                      - minNodeCount
-                      - scaleDownNodesAfterIdleDuration
                       type: object
                     type: array
                   ssh:
@@ -237,8 +231,6 @@ spec:
                             Changing this forces a new Machine Learning Compute Cluster
                             to be created.
                           type: string
-                      required:
-                      - adminUsername
                       type: object
                     type: array
                   sshPublicAccessEnabled:
@@ -324,6 +316,120 @@ spec:
                             type: string
                         type: object
                     type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Machine Learning Compute Cluster. Changing this forces a new
+                      Machine Learning Compute Cluster to be created.
+                    type: object
+                  vmPriority:
+                    description: The priority of the VM. Changing this forces a new
+                      Machine Learning Compute Cluster to be created. Accepted values
+                      are Dedicated and LowPriority.
+                    type: string
+                  vmSize:
+                    description: The size of the VM. Changing this forces a new Machine
+                      Learning Compute Cluster to be created.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  description:
+                    description: The description of the Machine Learning compute.
+                      Changing this forces a new Machine Learning Compute Cluster
+                      to be created.
+                    type: string
+                  identity:
+                    description: An identity block as defined below. Changing this
+                      forces a new Machine Learning Compute Cluster to be created.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Machine Learning Compute Cluster.
+                            Changing this forces a new resource to be created.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Machine Learning Compute
+                            Cluster. Possible values are SystemAssigned, UserAssigned,
+                            SystemAssigned, UserAssigned (to enable both). Changing
+                            this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  localAuthEnabled:
+                    description: Whether local authentication methods is enabled.
+                      Defaults to true. Changing this forces a new Machine Learning
+                      Compute Cluster to be created.
+                    type: boolean
+                  location:
+                    description: The Azure Region where the Machine Learning Compute
+                      Cluster should exist. Changing this forces a new Machine Learning
+                      Compute Cluster to be created.
+                    type: string
+                  name:
+                    description: The name which should be used for this Machine Learning
+                      Compute Cluster. Changing this forces a new Machine Learning
+                      Compute Cluster to be created.
+                    type: string
+                  scaleSettings:
+                    description: A scale_settings block as defined below. Changing
+                      this forces a new Machine Learning Compute Cluster to be created.
+                    items:
+                      properties:
+                        maxNodeCount:
+                          description: Maximum node count. Changing this forces a
+                            new Machine Learning Compute Cluster to be created.
+                          type: number
+                        minNodeCount:
+                          description: Minimal node count. Changing this forces a
+                            new Machine Learning Compute Cluster to be created.
+                          type: number
+                        scaleDownNodesAfterIdleDuration:
+                          description: 'Node Idle Time Before Scale Down: defines
+                            the time until the compute is shutdown when it has gone
+                            into Idle state. Is defined according to W3C XML schema
+                            standard for duration. Changing this forces a new Machine
+                            Learning Compute Cluster to be created.'
+                          type: string
+                      type: object
+                    type: array
+                  ssh:
+                    description: Credentials for an administrator user account that
+                      will be created on each compute node. A ssh block as defined
+                      below. Changing this forces a new Machine Learning Compute Cluster
+                      to be created.
+                    items:
+                      properties:
+                        adminPassword:
+                          description: Password of the administrator user account.
+                            Changing this forces a new Machine Learning Compute Cluster
+                            to be created.
+                          type: string
+                        adminUsername:
+                          description: Name of the administrator user account which
+                            can be used to SSH to nodes. Changing this forces a new
+                            Machine Learning Compute Cluster to be created.
+                          type: string
+                        keyValue:
+                          description: SSH public key of the administrator user account.
+                            Changing this forces a new Machine Learning Compute Cluster
+                            to be created.
+                          type: string
+                      type: object
+                    type: array
+                  sshPublicAccessEnabled:
+                    description: A boolean value indicating whether enable the public
+                      SSH port. Changing this forces a new Machine Learning Compute
+                      Cluster to be created.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -541,19 +647,24 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: scaleSettings is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.scaleSettings)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.scaleSettings)
+                || has(self.initProvider.scaleSettings)'
             - message: vmPriority is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.vmPriority)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vmPriority)
+                || has(self.initProvider.vmPriority)'
             - message: vmSize is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.vmSize)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vmSize)
+                || has(self.initProvider.vmSize)'
           status:
             description: ComputeClusterStatus defines the observed state of ComputeCluster.
             properties:

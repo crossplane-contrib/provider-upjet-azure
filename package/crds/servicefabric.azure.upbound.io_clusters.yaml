@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: clusters.servicefabric.azure.upbound.io
 spec:
   group: servicefabric.azure.upbound.io
@@ -88,10 +88,6 @@ spec:
                         tenantId:
                           description: The Azure Active Directory Tenant ID.
                           type: string
-                      required:
-                      - clientApplicationId
-                      - clusterApplicationId
-                      - tenantId
                       type: object
                     type: array
                   certificate:
@@ -109,9 +105,6 @@ spec:
                           description: The X509 Store where the Certificate Exists,
                             such as My.
                           type: string
-                      required:
-                      - thumbprint
-                      - x509StoreName
                       type: object
                     type: array
                   certificateCommonNames:
@@ -129,17 +122,12 @@ spec:
                               certificateIssuerThumbprint:
                                 description: The Issuer Thumbprint of the Certificate.
                                 type: string
-                            required:
-                            - certificateCommonName
                             type: object
                           type: array
                         x509StoreName:
                           description: The X509 Store where the Certificate Exists,
                             such as My.
                           type: string
-                      required:
-                      - commonNames
-                      - x509StoreName
                       type: object
                     type: array
                   clientCertificateCommonName:
@@ -158,9 +146,6 @@ spec:
                         issuerThumbprint:
                           description: The Issuer Thumbprint of the Certificate.
                           type: string
-                      required:
-                      - commonName
-                      - isAdmin
                       type: object
                     type: array
                   clientCertificateThumbprint:
@@ -176,9 +161,6 @@ spec:
                         thumbprint:
                           description: The Thumbprint associated with the Client Certificate.
                           type: string
-                      required:
-                      - isAdmin
-                      - thumbprint
                       type: object
                     type: array
                   clusterCodeVersion:
@@ -206,12 +188,6 @@ spec:
                         tableEndpoint:
                           description: The Table Endpoint of the Storage Account.
                           type: string
-                      required:
-                      - blobEndpoint
-                      - protectedAccountKeyName
-                      - queueEndpoint
-                      - storageAccountName
-                      - tableEndpoint
                       type: object
                     type: array
                   fabricSettings:
@@ -228,8 +204,6 @@ spec:
                           description: A map containing settings for the specified
                             Fabric Setting.
                           type: object
-                      required:
-                      - name
                       type: object
                     type: array
                   location:
@@ -258,9 +232,6 @@ spec:
                                 description: The start of the Ephemeral Port Range
                                   on this Node Type.
                                 type: number
-                            required:
-                            - endPort
-                            - startPort
                             type: object
                           type: array
                         capacities:
@@ -290,9 +261,6 @@ spec:
                                 description: The start of the Ephemeral Port Range
                                   on this Node Type.
                                 type: number
-                            required:
-                            - endPort
-                            - startPort
                             type: object
                           type: array
                         httpEndpointPort:
@@ -325,12 +293,6 @@ spec:
                           description: The Port used for the Reverse Proxy Endpoint
                             for this Node Type. Changing this will upgrade the cluster.
                           type: number
-                      required:
-                      - clientEndpointPort
-                      - httpEndpointPort
-                      - instanceCount
-                      - isPrimary
-                      - name
                       type: object
                     type: array
                   reliabilityLevel:
@@ -432,9 +394,6 @@ spec:
                           description: The X509 Store where the Certificate Exists,
                             such as My.
                           type: string
-                      required:
-                      - thumbprint
-                      - x509StoreName
                       type: object
                     type: array
                   reverseProxyCertificateCommonNames:
@@ -452,17 +411,410 @@ spec:
                               certificateIssuerThumbprint:
                                 description: The Issuer Thumbprint of the Certificate.
                                 type: string
-                            required:
-                            - certificateCommonName
                             type: object
                           type: array
                         x509StoreName:
                           description: The X509 Store where the Certificate Exists,
                             such as My.
                           type: string
-                      required:
-                      - commonNames
-                      - x509StoreName
+                      type: object
+                    type: array
+                  serviceFabricZonalUpgradeMode:
+                    description: Specifies the logical grouping of VMs in upgrade
+                      domains. Possible values are Hierarchical or Parallel.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  upgradeMode:
+                    description: Specifies the Upgrade Mode of the cluster. Possible
+                      values are Automatic or Manual.
+                    type: string
+                  upgradePolicy:
+                    description: A upgrade_policy block as defined below.
+                    items:
+                      properties:
+                        deltaHealthPolicy:
+                          description: A delta_health_policy block as defined below
+                          items:
+                            properties:
+                              maxDeltaUnhealthyApplicationsPercent:
+                                description: Specifies the maximum tolerated percentage
+                                  of delta unhealthy applications that can have aggregated
+                                  health states of error. If the current unhealthy
+                                  applications do not respect the percentage relative
+                                  to the state at the beginning of the upgrade, the
+                                  cluster is unhealthy. Defaults to 0.
+                                type: number
+                              maxDeltaUnhealthyNodesPercent:
+                                description: Specifies the maximum tolerated percentage
+                                  of delta unhealthy nodes that can have aggregated
+                                  health states of error. If the current unhealthy
+                                  nodes do not respect the percentage relative to
+                                  the state at the beginning of the upgrade, the cluster
+                                  is unhealthy. Defaults to 0.
+                                type: number
+                              maxUpgradeDomainDeltaUnhealthyNodesPercent:
+                                description: Specifies the maximum tolerated percentage
+                                  of upgrade domain delta unhealthy nodes that can
+                                  have aggregated health state of error. If there
+                                  is any upgrade domain where the current unhealthy
+                                  nodes do not respect the percentage relative to
+                                  the state at the beginning of the upgrade, the cluster
+                                  is unhealthy. Defaults to 0.
+                                type: number
+                            type: object
+                          type: array
+                        forceRestartEnabled:
+                          description: Indicates whether to restart the Service Fabric
+                            node even if only dynamic configurations have changed.
+                          type: boolean
+                        healthCheckRetryTimeout:
+                          description: Specifies the duration, in "hh:mm:ss" string
+                            format, after which Service Fabric retries the health
+                            check if the previous health check fails. Defaults to
+                            00:45:00.
+                          type: string
+                        healthCheckStableDuration:
+                          description: Specifies the duration, in "hh:mm:ss" string
+                            format, that Service Fabric waits in order to verify that
+                            the cluster is stable before it continues to the next
+                            upgrade domain or completes the upgrade. This wait duration
+                            prevents undetected changes of health right after the
+                            health check is performed. Defaults to 00:01:00.
+                          type: string
+                        healthCheckWaitDuration:
+                          description: Specifies the duration, in "hh:mm:ss" string
+                            format, that Service Fabric waits before it performs the
+                            initial health check after it finishes the upgrade on
+                            the upgrade domain. Defaults to 00:00:30.
+                          type: string
+                        healthPolicy:
+                          description: A health_policy block as defined below
+                          items:
+                            properties:
+                              maxUnhealthyApplicationsPercent:
+                                description: Specifies the maximum tolerated percentage
+                                  of applications that can have aggregated health
+                                  state of error. If the upgrade exceeds this percentage,
+                                  the cluster is unhealthy. Defaults to 0.
+                                type: number
+                              maxUnhealthyNodesPercent:
+                                description: Specifies the maximum tolerated percentage
+                                  of nodes that can have aggregated health states
+                                  of error. If an upgrade exceeds this percentage,
+                                  the cluster is unhealthy. Defaults to 0.
+                                type: number
+                            type: object
+                          type: array
+                        upgradeDomainTimeout:
+                          description: Specifies the duration, in "hh:mm:ss" string
+                            format, that Service Fabric takes to upgrade a single
+                            upgrade domain. After this period, the upgrade fails.
+                            Defaults to 02:00:00.
+                          type: string
+                        upgradeReplicaSetCheckTimeout:
+                          description: Specifies the duration, in "hh:mm:ss" string
+                            format, that Service Fabric waits for a replica set to
+                            reconfigure into a safe state, if it is not already in
+                            a safe state, before Service Fabric proceeds with the
+                            upgrade. Defaults to 10675199.02:48:05.4775807.
+                          type: string
+                        upgradeTimeout:
+                          description: Specifies the duration, in "hh:mm:ss" string
+                            format, that Service Fabric takes for the entire upgrade.
+                            After this period, the upgrade fails. Defaults to 12:00:00.
+                          type: string
+                      type: object
+                    type: array
+                  vmImage:
+                    description: Specifies the Image expected for the Service Fabric
+                      Cluster, such as Windows. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  vmssZonalUpgradeMode:
+                    description: Specifies the upgrade mode for the virtual machine
+                      scale set updates that happen in all availability zones at once.
+                      Possible values are Hierarchical or Parallel.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  addOnFeatures:
+                    description: A List of one or more features which should be enabled,
+                      such as DnsService.
+                    items:
+                      type: string
+                    type: array
+                  azureActiveDirectory:
+                    description: An azure_active_directory block as defined below.
+                    items:
+                      properties:
+                        clientApplicationId:
+                          description: The Azure Active Directory Client ID which
+                            should be used for the Client Application.
+                          type: string
+                        clusterApplicationId:
+                          description: The Azure Active Directory Cluster Application
+                            ID.
+                          type: string
+                        tenantId:
+                          description: The Azure Active Directory Tenant ID.
+                          type: string
+                      type: object
+                    type: array
+                  certificate:
+                    description: A certificate block as defined below. Conflicts with
+                      certificate_common_names.
+                    items:
+                      properties:
+                        thumbprint:
+                          description: The Thumbprint of the Certificate.
+                          type: string
+                        thumbprintSecondary:
+                          description: The Secondary Thumbprint of the Certificate.
+                          type: string
+                        x509StoreName:
+                          description: The X509 Store where the Certificate Exists,
+                            such as My.
+                          type: string
+                      type: object
+                    type: array
+                  certificateCommonNames:
+                    description: A certificate_common_names block as defined below.
+                      Conflicts with certificate.
+                    items:
+                      properties:
+                        commonNames:
+                          description: A common_names block as defined below.
+                          items:
+                            properties:
+                              certificateCommonName:
+                                description: The common or subject name of the certificate.
+                                type: string
+                              certificateIssuerThumbprint:
+                                description: The Issuer Thumbprint of the Certificate.
+                                type: string
+                            type: object
+                          type: array
+                        x509StoreName:
+                          description: The X509 Store where the Certificate Exists,
+                            such as My.
+                          type: string
+                      type: object
+                    type: array
+                  clientCertificateCommonName:
+                    description: A client_certificate_common_name block as defined
+                      below.
+                    items:
+                      properties:
+                        commonName:
+                          description: The common or subject name of the certificate.
+                          type: string
+                        isAdmin:
+                          description: Does the Client Certificate have Admin Access
+                            to the cluster? Non-admin clients can only perform read
+                            only operations on the cluster.
+                          type: boolean
+                        issuerThumbprint:
+                          description: The Issuer Thumbprint of the Certificate.
+                          type: string
+                      type: object
+                    type: array
+                  clientCertificateThumbprint:
+                    description: One or more client_certificate_thumbprint blocks
+                      as defined below.
+                    items:
+                      properties:
+                        isAdmin:
+                          description: Does the Client Certificate have Admin Access
+                            to the cluster? Non-admin clients can only perform read
+                            only operations on the cluster.
+                          type: boolean
+                        thumbprint:
+                          description: The Thumbprint associated with the Client Certificate.
+                          type: string
+                      type: object
+                    type: array
+                  clusterCodeVersion:
+                    description: Required if Upgrade Mode set to Manual, Specifies
+                      the Version of the Cluster Code of the cluster.
+                    type: string
+                  diagnosticsConfig:
+                    description: A diagnostics_config block as defined below.
+                    items:
+                      properties:
+                        blobEndpoint:
+                          description: The Blob Endpoint of the Storage Account.
+                          type: string
+                        protectedAccountKeyName:
+                          description: The protected diagnostics storage key name,
+                            such as StorageAccountKey1.
+                          type: string
+                        queueEndpoint:
+                          description: The Queue Endpoint of the Storage Account.
+                          type: string
+                        storageAccountName:
+                          description: The name of the Storage Account where the Diagnostics
+                            should be sent to.
+                          type: string
+                        tableEndpoint:
+                          description: The Table Endpoint of the Storage Account.
+                          type: string
+                      type: object
+                    type: array
+                  fabricSettings:
+                    description: One or more fabric_settings blocks as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: The name of the Fabric Setting, such as Security
+                            or Federation.
+                          type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: A map containing settings for the specified
+                            Fabric Setting.
+                          type: object
+                      type: object
+                    type: array
+                  location:
+                    description: Specifies the Azure Region where the Service Fabric
+                      Cluster should exist. Changing this forces a new resource to
+                      be created.
+                    type: string
+                  managementEndpoint:
+                    description: Specifies the Management Endpoint of the cluster
+                      such as http://example.com. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  nodeType:
+                    description: One or more node_type blocks as defined below.
+                    items:
+                      properties:
+                        applicationPorts:
+                          description: A application_ports block as defined below.
+                          items:
+                            properties:
+                              endPort:
+                                description: The end of the Ephemeral Port Range on
+                                  this Node Type.
+                                type: number
+                              startPort:
+                                description: The start of the Ephemeral Port Range
+                                  on this Node Type.
+                                type: number
+                            type: object
+                          type: array
+                        capacities:
+                          additionalProperties:
+                            type: string
+                          description: The capacity tags applied to the nodes in the
+                            node type, the cluster resource manager uses these tags
+                            to understand how much resource a node has.
+                          type: object
+                        clientEndpointPort:
+                          description: The Port used for the Client Endpoint for this
+                            Node Type.
+                          type: number
+                        durabilityLevel:
+                          description: The Durability Level for this Node Type. Possible
+                            values include Bronze, Gold and Silver. Defaults to Bronze.
+                          type: string
+                        ephemeralPorts:
+                          description: A ephemeral_ports block as defined below.
+                          items:
+                            properties:
+                              endPort:
+                                description: The end of the Ephemeral Port Range on
+                                  this Node Type.
+                                type: number
+                              startPort:
+                                description: The start of the Ephemeral Port Range
+                                  on this Node Type.
+                                type: number
+                            type: object
+                          type: array
+                        httpEndpointPort:
+                          description: The Port used for the HTTP Endpoint for this
+                            Node Type.
+                          type: number
+                        instanceCount:
+                          description: The number of nodes for this Node Type.
+                          type: number
+                        isPrimary:
+                          description: Is this the Primary Node Type?
+                          type: boolean
+                        isStateless:
+                          description: Should this node type run only stateless services?
+                          type: boolean
+                        multipleAvailabilityZones:
+                          description: Does this node type span availability zones?
+                          type: boolean
+                        name:
+                          description: The name of the Node Type.
+                          type: string
+                        placementProperties:
+                          additionalProperties:
+                            type: string
+                          description: The placement tags applied to nodes in the
+                            node type, which can be used to indicate where certain
+                            services (workload) should run.
+                          type: object
+                        reverseProxyEndpointPort:
+                          description: The Port used for the Reverse Proxy Endpoint
+                            for this Node Type. Changing this will upgrade the cluster.
+                          type: number
+                      type: object
+                    type: array
+                  reliabilityLevel:
+                    description: Specifies the Reliability Level of the Cluster. Possible
+                      values include None, Bronze, Silver, Gold and Platinum.
+                    type: string
+                  reverseProxyCertificate:
+                    description: A reverse_proxy_certificate block as defined below.
+                      Conflicts with reverse_proxy_certificate_common_names.
+                    items:
+                      properties:
+                        thumbprint:
+                          description: The Thumbprint of the Certificate.
+                          type: string
+                        thumbprintSecondary:
+                          description: The Secondary Thumbprint of the Certificate.
+                          type: string
+                        x509StoreName:
+                          description: The X509 Store where the Certificate Exists,
+                            such as My.
+                          type: string
+                      type: object
+                    type: array
+                  reverseProxyCertificateCommonNames:
+                    description: A reverse_proxy_certificate_common_names block as
+                      defined below. Conflicts with reverse_proxy_certificate.
+                    items:
+                      properties:
+                        commonNames:
+                          description: A common_names block as defined below.
+                          items:
+                            properties:
+                              certificateCommonName:
+                                description: The common or subject name of the certificate.
+                                type: string
+                              certificateIssuerThumbprint:
+                                description: The Issuer Thumbprint of the Certificate.
+                                type: string
+                            type: object
+                          type: array
+                        x509StoreName:
+                          description: The X509 Store where the Certificate Exists,
+                            such as My.
+                          type: string
                       type: object
                     type: array
                   serviceFabricZonalUpgradeMode:
@@ -786,22 +1138,28 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: managementEndpoint is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.managementEndpoint)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.managementEndpoint)
+                || has(self.initProvider.managementEndpoint)'
             - message: nodeType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeType)
+                || has(self.initProvider.nodeType)'
             - message: reliabilityLevel is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.reliabilityLevel)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.reliabilityLevel)
+                || has(self.initProvider.reliabilityLevel)'
             - message: upgradeMode is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.upgradeMode)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.upgradeMode)
+                || has(self.initProvider.upgradeMode)'
             - message: vmImage is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.vmImage)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vmImage)
+                || has(self.initProvider.vmImage)'
           status:
             description: ClusterStatus defines the observed state of Cluster.
             properties:

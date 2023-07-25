@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type APIVersionSetInitParameters struct {
+
+	// The description of API Version Set.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The display name of this API Version Set.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The name of the Header which should be read from Inbound Requests which defines the API Version.
+	VersionHeaderName *string `json:"versionHeaderName,omitempty" tf:"version_header_name,omitempty"`
+
+	// The name of the Query String which should be read from Inbound Requests which defines the API Version.
+	VersionQueryName *string `json:"versionQueryName,omitempty" tf:"version_query_name,omitempty"`
+
+	// Specifies where in an Inbound HTTP Request that the API Version should be read from. Possible values are Header, Query and Segment.
+	VersioningScheme *string `json:"versioningScheme,omitempty" tf:"versioning_scheme,omitempty"`
+}
+
 type APIVersionSetObservation struct {
 
 	// The name of the API Management Service in which the API Version Set should exist. May only contain alphanumeric characters and dashes up to 50 characters in length. Changing this forces a new resource to be created.
@@ -56,11 +74,9 @@ type APIVersionSetParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The description of API Version Set.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The display name of this API Version Set.
-	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The name of the Resource Group in which the parent API Management Service exists. Changing this forces a new resource to be created.
@@ -77,15 +93,12 @@ type APIVersionSetParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Header which should be read from Inbound Requests which defines the API Version.
-	// +kubebuilder:validation:Optional
 	VersionHeaderName *string `json:"versionHeaderName,omitempty" tf:"version_header_name,omitempty"`
 
 	// The name of the Query String which should be read from Inbound Requests which defines the API Version.
-	// +kubebuilder:validation:Optional
 	VersionQueryName *string `json:"versionQueryName,omitempty" tf:"version_query_name,omitempty"`
 
 	// Specifies where in an Inbound HTTP Request that the API Version should be read from. Possible values are Header, Query and Segment.
-	// +kubebuilder:validation:Optional
 	VersioningScheme *string `json:"versioningScheme,omitempty" tf:"versioning_scheme,omitempty"`
 }
 
@@ -93,6 +106,10 @@ type APIVersionSetParameters struct {
 type APIVersionSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     APIVersionSetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider APIVersionSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // APIVersionSetStatus defines the observed state of APIVersionSet.
@@ -113,8 +130,8 @@ type APIVersionSetStatus struct {
 type APIVersionSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName)",message="displayName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.versioningScheme)",message="versioningScheme is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.versioningScheme) || has(self.initProvider.versioningScheme)",message="versioningScheme is a required parameter"
 	Spec   APIVersionSetSpec   `json:"spec"`
 	Status APIVersionSetStatus `json:"status,omitempty"`
 }

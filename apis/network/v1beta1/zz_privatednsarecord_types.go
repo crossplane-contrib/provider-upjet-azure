@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PrivateDNSARecordInitParameters struct {
+
+	// List of IPv4 Addresses.
+	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type PrivateDNSARecordObservation struct {
 
 	// The FQDN of the DNS A Record.
@@ -40,7 +52,6 @@ type PrivateDNSARecordObservation struct {
 type PrivateDNSARecordParameters struct {
 
 	// List of IPv4 Addresses.
-	// +kubebuilder:validation:Optional
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
 	// Specifies the resource group where the Private DNS Zone exists. Changing this forces a new resource to be created.
@@ -57,11 +68,9 @@ type PrivateDNSARecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
@@ -82,6 +91,10 @@ type PrivateDNSARecordParameters struct {
 type PrivateDNSARecordSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PrivateDNSARecordParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PrivateDNSARecordInitParameters `json:"initProvider,omitempty"`
 }
 
 // PrivateDNSARecordStatus defines the observed state of PrivateDNSARecord.
@@ -102,8 +115,8 @@ type PrivateDNSARecordStatus struct {
 type PrivateDNSARecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.records)",message="records is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.records) || has(self.initProvider.records)",message="records is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl) || has(self.initProvider.ttl)",message="ttl is a required parameter"
 	Spec   PrivateDNSARecordSpec   `json:"spec"`
 	Status PrivateDNSARecordStatus `json:"status,omitempty"`
 }

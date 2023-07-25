@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BotChannelWebChatInitParameters struct {
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A list of Web Chat Site names.
+	SiteNames []*string `json:"siteNames,omitempty" tf:"site_names,omitempty"`
+}
+
 type BotChannelWebChatObservation struct {
 
 	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
@@ -48,7 +57,6 @@ type BotChannelWebChatParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group where the Web Chat Channel should be created. Changing this forces a new resource to be created.
@@ -65,7 +73,6 @@ type BotChannelWebChatParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A list of Web Chat Site names.
-	// +kubebuilder:validation:Optional
 	SiteNames []*string `json:"siteNames,omitempty" tf:"site_names,omitempty"`
 }
 
@@ -73,6 +80,10 @@ type BotChannelWebChatParameters struct {
 type BotChannelWebChatSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotChannelWebChatParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BotChannelWebChatInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotChannelWebChatStatus defines the observed state of BotChannelWebChat.
@@ -93,8 +104,8 @@ type BotChannelWebChatStatus struct {
 type BotChannelWebChat struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.siteNames)",message="siteNames is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.siteNames) || has(self.initProvider.siteNames)",message="siteNames is a required parameter"
 	Spec   BotChannelWebChatSpec   `json:"spec"`
 	Status BotChannelWebChatStatus `json:"status,omitempty"`
 }

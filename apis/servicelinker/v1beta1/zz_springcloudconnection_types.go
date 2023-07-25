@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthenticationInitParameters struct {
+
+	// Client ID for userAssignedIdentity or servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate. When type is set to userAssignedIdentity, client_id and subscription_id should be either both specified or both not specified.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// Username or account name for secret auth. name and secret should be either both specified or both not specified when type is set to secret.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Principal ID for servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// Subscription ID for userAssignedIdentity. subscription_id and client_id should be either both specified or both not specified.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+
+	// The authentication type. Possible values are systemAssignedIdentity, userAssignedIdentity, servicePrincipalSecret, servicePrincipalCertificate, secret. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type AuthenticationObservation struct {
 
 	// Client ID for userAssignedIdentity or servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate. When type is set to userAssignedIdentity, client_id and subscription_id should be either both specified or both not specified.
@@ -34,32 +52,31 @@ type AuthenticationObservation struct {
 type AuthenticationParameters struct {
 
 	// Service principal certificate for servicePrincipal auth. Should be specified when type is set to servicePrincipalCertificate.
-	// +kubebuilder:validation:Optional
 	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// Client ID for userAssignedIdentity or servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate. When type is set to userAssignedIdentity, client_id and subscription_id should be either both specified or both not specified.
-	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Username or account name for secret auth. name and secret should be either both specified or both not specified when type is set to secret.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Principal ID for servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate.
-	// +kubebuilder:validation:Optional
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// Password or account key for secret auth. secret and name should be either both specified or both not specified when type is set to secret.
-	// +kubebuilder:validation:Optional
 	SecretSecretRef *v1.SecretKeySelector `json:"secretSecretRef,omitempty" tf:"-"`
 
 	// Subscription ID for userAssignedIdentity. subscription_id and client_id should be either both specified or both not specified.
-	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// The authentication type. Possible values are systemAssignedIdentity, userAssignedIdentity, servicePrincipalSecret, servicePrincipalCertificate, secret. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type SecretStoreInitParameters struct {
+
+	// The key vault id to store secret.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 }
 
 type SecretStoreObservation struct {
@@ -71,8 +88,25 @@ type SecretStoreObservation struct {
 type SecretStoreParameters struct {
 
 	// The key vault id to store secret.
-	// +kubebuilder:validation:Required
-	KeyVaultID *string `json:"keyVaultId" tf:"key_vault_id,omitempty"`
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+}
+
+type SpringCloudConnectionInitParameters struct {
+
+	// The authentication info. An authentication block as defined below.
+	Authentication []AuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
+	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
+
+	// The name of the service connection. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// An option to store secret value in secure place. An secret_store block as defined below.
+	SecretStore []SecretStoreInitParameters `json:"secretStore,omitempty" tf:"secret_store,omitempty"`
+
+	// The type of the VNet solution. Possible values are serviceEndpoint, privateLink.
+	VnetSolution *string `json:"vnetSolution,omitempty" tf:"vnet_solution,omitempty"`
 }
 
 type SpringCloudConnectionObservation struct {
@@ -105,19 +139,15 @@ type SpringCloudConnectionObservation struct {
 type SpringCloudConnectionParameters struct {
 
 	// The authentication info. An authentication block as defined below.
-	// +kubebuilder:validation:Optional
 	Authentication []AuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
 	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
-	// +kubebuilder:validation:Optional
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
 	// The name of the service connection. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An option to store secret value in secure place. An secret_store block as defined below.
-	// +kubebuilder:validation:Optional
 	SecretStore []SecretStoreParameters `json:"secretStore,omitempty" tf:"secret_store,omitempty"`
 
 	// The ID of the data source spring cloud. Changing this forces a new resource to be created.
@@ -149,7 +179,6 @@ type SpringCloudConnectionParameters struct {
 	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
 	// The type of the VNet solution. Possible values are serviceEndpoint, privateLink.
-	// +kubebuilder:validation:Optional
 	VnetSolution *string `json:"vnetSolution,omitempty" tf:"vnet_solution,omitempty"`
 }
 
@@ -157,6 +186,10 @@ type SpringCloudConnectionParameters struct {
 type SpringCloudConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudConnectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SpringCloudConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudConnectionStatus defines the observed state of SpringCloudConnection.
@@ -177,8 +210,8 @@ type SpringCloudConnectionStatus struct {
 type SpringCloudConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authentication)",message="authentication is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authentication) || has(self.initProvider.authentication)",message="authentication is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   SpringCloudConnectionSpec   `json:"spec"`
 	Status SpringCloudConnectionStatus `json:"status,omitempty"`
 }

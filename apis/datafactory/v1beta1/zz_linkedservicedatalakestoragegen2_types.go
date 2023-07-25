@@ -13,6 +13,42 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LinkedServiceDataLakeStorageGen2InitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The service principal id with which to authenticate against the Azure Data Lake Storage Gen2 account. Incompatible with storage_account_key and use_managed_identity.
+	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
+
+	// The service principal key with which to authenticate against the Azure Data Lake Storage Gen2 account.
+	ServicePrincipalKey *string `json:"servicePrincipalKey,omitempty" tf:"service_principal_key,omitempty"`
+
+	// The Storage Account Key with which to authenticate against the Azure Data Lake Storage Gen2 account. Incompatible with service_principal_id, service_principal_key, tenant and use_managed_identity.
+	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
+
+	// The tenant id or name in which the service principal exists to authenticate against the Azure Data Lake Storage Gen2 account.
+	Tenant *string `json:"tenant,omitempty" tf:"tenant,omitempty"`
+
+	// The endpoint for the Azure Data Lake Storage Gen2 service.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// Whether to use the Data Factory's managed identity to authenticate against the Azure Data Lake Storage Gen2 account. Incompatible with service_principal_id, service_principal_key, tenant and storage_account_key.
+	UseManagedIdentity *bool `json:"useManagedIdentity,omitempty" tf:"use_managed_identity,omitempty"`
+}
+
 type LinkedServiceDataLakeStorageGen2Observation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
@@ -58,11 +94,9 @@ type LinkedServiceDataLakeStorageGen2Observation struct {
 type LinkedServiceDataLakeStorageGen2Parameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -80,39 +114,30 @@ type LinkedServiceDataLakeStorageGen2Parameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The integration runtime reference to associate with the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The service principal id with which to authenticate against the Azure Data Lake Storage Gen2 account. Incompatible with storage_account_key and use_managed_identity.
-	// +kubebuilder:validation:Optional
 	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
 
 	// The service principal key with which to authenticate against the Azure Data Lake Storage Gen2 account.
-	// +kubebuilder:validation:Optional
 	ServicePrincipalKey *string `json:"servicePrincipalKey,omitempty" tf:"service_principal_key,omitempty"`
 
 	// The Storage Account Key with which to authenticate against the Azure Data Lake Storage Gen2 account. Incompatible with service_principal_id, service_principal_key, tenant and use_managed_identity.
-	// +kubebuilder:validation:Optional
 	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
 
 	// The tenant id or name in which the service principal exists to authenticate against the Azure Data Lake Storage Gen2 account.
-	// +kubebuilder:validation:Optional
 	Tenant *string `json:"tenant,omitempty" tf:"tenant,omitempty"`
 
 	// The endpoint for the Azure Data Lake Storage Gen2 service.
-	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
 	// Whether to use the Data Factory's managed identity to authenticate against the Azure Data Lake Storage Gen2 account. Incompatible with service_principal_id, service_principal_key, tenant and storage_account_key.
-	// +kubebuilder:validation:Optional
 	UseManagedIdentity *bool `json:"useManagedIdentity,omitempty" tf:"use_managed_identity,omitempty"`
 }
 
@@ -120,6 +145,10 @@ type LinkedServiceDataLakeStorageGen2Parameters struct {
 type LinkedServiceDataLakeStorageGen2Spec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LinkedServiceDataLakeStorageGen2Parameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LinkedServiceDataLakeStorageGen2InitParameters `json:"initProvider,omitempty"`
 }
 
 // LinkedServiceDataLakeStorageGen2Status defines the observed state of LinkedServiceDataLakeStorageGen2.
@@ -140,7 +169,7 @@ type LinkedServiceDataLakeStorageGen2Status struct {
 type LinkedServiceDataLakeStorageGen2 struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.url)",message="url is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.url) || has(self.initProvider.url)",message="url is a required parameter"
 	Spec   LinkedServiceDataLakeStorageGen2Spec   `json:"spec"`
 	Status LinkedServiceDataLakeStorageGen2Status `json:"status,omitempty"`
 }

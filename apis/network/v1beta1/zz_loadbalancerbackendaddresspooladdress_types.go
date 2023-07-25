@@ -68,7 +68,6 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 
 	// The ip config ID of the regional load balancer that's added to the global load balancer's backend address pool.
 	// For global load balancer, user needs to specify the `backend_address_ip_configuration_id` of the added regional load balancers
-	// +kubebuilder:validation:Optional
 	BackendAddressIPConfigurationID *string `json:"backendAddressIpConfigurationId,omitempty" tf:"backend_address_ip_configuration_id,omitempty"`
 
 	// The ID of the Backend Address Pool. Changing this forces a new Backend Address Pool Address to be created.
@@ -86,7 +85,6 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
 	// The Static IP Address which should be allocated to this Backend Address Pool.
-	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The ID of the Virtual Network within which the Backend Address Pool should exist.
@@ -112,14 +110,6 @@ type LoadBalancerBackendAddressPoolAddressSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider LoadBalancerBackendAddressPoolAddressInitParameters `json:"initProvider,omitempty"`
 }
 

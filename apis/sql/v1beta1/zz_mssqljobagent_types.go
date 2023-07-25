@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MSSQLJobAgentInitParameters struct {
+
+	// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name which should be used for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Database.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type MSSQLJobAgentObservation struct {
 
 	// The ID of the database to store metadata for the Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
@@ -48,15 +60,12 @@ type MSSQLJobAgentParameters struct {
 	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name which should be used for this Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Database.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -64,6 +73,10 @@ type MSSQLJobAgentParameters struct {
 type MSSQLJobAgentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MSSQLJobAgentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider MSSQLJobAgentInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLJobAgentStatus defines the observed state of MSSQLJobAgent.
@@ -84,8 +97,8 @@ type MSSQLJobAgentStatus struct {
 type MSSQLJobAgent struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   MSSQLJobAgentSpec   `json:"spec"`
 	Status MSSQLJobAgentStatus `json:"status,omitempty"`
 }

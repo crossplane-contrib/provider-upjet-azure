@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type Gen2EnvironmentInitParameters struct {
+
+	// A list of property ids for the Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.
+	IDProperties []*string `json:"idProperties,omitempty" tf:"id_properties,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the SKU Name for this IoT Time Series Insights Gen2 Environment. Currently it supports only L1. For gen2, capacity cannot be specified. Changing this forces a new resource to be created.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A storage block as defined below.
+	Storage []StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the ISO8601 timespan specifying the minimum number of days the environment's events will be available for query.
+	WarmStoreDataRetentionTime *string `json:"warmStoreDataRetentionTime,omitempty" tf:"warm_store_data_retention_time,omitempty"`
+}
+
 type Gen2EnvironmentObservation struct {
 
 	// The FQDN used to access the environment data.
@@ -46,11 +67,9 @@ type Gen2EnvironmentObservation struct {
 type Gen2EnvironmentParameters struct {
 
 	// A list of property ids for the Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	IDProperties []*string `json:"idProperties,omitempty" tf:"id_properties,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.
@@ -67,20 +86,19 @@ type Gen2EnvironmentParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the SKU Name for this IoT Time Series Insights Gen2 Environment. Currently it supports only L1. For gen2, capacity cannot be specified. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A storage block as defined below.
-	// +kubebuilder:validation:Optional
 	Storage []StorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the ISO8601 timespan specifying the minimum number of days the environment's events will be available for query.
-	// +kubebuilder:validation:Optional
 	WarmStoreDataRetentionTime *string `json:"warmStoreDataRetentionTime,omitempty" tf:"warm_store_data_retention_time,omitempty"`
+}
+
+type StorageInitParameters struct {
 }
 
 type StorageObservation struct {
@@ -92,7 +110,6 @@ type StorageObservation struct {
 type StorageParameters struct {
 
 	// Access key of storage account for Azure IoT Time Series Insights Gen2 Environment
-	// +kubebuilder:validation:Required
 	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
 
 	// Name of storage account for Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.
@@ -113,6 +130,10 @@ type StorageParameters struct {
 type Gen2EnvironmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     Gen2EnvironmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider Gen2EnvironmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // Gen2EnvironmentStatus defines the observed state of Gen2Environment.
@@ -133,10 +154,10 @@ type Gen2EnvironmentStatus struct {
 type Gen2Environment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.idProperties)",message="idProperties is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName)",message="skuName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storage)",message="storage is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.idProperties) || has(self.initProvider.idProperties)",message="idProperties is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storage) || has(self.initProvider.storage)",message="storage is a required parameter"
 	Spec   Gen2EnvironmentSpec   `json:"spec"`
 	Status Gen2EnvironmentStatus `json:"status,omitempty"`
 }

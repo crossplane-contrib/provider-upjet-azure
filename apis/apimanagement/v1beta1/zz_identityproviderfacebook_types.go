@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IdentityProviderFacebookInitParameters struct {
+
+	// App ID for Facebook.
+	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+}
+
 type IdentityProviderFacebookObservation struct {
 
 	// The Name of the API Management Service where this Facebook Identity Provider should be created. Changing this forces a new resource to be created.
@@ -44,11 +50,9 @@ type IdentityProviderFacebookParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// App ID for Facebook.
-	// +kubebuilder:validation:Optional
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
 	// App Secret for Facebook.
-	// +kubebuilder:validation:Optional
 	AppSecretSecretRef v1.SecretKeySelector `json:"appSecretSecretRef" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
@@ -69,6 +73,10 @@ type IdentityProviderFacebookParameters struct {
 type IdentityProviderFacebookSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IdentityProviderFacebookParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider IdentityProviderFacebookInitParameters `json:"initProvider,omitempty"`
 }
 
 // IdentityProviderFacebookStatus defines the observed state of IdentityProviderFacebook.
@@ -89,7 +97,7 @@ type IdentityProviderFacebookStatus struct {
 type IdentityProviderFacebook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appId)",message="appId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appId) || has(self.initProvider.appId)",message="appId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appSecretSecretRef)",message="appSecretSecretRef is a required parameter"
 	Spec   IdentityProviderFacebookSpec   `json:"spec"`
 	Status IdentityProviderFacebookStatus `json:"status,omitempty"`

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: linkedservicesynapses.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -263,8 +263,54 @@ spec:
                           description: Specifies the secret name in Azure Key Vault
                             that stores Synapse password.
                           type: string
-                      required:
-                      - secretName
+                      type: object
+                    type: array
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of parameters to associate with the Data Factory
+                      Linked Service Synapse.
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Linked Service Synapse.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Linked Service Synapse.
+                    items:
+                      type: string
+                    type: array
+                  connectionString:
+                    description: The connection string in which to authenticate with
+                      the Synapse.
+                    type: string
+                  description:
+                    description: The description for the Data Factory Linked Service
+                      Synapse.
+                    type: string
+                  integrationRuntimeName:
+                    description: The integration runtime reference to associate with
+                      the Data Factory Linked Service Synapse.
+                    type: string
+                  keyVaultPassword:
+                    description: A key_vault_password block as defined below. Use
+                      this argument to store Synapse password in an existing Key Vault.
+                      It needs an existing Key Vault Data Factory Linked Service.
+                    items:
+                      properties:
+                        secretName:
+                          description: Specifies the secret name in Azure Key Vault
+                            that stores Synapse password.
+                          type: string
                       type: object
                     type: array
                   parameters:
@@ -474,7 +520,8 @@ spec:
             x-kubernetes-validations:
             - message: connectionString is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.connectionString)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.connectionString)
+                || has(self.initProvider.connectionString)'
           status:
             description: LinkedServiceSynapseStatus defines the observed state of
               LinkedServiceSynapse.

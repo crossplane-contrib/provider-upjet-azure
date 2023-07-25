@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ContentKeyInitParameters struct {
+
+	// ID of Content Key. Changing this forces a new Streaming Locator to be created.
+	ContentKeyID *string `json:"contentKeyId,omitempty" tf:"content_key_id,omitempty"`
+
+	// Label of Content Key as specified in the Streaming Policy. Changing this forces a new Streaming Locator to be created.
+	LabelReferenceInStreamingPolicy *string `json:"labelReferenceInStreamingPolicy,omitempty" tf:"label_reference_in_streaming_policy,omitempty"`
+
+	// Content Key Policy used by Content Key. Changing this forces a new Streaming Locator to be created.
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
+
+	// Encryption type of Content Key. Supported values are CommonEncryptionCbcs, CommonEncryptionCenc or EnvelopeEncryption. Changing this forces a new Streaming Locator to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// Value of Content Key. Changing this forces a new Streaming Locator to be created.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type ContentKeyObservation struct {
 
 	// ID of Content Key. Changing this forces a new Streaming Locator to be created.
@@ -34,24 +52,46 @@ type ContentKeyObservation struct {
 type ContentKeyParameters struct {
 
 	// ID of Content Key. Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	ContentKeyID *string `json:"contentKeyId,omitempty" tf:"content_key_id,omitempty"`
 
 	// Label of Content Key as specified in the Streaming Policy. Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	LabelReferenceInStreamingPolicy *string `json:"labelReferenceInStreamingPolicy,omitempty" tf:"label_reference_in_streaming_policy,omitempty"`
 
 	// Content Key Policy used by Content Key. Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 
 	// Encryption type of Content Key. Supported values are CommonEncryptionCbcs, CommonEncryptionCenc or EnvelopeEncryption. Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Value of Content Key. Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type StreamingLocatorInitParameters struct {
+
+	// Alternative Media ID of this Streaming Locator. Changing this forces a new Streaming Locator to be created.
+	AlternativeMediaID *string `json:"alternativeMediaId,omitempty" tf:"alternative_media_id,omitempty"`
+
+	// One or more content_key blocks as defined below. Changing this forces a new Streaming Locator to be created.
+	ContentKey []ContentKeyInitParameters `json:"contentKey,omitempty" tf:"content_key,omitempty"`
+
+	// Name of the default Content Key Policy used by this Streaming Locator.Changing this forces a new Streaming Locator to be created.
+	DefaultContentKeyPolicyName *string `json:"defaultContentKeyPolicyName,omitempty" tf:"default_content_key_policy_name,omitempty"`
+
+	// The end time of the Streaming Locator. Changing this forces a new Streaming Locator to be created.
+	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
+
+	// A list of names of asset or account filters which apply to this Streaming Locator. Changing this forces a new Streaming Locator to be created.
+	FilterNames []*string `json:"filterNames,omitempty" tf:"filter_names,omitempty"`
+
+	// The start time of the Streaming Locator. Changing this forces a new Streaming Locator to be created.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// The ID of the Streaming Locator. Changing this forces a new Streaming Locator to be created.
+	StreamingLocatorID *string `json:"streamingLocatorId,omitempty" tf:"streaming_locator_id,omitempty"`
+
+	// Name of the Streaming Policy used by this Streaming Locator. Either specify the name of Streaming Policy you created or use one of the predefined Streaming Policies. The predefined Streaming Policies available are: Predefined_DownloadOnly, Predefined_ClearStreamingOnly, Predefined_DownloadAndClearStreaming, Predefined_ClearKey, Predefined_MultiDrmCencStreaming and Predefined_MultiDrmStreaming. Changing this forces a new Streaming Locator to be created.
+	StreamingPolicyName *string `json:"streamingPolicyName,omitempty" tf:"streaming_policy_name,omitempty"`
 }
 
 type StreamingLocatorObservation struct {
@@ -96,7 +136,6 @@ type StreamingLocatorObservation struct {
 type StreamingLocatorParameters struct {
 
 	// Alternative Media ID of this Streaming Locator. Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	AlternativeMediaID *string `json:"alternativeMediaId,omitempty" tf:"alternative_media_id,omitempty"`
 
 	// Asset Name. Changing this forces a new Streaming Locator to be created.
@@ -113,19 +152,15 @@ type StreamingLocatorParameters struct {
 	AssetNameSelector *v1.Selector `json:"assetNameSelector,omitempty" tf:"-"`
 
 	// One or more content_key blocks as defined below. Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	ContentKey []ContentKeyParameters `json:"contentKey,omitempty" tf:"content_key,omitempty"`
 
 	// Name of the default Content Key Policy used by this Streaming Locator.Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	DefaultContentKeyPolicyName *string `json:"defaultContentKeyPolicyName,omitempty" tf:"default_content_key_policy_name,omitempty"`
 
 	// The end time of the Streaming Locator. Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
 	// A list of names of asset or account filters which apply to this Streaming Locator. Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	FilterNames []*string `json:"filterNames,omitempty" tf:"filter_names,omitempty"`
 
 	// The Media Services account name. Changing this forces a new Streaming Locator to be created.
@@ -155,15 +190,12 @@ type StreamingLocatorParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The start time of the Streaming Locator. Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
 	// The ID of the Streaming Locator. Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	StreamingLocatorID *string `json:"streamingLocatorId,omitempty" tf:"streaming_locator_id,omitempty"`
 
 	// Name of the Streaming Policy used by this Streaming Locator. Either specify the name of Streaming Policy you created or use one of the predefined Streaming Policies. The predefined Streaming Policies available are: Predefined_DownloadOnly, Predefined_ClearStreamingOnly, Predefined_DownloadAndClearStreaming, Predefined_ClearKey, Predefined_MultiDrmCencStreaming and Predefined_MultiDrmStreaming. Changing this forces a new Streaming Locator to be created.
-	// +kubebuilder:validation:Optional
 	StreamingPolicyName *string `json:"streamingPolicyName,omitempty" tf:"streaming_policy_name,omitempty"`
 }
 
@@ -171,6 +203,10 @@ type StreamingLocatorParameters struct {
 type StreamingLocatorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StreamingLocatorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider StreamingLocatorInitParameters `json:"initProvider,omitempty"`
 }
 
 // StreamingLocatorStatus defines the observed state of StreamingLocator.
@@ -191,7 +227,7 @@ type StreamingLocatorStatus struct {
 type StreamingLocator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.streamingPolicyName)",message="streamingPolicyName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.streamingPolicyName) || has(self.initProvider.streamingPolicyName)",message="streamingPolicyName is a required parameter"
 	Spec   StreamingLocatorSpec   `json:"spec"`
 	Status StreamingLocatorStatus `json:"status,omitempty"`
 }

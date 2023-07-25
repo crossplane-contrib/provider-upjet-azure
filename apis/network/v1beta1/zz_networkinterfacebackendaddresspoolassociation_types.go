@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NetworkInterfaceBackendAddressPoolAssociationInitParameters struct {
+
+	// The Name of the IP Configuration within the Network Interface which should be connected to the Backend Address Pool. Changing this forces a new resource to be created.
+	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
+}
+
 type NetworkInterfaceBackendAddressPoolAssociationObservation struct {
 
 	// The ID of the Load Balancer Backend Address Pool which this Network Interface should be connected to. Changing this forces a new resource to be created.
@@ -44,7 +50,6 @@ type NetworkInterfaceBackendAddressPoolAssociationParameters struct {
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
 	// The Name of the IP Configuration within the Network Interface which should be connected to the Backend Address Pool. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
 
 	// The ID of the Network Interface. Changing this forces a new resource to be created.
@@ -66,6 +71,10 @@ type NetworkInterfaceBackendAddressPoolAssociationParameters struct {
 type NetworkInterfaceBackendAddressPoolAssociationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NetworkInterfaceBackendAddressPoolAssociationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider NetworkInterfaceBackendAddressPoolAssociationInitParameters `json:"initProvider,omitempty"`
 }
 
 // NetworkInterfaceBackendAddressPoolAssociationStatus defines the observed state of NetworkInterfaceBackendAddressPoolAssociation.
@@ -86,7 +95,7 @@ type NetworkInterfaceBackendAddressPoolAssociationStatus struct {
 type NetworkInterfaceBackendAddressPoolAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipConfigurationName)",message="ipConfigurationName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipConfigurationName) || has(self.initProvider.ipConfigurationName)",message="ipConfigurationName is a required parameter"
 	Spec   NetworkInterfaceBackendAddressPoolAssociationSpec   `json:"spec"`
 	Status NetworkInterfaceBackendAddressPoolAssociationStatus `json:"status,omitempty"`
 }

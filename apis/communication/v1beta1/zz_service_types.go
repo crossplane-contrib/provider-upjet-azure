@@ -52,7 +52,6 @@ type ServiceObservation struct {
 type ServiceParameters struct {
 
 	// The location where the Communication service stores its data at rest. Possible values are Africa, Asia Pacific, Australia, Brazil, Canada, Europe, France, Germany, India, Japan, Korea, Norway, Switzerland, UAE, UK and United States. Defaults to United States. Changing this forces a new Communication Service to be created.
-	// +kubebuilder:validation:Optional
 	DataLocation *string `json:"dataLocation,omitempty" tf:"data_location,omitempty"`
 
 	// The name of the Resource Group where the Communication Service should exist. Changing this forces a new Communication Service to be created.
@@ -69,7 +68,6 @@ type ServiceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Communication Service.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -80,14 +78,6 @@ type ServiceSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider ServiceInitParameters `json:"initProvider,omitempty"`
 }
 

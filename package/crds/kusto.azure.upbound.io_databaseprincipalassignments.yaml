@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: databaseprincipalassignments.kusto.azure.upbound.io
 spec:
   group: kusto.azure.upbound.io
@@ -319,6 +319,29 @@ spec:
                       this forces a new resource to be created.
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  principalId:
+                    description: The object id of the principal. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  principalType:
+                    description: The type of the principal. Valid values include App,
+                      Group, User. Changing this forces a new resource to be created.
+                    type: string
+                  role:
+                    description: The database role assigned to the principal. Valid
+                      values include Admin, Ingestor, Monitor, UnrestrictedViewer,
+                      User and Viewer. Changing this forces a new resource to be created.
+                    type: string
+                  tenantId:
+                    description: The tenant id in which the principal resides. Changing
+                      this forces a new resource to be created.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -519,16 +542,20 @@ spec:
             x-kubernetes-validations:
             - message: principalId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.principalId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.principalId)
+                || has(self.initProvider.principalId)'
             - message: principalType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.principalType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.principalType)
+                || has(self.initProvider.principalType)'
             - message: role is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.role)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.role)
+                || has(self.initProvider.role)'
             - message: tenantId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.tenantId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tenantId)
+                || has(self.initProvider.tenantId)'
           status:
             description: DatabasePrincipalAssignmentStatus defines the observed state
               of DatabasePrincipalAssignment.

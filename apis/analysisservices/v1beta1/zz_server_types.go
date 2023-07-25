@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IPv4FirewallRuleInitParameters struct {
+
+	// Specifies the name of the firewall rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// End of the firewall rule range as IPv4 address.
+	RangeEnd *string `json:"rangeEnd,omitempty" tf:"range_end,omitempty"`
+
+	// Start of the firewall rule range as IPv4 address.
+	RangeStart *string `json:"rangeStart,omitempty" tf:"range_start,omitempty"`
+}
+
 type IPv4FirewallRuleObservation struct {
 
 	// Specifies the name of the firewall rule.
@@ -28,16 +40,40 @@ type IPv4FirewallRuleObservation struct {
 type IPv4FirewallRuleParameters struct {
 
 	// Specifies the name of the firewall rule.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// End of the firewall rule range as IPv4 address.
-	// +kubebuilder:validation:Required
-	RangeEnd *string `json:"rangeEnd" tf:"range_end,omitempty"`
+	RangeEnd *string `json:"rangeEnd,omitempty" tf:"range_end,omitempty"`
 
 	// Start of the firewall rule range as IPv4 address.
-	// +kubebuilder:validation:Required
-	RangeStart *string `json:"rangeStart" tf:"range_start,omitempty"`
+	RangeStart *string `json:"rangeStart,omitempty" tf:"range_start,omitempty"`
+}
+
+type ServerInitParameters struct {
+
+	// List of email addresses of admin users.
+	AdminUsers []*string `json:"adminUsers,omitempty" tf:"admin_users,omitempty"`
+
+	// Indicates if the Power BI service is allowed to access or not.
+	EnablePowerBiService *bool `json:"enablePowerBiService,omitempty" tf:"enable_power_bi_service,omitempty"`
+
+	// One or more ipv4_firewall_rule block(s) as defined below.
+	IPv4FirewallRule []IPv4FirewallRuleInitParameters `json:"ipv4FirewallRule,omitempty" tf:"ipv4_firewall_rule,omitempty"`
+
+	// The Azure location where the Analysis Services Server exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Analysis Services Server. Only lowercase Alphanumeric characters allowed, starting with a letter. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations.
+	QuerypoolConnectionMode *string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty"`
+
+	// SKU for the Analysis Services Server. Possible values are: D1, B1, B2, S0, S1, S2, S4, S8, S9, S8v2 and S9v2.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ServerObservation struct {
@@ -79,31 +115,24 @@ type ServerObservation struct {
 type ServerParameters struct {
 
 	// List of email addresses of admin users.
-	// +kubebuilder:validation:Optional
 	AdminUsers []*string `json:"adminUsers,omitempty" tf:"admin_users,omitempty"`
 
 	// URI and SAS token for a blob container to store backups.
-	// +kubebuilder:validation:Optional
 	BackupBlobContainerURISecretRef *v1.SecretKeySelector `json:"backupBlobContainerUriSecretRef,omitempty" tf:"-"`
 
 	// Indicates if the Power BI service is allowed to access or not.
-	// +kubebuilder:validation:Optional
 	EnablePowerBiService *bool `json:"enablePowerBiService,omitempty" tf:"enable_power_bi_service,omitempty"`
 
 	// One or more ipv4_firewall_rule block(s) as defined below.
-	// +kubebuilder:validation:Optional
 	IPv4FirewallRule []IPv4FirewallRuleParameters `json:"ipv4FirewallRule,omitempty" tf:"ipv4_firewall_rule,omitempty"`
 
 	// The Azure location where the Analysis Services Server exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Analysis Services Server. Only lowercase Alphanumeric characters allowed, starting with a letter. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations.
-	// +kubebuilder:validation:Optional
 	QuerypoolConnectionMode *string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty"`
 
 	// The name of the Resource Group in which the Analysis Services Server should be exist. Changing this forces a new resource to be created.
@@ -120,11 +149,9 @@ type ServerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// SKU for the Analysis Services Server. Possible values are: D1, B1, B2, S0, S1, S2, S4, S8, S9, S8v2 and S9v2.
-	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -132,6 +159,10 @@ type ServerParameters struct {
 type ServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ServerInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServerStatus defines the observed state of Server.
@@ -152,9 +183,9 @@ type ServerStatus struct {
 type Server struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
 	Spec   ServerSpec   `json:"spec"`
 	Status ServerStatus `json:"status,omitempty"`
 }

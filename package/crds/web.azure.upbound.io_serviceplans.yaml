@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: serviceplans.web.azure.upbound.io
 spec:
   group: web.azure.upbound.io
@@ -166,6 +166,53 @@ spec:
                             type: string
                         type: object
                     type: object
+                  skuName:
+                    description: The SKU for the plan. Possible values include B1,
+                      B2, B3, D1, F1, I1, I2, I3, I1v2, I2v2, I3v2, I4v2, I5v2, I6v2,
+                      P1v2, P2v2, P3v2, P1v3, P2v3, P3v3, P1mv3, P2mv3, P3mv3, P4mv3,
+                      P5mv3, S1, S2, S3, SHARED, EP1, EP2, EP3, WS1, WS2, WS3, and
+                      Y1.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      AppService.
+                    type: object
+                  workerCount:
+                    description: The number of Workers (instances) to be allocated.
+                    type: number
+                  zoneBalancingEnabled:
+                    description: Should the Service Plan balance across Availability
+                      Zones in the region. Changing this forces a new resource to
+                      be created.
+                    type: boolean
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  appServiceEnvironmentId:
+                    description: The ID of the App Service Environment to create this
+                      Service Plan in.
+                    type: string
+                  location:
+                    description: The Azure Region where the Service Plan should exist.
+                      Changing this forces a new AppService to be created.
+                    type: string
+                  maximumElasticWorkerCount:
+                    description: The maximum number of workers to use in an Elastic
+                      SKU Plan. Cannot be set unless using an Elastic SKU.
+                    type: number
+                  osType:
+                    description: The O/S type for the App Services to be hosted in
+                      this plan. Possible values include Windows, Linux, and WindowsContainer.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  perSiteScalingEnabled:
+                    description: Should Per Site Scaling be enabled. Defaults to false.
+                    type: boolean
                   skuName:
                     description: The SKU for the plan. Possible values include B1,
                       B2, B3, D1, F1, I1, I2, I3, I1v2, I2v2, I3v2, I4v2, I5v2, I6v2,
@@ -388,13 +435,16 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: osType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.osType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.osType)
+                || has(self.initProvider.osType)'
             - message: skuName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
+                || has(self.initProvider.skuName)'
           status:
             description: ServicePlanStatus defines the observed state of ServicePlan.
             properties:

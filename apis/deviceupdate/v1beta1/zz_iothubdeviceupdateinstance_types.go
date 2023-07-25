@@ -25,7 +25,6 @@ type DiagnosticStorageAccountObservation struct {
 type DiagnosticStorageAccountParameters struct {
 
 	// Connection String of the Diagnostic Storage Account.
-	// +kubebuilder:validation:Required
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// Resource ID of the Diagnostic Storage Account.
@@ -93,11 +92,9 @@ type IOTHubDeviceUpdateInstanceParameters struct {
 	DeviceUpdateAccountIDSelector *v1.Selector `json:"deviceUpdateAccountIdSelector,omitempty" tf:"-"`
 
 	// Whether the diagnostic log collection is enabled. Possible values are true and false. Defaults to false.
-	// +kubebuilder:validation:Optional
 	DiagnosticEnabled *bool `json:"diagnosticEnabled,omitempty" tf:"diagnostic_enabled,omitempty"`
 
 	// A diagnostic_storage_account block as defined below.
-	// +kubebuilder:validation:Optional
 	DiagnosticStorageAccount []DiagnosticStorageAccountParameters `json:"diagnosticStorageAccount,omitempty" tf:"diagnostic_storage_account,omitempty"`
 
 	// Specifies the ID of the IoT Hub associated with the IoT Hub Device Update Instance. Changing this forces a new resource to be created.
@@ -115,7 +112,6 @@ type IOTHubDeviceUpdateInstanceParameters struct {
 	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the IoT Hub Device Update Instance.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -126,14 +122,6 @@ type IOTHubDeviceUpdateInstanceSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider IOTHubDeviceUpdateInstanceInitParameters `json:"initProvider,omitempty"`
 }
 

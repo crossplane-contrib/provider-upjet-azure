@@ -79,6 +79,15 @@ func (tr *Service) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Service
+func (tr *Service) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Service using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Service) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *NetworkACL) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this NetworkACL
+func (tr *NetworkACL) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this NetworkACL using its observed tfState.
@@ -247,6 +265,15 @@ func (tr *SignalrSharedPrivateLinkResource) GetInitParameters() (map[string]any,
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this SignalrSharedPrivateLinkResource
+func (tr *SignalrSharedPrivateLinkResource) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this SignalrSharedPrivateLinkResource using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SignalrSharedPrivateLinkResource) LateInitialize(attrs []byte) (bool, error) {
@@ -329,6 +356,15 @@ func (tr *WebPubsub) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this WebPubsub
+func (tr *WebPubsub) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this WebPubsub using its observed tfState.
@@ -415,6 +451,15 @@ func (tr *WebPubsubHub) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this WebPubsubHub
+func (tr *WebPubsubHub) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this WebPubsubHub using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *WebPubsubHub) LateInitialize(attrs []byte) (bool, error) {
@@ -497,6 +542,15 @@ func (tr *WebPubsubNetworkACL) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this WebPubsubNetworkACL
+func (tr *WebPubsubNetworkACL) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this WebPubsubNetworkACL using its observed tfState.

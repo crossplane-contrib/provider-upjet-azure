@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: subscriptions.servicebus.azure.upbound.io
 spec:
   group: servicebus.azure.upbound.io
@@ -215,6 +215,82 @@ spec:
                         type: object
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  autoDeleteOnIdle:
+                    description: The idle interval after which the topic is automatically
+                      deleted as an ISO 8601 duration. The minimum duration is 5 minutes
+                      or PT5M.
+                    type: string
+                  clientScopedSubscription:
+                    description: A client_scoped_subscription block as defined below.
+                    items:
+                      properties:
+                        clientId:
+                          description: Specifies the Client ID of the application
+                            that created the client-scoped subscription. Changing
+                            this forces a new resource to be created.
+                          type: string
+                        isClientScopedSubscriptionShareable:
+                          description: Whether the client scoped subscription is shareable.
+                            Defaults to true Changing this forces a new resource to
+                            be created.
+                          type: boolean
+                      type: object
+                    type: array
+                  clientScopedSubscriptionEnabled:
+                    description: whether the subscription is scoped to a client id.
+                      Defaults to False.
+                    type: boolean
+                  deadLetteringOnFilterEvaluationError:
+                    description: Boolean flag which controls whether the Subscription
+                      has dead letter support on filter evaluation exceptions. Defaults
+                      to true.
+                    type: boolean
+                  deadLetteringOnMessageExpiration:
+                    description: Boolean flag which controls whether the Subscription
+                      has dead letter support when a message expires.
+                    type: boolean
+                  defaultMessageTtl:
+                    description: The Default message timespan to live as an ISO 8601
+                      duration. This is the duration after which the message expires,
+                      starting from when the message is sent to Service Bus. This
+                      is the default value used when TimeToLive is not set on a message
+                      itself.
+                    type: string
+                  enableBatchedOperations:
+                    description: Boolean flag which controls whether the Subscription
+                      supports batched operations.
+                    type: boolean
+                  forwardDeadLetteredMessagesTo:
+                    description: The name of a Queue or Topic to automatically forward
+                      Dead Letter messages to.
+                    type: string
+                  forwardTo:
+                    description: The name of a Queue or Topic to automatically forward
+                      messages to.
+                    type: string
+                  lockDuration:
+                    description: The lock duration for the subscription as an ISO
+                      8601 duration. The default value is 1 minute or P0DT0H1M0S .
+                      The maximum value is 5 minutes or P0DT0H5M0S .
+                    type: string
+                  maxDeliveryCount:
+                    description: The maximum number of deliveries.
+                    type: number
+                  requiresSession:
+                    description: Boolean flag which controls whether this Subscription
+                      supports the concept of a session. Changing this forces a new
+                      resource to be created.
+                    type: boolean
+                  status:
+                    description: The status of the Subscription. Possible values are
+                      Active,ReceiveDisabled, or Disabled. Defaults to Active.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -415,7 +491,8 @@ spec:
             x-kubernetes-validations:
             - message: maxDeliveryCount is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.maxDeliveryCount)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.maxDeliveryCount)
+                || has(self.initProvider.maxDeliveryCount)'
           status:
             description: SubscriptionStatus defines the observed state of Subscription.
             properties:

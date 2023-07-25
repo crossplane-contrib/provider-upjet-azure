@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: botwebapps.botservice.azure.upbound.io
 spec:
   group: botservice.azure.upbound.io
@@ -220,6 +220,50 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  developerAppInsightsApplicationId:
+                    description: The Application Insights Application ID to associate
+                      with the Web App Bot.
+                    type: string
+                  developerAppInsightsKey:
+                    description: The Application Insights Key to associate with the
+                      Web App Bot.
+                    type: string
+                  displayName:
+                    description: The name of the Web App Bot will be displayed as.
+                      This defaults to name if not specified.
+                    type: string
+                  endpoint:
+                    description: The Web App Bot endpoint.
+                    type: string
+                  location:
+                    description: The supported Azure location where the resource exists.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  luisAppIds:
+                    description: A list of LUIS App IDs to associate with the Web
+                      App Bot.
+                    items:
+                      type: string
+                    type: array
+                  microsoftAppId:
+                    description: The Microsoft Application ID for the Web App Bot.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  sku:
+                    description: The SKU of the Web App Bot. Valid values include
+                      F0 or S1. Changing this forces a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -420,13 +464,16 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: microsoftAppId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.microsoftAppId)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.microsoftAppId)
+                || has(self.initProvider.microsoftAppId)'
             - message: sku is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)
+                || has(self.initProvider.sku)'
           status:
             description: BotWebAppStatus defines the observed state of BotWebApp.
             properties:

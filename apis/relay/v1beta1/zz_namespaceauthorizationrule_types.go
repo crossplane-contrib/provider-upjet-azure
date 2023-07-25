@@ -49,11 +49,9 @@ type NamespaceAuthorizationRuleObservation struct {
 type NamespaceAuthorizationRuleParameters struct {
 
 	// Grants listen access to this Authorization Rule. Defaults to false.
-	// +kubebuilder:validation:Optional
 	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
 
 	// Grants manage access to this Authorization Rule. When this property is true - both listen and send must be set to true too. Defaults to false.
-	// +kubebuilder:validation:Optional
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Name of the Azure Relay Namespace for which this Azure Relay Namespace Authorization Rule will be created. Changing this forces a new Azure Relay Namespace Authorization Rule to be created.
@@ -83,7 +81,6 @@ type NamespaceAuthorizationRuleParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Grants send access to this Authorization Rule. Defaults to false.
-	// +kubebuilder:validation:Optional
 	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 
@@ -94,14 +91,6 @@ type NamespaceAuthorizationRuleSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider NamespaceAuthorizationRuleInitParameters `json:"initProvider,omitempty"`
 }
 

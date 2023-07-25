@@ -69,23 +69,18 @@ type MSSQLDatabaseExtendedAuditingPolicyParameters struct {
 	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
 	// Whether to enable the extended auditing policy. Possible values are true and false. Defaults to true.
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Enable audit events to Azure Monitor? Defaults to true.
-	// +kubebuilder:validation:Optional
 	LogMonitoringEnabled *bool `json:"logMonitoringEnabled,omitempty" tf:"log_monitoring_enabled,omitempty"`
 
 	// The number of days to retain logs for in the storage account. Defaults to 0.
-	// +kubebuilder:validation:Optional
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// Is storage_account_access_key value the storage's secondary key?
-	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeyIsSecondary *bool `json:"storageAccountAccessKeyIsSecondary,omitempty" tf:"storage_account_access_key_is_secondary,omitempty"`
 
 	// The access key to use for the auditing storage account.
-	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all extended auditing logs.
@@ -110,14 +105,6 @@ type MSSQLDatabaseExtendedAuditingPolicySpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider MSSQLDatabaseExtendedAuditingPolicyInitParameters `json:"initProvider,omitempty"`
 }
 

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OutputSynapseInitParameters struct {
+
+	// The name of the Azure SQL database. Changing this forces a new resource to be created.
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// The name of the SQL server containing the Azure SQL database. Changing this forces a new resource to be created.
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// The name of the table in the Azure SQL database. Changing this forces a new resource to be created.
+	Table *string `json:"table,omitempty" tf:"table,omitempty"`
+}
+
 type OutputSynapseObservation struct {
 
 	// The name of the Azure SQL database. Changing this forces a new resource to be created.
@@ -40,11 +52,9 @@ type OutputSynapseObservation struct {
 type OutputSynapseParameters struct {
 
 	// The name of the Azure SQL database. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// The password that will be used to connect to the Azure SQL database.
-	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
@@ -61,7 +71,6 @@ type OutputSynapseParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the SQL server containing the Azure SQL database. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
@@ -78,7 +87,6 @@ type OutputSynapseParameters struct {
 	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// The name of the table in the Azure SQL database. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
 	// The user name that will be used to connect to the Azure SQL database. Changing this forces a new resource to be created.
@@ -100,6 +108,10 @@ type OutputSynapseParameters struct {
 type OutputSynapseSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OutputSynapseParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider OutputSynapseInitParameters `json:"initProvider,omitempty"`
 }
 
 // OutputSynapseStatus defines the observed state of OutputSynapse.
@@ -120,10 +132,10 @@ type OutputSynapseStatus struct {
 type OutputSynapse struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.database)",message="database is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.database) || has(self.initProvider.database)",message="database is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.server)",message="server is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.table)",message="table is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.server) || has(self.initProvider.server)",message="server is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.table) || has(self.initProvider.table)",message="table is a required parameter"
 	Spec   OutputSynapseSpec   `json:"spec"`
 	Status OutputSynapseStatus `json:"status,omitempty"`
 }

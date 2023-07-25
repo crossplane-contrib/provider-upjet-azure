@@ -79,6 +79,15 @@ func (tr *BudgetManagementGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this BudgetManagementGroup
+func (tr *BudgetManagementGroup) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this BudgetManagementGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BudgetManagementGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -163,6 +172,15 @@ func (tr *BudgetResourceGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this BudgetResourceGroup
+func (tr *BudgetResourceGroup) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this BudgetResourceGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BudgetResourceGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -245,6 +263,15 @@ func (tr *BudgetSubscription) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this BudgetSubscription
+func (tr *BudgetSubscription) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BudgetSubscription using its observed tfState.

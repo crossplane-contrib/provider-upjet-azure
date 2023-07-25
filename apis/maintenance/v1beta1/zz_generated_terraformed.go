@@ -79,6 +79,15 @@ func (tr *MaintenanceAssignmentDedicatedHost) GetInitParameters() (map[string]an
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this MaintenanceAssignmentDedicatedHost
+func (tr *MaintenanceAssignmentDedicatedHost) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this MaintenanceAssignmentDedicatedHost using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MaintenanceAssignmentDedicatedHost) LateInitialize(attrs []byte) (bool, error) {
@@ -163,6 +172,15 @@ func (tr *MaintenanceAssignmentVirtualMachine) GetInitParameters() (map[string]a
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this MaintenanceAssignmentVirtualMachine
+func (tr *MaintenanceAssignmentVirtualMachine) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this MaintenanceAssignmentVirtualMachine using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MaintenanceAssignmentVirtualMachine) LateInitialize(attrs []byte) (bool, error) {
@@ -245,6 +263,15 @@ func (tr *MaintenanceConfiguration) GetInitParameters() (map[string]any, error) 
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this MaintenanceConfiguration
+func (tr *MaintenanceConfiguration) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MaintenanceConfiguration using its observed tfState.

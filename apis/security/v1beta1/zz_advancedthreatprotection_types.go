@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AdvancedThreatProtectionInitParameters struct {
+
+	// Should Advanced Threat Protection be enabled on this resource?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ID of the Azure Resource which to enable Advanced Threat Protection on. Changing this forces a new resource to be created.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+}
+
 type AdvancedThreatProtectionObservation struct {
 
 	// Should Advanced Threat Protection be enabled on this resource?
@@ -28,11 +37,9 @@ type AdvancedThreatProtectionObservation struct {
 type AdvancedThreatProtectionParameters struct {
 
 	// Should Advanced Threat Protection be enabled on this resource?
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The ID of the Azure Resource which to enable Advanced Threat Protection on. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 
@@ -40,6 +47,10 @@ type AdvancedThreatProtectionParameters struct {
 type AdvancedThreatProtectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AdvancedThreatProtectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AdvancedThreatProtectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // AdvancedThreatProtectionStatus defines the observed state of AdvancedThreatProtection.
@@ -60,8 +71,8 @@ type AdvancedThreatProtectionStatus struct {
 type AdvancedThreatProtection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled)",message="enabled is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetResourceId)",message="targetResourceId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || has(self.initProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetResourceId) || has(self.initProvider.targetResourceId)",message="targetResourceId is a required parameter"
 	Spec   AdvancedThreatProtectionSpec   `json:"spec"`
 	Status AdvancedThreatProtectionStatus `json:"status,omitempty"`
 }

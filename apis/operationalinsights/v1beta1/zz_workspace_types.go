@@ -13,6 +13,42 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type WorkspaceInitParameters struct {
+
+	// Specifies if the log Analytics Workspace allow users accessing to data associated with resources they have permission to view, without permission to workspace. Defaults to true.
+	AllowResourceOnlyPermissions *bool `json:"allowResourceOnlyPermissions,omitempty" tf:"allow_resource_only_permissions,omitempty"`
+
+	// Is Customer Managed Storage mandatory for query management?
+	CmkForQueryForced *bool `json:"cmkForQueryForced,omitempty" tf:"cmk_for_query_forced,omitempty"`
+
+	// The workspace daily quota for ingestion in GB. Defaults to -1 (unlimited) if omitted.
+	DailyQuotaGb *float64 `json:"dailyQuotaGb,omitempty" tf:"daily_quota_gb,omitempty"`
+
+	// Should the Log Analytics Workspace support ingestion over the Public Internet? Defaults to true.
+	InternetIngestionEnabled *bool `json:"internetIngestionEnabled,omitempty" tf:"internet_ingestion_enabled,omitempty"`
+
+	// Should the Log Analytics Workspace support querying over the Public Internet? Defaults to true.
+	InternetQueryEnabled *bool `json:"internetQueryEnabled,omitempty" tf:"internet_query_enabled,omitempty"`
+
+	// Specifies if the log Analytics workspace should enforce authentication using Azure AD. Defaults to false.
+	LocalAuthenticationDisabled *bool `json:"localAuthenticationDisabled,omitempty" tf:"local_authentication_disabled,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The capacity reservation level in GB for this workspace. Must be in increments of 100 between 100 and 5000.
+	ReservationCapacityInGbPerDay *float64 `json:"reservationCapacityInGbPerDay,omitempty" tf:"reservation_capacity_in_gb_per_day,omitempty"`
+
+	// The workspace data retention in days. Possible values are either 7 (Free Tier only) or range between 30 and 730.
+	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
+
+	// Specifies the SKU of the Log Analytics Workspace. Possible values are Free, PerNode, Premium, Standard, Standalone, Unlimited, CapacityReservation, and PerGB2018 (new SKU as of 2018-04-03). Defaults to PerGB2018.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type WorkspaceObservation struct {
 
 	// Specifies if the log Analytics Workspace allow users accessing to data associated with resources they have permission to view, without permission to workspace. Defaults to true.
@@ -61,35 +97,27 @@ type WorkspaceObservation struct {
 type WorkspaceParameters struct {
 
 	// Specifies if the log Analytics Workspace allow users accessing to data associated with resources they have permission to view, without permission to workspace. Defaults to true.
-	// +kubebuilder:validation:Optional
 	AllowResourceOnlyPermissions *bool `json:"allowResourceOnlyPermissions,omitempty" tf:"allow_resource_only_permissions,omitempty"`
 
 	// Is Customer Managed Storage mandatory for query management?
-	// +kubebuilder:validation:Optional
 	CmkForQueryForced *bool `json:"cmkForQueryForced,omitempty" tf:"cmk_for_query_forced,omitempty"`
 
 	// The workspace daily quota for ingestion in GB. Defaults to -1 (unlimited) if omitted.
-	// +kubebuilder:validation:Optional
 	DailyQuotaGb *float64 `json:"dailyQuotaGb,omitempty" tf:"daily_quota_gb,omitempty"`
 
 	// Should the Log Analytics Workspace support ingestion over the Public Internet? Defaults to true.
-	// +kubebuilder:validation:Optional
 	InternetIngestionEnabled *bool `json:"internetIngestionEnabled,omitempty" tf:"internet_ingestion_enabled,omitempty"`
 
 	// Should the Log Analytics Workspace support querying over the Public Internet? Defaults to true.
-	// +kubebuilder:validation:Optional
 	InternetQueryEnabled *bool `json:"internetQueryEnabled,omitempty" tf:"internet_query_enabled,omitempty"`
 
 	// Specifies if the log Analytics workspace should enforce authentication using Azure AD. Defaults to false.
-	// +kubebuilder:validation:Optional
 	LocalAuthenticationDisabled *bool `json:"localAuthenticationDisabled,omitempty" tf:"local_authentication_disabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The capacity reservation level in GB for this workspace. Must be in increments of 100 between 100 and 5000.
-	// +kubebuilder:validation:Optional
 	ReservationCapacityInGbPerDay *float64 `json:"reservationCapacityInGbPerDay,omitempty" tf:"reservation_capacity_in_gb_per_day,omitempty"`
 
 	// The name of the resource group in which the Log Analytics workspace is created. Changing this forces a new resource to be created.
@@ -106,15 +134,12 @@ type WorkspaceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The workspace data retention in days. Possible values are either 7 (Free Tier only) or range between 30 and 730.
-	// +kubebuilder:validation:Optional
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// Specifies the SKU of the Log Analytics Workspace. Possible values are Free, PerNode, Premium, Standard, Standalone, Unlimited, CapacityReservation, and PerGB2018 (new SKU as of 2018-04-03). Defaults to PerGB2018.
-	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -122,6 +147,10 @@ type WorkspaceParameters struct {
 type WorkspaceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WorkspaceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider WorkspaceInitParameters `json:"initProvider,omitempty"`
 }
 
 // WorkspaceStatus defines the observed state of Workspace.
@@ -142,7 +171,7 @@ type WorkspaceStatus struct {
 type Workspace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   WorkspaceSpec   `json:"spec"`
 	Status WorkspaceStatus `json:"status,omitempty"`
 }

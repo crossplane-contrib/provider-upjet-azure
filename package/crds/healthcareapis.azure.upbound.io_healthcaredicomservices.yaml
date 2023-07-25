@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: healthcaredicomservices.healthcareapis.azure.upbound.io
 spec:
   group: healthcareapis.azure.upbound.io
@@ -84,8 +84,6 @@ spec:
                             and SystemAssigned, UserAssigned. If UserAssigned is set,
                             an identity_ids must be set as well.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   location:
@@ -183,6 +181,46 @@ spec:
                             - IfNotPresent
                             type: string
                         type: object
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: A list of User Assigned Identity IDs which
+                            should be assigned to this Healthcare DICOM service.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: The type of identity used for the Healthcare
+                            DICOM service. Possible values are UserAssigned, SystemAssigned
+                            and SystemAssigned, UserAssigned. If UserAssigned is set,
+                            an identity_ids must be set as well.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: Specifies the Azure Region where the Healthcare DICOM
+                      Service should be created. Changing this forces a new Healthcare
+                      DICOM Service to be created.
+                    type: string
+                  publicNetworkAccessEnabled:
+                    description: Whether to enabled public networks when data plane
+                      traffic coming from public networks while private endpoint is
+                      enabled. Defaults to true.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the Healthcare DICOM
+                      Service.
                     type: object
                 type: object
               managementPolicies:
@@ -385,7 +423,8 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
           status:
             description: HealthcareDICOMServiceStatus defines the observed state of
               HealthcareDICOMService.

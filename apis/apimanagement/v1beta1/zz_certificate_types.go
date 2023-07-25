@@ -62,11 +62,9 @@ type CertificateParameters_2 struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The base-64 encoded certificate data, which must be a PFX file.
-	// +kubebuilder:validation:Optional
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The Client ID of the User Assigned Managed Identity to use for retrieving certificate.
-	// +kubebuilder:validation:Optional
 	KeyVaultIdentityClientID *string `json:"keyVaultIdentityClientId,omitempty" tf:"key_vault_identity_client_id,omitempty"`
 
 	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
@@ -84,7 +82,6 @@ type CertificateParameters_2 struct {
 	KeyVaultSecretIDSelector *v1.Selector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
 
 	// The password used for this certificate.
-	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
@@ -108,14 +105,6 @@ type CertificateSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider CertificateInitParameters_2 `json:"initProvider,omitempty"`
 }
 

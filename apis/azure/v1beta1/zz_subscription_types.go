@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SubscriptionInitParameters struct {
+
+	// The Azure Billing Scope ID. Can be a Microsoft Customer Account Billing Scope ID, a Microsoft Partner Account Billing Scope ID or an Enrollment Billing Scope ID.
+	BillingScopeID *string `json:"billingScopeId,omitempty" tf:"billing_scope_id,omitempty"`
+
+	// The ID of the Subscription. Changing this forces a new Subscription to be created.
+	// The GUID of the Subscription.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+
+	// The Name of the Subscription. This is the Display Name in the portal.
+	// The Display Name for the Subscription.
+	SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
+
+	// A mapping of tags to assign to the Subscription.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The workload type of the Subscription. Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.
+	// The workload type for the Subscription. Possible values are `Production` (default) and `DevTest`.
+	Workload *string `json:"workload,omitempty" tf:"workload,omitempty"`
+}
+
 type SubscriptionObservation struct {
 
 	// The Azure Billing Scope ID. Can be a Microsoft Customer Account Billing Scope ID, a Microsoft Partner Account Billing Scope ID or an Enrollment Billing Scope ID.
@@ -44,26 +65,21 @@ type SubscriptionObservation struct {
 type SubscriptionParameters struct {
 
 	// The Azure Billing Scope ID. Can be a Microsoft Customer Account Billing Scope ID, a Microsoft Partner Account Billing Scope ID or an Enrollment Billing Scope ID.
-	// +kubebuilder:validation:Optional
 	BillingScopeID *string `json:"billingScopeId,omitempty" tf:"billing_scope_id,omitempty"`
 
 	// The ID of the Subscription. Changing this forces a new Subscription to be created.
 	// The GUID of the Subscription.
-	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// The Name of the Subscription. This is the Display Name in the portal.
 	// The Display Name for the Subscription.
-	// +kubebuilder:validation:Optional
 	SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
 
 	// A mapping of tags to assign to the Subscription.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The workload type of the Subscription. Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.
 	// The workload type for the Subscription. Possible values are `Production` (default) and `DevTest`.
-	// +kubebuilder:validation:Optional
 	Workload *string `json:"workload,omitempty" tf:"workload,omitempty"`
 }
 
@@ -71,6 +87,10 @@ type SubscriptionParameters struct {
 type SubscriptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SubscriptionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SubscriptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // SubscriptionStatus defines the observed state of Subscription.
@@ -91,7 +111,7 @@ type SubscriptionStatus struct {
 type Subscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionName)",message="subscriptionName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionName) || has(self.initProvider.subscriptionName)",message="subscriptionName is a required parameter"
 	Spec   SubscriptionSpec   `json:"spec"`
 	Status SubscriptionStatus `json:"status,omitempty"`
 }

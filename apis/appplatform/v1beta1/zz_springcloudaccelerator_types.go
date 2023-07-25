@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SpringCloudAcceleratorInitParameters struct {
+
+	// The name which should be used for this Spring Cloud Accelerator. Changing this forces a new Spring Cloud Accelerator to be created. The only possible value is default.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type SpringCloudAcceleratorObservation struct {
 
 	// The ID of the Spring Cloud Accelerator.
@@ -28,7 +34,6 @@ type SpringCloudAcceleratorObservation struct {
 type SpringCloudAcceleratorParameters struct {
 
 	// The name which should be used for this Spring Cloud Accelerator. Changing this forces a new Spring Cloud Accelerator to be created. The only possible value is default.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Accelerator to be created.
@@ -50,6 +55,10 @@ type SpringCloudAcceleratorParameters struct {
 type SpringCloudAcceleratorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudAcceleratorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SpringCloudAcceleratorInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudAcceleratorStatus defines the observed state of SpringCloudAccelerator.
@@ -70,7 +79,7 @@ type SpringCloudAcceleratorStatus struct {
 type SpringCloudAccelerator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   SpringCloudAcceleratorSpec   `json:"spec"`
 	Status SpringCloudAcceleratorStatus `json:"status,omitempty"`
 }

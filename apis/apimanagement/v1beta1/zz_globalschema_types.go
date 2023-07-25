@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GlobalSchemaInitParameters struct {
+
+	// The description of the schema.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The content type of the Schema. Possible values are xml and json.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The string defining the document representing the Schema.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type GlobalSchemaObservation struct {
 
 	// The Name of the API Management Service where the API exists. Changing this forces a new resource to be created.
@@ -50,7 +62,6 @@ type GlobalSchemaParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The description of the schema.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
@@ -67,11 +78,9 @@ type GlobalSchemaParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The content type of the Schema. Possible values are xml and json.
-	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The string defining the document representing the Schema.
-	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -79,6 +88,10 @@ type GlobalSchemaParameters struct {
 type GlobalSchemaSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GlobalSchemaParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider GlobalSchemaInitParameters `json:"initProvider,omitempty"`
 }
 
 // GlobalSchemaStatus defines the observed state of GlobalSchema.
@@ -99,8 +112,8 @@ type GlobalSchemaStatus struct {
 type GlobalSchema struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type)",message="type is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value)",message="value is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value) || has(self.initProvider.value)",message="value is a required parameter"
 	Spec   GlobalSchemaSpec   `json:"spec"`
 	Status GlobalSchemaStatus `json:"status,omitempty"`
 }

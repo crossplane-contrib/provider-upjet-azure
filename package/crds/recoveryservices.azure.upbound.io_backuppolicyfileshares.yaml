@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: backuppolicyfileshares.recoveryservices.azure.upbound.io
 spec:
   group: recoveryservices.azure.upbound.io
@@ -81,9 +81,6 @@ spec:
                             format. Times must be either on the hour or half hour
                             (e.g. 12:00, 12:30, 13:00, etc.)
                           type: string
-                      required:
-                      - frequency
-                      - time
                       type: object
                     type: array
                   recoveryVaultName:
@@ -253,8 +250,6 @@ spec:
                           description: The number of daily backups to keep. Must be
                             between 1 and 200 (inclusive)
                           type: number
-                      required:
-                      - count
                       type: object
                     type: array
                   retentionMonthly:
@@ -279,10 +274,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - count
-                      - weekdays
-                      - weeks
                       type: object
                     type: array
                   retentionWeekly:
@@ -301,9 +292,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - count
-                      - weekdays
                       type: object
                     type: array
                   retentionYearly:
@@ -335,11 +323,116 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - count
-                      - months
-                      - weekdays
-                      - weeks
+                      type: object
+                    type: array
+                  timezone:
+                    description: Specifies the timezone. the possible values are defined
+                      here. Defaults to UTC
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  backup:
+                    description: Configures the Policy backup frequency and times
+                      as documented in the backup block below.
+                    items:
+                      properties:
+                        frequency:
+                          description: Sets the backup frequency. Currently, only
+                            Daily is supported
+                          type: string
+                        time:
+                          description: The time of day to perform the backup in 24-hour
+                            format. Times must be either on the hour or half hour
+                            (e.g. 12:00, 12:30, 13:00, etc.)
+                          type: string
+                      type: object
+                    type: array
+                  retentionDaily:
+                    description: Configures the policy daily retention as documented
+                      in the retention_daily block below.
+                    items:
+                      properties:
+                        count:
+                          description: The number of daily backups to keep. Must be
+                            between 1 and 200 (inclusive)
+                          type: number
+                      type: object
+                    type: array
+                  retentionMonthly:
+                    description: Configures the policy monthly retention as documented
+                      in the retention_monthly block below.
+                    items:
+                      properties:
+                        count:
+                          description: The number of monthly backups to keep. Must
+                            be between 1 and 120
+                          type: number
+                        weekdays:
+                          description: The weekday backups to retain . Must be one
+                            of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
+                            or Saturday.
+                          items:
+                            type: string
+                          type: array
+                        weeks:
+                          description: The weeks of the month to retain backups of.
+                            Must be one of First, Second, Third, Fourth, Last.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  retentionWeekly:
+                    description: Configures the policy weekly retention as documented
+                      in the retention_weekly block below.
+                    items:
+                      properties:
+                        count:
+                          description: The number of daily backups to keep. Must be
+                            between 1 and 200 (inclusive)
+                          type: number
+                        weekdays:
+                          description: The weekday backups to retain. Must be one
+                            of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
+                            or Saturday.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  retentionYearly:
+                    description: Configures the policy yearly retention as documented
+                      in the retention_yearly block below.
+                    items:
+                      properties:
+                        count:
+                          description: The number of yearly backups to keep. Must
+                            be between 1 and 10
+                          type: number
+                        months:
+                          description: The months of the year to retain backups of.
+                            Must be one of January, February, March, April, May, June,
+                            July, Augest, September, October, November and December.
+                          items:
+                            type: string
+                          type: array
+                        weekdays:
+                          description: The weekday backups to retain . Must be one
+                            of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
+                            or Saturday.
+                          items:
+                            type: string
+                          type: array
+                        weeks:
+                          description: The weeks of the month to retain backups of.
+                            Must be one of First, Second, Third, Fourth, Last.
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   timezone:
@@ -547,10 +640,12 @@ spec:
             x-kubernetes-validations:
             - message: backup is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.backup)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.backup)
+                || has(self.initProvider.backup)'
             - message: retentionDaily is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.retentionDaily)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.retentionDaily)
+                || has(self.initProvider.retentionDaily)'
           status:
             description: BackupPolicyFileShareStatus defines the observed state of
               BackupPolicyFileShare.

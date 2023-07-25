@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DiskEncryptionSetInitParameters struct {
+
+	// Boolean flag to specify whether Azure Disk Encryption Set automatically rotates encryption Key to latest version.
+	AutoKeyRotationEnabled *bool `json:"autoKeyRotationEnabled,omitempty" tf:"auto_key_rotation_enabled,omitempty"`
+
+	// The type of key used to encrypt the data of the disk. Possible values are EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys and ConfidentialVmEncryptedWithCustomerKey. Defaults to EncryptionAtRestWithCustomerKey. Changing this forces a new resource to be created.
+	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+
+	// Multi-tenant application client id to access key vault in a different tenant.
+	FederatedClientID *string `json:"federatedClientId,omitempty" tf:"federated_client_id,omitempty"`
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the Azure Region where the Disk Encryption Set exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags to assign to the Disk Encryption Set.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DiskEncryptionSetObservation struct {
 
 	// Boolean flag to specify whether Azure Disk Encryption Set automatically rotates encryption Key to latest version.
@@ -46,19 +67,15 @@ type DiskEncryptionSetObservation struct {
 type DiskEncryptionSetParameters struct {
 
 	// Boolean flag to specify whether Azure Disk Encryption Set automatically rotates encryption Key to latest version.
-	// +kubebuilder:validation:Optional
 	AutoKeyRotationEnabled *bool `json:"autoKeyRotationEnabled,omitempty" tf:"auto_key_rotation_enabled,omitempty"`
 
 	// The type of key used to encrypt the data of the disk. Possible values are EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys and ConfidentialVmEncryptedWithCustomerKey. Defaults to EncryptionAtRestWithCustomerKey. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 
 	// Multi-tenant application client id to access key vault in a different tenant.
-	// +kubebuilder:validation:Optional
 	FederatedClientID *string `json:"federatedClientId,omitempty" tf:"federated_client_id,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the URL to a Key Vault Key (either from a Key Vault Key, or the Key URL for the Key Vault Secret).
@@ -76,7 +93,6 @@ type DiskEncryptionSetParameters struct {
 	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
 	// Specifies the Azure Region where the Disk Encryption Set exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group where the Disk Encryption Set should exist. Changing this forces a new resource to be created.
@@ -93,8 +109,16 @@ type DiskEncryptionSetParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the Disk Encryption Set.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Disk Encryption Set.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The type of Managed Service Identity that is configured on this Disk Encryption Set. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
@@ -115,18 +139,20 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Disk Encryption Set.
-	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of Managed Service Identity that is configured on this Disk Encryption Set. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // DiskEncryptionSetSpec defines the desired state of DiskEncryptionSet
 type DiskEncryptionSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DiskEncryptionSetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DiskEncryptionSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // DiskEncryptionSetStatus defines the observed state of DiskEncryptionSet.
@@ -147,8 +173,8 @@ type DiskEncryptionSetStatus struct {
 type DiskEncryptionSet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identity)",message="identity is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identity) || has(self.initProvider.identity)",message="identity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   DiskEncryptionSetSpec   `json:"spec"`
 	Status DiskEncryptionSetStatus `json:"status,omitempty"`
 }

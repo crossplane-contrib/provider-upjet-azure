@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ResourcePolicyExemptionInitParameters struct {
+
+	// A description to use for this Policy Exemption.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A friendly display name to use for this Policy Exemption.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The category of this policy exemption. Possible values are Waiver and Mitigated.
+	ExemptionCategory *string `json:"exemptionCategory,omitempty" tf:"exemption_category,omitempty"`
+
+	// The expiration date and time in UTC ISO 8601 format of this policy exemption.
+	ExpiresOn *string `json:"expiresOn,omitempty" tf:"expires_on,omitempty"`
+
+	// The metadata for this policy exemption. This is a JSON string representing additional metadata that should be stored with the policy exemption.
+	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name of the Policy Exemption. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
+	PolicyDefinitionReferenceIds []*string `json:"policyDefinitionReferenceIds,omitempty" tf:"policy_definition_reference_ids,omitempty"`
+}
+
 type ResourcePolicyExemptionObservation struct {
 
 	// A description to use for this Policy Exemption.
@@ -49,27 +73,21 @@ type ResourcePolicyExemptionObservation struct {
 type ResourcePolicyExemptionParameters struct {
 
 	// A description to use for this Policy Exemption.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A friendly display name to use for this Policy Exemption.
-	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The category of this policy exemption. Possible values are Waiver and Mitigated.
-	// +kubebuilder:validation:Optional
 	ExemptionCategory *string `json:"exemptionCategory,omitempty" tf:"exemption_category,omitempty"`
 
 	// The expiration date and time in UTC ISO 8601 format of this policy exemption.
-	// +kubebuilder:validation:Optional
 	ExpiresOn *string `json:"expiresOn,omitempty" tf:"expires_on,omitempty"`
 
 	// The metadata for this policy exemption. This is a JSON string representing additional metadata that should be stored with the policy exemption.
-	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the Policy Exemption. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Policy Assignment to be exempted at the specified Scope. Changing this forces a new resource to be created.
@@ -87,7 +105,6 @@ type ResourcePolicyExemptionParameters struct {
 	PolicyAssignmentIDSelector *v1.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
 
 	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
-	// +kubebuilder:validation:Optional
 	PolicyDefinitionReferenceIds []*string `json:"policyDefinitionReferenceIds,omitempty" tf:"policy_definition_reference_ids,omitempty"`
 
 	// The Resource ID where the Policy Exemption should be applied. Changing this forces a new resource to be created.
@@ -109,6 +126,10 @@ type ResourcePolicyExemptionParameters struct {
 type ResourcePolicyExemptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourcePolicyExemptionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ResourcePolicyExemptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourcePolicyExemptionStatus defines the observed state of ResourcePolicyExemption.
@@ -129,8 +150,8 @@ type ResourcePolicyExemptionStatus struct {
 type ResourcePolicyExemption struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exemptionCategory)",message="exemptionCategory is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exemptionCategory) || has(self.initProvider.exemptionCategory)",message="exemptionCategory is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ResourcePolicyExemptionSpec   `json:"spec"`
 	Status ResourcePolicyExemptionStatus `json:"status,omitempty"`
 }

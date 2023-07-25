@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccountInitParameters struct {
+
+	// A active_directory block as defined below.
+	ActiveDirectory []ActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AccountObservation struct {
 
 	// A active_directory block as defined below.
@@ -34,11 +46,9 @@ type AccountObservation struct {
 type AccountParameters struct {
 
 	// A active_directory block as defined below.
-	// +kubebuilder:validation:Optional
 	ActiveDirectory []ActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group where the NetApp Account should be created. Changing this forces a new resource to be created.
@@ -55,8 +65,25 @@ type AccountParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type ActiveDirectoryInitParameters struct {
+
+	// A list of DNS server IP addresses for the Active Directory domain. Only allows IPv4 address.
+	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
+
+	// The name of the Active Directory domain.
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+
+	// The Organizational Unit (OU) within the Active Directory Domain.
+	OrganizationalUnit *string `json:"organizationalUnit,omitempty" tf:"organizational_unit,omitempty"`
+
+	// The NetBIOS name which should be used for the NetApp SMB Server, which will be registered as a computer account in the AD and used to mount volumes.
+	SMBServerName *string `json:"smbServerName,omitempty" tf:"smb_server_name,omitempty"`
+
+	// The Username of Active Directory Domain Administrator.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type ActiveDirectoryObservation struct {
@@ -80,34 +107,32 @@ type ActiveDirectoryObservation struct {
 type ActiveDirectoryParameters struct {
 
 	// A list of DNS server IP addresses for the Active Directory domain. Only allows IPv4 address.
-	// +kubebuilder:validation:Required
-	DNSServers []*string `json:"dnsServers" tf:"dns_servers,omitempty"`
+	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
 	// The name of the Active Directory domain.
-	// +kubebuilder:validation:Required
-	Domain *string `json:"domain" tf:"domain,omitempty"`
+	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// The Organizational Unit (OU) within the Active Directory Domain.
-	// +kubebuilder:validation:Optional
 	OrganizationalUnit *string `json:"organizationalUnit,omitempty" tf:"organizational_unit,omitempty"`
 
 	// The password associated with the username.
-	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The NetBIOS name which should be used for the NetApp SMB Server, which will be registered as a computer account in the AD and used to mount volumes.
-	// +kubebuilder:validation:Required
-	SMBServerName *string `json:"smbServerName" tf:"smb_server_name,omitempty"`
+	SMBServerName *string `json:"smbServerName,omitempty" tf:"smb_server_name,omitempty"`
 
 	// The Username of Active Directory Domain Administrator.
-	// +kubebuilder:validation:Required
-	Username *string `json:"username" tf:"username,omitempty"`
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 // AccountSpec defines the desired state of Account
 type AccountSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AccountParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AccountInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccountStatus defines the observed state of Account.
@@ -128,7 +153,7 @@ type AccountStatus struct {
 type Account struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   AccountSpec   `json:"spec"`
 	Status AccountStatus `json:"status,omitempty"`
 }

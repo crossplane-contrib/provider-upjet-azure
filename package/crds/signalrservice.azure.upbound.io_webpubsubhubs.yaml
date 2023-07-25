@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: webpubsubhubs.signalrservice.azure.upbound.io
 spec:
   group: signalrservice.azure.upbound.io
@@ -185,8 +185,6 @@ spec:
                             it matches event event1 and event2 * The single event
                             name, for example event1, it matches event1.'
                           type: string
-                      required:
-                      - urlTemplate
                       type: object
                     type: array
                   eventListener:
@@ -455,6 +453,69 @@ spec:
                         type: object
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  anonymousConnectionsEnabled:
+                    description: Is anonymous connections are allowed for this hub?
+                      Defaults to false. Possible values are true, false.
+                    type: boolean
+                  eventHandler:
+                    description: An event_handler block as defined below.
+                    items:
+                      properties:
+                        auth:
+                          description: An auth block as defined below.
+                          items:
+                            type: object
+                          type: array
+                        systemEvents:
+                          description: Specifies the list of system events. Supported
+                            values are connect, connected and disconnected.
+                          items:
+                            type: string
+                          type: array
+                        urlTemplate:
+                          description: 'The Event Handler URL Template. Two predefined
+                            parameters {hub} and {event} are available to use in the
+                            template. The value of the EventHandler URL is dynamically
+                            calculated when the client request comes in. Example:
+                            http://example.com/api/{hub}/{event}.'
+                          type: string
+                        userEventPattern:
+                          description: 'Specifies the matching event names. There
+                            are 3 kind of patterns supported: * * matches any event
+                            name * , Combine multiple events with , for example event1,event2,
+                            it matches event event1 and event2 * The single event
+                            name, for example event1, it matches event1.'
+                          type: string
+                      type: object
+                    type: array
+                  eventListener:
+                    description: An event_listener block as defined below.
+                    items:
+                      properties:
+                        systemEventNameFilter:
+                          description: Specifies the list of system events. Supported
+                            values are connected and disconnected.
+                          items:
+                            type: string
+                          type: array
+                        userEventNameFilter:
+                          description: Specifies the list of matching user event names.
+                            ["*"] can be used to match all events.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  name:
+                    description: The name of the Web Pubsub hub service. Changing
+                      this forces a new resource to be created.
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -655,7 +716,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: WebPubsubHubStatus defines the observed state of WebPubsubHub.
             properties:

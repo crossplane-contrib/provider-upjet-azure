@@ -79,6 +79,15 @@ func (tr *FederatedIdentityCredential) GetInitParameters() (map[string]any, erro
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this FederatedIdentityCredential
+func (tr *FederatedIdentityCredential) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this FederatedIdentityCredential using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FederatedIdentityCredential) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *UserAssignedIdentity) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this UserAssignedIdentity
+func (tr *UserAssignedIdentity) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this UserAssignedIdentity using its observed tfState.

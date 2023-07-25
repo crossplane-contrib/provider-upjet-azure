@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SQLDedicatedGatewayInitParameters struct {
+
+	// The instance count for the CosmosDB SQL Dedicated Gateway. Possible value is between 1 and 5.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// The instance size for the CosmosDB SQL Dedicated Gateway. Changing this forces a new resource to be created. Possible values are Cosmos.D4s, Cosmos.D8s and Cosmos.D16s.
+	InstanceSize *string `json:"instanceSize,omitempty" tf:"instance_size,omitempty"`
+}
+
 type SQLDedicatedGatewayObservation struct {
 
 	// The resource ID of the CosmosDB Account. Changing this forces a new resource to be created.
@@ -45,11 +54,9 @@ type SQLDedicatedGatewayParameters struct {
 	CosmosDBAccountIDSelector *v1.Selector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
 
 	// The instance count for the CosmosDB SQL Dedicated Gateway. Possible value is between 1 and 5.
-	// +kubebuilder:validation:Optional
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// The instance size for the CosmosDB SQL Dedicated Gateway. Changing this forces a new resource to be created. Possible values are Cosmos.D4s, Cosmos.D8s and Cosmos.D16s.
-	// +kubebuilder:validation:Optional
 	InstanceSize *string `json:"instanceSize,omitempty" tf:"instance_size,omitempty"`
 }
 
@@ -57,6 +64,10 @@ type SQLDedicatedGatewayParameters struct {
 type SQLDedicatedGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SQLDedicatedGatewayParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SQLDedicatedGatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // SQLDedicatedGatewayStatus defines the observed state of SQLDedicatedGateway.
@@ -77,8 +88,8 @@ type SQLDedicatedGatewayStatus struct {
 type SQLDedicatedGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceCount)",message="instanceCount is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceSize)",message="instanceSize is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceCount) || has(self.initProvider.instanceCount)",message="instanceCount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceSize) || has(self.initProvider.instanceSize)",message="instanceSize is a required parameter"
 	Spec   SQLDedicatedGatewaySpec   `json:"spec"`
 	Status SQLDedicatedGatewayStatus `json:"status,omitempty"`
 }

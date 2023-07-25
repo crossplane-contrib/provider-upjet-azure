@@ -13,6 +13,17 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FileInitParameters struct {
+
+	// The content of the file. Changing this forces a new resource to be created.
+	// The content of the file.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+
+	// The filename of the file to be uploaded. Changing this forces a new resource to be created.
+	// The filename of the file to be uploaded.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type FileObservation struct {
 
 	// The content of the file. Changing this forces a new resource to be created.
@@ -28,13 +39,37 @@ type FileParameters struct {
 
 	// The content of the file. Changing this forces a new resource to be created.
 	// The content of the file.
-	// +kubebuilder:validation:Required
-	Content *string `json:"content" tf:"content,omitempty"`
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The filename of the file to be uploaded. Changing this forces a new resource to be created.
 	// The filename of the file to be uploaded.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type FunctionAppFunctionInitParameters struct {
+
+	// The config for this Function in JSON format.
+	// The config for this Function in JSON format.
+	ConfigJSON *string `json:"configJson,omitempty" tf:"config_json,omitempty"`
+
+	// Should this function be enabled. Defaults to true.
+	// Should this function be enabled. Defaults to `true`.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A file block as detailed below. Changing this forces a new resource to be created.
+	File []FileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
+
+	// The language the Function is written in. Possible values are CSharp, Custom, Java, Javascript, Python, PowerShell, and TypeScript.
+	// The language the Function is written in.
+	Language *string `json:"language,omitempty" tf:"language,omitempty"`
+
+	// The name of the function. Changing this forces a new resource to be created.
+	// The name of the function.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The test data for the function.
+	// The test data for the function.
+	TestData *string `json:"testData,omitempty" tf:"test_data,omitempty"`
 }
 
 type FunctionAppFunctionObservation struct {
@@ -102,16 +137,13 @@ type FunctionAppFunctionParameters struct {
 
 	// The config for this Function in JSON format.
 	// The config for this Function in JSON format.
-	// +kubebuilder:validation:Optional
 	ConfigJSON *string `json:"configJson,omitempty" tf:"config_json,omitempty"`
 
 	// Should this function be enabled. Defaults to true.
 	// Should this function be enabled. Defaults to `true`.
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A file block as detailed below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	File []FileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
 	// The ID of the Function App in which this function should reside. Changing this forces a new resource to be created.
@@ -131,17 +163,14 @@ type FunctionAppFunctionParameters struct {
 
 	// The language the Function is written in. Possible values are CSharp, Custom, Java, Javascript, Python, PowerShell, and TypeScript.
 	// The language the Function is written in.
-	// +kubebuilder:validation:Optional
 	Language *string `json:"language,omitempty" tf:"language,omitempty"`
 
 	// The name of the function. Changing this forces a new resource to be created.
 	// The name of the function.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The test data for the function.
 	// The test data for the function.
-	// +kubebuilder:validation:Optional
 	TestData *string `json:"testData,omitempty" tf:"test_data,omitempty"`
 }
 
@@ -149,6 +178,10 @@ type FunctionAppFunctionParameters struct {
 type FunctionAppFunctionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FunctionAppFunctionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FunctionAppFunctionInitParameters `json:"initProvider,omitempty"`
 }
 
 // FunctionAppFunctionStatus defines the observed state of FunctionAppFunction.
@@ -169,8 +202,8 @@ type FunctionAppFunctionStatus struct {
 type FunctionAppFunction struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.configJson)",message="configJson is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.configJson) || has(self.initProvider.configJson)",message="configJson is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   FunctionAppFunctionSpec   `json:"spec"`
 	Status FunctionAppFunctionStatus `json:"status,omitempty"`
 }

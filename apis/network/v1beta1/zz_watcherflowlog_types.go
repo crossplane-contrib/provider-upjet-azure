@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RetentionPolicyInitParameters struct {
+
+	// The number of days to retain flow log records.
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Boolean flag to enable/disable retention.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type RetentionPolicyObservation struct {
 
 	// The number of days to retain flow log records.
@@ -25,12 +34,22 @@ type RetentionPolicyObservation struct {
 type RetentionPolicyParameters struct {
 
 	// The number of days to retain flow log records.
-	// +kubebuilder:validation:Required
-	Days *float64 `json:"days" tf:"days,omitempty"`
+	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
 
 	// Boolean flag to enable/disable retention.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type TrafficAnalyticsInitParameters struct {
+
+	// Boolean flag to enable/disable traffic analytics.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// How frequently service should do flow analytics in minutes. Defaults to 60.
+	IntervalInMinutes *float64 `json:"intervalInMinutes,omitempty" tf:"interval_in_minutes,omitempty"`
+
+	// The location of the attached workspace.
+	WorkspaceRegion *string `json:"workspaceRegion,omitempty" tf:"workspace_region,omitempty"`
 }
 
 type TrafficAnalyticsObservation struct {
@@ -54,11 +73,9 @@ type TrafficAnalyticsObservation struct {
 type TrafficAnalyticsParameters struct {
 
 	// Boolean flag to enable/disable traffic analytics.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// How frequently service should do flow analytics in minutes. Defaults to 60.
-	// +kubebuilder:validation:Optional
 	IntervalInMinutes *float64 `json:"intervalInMinutes,omitempty" tf:"interval_in_minutes,omitempty"`
 
 	// The resource GUID of the attached workspace.
@@ -76,8 +93,7 @@ type TrafficAnalyticsParameters struct {
 	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 
 	// The location of the attached workspace.
-	// +kubebuilder:validation:Required
-	WorkspaceRegion *string `json:"workspaceRegion" tf:"workspace_region,omitempty"`
+	WorkspaceRegion *string `json:"workspaceRegion,omitempty" tf:"workspace_region,omitempty"`
 
 	// The resource ID of the attached workspace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
@@ -92,6 +108,27 @@ type TrafficAnalyticsParameters struct {
 	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
+}
+
+type WatcherFlowLogInitParameters struct {
+
+	// Should Network Flow Logging be Enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The location where the Network Watcher Flow Log resides. Changing this forces a new resource to be created. Defaults to the location of the Network Watcher.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A retention_policy block as documented below.
+	RetentionPolicy []RetentionPolicyInitParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
+
+	// A mapping of tags which should be assigned to the Network Watcher Flow Log.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A traffic_analytics block as documented below.
+	TrafficAnalytics []TrafficAnalyticsInitParameters `json:"trafficAnalytics,omitempty" tf:"traffic_analytics,omitempty"`
+
+	// The version (revision) of the flow log. Possible values are 1 and 2.
+	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type WatcherFlowLogObservation struct {
@@ -133,11 +170,9 @@ type WatcherFlowLogObservation struct {
 type WatcherFlowLogParameters struct {
 
 	// Should Network Flow Logging be Enabled?
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The location where the Network Watcher Flow Log resides. Changing this forces a new resource to be created. Defaults to the location of the Network Watcher.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Network Security Group for which to enable flow logs for. Changing this forces a new resource to be created.
@@ -181,7 +216,6 @@ type WatcherFlowLogParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A retention_policy block as documented below.
-	// +kubebuilder:validation:Optional
 	RetentionPolicy []RetentionPolicyParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// The ID of the Storage Account where flow logs are stored.
@@ -199,15 +233,12 @@ type WatcherFlowLogParameters struct {
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Network Watcher Flow Log.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A traffic_analytics block as documented below.
-	// +kubebuilder:validation:Optional
 	TrafficAnalytics []TrafficAnalyticsParameters `json:"trafficAnalytics,omitempty" tf:"traffic_analytics,omitempty"`
 
 	// The version (revision) of the flow log. Possible values are 1 and 2.
-	// +kubebuilder:validation:Optional
 	Version *float64 `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -215,6 +246,10 @@ type WatcherFlowLogParameters struct {
 type WatcherFlowLogSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WatcherFlowLogParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider WatcherFlowLogInitParameters `json:"initProvider,omitempty"`
 }
 
 // WatcherFlowLogStatus defines the observed state of WatcherFlowLog.
@@ -235,8 +270,8 @@ type WatcherFlowLogStatus struct {
 type WatcherFlowLog struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled)",message="enabled is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.retentionPolicy)",message="retentionPolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || has(self.initProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.retentionPolicy) || has(self.initProvider.retentionPolicy)",message="retentionPolicy is a required parameter"
 	Spec   WatcherFlowLogSpec   `json:"spec"`
 	Status WatcherFlowLogStatus `json:"status,omitempty"`
 }

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: linkedserviceazureblobstorages.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -282,8 +282,6 @@ spec:
                           description: Specifies the secret name in Azure Key Vault
                             that stores the SAS token.
                           type: string
-                      required:
-                      - secretName
                       type: object
                     type: array
                   parameters:
@@ -429,8 +427,88 @@ spec:
                           description: Specifies the secret name in Azure Key Vault
                             that stores the Service Principal key.
                           type: string
-                      required:
-                      - secretName
+                      type: object
+                    type: array
+                  storageKind:
+                    description: Specify the kind of the storage account. Allowed
+                      values are Storage, StorageV2, BlobStorage and BlockBlobStorage.
+                    type: string
+                  tenantId:
+                    description: The tenant id or name in which to authenticate against
+                      the Azure Blob Storage account.
+                    type: string
+                  useManagedIdentity:
+                    description: Whether to use the Data Factory's managed identity
+                      to authenticate against the Azure Blob Storage account. Incompatible
+                      with service_principal_id and service_principal_key.
+                    type: boolean
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Linked Service.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Linked Service.
+                    items:
+                      type: string
+                    type: array
+                  connectionStringInsecure:
+                    description: The connection string sent insecurely. Conflicts
+                      with connection_string, sas_uri and service_endpoint.
+                    type: string
+                  description:
+                    description: The description for the Data Factory Linked Service.
+                    type: string
+                  integrationRuntimeName:
+                    description: The integration runtime reference to associate with
+                      the Data Factory Linked Service.
+                    type: string
+                  keyVaultSasToken:
+                    description: A key_vault_sas_token block as defined below. Use
+                      this argument to store SAS Token in an existing Key Vault. It
+                      needs an existing Key Vault Data Factory Linked Service. A sas_uri
+                      is required.
+                    items:
+                      properties:
+                        secretName:
+                          description: Specifies the secret name in Azure Key Vault
+                            that stores the SAS token.
+                          type: string
+                      type: object
+                    type: array
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of parameters to associate with the Data Factory
+                      Linked Service.
+                    type: object
+                  servicePrincipalId:
+                    description: The service principal id in which to authenticate
+                      against the Azure Blob Storage account.
+                    type: string
+                  servicePrincipalKey:
+                    description: The service principal key in which to authenticate
+                      against the AAzure Blob Storage account.
+                    type: string
+                  servicePrincipalLinkedKeyVaultKey:
+                    description: A service_principal_linked_key_vault_key block as
+                      defined below. Use this argument to store Service Principal
+                      key in an existing Key Vault. It needs an existing Key Vault
+                      Data Factory Linked Service.
+                    items:
+                      properties:
+                        secretName:
+                          description: Specifies the secret name in Azure Key Vault
+                            that stores the Service Principal key.
+                          type: string
                       type: object
                     type: array
                   storageKind:

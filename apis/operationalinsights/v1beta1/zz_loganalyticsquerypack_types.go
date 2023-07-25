@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LogAnalyticsQueryPackInitParameters struct {
+
+	// The Azure Region where the Log Analytics Query Pack should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags which should be assigned to the Log Analytics Query Pack.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type LogAnalyticsQueryPackObservation struct {
 
 	// The ID of the Log Analytics Query Pack.
@@ -31,7 +40,6 @@ type LogAnalyticsQueryPackObservation struct {
 type LogAnalyticsQueryPackParameters struct {
 
 	// The Azure Region where the Log Analytics Query Pack should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Log Analytics Query Pack should exist. Changing this forces a new resource to be created.
@@ -48,7 +56,6 @@ type LogAnalyticsQueryPackParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Log Analytics Query Pack.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -56,6 +63,10 @@ type LogAnalyticsQueryPackParameters struct {
 type LogAnalyticsQueryPackSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LogAnalyticsQueryPackParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LogAnalyticsQueryPackInitParameters `json:"initProvider,omitempty"`
 }
 
 // LogAnalyticsQueryPackStatus defines the observed state of LogAnalyticsQueryPack.
@@ -76,7 +87,7 @@ type LogAnalyticsQueryPackStatus struct {
 type LogAnalyticsQueryPack struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   LogAnalyticsQueryPackSpec   `json:"spec"`
 	Status LogAnalyticsQueryPackStatus `json:"status,omitempty"`
 }

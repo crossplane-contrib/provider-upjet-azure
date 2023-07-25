@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: managementgroups.management.azure.upbound.io
 spec:
   group: management.azure.upbound.io
@@ -149,6 +149,22 @@ spec:
                             type: string
                         type: object
                     type: object
+                  subscriptionIds:
+                    description: A list of Subscription GUIDs which should be assigned
+                      to the Management Group.
+                    items:
+                      type: string
+                    type: array
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  displayName:
+                    description: A friendly name for this Management Group. If not
+                      specified, this will be the same as the name.
+                    type: string
                   subscriptionIds:
                     description: A list of Subscription GUIDs which should be assigned
                       to the Management Group.

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: cassandrakeyspaces.cosmosdb.azure.upbound.io
 spec:
   group: cosmosdb.azure.upbound.io
@@ -236,6 +236,27 @@ spec:
                             type: string
                         type: object
                     type: object
+                  throughput:
+                    description: The throughput of Cassandra KeySpace (RU/s). Must
+                      be set in increments of 100. The minimum value is 400.
+                    type: number
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  autoscaleSettings:
+                    description: An autoscale_settings block as defined below.
+                    items:
+                      properties:
+                        maxThroughput:
+                          description: The maximum throughput of the Cassandra KeySpace
+                            (RU/s). Must be between 1,000 and 1,000,000. Must be set
+                            in increments of 1,000. Conflicts with throughput.
+                          type: number
+                      type: object
+                    type: array
                   throughput:
                     description: The throughput of Cassandra KeySpace (RU/s). Must
                       be set in increments of 100. The minimum value is 400.

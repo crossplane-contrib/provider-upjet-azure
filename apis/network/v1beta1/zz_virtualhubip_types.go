@@ -46,11 +46,9 @@ type VirtualHubIPObservation struct {
 type VirtualHubIPParameters struct {
 
 	// The private IP address of the IP configuration.
-	// +kubebuilder:validation:Optional
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
 	// The private IP address allocation method. Possible values are Static and Dynamic is allowed. Defaults to Dynamic.
-	// +kubebuilder:validation:Optional
 	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
 
 	// The ID of the Public IP Address. This option is required since September 1st 2021. Changing this forces a new resource to be created.
@@ -103,14 +101,6 @@ type VirtualHubIPSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider VirtualHubIPInitParameters `json:"initProvider,omitempty"`
 }
 

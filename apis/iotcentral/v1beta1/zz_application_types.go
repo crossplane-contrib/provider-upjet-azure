@@ -13,6 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ApplicationInitParameters struct {
+
+	// A display_name name. Custom display name for the IoT Central application. Default is resource name.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the supported Azure location where the resource has to be create. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the IotHub resource. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Whether public network access is allowed for the IoT Central Application. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// A sku name. Possible values is ST0, ST1, ST2, Default value is ST1
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A sub_domain name. Subdomain for the IoT Central URL. Each application must have a unique subdomain.
+	SubDomain *string `json:"subDomain,omitempty" tf:"sub_domain,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A template name. IoT Central application template name. Default is a custom application. Changing this forces a new resource to be created.
+	Template *string `json:"template,omitempty" tf:"template,omitempty"`
+}
+
 type ApplicationObservation struct {
 
 	// A display_name name. Custom display name for the IoT Central application. Default is resource name.
@@ -52,23 +82,18 @@ type ApplicationObservation struct {
 type ApplicationParameters struct {
 
 	// A display_name name. Custom display name for the IoT Central application. Default is resource name.
-	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the supported Azure location where the resource has to be create. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the IotHub resource. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Whether public network access is allowed for the IoT Central Application. Defaults to true.
-	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group under which the IotHub resource has to be created. Changing this forces a new resource to be created.
@@ -85,20 +110,22 @@ type ApplicationParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A sku name. Possible values is ST0, ST1, ST2, Default value is ST1
-	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A sub_domain name. Subdomain for the IoT Central URL. Each application must have a unique subdomain.
-	// +kubebuilder:validation:Optional
 	SubDomain *string `json:"subDomain,omitempty" tf:"sub_domain,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A template name. IoT Central application template name. Default is a custom application. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Template *string `json:"template,omitempty" tf:"template,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies the type of Managed Service Identity that should be configured on this IoT Central Application. The only possible value is SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
@@ -116,14 +143,17 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this IoT Central Application. The only possible value is SystemAssigned.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // ApplicationSpec defines the desired state of Application
 type ApplicationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApplicationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ApplicationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApplicationStatus defines the observed state of Application.
@@ -144,9 +174,9 @@ type ApplicationStatus struct {
 type Application struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subDomain)",message="subDomain is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subDomain) || has(self.initProvider.subDomain)",message="subDomain is a required parameter"
 	Spec   ApplicationSpec   `json:"spec"`
 	Status ApplicationStatus `json:"status,omitempty"`
 }

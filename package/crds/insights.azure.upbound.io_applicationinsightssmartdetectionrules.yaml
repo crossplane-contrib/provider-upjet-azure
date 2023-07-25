@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: applicationinsightssmartdetectionrules.insights.azure.upbound.io
 spec:
   group: insights.azure.upbound.io
@@ -155,6 +155,41 @@ spec:
                             type: string
                         type: object
                     type: object
+                  enabled:
+                    description: Is the Application Insights Smart Detection Rule
+                      enabled? Defaults to true.
+                    type: boolean
+                  name:
+                    description: Specifies the name of the Application Insights Smart
+                      Detection Rule. Valid values include Slow page load time, Slow
+                      server response time, Long dependency duration, Degradation
+                      in server response time, Degradation in dependency duration,
+                      Degradation in trace severity ratio, Abnormal rise in exception
+                      volume, Potential memory leak detected, Potential security issue
+                      detected and Abnormal rise in daily data volume, Long dependency
+                      duration, Degradation in server response time, Degradation in
+                      dependency duration, Degradation in trace severity ratio, Abnormal
+                      rise in exception volume, Potential memory leak detected, Potential
+                      security issue detected, Abnormal rise in daily data volume.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  sendEmailsToSubscriptionOwners:
+                    description: Do emails get sent to subscription owners? Defaults
+                      to true.
+                    type: boolean
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  additionalEmailRecipients:
+                    description: Specifies a list of additional recipients that will
+                      be sent emails on this Application Insights Smart Detection
+                      Rule.
+                    items:
+                      type: string
+                    type: array
                   enabled:
                     description: Is the Application Insights Smart Detection Rule
                       enabled? Defaults to true.
@@ -378,7 +413,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: ApplicationInsightsSmartDetectionRuleStatus defines the observed
               state of ApplicationInsightsSmartDetectionRule.

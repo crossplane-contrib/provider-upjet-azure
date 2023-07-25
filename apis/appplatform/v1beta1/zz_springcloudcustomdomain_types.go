@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SpringCloudCustomDomainInitParameters struct {
+
+	// Specifies the name of the Spring Cloud Certificate that binds to the Spring Cloud Custom Domain. Required when thumbprint is specified
+	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
+
+	// Specifies the name of the Spring Cloud Custom Domain. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud Custom Domain. Required when certificate_name is specified. Changing this forces a new resource to be created.
+	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+}
+
 type SpringCloudCustomDomainObservation struct {
 
 	// Specifies the name of the Spring Cloud Certificate that binds to the Spring Cloud Custom Domain. Required when thumbprint is specified
@@ -34,11 +46,9 @@ type SpringCloudCustomDomainObservation struct {
 type SpringCloudCustomDomainParameters struct {
 
 	// Specifies the name of the Spring Cloud Certificate that binds to the Spring Cloud Custom Domain. Required when thumbprint is specified
-	// +kubebuilder:validation:Optional
 	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
 
 	// Specifies the name of the Spring Cloud Custom Domain. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the resource ID of the Spring Cloud Application. Changing this forces a new resource to be created.
@@ -56,7 +66,6 @@ type SpringCloudCustomDomainParameters struct {
 	SpringCloudAppIDSelector *v1.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
 
 	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud Custom Domain. Required when certificate_name is specified. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
 }
 
@@ -64,6 +73,10 @@ type SpringCloudCustomDomainParameters struct {
 type SpringCloudCustomDomainSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudCustomDomainParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SpringCloudCustomDomainInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudCustomDomainStatus defines the observed state of SpringCloudCustomDomain.
@@ -84,7 +97,7 @@ type SpringCloudCustomDomainStatus struct {
 type SpringCloudCustomDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   SpringCloudCustomDomainSpec   `json:"spec"`
 	Status SpringCloudCustomDomainStatus `json:"status,omitempty"`
 }

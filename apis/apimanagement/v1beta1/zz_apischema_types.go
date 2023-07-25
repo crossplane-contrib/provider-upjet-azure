@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type APISchemaInitParameters struct {
+
+	// Types definitions. Used for Swagger/OpenAPI v2/v3 schemas only.
+	Components *string `json:"components,omitempty" tf:"components,omitempty"`
+
+	// The content type of the API Schema.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Types definitions. Used for Swagger/OpenAPI v1 schemas only.
+	Definitions *string `json:"definitions,omitempty" tf:"definitions,omitempty"`
+
+	// The JSON escaped string defining the document representing the Schema.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type APISchemaObservation struct {
 
 	// The Name of the API Management Service where the API exists. Changing this forces a new resource to be created.
@@ -69,15 +84,12 @@ type APISchemaParameters struct {
 	APINameSelector *v1.Selector `json:"apiNameSelector,omitempty" tf:"-"`
 
 	// Types definitions. Used for Swagger/OpenAPI v2/v3 schemas only.
-	// +kubebuilder:validation:Optional
 	Components *string `json:"components,omitempty" tf:"components,omitempty"`
 
 	// The content type of the API Schema.
-	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Types definitions. Used for Swagger/OpenAPI v1 schemas only.
-	// +kubebuilder:validation:Optional
 	Definitions *string `json:"definitions,omitempty" tf:"definitions,omitempty"`
 
 	// The Name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
@@ -94,7 +106,6 @@ type APISchemaParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The JSON escaped string defining the document representing the Schema.
-	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -102,6 +113,10 @@ type APISchemaParameters struct {
 type APISchemaSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     APISchemaParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider APISchemaInitParameters `json:"initProvider,omitempty"`
 }
 
 // APISchemaStatus defines the observed state of APISchema.
@@ -122,7 +137,7 @@ type APISchemaStatus struct {
 type APISchema struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentType)",message="contentType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentType) || has(self.initProvider.contentType)",message="contentType is a required parameter"
 	Spec   APISchemaSpec   `json:"spec"`
 	Status APISchemaStatus `json:"status,omitempty"`
 }

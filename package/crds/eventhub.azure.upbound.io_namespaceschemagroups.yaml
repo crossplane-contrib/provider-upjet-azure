@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: namespaceschemagroups.eventhub.azure.upbound.io
 spec:
   group: eventhub.azure.upbound.io
@@ -146,6 +146,22 @@ spec:
                             type: string
                         type: object
                     type: object
+                  schemaCompatibility:
+                    description: Specifies the compatibility of this schema group.
+                      Possible values are None, Backward, Forward. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  schemaType:
+                    description: Specifies the Type of this schema group. Possible
+                      values are Avro, Unknown. Changing this forces a new resource
+                      to be created.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
                   schemaCompatibility:
                     description: Specifies the compatibility of this schema group.
                       Possible values are None, Backward, Forward. Changing this forces
@@ -357,10 +373,12 @@ spec:
             x-kubernetes-validations:
             - message: schemaCompatibility is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaCompatibility)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaCompatibility)
+                || has(self.initProvider.schemaCompatibility)'
             - message: schemaType is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaType)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.schemaType)
+                || has(self.initProvider.schemaType)'
           status:
             description: NamespaceSchemaGroupStatus defines the observed state of
               NamespaceSchemaGroup.

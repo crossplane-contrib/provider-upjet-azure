@@ -66,19 +66,15 @@ type SubAccountTagRuleParameters struct {
 	LogzSubAccountIDSelector *v1.Selector `json:"logzSubAccountIdSelector,omitempty" tf:"-"`
 
 	// Whether AAD logs should be sent to the Monitor resource?
-	// +kubebuilder:validation:Optional
 	SendAADLogs *bool `json:"sendAadLogs,omitempty" tf:"send_aad_logs,omitempty"`
 
 	// Whether activity logs from this Logz Sub Account Tag Rule should be sent to the Monitor resource?
-	// +kubebuilder:validation:Optional
 	SendActivityLogs *bool `json:"sendActivityLogs,omitempty" tf:"send_activity_logs,omitempty"`
 
 	// Whether subscription logs should be sent to the Monitor resource?
-	// +kubebuilder:validation:Optional
 	SendSubscriptionLogs *bool `json:"sendSubscriptionLogs,omitempty" tf:"send_subscription_logs,omitempty"`
 
 	// One or more (up to 10) tag_filter blocks as defined below.
-	// +kubebuilder:validation:Optional
 	TagFilter []TagFilterParameters `json:"tagFilter,omitempty" tf:"tag_filter,omitempty"`
 }
 
@@ -109,15 +105,12 @@ type TagFilterObservation struct {
 type TagFilterParameters struct {
 
 	// The action is used to limit logs collection to include or exclude Azure resources with specific tags. Possible values are Include and Exclude. Note that the Exclude takes priority over the Include.
-	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The name of the tag to match.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of the tag to match.
-	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -128,14 +121,6 @@ type SubAccountTagRuleSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider SubAccountTagRuleInitParameters `json:"initProvider,omitempty"`
 }
 

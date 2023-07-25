@@ -13,6 +13,26 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LiveEventOutputInitParameters struct {
+
+	// ISO 8601 time between 1 minute to 25 hours to indicate the maximum content length that can be archived in the asset for this live output. This also sets the maximum content length for the rewind window. For example, use PT1H30M to indicate 1 hour and 30 minutes of archive window. Changing this forces a new Live Output to be created.
+	ArchiveWindowDuration *string `json:"archiveWindowDuration,omitempty" tf:"archive_window_duration,omitempty"`
+
+	// The description of the live output. Changing this forces a new Live Output to be created.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The number of fragments in an HTTP Live Streaming (HLS) TS segment in the output of the live event. This value does not affect the packing ratio for HLS CMAF output. Changing this forces a new Live Output to be created.
+	HlsFragmentsPerTSSegment *float64 `json:"hlsFragmentsPerTsSegment,omitempty" tf:"hls_fragments_per_ts_segment,omitempty"`
+
+	// The manifest file name. If not provided, the service will generate one automatically. Changing this forces a new Live Output to be created.
+	ManifestName *string `json:"manifestName,omitempty" tf:"manifest_name,omitempty"`
+
+	// The initial timestamp that the live output will start at, any content before this value will not be archived. Changing this forces a new Live Output to be created.
+	OutputSnapTimeInSeconds *float64 `json:"outputSnapTimeInSeconds,omitempty" tf:"output_snap_time_in_seconds,omitempty"`
+
+	RewindWindowDuration *string `json:"rewindWindowDuration,omitempty" tf:"rewind_window_duration,omitempty"`
+}
+
 type LiveEventOutputObservation struct {
 
 	// ISO 8601 time between 1 minute to 25 hours to indicate the maximum content length that can be archived in the asset for this live output. This also sets the maximum content length for the rewind window. For example, use PT1H30M to indicate 1 hour and 30 minutes of archive window. Changing this forces a new Live Output to be created.
@@ -45,7 +65,6 @@ type LiveEventOutputObservation struct {
 type LiveEventOutputParameters struct {
 
 	// ISO 8601 time between 1 minute to 25 hours to indicate the maximum content length that can be archived in the asset for this live output. This also sets the maximum content length for the rewind window. For example, use PT1H30M to indicate 1 hour and 30 minutes of archive window. Changing this forces a new Live Output to be created.
-	// +kubebuilder:validation:Optional
 	ArchiveWindowDuration *string `json:"archiveWindowDuration,omitempty" tf:"archive_window_duration,omitempty"`
 
 	// The asset that the live output will write to. Changing this forces a new Live Output to be created.
@@ -62,11 +81,9 @@ type LiveEventOutputParameters struct {
 	AssetNameSelector *v1.Selector `json:"assetNameSelector,omitempty" tf:"-"`
 
 	// The description of the live output. Changing this forces a new Live Output to be created.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The number of fragments in an HTTP Live Streaming (HLS) TS segment in the output of the live event. This value does not affect the packing ratio for HLS CMAF output. Changing this forces a new Live Output to be created.
-	// +kubebuilder:validation:Optional
 	HlsFragmentsPerTSSegment *float64 `json:"hlsFragmentsPerTsSegment,omitempty" tf:"hls_fragments_per_ts_segment,omitempty"`
 
 	// The id of the live event. Changing this forces a new Live Output to be created.
@@ -84,14 +101,11 @@ type LiveEventOutputParameters struct {
 	LiveEventIDSelector *v1.Selector `json:"liveEventIdSelector,omitempty" tf:"-"`
 
 	// The manifest file name. If not provided, the service will generate one automatically. Changing this forces a new Live Output to be created.
-	// +kubebuilder:validation:Optional
 	ManifestName *string `json:"manifestName,omitempty" tf:"manifest_name,omitempty"`
 
 	// The initial timestamp that the live output will start at, any content before this value will not be archived. Changing this forces a new Live Output to be created.
-	// +kubebuilder:validation:Optional
 	OutputSnapTimeInSeconds *float64 `json:"outputSnapTimeInSeconds,omitempty" tf:"output_snap_time_in_seconds,omitempty"`
 
-	// +kubebuilder:validation:Optional
 	RewindWindowDuration *string `json:"rewindWindowDuration,omitempty" tf:"rewind_window_duration,omitempty"`
 }
 
@@ -99,6 +113,10 @@ type LiveEventOutputParameters struct {
 type LiveEventOutputSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LiveEventOutputParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LiveEventOutputInitParameters `json:"initProvider,omitempty"`
 }
 
 // LiveEventOutputStatus defines the observed state of LiveEventOutput.
@@ -119,7 +137,7 @@ type LiveEventOutputStatus struct {
 type LiveEventOutput struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.archiveWindowDuration)",message="archiveWindowDuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.archiveWindowDuration) || has(self.initProvider.archiveWindowDuration)",message="archiveWindowDuration is a required parameter"
 	Spec   LiveEventOutputSpec   `json:"spec"`
 	Status LiveEventOutputStatus `json:"status,omitempty"`
 }

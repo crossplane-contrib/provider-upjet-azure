@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Fluid Relay Service.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Fluid Relay Service. Possible values are SystemAssigned,UserAssigned and SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Fluid Relay Service.
@@ -31,12 +40,28 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Fluid Relay Service.
-	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Fluid Relay Service. Possible values are SystemAssigned,UserAssigned and SystemAssigned, UserAssigned.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ServerInitParameters struct {
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where the Fluid Relay Server should exist. Changing this forces a new Fluid Relay Server to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name which should be used for this Fluid Relay Server. Changing this forces a new Fluid Relay Server to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Sku of the storage associated with the resource, Possible values are standard and basic. Changing this forces a new Fluid Relay Server to be created.
+	StorageSku *string `json:"storageSku,omitempty" tf:"storage_sku,omitempty"`
+
+	// A mapping of tags which should be assigned to the Fluid Relay Server.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ServerObservation struct {
@@ -78,15 +103,12 @@ type ServerObservation struct {
 type ServerParameters struct {
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Fluid Relay Server should exist. Changing this forces a new Fluid Relay Server to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name which should be used for this Fluid Relay Server. Changing this forces a new Fluid Relay Server to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Fluid Relay Server should exist. Changing this forces a new Fluid Relay Server to be created.
@@ -103,11 +125,9 @@ type ServerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Sku of the storage associated with the resource, Possible values are standard and basic. Changing this forces a new Fluid Relay Server to be created.
-	// +kubebuilder:validation:Optional
 	StorageSku *string `json:"storageSku,omitempty" tf:"storage_sku,omitempty"`
 
 	// A mapping of tags which should be assigned to the Fluid Relay Server.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -115,6 +135,10 @@ type ServerParameters struct {
 type ServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ServerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ServerInitParameters `json:"initProvider,omitempty"`
 }
 
 // ServerStatus defines the observed state of Server.
@@ -135,8 +159,8 @@ type ServerStatus struct {
 type Server struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ServerSpec   `json:"spec"`
 	Status ServerStatus `json:"status,omitempty"`
 }

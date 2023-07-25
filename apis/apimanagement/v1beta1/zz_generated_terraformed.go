@@ -79,6 +79,15 @@ func (tr *Management) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Management
+func (tr *Management) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Management using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Management) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *API) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this API
+func (tr *API) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this API using its observed tfState.
@@ -247,6 +265,15 @@ func (tr *APIDiagnostic) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this APIDiagnostic
+func (tr *APIDiagnostic) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this APIDiagnostic using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *APIDiagnostic) LateInitialize(attrs []byte) (bool, error) {
@@ -329,6 +356,15 @@ func (tr *APIOperation) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this APIOperation
+func (tr *APIOperation) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this APIOperation using its observed tfState.
@@ -415,6 +451,15 @@ func (tr *APIOperationPolicy) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this APIOperationPolicy
+func (tr *APIOperationPolicy) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this APIOperationPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *APIOperationPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -497,6 +542,15 @@ func (tr *APIOperationTag) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this APIOperationTag
+func (tr *APIOperationTag) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this APIOperationTag using its observed tfState.
@@ -583,6 +637,15 @@ func (tr *APIPolicy) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this APIPolicy
+func (tr *APIPolicy) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this APIPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *APIPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -665,6 +728,15 @@ func (tr *APIRelease) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this APIRelease
+func (tr *APIRelease) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this APIRelease using its observed tfState.
@@ -751,6 +823,15 @@ func (tr *APISchema) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this APISchema
+func (tr *APISchema) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this APISchema using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *APISchema) LateInitialize(attrs []byte) (bool, error) {
@@ -833,6 +914,15 @@ func (tr *APITag) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this APITag
+func (tr *APITag) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this APITag using its observed tfState.
@@ -919,6 +1009,15 @@ func (tr *APIVersionSet) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this APIVersionSet
+func (tr *APIVersionSet) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this APIVersionSet using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *APIVersionSet) LateInitialize(attrs []byte) (bool, error) {
@@ -1001,6 +1100,15 @@ func (tr *AuthorizationServer) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this AuthorizationServer
+func (tr *AuthorizationServer) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this AuthorizationServer using its observed tfState.
@@ -1087,6 +1195,15 @@ func (tr *Backend) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Backend
+func (tr *Backend) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Backend using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Backend) LateInitialize(attrs []byte) (bool, error) {
@@ -1169,6 +1286,15 @@ func (tr *Certificate) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this Certificate
+func (tr *Certificate) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Certificate using its observed tfState.
@@ -1255,6 +1381,15 @@ func (tr *Diagnostic) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Diagnostic
+func (tr *Diagnostic) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Diagnostic using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Diagnostic) LateInitialize(attrs []byte) (bool, error) {
@@ -1337,6 +1472,15 @@ func (tr *EmailTemplate) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this EmailTemplate
+func (tr *EmailTemplate) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this EmailTemplate using its observed tfState.
@@ -1423,6 +1567,15 @@ func (tr *Gateway) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Gateway
+func (tr *Gateway) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Gateway using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Gateway) LateInitialize(attrs []byte) (bool, error) {
@@ -1505,6 +1658,15 @@ func (tr *GatewayAPI) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this GatewayAPI
+func (tr *GatewayAPI) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this GatewayAPI using its observed tfState.
@@ -1591,6 +1753,15 @@ func (tr *GlobalSchema) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this GlobalSchema
+func (tr *GlobalSchema) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this GlobalSchema using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *GlobalSchema) LateInitialize(attrs []byte) (bool, error) {
@@ -1673,6 +1844,15 @@ func (tr *IdentityProviderAAD) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this IdentityProviderAAD
+func (tr *IdentityProviderAAD) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this IdentityProviderAAD using its observed tfState.
@@ -1759,6 +1939,15 @@ func (tr *IdentityProviderFacebook) GetInitParameters() (map[string]any, error) 
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this IdentityProviderFacebook
+func (tr *IdentityProviderFacebook) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this IdentityProviderFacebook using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IdentityProviderFacebook) LateInitialize(attrs []byte) (bool, error) {
@@ -1841,6 +2030,15 @@ func (tr *IdentityProviderGoogle) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this IdentityProviderGoogle
+func (tr *IdentityProviderGoogle) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this IdentityProviderGoogle using its observed tfState.
@@ -1927,6 +2125,15 @@ func (tr *IdentityProviderMicrosoft) GetInitParameters() (map[string]any, error)
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this IdentityProviderMicrosoft
+func (tr *IdentityProviderMicrosoft) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this IdentityProviderMicrosoft using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IdentityProviderMicrosoft) LateInitialize(attrs []byte) (bool, error) {
@@ -2009,6 +2216,15 @@ func (tr *IdentityProviderTwitter) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this IdentityProviderTwitter
+func (tr *IdentityProviderTwitter) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this IdentityProviderTwitter using its observed tfState.
@@ -2095,6 +2311,15 @@ func (tr *Logger) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Logger
+func (tr *Logger) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Logger using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Logger) LateInitialize(attrs []byte) (bool, error) {
@@ -2177,6 +2402,15 @@ func (tr *NamedValue) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this NamedValue
+func (tr *NamedValue) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this NamedValue using its observed tfState.
@@ -2263,6 +2497,15 @@ func (tr *NotificationRecipientEmail) GetInitParameters() (map[string]any, error
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this NotificationRecipientEmail
+func (tr *NotificationRecipientEmail) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this NotificationRecipientEmail using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *NotificationRecipientEmail) LateInitialize(attrs []byte) (bool, error) {
@@ -2345,6 +2588,15 @@ func (tr *NotificationRecipientUser) GetInitParameters() (map[string]any, error)
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this NotificationRecipientUser
+func (tr *NotificationRecipientUser) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this NotificationRecipientUser using its observed tfState.
@@ -2431,6 +2683,15 @@ func (tr *OpenIDConnectProvider) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this OpenIDConnectProvider
+func (tr *OpenIDConnectProvider) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this OpenIDConnectProvider using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *OpenIDConnectProvider) LateInitialize(attrs []byte) (bool, error) {
@@ -2513,6 +2774,15 @@ func (tr *Policy) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this Policy
+func (tr *Policy) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Policy using its observed tfState.
@@ -2599,6 +2869,15 @@ func (tr *Product) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Product
+func (tr *Product) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Product using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Product) LateInitialize(attrs []byte) (bool, error) {
@@ -2681,6 +2960,15 @@ func (tr *ProductAPI) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this ProductAPI
+func (tr *ProductAPI) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ProductAPI using its observed tfState.
@@ -2767,6 +3055,15 @@ func (tr *ProductPolicy) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this ProductPolicy
+func (tr *ProductPolicy) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ProductPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ProductPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -2849,6 +3146,15 @@ func (tr *ProductTag) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this ProductTag
+func (tr *ProductTag) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ProductTag using its observed tfState.
@@ -2935,6 +3241,15 @@ func (tr *RedisCache) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this RedisCache
+func (tr *RedisCache) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this RedisCache using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *RedisCache) LateInitialize(attrs []byte) (bool, error) {
@@ -3017,6 +3332,15 @@ func (tr *Subscription) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this Subscription
+func (tr *Subscription) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Subscription using its observed tfState.
@@ -3103,6 +3427,15 @@ func (tr *Tag) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this Tag
+func (tr *Tag) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this Tag using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Tag) LateInitialize(attrs []byte) (bool, error) {
@@ -3185,6 +3518,15 @@ func (tr *User) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this User
+func (tr *User) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this User using its observed tfState.

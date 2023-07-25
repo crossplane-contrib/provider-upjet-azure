@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: webpubsubnetworkacls.signalrservice.azure.upbound.io
 spec:
   group: signalrservice.azure.upbound.io
@@ -274,6 +274,57 @@ spec:
                         type: object
                     type: object
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  defaultAction:
+                    description: The default action to control the network access
+                      when no other rule matches. Possible values are Allow and Deny.
+                      Defaults to Deny.
+                    type: string
+                  privateEndpoint:
+                    description: A private_endpoint block as defined below.
+                    items:
+                      properties:
+                        allowedRequestTypes:
+                          description: The allowed request types for the Private Endpoint
+                            Connection. Possible values are ClientConnection, ServerConnection,
+                            RESTAPI and Trace.
+                          items:
+                            type: string
+                          type: array
+                        deniedRequestTypes:
+                          description: The denied request types for the Private Endpoint
+                            Connection. Possible values are ClientConnection, ServerConnection,
+                            RESTAPI and Trace.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  publicNetwork:
+                    description: A public_network block as defined below.
+                    items:
+                      properties:
+                        allowedRequestTypes:
+                          description: The allowed request types for the public network.
+                            Possible values are ClientConnection, ServerConnection,
+                            RESTAPI and Trace.
+                          items:
+                            type: string
+                          type: array
+                        deniedRequestTypes:
+                          description: The denied request types for the public network.
+                            Possible values are ClientConnection, ServerConnection,
+                            RESTAPI and Trace.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -474,7 +525,8 @@ spec:
             x-kubernetes-validations:
             - message: publicNetwork is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.publicNetwork)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.publicNetwork)
+                || has(self.initProvider.publicNetwork)'
           status:
             description: WebPubsubNetworkACLStatus defines the observed state of WebPubsubNetworkACL.
             properties:

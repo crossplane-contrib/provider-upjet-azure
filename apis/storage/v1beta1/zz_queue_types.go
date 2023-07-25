@@ -37,7 +37,6 @@ type QueueObservation struct {
 type QueueParameters struct {
 
 	// A mapping of MetaData which should be assigned to this Storage Queue.
-	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Specifies the Storage Account in which the Storage Queue should exist. Changing this forces a new resource to be created.
@@ -61,14 +60,6 @@ type QueueSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider QueueInitParameters `json:"initProvider,omitempty"`
 }
 

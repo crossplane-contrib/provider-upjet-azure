@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: securitycentersubscriptionpricings.security.azure.upbound.io
 spec:
   group: security.azure.upbound.io
@@ -67,6 +67,27 @@ spec:
                 - Delete
                 type: string
               forProvider:
+                properties:
+                  resourceType:
+                    description: The resource type this setting affects. Possible
+                      values are AppServices, ContainerRegistry, KeyVaults, KubernetesService,
+                      SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines,
+                      Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs
+                      and CloudPosture. Defaults to VirtualMachines
+                    type: string
+                  subplan:
+                    description: Resource type pricing subplan. Contact your MSFT
+                      representative for possible values.
+                    type: string
+                  tier:
+                    description: The pricing tier to use. Possible values are Free
+                      and Standard.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
                 properties:
                   resourceType:
                     description: The resource type this setting affects. Possible
@@ -284,7 +305,8 @@ spec:
             x-kubernetes-validations:
             - message: tier is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.tier)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tier)
+                || has(self.initProvider.tier)'
           status:
             description: SecurityCenterSubscriptionPricingStatus defines the observed
               state of SecurityCenterSubscriptionPricing.

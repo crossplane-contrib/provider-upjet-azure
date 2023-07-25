@@ -72,15 +72,12 @@ type SpringCloudAPIPortalParameters struct {
 	GatewayIdsSelector *v1.Selector `json:"gatewayIdsSelector,omitempty" tf:"-"`
 
 	// is only https is allowed?
-	// +kubebuilder:validation:Optional
 	HTTPSOnlyEnabled *bool `json:"httpsOnlyEnabled,omitempty" tf:"https_only_enabled,omitempty"`
 
 	// Specifies the required instance count of the Spring Cloud API Portal. Possible Values are between 1 and 500. Defaults to 1 if not specified.
-	// +kubebuilder:validation:Optional
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// Is the public network access enabled?
-	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud API Portal to be created.
@@ -98,7 +95,6 @@ type SpringCloudAPIPortalParameters struct {
 	SpringCloudServiceIDSelector *v1.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
 
 	// A sso block as defined below.
-	// +kubebuilder:validation:Optional
 	Sso []SsoParameters `json:"sso,omitempty" tf:"sso,omitempty"`
 }
 
@@ -135,19 +131,15 @@ type SsoObservation struct {
 type SsoParameters struct {
 
 	// The public identifier for the application.
-	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The secret known only to the application and the authorization server.
-	// +kubebuilder:validation:Optional
 	ClientSecret *string `json:"clientSecret,omitempty" tf:"client_secret,omitempty"`
 
 	// The URI of Issuer Identifier.
-	// +kubebuilder:validation:Optional
 	IssuerURI *string `json:"issuerUri,omitempty" tf:"issuer_uri,omitempty"`
 
 	// It defines the specific actions applications can be allowed to do on a user's behalf.
-	// +kubebuilder:validation:Optional
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
@@ -158,14 +150,6 @@ type SpringCloudAPIPortalSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider SpringCloudAPIPortalInitParameters `json:"initProvider,omitempty"`
 }
 

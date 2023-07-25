@@ -76,47 +76,36 @@ type RepositoryObservation struct {
 type RepositoryParameters struct {
 
 	// Specifies the SSH public key of git repository.
-	// +kubebuilder:validation:Optional
 	HostKey *string `json:"hostKey,omitempty" tf:"host_key,omitempty"`
 
 	// Specifies the SSH key algorithm of git repository.
-	// +kubebuilder:validation:Optional
 	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
 
 	// Specifies the label of the repository.
-	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// Specifies the name which should be used for this repository.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the password of git repository basic auth.
-	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// Specifies the collection of patterns of the repository.
-	// +kubebuilder:validation:Optional
 	Patterns []*string `json:"patterns,omitempty" tf:"patterns,omitempty"`
 
 	// Specifies the SSH private key of git repository.
-	// +kubebuilder:validation:Optional
 	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies a list of searching path of the repository
-	// +kubebuilder:validation:Optional
 	SearchPaths []*string `json:"searchPaths,omitempty" tf:"search_paths,omitempty"`
 
 	// Specifies whether enable the strict host key checking.
-	// +kubebuilder:validation:Optional
 	StrictHostKeyChecking *bool `json:"strictHostKeyChecking,omitempty" tf:"strict_host_key_checking,omitempty"`
 
 	// Specifies the URI of the repository.
-	// +kubebuilder:validation:Optional
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
 	// Specifies the username of git repository basic auth.
-	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -141,7 +130,6 @@ type SpringCloudConfigurationServiceObservation struct {
 type SpringCloudConfigurationServiceParameters struct {
 
 	// One or more repository blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Repository []RepositoryParameters `json:"repository,omitempty" tf:"repository,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Configuration Service to be created.
@@ -166,14 +154,6 @@ type SpringCloudConfigurationServiceSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider SpringCloudConfigurationServiceInitParameters `json:"initProvider,omitempty"`
 }
 

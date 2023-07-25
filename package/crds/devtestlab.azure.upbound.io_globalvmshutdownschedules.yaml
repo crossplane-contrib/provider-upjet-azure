@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: globalvmshutdownschedules.devtestlab.azure.upbound.io
 spec:
   group: devtestlab.azure.upbound.io
@@ -104,8 +104,6 @@ spec:
                           description: The webhook URL to which the notification will
                             be sent.
                           type: string
-                      required:
-                      - enabled
                       type: object
                     type: array
                   tags:
@@ -196,6 +194,58 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  dailyRecurrenceTime:
+                    description: The time each day when the schedule takes effect.
+                      Must match the format HHmm where HH is 00-23 and mm is 00-59
+                      (e.g. 0930, 2300, etc.)
+                    type: string
+                  enabled:
+                    description: Whether to enable the schedule. Possible values are
+                      true and false. Defaults to true.
+                    type: boolean
+                  location:
+                    description: The location where the schedule is created. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  notificationSettings:
+                    description: The notification setting of a schedule. A notification_settings
+                      as defined below.
+                    items:
+                      properties:
+                        email:
+                          description: E-mail address to which the notification will
+                            be sent.
+                          type: string
+                        enabled:
+                          description: Whether to enable pre-shutdown notifications.
+                            Possible values are true and false.
+                          type: boolean
+                        timeInMinutes:
+                          description: Time in minutes between 15 and 120 before a
+                            shutdown event at which a notification will be sent. Defaults
+                            to 30.
+                          type: number
+                        webhookUrl:
+                          description: The webhook URL to which the notification will
+                            be sent.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  timezone:
+                    description: The time zone ID (e.g. Pacific Standard time). Refer
+                      to this guide for a full list of accepted time zone names.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -397,16 +447,20 @@ spec:
             x-kubernetes-validations:
             - message: dailyRecurrenceTime is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.dailyRecurrenceTime)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.dailyRecurrenceTime)
+                || has(self.initProvider.dailyRecurrenceTime)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: notificationSettings is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.notificationSettings)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.notificationSettings)
+                || has(self.initProvider.notificationSettings)'
             - message: timezone is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.timezone)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.timezone)
+                || has(self.initProvider.timezone)'
           status:
             description: GlobalVMShutdownScheduleStatus defines the observed state
               of GlobalVMShutdownSchedule.

@@ -66,11 +66,9 @@ type LoadBalancerBackendAddressPoolParameters struct {
 	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
 	// One or more tunnel_interface blocks as defined below.
-	// +kubebuilder:validation:Optional
 	TunnelInterface []TunnelInterfaceParameters `json:"tunnelInterface,omitempty" tf:"tunnel_interface,omitempty"`
 
 	// The ID of the Virtual Network within which the Backend Address Pool should exist.
-	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
@@ -107,19 +105,15 @@ type TunnelInterfaceObservation struct {
 type TunnelInterfaceParameters struct {
 
 	// The unique identifier of this Gateway Lodbalancer Tunnel Interface.
-	// +kubebuilder:validation:Optional
 	Identifier *float64 `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
 	// The port number that this Gateway Lodbalancer Tunnel Interface listens to.
-	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The protocol used for this Gateway Lodbalancer Tunnel Interface. Possible values are None, Native and VXLAN.
-	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// The traffic type of this Gateway Lodbalancer Tunnel Interface. Possible values are None, Internal and External.
-	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -130,14 +124,6 @@ type LoadBalancerBackendAddressPoolSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider LoadBalancerBackendAddressPoolInitParameters `json:"initProvider,omitempty"`
 }
 

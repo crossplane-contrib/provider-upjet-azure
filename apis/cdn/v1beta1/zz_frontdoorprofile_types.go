@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type FrontdoorProfileInitParameters struct {
+
+	// Specifies the maximum response timeout in seconds. Possible values are between 16 and 240 seconds (inclusive). Defaults to 120 seconds.
+	ResponseTimeoutSeconds *float64 `json:"responseTimeoutSeconds,omitempty" tf:"response_timeout_seconds,omitempty"`
+
+	// Specifies the SKU for this Front Door Profile. Possible values include Standard_AzureFrontDoor and Premium_AzureFrontDoor. Changing this forces a new resource to be created.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// Specifies a mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type FrontdoorProfileObservation struct {
 
 	// The ID of this Front Door Profile.
@@ -50,15 +62,12 @@ type FrontdoorProfileParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the maximum response timeout in seconds. Possible values are between 16 and 240 seconds (inclusive). Defaults to 120 seconds.
-	// +kubebuilder:validation:Optional
 	ResponseTimeoutSeconds *float64 `json:"responseTimeoutSeconds,omitempty" tf:"response_timeout_seconds,omitempty"`
 
 	// Specifies the SKU for this Front Door Profile. Possible values include Standard_AzureFrontDoor and Premium_AzureFrontDoor. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// Specifies a mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -66,6 +75,10 @@ type FrontdoorProfileParameters struct {
 type FrontdoorProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FrontdoorProfileParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FrontdoorProfileInitParameters `json:"initProvider,omitempty"`
 }
 
 // FrontdoorProfileStatus defines the observed state of FrontdoorProfile.
@@ -86,7 +99,7 @@ type FrontdoorProfileStatus struct {
 type FrontdoorProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
 	Spec   FrontdoorProfileSpec   `json:"spec"`
 	Status FrontdoorProfileStatus `json:"status,omitempty"`
 }

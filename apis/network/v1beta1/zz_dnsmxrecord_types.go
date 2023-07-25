@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DNSMXRecordInitParameters struct {
+
+	// A list of values that make up the MX record. Each record block supports fields documented below.
+	Record []DNSMXRecordRecordInitParameters `json:"record,omitempty" tf:"record,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DNSMXRecordObservation struct {
 
 	// The FQDN of the DNS MX Record.
@@ -40,7 +52,6 @@ type DNSMXRecordObservation struct {
 type DNSMXRecordParameters struct {
 
 	// A list of values that make up the MX record. Each record block supports fields documented below.
-	// +kubebuilder:validation:Optional
 	Record []DNSMXRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
@@ -57,11 +68,9 @@ type DNSMXRecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created.
@@ -78,6 +87,15 @@ type DNSMXRecordParameters struct {
 	ZoneNameSelector *v1.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
 }
 
+type DNSMXRecordRecordInitParameters struct {
+
+	// The mail server responsible for the domain covered by the MX record.
+	Exchange *string `json:"exchange,omitempty" tf:"exchange,omitempty"`
+
+	// String representing the "preference” value of the MX records. Records with lower preference value take priority.
+	Preference *string `json:"preference,omitempty" tf:"preference,omitempty"`
+}
+
 type DNSMXRecordRecordObservation struct {
 
 	// The mail server responsible for the domain covered by the MX record.
@@ -90,18 +108,20 @@ type DNSMXRecordRecordObservation struct {
 type DNSMXRecordRecordParameters struct {
 
 	// The mail server responsible for the domain covered by the MX record.
-	// +kubebuilder:validation:Required
-	Exchange *string `json:"exchange" tf:"exchange,omitempty"`
+	Exchange *string `json:"exchange,omitempty" tf:"exchange,omitempty"`
 
 	// String representing the "preference” value of the MX records. Records with lower preference value take priority.
-	// +kubebuilder:validation:Required
-	Preference *string `json:"preference" tf:"preference,omitempty"`
+	Preference *string `json:"preference,omitempty" tf:"preference,omitempty"`
 }
 
 // DNSMXRecordSpec defines the desired state of DNSMXRecord
 type DNSMXRecordSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DNSMXRecordParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DNSMXRecordInitParameters `json:"initProvider,omitempty"`
 }
 
 // DNSMXRecordStatus defines the observed state of DNSMXRecord.
@@ -122,8 +142,8 @@ type DNSMXRecordStatus struct {
 type DNSMXRecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.record)",message="record is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.record) || has(self.initProvider.record)",message="record is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl) || has(self.initProvider.ttl)",message="ttl is a required parameter"
 	Spec   DNSMXRecordSpec   `json:"spec"`
 	Status DNSMXRecordStatus `json:"status,omitempty"`
 }

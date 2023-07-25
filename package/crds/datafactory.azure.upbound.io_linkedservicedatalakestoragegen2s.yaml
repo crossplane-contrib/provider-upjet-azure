@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: linkedservicedatalakestoragegen2s.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -160,6 +160,67 @@ spec:
                             type: string
                         type: object
                     type: object
+                  description:
+                    description: The description for the Data Factory Linked Service.
+                    type: string
+                  integrationRuntimeName:
+                    description: The integration runtime reference to associate with
+                      the Data Factory Linked Service.
+                    type: string
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of parameters to associate with the Data Factory
+                      Linked Service.
+                    type: object
+                  servicePrincipalId:
+                    description: The service principal id with which to authenticate
+                      against the Azure Data Lake Storage Gen2 account. Incompatible
+                      with storage_account_key and use_managed_identity.
+                    type: string
+                  servicePrincipalKey:
+                    description: The service principal key with which to authenticate
+                      against the Azure Data Lake Storage Gen2 account.
+                    type: string
+                  storageAccountKey:
+                    description: The Storage Account Key with which to authenticate
+                      against the Azure Data Lake Storage Gen2 account. Incompatible
+                      with service_principal_id, service_principal_key, tenant and
+                      use_managed_identity.
+                    type: string
+                  tenant:
+                    description: The tenant id or name in which the service principal
+                      exists to authenticate against the Azure Data Lake Storage Gen2
+                      account.
+                    type: string
+                  url:
+                    description: The endpoint for the Azure Data Lake Storage Gen2
+                      service.
+                    type: string
+                  useManagedIdentity:
+                    description: Whether to use the Data Factory's managed identity
+                      to authenticate against the Azure Data Lake Storage Gen2 account.
+                      Incompatible with service_principal_id, service_principal_key,
+                      tenant and storage_account_key.
+                    type: boolean
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Linked Service.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Linked Service.
+                    items:
+                      type: string
+                    type: array
                   description:
                     description: The description for the Data Factory Linked Service.
                     type: string
@@ -404,7 +465,8 @@ spec:
             x-kubernetes-validations:
             - message: url is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.url)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.url)
+                || has(self.initProvider.url)'
           status:
             description: LinkedServiceDataLakeStorageGen2Status defines the observed
               state of LinkedServiceDataLakeStorageGen2.

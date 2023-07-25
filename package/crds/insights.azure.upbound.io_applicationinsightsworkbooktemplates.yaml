@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: applicationinsightsworkbooktemplates.insights.azure.upbound.io
 spec:
   group: insights.azure.upbound.io
@@ -93,9 +93,6 @@ spec:
                           description: Type of workbook supported by the workbook
                             template. Defaults to workbook.
                           type: string
-                      required:
-                      - category
-                      - name
                       type: object
                     type: array
                   localized:
@@ -198,6 +195,67 @@ spec:
                             type: string
                         type: object
                     type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Application Insights Workbook Template.
+                    type: object
+                  templateData:
+                    description: Valid JSON object containing workbook template payload.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  author:
+                    description: Information about the author of the workbook template.
+                    type: string
+                  galleries:
+                    description: A galleries block as defined below.
+                    items:
+                      properties:
+                        category:
+                          description: Category for the gallery.
+                          type: string
+                        name:
+                          description: Name of the workbook template in the gallery.
+                          type: string
+                        order:
+                          description: Order of the template within the gallery. Defaults
+                            to 0.
+                          type: number
+                        resourceType:
+                          description: Azure resource type supported by the gallery.
+                            Defaults to Azure Monitor.
+                          type: string
+                        type:
+                          description: Type of workbook supported by the workbook
+                            template. Defaults to workbook.
+                          type: string
+                      type: object
+                    type: array
+                  localized:
+                    description: Key value pairs of localized gallery. Each key is
+                      the locale code of languages supported by the Azure portal.
+                    type: string
+                  location:
+                    description: Specifies the Azure Region where the Application
+                      Insights Workbook Template should exist. Changing this forces
+                      a new Application Insights Workbook Template to be created.
+                    type: string
+                  name:
+                    description: Specifies the name which should be used for this
+                      Application Insights Workbook Template. Changing this forces
+                      a new Application Insights Workbook Template to be created.
+                    type: string
+                  priority:
+                    description: Priority of the template. Determines which template
+                      to open when a workbook gallery is opened in viewer mode. Defaults
+                      to 0.
+                    type: number
                   tags:
                     additionalProperties:
                       type: string
@@ -408,16 +466,20 @@ spec:
             x-kubernetes-validations:
             - message: galleries is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.galleries)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.galleries)
+                || has(self.initProvider.galleries)'
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: templateData is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.templateData)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.templateData)
+                || has(self.initProvider.templateData)'
           status:
             description: ApplicationInsightsWorkbookTemplateStatus defines the observed
               state of ApplicationInsightsWorkbookTemplate.

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccountInitParameters struct {
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure Region where the Purview Account should exist. Changing this forces a new Purview Account to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Should the Purview Account be visible to the public network? Defaults to true.
+	PublicNetworkEnabled *bool `json:"publicNetworkEnabled,omitempty" tf:"public_network_enabled,omitempty"`
+
+	// A mapping of tags which should be assigned to the Purview Account.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AccountObservation struct {
 
 	// Catalog endpoint.
@@ -52,11 +67,9 @@ type AccountObservation struct {
 type AccountParameters struct {
 
 	// An identity block as defined below.
-	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Purview Account should exist. Changing this forces a new Purview Account to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name which should be used for the new Resource Group where Purview Account creates the managed resources. Changing this forces a new Purview Account to be created.
@@ -73,7 +86,6 @@ type AccountParameters struct {
 	ManagedResourceGroupNameSelector *v1.Selector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Should the Purview Account be visible to the public network? Defaults to true.
-	// +kubebuilder:validation:Optional
 	PublicNetworkEnabled *bool `json:"publicNetworkEnabled,omitempty" tf:"public_network_enabled,omitempty"`
 
 	// The name of the Resource Group where the Purview Account should exist. Changing this forces a new Purview Account to be created.
@@ -90,8 +102,16 @@ type AccountParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Purview Account.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Purview Account.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Purview Account. Possible values are UserAssigned and SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
@@ -112,12 +132,13 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Purview Account.
-	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Purview Account. Possible values are UserAssigned and SystemAssigned.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ManagedResourcesInitParameters struct {
 }
 
 type ManagedResourcesObservation struct {
@@ -139,6 +160,10 @@ type ManagedResourcesParameters struct {
 type AccountSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AccountParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AccountInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccountStatus defines the observed state of Account.
@@ -159,8 +184,8 @@ type AccountStatus struct {
 type Account struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identity)",message="identity is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.identity) || has(self.initProvider.identity)",message="identity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   AccountSpec   `json:"spec"`
 	Status AccountStatus `json:"status,omitempty"`
 }

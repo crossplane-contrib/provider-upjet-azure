@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CustomHTTPSConfigurationInitParameters struct {
+
+	// The name of the Key Vault secret representing the full certificate PFX.
+	AzureKeyVaultCertificateSecretName *string `json:"azureKeyVaultCertificateSecretName,omitempty" tf:"azure_key_vault_certificate_secret_name,omitempty"`
+
+	// The version of the Key Vault secret representing the full certificate PFX.
+	AzureKeyVaultCertificateSecretVersion *string `json:"azureKeyVaultCertificateSecretVersion,omitempty" tf:"azure_key_vault_certificate_secret_version,omitempty"`
+
+	// Certificate source to encrypted HTTPS traffic with. Allowed values are FrontDoor or AzureKeyVault. Defaults to FrontDoor.
+	CertificateSource *string `json:"certificateSource,omitempty" tf:"certificate_source,omitempty"`
+}
+
 type CustomHTTPSConfigurationObservation struct {
 
 	// The name of the Key Vault secret representing the full certificate PFX.
@@ -38,11 +50,9 @@ type CustomHTTPSConfigurationObservation struct {
 type CustomHTTPSConfigurationParameters struct {
 
 	// The name of the Key Vault secret representing the full certificate PFX.
-	// +kubebuilder:validation:Optional
 	AzureKeyVaultCertificateSecretName *string `json:"azureKeyVaultCertificateSecretName,omitempty" tf:"azure_key_vault_certificate_secret_name,omitempty"`
 
 	// The version of the Key Vault secret representing the full certificate PFX.
-	// +kubebuilder:validation:Optional
 	AzureKeyVaultCertificateSecretVersion *string `json:"azureKeyVaultCertificateSecretVersion,omitempty" tf:"azure_key_vault_certificate_secret_version,omitempty"`
 
 	// The ID of the Key Vault containing the SSL certificate.
@@ -60,8 +70,19 @@ type CustomHTTPSConfigurationParameters struct {
 	AzureKeyVaultCertificateVaultIDSelector *v1.Selector `json:"azureKeyVaultCertificateVaultIdSelector,omitempty" tf:"-"`
 
 	// Certificate source to encrypted HTTPS traffic with. Allowed values are FrontDoor or AzureKeyVault. Defaults to FrontDoor.
-	// +kubebuilder:validation:Optional
 	CertificateSource *string `json:"certificateSource,omitempty" tf:"certificate_source,omitempty"`
+}
+
+type FrontdoorCustomHTTPSConfigurationInitParameters struct {
+
+	// A custom_https_configuration block as defined above.
+	CustomHTTPSConfiguration []CustomHTTPSConfigurationInitParameters `json:"customHttpsConfiguration,omitempty" tf:"custom_https_configuration,omitempty"`
+
+	// Should the HTTPS protocol be enabled for this custom domain associated with the Front Door?
+	CustomHTTPSProvisioningEnabled *bool `json:"customHttpsProvisioningEnabled,omitempty" tf:"custom_https_provisioning_enabled,omitempty"`
+
+	// The ID of the Front Door Frontend Endpoint which this configuration refers to. Changing this forces a new resource to be created.
+	FrontendEndpointID *string `json:"frontendEndpointId,omitempty" tf:"frontend_endpoint_id,omitempty"`
 }
 
 type FrontdoorCustomHTTPSConfigurationObservation struct {
@@ -82,15 +103,12 @@ type FrontdoorCustomHTTPSConfigurationObservation struct {
 type FrontdoorCustomHTTPSConfigurationParameters struct {
 
 	// A custom_https_configuration block as defined above.
-	// +kubebuilder:validation:Optional
 	CustomHTTPSConfiguration []CustomHTTPSConfigurationParameters `json:"customHttpsConfiguration,omitempty" tf:"custom_https_configuration,omitempty"`
 
 	// Should the HTTPS protocol be enabled for this custom domain associated with the Front Door?
-	// +kubebuilder:validation:Optional
 	CustomHTTPSProvisioningEnabled *bool `json:"customHttpsProvisioningEnabled,omitempty" tf:"custom_https_provisioning_enabled,omitempty"`
 
 	// The ID of the Front Door Frontend Endpoint which this configuration refers to. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	FrontendEndpointID *string `json:"frontendEndpointId,omitempty" tf:"frontend_endpoint_id,omitempty"`
 }
 
@@ -98,6 +116,10 @@ type FrontdoorCustomHTTPSConfigurationParameters struct {
 type FrontdoorCustomHTTPSConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FrontdoorCustomHTTPSConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider FrontdoorCustomHTTPSConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // FrontdoorCustomHTTPSConfigurationStatus defines the observed state of FrontdoorCustomHTTPSConfiguration.
@@ -118,8 +140,8 @@ type FrontdoorCustomHTTPSConfigurationStatus struct {
 type FrontdoorCustomHTTPSConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.customHttpsProvisioningEnabled)",message="customHttpsProvisioningEnabled is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frontendEndpointId)",message="frontendEndpointId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.customHttpsProvisioningEnabled) || has(self.initProvider.customHttpsProvisioningEnabled)",message="customHttpsProvisioningEnabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frontendEndpointId) || has(self.initProvider.frontendEndpointId)",message="frontendEndpointId is a required parameter"
 	Spec   FrontdoorCustomHTTPSConfigurationSpec   `json:"spec"`
 	Status FrontdoorCustomHTTPSConfigurationStatus `json:"status,omitempty"`
 }

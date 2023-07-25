@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IOTHubRouteInitParameters struct {
+
+	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// Specifies whether a route is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The list of endpoints to which messages that satisfy the condition are routed. Currently only one endpoint is allowed.
+	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+
+	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
+	Source *string `json:"source,omitempty" tf:"source,omitempty"`
+}
+
 type IOTHubRouteObservation struct {
 
 	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
@@ -40,15 +55,12 @@ type IOTHubRouteObservation struct {
 type IOTHubRouteParameters struct {
 
 	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
-	// +kubebuilder:validation:Optional
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// Specifies whether a route is enabled.
-	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The list of endpoints to which messages that satisfy the condition are routed. Currently only one endpoint is allowed.
-	// +kubebuilder:validation:Optional
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
 	// The name of the IoTHub to which this Route belongs. Changing this forces a new resource to be created.
@@ -78,7 +90,6 @@ type IOTHubRouteParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
-	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
@@ -86,6 +97,10 @@ type IOTHubRouteParameters struct {
 type IOTHubRouteSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IOTHubRouteParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider IOTHubRouteInitParameters `json:"initProvider,omitempty"`
 }
 
 // IOTHubRouteStatus defines the observed state of IOTHubRoute.
@@ -106,9 +121,9 @@ type IOTHubRouteStatus struct {
 type IOTHubRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled)",message="enabled is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointNames)",message="endpointNames is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.source)",message="source is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || has(self.initProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointNames) || has(self.initProvider.endpointNames)",message="endpointNames is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.source) || has(self.initProvider.source)",message="source is a required parameter"
 	Spec   IOTHubRouteSpec   `json:"spec"`
 	Status IOTHubRouteStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccountNetworkRulesInitParameters struct {
+
+	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
+	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+
+	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// One or More private_link_access block as defined below.
+	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessInitParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
+
+	// A list of virtual network subnet ids to secure the storage account.
+	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
+}
+
 type AccountNetworkRulesObservation struct {
 
 	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
@@ -40,19 +58,15 @@ type AccountNetworkRulesObservation struct {
 type AccountNetworkRulesParameters struct {
 
 	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
-	// +kubebuilder:validation:Optional
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
-	// +kubebuilder:validation:Optional
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
-	// +kubebuilder:validation:Optional
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or More private_link_access block as defined below.
-	// +kubebuilder:validation:Optional
 	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// Specifies the ID of the storage account. Changing this forces a new resource to be created.
@@ -70,8 +84,16 @@ type AccountNetworkRulesParameters struct {
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A list of virtual network subnet ids to secure the storage account.
-	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
+}
+
+type AccountNetworkRulesPrivateLinkAccessInitParameters struct {
+
+	// The resource id of the resource access rule to be granted access.
+	EndpointResourceID *string `json:"endpointResourceId,omitempty" tf:"endpoint_resource_id,omitempty"`
+
+	// The tenant id of the resource of the resource access rule to be granted access. Defaults to the current tenant id.
+	EndpointTenantID *string `json:"endpointTenantId,omitempty" tf:"endpoint_tenant_id,omitempty"`
 }
 
 type AccountNetworkRulesPrivateLinkAccessObservation struct {
@@ -86,11 +108,9 @@ type AccountNetworkRulesPrivateLinkAccessObservation struct {
 type AccountNetworkRulesPrivateLinkAccessParameters struct {
 
 	// The resource id of the resource access rule to be granted access.
-	// +kubebuilder:validation:Required
-	EndpointResourceID *string `json:"endpointResourceId" tf:"endpoint_resource_id,omitempty"`
+	EndpointResourceID *string `json:"endpointResourceId,omitempty" tf:"endpoint_resource_id,omitempty"`
 
 	// The tenant id of the resource of the resource access rule to be granted access. Defaults to the current tenant id.
-	// +kubebuilder:validation:Optional
 	EndpointTenantID *string `json:"endpointTenantId,omitempty" tf:"endpoint_tenant_id,omitempty"`
 }
 
@@ -98,6 +118,10 @@ type AccountNetworkRulesPrivateLinkAccessParameters struct {
 type AccountNetworkRulesSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AccountNetworkRulesParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AccountNetworkRulesInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccountNetworkRulesStatus defines the observed state of AccountNetworkRules.
@@ -118,7 +142,7 @@ type AccountNetworkRulesStatus struct {
 type AccountNetworkRules struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultAction)",message="defaultAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultAction) || has(self.initProvider.defaultAction)",message="defaultAction is a required parameter"
 	Spec   AccountNetworkRulesSpec   `json:"spec"`
 	Status AccountNetworkRulesStatus `json:"status,omitempty"`
 }

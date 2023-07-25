@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BotChannelMSTeamsInitParameters struct {
+
+	// Specifies the webhook for Microsoft Teams channel calls.
+	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
+
+	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
+	EnableCalling *bool `json:"enableCalling,omitempty" tf:"enable_calling,omitempty"`
+
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+}
+
 type BotChannelMSTeamsObservation struct {
 
 	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
@@ -51,15 +63,12 @@ type BotChannelMSTeamsParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// Specifies the webhook for Microsoft Teams channel calls.
-	// +kubebuilder:validation:Optional
 	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
 
 	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
-	// +kubebuilder:validation:Optional
 	EnableCalling *bool `json:"enableCalling,omitempty" tf:"enable_calling,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.
@@ -80,6 +89,10 @@ type BotChannelMSTeamsParameters struct {
 type BotChannelMSTeamsSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotChannelMSTeamsParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider BotChannelMSTeamsInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotChannelMSTeamsStatus defines the observed state of BotChannelMSTeams.
@@ -100,7 +113,7 @@ type BotChannelMSTeamsStatus struct {
 type BotChannelMSTeams struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   BotChannelMSTeamsSpec   `json:"spec"`
 	Status BotChannelMSTeamsStatus `json:"status,omitempty"`
 }

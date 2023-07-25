@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: diagnostics.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -254,9 +254,6 @@ spec:
                                       description: The name of the header or the query
                                         parameter to mask.
                                       type: string
-                                  required:
-                                  - mode
-                                  - value
                                   type: object
                                 type: array
                               queryParams:
@@ -272,9 +269,6 @@ spec:
                                       description: The name of the header or the query
                                         parameter to mask.
                                       type: string
-                                  required:
-                                  - mode
-                                  - value
                                   type: object
                                 type: array
                             type: object
@@ -310,9 +304,6 @@ spec:
                                       description: The name of the header or the query
                                         parameter to mask.
                                       type: string
-                                  required:
-                                  - mode
-                                  - value
                                   type: object
                                 type: array
                               queryParams:
@@ -328,9 +319,6 @@ spec:
                                       description: The name of the header or the query
                                         parameter to mask.
                                       type: string
-                                  required:
-                                  - mode
-                                  - value
                                   type: object
                                 type: array
                             type: object
@@ -366,9 +354,6 @@ spec:
                                       description: The name of the header or the query
                                         parameter to mask.
                                       type: string
-                                  required:
-                                  - mode
-                                  - value
                                   type: object
                                 type: array
                               queryParams:
@@ -384,9 +369,6 @@ spec:
                                       description: The name of the header or the query
                                         parameter to mask.
                                       type: string
-                                  required:
-                                  - mode
-                                  - value
                                   type: object
                                 type: array
                             type: object
@@ -422,9 +404,6 @@ spec:
                                       description: The name of the header or the query
                                         parameter to mask.
                                       type: string
-                                  required:
-                                  - mode
-                                  - value
                                   type: object
                                 type: array
                               queryParams:
@@ -440,9 +419,6 @@ spec:
                                       description: The name of the header or the query
                                         parameter to mask.
                                       type: string
-                                  required:
-                                  - mode
-                                  - value
                                   type: object
                                 type: array
                             type: object
@@ -545,6 +521,237 @@ spec:
                             type: string
                         type: object
                     type: object
+                  samplingPercentage:
+                    description: Sampling (%). For high traffic APIs, please read
+                      this documentation to understand performance implications and
+                      log sampling. Valid values are between 0.0 and 100.0.
+                    type: number
+                  verbosity:
+                    description: Logging verbosity. Possible values are verbose, information
+                      or error.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  alwaysLogErrors:
+                    description: Always log errors. Send telemetry if there is an
+                      erroneous condition, regardless of sampling settings.
+                    type: boolean
+                  backendRequest:
+                    description: A backend_request block as defined below.
+                    items:
+                      properties:
+                        bodyBytes:
+                          description: Number of payload bytes to log (up to 8192).
+                          type: number
+                        dataMasking:
+                          description: A data_masking block as defined below.
+                          items:
+                            properties:
+                              headers:
+                                description: A headers block as defined below.
+                                items:
+                                  properties:
+                                    mode:
+                                      description: The data masking mode. Possible
+                                        values are Mask and Hide for query_params.
+                                        The only possible value is Mask for headers.
+                                      type: string
+                                    value:
+                                      description: The name of the header or the query
+                                        parameter to mask.
+                                      type: string
+                                  type: object
+                                type: array
+                              queryParams:
+                                description: A query_params block as defined below.
+                                items:
+                                  properties:
+                                    mode:
+                                      description: The data masking mode. Possible
+                                        values are Mask and Hide for query_params.
+                                        The only possible value is Mask for headers.
+                                      type: string
+                                    value:
+                                      description: The name of the header or the query
+                                        parameter to mask.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        headersToLog:
+                          description: Specifies a list of headers to log.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  backendResponse:
+                    description: A backend_response block as defined below.
+                    items:
+                      properties:
+                        bodyBytes:
+                          description: Number of payload bytes to log (up to 8192).
+                          type: number
+                        dataMasking:
+                          description: A data_masking block as defined below.
+                          items:
+                            properties:
+                              headers:
+                                description: A headers block as defined below.
+                                items:
+                                  properties:
+                                    mode:
+                                      description: The data masking mode. Possible
+                                        values are Mask and Hide for query_params.
+                                        The only possible value is Mask for headers.
+                                      type: string
+                                    value:
+                                      description: The name of the header or the query
+                                        parameter to mask.
+                                      type: string
+                                  type: object
+                                type: array
+                              queryParams:
+                                description: A query_params block as defined below.
+                                items:
+                                  properties:
+                                    mode:
+                                      description: The data masking mode. Possible
+                                        values are Mask and Hide for query_params.
+                                        The only possible value is Mask for headers.
+                                      type: string
+                                    value:
+                                      description: The name of the header or the query
+                                        parameter to mask.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        headersToLog:
+                          description: Specifies a list of headers to log.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  frontendRequest:
+                    description: A frontend_request block as defined below.
+                    items:
+                      properties:
+                        bodyBytes:
+                          description: Number of payload bytes to log (up to 8192).
+                          type: number
+                        dataMasking:
+                          description: A data_masking block as defined below.
+                          items:
+                            properties:
+                              headers:
+                                description: A headers block as defined below.
+                                items:
+                                  properties:
+                                    mode:
+                                      description: The data masking mode. Possible
+                                        values are Mask and Hide for query_params.
+                                        The only possible value is Mask for headers.
+                                      type: string
+                                    value:
+                                      description: The name of the header or the query
+                                        parameter to mask.
+                                      type: string
+                                  type: object
+                                type: array
+                              queryParams:
+                                description: A query_params block as defined below.
+                                items:
+                                  properties:
+                                    mode:
+                                      description: The data masking mode. Possible
+                                        values are Mask and Hide for query_params.
+                                        The only possible value is Mask for headers.
+                                      type: string
+                                    value:
+                                      description: The name of the header or the query
+                                        parameter to mask.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        headersToLog:
+                          description: Specifies a list of headers to log.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  frontendResponse:
+                    description: A frontend_response block as defined below.
+                    items:
+                      properties:
+                        bodyBytes:
+                          description: Number of payload bytes to log (up to 8192).
+                          type: number
+                        dataMasking:
+                          description: A data_masking block as defined below.
+                          items:
+                            properties:
+                              headers:
+                                description: A headers block as defined below.
+                                items:
+                                  properties:
+                                    mode:
+                                      description: The data masking mode. Possible
+                                        values are Mask and Hide for query_params.
+                                        The only possible value is Mask for headers.
+                                      type: string
+                                    value:
+                                      description: The name of the header or the query
+                                        parameter to mask.
+                                      type: string
+                                  type: object
+                                type: array
+                              queryParams:
+                                description: A query_params block as defined below.
+                                items:
+                                  properties:
+                                    mode:
+                                      description: The data masking mode. Possible
+                                        values are Mask and Hide for query_params.
+                                        The only possible value is Mask for headers.
+                                      type: string
+                                    value:
+                                      description: The name of the header or the query
+                                        parameter to mask.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                        headersToLog:
+                          description: Specifies a list of headers to log.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  httpCorrelationProtocol:
+                    description: The HTTP Correlation Protocol to use. Possible values
+                      are None, Legacy or W3C.
+                    type: string
+                  logClientIp:
+                    description: Log client IP address.
+                    type: boolean
+                  operationNameFormat:
+                    description: The format of the Operation Name for Application
+                      Insights telemetries. Possible values are Name, and Url. Defaults
+                      to Name.
+                    type: string
                   samplingPercentage:
                     description: Sampling (%). For high traffic APIs, please read
                       this documentation to understand performance implications and

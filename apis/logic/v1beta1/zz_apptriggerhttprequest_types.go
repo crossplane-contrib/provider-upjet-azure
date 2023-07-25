@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppTriggerHTTPRequestInitParameters struct {
+
+	// Specifies the HTTP Method which the request be using. Possible values include DELETE, GET, PATCH, POST or PUT.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// Specifies the Relative Path used for this Request.
+	RelativePath *string `json:"relativePath,omitempty" tf:"relative_path,omitempty"`
+
+	// A JSON Blob defining the Schema of the incoming request. This needs to be valid JSON.
+	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
+}
+
 type AppTriggerHTTPRequestObservation struct {
 
 	// The URL for the workflow trigger
@@ -51,15 +63,12 @@ type AppTriggerHTTPRequestParameters struct {
 	LogicAppIDSelector *v1.Selector `json:"logicAppIdSelector,omitempty" tf:"-"`
 
 	// Specifies the HTTP Method which the request be using. Possible values include DELETE, GET, PATCH, POST or PUT.
-	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
 	// Specifies the Relative Path used for this Request.
-	// +kubebuilder:validation:Optional
 	RelativePath *string `json:"relativePath,omitempty" tf:"relative_path,omitempty"`
 
 	// A JSON Blob defining the Schema of the incoming request. This needs to be valid JSON.
-	// +kubebuilder:validation:Optional
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 
@@ -67,6 +76,10 @@ type AppTriggerHTTPRequestParameters struct {
 type AppTriggerHTTPRequestSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppTriggerHTTPRequestParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AppTriggerHTTPRequestInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppTriggerHTTPRequestStatus defines the observed state of AppTriggerHTTPRequest.
@@ -87,7 +100,7 @@ type AppTriggerHTTPRequestStatus struct {
 type AppTriggerHTTPRequest struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schema)",message="schema is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schema) || has(self.initProvider.schema)",message="schema is a required parameter"
 	Spec   AppTriggerHTTPRequestSpec   `json:"spec"`
 	Status AppTriggerHTTPRequestStatus `json:"status,omitempty"`
 }

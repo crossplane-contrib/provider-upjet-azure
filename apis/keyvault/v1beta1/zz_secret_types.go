@@ -64,11 +64,9 @@ type SecretObservation struct {
 type SecretParameters struct {
 
 	// Specifies the content type for the Key Vault Secret.
-	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
-	// +kubebuilder:validation:Optional
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// The ID of the Key Vault where the Secret should be created. Changing this forces a new resource to be created.
@@ -86,15 +84,12 @@ type SecretParameters struct {
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
-	// +kubebuilder:validation:Optional
 	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the value of the Key Vault Secret.
-	// +kubebuilder:validation:Optional
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
@@ -105,14 +100,6 @@ type SecretSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider SecretInitParameters `json:"initProvider,omitempty"`
 }
 

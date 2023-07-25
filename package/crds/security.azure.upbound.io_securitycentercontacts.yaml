@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: securitycentercontacts.security.azure.upbound.io
 spec:
   group: security.azure.upbound.io
@@ -66,6 +66,30 @@ spec:
                 - Delete
                 type: string
               forProvider:
+                properties:
+                  alertNotifications:
+                    description: Whether to send security alerts notifications to
+                      the security contact.
+                    type: boolean
+                  alertsToAdmins:
+                    description: Whether to send security alerts notifications to
+                      subscription admins.
+                    type: boolean
+                  email:
+                    description: The email of the Security Center Contact.
+                    type: string
+                  name:
+                    description: The name of the Security Center Contact. Defaults
+                      to default1.
+                    type: string
+                  phone:
+                    description: The phone number of the Security Center Contact.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
                 properties:
                   alertNotifications:
                     description: Whether to send security alerts notifications to
@@ -286,13 +310,16 @@ spec:
             x-kubernetes-validations:
             - message: alertNotifications is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.alertNotifications)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.alertNotifications)
+                || has(self.initProvider.alertNotifications)'
             - message: alertsToAdmins is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.alertsToAdmins)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.alertsToAdmins)
+                || has(self.initProvider.alertsToAdmins)'
             - message: email is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.email)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.email)
+                || has(self.initProvider.email)'
           status:
             description: SecurityCenterContactStatus defines the observed state of
               SecurityCenterContact.

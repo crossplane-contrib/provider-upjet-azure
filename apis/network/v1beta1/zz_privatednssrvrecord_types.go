@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PrivateDNSSRVRecordInitParameters struct {
+
+	// One or more record blocks as defined below.
+	Record []PrivateDNSSRVRecordRecordInitParameters `json:"record,omitempty" tf:"record,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type PrivateDNSSRVRecordObservation struct {
 
 	// The FQDN of the DNS SRV Record.
@@ -40,7 +52,6 @@ type PrivateDNSSRVRecordObservation struct {
 type PrivateDNSSRVRecordParameters struct {
 
 	// One or more record blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Record []PrivateDNSSRVRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
@@ -57,11 +68,9 @@ type PrivateDNSSRVRecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
-	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
@@ -76,6 +85,21 @@ type PrivateDNSSRVRecordParameters struct {
 	// Selector for a PrivateDNSZone to populate zoneName.
 	// +kubebuilder:validation:Optional
 	ZoneNameSelector *v1.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
+}
+
+type PrivateDNSSRVRecordRecordInitParameters struct {
+
+	// The Port the service is listening on.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The priority of the SRV record.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The FQDN of the service.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// The Weight of the SRV record.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type PrivateDNSSRVRecordRecordObservation struct {
@@ -96,26 +120,26 @@ type PrivateDNSSRVRecordRecordObservation struct {
 type PrivateDNSSRVRecordRecordParameters struct {
 
 	// The Port the service is listening on.
-	// +kubebuilder:validation:Required
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The priority of the SRV record.
-	// +kubebuilder:validation:Required
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The FQDN of the service.
-	// +kubebuilder:validation:Required
-	Target *string `json:"target" tf:"target,omitempty"`
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// The Weight of the SRV record.
-	// +kubebuilder:validation:Required
-	Weight *float64 `json:"weight" tf:"weight,omitempty"`
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 // PrivateDNSSRVRecordSpec defines the desired state of PrivateDNSSRVRecord
 type PrivateDNSSRVRecordSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PrivateDNSSRVRecordParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PrivateDNSSRVRecordInitParameters `json:"initProvider,omitempty"`
 }
 
 // PrivateDNSSRVRecordStatus defines the observed state of PrivateDNSSRVRecord.
@@ -136,8 +160,8 @@ type PrivateDNSSRVRecordStatus struct {
 type PrivateDNSSRVRecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.record)",message="record is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.record) || has(self.initProvider.record)",message="record is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl) || has(self.initProvider.ttl)",message="ttl is a required parameter"
 	Spec   PrivateDNSSRVRecordSpec   `json:"spec"`
 	Status PrivateDNSSRVRecordStatus `json:"status,omitempty"`
 }

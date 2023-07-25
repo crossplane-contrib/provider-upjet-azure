@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: namespacenetworkrulesets.servicebus.azure.upbound.io
 spec:
   group: servicebus.azure.upbound.io
@@ -250,6 +250,43 @@ spec:
                                   type: string
                               type: object
                           type: object
+                      type: object
+                    type: array
+                  publicNetworkAccessEnabled:
+                    description: Whether to allow traffic over public network. Possible
+                      values are true and false. Defaults to true.
+                    type: boolean
+                  trustedServicesAllowed:
+                    description: If True, then Azure Services that are known and trusted
+                      for this resource type are allowed to bypass firewall configuration.
+                      See Trusted Microsoft Services
+                    type: boolean
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  defaultAction:
+                    description: Specifies the default action for the ServiceBus Namespace
+                      Network Rule Set. Possible values are Allow and Deny. Defaults
+                      to Deny.
+                    type: string
+                  ipRules:
+                    description: One or more IP Addresses, or CIDR Blocks which should
+                      be able to access the ServiceBus Namespace.
+                    items:
+                      type: string
+                    type: array
+                  networkRules:
+                    description: One or more network_rules blocks as defined below.
+                    items:
+                      properties:
+                        ignoreMissingVnetServiceEndpoint:
+                          description: Should the ServiceBus Namespace Network Rule
+                            Set ignore missing Virtual Network Service Endpoint option
+                            in the Subnet? Defaults to false.
+                          type: boolean
                       type: object
                     type: array
                   publicNetworkAccessEnabled:

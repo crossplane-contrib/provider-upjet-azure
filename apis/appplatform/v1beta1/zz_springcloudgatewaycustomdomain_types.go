@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SpringCloudGatewayCustomDomainInitParameters struct {
+
+	// The name which should be used for this Spring Cloud Gateway Custom Domain. Changing this forces a new Spring Cloud Gateway Custom Domain to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud Gateway Custom Domain.
+	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+}
+
 type SpringCloudGatewayCustomDomainObservation struct {
 
 	// The ID of the Spring Cloud Gateway Custom Domain.
@@ -31,7 +40,6 @@ type SpringCloudGatewayCustomDomainObservation struct {
 type SpringCloudGatewayCustomDomainParameters struct {
 
 	// The name which should be used for this Spring Cloud Gateway Custom Domain. Changing this forces a new Spring Cloud Gateway Custom Domain to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Spring Cloud Gateway. Changing this forces a new Spring Cloud Gateway Custom Domain to be created.
@@ -49,7 +57,6 @@ type SpringCloudGatewayCustomDomainParameters struct {
 	SpringCloudGatewayIDSelector *v1.Selector `json:"springCloudGatewayIdSelector,omitempty" tf:"-"`
 
 	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud Gateway Custom Domain.
-	// +kubebuilder:validation:Optional
 	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
 }
 
@@ -57,6 +64,10 @@ type SpringCloudGatewayCustomDomainParameters struct {
 type SpringCloudGatewayCustomDomainSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudGatewayCustomDomainParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SpringCloudGatewayCustomDomainInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudGatewayCustomDomainStatus defines the observed state of SpringCloudGatewayCustomDomain.
@@ -77,7 +88,7 @@ type SpringCloudGatewayCustomDomainStatus struct {
 type SpringCloudGatewayCustomDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   SpringCloudGatewayCustomDomainSpec   `json:"spec"`
 	Status SpringCloudGatewayCustomDomainStatus `json:"status,omitempty"`
 }

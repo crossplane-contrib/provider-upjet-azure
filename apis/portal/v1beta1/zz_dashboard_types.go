@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DashboardInitParameters struct {
+
+	// JSON data representing dashboard body. See above for details on how to obtain this from the Portal.
+	DashboardProperties *string `json:"dashboardProperties,omitempty" tf:"dashboard_properties,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the Shared Dashboard. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DashboardObservation struct {
 
 	// JSON data representing dashboard body. See above for details on how to obtain this from the Portal.
@@ -37,15 +52,12 @@ type DashboardObservation struct {
 type DashboardParameters struct {
 
 	// JSON data representing dashboard body. See above for details on how to obtain this from the Portal.
-	// +kubebuilder:validation:Optional
 	DashboardProperties *string `json:"dashboardProperties,omitempty" tf:"dashboard_properties,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Shared Dashboard. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which to create the dashboard. Changing this forces a new resource to be created.
@@ -62,7 +74,6 @@ type DashboardParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -70,6 +81,10 @@ type DashboardParameters struct {
 type DashboardSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DashboardParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider DashboardInitParameters `json:"initProvider,omitempty"`
 }
 
 // DashboardStatus defines the observed state of Dashboard.
@@ -90,9 +105,9 @@ type DashboardStatus struct {
 type Dashboard struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dashboardProperties)",message="dashboardProperties is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dashboardProperties) || has(self.initProvider.dashboardProperties)",message="dashboardProperties is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   DashboardSpec   `json:"spec"`
 	Status DashboardStatus `json:"status,omitempty"`
 }

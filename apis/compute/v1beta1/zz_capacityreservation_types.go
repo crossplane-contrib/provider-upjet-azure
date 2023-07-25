@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CapacityReservationInitParameters struct {
+
+	// A sku block as defined below.
+	Sku []SkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the Availability Zone for this Capacity Reservation. Changing this forces a new resource to be created.
+	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
 type CapacityReservationObservation struct {
 
 	// The ID of the Capacity Reservation Group where the Capacity Reservation exists. Changing this forces a new resource to be created.
@@ -48,16 +60,22 @@ type CapacityReservationParameters struct {
 	CapacityReservationGroupIDSelector *v1.Selector `json:"capacityReservationGroupIdSelector,omitempty" tf:"-"`
 
 	// A sku block as defined below.
-	// +kubebuilder:validation:Optional
 	Sku []SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Availability Zone for this Capacity Reservation. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type SkuInitParameters struct {
+
+	// Specifies the number of instances to be reserved. It must be a positive integer and not exceed the quota in the subscription.
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// Name of the sku, such as Standard_F2. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type SkuObservation struct {
@@ -72,18 +90,20 @@ type SkuObservation struct {
 type SkuParameters struct {
 
 	// Specifies the number of instances to be reserved. It must be a positive integer and not exceed the quota in the subscription.
-	// +kubebuilder:validation:Required
-	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// Name of the sku, such as Standard_F2. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 // CapacityReservationSpec defines the desired state of CapacityReservation
 type CapacityReservationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CapacityReservationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CapacityReservationInitParameters `json:"initProvider,omitempty"`
 }
 
 // CapacityReservationStatus defines the observed state of CapacityReservation.
@@ -104,7 +124,7 @@ type CapacityReservationStatus struct {
 type CapacityReservation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
 	Spec   CapacityReservationSpec   `json:"spec"`
 	Status CapacityReservationStatus `json:"status,omitempty"`
 }

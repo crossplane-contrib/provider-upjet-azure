@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LinkedServiceAzureSearchInitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The URL of the Search Service endpoint (e.g. https://{searchServiceName}.search.windows.net).
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+}
+
 type LinkedServiceAzureSearchObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
@@ -49,11 +70,9 @@ type LinkedServiceAzureSearchObservation struct {
 type LinkedServiceAzureSearchParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -71,15 +90,12 @@ type LinkedServiceAzureSearchParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The integration runtime reference to associate with the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
-	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The key of the Azure Search Service.
@@ -97,7 +113,6 @@ type LinkedServiceAzureSearchParameters struct {
 	SearchServiceKeySelector *v1.Selector `json:"searchServiceKeySelector,omitempty" tf:"-"`
 
 	// The URL of the Search Service endpoint (e.g. https://{searchServiceName}.search.windows.net).
-	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -105,6 +120,10 @@ type LinkedServiceAzureSearchParameters struct {
 type LinkedServiceAzureSearchSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LinkedServiceAzureSearchParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LinkedServiceAzureSearchInitParameters `json:"initProvider,omitempty"`
 }
 
 // LinkedServiceAzureSearchStatus defines the observed state of LinkedServiceAzureSearch.
@@ -125,7 +144,7 @@ type LinkedServiceAzureSearchStatus struct {
 type LinkedServiceAzureSearch struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.url)",message="url is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.url) || has(self.initProvider.url)",message="url is a required parameter"
 	Spec   LinkedServiceAzureSearchSpec   `json:"spec"`
 	Status LinkedServiceAzureSearchStatus `json:"status,omitempty"`
 }

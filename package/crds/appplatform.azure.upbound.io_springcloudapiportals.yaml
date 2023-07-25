@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: springcloudapiportals.appplatform.azure.upbound.io
 spec:
   group: appplatform.azure.upbound.io
@@ -240,6 +240,45 @@ spec:
                             type: string
                         type: object
                     type: object
+                  sso:
+                    description: A sso block as defined below.
+                    items:
+                      properties:
+                        clientId:
+                          description: The public identifier for the application.
+                          type: string
+                        clientSecret:
+                          description: The secret known only to the application and
+                            the authorization server.
+                          type: string
+                        issuerUri:
+                          description: The URI of Issuer Identifier.
+                          type: string
+                        scope:
+                          description: It defines the specific actions applications
+                            can be allowed to do on a user's behalf.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  httpsOnlyEnabled:
+                    description: is only https is allowed?
+                    type: boolean
+                  instanceCount:
+                    description: Specifies the required instance count of the Spring
+                      Cloud API Portal. Possible Values are between 1 and 500. Defaults
+                      to 1 if not specified.
+                    type: number
+                  publicNetworkAccessEnabled:
+                    description: Is the public network access enabled?
+                    type: boolean
                   sso:
                     description: A sso block as defined below.
                     items:

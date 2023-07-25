@@ -79,6 +79,15 @@ func (tr *EventHub) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this EventHub
+func (tr *EventHub) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this EventHub using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EventHub) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *AuthorizationRule) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this AuthorizationRule
+func (tr *AuthorizationRule) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this AuthorizationRule using its observed tfState.
@@ -247,6 +265,15 @@ func (tr *ConsumerGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this ConsumerGroup
+func (tr *ConsumerGroup) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ConsumerGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ConsumerGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -329,6 +356,15 @@ func (tr *EventHubNamespace) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this EventHubNamespace
+func (tr *EventHubNamespace) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this EventHubNamespace using its observed tfState.
@@ -416,6 +452,15 @@ func (tr *NamespaceAuthorizationRule) GetInitParameters() (map[string]any, error
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this NamespaceAuthorizationRule
+func (tr *NamespaceAuthorizationRule) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this NamespaceAuthorizationRule using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *NamespaceAuthorizationRule) LateInitialize(attrs []byte) (bool, error) {
@@ -500,6 +545,15 @@ func (tr *NamespaceDisasterRecoveryConfig) GetInitParameters() (map[string]any, 
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this NamespaceDisasterRecoveryConfig
+func (tr *NamespaceDisasterRecoveryConfig) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this NamespaceDisasterRecoveryConfig using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *NamespaceDisasterRecoveryConfig) LateInitialize(attrs []byte) (bool, error) {
@@ -582,6 +636,15 @@ func (tr *NamespaceSchemaGroup) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this NamespaceSchemaGroup
+func (tr *NamespaceSchemaGroup) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this NamespaceSchemaGroup using its observed tfState.

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OpenIDConnectProviderInitParameters struct {
+
+	// A description of this OpenID Connect Provider.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A user-friendly name for this OpenID Connect Provider.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The URI of the Metadata endpoint.
+	MetadataEndpoint *string `json:"metadataEndpoint,omitempty" tf:"metadata_endpoint,omitempty"`
+}
+
 type OpenIDConnectProviderObservation struct {
 
 	// The name of the API Management Service in which this OpenID Connect Provider should be created. Changing this forces a new resource to be created.
@@ -50,23 +62,18 @@ type OpenIDConnectProviderParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The Client ID used for the Client Application.
-	// +kubebuilder:validation:Optional
 	ClientIDSecretRef v1.SecretKeySelector `json:"clientIdSecretRef" tf:"-"`
 
 	// The Client Secret used for the Client Application.
-	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// A description of this OpenID Connect Provider.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A user-friendly name for this OpenID Connect Provider.
-	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The URI of the Metadata endpoint.
-	// +kubebuilder:validation:Optional
 	MetadataEndpoint *string `json:"metadataEndpoint,omitempty" tf:"metadata_endpoint,omitempty"`
 
 	// The name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
@@ -87,6 +94,10 @@ type OpenIDConnectProviderParameters struct {
 type OpenIDConnectProviderSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OpenIDConnectProviderParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider OpenIDConnectProviderInitParameters `json:"initProvider,omitempty"`
 }
 
 // OpenIDConnectProviderStatus defines the observed state of OpenIDConnectProvider.
@@ -109,8 +120,8 @@ type OpenIDConnectProvider struct {
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientIdSecretRef)",message="clientIdSecretRef is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientSecretSecretRef)",message="clientSecretSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName)",message="displayName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.metadataEndpoint)",message="metadataEndpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.metadataEndpoint) || has(self.initProvider.metadataEndpoint)",message="metadataEndpoint is a required parameter"
 	Spec   OpenIDConnectProviderSpec   `json:"spec"`
 	Status OpenIDConnectProviderStatus `json:"status,omitempty"`
 }

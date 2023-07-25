@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthorizationInitParameters struct {
+
+	// Specifies a role definition identifier for the provider. This role will define all the permissions that the provider must have on the managed application's container resource group. This role definition cannot have permission to delete the resource group.
+	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
+
+	// Specifies a service principal identifier for the provider. This is the identity that the provider will use to call ARM to manage the managed application resources.
+	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
+}
+
 type AuthorizationObservation struct {
 
 	// Specifies a role definition identifier for the provider. This role will define all the permissions that the provider must have on the managed application's container resource group. This role definition cannot have permission to delete the resource group.
@@ -25,12 +34,43 @@ type AuthorizationObservation struct {
 type AuthorizationParameters struct {
 
 	// Specifies a role definition identifier for the provider. This role will define all the permissions that the provider must have on the managed application's container resource group. This role definition cannot have permission to delete the resource group.
-	// +kubebuilder:validation:Required
-	RoleDefinitionID *string `json:"roleDefinitionId" tf:"role_definition_id,omitempty"`
+	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
 	// Specifies a service principal identifier for the provider. This is the identity that the provider will use to call ARM to manage the managed application resources.
-	// +kubebuilder:validation:Required
-	ServicePrincipalID *string `json:"servicePrincipalId" tf:"service_principal_id,omitempty"`
+	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
+}
+
+type ManagedApplicationDefinitionInitParameters struct {
+
+	// One or more authorization block defined below.
+	Authorization []AuthorizationInitParameters `json:"authorization,omitempty" tf:"authorization,omitempty"`
+
+	// Specifies the createUiDefinition JSON for the backing template with Microsoft.Solutions/applications resource.
+	CreateUIDefinition *string `json:"createUiDefinition,omitempty" tf:"create_ui_definition,omitempty"`
+
+	// Specifies the managed application definition description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the managed application definition display name.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the managed application lock level. Valid values include CanNotDelete, None, ReadOnly. Changing this forces a new resource to be created.
+	LockLevel *string `json:"lockLevel,omitempty" tf:"lock_level,omitempty"`
+
+	// Specifies the inline main template JSON which has resources to be provisioned.
+	MainTemplate *string `json:"mainTemplate,omitempty" tf:"main_template,omitempty"`
+
+	// Is the package enabled? Defaults to true.
+	PackageEnabled *bool `json:"packageEnabled,omitempty" tf:"package_enabled,omitempty"`
+
+	// Specifies the managed application definition package file Uri.
+	PackageFileURI *string `json:"packageFileUri,omitempty" tf:"package_file_uri,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ManagedApplicationDefinitionObservation struct {
@@ -75,39 +115,30 @@ type ManagedApplicationDefinitionObservation struct {
 type ManagedApplicationDefinitionParameters struct {
 
 	// One or more authorization block defined below.
-	// +kubebuilder:validation:Optional
 	Authorization []AuthorizationParameters `json:"authorization,omitempty" tf:"authorization,omitempty"`
 
 	// Specifies the createUiDefinition JSON for the backing template with Microsoft.Solutions/applications resource.
-	// +kubebuilder:validation:Optional
 	CreateUIDefinition *string `json:"createUiDefinition,omitempty" tf:"create_ui_definition,omitempty"`
 
 	// Specifies the managed application definition description.
-	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the managed application definition display name.
-	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the managed application lock level. Valid values include CanNotDelete, None, ReadOnly. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	LockLevel *string `json:"lockLevel,omitempty" tf:"lock_level,omitempty"`
 
 	// Specifies the inline main template JSON which has resources to be provisioned.
-	// +kubebuilder:validation:Optional
 	MainTemplate *string `json:"mainTemplate,omitempty" tf:"main_template,omitempty"`
 
 	// Is the package enabled? Defaults to true.
-	// +kubebuilder:validation:Optional
 	PackageEnabled *bool `json:"packageEnabled,omitempty" tf:"package_enabled,omitempty"`
 
 	// Specifies the managed application definition package file Uri.
-	// +kubebuilder:validation:Optional
 	PackageFileURI *string `json:"packageFileUri,omitempty" tf:"package_file_uri,omitempty"`
 
 	// The name of the Resource Group where the Managed Application Definition should exist. Changing this forces a new resource to be created.
@@ -124,7 +155,6 @@ type ManagedApplicationDefinitionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -132,6 +162,10 @@ type ManagedApplicationDefinitionParameters struct {
 type ManagedApplicationDefinitionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagedApplicationDefinitionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ManagedApplicationDefinitionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ManagedApplicationDefinitionStatus defines the observed state of ManagedApplicationDefinition.
@@ -152,9 +186,9 @@ type ManagedApplicationDefinitionStatus struct {
 type ManagedApplicationDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName)",message="displayName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lockLevel)",message="lockLevel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lockLevel) || has(self.initProvider.lockLevel)",message="lockLevel is a required parameter"
 	Spec   ManagedApplicationDefinitionSpec   `json:"spec"`
 	Status ManagedApplicationDefinitionStatus `json:"status,omitempty"`
 }

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: tables.storage.azure.upbound.io
 spec:
   group: storage.azure.upbound.io
@@ -87,18 +87,12 @@ spec:
                                 description: The ISO8061 UTC time at which this Access
                                   Policy should be valid from.
                                 type: string
-                            required:
-                            - expiry
-                            - permissions
-                            - start
                             type: object
                           type: array
                         id:
                           description: The ID which should be used for this Shared
                             Identifier.
                           type: string
-                      required:
-                      - id
                       type: object
                     type: array
                   name:
@@ -185,6 +179,46 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  acl:
+                    description: One or more acl blocks as defined below.
+                    items:
+                      properties:
+                        accessPolicy:
+                          description: An access_policy block as defined below.
+                          items:
+                            properties:
+                              expiry:
+                                description: The ISO8061 UTC time at which this Access
+                                  Policy should be valid until.
+                                type: string
+                              permissions:
+                                description: The permissions which should associated
+                                  with this Shared Identifier.
+                                type: string
+                              start:
+                                description: The ISO8061 UTC time at which this Access
+                                  Policy should be valid from.
+                                type: string
+                            type: object
+                          type: array
+                        id:
+                          description: The ID which should be used for this Shared
+                            Identifier.
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: The name of the storage table. Only Alphanumeric
+                      characters allowed, starting with a letter. Must be unique within
+                      the storage account the table is located. Changing this forces
+                      a new resource to be created.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -386,7 +420,8 @@ spec:
             x-kubernetes-validations:
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: TableStatus defines the observed state of Table.
             properties:

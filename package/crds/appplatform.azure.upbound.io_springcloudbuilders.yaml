@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: springcloudbuilders.appplatform.azure.upbound.io
 spec:
   group: appplatform.azure.upbound.io
@@ -80,8 +80,6 @@ spec:
                           description: The name which should be used for this build
                             pack group.
                           type: string
-                      required:
-                      - name
                       type: object
                     type: array
                   name:
@@ -178,9 +176,44 @@ spec:
                         version:
                           description: Specifies the version of the ClusterStack
                           type: string
-                      required:
-                      - id
-                      - version
+                      type: object
+                    type: array
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  buildPackGroup:
+                    description: One or more build_pack_group blocks as defined below.
+                    items:
+                      properties:
+                        buildPackIds:
+                          description: Specifies a list of the build pack's ID.
+                          items:
+                            type: string
+                          type: array
+                        name:
+                          description: The name which should be used for this build
+                            pack group.
+                          type: string
+                      type: object
+                    type: array
+                  name:
+                    description: The name which should be used for this Spring Cloud
+                      Builder. Changing this forces a new Spring Cloud Builder to
+                      be created.
+                    type: string
+                  stack:
+                    description: A stack block as defined below.
+                    items:
+                      properties:
+                        id:
+                          description: Specifies the ID of the ClusterStack.
+                          type: string
+                        version:
+                          description: Specifies the version of the ClusterStack
+                          type: string
                       type: object
                     type: array
                 type: object
@@ -384,13 +417,16 @@ spec:
             x-kubernetes-validations:
             - message: buildPackGroup is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.buildPackGroup)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.buildPackGroup)
+                || has(self.initProvider.buildPackGroup)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: stack is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.stack)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.stack)
+                || has(self.initProvider.stack)'
           status:
             description: SpringCloudBuilderStatus defines the observed state of SpringCloudBuilder.
             properties:

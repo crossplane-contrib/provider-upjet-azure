@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AdminInitParameters struct {
+
+	// E-mail address of the admin.
+	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
+
+	// First name of the admin.
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
+
+	// Last name of the admin.
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// Phone number of the admin.
+	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
+}
+
 type AdminObservation struct {
 
 	// E-mail address of the admin.
@@ -31,20 +46,31 @@ type AdminObservation struct {
 type AdminParameters struct {
 
 	// E-mail address of the admin.
-	// +kubebuilder:validation:Required
-	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
+	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
 	// First name of the admin.
-	// +kubebuilder:validation:Optional
 	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
 
 	// Last name of the admin.
-	// +kubebuilder:validation:Optional
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
 	// Phone number of the admin.
-	// +kubebuilder:validation:Optional
 	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
+}
+
+type CertificateIssuerInitParameters struct {
+
+	// The account number with the third-party Certificate Issuer.
+	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
+
+	// One or more admin blocks as defined below.
+	Admin []AdminInitParameters `json:"admin,omitempty" tf:"admin,omitempty"`
+
+	// The ID of the organization as provided to the issuer.
+	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
+
+	// The name of the third-party Certificate Issuer. Possible values are: DigiCert, GlobalSign, OneCertV2-PrivateCA, OneCertV2-PublicCA and SslAdminV2.
+	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 }
 
 type CertificateIssuerObservation struct {
@@ -71,11 +97,9 @@ type CertificateIssuerObservation struct {
 type CertificateIssuerParameters struct {
 
 	// The account number with the third-party Certificate Issuer.
-	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// One or more admin blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Admin []AdminParameters `json:"admin,omitempty" tf:"admin,omitempty"`
 
 	// The ID of the Key Vault in which to create the Certificate Issuer. Changing this forces a new resource to be created.
@@ -93,15 +117,12 @@ type CertificateIssuerParameters struct {
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// The ID of the organization as provided to the issuer.
-	// +kubebuilder:validation:Optional
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
 	// The password associated with the account and organization ID at the third-party Certificate Issuer. If not specified, will not overwrite any previous value.
-	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The name of the third-party Certificate Issuer. Possible values are: DigiCert, GlobalSign, OneCertV2-PrivateCA, OneCertV2-PublicCA and SslAdminV2.
-	// +kubebuilder:validation:Optional
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 }
 
@@ -109,6 +130,10 @@ type CertificateIssuerParameters struct {
 type CertificateIssuerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CertificateIssuerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider CertificateIssuerInitParameters `json:"initProvider,omitempty"`
 }
 
 // CertificateIssuerStatus defines the observed state of CertificateIssuer.
@@ -129,7 +154,7 @@ type CertificateIssuerStatus struct {
 type CertificateIssuer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerName)",message="providerName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.providerName) || has(self.initProvider.providerName)",message="providerName is a required parameter"
 	Spec   CertificateIssuerSpec   `json:"spec"`
 	Status CertificateIssuerStatus `json:"status,omitempty"`
 }

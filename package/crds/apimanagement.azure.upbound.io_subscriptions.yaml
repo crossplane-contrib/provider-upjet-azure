@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: subscriptions.apimanagement.azure.upbound.io
 spec:
   group: apimanagement.azure.upbound.io
@@ -431,6 +431,30 @@ spec:
                             type: string
                         type: object
                     type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  allowTracing:
+                    description: Determines whether tracing can be enabled. Defaults
+                      to true.
+                    type: boolean
+                  apiId:
+                    description: The ID of the API which should be assigned to this
+                      Subscription. Changing this forces a new resource to be created.
+                    type: string
+                  state:
+                    description: The state of this Subscription. Possible values are
+                      active, cancelled, expired, rejected, submitted and suspended.
+                      Defaults to submitted.
+                    type: string
+                  subscriptionId:
+                    description: An Identifier which should used as the ID of this
+                      Subscription. If not specified a new Subscription ID will be
+                      generated. Changing this forces a new resource to be created.
+                    type: string
                 type: object
               managementPolicies:
                 default:

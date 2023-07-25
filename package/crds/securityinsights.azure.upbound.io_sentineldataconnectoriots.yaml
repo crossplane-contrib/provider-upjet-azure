@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: sentineldataconnectoriots.securityinsights.azure.upbound.io
 spec:
   group: securityinsights.azure.upbound.io
@@ -148,6 +148,17 @@ spec:
                             type: string
                         type: object
                     type: object
+                  subscriptionId:
+                    description: The ID of the subscription that this Iot Data Connector
+                      connects to. Changing this forces a new Iot Data Connector to
+                      be created.
+                    type: string
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
                   subscriptionId:
                     description: The ID of the subscription that this Iot Data Connector
                       connects to. Changing this forces a new Iot Data Connector to

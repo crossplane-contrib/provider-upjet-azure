@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SiteRecoveryFabricInitParameters struct {
+
+	// In what region should the fabric be located. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+}
+
 type SiteRecoveryFabricObservation struct {
 
 	// The ID of the Site Recovery Fabric.
@@ -31,7 +37,6 @@ type SiteRecoveryFabricObservation struct {
 type SiteRecoveryFabricParameters struct {
 
 	// In what region should the fabric be located. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.
@@ -65,6 +70,10 @@ type SiteRecoveryFabricParameters struct {
 type SiteRecoveryFabricSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SiteRecoveryFabricParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider SiteRecoveryFabricInitParameters `json:"initProvider,omitempty"`
 }
 
 // SiteRecoveryFabricStatus defines the observed state of SiteRecoveryFabric.
@@ -85,7 +94,7 @@ type SiteRecoveryFabricStatus struct {
 type SiteRecoveryFabric struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   SiteRecoveryFabricSpec   `json:"spec"`
 	Status SiteRecoveryFabricStatus `json:"status,omitempty"`
 }

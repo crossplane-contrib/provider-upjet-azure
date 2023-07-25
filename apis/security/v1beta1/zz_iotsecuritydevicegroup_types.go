@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AllowRuleInitParameters struct {
+
+	// Specifies which IP is not allowed to be connected to in current device group for inbound connection.
+	ConnectionFromIpsNotAllowed []*string `json:"connectionFromIpsNotAllowed,omitempty" tf:"connection_from_ips_not_allowed,omitempty"`
+
+	// Specifies which IP is not allowed to be connected to in current device group for outbound connection.
+	ConnectionToIpsNotAllowed []*string `json:"connectionToIpsNotAllowed,omitempty" tf:"connection_to_ips_not_allowed,omitempty"`
+
+	// Specifies which local user is not allowed to login in current device group.
+	LocalUsersNotAllowed []*string `json:"localUsersNotAllowed,omitempty" tf:"local_users_not_allowed,omitempty"`
+
+	// Specifies which process is not allowed to be executed in current device group.
+	ProcessesNotAllowed []*string `json:"processesNotAllowed,omitempty" tf:"processes_not_allowed,omitempty"`
+}
+
 type AllowRuleObservation struct {
 
 	// Specifies which IP is not allowed to be connected to in current device group for inbound connection.
@@ -31,20 +46,28 @@ type AllowRuleObservation struct {
 type AllowRuleParameters struct {
 
 	// Specifies which IP is not allowed to be connected to in current device group for inbound connection.
-	// +kubebuilder:validation:Optional
 	ConnectionFromIpsNotAllowed []*string `json:"connectionFromIpsNotAllowed,omitempty" tf:"connection_from_ips_not_allowed,omitempty"`
 
 	// Specifies which IP is not allowed to be connected to in current device group for outbound connection.
-	// +kubebuilder:validation:Optional
 	ConnectionToIpsNotAllowed []*string `json:"connectionToIpsNotAllowed,omitempty" tf:"connection_to_ips_not_allowed,omitempty"`
 
 	// Specifies which local user is not allowed to login in current device group.
-	// +kubebuilder:validation:Optional
 	LocalUsersNotAllowed []*string `json:"localUsersNotAllowed,omitempty" tf:"local_users_not_allowed,omitempty"`
 
 	// Specifies which process is not allowed to be executed in current device group.
-	// +kubebuilder:validation:Optional
 	ProcessesNotAllowed []*string `json:"processesNotAllowed,omitempty" tf:"processes_not_allowed,omitempty"`
+}
+
+type IOTSecurityDeviceGroupInitParameters struct {
+
+	// an allow_rule blocks as defined below.
+	AllowRule []AllowRuleInitParameters `json:"allowRule,omitempty" tf:"allow_rule,omitempty"`
+
+	// Specifies the name of the Device Security Group. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more range_rule blocks as defined below.
+	RangeRule []RangeRuleInitParameters `json:"rangeRule,omitempty" tf:"range_rule,omitempty"`
 }
 
 type IOTSecurityDeviceGroupObservation struct {
@@ -68,7 +91,6 @@ type IOTSecurityDeviceGroupObservation struct {
 type IOTSecurityDeviceGroupParameters struct {
 
 	// an allow_rule blocks as defined below.
-	// +kubebuilder:validation:Optional
 	AllowRule []AllowRuleParameters `json:"allowRule,omitempty" tf:"allow_rule,omitempty"`
 
 	// The ID of the IoT Hub which to link the Security Device Group to. Changing this forces a new resource to be created.
@@ -86,12 +108,25 @@ type IOTSecurityDeviceGroupParameters struct {
 	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Device Security Group. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more range_rule blocks as defined below.
-	// +kubebuilder:validation:Optional
 	RangeRule []RangeRuleParameters `json:"rangeRule,omitempty" tf:"range_rule,omitempty"`
+}
+
+type RangeRuleInitParameters struct {
+
+	// Specifies the time range. represented in ISO 8601 duration format.
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// The maximum threshold in the given time window.
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
+
+	// The minimum threshold in the given time window.
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
+
+	// The type of supported rule type. Possible Values are ActiveConnectionsNotInAllowedRange, AmqpC2DMessagesNotInAllowedRange, MqttC2DMessagesNotInAllowedRange, HttpC2DMessagesNotInAllowedRange, AmqpC2DRejectedMessagesNotInAllowedRange, MqttC2DRejectedMessagesNotInAllowedRange, HttpC2DRejectedMessagesNotInAllowedRange, AmqpD2CMessagesNotInAllowedRange, MqttD2CMessagesNotInAllowedRange, HttpD2CMessagesNotInAllowedRange, DirectMethodInvokesNotInAllowedRange, FailedLocalLoginsNotInAllowedRange, FileUploadsNotInAllowedRange, QueuePurgesNotInAllowedRange, TwinUpdatesNotInAllowedRange and UnauthorizedOperationsNotInAllowedRange.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RangeRuleObservation struct {
@@ -112,26 +147,26 @@ type RangeRuleObservation struct {
 type RangeRuleParameters struct {
 
 	// Specifies the time range. represented in ISO 8601 duration format.
-	// +kubebuilder:validation:Required
-	Duration *string `json:"duration" tf:"duration,omitempty"`
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// The maximum threshold in the given time window.
-	// +kubebuilder:validation:Required
-	Max *float64 `json:"max" tf:"max,omitempty"`
+	Max *float64 `json:"max,omitempty" tf:"max,omitempty"`
 
 	// The minimum threshold in the given time window.
-	// +kubebuilder:validation:Required
-	Min *float64 `json:"min" tf:"min,omitempty"`
+	Min *float64 `json:"min,omitempty" tf:"min,omitempty"`
 
 	// The type of supported rule type. Possible Values are ActiveConnectionsNotInAllowedRange, AmqpC2DMessagesNotInAllowedRange, MqttC2DMessagesNotInAllowedRange, HttpC2DMessagesNotInAllowedRange, AmqpC2DRejectedMessagesNotInAllowedRange, MqttC2DRejectedMessagesNotInAllowedRange, HttpC2DRejectedMessagesNotInAllowedRange, AmqpD2CMessagesNotInAllowedRange, MqttD2CMessagesNotInAllowedRange, HttpD2CMessagesNotInAllowedRange, DirectMethodInvokesNotInAllowedRange, FailedLocalLoginsNotInAllowedRange, FileUploadsNotInAllowedRange, QueuePurgesNotInAllowedRange, TwinUpdatesNotInAllowedRange and UnauthorizedOperationsNotInAllowedRange.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // IOTSecurityDeviceGroupSpec defines the desired state of IOTSecurityDeviceGroup
 type IOTSecurityDeviceGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IOTSecurityDeviceGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider IOTSecurityDeviceGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // IOTSecurityDeviceGroupStatus defines the observed state of IOTSecurityDeviceGroup.
@@ -152,7 +187,7 @@ type IOTSecurityDeviceGroupStatus struct {
 type IOTSecurityDeviceGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   IOTSecurityDeviceGroupSpec   `json:"spec"`
 	Status IOTSecurityDeviceGroupStatus `json:"status,omitempty"`
 }

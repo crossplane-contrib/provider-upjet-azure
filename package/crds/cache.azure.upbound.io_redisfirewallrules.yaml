@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: redisfirewallrules.cache.azure.upbound.io
 spec:
   group: cache.azure.upbound.io
@@ -230,6 +230,18 @@ spec:
                     description: The lowest IP address included in the range
                     type: string
                 type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  endIp:
+                    description: The highest IP address included in the range.
+                    type: string
+                  startIp:
+                    description: The lowest IP address included in the range
+                    type: string
+                type: object
               managementPolicies:
                 default:
                 - '*'
@@ -430,10 +442,12 @@ spec:
             x-kubernetes-validations:
             - message: endIp is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.endIp)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.endIp)
+                || has(self.initProvider.endIp)'
             - message: startIp is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.startIp)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.startIp)
+                || has(self.initProvider.startIp)'
           status:
             description: RedisFirewallRuleStatus defines the observed state of RedisFirewallRule.
             properties:

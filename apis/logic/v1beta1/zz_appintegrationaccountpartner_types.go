@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppIntegrationAccountPartnerInitParameters struct {
+
+	// A business_identity block as documented below.
+	BusinessIdentity []BusinessIdentityInitParameters `json:"businessIdentity,omitempty" tf:"business_identity,omitempty"`
+
+	// A JSON mapping of any Metadata for this Logic App Integration Account Partner.
+	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+}
+
 type AppIntegrationAccountPartnerObservation struct {
 
 	// A business_identity block as documented below.
@@ -34,7 +43,6 @@ type AppIntegrationAccountPartnerObservation struct {
 type AppIntegrationAccountPartnerParameters struct {
 
 	// A business_identity block as documented below.
-	// +kubebuilder:validation:Optional
 	BusinessIdentity []BusinessIdentityParameters `json:"businessIdentity,omitempty" tf:"business_identity,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Partner to be created.
@@ -52,7 +60,6 @@ type AppIntegrationAccountPartnerParameters struct {
 	IntegrationAccountNameSelector *v1.Selector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
 
 	// A JSON mapping of any Metadata for this Logic App Integration Account Partner.
-	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Partner should exist. Changing this forces a new Logic App Integration Account Partner to be created.
@@ -69,6 +76,15 @@ type AppIntegrationAccountPartnerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
+type BusinessIdentityInitParameters struct {
+
+	// The authenticating body that provides unique business identities to organizations.
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+
+	// The value that identifies the documents that your logic apps receive.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type BusinessIdentityObservation struct {
 
 	// The authenticating body that provides unique business identities to organizations.
@@ -81,18 +97,20 @@ type BusinessIdentityObservation struct {
 type BusinessIdentityParameters struct {
 
 	// The authenticating body that provides unique business identities to organizations.
-	// +kubebuilder:validation:Required
-	Qualifier *string `json:"qualifier" tf:"qualifier,omitempty"`
+	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
 	// The value that identifies the documents that your logic apps receive.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 // AppIntegrationAccountPartnerSpec defines the desired state of AppIntegrationAccountPartner
 type AppIntegrationAccountPartnerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppIntegrationAccountPartnerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider AppIntegrationAccountPartnerInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppIntegrationAccountPartnerStatus defines the observed state of AppIntegrationAccountPartner.
@@ -113,7 +131,7 @@ type AppIntegrationAccountPartnerStatus struct {
 type AppIntegrationAccountPartner struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.businessIdentity)",message="businessIdentity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.businessIdentity) || has(self.initProvider.businessIdentity)",message="businessIdentity is a required parameter"
 	Spec   AppIntegrationAccountPartnerSpec   `json:"spec"`
 	Status AppIntegrationAccountPartnerStatus `json:"status,omitempty"`
 }

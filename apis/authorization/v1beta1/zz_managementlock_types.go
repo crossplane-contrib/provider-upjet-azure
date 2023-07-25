@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ManagementLockInitParameters struct {
+
+	// Specifies the Level to be used for this Lock. Possible values are CanNotDelete and ReadOnly. Changing this forces a new resource to be created.
+	LockLevel *string `json:"lockLevel,omitempty" tf:"lock_level,omitempty"`
+
+	// Specifies the name of the Management Lock. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies some notes about the lock. Maximum of 512 characters. Changing this forces a new resource to be created.
+	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
+}
+
 type ManagementLockObservation struct {
 
 	// The ID of the Management Lock
@@ -34,15 +46,12 @@ type ManagementLockObservation struct {
 type ManagementLockParameters struct {
 
 	// Specifies the Level to be used for this Lock. Possible values are CanNotDelete and ReadOnly. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	LockLevel *string `json:"lockLevel,omitempty" tf:"lock_level,omitempty"`
 
 	// Specifies the name of the Management Lock. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies some notes about the lock. Maximum of 512 characters. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
 	// Specifies the scope at which the Management Lock should be created. Changing this forces a new resource to be created.
@@ -64,6 +73,10 @@ type ManagementLockParameters struct {
 type ManagementLockSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagementLockParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ManagementLockInitParameters `json:"initProvider,omitempty"`
 }
 
 // ManagementLockStatus defines the observed state of ManagementLock.
@@ -84,8 +97,8 @@ type ManagementLockStatus struct {
 type ManagementLock struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lockLevel)",message="lockLevel is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.lockLevel) || has(self.initProvider.lockLevel)",message="lockLevel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ManagementLockSpec   `json:"spec"`
 	Status ManagementLockStatus `json:"status,omitempty"`
 }

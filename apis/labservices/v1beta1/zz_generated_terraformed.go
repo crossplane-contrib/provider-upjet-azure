@@ -79,6 +79,15 @@ func (tr *LabServiceLab) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this LabServiceLab
+func (tr *LabServiceLab) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this LabServiceLab using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LabServiceLab) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *LabServicePlan) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this LabServicePlan
+func (tr *LabServicePlan) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this LabServicePlan using its observed tfState.

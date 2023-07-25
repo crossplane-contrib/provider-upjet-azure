@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LogAnalyticsSolutionInitParameters struct {
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A plan block as documented below.
+	Plan []PlanInitParameters `json:"plan,omitempty" tf:"plan,omitempty"`
+
+	// Specifies the name of the solution to be deployed. See here for options.Changing this forces a new resource to be created.
+	SolutionName *string `json:"solutionName,omitempty" tf:"solution_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type LogAnalyticsSolutionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -41,11 +56,9 @@ type LogAnalyticsSolutionObservation struct {
 type LogAnalyticsSolutionParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A plan block as documented below.
-	// +kubebuilder:validation:Optional
 	Plan []PlanParameters `json:"plan,omitempty" tf:"plan,omitempty"`
 
 	// The name of the resource group in which the Log Analytics solution is created. Changing this forces a new resource to be created. Note: The solution and its related workspace can only exist in the same resource group.
@@ -62,11 +75,9 @@ type LogAnalyticsSolutionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the solution to be deployed. See here for options.Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	SolutionName *string `json:"solutionName,omitempty" tf:"solution_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The full name of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.
@@ -97,6 +108,18 @@ type LogAnalyticsSolutionParameters struct {
 	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
+type PlanInitParameters struct {
+
+	// The product name of the solution. For example OMSGallery/Containers. Changing this forces a new resource to be created.
+	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+
+	// A promotion code to be used with the solution. Changing this forces a new resource to be created.
+	PromotionCode *string `json:"promotionCode,omitempty" tf:"promotion_code,omitempty"`
+
+	// The publisher of the solution. For example Microsoft. Changing this forces a new resource to be created.
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+}
+
 type PlanObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -113,22 +136,23 @@ type PlanObservation struct {
 type PlanParameters struct {
 
 	// The product name of the solution. For example OMSGallery/Containers. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Product *string `json:"product" tf:"product,omitempty"`
+	Product *string `json:"product,omitempty" tf:"product,omitempty"`
 
 	// A promotion code to be used with the solution. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	PromotionCode *string `json:"promotionCode,omitempty" tf:"promotion_code,omitempty"`
 
 	// The publisher of the solution. For example Microsoft. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 }
 
 // LogAnalyticsSolutionSpec defines the desired state of LogAnalyticsSolution
 type LogAnalyticsSolutionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LogAnalyticsSolutionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider LogAnalyticsSolutionInitParameters `json:"initProvider,omitempty"`
 }
 
 // LogAnalyticsSolutionStatus defines the observed state of LogAnalyticsSolution.
@@ -149,9 +173,9 @@ type LogAnalyticsSolutionStatus struct {
 type LogAnalyticsSolution struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.plan)",message="plan is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.solutionName)",message="solutionName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.plan) || has(self.initProvider.plan)",message="plan is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.solutionName) || has(self.initProvider.solutionName)",message="solutionName is a required parameter"
 	Spec   LogAnalyticsSolutionSpec   `json:"spec"`
 	Status LogAnalyticsSolutionStatus `json:"status,omitempty"`
 }

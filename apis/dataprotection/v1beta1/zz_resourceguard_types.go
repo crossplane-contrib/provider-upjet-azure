@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ResourceGuardInitParameters struct {
+
+	// The Azure Region where the Resource Guard should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags which should be assigned to the Resource Guard.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A list of the critical operations which are not protected by this Resource Guard.
+	VaultCriticalOperationExclusionList []*string `json:"vaultCriticalOperationExclusionList,omitempty" tf:"vault_critical_operation_exclusion_list,omitempty"`
+}
+
 type ResourceGuardObservation struct {
 
 	// The ID of the Resource Guard.
@@ -34,7 +46,6 @@ type ResourceGuardObservation struct {
 type ResourceGuardParameters struct {
 
 	// The Azure Region where the Resource Guard should exist. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Resource Guard should exist. Changing this forces a new resource to be created.
@@ -51,11 +62,9 @@ type ResourceGuardParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Resource Guard.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of the critical operations which are not protected by this Resource Guard.
-	// +kubebuilder:validation:Optional
 	VaultCriticalOperationExclusionList []*string `json:"vaultCriticalOperationExclusionList,omitempty" tf:"vault_critical_operation_exclusion_list,omitempty"`
 }
 
@@ -63,6 +72,10 @@ type ResourceGuardParameters struct {
 type ResourceGuardSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ResourceGuardParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider ResourceGuardInitParameters `json:"initProvider,omitempty"`
 }
 
 // ResourceGuardStatus defines the observed state of ResourceGuard.
@@ -83,7 +96,7 @@ type ResourceGuardStatus struct {
 type ResourceGuard struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   ResourceGuardSpec   `json:"spec"`
 	Status ResourceGuardStatus `json:"status,omitempty"`
 }

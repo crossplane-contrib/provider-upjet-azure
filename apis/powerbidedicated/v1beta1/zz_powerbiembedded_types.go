@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PowerBIEmbeddedInitParameters struct {
+
+	// A set of administrator user identities, which manages the Power BI Embedded and must be a member user or a service principal in your AAD tenant.
+	Administrators []*string `json:"administrators,omitempty" tf:"administrators,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Sets the PowerBI Embedded's mode. Possible values include: Gen1, Gen2. Defaults to Gen1. Changing this forces a new resource to be created.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// Sets the PowerBI Embedded's pricing level's SKU. Possible values include: A1, A2, A3, A4, A5, A6.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type PowerBIEmbeddedObservation struct {
 
 	// A set of administrator user identities, which manages the Power BI Embedded and must be a member user or a service principal in your AAD tenant.
@@ -40,15 +58,12 @@ type PowerBIEmbeddedObservation struct {
 type PowerBIEmbeddedParameters struct {
 
 	// A set of administrator user identities, which manages the Power BI Embedded and must be a member user or a service principal in your AAD tenant.
-	// +kubebuilder:validation:Optional
 	Administrators []*string `json:"administrators,omitempty" tf:"administrators,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Sets the PowerBI Embedded's mode. Possible values include: Gen1, Gen2. Defaults to Gen1. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// The name of the Resource Group where the PowerBI Embedded should be created. Changing this forces a new resource to be created.
@@ -65,11 +80,9 @@ type PowerBIEmbeddedParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Sets the PowerBI Embedded's pricing level's SKU. Possible values include: A1, A2, A3, A4, A5, A6.
-	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
-	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -77,6 +90,10 @@ type PowerBIEmbeddedParameters struct {
 type PowerBIEmbeddedSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PowerBIEmbeddedParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	InitProvider PowerBIEmbeddedInitParameters `json:"initProvider,omitempty"`
 }
 
 // PowerBIEmbeddedStatus defines the observed state of PowerBIEmbedded.
@@ -97,9 +114,9 @@ type PowerBIEmbeddedStatus struct {
 type PowerBIEmbedded struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.administrators)",message="administrators is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.administrators) || has(self.initProvider.administrators)",message="administrators is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
 	Spec   PowerBIEmbeddedSpec   `json:"spec"`
 	Status PowerBIEmbeddedStatus `json:"status,omitempty"`
 }

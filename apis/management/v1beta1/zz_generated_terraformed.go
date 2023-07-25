@@ -79,6 +79,15 @@ func (tr *ManagementGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
+// SetInitParameters for this ManagementGroup
+func (tr *ManagementGroup) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
+}
+
 // LateInitialize this ManagementGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ManagementGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -161,6 +170,15 @@ func (tr *ManagementGroupSubscriptionAssociation) GetInitParameters() (map[strin
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetInitParameters for this ManagementGroupSubscriptionAssociation
+func (tr *ManagementGroupSubscriptionAssociation) SetInitParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ManagementGroupSubscriptionAssociation using its observed tfState.

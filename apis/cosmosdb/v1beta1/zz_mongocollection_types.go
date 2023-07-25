@@ -28,7 +28,6 @@ type MongoCollectionAutoscaleSettingsObservation struct {
 type MongoCollectionAutoscaleSettingsParameters struct {
 
 	// The maximum throughput of the MongoDB collection (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
-	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
 
@@ -53,11 +52,9 @@ type MongoCollectionIndexObservation struct {
 type MongoCollectionIndexParameters struct {
 
 	// Specifies the list of user settable keys for each Cosmos DB Mongo Collection.
-	// +kubebuilder:validation:Optional
 	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
 
 	// Is the index unique or not? Defaults to false.
-	// +kubebuilder:validation:Optional
 	Unique *bool `json:"unique,omitempty" tf:"unique,omitempty"`
 }
 
@@ -134,11 +131,9 @@ type MongoCollectionParameters struct {
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The default time to live of Analytical Storage for this Mongo Collection. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time.
-	// +kubebuilder:validation:Optional
 	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
 
 	// An autoscale_settings block as defined below.
-	// +kubebuilder:validation:Optional
 	AutoscaleSettings []MongoCollectionAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
 	// The name of the Cosmos DB Mongo Database in which the Cosmos DB Mongo Collection is created. Changing this forces a new resource to be created.
@@ -155,11 +150,9 @@ type MongoCollectionParameters struct {
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// The default Time To Live in seconds. If the value is -1, items are not automatically expired.
-	// +kubebuilder:validation:Optional
 	DefaultTTLSeconds *float64 `json:"defaultTtlSeconds,omitempty" tf:"default_ttl_seconds,omitempty"`
 
 	// One or more index blocks as defined below.
-	// +kubebuilder:validation:Optional
 	Index []MongoCollectionIndexParameters `json:"index,omitempty" tf:"index,omitempty"`
 
 	// The name of the resource group in which the Cosmos DB Mongo Collection is created. Changing this forces a new resource to be created.
@@ -176,11 +169,9 @@ type MongoCollectionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the key to partition on for sharding. There must not be any other unique index keys. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
 	ShardKey *string `json:"shardKey,omitempty" tf:"shard_key,omitempty"`
 
 	// The throughput of the MongoDB collection (RU/s). Must be set in increments of 100. The minimum value is 400.
-	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
@@ -206,14 +197,6 @@ type MongoCollectionSpec struct {
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
-	// InitProvider holds the same fields as ForProvider, with the exception
-	// of Identifier and other resource reference fields. The fields that are
-	// in InitProvider are merged into ForProvider when the resource is created.
-	// The same fields are also added to the terraform ignore_changes hook, to
-	// avoid updating them after creation. This is useful for fields that are
-	// required on creation, but we do not desire to update them after creation,
-	// for example because of an external controller is managing them, like an
-	// autoscaler.
 	InitProvider MongoCollectionInitParameters `json:"initProvider,omitempty"`
 }
 

@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.12.0
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: monitorautoscalesettings.insights.azure.upbound.io
 spec:
   group: insights.azure.upbound.io
@@ -119,8 +119,6 @@ spec:
                                 description: The HTTPS URI which should receive scale
                                   notifications.
                                 type: string
-                            required:
-                            - serviceUri
                             type: object
                           type: array
                       type: object
@@ -149,10 +147,6 @@ spec:
                                 description: The minimum number of instances for this
                                   resource. Valid values are between 0 and 1000.
                                 type: number
-                            required:
-                            - default
-                            - maximum
-                            - minimum
                             type: object
                           type: array
                         fixedDate:
@@ -173,9 +167,6 @@ spec:
                                   A list of possible values can be found here. Defaults
                                   to UTC.
                                 type: string
-                            required:
-                            - end
-                            - start
                             type: object
                           type: array
                         name:
@@ -213,10 +204,6 @@ spec:
                                   A list of possible values can be found here. Defaults
                                   to UTC.
                                 type: string
-                            required:
-                            - days
-                            - hours
-                            - minutes
                             type: object
                           type: array
                         rule:
@@ -249,10 +236,6 @@ spec:
                                             items:
                                               type: string
                                             type: array
-                                        required:
-                                        - name
-                                        - operator
-                                        - values
                                         type: object
                                       type: array
                                     divideByInstanceCount:
@@ -395,14 +378,6 @@ spec:
                                         be between 5 minutes and 12 hours and be formatted
                                         as an ISO 8601 string.
                                       type: string
-                                  required:
-                                  - metricName
-                                  - operator
-                                  - statistic
-                                  - threshold
-                                  - timeAggregation
-                                  - timeGrain
-                                  - timeWindow
                                   type: object
                                 type: array
                               scaleAction:
@@ -428,21 +403,10 @@ spec:
                                       description: The number of instances involved
                                         in the scaling action.
                                       type: number
-                                  required:
-                                  - cooldown
-                                  - direction
-                                  - type
-                                  - value
                                   type: object
                                 type: array
-                            required:
-                            - metricTrigger
-                            - scaleAction
                             type: object
                           type: array
-                      required:
-                      - capacity
-                      - name
                       type: object
                     type: array
                   resourceGroupName:
@@ -609,6 +573,269 @@ spec:
                             - IfNotPresent
                             type: string
                         type: object
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice.
+                properties:
+                  enabled:
+                    description: Specifies whether automatic scaling is enabled for
+                      the target resource. Defaults to true.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      AutoScale Setting should exist. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  name:
+                    description: The name of the AutoScale Setting. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  notification:
+                    description: Specifies a notification block as defined below.
+                    items:
+                      properties:
+                        email:
+                          description: A email block as defined below.
+                          items:
+                            properties:
+                              customEmails:
+                                description: Specifies a list of custom email addresses
+                                  to which the email notifications will be sent.
+                                items:
+                                  type: string
+                                type: array
+                              sendToSubscriptionAdministrator:
+                                description: Should email notifications be sent to
+                                  the subscription administrator? Defaults to false.
+                                type: boolean
+                              sendToSubscriptionCoAdministrator:
+                                description: Should email notifications be sent to
+                                  the subscription co-administrator? Defaults to false.
+                                type: boolean
+                            type: object
+                          type: array
+                        webhook:
+                          description: One or more webhook blocks as defined below.
+                          items:
+                            properties:
+                              properties:
+                                additionalProperties:
+                                  type: string
+                                description: A map of settings.
+                                type: object
+                              serviceUri:
+                                description: The HTTPS URI which should receive scale
+                                  notifications.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  profile:
+                    description: Specifies one or more (up to 20) profile blocks as
+                      defined below.
+                    items:
+                      properties:
+                        capacity:
+                          description: A capacity block as defined below.
+                          items:
+                            properties:
+                              default:
+                                description: The number of instances that are available
+                                  for scaling if metrics are not available for evaluation.
+                                  The default is only used if the current instance
+                                  count is lower than the default. Valid values are
+                                  between 0 and 1000.
+                                type: number
+                              maximum:
+                                description: The maximum number of instances for this
+                                  resource. Valid values are between 0 and 1000.
+                                type: number
+                              minimum:
+                                description: The minimum number of instances for this
+                                  resource. Valid values are between 0 and 1000.
+                                type: number
+                            type: object
+                          type: array
+                        fixedDate:
+                          description: A fixed_date block as defined below. This cannot
+                            be specified if a recurrence block is specified.
+                          items:
+                            properties:
+                              end:
+                                description: Specifies the end date for the profile,
+                                  formatted as an RFC3339 date string.
+                                type: string
+                              start:
+                                description: Specifies the start date for the profile,
+                                  formatted as an RFC3339 date string.
+                                type: string
+                              timezone:
+                                description: The Time Zone used for the hours field.
+                                  A list of possible values can be found here. Defaults
+                                  to UTC.
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          description: Specifies the name of the profile.
+                          type: string
+                        recurrence:
+                          description: A recurrence block as defined below. This cannot
+                            be specified if a fixed_date block is specified.
+                          items:
+                            properties:
+                              days:
+                                description: A list of days that this profile takes
+                                  effect on. Possible values include Monday, Tuesday,
+                                  Wednesday, Thursday, Friday, Saturday and Sunday.
+                                items:
+                                  type: string
+                                type: array
+                              hours:
+                                description: A list containing a single item, which
+                                  specifies the Hour interval at which this recurrence
+                                  should be triggered (in 24-hour time). Possible
+                                  values are from 0 to 23.
+                                items:
+                                  type: number
+                                type: array
+                              minutes:
+                                description: A list containing a single item which
+                                  specifies the Minute interval at which this recurrence
+                                  should be triggered.
+                                items:
+                                  type: number
+                                type: array
+                              timezone:
+                                description: The Time Zone used for the hours field.
+                                  A list of possible values can be found here. Defaults
+                                  to UTC.
+                                type: string
+                            type: object
+                          type: array
+                        rule:
+                          description: One or more (up to 10) rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              metricTrigger:
+                                description: A metric_trigger block as defined below.
+                                items:
+                                  properties:
+                                    dimensions:
+                                      description: One or more dimensions block as
+                                        defined below.
+                                      items:
+                                        properties:
+                                          name:
+                                            description: Specifies the name of the
+                                              profile.
+                                            type: string
+                                          operator:
+                                            description: 'Specifies the operator used
+                                              to compare the metric data and threshold.
+                                              Possible values are: Equals, NotEquals,
+                                              GreaterThan, GreaterThanOrEqual, LessThan,
+                                              LessThanOrEqual.'
+                                            type: string
+                                          values:
+                                            description: A list of dimension values.
+                                            items:
+                                              type: string
+                                            type: array
+                                        type: object
+                                      type: array
+                                    divideByInstanceCount:
+                                      description: Whether to enable metric divide
+                                        by instance count.
+                                      type: boolean
+                                    metricName:
+                                      description: The name of the metric that defines
+                                        what the rule monitors, such as Percentage
+                                        CPU for Virtual Machine Scale Sets and CpuPercentage
+                                        for App Service Plan.
+                                      type: string
+                                    metricNamespace:
+                                      description: The namespace of the metric that
+                                        defines what the rule monitors, such as microsoft.compute/virtualmachinescalesets
+                                        for Virtual Machine Scale Sets.
+                                      type: string
+                                    operator:
+                                      description: 'Specifies the operator used to
+                                        compare the metric data and threshold. Possible
+                                        values are: Equals, NotEquals, GreaterThan,
+                                        GreaterThanOrEqual, LessThan, LessThanOrEqual.'
+                                      type: string
+                                    statistic:
+                                      description: Specifies how the metrics from
+                                        multiple instances are combined. Possible
+                                        values are Average, Max, Min and Sum.
+                                      type: string
+                                    threshold:
+                                      description: Specifies the threshold of the
+                                        metric that triggers the scale action.
+                                      type: number
+                                    timeAggregation:
+                                      description: Specifies how the data that's collected
+                                        should be combined over time. Possible values
+                                        include Average, Count, Maximum, Minimum,
+                                        Last and Total.
+                                      type: string
+                                    timeGrain:
+                                      description: Specifies the granularity of metrics
+                                        that the rule monitors, which must be one
+                                        of the pre-defined values returned from the
+                                        metric definitions for the metric. This value
+                                        must be between 1 minute and 12 hours an be
+                                        formatted as an ISO 8601 string.
+                                      type: string
+                                    timeWindow:
+                                      description: Specifies the time range for which
+                                        data is collected, which must be greater than
+                                        the delay in metric collection (which varies
+                                        from resource to resource). This value must
+                                        be between 5 minutes and 12 hours and be formatted
+                                        as an ISO 8601 string.
+                                      type: string
+                                  type: object
+                                type: array
+                              scaleAction:
+                                description: A scale_action block as defined below.
+                                items:
+                                  properties:
+                                    cooldown:
+                                      description: The amount of time to wait since
+                                        the last scaling action before this action
+                                        occurs. Must be between 1 minute and 1 week
+                                        and formatted as a ISO 8601 string.
+                                      type: string
+                                    direction:
+                                      description: The scale direction. Possible values
+                                        are Increase and Decrease.
+                                      type: string
+                                    type:
+                                      description: The type of action that should
+                                        occur. Possible values are ChangeCount, ExactCount,
+                                        PercentChangeCount and ServiceAllowedNextValue.
+                                      type: string
+                                    value:
+                                      description: The number of instances involved
+                                        in the scaling action.
+                                      type: number
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
                     type: object
                 type: object
               managementPolicies:
@@ -811,13 +1038,16 @@ spec:
             x-kubernetes-validations:
             - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: name is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: profile is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.profile)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.profile)
+                || has(self.initProvider.profile)'
           status:
             description: MonitorAutoscaleSettingStatus defines the observed state
               of MonitorAutoscaleSetting.
