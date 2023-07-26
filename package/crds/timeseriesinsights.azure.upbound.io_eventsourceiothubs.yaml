@@ -417,8 +417,6 @@ spec:
                       source's timestamp. This value defaults to the event creation
                       time.
                     type: string
-                required:
-                - sharedAccessKeySecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

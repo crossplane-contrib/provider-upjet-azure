@@ -154,6 +154,7 @@ type AccountParameters struct {
 	CustomQuestionAnsweringSearchServiceID *string `json:"customQuestionAnsweringSearchServiceId,omitempty" tf:"custom_question_answering_search_service_id,omitempty"`
 
 	// If kind is TextAnalytics this specifies the key of the Search service.
+	// +kubebuilder:validation:Optional
 	CustomQuestionAnsweringSearchServiceKeySecretRef *v1.SecretKeySelector `json:"customQuestionAnsweringSearchServiceKeySecretRef,omitempty" tf:"-"`
 
 	// The subdomain name used for token-based authentication. Changing this forces a new resource to be created.

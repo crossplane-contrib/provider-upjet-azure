@@ -109,6 +109,7 @@ type StreamInputIOTHubParameters struct {
 	Serialization []StreamInputIOTHubSerializationParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The shared access policy key for the specified shared access policy. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SharedAccessPolicyKeySecretRef v1.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.

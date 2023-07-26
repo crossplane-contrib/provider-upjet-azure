@@ -355,6 +355,7 @@ type DeliveryPropertyParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// If the type is Static, then provide the value to use
+	// +kubebuilder:validation:Optional
 	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 

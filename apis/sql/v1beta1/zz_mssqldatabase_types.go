@@ -55,6 +55,7 @@ type ImportParameters struct {
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
 	// Specifies the password of the SQL administrator.
+	// +kubebuilder:validation:Required
 	AdministratorLoginPasswordSecretRef v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef" tf:"-"`
 
 	// Specifies the type of authentication used to access the server. Valid values are SQL or ADPassword.
@@ -64,6 +65,7 @@ type ImportParameters struct {
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// Specifies the access key for the storage account.
+	// +kubebuilder:validation:Required
 	StorageKeySecretRef v1.SecretKeySelector `json:"storageKeySecretRef" tf:"-"`
 
 	// Specifies the type of access key for the storage account. Valid values are StorageAccessKey or SharedAccessKey.
@@ -468,6 +470,7 @@ type ThreatDetectionPolicyParameters struct {
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Specifies the identifier key of the Threat Detection audit storage account. Required if state is Enabled.
+	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs. Required if state is Enabled.

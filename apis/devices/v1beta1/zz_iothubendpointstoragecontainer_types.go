@@ -82,6 +82,7 @@ type IOTHubEndpointStorageContainerParameters struct {
 	BatchFrequencyInSeconds *float64 `json:"batchFrequencyInSeconds,omitempty" tf:"batch_frequency_in_seconds,omitempty"`
 
 	// The connection string for the endpoint. This attribute can only be specified and is mandatory when authentication_type is keyBased.
+	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The name of storage container in the storage account.

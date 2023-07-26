@@ -58,6 +58,7 @@ type IOTHubEndpointServiceBusQueueParameters struct {
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The connection string for the endpoint. This attribute can only be specified and is mandatory when authentication_type is keyBased.
+	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// URI of the Service Bus endpoint. This attribute can only be specified and is mandatory when authentication_type is identityBased.

@@ -172,9 +172,11 @@ type ConfigServerGitSettingSSHAuthParameters struct {
 	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
 
 	// The host key of the Git repository server, should not include the algorithm prefix as covered by host-key-algorithm.
+	// +kubebuilder:validation:Optional
 	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// The SSH private key to access the Git repository, required when the URI starts with git@ or ssh://.
+	// +kubebuilder:validation:Required
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.
@@ -196,6 +198,7 @@ type HTTPBasicAuthObservation struct {
 type HTTPBasicAuthParameters struct {
 
 	// The password used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
@@ -296,6 +299,7 @@ type RepositoryHTTPBasicAuthObservation struct {
 type RepositoryHTTPBasicAuthParameters struct {
 
 	// The password used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
@@ -326,9 +330,11 @@ type RepositorySSHAuthParameters struct {
 	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
 
 	// The host key of the Git repository server, should not include the algorithm prefix as covered by host-key-algorithm.
+	// +kubebuilder:validation:Optional
 	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// The SSH private key to access the Git repository, required when the URI starts with git@ or ssh://.
+	// +kubebuilder:validation:Required
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 
 	// Indicates whether the Config Server instance will fail to start if the host_key does not match. Defaults to true.

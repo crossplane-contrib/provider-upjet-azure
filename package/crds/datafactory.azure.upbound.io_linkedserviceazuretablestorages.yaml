@@ -190,8 +190,6 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
-                required:
-                - connectionStringSecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

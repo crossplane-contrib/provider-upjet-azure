@@ -137,6 +137,7 @@ type ExpressRouteCircuitPeeringParameters struct {
 	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix,omitempty" tf:"secondary_peer_address_prefix,omitempty"`
 
 	// The shared key. Can be a maximum of 25 characters.
+	// +kubebuilder:validation:Optional
 	SharedKeySecretRef *v1.SecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
 
 	// A valid VLAN ID to establish this peering on.

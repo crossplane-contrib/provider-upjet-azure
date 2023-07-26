@@ -121,6 +121,7 @@ type KafkaClusterExtensionParameters struct {
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
 	// The workspace key of the log analytics extension.
+	// +kubebuilder:validation:Required
 	PrimaryKeySecretRef v1.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
@@ -139,6 +140,7 @@ type KafkaClusterGatewayObservation struct {
 type KafkaClusterGatewayParameters struct {
 
 	// The password used for the Ambari Portal.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username used for the Ambari Portal. Changing this forces a new resource to be created.
@@ -235,6 +237,7 @@ type KafkaClusterMetastoresAmbariParameters struct {
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
@@ -274,6 +277,7 @@ type KafkaClusterMetastoresHiveParameters struct {
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
@@ -337,6 +341,7 @@ type KafkaClusterMetastoresOozieParameters struct {
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
@@ -376,6 +381,7 @@ type KafkaClusterMonitorParameters struct {
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
 	// The Operations Management Suite (OMS) workspace key.
+	// +kubebuilder:validation:Required
 	PrimaryKeySecretRef v1.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
@@ -596,6 +602,7 @@ type KafkaClusterRolesHeadNodeObservation struct {
 type KafkaClusterRolesHeadNodeParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -766,6 +773,7 @@ type KafkaClusterRolesWorkerNodeParameters struct {
 	NumberOfDisksPerNode *float64 `json:"numberOfDisksPerNode,omitempty" tf:"number_of_disks_per_node,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -879,6 +887,7 @@ type KafkaClusterRolesZookeeperNodeObservation struct {
 type KafkaClusterRolesZookeeperNodeParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -1001,6 +1010,7 @@ type KafkaClusterSecurityProfileParameters struct {
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// The user password of the Azure Active Directory Domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	DomainUserPasswordSecretRef v1.SecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
 
 	// The username of the Azure Active Directory Domain. Changing this forces a new resource to be created.
@@ -1085,6 +1095,7 @@ type KafkaClusterStorageAccountParameters struct {
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
 	// The Access Key which should be used to connect to the Storage Account. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	StorageAccountKeySecretRef v1.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
 	// The ID of the Storage Container. Changing this forces a new resource to be created.
@@ -1147,6 +1158,7 @@ type KafkaManagementNodeObservation struct {
 type KafkaManagementNodeParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.

@@ -60,6 +60,7 @@ type RedisCacheParameters struct {
 	CacheLocation *string `json:"cacheLocation,omitempty" tf:"cache_location,omitempty"`
 
 	// The connection string to the Cache for Redis.
+	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The description of the API Management Redis Cache.

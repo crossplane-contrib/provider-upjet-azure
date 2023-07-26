@@ -431,8 +431,6 @@ spec:
                     description: The time format. Wherever {time} appears in path_pattern,
                       the value of this property is used as the time format instead.
                     type: string
-                required:
-                - storageAccountKeySecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

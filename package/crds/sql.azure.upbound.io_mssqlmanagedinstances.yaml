@@ -405,8 +405,6 @@ spec:
                       Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs,
                       or 4, 8, 16, 24, 32, 40, 64, or 80 for Gen5 SKUs.
                     type: number
-                required:
-                - administratorLoginPasswordSecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

@@ -341,6 +341,7 @@ type AuthenticationCertificateObservation struct {
 type AuthenticationCertificateParameters struct {
 
 	// The contents of the Authentication Certificate which should be used.
+	// +kubebuilder:validation:Required
 	DataSecretRef v1.SecretKeySelector `json:"dataSecretRef" tf:"-"`
 
 	// The Name of the Authentication Certificate to use.
@@ -1777,6 +1778,7 @@ type SSLCertificateObservation struct {
 type SSLCertificateParameters struct {
 
 	// The base64-encoded PFX certificate data. Required if key_vault_secret_id is not set.
+	// +kubebuilder:validation:Optional
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// Secret Id of (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for keyvault to use this feature. Required if data is not set.
@@ -1786,6 +1788,7 @@ type SSLCertificateParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Password for the pfx file specified in data. Required if data is set.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 }
 
@@ -1999,6 +2002,7 @@ type TrustedClientCertificateObservation struct {
 type TrustedClientCertificateParameters struct {
 
 	// The base-64 encoded certificate.
+	// +kubebuilder:validation:Required
 	DataSecretRef v1.SecretKeySelector `json:"dataSecretRef" tf:"-"`
 
 	// The name of the Trusted Client Certificate that is unique within this Application Gateway.
@@ -2029,6 +2033,7 @@ type TrustedRootCertificateObservation struct {
 type TrustedRootCertificateParameters struct {
 
 	// The contents of the Trusted Root Certificate which should be used. Required if key_vault_secret_id is not set.
+	// +kubebuilder:validation:Optional
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The Secret ID of (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for the Key Vault to use this feature. Required if data is not set.

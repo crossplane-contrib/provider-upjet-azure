@@ -55,6 +55,7 @@ type ResourceDeploymentScriptAzurePowerShellEnvironmentVariableParameters struct
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the value of the secure environment variable.
+	// +kubebuilder:validation:Optional
 	SecureValueSecretRef *v1.SecretKeySelector `json:"secureValueSecretRef,omitempty" tf:"-"`
 
 	// Specifies the value of the environment variable.
@@ -286,6 +287,7 @@ type ResourceDeploymentScriptAzurePowerShellStorageAccountObservation struct {
 type ResourceDeploymentScriptAzurePowerShellStorageAccountParameters struct {
 
 	// Specifies the storage account access key.
+	// +kubebuilder:validation:Required
 	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
 
 	// Specifies the storage account name.

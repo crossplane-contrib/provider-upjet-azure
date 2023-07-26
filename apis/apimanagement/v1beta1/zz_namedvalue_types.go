@@ -93,6 +93,7 @@ type NamedValueParameters struct {
 	ValueFromKeyVault []ValueFromKeyVaultParameters `json:"valueFromKeyVault,omitempty" tf:"value_from_key_vault,omitempty"`
 
 	// The value of this API Management Named Value.
+	// +kubebuilder:validation:Optional
 	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 

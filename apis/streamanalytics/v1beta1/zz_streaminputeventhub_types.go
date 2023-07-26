@@ -134,6 +134,7 @@ type StreamInputEventHubParameters struct {
 	ServiceBusNamespaceSelector *v1.Selector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
 	// The shared access policy key for the specified shared access policy.
+	// +kubebuilder:validation:Optional
 	SharedAccessPolicyKeySecretRef *v1.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.

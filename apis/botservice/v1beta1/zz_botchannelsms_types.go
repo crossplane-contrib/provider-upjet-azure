@@ -85,6 +85,7 @@ type BotChannelSMSParameters struct {
 	SMSChannelAccountSecurityID *string `json:"smsChannelAccountSecurityId,omitempty" tf:"sms_channel_account_security_id,omitempty"`
 
 	// The authorization token for the SMS Channel.
+	// +kubebuilder:validation:Optional
 	SMSChannelAuthTokenSecretRef v1.SecretKeySelector `json:"smsChannelAuthTokenSecretRef" tf:"-"`
 }
 

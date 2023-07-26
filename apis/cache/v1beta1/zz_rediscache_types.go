@@ -373,9 +373,11 @@ type RedisConfigurationParameters struct {
 	AofBackupEnabled *bool `json:"aofBackupEnabled,omitempty" tf:"aof_backup_enabled,omitempty"`
 
 	// First Storage Account connection string for AOF persistence.
+	// +kubebuilder:validation:Optional
 	AofStorageConnectionString0SecretRef *v1.SecretKeySelector `json:"aofStorageConnectionString0SecretRef,omitempty" tf:"-"`
 
 	// Second Storage Account connection string for AOF persistence.
+	// +kubebuilder:validation:Optional
 	AofStorageConnectionString1SecretRef *v1.SecretKeySelector `json:"aofStorageConnectionString1SecretRef,omitempty" tf:"-"`
 
 	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
@@ -406,6 +408,7 @@ type RedisConfigurationParameters struct {
 	RdbBackupMaxSnapshotCount *float64 `json:"rdbBackupMaxSnapshotCount,omitempty" tf:"rdb_backup_max_snapshot_count,omitempty"`
 
 	// The Connection String to the Storage Account. Only supported for Premium SKUs. In the format: DefaultEndpointsProtocol=https;BlobEndpoint=${azurerm_storage_account.example.primary_blob_endpoint};AccountName=${azurerm_storage_account.example.name};AccountKey=${azurerm_storage_account.example.primary_access_key}.
+	// +kubebuilder:validation:Optional
 	RdbStorageConnectionStringSecretRef *v1.SecretKeySelector `json:"rdbStorageConnectionStringSecretRef,omitempty" tf:"-"`
 }
 

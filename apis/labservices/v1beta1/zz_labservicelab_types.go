@@ -28,6 +28,7 @@ type AdminUserObservation struct {
 type AdminUserParameters struct {
 
 	// The password for the user.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username to use when signing in to Lab Service Lab VMs.
@@ -334,6 +335,7 @@ type NonAdminUserObservation struct {
 type NonAdminUserParameters struct {
 
 	// The password for the user.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username to use when signing in to Lab Service Lab VMs.

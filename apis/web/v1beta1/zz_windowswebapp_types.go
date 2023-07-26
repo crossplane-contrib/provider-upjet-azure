@@ -433,6 +433,7 @@ type WindowsWebAppAuthSettingsActiveDirectoryParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -478,6 +479,7 @@ type WindowsWebAppAuthSettingsFacebookParameters struct {
 
 	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
 	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
+	// +kubebuilder:validation:Optional
 	AppSecretSecretRef *v1.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
@@ -527,6 +529,7 @@ type WindowsWebAppAuthSettingsGithubParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -576,6 +579,7 @@ type WindowsWebAppAuthSettingsGoogleParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -682,6 +686,7 @@ type WindowsWebAppAuthSettingsMicrosoftParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -837,6 +842,7 @@ type WindowsWebAppAuthSettingsTwitterParameters struct {
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
+	// +kubebuilder:validation:Optional
 	ConsumerSecretSecretRef *v1.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
@@ -1823,6 +1829,7 @@ type WindowsWebAppBackupParameters struct {
 
 	// The SAS URL to the container.
 	// The SAS URL to the container.
+	// +kubebuilder:validation:Required
 	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
@@ -1932,6 +1939,7 @@ type WindowsWebAppConnectionStringParameters struct {
 
 	// The connection string value.
 	// The connection string value.
+	// +kubebuilder:validation:Required
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
@@ -2078,6 +2086,7 @@ type WindowsWebAppLogsHTTPLogsAzureBlobStorageParameters struct {
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// SAS url to an Azure blob container with read/write/list/delete permissions.
+	// +kubebuilder:validation:Required
 	SASURLSecretRef v1.SecretKeySelector `json:"sasurlSecretRef" tf:"-"`
 }
 
@@ -3217,6 +3226,7 @@ type WindowsWebAppStorageAccountObservation struct {
 type WindowsWebAppStorageAccountParameters struct {
 
 	// The Access key for the storage account.
+	// +kubebuilder:validation:Required
 	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
 
 	// The Name of the Storage Account.

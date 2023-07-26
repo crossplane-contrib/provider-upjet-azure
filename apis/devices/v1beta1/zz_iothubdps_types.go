@@ -230,6 +230,7 @@ type LinkedHubParameters struct {
 	ApplyAllocationPolicy *bool `json:"applyAllocationPolicy,omitempty" tf:"apply_allocation_policy,omitempty"`
 
 	// The connection string to connect to the IoT Hub.
+	// +kubebuilder:validation:Required
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The location of the IoT hub.

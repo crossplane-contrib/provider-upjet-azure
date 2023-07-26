@@ -52,6 +52,7 @@ type AuthenticationObservation struct {
 type AuthenticationParameters struct {
 
 	// Service principal certificate for servicePrincipal auth. Should be specified when type is set to servicePrincipalCertificate.
+	// +kubebuilder:validation:Optional
 	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// Client ID for userAssignedIdentity or servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate. When type is set to userAssignedIdentity, client_id and subscription_id should be either both specified or both not specified.
@@ -64,6 +65,7 @@ type AuthenticationParameters struct {
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// Password or account key for secret auth. secret and name should be either both specified or both not specified when type is set to secret.
+	// +kubebuilder:validation:Optional
 	SecretSecretRef *v1.SecretKeySelector `json:"secretSecretRef,omitempty" tf:"-"`
 
 	// Subscription ID for userAssignedIdentity. subscription_id and client_id should be either both specified or both not specified.

@@ -86,6 +86,7 @@ type OutputTableParameters struct {
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
 	// The Access Key which should be used to connect to this Storage Account.
+	// +kubebuilder:validation:Optional
 	StorageAccountKeySecretRef v1.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
 	// The name of the Storage Account.

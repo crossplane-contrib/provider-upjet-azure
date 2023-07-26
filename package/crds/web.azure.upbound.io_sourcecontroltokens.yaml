@@ -105,8 +105,6 @@ spec:
                     description: The Token type. Possible values include Bitbucket,
                       Dropbox, Github, and OneDrive.
                     type: string
-                required:
-                - tokenSecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

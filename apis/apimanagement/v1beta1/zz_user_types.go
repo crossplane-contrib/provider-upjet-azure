@@ -95,6 +95,7 @@ type UserParameters struct {
 	Note *string `json:"note,omitempty" tf:"note,omitempty"`
 
 	// The password associated with this user.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.

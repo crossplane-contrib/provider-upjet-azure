@@ -559,6 +559,7 @@ type LinuxVirtualMachineParameters struct {
 	AdditionalCapabilities []AdditionalCapabilitiesParameters `json:"additionalCapabilities,omitempty" tf:"additional_capabilities,omitempty"`
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// One or more admin_ssh_key blocks as defined below. Changing this forces a new resource to be created.
@@ -583,6 +584,7 @@ type LinuxVirtualMachineParameters struct {
 	ComputerName *string `json:"computerName,omitempty" tf:"computer_name,omitempty"`
 
 	// The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// The ID of a Dedicated Host Group that this Linux Virtual Machine should be run within. Conflicts with dedicated_host_id.

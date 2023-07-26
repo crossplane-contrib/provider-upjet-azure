@@ -84,6 +84,7 @@ type BotConnectionParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The Client Secret that will be used to authenticate with the service provider.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.

@@ -1103,8 +1103,6 @@ spec:
                     description: The runtime version associated with the Function
                       App. Defaults to ~1.
                     type: string
-                required:
-                - storageAccountAccessKeySecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

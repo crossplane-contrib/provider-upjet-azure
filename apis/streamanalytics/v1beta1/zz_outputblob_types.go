@@ -110,6 +110,7 @@ type OutputBlobParameters struct {
 	Serialization []SerializationParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The Access Key which should be used to connect to this Storage Account.
+	// +kubebuilder:validation:Optional
 	StorageAccountKeySecretRef *v1.SecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Storage Account.

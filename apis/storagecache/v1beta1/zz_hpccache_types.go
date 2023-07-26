@@ -112,6 +112,7 @@ type BindParameters struct {
 	Dn *string `json:"dn,omitempty" tf:"dn,omitempty"`
 
 	// The password of the Active Directory domain administrator.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
@@ -220,6 +221,7 @@ type DirectoryActiveDirectoryParameters struct {
 	DomainNetbiosName *string `json:"domainNetbiosName,omitempty" tf:"domain_netbios_name,omitempty"`
 
 	// The password of the Active Directory domain administrator.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username of the Active Directory domain administrator.

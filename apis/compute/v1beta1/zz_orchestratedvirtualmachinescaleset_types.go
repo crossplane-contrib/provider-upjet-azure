@@ -196,6 +196,7 @@ type LinuxConfigurationObservation struct {
 type LinuxConfigurationParameters struct {
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// A admin_ssh_key block as documented below.
@@ -591,6 +592,7 @@ type OrchestratedVirtualMachineScaleSetExtensionParameters struct {
 	ProtectedSettingsFromKeyVault []ExtensionProtectedSettingsFromKeyVaultParameters `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
 
 	// A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
+	// +kubebuilder:validation:Optional
 	ProtectedSettingsSecretRef *v1.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
 
 	// Specifies the Publisher of the Extension.
@@ -1099,6 +1101,7 @@ type OrchestratedVirtualMachineScaleSetParameters struct {
 	TerminationNotification []OrchestratedVirtualMachineScaleSetTerminationNotificationParameters `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
 
 	// The Base64-Encoded User Data which should be used for this Virtual Machine Scale Set.
+	// +kubebuilder:validation:Optional
 	UserDataBase64SecretRef *v1.SecretKeySelector `json:"userDataBase64SecretRef,omitempty" tf:"-"`
 
 	// Should the Virtual Machines in this Scale Set be strictly evenly distributed across Availability Zones? Defaults to false. Changing this forces a new resource to be created.
@@ -1237,6 +1240,7 @@ type OsProfileObservation struct {
 type OsProfileParameters struct {
 
 	// The Base64-Encoded Custom Data which should be used for this Orchestrated Virtual Machine Scale Set.
+	// +kubebuilder:validation:Optional
 	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// A linux_configuration block as documented below.
@@ -1369,6 +1373,7 @@ type WindowsConfigurationObservation struct {
 type WindowsConfigurationParameters struct {
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
 	// The username of the local administrator on each Orchestrated Virtual Machine Scale Set instance. Changing this forces a new resource to be created.

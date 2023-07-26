@@ -254,8 +254,6 @@ spec:
                     - name
                     - namespace
                     type: object
-                required:
-                - smsChannelAuthTokenSecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

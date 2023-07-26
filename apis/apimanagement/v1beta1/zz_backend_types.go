@@ -186,6 +186,7 @@ type BackendProxyObservation struct {
 type BackendProxyParameters struct {
 
 	// The password to connect to the proxy server.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The URL of the proxy server.

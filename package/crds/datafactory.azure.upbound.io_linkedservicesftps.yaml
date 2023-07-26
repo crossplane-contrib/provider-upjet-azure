@@ -210,8 +210,6 @@ spec:
                   username:
                     description: The username used to log on to the SFTP server.
                     type: string
-                required:
-                - passwordSecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

@@ -40,6 +40,7 @@ type ActiveDirectoryParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 }
 
@@ -205,6 +206,7 @@ type ConnectionStringParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The value for the Connection String.
+	// +kubebuilder:validation:Required
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
@@ -259,6 +261,7 @@ type FacebookParameters struct {
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
 	// The App Secret of the Facebook app used for Facebook login.
+	// +kubebuilder:validation:Required
 	AppSecretSecretRef v1.SecretKeySelector `json:"appSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
@@ -478,6 +481,7 @@ type FunctionAppParameters struct {
 	SourceControl []SourceControlParameters `json:"sourceControl,omitempty" tf:"source_control,omitempty"`
 
 	// The access key which will be used to access the backend storage account for the Function App.
+	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeySecretRef v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef" tf:"-"`
 
 	// The backend storage account name which will be used by this Function App (such as the dashboard, logs). Changing this forces a new resource to be created.
@@ -524,6 +528,7 @@ type GoogleParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
+	// +kubebuilder:validation:Required
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
@@ -712,6 +717,7 @@ type MicrosoftParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
+	// +kubebuilder:validation:Required
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
@@ -1128,6 +1134,7 @@ type TwitterParameters struct {
 	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// +kubebuilder:validation:Required
 	ConsumerSecretSecretRef v1.SecretKeySelector `json:"consumerSecretSecretRef" tf:"-"`
 }
 

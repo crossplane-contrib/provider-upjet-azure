@@ -110,6 +110,7 @@ type StorageObservation struct {
 type StorageParameters struct {
 
 	// Access key of storage account for Azure IoT Time Series Insights Gen2 Environment
+	// +kubebuilder:validation:Required
 	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
 
 	// Name of storage account for Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.

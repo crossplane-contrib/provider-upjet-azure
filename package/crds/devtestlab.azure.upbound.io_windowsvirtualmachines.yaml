@@ -478,8 +478,6 @@ spec:
                       on this Virtual Machine. Changing this forces a new resource
                       to be created.
                     type: string
-                required:
-                - passwordSecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

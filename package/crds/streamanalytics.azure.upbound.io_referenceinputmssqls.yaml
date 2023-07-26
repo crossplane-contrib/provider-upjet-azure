@@ -348,7 +348,6 @@ spec:
                     description: The username to connect to the MS SQL database.
                     type: string
                 required:
-                - passwordSecretRef
                 - streamAnalyticsJobName
                 type: object
               initProvider:

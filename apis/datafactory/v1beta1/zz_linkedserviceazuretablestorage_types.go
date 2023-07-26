@@ -64,6 +64,7 @@ type LinkedServiceAzureTableStorageParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The connection string to an Azure Storage Account.
+	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.

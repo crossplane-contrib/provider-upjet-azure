@@ -257,8 +257,6 @@ spec:
                     description: The AAD Tenant to use instead of Common when logging
                       into Active Directory
                     type: string
-                required:
-                - clientSecretSecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

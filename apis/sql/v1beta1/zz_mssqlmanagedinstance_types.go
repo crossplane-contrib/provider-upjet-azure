@@ -163,6 +163,7 @@ type MSSQLManagedInstanceParameters struct {
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
 	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy
+	// +kubebuilder:validation:Optional
 	AdministratorLoginPasswordSecretRef v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef" tf:"-"`
 
 	// Specifies how the SQL Managed Instance will be collated. Default value is SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.

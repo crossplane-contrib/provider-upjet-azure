@@ -141,6 +141,7 @@ type LinkedServiceKustoParameters struct {
 	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
 
 	// The service principal key in which to authenticate against the Kusto Database.
+	// +kubebuilder:validation:Optional
 	ServicePrincipalKeySecretRef *v1.SecretKeySelector `json:"servicePrincipalKeySecretRef,omitempty" tf:"-"`
 
 	// The service principal tenant id or name in which to authenticate against the Kusto Database.

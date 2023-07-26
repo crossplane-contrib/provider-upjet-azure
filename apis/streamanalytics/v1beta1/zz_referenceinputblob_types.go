@@ -101,6 +101,7 @@ type ReferenceInputBlobParameters struct {
 	Serialization []ReferenceInputBlobSerializationParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The Access Key which should be used to connect to this Storage Account. Required if authentication_mode is ConnectionString.
+	// +kubebuilder:validation:Optional
 	StorageAccountKeySecretRef *v1.SecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
 
 	// The name of the Storage Account that has the blob container with reference data.

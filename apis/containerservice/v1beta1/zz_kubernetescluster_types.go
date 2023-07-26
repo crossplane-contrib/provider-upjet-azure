@@ -334,6 +334,7 @@ type AzureActiveDirectoryRoleBasedAccessControlParameters struct {
 	ServerAppID *string `json:"serverAppId,omitempty" tf:"server_app_id,omitempty"`
 
 	// The Server Secret of an Azure Active Directory Application.
+	// +kubebuilder:validation:Optional
 	ServerAppSecretSecretRef *v1.SecretKeySelector `json:"serverAppSecretSecretRef,omitempty" tf:"-"`
 
 	// The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used.
@@ -797,6 +798,7 @@ type HTTPProxyConfigParameters struct {
 	NoProxy []*string `json:"noProxy,omitempty" tf:"no_proxy,omitempty"`
 
 	// The base64 encoded alternative CA certificate content in PEM format.
+	// +kubebuilder:validation:Optional
 	TrustedCASecretRef *v1.SecretKeySelector `json:"trustedCaSecretRef,omitempty" tf:"-"`
 }
 
@@ -2191,6 +2193,7 @@ type ServicePrincipalParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The Client Secret for the Service Principal.
+	// +kubebuilder:validation:Required
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 }
 
@@ -2581,6 +2584,7 @@ type WindowsProfileObservation struct {
 type WindowsProfileParameters struct {
 
 	// The Admin Password for Windows VMs. Length must be between 14 and 123 characters.
+	// +kubebuilder:validation:Optional
 	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// The Admin Username for Windows VMs. Changing this forces a new resource to be created.

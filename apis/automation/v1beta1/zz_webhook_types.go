@@ -119,6 +119,7 @@ type WebhookParameters struct {
 	RunOnWorkerGroup *string `json:"runOnWorkerGroup,omitempty" tf:"run_on_worker_group,omitempty"`
 
 	// URI to initiate the webhook. Can be generated using Generate URI API. By default, new URI is generated on each new resource creation. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	URISecretRef *v1.SecretKeySelector `json:"uriSecretRef,omitempty" tf:"-"`
 }
 

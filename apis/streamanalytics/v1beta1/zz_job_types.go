@@ -224,6 +224,7 @@ type JobStorageAccountObservation struct {
 type JobStorageAccountParameters struct {
 
 	// The account key for the Azure storage account.
+	// +kubebuilder:validation:Required
 	AccountKeySecretRef v1.SecretKeySelector `json:"accountKeySecretRef" tf:"-"`
 
 	// The name of the Azure storage account.

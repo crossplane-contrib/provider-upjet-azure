@@ -139,6 +139,7 @@ type HBaseClusterExtensionParameters struct {
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
 	// The workspace key of the log analytics extension.
+	// +kubebuilder:validation:Required
 	PrimaryKeySecretRef v1.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
@@ -157,6 +158,7 @@ type HBaseClusterGatewayObservation struct {
 type HBaseClusterGatewayParameters struct {
 
 	// The password used for the Ambari Portal.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username used for the Ambari Portal. Changing this forces a new resource to be created.
@@ -271,6 +273,7 @@ type HBaseClusterMonitorParameters struct {
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
 	// The Operations Management Suite (OMS) workspace key.
+	// +kubebuilder:validation:Required
 	PrimaryKeySecretRef v1.SecretKeySelector `json:"primaryKeySecretRef" tf:"-"`
 }
 
@@ -524,6 +527,7 @@ type HBaseClusterSecurityProfileParameters struct {
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// The user password of the Azure Active Directory Domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	DomainUserPasswordSecretRef v1.SecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
 
 	// The username of the Azure Active Directory Domain. Changing this forces a new resource to be created.
@@ -608,6 +612,7 @@ type HBaseClusterStorageAccountParameters struct {
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
 	// The Access Key which should be used to connect to the Storage Account. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	StorageAccountKeySecretRef v1.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
 
 	// The ID of the Storage Container. Changing this forces a new resource to be created.
@@ -694,6 +699,7 @@ type MetastoresAmbariParameters struct {
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
@@ -733,6 +739,7 @@ type MetastoresHiveParameters struct {
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
@@ -772,6 +779,7 @@ type MetastoresOozieParameters struct {
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
@@ -850,6 +858,7 @@ type RolesHeadNodeObservation struct {
 type RolesHeadNodeParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -933,6 +942,7 @@ type RolesWorkerNodeParameters struct {
 	Autoscale []WorkerNodeAutoscaleParameters `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -1046,6 +1056,7 @@ type RolesZookeeperNodeObservation struct {
 type RolesZookeeperNodeParameters struct {
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.

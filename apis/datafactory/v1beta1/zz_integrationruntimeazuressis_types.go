@@ -55,6 +55,7 @@ type CatalogInfoParameters struct {
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
 	// Administrator login password for the SQL Server.
+	// +kubebuilder:validation:Optional
 	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
 	// The dual standby Azure-SSIS Integration Runtime pair with SSISDB failover.
@@ -100,6 +101,7 @@ type CommandKeyParameters struct {
 	KeyVaultPassword []KeyVaultPasswordParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// The password for the target device.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The target computer or domain name.
@@ -133,6 +135,7 @@ type ComponentParameters struct {
 	KeyVaultLicense []KeyVaultLicenseParameters `json:"keyVaultLicense,omitempty" tf:"key_vault_license,omitempty"`
 
 	// The license used for the Component.
+	// +kubebuilder:validation:Optional
 	LicenseSecretRef *v1.SecretKeySelector `json:"licenseSecretRef,omitempty" tf:"-"`
 
 	// Name of the package store.
@@ -157,6 +160,7 @@ type CustomSetupScriptParameters struct {
 	BlobContainerURI *string `json:"blobContainerUri,omitempty" tf:"blob_container_uri,omitempty"`
 
 	// A container SAS token that gives access to the files. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
+	// +kubebuilder:validation:Required
 	SASTokenSecretRef v1.SecretKeySelector `json:"sasTokenSecretRef" tf:"-"`
 }
 

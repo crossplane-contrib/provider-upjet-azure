@@ -64,6 +64,7 @@ type SpringCloudAppMySQLAssociationParameters struct {
 	MySQLServerIDSelector *v1.Selector `json:"mysqlServerIdSelector,omitempty" tf:"-"`
 
 	// Specifies the password which should be used when connecting to the MySQL Database from the Spring Cloud App.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the ID of the Spring Cloud Application where this Association is created. Changing this forces a new resource to be created.

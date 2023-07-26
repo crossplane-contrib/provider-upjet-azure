@@ -37,6 +37,7 @@ type IOTHubDPSCertificateObservation struct {
 type IOTHubDPSCertificateParameters struct {
 
 	// The Base-64 representation of the X509 leaf certificate .cer file or just a .pem file content.
+	// +kubebuilder:validation:Optional
 	CertificateContentSecretRef v1.SecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
 	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.

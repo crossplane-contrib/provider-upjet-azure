@@ -28,6 +28,7 @@ type BasicAuthObservation struct {
 type BasicAuthParameters struct {
 
 	// Specifies the password of git repository basic auth.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// Specifies the username of git repository basic auth.
@@ -124,9 +125,11 @@ type SSHAuthParameters struct {
 	HostKeyAlgorithm *string `json:"hostKeyAlgorithm,omitempty" tf:"host_key_algorithm,omitempty"`
 
 	// Specifies the Public SSH Key of git repository basic auth.
+	// +kubebuilder:validation:Optional
 	HostKeySecretRef *v1.SecretKeySelector `json:"hostKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies the Private SSH Key of git repository basic auth.
+	// +kubebuilder:validation:Required
 	PrivateKeySecretRef v1.SecretKeySelector `json:"privateKeySecretRef" tf:"-"`
 }
 

@@ -31,9 +31,11 @@ type SourceControlTokenObservation struct {
 type SourceControlTokenParameters struct {
 
 	// The Access Token.
+	// +kubebuilder:validation:Optional
 	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 
 	// The Access Token Secret.
+	// +kubebuilder:validation:Optional
 	TokenSecretSecretRef *v1.SecretKeySelector `json:"tokenSecretSecretRef,omitempty" tf:"-"`
 
 	// The Token type. Possible values include Bitbucket, Dropbox, Github, and OneDrive.

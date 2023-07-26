@@ -25,6 +25,7 @@ type DiagnosticStorageAccountObservation struct {
 type DiagnosticStorageAccountParameters struct {
 
 	// Connection String of the Diagnostic Storage Account.
+	// +kubebuilder:validation:Required
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// Resource ID of the Diagnostic Storage Account.

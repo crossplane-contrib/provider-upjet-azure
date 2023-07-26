@@ -49,6 +49,7 @@ type ExpressRouteCircuitConnectionParameters struct {
 	AddressPrefixIPv6 *string `json:"addressPrefixIpv6,omitempty" tf:"address_prefix_ipv6,omitempty"`
 
 	// The authorization key which is associated with the Express Route Circuit Connection.
+	// +kubebuilder:validation:Optional
 	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the peered Express Route Circuit Private Peering. Changing this forces a new Express Route Circuit Connection to be created.

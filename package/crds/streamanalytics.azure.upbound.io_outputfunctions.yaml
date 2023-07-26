@@ -330,8 +330,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                required:
-                - apiKeySecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

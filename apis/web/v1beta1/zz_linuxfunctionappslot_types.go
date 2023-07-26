@@ -55,6 +55,7 @@ type ApplicationStackDockerParameters struct {
 
 	// The password for the account to use to connect to the registry.
 	// The password for the account to use to connect to the registry.
+	// +kubebuilder:validation:Optional
 	RegistryPasswordSecretRef *v1.SecretKeySelector `json:"registryPasswordSecretRef,omitempty" tf:"-"`
 
 	// The URL of the docker registry.
@@ -63,6 +64,7 @@ type ApplicationStackDockerParameters struct {
 
 	// The username to use for connections to the registry.
 	// The username to use for connections to the registry.
+	// +kubebuilder:validation:Optional
 	RegistryUsernameSecretRef *v1.SecretKeySelector `json:"registryUsernameSecretRef,omitempty" tf:"-"`
 }
 
@@ -104,6 +106,7 @@ type AuthSettingsGithubParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -923,6 +926,7 @@ type LinuxFunctionAppSlotAuthSettingsActiveDirectoryParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -968,6 +972,7 @@ type LinuxFunctionAppSlotAuthSettingsFacebookParameters struct {
 
 	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
 	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
+	// +kubebuilder:validation:Optional
 	AppSecretSecretRef *v1.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
@@ -1017,6 +1022,7 @@ type LinuxFunctionAppSlotAuthSettingsGoogleParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -1123,6 +1129,7 @@ type LinuxFunctionAppSlotAuthSettingsMicrosoftParameters struct {
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -1278,6 +1285,7 @@ type LinuxFunctionAppSlotAuthSettingsTwitterParameters struct {
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
+	// +kubebuilder:validation:Optional
 	ConsumerSecretSecretRef *v1.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
@@ -1571,6 +1579,7 @@ type LinuxFunctionAppSlotBackupParameters struct {
 
 	// The SAS URL to the container.
 	// The SAS URL to the container.
+	// +kubebuilder:validation:Required
 	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
@@ -1608,6 +1617,7 @@ type LinuxFunctionAppSlotConnectionStringParameters struct {
 
 	// The connection string value.
 	// The connection string value.
+	// +kubebuilder:validation:Required
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
@@ -1930,6 +1940,7 @@ type LinuxFunctionAppSlotParameters struct {
 
 	// The access key which will be used to access the storage account for the Function App Slot.
 	// The access key which will be used to access the storage account for the Function App Slot.
+	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// The backend storage account name which will be used by this Function App Slot.
@@ -2436,10 +2447,12 @@ type LinuxFunctionAppSlotSiteConfigParameters struct {
 
 	// The Connection String for linking the Linux Function App to Application Insights.
 	// The Connection String for linking the Linux Function App to Application Insights.
+	// +kubebuilder:validation:Optional
 	ApplicationInsightsConnectionStringSecretRef *v1.SecretKeySelector `json:"applicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
 
 	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
 	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
+	// +kubebuilder:validation:Optional
 	ApplicationInsightsKeySecretRef *v1.SecretKeySelector `json:"applicationInsightsKeySecretRef,omitempty" tf:"-"`
 
 	// an application_stack block as detailed below.
@@ -2738,6 +2751,7 @@ type LinuxFunctionAppSlotStorageAccountObservation struct {
 type LinuxFunctionAppSlotStorageAccountParameters struct {
 
 	// The Access key for the storage account.
+	// +kubebuilder:validation:Required
 	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
 
 	// The Name of the Storage Account.

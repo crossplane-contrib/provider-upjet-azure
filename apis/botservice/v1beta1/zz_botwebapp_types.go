@@ -82,6 +82,7 @@ type BotWebAppObservation struct {
 type BotWebAppParameters struct {
 
 	// The Application Insights API Key to associate with the Web App Bot.
+	// +kubebuilder:validation:Optional
 	DeveloperAppInsightsAPIKeySecretRef *v1.SecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
 
 	// The Application Insights Application ID to associate with the Web App Bot.
@@ -103,6 +104,7 @@ type BotWebAppParameters struct {
 	LuisAppIds []*string `json:"luisAppIds,omitempty" tf:"luis_app_ids,omitempty"`
 
 	// The LUIS key to associate with the Web App Bot.
+	// +kubebuilder:validation:Optional
 	LuisKeySecretRef *v1.SecretKeySelector `json:"luisKeySecretRef,omitempty" tf:"-"`
 
 	// The Microsoft Application ID for the Web App Bot. Changing this forces a new resource to be created.

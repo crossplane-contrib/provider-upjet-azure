@@ -233,8 +233,6 @@ spec:
                   userId:
                     description: The user ID to log in the server.
                     type: string
-                required:
-                - connectionStringSecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

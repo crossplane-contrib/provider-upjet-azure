@@ -77,9 +77,11 @@ type MSSQLServerMicrosoftSupportAuditingPolicyParameters struct {
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// The access key to use for the auditing storage account.
+	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the Subscription containing the Storage Account.
+	// +kubebuilder:validation:Optional
 	StorageAccountSubscriptionIDSecretRef *v1.SecretKeySelector `json:"storageAccountSubscriptionIdSecretRef,omitempty" tf:"-"`
 }
 

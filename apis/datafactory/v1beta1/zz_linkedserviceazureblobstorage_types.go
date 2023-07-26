@@ -149,6 +149,7 @@ type LinkedServiceAzureBlobStorageParameters struct {
 	ConnectionStringInsecure *string `json:"connectionStringInsecure,omitempty" tf:"connection_string_insecure,omitempty"`
 
 	// The connection string. Conflicts with connection_string_insecure, sas_uri and service_endpoint.
+	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -178,9 +179,11 @@ type LinkedServiceAzureBlobStorageParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The SAS URI. Conflicts with connection_string_insecure, connection_string and service_endpoint.
+	// +kubebuilder:validation:Optional
 	SASURISecretRef *v1.SecretKeySelector `json:"sasuriSecretRef,omitempty" tf:"-"`
 
 	// The Service Endpoint. Conflicts with connection_string, connection_string_insecure and sas_uri.
+	// +kubebuilder:validation:Optional
 	ServiceEndpointSecretRef *v1.SecretKeySelector `json:"serviceEndpointSecretRef,omitempty" tf:"-"`
 
 	// The service principal id in which to authenticate against the Azure Blob Storage account.

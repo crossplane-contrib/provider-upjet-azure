@@ -59,6 +59,7 @@ type CredentialParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The password associated with this Automation Credential.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The name of the resource group in which the Credential is created. Changing this forces a new resource to be created.

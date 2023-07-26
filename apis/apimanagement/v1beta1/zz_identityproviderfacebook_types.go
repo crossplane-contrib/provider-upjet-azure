@@ -53,6 +53,7 @@ type IdentityProviderFacebookParameters struct {
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
 	// App Secret for Facebook.
+	// +kubebuilder:validation:Optional
 	AppSecretSecretRef v1.SecretKeySelector `json:"appSecretSecretRef" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.

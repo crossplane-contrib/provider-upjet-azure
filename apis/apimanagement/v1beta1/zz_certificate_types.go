@@ -62,6 +62,7 @@ type CertificateParameters_2 struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The base-64 encoded certificate data, which must be a PFX file.
+	// +kubebuilder:validation:Optional
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The Client ID of the User Assigned Managed Identity to use for retrieving certificate.
@@ -82,6 +83,7 @@ type CertificateParameters_2 struct {
 	KeyVaultSecretIDSelector *v1.Selector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
 
 	// The password used for this certificate.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.

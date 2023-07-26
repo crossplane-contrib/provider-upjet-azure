@@ -146,6 +146,7 @@ type AuthorizationServerParameters struct {
 	ClientRegistrationEndpoint *string `json:"clientRegistrationEndpoint,omitempty" tf:"client_registration_endpoint,omitempty"`
 
 	// The Client/App Secret registered with this Authorization Server.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The Default Scope used when requesting an Access Token, specified as a string containing space-delimited values.
@@ -174,6 +175,7 @@ type AuthorizationServerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The password associated with the Resource Owner.
+	// +kubebuilder:validation:Optional
 	ResourceOwnerPasswordSecretRef *v1.SecretKeySelector `json:"resourceOwnerPasswordSecretRef,omitempty" tf:"-"`
 
 	// The username associated with the Resource Owner.

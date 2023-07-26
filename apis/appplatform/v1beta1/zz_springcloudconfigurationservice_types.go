@@ -88,12 +88,14 @@ type RepositoryParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the password of git repository basic auth.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// Specifies the collection of patterns of the repository.
 	Patterns []*string `json:"patterns,omitempty" tf:"patterns,omitempty"`
 
 	// Specifies the SSH private key of git repository.
+	// +kubebuilder:validation:Optional
 	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies a list of searching path of the repository

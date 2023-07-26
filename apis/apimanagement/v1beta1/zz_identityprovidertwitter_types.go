@@ -31,6 +31,7 @@ type IdentityProviderTwitterObservation struct {
 type IdentityProviderTwitterParameters struct {
 
 	// App Consumer API key for Twitter.
+	// +kubebuilder:validation:Optional
 	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 
 	// The Name of the API Management Service where this Twitter Identity Provider should be created. Changing this forces a new resource to be created.
@@ -47,6 +48,7 @@ type IdentityProviderTwitterParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// App Consumer API secret key for Twitter.
+	// +kubebuilder:validation:Optional
 	APISecretKeySecretRef v1.SecretKeySelector `json:"apiSecretKeySecretRef" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.

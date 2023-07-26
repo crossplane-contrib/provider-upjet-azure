@@ -28,6 +28,7 @@ type LinkedServiceOdbcBasicAuthenticationObservation struct {
 type LinkedServiceOdbcBasicAuthenticationParameters struct {
 
 	// The password associated with the username, which can be used to authenticate to the ODBC endpoint.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username which can be used to authenticate to the ODBC endpoint.

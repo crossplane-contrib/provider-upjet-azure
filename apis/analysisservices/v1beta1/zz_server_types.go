@@ -118,6 +118,7 @@ type ServerParameters struct {
 	AdminUsers []*string `json:"adminUsers,omitempty" tf:"admin_users,omitempty"`
 
 	// URI and SAS token for a blob container to store backups.
+	// +kubebuilder:validation:Optional
 	BackupBlobContainerURISecretRef *v1.SecretKeySelector `json:"backupBlobContainerUriSecretRef,omitempty" tf:"-"`
 
 	// Indicates if the Power BI service is allowed to access or not.

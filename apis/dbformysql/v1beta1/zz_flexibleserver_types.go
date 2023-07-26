@@ -193,6 +193,7 @@ type FlexibleServerParameters struct {
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
 	// The Password associated with the administrator_login for the MySQL Flexible Server. Required when create_mode is Default.
+	// +kubebuilder:validation:Optional
 	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
 	// The backup retention days for the MySQL Flexible Server. Possible values are between 1 and 35 days. Defaults to 7.

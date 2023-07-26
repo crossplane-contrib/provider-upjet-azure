@@ -124,6 +124,7 @@ type BotChannelsRegistrationParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Application Insights API Key to associate with the Bot Channels Registration.
+	// +kubebuilder:validation:Optional
 	DeveloperAppInsightsAPIKeySecretRef *v1.SecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
 
 	// The Application Insights Application ID to associate with the Bot Channels Registration.

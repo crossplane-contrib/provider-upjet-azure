@@ -62,9 +62,11 @@ type OpenIDConnectProviderParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The Client ID used for the Client Application.
+	// +kubebuilder:validation:Optional
 	ClientIDSecretRef v1.SecretKeySelector `json:"clientIdSecretRef" tf:"-"`
 
 	// The Client Secret used for the Client Application.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// A description of this OpenID Connect Provider.

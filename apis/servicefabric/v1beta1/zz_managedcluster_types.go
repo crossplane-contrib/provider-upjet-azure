@@ -523,6 +523,7 @@ type ManagedClusterParameters struct {
 	NodeType []ManagedClusterNodeTypeParameters `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// Administrator password for the VMs that will be created as part of this cluster.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The name of the Resource Group where the Resource Group should exist. Changing this forces a new Resource Group to be created.

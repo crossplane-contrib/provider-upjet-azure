@@ -193,6 +193,7 @@ type ServerParameters struct {
 	Score *float64 `json:"score,omitempty" tf:"score,omitempty"`
 
 	// The Secret used to communicate with the Radius Server.
+	// +kubebuilder:validation:Required
 	SecretSecretRef v1.SecretKeySelector `json:"secretSecretRef" tf:"-"`
 }
 

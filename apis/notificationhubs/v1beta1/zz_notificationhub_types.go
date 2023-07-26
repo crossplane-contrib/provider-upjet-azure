@@ -58,6 +58,7 @@ type APNSCredentialParameters struct {
 	TeamID *string `json:"teamId,omitempty" tf:"team_id,omitempty"`
 
 	// The Push Token associated with the Apple Developer Account. This is the contents of the key downloaded from the Apple Developer Portal between the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- blocks.
+	// +kubebuilder:validation:Required
 	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 }
 
@@ -70,6 +71,7 @@ type GCMCredentialObservation struct {
 type GCMCredentialParameters struct {
 
 	// The API Key associated with the Google Cloud Messaging service.
+	// +kubebuilder:validation:Required
 	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 }
 

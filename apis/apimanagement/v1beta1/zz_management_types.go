@@ -109,9 +109,11 @@ type CertificateObservation struct {
 type CertificateParameters struct {
 
 	// The password for the certificate.
+	// +kubebuilder:validation:Optional
 	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
 
 	// The Base64 Encoded PFX or Base64 Encoded X.509 Certificate.
+	// +kubebuilder:validation:Required
 	EncodedCertificateSecretRef v1.SecretKeySelector `json:"encodedCertificateSecretRef" tf:"-"`
 
 	// The name of the Certificate Store where this certificate should be stored. Possible values are CertificateAuthority and Root.
@@ -154,6 +156,7 @@ type DelegationParameters struct {
 	UserRegistrationEnabled *bool `json:"userRegistrationEnabled,omitempty" tf:"user_registration_enabled,omitempty"`
 
 	// A base64-encoded validation key to validate, that a request is coming from Azure API Management.
+	// +kubebuilder:validation:Optional
 	ValidationKeySecretRef *v1.SecretKeySelector `json:"validationKeySecretRef,omitempty" tf:"-"`
 }
 

@@ -80,6 +80,7 @@ type SubscriptionParameters struct {
 	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
 
 	// The primary subscription key to use for the subscription.
+	// +kubebuilder:validation:Optional
 	PrimaryKeySecretRef *v1.SecretKeySelector `json:"primaryKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the Product which should be assigned to this Subscription. Changing this forces a new resource to be created.
@@ -110,6 +111,7 @@ type SubscriptionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The secondary subscription key to use for the subscription.
+	// +kubebuilder:validation:Optional
 	SecondaryKeySecretRef *v1.SecretKeySelector `json:"secondaryKeySecretRef,omitempty" tf:"-"`
 
 	// The state of this Subscription. Possible values are active, cancelled, expired, rejected, submitted and suspended. Defaults to submitted.

@@ -121,6 +121,7 @@ type CassandraClusterParameters struct {
 	ClientCertificatePems []*string `json:"clientCertificatePems,omitempty" tf:"client_certificate_pems,omitempty"`
 
 	// The initial admin password for this Cassandra Cluster. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DefaultAdminPasswordSecretRef v1.SecretKeySelector `json:"defaultAdminPasswordSecretRef" tf:"-"`
 
 	// The ID of the delegated management subnet for this Cassandra Cluster. Changing this forces a new Cassandra Cluster to be created.

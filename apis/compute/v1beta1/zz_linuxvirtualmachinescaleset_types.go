@@ -151,6 +151,7 @@ type ExtensionParameters struct {
 	ProtectedSettingsFromKeyVault []ProtectedSettingsFromKeyVaultParameters `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
 
 	// A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
+	// +kubebuilder:validation:Optional
 	ProtectedSettingsSecretRef *v1.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
 
 	// An ordered list of Extension names which this should be provisioned after.
@@ -975,6 +976,7 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	AdditionalCapabilities []LinuxVirtualMachineScaleSetAdditionalCapabilitiesParameters `json:"additionalCapabilities,omitempty" tf:"additional_capabilities,omitempty"`
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// One or more admin_ssh_key blocks as defined below.
@@ -999,6 +1001,7 @@ type LinuxVirtualMachineScaleSetParameters struct {
 	ComputerNamePrefix *string `json:"computerNamePrefix,omitempty" tf:"computer_name_prefix,omitempty"`
 
 	// The Base64-Encoded Custom Data which should be used for this Virtual Machine Scale Set.
+	// +kubebuilder:validation:Optional
 	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// One or more data_disk blocks as defined below.

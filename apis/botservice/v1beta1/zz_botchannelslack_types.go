@@ -66,6 +66,7 @@ type BotChannelSlackParameters struct {
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The Client Secret that will be used to authenticate with Slack.
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The Slack Landing Page URL.
@@ -88,9 +89,11 @@ type BotChannelSlackParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Signing Secret that will be used to sign the requests.
+	// +kubebuilder:validation:Optional
 	SigningSecretSecretRef *v1.SecretKeySelector `json:"signingSecretSecretRef,omitempty" tf:"-"`
 
 	// The Verification Token that will be used to authenticate with Slack.
+	// +kubebuilder:validation:Optional
 	VerificationTokenSecretRef v1.SecretKeySelector `json:"verificationTokenSecretRef" tf:"-"`
 }
 

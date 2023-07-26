@@ -52,6 +52,7 @@ type OutputFunctionObservation struct {
 type OutputFunctionParameters struct {
 
 	// The API key for the Function.
+	// +kubebuilder:validation:Optional
 	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 
 	// The maximum number of events in each batch that's sent to the function. Defaults to 100.

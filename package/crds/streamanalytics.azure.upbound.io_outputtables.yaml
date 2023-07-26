@@ -340,7 +340,6 @@ spec:
                         type: object
                     type: object
                 required:
-                - storageAccountKeySecretRef
                 - streamAnalyticsJobName
                 type: object
               initProvider:

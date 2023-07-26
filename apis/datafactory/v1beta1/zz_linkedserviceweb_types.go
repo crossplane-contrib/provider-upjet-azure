@@ -108,6 +108,7 @@ type LinkedServiceWebParameters struct {
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The password for Basic authentication. Required if authentication_type sets to Basic.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The URL of the web service endpoint (e.g. https://www.microsoft.com).

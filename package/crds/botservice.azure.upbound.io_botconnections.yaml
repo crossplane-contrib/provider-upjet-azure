@@ -271,8 +271,6 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
-                required:
-                - clientSecretSecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

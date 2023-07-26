@@ -28,6 +28,7 @@ type BasicAuthenticationObservation struct {
 type BasicAuthenticationParameters struct {
 
 	// The password associated with the username, which can be used to authenticate to the OData endpoint.
+	// +kubebuilder:validation:Required
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username which can be used to authenticate to the OData endpoint.

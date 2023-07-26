@@ -136,6 +136,7 @@ type WindowsVirtualMachineScaleSetAdditionalUnattendContentObservation struct {
 type WindowsVirtualMachineScaleSetAdditionalUnattendContentParameters struct {
 
 	// The XML formatted content that is added to the unattend.xml file for the specified path and component. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
 
 	// The name of the setting to which the content applies. Possible values are AutoLogon and FirstLogonCommands. Changing this forces a new resource to be created.
@@ -397,6 +398,7 @@ type WindowsVirtualMachineScaleSetExtensionParameters struct {
 	ProtectedSettingsFromKeyVault []WindowsVirtualMachineScaleSetExtensionProtectedSettingsFromKeyVaultParameters `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
 
 	// A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
+	// +kubebuilder:validation:Optional
 	ProtectedSettingsSecretRef *v1.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
 
 	// An ordered list of Extension names which this should be provisioned after.
@@ -1183,6 +1185,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	AdditionalUnattendContent []WindowsVirtualMachineScaleSetAdditionalUnattendContentParameters `json:"additionalUnattendContent,omitempty" tf:"additional_unattend_content,omitempty"`
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
 	// The username of the local administrator on each Virtual Machine Scale Set instance. Changing this forces a new resource to be created.
@@ -1204,6 +1207,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	ComputerNamePrefix *string `json:"computerNamePrefix,omitempty" tf:"computer_name_prefix,omitempty"`
 
 	// The Base64-Encoded Custom Data which should be used for this Virtual Machine Scale Set.
+	// +kubebuilder:validation:Optional
 	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// One or more data_disk blocks as defined below.

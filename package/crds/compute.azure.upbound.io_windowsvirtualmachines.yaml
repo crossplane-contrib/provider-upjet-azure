@@ -698,8 +698,6 @@ spec:
                       this Windows Virtual Machine should be located. Changing this
                       forces a new Windows Virtual Machine to be created.'
                     type: string
-                required:
-                - adminPasswordSecretRef
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.

@@ -55,6 +55,7 @@ type OutputSynapseParameters struct {
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// The password that will be used to connect to the Azure SQL database.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.

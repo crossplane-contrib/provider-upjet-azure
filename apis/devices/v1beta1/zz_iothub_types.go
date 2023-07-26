@@ -229,6 +229,7 @@ type FileUploadParameters struct {
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The connection string for the Azure Storage account to which files are uploaded.
+	// +kubebuilder:validation:Required
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The name of the root container where the files should be uploaded to. The container need not exist but should be creatable using the connection_string specified.

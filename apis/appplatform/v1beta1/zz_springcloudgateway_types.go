@@ -226,6 +226,7 @@ type SpringCloudGatewayParameters struct {
 	Quota []SpringCloudGatewayQuotaParameters `json:"quota,omitempty" tf:"quota,omitempty"`
 
 	// Specifies the sensitive environment variables of the Spring Cloud Gateway as a map of key-value pairs. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SensitiveEnvironmentVariablesSecretRef *v1.SecretReference `json:"sensitiveEnvironmentVariablesSecretRef,omitempty" tf:"-"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Gateway to be created.

@@ -163,6 +163,7 @@ type LinkedServiceAzureDatabricksObservation struct {
 type LinkedServiceAzureDatabricksParameters struct {
 
 	// Authenticate to ADB via an access token.
+	// +kubebuilder:validation:Optional
 	AccessTokenSecretRef *v1.SecretKeySelector `json:"accessTokenSecretRef,omitempty" tf:"-"`
 
 	// The domain URL of the databricks instance.

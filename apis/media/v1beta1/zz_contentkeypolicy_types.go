@@ -22,15 +22,19 @@ type AlternateKeyObservation struct {
 type AlternateKeyParameters struct {
 
 	// The RSA parameter exponent.
+	// +kubebuilder:validation:Optional
 	RsaTokenKeyExponentSecretRef *v1.SecretKeySelector `json:"rsaTokenKeyExponentSecretRef,omitempty" tf:"-"`
 
 	// The RSA parameter modulus.
+	// +kubebuilder:validation:Optional
 	RsaTokenKeyModulusSecretRef *v1.SecretKeySelector `json:"rsaTokenKeyModulusSecretRef,omitempty" tf:"-"`
 
 	// The key value of the key. Specifies a symmetric key for token validation.
+	// +kubebuilder:validation:Optional
 	SymmetricTokenKeySecretRef *v1.SecretKeySelector `json:"symmetricTokenKeySecretRef,omitempty" tf:"-"`
 
 	// The raw data field of a certificate in PKCS 12 format (X509Certificate2 in .NET). Specifies a certificate for token validation.
+	// +kubebuilder:validation:Optional
 	X509TokenKeyRawSecretRef *v1.SecretKeySelector `json:"x509TokenKeyRawSecretRef,omitempty" tf:"-"`
 }
 
@@ -150,15 +154,18 @@ type FairplayConfigurationObservation struct {
 type FairplayConfigurationParameters struct {
 
 	// The key that must be used as FairPlay Application Secret key.
+	// +kubebuilder:validation:Optional
 	AskSecretRef *v1.SecretKeySelector `json:"askSecretRef,omitempty" tf:"-"`
 
 	// A offline_rental_configuration block as defined below.
 	OfflineRentalConfiguration []OfflineRentalConfigurationParameters `json:"offlineRentalConfiguration,omitempty" tf:"offline_rental_configuration,omitempty"`
 
 	// The password encrypting FairPlay certificate in PKCS 12 (pfx) format.
+	// +kubebuilder:validation:Optional
 	PfxPasswordSecretRef *v1.SecretKeySelector `json:"pfxPasswordSecretRef,omitempty" tf:"-"`
 
 	// The Base64 representation of FairPlay certificate in PKCS 12 (pfx) format (including private key).
+	// +kubebuilder:validation:Optional
 	PfxSecretRef *v1.SecretKeySelector `json:"pfxSecretRef,omitempty" tf:"-"`
 
 	// The rental and lease key type. Supported values are DualExpiry, PersistentLimited, PersistentUnlimited or Undefined.
@@ -414,6 +421,7 @@ type PlayreadyConfigurationLicenseParameters struct {
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// The grace period of license.
+	// +kubebuilder:validation:Optional
 	GracePeriodSecretRef *v1.SecretKeySelector `json:"gracePeriodSecretRef,omitempty" tf:"-"`
 
 	// The license type. Supported values are NonPersistent or Persistent.
@@ -597,15 +605,19 @@ type TokenRestrictionParameters struct {
 	OpenIDConnectDiscoveryDocument *string `json:"openIdConnectDiscoveryDocument,omitempty" tf:"open_id_connect_discovery_document,omitempty"`
 
 	// The RSA parameter exponent.
+	// +kubebuilder:validation:Optional
 	PrimaryRsaTokenKeyExponentSecretRef *v1.SecretKeySelector `json:"primaryRsaTokenKeyExponentSecretRef,omitempty" tf:"-"`
 
 	// The RSA parameter modulus.
+	// +kubebuilder:validation:Optional
 	PrimaryRsaTokenKeyModulusSecretRef *v1.SecretKeySelector `json:"primaryRsaTokenKeyModulusSecretRef,omitempty" tf:"-"`
 
 	// The key value of the key. Specifies a symmetric key for token validation.
+	// +kubebuilder:validation:Optional
 	PrimarySymmetricTokenKeySecretRef *v1.SecretKeySelector `json:"primarySymmetricTokenKeySecretRef,omitempty" tf:"-"`
 
 	// The raw data field of a certificate in PKCS 12 format (X509Certificate2 in .NET). Specifies a certificate for token validation.
+	// +kubebuilder:validation:Optional
 	PrimaryX509TokenKeyRawSecretRef *v1.SecretKeySelector `json:"primaryX509TokenKeyRawSecretRef,omitempty" tf:"-"`
 
 	// One or more required_claim blocks as defined above.

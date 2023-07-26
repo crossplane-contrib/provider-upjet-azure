@@ -48,6 +48,7 @@ type MSSQLJobCredentialParameters struct {
 	JobAgentIDSelector *v1.Selector `json:"jobAgentIdSelector,omitempty" tf:"-"`
 
 	// The password part of the credential.
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username part of the credential.

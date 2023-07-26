@@ -28,6 +28,7 @@ type AdditionalUnattendContentObservation struct {
 type AdditionalUnattendContentParameters struct {
 
 	// The XML formatted content that is added to the unattend.xml file for the specified path and component. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
 	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
 
 	// The name of the setting to which the content applies. Possible values are AutoLogon and FirstLogonCommands. Changing this forces a new resource to be created.
@@ -556,6 +557,7 @@ type WindowsVirtualMachineParameters struct {
 	AdditionalUnattendContent []AdditionalUnattendContentParameters `json:"additionalUnattendContent,omitempty" tf:"additional_unattend_content,omitempty"`
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
 	// The username of the local administrator used for the Virtual Machine. Changing this forces a new resource to be created.
@@ -577,6 +579,7 @@ type WindowsVirtualMachineParameters struct {
 	ComputerName *string `json:"computerName,omitempty" tf:"computer_name,omitempty"`
 
 	// The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// The ID of a Dedicated Host Group that this Windows Virtual Machine should be run within. Conflicts with dedicated_host_id.

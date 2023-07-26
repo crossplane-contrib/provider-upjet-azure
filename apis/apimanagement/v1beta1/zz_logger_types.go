@@ -22,6 +22,7 @@ type ApplicationInsightsObservation struct {
 type ApplicationInsightsParameters struct {
 
 	// The instrumentation key used to push data to Application Insights.
+	// +kubebuilder:validation:Required
 	InstrumentationKeySecretRef v1.SecretKeySelector `json:"instrumentationKeySecretRef" tf:"-"`
 }
 
@@ -40,6 +41,7 @@ type EventHubObservation struct {
 type EventHubParameters struct {
 
 	// The connection string of an EventHub Namespace.
+	// +kubebuilder:validation:Required
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// The name of an EventHub.
