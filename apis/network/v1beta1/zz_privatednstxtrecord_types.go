@@ -52,6 +52,7 @@ type PrivateDNSTXTRecordObservation struct {
 type PrivateDNSTXTRecordParameters struct {
 
 	// One or more record blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Record []PrivateDNSTXTRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
@@ -68,9 +69,11 @@ type PrivateDNSTXTRecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
+	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
@@ -102,6 +105,7 @@ type PrivateDNSTXTRecordRecordObservation struct {
 type PrivateDNSTXTRecordRecordParameters struct {
 
 	// The value of the TXT record. Max length: 1024 characters
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 

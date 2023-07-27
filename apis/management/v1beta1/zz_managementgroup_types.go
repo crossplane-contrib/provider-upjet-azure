@@ -40,6 +40,7 @@ type ManagementGroupObservation struct {
 type ManagementGroupParameters struct {
 
 	// A friendly name for this Management Group. If not specified, this will be the same as the name.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The ID of the Parent Management Group.
@@ -57,6 +58,7 @@ type ManagementGroupParameters struct {
 	ParentManagementGroupIDSelector *v1.Selector `json:"parentManagementGroupIdSelector,omitempty" tf:"-"`
 
 	// A list of Subscription GUIDs which should be assigned to the Management Group.
+	// +kubebuilder:validation:Optional
 	SubscriptionIds []*string `json:"subscriptionIds,omitempty" tf:"subscription_ids,omitempty"`
 }
 

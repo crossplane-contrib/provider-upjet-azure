@@ -57,9 +57,11 @@ type FrontdoorEndpointParameters struct {
 	CdnFrontdoorProfileIDSelector *v1.Selector `json:"cdnFrontdoorProfileIdSelector,omitempty" tf:"-"`
 
 	// Specifies if this Front Door Endpoint is enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Specifies a mapping of tags which should be assigned to the Front Door Endpoint.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

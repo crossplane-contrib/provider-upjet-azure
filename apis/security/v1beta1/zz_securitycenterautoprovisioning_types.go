@@ -31,6 +31,7 @@ type SecurityCenterAutoProvisioningObservation struct {
 type SecurityCenterAutoProvisioningParameters struct {
 
 	// Should the security agent be automatically provisioned on Virtual Machines in this subscription? Possible values are On (to install the security agent automatically, if it's missing) or Off (to not install the security agent automatically).
+	// +kubebuilder:validation:Optional
 	AutoProvision *string `json:"autoProvision,omitempty" tf:"auto_provision,omitempty"`
 }
 

@@ -52,18 +52,23 @@ type DataDiskObservation struct {
 type DataDiskParameters struct {
 
 	// Specifies the URI in Azure storage of the blob that you want to use to create the image.
+	// +kubebuilder:validation:Optional
 	BlobURI *string `json:"blobUri,omitempty" tf:"blob_uri,omitempty"`
 
 	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
+	// +kubebuilder:validation:Optional
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
 	// Specifies the logical unit number of the data disk.
+	// +kubebuilder:validation:Optional
 	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
 
 	// Specifies the ID of the managed disk resource that you want to use to create the image. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
 	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
+	// +kubebuilder:validation:Optional
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
 }
 
@@ -127,16 +132,20 @@ type ImageObservation struct {
 type ImageParameters struct {
 
 	// One or more data_disk elements as defined below.
+	// +kubebuilder:validation:Optional
 	DataDisk []DataDiskParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
 	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. The default is V1. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
 	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// One or more os_disk elements as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	OsDisk []OsDiskParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
 	// The name of the resource group in which to create. Changing this forces a new resource to be created.
@@ -154,12 +163,15 @@ type ImageParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Virtual Machine ID from which to create the image.
+	// +kubebuilder:validation:Optional
 	SourceVirtualMachineID *string `json:"sourceVirtualMachineId,omitempty" tf:"source_virtual_machine_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Is zone resiliency enabled? Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ZoneResilient *bool `json:"zoneResilient,omitempty" tf:"zone_resilient,omitempty"`
 }
 
@@ -208,21 +220,27 @@ type OsDiskObservation struct {
 type OsDiskParameters struct {
 
 	// Specifies the URI in Azure storage of the blob that you want to use to create the image. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	BlobURI *string `json:"blobUri,omitempty" tf:"blob_uri,omitempty"`
 
 	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
+	// +kubebuilder:validation:Optional
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
 	// Specifies the ID of the managed disk resource that you want to use to create the image.
+	// +kubebuilder:validation:Optional
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
 	// Specifies the state of the operating system contained in the blob. Currently, the only value is Generalized. Possible values are Generalized and Specialized.
+	// +kubebuilder:validation:Optional
 	OsState *string `json:"osState,omitempty" tf:"os_state,omitempty"`
 
 	// Specifies the type of operating system contained in the virtual machine image. Possible values are: Windows or Linux.
+	// +kubebuilder:validation:Optional
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
 	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
+	// +kubebuilder:validation:Optional
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
 }
 

@@ -46,12 +46,15 @@ type HybridRunBookWorkerGroupObservation struct {
 type HybridRunBookWorkerGroupParameters struct {
 
 	// The name of the Automation Account in which the Runbook Worker Group is created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 
 	// The name of resource type azurerm_automation_credential to use for hybrid worker.
+	// +kubebuilder:validation:Optional
 	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
 
 	// The name which should be used for this Automation Account Runbook Worker Group. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Automation should exist. Changing this forces a new Automation to be created.

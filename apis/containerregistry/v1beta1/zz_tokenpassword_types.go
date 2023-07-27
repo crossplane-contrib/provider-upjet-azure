@@ -28,6 +28,7 @@ type Password1Observation struct {
 type Password1Parameters struct {
 
 	// The expiration date of the password in RFC3339 format. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 }
 
@@ -46,6 +47,7 @@ type Password2Observation struct {
 type Password2Parameters struct {
 
 	// The expiration date of the password in RFC3339 format. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 }
 
@@ -90,9 +92,11 @@ type TokenPasswordParameters struct {
 	ContainerRegistryTokenIDSelector *v1.Selector `json:"containerRegistryTokenIdSelector,omitempty" tf:"-"`
 
 	// One password block as defined below.
+	// +kubebuilder:validation:Optional
 	Password1 []Password1Parameters `json:"password1,omitempty" tf:"password1,omitempty"`
 
 	// One password block as defined below.
+	// +kubebuilder:validation:Optional
 	Password2 []Password2Parameters `json:"password2,omitempty" tf:"password2,omitempty"`
 }
 

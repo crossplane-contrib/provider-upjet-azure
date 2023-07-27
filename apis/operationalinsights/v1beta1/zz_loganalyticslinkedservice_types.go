@@ -84,6 +84,7 @@ type LogAnalyticsLinkedServiceParameters struct {
 	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the writable Resource that will be linked to the workspace. This should be used for linking to a Log Analytics Cluster resource.
+	// +kubebuilder:validation:Optional
 	WriteAccessID *string `json:"writeAccessId,omitempty" tf:"write_access_id,omitempty"`
 }
 

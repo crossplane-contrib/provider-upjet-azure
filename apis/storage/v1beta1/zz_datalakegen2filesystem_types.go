@@ -46,15 +46,19 @@ type AceObservation struct {
 type AceParameters struct {
 
 	// Specifies the Object ID of the Azure Active Directory User or Group that the entry relates to. Only valid for user or group entries.
+	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the permissions for the entry in rwx form. For example, rwx gives full permissions but r-- only gives read permissions.
+	// +kubebuilder:validation:Optional
 	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Specifies whether the ACE represents an access entry or a default entry. Default value is access.
+	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Specifies the type of entry. Can be user, group, mask or other.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -97,15 +101,19 @@ type DataLakeGen2FileSystemObservation struct {
 type DataLakeGen2FileSystemParameters struct {
 
 	// One or more ace blocks as defined below to specify the entries for the ACL for the path.
+	// +kubebuilder:validation:Optional
 	Ace []AceParameters `json:"ace,omitempty" tf:"ace,omitempty"`
 
 	// Specifies the Object ID of the Azure Active Directory Group to make the owning group of the root path (i.e. /). Possible values also include $superuser.
+	// +kubebuilder:validation:Optional
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
 	// Specifies the Object ID of the Azure Active Directory User to make the owning user of the root path (i.e. /). Possible values also include $superuser.
+	// +kubebuilder:validation:Optional
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
 	// A mapping of Key to Base64-Encoded Values which should be assigned to this Data Lake Gen2 File System.
+	// +kubebuilder:validation:Optional
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Specifies the ID of the Storage Account in which the Data Lake Gen2 File System should exist. Changing this forces a new resource to be created.

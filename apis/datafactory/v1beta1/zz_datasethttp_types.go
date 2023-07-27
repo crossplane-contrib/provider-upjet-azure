@@ -85,9 +85,11 @@ type DataSetHTTPObservation struct {
 type DataSetHTTPParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Dataset.
+	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Dataset.
+	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -105,9 +107,11 @@ type DataSetHTTPParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Dataset.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	// +kubebuilder:validation:Optional
 	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Dataset with.
@@ -124,18 +128,23 @@ type DataSetHTTPParameters struct {
 	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Dataset.
+	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The relative URL based on the URL in the HTTP Linked Service.
+	// +kubebuilder:validation:Optional
 	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
 
 	// The body for the HTTP request.
+	// +kubebuilder:validation:Optional
 	RequestBody *string `json:"requestBody,omitempty" tf:"request_body,omitempty"`
 
 	// The HTTP method for the HTTP request. (e.g. GET, POST)
+	// +kubebuilder:validation:Optional
 	RequestMethod *string `json:"requestMethod,omitempty" tf:"request_method,omitempty"`
 
 	// A schema_column block as defined below.
+	// +kubebuilder:validation:Optional
 	SchemaColumn []DataSetHTTPSchemaColumnParameters `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
 }
 
@@ -166,12 +175,15 @@ type DataSetHTTPSchemaColumnObservation struct {
 type DataSetHTTPSchemaColumnParameters struct {
 
 	// The description of the column.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the column.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

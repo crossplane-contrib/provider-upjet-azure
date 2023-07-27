@@ -82,9 +82,11 @@ type CustomDataSetObservation struct {
 type CustomDataSetParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Dataset.
+	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Dataset.
+	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The Data Factory ID in which to associate the Dataset with. Changing this forces a new resource.
@@ -102,24 +104,31 @@ type CustomDataSetParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Dataset.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	// +kubebuilder:validation:Optional
 	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
 
 	// A linked_service block as defined below.
+	// +kubebuilder:validation:Optional
 	LinkedService []LinkedServiceParameters `json:"linkedService,omitempty" tf:"linked_service,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Dataset.
+	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A JSON object that contains the schema of the Data Factory Dataset.
+	// +kubebuilder:validation:Optional
 	SchemaJSON *string `json:"schemaJson,omitempty" tf:"schema_json,omitempty"`
 
 	// The type of dataset that will be associated with Data Factory. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A JSON object that contains the properties of the Data Factory Dataset.
+	// +kubebuilder:validation:Optional
 	TypePropertiesJSON *string `json:"typePropertiesJson,omitempty" tf:"type_properties_json,omitempty"`
 }
 
@@ -154,6 +163,7 @@ type LinkedServiceParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

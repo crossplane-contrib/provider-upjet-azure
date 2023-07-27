@@ -56,6 +56,7 @@ type CredentialParameters struct {
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// The description associated with this Automation Credential.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The password associated with this Automation Credential.
@@ -76,6 +77,7 @@ type CredentialParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The username associated with this Automation Credential.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 

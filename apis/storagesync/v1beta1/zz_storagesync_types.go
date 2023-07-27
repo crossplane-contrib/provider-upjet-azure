@@ -46,9 +46,11 @@ type StorageSyncObservation struct {
 type StorageSyncParameters struct {
 
 	// Incoming traffic policy. Possible values are AllowAllTraffic and AllowVirtualNetworksOnly.
+	// +kubebuilder:validation:Optional
 	IncomingTrafficPolicy *string `json:"incomingTrafficPolicy,omitempty" tf:"incoming_traffic_policy,omitempty"`
 
 	// The Azure Region where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
@@ -65,6 +67,7 @@ type StorageSyncParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Storage Sync.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -34,9 +34,11 @@ type HashObservation struct {
 type HashParameters struct {
 
 	// Specifies the algorithm used for the hash content.
+	// +kubebuilder:validation:Optional
 	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
 
 	// The hash value of the content.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -67,9 +69,11 @@ type ModuleLinkObservation struct {
 type ModuleLinkParameters struct {
 
 	// A hash block as defined below.
+	// +kubebuilder:validation:Optional
 	Hash []HashParameters `json:"hash,omitempty" tf:"hash,omitempty"`
 
 	// The URI of the module content (zip or nupkg).
+	// +kubebuilder:validation:Optional
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
@@ -104,6 +108,7 @@ type ModuleParameters struct {
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// A module_link block as defined below.
+	// +kubebuilder:validation:Optional
 	ModuleLink []ModuleLinkParameters `json:"moduleLink,omitempty" tf:"module_link,omitempty"`
 
 	// The name of the resource group in which the Module is created. Changing this forces a new resource to be created.

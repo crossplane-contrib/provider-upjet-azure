@@ -43,9 +43,11 @@ type LogAnalyticsDataSourceWindowsEventObservation struct {
 type LogAnalyticsDataSourceWindowsEventParameters struct {
 
 	// Specifies the name of the Windows Event Log to collect events from.
+	// +kubebuilder:validation:Optional
 	EventLogName *string `json:"eventLogName,omitempty" tf:"event_log_name,omitempty"`
 
 	// Specifies an array of event types applied to the specified event log. Possible values include Error, Warning and Information.
+	// +kubebuilder:validation:Optional
 	EventTypes []*string `json:"eventTypes,omitempty" tf:"event_types,omitempty"`
 
 	// The name of the Resource Group where the Log Analytics Windows Event DataSource should exist. Changing this forces a new Log Analytics Windows Event DataSource to be created.

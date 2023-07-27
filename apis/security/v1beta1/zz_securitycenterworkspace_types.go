@@ -34,6 +34,7 @@ type SecurityCenterWorkspaceObservation struct {
 type SecurityCenterWorkspaceParameters struct {
 
 	// The scope of VMs to send their security data to the desired workspace, unless overridden by a setting with more specific scope.
+	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// The ID of the Log Analytics Workspace to save the data in.

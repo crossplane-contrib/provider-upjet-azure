@@ -34,9 +34,11 @@ type BuildPackGroupObservation struct {
 type BuildPackGroupParameters struct {
 
 	// Specifies a list of the build pack's ID.
+	// +kubebuilder:validation:Optional
 	BuildPackIds []*string `json:"buildPackIds,omitempty" tf:"build_pack_ids,omitempty"`
 
 	// The name which should be used for this build pack group.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -73,9 +75,11 @@ type SpringCloudBuilderObservation struct {
 type SpringCloudBuilderParameters struct {
 
 	// One or more build_pack_group blocks as defined below.
+	// +kubebuilder:validation:Optional
 	BuildPackGroup []BuildPackGroupParameters `json:"buildPackGroup,omitempty" tf:"build_pack_group,omitempty"`
 
 	// The name which should be used for this Spring Cloud Builder. Changing this forces a new Spring Cloud Builder to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Builder to be created.
@@ -93,6 +97,7 @@ type SpringCloudBuilderParameters struct {
 	SpringCloudServiceIDSelector *v1.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
 
 	// A stack block as defined below.
+	// +kubebuilder:validation:Optional
 	Stack []StackParameters `json:"stack,omitempty" tf:"stack,omitempty"`
 }
 
@@ -117,9 +122,11 @@ type StackObservation struct {
 type StackParameters struct {
 
 	// Specifies the ID of the ClusterStack.
+	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the version of the ClusterStack
+	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 

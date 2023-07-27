@@ -46,12 +46,15 @@ type ManagementLockObservation struct {
 type ManagementLockParameters struct {
 
 	// Specifies the Level to be used for this Lock. Possible values are CanNotDelete and ReadOnly. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	LockLevel *string `json:"lockLevel,omitempty" tf:"lock_level,omitempty"`
 
 	// Specifies the name of the Management Lock. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies some notes about the lock. Maximum of 512 characters. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
 	// Specifies the scope at which the Management Lock should be created. Changing this forces a new resource to be created.

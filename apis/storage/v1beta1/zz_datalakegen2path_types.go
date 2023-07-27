@@ -46,15 +46,19 @@ type DataLakeGen2PathAceObservation struct {
 type DataLakeGen2PathAceParameters struct {
 
 	// Specifies the Object ID of the Azure Active Directory User or Group that the entry relates to. Only valid for user or group entries.
+	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the permissions for the entry in rwx form. For example, rwx gives full permissions but r-- only gives read permissions.
+	// +kubebuilder:validation:Optional
 	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Specifies whether the ACE represents an access entry or a default entry. Default value is access.
+	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Specifies the type of entry. Can be user, group, mask or other.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -106,6 +110,7 @@ type DataLakeGen2PathObservation struct {
 type DataLakeGen2PathParameters struct {
 
 	// One or more ace blocks as defined below to specify the entries for the ACL for the path.
+	// +kubebuilder:validation:Optional
 	Ace []DataLakeGen2PathAceParameters `json:"ace,omitempty" tf:"ace,omitempty"`
 
 	// The name of the Data Lake Gen2 File System which should be created within the Storage Account. Must be unique within the storage account the queue is located. Changing this forces a new resource to be created.
@@ -122,15 +127,19 @@ type DataLakeGen2PathParameters struct {
 	FileSystemNameSelector *v1.Selector `json:"filesystemNameSelector,omitempty" tf:"-"`
 
 	// Specifies the Object ID of the Azure Active Directory Group to make the owning group. Possible values also include $superuser.
+	// +kubebuilder:validation:Optional
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
 	// Specifies the Object ID of the Azure Active Directory User to make the owning user. Possible values also include $superuser.
+	// +kubebuilder:validation:Optional
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
 	// The path which should be created within the Data Lake Gen2 File System in the Storage Account. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// Specifies the type for path to create. Currently only directory is supported. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
 
 	// Specifies the ID of the Storage Account in which the Data Lake Gen2 File System should exist. Changing this forces a new resource to be created.

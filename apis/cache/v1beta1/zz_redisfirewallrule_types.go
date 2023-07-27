@@ -43,6 +43,7 @@ type RedisFirewallRuleObservation struct {
 type RedisFirewallRuleParameters struct {
 
 	// The highest IP address included in the range.
+	// +kubebuilder:validation:Optional
 	EndIP *string `json:"endIp,omitempty" tf:"end_ip,omitempty"`
 
 	// The name of the Redis Cache. Changing this forces a new resource to be created.
@@ -72,6 +73,7 @@ type RedisFirewallRuleParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The lowest IP address included in the range
+	// +kubebuilder:validation:Optional
 	StartIP *string `json:"startIp,omitempty" tf:"start_ip,omitempty"`
 }
 

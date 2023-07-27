@@ -42,13 +42,16 @@ type AuthenticationConfigurationObservation struct {
 type AuthenticationConfigurationParameters struct {
 
 	// The intended audience to receive authentication tokens for the service. The default value is https://azurehealthcareapis.com
+	// +kubebuilder:validation:Optional
 	Audience *string `json:"audience,omitempty" tf:"audience,omitempty"`
 
 	// The Azure Active Directory (tenant) that serves as the authentication authority to access the service.
 	// Authority must be registered to Azure AD and in the following format: https://{Azure-AD-endpoint}/{tenant-id}.
+	// +kubebuilder:validation:Optional
 	Authority *string `json:"authority,omitempty" tf:"authority,omitempty"`
 
 	// (Boolean) Enables the 'SMART on FHIR' option for mobile and web implementations.
+	// +kubebuilder:validation:Optional
 	SmartProxyEnabled *bool `json:"smartProxyEnabled,omitempty" tf:"smart_proxy_enabled,omitempty"`
 }
 
@@ -91,18 +94,23 @@ type CorsConfigurationObservation struct {
 type CorsConfigurationParameters struct {
 
 	// (Boolean) If credentials are allowed via CORS.
+	// +kubebuilder:validation:Optional
 	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
 
 	// A set of headers to be allowed via CORS.
+	// +kubebuilder:validation:Optional
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
+	// +kubebuilder:validation:Optional
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// A set of origins to be allowed via CORS.
+	// +kubebuilder:validation:Optional
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// The max age to be allowed via CORS.
+	// +kubebuilder:validation:Optional
 	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
 }
 
@@ -175,27 +183,35 @@ type HealthcareServiceObservation struct {
 type HealthcareServiceParameters struct {
 
 	// A set of Azure object IDs that are allowed to access the Service.
+	// +kubebuilder:validation:Optional
 	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
 
 	// An authentication_configuration block as defined below.
+	// +kubebuilder:validation:Optional
 	AuthenticationConfiguration []AuthenticationConfigurationParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
 	// A cors_configuration block as defined below.
+	// +kubebuilder:validation:Optional
 	CorsConfiguration []CorsConfigurationParameters `json:"corsConfiguration,omitempty" tf:"cors_configuration,omitempty"`
 
 	// A versionless Key Vault Key ID for CMK encryption of the backing database. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	CosmosDBKeyVaultKeyVersionlessID *string `json:"cosmosdbKeyVaultKeyVersionlessId,omitempty" tf:"cosmosdb_key_vault_key_versionless_id,omitempty"`
 
 	// The provisioned throughput for the backing database. Range of 400-100000. Defaults to 1000.
+	// +kubebuilder:validation:Optional
 	CosmosDBThroughput *float64 `json:"cosmosdbThroughput,omitempty" tf:"cosmosdb_throughput,omitempty"`
 
 	// The type of the service. Values at time of publication are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.
+	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// Specifies the supported Azure Region where the Service should be created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether public network access is enabled or disabled for this service instance. Defaults to true.
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group in which to create the Service. Changing this forces a new resource to be created.
@@ -212,6 +228,7 @@ type HealthcareServiceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

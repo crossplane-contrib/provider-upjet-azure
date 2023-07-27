@@ -43,12 +43,15 @@ type EncryptionObservation struct {
 type EncryptionParameters struct {
 
 	// Specifies the URI of the Key Vault Key used to encrypt data. The key may either be versioned (for example https://vault/keys/mykey/version1) or reference a key without a version (for example https://vault/keys/mykey).
+	// +kubebuilder:validation:Optional
 	KeyVaultKeyIdentifier *string `json:"keyVaultKeyIdentifier,omitempty" tf:"key_vault_key_identifier,omitempty"`
 
 	// A managed_identity block as defined below.
+	// +kubebuilder:validation:Optional
 	ManagedIdentity []ManagedIdentityParameters `json:"managedIdentity,omitempty" tf:"managed_identity,omitempty"`
 
 	// Specifies the type of key used to encrypt the account data. Possible values are SystemKey and CustomerKey.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -79,9 +82,11 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Media Services Account.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Media Services Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -106,9 +111,11 @@ type KeyDeliveryAccessControlObservation struct {
 type KeyDeliveryAccessControlParameters struct {
 
 	// The Default Action to use when no rules match from ip_allow_list. Possible values are Allow and Deny.
+	// +kubebuilder:validation:Optional
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Delivery.
+	// +kubebuilder:validation:Optional
 	IPAllowList []*string `json:"ipAllowList,omitempty" tf:"ip_allow_list,omitempty"`
 }
 
@@ -133,9 +140,11 @@ type ManagedIdentityObservation struct {
 type ManagedIdentityParameters struct {
 
 	// Whether to use System Assigned Identity. Possible Values are true and false.
+	// +kubebuilder:validation:Optional
 	UseSystemAssignedIdentity *bool `json:"useSystemAssignedIdentity,omitempty" tf:"use_system_assigned_identity,omitempty"`
 
 	// The ID of the User Assigned Identity. This value can only be set when use_system_assigned_identity is false
+	// +kubebuilder:validation:Optional
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
@@ -202,18 +211,23 @@ type ServicesAccountObservation struct {
 type ServicesAccountParameters struct {
 
 	// An encryption block as defined below.
+	// +kubebuilder:validation:Optional
 	Encryption []EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// A key_delivery_access_control block as defined below.
+	// +kubebuilder:validation:Optional
 	KeyDeliveryAccessControl []KeyDeliveryAccessControlParameters `json:"keyDeliveryAccessControl,omitempty" tf:"key_delivery_access_control,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether public network access is allowed for this server. Defaults to true.
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Media Services Account. Changing this forces a new resource to be created.
@@ -230,12 +244,15 @@ type ServicesAccountParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more storage_account blocks as defined below.
+	// +kubebuilder:validation:Optional
 	StorageAccount []StorageAccountParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
 
 	// Specifies the storage authentication type. Possible value is ManagedIdentity or System.
+	// +kubebuilder:validation:Optional
 	StorageAuthenticationType *string `json:"storageAuthenticationType,omitempty" tf:"storage_authentication_type,omitempty"`
 
 	// A mapping of tags assigned to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -269,9 +286,11 @@ type StorageAccountManagedIdentityObservation struct {
 type StorageAccountManagedIdentityParameters struct {
 
 	// Whether to use System Assigned Identity. Possible Values are true and false.
+	// +kubebuilder:validation:Optional
 	UseSystemAssignedIdentity *bool `json:"useSystemAssignedIdentity,omitempty" tf:"use_system_assigned_identity,omitempty"`
 
 	// The ID of the User Assigned Identity. This value can only be set when use_system_assigned_identity is false
+	// +kubebuilder:validation:Optional
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
@@ -304,9 +323,11 @@ type StorageAccountParameters struct {
 	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 
 	// Specifies whether the storage account should be the primary account or not. Defaults to false.
+	// +kubebuilder:validation:Optional
 	IsPrimary *bool `json:"isPrimary,omitempty" tf:"is_primary,omitempty"`
 
 	// A managed_identity block as defined below.
+	// +kubebuilder:validation:Optional
 	ManagedIdentity []StorageAccountManagedIdentityParameters `json:"managedIdentity,omitempty" tf:"managed_identity,omitempty"`
 }
 

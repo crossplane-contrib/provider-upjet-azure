@@ -43,6 +43,7 @@ type ScopeMapObservation struct {
 type ScopeMapParameters struct {
 
 	// A list of actions to attach to the scope map (e.g. repo/content/read, repo2/content/delete).
+	// +kubebuilder:validation:Optional
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// The name of the Container Registry. Changing this forces a new resource to be created.
@@ -59,6 +60,7 @@ type ScopeMapParameters struct {
 	ContainerRegistryNameSelector *v1.Selector `json:"containerRegistryNameSelector,omitempty" tf:"-"`
 
 	// The description of the Container Registry.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the resource group in which to create the Container Registry token. Changing this forces a new resource to be created.

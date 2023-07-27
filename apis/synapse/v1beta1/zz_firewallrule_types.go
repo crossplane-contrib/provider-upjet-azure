@@ -40,9 +40,11 @@ type FirewallRuleObservation struct {
 type FirewallRuleParameters struct {
 
 	// The ending IP address to allow through the firewall for this rule.
+	// +kubebuilder:validation:Optional
 	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
 	// The starting IP address to allow through the firewall for this rule.
+	// +kubebuilder:validation:Optional
 	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 
 	// The ID of the Synapse Workspace on which to create the Firewall Rule. Changing this forces a new resource to be created.

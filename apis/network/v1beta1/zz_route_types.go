@@ -49,12 +49,15 @@ type RouteObservation_2 struct {
 type RouteParameters_2 struct {
 
 	// The destination to which the route applies. Can be CIDR (such as 10.1.0.0/16) or Azure Service Tag (such as ApiManagement, AzureBackup or AzureMonitor) format.
+	// +kubebuilder:validation:Optional
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
 
 	// Contains the IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance.
+	// +kubebuilder:validation:Optional
 	NextHopInIPAddress *string `json:"nextHopInIpAddress,omitempty" tf:"next_hop_in_ip_address,omitempty"`
 
 	// The type of Azure hop the packet should be sent to. Possible values are VirtualNetworkGateway, VnetLocal, Internet, VirtualAppliance and None.
+	// +kubebuilder:validation:Optional
 	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
 
 	// The name of the resource group in which to create the route. Changing this forces a new resource to be created.

@@ -115,9 +115,11 @@ type EventSourceIOTHubParameters struct {
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Shared Access key that grants the Event Source access to the IotHub.
+	// +kubebuilder:validation:Optional
 	SharedAccessKeyName *string `json:"sharedAccessKeyName,omitempty" tf:"shared_access_key_name,omitempty"`
 
 	// Specifies the value of the Shared Access Policy key that grants the Time Series Insights service read access to the IotHub.
@@ -125,9 +127,11 @@ type EventSourceIOTHubParameters struct {
 	SharedAccessKeySecretRef v1.SecretKeySelector `json:"sharedAccessKeySecretRef" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the value that will be used as the event source's timestamp. This value defaults to the event creation time.
+	// +kubebuilder:validation:Optional
 	TimestampPropertyName *string `json:"timestampPropertyName,omitempty" tf:"timestamp_property_name,omitempty"`
 }
 

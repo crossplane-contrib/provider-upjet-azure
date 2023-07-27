@@ -42,6 +42,7 @@ type AppActiveSlotParameters struct {
 
 	// The swap action should overwrite the Production slot's network configuration with the configuration from this slot. Defaults to true. Changing this forces a new resource to be created.
 	// The swap action should overwrite the Production slot's network configuration with the configuration from this slot. Defaults to `true`.
+	// +kubebuilder:validation:Optional
 	OverwriteNetworkConfig *bool `json:"overwriteNetworkConfig,omitempty" tf:"overwrite_network_config,omitempty"`
 
 	// The ID of the Slot to swap with Production.

@@ -34,9 +34,11 @@ type ActionObservation struct {
 type ActionParameters struct {
 
 	// Specifies the endpoint of the action.
+	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// Specifies the name of the action.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -85,9 +87,11 @@ type CustomProviderObservation struct {
 type CustomProviderParameters struct {
 
 	// Any number of action block as defined below. One of resource_type or action must be specified.
+	// +kubebuilder:validation:Optional
 	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Custom Provider. Changing this forces a new resource to be created.
@@ -104,12 +108,15 @@ type CustomProviderParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Any number of resource_type block as defined below. One of resource_type or action must be specified.
+	// +kubebuilder:validation:Optional
 	ResourceType []ResourceTypeParameters `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Any number of validation block as defined below.
+	// +kubebuilder:validation:Optional
 	Validation []ValidationParameters `json:"validation,omitempty" tf:"validation,omitempty"`
 }
 
@@ -140,12 +147,15 @@ type ResourceTypeObservation struct {
 type ResourceTypeParameters struct {
 
 	// Specifies the endpoint of the route definition.
+	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// Specifies the name of the route definition.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. This value defaults to ResourceTypeRoutingProxy.
+	// +kubebuilder:validation:Optional
 	RoutingType *string `json:"routingType,omitempty" tf:"routing_type,omitempty"`
 }
 
@@ -164,6 +174,7 @@ type ValidationObservation struct {
 type ValidationParameters struct {
 
 	// The endpoint where the validation specification is located.
+	// +kubebuilder:validation:Optional
 	Specification *string `json:"specification,omitempty" tf:"specification,omitempty"`
 }
 

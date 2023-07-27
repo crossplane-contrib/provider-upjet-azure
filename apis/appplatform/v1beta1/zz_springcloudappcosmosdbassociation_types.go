@@ -70,6 +70,7 @@ type SpringCloudAppCosmosDBAssociationObservation struct {
 type SpringCloudAppCosmosDBAssociationParameters struct {
 
 	// Specifies the API type which should be used when connecting to the CosmosDB Account. Possible values are cassandra, gremlin, mongo, sql or table. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
 
 	// Specifies the CosmosDB Account access key.
@@ -101,18 +102,23 @@ type SpringCloudAppCosmosDBAssociationParameters struct {
 	CosmosDBAccountIDSelector *v1.Selector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Cassandra Keyspace which the Spring Cloud App should be associated with. Should only be set when api_type is cassandra.
+	// +kubebuilder:validation:Optional
 	CosmosDBCassandraKeySpaceName *string `json:"cosmosdbCassandraKeyspaceName,omitempty" tf:"cosmosdb_cassandra_keyspace_name,omitempty"`
 
 	// Specifies the name of the Gremlin Database which the Spring Cloud App should be associated with. Should only be set when api_type is gremlin.
+	// +kubebuilder:validation:Optional
 	CosmosDBGremlinDatabaseName *string `json:"cosmosdbGremlinDatabaseName,omitempty" tf:"cosmosdb_gremlin_database_name,omitempty"`
 
 	// Specifies the name of the Gremlin Graph which the Spring Cloud App should be associated with. Should only be set when api_type is gremlin.
+	// +kubebuilder:validation:Optional
 	CosmosDBGremlinGraphName *string `json:"cosmosdbGremlinGraphName,omitempty" tf:"cosmosdb_gremlin_graph_name,omitempty"`
 
 	// Specifies the name of the Mongo Database which the Spring Cloud App should be associated with. Should only be set when api_type is mongo.
+	// +kubebuilder:validation:Optional
 	CosmosDBMongoDatabaseName *string `json:"cosmosdbMongoDatabaseName,omitempty" tf:"cosmosdb_mongo_database_name,omitempty"`
 
 	// Specifies the name of the SQL Database which the Spring Cloud App should be associated with. Should only be set when api_type is sql.
+	// +kubebuilder:validation:Optional
 	CosmosDBSQLDatabaseName *string `json:"cosmosdbSqlDatabaseName,omitempty" tf:"cosmosdb_sql_database_name,omitempty"`
 
 	// Specifies the ID of the Spring Cloud Application where this Association is created. Changing this forces a new resource to be created.

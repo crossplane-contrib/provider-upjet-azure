@@ -84,12 +84,15 @@ type APISchemaParameters struct {
 	APINameSelector *v1.Selector `json:"apiNameSelector,omitempty" tf:"-"`
 
 	// Types definitions. Used for Swagger/OpenAPI v2/v3 schemas only.
+	// +kubebuilder:validation:Optional
 	Components *string `json:"components,omitempty" tf:"components,omitempty"`
 
 	// The content type of the API Schema.
+	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Types definitions. Used for Swagger/OpenAPI v1 schemas only.
+	// +kubebuilder:validation:Optional
 	Definitions *string `json:"definitions,omitempty" tf:"definitions,omitempty"`
 
 	// The Name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
@@ -106,6 +109,7 @@ type APISchemaParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The JSON escaped string defining the document representing the Schema.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 

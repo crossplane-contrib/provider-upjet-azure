@@ -40,9 +40,11 @@ type TopicIdentityObservation struct {
 type TopicIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid Topic.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Event Grid Topic. Possible values are SystemAssigned, UserAssigned.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -67,9 +69,11 @@ type TopicInboundIPRuleObservation struct {
 type TopicInboundIPRuleParameters struct {
 
 	// The action to take when the rule is matched. Possible values are Allow.
+	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 
 	// The IP mask (CIDR) to match on.
+	// +kubebuilder:validation:Optional
 	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask"`
 }
 
@@ -130,12 +134,15 @@ type TopicInputMappingDefaultValuesObservation struct {
 type TopicInputMappingDefaultValuesParameters struct {
 
 	// Specifies the default data version of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DataVersion *string `json:"dataVersion,omitempty" tf:"data_version,omitempty"`
 
 	// Specifies the default event type of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
 
 	// Specifies the default subject of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
@@ -184,21 +191,27 @@ type TopicInputMappingFieldsObservation struct {
 type TopicInputMappingFieldsParameters struct {
 
 	// Specifies the data version of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DataVersion *string `json:"dataVersion,omitempty" tf:"data_version,omitempty"`
 
 	// Specifies the event time of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	EventTime *string `json:"eventTime,omitempty" tf:"event_time,omitempty"`
 
 	// Specifies the event type of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	EventType *string `json:"eventType,omitempty" tf:"event_type,omitempty"`
 
 	// Specifies the id of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the subject of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
 	// Specifies the topic of the EventGrid Event to associate with the domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Topic *string `json:"topic,omitempty" tf:"topic,omitempty"`
 }
 
@@ -244,27 +257,35 @@ type TopicObservation struct {
 type TopicParameters struct {
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []TopicIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// One or more inbound_ip_rule blocks as defined below.
+	// +kubebuilder:validation:Optional
 	InboundIPRule []TopicInboundIPRuleParameters `json:"inboundIpRule,omitempty" tf:"inbound_ip_rule,omitempty"`
 
 	// A input_mapping_default_values block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	InputMappingDefaultValues []TopicInputMappingDefaultValuesParameters `json:"inputMappingDefaultValues,omitempty" tf:"input_mapping_default_values,omitempty"`
 
 	// A input_mapping_fields block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	InputMappingFields []TopicInputMappingFieldsParameters `json:"inputMappingFields,omitempty" tf:"input_mapping_fields,omitempty"`
 
 	// Specifies the schema in which incoming events will be published to this domain. Allowed values are CloudEventSchemaV1_0, CustomEventSchema, or EventGridSchema. Defaults to EventGridSchema. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	InputSchema *string `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
 
 	// Whether local authentication methods is enabled for the EventGrid Topic. Defaults to true.
+	// +kubebuilder:validation:Optional
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether or not public network access is allowed for this server. Defaults to true.
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which the EventGrid Topic exists. Changing this forces a new resource to be created.
@@ -281,6 +302,7 @@ type TopicParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

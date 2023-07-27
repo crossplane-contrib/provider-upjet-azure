@@ -43,9 +43,11 @@ type SiteRecoveryReplicationPolicyObservation struct {
 type SiteRecoveryReplicationPolicyParameters struct {
 
 	// Specifies the frequency(in minutes) at which to create application consistent recovery points.
+	// +kubebuilder:validation:Optional
 	ApplicationConsistentSnapshotFrequencyInMinutes *float64 `json:"applicationConsistentSnapshotFrequencyInMinutes,omitempty" tf:"application_consistent_snapshot_frequency_in_minutes,omitempty"`
 
 	// The duration in minutes for which the recovery points need to be stored.
+	// +kubebuilder:validation:Optional
 	RecoveryPointRetentionInMinutes *float64 `json:"recoveryPointRetentionInMinutes,omitempty" tf:"recovery_point_retention_in_minutes,omitempty"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.

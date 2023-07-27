@@ -65,6 +65,7 @@ type EmailTemplateParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The body of the Email. Its format has to be a well-formed HTML document.
+	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The name of the Resource Group where the API Management Email Template should exist. Changing this forces a new API Management Email Template to be created.
@@ -81,6 +82,7 @@ type EmailTemplateParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The subject of the Email.
+	// +kubebuilder:validation:Optional
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
 	// The name of the Email Template. Possible values are AccountClosedDeveloper, ApplicationApprovedNotificationMessage, ConfirmSignUpIdentityDefault, EmailChangeIdentityDefault, InviteUserNotificationMessage, NewCommentNotificationMessage, NewDeveloperNotificationMessage, NewIssueNotificationMessage, PasswordResetByAdminNotificationMessage, PasswordResetIdentityDefault, PurchaseDeveloperNotificationMessage, QuotaLimitApproachingDeveloperNotificationMessage, RejectDeveloperNotificationMessage, RequestDeveloperNotificationMessage. Changing this forces a new API Management Email Template to be created.

@@ -31,6 +31,7 @@ type LoadBalancerOutboundRuleFrontendIPConfigurationObservation struct {
 type LoadBalancerOutboundRuleFrontendIPConfigurationParameters struct {
 
 	// The name of the Frontend IP Configuration.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -82,6 +83,7 @@ type LoadBalancerOutboundRuleObservation struct {
 type LoadBalancerOutboundRuleParameters struct {
 
 	// The number of outbound ports to be used for NAT. Defaults to 1024.
+	// +kubebuilder:validation:Optional
 	AllocatedOutboundPorts *float64 `json:"allocatedOutboundPorts,omitempty" tf:"allocated_outbound_ports,omitempty"`
 
 	// The ID of the Backend Address Pool. Outbound traffic is randomly load balanced across IPs in the backend IPs.
@@ -99,12 +101,15 @@ type LoadBalancerOutboundRuleParameters struct {
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
 	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
+	// +kubebuilder:validation:Optional
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
 
 	// One or more frontend_ip_configuration blocks as defined below.
+	// +kubebuilder:validation:Optional
 	FrontendIPConfiguration []LoadBalancerOutboundRuleFrontendIPConfigurationParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// The timeout for the TCP idle connection Defaults to 4.
+	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// The ID of the Load Balancer in which to create the Outbound Rule. Changing this forces a new resource to be created.
@@ -122,6 +127,7 @@ type LoadBalancerOutboundRuleParameters struct {
 	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
 	// The transport protocol for the external endpoint. Possible values are Udp, Tcp or All.
+	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 

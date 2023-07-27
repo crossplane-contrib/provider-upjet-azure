@@ -108,21 +108,27 @@ type ApplicationInsightsStandardWebTestParameters struct {
 	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// Purpose/user defined descriptive test for this WebTest.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Should the WebTest be enabled?
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Interval in seconds between test runs for this WebTest. Valid options are 300, 600 and 900. Defaults to 300.
+	// +kubebuilder:validation:Optional
 	Frequency *float64 `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// Specifies a list of where to physically run the tests from to give global coverage for accessibility of your application.
+	// +kubebuilder:validation:Optional
 	GeoLocations []*string `json:"geoLocations,omitempty" tf:"geo_locations,omitempty"`
 
 	// The Azure Region where the Application Insights Standard WebTest should exist. Changing this forces a new Application Insights Standard WebTest to be created. It needs to correlate with location of the parent resource (azurerm_application_insights)
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A request block as defined below.
+	// +kubebuilder:validation:Optional
 	Request []RequestParameters `json:"request,omitempty" tf:"request,omitempty"`
 
 	// The name of the Resource Group where the Application Insights Standard WebTest should exist. Changing this forces a new Application Insights Standard WebTest to be created.
@@ -139,15 +145,19 @@ type ApplicationInsightsStandardWebTestParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Should the retry on WebTest failure be enabled?
+	// +kubebuilder:validation:Optional
 	RetryEnabled *bool `json:"retryEnabled,omitempty" tf:"retry_enabled,omitempty"`
 
 	// A mapping of tags which should be assigned to the Application Insights Standard WebTest.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Seconds until this WebTest will timeout and fail. Default is 30.
+	// +kubebuilder:validation:Optional
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// A validation_rules block as defined below.
+	// +kubebuilder:validation:Optional
 	ValidationRules []ValidationRulesParameters `json:"validationRules,omitempty" tf:"validation_rules,omitempty"`
 }
 
@@ -178,12 +188,15 @@ type ContentObservation struct {
 type ContentParameters struct {
 
 	// A string value containing the content to match on.
+	// +kubebuilder:validation:Optional
 	ContentMatch *string `json:"contentMatch,omitempty" tf:"content_match,omitempty"`
 
 	// Ignore the casing in the content_match value.
+	// +kubebuilder:validation:Optional
 	IgnoreCase *bool `json:"ignoreCase,omitempty" tf:"ignore_case,omitempty"`
 
 	// If the content of content_match is found, pass the test. If set to false, the WebTest is failing if the content of content_match is found.
+	// +kubebuilder:validation:Optional
 	PassIfTextFound *bool `json:"passIfTextFound,omitempty" tf:"pass_if_text_found,omitempty"`
 }
 
@@ -208,9 +221,11 @@ type HeaderObservation struct {
 type HeaderParameters struct {
 
 	// The name which should be used for this Application Insights Standard WebTest. Changing this forces a new Application Insights Standard WebTest to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value which should be used for a header in the request.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -259,21 +274,27 @@ type RequestObservation struct {
 type RequestParameters struct {
 
 	// The WebTest request body.
+	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// Should the following of redirects be enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	FollowRedirectsEnabled *bool `json:"followRedirectsEnabled,omitempty" tf:"follow_redirects_enabled,omitempty"`
 
 	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'.
+	// +kubebuilder:validation:Optional
 	HTTPVerb *string `json:"httpVerb,omitempty" tf:"http_verb,omitempty"`
 
 	// One or more header blocks as defined above.
+	// +kubebuilder:validation:Optional
 	Header []HeaderParameters `json:"header,omitempty" tf:"header,omitempty"`
 
 	// Should the parsing of dependend requests be enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	ParseDependentRequestsEnabled *bool `json:"parseDependentRequestsEnabled,omitempty" tf:"parse_dependent_requests_enabled,omitempty"`
 
 	// The WebTest request URL.
+	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -310,15 +331,19 @@ type ValidationRulesObservation struct {
 type ValidationRulesParameters struct {
 
 	// A content block as defined above.
+	// +kubebuilder:validation:Optional
 	Content []ContentParameters `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The expected status code of the response. Default is '200', '0' means 'response code < 400'
+	// +kubebuilder:validation:Optional
 	ExpectedStatusCode *float64 `json:"expectedStatusCode,omitempty" tf:"expected_status_code,omitempty"`
 
 	// The number of days of SSL certificate validity remaining for the checked endpoint. If the certificate has a shorter remaining lifetime left, the test will fail. This number should be between 1 and 365.
+	// +kubebuilder:validation:Optional
 	SSLCertRemainingLifetime *float64 `json:"sslCertRemainingLifetime,omitempty" tf:"ssl_cert_remaining_lifetime,omitempty"`
 
 	// Should the SSL check be enabled?
+	// +kubebuilder:validation:Optional
 	SSLCheckEnabled *bool `json:"sslCheckEnabled,omitempty" tf:"ssl_check_enabled,omitempty"`
 }
 

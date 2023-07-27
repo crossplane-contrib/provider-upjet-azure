@@ -61,9 +61,11 @@ type DatabaseMigrationProjectObservation struct {
 type DatabaseMigrationProjectParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specify the name of the database migration project. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Name of the resource group in which to create the database migration project. Changing this forces a new resource to be created.
@@ -94,12 +96,15 @@ type DatabaseMigrationProjectParameters struct {
 	ServiceNameSelector *v1.Selector `json:"serviceNameSelector,omitempty" tf:"-"`
 
 	// The platform type of the migration source. Currently only support: SQL(on-premises SQL Server). Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SourcePlatform *string `json:"sourcePlatform,omitempty" tf:"source_platform,omitempty"`
 
 	// A mapping of tags to assigned to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The platform type of the migration target. Currently only support: SQLDB(Azure SQL Database). Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	TargetPlatform *string `json:"targetPlatform,omitempty" tf:"target_platform,omitempty"`
 }
 

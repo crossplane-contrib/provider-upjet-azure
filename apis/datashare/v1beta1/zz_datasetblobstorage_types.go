@@ -79,12 +79,15 @@ type DataSetBlobStorageParameters struct {
 	DataShareIDSelector *v1.Selector `json:"dataShareIdSelector,omitempty" tf:"-"`
 
 	// The path of the file in the storage container to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
+	// +kubebuilder:validation:Optional
 	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
 
 	// The path of the folder in the storage container to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
+	// +kubebuilder:validation:Optional
 	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
 
 	// A storage_account block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	StorageAccount []StorageAccountParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
 }
 
@@ -135,6 +138,7 @@ type StorageAccountParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The subscription id of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
+	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 

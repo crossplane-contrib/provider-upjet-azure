@@ -37,6 +37,7 @@ type AppIntegrationAccountSessionObservation struct {
 type AppIntegrationAccountSessionParameters struct {
 
 	// The content of the Logic App Integration Account Session.
+	// +kubebuilder:validation:Optional
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Session to be created.

@@ -49,6 +49,7 @@ type HybridConnectionObservation struct {
 type HybridConnectionParameters struct {
 
 	// Specifies the name of the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Azure Relay in which to create the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
@@ -65,6 +66,7 @@ type HybridConnectionParameters struct {
 	RelayNamespaceNameSelector *v1.Selector `json:"relayNamespaceNameSelector,omitempty" tf:"-"`
 
 	// Specify if client authorization is needed for this hybrid connection. True by default. Changing this forces a new resource to be created. Defaults to true.
+	// +kubebuilder:validation:Optional
 	RequiresClientAuthorization *bool `json:"requiresClientAuthorization,omitempty" tf:"requires_client_authorization,omitempty"`
 
 	// The name of the resource group in which to create the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
@@ -81,6 +83,7 @@ type HybridConnectionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The usermetadata is a placeholder to store user-defined string data for the hybrid connection endpoint. For example, it can be used to store descriptive data, such as a list of teams and their contact information. Also, user-defined configuration settings can be stored.
+	// +kubebuilder:validation:Optional
 	UserMetadata *string `json:"userMetadata,omitempty" tf:"user_metadata,omitempty"`
 }
 

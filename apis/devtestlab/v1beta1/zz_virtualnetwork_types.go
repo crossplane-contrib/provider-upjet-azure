@@ -37,9 +37,11 @@ type SubnetObservation struct {
 type SubnetParameters struct {
 
 	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny.
+	// +kubebuilder:validation:Optional
 	UseInVirtualMachineCreation *string `json:"useInVirtualMachineCreation,omitempty" tf:"use_in_virtual_machine_creation,omitempty"`
 
 	// Can Virtual Machines in this Subnet use Public IP Addresses? Possible values are Allow, Default and Deny.
+	// +kubebuilder:validation:Optional
 	UsePublicIPAddress *string `json:"usePublicIpAddress,omitempty" tf:"use_public_ip_address,omitempty"`
 }
 
@@ -88,6 +90,7 @@ type VirtualNetworkObservation struct {
 type VirtualNetworkParameters struct {
 
 	// A description for the Virtual Network.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the name of the Dev Test Lab in which the Virtual Network should be created. Changing this forces a new resource to be created.
@@ -104,6 +107,7 @@ type VirtualNetworkParameters struct {
 	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Dev Test Virtual Network. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
@@ -120,9 +124,11 @@ type VirtualNetworkParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A subnet block as defined below.
+	// +kubebuilder:validation:Optional
 	Subnet []SubnetParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

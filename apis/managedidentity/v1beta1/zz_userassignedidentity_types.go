@@ -55,9 +55,11 @@ type UserAssignedIdentityObservation struct {
 type UserAssignedIdentityParameters struct {
 
 	// The Azure Region where the User Assigned Identity should exist. Changing this forces a new User Assigned Identity to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of this User Assigned Identity. Changing this forces a new User Assigned Identity to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the name of the Resource Group within which this User Assigned Identity should exist. Changing this forces a new User Assigned Identity to be created.
@@ -74,6 +76,7 @@ type UserAssignedIdentityParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the User Assigned Identity.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

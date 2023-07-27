@@ -68,9 +68,11 @@ type ConnectionClassicCertificateParameters struct {
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the certificate asset.
+	// +kubebuilder:validation:Optional
 	CertificateAssetName *string `json:"certificateAssetName,omitempty" tf:"certificate_asset_name,omitempty"`
 
 	// A description for this Connection.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the resource group in which the Connection is created. Changing this forces a new resource to be created.
@@ -87,9 +89,11 @@ type ConnectionClassicCertificateParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The id of subscription.
+	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// The name of subscription.
+	// +kubebuilder:validation:Optional
 	SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
 }
 

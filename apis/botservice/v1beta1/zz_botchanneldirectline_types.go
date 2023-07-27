@@ -57,6 +57,7 @@ type BotChannelDirectLineParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.
@@ -73,6 +74,7 @@ type BotChannelDirectLineParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A site represents a client application that you want to connect to your bot. Multiple site blocks may be defined as below
+	// +kubebuilder:validation:Optional
 	Site []SiteParameters `json:"site,omitempty" tf:"site,omitempty"`
 }
 
@@ -124,21 +126,27 @@ type SiteObservation struct {
 type SiteParameters struct {
 
 	// Enables/Disables this site. Enabled by default Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Enables additional security measures for this site, see Enhanced Directline Authentication Features. Disabled by default.
+	// +kubebuilder:validation:Optional
 	EnhancedAuthenticationEnabled *bool `json:"enhancedAuthenticationEnabled,omitempty" tf:"enhanced_authentication_enabled,omitempty"`
 
 	// The name of the site
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// This field is required when is_secure_site_enabled is enabled. Determines which origins can establish a Directline conversation for this site.
+	// +kubebuilder:validation:Optional
 	TrustedOrigins []*string `json:"trustedOrigins,omitempty" tf:"trusted_origins,omitempty"`
 
 	// Enables v1 of the Directline protocol for this site. Enabled by default Defaults to true.
+	// +kubebuilder:validation:Optional
 	V1Allowed *bool `json:"v1Allowed,omitempty" tf:"v1_allowed,omitempty"`
 
 	// Enables v3 of the Directline protocol for this site. Enabled by default Defaults to true.
+	// +kubebuilder:validation:Optional
 	V3Allowed *bool `json:"v3Allowed,omitempty" tf:"v3_allowed,omitempty"`
 }
 

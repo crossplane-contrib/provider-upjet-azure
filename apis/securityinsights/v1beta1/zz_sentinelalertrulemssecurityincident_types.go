@@ -76,21 +76,27 @@ type SentinelAlertRuleMSSecurityIncidentObservation struct {
 type SentinelAlertRuleMSSecurityIncidentParameters struct {
 
 	// The GUID of the alert rule template which is used to create this Sentinel Scheduled Alert Rule. Changing this forces a new Sentinel MS Security Incident Alert Rule to be created.
+	// +kubebuilder:validation:Optional
 	AlertRuleTemplateGUID *string `json:"alertRuleTemplateGuid,omitempty" tf:"alert_rule_template_guid,omitempty"`
 
 	// The description of this Sentinel MS Security Incident Alert Rule.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The friendly name of this Sentinel MS Security Incident Alert Rule.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Only create incidents when the alert display name doesn't contain text from this list.
+	// +kubebuilder:validation:Optional
 	DisplayNameExcludeFilter []*string `json:"displayNameExcludeFilter,omitempty" tf:"display_name_exclude_filter,omitempty"`
 
 	// Only create incidents when the alert display name contain text from this list, leave empty to apply no filter.
+	// +kubebuilder:validation:Optional
 	DisplayNameFilter []*string `json:"displayNameFilter,omitempty" tf:"display_name_filter,omitempty"`
 
 	// Should this Sentinel MS Security Incident Alert Rule be enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The ID of the Log Analytics Workspace this Sentinel MS Security Incident Alert Rule belongs to. Changing this forces a new Sentinel MS Security Incident Alert Rule to be created.
@@ -108,9 +114,11 @@ type SentinelAlertRuleMSSecurityIncidentParameters struct {
 	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The Microsoft Security Service from where the alert will be generated. Possible values are Azure Active Directory Identity Protection, Azure Advanced Threat Protection, Azure Security Center, Azure Security Center for IoT, Microsoft Cloud App Security, Microsoft Defender Advanced Threat Protection and Office 365 Advanced Threat Protection.
+	// +kubebuilder:validation:Optional
 	ProductFilter *string `json:"productFilter,omitempty" tf:"product_filter,omitempty"`
 
 	// Only create incidents from alerts when alert severity level is contained in this list. Possible values are High, Medium, Low and Informational.
+	// +kubebuilder:validation:Optional
 	SeverityFilter []*string `json:"severityFilter,omitempty" tf:"severity_filter,omitempty"`
 }
 

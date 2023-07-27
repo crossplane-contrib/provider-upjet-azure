@@ -100,9 +100,11 @@ type WorkspaceIdentityObservation struct {
 type WorkspaceIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Workspace.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Workspace. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -231,24 +233,31 @@ type WorkspaceParameters struct {
 	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// The ID of the container registry associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
 
 	// The description of this Machine Learning Workspace.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An encryption block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Encryption []EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// Display name for this Machine Learning Workspace.
+	// +kubebuilder:validation:Optional
 	FriendlyName *string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
 
 	// Flag to signal High Business Impact (HBI) data in the workspace and reduce diagnostic data collected by the service
+	// +kubebuilder:validation:Optional
 	HighBusinessImpact *bool `json:"highBusinessImpact,omitempty" tf:"high_business_impact,omitempty"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []WorkspaceIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The compute name for image build of the Machine Learning Workspace.
+	// +kubebuilder:validation:Optional
 	ImageBuildComputeName *string `json:"imageBuildComputeName,omitempty" tf:"image_build_compute_name,omitempty"`
 
 	// The ID of key vault associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
@@ -266,6 +275,7 @@ type WorkspaceParameters struct {
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The user assigned identity id that represents the workspace identity.
@@ -283,9 +293,11 @@ type WorkspaceParameters struct {
 	PrimaryUserAssignedIdentitySelector *v1.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
 
 	// Enable public access when this Machine Learning Workspace is behind a VNet. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PublicAccessBehindVirtualNetworkEnabled *bool `json:"publicAccessBehindVirtualNetworkEnabled,omitempty" tf:"public_access_behind_virtual_network_enabled,omitempty"`
 
 	// Enable public access when this Machine Learning Workspace is behind VNet.
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// Specifies the name of the Resource Group in which the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
@@ -302,6 +314,7 @@ type WorkspaceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// SKU/edition of the Machine Learning Workspace, possible values are Basic. Defaults to Basic.
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The ID of the Storage Account associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
@@ -319,9 +332,11 @@ type WorkspaceParameters struct {
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Enable V1 API features, enabling v1_legacy_mode may prevent you from using features provided by the v2 API. Defaults to false.
+	// +kubebuilder:validation:Optional
 	V1LegacyModeEnabled *bool `json:"v1LegacyModeEnabled,omitempty" tf:"v1_legacy_mode_enabled,omitempty"`
 }
 

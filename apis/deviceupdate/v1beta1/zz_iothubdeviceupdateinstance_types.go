@@ -93,9 +93,11 @@ type IOTHubDeviceUpdateInstanceParameters struct {
 	DeviceUpdateAccountIDSelector *v1.Selector `json:"deviceUpdateAccountIdSelector,omitempty" tf:"-"`
 
 	// Whether the diagnostic log collection is enabled. Possible values are true and false. Defaults to false.
+	// +kubebuilder:validation:Optional
 	DiagnosticEnabled *bool `json:"diagnosticEnabled,omitempty" tf:"diagnostic_enabled,omitempty"`
 
 	// A diagnostic_storage_account block as defined below.
+	// +kubebuilder:validation:Optional
 	DiagnosticStorageAccount []DiagnosticStorageAccountParameters `json:"diagnosticStorageAccount,omitempty" tf:"diagnostic_storage_account,omitempty"`
 
 	// Specifies the ID of the IoT Hub associated with the IoT Hub Device Update Instance. Changing this forces a new resource to be created.
@@ -113,6 +115,7 @@ type IOTHubDeviceUpdateInstanceParameters struct {
 	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the IoT Hub Device Update Instance.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

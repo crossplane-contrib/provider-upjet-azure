@@ -37,6 +37,7 @@ type APIServerAccessProfileObservation struct {
 type APIServerAccessProfileParameters struct {
 
 	// Set of authorized IP ranges to allow access to API server, e.g. ["198.51.100.0/24"].
+	// +kubebuilder:validation:Optional
 	AuthorizedIPRanges []*string `json:"authorizedIpRanges,omitempty" tf:"authorized_ip_ranges,omitempty"`
 
 	// The ID of the Subnet where the API server endpoint is delegated to.
@@ -54,6 +55,7 @@ type APIServerAccessProfileParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Should API Server VNet Integration be enabled? For more details please visit Use API Server VNet Integration.
+	// +kubebuilder:validation:Optional
 	VnetIntegrationEnabled *bool `json:"vnetIntegrationEnabled,omitempty" tf:"vnet_integration_enabled,omitempty"`
 }
 
@@ -106,9 +108,11 @@ type AllowedObservation struct {
 type AllowedParameters struct {
 
 	// A day in a week. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
+	// +kubebuilder:validation:Optional
 	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
 	// An array of hour slots in a day. For example, specifying 1 will allow maintenance from 1:00am to 2:00am. Specifying 1, 2 will allow maintenance from 1:00am to 3:00m. Possible values are between 0 and 23.
+	// +kubebuilder:validation:Optional
 	Hours []*float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 }
 
@@ -223,54 +227,71 @@ type AutoScalerProfileObservation struct {
 type AutoScalerProfileParameters struct {
 
 	// Detect similar node groups and balance the number of nodes between them. Defaults to false.
+	// +kubebuilder:validation:Optional
 	BalanceSimilarNodeGroups *bool `json:"balanceSimilarNodeGroups,omitempty" tf:"balance_similar_node_groups,omitempty"`
 
 	// Maximum number of empty nodes that can be deleted at the same time. Defaults to 10.
+	// +kubebuilder:validation:Optional
 	EmptyBulkDeleteMax *string `json:"emptyBulkDeleteMax,omitempty" tf:"empty_bulk_delete_max,omitempty"`
 
 	// Expander to use. Possible values are least-waste, priority, most-pods and random. Defaults to random.
+	// +kubebuilder:validation:Optional
 	Expander *string `json:"expander,omitempty" tf:"expander,omitempty"`
 
 	// Maximum number of seconds the cluster autoscaler waits for pod termination when trying to scale down a node. Defaults to 600.
+	// +kubebuilder:validation:Optional
 	MaxGracefulTerminationSec *string `json:"maxGracefulTerminationSec,omitempty" tf:"max_graceful_termination_sec,omitempty"`
 
 	// Maximum time the autoscaler waits for a node to be provisioned. Defaults to 15m.
+	// +kubebuilder:validation:Optional
 	MaxNodeProvisioningTime *string `json:"maxNodeProvisioningTime,omitempty" tf:"max_node_provisioning_time,omitempty"`
 
 	// Maximum Number of allowed unready nodes. Defaults to 3.
+	// +kubebuilder:validation:Optional
 	MaxUnreadyNodes *float64 `json:"maxUnreadyNodes,omitempty" tf:"max_unready_nodes,omitempty"`
 
 	// Maximum percentage of unready nodes the cluster autoscaler will stop if the percentage is exceeded. Defaults to 45.
+	// +kubebuilder:validation:Optional
 	MaxUnreadyPercentage *float64 `json:"maxUnreadyPercentage,omitempty" tf:"max_unready_percentage,omitempty"`
 
 	// For scenarios like burst/batch scale where you don't want CA to act before the kubernetes scheduler could schedule all the pods, you can tell CA to ignore unscheduled pods before they're a certain age. Defaults to 10s.
+	// +kubebuilder:validation:Optional
 	NewPodScaleUpDelay *string `json:"newPodScaleUpDelay,omitempty" tf:"new_pod_scale_up_delay,omitempty"`
 
 	// How long after the scale up of AKS nodes the scale down evaluation resumes. Defaults to 10m.
+	// +kubebuilder:validation:Optional
 	ScaleDownDelayAfterAdd *string `json:"scaleDownDelayAfterAdd,omitempty" tf:"scale_down_delay_after_add,omitempty"`
 
 	// How long after node deletion that scale down evaluation resumes. Defaults to the value used for scan_interval.
+	// +kubebuilder:validation:Optional
 	ScaleDownDelayAfterDelete *string `json:"scaleDownDelayAfterDelete,omitempty" tf:"scale_down_delay_after_delete,omitempty"`
 
 	// How long after scale down failure that scale down evaluation resumes. Defaults to 3m.
+	// +kubebuilder:validation:Optional
 	ScaleDownDelayAfterFailure *string `json:"scaleDownDelayAfterFailure,omitempty" tf:"scale_down_delay_after_failure,omitempty"`
 
 	// How long a node should be unneeded before it is eligible for scale down. Defaults to 10m.
+	// +kubebuilder:validation:Optional
 	ScaleDownUnneeded *string `json:"scaleDownUnneeded,omitempty" tf:"scale_down_unneeded,omitempty"`
 
 	// How long an unready node should be unneeded before it is eligible for scale down. Defaults to 20m.
+	// +kubebuilder:validation:Optional
 	ScaleDownUnready *string `json:"scaleDownUnready,omitempty" tf:"scale_down_unready,omitempty"`
 
 	// Node utilization level, defined as sum of requested resources divided by capacity, below which a node can be considered for scale down. Defaults to 0.5.
+	// +kubebuilder:validation:Optional
 	ScaleDownUtilizationThreshold *string `json:"scaleDownUtilizationThreshold,omitempty" tf:"scale_down_utilization_threshold,omitempty"`
 
 	// How often the AKS Cluster should be re-evaluated for scale up/down. Defaults to 10s.
+	// +kubebuilder:validation:Optional
 	ScanInterval *string `json:"scanInterval,omitempty" tf:"scan_interval,omitempty"`
 
 	// If true cluster autoscaler will never delete nodes with pods with local storage, for example, EmptyDir or HostPath. Defaults to true.
+	// +kubebuilder:validation:Optional
 	SkipNodesWithLocalStorage *bool `json:"skipNodesWithLocalStorage,omitempty" tf:"skip_nodes_with_local_storage,omitempty"`
 
 	// If true cluster autoscaler will never delete nodes with pods from kube-system (except for DaemonSet or mirror pods). Defaults to true.
+	// +kubebuilder:validation:Optional
 	SkipNodesWithSystemPods *bool `json:"skipNodesWithSystemPods,omitempty" tf:"skip_nodes_with_system_pods,omitempty"`
 }
 
@@ -319,18 +340,23 @@ type AzureActiveDirectoryRoleBasedAccessControlObservation struct {
 type AzureActiveDirectoryRoleBasedAccessControlParameters struct {
 
 	// A list of Object IDs of Azure Active Directory Groups which should have Admin Role on the Cluster.
+	// +kubebuilder:validation:Optional
 	AdminGroupObjectIds []*string `json:"adminGroupObjectIds,omitempty" tf:"admin_group_object_ids,omitempty"`
 
 	// Is Role Based Access Control based on Azure AD enabled?
+	// +kubebuilder:validation:Optional
 	AzureRbacEnabled *bool `json:"azureRbacEnabled,omitempty" tf:"azure_rbac_enabled,omitempty"`
 
 	// The Client ID of an Azure Active Directory Application.
+	// +kubebuilder:validation:Optional
 	ClientAppID *string `json:"clientAppId,omitempty" tf:"client_app_id,omitempty"`
 
 	// Is the Azure Active Directory integration Managed, meaning that Azure will create/manage the Service Principal used for integration.
+	// +kubebuilder:validation:Optional
 	Managed *bool `json:"managed,omitempty" tf:"managed,omitempty"`
 
 	// The Server ID of an Azure Active Directory Application.
+	// +kubebuilder:validation:Optional
 	ServerAppID *string `json:"serverAppId,omitempty" tf:"server_app_id,omitempty"`
 
 	// The Server Secret of an Azure Active Directory Application.
@@ -338,6 +364,7 @@ type AzureActiveDirectoryRoleBasedAccessControlParameters struct {
 	ServerAppSecretSecretRef *v1.SecretKeySelector `json:"serverAppSecretSecretRef,omitempty" tf:"-"`
 
 	// The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used.
+	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
@@ -356,6 +383,7 @@ type ConfidentialComputingObservation struct {
 type ConfidentialComputingParameters struct {
 
 	// Should the SGX quote helper be enabled?
+	// +kubebuilder:validation:Optional
 	SgxQuoteHelperEnabled *bool `json:"sgxQuoteHelperEnabled,omitempty" tf:"sgx_quote_helper_enabled,omitempty"`
 }
 
@@ -602,78 +630,103 @@ type DefaultNodePoolObservation struct {
 type DefaultNodePoolParameters struct {
 
 	// Specifies the ID of the Capacity Reservation Group within which this AKS Cluster should be created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
 
 	// Specifies whether to trust a Custom CA.
+	// +kubebuilder:validation:Optional
 	CustomCATrustEnabled *bool `json:"customCaTrustEnabled,omitempty" tf:"custom_ca_trust_enabled,omitempty"`
 
 	// Should the Kubernetes Auto Scaler be enabled for this Node Pool?
+	// +kubebuilder:validation:Optional
 	EnableAutoScaling *bool `json:"enableAutoScaling,omitempty" tf:"enable_auto_scaling,omitempty"`
 
 	// Should the nodes in the Default Node Pool have host encryption enabled? Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	EnableHostEncryption *bool `json:"enableHostEncryption,omitempty" tf:"enable_host_encryption,omitempty"`
 
 	// Should nodes in this Node Pool have a Public IP Address? Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	EnableNodePublicIP *bool `json:"enableNodePublicIp,omitempty" tf:"enable_node_public_ip,omitempty"`
 
 	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
 
 	// Specifies the ID of the Host Group within which this AKS Cluster should be created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
 
 	// A kubelet_config block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	KubeletConfig []KubeletConfigParameters `json:"kubeletConfig,omitempty" tf:"kubelet_config,omitempty"`
 
 	// The type of disk used by kubelet. Possible values are OS and Temporary.
+	// +kubebuilder:validation:Optional
 	KubeletDiskType *string `json:"kubeletDiskType,omitempty" tf:"kubelet_disk_type,omitempty"`
 
 	// A linux_os_config block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	LinuxOsConfig []LinuxOsConfigParameters `json:"linuxOsConfig,omitempty" tf:"linux_os_config,omitempty"`
 
 	// The maximum number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000.
+	// +kubebuilder:validation:Optional
 	MaxCount *float64 `json:"maxCount,omitempty" tf:"max_count,omitempty"`
 
 	// The maximum number of pods that can run on each agent. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	MaxPods *float64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
 
 	// A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It cannot be specified for Windows nodes and must be a static string (i.e. will be printed raw and not executed as a script). Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	MessageOfTheDay *string `json:"messageOfTheDay,omitempty" tf:"message_of_the_day,omitempty"`
 
 	// The minimum number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000.
+	// +kubebuilder:validation:Optional
 	MinCount *float64 `json:"minCount,omitempty" tf:"min_count,omitempty"`
 
 	// The name which should be used for the default Kubernetes Node Pool. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The initial number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000 and between min_count and max_count.
+	// +kubebuilder:validation:Optional
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
 	// A map of Kubernetes labels which should be applied to nodes in the Default Node Pool.
+	// +kubebuilder:validation:Optional
 	NodeLabels map[string]*string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
 
 	// A node_network_profile block as documented below.
+	// +kubebuilder:validation:Optional
 	NodeNetworkProfile []NodeNetworkProfileParameters `json:"nodeNetworkProfile,omitempty" tf:"node_network_profile,omitempty"`
 
 	// Resource ID for the Public IP Addresses Prefix for the nodes in this Node Pool. enable_node_public_ip should be true. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NodePublicIPPrefixID *string `json:"nodePublicIpPrefixId,omitempty" tf:"node_public_ip_prefix_id,omitempty"`
 
 	// A list of the taints added to new nodes during node pool create and scale. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NodeTaints []*string `json:"nodeTaints,omitempty" tf:"node_taints,omitempty"`
 
 	// Enabling this option will taint default node pool with CriticalAddonsOnly=true:NoSchedule taint. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	OnlyCriticalAddonsEnabled *bool `json:"onlyCriticalAddonsEnabled,omitempty" tf:"only_critical_addons_enabled,omitempty"`
 
 	// Version of Kubernetes used for the Agents. If not specified, the default node pool will be created with the version specified by kubernetes_version. If both are unspecified, the latest recommended version will be used at provisioning time (but won't auto-upgrade). AKS does not require an exact patch version to be specified, minor version aliases such as 1.22 are also supported. - The minor version's latest GA patch is automatically chosen in that case. More details can be found in the documentation.
+	// +kubebuilder:validation:Optional
 	OrchestratorVersion *string `json:"orchestratorVersion,omitempty" tf:"orchestrator_version,omitempty"`
 
 	// The size of the OS Disk which should be used for each agent in the Node Pool. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	OsDiskSizeGb *float64 `json:"osDiskSizeGb,omitempty" tf:"os_disk_size_gb,omitempty"`
 
 	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
 	// Specifies the OS SKU used by the agent pool. Possible values include: Ubuntu, CBLMariner, Mariner, Windows2019, Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
 	// The ID of the Subnet where the pods in the default Node Pool should exist. Changing this forces a new resource to be created.
@@ -691,27 +744,35 @@ type DefaultNodePoolParameters struct {
 	PodSubnetIDSelector *v1.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Proximity Placement Group. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
 
 	// Specifies the autoscaling behaviour of the Kubernetes Cluster. Allowed values are Delete and Deallocate. Defaults to Delete.
+	// +kubebuilder:validation:Optional
 	ScaleDownMode *string `json:"scaleDownMode,omitempty" tf:"scale_down_mode,omitempty"`
 
 	// A mapping of tags to assign to the Node Pool.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the name of the temporary node pool used to cycle the default node pool for VM resizing.
+	// +kubebuilder:validation:Optional
 	TemporaryNameForRotation *string `json:"temporaryNameForRotation,omitempty" tf:"temporary_name_for_rotation,omitempty"`
 
 	// The type of Node Pool which should be created. Possible values are AvailabilitySet and VirtualMachineScaleSets. Defaults to VirtualMachineScaleSets. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// Used to specify whether the UltraSSD is enabled in the Default Node Pool. Defaults to false. See the documentation for more information. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 
 	// A upgrade_settings block as documented below.
+	// +kubebuilder:validation:Optional
 	UpgradeSettings []UpgradeSettingsParameters `json:"upgradeSettings,omitempty" tf:"upgrade_settings,omitempty"`
 
 	// The size of the Virtual Machine, such as Standard_DS2_v2.
+	// +kubebuilder:validation:Optional
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 
 	// The ID of a Subnet where the Kubernetes Node Pool should exist. Changing this forces a new resource to be created.
@@ -729,9 +790,11 @@ type DefaultNodePoolParameters struct {
 	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
 
 	// Specifies the workload runtime used by the node pool. Possible values are OCIContainer and KataMshvVmIsolation.
+	// +kubebuilder:validation:Optional
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kubernetes Cluster should be located. Changing this forces a new Kubernetes Cluster to be created.
+	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -756,9 +819,11 @@ type GmsaObservation struct {
 type GmsaParameters struct {
 
 	// Specifies the DNS server for Windows gMSA. Set this to an empty string if you have configured the DNS server in the VNet which was used to create the managed cluster.
+	// +kubebuilder:validation:Optional
 	DNSServer *string `json:"dnsServer,omitempty" tf:"dns_server,omitempty"`
 
 	// Specifies the root domain name for Windows gMSA. Set this to an empty string if you have configured the DNS server in the VNet which was used to create the managed cluster.
+	// +kubebuilder:validation:Optional
 	RootDomain *string `json:"rootDomain,omitempty" tf:"root_domain,omitempty"`
 }
 
@@ -789,12 +854,15 @@ type HTTPProxyConfigObservation struct {
 type HTTPProxyConfigParameters struct {
 
 	// The proxy address to be used when communicating over HTTP. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	HTTPProxy *string `json:"httpProxy,omitempty" tf:"http_proxy,omitempty"`
 
 	// The proxy address to be used when communicating over HTTPS. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	HTTPSProxy *string `json:"httpsProxy,omitempty" tf:"https_proxy,omitempty"`
 
 	// The list of domains that will not use the proxy for communication.
+	// +kubebuilder:validation:Optional
 	NoProxy []*string `json:"noProxy,omitempty" tf:"no_proxy,omitempty"`
 
 	// The base64 encoded alternative CA certificate content in PEM format.
@@ -829,9 +897,11 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kubernetes Cluster.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Kubernetes Cluster. Possible values are SystemAssigned or UserAssigned.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -889,12 +959,15 @@ type IngressApplicationGatewayObservation struct {
 type IngressApplicationGatewayParameters struct {
 
 	// The ID of the Application Gateway to integrate with the ingress controller of this Kubernetes Cluster. See this page for further details.
+	// +kubebuilder:validation:Optional
 	GatewayID *string `json:"gatewayId,omitempty" tf:"gateway_id,omitempty"`
 
 	// The name of the Application Gateway to be used or created in the Nodepool Resource Group, which in turn will be integrated with the ingress controller of this Kubernetes Cluster. See this page for further details.
+	// +kubebuilder:validation:Optional
 	GatewayName *string `json:"gatewayName,omitempty" tf:"gateway_name,omitempty"`
 
 	// The subnet CIDR to be used to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster. See this page for further details.
+	// +kubebuilder:validation:Optional
 	SubnetCidr *string `json:"subnetCidr,omitempty" tf:"subnet_cidr,omitempty"`
 
 	// The ID of the subnet on which to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster. See this page for further details.
@@ -933,9 +1006,11 @@ type KeyManagementServiceObservation struct {
 type KeyManagementServiceParameters struct {
 
 	// Identifier of Azure Key Vault key. See key identifier format for more details. When Azure Key Vault key management service is enabled, this field is required and must be a valid key identifier. When enabled is false, leave the field empty.
+	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
 	// Network access of the key vault Network access of key vault. The possible values are Public and Private. Public means the key vault allows public access from all networks. Private means the key vault disables public access and enables private link. The default value is Public.
+	// +kubebuilder:validation:Optional
 	KeyVaultNetworkAccess *string `json:"keyVaultNetworkAccess,omitempty" tf:"key_vault_network_access,omitempty"`
 }
 
@@ -963,9 +1038,11 @@ type KeyVaultSecretsProviderObservation struct {
 type KeyVaultSecretsProviderParameters struct {
 
 	// Should the secret store CSI driver on the AKS cluster be enabled?
+	// +kubebuilder:validation:Optional
 	SecretRotationEnabled *bool `json:"secretRotationEnabled,omitempty" tf:"secret_rotation_enabled,omitempty"`
 
 	// The interval to poll for secret rotation. This attribute is only set when secret_rotation is true and defaults to 2m.
+	// +kubebuilder:validation:Optional
 	SecretRotationInterval *string `json:"secretRotationInterval,omitempty" tf:"secret_rotation_interval,omitempty"`
 }
 
@@ -1068,33 +1145,43 @@ type KubeletConfigObservation struct {
 type KubeletConfigParameters struct {
 
 	// Specifies the allow list of unsafe sysctls command or patterns (ending in *). Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
 	// Is CPU CFS quota enforcement for containers enabled? Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	CPUCfsQuotaEnabled *bool `json:"cpuCfsQuotaEnabled,omitempty" tf:"cpu_cfs_quota_enabled,omitempty"`
 
 	// Specifies the CPU CFS quota period value. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	CPUCfsQuotaPeriod *string `json:"cpuCfsQuotaPeriod,omitempty" tf:"cpu_cfs_quota_period,omitempty"`
 
 	// Specifies the CPU Manager policy to use. Possible values are none and static, Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	CPUManagerPolicy *string `json:"cpuManagerPolicy,omitempty" tf:"cpu_manager_policy,omitempty"`
 
 	// Specifies the maximum number of container log files that can be present for a container. must be at least 2. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ContainerLogMaxLine *float64 `json:"containerLogMaxLine,omitempty" tf:"container_log_max_line,omitempty"`
 
 	// Specifies the maximum size (e.g. 10MB) of container log file before it is rotated. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ContainerLogMaxSizeMb *float64 `json:"containerLogMaxSizeMb,omitempty" tf:"container_log_max_size_mb,omitempty"`
 
 	// Specifies the percent of disk usage above which image garbage collection is always run. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ImageGcHighThreshold *float64 `json:"imageGcHighThreshold,omitempty" tf:"image_gc_high_threshold,omitempty"`
 
 	// Specifies the percent of disk usage lower than which image garbage collection is never run. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ImageGcLowThreshold *float64 `json:"imageGcLowThreshold,omitempty" tf:"image_gc_low_threshold,omitempty"`
 
 	// Specifies the maximum number of processes per pod. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PodMaxPid *float64 `json:"podMaxPid,omitempty" tf:"pod_max_pid,omitempty"`
 
 	// Specifies the Topology Manager policy to use. Possible values are none, best-effort, restricted or single-numa-node. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	TopologyManagerPolicy *string `json:"topologyManagerPolicy,omitempty" tf:"topology_manager_policy,omitempty"`
 }
 
@@ -1125,12 +1212,15 @@ type KubeletIdentityObservation struct {
 type KubeletIdentityParameters struct {
 
 	// The Client ID of the user-defined Managed Identity to be assigned to the Kubelets. If not specified a Managed Identity is created automatically. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The Object ID of the user-defined Managed Identity assigned to the Kubelets.If not specified a Managed Identity is created automatically. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// The ID of the User Assigned Identity assigned to the Kubelets. If not specified a Managed Identity is created automatically. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
@@ -1462,113 +1552,150 @@ type KubernetesClusterObservation struct {
 type KubernetesClusterParameters struct {
 
 	// An api_server_access_profile block as defined below.
+	// +kubebuilder:validation:Optional
 	APIServerAccessProfile []APIServerAccessProfileParameters `json:"apiServerAccessProfile,omitempty" tf:"api_server_access_profile,omitempty"`
 
 	// Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
+	// +kubebuilder:validation:Optional
 	APIServerAuthorizedIPRanges []*string `json:"apiServerAuthorizedIpRanges,omitempty" tf:"api_server_authorized_ip_ranges,omitempty"`
 
 	// A aci_connector_linux block as defined below. For more details, please visit Create and configure an AKS cluster to use virtual nodes.
+	// +kubebuilder:validation:Optional
 	AciConnectorLinux []AciConnectorLinuxParameters `json:"aciConnectorLinux,omitempty" tf:"aci_connector_linux,omitempty"`
 
 	// A auto_scaler_profile block as defined below.
+	// +kubebuilder:validation:Optional
 	AutoScalerProfile []AutoScalerProfileParameters `json:"autoScalerProfile,omitempty" tf:"auto_scaler_profile,omitempty"`
 
 	// The upgrade channel for this Kubernetes Cluster. Possible values are patch, rapid, node-image and stable. Omitting this field sets this value to none.
+	// +kubebuilder:validation:Optional
 	AutomaticChannelUpgrade *string `json:"automaticChannelUpgrade,omitempty" tf:"automatic_channel_upgrade,omitempty"`
 
 	// A azure_active_directory_role_based_access_control block as defined below.
+	// +kubebuilder:validation:Optional
 	AzureActiveDirectoryRoleBasedAccessControl []AzureActiveDirectoryRoleBasedAccessControlParameters `json:"azureActiveDirectoryRoleBasedAccessControl,omitempty" tf:"azure_active_directory_role_based_access_control,omitempty"`
 
 	// Should the Azure Policy Add-On be enabled? For more details please visit Understand Azure Policy for Azure Kubernetes Service
+	// +kubebuilder:validation:Optional
 	AzurePolicyEnabled *bool `json:"azurePolicyEnabled,omitempty" tf:"azure_policy_enabled,omitempty"`
 
 	// A confidential_computing block as defined below. For more details please the documentation
+	// +kubebuilder:validation:Optional
 	ConfidentialComputing []ConfidentialComputingParameters `json:"confidentialComputing,omitempty" tf:"confidential_computing,omitempty"`
 
 	// DNS prefix specified when creating the managed cluster. Possible values must begin and end with a letter or number, contain only letters, numbers, and hyphens and be between 1 and 54 characters in length. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
 
 	// Specifies the DNS prefix to use with private clusters. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DNSPrefixPrivateCluster *string `json:"dnsPrefixPrivateCluster,omitempty" tf:"dns_prefix_private_cluster,omitempty"`
 
 	// A default_node_pool block as defined below.
+	// +kubebuilder:validation:Optional
 	DefaultNodePool []DefaultNodePoolParameters `json:"defaultNodePool,omitempty" tf:"default_node_pool,omitempty"`
 
 	// The ID of the Disk Encryption Set which should be used for the Nodes and Volumes. More information can be found in the documentation. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
 
 	// Specifies the Edge Zone within the Azure Region where this Managed Kubernetes Cluster should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
+	// +kubebuilder:validation:Optional
 	EnablePodSecurityPolicy *bool `json:"enablePodSecurityPolicy,omitempty" tf:"enable_pod_security_policy,omitempty"`
 
 	// Should HTTP Application Routing be enabled?
+	// +kubebuilder:validation:Optional
 	HTTPApplicationRoutingEnabled *bool `json:"httpApplicationRoutingEnabled,omitempty" tf:"http_application_routing_enabled,omitempty"`
 
 	// A http_proxy_config block as defined below.
+	// +kubebuilder:validation:Optional
 	HTTPProxyConfig []HTTPProxyConfigParameters `json:"httpProxyConfig,omitempty" tf:"http_proxy_config,omitempty"`
 
 	// An identity block as defined below. One of either identity or service_principal must be specified.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies whether Image Cleaner is enabled.
+	// +kubebuilder:validation:Optional
 	ImageCleanerEnabled *bool `json:"imageCleanerEnabled,omitempty" tf:"image_cleaner_enabled,omitempty"`
 
 	// Specifies the interval in hours when images should be cleaned up. Defaults to 48.
+	// +kubebuilder:validation:Optional
 	ImageCleanerIntervalHours *float64 `json:"imageCleanerIntervalHours,omitempty" tf:"image_cleaner_interval_hours,omitempty"`
 
 	// An ingress_application_gateway block as defined below.
+	// +kubebuilder:validation:Optional
 	IngressApplicationGateway []IngressApplicationGatewayParameters `json:"ingressApplicationGateway,omitempty" tf:"ingress_application_gateway,omitempty"`
 
 	// A key_management_service block as defined below. For more details, please visit Key Management Service (KMS) etcd encryption to an AKS cluster.
+	// +kubebuilder:validation:Optional
 	KeyManagementService []KeyManagementServiceParameters `json:"keyManagementService,omitempty" tf:"key_management_service,omitempty"`
 
 	// A key_vault_secrets_provider block as defined below.
+	// +kubebuilder:validation:Optional
 	KeyVaultSecretsProvider []KeyVaultSecretsProviderParameters `json:"keyVaultSecretsProvider,omitempty" tf:"key_vault_secrets_provider,omitempty"`
 
 	// A kubelet_identity block as defined below.
+	// +kubebuilder:validation:Optional
 	KubeletIdentity []KubeletIdentityParameters `json:"kubeletIdentity,omitempty" tf:"kubelet_identity,omitempty"`
 
 	// Version of Kubernetes specified when creating the AKS managed cluster. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade). AKS does not require an exact patch version to be specified, minor version aliases such as 1.22 are also supported. - The minor version's latest GA patch is automatically chosen in that case. More details can be found in the documentation.
+	// +kubebuilder:validation:Optional
 	KubernetesVersion *string `json:"kubernetesVersion,omitempty" tf:"kubernetes_version,omitempty"`
 
 	// A linux_profile block as defined below.
+	// +kubebuilder:validation:Optional
 	LinuxProfile []LinuxProfileParameters `json:"linuxProfile,omitempty" tf:"linux_profile,omitempty"`
 
 	// If true local accounts will be disabled. See the documentation for more information.
+	// +kubebuilder:validation:Optional
 	LocalAccountDisabled *bool `json:"localAccountDisabled,omitempty" tf:"local_account_disabled,omitempty"`
 
 	// The location where the Managed Kubernetes Cluster should be created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A maintenance_window block as defined below.
+	// +kubebuilder:validation:Optional
 	MaintenanceWindow []MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// A microsoft_defender block as defined below.
+	// +kubebuilder:validation:Optional
 	MicrosoftDefender []MicrosoftDefenderParameters `json:"microsoftDefender,omitempty" tf:"microsoft_defender,omitempty"`
 
 	// Specifies a Prometheus add-on profile for the Kubernetes Cluster. A monitor_metrics block as defined below.
+	// +kubebuilder:validation:Optional
 	MonitorMetrics []MonitorMetricsParameters `json:"monitorMetrics,omitempty" tf:"monitor_metrics,omitempty"`
 
 	// A network_profile block as defined below.
+	// +kubebuilder:validation:Optional
 	NetworkProfile []NetworkProfileParameters `json:"networkProfile,omitempty" tf:"network_profile,omitempty"`
 
 	// The auto-generated Resource Group which contains the resources for this Managed Kubernetes Cluster.
+	// +kubebuilder:validation:Optional
 	NodeResourceGroup *string `json:"nodeResourceGroup,omitempty" tf:"node_resource_group,omitempty"`
 
 	// Enable or Disable the OIDC issuer URL
+	// +kubebuilder:validation:Optional
 	OidcIssuerEnabled *bool `json:"oidcIssuerEnabled,omitempty" tf:"oidc_issuer_enabled,omitempty"`
 
 	// An oms_agent block as defined below.
+	// +kubebuilder:validation:Optional
 	OmsAgent []OmsAgentParameters `json:"omsAgent,omitempty" tf:"oms_agent,omitempty"`
 
 	// Is Open Service Mesh enabled? For more details, please visit Open Service Mesh for AKS.
+	// +kubebuilder:validation:Optional
 	OpenServiceMeshEnabled *bool `json:"openServiceMeshEnabled,omitempty" tf:"open_service_mesh_enabled,omitempty"`
 
 	// Should this Kubernetes Cluster have its API server only exposed on internal IP addresses? This provides a Private IP Address for the Kubernetes API on the Virtual Network where the Kubernetes Cluster is located. Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PrivateClusterEnabled *bool `json:"privateClusterEnabled,omitempty" tf:"private_cluster_enabled,omitempty"`
 
 	// Specifies whether a Public FQDN for this Private Cluster should be added. Defaults to false.
+	// +kubebuilder:validation:Optional
 	PrivateClusterPublicFqdnEnabled *bool `json:"privateClusterPublicFqdnEnabled,omitempty" tf:"private_cluster_public_fqdn_enabled,omitempty"`
 
 	// Either the ID of Private DNS Zone which should be delegated to this Cluster, System to have AKS manage this or None. In case of None you will need to bring your own DNS server and set up resolving, otherwise, the cluster will have issues after provisioning. Changing this forces a new resource to be created.
@@ -1586,6 +1713,7 @@ type KubernetesClusterParameters struct {
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
 	// Whether public network access is allowed for this Kubernetes Cluster. Defaults to true. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// Specifies the Resource Group where the Managed Kubernetes Cluster should exist. Changing this forces a new resource to be created.
@@ -1602,36 +1730,47 @@ type KubernetesClusterParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Whether Role Based Access Control for the Kubernetes Cluster should be enabled. Defaults to true. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	RoleBasedAccessControlEnabled *bool `json:"roleBasedAccessControlEnabled,omitempty" tf:"role_based_access_control_enabled,omitempty"`
 
 	// Whether to enable run command for the cluster or not. Defaults to true.
+	// +kubebuilder:validation:Optional
 	RunCommandEnabled *bool `json:"runCommandEnabled,omitempty" tf:"run_command_enabled,omitempty"`
 
 	// A service_mesh_profile block as defined below.
+	// +kubebuilder:validation:Optional
 	ServiceMeshProfile []ServiceMeshProfileParameters `json:"serviceMeshProfile,omitempty" tf:"service_mesh_profile,omitempty"`
 
 	// A service_principal block as documented below. One of either identity or service_principal must be specified.
+	// +kubebuilder:validation:Optional
 	ServicePrincipal []ServicePrincipalParameters `json:"servicePrincipal,omitempty" tf:"service_principal,omitempty"`
 
 	// The SKU Tier that should be used for this Kubernetes Cluster. Possible values are Free, and Standard (which includes the Uptime SLA). Defaults to Free.
+	// +kubebuilder:validation:Optional
 	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
 	// A storage_profile block as defined below.
+	// +kubebuilder:validation:Optional
 	StorageProfile []StorageProfileParameters `json:"storageProfile,omitempty" tf:"storage_profile,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A web_app_routing block as defined below.
+	// +kubebuilder:validation:Optional
 	WebAppRouting []WebAppRoutingParameters `json:"webAppRouting,omitempty" tf:"web_app_routing,omitempty"`
 
 	// A windows_profile block as defined below.
+	// +kubebuilder:validation:Optional
 	WindowsProfile []WindowsProfileParameters `json:"windowsProfile,omitempty" tf:"windows_profile,omitempty"`
 
 	// A workload_autoscaler_profile block defined below.
+	// +kubebuilder:validation:Optional
 	WorkloadAutoscalerProfile []WorkloadAutoscalerProfileParameters `json:"workloadAutoscalerProfile,omitempty" tf:"workload_autoscaler_profile,omitempty"`
 
 	// Specifies whether Azure AD Workload Identity should be enabled for the Cluster. Defaults to false.
+	// +kubebuilder:validation:Optional
 	WorkloadIdentityEnabled *bool `json:"workloadIdentityEnabled,omitempty" tf:"workload_identity_enabled,omitempty"`
 }
 
@@ -1668,15 +1807,19 @@ type LinuxOsConfigObservation struct {
 type LinuxOsConfigParameters struct {
 
 	// Specifies the size of the swap file on each node in MB. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SwapFileSizeMb *float64 `json:"swapFileSizeMb,omitempty" tf:"swap_file_size_mb,omitempty"`
 
 	// A sysctl_config block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SysctlConfig []SysctlConfigParameters `json:"sysctlConfig,omitempty" tf:"sysctl_config,omitempty"`
 
 	// specifies the defrag configuration for Transparent Huge Page. Possible values are always, defer, defer+madvise, madvise and never. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	TransparentHugePageDefrag *string `json:"transparentHugePageDefrag,omitempty" tf:"transparent_huge_page_defrag,omitempty"`
 
 	// Specifies the Transparent Huge Page enabled configuration. Possible values are always, madvise and never. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	TransparentHugePageEnabled *string `json:"transparentHugePageEnabled,omitempty" tf:"transparent_huge_page_enabled,omitempty"`
 }
 
@@ -1701,9 +1844,11 @@ type LinuxProfileObservation struct {
 type LinuxProfileParameters struct {
 
 	// The Admin Username for the Cluster. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
 
 	// An ssh_key block. Only one is currently allowed. Changing this will update the key on all node pools. More information can be found in the documentation.
+	// +kubebuilder:validation:Optional
 	SSHKey []SSHKeyParameters `json:"sshKey,omitempty" tf:"ssh_key,omitempty"`
 }
 
@@ -1755,21 +1900,27 @@ type LoadBalancerProfileObservation struct {
 type LoadBalancerProfileParameters struct {
 
 	// Desired outbound flow idle timeout in minutes for the cluster load balancer. Must be between 4 and 120 inclusive. Defaults to 4.
+	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// Count of desired managed outbound IPs for the cluster load balancer. Must be between 1 and 100 inclusive.
+	// +kubebuilder:validation:Optional
 	ManagedOutboundIPCount *float64 `json:"managedOutboundIpCount,omitempty" tf:"managed_outbound_ip_count,omitempty"`
 
 	// The desired number of IPv6 outbound IPs created and managed by Azure for the cluster load balancer. Must be in the range of 1 to 100 (inclusive). The default value is 0 for single-stack and 1 for dual-stack.
+	// +kubebuilder:validation:Optional
 	ManagedOutboundIPv6Count *float64 `json:"managedOutboundIpv6Count,omitempty" tf:"managed_outbound_ipv6_count,omitempty"`
 
 	// The ID of the Public IP Addresses which should be used for outbound communication for the cluster load balancer.
+	// +kubebuilder:validation:Optional
 	OutboundIPAddressIds []*string `json:"outboundIpAddressIds,omitempty" tf:"outbound_ip_address_ids,omitempty"`
 
 	// The ID of the outbound Public IP Address Prefixes which should be used for the cluster load balancer.
+	// +kubebuilder:validation:Optional
 	OutboundIPPrefixIds []*string `json:"outboundIpPrefixIds,omitempty" tf:"outbound_ip_prefix_ids,omitempty"`
 
 	// Number of desired SNAT port for each VM in the clusters load balancer. Must be between 0 and 64000 inclusive. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	OutboundPortsAllocated *float64 `json:"outboundPortsAllocated,omitempty" tf:"outbound_ports_allocated,omitempty"`
 }
 
@@ -1794,9 +1945,11 @@ type MaintenanceWindowObservation struct {
 type MaintenanceWindowParameters struct {
 
 	// One or more allowed blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Allowed []AllowedParameters `json:"allowed,omitempty" tf:"allowed,omitempty"`
 
 	// One or more not_allowed block as defined below.
+	// +kubebuilder:validation:Optional
 	NotAllowed []NotAllowedParameters `json:"notAllowed,omitempty" tf:"not_allowed,omitempty"`
 }
 
@@ -1815,6 +1968,7 @@ type MicrosoftDefenderObservation struct {
 type MicrosoftDefenderParameters struct {
 
 	// Specifies the ID of the Log Analytics Workspace where the audit logs collected by Microsoft Defender should be sent to.
+	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 }
 
@@ -1839,9 +1993,11 @@ type MonitorMetricsObservation struct {
 type MonitorMetricsParameters struct {
 
 	// Specifies a comma-separated list of Kubernetes annotation keys that will be used in the resource's labels metric.
+	// +kubebuilder:validation:Optional
 	AnnotationsAllowed *string `json:"annotationsAllowed,omitempty" tf:"annotations_allowed,omitempty"`
 
 	// Specifies a Comma-separated list of additional Kubernetes label keys that will be used in the resource's labels metric.
+	// +kubebuilder:validation:Optional
 	LabelsAllowed *string `json:"labelsAllowed,omitempty" tf:"labels_allowed,omitempty"`
 }
 
@@ -1869,9 +2025,11 @@ type NATGatewayProfileObservation struct {
 type NATGatewayProfileParameters struct {
 
 	// Desired outbound flow idle timeout in minutes for the cluster load balancer. Must be between 4 and 120 inclusive. Defaults to 4.
+	// +kubebuilder:validation:Optional
 	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
 
 	// Count of desired managed outbound IPs for the cluster load balancer. Must be between 1 and 100 inclusive.
+	// +kubebuilder:validation:Optional
 	ManagedOutboundIPCount *float64 `json:"managedOutboundIpCount,omitempty" tf:"managed_outbound_ip_count,omitempty"`
 }
 
@@ -1980,51 +2138,67 @@ type NetworkProfileObservation struct {
 type NetworkProfileParameters struct {
 
 	// IP address within the Kubernetes service address range that will be used by cluster service discovery (kube-dns). Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DNSServiceIP *string `json:"dnsServiceIp,omitempty" tf:"dns_service_ip,omitempty"`
 
 	// IP address (in CIDR notation) used as the Docker bridge IP address on nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DockerBridgeCidr *string `json:"dockerBridgeCidr,omitempty" tf:"docker_bridge_cidr,omitempty"`
 
 	// Specifies the eBPF data plane used for building the Kubernetes network. Possible value is cilium. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	EbpfDataPlane *string `json:"ebpfDataPlane,omitempty" tf:"ebpf_data_plane,omitempty"`
 
 	// Specifies a list of IP versions the Kubernetes Cluster will use to assign IP addresses to its nodes and pods. Possible values are IPv4 and/or IPv6. IPv4 must always be specified. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	IPVersions []*string `json:"ipVersions,omitempty" tf:"ip_versions,omitempty"`
 
 	// A load_balancer_profile block as defined below. This can only be specified when load_balancer_sku is set to standard. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	LoadBalancerProfile []LoadBalancerProfileParameters `json:"loadBalancerProfile,omitempty" tf:"load_balancer_profile,omitempty"`
 
 	// Specifies the SKU of the Load Balancer used for this Kubernetes Cluster. Possible values are basic and standard. Defaults to standard. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	LoadBalancerSku *string `json:"loadBalancerSku,omitempty" tf:"load_balancer_sku,omitempty"`
 
 	// A nat_gateway_profile block as defined below.
+	// +kubebuilder:validation:Optional
 	NATGatewayProfile []NATGatewayProfileParameters `json:"natGatewayProfile,omitempty" tf:"nat_gateway_profile,omitempty"`
 
 	// Network mode to be used with Azure CNI. Possible values are bridge and transparent. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetworkMode *string `json:"networkMode,omitempty" tf:"network_mode,omitempty"`
 
 	// Network plugin to use for networking. Currently supported values are azure, kubenet and none. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetworkPlugin *string `json:"networkPlugin,omitempty" tf:"network_plugin,omitempty"`
 
 	// Specifies the network plugin mode used for building the Kubernetes network. Possible value is Overlay. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetworkPluginMode *string `json:"networkPluginMode,omitempty" tf:"network_plugin_mode,omitempty"`
 
 	// Sets up network policy to be used with Azure CNI. Network policy allows us to control the traffic flow between pods. Currently supported values are calico and azure. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetworkPolicy *string `json:"networkPolicy,omitempty" tf:"network_policy,omitempty"`
 
 	// The outbound (egress) routing method which should be used for this Kubernetes Cluster. Possible values are loadBalancer, userDefinedRouting, managedNATGateway and userAssignedNATGateway. Defaults to loadBalancer. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	OutboundType *string `json:"outboundType,omitempty" tf:"outbound_type,omitempty"`
 
 	// The CIDR to use for pod IP addresses. This field can only be set when network_plugin is set to kubenet. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PodCidr *string `json:"podCidr,omitempty" tf:"pod_cidr,omitempty"`
 
 	// A list of CIDRs to use for pod IP addresses. For single-stack networking a single IPv4 CIDR is expected. For dual-stack networking an IPv4 and IPv6 CIDR are expected. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PodCidrs []*string `json:"podCidrs,omitempty" tf:"pod_cidrs,omitempty"`
 
 	// The Network Range used by the Kubernetes service. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ServiceCidr *string `json:"serviceCidr,omitempty" tf:"service_cidr,omitempty"`
 
 	// A list of CIDRs to use for Kubernetes services. For single-stack networking a single IPv4 CIDR is expected. For dual-stack networking an IPv4 and IPv6 CIDR are expected. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ServiceCidrs []*string `json:"serviceCidrs,omitempty" tf:"service_cidrs,omitempty"`
 }
 
@@ -2043,6 +2217,7 @@ type NodeNetworkProfileObservation struct {
 type NodeNetworkProfileParameters struct {
 
 	// Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
 }
 
@@ -2067,9 +2242,11 @@ type NotAllowedObservation struct {
 type NotAllowedParameters struct {
 
 	// The end of a time span, formatted as an RFC3339 string.
+	// +kubebuilder:validation:Optional
 	End *string `json:"end,omitempty" tf:"end,omitempty"`
 
 	// The start of a time span, formatted as an RFC3339 string.
+	// +kubebuilder:validation:Optional
 	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
@@ -2115,9 +2292,11 @@ type OmsAgentObservation struct {
 type OmsAgentParameters struct {
 
 	// The ID of the Log Analytics Workspace which the OMS Agent should send data to.
+	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
 	// Is managed identity authentication for monitoring enabled?
+	// +kubebuilder:validation:Optional
 	MsiAuthForMonitoringEnabled *bool `json:"msiAuthForMonitoringEnabled,omitempty" tf:"msi_auth_for_monitoring_enabled,omitempty"`
 }
 
@@ -2136,6 +2315,7 @@ type SSHKeyObservation struct {
 type SSHKeyParameters struct {
 
 	// The Public SSH Key used to access the cluster.
+	// +kubebuilder:validation:Optional
 	KeyData *string `json:"keyData,omitempty" tf:"key_data,omitempty"`
 }
 
@@ -2172,6 +2352,7 @@ type ServiceMeshProfileObservation struct {
 type ServiceMeshProfileParameters struct {
 
 	// The mode of the service mesh. Possible value is Istio.
+	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 
@@ -2190,6 +2371,7 @@ type ServicePrincipalObservation struct {
 type ServicePrincipalParameters struct {
 
 	// The Client ID for the Service Principal.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The Client Secret for the Service Principal.
@@ -2236,18 +2418,23 @@ type StorageProfileObservation struct {
 type StorageProfileParameters struct {
 
 	// Is the Blob CSI driver enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	BlobDriverEnabled *bool `json:"blobDriverEnabled,omitempty" tf:"blob_driver_enabled,omitempty"`
 
 	// Is the Disk CSI driver enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	DiskDriverEnabled *bool `json:"diskDriverEnabled,omitempty" tf:"disk_driver_enabled,omitempty"`
 
 	// Disk CSI Driver version to be used. Possible values are v1 and v2. Defaults to v1.
+	// +kubebuilder:validation:Optional
 	DiskDriverVersion *string `json:"diskDriverVersion,omitempty" tf:"disk_driver_version,omitempty"`
 
 	// Is the File CSI driver enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	FileDriverEnabled *bool `json:"fileDriverEnabled,omitempty" tf:"file_driver_enabled,omitempty"`
 
 	// Is the Snapshot Controller enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	SnapshotControllerEnabled *bool `json:"snapshotControllerEnabled,omitempty" tf:"snapshot_controller_enabled,omitempty"`
 }
 
@@ -2434,90 +2621,119 @@ type SysctlConfigObservation struct {
 type SysctlConfigParameters struct {
 
 	// The sysctl setting fs.aio-max-nr. Must be between 65536 and 6553500. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	FsAioMaxNr *float64 `json:"fsAioMaxNr,omitempty" tf:"fs_aio_max_nr,omitempty"`
 
 	// The sysctl setting fs.file-max. Must be between 8192 and 12000500. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	FsFileMax *float64 `json:"fsFileMax,omitempty" tf:"fs_file_max,omitempty"`
 
 	// The sysctl setting fs.inotify.max_user_watches. Must be between 781250 and 2097152. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	FsInotifyMaxUserWatches *float64 `json:"fsInotifyMaxUserWatches,omitempty" tf:"fs_inotify_max_user_watches,omitempty"`
 
 	// The sysctl setting fs.nr_open. Must be between 8192 and 20000500. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	FsNrOpen *float64 `json:"fsNrOpen,omitempty" tf:"fs_nr_open,omitempty"`
 
 	// The sysctl setting kernel.threads-max. Must be between 20 and 513785. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	KernelThreadsMax *float64 `json:"kernelThreadsMax,omitempty" tf:"kernel_threads_max,omitempty"`
 
 	// The sysctl setting net.core.netdev_max_backlog. Must be between 1000 and 3240000. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetCoreNetdevMaxBacklog *float64 `json:"netCoreNetdevMaxBacklog,omitempty" tf:"net_core_netdev_max_backlog,omitempty"`
 
 	// The sysctl setting net.core.optmem_max. Must be between 20480 and 4194304. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetCoreOptmemMax *float64 `json:"netCoreOptmemMax,omitempty" tf:"net_core_optmem_max,omitempty"`
 
 	// The sysctl setting net.core.rmem_default. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetCoreRmemDefault *float64 `json:"netCoreRmemDefault,omitempty" tf:"net_core_rmem_default,omitempty"`
 
 	// The sysctl setting net.core.rmem_max. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetCoreRmemMax *float64 `json:"netCoreRmemMax,omitempty" tf:"net_core_rmem_max,omitempty"`
 
 	// The sysctl setting net.core.somaxconn. Must be between 4096 and 3240000. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetCoreSomaxconn *float64 `json:"netCoreSomaxconn,omitempty" tf:"net_core_somaxconn,omitempty"`
 
 	// The sysctl setting net.core.wmem_default. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetCoreWmemDefault *float64 `json:"netCoreWmemDefault,omitempty" tf:"net_core_wmem_default,omitempty"`
 
 	// The sysctl setting net.core.wmem_max. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetCoreWmemMax *float64 `json:"netCoreWmemMax,omitempty" tf:"net_core_wmem_max,omitempty"`
 
 	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 1024 and 60999. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetIPv4IPLocalPortRangeMax *float64 `json:"netIpv4IpLocalPortRangeMax,omitempty" tf:"net_ipv4_ip_local_port_range_max,omitempty"`
 
 	// The sysctl setting net.ipv4.ip_local_port_range min value. Must be between 1024 and 60999. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetIPv4IPLocalPortRangeMin *float64 `json:"netIpv4IpLocalPortRangeMin,omitempty" tf:"net_ipv4_ip_local_port_range_min,omitempty"`
 
 	// The sysctl setting net.ipv4.neigh.default.gc_thresh1. Must be between 128 and 80000. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetIPv4NeighDefaultGcThresh1 *float64 `json:"netIpv4NeighDefaultGcThresh1,omitempty" tf:"net_ipv4_neigh_default_gc_thresh1,omitempty"`
 
 	// The sysctl setting net.ipv4.neigh.default.gc_thresh2. Must be between 512 and 90000. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetIPv4NeighDefaultGcThresh2 *float64 `json:"netIpv4NeighDefaultGcThresh2,omitempty" tf:"net_ipv4_neigh_default_gc_thresh2,omitempty"`
 
 	// The sysctl setting net.ipv4.neigh.default.gc_thresh3. Must be between 1024 and 100000. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetIPv4NeighDefaultGcThresh3 *float64 `json:"netIpv4NeighDefaultGcThresh3,omitempty" tf:"net_ipv4_neigh_default_gc_thresh3,omitempty"`
 
 	// The sysctl setting net.ipv4.tcp_fin_timeout. Must be between 5 and 120. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetIPv4TCPFinTimeout *float64 `json:"netIpv4TcpFinTimeout,omitempty" tf:"net_ipv4_tcp_fin_timeout,omitempty"`
 
 	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 75. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetIPv4TCPKeepaliveIntvl *float64 `json:"netIpv4TcpKeepaliveIntvl,omitempty" tf:"net_ipv4_tcp_keepalive_intvl,omitempty"`
 
 	// The sysctl setting net.ipv4.tcp_keepalive_probes. Must be between 1 and 15. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetIPv4TCPKeepaliveProbes *float64 `json:"netIpv4TcpKeepaliveProbes,omitempty" tf:"net_ipv4_tcp_keepalive_probes,omitempty"`
 
 	// The sysctl setting net.ipv4.tcp_keepalive_time. Must be between 30 and 432000. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetIPv4TCPKeepaliveTime *float64 `json:"netIpv4TcpKeepaliveTime,omitempty" tf:"net_ipv4_tcp_keepalive_time,omitempty"`
 
 	// The sysctl setting net.ipv4.tcp_max_syn_backlog. Must be between 128 and 3240000. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetIPv4TCPMaxSynBacklog *float64 `json:"netIpv4TcpMaxSynBacklog,omitempty" tf:"net_ipv4_tcp_max_syn_backlog,omitempty"`
 
 	// The sysctl setting net.ipv4.tcp_max_tw_buckets. Must be between 8000 and 1440000. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetIPv4TCPMaxTwBuckets *float64 `json:"netIpv4TcpMaxTwBuckets,omitempty" tf:"net_ipv4_tcp_max_tw_buckets,omitempty"`
 
 	// The sysctl setting net.ipv4.tcp_tw_reuse. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetIPv4TCPTwReuse *bool `json:"netIpv4TcpTwReuse,omitempty" tf:"net_ipv4_tcp_tw_reuse,omitempty"`
 
 	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 147456. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetNetfilterNfConntrackBuckets *float64 `json:"netNetfilterNfConntrackBuckets,omitempty" tf:"net_netfilter_nf_conntrack_buckets,omitempty"`
 
 	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 1048576. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NetNetfilterNfConntrackMax *float64 `json:"netNetfilterNfConntrackMax,omitempty" tf:"net_netfilter_nf_conntrack_max,omitempty"`
 
 	// The sysctl setting vm.max_map_count. Must be between 65530 and 262144. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	VMMaxMapCount *float64 `json:"vmMaxMapCount,omitempty" tf:"vm_max_map_count,omitempty"`
 
 	// The sysctl setting vm.swappiness. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	VMSwappiness *float64 `json:"vmSwappiness,omitempty" tf:"vm_swappiness,omitempty"`
 
 	// The sysctl setting vm.vfs_cache_pressure. Must be between 0 and 100. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	VMVfsCachePressure *float64 `json:"vmVfsCachePressure,omitempty" tf:"vm_vfs_cache_pressure,omitempty"`
 }
 
@@ -2536,6 +2752,7 @@ type UpgradeSettingsObservation struct {
 type UpgradeSettingsParameters struct {
 
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
+	// +kubebuilder:validation:Optional
 	MaxSurge *string `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
 }
 
@@ -2554,6 +2771,7 @@ type WebAppRoutingObservation struct {
 type WebAppRoutingParameters struct {
 
 	// Specifies the ID of the DNS Zone in which DNS entries are created for applications deployed to the cluster when Web App Routing is enabled. For Bring-Your-Own DNS zones this property should be set to an empty string "".
+	// +kubebuilder:validation:Optional
 	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
 }
 
@@ -2588,12 +2806,15 @@ type WindowsProfileParameters struct {
 	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// The Admin Username for Windows VMs. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
 
 	// A gmsa block as defined below.
+	// +kubebuilder:validation:Optional
 	Gmsa []GmsaParameters `json:"gmsa,omitempty" tf:"gmsa,omitempty"`
 
 	// Specifies the type of on-premise license which should be used for Node Pool Windows Virtual Machine. At this time the only possible value is Windows_Server.
+	// +kubebuilder:validation:Optional
 	License *string `json:"license,omitempty" tf:"license,omitempty"`
 }
 
@@ -2624,9 +2845,11 @@ type WorkloadAutoscalerProfileObservation struct {
 type WorkloadAutoscalerProfileParameters struct {
 
 	// Specifies whether KEDA Autoscaler can be used for workloads.
+	// +kubebuilder:validation:Optional
 	KedaEnabled *bool `json:"kedaEnabled,omitempty" tf:"keda_enabled,omitempty"`
 
 	// Specifies whether Vertical Pod Autoscaler should be enabled.
+	// +kubebuilder:validation:Optional
 	VerticalPodAutoscalerEnabled *bool `json:"verticalPodAutoscalerEnabled,omitempty" tf:"vertical_pod_autoscaler_enabled,omitempty"`
 }
 

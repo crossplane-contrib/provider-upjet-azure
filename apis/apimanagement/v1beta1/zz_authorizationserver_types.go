@@ -128,21 +128,27 @@ type AuthorizationServerParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The OAUTH Authorization Endpoint.
+	// +kubebuilder:validation:Optional
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
 	// The HTTP Verbs supported by the Authorization Endpoint. Possible values are DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT and TRACE.
+	// +kubebuilder:validation:Optional
 	AuthorizationMethods []*string `json:"authorizationMethods,omitempty" tf:"authorization_methods,omitempty"`
 
 	// The mechanism by which Access Tokens are passed to the API. Possible values are authorizationHeader and query.
+	// +kubebuilder:validation:Optional
 	BearerTokenSendingMethods []*string `json:"bearerTokenSendingMethods,omitempty" tf:"bearer_token_sending_methods,omitempty"`
 
 	// The Authentication Methods supported by the Token endpoint of this Authorization Server.. Possible values are Basic and Body.
+	// +kubebuilder:validation:Optional
 	ClientAuthenticationMethod []*string `json:"clientAuthenticationMethod,omitempty" tf:"client_authentication_method,omitempty"`
 
 	// The Client/App ID registered with this Authorization Server.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The URI of page where Client/App Registration is performed for this Authorization Server.
+	// +kubebuilder:validation:Optional
 	ClientRegistrationEndpoint *string `json:"clientRegistrationEndpoint,omitempty" tf:"client_registration_endpoint,omitempty"`
 
 	// The Client/App Secret registered with this Authorization Server.
@@ -150,15 +156,19 @@ type AuthorizationServerParameters struct {
 	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The Default Scope used when requesting an Access Token, specified as a string containing space-delimited values.
+	// +kubebuilder:validation:Optional
 	DefaultScope *string `json:"defaultScope,omitempty" tf:"default_scope,omitempty"`
 
 	// A description of the Authorization Server, which may contain HTML formatting tags.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The user-friendly name of this Authorization Server.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Form of Authorization Grants required when requesting an Access Token. Possible values are authorizationCode, clientCredentials, implicit and resourceOwnerPassword.
+	// +kubebuilder:validation:Optional
 	GrantTypes []*string `json:"grantTypes,omitempty" tf:"grant_types,omitempty"`
 
 	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.
@@ -179,15 +189,19 @@ type AuthorizationServerParameters struct {
 	ResourceOwnerPasswordSecretRef *v1.SecretKeySelector `json:"resourceOwnerPasswordSecretRef,omitempty" tf:"-"`
 
 	// The username associated with the Resource Owner.
+	// +kubebuilder:validation:Optional
 	ResourceOwnerUsername *string `json:"resourceOwnerUsername,omitempty" tf:"resource_owner_username,omitempty"`
 
 	// Does this Authorization Server support State? If this is set to true the client may use the state parameter to raise protocol security.
+	// +kubebuilder:validation:Optional
 	SupportState *bool `json:"supportState,omitempty" tf:"support_state,omitempty"`
 
 	// A token_body_parameter block as defined below.
+	// +kubebuilder:validation:Optional
 	TokenBodyParameter []TokenBodyParameterParameters `json:"tokenBodyParameter,omitempty" tf:"token_body_parameter,omitempty"`
 
 	// The OAUTH Token Endpoint.
+	// +kubebuilder:validation:Optional
 	TokenEndpoint *string `json:"tokenEndpoint,omitempty" tf:"token_endpoint,omitempty"`
 }
 
@@ -212,9 +226,11 @@ type TokenBodyParameterObservation struct {
 type TokenBodyParameterParameters struct {
 
 	// The Name of the Parameter.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Value of the Parameter.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 

@@ -46,12 +46,15 @@ type FunctionJavascriptUdaObservation struct {
 type FunctionJavascriptUdaParameters struct {
 
 	// One or more input blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Input []InputParameters `json:"input,omitempty" tf:"input,omitempty"`
 
 	// An output block as defined below.
+	// +kubebuilder:validation:Optional
 	Output []OutputParameters `json:"output,omitempty" tf:"output,omitempty"`
 
 	// The JavaScript of this UDA Function.
+	// +kubebuilder:validation:Optional
 	Script *string `json:"script,omitempty" tf:"script,omitempty"`
 
 	// The resource ID of the Stream Analytics Job where this Function should be created. Changing this forces a new resource to be created.
@@ -90,9 +93,11 @@ type InputObservation struct {
 type InputParameters struct {
 
 	// Is this input parameter a configuration parameter? Defaults to false.
+	// +kubebuilder:validation:Optional
 	ConfigurationParameter *bool `json:"configurationParameter,omitempty" tf:"configuration_parameter,omitempty"`
 
 	// The input data type of this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -111,6 +116,7 @@ type OutputObservation struct {
 type OutputParameters struct {
 
 	// The output data type from this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

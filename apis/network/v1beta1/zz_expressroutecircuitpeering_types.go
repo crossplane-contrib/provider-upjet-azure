@@ -103,18 +103,23 @@ type ExpressRouteCircuitPeeringParameters struct {
 	ExpressRouteCircuitNameSelector *v1.Selector `json:"expressRouteCircuitNameSelector,omitempty" tf:"-"`
 
 	// A boolean value indicating whether the IPv4 peering is enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
 	IPv4Enabled *bool `json:"ipv4Enabled,omitempty" tf:"ipv4_enabled,omitempty"`
 
 	// A ipv6 block as defined below.
+	// +kubebuilder:validation:Optional
 	IPv6 []IPv6Parameters `json:"ipv6,omitempty" tf:"ipv6,omitempty"`
 
 	// A microsoft_peering_config block as defined below. Required when peering_type is set to MicrosoftPeering and config for IPv4.
+	// +kubebuilder:validation:Optional
 	MicrosoftPeeringConfig []MicrosoftPeeringConfigParameters `json:"microsoftPeeringConfig,omitempty" tf:"microsoft_peering_config,omitempty"`
 
 	// The Either a 16-bit or a 32-bit ASN. Can either be public or private.
+	// +kubebuilder:validation:Optional
 	PeerAsn *float64 `json:"peerAsn,omitempty" tf:"peer_asn,omitempty"`
 
 	// A /30 subnet for the primary link. Required when config for IPv4.
+	// +kubebuilder:validation:Optional
 	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix,omitempty" tf:"primary_peer_address_prefix,omitempty"`
 
 	// The name of the resource group in which to create the Express Route Circuit Peering. Changing this forces a new resource to be created.
@@ -131,9 +136,11 @@ type ExpressRouteCircuitPeeringParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Route Filter. Only available when peering_type is set to MicrosoftPeering.
+	// +kubebuilder:validation:Optional
 	RouteFilterID *string `json:"routeFilterId,omitempty" tf:"route_filter_id,omitempty"`
 
 	// A /30 subnet for the secondary link. Required when config for IPv4.
+	// +kubebuilder:validation:Optional
 	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix,omitempty" tf:"secondary_peer_address_prefix,omitempty"`
 
 	// The shared key. Can be a maximum of 25 characters.
@@ -141,6 +148,7 @@ type ExpressRouteCircuitPeeringParameters struct {
 	SharedKeySecretRef *v1.SecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
 
 	// A valid VLAN ID to establish this peering on.
+	// +kubebuilder:validation:Optional
 	VlanID *float64 `json:"vlanId,omitempty" tf:"vlan_id,omitempty"`
 }
 
@@ -183,18 +191,23 @@ type IPv6Observation struct {
 type IPv6Parameters struct {
 
 	// A boolean value indicating whether the IPv6 peering is enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A microsoft_peering block as defined below.
+	// +kubebuilder:validation:Optional
 	MicrosoftPeering []MicrosoftPeeringParameters `json:"microsoftPeering,omitempty" tf:"microsoft_peering,omitempty"`
 
 	// A subnet for the primary link.
+	// +kubebuilder:validation:Optional
 	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix,omitempty" tf:"primary_peer_address_prefix,omitempty"`
 
 	// The ID of the Route Filter. Only available when peering_type is set to MicrosoftPeering.
+	// +kubebuilder:validation:Optional
 	RouteFilterID *string `json:"routeFilterId,omitempty" tf:"route_filter_id,omitempty"`
 
 	// A subnet for the secondary link.
+	// +kubebuilder:validation:Optional
 	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix,omitempty" tf:"secondary_peer_address_prefix,omitempty"`
 }
 
@@ -231,15 +244,19 @@ type MicrosoftPeeringConfigObservation struct {
 type MicrosoftPeeringConfigParameters struct {
 
 	// The communities of Bgp Peering specified for microsoft peering.
+	// +kubebuilder:validation:Optional
 	AdvertisedCommunities []*string `json:"advertisedCommunities,omitempty" tf:"advertised_communities,omitempty"`
 
 	// A list of Advertised Public Prefixes.
+	// +kubebuilder:validation:Optional
 	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes,omitempty" tf:"advertised_public_prefixes,omitempty"`
 
 	// The CustomerASN of the peering. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	CustomerAsn *float64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
 
 	// The Routing Registry against which the AS number and prefixes are registered. For example: ARIN, RIPE, AFRINIC etc. Defaults to NONE.
+	// +kubebuilder:validation:Optional
 	RoutingRegistryName *string `json:"routingRegistryName,omitempty" tf:"routing_registry_name,omitempty"`
 }
 
@@ -276,15 +293,19 @@ type MicrosoftPeeringObservation struct {
 type MicrosoftPeeringParameters struct {
 
 	// The communities of Bgp Peering specified for microsoft peering.
+	// +kubebuilder:validation:Optional
 	AdvertisedCommunities []*string `json:"advertisedCommunities,omitempty" tf:"advertised_communities,omitempty"`
 
 	// A list of Advertised Public Prefixes.
+	// +kubebuilder:validation:Optional
 	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes,omitempty" tf:"advertised_public_prefixes,omitempty"`
 
 	// The CustomerASN of the peering. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	CustomerAsn *float64 `json:"customerAsn,omitempty" tf:"customer_asn,omitempty"`
 
 	// The Routing Registry against which the AS number and prefixes are registered. For example: ARIN, RIPE, AFRINIC etc. Defaults to NONE.
+	// +kubebuilder:validation:Optional
 	RoutingRegistryName *string `json:"routingRegistryName,omitempty" tf:"routing_registry_name,omitempty"`
 }
 

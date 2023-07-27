@@ -34,9 +34,11 @@ type RolesWorkerNodeAutoscaleRecurrenceObservation struct {
 type RolesWorkerNodeAutoscaleRecurrenceParameters struct {
 
 	// A list of schedule blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Schedule []WorkerNodeAutoscaleRecurrenceScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The time zone for the autoscale schedule times.
+	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
@@ -55,6 +57,7 @@ type SparkClusterComponentVersionObservation struct {
 type SparkClusterComponentVersionParameters struct {
 
 	// The version of Spark which should be used for this HDInsight Spark Cluster. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Spark *string `json:"spark,omitempty" tf:"spark,omitempty"`
 }
 
@@ -79,9 +82,11 @@ type SparkClusterComputeIsolationObservation struct {
 type SparkClusterComputeIsolationParameters struct {
 
 	// This field indicates whether enable compute isolation or not. Possible values are true or false.
+	// +kubebuilder:validation:Optional
 	ComputeIsolationEnabled *bool `json:"computeIsolationEnabled,omitempty" tf:"compute_isolation_enabled,omitempty"`
 
 	// The name of the host SKU.
+	// +kubebuilder:validation:Optional
 	HostSku *string `json:"hostSku,omitempty" tf:"host_sku,omitempty"`
 }
 
@@ -118,15 +123,19 @@ type SparkClusterDiskEncryptionObservation struct {
 type SparkClusterDiskEncryptionParameters struct {
 
 	// This is an algorithm identifier for encryption. Possible values are RSA1_5, RSA-OAEP, RSA-OAEP-256.
+	// +kubebuilder:validation:Optional
 	EncryptionAlgorithm *string `json:"encryptionAlgorithm,omitempty" tf:"encryption_algorithm,omitempty"`
 
 	// This is indicator to show whether resource disk encryption is enabled.
+	// +kubebuilder:validation:Optional
 	EncryptionAtHostEnabled *bool `json:"encryptionAtHostEnabled,omitempty" tf:"encryption_at_host_enabled,omitempty"`
 
 	// The ID of the key vault key.
+	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
 	// This is the resource ID of Managed Identity used to access the key vault.
+	// +kubebuilder:validation:Optional
 	KeyVaultManagedIdentityID *string `json:"keyVaultManagedIdentityId,omitempty" tf:"key_vault_managed_identity_id,omitempty"`
 }
 
@@ -145,6 +154,7 @@ type SparkClusterExtensionObservation struct {
 type SparkClusterExtensionParameters struct {
 
 	// The workspace ID of the log analytics extension.
+	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
 	// The workspace key of the log analytics extension.
@@ -171,6 +181,7 @@ type SparkClusterGatewayParameters struct {
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username used for the Ambari Portal. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -258,6 +269,7 @@ type SparkClusterMetastoresAmbariObservation struct {
 type SparkClusterMetastoresAmbariParameters struct {
 
 	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -265,9 +277,11 @@ type SparkClusterMetastoresAmbariParameters struct {
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -298,6 +312,7 @@ type SparkClusterMetastoresHiveObservation struct {
 type SparkClusterMetastoresHiveParameters struct {
 
 	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -305,9 +320,11 @@ type SparkClusterMetastoresHiveParameters struct {
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -362,6 +379,7 @@ type SparkClusterMetastoresOozieObservation struct {
 type SparkClusterMetastoresOozieParameters struct {
 
 	// The external Oozie metastore's existing SQL database. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -369,21 +387,26 @@ type SparkClusterMetastoresOozieParameters struct {
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The fully-qualified domain name (FQDN) of the SQL server to use for the external Oozie metastore. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type SparkClusterMetastoresParameters struct {
 
 	// An ambari block as defined below.
+	// +kubebuilder:validation:Optional
 	Ambari []SparkClusterMetastoresAmbariParameters `json:"ambari,omitempty" tf:"ambari,omitempty"`
 
 	// A hive block as defined below.
+	// +kubebuilder:validation:Optional
 	Hive []SparkClusterMetastoresHiveParameters `json:"hive,omitempty" tf:"hive,omitempty"`
 
 	// An oozie block as defined below.
+	// +kubebuilder:validation:Optional
 	Oozie []SparkClusterMetastoresOozieParameters `json:"oozie,omitempty" tf:"oozie,omitempty"`
 }
 
@@ -402,6 +425,7 @@ type SparkClusterMonitorObservation struct {
 type SparkClusterMonitorParameters struct {
 
 	// The Operations Management Suite (OMS) workspace ID.
+	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
 
 	// The Operations Management Suite (OMS) workspace key.
@@ -430,9 +454,11 @@ type SparkClusterNetworkObservation struct {
 type SparkClusterNetworkParameters struct {
 
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
 	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -508,36 +534,47 @@ type SparkClusterObservation struct {
 type SparkClusterParameters struct {
 
 	// Specifies the Version of HDInsights which should be used for this Cluster. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ClusterVersion *string `json:"clusterVersion,omitempty" tf:"cluster_version,omitempty"`
 
 	// A component_version block as defined below.
+	// +kubebuilder:validation:Optional
 	ComponentVersion []SparkClusterComponentVersionParameters `json:"componentVersion,omitempty" tf:"component_version,omitempty"`
 
 	// A compute_isolation block as defined below.
+	// +kubebuilder:validation:Optional
 	ComputeIsolation []SparkClusterComputeIsolationParameters `json:"computeIsolation,omitempty" tf:"compute_isolation,omitempty"`
 
 	// One or more disk_encryption block as defined below.
+	// +kubebuilder:validation:Optional
 	DiskEncryption []SparkClusterDiskEncryptionParameters `json:"diskEncryption,omitempty" tf:"disk_encryption,omitempty"`
 
 	// Whether encryption in transit is enabled for this Cluster. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	EncryptionInTransitEnabled *bool `json:"encryptionInTransitEnabled,omitempty" tf:"encryption_in_transit_enabled,omitempty"`
 
 	// An extension block as defined below.
+	// +kubebuilder:validation:Optional
 	Extension []SparkClusterExtensionParameters `json:"extension,omitempty" tf:"extension,omitempty"`
 
 	// A gateway block as defined below.
+	// +kubebuilder:validation:Optional
 	Gateway []SparkClusterGatewayParameters `json:"gateway,omitempty" tf:"gateway,omitempty"`
 
 	// Specifies the Azure Region which this HDInsight Spark Cluster should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A metastores block as defined below.
+	// +kubebuilder:validation:Optional
 	Metastores []SparkClusterMetastoresParameters `json:"metastores,omitempty" tf:"metastores,omitempty"`
 
 	// A monitor block as defined below.
+	// +kubebuilder:validation:Optional
 	Monitor []SparkClusterMonitorParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
 	// A network block as defined below.
+	// +kubebuilder:validation:Optional
 	Network []SparkClusterNetworkParameters `json:"network,omitempty" tf:"network,omitempty"`
 
 	// Specifies the name of the Resource Group in which this HDInsight Spark Cluster should exist. Changing this forces a new resource to be created.
@@ -554,24 +591,31 @@ type SparkClusterParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A roles block as defined below.
+	// +kubebuilder:validation:Optional
 	Roles []SparkClusterRolesParameters `json:"roles,omitempty" tf:"roles,omitempty"`
 
 	// A security_profile block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SecurityProfile []SparkClusterSecurityProfileParameters `json:"securityProfile,omitempty" tf:"security_profile,omitempty"`
 
 	// One or more storage_account block as defined below.
+	// +kubebuilder:validation:Optional
 	StorageAccount []SparkClusterStorageAccountParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
 
 	// A storage_account_gen2 block as defined below.
+	// +kubebuilder:validation:Optional
 	StorageAccountGen2 []SparkClusterStorageAccountGen2Parameters `json:"storageAccountGen2,omitempty" tf:"storage_account_gen2,omitempty"`
 
 	// The minimal supported TLS version. Possible values are 1.0, 1.1 or 1.2. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	TLSMinVersion *string `json:"tlsMinVersion,omitempty" tf:"tls_min_version,omitempty"`
 
 	// A map of Tags which should be assigned to this HDInsight Spark Cluster.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Tier which should be used for this HDInsight Spark Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
@@ -621,9 +665,11 @@ type SparkClusterRolesHeadNodeParameters struct {
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ScriptActions []SparkClusterRolesHeadNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -641,12 +687,15 @@ type SparkClusterRolesHeadNodeParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
 	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 
 	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
@@ -677,12 +726,15 @@ type SparkClusterRolesHeadNodeScriptActionsObservation struct {
 type SparkClusterRolesHeadNodeScriptActionsParameters struct {
 
 	// The name of the script action.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The parameters for the script provided.
+	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The URI to the script.
+	// +kubebuilder:validation:Optional
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
@@ -713,12 +765,15 @@ type SparkClusterRolesObservation struct {
 type SparkClusterRolesParameters struct {
 
 	// A head_node block as defined above.
+	// +kubebuilder:validation:Optional
 	HeadNode []SparkClusterRolesHeadNodeParameters `json:"headNode,omitempty" tf:"head_node,omitempty"`
 
 	// A worker_node block as defined below.
+	// +kubebuilder:validation:Optional
 	WorkerNode []SparkClusterRolesWorkerNodeParameters `json:"workerNode,omitempty" tf:"worker_node,omitempty"`
 
 	// A zookeeper_node block as defined below.
+	// +kubebuilder:validation:Optional
 	ZookeeperNode []SparkClusterRolesZookeeperNodeParameters `json:"zookeeperNode,omitempty" tf:"zookeeper_node,omitempty"`
 }
 
@@ -743,9 +798,11 @@ type SparkClusterRolesWorkerNodeAutoscaleObservation struct {
 type SparkClusterRolesWorkerNodeAutoscaleParameters struct {
 
 	// A capacity block as defined below.
+	// +kubebuilder:validation:Optional
 	Capacity []WorkerNodeAutoscaleCapacityParameters `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// A recurrence block as defined below.
+	// +kubebuilder:validation:Optional
 	Recurrence []RolesWorkerNodeAutoscaleRecurrenceParameters `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }
 
@@ -803,6 +860,7 @@ type SparkClusterRolesWorkerNodeObservation struct {
 type SparkClusterRolesWorkerNodeParameters struct {
 
 	// A autoscale block as defined below.
+	// +kubebuilder:validation:Optional
 	Autoscale []SparkClusterRolesWorkerNodeAutoscaleParameters `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
 	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -810,9 +868,11 @@ type SparkClusterRolesWorkerNodeParameters struct {
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ScriptActions []SparkClusterRolesWorkerNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -830,15 +890,19 @@ type SparkClusterRolesWorkerNodeParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The number of instances which should be run for the Worker Nodes.
+	// +kubebuilder:validation:Optional
 	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
 	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 
 	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
@@ -869,12 +933,15 @@ type SparkClusterRolesWorkerNodeScriptActionsObservation struct {
 type SparkClusterRolesWorkerNodeScriptActionsParameters struct {
 
 	// The name of the script action.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The parameters for the script provided.
+	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The URI to the script.
+	// +kubebuilder:validation:Optional
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
@@ -924,9 +991,11 @@ type SparkClusterRolesZookeeperNodeParameters struct {
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ScriptActions []SparkClusterRolesZookeeperNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -944,12 +1013,15 @@ type SparkClusterRolesZookeeperNodeParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 
 	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 
 	// The ID of the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
@@ -980,12 +1052,15 @@ type SparkClusterRolesZookeeperNodeScriptActionsObservation struct {
 type SparkClusterRolesZookeeperNodeScriptActionsParameters struct {
 
 	// The name of the script action.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The parameters for the script provided.
+	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The URI to the script.
+	// +kubebuilder:validation:Optional
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
@@ -1034,12 +1109,15 @@ type SparkClusterSecurityProfileObservation struct {
 type SparkClusterSecurityProfileParameters struct {
 
 	// The resource ID of the Azure Active Directory Domain Service. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	AaddsResourceID *string `json:"aaddsResourceId,omitempty" tf:"aadds_resource_id,omitempty"`
 
 	// A list of the distinguished names for the cluster user groups. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ClusterUsersGroupDNS []*string `json:"clusterUsersGroupDns,omitempty" tf:"cluster_users_group_dns,omitempty"`
 
 	// The name of the Azure Active Directory Domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
 	// The user password of the Azure Active Directory Domain. Changing this forces a new resource to be created.
@@ -1047,12 +1125,15 @@ type SparkClusterSecurityProfileParameters struct {
 	DomainUserPasswordSecretRef v1.SecretKeySelector `json:"domainUserPasswordSecretRef" tf:"-"`
 
 	// The username of the Azure Active Directory Domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DomainUsername *string `json:"domainUsername,omitempty" tf:"domain_username,omitempty"`
 
 	// A list of the LDAPS URLs to communicate with the Azure Active Directory. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	LdapsUrls []*string `json:"ldapsUrls,omitempty" tf:"ldaps_urls,omitempty"`
 
 	// The User Assigned Identity for the HDInsight Cluster. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	MsiResourceID *string `json:"msiResourceId,omitempty" tf:"msi_resource_id,omitempty"`
 }
 
@@ -1089,15 +1170,19 @@ type SparkClusterStorageAccountGen2Observation struct {
 type SparkClusterStorageAccountGen2Parameters struct {
 
 	// The ID of the Gen2 Filesystem. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	FileSystemID *string `json:"filesystemId,omitempty" tf:"filesystem_id,omitempty"`
 
 	// Is this the Default Storage Account for the HDInsight Hadoop Cluster? Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
 	// The ID of Managed Identity to use for accessing the Gen2 filesystem. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ManagedIdentityResourceID *string `json:"managedIdentityResourceId,omitempty" tf:"managed_identity_resource_id,omitempty"`
 
 	// The ID of the Storage Account. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	StorageResourceID *string `json:"storageResourceId,omitempty" tf:"storage_resource_id,omitempty"`
 }
 
@@ -1125,6 +1210,7 @@ type SparkClusterStorageAccountObservation struct {
 type SparkClusterStorageAccountParameters struct {
 
 	// Is this the Default Storage Account for the HDInsight Hadoop Cluster? Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
 	// The Access Key which should be used to connect to the Storage Account. Changing this forces a new resource to be created.
@@ -1146,6 +1232,7 @@ type SparkClusterStorageAccountParameters struct {
 	StorageContainerIDSelector *v1.Selector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Storage Account. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	StorageResourceID *string `json:"storageResourceId,omitempty" tf:"storage_resource_id,omitempty"`
 }
 
@@ -1170,9 +1257,11 @@ type WorkerNodeAutoscaleCapacityObservation struct {
 type WorkerNodeAutoscaleCapacityParameters struct {
 
 	// The maximum number of worker nodes to autoscale to based on the cluster's activity.
+	// +kubebuilder:validation:Optional
 	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
 
 	// The minimum number of worker nodes to autoscale to based on the cluster's activity.
+	// +kubebuilder:validation:Optional
 	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
 }
 
@@ -1203,12 +1292,15 @@ type WorkerNodeAutoscaleRecurrenceScheduleObservation struct {
 type WorkerNodeAutoscaleRecurrenceScheduleParameters struct {
 
 	// The days of the week to perform autoscale. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
+	// +kubebuilder:validation:Optional
 	Days []*string `json:"days,omitempty" tf:"days,omitempty"`
 
 	// The number of instances which should be run for the Worker Nodes.
+	// +kubebuilder:validation:Optional
 	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
 
 	// The time of day to perform the autoscale in 24hour format.
+	// +kubebuilder:validation:Optional
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 }
 

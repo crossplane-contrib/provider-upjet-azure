@@ -34,6 +34,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Search Service. The only possible value is SystemAssigned.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -142,33 +143,43 @@ type ServiceObservation struct {
 type ServiceParameters struct {
 
 	// Specifies a list of inbound IPv4 or CIDRs that are allowed to access the Search Service. If the incoming IP request is from an IP address which is not included in the allowed_ips it will be blocked by the Search Services firewall.
+	// +kubebuilder:validation:Optional
 	AllowedIps []*string `json:"allowedIps,omitempty" tf:"allowed_ips,omitempty"`
 
 	// Specifies the response that the Search Service should return for requests that fail authentication. Possible values include http401WithBearerChallenge or http403.
+	// +kubebuilder:validation:Optional
 	AuthenticationFailureMode *string `json:"authenticationFailureMode,omitempty" tf:"authentication_failure_mode,omitempty"`
 
 	// Specifies whether the Search Service should enforce that non-customer resources are encrypted. Defaults to false.
+	// +kubebuilder:validation:Optional
 	CustomerManagedKeyEnforcementEnabled *bool `json:"customerManagedKeyEnforcementEnabled,omitempty" tf:"customer_managed_key_enforcement_enabled,omitempty"`
 
 	// Specifies the Hosting Mode, which allows for High Density partitions (that allow for up to 1000 indexes) should be supported. Possible values are highDensity or default. Defaults to default. Changing this forces a new Search Service to be created.
+	// +kubebuilder:validation:Optional
 	HostingMode *string `json:"hostingMode,omitempty" tf:"hosting_mode,omitempty"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies whether the Search Service allows authenticating using API Keys? Defaults to false.
+	// +kubebuilder:validation:Optional
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
 	// The Azure Region where the Search Service should exist. Changing this forces a new Search Service to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the number of partitions which should be created. This field cannot be set when using a free or basic sku (see the Microsoft documentation). Possible values include 1, 2, 3, 4, 6, or 12. Defaults to 1.
+	// +kubebuilder:validation:Optional
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// Specifies whether Public Network Access is allowed for this resource. Defaults to true.
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// Specifies the number of Replica's which should be created for this Search Service. This field cannot be set when using a free sku (see the Microsoft documentation).
+	// +kubebuilder:validation:Optional
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
 
 	// The name of the Resource Group where the Search Service should exist. Changing this forces a new Search Service to be created.
@@ -185,9 +196,11 @@ type ServiceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU which should be used for this Search Service. Possible values include basic, free, standard, standard2, standard3, storage_optimized_l1 and storage_optimized_l2. Changing this forces a new Search Service to be created.
+	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Specifies a mapping of tags which should be assigned to this Search Service.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

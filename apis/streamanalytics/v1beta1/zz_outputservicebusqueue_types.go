@@ -73,12 +73,15 @@ type OutputServiceBusQueueObservation struct {
 type OutputServiceBusQueueParameters struct {
 
 	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	// +kubebuilder:validation:Optional
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The name of the Stream Output. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of property columns to add to the Service Bus Queue output.
+	// +kubebuilder:validation:Optional
 	PropertyColumns []*string `json:"propertyColumns,omitempty" tf:"property_columns,omitempty"`
 
 	// The name of the Service Bus Queue.
@@ -108,6 +111,7 @@ type OutputServiceBusQueueParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
+	// +kubebuilder:validation:Optional
 	Serialization []OutputServiceBusQueueSerializationParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The namespace that is associated with the desired Event Hub, Service Bus Queue, Service Bus Topic, etc.
@@ -128,6 +132,7 @@ type OutputServiceBusQueueParameters struct {
 	SharedAccessPolicyKeySecretRef *v1.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required if authentication_mode is ConnectionString.
+	// +kubebuilder:validation:Optional
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
@@ -144,6 +149,7 @@ type OutputServiceBusQueueParameters struct {
 	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// A key-value pair of system property columns that will be attached to the outgoing messages for the Service Bus Queue Output.
+	// +kubebuilder:validation:Optional
 	SystemPropertyColumns map[string]*string `json:"systemPropertyColumns,omitempty" tf:"system_property_columns,omitempty"`
 }
 
@@ -180,15 +186,19 @@ type OutputServiceBusQueueSerializationObservation struct {
 type OutputServiceBusQueueSerializationParameters struct {
 
 	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
+	// +kubebuilder:validation:Optional
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
+	// +kubebuilder:validation:Optional
 	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
 
 	// Specifies the format of the JSON the output will be written in. Possible values are Array and LineSeparated.
+	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The serialization format used for outgoing data streams. Possible values are Avro, Csv, Json and Parquet.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

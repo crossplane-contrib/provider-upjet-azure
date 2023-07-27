@@ -49,15 +49,19 @@ type CostAnomalyAlertObservation struct {
 type CostAnomalyAlertParameters struct {
 
 	// The display name which should be used for this Cost Anomaly Alert.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Specifies a list of email addresses which the Anomaly Alerts are send to.
+	// +kubebuilder:validation:Optional
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// The email subject of the Cost Anomaly Alerts. Maximum length of the subject is 70.
+	// +kubebuilder:validation:Optional
 	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
 
 	// The message of the Cost Anomaly Alert. Maximum length of the message is 250.
+	// +kubebuilder:validation:Optional
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
 }
 

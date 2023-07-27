@@ -46,6 +46,7 @@ type SharedPrivateLinkServiceObservation struct {
 type SharedPrivateLinkServiceParameters struct {
 
 	// Specify the request message for requesting approval of the Shared Private Link Enabled Remote Resource.
+	// +kubebuilder:validation:Optional
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
 	// Specify the id of the Azure Search Service. Changing this forces a new resource to be created.
@@ -63,6 +64,7 @@ type SharedPrivateLinkServiceParameters struct {
 	SearchServiceIDSelector *v1.Selector `json:"searchServiceIdSelector,omitempty" tf:"-"`
 
 	// Specify the sub resource name which the Azure Search Private Endpoint is able to connect to. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 
 	// Specify the ID of the Shared Private Link Enabled Remote Resource which this Azure Search Private Endpoint should be connected to. Changing this forces a new resource to be created.

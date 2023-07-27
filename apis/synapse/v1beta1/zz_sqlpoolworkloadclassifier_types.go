@@ -64,21 +64,27 @@ type SQLPoolWorkloadClassifierObservation struct {
 type SQLPoolWorkloadClassifierParameters struct {
 
 	// Specifies the session context value that a request can be classified against.
+	// +kubebuilder:validation:Optional
 	Context *string `json:"context,omitempty" tf:"context,omitempty"`
 
 	// The workload classifier end time for classification. It's of the HH:MM format in UTC time zone.
+	// +kubebuilder:validation:Optional
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
 	// The workload classifier importance. The allowed values are low, below_normal, normal, above_normal and high.
+	// +kubebuilder:validation:Optional
 	Importance *string `json:"importance,omitempty" tf:"importance,omitempty"`
 
 	// Specifies the label value that a request can be classified against.
+	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// The workload classifier member name used to classified against.
+	// +kubebuilder:validation:Optional
 	MemberName *string `json:"memberName,omitempty" tf:"member_name,omitempty"`
 
 	// The workload classifier start time for classification. It's of the HH:MM format in UTC time zone.
+	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
 	// The ID of the Synapse SQL Pool Workload Group. Changing this forces a new Synapse SQL Pool Workload Classifier to be created.

@@ -76,27 +76,35 @@ type SecurityCenterAssessmentPolicyObservation struct {
 type SecurityCenterAssessmentPolicyParameters struct {
 
 	// A list of the categories of resource that is at risk when the Security Center Assessment is unhealthy. Possible values are Unknown, Compute, Data, IdentityAndAccess, IoT and Networking.
+	// +kubebuilder:validation:Optional
 	Categories []*string `json:"categories,omitempty" tf:"categories,omitempty"`
 
 	// The description of the Security Center Assessment.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The user-friendly display name of the Security Center Assessment.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The implementation effort which is used to remediate the Security Center Assessment. Possible values are Low, Moderate and High.
+	// +kubebuilder:validation:Optional
 	ImplementationEffort *string `json:"implementationEffort,omitempty" tf:"implementation_effort,omitempty"`
 
 	// The description which is used to mitigate the security issue.
+	// +kubebuilder:validation:Optional
 	RemediationDescription *string `json:"remediationDescription,omitempty" tf:"remediation_description,omitempty"`
 
 	// The severity level of the Security Center Assessment. Possible values are Low, Medium and High. Defaults to Medium.
+	// +kubebuilder:validation:Optional
 	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A list of the threat impacts for the Security Center Assessment. Possible values are AccountBreach, DataExfiltration, DataSpillage, DenialOfService, ElevationOfPrivilege, MaliciousInsider, MissingCoverage and ThreatResistance.
+	// +kubebuilder:validation:Optional
 	Threats []*string `json:"threats,omitempty" tf:"threats,omitempty"`
 
 	// The user impact of the Security Center Assessment. Possible values are Low, Moderate and High.
+	// +kubebuilder:validation:Optional
 	UserImpact *string `json:"userImpact,omitempty" tf:"user_impact,omitempty"`
 }
 

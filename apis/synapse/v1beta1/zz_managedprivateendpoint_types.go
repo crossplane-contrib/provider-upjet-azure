@@ -43,9 +43,11 @@ type ManagedPrivateEndpointObservation struct {
 type ManagedPrivateEndpointParameters struct {
 
 	// Specifies the name which should be used for this Managed Private Endpoint. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the sub resource name which the Synapse Private Endpoint is able to connect to. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 
 	// The ID of the Synapse Workspace on which to create the Managed Private Endpoint. Changing this forces a new resource to be created.

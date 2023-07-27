@@ -49,9 +49,11 @@ type VirtualHubRouteTableRouteObservation_2 struct {
 type VirtualHubRouteTableRouteParameters_2 struct {
 
 	// A list of destination addresses for this route.
+	// +kubebuilder:validation:Optional
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// The type of destinations. Possible values are CIDR, ResourceId and Service.
+	// +kubebuilder:validation:Optional
 	DestinationsType *string `json:"destinationsType,omitempty" tf:"destinations_type,omitempty"`
 
 	// The next hop's resource ID.
@@ -69,6 +71,7 @@ type VirtualHubRouteTableRouteParameters_2 struct {
 	NextHopSelector *v1.Selector `json:"nextHopSelector,omitempty" tf:"-"`
 
 	// The type of next hop. Currently the only possible value is ResourceId. Defaults to ResourceId.
+	// +kubebuilder:validation:Optional
 	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
 
 	// The ID of the Virtual Hub Route Table to link this route to. Changing this forces a new resource to be created.

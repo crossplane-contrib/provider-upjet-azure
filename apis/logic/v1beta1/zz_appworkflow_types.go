@@ -46,15 +46,19 @@ type AccessControlObservation struct {
 type AccessControlParameters struct {
 
 	// A action block as defined below.
+	// +kubebuilder:validation:Optional
 	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A content block as defined below.
+	// +kubebuilder:validation:Optional
 	Content []ContentParameters `json:"content,omitempty" tf:"content,omitempty"`
 
 	// A trigger block as defined below.
+	// +kubebuilder:validation:Optional
 	Trigger []TriggerParameters `json:"trigger,omitempty" tf:"trigger,omitempty"`
 
 	// A workflow_management block as defined below.
+	// +kubebuilder:validation:Optional
 	WorkflowManagement []WorkflowManagementParameters `json:"workflowManagement,omitempty" tf:"workflow_management,omitempty"`
 }
 
@@ -73,6 +77,7 @@ type ActionObservation struct {
 type ActionParameters struct {
 
 	// A list of the allowed caller IP address ranges.
+	// +kubebuilder:validation:Optional
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 }
 
@@ -172,24 +177,31 @@ type AppWorkflowObservation struct {
 type AppWorkflowParameters struct {
 
 	// A access_control block as defined below.
+	// +kubebuilder:validation:Optional
 	AccessControl []AccessControlParameters `json:"accessControl,omitempty" tf:"access_control,omitempty"`
 
 	// Is the Logic App Workflow enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The ID of the Integration Service Environment to which this Logic App Workflow belongs. Changing this forces a new Logic App Workflow to be created.
+	// +kubebuilder:validation:Optional
 	IntegrationServiceEnvironmentID *string `json:"integrationServiceEnvironmentId,omitempty" tf:"integration_service_environment_id,omitempty"`
 
 	// Specifies the supported Azure location where the Logic App Workflow exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the integration account linked by this Logic App Workflow.
+	// +kubebuilder:validation:Optional
 	LogicAppIntegrationAccountID *string `json:"logicAppIntegrationAccountId,omitempty" tf:"logic_app_integration_account_id,omitempty"`
 
 	// A map of Key-Value pairs.
+	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The name of the Resource Group in which the Logic App Workflow should be created. Changing this forces a new resource to be created.
@@ -206,15 +218,19 @@ type AppWorkflowParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a map of Key-Value pairs of the Parameter Definitions to use for this Logic App Workflow. The key is the parameter name, and the value is a JSON encoded string of the parameter definition (see: https://docs.microsoft.com/azure/logic-apps/logic-apps-workflow-definition-language#parameters).
+	// +kubebuilder:validation:Optional
 	WorkflowParameters map[string]*string `json:"workflowParameters,omitempty" tf:"workflow_parameters,omitempty"`
 
 	// Specifies the Schema to use for this Logic App Workflow. Defaults to https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	WorkflowSchema *string `json:"workflowSchema,omitempty" tf:"workflow_schema,omitempty"`
 
 	// Specifies the version of the Schema used for this Logic App Workflow. Defaults to 1.0.0.0. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	WorkflowVersion *string `json:"workflowVersion,omitempty" tf:"workflow_version,omitempty"`
 }
 
@@ -239,9 +255,11 @@ type ClaimObservation struct {
 type ClaimParameters struct {
 
 	// The OAuth policy name for the Logic App Workflow.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of the OAuth policy claim for the Logic App Workflow.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -260,6 +278,7 @@ type ContentObservation struct {
 type ContentParameters struct {
 
 	// A list of the allowed caller IP address ranges.
+	// +kubebuilder:validation:Optional
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 }
 
@@ -290,9 +309,11 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Logic App Workflow.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Logic App Workflow. Possible values are SystemAssigned, UserAssigned.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -317,9 +338,11 @@ type OpenAuthenticationPolicyObservation struct {
 type OpenAuthenticationPolicyParameters struct {
 
 	// A claim block as defined below.
+	// +kubebuilder:validation:Optional
 	Claim []ClaimParameters `json:"claim,omitempty" tf:"claim,omitempty"`
 
 	// The OAuth policy name for the Logic App Workflow.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -344,9 +367,11 @@ type TriggerObservation struct {
 type TriggerParameters struct {
 
 	// A list of the allowed caller IP address ranges.
+	// +kubebuilder:validation:Optional
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 
 	// A open_authentication_policy block as defined below.
+	// +kubebuilder:validation:Optional
 	OpenAuthenticationPolicy []OpenAuthenticationPolicyParameters `json:"openAuthenticationPolicy,omitempty" tf:"open_authentication_policy,omitempty"`
 }
 
@@ -365,6 +390,7 @@ type WorkflowManagementObservation struct {
 type WorkflowManagementParameters struct {
 
 	// A list of the allowed caller IP address ranges.
+	// +kubebuilder:validation:Optional
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 }
 

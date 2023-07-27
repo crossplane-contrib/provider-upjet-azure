@@ -37,9 +37,11 @@ type ResourceGroupObservation struct {
 type ResourceGroupParameters struct {
 
 	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Group.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

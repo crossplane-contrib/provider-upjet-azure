@@ -52,9 +52,11 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorObservation struct {
 type MSSQLManagedInstanceActiveDirectoryAdministratorParameters struct {
 
 	// When true, only permit logins from AAD users and administrators. When false, also allow local database users.
+	// +kubebuilder:validation:Optional
 	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
 	// The login name of the principal to set as the Managed Instance Administrator.
+	// +kubebuilder:validation:Optional
 	LoginUsername *string `json:"loginUsername,omitempty" tf:"login_username,omitempty"`
 
 	// The ID of the Azure SQL Managed Instance for which to set the administrator. Changing this forces a new resource to be created.
@@ -72,9 +74,11 @@ type MSSQLManagedInstanceActiveDirectoryAdministratorParameters struct {
 	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 
 	// The Object ID of the principal to set as the Managed Instance Administrator.
+	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// The Azure Active Directory Tenant ID.
+	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 

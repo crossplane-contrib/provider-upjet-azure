@@ -49,6 +49,7 @@ type BackupPolicyVMWorkloadObservation struct {
 type BackupPolicyVMWorkloadParameters struct {
 
 	// One or more protection_policy blocks as defined below.
+	// +kubebuilder:validation:Optional
 	ProtectionPolicy []ProtectionPolicyParameters `json:"protectionPolicy,omitempty" tf:"protection_policy,omitempty"`
 
 	// The name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
@@ -78,9 +79,11 @@ type BackupPolicyVMWorkloadParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A settings block as defined below.
+	// +kubebuilder:validation:Optional
 	Settings []SettingsParameters `json:"settings,omitempty" tf:"settings,omitempty"`
 
 	// The VM Workload type for the Backup Policy. Possible values are SQLDataBase and SAPHanaDatabase. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	WorkloadType *string `json:"workloadType,omitempty" tf:"workload_type,omitempty"`
 }
 
@@ -117,15 +120,19 @@ type ProtectionPolicyBackupObservation struct {
 type ProtectionPolicyBackupParameters struct {
 
 	// The backup frequency for the VM Workload Backup Policy. Possible values are Daily and Weekly.
+	// +kubebuilder:validation:Optional
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// The backup frequency in minutes for the VM Workload Backup Policy. Possible values are 15, 30, 60, 120, 240, 480, 720 and 1440.
+	// +kubebuilder:validation:Optional
 	FrequencyInMinutes *float64 `json:"frequencyInMinutes,omitempty" tf:"frequency_in_minutes,omitempty"`
 
 	// The time of day to perform the backup in 24hour format.
+	// +kubebuilder:validation:Optional
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +kubebuilder:validation:Optional
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
@@ -180,24 +187,31 @@ type ProtectionPolicyObservation struct {
 type ProtectionPolicyParameters struct {
 
 	// A backup block as defined below.
+	// +kubebuilder:validation:Optional
 	Backup []ProtectionPolicyBackupParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	// The type of the VM Workload Backup Policy. Possible values are Differential, Full, Incremental and Log.
+	// +kubebuilder:validation:Optional
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 
 	// A retention_daily block as defined below.
+	// +kubebuilder:validation:Optional
 	RetentionDaily []ProtectionPolicyRetentionDailyParameters `json:"retentionDaily,omitempty" tf:"retention_daily,omitempty"`
 
 	// A retention_monthly block as defined below.
+	// +kubebuilder:validation:Optional
 	RetentionMonthly []ProtectionPolicyRetentionMonthlyParameters `json:"retentionMonthly,omitempty" tf:"retention_monthly,omitempty"`
 
 	// A retention_weekly block as defined below.
+	// +kubebuilder:validation:Optional
 	RetentionWeekly []ProtectionPolicyRetentionWeeklyParameters `json:"retentionWeekly,omitempty" tf:"retention_weekly,omitempty"`
 
 	// A retention_yearly block as defined below.
+	// +kubebuilder:validation:Optional
 	RetentionYearly []ProtectionPolicyRetentionYearlyParameters `json:"retentionYearly,omitempty" tf:"retention_yearly,omitempty"`
 
 	// A simple_retention block as defined below.
+	// +kubebuilder:validation:Optional
 	SimpleRetention []SimpleRetentionParameters `json:"simpleRetention,omitempty" tf:"simple_retention,omitempty"`
 }
 
@@ -216,6 +230,7 @@ type ProtectionPolicyRetentionDailyObservation struct {
 type ProtectionPolicyRetentionDailyParameters struct {
 
 	// The count that is used to count retention duration with duration type Days. Possible values are between 7 and 35.
+	// +kubebuilder:validation:Optional
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 }
 
@@ -258,18 +273,23 @@ type ProtectionPolicyRetentionMonthlyObservation struct {
 type ProtectionPolicyRetentionMonthlyParameters struct {
 
 	// The count that is used to count retention duration with duration type Days. Possible values are between 7 and 35.
+	// +kubebuilder:validation:Optional
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The retention schedule format type for yearly retention policy. Possible values are Daily and Weekly.
+	// +kubebuilder:validation:Optional
 	FormatType *string `json:"formatType,omitempty" tf:"format_type,omitempty"`
 
 	// The monthday backups to retain. Possible values are between 0 and 28.
+	// +kubebuilder:validation:Optional
 	Monthdays []*float64 `json:"monthdays,omitempty" tf:"monthdays,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +kubebuilder:validation:Optional
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Possible values are First, Second, Third, Fourth, Last.
+	// +kubebuilder:validation:Optional
 	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
@@ -294,9 +314,11 @@ type ProtectionPolicyRetentionWeeklyObservation struct {
 type ProtectionPolicyRetentionWeeklyParameters struct {
 
 	// The count that is used to count retention duration with duration type Days. Possible values are between 7 and 35.
+	// +kubebuilder:validation:Optional
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +kubebuilder:validation:Optional
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
@@ -345,21 +367,27 @@ type ProtectionPolicyRetentionYearlyObservation struct {
 type ProtectionPolicyRetentionYearlyParameters struct {
 
 	// The count that is used to count retention duration with duration type Days. Possible values are between 7 and 35.
+	// +kubebuilder:validation:Optional
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The retention schedule format type for yearly retention policy. Possible values are Daily and Weekly.
+	// +kubebuilder:validation:Optional
 	FormatType *string `json:"formatType,omitempty" tf:"format_type,omitempty"`
 
 	// The monthday backups to retain. Possible values are between 0 and 28.
+	// +kubebuilder:validation:Optional
 	Monthdays []*float64 `json:"monthdays,omitempty" tf:"monthdays,omitempty"`
 
 	// The months of the year to retain backups of. Possible values are January, February, March, April, May, June, July, August, September, October, November and December.
+	// +kubebuilder:validation:Optional
 	Months []*string `json:"months,omitempty" tf:"months,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +kubebuilder:validation:Optional
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Possible values are First, Second, Third, Fourth, Last.
+	// +kubebuilder:validation:Optional
 	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
@@ -384,9 +412,11 @@ type SettingsObservation struct {
 type SettingsParameters struct {
 
 	// The compression setting for the VM Workload Backup Policy. Defaults to false.
+	// +kubebuilder:validation:Optional
 	CompressionEnabled *bool `json:"compressionEnabled,omitempty" tf:"compression_enabled,omitempty"`
 
 	// The timezone for the VM Workload Backup Policy. The possible values are defined here.
+	// +kubebuilder:validation:Optional
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
@@ -405,6 +435,7 @@ type SimpleRetentionObservation struct {
 type SimpleRetentionParameters struct {
 
 	// The count that is used to count retention duration with duration type Days. Possible values are between 7 and 35.
+	// +kubebuilder:validation:Optional
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 }
 

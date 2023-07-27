@@ -49,12 +49,15 @@ type TableEntityObservation struct {
 type TableEntityParameters struct {
 
 	// A map of key/value pairs that describe the entity to be inserted/merged in to the storage table.
+	// +kubebuilder:validation:Optional
 	Entity map[string]*string `json:"entity,omitempty" tf:"entity,omitempty"`
 
 	// The key for the partition where the entity will be inserted/merged. Changing this forces a new resource.
+	// +kubebuilder:validation:Optional
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
 	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource.
+	// +kubebuilder:validation:Optional
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
 	// Specifies the storage account in which to create the storage table entity. Changing this forces a new resource to be created.

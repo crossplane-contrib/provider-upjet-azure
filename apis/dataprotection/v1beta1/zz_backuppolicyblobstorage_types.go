@@ -34,6 +34,7 @@ type BackupPolicyBlobStorageObservation struct {
 type BackupPolicyBlobStorageParameters struct {
 
 	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Blob Storage to be created.
+	// +kubebuilder:validation:Optional
 	RetentionDuration *string `json:"retentionDuration,omitempty" tf:"retention_duration,omitempty"`
 
 	// The ID of the Backup Vault within which the Backup Policy Blob Storage should exist. Changing this forces a new Backup Policy Blob Storage to be created.

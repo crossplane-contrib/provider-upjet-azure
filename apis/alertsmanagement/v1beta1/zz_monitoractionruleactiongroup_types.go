@@ -34,9 +34,11 @@ type AlertContextObservation struct {
 type AlertContextParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
+	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -61,9 +63,11 @@ type AlertRuleIDObservation struct {
 type AlertRuleIDParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
+	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -118,24 +122,31 @@ type ConditionObservation struct {
 type ConditionParameters struct {
 
 	// A alert_context block as defined below.
+	// +kubebuilder:validation:Optional
 	AlertContext []AlertContextParameters `json:"alertContext,omitempty" tf:"alert_context,omitempty"`
 
 	// A alert_rule_id block as defined below.
+	// +kubebuilder:validation:Optional
 	AlertRuleID []AlertRuleIDParameters `json:"alertRuleId,omitempty" tf:"alert_rule_id,omitempty"`
 
 	// A description block as defined below.
+	// +kubebuilder:validation:Optional
 	Description []DescriptionParameters `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A monitor block as defined below.
+	// +kubebuilder:validation:Optional
 	Monitor []MonitorParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
 	// A monitor_service as block defined below.
+	// +kubebuilder:validation:Optional
 	MonitorService []MonitorServiceParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
+	// +kubebuilder:validation:Optional
 	Severity []SeverityParameters `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A target_resource_type block as defined below.
+	// +kubebuilder:validation:Optional
 	TargetResourceType []TargetResourceTypeParameters `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 }
 
@@ -160,9 +171,11 @@ type DescriptionObservation struct {
 type DescriptionParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
+	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -228,12 +241,15 @@ type MonitorActionRuleActionGroupParameters struct {
 	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 
 	// A condition block as defined below.
+	// +kubebuilder:validation:Optional
 	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// Specifies a description for the Action Rule.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Is the Action Rule enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Specifies the name of the resource group in which the Monitor Action Rule should exist. Changing this forces a new resource to be created.
@@ -250,9 +266,11 @@ type MonitorActionRuleActionGroupParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A scope block as defined below.
+	// +kubebuilder:validation:Optional
 	Scope []ScopeParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -277,9 +295,11 @@ type MonitorObservation struct {
 type MonitorParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
+	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -304,9 +324,11 @@ type MonitorServiceObservation struct {
 type MonitorServiceParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
+	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -331,9 +353,11 @@ type ScopeObservation struct {
 type ScopeParameters struct {
 
 	// A list of resource IDs of the given scope type which will be the target of action rule.
+	// +kubebuilder:validation:Optional
 	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
 
 	// Specifies the type of target scope. Possible values are ResourceGroup and Resource.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -358,9 +382,11 @@ type SeverityObservation struct {
 type SeverityParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
+	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -385,9 +411,11 @@ type TargetResourceTypeObservation struct {
 type TargetResourceTypeParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
+	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 

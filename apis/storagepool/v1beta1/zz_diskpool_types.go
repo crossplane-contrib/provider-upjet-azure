@@ -55,6 +55,7 @@ type DiskPoolObservation struct {
 type DiskPoolParameters struct {
 
 	// The Azure Region where the Disk Pool should exist. Changing this forces a new Disk Pool to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Disk Pool should exist. Changing this forces a new Disk Pool to be created.
@@ -71,6 +72,7 @@ type DiskPoolParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the Disk Pool. Possible values are Basic_B1, Standard_S1 and Premium_P1. Changing this forces a new Disk Pool to be created.
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The ID of the Subnet where the Disk Pool should be created. Changing this forces a new Disk Pool to be created.
@@ -88,9 +90,11 @@ type DiskPoolParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Disk Pool.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Disk Pool should be located. Changing this forces a new Disk Pool to be created.
+	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 

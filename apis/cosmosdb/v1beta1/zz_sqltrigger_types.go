@@ -46,6 +46,7 @@ type SQLTriggerObservation struct {
 type SQLTriggerParameters struct {
 
 	// Body of the Trigger.
+	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The id of the Cosmos DB SQL Container to create the SQL Trigger within. Changing this forces a new SQL Trigger to be created.
@@ -63,9 +64,11 @@ type SQLTriggerParameters struct {
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
 	// The operation the trigger is associated with. Possible values are All, Create, Update, Delete and Replace.
+	// +kubebuilder:validation:Optional
 	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
 
 	// Type of the Trigger. Possible values are Pre and Post.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

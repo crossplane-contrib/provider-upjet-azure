@@ -61,6 +61,7 @@ type StreamInputIOTHubObservation struct {
 type StreamInputIOTHubParameters struct {
 
 	// The IoT Hub endpoint to connect to (ie. messages/events, messages/operationsMonitoringEvents, etc.).
+	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// The name of an Event Hub Consumer Group that should be used to read events from the Event Hub. Specifying distinct consumer group names for multiple inputs allows each of those inputs to receive the same events from the Event Hub.
@@ -90,6 +91,7 @@ type StreamInputIOTHubParameters struct {
 	IOTHubNamespaceSelector *v1.Selector `json:"iothubNamespaceSelector,omitempty" tf:"-"`
 
 	// The name of the Stream Input IoTHub. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
@@ -106,6 +108,7 @@ type StreamInputIOTHubParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
+	// +kubebuilder:validation:Optional
 	Serialization []StreamInputIOTHubSerializationParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The shared access policy key for the specified shared access policy. Changing this forces a new resource to be created.
@@ -113,6 +116,7 @@ type StreamInputIOTHubParameters struct {
 	SharedAccessPolicyKeySecretRef v1.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
+	// +kubebuilder:validation:Optional
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
@@ -156,12 +160,15 @@ type StreamInputIOTHubSerializationObservation struct {
 type StreamInputIOTHubSerializationParameters struct {
 
 	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
+	// +kubebuilder:validation:Optional
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
+	// +kubebuilder:validation:Optional
 	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
 
 	// The serialization format used for incoming data streams. Possible values are Avro, Csv and Json.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

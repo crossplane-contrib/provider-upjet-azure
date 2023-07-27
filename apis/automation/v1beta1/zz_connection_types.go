@@ -62,6 +62,7 @@ type ConnectionParameters struct {
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// A description for this Connection.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the resource group in which the Connection is created. Changing this forces a new resource to be created.
@@ -78,9 +79,11 @@ type ConnectionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The type of the Connection - can be either builtin type such as Azure, AzureClassicCertificate, and AzureServicePrincipal, or a user defined types. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A mapping of key value pairs passed to the connection. Different type needs different parameters in the values. Builtin types have required field values as below:
+	// +kubebuilder:validation:Optional
 	Values map[string]*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 

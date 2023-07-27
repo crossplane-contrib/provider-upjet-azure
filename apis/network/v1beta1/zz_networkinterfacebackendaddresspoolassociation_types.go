@@ -50,6 +50,7 @@ type NetworkInterfaceBackendAddressPoolAssociationParameters struct {
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
 	// The Name of the IP Configuration within the Network Interface which should be connected to the Backend Address Pool. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
 
 	// The ID of the Network Interface. Changing this forces a new resource to be created.

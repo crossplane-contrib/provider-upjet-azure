@@ -64,9 +64,11 @@ type AppActionHTTPObservation struct {
 type AppActionHTTPParameters struct {
 
 	// Specifies the HTTP Body that should be sent to the uri when this HTTP Action is triggered.
+	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
+	// +kubebuilder:validation:Optional
 	Headers map[string]*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
@@ -84,15 +86,19 @@ type AppActionHTTPParameters struct {
 	LogicAppIDSelector *v1.Selector `json:"logicAppIdSelector,omitempty" tf:"-"`
 
 	// Specifies the HTTP Method which should be used for this HTTP Action. Possible values include DELETE, GET, PATCH, POST and PUT.
+	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
 	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
+	// +kubebuilder:validation:Optional
 	Queries map[string]*string `json:"queries,omitempty" tf:"queries,omitempty"`
 
 	// Specifies the place of the HTTP Action in the Logic App Workflow. If not specified, the HTTP Action is right after the Trigger. A run_after block is as defined below.
+	// +kubebuilder:validation:Optional
 	RunAfter []RunAfterParameters `json:"runAfter,omitempty" tf:"run_after,omitempty"`
 
 	// Specifies the URI which will be called when this HTTP Action is triggered.
+	// +kubebuilder:validation:Optional
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
@@ -117,9 +123,11 @@ type RunAfterObservation struct {
 type RunAfterParameters struct {
 
 	// Specifies the name of the precedent HTTP Action.
+	// +kubebuilder:validation:Optional
 	ActionName *string `json:"actionName,omitempty" tf:"action_name,omitempty"`
 
 	// Specifies the expected result of the precedent HTTP Action, only after which the current HTTP Action will be triggered. Possible values include Succeeded, Failed, Skipped and TimedOut.
+	// +kubebuilder:validation:Optional
 	ActionResult *string `json:"actionResult,omitempty" tf:"action_result,omitempty"`
 }
 

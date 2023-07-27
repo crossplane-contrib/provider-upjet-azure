@@ -52,18 +52,23 @@ type CorsObservation struct {
 type CorsParameters struct {
 
 	// A set of headers to be allowed via CORS.
+	// +kubebuilder:validation:Optional
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
+	// +kubebuilder:validation:Optional
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// A set of origins to be allowed via CORS.
+	// +kubebuilder:validation:Optional
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// If credentials are allowed via CORS.
+	// +kubebuilder:validation:Optional
 	CredentialsAllowed *bool `json:"credentialsAllowed,omitempty" tf:"credentials_allowed,omitempty"`
 
 	// The max age to be allowed via CORS.
+	// +kubebuilder:validation:Optional
 	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
 }
 
@@ -96,13 +101,16 @@ type HealthcareFHIRServiceAuthenticationObservation struct {
 type HealthcareFHIRServiceAuthenticationParameters struct {
 
 	// The intended audience to receive authentication tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
+	// +kubebuilder:validation:Optional
 	Audience *string `json:"audience,omitempty" tf:"audience,omitempty"`
 
 	// The Azure Active Directory (tenant) that serves as the authentication authority to access the service.
 	// Authority must be registered to Azure AD and in the following format: https://{Azure-AD-endpoint}/{tenant-id}.
+	// +kubebuilder:validation:Optional
 	Authority *string `json:"authority,omitempty" tf:"authority,omitempty"`
 
 	// Whether smart proxy is enabled.
+	// +kubebuilder:validation:Optional
 	SmartProxyEnabled *bool `json:"smartProxyEnabled,omitempty" tf:"smart_proxy_enabled,omitempty"`
 }
 
@@ -133,9 +141,11 @@ type HealthcareFHIRServiceIdentityObservation struct {
 type HealthcareFHIRServiceIdentityParameters struct {
 
 	// A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -220,30 +230,39 @@ type HealthcareFHIRServiceObservation struct {
 type HealthcareFHIRServiceParameters struct {
 
 	// A list of the access policies of the service instance.
+	// +kubebuilder:validation:Optional
 	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
 
 	// An authentication block as defined below.
+	// +kubebuilder:validation:Optional
 	Authentication []HealthcareFHIRServiceAuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
 	// Specifies the name of the storage account which the operation configuration information is exported to.
+	// +kubebuilder:validation:Optional
 	ConfigurationExportStorageAccountName *string `json:"configurationExportStorageAccountName,omitempty" tf:"configuration_export_storage_account_name,omitempty"`
 
 	// A list of azure container registry settings used for convert data operation of the service instance.
+	// +kubebuilder:validation:Optional
 	ContainerRegistryLoginServerURL []*string `json:"containerRegistryLoginServerUrl,omitempty" tf:"container_registry_login_server_url,omitempty"`
 
 	// A cors block as defined below.
+	// +kubebuilder:validation:Optional
 	Cors []CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []HealthcareFHIRServiceIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the kind of the Healthcare FHIR Service. Possible values are: fhir-Stu3 and fhir-R4. Defaults to fhir-R4. Changing this forces a new Healthcare FHIR Service to be created.
+	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// Specifies the Azure Region where the Healthcare FHIR Service should be created. Changing this forces a new Healthcare FHIR Service to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A list of objects describing OCI artifacts for export as defined below.
+	// +kubebuilder:validation:Optional
 	OciArtifact []OciArtifactParameters `json:"ociArtifact,omitempty" tf:"oci_artifact,omitempty"`
 
 	// Specifies the name of the Resource Group in which to create the Healthcare FHIR Service. Changing this forces a new resource to be created.
@@ -260,6 +279,7 @@ type HealthcareFHIRServiceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the Healthcare FHIR Service.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the id of the Healthcare Workspace where the Healthcare FHIR Service should exist. Changing this forces a new Healthcare FHIR Service to be created.
@@ -304,12 +324,15 @@ type OciArtifactObservation struct {
 type OciArtifactParameters struct {
 
 	// A digest of an image within Azure container registry used for export operations of the service instance to narrow the artifacts down.
+	// +kubebuilder:validation:Optional
 	Digest *string `json:"digest,omitempty" tf:"digest,omitempty"`
 
 	// An image within Azure container registry used for export operations of the service instance.
+	// +kubebuilder:validation:Optional
 	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
 
 	// An Azure container registry used for export operations of the service instance.
+	// +kubebuilder:validation:Optional
 	LoginServer *string `json:"loginServer,omitempty" tf:"login_server,omitempty"`
 }
 

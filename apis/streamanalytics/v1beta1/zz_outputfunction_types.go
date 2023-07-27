@@ -56,9 +56,11 @@ type OutputFunctionParameters struct {
 	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 
 	// The maximum number of events in each batch that's sent to the function. Defaults to 100.
+	// +kubebuilder:validation:Optional
 	BatchMaxCount *float64 `json:"batchMaxCount,omitempty" tf:"batch_max_count,omitempty"`
 
 	// The maximum batch size in bytes that's sent to the function. Defaults to 262144 (256 kB).
+	// +kubebuilder:validation:Optional
 	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
 
 	// The name of the Function App.
@@ -76,6 +78,7 @@ type OutputFunctionParameters struct {
 	FunctionAppSelector *v1.Selector `json:"functionAppSelector,omitempty" tf:"-"`
 
 	// The name of the function in the Function App.
+	// +kubebuilder:validation:Optional
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Output should exist. Changing this forces a new resource to be created.

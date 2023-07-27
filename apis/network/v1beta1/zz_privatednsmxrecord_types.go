@@ -52,6 +52,7 @@ type PrivateDNSMXRecordObservation struct {
 type PrivateDNSMXRecordParameters struct {
 
 	// One or more record blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Record []PrivateDNSMXRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
@@ -68,9 +69,11 @@ type PrivateDNSMXRecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
+	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
@@ -108,9 +111,11 @@ type PrivateDNSMXRecordRecordObservation struct {
 type PrivateDNSMXRecordRecordParameters struct {
 
 	// The FQDN of the exchange to MX record points to.
+	// +kubebuilder:validation:Optional
 	Exchange *string `json:"exchange,omitempty" tf:"exchange,omitempty"`
 
 	// The preference of the MX record.
+	// +kubebuilder:validation:Optional
 	Preference *float64 `json:"preference,omitempty" tf:"preference,omitempty"`
 }
 

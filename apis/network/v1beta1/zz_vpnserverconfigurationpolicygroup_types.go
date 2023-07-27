@@ -40,12 +40,15 @@ type PolicyObservation struct {
 type PolicyParameters struct {
 
 	// The name of the VPN Server Configuration Policy member.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The attribute type of the VPN Server Configuration Policy member. Possible values are AADGroupId, CertificateGroupId and RadiusAzureGroupId.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The value of the attribute that is used for the VPN Server Configuration Policy member.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -82,12 +85,15 @@ type VPNServerConfigurationPolicyGroupObservation struct {
 type VPNServerConfigurationPolicyGroupParameters struct {
 
 	// Is this a default VPN Server Configuration Policy Group? Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
 
 	// One or more policy blocks as documented below.
+	// +kubebuilder:validation:Optional
 	Policy []PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The priority of this VPN Server Configuration Policy Group. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The ID of the VPN Server Configuration that the VPN Server Configuration Policy Group belongs to. Changing this forces a new resource to be created.

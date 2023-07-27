@@ -39,10 +39,12 @@ type FileParameters struct {
 
 	// The content of the file. Changing this forces a new resource to be created.
 	// The content of the file.
+	// +kubebuilder:validation:Optional
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The filename of the file to be uploaded. Changing this forces a new resource to be created.
 	// The filename of the file to be uploaded.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -137,13 +139,16 @@ type FunctionAppFunctionParameters struct {
 
 	// The config for this Function in JSON format.
 	// The config for this Function in JSON format.
+	// +kubebuilder:validation:Optional
 	ConfigJSON *string `json:"configJson,omitempty" tf:"config_json,omitempty"`
 
 	// Should this function be enabled. Defaults to true.
 	// Should this function be enabled. Defaults to `true`.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A file block as detailed below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	File []FileParameters `json:"file,omitempty" tf:"file,omitempty"`
 
 	// The ID of the Function App in which this function should reside. Changing this forces a new resource to be created.
@@ -163,14 +168,17 @@ type FunctionAppFunctionParameters struct {
 
 	// The language the Function is written in. Possible values are CSharp, Custom, Java, Javascript, Python, PowerShell, and TypeScript.
 	// The language the Function is written in.
+	// +kubebuilder:validation:Optional
 	Language *string `json:"language,omitempty" tf:"language,omitempty"`
 
 	// The name of the function. Changing this forces a new resource to be created.
 	// The name of the function.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The test data for the function.
 	// The test data for the function.
+	// +kubebuilder:validation:Optional
 	TestData *string `json:"testData,omitempty" tf:"test_data,omitempty"`
 }
 

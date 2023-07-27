@@ -50,6 +50,7 @@ type IdentityProviderFacebookParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// App ID for Facebook.
+	// +kubebuilder:validation:Optional
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
 	// App Secret for Facebook.

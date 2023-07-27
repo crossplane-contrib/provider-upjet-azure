@@ -82,9 +82,11 @@ type LinkedServiceKustoObservation struct {
 type LinkedServiceKustoParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -102,9 +104,11 @@ type LinkedServiceKustoParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The integration runtime reference to associate with the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// The Kusto Database Name.
@@ -135,9 +139,11 @@ type LinkedServiceKustoParameters struct {
 	KustoEndpointSelector *v1.Selector `json:"kustoEndpointSelector,omitempty" tf:"-"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The service principal id in which to authenticate against the Kusto Database.
+	// +kubebuilder:validation:Optional
 	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
 
 	// The service principal key in which to authenticate against the Kusto Database.
@@ -145,9 +151,11 @@ type LinkedServiceKustoParameters struct {
 	ServicePrincipalKeySecretRef *v1.SecretKeySelector `json:"servicePrincipalKeySecretRef,omitempty" tf:"-"`
 
 	// The service principal tenant id or name in which to authenticate against the Kusto Database.
+	// +kubebuilder:validation:Optional
 	Tenant *string `json:"tenant,omitempty" tf:"tenant,omitempty"`
 
 	// Whether to use the Data Factory's managed identity to authenticate against the Kusto Database.
+	// +kubebuilder:validation:Optional
 	UseManagedIdentity *bool `json:"useManagedIdentity,omitempty" tf:"use_managed_identity,omitempty"`
 }
 

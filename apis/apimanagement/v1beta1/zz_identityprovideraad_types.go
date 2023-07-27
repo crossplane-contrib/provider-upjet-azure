@@ -62,9 +62,11 @@ type IdentityProviderAADParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// List of allowed AAD Tenants.
+	// +kubebuilder:validation:Optional
 	AllowedTenants []*string `json:"allowedTenants,omitempty" tf:"allowed_tenants,omitempty"`
 
 	// Client Id of the Application in the AAD Identity Provider.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Client secret of the Application in the AAD Identity Provider.
@@ -85,6 +87,7 @@ type IdentityProviderAADParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The AAD Tenant to use instead of Common when logging into Active Directory
+	// +kubebuilder:validation:Optional
 	SigninTenant *string `json:"signinTenant,omitempty" tf:"signin_tenant,omitempty"`
 }
 

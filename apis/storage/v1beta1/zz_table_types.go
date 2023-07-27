@@ -40,12 +40,15 @@ type ACLAccessPolicyObservation struct {
 type ACLAccessPolicyParameters struct {
 
 	// The ISO8061 UTC time at which this Access Policy should be valid until.
+	// +kubebuilder:validation:Optional
 	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
 
 	// The permissions which should associated with this Shared Identifier.
+	// +kubebuilder:validation:Optional
 	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The ISO8061 UTC time at which this Access Policy should be valid from.
+	// +kubebuilder:validation:Optional
 	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 }
 
@@ -70,9 +73,11 @@ type TableACLObservation struct {
 type TableACLParameters struct {
 
 	// An access_policy block as defined below.
+	// +kubebuilder:validation:Optional
 	AccessPolicy []ACLAccessPolicyParameters `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
 	// The ID which should be used for this Shared Identifier.
+	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -103,9 +108,11 @@ type TableObservation struct {
 type TableParameters struct {
 
 	// One or more acl blocks as defined below.
+	// +kubebuilder:validation:Optional
 	ACL []TableACLParameters `json:"acl,omitempty" tf:"acl,omitempty"`
 
 	// The name of the storage table. Only Alphanumeric characters allowed, starting with a letter. Must be unique within the storage account the table is located. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the storage account in which to create the storage table. Changing this forces a new resource to be created.

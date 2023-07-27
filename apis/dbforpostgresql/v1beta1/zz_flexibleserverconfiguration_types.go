@@ -40,6 +40,7 @@ type FlexibleServerConfigurationObservation struct {
 type FlexibleServerConfigurationParameters struct {
 
 	// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the PostgreSQL Flexible Server where we want to change configuration. Changing this forces a new PostgreSQL Flexible Server Configuration resource.
@@ -57,6 +58,7 @@ type FlexibleServerConfigurationParameters struct {
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 

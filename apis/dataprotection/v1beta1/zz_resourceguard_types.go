@@ -46,6 +46,7 @@ type ResourceGuardObservation struct {
 type ResourceGuardParameters struct {
 
 	// The Azure Region where the Resource Guard should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Resource Guard should exist. Changing this forces a new resource to be created.
@@ -62,9 +63,11 @@ type ResourceGuardParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Resource Guard.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of the critical operations which are not protected by this Resource Guard.
+	// +kubebuilder:validation:Optional
 	VaultCriticalOperationExclusionList []*string `json:"vaultCriticalOperationExclusionList,omitempty" tf:"vault_critical_operation_exclusion_list,omitempty"`
 }
 

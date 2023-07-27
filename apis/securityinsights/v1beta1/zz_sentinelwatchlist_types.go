@@ -58,18 +58,23 @@ type SentinelWatchlistObservation struct {
 type SentinelWatchlistParameters struct {
 
 	// The default duration in ISO8601 duration form of this Sentinel Watchlist. Changing this forces a new Sentinel Watchlist to be created.
+	// +kubebuilder:validation:Optional
 	DefaultDuration *string `json:"defaultDuration,omitempty" tf:"default_duration,omitempty"`
 
 	// The description of this Sentinel Watchlist. Changing this forces a new Sentinel Watchlist to be created.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The display name of this Sentinel Watchlist. Changing this forces a new Sentinel Watchlist to be created.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The key used to optimize query performance when using Watchlist for joins with other data. Changing this forces a new Sentinel Watchlist to be created.
+	// +kubebuilder:validation:Optional
 	ItemSearchKey *string `json:"itemSearchKey,omitempty" tf:"item_search_key,omitempty"`
 
 	// Specifies a list of labels related to this Sentinel Watchlist. Changing this forces a new Sentinel Watchlist to be created.
+	// +kubebuilder:validation:Optional
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// The ID of the Log Analytics Workspace where this Sentinel Watchlist resides in. Changing this forces a new Sentinel Watchlist to be created.

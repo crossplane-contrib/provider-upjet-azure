@@ -34,9 +34,11 @@ type DDOSProtectionPlanObservation struct {
 type DDOSProtectionPlanParameters struct {
 
 	// Enable/disable DDoS Protection Plan on Virtual Network.
+	// +kubebuilder:validation:Optional
 	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
 
 	// The ID of DDoS Protection Plan.
+	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 }
 
@@ -109,24 +111,31 @@ type VirtualNetworkObservation struct {
 type VirtualNetworkParameters struct {
 
 	// The address space that is used the virtual network. You can supply more than one address space.
+	// +kubebuilder:validation:Optional
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
 
 	// The BGP community attribute in format <as-number>:<community-value>.
+	// +kubebuilder:validation:Optional
 	BGPCommunity *string `json:"bgpCommunity,omitempty" tf:"bgp_community,omitempty"`
 
 	// A ddos_protection_plan block as documented below.
+	// +kubebuilder:validation:Optional
 	DDOSProtectionPlan []DDOSProtectionPlanParameters `json:"ddosProtectionPlan,omitempty" tf:"ddos_protection_plan,omitempty"`
 
 	// List of IP addresses of DNS servers
+	// +kubebuilder:validation:Optional
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
 	// Specifies the Edge Zone within the Azure Region where this Virtual Network should exist. Changing this forces a new Virtual Network to be created.
+	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
 	// The flow timeout in minutes for the Virtual Network, which is used to enable connection tracking for intra-VM flows. Possible values are between 4 and 30 minutes.
+	// +kubebuilder:validation:Optional
 	FlowTimeoutInMinutes *float64 `json:"flowTimeoutInMinutes,omitempty" tf:"flow_timeout_in_minutes,omitempty"`
 
 	// The location/region where the virtual network is created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the virtual network. Changing this forces a new resource to be created.
@@ -143,6 +152,7 @@ type VirtualNetworkParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

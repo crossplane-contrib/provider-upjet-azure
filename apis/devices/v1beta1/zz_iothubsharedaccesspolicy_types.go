@@ -55,6 +55,7 @@ type IOTHubSharedAccessPolicyObservation struct {
 type IOTHubSharedAccessPolicyParameters struct {
 
 	// Adds DeviceConnect permission to this Shared Access Account. It allows sending and receiving on the device-side endpoints.
+	// +kubebuilder:validation:Optional
 	DeviceConnect *bool `json:"deviceConnect,omitempty" tf:"device_connect,omitempty"`
 
 	// The name of the IoTHub to which this Shared Access Policy belongs. Changing this forces a new resource to be created.
@@ -71,9 +72,11 @@ type IOTHubSharedAccessPolicyParameters struct {
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// Adds RegistryRead permission to this Shared Access Account. It allows read access to the identity registry.
+	// +kubebuilder:validation:Optional
 	RegistryRead *bool `json:"registryRead,omitempty" tf:"registry_read,omitempty"`
 
 	// Adds RegistryWrite permission to this Shared Access Account. It allows write access to the identity registry.
+	// +kubebuilder:validation:Optional
 	RegistryWrite *bool `json:"registryWrite,omitempty" tf:"registry_write,omitempty"`
 
 	// The name of the resource group under which the IotHub Shared Access Policy resource has to be created. Changing this forces a new resource to be created.
@@ -90,6 +93,7 @@ type IOTHubSharedAccessPolicyParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Adds ServiceConnect permission to this Shared Access Account. It allows sending and receiving on the cloud-side endpoints.
+	// +kubebuilder:validation:Optional
 	ServiceConnect *bool `json:"serviceConnect,omitempty" tf:"service_connect,omitempty"`
 }
 

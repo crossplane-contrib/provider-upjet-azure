@@ -60,12 +60,15 @@ type CapacityReservationParameters struct {
 	CapacityReservationGroupIDSelector *v1.Selector `json:"capacityReservationGroupIdSelector,omitempty" tf:"-"`
 
 	// A sku block as defined below.
+	// +kubebuilder:validation:Optional
 	Sku []SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Availability Zone for this Capacity Reservation. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
@@ -90,9 +93,11 @@ type SkuObservation struct {
 type SkuParameters struct {
 
 	// Specifies the number of instances to be reserved. It must be a positive integer and not exceed the quota in the subscription.
+	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// Name of the sku, such as Standard_F2. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 

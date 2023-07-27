@@ -78,18 +78,23 @@ type AccountObservation struct {
 type AccountParameters struct {
 
 	// An encryption block as defined below.
+	// +kubebuilder:validation:Optional
 	Encryption []EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether requests using non-AAD authentication are blocked. Defaults to true.
+	// +kubebuilder:validation:Optional
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether public network access is allowed for the container registry. Defaults to true.
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which the Automation Account is created. Changing this forces a new resource to be created.
@@ -106,9 +111,11 @@ type AccountParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the account. Possible values are Basic and Free.
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -133,12 +140,16 @@ type EncryptionObservation struct {
 }
 
 type EncryptionParameters struct {
+
+	// +kubebuilder:validation:Optional
 	KeySource *string `json:"keySource,omitempty" tf:"key_source,omitempty"`
 
 	// The ID of the Key Vault Key which should be used to Encrypt the data in this Automation Account.
+	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
 	// The User Assigned Managed Identity ID to be used for accessing the Customer Managed Key for encryption.
+	// +kubebuilder:validation:Optional
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
@@ -169,9 +180,11 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// The ID of the User Assigned Identity which should be assigned to this Automation Account.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of identity used for this Automation Account. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

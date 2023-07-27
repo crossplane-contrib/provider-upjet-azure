@@ -47,10 +47,12 @@ type WindowsFunctionAppSlotAuthSettingsActiveDirectoryParameters struct {
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
 	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
+	// +kubebuilder:validation:Optional
 	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with Azure Active Directory.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
@@ -60,6 +62,7 @@ type WindowsFunctionAppSlotAuthSettingsActiveDirectoryParameters struct {
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
+	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 }
 
@@ -97,6 +100,7 @@ type WindowsFunctionAppSlotAuthSettingsFacebookParameters struct {
 
 	// The App ID of the Facebook app used for login.
 	// The App ID of the Facebook app used for login.
+	// +kubebuilder:validation:Optional
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
 	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
@@ -106,10 +110,12 @@ type WindowsFunctionAppSlotAuthSettingsFacebookParameters struct {
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
 	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
+	// +kubebuilder:validation:Optional
 	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
 
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
 	// Specifies a list of OAuth 2.0 scopes to be requested as part of Facebook Login authentication.
+	// +kubebuilder:validation:Optional
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
@@ -147,6 +153,7 @@ type WindowsFunctionAppSlotAuthSettingsGithubParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the GitHub app used for login.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
@@ -156,10 +163,12 @@ type WindowsFunctionAppSlotAuthSettingsGithubParameters struct {
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
+	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
+	// +kubebuilder:validation:Optional
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
@@ -197,6 +206,7 @@ type WindowsFunctionAppSlotAuthSettingsGoogleParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Google web application.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
@@ -206,10 +216,12 @@ type WindowsFunctionAppSlotAuthSettingsGoogleParameters struct {
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
+	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Google Sign-In authentication. If not specified, "openid", "profile", and "email" are used as default scopes.
+	// +kubebuilder:validation:Optional
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
@@ -304,6 +316,7 @@ type WindowsFunctionAppSlotAuthSettingsMicrosoftParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
@@ -313,10 +326,12 @@ type WindowsFunctionAppSlotAuthSettingsMicrosoftParameters struct {
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
+	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, wl.basic is used as the default scope.
 	// The list of OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. If not specified, `wl.basic` is used as the default scope.
+	// +kubebuilder:validation:Optional
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
 
@@ -380,57 +395,72 @@ type WindowsFunctionAppSlotAuthSettingsObservation struct {
 type WindowsFunctionAppSlotAuthSettingsParameters struct {
 
 	// an active_directory block as detailed below.
+	// +kubebuilder:validation:Optional
 	ActiveDirectory []WindowsFunctionAppSlotAuthSettingsActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
 	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
 	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// +kubebuilder:validation:Optional
 	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
 	// an allowed_external_redirect_urls block as detailed below.
 	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
+	// +kubebuilder:validation:Optional
 	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
 
 	// The default authentication provider to use when multiple providers are configured. Possible values include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount, Twitter, Github.
 	// The default authentication provider to use when multiple providers are configured. Possible values include: `AzureActiveDirectory`, `Facebook`, `Google`, `MicrosoftAccount`, `Twitter`, `Github`.
+	// +kubebuilder:validation:Optional
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// Should the Authentication / Authorization feature be enabled?
 	// Should the Authentication / Authorization feature be enabled?
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// a facebook block as detailed below.
+	// +kubebuilder:validation:Optional
 	Facebook []WindowsFunctionAppSlotAuthSettingsFacebookParameters `json:"facebook,omitempty" tf:"facebook,omitempty"`
 
 	// a github block as detailed below.
+	// +kubebuilder:validation:Optional
 	Github []WindowsFunctionAppSlotAuthSettingsGithubParameters `json:"github,omitempty" tf:"github,omitempty"`
 
 	// a google block as detailed below.
+	// +kubebuilder:validation:Optional
 	Google []WindowsFunctionAppSlotAuthSettingsGoogleParameters `json:"google,omitempty" tf:"google,omitempty"`
 
 	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
 	// The OpenID Connect Issuer URI that represents the entity which issues access tokens.
+	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// a microsoft block as detailed below.
+	// +kubebuilder:validation:Optional
 	Microsoft []WindowsFunctionAppSlotAuthSettingsMicrosoftParameters `json:"microsoft,omitempty" tf:"microsoft,omitempty"`
 
 	// The RuntimeVersion of the Authentication / Authorization feature in use.
 	// The RuntimeVersion of the Authentication / Authorization feature in use.
+	// +kubebuilder:validation:Optional
 	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
 
 	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
 	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	// +kubebuilder:validation:Optional
 	TokenRefreshExtensionHours *float64 `json:"tokenRefreshExtensionHours,omitempty" tf:"token_refresh_extension_hours,omitempty"`
 
 	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to false.
 	// Should the Windows Web App durably store platform-specific security tokens that are obtained during login flows? Defaults to `false`.
+	// +kubebuilder:validation:Optional
 	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
 
 	// a twitter block as detailed below.
+	// +kubebuilder:validation:Optional
 	Twitter []WindowsFunctionAppSlotAuthSettingsTwitterParameters `json:"twitter,omitempty" tf:"twitter,omitempty"`
 
 	// The action to take when an unauthenticated client attempts to access the app. Possible values include: RedirectToLoginPage, AllowAnonymous.
 	// The action to take when an unauthenticated client attempts to access the app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.
+	// +kubebuilder:validation:Optional
 	UnauthenticatedClientAction *string `json:"unauthenticatedClientAction,omitempty" tf:"unauthenticated_client_action,omitempty"`
 }
 
@@ -460,6 +490,7 @@ type WindowsFunctionAppSlotAuthSettingsTwitterParameters struct {
 
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// +kubebuilder:validation:Optional
 	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
@@ -469,6 +500,7 @@ type WindowsFunctionAppSlotAuthSettingsTwitterParameters struct {
 
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
+	// +kubebuilder:validation:Optional
 	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
 }
 
@@ -578,50 +610,62 @@ type WindowsFunctionAppSlotAuthSettingsV2ActiveDirectoryV2Parameters struct {
 
 	// The list of allowed Applications for the Default Authorisation Policy.
 	// The list of allowed Applications for the Default Authorisation Policy.
+	// +kubebuilder:validation:Optional
 	AllowedApplications []*string `json:"allowedApplications,omitempty" tf:"allowed_applications,omitempty"`
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
 	// Specifies a list of Allowed audience values to consider when validating JWTs issued by Azure Active Directory.
+	// +kubebuilder:validation:Optional
 	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
 
 	// The list of allowed Group Names for the Default Authorisation Policy.
 	// The list of allowed Group Names for the Default Authorisation Policy.
+	// +kubebuilder:validation:Optional
 	AllowedGroups []*string `json:"allowedGroups,omitempty" tf:"allowed_groups,omitempty"`
 
 	// The list of allowed Identities for the Default Authorisation Policy.
 	// The list of allowed Identities for the Default Authorisation Policy.
+	// +kubebuilder:validation:Optional
 	AllowedIdentities []*string `json:"allowedIdentities,omitempty" tf:"allowed_identities,omitempty"`
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with Azure Active Directory.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The thumbprint of the certificate used for signing purposes.
 	// The thumbprint of the certificate used for signing purposes.
+	// +kubebuilder:validation:Optional
 	ClientSecretCertificateThumbprint *string `json:"clientSecretCertificateThumbprint,omitempty" tf:"client_secret_certificate_thumbprint,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The App Setting name that contains the client secret of the Client.
+	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// A list of Allowed Client Applications in the JWT Claim.
 	// A list of Allowed Client Applications in the JWT Claim.
+	// +kubebuilder:validation:Optional
 	JwtAllowedClientApplications []*string `json:"jwtAllowedClientApplications,omitempty" tf:"jwt_allowed_client_applications,omitempty"`
 
 	// A list of Allowed Groups in the JWT Claim.
 	// A list of Allowed Groups in the JWT Claim.
+	// +kubebuilder:validation:Optional
 	JwtAllowedGroups []*string `json:"jwtAllowedGroups,omitempty" tf:"jwt_allowed_groups,omitempty"`
 
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
+	// +kubebuilder:validation:Optional
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
+	// +kubebuilder:validation:Optional
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
 	// Should the www-authenticate provider should be omitted from the request? Defaults to false
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
+	// +kubebuilder:validation:Optional
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
 
@@ -654,10 +698,12 @@ type WindowsFunctionAppSlotAuthSettingsV2AppleV2Parameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Apple web application.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Apple Login.
+	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 }
 
@@ -679,6 +725,7 @@ type WindowsFunctionAppSlotAuthSettingsV2AzureStaticWebAppV2Parameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with Azure Static Web App Authentication.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 }
 
@@ -756,22 +803,27 @@ type WindowsFunctionAppSlotAuthSettingsV2CustomOidcV2Parameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with this Custom OIDC.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The name which should be used for this Storage Account.
 	// The name of the Custom OIDC Authentication Provider.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the claim that contains the users name.
 	// The name of the claim that contains the users name.
+	// +kubebuilder:validation:Optional
 	NameClaimType *string `json:"nameClaimType,omitempty" tf:"name_claim_type,omitempty"`
 
 	// The app setting name that contains the client_secret value used for the Custom OIDC Login.
 	// The endpoint that contains all the configuration endpoints for this Custom OIDC provider.
+	// +kubebuilder:validation:Optional
 	OpenIDConfigurationEndpoint *string `json:"openidConfigurationEndpoint,omitempty" tf:"openid_configuration_endpoint,omitempty"`
 
 	// The list of the scopes that should be requested while authenticating.
 	// The list of the scopes that should be requested while authenticating.
+	// +kubebuilder:validation:Optional
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 }
 
@@ -817,18 +869,22 @@ type WindowsFunctionAppSlotAuthSettingsV2FacebookV2Parameters struct {
 
 	// The App ID of the Facebook app used for login.
 	// The App ID of the Facebook app used for login.
+	// +kubebuilder:validation:Optional
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
 	// The app setting name that contains the `app_secret` value used for Facebook Login.
+	// +kubebuilder:validation:Optional
 	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
 
 	// The version of the Facebook API to be used while logging in.
 	// The version of the Facebook API to be used while logging in.
+	// +kubebuilder:validation:Optional
 	GraphAPIVersion *string `json:"graphApiVersion,omitempty" tf:"graph_api_version,omitempty"`
 
 	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
 	// Specifies a list of scopes to be requested as part of Facebook Login authentication.
+	// +kubebuilder:validation:Optional
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
@@ -866,14 +922,17 @@ type WindowsFunctionAppSlotAuthSettingsV2GithubV2Parameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the GitHub app used for login.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for GitHub Login.
+	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
+	// +kubebuilder:validation:Optional
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
@@ -919,18 +978,22 @@ type WindowsFunctionAppSlotAuthSettingsV2GoogleV2Parameters struct {
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
 	// Specifies a list of Allowed Audiences that will be requested as part of Google Sign-In authentication.
+	// +kubebuilder:validation:Optional
 	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Google web application.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Google Login.
+	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
 	// Specifies a list of Login scopes that will be requested as part of Google Sign-In authentication.
+	// +kubebuilder:validation:Optional
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
@@ -1113,46 +1176,57 @@ type WindowsFunctionAppSlotAuthSettingsV2LoginParameters struct {
 
 	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends.
 	// External URLs that can be redirected to as part of logging in or logging out of the app. This is an advanced setting typically only needed by Windows Store application backends. **Note:** URLs within the current domain are always implicitly allowed.
+	// +kubebuilder:validation:Optional
 	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
 
 	// The method by which cookies expire. Possible values include: FixedTime, and IdentityProviderDerived. Defaults to FixedTime.
 	// The method by which cookies expire. Possible values include: `FixedTime`, and `IdentityProviderDerived`. Defaults to `FixedTime`.
+	// +kubebuilder:validation:Optional
 	CookieExpirationConvention *string `json:"cookieExpirationConvention,omitempty" tf:"cookie_expiration_convention,omitempty"`
 
 	// The time after the request is made when the session cookie should expire. Defaults to 08:00:00.
 	// The time after the request is made when the session cookie should expire. Defaults to `08:00:00`.
+	// +kubebuilder:validation:Optional
 	CookieExpirationTime *string `json:"cookieExpirationTime,omitempty" tf:"cookie_expiration_time,omitempty"`
 
 	// The endpoint to which logout requests should be made.
 	// The endpoint to which logout requests should be made.
+	// +kubebuilder:validation:Optional
 	LogoutEndpoint *string `json:"logoutEndpoint,omitempty" tf:"logout_endpoint,omitempty"`
 
 	// The time after the request is made when the nonce should expire. Defaults to 00:05:00.
 	// The time after the request is made when the nonce should expire. Defaults to `00:05:00`.
+	// +kubebuilder:validation:Optional
 	NonceExpirationTime *string `json:"nonceExpirationTime,omitempty" tf:"nonce_expiration_time,omitempty"`
 
 	// Should the fragments from the request be preserved after the login request is made. Defaults to false.
 	// Should the fragments from the request be preserved after the login request is made. Defaults to `false`.
+	// +kubebuilder:validation:Optional
 	PreserveURLFragmentsForLogins *bool `json:"preserveUrlFragmentsForLogins,omitempty" tf:"preserve_url_fragments_for_logins,omitempty"`
 
 	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to 72 hours.
 	// The number of hours after session token expiration that a session token can be used to call the token refresh API. Defaults to `72` hours.
+	// +kubebuilder:validation:Optional
 	TokenRefreshExtensionTime *float64 `json:"tokenRefreshExtensionTime,omitempty" tf:"token_refresh_extension_time,omitempty"`
 
 	// Should the Token Store configuration Enabled. Defaults to false
 	// Should the Token Store configuration Enabled. Defaults to `false`
+	// +kubebuilder:validation:Optional
 	TokenStoreEnabled *bool `json:"tokenStoreEnabled,omitempty" tf:"token_store_enabled,omitempty"`
 
 	// The directory path in the App Filesystem in which the tokens will be stored.
 	// The directory path in the App Filesystem in which the tokens will be stored.
+	// +kubebuilder:validation:Optional
 	TokenStorePath *string `json:"tokenStorePath,omitempty" tf:"token_store_path,omitempty"`
 
 	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
 	// The name of the app setting which contains the SAS URL of the blob storage containing the tokens.
+	// +kubebuilder:validation:Optional
 	TokenStoreSASSettingName *string `json:"tokenStoreSasSettingName,omitempty" tf:"token_store_sas_setting_name,omitempty"`
 
 	// Should the nonce be validated while completing the login flow. Defaults to true.
 	// Should the nonce be validated while completing the login flow. Defaults to `true`.
+	// +kubebuilder:validation:Optional
 	ValidateNonce *bool `json:"validateNonce,omitempty" tf:"validate_nonce,omitempty"`
 }
 
@@ -1198,18 +1272,22 @@ type WindowsFunctionAppSlotAuthSettingsV2MicrosoftV2Parameters struct {
 
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
 	// Specifies a list of Allowed Audiences that will be requested as part of Microsoft Sign-In authentication.
+	// +kubebuilder:validation:Optional
 	AllowedAudiences []*string `json:"allowedAudiences,omitempty" tf:"allowed_audiences,omitempty"`
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
+	// +kubebuilder:validation:Optional
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
 
 	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
 	// The list of Login scopes that will be requested as part of Microsoft Account authentication.
+	// +kubebuilder:validation:Optional
 	LoginScopes []*string `json:"loginScopes,omitempty" tf:"login_scopes,omitempty"`
 }
 
@@ -1297,81 +1375,103 @@ type WindowsFunctionAppSlotAuthSettingsV2Observation struct {
 type WindowsFunctionAppSlotAuthSettingsV2Parameters struct {
 
 	// An active_directory_v2 block as defined below.
+	// +kubebuilder:validation:Optional
 	ActiveDirectoryV2 []WindowsFunctionAppSlotAuthSettingsV2ActiveDirectoryV2Parameters `json:"activeDirectoryV2,omitempty" tf:"active_directory_v2,omitempty"`
 
 	// An apple_v2 block as defined below.
+	// +kubebuilder:validation:Optional
 	AppleV2 []WindowsFunctionAppSlotAuthSettingsV2AppleV2Parameters `json:"appleV2,omitempty" tf:"apple_v2,omitempty"`
 
 	// Should the AuthV2 Settings be enabled. Defaults to false.
 	// Should the AuthV2 Settings be enabled. Defaults to `false`
+	// +kubebuilder:validation:Optional
 	AuthEnabled *bool `json:"authEnabled,omitempty" tf:"auth_enabled,omitempty"`
 
 	// An azure_static_web_app_v2 block as defined below.
+	// +kubebuilder:validation:Optional
 	AzureStaticWebAppV2 []WindowsFunctionAppSlotAuthSettingsV2AzureStaticWebAppV2Parameters `json:"azureStaticWebAppV2,omitempty" tf:"azure_static_web_app_v2,omitempty"`
 
 	// The path to the App Auth settings.
 	// The path to the App Auth settings. **Note:** Relative Paths are evaluated from the Site Root directory.
+	// +kubebuilder:validation:Optional
 	ConfigFilePath *string `json:"configFilePath,omitempty" tf:"config_file_path,omitempty"`
 
 	// Zero or more custom_oidc_v2 blocks as defined below.
+	// +kubebuilder:validation:Optional
 	CustomOidcV2 []WindowsFunctionAppSlotAuthSettingsV2CustomOidcV2Parameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
 	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
 	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// +kubebuilder:validation:Optional
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
 	// The paths which should be excluded from the `unauthenticated_action` when it is set to `RedirectToLoginPage`.
+	// +kubebuilder:validation:Optional
 	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
 
 	// A facebook_v2 block as defined below.
+	// +kubebuilder:validation:Optional
 	FacebookV2 []WindowsFunctionAppSlotAuthSettingsV2FacebookV2Parameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
 	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+	// +kubebuilder:validation:Optional
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
 
 	// The name of the custom header containing the host of the request.
 	// The name of the header containing the host of the request.
+	// +kubebuilder:validation:Optional
 	ForwardProxyCustomHostHeaderName *string `json:"forwardProxyCustomHostHeaderName,omitempty" tf:"forward_proxy_custom_host_header_name,omitempty"`
 
 	// The name of the custom header containing the scheme of the request.
 	// The name of the header containing the scheme of the request.
+	// +kubebuilder:validation:Optional
 	ForwardProxyCustomSchemeHeaderName *string `json:"forwardProxyCustomSchemeHeaderName,omitempty" tf:"forward_proxy_custom_scheme_header_name,omitempty"`
 
 	// A github_v2 block as defined below.
+	// +kubebuilder:validation:Optional
 	GithubV2 []WindowsFunctionAppSlotAuthSettingsV2GithubV2Parameters `json:"githubV2,omitempty" tf:"github_v2,omitempty"`
 
 	// A google_v2 block as defined below.
+	// +kubebuilder:validation:Optional
 	GoogleV2 []WindowsFunctionAppSlotAuthSettingsV2GoogleV2Parameters `json:"googleV2,omitempty" tf:"google_v2,omitempty"`
 
 	// The prefix that should precede all the authentication and authorisation paths. Defaults to /.auth.
 	// The prefix that should precede all the authentication and authorisation paths. Defaults to `/.auth`
+	// +kubebuilder:validation:Optional
 	HTTPRouteAPIPrefix *string `json:"httpRouteApiPrefix,omitempty" tf:"http_route_api_prefix,omitempty"`
 
 	// A login block as defined below.
+	// +kubebuilder:validation:Optional
 	Login []WindowsFunctionAppSlotAuthSettingsV2LoginParameters `json:"login,omitempty" tf:"login,omitempty"`
 
 	// A microsoft_v2 block as defined below.
+	// +kubebuilder:validation:Optional
 	MicrosoftV2 []WindowsFunctionAppSlotAuthSettingsV2MicrosoftV2Parameters `json:"microsoftV2,omitempty" tf:"microsoft_v2,omitempty"`
 
 	// Should the authentication flow be used for all requests.
 	// Should the authentication flow be used for all requests.
+	// +kubebuilder:validation:Optional
 	RequireAuthentication *bool `json:"requireAuthentication,omitempty" tf:"require_authentication,omitempty"`
 
 	// Should HTTPS be required on connections? Defaults to true.
 	// Should HTTPS be required on connections? Defaults to true.
+	// +kubebuilder:validation:Optional
 	RequireHTTPS *bool `json:"requireHttps,omitempty" tf:"require_https,omitempty"`
 
 	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to ~1.
 	// The Runtime Version of the Authentication and Authorisation feature of this App. Defaults to `~1`
+	// +kubebuilder:validation:Optional
 	RuntimeVersion *string `json:"runtimeVersion,omitempty" tf:"runtime_version,omitempty"`
 
 	// A twitter_v2 block as defined below.
+	// +kubebuilder:validation:Optional
 	TwitterV2 []WindowsFunctionAppSlotAuthSettingsV2TwitterV2Parameters `json:"twitterV2,omitempty" tf:"twitter_v2,omitempty"`
 
 	// The action to take for requests made without authentication. Possible values include RedirectToLoginPage, AllowAnonymous, Return401, and Return403. Defaults to RedirectToLoginPage.
 	// The action to take for requests made without authentication. Possible values include `RedirectToLoginPage`, `AllowAnonymous`, `Return401`, and `Return403`. Defaults to `RedirectToLoginPage`.
+	// +kubebuilder:validation:Optional
 	UnauthenticatedAction *string `json:"unauthenticatedAction,omitempty" tf:"unauthenticated_action,omitempty"`
 }
 
@@ -1401,10 +1501,12 @@ type WindowsFunctionAppSlotAuthSettingsV2TwitterV2Parameters struct {
 
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
+	// +kubebuilder:validation:Optional
 	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
 
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	// +kubebuilder:validation:Optional
 	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
 }
 
@@ -1440,13 +1542,16 @@ type WindowsFunctionAppSlotBackupParameters struct {
 
 	// Should this backup job be enabled? Defaults to true.
 	// Should this backup job be enabled?
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name which should be used for this Backup.
 	// The name which should be used for this Backup.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// a schedule block as detailed below.
+	// +kubebuilder:validation:Optional
 	Schedule []WindowsFunctionAppSlotBackupScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The SAS URL to the container.
@@ -1509,22 +1614,27 @@ type WindowsFunctionAppSlotBackupScheduleParameters struct {
 
 	// How often the backup should be executed (e.g. for weekly backup, this should be set to 7 and frequency_unit should be set to Day).
 	// How often the backup should be executed (e.g. for weekly backup, this should be set to `7` and `frequency_unit` should be set to `Day`).
+	// +kubebuilder:validation:Optional
 	FrequencyInterval *float64 `json:"frequencyInterval,omitempty" tf:"frequency_interval,omitempty"`
 
 	// The unit of time for how often the backup should take place. Possible values include: Day and Hour.
 	// The unit of time for how often the backup should take place. Possible values include: `Day` and `Hour`.
+	// +kubebuilder:validation:Optional
 	FrequencyUnit *string `json:"frequencyUnit,omitempty" tf:"frequency_unit,omitempty"`
 
 	// Should the service keep at least one backup, regardless of age of backup. Defaults to false.
 	// Should the service keep at least one backup, regardless of age of backup. Defaults to `false`.
+	// +kubebuilder:validation:Optional
 	KeepAtLeastOneBackup *bool `json:"keepAtLeastOneBackup,omitempty" tf:"keep_at_least_one_backup,omitempty"`
 
 	// After how many days backups should be deleted. Defaults to 30.
 	// After how many days backups should be deleted.
+	// +kubebuilder:validation:Optional
 	RetentionPeriodDays *float64 `json:"retentionPeriodDays,omitempty" tf:"retention_period_days,omitempty"`
 
 	// When the schedule should start working in RFC-3339 format.
 	// When the schedule should start working in RFC-3339 format.
+	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 
@@ -1554,10 +1664,12 @@ type WindowsFunctionAppSlotConnectionStringParameters struct {
 
 	// The name which should be used for this Connection.
 	// The name which should be used for this Connection.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Type of database. Possible values include: APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub, PostgreSQL, RedisCache, ServiceBus, SQLAzure, and SQLServer.
 	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The connection string value.
@@ -1593,9 +1705,11 @@ type WindowsFunctionAppSlotIdentityObservation struct {
 type WindowsFunctionAppSlotIdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Windows Function App Slot.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Windows Function App Slot. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -1808,46 +1922,58 @@ type WindowsFunctionAppSlotParameters struct {
 
 	// A map of key-value pairs for App Settings and custom values.
 	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	// +kubebuilder:validation:Optional
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// an auth_settings block as detailed below.
+	// +kubebuilder:validation:Optional
 	AuthSettings []WindowsFunctionAppSlotAuthSettingsParameters `json:"authSettings,omitempty" tf:"auth_settings,omitempty"`
 
 	// an auth_settings_v2 block as detailed below.
+	// +kubebuilder:validation:Optional
 	AuthSettingsV2 []WindowsFunctionAppSlotAuthSettingsV2Parameters `json:"authSettingsV2,omitempty" tf:"auth_settings_v2,omitempty"`
 
 	// a backup block as detailed below.
+	// +kubebuilder:validation:Optional
 	Backup []WindowsFunctionAppSlotBackupParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
 	// Should built-in logging be enabled. Configures AzureWebJobsDashboard app setting based on the configured storage setting. Defaults to true.
 	// Should built in logging be enabled. Configures `AzureWebJobsDashboard` app setting based on the configured storage setting.
+	// +kubebuilder:validation:Optional
 	BuiltinLoggingEnabled *bool `json:"builtinLoggingEnabled,omitempty" tf:"builtin_logging_enabled,omitempty"`
 
 	// Should the Function App Slot use Client Certificates.
 	// Should the Function App Slot use Client Certificates.
+	// +kubebuilder:validation:Optional
 	ClientCertificateEnabled *bool `json:"clientCertificateEnabled,omitempty" tf:"client_certificate_enabled,omitempty"`
 
 	// Paths to exclude when using client certificates, separated by ;
 	// Paths to exclude when using client certificates, separated by ;
+	// +kubebuilder:validation:Optional
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
 	// The mode of the Function App Slot's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser.
 	// The mode of the Function App Slot's client certificates requirement for incoming requests. Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`.
+	// +kubebuilder:validation:Optional
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
 	// a connection_string block as detailed below.
+	// +kubebuilder:validation:Optional
 	ConnectionString []WindowsFunctionAppSlotConnectionStringParameters `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// Force disable the content share settings.
 	// Force disable the content share settings.
+	// +kubebuilder:validation:Optional
 	ContentShareForceDisabled *bool `json:"contentShareForceDisabled,omitempty" tf:"content_share_force_disabled,omitempty"`
 
 	// The amount of memory in gigabyte-seconds that your application is allowed to consume per day. Setting this value only affects function apps in Consumption Plans. Defaults to 0.
 	// The amount of memory in gigabyte-seconds that your application is allowed to consume per day. Setting this value only affects function apps in Consumption Plans.
+	// +kubebuilder:validation:Optional
 	DailyMemoryTimeQuota *float64 `json:"dailyMemoryTimeQuota,omitempty" tf:"daily_memory_time_quota,omitempty"`
 
 	// Is the Windows Function App Slot enabled. Defaults to true.
 	// Is the Windows Function App Slot enabled.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the Windows Function App this Slot is a member of. Changing this forces a new resource to be created.
@@ -1867,26 +1993,33 @@ type WindowsFunctionAppSlotParameters struct {
 
 	// The runtime version associated with the Function App Slot. Defaults to ~4.
 	// The runtime version associated with the Function App Slot.
+	// +kubebuilder:validation:Optional
 	FunctionsExtensionVersion *string `json:"functionsExtensionVersion,omitempty" tf:"functions_extension_version,omitempty"`
 
 	// Can the Function App Slot only be accessed via HTTPS?
 	// Can the Function App Slot only be accessed via HTTPS?
+	// +kubebuilder:validation:Optional
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
 	// an identity block as detailed below.
+	// +kubebuilder:validation:Optional
 	Identity []WindowsFunctionAppSlotIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The User Assigned Identity ID used for accessing KeyVault secrets. The identity must be assigned to the application in the identity block. For more information see - Access vaults with a user-assigned identity
 	// The User Assigned Identity to use for Key Vault access.
+	// +kubebuilder:validation:Optional
 	KeyVaultReferenceIdentityID *string `json:"keyVaultReferenceIdentityId,omitempty" tf:"key_vault_reference_identity_id,omitempty"`
 
 	// The ID of the Service Plan in which to run this slot. If not specified the same Service Plan as the Windows Function App will be used.
+	// +kubebuilder:validation:Optional
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
 
 	// a site_config block as detailed below.
+	// +kubebuilder:validation:Optional
 	SiteConfig []WindowsFunctionAppSlotSiteConfigParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
 	// One or more storage_account blocks as defined below.
+	// +kubebuilder:validation:Optional
 	StorageAccount []WindowsFunctionAppSlotStorageAccountParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
 
 	// The access key which will be used to access the storage account for the Function App Slot.
@@ -1910,13 +2043,16 @@ type WindowsFunctionAppSlotParameters struct {
 
 	// The Key Vault Secret ID, optionally including version, that contains the Connection String to connect to the storage account for this Function App Slot.
 	// The Key Vault Secret ID, including version, that contains the Connection String to connect to the storage account for this Function App.
+	// +kubebuilder:validation:Optional
 	StorageKeyVaultSecretID *string `json:"storageKeyVaultSecretId,omitempty" tf:"storage_key_vault_secret_id,omitempty"`
 
 	// Should the Function App Slot use its Managed Identity to access storage.
 	// Should the Function App Slot use its Managed Identity to access storage?
+	// +kubebuilder:validation:Optional
 	StorageUsesManagedIdentity *bool `json:"storageUsesManagedIdentity,omitempty" tf:"storage_uses_managed_identity,omitempty"`
 
 	// A mapping of tags which should be assigned to the Windows Function App Slot.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
@@ -1960,10 +2096,12 @@ type WindowsFunctionAppSlotSiteConfigAppServiceLogsParameters struct {
 
 	// The amount of disk space to use for logs. Valid values are between 25 and 100. Defaults to 35.
 	// The amount of disk space to use for logs. Valid values are between `25` and `100`.
+	// +kubebuilder:validation:Optional
 	DiskQuotaMb *float64 `json:"diskQuotaMb,omitempty" tf:"disk_quota_mb,omitempty"`
 
 	// After how many days backups should be deleted. Defaults to 30.
 	// The retention period for logs in days. Valid values are between `0` and `99999`. Defaults to `0` (never delete).
+	// +kubebuilder:validation:Optional
 	RetentionPeriodDays *float64 `json:"retentionPeriodDays,omitempty" tf:"retention_period_days,omitempty"`
 }
 
@@ -2025,26 +2163,32 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackParameters struct {
 
 	// The version of .Net. Possible values are v3.0, v4.0, v6.0 and v7.0. Defaults to v4.0.
 	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0` and `v7.0`
+	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Java to use. Possible values are 1.8, 11 and 17 (In-Preview).
 	// The version of Java to use. Possible values are `1.8`, `11` and `17`
+	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
 	// The version of Node to use. Possible values are ~12, ~14, ~16 and ~18.
 	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The PowerShell Core version to use. Possible values are 7, and 7.2.
 	// The PowerShell Core version to use. Possible values are `7`, and `7.2`
+	// +kubebuilder:validation:Optional
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
 	// Does the Function App use a custom Application Stack?
 	// Does the Function App use a custom Application Stack?
+	// +kubebuilder:validation:Optional
 	UseCustomRuntime *bool `json:"useCustomRuntime,omitempty" tf:"use_custom_runtime,omitempty"`
 
 	// Should the DotNet process use an isolated runtime. Defaults to false.
 	// Should the DotNet process use an isolated runtime. Defaults to `false`.
+	// +kubebuilder:validation:Optional
 	UseDotnetIsolatedRuntime *bool `json:"useDotnetIsolatedRuntime,omitempty" tf:"use_dotnet_isolated_runtime,omitempty"`
 }
 
@@ -2074,10 +2218,12 @@ type WindowsFunctionAppSlotSiteConfigCorsParameters struct {
 
 	// an allowed_origins block as detailed below.
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// +kubebuilder:validation:Optional
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Are credentials allowed in CORS requests? Defaults to false.
 	// Are credentials allowed in CORS requests? Defaults to `false`.
+	// +kubebuilder:validation:Optional
 	SupportCredentials *bool `json:"supportCredentials,omitempty" tf:"support_credentials,omitempty"`
 }
 
@@ -2114,15 +2260,19 @@ type WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersObservation struct {
 type WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersParameters struct {
 
 	// Specifies a list of Azure Front Door IDs.
+	// +kubebuilder:validation:Optional
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
 
 	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
+	// +kubebuilder:validation:Optional
 	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
 
 	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
+	// +kubebuilder:validation:Optional
 	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
 
 	// Specifies a list of Hosts for which matching should be applied.
+	// +kubebuilder:validation:Optional
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
@@ -2186,25 +2336,31 @@ type WindowsFunctionAppSlotSiteConfigIPRestrictionParameters struct {
 
 	// The action to take. Possible values are Allow or Deny.
 	// The action to take. Possible values are `Allow` or `Deny`.
+	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// a headers block as detailed below.
+	// +kubebuilder:validation:Optional
 	Headers []WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
+	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The name which should be used for this Storage Account.
 	// The name which should be used for this `ip_restriction`.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The priority value of this ip_restriction. Defaults to 65000.
 	// The priority value of this `ip_restriction`.
+	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The Service Tag used for this IP Restriction.
 	// The Service Tag used for this IP Restriction.
+	// +kubebuilder:validation:Optional
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
@@ -2473,25 +2629,31 @@ type WindowsFunctionAppSlotSiteConfigParameters struct {
 
 	// The URL of the API definition that describes this Windows Function App.
 	// The URL of the API definition that describes this Windows Function App.
+	// +kubebuilder:validation:Optional
 	APIDefinitionURL *string `json:"apiDefinitionUrl,omitempty" tf:"api_definition_url,omitempty"`
 
 	// The ID of the API Management API for this Windows Function App.
 	// The ID of the API Management API for this Windows Function App.
+	// +kubebuilder:validation:Optional
 	APIManagementAPIID *string `json:"apiManagementApiId,omitempty" tf:"api_management_api_id,omitempty"`
 
 	// If this Windows Web App is Always On enabled. Defaults to false.
 	// If this Windows Web App is Always On enabled. Defaults to `false`.
+	// +kubebuilder:validation:Optional
 	AlwaysOn *bool `json:"alwaysOn,omitempty" tf:"always_on,omitempty"`
 
 	// The program and any arguments used to launch this app via the command line. (Example node myapp.js).
 	// The program and any arguments used to launch this app via the command line. (Example `node myapp.js`).
+	// +kubebuilder:validation:Optional
 	AppCommandLine *string `json:"appCommandLine,omitempty" tf:"app_command_line,omitempty"`
 
 	// The number of workers this function app can scale out to. Only applicable to apps on the Consumption and Premium plan.
 	// The number of workers this function app can scale out to. Only applicable to apps on the Consumption and Premium plan.
+	// +kubebuilder:validation:Optional
 	AppScaleLimit *float64 `json:"appScaleLimit,omitempty" tf:"app_scale_limit,omitempty"`
 
 	// an app_service_logs block as detailed below.
+	// +kubebuilder:validation:Optional
 	AppServiceLogs []WindowsFunctionAppSlotSiteConfigAppServiceLogsParameters `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
 
 	// The Connection String for linking the Windows Function App to Application Insights.
@@ -2505,94 +2667,118 @@ type WindowsFunctionAppSlotSiteConfigParameters struct {
 	ApplicationInsightsKeySecretRef *v1.SecretKeySelector `json:"applicationInsightsKeySecretRef,omitempty" tf:"-"`
 
 	// an application_stack block as detailed below.
+	// +kubebuilder:validation:Optional
 	ApplicationStack []WindowsFunctionAppSlotSiteConfigApplicationStackParameters `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
 
 	// The name of the slot to automatically swap with when this slot is successfully deployed.
+	// +kubebuilder:validation:Optional
 	AutoSwapSlotName *string `json:"autoSwapSlotName,omitempty" tf:"auto_swap_slot_name,omitempty"`
 
 	// a cors block as detailed below.
+	// +kubebuilder:validation:Optional
 	Cors []WindowsFunctionAppSlotSiteConfigCorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// a default_documents block as detailed below.
 	// Specifies a list of Default Documents for the Windows Web App.
+	// +kubebuilder:validation:Optional
 	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
 
 	// The number of minimum instances for this Windows Function App. Only affects apps on Elastic Premium plans.
 	// The number of minimum instances for this Windows Function App. Only affects apps on Elastic Premium plans.
+	// +kubebuilder:validation:Optional
 	ElasticInstanceMinimum *float64 `json:"elasticInstanceMinimum,omitempty" tf:"elastic_instance_minimum,omitempty"`
 
 	// State of FTP / FTPS service for this function app. Possible values include: AllAllowed, FtpsOnly and Disabled. Defaults to Disabled.
 	// State of FTP / FTPS service for this function app. Possible values include: `AllAllowed`, `FtpsOnly` and `Disabled`. Defaults to `Disabled`.
+	// +kubebuilder:validation:Optional
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Defaults to 10. Only valid in conjunction with health_check_path
 	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// +kubebuilder:validation:Optional
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
 	// The path to be checked for this function app health.
 	// The path to be checked for this function app health.
+	// +kubebuilder:validation:Optional
 	HealthCheckPath *string `json:"healthCheckPath,omitempty" tf:"health_check_path,omitempty"`
 
 	// Specifies if the HTTP2 protocol should be enabled. Defaults to false.
 	// Specifies if the http2 protocol should be enabled. Defaults to `false`.
+	// +kubebuilder:validation:Optional
 	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 
 	// an ip_restriction block as detailed below.
+	// +kubebuilder:validation:Optional
 	IPRestriction []WindowsFunctionAppSlotSiteConfigIPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
 	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
 	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
+	// +kubebuilder:validation:Optional
 	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
 
 	// The Managed Pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
 	// The Managed Pipeline mode. Possible values include: `Integrated`, `Classic`. Defaults to `Integrated`.
+	// +kubebuilder:validation:Optional
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	// The configures the minimum version of TLS required for SSL requests. Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// The number of pre-warmed instances for this function app. Only affects apps on an Elastic Premium plan.
 	// The number of pre-warmed instances for this function app. Only affects apps on an Elastic Premium plan.
+	// +kubebuilder:validation:Optional
 	PreWarmedInstanceCount *float64 `json:"preWarmedInstanceCount,omitempty" tf:"pre_warmed_instance_count,omitempty"`
 
 	// Should Remote Debugging be enabled. Defaults to false.
 	// Should Remote Debugging be enabled. Defaults to `false`.
+	// +kubebuilder:validation:Optional
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
 	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022
 	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022`
+	// +kubebuilder:validation:Optional
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// Should Scale Monitoring of the Functions Runtime be enabled?
 	// Should Functions Runtime Scale Monitoring be enabled.
+	// +kubebuilder:validation:Optional
 	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
 
 	// a scm_ip_restriction block as detailed below.
+	// +kubebuilder:validation:Optional
 	ScmIPRestriction []WindowsFunctionAppSlotSiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
 	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
+	// +kubebuilder:validation:Optional
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
 
 	// Should the Windows Function App ip_restriction configuration be used for the SCM also.
 	// Should the Windows Function App `ip_restriction` configuration be used for the SCM also.
+	// +kubebuilder:validation:Optional
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
 	// Should the Windows Web App use a 32-bit worker. Defaults to true.
 	// Should the Windows Web App use a 32-bit worker.
+	// +kubebuilder:validation:Optional
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
 	// Should all outbound traffic to have NAT Gateways, Network Security Groups and User Defined Routes applied? Defaults to false.
 	// Should all outbound traffic to have Virtual Network Security Groups and User Defined Routes applied? Defaults to `false`.
+	// +kubebuilder:validation:Optional
 	VnetRouteAllEnabled *bool `json:"vnetRouteAllEnabled,omitempty" tf:"vnet_route_all_enabled,omitempty"`
 
 	// Should Web Sockets be enabled. Defaults to false.
 	// Should Web Sockets be enabled. Defaults to `false`.
+	// +kubebuilder:validation:Optional
 	WebsocketsEnabled *bool `json:"websocketsEnabled,omitempty" tf:"websockets_enabled,omitempty"`
 
 	// The number of Workers for this Windows Function App.
 	// The number of Workers for this Windows Function App.
+	// +kubebuilder:validation:Optional
 	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 }
 
@@ -2629,15 +2815,19 @@ type WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersObservation struct {
 type WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersParameters struct {
 
 	// Specifies a list of Azure Front Door IDs.
+	// +kubebuilder:validation:Optional
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
 
 	// Specifies if a Front Door Health Probe should be expected. The only possible value is 1.
+	// +kubebuilder:validation:Optional
 	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
 
 	// Specifies a list of addresses for which matching should be applied. Omitting this value means allow any.
+	// +kubebuilder:validation:Optional
 	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
 
 	// Specifies a list of Hosts for which matching should be applied.
+	// +kubebuilder:validation:Optional
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
@@ -2701,25 +2891,31 @@ type WindowsFunctionAppSlotSiteConfigScmIPRestrictionParameters struct {
 
 	// The action to take. Possible values are Allow or Deny.
 	// The action to take. Possible values are `Allow` or `Deny`.
+	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// a headers block as detailed below.
+	// +kubebuilder:validation:Optional
 	Headers []WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
+	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The name which should be used for this Storage Account.
 	// The name which should be used for this `ip_restriction`.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The priority value of this ip_restriction. Defaults to 65000.
 	// The priority value of this `ip_restriction`.
+	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The Service Tag used for this IP Restriction.
 	// The Service Tag used for this IP Restriction.
+	// +kubebuilder:validation:Optional
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
@@ -2796,18 +2992,23 @@ type WindowsFunctionAppSlotStorageAccountParameters struct {
 	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
 
 	// The Name of the Storage Account.
+	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
 	// The path at which to mount the storage share.
+	// +kubebuilder:validation:Optional
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 
 	// The name which should be used for this Storage Account.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Name of the File Share or Container Name for Blob storage.
+	// +kubebuilder:validation:Optional
 	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
 
 	// The Azure Storage Type. Possible values include AzureFiles.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

@@ -34,9 +34,11 @@ type CustomHeaderObservation struct {
 type CustomHeaderParameters struct {
 
 	// The name of the custom header.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of custom header. Applicable for HTTP and HTTPS protocol.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -94,15 +96,19 @@ type TrafficManagerAzureEndpointObservation struct {
 type TrafficManagerAzureEndpointParameters struct {
 
 	// One or more custom_header blocks as defined below.
+	// +kubebuilder:validation:Optional
 	CustomHeader []CustomHeaderParameters `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
 
 	// Is the endpoint enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A list of Geographic Regions used to distribute traffic, such as WORLD, UK or DE. The same location can't be specified in two endpoints. See the Geographic Hierarchies documentation for more information.
+	// +kubebuilder:validation:Optional
 	GeoMappings []*string `json:"geoMappings,omitempty" tf:"geo_mappings,omitempty"`
 
 	// Specifies the priority of this Endpoint, this must be specified for Profiles using the Priority traffic routing method. Supports values between 1 and 1000, with no Endpoints sharing the same value. If omitted the value will be computed in order of creation.
+	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The ID of the Traffic Manager Profile that this Azure Endpoint should be created within. Changing this forces a new resource to be created.
@@ -120,6 +126,7 @@ type TrafficManagerAzureEndpointParameters struct {
 	ProfileIDSelector *v1.Selector `json:"profileIdSelector,omitempty" tf:"-"`
 
 	// One or more subnet blocks as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Subnet []TrafficManagerAzureEndpointSubnetParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
 
 	// The ID of the Azure Resource which should be used as a target.
@@ -137,6 +144,7 @@ type TrafficManagerAzureEndpointParameters struct {
 	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
 	// Specifies how much traffic should be distributed to this endpoint, this must be specified for Profiles using the Weighted traffic routing method. Valid values are between 1 and 1000.
+	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
@@ -167,12 +175,15 @@ type TrafficManagerAzureEndpointSubnetObservation struct {
 type TrafficManagerAzureEndpointSubnetParameters struct {
 
 	// The first IP Address in this subnet.
+	// +kubebuilder:validation:Optional
 	First *string `json:"first,omitempty" tf:"first,omitempty"`
 
 	// The last IP Address in this subnet.
+	// +kubebuilder:validation:Optional
 	Last *string `json:"last,omitempty" tf:"last,omitempty"`
 
 	// The block size (number of leading bits in the subnet mask).
+	// +kubebuilder:validation:Optional
 	Scope *float64 `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 

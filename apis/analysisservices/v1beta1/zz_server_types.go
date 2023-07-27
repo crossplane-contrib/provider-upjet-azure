@@ -40,12 +40,15 @@ type IPv4FirewallRuleObservation struct {
 type IPv4FirewallRuleParameters struct {
 
 	// Specifies the name of the firewall rule.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// End of the firewall rule range as IPv4 address.
+	// +kubebuilder:validation:Optional
 	RangeEnd *string `json:"rangeEnd,omitempty" tf:"range_end,omitempty"`
 
 	// Start of the firewall rule range as IPv4 address.
+	// +kubebuilder:validation:Optional
 	RangeStart *string `json:"rangeStart,omitempty" tf:"range_start,omitempty"`
 }
 
@@ -115,6 +118,7 @@ type ServerObservation struct {
 type ServerParameters struct {
 
 	// List of email addresses of admin users.
+	// +kubebuilder:validation:Optional
 	AdminUsers []*string `json:"adminUsers,omitempty" tf:"admin_users,omitempty"`
 
 	// URI and SAS token for a blob container to store backups.
@@ -122,18 +126,23 @@ type ServerParameters struct {
 	BackupBlobContainerURISecretRef *v1.SecretKeySelector `json:"backupBlobContainerUriSecretRef,omitempty" tf:"-"`
 
 	// Indicates if the Power BI service is allowed to access or not.
+	// +kubebuilder:validation:Optional
 	EnablePowerBiService *bool `json:"enablePowerBiService,omitempty" tf:"enable_power_bi_service,omitempty"`
 
 	// One or more ipv4_firewall_rule block(s) as defined below.
+	// +kubebuilder:validation:Optional
 	IPv4FirewallRule []IPv4FirewallRuleParameters `json:"ipv4FirewallRule,omitempty" tf:"ipv4_firewall_rule,omitempty"`
 
 	// The Azure location where the Analysis Services Server exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Analysis Services Server. Only lowercase Alphanumeric characters allowed, starting with a letter. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations.
+	// +kubebuilder:validation:Optional
 	QuerypoolConnectionMode *string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty"`
 
 	// The name of the Resource Group in which the Analysis Services Server should be exist. Changing this forces a new resource to be created.
@@ -150,9 +159,11 @@ type ServerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// SKU for the Analysis Services Server. Possible values are: D1, B1, B2, S0, S1, S2, S4, S8, S9, S8v2 and S9v2.
+	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -49,6 +49,7 @@ type VirtualHubSecurityPartnerProviderObservation struct {
 type VirtualHubSecurityPartnerProviderParameters struct {
 
 	// The Azure Region where the Security Partner Provider should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Security Partner Provider should exist. Changing this forces a new resource to be created.
@@ -65,9 +66,11 @@ type VirtualHubSecurityPartnerProviderParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The security provider name. Possible values are ZScaler, IBoss and Checkpoint is allowed. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SecurityProviderName *string `json:"securityProviderName,omitempty" tf:"security_provider_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Security Partner Provider.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Hub within which this Security Partner Provider should be created. Changing this forces a new resource to be created.

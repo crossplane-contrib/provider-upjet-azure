@@ -64,21 +64,27 @@ type GlobalVMShutdownScheduleObservation struct {
 type GlobalVMShutdownScheduleParameters struct {
 
 	// The time each day when the schedule takes effect. Must match the format HHmm where HH is 00-23 and mm is 00-59 (e.g. 0930, 2300, etc.)
+	// +kubebuilder:validation:Optional
 	DailyRecurrenceTime *string `json:"dailyRecurrenceTime,omitempty" tf:"daily_recurrence_time,omitempty"`
 
 	// Whether to enable the schedule. Possible values are true and false. Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The location where the schedule is created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The notification setting of a schedule. A notification_settings as defined below.
+	// +kubebuilder:validation:Optional
 	NotificationSettings []NotificationSettingsParameters `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The time zone ID (e.g. Pacific Standard time). Refer to this guide for a full list of accepted time zone names.
+	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
 	// The resource ID of the target ARM-based Virtual Machine. Changing this forces a new resource to be created.
@@ -129,15 +135,19 @@ type NotificationSettingsObservation struct {
 type NotificationSettingsParameters struct {
 
 	// E-mail address to which the notification will be sent.
+	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// Whether to enable pre-shutdown notifications. Possible values are true and false.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Time in minutes between 15 and 120 before a shutdown event at which a notification will be sent. Defaults to 30.
+	// +kubebuilder:validation:Optional
 	TimeInMinutes *float64 `json:"timeInMinutes,omitempty" tf:"time_in_minutes,omitempty"`
 
 	// The webhook URL to which the notification will be sent.
+	// +kubebuilder:validation:Optional
 	WebhookURL *string `json:"webhookUrl,omitempty" tf:"webhook_url,omitempty"`
 }
 

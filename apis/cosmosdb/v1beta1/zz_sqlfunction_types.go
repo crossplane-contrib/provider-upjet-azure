@@ -34,6 +34,7 @@ type SQLFunctionObservation struct {
 type SQLFunctionParameters struct {
 
 	// Body of the User Defined Function.
+	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The id of the Cosmos DB SQL Container to create the SQL User Defined Function within. Changing this forces a new SQL User Defined Function to be created.

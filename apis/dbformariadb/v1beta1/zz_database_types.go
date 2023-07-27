@@ -43,9 +43,11 @@ type DatabaseObservation struct {
 type DatabaseParameters struct {
 
 	// Specifies the Charset for the MariaDB Database, which needs to be a valid MariaDB Charset. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Charset *string `json:"charset,omitempty" tf:"charset,omitempty"`
 
 	// Specifies the Collation for the MariaDB Database, which needs to be a valid MariaDB Collation. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
 	// The name of the resource group in which the MariaDB Server exists. Changing this forces a new resource to be created.

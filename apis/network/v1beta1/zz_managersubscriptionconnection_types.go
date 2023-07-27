@@ -43,6 +43,7 @@ type ManagerSubscriptionConnectionObservation struct {
 type ManagerSubscriptionConnectionParameters struct {
 
 	// A description of the Network Manager Subscription Connection.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the ID of the Network Manager which the Subscription is connected to.
@@ -60,6 +61,7 @@ type ManagerSubscriptionConnectionParameters struct {
 	NetworkManagerIDSelector *v1.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the target Subscription. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 

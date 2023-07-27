@@ -46,9 +46,11 @@ type NamespaceAuthorizationRuleObservation struct {
 type NamespaceAuthorizationRuleParameters struct {
 
 	// Grants listen access to this this Authorization Rule. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
 
 	// Grants manage access to this this Authorization Rule. When this property is true - both listen and send must be too. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Specifies the ID of the ServiceBus Namespace. Changing this forces a new resource to be created.
@@ -66,6 +68,7 @@ type NamespaceAuthorizationRuleParameters struct {
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// Grants send access to this this Authorization Rule. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 

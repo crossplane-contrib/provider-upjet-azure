@@ -37,9 +37,11 @@ type SecurityCenterSettingObservation struct {
 type SecurityCenterSettingParameters struct {
 
 	// Boolean flag to enable/disable data access.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The setting to manage. Possible values are MCAS , WDATP and SENTINEL. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SettingName *string `json:"settingName,omitempty" tf:"setting_name,omitempty"`
 }
 

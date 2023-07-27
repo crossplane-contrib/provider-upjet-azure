@@ -46,6 +46,7 @@ type ClusterObservation struct {
 type ClusterParameters struct {
 
 	// The Azure Region where the Stream Analytics Cluster should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Cluster should exist. Changing this forces a new resource to be created.
@@ -62,9 +63,11 @@ type ClusterParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The number of streaming units supported by the Cluster. Accepted values are multiples of 36 in the range of 36 to 216.
+	// +kubebuilder:validation:Optional
 	StreamingCapacity *float64 `json:"streamingCapacity,omitempty" tf:"streaming_capacity,omitempty"`
 
 	// A mapping of tags which should be assigned to the Stream Analytics.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

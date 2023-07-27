@@ -77,9 +77,11 @@ type FrontdoorCustomDomainParameters struct {
 	DNSZoneIDSelector *v1.Selector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
 
 	// The host name of the domain. The host_name field must be the FQDN of your domain(e.g. contoso.fabrikam.com). Changing this forces a new Front Door Custom Domain to be created.
+	// +kubebuilder:validation:Optional
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// A tls block as defined below.
+	// +kubebuilder:validation:Optional
 	TLS []TLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 }
 
@@ -110,12 +112,15 @@ type TLSObservation struct {
 type TLSParameters struct {
 
 	// Resource ID of the Front Door Secret.
+	// +kubebuilder:validation:Optional
 	CdnFrontdoorSecretID *string `json:"cdnFrontdoorSecretId,omitempty" tf:"cdn_frontdoor_secret_id,omitempty"`
 
 	// Defines the source of the SSL certificate. Possible values include CustomerCertificate and ManagedCertificate. Defaults to ManagedCertificate.
+	// +kubebuilder:validation:Optional
 	CertificateType *string `json:"certificateType,omitempty" tf:"certificate_type,omitempty"`
 
 	// TLS protocol version that will be used for Https. Possible values include TLS10 and TLS12. Defaults to TLS12.
+	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 }
 

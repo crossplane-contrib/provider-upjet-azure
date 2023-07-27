@@ -43,6 +43,7 @@ type SpringCloudCertificateObservation struct {
 type SpringCloudCertificateParameters struct {
 
 	// The content of uploaded certificate. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	CertificateContent *string `json:"certificateContent,omitempty" tf:"certificate_content,omitempty"`
 
 	// Specifies the ID of the Key Vault Certificate resource. Changing this forces a new resource to be created.

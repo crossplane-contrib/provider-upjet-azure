@@ -66,15 +66,19 @@ type DataShareParameters struct {
 	AccountIDSelector *v1.Selector `json:"accountIdSelector,omitempty" tf:"-"`
 
 	// The Data Share's description.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The kind of the Data Share. Possible values are CopyBased and InPlace. Changing this forces a new Data Share to be created.
+	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// A snapshot_schedule block as defined below.
+	// +kubebuilder:validation:Optional
 	SnapshotSchedule []SnapshotScheduleParameters `json:"snapshotSchedule,omitempty" tf:"snapshot_schedule,omitempty"`
 
 	// The terms of the Data Share.
+	// +kubebuilder:validation:Optional
 	Terms *string `json:"terms,omitempty" tf:"terms,omitempty"`
 }
 
@@ -105,12 +109,15 @@ type SnapshotScheduleObservation struct {
 type SnapshotScheduleParameters struct {
 
 	// The name of the snapshot schedule.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The interval of the synchronization with the source data. Possible values are Hour and Day.
+	// +kubebuilder:validation:Optional
 	Recurrence *string `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 
 	// The synchronization with the source data's start time.
+	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 }
 

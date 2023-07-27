@@ -63,12 +63,15 @@ type AppTriggerHTTPRequestParameters struct {
 	LogicAppIDSelector *v1.Selector `json:"logicAppIdSelector,omitempty" tf:"-"`
 
 	// Specifies the HTTP Method which the request be using. Possible values include DELETE, GET, PATCH, POST or PUT.
+	// +kubebuilder:validation:Optional
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
 	// Specifies the Relative Path used for this Request.
+	// +kubebuilder:validation:Optional
 	RelativePath *string `json:"relativePath,omitempty" tf:"relative_path,omitempty"`
 
 	// A JSON Blob defining the Schema of the incoming request. This needs to be valid JSON.
+	// +kubebuilder:validation:Optional
 	Schema *string `json:"schema,omitempty" tf:"schema,omitempty"`
 }
 

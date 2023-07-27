@@ -43,6 +43,7 @@ type FirewallRuleObservation struct {
 type FirewallRuleParameters struct {
 
 	// Specifies the End IP Address associated with this Firewall Rule. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
 	// The name of the resource group in which the PostgreSQL Server exists. Changing this forces a new resource to be created.
@@ -72,6 +73,7 @@ type FirewallRuleParameters struct {
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// Specifies the Start IP Address associated with this Firewall Rule. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 }
 

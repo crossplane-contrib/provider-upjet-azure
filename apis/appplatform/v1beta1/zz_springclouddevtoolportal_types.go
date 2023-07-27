@@ -58,15 +58,19 @@ type SpringCloudDevToolPortalObservation struct {
 type SpringCloudDevToolPortalParameters struct {
 
 	// Should the Accelerator plugin be enabled?
+	// +kubebuilder:validation:Optional
 	ApplicationAcceleratorEnabled *bool `json:"applicationAcceleratorEnabled,omitempty" tf:"application_accelerator_enabled,omitempty"`
 
 	// Should the Application Live View be enabled?
+	// +kubebuilder:validation:Optional
 	ApplicationLiveViewEnabled *bool `json:"applicationLiveViewEnabled,omitempty" tf:"application_live_view_enabled,omitempty"`
 
 	// The name which should be used for this Spring Cloud Dev Tool Portal. The only possible value is default. Changing this forces a new Spring Cloud Dev Tool Portal to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Is public network access enabled?
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Dev Tool Portal to be created.
@@ -84,6 +88,7 @@ type SpringCloudDevToolPortalParameters struct {
 	SpringCloudServiceIDSelector *v1.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
 
 	// A sso block as defined below.
+	// +kubebuilder:validation:Optional
 	Sso []SpringCloudDevToolPortalSsoParameters `json:"sso,omitempty" tf:"sso,omitempty"`
 }
 
@@ -120,15 +125,19 @@ type SpringCloudDevToolPortalSsoObservation struct {
 type SpringCloudDevToolPortalSsoParameters struct {
 
 	// Specifies the public identifier for the application.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Specifies the secret known only to the application and the authorization server.
+	// +kubebuilder:validation:Optional
 	ClientSecret *string `json:"clientSecret,omitempty" tf:"client_secret,omitempty"`
 
 	// Specifies the URI of a JSON file with generic OIDC provider configuration.
+	// +kubebuilder:validation:Optional
 	MetadataURL *string `json:"metadataUrl,omitempty" tf:"metadata_url,omitempty"`
 
 	// Specifies a list of specific actions applications can be allowed to do on a user's behalf.
+	// +kubebuilder:validation:Optional
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 

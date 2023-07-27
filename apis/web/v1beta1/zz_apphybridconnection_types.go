@@ -74,10 +74,12 @@ type AppHybridConnectionParameters struct {
 
 	// The hostname of the endpoint.
 	// The hostname of the endpoint.
+	// +kubebuilder:validation:Optional
 	HostName *string `json:"hostname,omitempty" tf:"hostname,omitempty"`
 
 	// The port to use for the endpoint.
 	// The port to use for the endpoint
+	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The ID of the Relay Hybrid Connection to use. Changing this forces a new resource to be created.
@@ -97,6 +99,7 @@ type AppHybridConnectionParameters struct {
 
 	// The name of the Relay key with Send permission to use. Defaults to RootManageSharedAccessKey
 	// The name of the Relay key with `Send` permission to use. Defaults to `RootManageSharedAccessKey`
+	// +kubebuilder:validation:Optional
 	SendKeyName *string `json:"sendKeyName,omitempty" tf:"send_key_name,omitempty"`
 
 	// The ID of the Web App for this Hybrid Connection. Changing this forces a new resource to be created.

@@ -49,9 +49,11 @@ type SQLPoolExtendedAuditingPolicyObservation struct {
 type SQLPoolExtendedAuditingPolicyParameters struct {
 
 	// Enable audit events to Azure Monitor? To enable server audit events to Azure Monitor, please enable its master database audit events to Azure Monitor. Defaults to true.
+	// +kubebuilder:validation:Optional
 	LogMonitoringEnabled *bool `json:"logMonitoringEnabled,omitempty" tf:"log_monitoring_enabled,omitempty"`
 
 	// The number of days to retain logs for in the storage account. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// The ID of the Synapse SQL pool to set the extended auditing policy. Changing this forces a new resource to be created.
@@ -69,6 +71,7 @@ type SQLPoolExtendedAuditingPolicyParameters struct {
 	SQLPoolIDSelector *v1.Selector `json:"sqlPoolIdSelector,omitempty" tf:"-"`
 
 	// Is storage_account_access_key value the storage's secondary key?
+	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeyIsSecondary *bool `json:"storageAccountAccessKeyIsSecondary,omitempty" tf:"storage_account_access_key_is_secondary,omitempty"`
 
 	// The access key to use for the auditing storage account.

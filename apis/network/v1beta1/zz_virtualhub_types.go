@@ -76,12 +76,15 @@ type VirtualHubObservation_2 struct {
 type VirtualHubParameters_2 struct {
 
 	// The Address Prefix which should be used for this Virtual Hub. Changing this forces a new resource to be created. The address prefix subnet cannot be smaller than a .
+	// +kubebuilder:validation:Optional
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
 
 	// The hub routing preference. Possible values are ExpressRoute, ASPath and VpnGateway. Defaults to ExpressRoute.
+	// +kubebuilder:validation:Optional
 	HubRoutingPreference *string `json:"hubRoutingPreference,omitempty" tf:"hub_routing_preference,omitempty"`
 
 	// Specifies the supported Azure location where the Virtual Hub should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group where the Virtual Hub should exist. Changing this forces a new resource to be created.
@@ -98,12 +101,15 @@ type VirtualHubParameters_2 struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more route blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Route []VirtualHubRouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 
 	// The SKU of the Virtual Hub. Possible values are Basic and Standard. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the Virtual Hub.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of a Virtual WAN within which the Virtual Hub should be created. Changing this forces a new resource to be created.
@@ -142,9 +148,11 @@ type VirtualHubRouteObservation struct {
 type VirtualHubRouteParameters struct {
 
 	// A list of Address Prefixes.
+	// +kubebuilder:validation:Optional
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 
 	// The IP Address that Packets should be forwarded to as the Next Hop.
+	// +kubebuilder:validation:Optional
 	NextHopIPAddress *string `json:"nextHopIpAddress,omitempty" tf:"next_hop_ip_address,omitempty"`
 }
 

@@ -52,18 +52,23 @@ type ActionsObservation struct {
 type ActionsParameters struct {
 
 	// A request_header_action block as defined below.
+	// +kubebuilder:validation:Optional
 	RequestHeaderAction []RequestHeaderActionParameters `json:"requestHeaderAction,omitempty" tf:"request_header_action,omitempty"`
 
 	// A response_header_action block as defined below.
+	// +kubebuilder:validation:Optional
 	ResponseHeaderAction []ResponseHeaderActionParameters `json:"responseHeaderAction,omitempty" tf:"response_header_action,omitempty"`
 
 	// A route_configuration_override_action block as defined below.
+	// +kubebuilder:validation:Optional
 	RouteConfigurationOverrideAction []RouteConfigurationOverrideActionParameters `json:"routeConfigurationOverrideAction,omitempty" tf:"route_configuration_override_action,omitempty"`
 
 	// A url_redirect_action block as defined below. You may not have a url_redirect_action and a url_rewrite_action defined in the same actions block.
+	// +kubebuilder:validation:Optional
 	URLRedirectAction []ActionsURLRedirectActionParameters `json:"urlRedirectAction,omitempty" tf:"url_redirect_action,omitempty"`
 
 	// A url_rewrite_action block as defined below. You may not have a url_rewrite_action and a url_redirect_action defined in the same actions block.
+	// +kubebuilder:validation:Optional
 	URLRewriteAction []ActionsURLRewriteActionParameters `json:"urlRewriteAction,omitempty" tf:"url_rewrite_action,omitempty"`
 }
 
@@ -112,21 +117,27 @@ type ActionsURLRedirectActionObservation struct {
 type ActionsURLRedirectActionParameters struct {
 
 	// The fragment to use in the redirect. The value must be a string between 0 and 1024 characters in length, leave blank to preserve the incoming fragment. Defaults to an empty string. Defaults to "".
+	// +kubebuilder:validation:Optional
 	DestinationFragment *string `json:"destinationFragment,omitempty" tf:"destination_fragment,omitempty"`
 
 	// The host name you want the request to be redirected to. The value must be a string between 0 and 2048 characters in length, leave blank to preserve the incoming host.
+	// +kubebuilder:validation:Optional
 	DestinationHostName *string `json:"destinationHostname,omitempty" tf:"destination_hostname,omitempty"`
 
 	// The path to use in the redirect. The value must be a string and include the leading /, leave blank to preserve the incoming path. Defaults to an empty string. Defaults to "".
+	// +kubebuilder:validation:Optional
 	DestinationPath *string `json:"destinationPath,omitempty" tf:"destination_path,omitempty"`
 
 	// The query string used in the redirect URL. The value must be in the <key>=<value> or <key>={action_server_variable} format and must not include the leading ?, leave blank to preserve the incoming query string. Maximum allowed length for this field is 2048 characters. Defaults to an empty string. Defaults to "".
+	// +kubebuilder:validation:Optional
 	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
 	// The protocol the request will be redirected as. Possible values include MatchRequest, Http or Https. Defaults to MatchRequest.
+	// +kubebuilder:validation:Optional
 	RedirectProtocol *string `json:"redirectProtocol,omitempty" tf:"redirect_protocol,omitempty"`
 
 	// The response type to return to the requestor. Possible values include Moved, Found , TemporaryRedirect or PermanentRedirect.
+	// +kubebuilder:validation:Optional
 	RedirectType *string `json:"redirectType,omitempty" tf:"redirect_type,omitempty"`
 }
 
@@ -157,12 +168,15 @@ type ActionsURLRewriteActionObservation struct {
 type ActionsURLRewriteActionParameters struct {
 
 	// The destination path to use in the rewrite. The destination path overwrites the source pattern.
+	// +kubebuilder:validation:Optional
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Append the remaining path after the source pattern to the new destination path? Possible values true or false. Defaults to false.
+	// +kubebuilder:validation:Optional
 	PreserveUnmatchedPath *bool `json:"preserveUnmatchedPath,omitempty" tf:"preserve_unmatched_path,omitempty"`
 
 	// The source pattern in the URL path to replace. This uses prefix-based matching. For example, to match all URL paths use a forward slash "/" as the source pattern value.
+	// +kubebuilder:validation:Optional
 	SourcePattern *string `json:"sourcePattern,omitempty" tf:"source_pattern,omitempty"`
 }
 
@@ -193,12 +207,15 @@ type ClientPortConditionObservation struct {
 type ClientPortConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -241,18 +258,23 @@ type ConditionsCookiesConditionObservation struct {
 type ConditionsCookiesConditionParameters struct {
 
 	// A string value representing the name of the cookie.
+	// +kubebuilder:validation:Optional
 	CookieName *string `json:"cookieName,omitempty" tf:"cookie_name,omitempty"`
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +kubebuilder:validation:Optional
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -283,12 +305,15 @@ type ConditionsHTTPVersionConditionObservation struct {
 type ConditionsHTTPVersionConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -415,60 +440,79 @@ type ConditionsObservation struct {
 type ConditionsParameters struct {
 
 	// A client_port_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	ClientPortCondition []ClientPortConditionParameters `json:"clientPortCondition,omitempty" tf:"client_port_condition,omitempty"`
 
 	// A cookies_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	CookiesCondition []ConditionsCookiesConditionParameters `json:"cookiesCondition,omitempty" tf:"cookies_condition,omitempty"`
 
 	// A http_version_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	HTTPVersionCondition []ConditionsHTTPVersionConditionParameters `json:"httpVersionCondition,omitempty" tf:"http_version_condition,omitempty"`
 
 	// A host_name_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	HostNameCondition []HostNameConditionParameters `json:"hostNameCondition,omitempty" tf:"host_name_condition,omitempty"`
 
 	// A is_device_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	IsDeviceCondition []IsDeviceConditionParameters `json:"isDeviceCondition,omitempty" tf:"is_device_condition,omitempty"`
 
 	// A post_args_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	PostArgsCondition []PostArgsConditionParameters `json:"postArgsCondition,omitempty" tf:"post_args_condition,omitempty"`
 
 	// A query_string_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	QueryStringCondition []ConditionsQueryStringConditionParameters `json:"queryStringCondition,omitempty" tf:"query_string_condition,omitempty"`
 
 	// A remote_address_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	RemoteAddressCondition []ConditionsRemoteAddressConditionParameters `json:"remoteAddressCondition,omitempty" tf:"remote_address_condition,omitempty"`
 
 	// A request_body_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	RequestBodyCondition []ConditionsRequestBodyConditionParameters `json:"requestBodyCondition,omitempty" tf:"request_body_condition,omitempty"`
 
 	// A request_header_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	RequestHeaderCondition []ConditionsRequestHeaderConditionParameters `json:"requestHeaderCondition,omitempty" tf:"request_header_condition,omitempty"`
 
 	// A request_method_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	RequestMethodCondition []ConditionsRequestMethodConditionParameters `json:"requestMethodCondition,omitempty" tf:"request_method_condition,omitempty"`
 
 	// A request_scheme_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	RequestSchemeCondition []ConditionsRequestSchemeConditionParameters `json:"requestSchemeCondition,omitempty" tf:"request_scheme_condition,omitempty"`
 
 	// A request_uri_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	RequestURICondition []ConditionsRequestURIConditionParameters `json:"requestUriCondition,omitempty" tf:"request_uri_condition,omitempty"`
 
 	// A ssl_protocol_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	SSLProtocolCondition []SSLProtocolConditionParameters `json:"sslProtocolCondition,omitempty" tf:"ssl_protocol_condition,omitempty"`
 
 	// A server_port_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	ServerPortCondition []ServerPortConditionParameters `json:"serverPortCondition,omitempty" tf:"server_port_condition,omitempty"`
 
 	// A socket_address_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	SocketAddressCondition []SocketAddressConditionParameters `json:"socketAddressCondition,omitempty" tf:"socket_address_condition,omitempty"`
 
 	// A url_file_extension_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	URLFileExtensionCondition []ConditionsURLFileExtensionConditionParameters `json:"urlFileExtensionCondition,omitempty" tf:"url_file_extension_condition,omitempty"`
 
 	// A url_filename_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	URLFilenameCondition []URLFilenameConditionParameters `json:"urlFilenameCondition,omitempty" tf:"url_filename_condition,omitempty"`
 
 	// A url_path_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	URLPathCondition []ConditionsURLPathConditionParameters `json:"urlPathCondition,omitempty" tf:"url_path_condition,omitempty"`
 }
 
@@ -505,15 +549,19 @@ type ConditionsQueryStringConditionObservation struct {
 type ConditionsQueryStringConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +kubebuilder:validation:Optional
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -544,12 +592,15 @@ type ConditionsRemoteAddressConditionObservation struct {
 type ConditionsRemoteAddressConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -586,15 +637,19 @@ type ConditionsRequestBodyConditionObservation struct {
 type ConditionsRequestBodyConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +kubebuilder:validation:Optional
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -637,18 +692,23 @@ type ConditionsRequestHeaderConditionObservation struct {
 type ConditionsRequestHeaderConditionParameters struct {
 
 	// The name of the header to modify.
+	// +kubebuilder:validation:Optional
 	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +kubebuilder:validation:Optional
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -679,12 +739,15 @@ type ConditionsRequestMethodConditionObservation struct {
 type ConditionsRequestMethodConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -715,12 +778,15 @@ type ConditionsRequestSchemeConditionObservation struct {
 type ConditionsRequestSchemeConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -757,15 +823,19 @@ type ConditionsRequestURIConditionObservation struct {
 type ConditionsRequestURIConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +kubebuilder:validation:Optional
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -802,15 +872,19 @@ type ConditionsURLFileExtensionConditionObservation struct {
 type ConditionsURLFileExtensionConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +kubebuilder:validation:Optional
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -847,15 +921,19 @@ type ConditionsURLPathConditionObservation struct {
 type ConditionsURLPathConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +kubebuilder:validation:Optional
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -901,9 +979,11 @@ type FrontdoorRuleObservation struct {
 type FrontdoorRuleParameters struct {
 
 	// An actions block as defined below.
+	// +kubebuilder:validation:Optional
 	Actions []ActionsParameters `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// If this rule is a match should the rules engine continue processing the remaining rules or stop? Possible values are Continue and Stop. Defaults to Continue.
+	// +kubebuilder:validation:Optional
 	BehaviorOnMatch *string `json:"behaviorOnMatch,omitempty" tf:"behavior_on_match,omitempty"`
 
 	// The resource ID of the Front Door Rule Set for this Front Door Rule. Changing this forces a new Front Door Rule to be created.
@@ -921,9 +1001,11 @@ type FrontdoorRuleParameters struct {
 	CdnFrontdoorRuleSetIDSelector *v1.Selector `json:"cdnFrontdoorRuleSetIdSelector,omitempty" tf:"-"`
 
 	// A conditions block as defined below.
+	// +kubebuilder:validation:Optional
 	Conditions []ConditionsParameters `json:"conditions,omitempty" tf:"conditions,omitempty"`
 
 	// The order in which the rules will be applied for the Front Door Endpoint. The order value should be sequential and begin at 1(e.g. 1, 2, 3...). A Front Door Rule with a lesser order value will be applied before a rule with a greater order value.
+	// +kubebuilder:validation:Optional
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 }
 
@@ -960,15 +1042,19 @@ type HostNameConditionObservation struct {
 type HostNameConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +kubebuilder:validation:Optional
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -999,12 +1085,15 @@ type IsDeviceConditionObservation struct {
 type IsDeviceConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -1047,18 +1136,23 @@ type PostArgsConditionObservation struct {
 type PostArgsConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A string value representing the name of the POST argument.
+	// +kubebuilder:validation:Optional
 	PostArgsName *string `json:"postArgsName,omitempty" tf:"post_args_name,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +kubebuilder:validation:Optional
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -1089,12 +1183,15 @@ type RequestHeaderActionObservation struct {
 type RequestHeaderActionParameters struct {
 
 	// The action to be taken on the specified header_name. Possible values include Append, Overwrite or Delete.
+	// +kubebuilder:validation:Optional
 	HeaderAction *string `json:"headerAction,omitempty" tf:"header_action,omitempty"`
 
 	// The name of the header to modify.
+	// +kubebuilder:validation:Optional
 	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
 
 	// The value to append or overwrite.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -1125,12 +1222,15 @@ type ResponseHeaderActionObservation struct {
 type ResponseHeaderActionParameters struct {
 
 	// The action to be taken on the specified header_name. Possible values include Append, Overwrite or Delete.
+	// +kubebuilder:validation:Optional
 	HeaderAction *string `json:"headerAction,omitempty" tf:"header_action,omitempty"`
 
 	// The name of the header to modify.
+	// +kubebuilder:validation:Optional
 	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
 
 	// The value to append or overwrite.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -1182,9 +1282,11 @@ type RouteConfigurationOverrideActionObservation struct {
 type RouteConfigurationOverrideActionParameters struct {
 
 	// HonorOrigin the Front Door will always honor origin response header directive. If the origin directive is missing, Front Door will cache contents anywhere from 1 to 3 days. OverrideAlways the TTL value returned from your Front Door Origin is overwritten with the value specified in the action. This behavior will only be applied if the response is cacheable. OverrideIfOriginMissing if no TTL value gets returned from your Front Door Origin, the rule sets the TTL to the value specified in the action. This behavior will only be applied if the response is cacheable. Disabled the Front Door will not cache the response contents, irrespective of Front Door Origin response directives. Possible values include HonorOrigin, OverrideAlways, OverrideIfOriginMissing or Disabled.
+	// +kubebuilder:validation:Optional
 	CacheBehavior *string `json:"cacheBehavior,omitempty" tf:"cache_behavior,omitempty"`
 
 	// When Cache behavior is set to Override or SetIfMissing, this field specifies the cache duration to use. The maximum duration is 366 days specified in the d.HH:MM:SS format(e.g. 365.23:59:59). If the desired maximum cache duration is less than 1 day then the maximum cache duration should be specified in the HH:MM:SS format(e.g. 23:59:59).
+	// +kubebuilder:validation:Optional
 	CacheDuration *string `json:"cacheDuration,omitempty" tf:"cache_duration,omitempty"`
 
 	// The Front Door Origin Group resource ID that the request should be routed to. This overrides the configuration specified in the Front Door Endpoint route.
@@ -1202,15 +1304,19 @@ type RouteConfigurationOverrideActionParameters struct {
 	CdnFrontdoorOriginGroupIDSelector *v1.Selector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
 
 	// Should the Front Door dynamically compress the content? Possible values include true or false.
+	// +kubebuilder:validation:Optional
 	CompressionEnabled *bool `json:"compressionEnabled,omitempty" tf:"compression_enabled,omitempty"`
 
 	// The forwarding protocol the request will be redirected as. This overrides the configuration specified in the route to be associated with. Possible values include MatchRequest, HttpOnly or HttpsOnly.
+	// +kubebuilder:validation:Optional
 	ForwardingProtocol *string `json:"forwardingProtocol,omitempty" tf:"forwarding_protocol,omitempty"`
 
 	// IncludeSpecifiedQueryStrings query strings specified in the query_string_parameters field get included when the cache key gets generated. UseQueryString cache every unique URL, each unique URL will have its own cache key. IgnoreSpecifiedQueryStrings query strings specified in the query_string_parameters field get excluded when the cache key gets generated. IgnoreQueryString query strings aren't considered when the cache key gets generated. Possible values include IgnoreQueryString, UseQueryString, IgnoreSpecifiedQueryStrings or IncludeSpecifiedQueryStrings.
+	// +kubebuilder:validation:Optional
 	QueryStringCachingBehavior *string `json:"queryStringCachingBehavior,omitempty" tf:"query_string_caching_behavior,omitempty"`
 
 	// A list of query string parameter names.
+	// +kubebuilder:validation:Optional
 	QueryStringParameters []*string `json:"queryStringParameters,omitempty" tf:"query_string_parameters,omitempty"`
 }
 
@@ -1241,12 +1347,15 @@ type SSLProtocolConditionObservation struct {
 type SSLProtocolConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -1277,12 +1386,15 @@ type ServerPortConditionObservation struct {
 type ServerPortConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -1313,12 +1425,15 @@ type SocketAddressConditionObservation struct {
 type SocketAddressConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 }
 
@@ -1355,15 +1470,19 @@ type URLFilenameConditionObservation struct {
 type URLFilenameConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +kubebuilder:validation:Optional
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// A Conditional operator. Possible values include Any, Equal, Contains, BeginsWith, EndsWith, LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual or RegEx. Details can be found in the Condition Operator List below.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +kubebuilder:validation:Optional
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 

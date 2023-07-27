@@ -40,12 +40,15 @@ type CertificateContactsContactObservation struct {
 type CertificateContactsContactParameters struct {
 
 	// E-mail address of the contact.
+	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// Name of the contact.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Phone number of the contact.
+	// +kubebuilder:validation:Optional
 	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
 }
 
@@ -70,6 +73,7 @@ type CertificateContactsObservation struct {
 type CertificateContactsParameters struct {
 
 	// One or more contact blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Contact []CertificateContactsContactParameters `json:"contact,omitempty" tf:"contact,omitempty"`
 
 	// The ID of the Key Vault. Changing this forces a new resource to be created.

@@ -31,6 +31,7 @@ type ContainerNetworkInterfaceIPConfigurationObservation struct {
 type ContainerNetworkInterfaceIPConfigurationParameters struct {
 
 	// Specifies the name of the Network Profile. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to the subnet associated with the IP Configuration.
@@ -69,9 +70,11 @@ type ContainerNetworkInterfaceObservation struct {
 type ContainerNetworkInterfaceParameters struct {
 
 	// One or more ip_configuration blocks as documented below.
+	// +kubebuilder:validation:Optional
 	IPConfiguration []ContainerNetworkInterfaceIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// Specifies the name of the IP Configuration.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -111,9 +114,11 @@ type ProfileObservation struct {
 type ProfileParameters struct {
 
 	// A container_network_interface block as documented below.
+	// +kubebuilder:validation:Optional
 	ContainerNetworkInterface []ContainerNetworkInterfaceParameters `json:"containerNetworkInterface,omitempty" tf:"container_network_interface,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
@@ -130,6 +135,7 @@ type ProfileParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

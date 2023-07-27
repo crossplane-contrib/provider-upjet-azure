@@ -48,6 +48,7 @@ type FirewallNATRuleCollectionObservation struct {
 type FirewallNATRuleCollectionParameters struct {
 
 	// Specifies the action the rule will apply to matching traffic. Possible values are Dnat and Snat.
+	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Specifies the name of the Firewall in which the NAT Rule Collection should be created. Changing this forces a new resource to be created.
@@ -64,6 +65,7 @@ type FirewallNATRuleCollectionParameters struct {
 	AzureFirewallNameSelector *v1.Selector `json:"azureFirewallNameSelector,omitempty" tf:"-"`
 
 	// Specifies the priority of the rule collection. Possible values are between 100 - 65000.
+	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Specifies the name of the Resource Group in which the Firewall exists. Changing this forces a new resource to be created.
@@ -80,6 +82,7 @@ type FirewallNATRuleCollectionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more rule blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Rule []FirewallNATRuleCollectionRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
@@ -146,30 +149,39 @@ type FirewallNATRuleCollectionRuleObservation struct {
 type FirewallNATRuleCollectionRuleParameters struct {
 
 	// Specifies a description for the rule.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A list of destination IP addresses and/or IP ranges.
+	// +kubebuilder:validation:Optional
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
 	// A list of destination ports.
+	// +kubebuilder:validation:Optional
 	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
 
 	// Specifies the name of the rule.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of protocols. Possible values are Any, ICMP, TCP and UDP. If action is Dnat, protocols can only be TCP and UDP.
+	// +kubebuilder:validation:Optional
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// A list of source IP addresses and/or IP ranges.
+	// +kubebuilder:validation:Optional
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
 	// A list of source IP Group IDs for the rule.
+	// +kubebuilder:validation:Optional
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 
 	// The address of the service behind the Firewall.
+	// +kubebuilder:validation:Optional
 	TranslatedAddress *string `json:"translatedAddress,omitempty" tf:"translated_address,omitempty"`
 
 	// The port of the service behind the Firewall.
+	// +kubebuilder:validation:Optional
 	TranslatedPort *string `json:"translatedPort,omitempty" tf:"translated_port,omitempty"`
 }
 

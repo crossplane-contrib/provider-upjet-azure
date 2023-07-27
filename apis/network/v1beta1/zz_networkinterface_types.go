@@ -67,24 +67,31 @@ type NetworkInterfaceIPConfigurationObservation struct {
 type NetworkInterfaceIPConfigurationParameters struct {
 
 	// The Frontend IP Configuration ID of a Gateway SKU Load Balancer.
+	// +kubebuilder:validation:Optional
 	GatewayLoadBalancerFrontendIPConfigurationID *string `json:"gatewayLoadBalancerFrontendIpConfigurationId,omitempty" tf:"gateway_load_balancer_frontend_ip_configuration_id,omitempty"`
 
 	// A name used for this IP Configuration.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Is this the Primary IP Configuration? Must be true for the first ip_configuration when multiple are specified. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
 
 	// The Static IP Address which should be used.
+	// +kubebuilder:validation:Optional
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
 	// The allocation method used for the Private IP Address. Possible values are Dynamic and Static.
+	// +kubebuilder:validation:Optional
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 
 	// The IP Version to use. Possible values are IPv4 or IPv6. Defaults to IPv4.
+	// +kubebuilder:validation:Optional
 	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
 
 	// Reference to a Public IP Address to associate with this NIC
+	// +kubebuilder:validation:Optional
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
 	// The ID of the Subnet where this Network Interface should be located in.
@@ -183,24 +190,31 @@ type NetworkInterfaceObservation struct {
 type NetworkInterfaceParameters struct {
 
 	// A list of IP Addresses defining the DNS Servers which should be used for this Network Interface.
+	// +kubebuilder:validation:Optional
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
 	// Specifies the Edge Zone within the Azure Region where this Network Interface should exist. Changing this forces a new Network Interface to be created.
+	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
 	// Should Accelerated Networking be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	EnableAcceleratedNetworking *bool `json:"enableAcceleratedNetworking,omitempty" tf:"enable_accelerated_networking,omitempty"`
 
 	// Should IP Forwarding be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	EnableIPForwarding *bool `json:"enableIpForwarding,omitempty" tf:"enable_ip_forwarding,omitempty"`
 
 	// One or more ip_configuration blocks as defined below.
+	// +kubebuilder:validation:Optional
 	IPConfiguration []NetworkInterfaceIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
 	// The (relative) DNS Name used for internal communications between Virtual Machines in the same Virtual Network.
+	// +kubebuilder:validation:Optional
 	InternalDNSNameLabel *string `json:"internalDnsNameLabel,omitempty" tf:"internal_dns_name_label,omitempty"`
 
 	// The location where the Network Interface should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group in which to create the Network Interface. Changing this forces a new resource to be created.
@@ -217,6 +231,7 @@ type NetworkInterfaceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

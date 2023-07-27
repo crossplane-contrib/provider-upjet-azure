@@ -76,27 +76,35 @@ type PolicyDefinitionObservation struct {
 type PolicyDefinitionParameters struct {
 
 	// The description of the policy definition.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The display name of the policy definition.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The id of the Management Group where this policy should be defined. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
 
 	// The metadata for the policy definition. This is a JSON string representing additional metadata that should be stored with the policy definition.
+	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The policy resource manager mode that allows you to specify which resource types will be evaluated. Possible values are All, Indexed, Microsoft.ContainerService.Data, Microsoft.CustomerLockbox.Data, Microsoft.DataCatalog.Data, Microsoft.KeyVault.Data, Microsoft.Kubernetes.Data, Microsoft.MachineLearningServices.Data, Microsoft.Network.Data and Microsoft.Synapse.Data.
+	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// Parameters for the policy definition. This field is a JSON string that allows you to parameterize your policy definition.
+	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The policy rule for the policy definition. This is a JSON string representing the rule that contains an if and a then block.
+	// +kubebuilder:validation:Optional
 	PolicyRule *string `json:"policyRule,omitempty" tf:"policy_rule,omitempty"`
 
 	// The policy type. Possible values are BuiltIn, Custom, NotSpecified and Static. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PolicyType *string `json:"policyType,omitempty" tf:"policy_type,omitempty"`
 }
 

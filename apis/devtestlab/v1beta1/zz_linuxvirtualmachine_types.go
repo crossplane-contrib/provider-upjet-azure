@@ -46,15 +46,19 @@ type GalleryImageReferenceObservation struct {
 type GalleryImageReferenceParameters struct {
 
 	// The Offer of the Gallery Image. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
 
 	// The Publisher of the Gallery Image. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 
 	// The SKU of the Gallery Image. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// The Version of the Gallery Image. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -82,9 +86,11 @@ type InboundNATRuleObservation struct {
 type InboundNATRuleParameters struct {
 
 	// The Backend Port associated with this NAT Rule. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
 
 	// The Protocol used for this NAT Rule. Possible values are Tcp and Udp.
+	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
@@ -190,15 +196,19 @@ type LinuxVirtualMachineObservation struct {
 type LinuxVirtualMachineParameters struct {
 
 	// Can this Virtual Machine be claimed by users? Defaults to true.
+	// +kubebuilder:validation:Optional
 	AllowClaim *bool `json:"allowClaim,omitempty" tf:"allow_claim,omitempty"`
 
 	// Should the Virtual Machine be created without a Public IP Address? Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DisallowPublicIPAddress *bool `json:"disallowPublicIpAddress,omitempty" tf:"disallow_public_ip_address,omitempty"`
 
 	// A gallery_image_reference block as defined below.
+	// +kubebuilder:validation:Optional
 	GalleryImageReference []GalleryImageReferenceParameters `json:"galleryImageReference,omitempty" tf:"gallery_image_reference,omitempty"`
 
 	// One or more inbound_nat_rule blocks as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	InboundNATRule []InboundNATRuleParameters `json:"inboundNatRule,omitempty" tf:"inbound_nat_rule,omitempty"`
 
 	// Specifies the name of the Dev Test Lab in which the Virtual Machine should be created. Changing this forces a new resource to be created.
@@ -242,12 +252,15 @@ type LinuxVirtualMachineParameters struct {
 	LabVirtualNetworkIDSelector *v1.Selector `json:"labVirtualNetworkIdSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the Dev Test Lab exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Dev Test Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Any notes about the Virtual Machine.
+	// +kubebuilder:validation:Optional
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
 	// The Password associated with the username used to login to this Virtual Machine. Changing this forces a new resource to be created.
@@ -268,18 +281,23 @@ type LinuxVirtualMachineParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SSH Key associated with the username used to login to this Virtual Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SSHKey *string `json:"sshKey,omitempty" tf:"ssh_key,omitempty"`
 
 	// The Machine Size to use for this Virtual Machine, such as Standard_F2. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
 	// The type of Storage to use on this Virtual Machine. Possible values are Standard and Premium.
+	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Username associated with the local administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 

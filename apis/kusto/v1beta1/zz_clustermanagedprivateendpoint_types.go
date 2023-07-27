@@ -61,6 +61,7 @@ type ClusterManagedPrivateEndpointParameters struct {
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// The group id in which the managed private endpoint is created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
 	// The ARM resource ID of the resource for which the managed private endpoint is created. Changing this forces a new resource to be created.
@@ -92,6 +93,7 @@ type ClusterManagedPrivateEndpointParameters struct {
 	PrivateLinkResourceRegionSelector *v1.Selector `json:"privateLinkResourceRegionSelector,omitempty" tf:"-"`
 
 	// The user request message.
+	// +kubebuilder:validation:Optional
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
 	// Specifies the Resource Group where the Kusto Cluster should exist. Changing this forces a new resource to be created.

@@ -34,9 +34,11 @@ type AuthorizationObservation struct {
 type AuthorizationParameters struct {
 
 	// The authentication Parameter value.
+	// +kubebuilder:validation:Optional
 	Parameter *string `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// The authentication Scheme name.
+	// +kubebuilder:validation:Optional
 	Scheme *string `json:"scheme,omitempty" tf:"scheme,omitempty"`
 }
 
@@ -125,15 +127,19 @@ type BackendParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// A credentials block as documented below.
+	// +kubebuilder:validation:Optional
 	Credentials []CredentialsParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
 
 	// The description of the backend.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The protocol used by the backend host. Possible values are http or soap.
+	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// A proxy block as documented below.
+	// +kubebuilder:validation:Optional
 	Proxy []BackendProxyParameters `json:"proxy,omitempty" tf:"proxy,omitempty"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
@@ -150,18 +156,23 @@ type BackendParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The management URI of the backend host in an external system. This URI can be the ARM Resource ID of Logic Apps, Function Apps or API Apps, or the management endpoint of a Service Fabric cluster.
+	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
 	// A service_fabric_cluster block as documented below.
+	// +kubebuilder:validation:Optional
 	ServiceFabricCluster []ServiceFabricClusterParameters `json:"serviceFabricCluster,omitempty" tf:"service_fabric_cluster,omitempty"`
 
 	// A tls block as documented below.
+	// +kubebuilder:validation:Optional
 	TLS []TLSParameters `json:"tls,omitempty" tf:"tls,omitempty"`
 
 	// The title of the backend.
+	// +kubebuilder:validation:Optional
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
 	// The URL of the backend host.
+	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
@@ -190,9 +201,11 @@ type BackendProxyParameters struct {
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The URL of the proxy server.
+	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
 	// The username to connect to the proxy server.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
@@ -229,15 +242,19 @@ type CredentialsObservation struct {
 type CredentialsParameters struct {
 
 	// An authorization block as defined below.
+	// +kubebuilder:validation:Optional
 	Authorization []AuthorizationParameters `json:"authorization,omitempty" tf:"authorization,omitempty"`
 
 	// A list of client certificate thumbprints to present to the backend host. The certificates must exist within the API Management Service.
+	// +kubebuilder:validation:Optional
 	Certificate []*string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// A mapping of header parameters to pass to the backend host. The keys are the header names and the values are a comma separated string of header values. This is converted to a list before being passed to the API.
+	// +kubebuilder:validation:Optional
 	Header map[string]*string `json:"header,omitempty" tf:"header,omitempty"`
 
 	// A mapping of query parameters to pass to the backend host. The keys are the query names and the values are a comma separated string of query values. This is converted to a list before being passed to the API.
+	// +kubebuilder:validation:Optional
 	Query map[string]*string `json:"query,omitempty" tf:"query,omitempty"`
 }
 
@@ -262,9 +279,11 @@ type ServerX509NameObservation struct {
 type ServerX509NameParameters struct {
 
 	// The thumbprint for the issuer of the certificate.
+	// +kubebuilder:validation:Optional
 	IssuerCertificateThumbprint *string `json:"issuerCertificateThumbprint,omitempty" tf:"issuer_certificate_thumbprint,omitempty"`
 
 	// The common name of the certificate.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -313,21 +332,27 @@ type ServiceFabricClusterObservation struct {
 type ServiceFabricClusterParameters struct {
 
 	// The client certificate resource id for the management endpoint.
+	// +kubebuilder:validation:Optional
 	ClientCertificateID *string `json:"clientCertificateId,omitempty" tf:"client_certificate_id,omitempty"`
 
 	// The client certificate thumbprint for the management endpoint.
+	// +kubebuilder:validation:Optional
 	ClientCertificateThumbprint *string `json:"clientCertificateThumbprint,omitempty" tf:"client_certificate_thumbprint,omitempty"`
 
 	// A list of cluster management endpoints.
+	// +kubebuilder:validation:Optional
 	ManagementEndpoints []*string `json:"managementEndpoints,omitempty" tf:"management_endpoints,omitempty"`
 
 	// The maximum number of retries when attempting resolve the partition.
+	// +kubebuilder:validation:Optional
 	MaxPartitionResolutionRetries *float64 `json:"maxPartitionResolutionRetries,omitempty" tf:"max_partition_resolution_retries,omitempty"`
 
 	// A list of thumbprints of the server certificates of the Service Fabric cluster.
+	// +kubebuilder:validation:Optional
 	ServerCertificateThumbprints []*string `json:"serverCertificateThumbprints,omitempty" tf:"server_certificate_thumbprints,omitempty"`
 
 	// One or more server_x509_name blocks as documented below.
+	// +kubebuilder:validation:Optional
 	ServerX509Name []ServerX509NameParameters `json:"serverX509Name,omitempty" tf:"server_x509_name,omitempty"`
 }
 
@@ -352,9 +377,11 @@ type TLSObservation struct {
 type TLSParameters struct {
 
 	// Flag indicating whether SSL certificate chain validation should be done when using self-signed certificates for the backend host.
+	// +kubebuilder:validation:Optional
 	ValidateCertificateChain *bool `json:"validateCertificateChain,omitempty" tf:"validate_certificate_chain,omitempty"`
 
 	// Flag indicating whether SSL certificate name validation should be done when using self-signed certificates for the backend host.
+	// +kubebuilder:validation:Optional
 	ValidateCertificateName *bool `json:"validateCertificateName,omitempty" tf:"validate_certificate_name,omitempty"`
 }
 

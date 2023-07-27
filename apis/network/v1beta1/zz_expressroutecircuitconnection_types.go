@@ -43,9 +43,11 @@ type ExpressRouteCircuitConnectionObservation struct {
 type ExpressRouteCircuitConnectionParameters struct {
 
 	// The IPv4 address space from which to allocate customer address for global reach. Changing this forces a new Express Route Circuit Connection to be created.
+	// +kubebuilder:validation:Optional
 	AddressPrefixIPv4 *string `json:"addressPrefixIpv4,omitempty" tf:"address_prefix_ipv4,omitempty"`
 
 	// The IPv6 address space from which to allocate customer addresses for global reach.
+	// +kubebuilder:validation:Optional
 	AddressPrefixIPv6 *string `json:"addressPrefixIpv6,omitempty" tf:"address_prefix_ipv6,omitempty"`
 
 	// The authorization key which is associated with the Express Route Circuit Connection.

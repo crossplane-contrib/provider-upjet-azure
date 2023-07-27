@@ -37,9 +37,11 @@ type AdvancedThreatProtectionObservation struct {
 type AdvancedThreatProtectionParameters struct {
 
 	// Should Advanced Threat Protection be enabled on this resource?
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The ID of the Azure Resource which to enable Advanced Threat Protection on. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 

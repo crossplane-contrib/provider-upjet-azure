@@ -56,6 +56,7 @@ type SQLStoredProcedureParameters struct {
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// The body of the stored procedure.
+	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The name of the Cosmos DB SQL Container to create the stored procedure within. Changing this forces a new resource to be created.

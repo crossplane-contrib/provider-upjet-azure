@@ -49,6 +49,7 @@ type HealthcareMedtechServiceFHIRDestinationObservation struct {
 type HealthcareMedtechServiceFHIRDestinationParameters struct {
 
 	// Specifies the destination Fhir mappings of the Med Tech Service Fhir Destination.
+	// +kubebuilder:validation:Optional
 	DestinationFHIRMappingJSON *string `json:"destinationFhirMappingJson,omitempty" tf:"destination_fhir_mapping_json,omitempty"`
 
 	// Specifies the destination fhir service id of the Med Tech Service Fhir Destination.
@@ -66,9 +67,11 @@ type HealthcareMedtechServiceFHIRDestinationParameters struct {
 	DestinationFHIRServiceIDSelector *v1.Selector `json:"destinationFhirServiceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the destination identity resolution type where the Healthcare Med Tech Service Fhir Destination should be created. Possible values are Create, Lookup.
+	// +kubebuilder:validation:Optional
 	DestinationIdentityResolutionType *string `json:"destinationIdentityResolutionType,omitempty" tf:"destination_identity_resolution_type,omitempty"`
 
 	// Specifies the Azure Region where the Healthcare Med Tech Service Fhir Destination should be created. Changing this forces a new Healthcare Med Tech Service Fhir Destination to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Healthcare Med Tech Service where the Healthcare Med Tech Service Fhir Destination should exist. Changing this forces a new Healthcare Med Tech Service Fhir Destination to be created.

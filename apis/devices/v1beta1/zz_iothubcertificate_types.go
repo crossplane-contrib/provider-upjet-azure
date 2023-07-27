@@ -54,6 +54,7 @@ type IOTHubCertificateParameters struct {
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// Is the certificate verified? Defaults to false.
+	// +kubebuilder:validation:Optional
 	IsVerified *bool `json:"isVerified,omitempty" tf:"is_verified,omitempty"`
 
 	// The name of the resource group under which the IotHub Certificate resource has to be created. Changing this forces a new resource to be created.

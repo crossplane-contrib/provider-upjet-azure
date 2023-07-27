@@ -26,6 +26,8 @@ type HubProfileObservation struct {
 }
 
 type HubProfileParameters struct {
+
+	// +kubebuilder:validation:Optional
 	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
 }
 
@@ -62,9 +64,11 @@ type KubernetesFleetManagerObservation struct {
 type KubernetesFleetManagerParameters struct {
 
 	// A hub_profile block as defined below. The FleetHubProfile configures the Fleet's hub. Changing this forces a new Kubernetes Fleet Manager to be created.
+	// +kubebuilder:validation:Optional
 	HubProfile []HubProfileParameters `json:"hubProfile,omitempty" tf:"hub_profile,omitempty"`
 
 	// The Azure Region where the Kubernetes Fleet Manager should exist. Changing this forces a new Kubernetes Fleet Manager to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group within which this Kubernetes Fleet Manager should exist. Changing this forces a new Kubernetes Fleet Manager to be created.
@@ -81,6 +85,7 @@ type KubernetesFleetManagerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Kubernetes Fleet Manager.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

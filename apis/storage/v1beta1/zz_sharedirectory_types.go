@@ -43,9 +43,11 @@ type ShareDirectoryObservation struct {
 type ShareDirectoryParameters struct {
 
 	// A mapping of metadata to assign to this Directory.
+	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the File Share where this Directory should be created. Changing this forces a new resource to be created.

@@ -66,9 +66,11 @@ type LoadBalancerBackendAddressPoolParameters struct {
 	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
 	// One or more tunnel_interface blocks as defined below.
+	// +kubebuilder:validation:Optional
 	TunnelInterface []TunnelInterfaceParameters `json:"tunnelInterface,omitempty" tf:"tunnel_interface,omitempty"`
 
 	// The ID of the Virtual Network within which the Backend Address Pool should exist.
+	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
@@ -105,15 +107,19 @@ type TunnelInterfaceObservation struct {
 type TunnelInterfaceParameters struct {
 
 	// The unique identifier of this Gateway Lodbalancer Tunnel Interface.
+	// +kubebuilder:validation:Optional
 	Identifier *float64 `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
 	// The port number that this Gateway Lodbalancer Tunnel Interface listens to.
+	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The protocol used for this Gateway Lodbalancer Tunnel Interface. Possible values are None, Native and VXLAN.
+	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// The traffic type of this Gateway Lodbalancer Tunnel Interface. Possible values are None, Internal and External.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

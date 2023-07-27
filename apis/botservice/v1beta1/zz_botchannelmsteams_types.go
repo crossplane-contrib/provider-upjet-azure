@@ -63,12 +63,15 @@ type BotChannelMSTeamsParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// Specifies the webhook for Microsoft Teams channel calls.
+	// +kubebuilder:validation:Optional
 	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
 
 	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
+	// +kubebuilder:validation:Optional
 	EnableCalling *bool `json:"enableCalling,omitempty" tf:"enable_calling,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.

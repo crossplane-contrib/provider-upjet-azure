@@ -66,6 +66,7 @@ type CertificateParameters_2 struct {
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The Client ID of the User Assigned Managed Identity to use for retrieving certificate.
+	// +kubebuilder:validation:Optional
 	KeyVaultIdentityClientID *string `json:"keyVaultIdentityClientId,omitempty" tf:"key_vault_identity_client_id,omitempty"`
 
 	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.

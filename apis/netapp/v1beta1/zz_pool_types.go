@@ -74,9 +74,11 @@ type PoolParameters struct {
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// QoS Type of the pool. Valid values include Auto or Manual.
+	// +kubebuilder:validation:Optional
 	QosType *string `json:"qosType,omitempty" tf:"qos_type,omitempty"`
 
 	// The name of the resource group where the NetApp Pool should be created. Changing this forces a new resource to be created.
@@ -93,12 +95,15 @@ type PoolParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The service level of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
 	// Provisioned size of the pool in TB. Value must be between 4 and 500.
+	// +kubebuilder:validation:Optional
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

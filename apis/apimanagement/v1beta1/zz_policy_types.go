@@ -54,9 +54,11 @@ type PolicyParameters_2 struct {
 	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
 	// The XML Content for this Policy as a string.
+	// +kubebuilder:validation:Optional
 	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content,omitempty"`
 
 	// A link to a Policy XML Document, which must be publicly available.
+	// +kubebuilder:validation:Optional
 	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link,omitempty"`
 }
 

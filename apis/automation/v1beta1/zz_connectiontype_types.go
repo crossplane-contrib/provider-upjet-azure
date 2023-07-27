@@ -62,12 +62,15 @@ type ConnectionTypeParameters struct {
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// One or more field blocks as defined below. Changing this forces a new Automation to be created.
+	// +kubebuilder:validation:Optional
 	Field []FieldParameters `json:"field,omitempty" tf:"field,omitempty"`
 
 	// Whether the connection type is global. Changing this forces a new Automation to be created.
+	// +kubebuilder:validation:Optional
 	IsGlobal *bool `json:"isGlobal,omitempty" tf:"is_global,omitempty"`
 
 	// The name which should be used for this Automation Connection Type. Changing this forces a new Automation to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Automation should exist. Changing this forces a new Automation to be created.
@@ -117,15 +120,19 @@ type FieldObservation struct {
 type FieldParameters struct {
 
 	// Whether to set the isEncrypted flag of the connection field definition.
+	// +kubebuilder:validation:Optional
 	IsEncrypted *bool `json:"isEncrypted,omitempty" tf:"is_encrypted,omitempty"`
 
 	// Whether to set the isOptional flag of the connection field definition.
+	// +kubebuilder:validation:Optional
 	IsOptional *bool `json:"isOptional,omitempty" tf:"is_optional,omitempty"`
 
 	// The name which should be used for this connection field definition.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The type of the connection field definition.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

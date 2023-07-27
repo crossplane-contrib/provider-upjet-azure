@@ -43,6 +43,7 @@ type SecurityCenterAssessmentObservation struct {
 type SecurityCenterAssessmentParameters struct {
 
 	// A map of additional data to associate with the assessment.
+	// +kubebuilder:validation:Optional
 	AdditionalData map[string]*string `json:"additionalData,omitempty" tf:"additional_data,omitempty"`
 
 	// The ID of the security Assessment policy to apply to this resource. Changing this forces a new security Assessment to be created.
@@ -60,6 +61,7 @@ type SecurityCenterAssessmentParameters struct {
 	AssessmentPolicyIDSelector *v1.Selector `json:"assessmentPolicyIdSelector,omitempty" tf:"-"`
 
 	// A status block as defined below.
+	// +kubebuilder:validation:Optional
 	Status []StatusParameters `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The ID of the target resource. Changing this forces a new security Assessment to be created.
@@ -104,12 +106,15 @@ type StatusObservation struct {
 type StatusParameters struct {
 
 	// Specifies the cause of the assessment status.
+	// +kubebuilder:validation:Optional
 	Cause *string `json:"cause,omitempty" tf:"cause,omitempty"`
 
 	// Specifies the programmatic code of the assessment status. Possible values are Healthy, Unhealthy and NotApplicable.
+	// +kubebuilder:validation:Optional
 	Code *string `json:"code,omitempty" tf:"code,omitempty"`
 
 	// Specifies the human readable description of the assessment status.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 }
 

@@ -55,6 +55,7 @@ type SiteRecoveryNetworkMappingObservation struct {
 type SiteRecoveryNetworkMappingParameters struct {
 
 	// The name of the network mapping. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.
@@ -98,6 +99,7 @@ type SiteRecoveryNetworkMappingParameters struct {
 	SourceNetworkIDSelector *v1.Selector `json:"sourceNetworkIdSelector,omitempty" tf:"-"`
 
 	// Specifies the ASR fabric where mapping should be created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SourceRecoveryFabricName *string `json:"sourceRecoveryFabricName,omitempty" tf:"source_recovery_fabric_name,omitempty"`
 
 	// The id of the recovery network. Changing this forces a new resource to be created.
@@ -115,6 +117,7 @@ type SiteRecoveryNetworkMappingParameters struct {
 	TargetNetworkIDSelector *v1.Selector `json:"targetNetworkIdSelector,omitempty" tf:"-"`
 
 	// The Azure Site Recovery fabric object corresponding to the recovery Azure region. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	TargetRecoveryFabricName *string `json:"targetRecoveryFabricName,omitempty" tf:"target_recovery_fabric_name,omitempty"`
 }
 

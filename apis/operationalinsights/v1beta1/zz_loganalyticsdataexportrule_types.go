@@ -63,6 +63,7 @@ type LogAnalyticsDataExportRuleParameters struct {
 	DestinationResourceIDSelector *v1.Selector `json:"destinationResourceIdSelector,omitempty" tf:"-"`
 
 	// Is this Log Analytics Data Export Rule enabled? Possible values include true or false. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the Resource Group where the Log Analytics Data Export should exist. Changing this forces a new Log Analytics Data Export Rule to be created.
@@ -79,6 +80,7 @@ type LogAnalyticsDataExportRuleParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A list of table names to export to the destination resource, for example: ["Heartbeat", "SecurityEvent"].
+	// +kubebuilder:validation:Optional
 	TableNames []*string `json:"tableNames,omitempty" tf:"table_names,omitempty"`
 
 	// The resource ID of the workspace. Changing this forces a new Log Analytics Data Export Rule to be created.

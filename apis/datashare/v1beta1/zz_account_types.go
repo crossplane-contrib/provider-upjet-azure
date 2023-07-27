@@ -46,9 +46,11 @@ type AccountObservation struct {
 type AccountParameters struct {
 
 	// An identity block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Data Share Account should exist. Changing this forces a new Data Share Account to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Data Share Account should exist. Changing this forces a new Data Share Account to be created.
@@ -65,6 +67,7 @@ type AccountParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Data Share Account.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -89,6 +92,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Data Share Account. The only possible value is SystemAssigned. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

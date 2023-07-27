@@ -40,12 +40,15 @@ type CapacityObservation struct {
 type CapacityParameters struct {
 
 	// The number of instances that are available for scaling if metrics are not available for evaluation. The default is only used if the current instance count is lower than the default. Valid values are between 0 and 1000.
+	// +kubebuilder:validation:Optional
 	Default *float64 `json:"default,omitempty" tf:"default,omitempty"`
 
 	// The maximum number of instances for this resource. Valid values are between 0 and 1000.
+	// +kubebuilder:validation:Optional
 	Maximum *float64 `json:"maximum,omitempty" tf:"maximum,omitempty"`
 
 	// The minimum number of instances for this resource. Valid values are between 0 and 1000.
+	// +kubebuilder:validation:Optional
 	Minimum *float64 `json:"minimum,omitempty" tf:"minimum,omitempty"`
 }
 
@@ -76,12 +79,15 @@ type DimensionsObservation struct {
 type DimensionsParameters struct {
 
 	// Specifies the name of the profile.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the operator used to compare the metric data and threshold. Possible values are: Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of dimension values.
+	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -112,12 +118,15 @@ type EmailObservation struct {
 type EmailParameters struct {
 
 	// Specifies a list of custom email addresses to which the email notifications will be sent.
+	// +kubebuilder:validation:Optional
 	CustomEmails []*string `json:"customEmails,omitempty" tf:"custom_emails,omitempty"`
 
 	// Should email notifications be sent to the subscription administrator? Defaults to false.
+	// +kubebuilder:validation:Optional
 	SendToSubscriptionAdministrator *bool `json:"sendToSubscriptionAdministrator,omitempty" tf:"send_to_subscription_administrator,omitempty"`
 
 	// Should email notifications be sent to the subscription co-administrator? Defaults to false.
+	// +kubebuilder:validation:Optional
 	SendToSubscriptionCoAdministrator *bool `json:"sendToSubscriptionCoAdministrator,omitempty" tf:"send_to_subscription_co_administrator,omitempty"`
 }
 
@@ -148,12 +157,15 @@ type FixedDateObservation struct {
 type FixedDateParameters struct {
 
 	// Specifies the end date for the profile, formatted as an RFC3339 date string.
+	// +kubebuilder:validation:Optional
 	End *string `json:"end,omitempty" tf:"end,omitempty"`
 
 	// Specifies the start date for the profile, formatted as an RFC3339 date string.
+	// +kubebuilder:validation:Optional
 	Start *string `json:"start,omitempty" tf:"start,omitempty"`
 
 	// The Time Zone used for the hours field. A list of possible values can be found here. Defaults to UTC.
+	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
@@ -229,15 +241,19 @@ type MetricTriggerObservation struct {
 type MetricTriggerParameters struct {
 
 	// One or more dimensions block as defined below.
+	// +kubebuilder:validation:Optional
 	Dimensions []DimensionsParameters `json:"dimensions,omitempty" tf:"dimensions,omitempty"`
 
 	// Whether to enable metric divide by instance count.
+	// +kubebuilder:validation:Optional
 	DivideByInstanceCount *bool `json:"divideByInstanceCount,omitempty" tf:"divide_by_instance_count,omitempty"`
 
 	// The name of the metric that defines what the rule monitors, such as Percentage CPU for Virtual Machine Scale Sets and CpuPercentage for App Service Plan.
+	// +kubebuilder:validation:Optional
 	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 
 	// The namespace of the metric that defines what the rule monitors, such as microsoft.compute/virtualmachinescalesets for Virtual Machine Scale Sets.
+	// +kubebuilder:validation:Optional
 	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
 
 	// The ID of the Resource which the Rule monitors.
@@ -255,21 +271,27 @@ type MetricTriggerParameters struct {
 	MetricResourceIDSelector *v1.Selector `json:"metricResourceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the operator used to compare the metric data and threshold. Possible values are: Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies how the metrics from multiple instances are combined. Possible values are Average, Max, Min and Sum.
+	// +kubebuilder:validation:Optional
 	Statistic *string `json:"statistic,omitempty" tf:"statistic,omitempty"`
 
 	// Specifies the threshold of the metric that triggers the scale action.
+	// +kubebuilder:validation:Optional
 	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
 
 	// Specifies how the data that's collected should be combined over time. Possible values include Average, Count, Maximum, Minimum, Last and Total.
+	// +kubebuilder:validation:Optional
 	TimeAggregation *string `json:"timeAggregation,omitempty" tf:"time_aggregation,omitempty"`
 
 	// Specifies the granularity of metrics that the rule monitors, which must be one of the pre-defined values returned from the metric definitions for the metric. This value must be between 1 minute and 12 hours an be formatted as an ISO 8601 string.
+	// +kubebuilder:validation:Optional
 	TimeGrain *string `json:"timeGrain,omitempty" tf:"time_grain,omitempty"`
 
 	// Specifies the time range for which data is collected, which must be greater than the delay in metric collection (which varies from resource to resource). This value must be between 5 minutes and 12 hours and be formatted as an ISO 8601 string.
+	// +kubebuilder:validation:Optional
 	TimeWindow *string `json:"timeWindow,omitempty" tf:"time_window,omitempty"`
 }
 
@@ -327,18 +349,23 @@ type MonitorAutoscaleSettingObservation struct {
 type MonitorAutoscaleSettingParameters struct {
 
 	// Specifies whether automatic scaling is enabled for the target resource. Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Specifies the supported Azure location where the AutoScale Setting should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the AutoScale Setting. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies a notification block as defined below.
+	// +kubebuilder:validation:Optional
 	Notification []NotificationParameters `json:"notification,omitempty" tf:"notification,omitempty"`
 
 	// Specifies one or more (up to 20) profile blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Profile []ProfileParameters `json:"profile,omitempty" tf:"profile,omitempty"`
 
 	// The name of the Resource Group in the AutoScale Setting should be created. Changing this forces a new resource to be created.
@@ -355,6 +382,7 @@ type MonitorAutoscaleSettingParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the resource ID of the resource that the autoscale setting should be added to. Changing this forces a new resource to be created.
@@ -393,9 +421,11 @@ type NotificationObservation struct {
 type NotificationParameters struct {
 
 	// A email block as defined below.
+	// +kubebuilder:validation:Optional
 	Email []EmailParameters `json:"email,omitempty" tf:"email,omitempty"`
 
 	// One or more webhook blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Webhook []WebhookParameters `json:"webhook,omitempty" tf:"webhook,omitempty"`
 }
 
@@ -438,18 +468,23 @@ type ProfileObservation struct {
 type ProfileParameters struct {
 
 	// A capacity block as defined below.
+	// +kubebuilder:validation:Optional
 	Capacity []CapacityParameters `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// A fixed_date block as defined below. This cannot be specified if a recurrence block is specified.
+	// +kubebuilder:validation:Optional
 	FixedDate []FixedDateParameters `json:"fixedDate,omitempty" tf:"fixed_date,omitempty"`
 
 	// Specifies the name of the profile.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A recurrence block as defined below. This cannot be specified if a fixed_date block is specified.
+	// +kubebuilder:validation:Optional
 	Recurrence []RecurrenceParameters `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 
 	// One or more (up to 10) rule blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
@@ -486,15 +521,19 @@ type RecurrenceObservation struct {
 type RecurrenceParameters struct {
 
 	// A list of days that this profile takes effect on. Possible values include Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
+	// +kubebuilder:validation:Optional
 	Days []*string `json:"days,omitempty" tf:"days,omitempty"`
 
 	// A list containing a single item, which specifies the Hour interval at which this recurrence should be triggered (in 24-hour time). Possible values are from 0 to 23.
+	// +kubebuilder:validation:Optional
 	Hours []*float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
 	// A list containing a single item which specifies the Minute interval at which this recurrence should be triggered.
+	// +kubebuilder:validation:Optional
 	Minutes []*float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
 	// The Time Zone used for the hours field. A list of possible values can be found here. Defaults to UTC.
+	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
@@ -519,9 +558,11 @@ type RuleObservation struct {
 type RuleParameters struct {
 
 	// A metric_trigger block as defined below.
+	// +kubebuilder:validation:Optional
 	MetricTrigger []MetricTriggerParameters `json:"metricTrigger,omitempty" tf:"metric_trigger,omitempty"`
 
 	// A scale_action block as defined below.
+	// +kubebuilder:validation:Optional
 	ScaleAction []ScaleActionParameters `json:"scaleAction,omitempty" tf:"scale_action,omitempty"`
 }
 
@@ -558,15 +599,19 @@ type ScaleActionObservation struct {
 type ScaleActionParameters struct {
 
 	// The amount of time to wait since the last scaling action before this action occurs. Must be between 1 minute and 1 week and formatted as a ISO 8601 string.
+	// +kubebuilder:validation:Optional
 	Cooldown *string `json:"cooldown,omitempty" tf:"cooldown,omitempty"`
 
 	// The scale direction. Possible values are Increase and Decrease.
+	// +kubebuilder:validation:Optional
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
 	// The type of action that should occur. Possible values are ChangeCount, ExactCount, PercentChangeCount and ServiceAllowedNextValue.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The number of instances involved in the scaling action.
+	// +kubebuilder:validation:Optional
 	Value *float64 `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -591,9 +636,11 @@ type WebhookObservation struct {
 type WebhookParameters struct {
 
 	// A map of settings.
+	// +kubebuilder:validation:Optional
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// The HTTPS URI which should receive scale notifications.
+	// +kubebuilder:validation:Optional
 	ServiceURI *string `json:"serviceUri,omitempty" tf:"service_uri,omitempty"`
 }
 

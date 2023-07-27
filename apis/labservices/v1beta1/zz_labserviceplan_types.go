@@ -46,15 +46,19 @@ type DefaultAutoShutdownObservation struct {
 type DefaultAutoShutdownParameters struct {
 
 	// The amount of time a VM will stay running after a user disconnects if this behavior is enabled. This value must be formatted as an ISO 8601 string.
+	// +kubebuilder:validation:Optional
 	DisconnectDelay *string `json:"disconnectDelay,omitempty" tf:"disconnect_delay,omitempty"`
 
 	// The amount of time a VM will idle before it is shutdown if this behavior is enabled. This value must be formatted as an ISO 8601 string.
+	// +kubebuilder:validation:Optional
 	IdleDelay *string `json:"idleDelay,omitempty" tf:"idle_delay,omitempty"`
 
 	// The amount of time a VM will stay running before it is shutdown if no connection is made and this behavior is enabled. This value must be formatted as an ISO 8601 string.
+	// +kubebuilder:validation:Optional
 	NoConnectDelay *string `json:"noConnectDelay,omitempty" tf:"no_connect_delay,omitempty"`
 
 	// Will a VM get shutdown when it has idled for a period of time? Possible values are LowUsage and UserAbsence.
+	// +kubebuilder:validation:Optional
 	ShutdownOnIdle *string `json:"shutdownOnIdle,omitempty" tf:"shutdown_on_idle,omitempty"`
 }
 
@@ -91,15 +95,19 @@ type DefaultConnectionObservation struct {
 type DefaultConnectionParameters struct {
 
 	// The enabled access level for Client Access over RDP. Possible values are Private and Public.
+	// +kubebuilder:validation:Optional
 	ClientRdpAccess *string `json:"clientRdpAccess,omitempty" tf:"client_rdp_access,omitempty"`
 
 	// The enabled access level for Client Access over SSH. Possible values are Private and Public.
+	// +kubebuilder:validation:Optional
 	ClientSSHAccess *string `json:"clientSshAccess,omitempty" tf:"client_ssh_access,omitempty"`
 
 	// The enabled access level for Web Access over RDP. Possible values are Private and Public.
+	// +kubebuilder:validation:Optional
 	WebRdpAccess *string `json:"webRdpAccess,omitempty" tf:"web_rdp_access,omitempty"`
 
 	// The enabled access level for Web Access over SSH. Possible values are Private and Public.
+	// +kubebuilder:validation:Optional
 	WebSSHAccess *string `json:"webSshAccess,omitempty" tf:"web_ssh_access,omitempty"`
 }
 
@@ -163,12 +171,15 @@ type LabServicePlanObservation struct {
 type LabServicePlanParameters struct {
 
 	// The allowed regions for the lab creator to use when creating labs using this Lab Service Plan. The allowed region's count must be between 1 and 28.
+	// +kubebuilder:validation:Optional
 	AllowedRegions []*string `json:"allowedRegions,omitempty" tf:"allowed_regions,omitempty"`
 
 	// A default_auto_shutdown block as defined below.
+	// +kubebuilder:validation:Optional
 	DefaultAutoShutdown []DefaultAutoShutdownParameters `json:"defaultAutoShutdown,omitempty" tf:"default_auto_shutdown,omitempty"`
 
 	// A default_connection block as defined below.
+	// +kubebuilder:validation:Optional
 	DefaultConnection []DefaultConnectionParameters `json:"defaultConnection,omitempty" tf:"default_connection,omitempty"`
 
 	// The resource ID of the Subnet for the Lab Service Plan network profile.
@@ -186,6 +197,7 @@ type LabServicePlanParameters struct {
 	DefaultNetworkSubnetIDSelector *v1.Selector `json:"defaultNetworkSubnetIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Lab Service Plan should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Lab Service Plan should exist. Changing this forces a new resource to be created.
@@ -202,12 +214,15 @@ type LabServicePlanParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Shared Image Gallery attached to this Lab Service Plan. When saving a lab template virtual machine image it will be persisted in this gallery. The shared images from the gallery can be made available to use when creating new labs.
+	// +kubebuilder:validation:Optional
 	SharedGalleryID *string `json:"sharedGalleryId,omitempty" tf:"shared_gallery_id,omitempty"`
 
 	// A support block as defined below.
+	// +kubebuilder:validation:Optional
 	Support []SupportParameters `json:"support,omitempty" tf:"support,omitempty"`
 
 	// A mapping of tags which should be assigned to the Lab Service Plan.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -244,15 +259,19 @@ type SupportObservation struct {
 type SupportParameters struct {
 
 	// The email address for the support contact.
+	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// The instructions for users of the Lab Service Plan.
+	// +kubebuilder:validation:Optional
 	Instructions *string `json:"instructions,omitempty" tf:"instructions,omitempty"`
 
 	// The phone number for the support contact.
+	// +kubebuilder:validation:Optional
 	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
 
 	// The web address for users of the Lab Service Plan.
+	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 

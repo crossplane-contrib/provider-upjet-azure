@@ -57,9 +57,11 @@ type MSSQLServerMicrosoftSupportAuditingPolicyParameters struct {
 	BlobStorageEndpointSelector *v1.Selector `json:"blobStorageEndpointSelector,omitempty" tf:"-"`
 
 	// Whether to enable the extended auditing policy. Possible values are true and false. Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Enable audit events to Azure Monitor? To enable server audit events to Azure Monitor, please enable its main database audit events to Azure Monitor. Defaults to true.
+	// +kubebuilder:validation:Optional
 	LogMonitoringEnabled *bool `json:"logMonitoringEnabled,omitempty" tf:"log_monitoring_enabled,omitempty"`
 
 	// The ID of the SQL Server to set the extended auditing policy. Changing this forces a new resource to be created.

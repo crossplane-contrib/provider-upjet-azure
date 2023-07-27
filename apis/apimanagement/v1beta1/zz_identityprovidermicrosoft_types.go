@@ -50,6 +50,7 @@ type IdentityProviderMicrosoftParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// Client Id of the Azure AD Application.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Client secret of the Azure AD Application.

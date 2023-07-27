@@ -46,15 +46,19 @@ type AdminObservation struct {
 type AdminParameters struct {
 
 	// E-mail address of the admin.
+	// +kubebuilder:validation:Optional
 	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
 
 	// First name of the admin.
+	// +kubebuilder:validation:Optional
 	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
 
 	// Last name of the admin.
+	// +kubebuilder:validation:Optional
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
 	// Phone number of the admin.
+	// +kubebuilder:validation:Optional
 	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
 }
 
@@ -97,9 +101,11 @@ type CertificateIssuerObservation struct {
 type CertificateIssuerParameters struct {
 
 	// The account number with the third-party Certificate Issuer.
+	// +kubebuilder:validation:Optional
 	AccountID *string `json:"accountId,omitempty" tf:"account_id,omitempty"`
 
 	// One or more admin blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Admin []AdminParameters `json:"admin,omitempty" tf:"admin,omitempty"`
 
 	// The ID of the Key Vault in which to create the Certificate Issuer. Changing this forces a new resource to be created.
@@ -117,6 +123,7 @@ type CertificateIssuerParameters struct {
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// The ID of the organization as provided to the issuer.
+	// +kubebuilder:validation:Optional
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
 	// The password associated with the account and organization ID at the third-party Certificate Issuer. If not specified, will not overwrite any previous value.
@@ -124,6 +131,7 @@ type CertificateIssuerParameters struct {
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The name of the third-party Certificate Issuer. Possible values are: DigiCert, GlobalSign, OneCertV2-PrivateCA, OneCertV2-PublicCA and SslAdminV2.
+	// +kubebuilder:validation:Optional
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 }
 

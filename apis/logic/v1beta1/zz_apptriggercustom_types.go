@@ -34,6 +34,7 @@ type AppTriggerCustomObservation struct {
 type AppTriggerCustomParameters struct {
 
 	// Specifies the JSON Blob defining the Body of this Custom Trigger.
+	// +kubebuilder:validation:Optional
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.

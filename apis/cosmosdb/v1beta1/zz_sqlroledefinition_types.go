@@ -28,6 +28,7 @@ type PermissionsObservation struct {
 type PermissionsParameters struct {
 
 	// A list of data actions that are allowed for the Cosmos DB SQL Role Definition.
+	// +kubebuilder:validation:Optional
 	DataActions []*string `json:"dataActions,omitempty" tf:"data_actions,omitempty"`
 }
 
@@ -92,12 +93,15 @@ type SQLRoleDefinitionParameters struct {
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// A list of fully qualified scopes at or below which Role Assignments may be created using this Cosmos DB SQL Role Definition. It will allow application of this Cosmos DB SQL Role Definition on the entire Database Account or any underlying Database/Collection. Scopes higher than Database Account are not enforceable as assignable scopes.
+	// +kubebuilder:validation:Optional
 	AssignableScopes []*string `json:"assignableScopes,omitempty" tf:"assignable_scopes,omitempty"`
 
 	// An user-friendly name for the Cosmos DB SQL Role Definition which must be unique for the Database Account.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A permissions block as defined below.
+	// +kubebuilder:validation:Optional
 	Permissions []PermissionsParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The name of the Resource Group in which the Cosmos DB SQL Role Definition is created. Changing this forces a new resource to be created.
@@ -114,9 +118,11 @@ type SQLRoleDefinitionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The GUID as the name of the Cosmos DB SQL Role Definition - one will be generated if not specified. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
 	// The type of the Cosmos DB SQL Role Definition. Possible values are BuiltInRole and CustomRole. Defaults to CustomRole. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

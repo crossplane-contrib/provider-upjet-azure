@@ -40,6 +40,7 @@ type PrivateLinkHubObservation struct {
 type PrivateLinkHubParameters struct {
 
 	// Specifies the Azure location where the Synapse Private Link Hub exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Synapse Private Link Hub. Changing this forces a new resource to be created.
@@ -56,6 +57,7 @@ type PrivateLinkHubParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Synapse Private Link Hub.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

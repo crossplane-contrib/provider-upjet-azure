@@ -64,9 +64,11 @@ type SecretObservation struct {
 type SecretParameters struct {
 
 	// Specifies the content type for the Key Vault Secret.
+	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
+	// +kubebuilder:validation:Optional
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// The ID of the Key Vault where the Secret should be created. Changing this forces a new resource to be created.
@@ -84,9 +86,11 @@ type SecretParameters struct {
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
+	// +kubebuilder:validation:Optional
 	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the value of the Key Vault Secret.

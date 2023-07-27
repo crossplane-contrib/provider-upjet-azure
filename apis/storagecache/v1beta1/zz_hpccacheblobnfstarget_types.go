@@ -55,6 +55,7 @@ type HPCCacheBlobNFSTargetObservation struct {
 type HPCCacheBlobNFSTargetParameters struct {
 
 	// The name of the access policy applied to this target. Defaults to default.
+	// +kubebuilder:validation:Optional
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
 	// The name of the HPC Cache, which the HPC Cache Blob NFS Target will be added to. Changing this forces a new HPC Cache Blob NFS Target to be created.
@@ -71,6 +72,7 @@ type HPCCacheBlobNFSTargetParameters struct {
 	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
 	// The client-facing file path of the HPC Cache Blob NFS Target.
+	// +kubebuilder:validation:Optional
 	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
 
 	// The name of the Resource Group where the HPC Cache Blob NFS Target should exist. Changing this forces a new HPC Cache Blob NFS Target to be created.
@@ -87,9 +89,11 @@ type HPCCacheBlobNFSTargetParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Resource Manager ID of the Storage Container used as the HPC Cache Blob NFS Target. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
 	// The type of usage of the HPC Cache Blob NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
+	// +kubebuilder:validation:Optional
 	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
 }
 

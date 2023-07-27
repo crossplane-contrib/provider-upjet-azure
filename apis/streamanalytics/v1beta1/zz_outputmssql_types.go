@@ -73,18 +73,23 @@ type OutputMSSQLObservation struct {
 type OutputMSSQLParameters struct {
 
 	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	// +kubebuilder:validation:Optional
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The MS SQL database name where the reference table exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// The max batch count to write to the SQL Database. Defaults to 10000. Possible values are between 1 and 1073741824.
+	// +kubebuilder:validation:Optional
 	MaxBatchCount *float64 `json:"maxBatchCount,omitempty" tf:"max_batch_count,omitempty"`
 
 	// The max writer count for the SQL Database. Defaults to 1. Possible values are 0 which bases the writer count on the query partition and 1 which corresponds to a single writer.
+	// +kubebuilder:validation:Optional
 	MaxWriterCount *float64 `json:"maxWriterCount,omitempty" tf:"max_writer_count,omitempty"`
 
 	// The name of the Stream Output. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Password used together with username, to login to the Microsoft SQL Server. Required if authentication_mode is ConnectionString.
@@ -144,6 +149,7 @@ type OutputMSSQLParameters struct {
 	TableSelector *v1.Selector `json:"tableSelector,omitempty" tf:"-"`
 
 	// Username used to login to the Microsoft SQL Server. Changing this forces a new resource to be created. Required if authentication_mode is ConnectionString.
+	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 }
 

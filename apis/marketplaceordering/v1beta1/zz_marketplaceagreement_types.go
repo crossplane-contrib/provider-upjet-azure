@@ -47,12 +47,15 @@ type MarketplaceAgreementObservation struct {
 type MarketplaceAgreementParameters struct {
 
 	// The Offer of the Marketplace Image. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
 
 	// The Plan of the Marketplace Image. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
 
 	// The Publisher of the Marketplace Image. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 }
 

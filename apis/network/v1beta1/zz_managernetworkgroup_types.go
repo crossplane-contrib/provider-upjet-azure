@@ -34,6 +34,7 @@ type ManagerNetworkGroupObservation struct {
 type ManagerNetworkGroupParameters struct {
 
 	// A description of the Network Manager Network Group.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the ID of the Network Manager. Changing this forces a new Network Manager Network Group to be created.

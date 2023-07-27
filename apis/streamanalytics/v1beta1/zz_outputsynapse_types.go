@@ -52,6 +52,7 @@ type OutputSynapseObservation struct {
 type OutputSynapseParameters struct {
 
 	// The name of the Azure SQL database. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// The password that will be used to connect to the Azure SQL database.
@@ -72,6 +73,7 @@ type OutputSynapseParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the SQL server containing the Azure SQL database. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 
 	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
@@ -88,6 +90,7 @@ type OutputSynapseParameters struct {
 	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// The name of the table in the Azure SQL database. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
 	// The user name that will be used to connect to the Azure SQL database. Changing this forces a new resource to be created.

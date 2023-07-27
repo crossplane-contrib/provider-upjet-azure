@@ -84,9 +84,11 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 	PartnerManagedInstanceIDSelector *v1.Selector `json:"partnerManagedInstanceIdSelector,omitempty" tf:"-"`
 
 	// A read_write_endpoint_failover_policy block as defined below.
+	// +kubebuilder:validation:Optional
 	ReadWriteEndpointFailoverPolicy []MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyParameters `json:"readWriteEndpointFailoverPolicy,omitempty" tf:"read_write_endpoint_failover_policy,omitempty"`
 
 	// Failover policy for the read-only endpoint. Defaults to true.
+	// +kubebuilder:validation:Optional
 	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
 }
 
@@ -111,9 +113,11 @@ type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyObservation
 type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyParameters struct {
 
 	// Applies only if mode is Automatic. The grace period in minutes before failover with data loss is attempted.
+	// +kubebuilder:validation:Optional
 	GraceMinutes *float64 `json:"graceMinutes,omitempty" tf:"grace_minutes,omitempty"`
 
 	// The failover mode. Possible values are Automatic or Manual.
+	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 

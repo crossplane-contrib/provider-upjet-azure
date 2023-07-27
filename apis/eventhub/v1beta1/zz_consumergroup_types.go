@@ -79,6 +79,7 @@ type ConsumerGroupParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the user metadata.
+	// +kubebuilder:validation:Optional
 	UserMetadata *string `json:"userMetadata,omitempty" tf:"user_metadata,omitempty"`
 }
 

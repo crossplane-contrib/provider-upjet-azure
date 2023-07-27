@@ -52,9 +52,11 @@ type SignalrSharedPrivateLinkResourceObservation struct {
 type SignalrSharedPrivateLinkResourceParameters struct {
 
 	// The name of the Signalr Shared Private Link Resource. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The request message for requesting approval of the Shared Private Link Enabled Remote Resource.
+	// +kubebuilder:validation:Optional
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
 	// The id of the Signalr Service. Changing this forces a new resource to be created.
@@ -72,6 +74,7 @@ type SignalrSharedPrivateLinkResourceParameters struct {
 	SignalrServiceIDSelector *v1.Selector `json:"signalrServiceIdSelector,omitempty" tf:"-"`
 
 	// The sub resource name which the Signalr Private Endpoint can connect to. Possible values are sites, vault. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SubResourceName *string `json:"subResourceName,omitempty" tf:"sub_resource_name,omitempty"`
 
 	// The ID of the Shared Private Link Enabled Remote Resource which this Signalr Private Endpoint should be connected to. Changing this forces a new resource to be created.

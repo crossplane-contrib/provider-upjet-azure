@@ -96,18 +96,23 @@ type FrontdoorOriginParameters struct {
 	CdnFrontdoorOriginGroupIDSelector *v1.Selector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
 
 	// Specifies whether certificate name checks are enabled for this origin.
+	// +kubebuilder:validation:Optional
 	CertificateNameCheckEnabled *bool `json:"certificateNameCheckEnabled,omitempty" tf:"certificate_name_check_enabled,omitempty"`
 
 	// Should the origin be enabled? Possible values are true or false. Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The value of the HTTP port. Must be between 1 and 65535. Defaults to 80.
+	// +kubebuilder:validation:Optional
 	HTTPPort *float64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
 
 	// The value of the HTTPS port. Must be between 1 and 65535. Defaults to 443.
+	// +kubebuilder:validation:Optional
 	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
 
 	// Should the origin be enabled? Possible values are true or false. Defaults to true.
+	// +kubebuilder:validation:Optional
 	HealthProbesEnabled *bool `json:"healthProbesEnabled,omitempty" tf:"health_probes_enabled,omitempty"`
 
 	// The IPv4 address, IPv6 address or Domain name of the Origin.
@@ -139,12 +144,15 @@ type FrontdoorOriginParameters struct {
 	OriginHostHeaderSelector *v1.Selector `json:"originHostHeaderSelector,omitempty" tf:"-"`
 
 	// Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy. Must be between 1 and 5 (inclusive). Defaults to 1.
+	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// A private_link block as defined below.
+	// +kubebuilder:validation:Optional
 	PrivateLink []PrivateLinkParameters `json:"privateLink,omitempty" tf:"private_link,omitempty"`
 
 	// The weight of the origin in a given origin group for load balancing. Must be between 1 and 1000. Defaults to 500.
+	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
@@ -203,9 +211,11 @@ type PrivateLinkParameters struct {
 	PrivateLinkTargetIDSelector *v1.Selector `json:"privateLinkTargetIdSelector,omitempty" tf:"-"`
 
 	// Specifies the request message that will be submitted to the private_link_target_id when requesting the private link endpoint connection. Values must be between 1 and 140 characters in length. Defaults to Access request for CDN FrontDoor Private Link Origin.
+	// +kubebuilder:validation:Optional
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
 	// Specifies the type of target for this Private Link Endpoint. Possible values are blob, blob_secondary, web and sites.
+	// +kubebuilder:validation:Optional
 	TargetType *string `json:"targetType,omitempty" tf:"target_type,omitempty"`
 }
 

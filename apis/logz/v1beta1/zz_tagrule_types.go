@@ -66,15 +66,19 @@ type TagRuleParameters struct {
 	LogzMonitorIDSelector *v1.Selector `json:"logzMonitorIdSelector,omitempty" tf:"-"`
 
 	// Whether AAD logs should be sent to the Monitor resource?
+	// +kubebuilder:validation:Optional
 	SendAADLogs *bool `json:"sendAadLogs,omitempty" tf:"send_aad_logs,omitempty"`
 
 	// Whether activity logs from Azure resources should be sent to the Monitor resource?
+	// +kubebuilder:validation:Optional
 	SendActivityLogs *bool `json:"sendActivityLogs,omitempty" tf:"send_activity_logs,omitempty"`
 
 	// Whether subscription logs should be sent to the Monitor resource?
+	// +kubebuilder:validation:Optional
 	SendSubscriptionLogs *bool `json:"sendSubscriptionLogs,omitempty" tf:"send_subscription_logs,omitempty"`
 
 	// One or more (up to 10) tag_filter blocks as defined below.
+	// +kubebuilder:validation:Optional
 	TagFilter []TagRuleTagFilterParameters `json:"tagFilter,omitempty" tf:"tag_filter,omitempty"`
 }
 
@@ -105,12 +109,15 @@ type TagRuleTagFilterObservation struct {
 type TagRuleTagFilterParameters struct {
 
 	// The action for a filtering tag. Possible values are Include and Exclude is allowed. Note that the Exclude takes priority over the Include.
+	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The name of this tag_filter.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of this tag_filter.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 

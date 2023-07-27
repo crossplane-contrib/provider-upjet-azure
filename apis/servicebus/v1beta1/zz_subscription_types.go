@@ -37,9 +37,11 @@ type ClientScopedSubscriptionObservation struct {
 type ClientScopedSubscriptionParameters struct {
 
 	// Specifies the Client ID of the application that created the client-scoped subscription. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Whether the client scoped subscription is shareable. Defaults to true Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	IsClientScopedSubscriptionShareable *bool `json:"isClientScopedSubscriptionShareable,omitempty" tf:"is_client_scoped_subscription_shareable,omitempty"`
 }
 
@@ -136,42 +138,55 @@ type SubscriptionObservation struct {
 type SubscriptionParameters struct {
 
 	// The idle interval after which the topic is automatically deleted as an ISO 8601 duration. The minimum duration is 5 minutes or PT5M.
+	// +kubebuilder:validation:Optional
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
 	// A client_scoped_subscription block as defined below.
+	// +kubebuilder:validation:Optional
 	ClientScopedSubscription []ClientScopedSubscriptionParameters `json:"clientScopedSubscription,omitempty" tf:"client_scoped_subscription,omitempty"`
 
 	// whether the subscription is scoped to a client id. Defaults to False.
+	// +kubebuilder:validation:Optional
 	ClientScopedSubscriptionEnabled *bool `json:"clientScopedSubscriptionEnabled,omitempty" tf:"client_scoped_subscription_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Subscription has dead letter support on filter evaluation exceptions. Defaults to true.
+	// +kubebuilder:validation:Optional
 	DeadLetteringOnFilterEvaluationError *bool `json:"deadLetteringOnFilterEvaluationError,omitempty" tf:"dead_lettering_on_filter_evaluation_error,omitempty"`
 
 	// Boolean flag which controls whether the Subscription has dead letter support when a message expires.
+	// +kubebuilder:validation:Optional
 	DeadLetteringOnMessageExpiration *bool `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty"`
 
 	// The Default message timespan to live as an ISO 8601 duration. This is the duration after which the message expires, starting from when the message is sent to Service Bus. This is the default value used when TimeToLive is not set on a message itself.
+	// +kubebuilder:validation:Optional
 	DefaultMessageTTL *string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
 
 	// Boolean flag which controls whether the Subscription supports batched operations.
+	// +kubebuilder:validation:Optional
 	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
 
 	// The name of a Queue or Topic to automatically forward Dead Letter messages to.
+	// +kubebuilder:validation:Optional
 	ForwardDeadLetteredMessagesTo *string `json:"forwardDeadLetteredMessagesTo,omitempty" tf:"forward_dead_lettered_messages_to,omitempty"`
 
 	// The name of a Queue or Topic to automatically forward messages to.
+	// +kubebuilder:validation:Optional
 	ForwardTo *string `json:"forwardTo,omitempty" tf:"forward_to,omitempty"`
 
 	// The lock duration for the subscription as an ISO 8601 duration. The default value is 1 minute or P0DT0H1M0S . The maximum value is 5 minutes or P0DT0H5M0S .
+	// +kubebuilder:validation:Optional
 	LockDuration *string `json:"lockDuration,omitempty" tf:"lock_duration,omitempty"`
 
 	// The maximum number of deliveries.
+	// +kubebuilder:validation:Optional
 	MaxDeliveryCount *float64 `json:"maxDeliveryCount,omitempty" tf:"max_delivery_count,omitempty"`
 
 	// Boolean flag which controls whether this Subscription supports the concept of a session. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	RequiresSession *bool `json:"requiresSession,omitempty" tf:"requires_session,omitempty"`
 
 	// The status of the Subscription. Possible values are Active,ReceiveDisabled, or Disabled. Defaults to Active.
+	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// The ID of the ServiceBus Topic to create this Subscription in. Changing this forces a new resource to be created.

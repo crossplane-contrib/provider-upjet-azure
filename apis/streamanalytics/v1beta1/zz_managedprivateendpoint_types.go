@@ -66,6 +66,7 @@ type ManagedPrivateEndpointParameters struct {
 	StreamAnalyticsClusterNameSelector *v1.Selector `json:"streamAnalyticsClusterNameSelector,omitempty" tf:"-"`
 
 	// Specifies the sub resource name which the Stream Analytics Private Endpoint is able to connect to. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 
 	// The ID of the Private Link Enabled Remote Resource which this Stream Analytics Private endpoint should be connected to. Changing this forces a new resource to be created.

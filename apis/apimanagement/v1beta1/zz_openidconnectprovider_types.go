@@ -70,12 +70,15 @@ type OpenIDConnectProviderParameters struct {
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// A description of this OpenID Connect Provider.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A user-friendly name for this OpenID Connect Provider.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The URI of the Metadata endpoint.
+	// +kubebuilder:validation:Optional
 	MetadataEndpoint *string `json:"metadataEndpoint,omitempty" tf:"metadata_endpoint,omitempty"`
 
 	// The name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.

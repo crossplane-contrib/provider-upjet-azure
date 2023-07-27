@@ -54,9 +54,11 @@ type SQLDedicatedGatewayParameters struct {
 	CosmosDBAccountIDSelector *v1.Selector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
 
 	// The instance count for the CosmosDB SQL Dedicated Gateway. Possible value is between 1 and 5.
+	// +kubebuilder:validation:Optional
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// The instance size for the CosmosDB SQL Dedicated Gateway. Changing this forces a new resource to be created. Possible values are Cosmos.D4s, Cosmos.D8s and Cosmos.D16s.
+	// +kubebuilder:validation:Optional
 	InstanceSize *string `json:"instanceSize,omitempty" tf:"instance_size,omitempty"`
 }
 

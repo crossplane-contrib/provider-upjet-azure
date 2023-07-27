@@ -58,18 +58,23 @@ type AccountLocalUserObservation struct {
 type AccountLocalUserParameters struct {
 
 	// The home directory of the Storage Account Local User.
+	// +kubebuilder:validation:Optional
 	HomeDirectory *string `json:"homeDirectory,omitempty" tf:"home_directory,omitempty"`
 
 	// One or more permission_scope blocks as defined below.
+	// +kubebuilder:validation:Optional
 	PermissionScope []PermissionScopeParameters `json:"permissionScope,omitempty" tf:"permission_scope,omitempty"`
 
 	// One or more ssh_authorized_key blocks as defined below.
+	// +kubebuilder:validation:Optional
 	SSHAuthorizedKey []SSHAuthorizedKeyParameters `json:"sshAuthorizedKey,omitempty" tf:"ssh_authorized_key,omitempty"`
 
 	// Specifies whether SSH Key Authentication is enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
 	SSHKeyEnabled *bool `json:"sshKeyEnabled,omitempty" tf:"ssh_key_enabled,omitempty"`
 
 	// Specifies whether SSH Password Authentication is enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
 	SSHPasswordEnabled *bool `json:"sshPasswordEnabled,omitempty" tf:"ssh_password_enabled,omitempty"`
 
 	// The ID of the Storage Account that this Storage Account Local User resides in. Changing this forces a new Storage Account Local User to be created.
@@ -111,6 +116,7 @@ type PermissionScopeObservation struct {
 type PermissionScopeParameters struct {
 
 	// A permissions block as defined below.
+	// +kubebuilder:validation:Optional
 	Permissions []PermissionsParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The container name (when service is set to blob) or the file share name (when service is set to file), used by the Storage Account Local User.
@@ -127,6 +133,7 @@ type PermissionScopeParameters struct {
 	ResourceNameSelector *v1.Selector `json:"resourceNameSelector,omitempty" tf:"-"`
 
 	// The storage service used by this Storage Account Local User. Possible values are blob and file.
+	// +kubebuilder:validation:Optional
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }
 
@@ -169,18 +176,23 @@ type PermissionsObservation struct {
 type PermissionsParameters struct {
 
 	// (Defaults to 30 minutes) Used when creating the Storage Account Local User.
+	// +kubebuilder:validation:Optional
 	Create *bool `json:"create,omitempty" tf:"create,omitempty"`
 
 	// (Defaults to 30 minutes) Used when deleting the Storage Account Local User.
+	// +kubebuilder:validation:Optional
 	Delete *bool `json:"delete,omitempty" tf:"delete,omitempty"`
 
 	// Specifies if the Local User has the list permission for this scope. Defaults to false.
+	// +kubebuilder:validation:Optional
 	List *bool `json:"list,omitempty" tf:"list,omitempty"`
 
 	// (Defaults to 5 minutes) Used when retrieving the Storage Account Local User.
+	// +kubebuilder:validation:Optional
 	Read *bool `json:"read,omitempty" tf:"read,omitempty"`
 
 	// Specifies if the Local User has the write permission for this scope. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Write *bool `json:"write,omitempty" tf:"write,omitempty"`
 }
 
@@ -205,9 +217,11 @@ type SSHAuthorizedKeyObservation struct {
 type SSHAuthorizedKeyParameters struct {
 
 	// The description of this SSH authorized key.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The public key value of this SSH authorized key.
+	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 

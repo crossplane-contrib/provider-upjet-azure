@@ -57,6 +57,7 @@ type BotChannelWebChatParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group where the Web Chat Channel should be created. Changing this forces a new resource to be created.
@@ -73,6 +74,7 @@ type BotChannelWebChatParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A list of Web Chat Site names.
+	// +kubebuilder:validation:Optional
 	SiteNames []*string `json:"siteNames,omitempty" tf:"site_names,omitempty"`
 }
 

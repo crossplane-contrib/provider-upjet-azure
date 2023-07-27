@@ -76,12 +76,15 @@ type GalleryApplicationObservation struct {
 type GalleryApplicationParameters struct {
 
 	// A description of the Gallery Application.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The end of life date in RFC3339 format of the Gallery Application.
+	// +kubebuilder:validation:Optional
 	EndOfLifeDate *string `json:"endOfLifeDate,omitempty" tf:"end_of_life_date,omitempty"`
 
 	// The End User Licence Agreement of the Gallery Application.
+	// +kubebuilder:validation:Optional
 	Eula *string `json:"eula,omitempty" tf:"eula,omitempty"`
 
 	// The ID of the Shared Image Gallery. Changing this forces a new resource to be created.
@@ -99,18 +102,23 @@ type GalleryApplicationParameters struct {
 	GalleryIDSelector *v1.Selector `json:"galleryIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Gallery Application exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The URI containing the Privacy Statement associated with the Gallery Application.
+	// +kubebuilder:validation:Optional
 	PrivacyStatementURI *string `json:"privacyStatementUri,omitempty" tf:"privacy_statement_uri,omitempty"`
 
 	// The URI containing the Release Notes associated with the Gallery Application.
+	// +kubebuilder:validation:Optional
 	ReleaseNoteURI *string `json:"releaseNoteUri,omitempty" tf:"release_note_uri,omitempty"`
 
 	// The type of the Operating System supported for the Gallery Application. Possible values are Linux and Windows. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SupportedOsType *string `json:"supportedOsType,omitempty" tf:"supported_os_type,omitempty"`
 
 	// A mapping of tags to assign to the Gallery Application.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

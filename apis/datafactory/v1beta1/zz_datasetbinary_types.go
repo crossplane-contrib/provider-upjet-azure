@@ -58,21 +58,27 @@ type AzureBlobStorageLocationObservation struct {
 type AzureBlobStorageLocationParameters struct {
 
 	// The container on the Azure Blob Storage Account hosting the file.
+	// +kubebuilder:validation:Optional
 	Container *string `json:"container,omitempty" tf:"container,omitempty"`
 
 	// Is the container using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
 	DynamicContainerEnabled *bool `json:"dynamicContainerEnabled,omitempty" tf:"dynamic_container_enabled,omitempty"`
 
 	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
 	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
 
 	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
 	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
 
 	// The filename of the file in the blob container.
+	// +kubebuilder:validation:Optional
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
 	// The folder path to the file in the blob container.
+	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
@@ -97,9 +103,11 @@ type CompressionObservation struct {
 type CompressionParameters struct {
 
 	// The level of compression. Possible values are Fastest and Optimal.
+	// +kubebuilder:validation:Optional
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
 	// The type of compression used during transport. Possible values are BZip2, Deflate, GZip, Tar, TarGZip and ZipDeflate.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -175,15 +183,19 @@ type DataSetBinaryObservation struct {
 type DataSetBinaryParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Binary Dataset.
+	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Binary Dataset.
+	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// A azure_blob_storage_location block as defined below.
+	// +kubebuilder:validation:Optional
 	AzureBlobStorageLocation []AzureBlobStorageLocationParameters `json:"azureBlobStorageLocation,omitempty" tf:"azure_blob_storage_location,omitempty"`
 
 	// A compression block as defined below.
+	// +kubebuilder:validation:Optional
 	Compression []CompressionParameters `json:"compression,omitempty" tf:"compression,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -201,12 +213,15 @@ type DataSetBinaryParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Dataset.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	// +kubebuilder:validation:Optional
 	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
 
 	// A http_server_location block as defined below.
+	// +kubebuilder:validation:Optional
 	HTTPServerLocation []HTTPServerLocationParameters `json:"httpServerLocation,omitempty" tf:"http_server_location,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Binary Dataset with.
@@ -223,9 +238,11 @@ type DataSetBinaryParameters struct {
 	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies a list of parameters to associate with the Data Factory Binary Dataset.
+	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A sftp_server_location block as defined below.
+	// +kubebuilder:validation:Optional
 	SFTPServerLocation []SFTPServerLocationParameters `json:"sftpServerLocation,omitempty" tf:"sftp_server_location,omitempty"`
 }
 
@@ -268,18 +285,23 @@ type HTTPServerLocationObservation struct {
 type HTTPServerLocationParameters struct {
 
 	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
 	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
 
 	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
 	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
 
 	// The filename of the file on the web server.
+	// +kubebuilder:validation:Optional
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
 	// The folder path to the file on the web server.
+	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The base URL to the web server hosting the file.
+	// +kubebuilder:validation:Optional
 	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
 }
 
@@ -316,15 +338,19 @@ type SFTPServerLocationObservation struct {
 type SFTPServerLocationParameters struct {
 
 	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
 	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
 
 	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
 	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
 
 	// The filename of the file on the SFTP server.
+	// +kubebuilder:validation:Optional
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
 	// The folder path to the file on the SFTP server.
+	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 

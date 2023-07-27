@@ -51,6 +51,7 @@ type MaintenanceAssignmentDedicatedHostParameters struct {
 	DedicatedHostIDSelector *v1.Selector `json:"dedicatedHostIdSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the ID of the Maintenance Configuration Resource. Changing this forces a new resource to be created.

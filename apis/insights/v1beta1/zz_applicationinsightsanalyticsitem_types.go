@@ -81,18 +81,23 @@ type ApplicationInsightsAnalyticsItemParameters struct {
 	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// The content for the Analytics Item, for example the query text if type is query.
+	// +kubebuilder:validation:Optional
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The alias to use for the function. Required when type is function.
+	// +kubebuilder:validation:Optional
 	FunctionAlias *string `json:"functionAlias,omitempty" tf:"function_alias,omitempty"`
 
 	// Specifies the name of the Application Insights Analytics Item. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The scope for the Analytics Item. Can be shared or user. Changing this forces a new resource to be created. Must be shared for functions.
+	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// The type of Analytics Item to create. Can be one of query, function, folder, recent. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

@@ -34,9 +34,12 @@ type HealthcareMedtechServiceIdentityObservation struct {
 }
 
 type HealthcareMedtechServiceIdentityParameters struct {
+
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Healthcare Med Tech Service. Possible values are SystemAssigned.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -88,6 +91,7 @@ type HealthcareMedtechServiceObservation struct {
 type HealthcareMedtechServiceParameters struct {
 
 	// Specifies the Device Mappings of the Med Tech Service.
+	// +kubebuilder:validation:Optional
 	DeviceMappingJSON *string `json:"deviceMappingJson,omitempty" tf:"device_mapping_json,omitempty"`
 
 	// Specifies the Consumer Group of the Event Hub to connect to.
@@ -130,12 +134,15 @@ type HealthcareMedtechServiceParameters struct {
 	EventHubNamespaceNameSelector *v1.Selector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []HealthcareMedtechServiceIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the Azure Region where the Healthcare Med Tech Service should be created. Changing this forces a new Healthcare Med Tech Service to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags to assign to the Healthcare Med Tech Service.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the id of the Healthcare Workspace where the Healthcare Med Tech Service should exist. Changing this forces a new Healthcare Med Tech Service to be created.

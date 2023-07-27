@@ -55,12 +55,15 @@ type AssetObservation struct {
 type AssetParameters struct {
 
 	// The alternate ID of the Asset.
+	// +kubebuilder:validation:Optional
 	AlternateID *string `json:"alternateId,omitempty" tf:"alternate_id,omitempty"`
 
 	// The name of the asset blob container. Changing this forces a new Media Asset to be created.
+	// +kubebuilder:validation:Optional
 	Container *string `json:"container,omitempty" tf:"container,omitempty"`
 
 	// The Asset description.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the name of the Media Services Account. Changing this forces a new Media Asset to be created.
@@ -90,6 +93,7 @@ type AssetParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the storage account where to store the media asset. Changing this forces a new Media Asset to be created.
+	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 }
 

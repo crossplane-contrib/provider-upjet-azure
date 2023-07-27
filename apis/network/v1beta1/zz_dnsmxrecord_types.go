@@ -52,6 +52,7 @@ type DNSMXRecordObservation struct {
 type DNSMXRecordParameters struct {
 
 	// A list of values that make up the MX record. Each record block supports fields documented below.
+	// +kubebuilder:validation:Optional
 	Record []DNSMXRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
@@ -68,9 +69,11 @@ type DNSMXRecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
+	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created.
@@ -108,9 +111,11 @@ type DNSMXRecordRecordObservation struct {
 type DNSMXRecordRecordParameters struct {
 
 	// The mail server responsible for the domain covered by the MX record.
+	// +kubebuilder:validation:Optional
 	Exchange *string `json:"exchange,omitempty" tf:"exchange,omitempty"`
 
 	// String representing the "preference” value of the MX records. Records with lower preference value take priority.
+	// +kubebuilder:validation:Optional
 	Preference *string `json:"preference,omitempty" tf:"preference,omitempty"`
 }
 

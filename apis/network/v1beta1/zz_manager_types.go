@@ -79,9 +79,11 @@ type ManagerObservation struct {
 type ManagerParameters struct {
 
 	// A description of the network manager.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the Azure Region where the Network Managers should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Resource Group where the Network Managers should exist. Changing this forces a new Network Managers to be created.
@@ -98,12 +100,15 @@ type ManagerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A scope block as defined below.
+	// +kubebuilder:validation:Optional
 	Scope []ScopeParameters `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// A list of configuration deployment type. Possible values are Connectivity and SecurityAdmin, corresponds to if Connectivity Configuration and Security Admin Configuration is allowed for the Network Manager.
+	// +kubebuilder:validation:Optional
 	ScopeAccesses []*string `json:"scopeAccesses,omitempty" tf:"scope_accesses,omitempty"`
 
 	// A mapping of tags which should be assigned to the Network Managers.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -128,9 +133,11 @@ type ScopeObservation struct {
 type ScopeParameters struct {
 
 	// A list of management group IDs.
+	// +kubebuilder:validation:Optional
 	ManagementGroupIds []*string `json:"managementGroupIds,omitempty" tf:"management_group_ids,omitempty"`
 
 	// A list of subscription IDs.
+	// +kubebuilder:validation:Optional
 	SubscriptionIds []*string `json:"subscriptionIds,omitempty" tf:"subscription_ids,omitempty"`
 }
 

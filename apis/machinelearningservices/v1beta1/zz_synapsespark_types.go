@@ -40,9 +40,11 @@ type SynapseSparkIdentityObservation struct {
 type SynapseSparkIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Synapse Spark. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Synapse Spark. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -94,15 +96,19 @@ type SynapseSparkObservation struct {
 type SynapseSparkParameters struct {
 
 	// The description of the Machine Learning Synapse Spark. Changing this forces a new Machine Learning Synapse Spark to be created.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An identity block as defined below. Changing this forces a new Machine Learning Synapse Spark to be created.
+	// +kubebuilder:validation:Optional
 	Identity []SynapseSparkIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Synapse Spark to be created.
+	// +kubebuilder:validation:Optional
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// The Azure Region where the Machine Learning Synapse Spark should exist. Changing this forces a new Machine Learning Synapse Spark to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Synapse Spark to be created.
@@ -134,6 +140,7 @@ type SynapseSparkParameters struct {
 	SynapseSparkPoolIDSelector *v1.Selector `json:"synapseSparkPoolIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Machine Learning Synapse Spark. Changing this forces a new Machine Learning Synapse Spark to be created.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -55,6 +55,7 @@ type IOTHubEndpointEventHubObservation struct {
 type IOTHubEndpointEventHubParameters struct {
 
 	// Type used to authenticate against the Event Hub endpoint. Possible values are keyBased and identityBased. Defaults to keyBased.
+	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The connection string for the endpoint. This attribute can only be specified and is mandatory when authentication_type is keyBased.
@@ -62,9 +63,11 @@ type IOTHubEndpointEventHubParameters struct {
 	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// URI of the Event Hubs Namespace endpoint. This attribute can only be specified and is mandatory when authentication_type is identityBased.
+	// +kubebuilder:validation:Optional
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
 
 	// Name of the Event Hub. This attribute can only be specified and is mandatory when authentication_type is identityBased.
+	// +kubebuilder:validation:Optional
 	EntityPath *string `json:"entityPath,omitempty" tf:"entity_path,omitempty"`
 
 	// The IoTHub ID for the endpoint. Changing this forces a new resource to be created.
@@ -82,6 +85,7 @@ type IOTHubEndpointEventHubParameters struct {
 	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// ID of the User Managed Identity used to authenticate against the Event Hub endpoint.
+	// +kubebuilder:validation:Optional
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
 
 	// The name of the resource group under which the Event Hub has been created. Changing this forces a new resource to be created.

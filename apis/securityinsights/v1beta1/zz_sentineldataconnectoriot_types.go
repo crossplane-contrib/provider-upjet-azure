@@ -48,6 +48,7 @@ type SentinelDataConnectorIOTParameters struct {
 	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the subscription that this Iot Data Connector connects to. Changing this forces a new Iot Data Connector to be created.
+	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 

@@ -73,12 +73,15 @@ type PolicyObservation struct {
 type PolicyParameters struct {
 
 	// A description for the Policy.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Evaluation Type used for this Policy. Possible values include: 'AllowedValuesPolicy', 'MaxValuePolicy'. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	EvaluatorType *string `json:"evaluatorType,omitempty" tf:"evaluator_type,omitempty"`
 
 	// The Fact Data for this Policy.
+	// +kubebuilder:validation:Optional
 	FactData *string `json:"factData,omitempty" tf:"fact_data,omitempty"`
 
 	// Specifies the name of the Dev Test Lab in which the Policy should be created. Changing this forces a new resource to be created.
@@ -95,9 +98,11 @@ type PolicyParameters struct {
 	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Dev Test Policy. Possible values are GalleryImage, LabPremiumVmCount, LabTargetCost, LabVmCount, LabVmSize, UserOwnedLabPremiumVmCount, UserOwnedLabVmCount and UserOwnedLabVmCountInSubnet. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the name of the Policy Set within the Dev Test Lab where this policy should be created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PolicySetName *string `json:"policySetName,omitempty" tf:"policy_set_name,omitempty"`
 
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
@@ -114,9 +119,11 @@ type PolicyParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Threshold for this Policy.
+	// +kubebuilder:validation:Optional
 	Threshold *string `json:"threshold,omitempty" tf:"threshold,omitempty"`
 }
 

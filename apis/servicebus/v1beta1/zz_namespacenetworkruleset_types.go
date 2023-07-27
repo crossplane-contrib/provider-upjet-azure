@@ -58,9 +58,11 @@ type NamespaceNetworkRuleSetObservation struct {
 type NamespaceNetworkRuleSetParameters struct {
 
 	// Specifies the default action for the ServiceBus Namespace Network Rule Set. Possible values are Allow and Deny. Defaults to Deny.
+	// +kubebuilder:validation:Optional
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the ServiceBus Namespace.
+	// +kubebuilder:validation:Optional
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// Specifies the ServiceBus Namespace ID to which to attach the ServiceBus Namespace Network Rule Set. Changing this forces a new resource to be created.
@@ -78,12 +80,15 @@ type NamespaceNetworkRuleSetParameters struct {
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// One or more network_rules blocks as defined below.
+	// +kubebuilder:validation:Optional
 	NetworkRules []NetworkRulesParameters `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
 
 	// Whether to allow traffic over public network. Possible values are true and false. Defaults to true.
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// If True, then Azure Services that are known and trusted for this resource type are allowed to bypass firewall configuration. See Trusted Microsoft Services
+	// +kubebuilder:validation:Optional
 	TrustedServicesAllowed *bool `json:"trustedServicesAllowed,omitempty" tf:"trusted_services_allowed,omitempty"`
 }
 
@@ -105,6 +110,7 @@ type NetworkRulesObservation struct {
 type NetworkRulesParameters struct {
 
 	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
+	// +kubebuilder:validation:Optional
 	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
 
 	// The Subnet ID which should be able to access this ServiceBus Namespace.

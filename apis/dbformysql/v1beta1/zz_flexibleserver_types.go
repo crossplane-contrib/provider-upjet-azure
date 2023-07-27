@@ -46,15 +46,19 @@ type CustomerManagedKeyObservation struct {
 type CustomerManagedKeyParameters struct {
 
 	// The ID of the geo backup Key Vault Key. It can't cross region and need Customer Managed Key in same region as geo backup.
+	// +kubebuilder:validation:Optional
 	GeoBackupKeyVaultKeyID *string `json:"geoBackupKeyVaultKeyId,omitempty" tf:"geo_backup_key_vault_key_id,omitempty"`
 
 	// The geo backup user managed identity id for a Customer Managed Key. Should be added with identity_ids. It can't cross region and need identity in same region as geo backup.
+	// +kubebuilder:validation:Optional
 	GeoBackupUserAssignedIdentityID *string `json:"geoBackupUserAssignedIdentityId,omitempty" tf:"geo_backup_user_assigned_identity_id,omitempty"`
 
 	// The ID of the Key Vault Key.
+	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
 	// Specifies the primary user managed identity id for a Customer Managed Key. Should be added with identity_ids.
+	// +kubebuilder:validation:Optional
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 }
 
@@ -190,6 +194,7 @@ type FlexibleServerObservation struct {
 type FlexibleServerParameters struct {
 
 	// The Administrator login for the MySQL Flexible Server. Required when create_mode is Default. Changing this forces a new MySQL Flexible Server to be created.
+	// +kubebuilder:validation:Optional
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
 	// The Password associated with the administrator_login for the MySQL Flexible Server. Required when create_mode is Default.
@@ -197,12 +202,15 @@ type FlexibleServerParameters struct {
 	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
 	// The backup retention days for the MySQL Flexible Server. Possible values are between 1 and 35 days. Defaults to 7.
+	// +kubebuilder:validation:Optional
 	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 
 	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, PointInTimeRestore, GeoRestore, and Replica. Changing this forces a new MySQL Flexible Server to be created.
+	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// A customer_managed_key block as defined below.
+	// +kubebuilder:validation:Optional
 	CustomerManagedKey []CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// The ID of the virtual network subnet to create the MySQL Flexible Server. Changing this forces a new MySQL Flexible Server to be created.
@@ -220,21 +228,27 @@ type FlexibleServerParameters struct {
 	DelegatedSubnetIDSelector *v1.Selector `json:"delegatedSubnetIdSelector,omitempty" tf:"-"`
 
 	// Should geo redundant backup enabled? Defaults to false. Changing this forces a new MySQL Flexible Server to be created.
+	// +kubebuilder:validation:Optional
 	GeoRedundantBackupEnabled *bool `json:"geoRedundantBackupEnabled,omitempty" tf:"geo_redundant_backup_enabled,omitempty"`
 
 	// A high_availability block as defined below.
+	// +kubebuilder:validation:Optional
 	HighAvailability []HighAvailabilityParameters `json:"highAvailability,omitempty" tf:"high_availability,omitempty"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the MySQL Flexible Server should exist. Changing this forces a new MySQL Flexible Server to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A maintenance_window block as defined below.
+	// +kubebuilder:validation:Optional
 	MaintenanceWindow []MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
 	// The point in time to restore from creation_source_server_id when create_mode is PointInTimeRestore. Changing this forces a new MySQL Flexible Server to be created.
+	// +kubebuilder:validation:Optional
 	PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
 
 	// The ID of the private DNS zone to create the MySQL Flexible Server. Changing this forces a new MySQL Flexible Server to be created.
@@ -252,6 +266,7 @@ type FlexibleServerParameters struct {
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
 	// The replication role. Possible value is None.
+	// +kubebuilder:validation:Optional
 	ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
 
 	// The name of the Resource Group where the MySQL Flexible Server should exist. Changing this forces a new MySQL Flexible Server to be created.
@@ -268,21 +283,27 @@ type FlexibleServerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU Name for the MySQL Flexible Server.
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The resource ID of the source MySQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore, GeoRestore, and Replica. Changing this forces a new MySQL Flexible Server to be created.
+	// +kubebuilder:validation:Optional
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
 	// A storage block as defined below.
+	// +kubebuilder:validation:Optional
 	Storage []StorageParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags which should be assigned to the MySQL Flexible Server.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The version of the MySQL Flexible Server to use. Possible values are 5.7, and 8.0.21. Changing this forces a new MySQL Flexible Server to be created.
+	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 
 	// Specifies the Availability Zone in which this MySQL Flexible Server should be located. Possible values are 1, 2 and 3.
+	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 
@@ -307,9 +328,11 @@ type HighAvailabilityObservation struct {
 type HighAvailabilityParameters struct {
 
 	// The high availability mode for the MySQL Flexible Server. Possibles values are SameZone and ZoneRedundant.
+	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// Specifies the Availability Zone in which the standby Flexible Server should be located. Possible values are 1, 2 and 3.
+	// +kubebuilder:validation:Optional
 	StandbyAvailabilityZone *string `json:"standbyAvailabilityZone,omitempty" tf:"standby_availability_zone,omitempty"`
 }
 
@@ -334,9 +357,11 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this MySQL Flexible Server.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this MySQL Flexible Server. The only possible value is UserAssigned.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -367,12 +392,15 @@ type MaintenanceWindowObservation struct {
 type MaintenanceWindowParameters struct {
 
 	// The day of week for maintenance window. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	DayOfWeek *float64 `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
 	// The start hour for maintenance window. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	StartHour *float64 `json:"startHour,omitempty" tf:"start_hour,omitempty"`
 
 	// The start minute for maintenance window. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	StartMinute *float64 `json:"startMinute,omitempty" tf:"start_minute,omitempty"`
 }
 
@@ -403,12 +431,15 @@ type StorageObservation struct {
 type StorageParameters struct {
 
 	// Should Storage Auto Grow be enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	AutoGrowEnabled *bool `json:"autoGrowEnabled,omitempty" tf:"auto_grow_enabled,omitempty"`
 
 	// The storage IOPS for the MySQL Flexible Server. Possible values are between 360 and 20000.
+	// +kubebuilder:validation:Optional
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
 	// The max storage allowed for the MySQL Flexible Server. Possible values are between 20 and 16384.
+	// +kubebuilder:validation:Optional
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
 }
 

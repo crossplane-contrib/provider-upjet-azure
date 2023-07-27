@@ -46,9 +46,11 @@ type SpringCloudCustomDomainObservation struct {
 type SpringCloudCustomDomainParameters struct {
 
 	// Specifies the name of the Spring Cloud Certificate that binds to the Spring Cloud Custom Domain. Required when thumbprint is specified
+	// +kubebuilder:validation:Optional
 	CertificateName *string `json:"certificateName,omitempty" tf:"certificate_name,omitempty"`
 
 	// Specifies the name of the Spring Cloud Custom Domain. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the resource ID of the Spring Cloud Application. Changing this forces a new resource to be created.
@@ -66,6 +68,7 @@ type SpringCloudCustomDomainParameters struct {
 	SpringCloudAppIDSelector *v1.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
 
 	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud Custom Domain. Required when certificate_name is specified. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
 }
 

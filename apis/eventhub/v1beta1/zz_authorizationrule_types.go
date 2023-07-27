@@ -65,9 +65,11 @@ type AuthorizationRuleParameters struct {
 	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Does this Authorization Rule have permissions to Listen to the Event Hub? Defaults to false.
+	// +kubebuilder:validation:Optional
 	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
 
 	// Does this Authorization Rule have permissions to Manage to the Event Hub? When this property is true - both listen and send must be too. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Specifies the name of the grandparent EventHub Namespace. Changing this forces a new resource to be created.
@@ -97,6 +99,7 @@ type AuthorizationRuleParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Does this Authorization Rule have permissions to Send to the Event Hub? Defaults to false.
+	// +kubebuilder:validation:Optional
 	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 

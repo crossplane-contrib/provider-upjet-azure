@@ -51,6 +51,7 @@ type NotificationRecipientUserParameters struct {
 	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
 	// The Notification Name to be received. Changing this forces a new API Management Notification Recipient User to be created. Possible values are AccountClosedPublisher, BCC, NewApplicationNotificationMessage, NewIssuePublisherNotificationMessage, PurchasePublisherNotificationMessage, QuotaLimitApproachingPublisherNotificationMessage, and RequestPublisherNotificationMessage.
+	// +kubebuilder:validation:Optional
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
 
 	// The recipient user ID. Changing this forces a new API Management Notification Recipient User to be created.

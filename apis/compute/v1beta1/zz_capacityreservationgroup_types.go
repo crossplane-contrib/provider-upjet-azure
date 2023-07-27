@@ -46,6 +46,7 @@ type CapacityReservationGroupObservation struct {
 type CapacityReservationGroupParameters struct {
 
 	// The Azure location where the Capacity Reservation Group exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the resource group the Capacity Reservation Group is located in. Changing this forces a new resource to be created.
@@ -62,9 +63,11 @@ type CapacityReservationGroupParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a list of Availability Zones for this Capacity Reservation Group. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 

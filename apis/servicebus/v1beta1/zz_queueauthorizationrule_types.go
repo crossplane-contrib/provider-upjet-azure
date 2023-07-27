@@ -46,9 +46,11 @@ type QueueAuthorizationRuleObservation struct {
 type QueueAuthorizationRuleParameters struct {
 
 	// Does this Authorization Rule have Listen permissions to the ServiceBus Queue? Defaults to false.
+	// +kubebuilder:validation:Optional
 	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
 
 	// Does this Authorization Rule have Manage permissions to the ServiceBus Queue? When this property is true - both listen and send must be too. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Specifies the ID of the ServiceBus Queue. Changing this forces a new resource to be created.
@@ -66,6 +68,7 @@ type QueueAuthorizationRuleParameters struct {
 	QueueIDSelector *v1.Selector `json:"queueIdSelector,omitempty" tf:"-"`
 
 	// Does this Authorization Rule have Send permissions to the ServiceBus Queue? Defaults to false.
+	// +kubebuilder:validation:Optional
 	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 

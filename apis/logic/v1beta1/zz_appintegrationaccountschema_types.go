@@ -49,9 +49,11 @@ type AppIntegrationAccountSchemaObservation struct {
 type AppIntegrationAccountSchemaParameters struct {
 
 	// The content of the Logic App Integration Account Schema.
+	// +kubebuilder:validation:Optional
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// The file name of the Logic App Integration Account Schema.
+	// +kubebuilder:validation:Optional
 	FileName *string `json:"fileName,omitempty" tf:"file_name,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Schema to be created.
@@ -69,6 +71,7 @@ type AppIntegrationAccountSchemaParameters struct {
 	IntegrationAccountNameSelector *v1.Selector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
 
 	// The metadata of the Logic App Integration Account Schema.
+	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Schema should exist. Changing this forces a new Logic App Integration Account Schema to be created.

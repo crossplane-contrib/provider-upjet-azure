@@ -86,21 +86,27 @@ type BotWebAppParameters struct {
 	DeveloperAppInsightsAPIKeySecretRef *v1.SecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
 
 	// The Application Insights Application ID to associate with the Web App Bot.
+	// +kubebuilder:validation:Optional
 	DeveloperAppInsightsApplicationID *string `json:"developerAppInsightsApplicationId,omitempty" tf:"developer_app_insights_application_id,omitempty"`
 
 	// The Application Insights Key to associate with the Web App Bot.
+	// +kubebuilder:validation:Optional
 	DeveloperAppInsightsKey *string `json:"developerAppInsightsKey,omitempty" tf:"developer_app_insights_key,omitempty"`
 
 	// The name of the Web App Bot will be displayed as. This defaults to name if not specified.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The Web App Bot endpoint.
+	// +kubebuilder:validation:Optional
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A list of LUIS App IDs to associate with the Web App Bot.
+	// +kubebuilder:validation:Optional
 	LuisAppIds []*string `json:"luisAppIds,omitempty" tf:"luis_app_ids,omitempty"`
 
 	// The LUIS key to associate with the Web App Bot.
@@ -108,6 +114,7 @@ type BotWebAppParameters struct {
 	LuisKeySecretRef *v1.SecretKeySelector `json:"luisKeySecretRef,omitempty" tf:"-"`
 
 	// The Microsoft Application ID for the Web App Bot. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	MicrosoftAppID *string `json:"microsoftAppId,omitempty" tf:"microsoft_app_id,omitempty"`
 
 	// The name of the resource group in which to create the Web App Bot. Changing this forces a new resource to be created.
@@ -124,9 +131,11 @@ type BotWebAppParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the Web App Bot. Valid values include F0 or S1. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

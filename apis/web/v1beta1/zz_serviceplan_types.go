@@ -88,18 +88,23 @@ type ServicePlanObservation struct {
 type ServicePlanParameters struct {
 
 	// The ID of the App Service Environment to create this Service Plan in.
+	// +kubebuilder:validation:Optional
 	AppServiceEnvironmentID *string `json:"appServiceEnvironmentId,omitempty" tf:"app_service_environment_id,omitempty"`
 
 	// The Azure Region where the Service Plan should exist. Changing this forces a new AppService to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The maximum number of workers to use in an Elastic SKU Plan. Cannot be set unless using an Elastic SKU.
+	// +kubebuilder:validation:Optional
 	MaximumElasticWorkerCount *float64 `json:"maximumElasticWorkerCount,omitempty" tf:"maximum_elastic_worker_count,omitempty"`
 
 	// The O/S type for the App Services to be hosted in this plan. Possible values include Windows, Linux, and WindowsContainer. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
 	// Should Per Site Scaling be enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
 	PerSiteScalingEnabled *bool `json:"perSiteScalingEnabled,omitempty" tf:"per_site_scaling_enabled,omitempty"`
 
 	// The name of the Resource Group where the AppService should exist. Changing this forces a new AppService to be created.
@@ -116,15 +121,19 @@ type ServicePlanParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU for the plan. Possible values include B1, B2, B3, D1, F1, I1, I2, I3, I1v2, I2v2, I3v2, I4v2, I5v2, I6v2, P1v2, P2v2, P3v2, P1v3, P2v3, P3v3, P1mv3, P2mv3, P3mv3, P4mv3, P5mv3, S1, S2, S3, SHARED, EP1, EP2, EP3, WS1, WS2, WS3, and Y1.
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the AppService.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of Workers (instances) to be allocated.
+	// +kubebuilder:validation:Optional
 	WorkerCount *float64 `json:"workerCount,omitempty" tf:"worker_count,omitempty"`
 
 	// Should the Service Plan balance across Availability Zones in the region. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ZoneBalancingEnabled *bool `json:"zoneBalancingEnabled,omitempty" tf:"zone_balancing_enabled,omitempty"`
 }
 

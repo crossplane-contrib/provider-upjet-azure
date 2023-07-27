@@ -64,18 +64,23 @@ type AvailabilitySetObservation struct {
 type AvailabilitySetParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies whether the availability set is managed or not. Possible values are true (to specify aligned) or false (to specify classic). Default is true. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Managed *bool `json:"managed,omitempty" tf:"managed,omitempty"`
 
 	// Specifies the number of fault domains that are used. Defaults to 3. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PlatformFaultDomainCount *float64 `json:"platformFaultDomainCount,omitempty" tf:"platform_fault_domain_count,omitempty"`
 
 	// Specifies the number of update domains that are used. Defaults to 5. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PlatformUpdateDomainCount *float64 `json:"platformUpdateDomainCount,omitempty" tf:"platform_update_domain_count,omitempty"`
 
 	// The ID of the Proximity Placement Group to which this Virtual Machine should be assigned. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
 
 	// The name of the resource group in which to create the availability set. Changing this forces a new resource to be created.
@@ -92,6 +97,7 @@ type AvailabilitySetParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

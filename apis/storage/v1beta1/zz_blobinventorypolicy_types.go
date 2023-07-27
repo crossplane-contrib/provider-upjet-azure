@@ -34,6 +34,7 @@ type BlobInventoryPolicyObservation struct {
 type BlobInventoryPolicyParameters struct {
 
 	// One or more rules blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Rules []RulesParameters `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// The ID of the storage account to apply this Blob Inventory Policy to. Changing this forces a new Storage Blob Inventory Policy to be created.
@@ -96,21 +97,27 @@ type FilterObservation struct {
 type FilterParameters struct {
 
 	// A set of blob types. Possible values are blockBlob, appendBlob, and pageBlob. The storage account with is_hns_enabled is true doesn't support pageBlob.
+	// +kubebuilder:validation:Optional
 	BlobTypes []*string `json:"blobTypes,omitempty" tf:"blob_types,omitempty"`
 
 	// A set of strings for blob prefixes to be excluded. Maximum of 10 blob prefixes.
+	// +kubebuilder:validation:Optional
 	ExcludePrefixes []*string `json:"excludePrefixes,omitempty" tf:"exclude_prefixes,omitempty"`
 
 	// Includes blob versions in blob inventory or not? Defaults to false.
+	// +kubebuilder:validation:Optional
 	IncludeBlobVersions *bool `json:"includeBlobVersions,omitempty" tf:"include_blob_versions,omitempty"`
 
 	// Includes deleted blobs in blob inventory or not? Defaults to false.
+	// +kubebuilder:validation:Optional
 	IncludeDeleted *bool `json:"includeDeleted,omitempty" tf:"include_deleted,omitempty"`
 
 	// Includes blob snapshots in blob inventory or not? Defaults to false.
+	// +kubebuilder:validation:Optional
 	IncludeSnapshots *bool `json:"includeSnapshots,omitempty" tf:"include_snapshots,omitempty"`
 
 	// A set of strings for blob prefixes to be matched. Maximum of 10 blob prefixes.
+	// +kubebuilder:validation:Optional
 	PrefixMatch []*string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 }
 
@@ -162,21 +169,27 @@ type RulesObservation struct {
 type RulesParameters struct {
 
 	// A filter block as defined above. Can only be set when the scope is Blob.
+	// +kubebuilder:validation:Optional
 	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// The format of the inventory files. Possible values are Csv and Parquet.
+	// +kubebuilder:validation:Optional
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The name which should be used for this Blob Inventory Policy Rule.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The inventory schedule applied by this rule. Possible values are Daily and Weekly.
+	// +kubebuilder:validation:Optional
 	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// A list of fields to be included in the inventory. See the Azure API reference for all the supported fields.
+	// +kubebuilder:validation:Optional
 	SchemaFields []*string `json:"schemaFields,omitempty" tf:"schema_fields,omitempty"`
 
 	// The scope of the inventory for this rule. Possible values are Blob and Container.
+	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// The storage container name to store the blob inventory files for this rule.

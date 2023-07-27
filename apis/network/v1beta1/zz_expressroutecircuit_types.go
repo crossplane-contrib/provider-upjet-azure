@@ -85,6 +85,7 @@ type ExpressRouteCircuitObservation struct {
 type ExpressRouteCircuitParameters struct {
 
 	// Allow the circuit to interact with classic (RDFE) resources. Defaults to false.
+	// +kubebuilder:validation:Optional
 	AllowClassicOperations *bool `json:"allowClassicOperations,omitempty" tf:"allow_classic_operations,omitempty"`
 
 	// The authorization key. This can be used to set up an ExpressRoute Circuit with an ExpressRoute Port from another subscription.
@@ -92,18 +93,23 @@ type ExpressRouteCircuitParameters struct {
 	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
 	// The bandwidth in Gbps of the circuit being created on the Express Route Port.
+	// +kubebuilder:validation:Optional
 	BandwidthInGbps *float64 `json:"bandwidthInGbps,omitempty" tf:"bandwidth_in_gbps,omitempty"`
 
 	// The bandwidth in Mbps of the circuit being created on the Service Provider.
+	// +kubebuilder:validation:Optional
 	BandwidthInMbps *float64 `json:"bandwidthInMbps,omitempty" tf:"bandwidth_in_mbps,omitempty"`
 
 	// The ID of the Express Route Port this Express Route Circuit is based on. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ExpressRoutePortID *string `json:"expressRoutePortId,omitempty" tf:"express_route_port_id,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the peering location and not the Azure resource location. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PeeringLocation *string `json:"peeringLocation,omitempty" tf:"peering_location,omitempty"`
 
 	// The name of the resource group in which to create the ExpressRoute circuit. Changing this forces a new resource to be created.
@@ -120,12 +126,15 @@ type ExpressRouteCircuitParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the ExpressRoute Service Provider. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
 
 	// A sku block for the ExpressRoute circuit as documented below.
+	// +kubebuilder:validation:Optional
 	Sku []ExpressRouteCircuitSkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -150,9 +159,11 @@ type ExpressRouteCircuitSkuObservation struct {
 type ExpressRouteCircuitSkuParameters struct {
 
 	// The billing mode for bandwidth. Possible values are MeteredData or UnlimitedData.
+	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
 	// The service tier. Possible values are Basic, Local, Standard or Premium.
+	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 

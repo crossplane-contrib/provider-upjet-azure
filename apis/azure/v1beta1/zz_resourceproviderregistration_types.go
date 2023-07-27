@@ -34,9 +34,11 @@ type FeatureObservation struct {
 type FeatureParameters struct {
 
 	// Specifies the name of the feature to register.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Should this feature be Registered or Unregistered?
+	// +kubebuilder:validation:Optional
 	Registered *bool `json:"registered,omitempty" tf:"registered,omitempty"`
 }
 
@@ -63,9 +65,11 @@ type ResourceProviderRegistrationObservation struct {
 type ResourceProviderRegistrationParameters struct {
 
 	// A list of feature blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Feature []FeatureParameters `json:"feature,omitempty" tf:"feature,omitempty"`
 
 	// The namespace of the Resource Provider which should be registered. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 

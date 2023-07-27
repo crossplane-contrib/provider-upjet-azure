@@ -61,12 +61,15 @@ type NotificationHubNamespaceObservation struct {
 type NotificationHubNamespaceParameters struct {
 
 	// Is this Notification Hub Namespace enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The Azure Region in which this Notification Hub Namespace should be created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Type of Namespace - possible values are Messaging or NotificationHub.
+	// +kubebuilder:validation:Optional
 	NamespaceType *string `json:"namespaceType,omitempty" tf:"namespace_type,omitempty"`
 
 	// The name of the Resource Group in which the Notification Hub Namespace should exist. Changing this forces a new resource to be created.
@@ -83,9 +86,11 @@ type NotificationHubNamespaceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the SKU to use for this Notification Hub Namespace. Possible values are Free, Basic or Standard.
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

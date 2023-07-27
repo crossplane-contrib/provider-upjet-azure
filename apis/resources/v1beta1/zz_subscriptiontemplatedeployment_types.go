@@ -64,21 +64,27 @@ type SubscriptionTemplateDeploymentObservation struct {
 type SubscriptionTemplateDeploymentParameters struct {
 
 	// The Debug Level which should be used for this Subscription Template Deployment. Possible values are none, requestContent, responseContent and requestContent, responseContent.
+	// +kubebuilder:validation:Optional
 	DebugLevel *string `json:"debugLevel,omitempty" tf:"debug_level,omitempty"`
 
 	// The Azure Region where the Subscription Template Deployment should exist. Changing this forces a new Subscription Template Deployment to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The contents of the ARM Template parameters file - containing a JSON list of parameters.
+	// +kubebuilder:validation:Optional
 	ParametersContent *string `json:"parametersContent,omitempty" tf:"parameters_content,omitempty"`
 
 	// A mapping of tags which should be assigned to the Subscription Template Deployment.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The contents of the ARM Template which should be deployed into this Subscription.
+	// +kubebuilder:validation:Optional
 	TemplateContent *string `json:"templateContent,omitempty" tf:"template_content,omitempty"`
 
 	// The ID of the Template Spec Version to deploy into the Subscription. Cannot be specified with template_content.
+	// +kubebuilder:validation:Optional
 	TemplateSpecVersionID *string `json:"templateSpecVersionId,omitempty" tf:"template_spec_version_id,omitempty"`
 }
 

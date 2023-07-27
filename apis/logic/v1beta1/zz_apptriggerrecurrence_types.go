@@ -58,9 +58,11 @@ type AppTriggerRecurrenceObservation struct {
 type AppTriggerRecurrenceParameters struct {
 
 	// Specifies the Frequency at which this Trigger should be run. Possible values include Month, Week, Day, Hour, Minute and Second.
+	// +kubebuilder:validation:Optional
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// Specifies interval used for the Frequency, for example a value of 4 for interval and hour for frequency would run the Trigger every 4 hours.
+	// +kubebuilder:validation:Optional
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
@@ -78,12 +80,15 @@ type AppTriggerRecurrenceParameters struct {
 	LogicAppIDSelector *v1.Selector `json:"logicAppIdSelector,omitempty" tf:"-"`
 
 	// A schedule block as specified below.
+	// +kubebuilder:validation:Optional
 	Schedule []AppTriggerRecurrenceScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// Specifies the start date and time for this trigger in RFC3339 format: 2000-01-02T03:04:05Z.
+	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
 	// Specifies the time zone for this trigger. Supported time zone options are listed here
+	// +kubebuilder:validation:Optional
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
@@ -114,12 +119,15 @@ type AppTriggerRecurrenceScheduleObservation struct {
 type AppTriggerRecurrenceScheduleParameters struct {
 
 	// Specifies a list of hours when the trigger should run. Valid values are between 0 and 23.
+	// +kubebuilder:validation:Optional
 	AtTheseHours []*float64 `json:"atTheseHours,omitempty" tf:"at_these_hours,omitempty"`
 
 	// Specifies a list of minutes when the trigger should run. Valid values are between 0 and 59.
+	// +kubebuilder:validation:Optional
 	AtTheseMinutes []*float64 `json:"atTheseMinutes,omitempty" tf:"at_these_minutes,omitempty"`
 
 	// Specifies a list of days when the trigger should run. Valid values include Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, and Sunday.
+	// +kubebuilder:validation:Optional
 	OnTheseDays []*string `json:"onTheseDays,omitempty" tf:"on_these_days,omitempty"`
 }
 

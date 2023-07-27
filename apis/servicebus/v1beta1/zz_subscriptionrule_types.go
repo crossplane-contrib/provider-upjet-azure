@@ -76,30 +76,39 @@ type CorrelationFilterObservation struct {
 type CorrelationFilterParameters struct {
 
 	// Content type of the message.
+	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// Identifier of the correlation.
+	// +kubebuilder:validation:Optional
 	CorrelationID *string `json:"correlationId,omitempty" tf:"correlation_id,omitempty"`
 
 	// Application specific label.
+	// +kubebuilder:validation:Optional
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 
 	// Identifier of the message.
+	// +kubebuilder:validation:Optional
 	MessageID *string `json:"messageId,omitempty" tf:"message_id,omitempty"`
 
 	// A list of user defined properties to be included in the filter. Specified as a map of name/value pairs.
+	// +kubebuilder:validation:Optional
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Address of the queue to reply to.
+	// +kubebuilder:validation:Optional
 	ReplyTo *string `json:"replyTo,omitempty" tf:"reply_to,omitempty"`
 
 	// Session identifier to reply to.
+	// +kubebuilder:validation:Optional
 	ReplyToSessionID *string `json:"replyToSessionId,omitempty" tf:"reply_to_session_id,omitempty"`
 
 	// Session identifier.
+	// +kubebuilder:validation:Optional
 	SessionID *string `json:"sessionId,omitempty" tf:"session_id,omitempty"`
 
 	// Address to send to.
+	// +kubebuilder:validation:Optional
 	To *string `json:"to,omitempty" tf:"to,omitempty"`
 }
 
@@ -144,15 +153,19 @@ type SubscriptionRuleObservation struct {
 type SubscriptionRuleParameters struct {
 
 	// Represents set of actions written in SQL language-based syntax that is performed against a BrokeredMessage.
+	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A correlation_filter block as documented below to be evaluated against a BrokeredMessage. Required when filter_type is set to CorrelationFilter.
+	// +kubebuilder:validation:Optional
 	CorrelationFilter []CorrelationFilterParameters `json:"correlationFilter,omitempty" tf:"correlation_filter,omitempty"`
 
 	// Type of filter to be applied to a BrokeredMessage. Possible values are SqlFilter and CorrelationFilter.
+	// +kubebuilder:validation:Optional
 	FilterType *string `json:"filterType,omitempty" tf:"filter_type,omitempty"`
 
 	// Represents a filter written in SQL language-based syntax that to be evaluated against a BrokeredMessage. Required when filter_type is set to SqlFilter.
+	// +kubebuilder:validation:Optional
 	SQLFilter *string `json:"sqlFilter,omitempty" tf:"sql_filter,omitempty"`
 
 	// The ID of the ServiceBus Subscription in which this Rule should be created. Changing this forces a new resource to be created.

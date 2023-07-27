@@ -34,6 +34,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// The type of Managed Service Identity that is configured on this Digital Twins instance. The only possible value is SystemAssigned.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -73,9 +74,11 @@ type InstanceObservation struct {
 type InstanceParameters struct {
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Digital Twins instance should exist. Changing this forces a new Digital Twins instance to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Digital Twins instance should exist. Changing this forces a new Digital Twins instance to be created.
@@ -92,6 +95,7 @@ type InstanceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Digital Twins instance.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

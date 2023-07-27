@@ -86,9 +86,11 @@ type ReferenceInputMSSQLParameters struct {
 	DatabaseSelector *v1.Selector `json:"databaseSelector,omitempty" tf:"-"`
 
 	// The query used to retrieve incremental changes in the reference data from the MS SQL database. Cannot be set when refresh_type is Static.
+	// +kubebuilder:validation:Optional
 	DeltaSnapshotQuery *string `json:"deltaSnapshotQuery,omitempty" tf:"delta_snapshot_query,omitempty"`
 
 	// The query used to retrieve the reference data from the MS SQL database.
+	// +kubebuilder:validation:Optional
 	FullSnapshotQuery *string `json:"fullSnapshotQuery,omitempty" tf:"full_snapshot_query,omitempty"`
 
 	// The password to connect to the MS SQL database.
@@ -96,9 +98,11 @@ type ReferenceInputMSSQLParameters struct {
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The frequency in hh:mm:ss with which the reference data should be retrieved from the MS SQL database e.g. 00:20:00 for every 20 minutes. Must be set when refresh_type is RefreshPeriodicallyWithFull or RefreshPeriodicallyWithDelta.
+	// +kubebuilder:validation:Optional
 	RefreshIntervalDuration *string `json:"refreshIntervalDuration,omitempty" tf:"refresh_interval_duration,omitempty"`
 
 	// Defines whether and how the reference data should be refreshed. Accepted values are Static, RefreshPeriodicallyWithFull and RefreshPeriodicallyWithDelta.
+	// +kubebuilder:validation:Optional
 	RefreshType *string `json:"refreshType,omitempty" tf:"refresh_type,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job should exist. Changing this forces a new resource to be created.
@@ -133,9 +137,11 @@ type ReferenceInputMSSQLParameters struct {
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName" tf:"stream_analytics_job_name,omitempty"`
 
 	// The name of the table in the Azure SQL database.
+	// +kubebuilder:validation:Optional
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
 	// The username to connect to the MS SQL database.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 

@@ -67,9 +67,11 @@ type IntegrationServiceEnvironmentObservation struct {
 type IntegrationServiceEnvironmentParameters struct {
 
 	// The type of access endpoint to use for the Integration Service Environment. Possible Values are Internal and External. Changing this forces a new Integration Service Environment to be created.
+	// +kubebuilder:validation:Optional
 	AccessEndpointType *string `json:"accessEndpointType,omitempty" tf:"access_endpoint_type,omitempty"`
 
 	// The Azure Region where the Integration Service Environment should exist. Changing this forces a new Integration Service Environment to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Integration Service Environment should exist. Changing this forces a new Integration Service Environment to be created.
@@ -86,9 +88,11 @@ type IntegrationServiceEnvironmentParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU name and capacity of the Integration Service Environment. Possible values are Developer_0, Premium_0, Premium_1, Premium_2, Premium_3, Premium_4, Premium_5, Premium_6, Premium_7, Premium_8, Premium_9 and Premium_10.
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Integration Service Environment.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of virtual network subnet ids to be used by Integration Service Environment. Exactly four distinct ids to /27 subnets must be provided. Changing this forces a new Integration Service Environment to be created.

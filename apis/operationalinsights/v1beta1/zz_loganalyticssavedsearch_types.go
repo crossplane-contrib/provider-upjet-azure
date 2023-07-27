@@ -64,15 +64,19 @@ type LogAnalyticsSavedSearchObservation struct {
 type LogAnalyticsSavedSearchParameters struct {
 
 	// The category that the Saved Search will be listed under. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// The name that Saved Search will be displayed as. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The function alias if the query serves as a function. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	FunctionAlias *string `json:"functionAlias,omitempty" tf:"function_alias,omitempty"`
 
 	// The function parameters if the query serves as a function. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	FunctionParameters []*string `json:"functionParameters,omitempty" tf:"function_parameters,omitempty"`
 
 	// Specifies the ID of the Log Analytics Workspace that the Saved Search will be associated with. Changing this forces a new resource to be created.
@@ -90,9 +94,11 @@ type LogAnalyticsSavedSearchParameters struct {
 	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The query expression for the saved search. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
 	// A mapping of tags which should be assigned to the Logs Analytics Saved Search. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

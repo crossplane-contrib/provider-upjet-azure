@@ -80,18 +80,23 @@ type UserParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The kind of confirmation email which will be sent to this user. Possible values are invite and signup. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Confirmation *string `json:"confirmation,omitempty" tf:"confirmation,omitempty"`
 
 	// The email address associated with this user.
+	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// The first name for this user.
+	// +kubebuilder:validation:Optional
 	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
 
 	// The last name for this user.
+	// +kubebuilder:validation:Optional
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
 	// A note about this user.
+	// +kubebuilder:validation:Optional
 	Note *string `json:"note,omitempty" tf:"note,omitempty"`
 
 	// The password associated with this user.
@@ -112,6 +117,7 @@ type UserParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The state of this user. Possible values are active, blocked and pending.
+	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }
 

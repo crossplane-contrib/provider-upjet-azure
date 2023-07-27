@@ -58,12 +58,15 @@ type AppIntegrationAccountObservation struct {
 type AppIntegrationAccountParameters struct {
 
 	// The resource ID of the Integration Service Environment. Changing this forces a new Logic App Integration Account to be created.
+	// +kubebuilder:validation:Optional
 	IntegrationServiceEnvironmentID *string `json:"integrationServiceEnvironmentId,omitempty" tf:"integration_service_environment_id,omitempty"`
 
 	// The Azure Region where the Logic App Integration Account should exist. Changing this forces a new Logic App Integration Account to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name which should be used for this Logic App Integration Account. Changing this forces a new Logic App Integration Account to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account should exist. Changing this forces a new Logic App Integration Account to be created.
@@ -80,9 +83,11 @@ type AppIntegrationAccountParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU name of the Logic App Integration Account. Possible Values are Basic, Free and Standard.
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Logic App Integration Account.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

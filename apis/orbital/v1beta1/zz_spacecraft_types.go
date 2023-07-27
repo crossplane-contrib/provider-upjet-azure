@@ -73,18 +73,23 @@ type SpacecraftLinksObservation struct {
 type SpacecraftLinksParameters struct {
 
 	// Bandwidth in Mhz.
+	// +kubebuilder:validation:Optional
 	BandwidthMhz *float64 `json:"bandwidthMhz,omitempty" tf:"bandwidth_mhz,omitempty"`
 
 	// Center frequency in Mhz.
+	// +kubebuilder:validation:Optional
 	CenterFrequencyMhz *float64 `json:"centerFrequencyMhz,omitempty" tf:"center_frequency_mhz,omitempty"`
 
 	// Direction if the communication. Possible values are Uplink and Downlink.
+	// +kubebuilder:validation:Optional
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
 	// Name of the link.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Polarization. Possible values are RHCP, LHCP, linearVertical and linearHorizontal.
+	// +kubebuilder:validation:Optional
 	Polarization *string `json:"polarization,omitempty" tf:"polarization,omitempty"`
 }
 
@@ -118,12 +123,15 @@ type SpacecraftObservation struct {
 type SpacecraftParameters struct {
 
 	// A links block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Links []SpacecraftLinksParameters `json:"links,omitempty" tf:"links,omitempty"`
 
 	// The location where the Spacecraft exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// NORAD ID of the Spacecraft.
+	// +kubebuilder:validation:Optional
 	NoradID *string `json:"noradId,omitempty" tf:"norad_id,omitempty"`
 
 	// The name of the Resource Group where the Spacecraft exists. Changing this forces a new resource to be created.
@@ -140,12 +148,15 @@ type SpacecraftParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Title of the two line elements (TLE).
+	// +kubebuilder:validation:Optional
 	TitleLine *string `json:"titleLine,omitempty" tf:"title_line,omitempty"`
 
 	// A list of the two line elements (TLE), the first string being the first of the TLE, the second string being the second line of the TLE. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	TwoLineElements []*string `json:"twoLineElements,omitempty" tf:"two_line_elements,omitempty"`
 }
 

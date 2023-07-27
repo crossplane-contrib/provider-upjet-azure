@@ -49,6 +49,7 @@ type EventRelayNamespaceObservation struct {
 type EventRelayNamespaceParameters struct {
 
 	// Specifies the supported Azure location where the Azure Relay Namespace exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Azure Relay Namespace. Changing this forces a new resource to be created.
@@ -65,9 +66,11 @@ type EventRelayNamespaceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the SKU to use. At this time the only supported value is Standard.
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

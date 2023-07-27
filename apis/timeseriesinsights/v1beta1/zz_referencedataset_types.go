@@ -34,9 +34,11 @@ type KeyPropertyObservation struct {
 type KeyPropertyParameters struct {
 
 	// The name of the key property. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The data type of the key property. Valid values include Bool, DateTime, Double, String. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -79,15 +81,19 @@ type ReferenceDataSetObservation struct {
 type ReferenceDataSetParameters struct {
 
 	// The comparison behavior that will be used to compare keys. Valid values include Ordinal and OrdinalIgnoreCase. Defaults to Ordinal. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DataStringComparisonBehavior *string `json:"dataStringComparisonBehavior,omitempty" tf:"data_string_comparison_behavior,omitempty"`
 
 	// A key_property block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	KeyProperty []KeyPropertyParameters `json:"keyProperty,omitempty" tf:"key_property,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The resource ID of the Azure IoT Time Series Insights Environment in which to create the Azure IoT Time Series Insights Reference Data Set. Changing this forces a new resource to be created.

@@ -66,9 +66,11 @@ type BackupProtectedVMParameters struct {
 	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// A list of Disks' Logical Unit Numbers(LUN) to be excluded for VM Protection.
+	// +kubebuilder:validation:Optional
 	ExcludeDiskLuns []*float64 `json:"excludeDiskLuns,omitempty" tf:"exclude_disk_luns,omitempty"`
 
 	// A list of Disks' Logical Unit Numbers(LUN) to be included for VM Protection.
+	// +kubebuilder:validation:Optional
 	IncludeDiskLuns []*float64 `json:"includeDiskLuns,omitempty" tf:"include_disk_luns,omitempty"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
@@ -98,6 +100,7 @@ type BackupProtectedVMParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the VM to backup. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SourceVMID *string `json:"sourceVmId,omitempty" tf:"source_vm_id,omitempty"`
 }
 

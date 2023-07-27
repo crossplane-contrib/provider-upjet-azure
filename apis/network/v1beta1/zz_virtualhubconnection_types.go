@@ -34,9 +34,11 @@ type RoutingPropagatedRouteTableObservation struct {
 type RoutingPropagatedRouteTableParameters struct {
 
 	// The list of labels to assign to this route table.
+	// +kubebuilder:validation:Optional
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A list of Route Table IDs to associated with this Virtual Hub Connection.
+	// +kubebuilder:validation:Optional
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 }
 
@@ -67,12 +69,15 @@ type StaticVnetRouteObservation struct {
 type StaticVnetRouteParameters struct {
 
 	// A list of CIDR Ranges which should be used as Address Prefixes.
+	// +kubebuilder:validation:Optional
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 
 	// The name which should be used for this Static Route.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The IP Address which should be used for the Next Hop.
+	// +kubebuilder:validation:Optional
 	NextHopIPAddress *string `json:"nextHopIpAddress,omitempty" tf:"next_hop_ip_address,omitempty"`
 }
 
@@ -106,6 +111,7 @@ type VirtualHubConnectionObservation struct {
 type VirtualHubConnectionParameters struct {
 
 	// Should Internet Security be enabled to secure internet traffic? Defaults to false.
+	// +kubebuilder:validation:Optional
 	InternetSecurityEnabled *bool `json:"internetSecurityEnabled,omitempty" tf:"internet_security_enabled,omitempty"`
 
 	// The ID of the Virtual Network which the Virtual Hub should be connected to. Changing this forces a new resource to be created.
@@ -123,6 +129,7 @@ type VirtualHubConnectionParameters struct {
 	RemoteVirtualNetworkIDSelector *v1.Selector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
 
 	// A routing block as defined below.
+	// +kubebuilder:validation:Optional
 	Routing []VirtualHubConnectionRoutingParameters `json:"routing,omitempty" tf:"routing,omitempty"`
 
 	// The ID of the Virtual Hub within which this connection should be created. Changing this forces a new resource to be created.
@@ -178,9 +185,11 @@ type VirtualHubConnectionRoutingParameters struct {
 	AssociatedRouteTableIDSelector *v1.Selector `json:"associatedRouteTableIdSelector,omitempty" tf:"-"`
 
 	// A propagated_route_table block as defined below.
+	// +kubebuilder:validation:Optional
 	PropagatedRouteTable []RoutingPropagatedRouteTableParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
 
 	// A static_vnet_route block as defined below.
+	// +kubebuilder:validation:Optional
 	StaticVnetRoute []StaticVnetRouteParameters `json:"staticVnetRoute,omitempty" tf:"static_vnet_route,omitempty"`
 }
 

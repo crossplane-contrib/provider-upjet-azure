@@ -48,6 +48,7 @@ type APIReleaseParameters struct {
 	APIIDSelector *v1.Selector `json:"apiIdSelector,omitempty" tf:"-"`
 
 	// The Release Notes.
+	// +kubebuilder:validation:Optional
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 }
 

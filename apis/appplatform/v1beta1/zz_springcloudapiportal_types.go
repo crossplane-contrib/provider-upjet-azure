@@ -72,12 +72,15 @@ type SpringCloudAPIPortalParameters struct {
 	GatewayIdsSelector *v1.Selector `json:"gatewayIdsSelector,omitempty" tf:"-"`
 
 	// is only https is allowed?
+	// +kubebuilder:validation:Optional
 	HTTPSOnlyEnabled *bool `json:"httpsOnlyEnabled,omitempty" tf:"https_only_enabled,omitempty"`
 
 	// Specifies the required instance count of the Spring Cloud API Portal. Possible Values are between 1 and 500. Defaults to 1 if not specified.
+	// +kubebuilder:validation:Optional
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// Is the public network access enabled?
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud API Portal to be created.
@@ -95,6 +98,7 @@ type SpringCloudAPIPortalParameters struct {
 	SpringCloudServiceIDSelector *v1.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
 
 	// A sso block as defined below.
+	// +kubebuilder:validation:Optional
 	Sso []SsoParameters `json:"sso,omitempty" tf:"sso,omitempty"`
 }
 
@@ -131,15 +135,19 @@ type SsoObservation struct {
 type SsoParameters struct {
 
 	// The public identifier for the application.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The secret known only to the application and the authorization server.
+	// +kubebuilder:validation:Optional
 	ClientSecret *string `json:"clientSecret,omitempty" tf:"client_secret,omitempty"`
 
 	// The URI of Issuer Identifier.
+	// +kubebuilder:validation:Optional
 	IssuerURI *string `json:"issuerUri,omitempty" tf:"issuer_uri,omitempty"`
 
 	// It defines the specific actions applications can be allowed to do on a user's behalf.
+	// +kubebuilder:validation:Optional
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 

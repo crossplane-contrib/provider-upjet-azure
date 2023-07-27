@@ -50,9 +50,11 @@ type CustomHTTPSConfigurationObservation struct {
 type CustomHTTPSConfigurationParameters struct {
 
 	// The name of the Key Vault secret representing the full certificate PFX.
+	// +kubebuilder:validation:Optional
 	AzureKeyVaultCertificateSecretName *string `json:"azureKeyVaultCertificateSecretName,omitempty" tf:"azure_key_vault_certificate_secret_name,omitempty"`
 
 	// The version of the Key Vault secret representing the full certificate PFX.
+	// +kubebuilder:validation:Optional
 	AzureKeyVaultCertificateSecretVersion *string `json:"azureKeyVaultCertificateSecretVersion,omitempty" tf:"azure_key_vault_certificate_secret_version,omitempty"`
 
 	// The ID of the Key Vault containing the SSL certificate.
@@ -70,6 +72,7 @@ type CustomHTTPSConfigurationParameters struct {
 	AzureKeyVaultCertificateVaultIDSelector *v1.Selector `json:"azureKeyVaultCertificateVaultIdSelector,omitempty" tf:"-"`
 
 	// Certificate source to encrypted HTTPS traffic with. Allowed values are FrontDoor or AzureKeyVault. Defaults to FrontDoor.
+	// +kubebuilder:validation:Optional
 	CertificateSource *string `json:"certificateSource,omitempty" tf:"certificate_source,omitempty"`
 }
 
@@ -103,12 +106,15 @@ type FrontdoorCustomHTTPSConfigurationObservation struct {
 type FrontdoorCustomHTTPSConfigurationParameters struct {
 
 	// A custom_https_configuration block as defined above.
+	// +kubebuilder:validation:Optional
 	CustomHTTPSConfiguration []CustomHTTPSConfigurationParameters `json:"customHttpsConfiguration,omitempty" tf:"custom_https_configuration,omitempty"`
 
 	// Should the HTTPS protocol be enabled for this custom domain associated with the Front Door?
+	// +kubebuilder:validation:Optional
 	CustomHTTPSProvisioningEnabled *bool `json:"customHttpsProvisioningEnabled,omitempty" tf:"custom_https_provisioning_enabled,omitempty"`
 
 	// The ID of the Front Door Frontend Endpoint which this configuration refers to. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	FrontendEndpointID *string `json:"frontendEndpointId,omitempty" tf:"frontend_endpoint_id,omitempty"`
 }
 

@@ -54,9 +54,11 @@ type GatewayParameters struct {
 	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
 	// The description of the API Management Gateway.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A location_data block as documented below.
+	// +kubebuilder:validation:Optional
 	LocationData []LocationDataParameters `json:"locationData,omitempty" tf:"location_data,omitempty"`
 }
 
@@ -93,15 +95,19 @@ type LocationDataObservation struct {
 type LocationDataParameters struct {
 
 	// The city or locality where the resource is located.
+	// +kubebuilder:validation:Optional
 	City *string `json:"city,omitempty" tf:"city,omitempty"`
 
 	// The district, state, or province where the resource is located.
+	// +kubebuilder:validation:Optional
 	District *string `json:"district,omitempty" tf:"district,omitempty"`
 
 	// A canonical name for the geographic or physical location.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The country or region where the resource is located.
+	// +kubebuilder:validation:Optional
 	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 

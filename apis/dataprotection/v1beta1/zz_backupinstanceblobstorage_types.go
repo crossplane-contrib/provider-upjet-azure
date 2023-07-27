@@ -54,6 +54,7 @@ type BackupInstanceBlobStorageParameters struct {
 	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
 
 	// The location of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.

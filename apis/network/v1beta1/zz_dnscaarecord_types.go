@@ -52,6 +52,7 @@ type DNSCAARecordObservation struct {
 type DNSCAARecordParameters struct {
 
 	// A list of values that make up the CAA record. Each record block supports fields documented below.
+	// +kubebuilder:validation:Optional
 	Record []RecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
@@ -68,9 +69,11 @@ type DNSCAARecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
+	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created.
@@ -114,12 +117,15 @@ type RecordObservation struct {
 type RecordParameters struct {
 
 	// Extensible CAA flags, currently only 1 is implemented to set the issuer critical flag.
+	// +kubebuilder:validation:Optional
 	Flags *float64 `json:"flags,omitempty" tf:"flags,omitempty"`
 
 	// A property tag, options are issue, issuewild and iodef.
+	// +kubebuilder:validation:Optional
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
 
 	// A property value such as a registrar domain.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 

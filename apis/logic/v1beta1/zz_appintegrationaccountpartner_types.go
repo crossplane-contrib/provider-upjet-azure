@@ -43,6 +43,7 @@ type AppIntegrationAccountPartnerObservation struct {
 type AppIntegrationAccountPartnerParameters struct {
 
 	// A business_identity block as documented below.
+	// +kubebuilder:validation:Optional
 	BusinessIdentity []BusinessIdentityParameters `json:"businessIdentity,omitempty" tf:"business_identity,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Partner to be created.
@@ -60,6 +61,7 @@ type AppIntegrationAccountPartnerParameters struct {
 	IntegrationAccountNameSelector *v1.Selector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
 
 	// A JSON mapping of any Metadata for this Logic App Integration Account Partner.
+	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Partner should exist. Changing this forces a new Logic App Integration Account Partner to be created.
@@ -97,9 +99,11 @@ type BusinessIdentityObservation struct {
 type BusinessIdentityParameters struct {
 
 	// The authenticating body that provides unique business identities to organizations.
+	// +kubebuilder:validation:Optional
 	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
 
 	// The value that identifies the documents that your logic apps receive.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 

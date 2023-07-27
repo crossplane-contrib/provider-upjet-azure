@@ -64,21 +64,27 @@ type SQLPoolWorkloadGroupObservation struct {
 type SQLPoolWorkloadGroupParameters struct {
 
 	// The workload group importance level. Defaults to normal.
+	// +kubebuilder:validation:Optional
 	Importance *string `json:"importance,omitempty" tf:"importance,omitempty"`
 
 	// The workload group cap percentage resource.
+	// +kubebuilder:validation:Optional
 	MaxResourcePercent *float64 `json:"maxResourcePercent,omitempty" tf:"max_resource_percent,omitempty"`
 
 	// The workload group request maximum grant percentage. Defaults to 3.
+	// +kubebuilder:validation:Optional
 	MaxResourcePercentPerRequest *float64 `json:"maxResourcePercentPerRequest,omitempty" tf:"max_resource_percent_per_request,omitempty"`
 
 	// The workload group minimum percentage resource.
+	// +kubebuilder:validation:Optional
 	MinResourcePercent *float64 `json:"minResourcePercent,omitempty" tf:"min_resource_percent,omitempty"`
 
 	// The workload group request minimum grant percentage.
+	// +kubebuilder:validation:Optional
 	MinResourcePercentPerRequest *float64 `json:"minResourcePercentPerRequest,omitempty" tf:"min_resource_percent_per_request,omitempty"`
 
 	// The workload group query execution timeout.
+	// +kubebuilder:validation:Optional
 	QueryExecutionTimeoutInSeconds *float64 `json:"queryExecutionTimeoutInSeconds,omitempty" tf:"query_execution_timeout_in_seconds,omitempty"`
 
 	// The ID of the Synapse SQL Pool. Changing this forces a new Synapse SQL Pool Workload Group to be created.

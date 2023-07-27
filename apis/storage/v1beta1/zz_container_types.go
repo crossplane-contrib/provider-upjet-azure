@@ -49,9 +49,11 @@ type ContainerObservation struct {
 type ContainerParameters struct {
 
 	// The Access Level configured for this Container. Possible values are blob, container or private. Defaults to private.
+	// +kubebuilder:validation:Optional
 	ContainerAccessType *string `json:"containerAccessType,omitempty" tf:"container_access_type,omitempty"`
 
 	// A mapping of MetaData for this Container. All metadata keys should be lowercase.
+	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the Storage Account where the Container should be created. Changing this forces a new resource to be created.

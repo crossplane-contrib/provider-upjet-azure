@@ -48,6 +48,7 @@ type APIOperationTagParameters struct {
 	APIOperationIDSelector *v1.Selector `json:"apiOperationIdSelector,omitempty" tf:"-"`
 
 	// The display name of the API Management API Operation Tag.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 }
 

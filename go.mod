@@ -2,7 +2,7 @@ module github.com/upbound/provider-azure
 
 go 1.19
 
-replace github.com/upbound/upjet => github.com/lsviben/upjet v0.0.0-20230726104527-dc55bdf638c0
+replace github.com/upbound/upjet => github.com/lsviben/upjet v0.0.0-20230727085627-91de73c8db52
 
 require (
 	github.com/crossplane/crossplane-runtime v0.20.0

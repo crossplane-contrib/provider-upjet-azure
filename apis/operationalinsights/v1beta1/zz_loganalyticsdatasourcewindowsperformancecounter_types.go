@@ -55,15 +55,19 @@ type LogAnalyticsDataSourceWindowsPerformanceCounterObservation struct {
 type LogAnalyticsDataSourceWindowsPerformanceCounterParameters struct {
 
 	// The friendly name of the performance counter.
+	// +kubebuilder:validation:Optional
 	CounterName *string `json:"counterName,omitempty" tf:"counter_name,omitempty"`
 
 	// The name of the virtual machine instance to which the Windows Performance Counter DataSource be applied. Specify a * will apply to all instances.
+	// +kubebuilder:validation:Optional
 	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
 
 	// The time of sample interval in seconds. Supports values between 10 and 2147483647.
+	// +kubebuilder:validation:Optional
 	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
 
 	// The object name of the Log Analytics Windows Performance Counter DataSource.
+	// +kubebuilder:validation:Optional
 	ObjectName *string `json:"objectName,omitempty" tf:"object_name,omitempty"`
 
 	// The name of the Resource Group where the Log Analytics Windows Performance Counter DataSource should exist. Changing this forces a new Log Analytics Windows Performance Counter DataSource to be created.

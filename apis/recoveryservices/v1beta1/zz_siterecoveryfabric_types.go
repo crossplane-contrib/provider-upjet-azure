@@ -37,6 +37,7 @@ type SiteRecoveryFabricObservation struct {
 type SiteRecoveryFabricParameters struct {
 
 	// In what region should the fabric be located. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.

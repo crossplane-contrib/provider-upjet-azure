@@ -103,9 +103,11 @@ type APIOperationPolicyParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The XML Content for this Policy.
+	// +kubebuilder:validation:Optional
 	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content,omitempty"`
 
 	// A link to a Policy XML Document, which must be publicly available.
+	// +kubebuilder:validation:Optional
 	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link,omitempty"`
 }
 

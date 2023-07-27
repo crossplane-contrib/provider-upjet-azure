@@ -34,9 +34,11 @@ type KeyVaultConnectionStringObservation struct {
 type KeyVaultConnectionStringParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Specifies the secret name in Azure Key Vault that stores SQL Server connection string.
+	// +kubebuilder:validation:Optional
 	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
@@ -100,9 +102,11 @@ type LinkedServiceAzureSQLDatabaseKeyVaultPasswordObservation struct {
 type LinkedServiceAzureSQLDatabaseKeyVaultPasswordParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Specifies the secret name in Azure Key Vault that stores SQL Server password.
+	// +kubebuilder:validation:Optional
 	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
@@ -154,12 +158,15 @@ type LinkedServiceAzureSQLDatabaseObservation struct {
 type LinkedServiceAzureSQLDatabaseParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service Azure SQL Database.
+	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service Azure SQL Database.
+	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The connection string in which to authenticate with Azure SQL Database. Exactly one of either connection_string or key_vault_connection_string is required.
+	// +kubebuilder:validation:Optional
 	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -177,30 +184,39 @@ type LinkedServiceAzureSQLDatabaseParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service Azure SQL Database.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The integration runtime reference to associate with the Data Factory Linked Service Azure SQL Database.
+	// +kubebuilder:validation:Optional
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A key_vault_connection_string block as defined below. Use this argument to store Azure SQL Database connection string in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service. Exactly one of either connection_string or key_vault_connection_string is required.
+	// +kubebuilder:validation:Optional
 	KeyVaultConnectionString []KeyVaultConnectionStringParameters `json:"keyVaultConnectionString,omitempty" tf:"key_vault_connection_string,omitempty"`
 
 	// A key_vault_password block as defined below. Use this argument to store SQL Server password in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	KeyVaultPassword []LinkedServiceAzureSQLDatabaseKeyVaultPasswordParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service Azure SQL Database.
+	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The service principal id in which to authenticate against the Azure SQL Database. Required if service_principal_key is set.
+	// +kubebuilder:validation:Optional
 	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
 
 	// The service principal key in which to authenticate against the Azure SQL Database. Required if service_principal_id is set.
+	// +kubebuilder:validation:Optional
 	ServicePrincipalKey *string `json:"servicePrincipalKey,omitempty" tf:"service_principal_key,omitempty"`
 
 	// The tenant id or name in which to authenticate against the Azure SQL Database.
+	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
 	// Whether to use the Data Factory's managed identity to authenticate against the Azure SQL Database. Incompatible with service_principal_id and service_principal_key
+	// +kubebuilder:validation:Optional
 	UseManagedIdentity *bool `json:"useManagedIdentity,omitempty" tf:"use_managed_identity,omitempty"`
 }
 

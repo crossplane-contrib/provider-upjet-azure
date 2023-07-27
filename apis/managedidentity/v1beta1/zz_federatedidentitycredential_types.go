@@ -49,9 +49,11 @@ type FederatedIdentityCredentialObservation struct {
 type FederatedIdentityCredentialParameters struct {
 
 	// Specifies the audience for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	// +kubebuilder:validation:Optional
 	Audience []*string `json:"audience,omitempty" tf:"audience,omitempty"`
 
 	// Specifies the issuer of this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// Specifies parent ID of User Assigned Identity for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
@@ -82,6 +84,7 @@ type FederatedIdentityCredentialParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the subject for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	// +kubebuilder:validation:Optional
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 

@@ -34,9 +34,11 @@ type CustomBGPAddressObservation struct {
 type CustomBGPAddressParameters struct {
 
 	// The custom bgp ip address which belongs to the IP Configuration.
+	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The ID of the IP Configuration which belongs to the VPN Gateway.
+	// +kubebuilder:validation:Optional
 	IPConfigurationID *string `json:"ipConfigurationId,omitempty" tf:"ip_configuration_id,omitempty"`
 }
 
@@ -82,6 +84,7 @@ type VPNGatewayConnectionObservation struct {
 type VPNGatewayConnectionParameters struct {
 
 	// Whether Internet Security is enabled for this VPN Connection. Defaults to false.
+	// +kubebuilder:validation:Optional
 	InternetSecurityEnabled *bool `json:"internetSecurityEnabled,omitempty" tf:"internet_security_enabled,omitempty"`
 
 	// The ID of the remote VPN Site, which will connect to the VPN Gateway. Changing this forces a new VPN Gateway Connection to be created.
@@ -99,9 +102,11 @@ type VPNGatewayConnectionParameters struct {
 	RemoteVPNSiteIDSelector *v1.Selector `json:"remoteVpnSiteIdSelector,omitempty" tf:"-"`
 
 	// A routing block as defined below. If this is not specified, there will be a default route table created implicitly.
+	// +kubebuilder:validation:Optional
 	Routing []VPNGatewayConnectionRoutingParameters `json:"routing,omitempty" tf:"routing,omitempty"`
 
 	// One or more traffic_selector_policy blocks as defined below.
+	// +kubebuilder:validation:Optional
 	TrafficSelectorPolicy []VPNGatewayConnectionTrafficSelectorPolicyParameters `json:"trafficSelectorPolicy,omitempty" tf:"traffic_selector_policy,omitempty"`
 
 	// The ID of the VPN Gateway that this VPN Gateway Connection belongs to. Changing this forces a new VPN Gateway Connection to be created.
@@ -119,6 +124,7 @@ type VPNGatewayConnectionParameters struct {
 	VPNGatewayIDSelector *v1.Selector `json:"vpnGatewayIdSelector,omitempty" tf:"-"`
 
 	// One or more vpn_link blocks as defined below.
+	// +kubebuilder:validation:Optional
 	VPNLink []VPNLinkParameters `json:"vpnLink,omitempty" tf:"vpn_link,omitempty"`
 }
 
@@ -155,15 +161,19 @@ type VPNGatewayConnectionRoutingObservation struct {
 type VPNGatewayConnectionRoutingParameters struct {
 
 	// The ID of the Route Table associated with this VPN Connection.
+	// +kubebuilder:validation:Optional
 	AssociatedRouteTable *string `json:"associatedRouteTable,omitempty" tf:"associated_route_table,omitempty"`
 
 	// The resource ID of the Route Map associated with this Routing Configuration for inbound learned routes.
+	// +kubebuilder:validation:Optional
 	InboundRouteMapID *string `json:"inboundRouteMapId,omitempty" tf:"inbound_route_map_id,omitempty"`
 
 	// The resource ID of the Route Map associated with this Routing Configuration for outbound advertised routes.
+	// +kubebuilder:validation:Optional
 	OutboundRouteMapID *string `json:"outboundRouteMapId,omitempty" tf:"outbound_route_map_id,omitempty"`
 
 	// A propagated_route_table block as defined below.
+	// +kubebuilder:validation:Optional
 	PropagatedRouteTable []VPNGatewayConnectionRoutingPropagatedRouteTableParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
 }
 
@@ -188,9 +198,11 @@ type VPNGatewayConnectionRoutingPropagatedRouteTableObservation struct {
 type VPNGatewayConnectionRoutingPropagatedRouteTableParameters struct {
 
 	// A list of labels to assign to this route table.
+	// +kubebuilder:validation:Optional
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A list of Route Table IDs to associated with this VPN Gateway Connection.
+	// +kubebuilder:validation:Optional
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
 }
 
@@ -215,9 +227,11 @@ type VPNGatewayConnectionTrafficSelectorPolicyObservation struct {
 type VPNGatewayConnectionTrafficSelectorPolicyParameters struct {
 
 	// A list of local address spaces in CIDR format for this VPN Gateway Connection.
+	// +kubebuilder:validation:Optional
 	LocalAddressRanges []*string `json:"localAddressRanges,omitempty" tf:"local_address_ranges,omitempty"`
 
 	// A list of remote address spaces in CIDR format for this VPN Gateway Connection.
+	// +kubebuilder:validation:Optional
 	RemoteAddressRanges []*string `json:"remoteAddressRanges,omitempty" tf:"remote_address_ranges,omitempty"`
 }
 
@@ -326,27 +340,35 @@ type VPNLinkIpsecPolicyObservation struct {
 type VPNLinkIpsecPolicyParameters struct {
 
 	// The DH Group used in IKE Phase 1 for initial SA. Possible values are None, DHGroup1, DHGroup2, DHGroup14, DHGroup24, DHGroup2048, ECP256, ECP384.
+	// +kubebuilder:validation:Optional
 	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
 
 	// The IPSec encryption algorithm (IKE phase 1). Possible values are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, None.
+	// +kubebuilder:validation:Optional
 	EncryptionAlgorithm *string `json:"encryptionAlgorithm,omitempty" tf:"encryption_algorithm,omitempty"`
 
 	// The IKE encryption algorithm (IKE phase 2). Possible values are DES, DES3, AES128, AES192, AES256, GCMAES128, GCMAES256.
+	// +kubebuilder:validation:Optional
 	IkeEncryptionAlgorithm *string `json:"ikeEncryptionAlgorithm,omitempty" tf:"ike_encryption_algorithm,omitempty"`
 
 	// The IKE integrity algorithm (IKE phase 2). Possible values are MD5, SHA1, SHA256, SHA384, GCMAES128, GCMAES256.
+	// +kubebuilder:validation:Optional
 	IkeIntegrityAlgorithm *string `json:"ikeIntegrityAlgorithm,omitempty" tf:"ike_integrity_algorithm,omitempty"`
 
 	// The IPSec integrity algorithm (IKE phase 1). Possible values are MD5, SHA1, SHA256, GCMAES128, GCMAES192, GCMAES256.
+	// +kubebuilder:validation:Optional
 	IntegrityAlgorithm *string `json:"integrityAlgorithm,omitempty" tf:"integrity_algorithm,omitempty"`
 
 	// The Pfs Group used in IKE Phase 2 for the new child SA. Possible values are None, PFS1, PFS2, PFS14, PFS24, PFS2048, PFSMM, ECP256, ECP384.
+	// +kubebuilder:validation:Optional
 	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
 
 	// The IPSec Security Association (also called Quick Mode or Phase 2 SA) payload size in KB for the site to site VPN tunnel.
+	// +kubebuilder:validation:Optional
 	SaDataSizeKb *float64 `json:"saDataSizeKb,omitempty" tf:"sa_data_size_kb,omitempty"`
 
 	// The IPSec Security Association (also called Quick Mode or Phase 2 SA) lifetime in seconds for the site to site VPN tunnel.
+	// +kubebuilder:validation:Optional
 	SaLifetimeSec *float64 `json:"saLifetimeSec,omitempty" tf:"sa_lifetime_sec,omitempty"`
 }
 
@@ -401,48 +423,63 @@ type VPNLinkObservation struct {
 type VPNLinkParameters struct {
 
 	// Should the BGP be enabled? Defaults to false. Changing this forces a new VPN Gateway Connection to be created.
+	// +kubebuilder:validation:Optional
 	BGPEnabled *bool `json:"bgpEnabled,omitempty" tf:"bgp_enabled,omitempty"`
 
 	// The expected connection bandwidth in MBPS. Defaults to 10.
+	// +kubebuilder:validation:Optional
 	BandwidthMbps *float64 `json:"bandwidthMbps,omitempty" tf:"bandwidth_mbps,omitempty"`
 
 	// The connection mode of this VPN Link. Possible values are Default, InitiatorOnly and ResponderOnly. Defaults to Default.
+	// +kubebuilder:validation:Optional
 	ConnectionMode *string `json:"connectionMode,omitempty" tf:"connection_mode,omitempty"`
 
 	// One or more custom_bgp_address blocks as defined below.
+	// +kubebuilder:validation:Optional
 	CustomBGPAddress []CustomBGPAddressParameters `json:"customBgpAddress,omitempty" tf:"custom_bgp_address,omitempty"`
 
 	// A list of the egress NAT Rule Ids.
+	// +kubebuilder:validation:Optional
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
 
 	// A list of the ingress NAT Rule Ids.
+	// +kubebuilder:validation:Optional
 	IngressNATRuleIds []*string `json:"ingressNatRuleIds,omitempty" tf:"ingress_nat_rule_ids,omitempty"`
 
 	// One or more ipsec_policy blocks as defined above.
+	// +kubebuilder:validation:Optional
 	IpsecPolicy []VPNLinkIpsecPolicyParameters `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
 
 	// Whether to use local Azure IP to initiate connection? Defaults to false.
+	// +kubebuilder:validation:Optional
 	LocalAzureIPAddressEnabled *bool `json:"localAzureIpAddressEnabled,omitempty" tf:"local_azure_ip_address_enabled,omitempty"`
 
 	// The name which should be used for this VPN Link Connection.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Whether to enable policy-based traffic selectors? Defaults to false.
+	// +kubebuilder:validation:Optional
 	PolicyBasedTrafficSelectorEnabled *bool `json:"policyBasedTrafficSelectorEnabled,omitempty" tf:"policy_based_traffic_selector_enabled,omitempty"`
 
 	// The protocol used for this VPN Link Connection. Possible values are IKEv1 and IKEv2. Defaults to IKEv2.
+	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Should the rate limit be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	RatelimitEnabled *bool `json:"ratelimitEnabled,omitempty" tf:"ratelimit_enabled,omitempty"`
 
 	// Routing weight for this VPN Link Connection. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	RouteWeight *float64 `json:"routeWeight,omitempty" tf:"route_weight,omitempty"`
 
 	// SharedKey for this VPN Link Connection.
+	// +kubebuilder:validation:Optional
 	SharedKey *string `json:"sharedKey,omitempty" tf:"shared_key,omitempty"`
 
 	// The ID of the connected VPN Site Link. Changing this forces a new VPN Gateway Connection to be created.
+	// +kubebuilder:validation:Optional
 	VPNSiteLinkID *string `json:"vpnSiteLinkId,omitempty" tf:"vpn_site_link_id,omitempty"`
 }
 

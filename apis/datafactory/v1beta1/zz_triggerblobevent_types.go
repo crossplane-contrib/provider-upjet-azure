@@ -85,18 +85,23 @@ type TriggerBlobEventObservation struct {
 type TriggerBlobEventParameters struct {
 
 	// Specifies if the Data Factory Blob Event Trigger is activated. Defaults to true.
+	// +kubebuilder:validation:Optional
 	Activated *bool `json:"activated,omitempty" tf:"activated,omitempty"`
 
 	// A map of additional properties to associate with the Data Factory Blob Event Trigger.
+	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Blob Event Trigger.
+	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The pattern that blob path starts with for trigger to fire.
+	// +kubebuilder:validation:Optional
 	BlobPathBeginsWith *string `json:"blobPathBeginsWith,omitempty" tf:"blob_path_begins_with,omitempty"`
 
 	// The pattern that blob path ends with for trigger to fire.
+	// +kubebuilder:validation:Optional
 	BlobPathEndsWith *string `json:"blobPathEndsWith,omitempty" tf:"blob_path_ends_with,omitempty"`
 
 	// The ID of Data Factory in which to associate the Trigger with. Changing this forces a new resource.
@@ -114,15 +119,19 @@ type TriggerBlobEventParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Blob Event Trigger.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// List of events that will fire this trigger. Possible values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobDeleted.
+	// +kubebuilder:validation:Optional
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// are blobs with zero bytes ignored?
+	// +kubebuilder:validation:Optional
 	IgnoreEmptyBlobs *bool `json:"ignoreEmptyBlobs,omitempty" tf:"ignore_empty_blobs,omitempty"`
 
 	// One or more pipeline blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Pipeline []TriggerBlobEventPipelineParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
 	// The ID of Storage Account in which blob event will be listened. Changing this forces a new resource.
@@ -171,6 +180,7 @@ type TriggerBlobEventPipelineParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The Data Factory Pipeline parameters that the trigger will act on.
+	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

@@ -28,6 +28,7 @@ type CassandraTableAutoscaleSettingsObservation struct {
 type CassandraTableAutoscaleSettingsParameters struct {
 
 	// The maximum throughput of the Cassandra Table (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
 
@@ -76,9 +77,11 @@ type CassandraTableObservation struct {
 type CassandraTableParameters struct {
 
 	// Time to live of the Analytical Storage. Possible values are between -1 and 2147483647 except 0. -1 means the Analytical Storage never expires. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
 
 	// An autoscale_settings block as defined below.
+	// +kubebuilder:validation:Optional
 	AutoscaleSettings []CassandraTableAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
 	// The ID of the Cosmos DB Cassandra Keyspace to create the table within. Changing this forces a new resource to be created.
@@ -96,12 +99,15 @@ type CassandraTableParameters struct {
 	CassandraKeySpaceIDSelector *v1.Selector `json:"cassandraKeyspaceIdSelector,omitempty" tf:"-"`
 
 	// Time to live of the Cosmos DB Cassandra table. Possible values are at least -1. -1 means the Cassandra table never expires.
+	// +kubebuilder:validation:Optional
 	DefaultTTL *float64 `json:"defaultTtl,omitempty" tf:"default_ttl,omitempty"`
 
 	// A schema block as defined below.
+	// +kubebuilder:validation:Optional
 	Schema []SchemaParameters `json:"schema,omitempty" tf:"schema,omitempty"`
 
 	// The throughput of Cassandra KeySpace (RU/s). Must be set in increments of 100. The minimum value is 400.
+	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
@@ -126,9 +132,11 @@ type ClusterKeyObservation struct {
 type ClusterKeyParameters struct {
 
 	// Name of the column to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Order of the key. Currently supported values are Asc and Desc.
+	// +kubebuilder:validation:Optional
 	OrderBy *string `json:"orderBy,omitempty" tf:"order_by,omitempty"`
 }
 
@@ -153,9 +161,11 @@ type ColumnObservation struct {
 type ColumnParameters struct {
 
 	// Name of the column to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Type of the column to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -174,6 +184,7 @@ type PartitionKeyObservation struct {
 type PartitionKeyParameters struct {
 
 	// Name of the column to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -204,12 +215,15 @@ type SchemaObservation struct {
 type SchemaParameters struct {
 
 	// One or more cluster_key blocks as defined below.
+	// +kubebuilder:validation:Optional
 	ClusterKey []ClusterKeyParameters `json:"clusterKey,omitempty" tf:"cluster_key,omitempty"`
 
 	// One or more column blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Column []ColumnParameters `json:"column,omitempty" tf:"column,omitempty"`
 
 	// One or more partition_key blocks as defined below.
+	// +kubebuilder:validation:Optional
 	PartitionKey []PartitionKeyParameters `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 }
 

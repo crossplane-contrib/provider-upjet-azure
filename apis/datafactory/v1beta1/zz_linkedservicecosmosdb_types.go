@@ -70,6 +70,7 @@ type LinkedServiceCosmosDBObservation struct {
 type LinkedServiceCosmosDBParameters struct {
 
 	// The endpoint of the Azure CosmosDB account. Required if connection_string is unspecified.
+	// +kubebuilder:validation:Optional
 	AccountEndpoint *string `json:"accountEndpoint,omitempty" tf:"account_endpoint,omitempty"`
 
 	// The account key of the Azure Cosmos DB account. Required if connection_string is unspecified.
@@ -77,9 +78,11 @@ type LinkedServiceCosmosDBParameters struct {
 	AccountKeySecretRef *v1.SecretKeySelector `json:"accountKeySecretRef,omitempty" tf:"-"`
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The connection string. Required if account_endpoint, account_key, and database are unspecified.
@@ -101,15 +104,19 @@ type LinkedServiceCosmosDBParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The name of the database. Required if connection_string is unspecified.
+	// +kubebuilder:validation:Optional
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
 	// The description for the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The integration runtime reference to associate with the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

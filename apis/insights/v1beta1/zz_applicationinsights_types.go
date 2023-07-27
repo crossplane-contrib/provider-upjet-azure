@@ -106,30 +106,39 @@ type ApplicationInsightsObservation struct {
 type ApplicationInsightsParameters struct {
 
 	// Specifies the type of Application Insights to create. Valid values are ios for iOS, java for Java web, MobileCenter for App Center, Node.JS for Node.js, other for General, phone for Windows Phone, store for Windows Store and web for ASP.NET. Please note these values are case sensitive; unmatched values are treated as ASP.NET by Azure. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ApplicationType *string `json:"applicationType,omitempty" tf:"application_type,omitempty"`
 
 	// Specifies the Application Insights component daily data volume cap in GB.
+	// +kubebuilder:validation:Optional
 	DailyDataCapInGb *float64 `json:"dailyDataCapInGb,omitempty" tf:"daily_data_cap_in_gb,omitempty"`
 
 	// Specifies if a notification email will be send when the daily data volume cap is met.
+	// +kubebuilder:validation:Optional
 	DailyDataCapNotificationsDisabled *bool `json:"dailyDataCapNotificationsDisabled,omitempty" tf:"daily_data_cap_notifications_disabled,omitempty"`
 
 	// By default the real client IP is masked as 0.0.0.0 in the logs. Use this argument to disable masking and log the real client IP. Defaults to false.
+	// +kubebuilder:validation:Optional
 	DisableIPMasking *bool `json:"disableIpMasking,omitempty" tf:"disable_ip_masking,omitempty"`
 
 	// Should the Application Insights component force users to create their own storage account for profiling? Defaults to false.
+	// +kubebuilder:validation:Optional
 	ForceCustomerStorageForProfiler *bool `json:"forceCustomerStorageForProfiler,omitempty" tf:"force_customer_storage_for_profiler,omitempty"`
 
 	// Should the Application Insights component support ingestion over the Public Internet? Defaults to true.
+	// +kubebuilder:validation:Optional
 	InternetIngestionEnabled *bool `json:"internetIngestionEnabled,omitempty" tf:"internet_ingestion_enabled,omitempty"`
 
 	// Should the Application Insights component support querying over the Public Internet? Defaults to true.
+	// +kubebuilder:validation:Optional
 	InternetQueryEnabled *bool `json:"internetQueryEnabled,omitempty" tf:"internet_query_enabled,omitempty"`
 
 	// Disable Non-Azure AD based Auth. Defaults to false.
+	// +kubebuilder:validation:Optional
 	LocalAuthenticationDisabled *bool `json:"localAuthenticationDisabled,omitempty" tf:"local_authentication_disabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Application Insights component. Changing this forces a new resource to be created.
@@ -146,12 +155,15 @@ type ApplicationInsightsParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the retention period in days. Possible values are 30, 60, 90, 120, 180, 270, 365, 550 or 730. Defaults to 90.
+	// +kubebuilder:validation:Optional
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// Specifies the percentage of the data produced by the monitored application that is sampled for Application Insights telemetry. Defaults to 100.
+	// +kubebuilder:validation:Optional
 	SamplingPercentage *float64 `json:"samplingPercentage,omitempty" tf:"sampling_percentage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the id of a log analytics workspace resource.

@@ -49,6 +49,7 @@ type IOTHubEnrichmentObservation struct {
 type IOTHubEnrichmentParameters struct {
 
 	// The list of endpoints which will be enriched.
+	// +kubebuilder:validation:Optional
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
 	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
@@ -65,6 +66,7 @@ type IOTHubEnrichmentParameters struct {
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 
 	// The key of the enrichment. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 
 	// The name of the resource group under which the IoTHub resource is created. Changing this forces a new resource to be created.
@@ -81,6 +83,7 @@ type IOTHubEnrichmentParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The value of the enrichment. Value can be any static string, the name of the IoT hub sending the message (use $iothubname) or information from the device twin (ex: $twin.tags.latitude)
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 

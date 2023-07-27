@@ -67,12 +67,15 @@ type ResourceGroupTemplateDeploymentObservation struct {
 type ResourceGroupTemplateDeploymentParameters struct {
 
 	// The Debug Level which should be used for this Resource Group Template Deployment. Possible values are none, requestContent, responseContent and requestContent, responseContent.
+	// +kubebuilder:validation:Optional
 	DebugLevel *string `json:"debugLevel,omitempty" tf:"debug_level,omitempty"`
 
 	// The Deployment Mode for this Resource Group Template Deployment. Possible values are Complete (where resources in the Resource Group not specified in the ARM Template will be destroyed) and Incremental (where resources are additive only).
+	// +kubebuilder:validation:Optional
 	DeploymentMode *string `json:"deploymentMode,omitempty" tf:"deployment_mode,omitempty"`
 
 	// The contents of the ARM Template parameters file - containing a JSON list of parameters.
+	// +kubebuilder:validation:Optional
 	ParametersContent *string `json:"parametersContent,omitempty" tf:"parameters_content,omitempty"`
 
 	// The name of the Resource Group where the Resource Group Template Deployment should exist. Changing this forces a new Resource Group Template Deployment to be created.
@@ -89,12 +92,15 @@ type ResourceGroupTemplateDeploymentParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Resource Group Template Deployment.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The contents of the ARM Template which should be deployed into this Resource Group. Cannot be specified with template_spec_version_id.
+	// +kubebuilder:validation:Optional
 	TemplateContent *string `json:"templateContent,omitempty" tf:"template_content,omitempty"`
 
 	// The ID of the Template Spec Version to deploy. Cannot be specified with template_content.
+	// +kubebuilder:validation:Optional
 	TemplateSpecVersionID *string `json:"templateSpecVersionId,omitempty" tf:"template_spec_version_id,omitempty"`
 }
 

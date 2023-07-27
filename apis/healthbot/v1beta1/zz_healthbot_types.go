@@ -49,6 +49,7 @@ type HealthBotObservation struct {
 type HealthBotParameters struct {
 
 	// Specifies The Azure Region where the resource exists. Changing this force a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies The name of the Resource Group in which to create the Healthbot Service. changing this forces a new resource to be created.
@@ -65,9 +66,11 @@ type HealthBotParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name which should be used for the SKU of the service. Possible values are C0, F0 and S1.
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the service.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

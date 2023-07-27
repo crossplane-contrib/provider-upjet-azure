@@ -77,15 +77,19 @@ type WebhookParameters struct {
 	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// Controls if Webhook is enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Timestamp when the webhook expires. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ExpiryTime *string `json:"expiryTime,omitempty" tf:"expiry_time,omitempty"`
 
 	// Specifies the name of the Webhook. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Map of input parameters passed to runbook.
+	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The name of the resource group in which the Webhook is created. Changing this forces a new resource to be created.
@@ -116,6 +120,7 @@ type WebhookParameters struct {
 	RunBookNameSelector *v1.Selector `json:"runbookNameSelector,omitempty" tf:"-"`
 
 	// Name of the hybrid worker group the Webhook job will run on.
+	// +kubebuilder:validation:Optional
 	RunOnWorkerGroup *string `json:"runOnWorkerGroup,omitempty" tf:"run_on_worker_group,omitempty"`
 
 	// URI to initiate the webhook. Can be generated using Generate URI API. By default, new URI is generated on each new resource creation. Changing this forces a new resource to be created.

@@ -58,9 +58,11 @@ type AuthorizationRuleObservation struct {
 type AuthorizationRuleParameters struct {
 
 	// Does this Authorization Rule have Listen access to the Notification Hub? Defaults to false.
+	// +kubebuilder:validation:Optional
 	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
 
 	// Does this Authorization Rule have Manage access to the Notification Hub? Defaults to false.
+	// +kubebuilder:validation:Optional
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// The name of the Notification Hub Namespace in which the Notification Hub exists. Changing this forces a new resource to be created.
@@ -103,6 +105,7 @@ type AuthorizationRuleParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Does this Authorization Rule have Send access to the Notification Hub? Defaults to false.
+	// +kubebuilder:validation:Optional
 	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 

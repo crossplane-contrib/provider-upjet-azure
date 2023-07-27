@@ -49,15 +49,19 @@ type NATIPConfigurationObservation struct {
 type NATIPConfigurationParameters struct {
 
 	// Specifies the name which should be used for the NAT IP Configuration. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Is this is the Primary IP Configuration? Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
 
 	// Specifies a Private Static IP Address for this IP Configuration.
+	// +kubebuilder:validation:Optional
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
 	// The version of the IP Protocol which should be used. At this time the only supported value is IPv4. Defaults to IPv4.
+	// +kubebuilder:validation:Optional
 	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
 
 	// Specifies the ID of the Subnet which should be used for the Private Link Service.
@@ -140,21 +144,27 @@ type PrivateLinkServiceObservation struct {
 type PrivateLinkServiceParameters struct {
 
 	// A list of Subscription UUID/GUID's that will be automatically be able to use this Private Link Service.
+	// +kubebuilder:validation:Optional
 	AutoApprovalSubscriptionIds []*string `json:"autoApprovalSubscriptionIds,omitempty" tf:"auto_approval_subscription_ids,omitempty"`
 
 	// Should the Private Link Service support the Proxy Protocol?
+	// +kubebuilder:validation:Optional
 	EnableProxyProtocol *bool `json:"enableProxyProtocol,omitempty" tf:"enable_proxy_protocol,omitempty"`
 
 	// List of FQDNs allowed for the Private Link Service.
+	// +kubebuilder:validation:Optional
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
 	// A list of Frontend IP Configuration IDs from a Standard Load Balancer, where traffic from the Private Link Service should be routed. You can use Load Balancer Rules to direct this traffic to appropriate backend pools where your applications are running. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	LoadBalancerFrontendIPConfigurationIds []*string `json:"loadBalancerFrontendIpConfigurationIds,omitempty" tf:"load_balancer_frontend_ip_configuration_ids,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// One or more (up to 8) nat_ip_configuration block as defined below.
+	// +kubebuilder:validation:Optional
 	NATIPConfiguration []NATIPConfigurationParameters `json:"natIpConfiguration,omitempty" tf:"nat_ip_configuration,omitempty"`
 
 	// The name of the Resource Group where the Private Link Service should exist. Changing this forces a new resource to be created.
@@ -171,9 +181,11 @@ type PrivateLinkServiceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of Subscription UUID/GUID's that will be able to see this Private Link Service.
+	// +kubebuilder:validation:Optional
 	VisibilitySubscriptionIds []*string `json:"visibilitySubscriptionIds,omitempty" tf:"visibility_subscription_ids,omitempty"`
 }
 

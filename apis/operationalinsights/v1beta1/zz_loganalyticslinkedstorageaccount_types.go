@@ -40,6 +40,7 @@ type LogAnalyticsLinkedStorageAccountObservation struct {
 type LogAnalyticsLinkedStorageAccountParameters struct {
 
 	// The data source type which should be used for this Log Analytics Linked Storage Account. Possible values are CustomLogs, AzureWatson, Query, Ingestion and Alerts. Changing this forces a new Log Analytics Linked Storage Account to be created.
+	// +kubebuilder:validation:Optional
 	DataSourceType *string `json:"dataSourceType,omitempty" tf:"data_source_type,omitempty"`
 
 	// The name of the Resource Group where the Log Analytics Linked Storage Account should exist. Changing this forces a new Log Analytics Linked Storage Account to be created.

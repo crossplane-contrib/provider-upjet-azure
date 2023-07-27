@@ -49,9 +49,11 @@ type NamespaceAuthorizationRuleObservation struct {
 type NamespaceAuthorizationRuleParameters struct {
 
 	// Grants listen access to this Authorization Rule. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
 
 	// Grants manage access to this Authorization Rule. When this property is true - both listen and send must be set to true too. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Name of the Azure Relay Namespace for which this Azure Relay Namespace Authorization Rule will be created. Changing this forces a new Azure Relay Namespace Authorization Rule to be created.
@@ -81,6 +83,7 @@ type NamespaceAuthorizationRuleParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Grants send access to this Authorization Rule. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 

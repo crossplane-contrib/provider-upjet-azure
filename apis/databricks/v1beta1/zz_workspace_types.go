@@ -88,12 +88,15 @@ type CustomParametersObservation struct {
 type CustomParametersParameters struct {
 
 	// The ID of a Azure Machine Learning workspace to link with Databricks workspace. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
 
 	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets. Defaults to nat-gateway. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	NATGatewayName *string `json:"natGatewayName,omitempty" tf:"nat_gateway_name,omitempty"`
 
 	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to false.
+	// +kubebuilder:validation:Optional
 	NoPublicIP *bool `json:"noPublicIp,omitempty" tf:"no_public_ip,omitempty"`
 
 	// The name of the Private Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
@@ -110,9 +113,11 @@ type CustomParametersParameters struct {
 	PrivateSubnetNameSelector *v1.Selector `json:"privateSubnetNameSelector,omitempty" tf:"-"`
 
 	// The resource ID of the azurerm_subnet_network_security_group_association resource which is referred to by the private_subnet_name field. This is the same as the ID of the subnet referred to by the private_subnet_name field. Required if virtual_network_id is set.
+	// +kubebuilder:validation:Optional
 	PrivateSubnetNetworkSecurityGroupAssociationID *string `json:"privateSubnetNetworkSecurityGroupAssociationId,omitempty" tf:"private_subnet_network_security_group_association_id,omitempty"`
 
 	// Name of the Public IP for No Public IP workspace with managed vNet. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PublicIPName *string `json:"publicIpName,omitempty" tf:"public_ip_name,omitempty"`
 
 	// The name of the Public Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
@@ -129,18 +134,23 @@ type CustomParametersParameters struct {
 	PublicSubnetNameSelector *v1.Selector `json:"publicSubnetNameSelector,omitempty" tf:"-"`
 
 	// The resource ID of the azurerm_subnet_network_security_group_association resource which is referred to by the public_subnet_name field. This is the same as the ID of the subnet referred to by the public_subnet_name field. Required if virtual_network_id is set.
+	// +kubebuilder:validation:Optional
 	PublicSubnetNetworkSecurityGroupAssociationID *string `json:"publicSubnetNetworkSecurityGroupAssociationId,omitempty" tf:"public_subnet_network_security_group_association_id,omitempty"`
 
 	// Default Databricks File Storage account name. Defaults to a randomized name(e.g. dbstoragel6mfeghoe5kxu). Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	StorageAccountSkuName *string `json:"storageAccountSkuName,omitempty" tf:"storage_account_sku_name,omitempty"`
 
 	// The ID of a Virtual Network where this Databricks Cluster should be created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 
 	// Address prefix for Managed virtual network. Defaults to 10.139. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	VnetAddressPrefix *string `json:"vnetAddressPrefix,omitempty" tf:"vnet_address_prefix,omitempty"`
 }
 
@@ -288,24 +298,31 @@ type WorkspaceObservation struct {
 type WorkspaceParameters struct {
 
 	// A custom_parameters block as documented below.
+	// +kubebuilder:validation:Optional
 	CustomParameters []CustomParametersParameters `json:"customParameters,omitempty" tf:"custom_parameters,omitempty"`
 
 	// Is the workspace enabled for customer managed key encryption? If true this enables the Managed Identity for the managed storage account. Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium.
+	// +kubebuilder:validation:Optional
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
 	// Is the Databricks File System root file system enabled with a secondary layer of encryption with platform managed keys? Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
 
 	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	LoadBalancerBackendAddressPoolID *string `json:"loadBalancerBackendAddressPoolId,omitempty" tf:"load_balancer_backend_address_pool_id,omitempty"`
 
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Customer managed encryption properties for the Databricks Workspace managed disks.
+	// +kubebuilder:validation:Optional
 	ManagedDiskCmkKeyVaultKeyID *string `json:"managedDiskCmkKeyVaultKeyId,omitempty" tf:"managed_disk_cmk_key_vault_key_id,omitempty"`
 
 	// Whether customer managed keys for disk encryption will automatically be rotated to the latest version.
+	// +kubebuilder:validation:Optional
 	ManagedDiskCmkRotationToLatestVersionEnabled *bool `json:"managedDiskCmkRotationToLatestVersionEnabled,omitempty" tf:"managed_disk_cmk_rotation_to_latest_version_enabled,omitempty"`
 
 	// The name of the resource group where Azure should place the managed Databricks resources. Changing this forces a new resource to be created.
@@ -322,12 +339,15 @@ type WorkspaceParameters struct {
 	ManagedResourceGroupNameSelector *v1.Selector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Customer managed encryption properties for the Databricks Workspace managed resources(e.g. Notebooks and Artifacts).
+	// +kubebuilder:validation:Optional
 	ManagedServicesCmkKeyVaultKeyID *string `json:"managedServicesCmkKeyVaultKeyId,omitempty" tf:"managed_services_cmk_key_vault_key_id,omitempty"`
 
 	// Does the data plane (clusters) to control plane communication happen over private link endpoint only or publicly? Possible values AllRules, NoAzureDatabricksRules or NoAzureServiceRules. Required when public_network_access_enabled is set to false.
+	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupRulesRequired *string `json:"networkSecurityGroupRulesRequired,omitempty" tf:"network_security_group_rules_required,omitempty"`
 
 	// Allow public access for accessing workspace. Set value to false to access workspace only via private link endpoint. Possible values include true or false. Defaults to true.
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group in which the Databricks Workspace should exist. Changing this forces a new resource to be created.
@@ -344,9 +364,11 @@ type WorkspaceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The sku to use for the Databricks Workspace. Possible values are standard, premium, or trial.
+	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

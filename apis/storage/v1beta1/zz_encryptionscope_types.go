@@ -46,12 +46,15 @@ type EncryptionScopeObservation struct {
 type EncryptionScopeParameters struct {
 
 	// Is a secondary layer of encryption with Platform Managed Keys for data applied? Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	InfrastructureEncryptionRequired *bool `json:"infrastructureEncryptionRequired,omitempty" tf:"infrastructure_encryption_required,omitempty"`
 
 	// The ID of the Key Vault Key. Required when source is Microsoft.KeyVault.
+	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
 	// The source of the Storage Encryption Scope. Possible values are Microsoft.KeyVault and Microsoft.Storage.
+	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 
 	// The ID of the Storage Account where this Storage Encryption Scope is created. Changing this forces a new Storage Encryption Scope to be created.

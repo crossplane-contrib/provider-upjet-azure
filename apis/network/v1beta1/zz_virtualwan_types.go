@@ -64,15 +64,19 @@ type VirtualWANObservation struct {
 type VirtualWANParameters struct {
 
 	// Boolean flag to specify whether branch to branch traffic is allowed. Defaults to true.
+	// +kubebuilder:validation:Optional
 	AllowBranchToBranchTraffic *bool `json:"allowBranchToBranchTraffic,omitempty" tf:"allow_branch_to_branch_traffic,omitempty"`
 
 	// Boolean flag to specify whether VPN encryption is disabled. Defaults to false.
+	// +kubebuilder:validation:Optional
 	DisableVPNEncryption *bool `json:"disableVpnEncryption,omitempty" tf:"disable_vpn_encryption,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the Office365 local breakout category. Possible values include: Optimize, OptimizeAndAllow, All, None. Defaults to None.
+	// +kubebuilder:validation:Optional
 	Office365LocalBreakoutCategory *string `json:"office365LocalBreakoutCategory,omitempty" tf:"office365_local_breakout_category,omitempty"`
 
 	// The name of the resource group in which to create the Virtual WAN. Changing this forces a new resource to be created.
@@ -89,9 +93,11 @@ type VirtualWANParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the Virtual WAN.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Virtual WAN type. Possible Values include: Basic and Standard. Defaults to Standard.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

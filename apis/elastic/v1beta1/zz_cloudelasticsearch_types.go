@@ -82,15 +82,19 @@ type CloudElasticsearchObservation struct {
 type CloudElasticsearchParameters struct {
 
 	// Specifies the Email Address which should be associated with this Elasticsearch account. Changing this forces a new Elasticsearch to be created.
+	// +kubebuilder:validation:Optional
 	ElasticCloudEmailAddress *string `json:"elasticCloudEmailAddress,omitempty" tf:"elastic_cloud_email_address,omitempty"`
 
 	// The Azure Region where the Elasticsearch resource should exist. Changing this forces a new Elasticsearch to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A logs block as defined below.
+	// +kubebuilder:validation:Optional
 	Logs []LogsParameters `json:"logs,omitempty" tf:"logs,omitempty"`
 
 	// Specifies if the Elasticsearch should have monitoring configured? Defaults to true. Changing this forces a new Elasticsearch to be created.
+	// +kubebuilder:validation:Optional
 	MonitoringEnabled *bool `json:"monitoringEnabled,omitempty" tf:"monitoring_enabled,omitempty"`
 
 	// The name of the Resource Group where the Elasticsearch resource should exist. Changing this forces a new Elasticsearch to be created.
@@ -107,9 +111,11 @@ type CloudElasticsearchParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the SKU for this Elasticsearch. Changing this forces a new Elasticsearch to be created.
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Elasticsearch resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -140,12 +146,15 @@ type FilteringTagObservation struct {
 type FilteringTagParameters struct {
 
 	// Specifies the type of action which should be taken when the Tag matches the name and value. Possible values are Exclude and Include.
+	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The name which should be used for this Elasticsearch resource. Changing this forces a new Elasticsearch to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the value of the Tag which should be filtered.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -182,15 +191,19 @@ type LogsObservation struct {
 type LogsParameters struct {
 
 	// A list of filtering_tag blocks as defined above.
+	// +kubebuilder:validation:Optional
 	FilteringTag []FilteringTagParameters `json:"filteringTag,omitempty" tf:"filtering_tag,omitempty"`
 
 	// Specifies if the Azure Activity Logs should be sent to the Elasticsearch cluster. Defaults to false.
+	// +kubebuilder:validation:Optional
 	SendActivityLogs *bool `json:"sendActivityLogs,omitempty" tf:"send_activity_logs,omitempty"`
 
 	// Specifies if the AzureAD Logs should be sent to the Elasticsearch cluster. Defaults to false.
+	// +kubebuilder:validation:Optional
 	SendAzureadLogs *bool `json:"sendAzureadLogs,omitempty" tf:"send_azuread_logs,omitempty"`
 
 	// Specifies if the Azure Subscription Logs should be sent to the Elasticsearch cluster. Defaults to false.
+	// +kubebuilder:validation:Optional
 	SendSubscriptionLogs *bool `json:"sendSubscriptionLogs,omitempty" tf:"send_subscription_logs,omitempty"`
 }
 

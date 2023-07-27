@@ -121,27 +121,35 @@ type SecurityRuleObservation_2 struct {
 type SecurityRuleParameters_2 struct {
 
 	// Specifies whether network traffic is allowed or denied. Possible values are Allow and Deny.
+	// +kubebuilder:validation:Optional
 	Access *string `json:"access,omitempty" tf:"access,omitempty"`
 
 	// A description for this rule. Restricted to 140 characters.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// CIDR or destination IP range or * to match any IP. Tags such as VirtualNetwork, AzureLoadBalancer and Internet can also be used. Besides, it also supports all available Service Tags like ‘Sql.WestEurope‘, ‘Storage.EastUS‘, etc. You can list the available service tags with the CLI: shell az network list-service-tags --location westcentralus. For further information please see Azure CLI - az network list-service-tags. This is required if destination_address_prefixes is not specified.
+	// +kubebuilder:validation:Optional
 	DestinationAddressPrefix *string `json:"destinationAddressPrefix,omitempty" tf:"destination_address_prefix,omitempty"`
 
 	// List of destination address prefixes. Tags may not be used. This is required if destination_address_prefix is not specified.
+	// +kubebuilder:validation:Optional
 	DestinationAddressPrefixes []*string `json:"destinationAddressPrefixes,omitempty" tf:"destination_address_prefixes,omitempty"`
 
 	// A List of destination Application Security Group IDs
+	// +kubebuilder:validation:Optional
 	DestinationApplicationSecurityGroupIds []*string `json:"destinationApplicationSecurityGroupIds,omitempty" tf:"destination_application_security_group_ids,omitempty"`
 
 	// Destination Port or Range. Integer or range between 0 and 65535 or * to match any. This is required if destination_port_ranges is not specified.
+	// +kubebuilder:validation:Optional
 	DestinationPortRange *string `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
 
 	// List of destination ports or port ranges. This is required if destination_port_range is not specified.
+	// +kubebuilder:validation:Optional
 	DestinationPortRanges []*string `json:"destinationPortRanges,omitempty" tf:"destination_port_ranges,omitempty"`
 
 	// The direction specifies if rule will be evaluated on incoming or outgoing traffic. Possible values are Inbound and Outbound.
+	// +kubebuilder:validation:Optional
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
 	// The name of the Network Security Group that we want to attach the rule to. Changing this forces a new resource to be created.
@@ -158,9 +166,11 @@ type SecurityRuleParameters_2 struct {
 	NetworkSecurityGroupNameSelector *v1.Selector `json:"networkSecurityGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the priority of the rule. The value can be between 100 and 4096. The priority number must be unique for each rule in the collection. The lower the priority number, the higher the priority of the rule.
+	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Network protocol this rule applies to. Possible values include Tcp, Udp, Icmp, Esp, Ah or * (which matches all).
+	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// The name of the resource group in which to create the Network Security Rule. Changing this forces a new resource to be created.
@@ -177,18 +187,23 @@ type SecurityRuleParameters_2 struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// CIDR or source IP range or * to match any IP. Tags such as VirtualNetwork, AzureLoadBalancer and Internet can also be used. This is required if source_address_prefixes is not specified.
+	// +kubebuilder:validation:Optional
 	SourceAddressPrefix *string `json:"sourceAddressPrefix,omitempty" tf:"source_address_prefix,omitempty"`
 
 	// List of source address prefixes. Tags may not be used. This is required if source_address_prefix is not specified.
+	// +kubebuilder:validation:Optional
 	SourceAddressPrefixes []*string `json:"sourceAddressPrefixes,omitempty" tf:"source_address_prefixes,omitempty"`
 
 	// A List of source Application Security Group IDs
+	// +kubebuilder:validation:Optional
 	SourceApplicationSecurityGroupIds []*string `json:"sourceApplicationSecurityGroupIds,omitempty" tf:"source_application_security_group_ids,omitempty"`
 
 	// Source Port or Range. Integer or range between 0 and 65535 or * to match any. This is required if source_port_ranges is not specified.
+	// +kubebuilder:validation:Optional
 	SourcePortRange *string `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
 
 	// List of source ports or port ranges. This is required if source_port_range is not specified.
+	// +kubebuilder:validation:Optional
 	SourcePortRanges []*string `json:"sourcePortRanges,omitempty" tf:"source_port_ranges,omitempty"`
 }
 

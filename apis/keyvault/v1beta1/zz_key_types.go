@@ -34,9 +34,11 @@ type AutomaticObservation struct {
 type AutomaticParameters struct {
 
 	// Rotate automatically at a duration after create as an ISO 8601 duration.
+	// +kubebuilder:validation:Optional
 	TimeAfterCreation *string `json:"timeAfterCreation,omitempty" tf:"time_after_creation,omitempty"`
 
 	// Rotate automatically at a duration before expiry as an ISO 8601 duration.
+	// +kubebuilder:validation:Optional
 	TimeBeforeExpiry *string `json:"timeBeforeExpiry,omitempty" tf:"time_before_expiry,omitempty"`
 }
 
@@ -133,18 +135,23 @@ type KeyObservation struct {
 type KeyParameters struct {
 
 	// Specifies the curve to use when creating an EC key. Possible values are P-256, P-256K, P-384, and P-521. This field will be required in a future release if key_type is EC or EC-HSM. The API will default to P-256 if nothing is specified. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Curve *string `json:"curve,omitempty" tf:"curve,omitempty"`
 
 	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
+	// +kubebuilder:validation:Optional
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// A list of JSON web key operations. Possible values include: decrypt, encrypt, sign, unwrapKey, verify and wrapKey. Please note these values are case sensitive.
+	// +kubebuilder:validation:Optional
 	KeyOpts []*string `json:"keyOpts,omitempty" tf:"key_opts,omitempty"`
 
 	// Specifies the Size of the RSA key to create in bytes. For example, 1024 or 2048. Note: This field is required if key_type is RSA or RSA-HSM. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	KeySize *float64 `json:"keySize,omitempty" tf:"key_size,omitempty"`
 
 	// Specifies the Key Type to use for this Key Vault Key. Possible values are EC (Elliptic Curve), EC-HSM, RSA and RSA-HSM. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 
 	// The ID of the Key Vault where the Key should be created. Changing this forces a new resource to be created.
@@ -162,12 +169,15 @@ type KeyParameters struct {
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
 	// Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
+	// +kubebuilder:validation:Optional
 	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
 
 	// A rotation_policy block as defined below.
+	// +kubebuilder:validation:Optional
 	RotationPolicy []RotationPolicyParameters `json:"rotationPolicy,omitempty" tf:"rotation_policy,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -198,12 +208,15 @@ type RotationPolicyObservation struct {
 type RotationPolicyParameters struct {
 
 	// An automatic block as defined below.
+	// +kubebuilder:validation:Optional
 	Automatic []AutomaticParameters `json:"automatic,omitempty" tf:"automatic,omitempty"`
 
 	// Expire a Key Vault Key after given duration as an ISO 8601 duration.
+	// +kubebuilder:validation:Optional
 	ExpireAfter *string `json:"expireAfter,omitempty" tf:"expire_after,omitempty"`
 
 	// Notify at a given duration before expiry as an ISO 8601 duration. Default is P30D.
+	// +kubebuilder:validation:Optional
 	NotifyBeforeExpiry *string `json:"notifyBeforeExpiry,omitempty" tf:"notify_before_expiry,omitempty"`
 }
 

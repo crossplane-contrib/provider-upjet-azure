@@ -67,21 +67,27 @@ type AdditionalLocationObservation struct {
 type AdditionalLocationParameters struct {
 
 	// The number of compute units in this region. Defaults to the capacity of the main region.
+	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// Only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in this additional location.
+	// +kubebuilder:validation:Optional
 	GatewayDisabled *bool `json:"gatewayDisabled,omitempty" tf:"gateway_disabled,omitempty"`
 
 	// The name of the Azure Region in which the API Management Service should be expanded to.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// ID of a standard SKU IPv4 Public IP.
+	// +kubebuilder:validation:Optional
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
 	// A virtual_network_configuration block as defined below. Required when virtual_network_type is External or Internal.
+	// +kubebuilder:validation:Optional
 	VirtualNetworkConfiguration []VirtualNetworkConfigurationParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
 	// A list of availability zones. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -117,6 +123,7 @@ type CertificateParameters struct {
 	EncodedCertificateSecretRef v1.SecretKeySelector `json:"encodedCertificateSecretRef" tf:"-"`
 
 	// The name of the Certificate Store where this certificate should be stored. Possible values are CertificateAuthority and Root.
+	// +kubebuilder:validation:Optional
 	StoreName *string `json:"storeName,omitempty" tf:"store_name,omitempty"`
 }
 
@@ -147,12 +154,15 @@ type DelegationObservation struct {
 type DelegationParameters struct {
 
 	// Should subscription requests be delegated to an external url? Defaults to false.
+	// +kubebuilder:validation:Optional
 	SubscriptionsEnabled *bool `json:"subscriptionsEnabled,omitempty" tf:"subscriptions_enabled,omitempty"`
 
 	// The delegation URL.
+	// +kubebuilder:validation:Optional
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
 	// Should user registration requests be delegated to an external url? Defaults to false.
+	// +kubebuilder:validation:Optional
 	UserRegistrationEnabled *bool `json:"userRegistrationEnabled,omitempty" tf:"user_registration_enabled,omitempty"`
 
 	// A base64-encoded validation key to validate, that a request is coming from Azure API Management.
@@ -283,9 +293,11 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this API Management Service.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this API Management Service. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -475,48 +487,63 @@ type ManagementObservation struct {
 type ManagementParameters struct {
 
 	// One or more additional_location blocks as defined below.
+	// +kubebuilder:validation:Optional
 	AdditionalLocation []AdditionalLocationParameters `json:"additionalLocation,omitempty" tf:"additional_location,omitempty"`
 
 	// One or more (up to 10) certificate blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Certificate []CertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// Enforce a client certificate to be presented on each request to the gateway? This is only supported when SKU type is Consumption.
+	// +kubebuilder:validation:Optional
 	ClientCertificateEnabled *bool `json:"clientCertificateEnabled,omitempty" tf:"client_certificate_enabled,omitempty"`
 
 	// A delegation block as defined below.
+	// +kubebuilder:validation:Optional
 	Delegation []DelegationParameters `json:"delegation,omitempty" tf:"delegation,omitempty"`
 
 	// Disable the gateway in main region? This is only supported when additional_location is set.
+	// +kubebuilder:validation:Optional
 	GatewayDisabled *bool `json:"gatewayDisabled,omitempty" tf:"gateway_disabled,omitempty"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure location where the API Management Service exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The version which the control plane API calls to API Management service are limited with version equal to or newer than.
+	// +kubebuilder:validation:Optional
 	MinAPIVersion *string `json:"minApiVersion,omitempty" tf:"min_api_version,omitempty"`
 
 	// Email address from which the notification will be sent.
+	// +kubebuilder:validation:Optional
 	NotificationSenderEmail *string `json:"notificationSenderEmail,omitempty" tf:"notification_sender_email,omitempty"`
 
 	// A policy block as defined below.
+	// +kubebuilder:validation:Optional
 	Policy []PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// A protocols block as defined below.
+	// +kubebuilder:validation:Optional
 	Protocols []ProtocolsParameters `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// ID of a standard SKU IPv4 Public IP.
+	// +kubebuilder:validation:Optional
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
 	// Is public access to the service allowed?. Defaults to true
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The email of publisher/company.
+	// +kubebuilder:validation:Optional
 	PublisherEmail *string `json:"publisherEmail,omitempty" tf:"publisher_email,omitempty"`
 
 	// The name of publisher/company.
+	// +kubebuilder:validation:Optional
 	PublisherName *string `json:"publisherName,omitempty" tf:"publisher_name,omitempty"`
 
 	// The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created.
@@ -533,30 +560,39 @@ type ManagementParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A security block as defined below.
+	// +kubebuilder:validation:Optional
 	Security []SecurityParameters `json:"security,omitempty" tf:"security,omitempty"`
 
 	// A sign_in block as defined below.
+	// +kubebuilder:validation:Optional
 	SignIn []SignInParameters `json:"signIn,omitempty" tf:"sign_in,omitempty"`
 
 	// A sign_up block as defined below.
+	// +kubebuilder:validation:Optional
 	SignUp []SignUpParameters `json:"signUp,omitempty" tf:"sign_up,omitempty"`
 
 	// sku_name is a string consisting of two parts separated by an underscore(_). The first part is the name, valid values include: Consumption, Developer, Basic, Standard and Premium. The second part is the capacity (e.g. the number of deployed units of the sku), which must be a positive integer (e.g. Developer_1).
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags assigned to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A tenant_access block as defined below.
+	// +kubebuilder:validation:Optional
 	TenantAccess []TenantAccessParameters `json:"tenantAccess,omitempty" tf:"tenant_access,omitempty"`
 
 	// A virtual_network_configuration block as defined below. Required when virtual_network_type is External or Internal.
+	// +kubebuilder:validation:Optional
 	VirtualNetworkConfiguration []ManagementVirtualNetworkConfigurationParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
 	// The type of virtual network you want to use, valid values include: None, External, Internal.
+	// +kubebuilder:validation:Optional
 	VirtualNetworkType *string `json:"virtualNetworkType,omitempty" tf:"virtual_network_type,omitempty"`
 
 	// Specifies a list of Availability Zones in which this API Management service should be located. Changing this forces a new API Management service to be created.
+	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -607,9 +643,11 @@ type PolicyObservation struct {
 type PolicyParameters struct {
 
 	// The XML Content for this Policy.
+	// +kubebuilder:validation:Optional
 	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content"`
 
 	// A link to an API Management Policy XML Document, which must be publicly available.
+	// +kubebuilder:validation:Optional
 	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link"`
 }
 
@@ -664,6 +702,7 @@ type ProtocolsObservation struct {
 type ProtocolsParameters struct {
 
 	// Should HTTP/2 be supported by the API Management Service? Defaults to false.
+	// +kubebuilder:validation:Optional
 	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
 }
 
@@ -853,54 +892,71 @@ type SecurityObservation struct {
 type SecurityParameters struct {
 
 	// Should SSL 3.0 be enabled on the backend of the gateway? Defaults to false.
+	// +kubebuilder:validation:Optional
 	EnableBackendSsl30 *bool `json:"enableBackendSsl30,omitempty" tf:"enable_backend_ssl30,omitempty"`
 
 	// Should TLS 1.0 be enabled on the backend of the gateway? Defaults to false.
+	// +kubebuilder:validation:Optional
 	EnableBackendTls10 *bool `json:"enableBackendTls10,omitempty" tf:"enable_backend_tls10,omitempty"`
 
 	// Should TLS 1.1 be enabled on the backend of the gateway? Defaults to false.
+	// +kubebuilder:validation:Optional
 	EnableBackendTls11 *bool `json:"enableBackendTls11,omitempty" tf:"enable_backend_tls11,omitempty"`
 
 	// Should SSL 3.0 be enabled on the frontend of the gateway? Defaults to false.
+	// +kubebuilder:validation:Optional
 	EnableFrontendSsl30 *bool `json:"enableFrontendSsl30,omitempty" tf:"enable_frontend_ssl30,omitempty"`
 
 	// Should TLS 1.0 be enabled on the frontend of the gateway? Defaults to false.
+	// +kubebuilder:validation:Optional
 	EnableFrontendTls10 *bool `json:"enableFrontendTls10,omitempty" tf:"enable_frontend_tls10,omitempty"`
 
 	// Should TLS 1.1 be enabled on the frontend of the gateway? Defaults to false.
+	// +kubebuilder:validation:Optional
 	EnableFrontendTls11 *bool `json:"enableFrontendTls11,omitempty" tf:"enable_frontend_tls11,omitempty"`
 
 	// Should the TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA cipher be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	TLSEcdheEcdsaWithAes128CbcShaCiphersEnabled *bool `json:"tlsEcdheEcdsaWithAes128CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_ecdsa_with_aes128_cbc_sha_ciphers_enabled,omitempty"`
 
 	// Should the TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA cipher be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	TLSEcdheEcdsaWithAes256CbcShaCiphersEnabled *bool `json:"tlsEcdheEcdsaWithAes256CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_ecdsa_with_aes256_cbc_sha_ciphers_enabled,omitempty"`
 
 	// Should the TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA cipher be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	TLSEcdheRsaWithAes128CbcShaCiphersEnabled *bool `json:"tlsEcdheRsaWithAes128CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_rsa_with_aes128_cbc_sha_ciphers_enabled,omitempty"`
 
 	// Should the TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA cipher be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	TLSEcdheRsaWithAes256CbcShaCiphersEnabled *bool `json:"tlsEcdheRsaWithAes256CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_rsa_with_aes256_cbc_sha_ciphers_enabled,omitempty"`
 
 	// Should the TLS_RSA_WITH_AES_128_CBC_SHA256 cipher be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	TLSRsaWithAes128CbcSha256CiphersEnabled *bool `json:"tlsRsaWithAes128CbcSha256CiphersEnabled,omitempty" tf:"tls_rsa_with_aes128_cbc_sha256_ciphers_enabled,omitempty"`
 
 	// Should the TLS_RSA_WITH_AES_128_CBC_SHA cipher be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	TLSRsaWithAes128CbcShaCiphersEnabled *bool `json:"tlsRsaWithAes128CbcShaCiphersEnabled,omitempty" tf:"tls_rsa_with_aes128_cbc_sha_ciphers_enabled,omitempty"`
 
 	// Should the TLS_RSA_WITH_AES_128_GCM_SHA256 cipher be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	TLSRsaWithAes128GCMSha256CiphersEnabled *bool `json:"tlsRsaWithAes128GcmSha256CiphersEnabled,omitempty" tf:"tls_rsa_with_aes128_gcm_sha256_ciphers_enabled,omitempty"`
 
 	// Should the TLS_RSA_WITH_AES_256_CBC_SHA256 cipher be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	TLSRsaWithAes256CbcSha256CiphersEnabled *bool `json:"tlsRsaWithAes256CbcSha256CiphersEnabled,omitempty" tf:"tls_rsa_with_aes256_cbc_sha256_ciphers_enabled,omitempty"`
 
 	// Should the TLS_RSA_WITH_AES_256_CBC_SHA cipher be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	TLSRsaWithAes256CbcShaCiphersEnabled *bool `json:"tlsRsaWithAes256CbcShaCiphersEnabled,omitempty" tf:"tls_rsa_with_aes256_cbc_sha_ciphers_enabled,omitempty"`
 
 	// Should the TLS_RSA_WITH_AES_256_GCM_SHA384 cipher be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	TLSRsaWithAes256GCMSha384CiphersEnabled *bool `json:"tlsRsaWithAes256GcmSha384CiphersEnabled,omitempty" tf:"tls_rsa_with_aes256_gcm_sha384_ciphers_enabled,omitempty"`
 
 	// Should the TLS_RSA_WITH_3DES_EDE_CBC_SHA cipher be enabled for alL TLS versions (1.0, 1.1 and 1.2)?
+	// +kubebuilder:validation:Optional
 	TripleDesCiphersEnabled *bool `json:"tripleDesCiphersEnabled,omitempty" tf:"triple_des_ciphers_enabled,omitempty"`
 }
 
@@ -919,6 +975,7 @@ type SignInObservation struct {
 type SignInParameters struct {
 
 	// Should anonymous users be redirected to the sign in page?
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
@@ -943,9 +1000,11 @@ type SignUpObservation struct {
 type SignUpParameters struct {
 
 	// Can users sign up on the development portal?
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A terms_of_service block as defined below.
+	// +kubebuilder:validation:Optional
 	TermsOfService []TermsOfServiceParameters `json:"termsOfService,omitempty" tf:"terms_of_service,omitempty"`
 }
 
@@ -967,6 +1026,7 @@ type TenantAccessObservation struct {
 type TenantAccessParameters struct {
 
 	// Should the access to the management API be enabled?
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
@@ -997,12 +1057,15 @@ type TermsOfServiceObservation struct {
 type TermsOfServiceParameters struct {
 
 	// Should the user be asked for consent during sign up?
+	// +kubebuilder:validation:Optional
 	ConsentRequired *bool `json:"consentRequired,omitempty" tf:"consent_required,omitempty"`
 
 	// Should Terms of Service be displayed during sign up?.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The Terms of Service which users are required to agree to in order to sign up.
+	// +kubebuilder:validation:Optional
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 

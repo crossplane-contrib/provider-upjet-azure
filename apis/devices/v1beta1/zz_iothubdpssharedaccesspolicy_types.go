@@ -61,9 +61,11 @@ type IOTHubDPSSharedAccessPolicyObservation struct {
 type IOTHubDPSSharedAccessPolicyParameters struct {
 
 	// Adds EnrollmentRead permission to this Shared Access Account. It allows read access to enrollment data.
+	// +kubebuilder:validation:Optional
 	EnrollmentRead *bool `json:"enrollmentRead,omitempty" tf:"enrollment_read,omitempty"`
 
 	// Adds EnrollmentWrite permission to this Shared Access Account. It allows write access to enrollment data.
+	// +kubebuilder:validation:Optional
 	EnrollmentWrite *bool `json:"enrollmentWrite,omitempty" tf:"enrollment_write,omitempty"`
 
 	// The name of the IoT Hub Device Provisioning service to which this Shared Access Policy belongs. Changing this forces a new resource to be created.
@@ -80,9 +82,11 @@ type IOTHubDPSSharedAccessPolicyParameters struct {
 	IOTHubDPSNameSelector *v1.Selector `json:"iothubDpsNameSelector,omitempty" tf:"-"`
 
 	// Adds RegistrationStatusRead permission to this Shared Access Account. It allows read access to device registrations.
+	// +kubebuilder:validation:Optional
 	RegistrationRead *bool `json:"registrationRead,omitempty" tf:"registration_read,omitempty"`
 
 	// Adds RegistrationStatusWrite permission to this Shared Access Account. It allows write access to device registrations.
+	// +kubebuilder:validation:Optional
 	RegistrationWrite *bool `json:"registrationWrite,omitempty" tf:"registration_write,omitempty"`
 
 	// The name of the resource group under which the IotHub Shared Access Policy resource has to be created. Changing this forces a new resource to be created.
@@ -99,6 +103,7 @@ type IOTHubDPSSharedAccessPolicyParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Adds ServiceConfig permission to this Shared Access Account. It allows configuration of the Device Provisioning Service.
+	// +kubebuilder:validation:Optional
 	ServiceConfig *bool `json:"serviceConfig,omitempty" tf:"service_config,omitempty"`
 }
 

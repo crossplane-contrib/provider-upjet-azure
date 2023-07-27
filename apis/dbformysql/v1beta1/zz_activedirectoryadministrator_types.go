@@ -49,9 +49,11 @@ type ActiveDirectoryAdministratorObservation struct {
 type ActiveDirectoryAdministratorParameters struct {
 
 	// The login name of the principal to set as the server administrator
+	// +kubebuilder:validation:Optional
 	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
 	// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
+	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// The name of the resource group for the MySQL server. Changing this forces a new resource to be created.
@@ -81,6 +83,7 @@ type ActiveDirectoryAdministratorParameters struct {
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// The Azure Tenant ID
+	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 

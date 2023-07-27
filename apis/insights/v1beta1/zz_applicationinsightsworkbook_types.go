@@ -88,24 +88,31 @@ type ApplicationInsightsWorkbookObservation struct {
 type ApplicationInsightsWorkbookParameters struct {
 
 	// Workbook category, as defined by the user at creation time. There may be additional category types beyond the following: workbook, sentinel. Defaults to workbook.
+	// +kubebuilder:validation:Optional
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// Configuration of this particular workbook. Configuration data is a string containing valid JSON.
+	// +kubebuilder:validation:Optional
 	DataJSON *string `json:"dataJson,omitempty" tf:"data_json,omitempty"`
 
 	// Specifies the description of the workbook.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the user-defined name (display name) of the workbook.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// An identity block as defined below. Changing this forces a new Workbook to be created.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the Azure Region where the Workbook should exist. Changing this forces a new Workbook to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of this Workbook as a UUID/GUID. It should not contain any uppercase letters. Changing this forces a new Workbook to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the name of the Resource Group where the Workbook should exist. Changing this forces a new Workbook to be created.
@@ -122,12 +129,15 @@ type ApplicationInsightsWorkbookParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Resource ID for a source resource. It should not contain any uppercase letters. Defaults to azure monitor.
+	// +kubebuilder:validation:Optional
 	SourceID *string `json:"sourceId,omitempty" tf:"source_id,omitempty"`
 
 	// Specifies the Resource Manager ID of the Storage Container when bring your own storage is used. Changing this forces a new Workbook to be created.
+	// +kubebuilder:validation:Optional
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the Workbook.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -158,9 +168,11 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// The list of User Assigned Managed Identity IDs assigned to this Workbook. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of Managed Service Identity that is configured on this Workbook. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

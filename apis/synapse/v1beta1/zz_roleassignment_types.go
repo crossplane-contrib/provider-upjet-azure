@@ -46,12 +46,15 @@ type RoleAssignmentObservation struct {
 type RoleAssignmentParameters struct {
 
 	// The ID of the Principal (User, Group or Service Principal) to assign the Synapse Role Definition to. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// The Role Name of the Synapse Built-In Role. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
 
 	// The Synapse Spark Pool which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SynapseSparkPoolID *string `json:"synapseSparkPoolId,omitempty" tf:"synapse_spark_pool_id,omitempty"`
 
 	// The Synapse Workspace which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.

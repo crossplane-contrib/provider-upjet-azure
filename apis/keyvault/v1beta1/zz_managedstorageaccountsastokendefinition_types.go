@@ -69,15 +69,19 @@ type ManagedStorageAccountSASTokenDefinitionParameters struct {
 	ManagedStorageAccountIDSelector *v1.Selector `json:"managedStorageAccountIdSelector,omitempty" tf:"-"`
 
 	// The SAS definition token template signed with an arbitrary key. Tokens created according to the SAS definition will have the same properties as the template, but regenerated with a new validity period.
+	// +kubebuilder:validation:Optional
 	SASTemplateURI *string `json:"sasTemplateUri,omitempty" tf:"sas_template_uri,omitempty"`
 
 	// The type of SAS token the SAS definition will create. Possible values are account and service.
+	// +kubebuilder:validation:Optional
 	SASType *string `json:"sasType,omitempty" tf:"sas_type,omitempty"`
 
 	// A mapping of tags which should be assigned to the SAS Definition. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Validity period of SAS token. Value needs to be in ISO 8601 duration format.
+	// +kubebuilder:validation:Optional
 	ValidityPeriod *string `json:"validityPeriod,omitempty" tf:"validity_period,omitempty"`
 }
 

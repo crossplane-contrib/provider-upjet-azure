@@ -35,6 +35,7 @@ type NetworkInterfaceNatRuleAssociationObservation struct {
 type NetworkInterfaceNatRuleAssociationParameters struct {
 
 	// The Name of the IP Configuration within the Network Interface which should be connected to the NAT Rule. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
 
 	// The ID of the Load Balancer NAT Rule which this Network Interface which should be connected to. Changing this forces a new resource to be created.

@@ -101,6 +101,7 @@ type EventHubDataConnectionParameters struct {
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 
 	// Specifies compression type for the connection. Allowed values: GZip and None. Defaults to None. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
 	// Specifies the EventHub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
@@ -117,6 +118,7 @@ type EventHubDataConnectionParameters struct {
 	ConsumerGroupSelector *v1.Selector `json:"consumerGroupSelector,omitempty" tf:"-"`
 
 	// Specifies the data format of the EventHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSVE, TSV, TXT, and W3CLOGFILE.
+	// +kubebuilder:validation:Optional
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
 	// Specifies the name of the Kusto Database this data connection will be added to. Changing this forces a new resource to be created.
@@ -133,6 +135,7 @@ type EventHubDataConnectionParameters struct {
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
 	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
 
 	// Specifies the resource id of the EventHub this data connection will use for ingestion. Changing this forces a new resource to be created.
@@ -150,15 +153,19 @@ type EventHubDataConnectionParameters struct {
 	EventHubIDSelector *v1.Selector `json:"eventhubIdSelector,omitempty" tf:"-"`
 
 	// Specifies a list of system properties for the Event Hub.
+	// +kubebuilder:validation:Optional
 	EventSystemProperties []*string `json:"eventSystemProperties,omitempty" tf:"event_system_properties,omitempty"`
 
 	// The resource ID of a managed identity (system or user assigned) to be used to authenticate with event hub.
+	// +kubebuilder:validation:Optional
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
 
 	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the mapping rule used for the message ingestion. Mapping rule must exist before resource is created.
+	// +kubebuilder:validation:Optional
 	MappingRuleName *string `json:"mappingRuleName,omitempty" tf:"mapping_rule_name,omitempty"`
 
 	// Specifies the Resource Group where the Kusto Database should exist. Changing this forces a new resource to be created.
@@ -175,6 +182,7 @@ type EventHubDataConnectionParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the target table name used for the message ingestion. Table must exist before resource is created.
+	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 

@@ -46,12 +46,15 @@ type TopicAuthorizationRuleObservation struct {
 type TopicAuthorizationRuleParameters struct {
 
 	// Grants listen access to this this Authorization Rule. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
 
 	// Grants manage access to this this Authorization Rule. When this property is true - both listen and send must be too. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Grants send access to this this Authorization Rule. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 
 	// Specifies the ID of the ServiceBus Topic. Changing this forces a new resource to be created.

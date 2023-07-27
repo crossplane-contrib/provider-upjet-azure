@@ -74,9 +74,11 @@ type APIVersionSetParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The description of API Version Set.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The display name of this API Version Set.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// The name of the Resource Group in which the parent API Management Service exists. Changing this forces a new resource to be created.
@@ -93,12 +95,15 @@ type APIVersionSetParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Header which should be read from Inbound Requests which defines the API Version.
+	// +kubebuilder:validation:Optional
 	VersionHeaderName *string `json:"versionHeaderName,omitempty" tf:"version_header_name,omitempty"`
 
 	// The name of the Query String which should be read from Inbound Requests which defines the API Version.
+	// +kubebuilder:validation:Optional
 	VersionQueryName *string `json:"versionQueryName,omitempty" tf:"version_query_name,omitempty"`
 
 	// Specifies where in an Inbound HTTP Request that the API Version should be read from. Possible values are Header, Query and Segment.
+	// +kubebuilder:validation:Optional
 	VersioningScheme *string `json:"versioningScheme,omitempty" tf:"versioning_scheme,omitempty"`
 }
 

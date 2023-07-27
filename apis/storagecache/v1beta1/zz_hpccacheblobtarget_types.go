@@ -46,6 +46,7 @@ type HPCCacheBlobTargetObservation struct {
 type HPCCacheBlobTargetParameters struct {
 
 	// The name of the access policy applied to this target. Defaults to default.
+	// +kubebuilder:validation:Optional
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
 	// The name HPC Cache, which the HPC Cache Blob Target will be added to. Changing this forces a new resource to be created.
@@ -62,6 +63,7 @@ type HPCCacheBlobTargetParameters struct {
 	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
 	// The client-facing file path of the HPC Cache Blob Target.
+	// +kubebuilder:validation:Optional
 	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
 
 	// The name of the Resource Group in which to create the HPC Cache Blob Target. Changing this forces a new resource to be created.

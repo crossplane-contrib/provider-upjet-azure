@@ -34,6 +34,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Stream Analytics Job. The only possible value is SystemAssigned.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -145,33 +146,43 @@ type JobObservation struct {
 type JobParameters struct {
 
 	// Specifies the compatibility level for this job - which controls certain runtime behaviours of the streaming job. Possible values are 1.0, 1.1 and 1.2.
+	// +kubebuilder:validation:Optional
 	CompatibilityLevel *string `json:"compatibilityLevel,omitempty" tf:"compatibility_level,omitempty"`
 
 	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount.
+	// +kubebuilder:validation:Optional
 	ContentStoragePolicy *string `json:"contentStoragePolicy,omitempty" tf:"content_storage_policy,omitempty"`
 
 	// Specifies the Data Locale of the Job, which should be a supported .NET Culture.
+	// +kubebuilder:validation:Optional
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
 
 	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 0.
+	// +kubebuilder:validation:Optional
 	EventsLateArrivalMaxDelayInSeconds *float64 `json:"eventsLateArrivalMaxDelayInSeconds,omitempty" tf:"events_late_arrival_max_delay_in_seconds,omitempty"`
 
 	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 5.
+	// +kubebuilder:validation:Optional
 	EventsOutOfOrderMaxDelayInSeconds *float64 `json:"eventsOutOfOrderMaxDelayInSeconds,omitempty" tf:"events_out_of_order_max_delay_in_seconds,omitempty"`
 
 	// Specifies the policy which should be applied to events which arrive out of order in the input event stream. Possible values are Adjust and Drop. Default is Adjust.
+	// +kubebuilder:validation:Optional
 	EventsOutOfOrderPolicy *string `json:"eventsOutOfOrderPolicy,omitempty" tf:"events_out_of_order_policy,omitempty"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The details of the job storage account. A job_storage_account block as defined below.
+	// +kubebuilder:validation:Optional
 	JobStorageAccount []JobStorageAccountParameters `json:"jobStorageAccount,omitempty" tf:"job_storage_account,omitempty"`
 
 	// The Azure Region in which the Resource Group exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the policy which should be applied to events which arrive at the output and cannot be written to the external storage due to being malformed (such as missing column values, column values of wrong type or size). Possible values are Drop and Stop. Default is Drop.
+	// +kubebuilder:validation:Optional
 	OutputErrorPolicy *string `json:"outputErrorPolicy,omitempty" tf:"output_error_policy,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job should exist. Changing this forces a new resource to be created.
@@ -188,18 +199,23 @@ type JobParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of an existing Stream Analytics Cluster where the Stream Analytics Job should run.
+	// +kubebuilder:validation:Optional
 	StreamAnalyticsClusterID *string `json:"streamAnalyticsClusterId,omitempty" tf:"stream_analytics_cluster_id,omitempty"`
 
 	// Specifies the number of streaming units that the streaming job uses. Supported values are 1, 3, 6 and multiples of 6 up to 120.
+	// +kubebuilder:validation:Optional
 	StreamingUnits *float64 `json:"streamingUnits,omitempty" tf:"streaming_units,omitempty"`
 
 	// A mapping of tags assigned to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the query that will be run in the streaming job, written in Stream Analytics Query Language (SAQL).
+	// +kubebuilder:validation:Optional
 	TransformationQuery *string `json:"transformationQuery,omitempty" tf:"transformation_query,omitempty"`
 
 	// The type of the Stream Analytics Job. Possible values are Cloud and Edge. Defaults to Cloud. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -228,9 +244,11 @@ type JobStorageAccountParameters struct {
 	AccountKeySecretRef v1.SecretKeySelector `json:"accountKeySecretRef" tf:"-"`
 
 	// The name of the Azure storage account.
+	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
 	// The authentication mode of the storage account. The only supported value is ConnectionString. Defaults to ConnectionString.
+	// +kubebuilder:validation:Optional
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 }
 

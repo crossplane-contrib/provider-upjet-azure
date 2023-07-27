@@ -34,9 +34,11 @@ type BGPObservation struct {
 type BGPParameters struct {
 
 	// The BGP speaker's ASN.
+	// +kubebuilder:validation:Optional
 	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
 
 	// The BGP peering IP address.
+	// +kubebuilder:validation:Optional
 	PeeringAddress *string `json:"peeringAddress,omitempty" tf:"peering_address,omitempty"`
 }
 
@@ -88,21 +90,27 @@ type LinkObservation struct {
 type LinkParameters struct {
 
 	// A bgp block as defined above.
+	// +kubebuilder:validation:Optional
 	BGP []BGPParameters `json:"bgp,omitempty" tf:"bgp,omitempty"`
 
 	// The FQDN of this VPN Site Link.
+	// +kubebuilder:validation:Optional
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
 	// The IP address of this VPN Site Link.
+	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The name which should be used for this VPN Site Link.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the physical link at the VPN Site. Example: ATT, Verizon.
+	// +kubebuilder:validation:Optional
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 
 	// The speed of the VPN device at the branch location in unit of mbps. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	SpeedInMbps *float64 `json:"speedInMbps,omitempty" tf:"speed_in_mbps,omitempty"`
 }
 
@@ -121,6 +129,7 @@ type O365PolicyObservation struct {
 type O365PolicyParameters struct {
 
 	// A traffic_category block as defined above.
+	// +kubebuilder:validation:Optional
 	TrafficCategory []TrafficCategoryParameters `json:"trafficCategory,omitempty" tf:"traffic_category,omitempty"`
 }
 
@@ -151,12 +160,15 @@ type TrafficCategoryObservation struct {
 type TrafficCategoryParameters struct {
 
 	// Is allow endpoint enabled? The Allow endpoint is required for connectivity to specific O365 services and features, but are not as sensitive to network performance and latency as other endpoint types. Defaults to false.
+	// +kubebuilder:validation:Optional
 	AllowEndpointEnabled *bool `json:"allowEndpointEnabled,omitempty" tf:"allow_endpoint_enabled,omitempty"`
 
 	// Is default endpoint enabled? The Default endpoint represents O365 services and dependencies that do not require any optimization, and can be treated by customer networks as normal Internet bound traffic. Defaults to false.
+	// +kubebuilder:validation:Optional
 	DefaultEndpointEnabled *bool `json:"defaultEndpointEnabled,omitempty" tf:"default_endpoint_enabled,omitempty"`
 
 	// Is optimize endpoint enabled? The Optimize endpoint is required for connectivity to every O365 service and represents the O365 scenario that is the most sensitive to network performance, latency, and availability. Defaults to false.
+	// +kubebuilder:validation:Optional
 	OptimizeEndpointEnabled *bool `json:"optimizeEndpointEnabled,omitempty" tf:"optimize_endpoint_enabled,omitempty"`
 }
 
@@ -220,21 +232,27 @@ type VPNSiteObservation struct {
 type VPNSiteParameters struct {
 
 	// Specifies a list of IP address CIDRs that are located on your on-premises site. Traffic destined for these address spaces is routed to your local site.
+	// +kubebuilder:validation:Optional
 	AddressCidrs []*string `json:"addressCidrs,omitempty" tf:"address_cidrs,omitempty"`
 
 	// The model of the VPN device.
+	// +kubebuilder:validation:Optional
 	DeviceModel *string `json:"deviceModel,omitempty" tf:"device_model,omitempty"`
 
 	// The name of the VPN device vendor.
+	// +kubebuilder:validation:Optional
 	DeviceVendor *string `json:"deviceVendor,omitempty" tf:"device_vendor,omitempty"`
 
 	// One or more link blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Link []LinkParameters `json:"link,omitempty" tf:"link,omitempty"`
 
 	// The Azure Region where the VPN Site should exist. Changing this forces a new VPN Site to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// An o365_policy block as defined below.
+	// +kubebuilder:validation:Optional
 	O365Policy []O365PolicyParameters `json:"o365Policy,omitempty" tf:"o365_policy,omitempty"`
 
 	// The name of the Resource Group where the VPN Site should exist. Changing this forces a new VPN Site to be created.
@@ -251,6 +269,7 @@ type VPNSiteParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the VPN Site.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Wan where this VPN site resides in. Changing this forces a new VPN Site to be created.

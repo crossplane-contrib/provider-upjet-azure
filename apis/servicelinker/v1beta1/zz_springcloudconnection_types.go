@@ -56,12 +56,15 @@ type AuthenticationParameters struct {
 	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// Client ID for userAssignedIdentity or servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate. When type is set to userAssignedIdentity, client_id and subscription_id should be either both specified or both not specified.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Username or account name for secret auth. name and secret should be either both specified or both not specified when type is set to secret.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Principal ID for servicePrincipal auth. Should be specified when type is set to servicePrincipalSecret or servicePrincipalCertificate.
+	// +kubebuilder:validation:Optional
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
 	// Password or account key for secret auth. secret and name should be either both specified or both not specified when type is set to secret.
@@ -69,9 +72,11 @@ type AuthenticationParameters struct {
 	SecretSecretRef *v1.SecretKeySelector `json:"secretSecretRef,omitempty" tf:"-"`
 
 	// Subscription ID for userAssignedIdentity. subscription_id and client_id should be either both specified or both not specified.
+	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// The authentication type. Possible values are systemAssignedIdentity, userAssignedIdentity, servicePrincipalSecret, servicePrincipalCertificate, secret. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -90,6 +95,7 @@ type SecretStoreObservation struct {
 type SecretStoreParameters struct {
 
 	// The key vault id to store secret.
+	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 }
 
@@ -141,15 +147,19 @@ type SpringCloudConnectionObservation struct {
 type SpringCloudConnectionParameters struct {
 
 	// The authentication info. An authentication block as defined below.
+	// +kubebuilder:validation:Optional
 	Authentication []AuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
 	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
+	// +kubebuilder:validation:Optional
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
 	// The name of the service connection. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// An option to store secret value in secure place. An secret_store block as defined below.
+	// +kubebuilder:validation:Optional
 	SecretStore []SecretStoreParameters `json:"secretStore,omitempty" tf:"secret_store,omitempty"`
 
 	// The ID of the data source spring cloud. Changing this forces a new resource to be created.
@@ -181,6 +191,7 @@ type SpringCloudConnectionParameters struct {
 	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
 	// The type of the VNet solution. Possible values are serviceEndpoint, privateLink.
+	// +kubebuilder:validation:Optional
 	VnetSolution *string `json:"vnetSolution,omitempty" tf:"vnet_solution,omitempty"`
 }
 

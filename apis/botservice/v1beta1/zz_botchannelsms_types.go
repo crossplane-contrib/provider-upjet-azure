@@ -63,9 +63,11 @@ type BotChannelSMSParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The phone number for the SMS Channel.
+	// +kubebuilder:validation:Optional
 	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 
 	// The name of the resource group where the SMS Channel should be created. Changing this forces a new resource to be created.
@@ -82,6 +84,7 @@ type BotChannelSMSParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The account security identifier (SID) for the SMS Channel.
+	// +kubebuilder:validation:Optional
 	SMSChannelAccountSecurityID *string `json:"smsChannelAccountSecurityId,omitempty" tf:"sms_channel_account_security_id,omitempty"`
 
 	// The authorization token for the SMS Channel.

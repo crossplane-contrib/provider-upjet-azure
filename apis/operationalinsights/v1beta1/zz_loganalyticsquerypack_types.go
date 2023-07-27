@@ -40,6 +40,7 @@ type LogAnalyticsQueryPackObservation struct {
 type LogAnalyticsQueryPackParameters struct {
 
 	// The Azure Region where the Log Analytics Query Pack should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Log Analytics Query Pack should exist. Changing this forces a new resource to be created.
@@ -56,6 +57,7 @@ type LogAnalyticsQueryPackParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Log Analytics Query Pack.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

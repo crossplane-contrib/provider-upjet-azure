@@ -55,18 +55,23 @@ type SecurityCenterContactObservation struct {
 type SecurityCenterContactParameters struct {
 
 	// Whether to send security alerts notifications to the security contact.
+	// +kubebuilder:validation:Optional
 	AlertNotifications *bool `json:"alertNotifications,omitempty" tf:"alert_notifications,omitempty"`
 
 	// Whether to send security alerts notifications to subscription admins.
+	// +kubebuilder:validation:Optional
 	AlertsToAdmins *bool `json:"alertsToAdmins,omitempty" tf:"alerts_to_admins,omitempty"`
 
 	// The email of the Security Center Contact.
+	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// The name of the Security Center Contact. Defaults to default1.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The phone number of the Security Center Contact.
+	// +kubebuilder:validation:Optional
 	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
 }
 

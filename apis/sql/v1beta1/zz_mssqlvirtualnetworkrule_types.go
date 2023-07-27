@@ -37,6 +37,7 @@ type MSSQLVirtualNetworkRuleObservation struct {
 type MSSQLVirtualNetworkRuleParameters struct {
 
 	// Create the virtual network rule before the subnet has the virtual network service endpoint enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
 	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
 
 	// The resource ID of the SQL Server to which this SQL virtual network rule will be applied. Changing this forces a new resource to be created.

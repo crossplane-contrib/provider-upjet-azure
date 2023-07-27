@@ -58,15 +58,19 @@ type IntegrationRuntimeAzureObservation struct {
 type IntegrationRuntimeAzureParameters struct {
 
 	// Compute type of the cluster which will execute data flow job. Valid values are General, ComputeOptimized and MemoryOptimized. Defaults to General.
+	// +kubebuilder:validation:Optional
 	ComputeType *string `json:"computeType,omitempty" tf:"compute_type,omitempty"`
 
 	// Core count of the cluster which will execute data flow job. Valid values are 8, 16, 32, 48, 80, 144 and 272. Defaults to 8.
+	// +kubebuilder:validation:Optional
 	CoreCount *float64 `json:"coreCount,omitempty" tf:"core_count,omitempty"`
 
 	// Integration runtime description.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Azure Region where the Synapse Azure Integration Runtime should exist. Use AutoResolve to create an auto-resolve integration runtime. Changing this forces a new Synapse Azure Integration Runtime to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Synapse Workspace ID in which to associate the Integration Runtime with. Changing this forces a new Synapse Azure Integration Runtime to be created.
@@ -84,6 +88,7 @@ type IntegrationRuntimeAzureParameters struct {
 	SynapseWorkspaceIDSelector *v1.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// Time to live (in minutes) setting of the cluster which will execute data flow job. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	TimeToLiveMin *float64 `json:"timeToLiveMin,omitempty" tf:"time_to_live_min,omitempty"`
 }
 

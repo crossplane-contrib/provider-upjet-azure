@@ -40,6 +40,7 @@ type VirtualNetworkRuleObservation struct {
 type VirtualNetworkRuleParameters struct {
 
 	// Should the Virtual Network Rule be created before the Subnet has the Virtual Network Service Endpoint enabled?
+	// +kubebuilder:validation:Optional
 	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
 
 	// The name of the resource group where the PostgreSQL server resides. Changing this forces a new resource to be created.

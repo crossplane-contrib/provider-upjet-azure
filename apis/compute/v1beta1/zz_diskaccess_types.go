@@ -40,6 +40,7 @@ type DiskAccessObservation struct {
 type DiskAccessParameters struct {
 
 	// The Azure Region where the Disk Access should exist. Changing this forces a new Disk to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Disk Access should exist. Changing this forces a new Disk Access to be created.
@@ -56,6 +57,7 @@ type DiskAccessParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Disk Access.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

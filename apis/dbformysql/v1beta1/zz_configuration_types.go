@@ -43,6 +43,7 @@ type ConfigurationObservation struct {
 type ConfigurationParameters struct {
 
 	// Specifies the name of the MySQL Configuration, which needs to be a valid MySQL configuration name. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which the MySQL Server exists. Changing this forces a new resource to be created.
@@ -72,6 +73,7 @@ type ConfigurationParameters struct {
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 
 	// Specifies the value of the MySQL Configuration. See the MySQL documentation for valid values. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 

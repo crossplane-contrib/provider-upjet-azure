@@ -68,6 +68,7 @@ type MonitorDataCollectionRuleAssociationParameters struct {
 	DataCollectionRuleIDSelector *v1.Selector `json:"dataCollectionRuleIdSelector,omitempty" tf:"-"`
 
 	// The description of the Data Collection Rule Association.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of the Azure Resource which to associate to a Data Collection Rule or a Data Collection Endpoint. Changing this forces a new resource to be created.

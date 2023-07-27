@@ -54,9 +54,11 @@ type NamespaceSchemaGroupParameters struct {
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the compatibility of this schema group. Possible values are None, Backward, Forward. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SchemaCompatibility *string `json:"schemaCompatibility,omitempty" tf:"schema_compatibility,omitempty"`
 
 	// Specifies the Type of this schema group. Possible values are Avro, Unknown. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SchemaType *string `json:"schemaType,omitempty" tf:"schema_type,omitempty"`
 }
 

@@ -68,6 +68,7 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 
 	// The ip config ID of the regional load balancer that's added to the global load balancer's backend address pool.
 	// For global load balancer, user needs to specify the `backend_address_ip_configuration_id` of the added regional load balancers
+	// +kubebuilder:validation:Optional
 	BackendAddressIPConfigurationID *string `json:"backendAddressIpConfigurationId,omitempty" tf:"backend_address_ip_configuration_id,omitempty"`
 
 	// The ID of the Backend Address Pool. Changing this forces a new Backend Address Pool Address to be created.
@@ -85,6 +86,7 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
 
 	// The Static IP Address which should be allocated to this Backend Address Pool.
+	// +kubebuilder:validation:Optional
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The ID of the Virtual Network within which the Backend Address Pool should exist.

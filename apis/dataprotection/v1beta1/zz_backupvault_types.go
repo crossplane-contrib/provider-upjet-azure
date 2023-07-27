@@ -58,15 +58,19 @@ type BackupVaultObservation struct {
 type BackupVaultParameters struct {
 
 	// Specifies the type of the data store. Possible values are ArchiveStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DatastoreType *string `json:"datastoreType,omitempty" tf:"datastore_type,omitempty"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the backup storage redundancy. Possible values are GeoRedundant and LocallyRedundant. Changing this forces a new Backup Vault to be created.
+	// +kubebuilder:validation:Optional
 	Redundancy *string `json:"redundancy,omitempty" tf:"redundancy,omitempty"`
 
 	// The name of the Resource Group where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
@@ -83,6 +87,7 @@ type BackupVaultParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Backup Vault.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -107,6 +112,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Backup Vault. The only possible value is SystemAssigned.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

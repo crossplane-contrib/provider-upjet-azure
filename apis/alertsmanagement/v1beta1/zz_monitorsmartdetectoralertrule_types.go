@@ -37,6 +37,7 @@ type ActionGroupObservation struct {
 type ActionGroupParameters struct {
 
 	// Specifies a custom email subject if Email Receiver is specified in Monitor Action Group resource.
+	// +kubebuilder:validation:Optional
 	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
 
 	// Specifies the action group ids.
@@ -54,6 +55,7 @@ type ActionGroupParameters struct {
 	IdsSelector *v1.Selector `json:"idsSelector,omitempty" tf:"-"`
 
 	// A JSON String which Specifies the custom webhook payload if Webhook Receiver is specified in Monitor Action Group resource.
+	// +kubebuilder:validation:Optional
 	WebhookPayload *string `json:"webhookPayload,omitempty" tf:"webhook_payload,omitempty"`
 }
 
@@ -129,21 +131,27 @@ type MonitorSmartDetectorAlertRuleObservation struct {
 type MonitorSmartDetectorAlertRuleParameters struct {
 
 	// An action_group block as defined below.
+	// +kubebuilder:validation:Optional
 	ActionGroup []ActionGroupParameters `json:"actionGroup,omitempty" tf:"action_group,omitempty"`
 
 	// Specifies a description for the Smart Detector Alert Rule.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the Built-In Smart Detector type that this alert rule will use. Currently the only possible values are FailureAnomaliesDetector, RequestPerformanceDegradationDetector, DependencyPerformanceDegradationDetector, ExceptionVolumeChangedDetector, TraceSeverityDetector, MemoryLeakDetector.
+	// +kubebuilder:validation:Optional
 	DetectorType *string `json:"detectorType,omitempty" tf:"detector_type,omitempty"`
 
 	// Is the Smart Detector Alert Rule enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Specifies the frequency of this Smart Detector Alert Rule in ISO8601 format.
+	// +kubebuilder:validation:Optional
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// Specifies the name of the Monitor Smart Detector Alert Rule. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the name of the resource group in which the Monitor Smart Detector Alert Rule should exist. Changing this forces a new resource to be created.
@@ -174,12 +182,15 @@ type MonitorSmartDetectorAlertRuleParameters struct {
 	ScopeResourceIdsSelector *v1.Selector `json:"scopeResourceIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the severity of this Smart Detector Alert Rule. Possible values are Sev0, Sev1, Sev2, Sev3 or Sev4.
+	// +kubebuilder:validation:Optional
 	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the duration (in ISO8601 format) to wait before notifying on the alert rule again.
+	// +kubebuilder:validation:Optional
 	ThrottlingDuration *string `json:"throttlingDuration,omitempty" tf:"throttling_duration,omitempty"`
 }
 

@@ -69,15 +69,19 @@ type MSSQLDatabaseExtendedAuditingPolicyParameters struct {
 	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
 
 	// Whether to enable the extended auditing policy. Possible values are true and false. Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Enable audit events to Azure Monitor? Defaults to true.
+	// +kubebuilder:validation:Optional
 	LogMonitoringEnabled *bool `json:"logMonitoringEnabled,omitempty" tf:"log_monitoring_enabled,omitempty"`
 
 	// The number of days to retain logs for in the storage account. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// Is storage_account_access_key value the storage's secondary key?
+	// +kubebuilder:validation:Optional
 	StorageAccountAccessKeyIsSecondary *bool `json:"storageAccountAccessKeyIsSecondary,omitempty" tf:"storage_account_access_key_is_secondary,omitempty"`
 
 	// The access key to use for the auditing storage account.

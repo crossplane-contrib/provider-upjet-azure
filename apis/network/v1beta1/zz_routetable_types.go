@@ -55,9 +55,11 @@ type RouteTableObservation struct {
 type RouteTableParameters struct {
 
 	// Boolean flag which controls propagation of routes learned by BGP on that route table. True means disable.
+	// +kubebuilder:validation:Optional
 	DisableBGPRoutePropagation *bool `json:"disableBgpRoutePropagation,omitempty" tf:"disable_bgp_route_propagation,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the route table. Changing this forces a new resource to be created.
@@ -74,9 +76,11 @@ type RouteTableParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// List of objects representing routes. Each object accepts the arguments documented below.
+	// +kubebuilder:validation:Optional
 	Route []RouteTableRouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -113,15 +117,19 @@ type RouteTableRouteObservation struct {
 type RouteTableRouteParameters struct {
 
 	// The destination to which the route applies. Can be CIDR (such as 10.1.0.0/16) or Azure Service Tag (such as ApiManagement, AzureBackup or AzureMonitor) format.
+	// +kubebuilder:validation:Optional
 	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix"`
 
 	// The name of the route.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name"`
 
 	// Contains the IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance.
+	// +kubebuilder:validation:Optional
 	NextHopInIPAddress *string `json:"nextHopInIpAddress,omitempty" tf:"next_hop_in_ip_address"`
 
 	// The type of Azure hop the packet should be sent to. Possible values are VirtualNetworkGateway, VnetLocal, Internet, VirtualAppliance and None.
+	// +kubebuilder:validation:Optional
 	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type"`
 }
 

@@ -61,12 +61,15 @@ type OutputTableObservation struct {
 type OutputTableParameters struct {
 
 	// The number of records for a batch operation. Must be between 1 and 100.
+	// +kubebuilder:validation:Optional
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// A list of the column names to be removed from output event entities.
+	// +kubebuilder:validation:Optional
 	ColumnsToRemove []*string `json:"columnsToRemove,omitempty" tf:"columns_to_remove,omitempty"`
 
 	// The name of the output column that contains the partition key.
+	// +kubebuilder:validation:Optional
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
@@ -83,6 +86,7 @@ type OutputTableParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the output column that contains the row key.
+	// +kubebuilder:validation:Optional
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
 	// The Access Key which should be used to connect to this Storage Account.

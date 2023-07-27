@@ -57,9 +57,11 @@ type BotChannelLineParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// One or more line_channel blocks as defined below.
+	// +kubebuilder:validation:Optional
 	LineChannel []LineChannelParameters `json:"lineChannel,omitempty" tf:"line_channel,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group where the Line Channel should be created. Changing this forces a new resource to be created.

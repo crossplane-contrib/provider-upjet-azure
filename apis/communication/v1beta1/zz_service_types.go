@@ -52,6 +52,7 @@ type ServiceObservation struct {
 type ServiceParameters struct {
 
 	// The location where the Communication service stores its data at rest. Possible values are Africa, Asia Pacific, Australia, Brazil, Canada, Europe, France, Germany, India, Japan, Korea, Norway, Switzerland, UAE, UK and United States. Defaults to United States. Changing this forces a new Communication Service to be created.
+	// +kubebuilder:validation:Optional
 	DataLocation *string `json:"dataLocation,omitempty" tf:"data_location,omitempty"`
 
 	// The name of the Resource Group where the Communication Service should exist. Changing this forces a new Communication Service to be created.
@@ -68,6 +69,7 @@ type ServiceParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Communication Service.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

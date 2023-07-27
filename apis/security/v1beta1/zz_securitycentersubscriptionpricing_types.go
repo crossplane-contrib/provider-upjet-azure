@@ -43,12 +43,15 @@ type SecurityCenterSubscriptionPricingObservation struct {
 type SecurityCenterSubscriptionPricingParameters struct {
 
 	// The resource type this setting affects. Possible values are AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
+	// +kubebuilder:validation:Optional
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Resource type pricing subplan. Contact your MSFT representative for possible values.
+	// +kubebuilder:validation:Optional
 	Subplan *string `json:"subplan,omitempty" tf:"subplan,omitempty"`
 
 	// The pricing tier to use. Possible values are Free and Standard.
+	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 

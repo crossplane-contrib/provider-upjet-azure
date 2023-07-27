@@ -69,12 +69,15 @@ type MSSQLFailoverGroupParameters struct {
 	DatabasesSelector *v1.Selector `json:"databasesSelector,omitempty" tf:"-"`
 
 	// A partner_server block as defined below.
+	// +kubebuilder:validation:Optional
 	PartnerServer []PartnerServerParameters `json:"partnerServer,omitempty" tf:"partner_server,omitempty"`
 
 	// A read_write_endpoint_failover_policy block as defined below.
+	// +kubebuilder:validation:Optional
 	ReadWriteEndpointFailoverPolicy []ReadWriteEndpointFailoverPolicyParameters `json:"readWriteEndpointFailoverPolicy,omitempty" tf:"read_write_endpoint_failover_policy,omitempty"`
 
 	// Whether failover is enabled for the readonly endpoint. Defaults to false.
+	// +kubebuilder:validation:Optional
 	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
 
 	// The ID of the primary SQL Server on which to create the failover group. Changing this forces a new resource to be created.
@@ -92,6 +95,7 @@ type MSSQLFailoverGroupParameters struct {
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -148,9 +152,11 @@ type ReadWriteEndpointFailoverPolicyObservation struct {
 type ReadWriteEndpointFailoverPolicyParameters struct {
 
 	// The grace period in minutes, before failover with data loss is attempted for the read-write endpoint. Required when mode is Automatic.
+	// +kubebuilder:validation:Optional
 	GraceMinutes *float64 `json:"graceMinutes,omitempty" tf:"grace_minutes,omitempty"`
 
 	// The failover policy of the read-write endpoint for the failover group. Possible values are Automatic or Manual.
+	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 }
 

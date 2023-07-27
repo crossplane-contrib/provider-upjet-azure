@@ -48,6 +48,7 @@ type TagParameters struct {
 	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
 
 	// The display name of the API Management Tag. Defaults to the name.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 }
 

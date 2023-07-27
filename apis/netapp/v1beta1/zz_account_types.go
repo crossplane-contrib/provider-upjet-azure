@@ -46,9 +46,11 @@ type AccountObservation struct {
 type AccountParameters struct {
 
 	// A active_directory block as defined below.
+	// +kubebuilder:validation:Optional
 	ActiveDirectory []ActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group where the NetApp Account should be created. Changing this forces a new resource to be created.
@@ -65,6 +67,7 @@ type AccountParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -107,12 +110,15 @@ type ActiveDirectoryObservation struct {
 type ActiveDirectoryParameters struct {
 
 	// A list of DNS server IP addresses for the Active Directory domain. Only allows IPv4 address.
+	// +kubebuilder:validation:Optional
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
 	// The name of the Active Directory domain.
+	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
 	// The Organizational Unit (OU) within the Active Directory Domain.
+	// +kubebuilder:validation:Optional
 	OrganizationalUnit *string `json:"organizationalUnit,omitempty" tf:"organizational_unit,omitempty"`
 
 	// The password associated with the username.
@@ -120,9 +126,11 @@ type ActiveDirectoryParameters struct {
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The NetBIOS name which should be used for the NetApp SMB Server, which will be registered as a computer account in the AD and used to mount volumes.
+	// +kubebuilder:validation:Optional
 	SMBServerName *string `json:"smbServerName,omitempty" tf:"smb_server_name,omitempty"`
 
 	// The Username of Active Directory Domain Administrator.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 

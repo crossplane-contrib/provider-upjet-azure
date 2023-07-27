@@ -46,12 +46,15 @@ type NetworkACLObservation struct {
 type NetworkACLParameters struct {
 
 	// The default action to control the network access when no other rule matches. Possible values are Allow and Deny.
+	// +kubebuilder:validation:Optional
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// A private_endpoint block as defined below.
+	// +kubebuilder:validation:Optional
 	PrivateEndpoint []PrivateEndpointParameters `json:"privateEndpoint,omitempty" tf:"private_endpoint,omitempty"`
 
 	// A public_network block as defined below.
+	// +kubebuilder:validation:Optional
 	PublicNetwork []PublicNetworkParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
 
 	// The ID of the SignalR service. Changing this forces a new resource to be created.
@@ -93,9 +96,11 @@ type PrivateEndpointObservation struct {
 type PrivateEndpointParameters struct {
 
 	// The allowed request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	// +kubebuilder:validation:Optional
 	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
 
 	// The denied request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	// +kubebuilder:validation:Optional
 	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 
 	// The ID of the Private Endpoint which is based on the SignalR service.
@@ -134,9 +139,11 @@ type PublicNetworkObservation struct {
 type PublicNetworkParameters struct {
 
 	// The allowed request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	// +kubebuilder:validation:Optional
 	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
 
 	// The denied request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	// +kubebuilder:validation:Optional
 	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 }
 

@@ -65,21 +65,26 @@ type SubscriptionObservation struct {
 type SubscriptionParameters struct {
 
 	// The Azure Billing Scope ID. Can be a Microsoft Customer Account Billing Scope ID, a Microsoft Partner Account Billing Scope ID or an Enrollment Billing Scope ID.
+	// +kubebuilder:validation:Optional
 	BillingScopeID *string `json:"billingScopeId,omitempty" tf:"billing_scope_id,omitempty"`
 
 	// The ID of the Subscription. Changing this forces a new Subscription to be created.
 	// The GUID of the Subscription.
+	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
 	// The Name of the Subscription. This is the Display Name in the portal.
 	// The Display Name for the Subscription.
+	// +kubebuilder:validation:Optional
 	SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
 
 	// A mapping of tags to assign to the Subscription.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The workload type of the Subscription. Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.
 	// The workload type for the Subscription. Possible values are `Production` (default) and `DevTest`.
+	// +kubebuilder:validation:Optional
 	Workload *string `json:"workload,omitempty" tf:"workload,omitempty"`
 }
 

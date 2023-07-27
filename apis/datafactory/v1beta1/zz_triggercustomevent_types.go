@@ -79,12 +79,15 @@ type TriggerCustomEventObservation struct {
 type TriggerCustomEventParameters struct {
 
 	// Specifies if the Data Factory Custom Event Trigger is activated. Defaults to true.
+	// +kubebuilder:validation:Optional
 	Activated *bool `json:"activated,omitempty" tf:"activated,omitempty"`
 
 	// A map of additional properties to associate with the Data Factory Custom Event Trigger.
+	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Custom Event Trigger.
+	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The ID of Data Factory in which to associate the Trigger with. Changing this forces a new resource.
@@ -102,6 +105,7 @@ type TriggerCustomEventParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Custom Event Trigger.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of Event Grid Topic in which event will be listened. Changing this forces a new resource.
@@ -119,15 +123,19 @@ type TriggerCustomEventParameters struct {
 	EventGridTopicIDSelector *v1.Selector `json:"eventgridTopicIdSelector,omitempty" tf:"-"`
 
 	// List of events that will fire this trigger. At least one event must be specified.
+	// +kubebuilder:validation:Optional
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// One or more pipeline blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Pipeline []TriggerCustomEventPipelineParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
 	// The pattern that event subject starts with for trigger to fire.
+	// +kubebuilder:validation:Optional
 	SubjectBeginsWith *string `json:"subjectBeginsWith,omitempty" tf:"subject_begins_with,omitempty"`
 
 	// The pattern that event subject ends with for trigger to fire.
+	// +kubebuilder:validation:Optional
 	SubjectEndsWith *string `json:"subjectEndsWith,omitempty" tf:"subject_ends_with,omitempty"`
 }
 
@@ -162,6 +170,7 @@ type TriggerCustomEventPipelineParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The Data Factory Pipeline parameters that the trigger will act on.
+	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

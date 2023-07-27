@@ -76,18 +76,23 @@ type MonitorObservation struct {
 type MonitorParameters struct {
 
 	// Name of the Logz organization. Changing this forces a new logz Monitor to be created.
+	// +kubebuilder:validation:Optional
 	CompanyName *string `json:"companyName,omitempty" tf:"company_name,omitempty"`
 
 	// Whether the resource monitoring is enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The ID of the Enterprise App. Changing this forces a new logz Monitor to be created.
+	// +kubebuilder:validation:Optional
 	EnterpriseAppID *string `json:"enterpriseAppId,omitempty" tf:"enterprise_app_id,omitempty"`
 
 	// The Azure Region where the logz Monitor should exist. Changing this forces a new logz Monitor to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A plan block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Plan []PlanParameters `json:"plan,omitempty" tf:"plan,omitempty"`
 
 	// The name of the Resource Group where the logz Monitor should exist. Changing this forces a new logz Monitor to be created.
@@ -104,9 +109,11 @@ type MonitorParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the logz Monitor.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A user block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	User []UserParameters `json:"user,omitempty" tf:"user,omitempty"`
 }
 
@@ -143,15 +150,19 @@ type PlanObservation struct {
 type PlanParameters struct {
 
 	// Different billing cycles. Possible values are MONTHLY or WEEKLY. Changing this forces a new logz Monitor to be created.
+	// +kubebuilder:validation:Optional
 	BillingCycle *string `json:"billingCycle,omitempty" tf:"billing_cycle,omitempty"`
 
 	// Date when plan was applied. Changing this forces a new logz Monitor to be created.
+	// +kubebuilder:validation:Optional
 	EffectiveDate *string `json:"effectiveDate,omitempty" tf:"effective_date,omitempty"`
 
 	// Plan id as published by Logz. The only possible value is 100gb14days. Defaults to 100gb14days. Changing this forces a new logz Monitor to be created.
+	// +kubebuilder:validation:Optional
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
 	// Different usage types. Possible values are PAYG or COMMITTED. Changing this forces a new logz Monitor to be created.
+	// +kubebuilder:validation:Optional
 	UsageType *string `json:"usageType,omitempty" tf:"usage_type,omitempty"`
 }
 
@@ -188,15 +199,19 @@ type UserObservation struct {
 type UserParameters struct {
 
 	// Email of the user used by Logz for contacting them if needed. Changing this forces a new logz Monitor to be created.
+	// +kubebuilder:validation:Optional
 	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// First Name of the user. Changing this forces a new logz Monitor to be created.
+	// +kubebuilder:validation:Optional
 	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
 
 	// Last Name of the user. Changing this forces a new logz Monitor to be created.
+	// +kubebuilder:validation:Optional
 	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
 	// Phone number of the user used by Logz for contacting them if needed. Changing this forces a new logz Monitor to be created.
+	// +kubebuilder:validation:Optional
 	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 }
 

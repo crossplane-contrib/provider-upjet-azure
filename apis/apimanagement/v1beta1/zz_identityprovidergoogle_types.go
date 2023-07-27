@@ -50,6 +50,7 @@ type IdentityProviderGoogleParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// Client Id for Google Sign-in.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// Client secret for Google Sign-in.

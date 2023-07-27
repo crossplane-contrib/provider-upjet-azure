@@ -82,12 +82,15 @@ type GalleryApplicationVersionObservation struct {
 type GalleryApplicationVersionParameters struct {
 
 	// Should the Gallery Application reports health. Defaults to false.
+	// +kubebuilder:validation:Optional
 	EnableHealthCheck *bool `json:"enableHealthCheck,omitempty" tf:"enable_health_check,omitempty"`
 
 	// The end of life date in RFC3339 format of the Gallery Application Version.
+	// +kubebuilder:validation:Optional
 	EndOfLifeDate *string `json:"endOfLifeDate,omitempty" tf:"end_of_life_date,omitempty"`
 
 	// Should the Gallery Application Version be excluded from the latest filter? If set to true this Gallery Application Version won't be returned for the latest version. Defaults to false.
+	// +kubebuilder:validation:Optional
 	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty"`
 
 	// The ID of the Gallery Application. Changing this forces a new resource to be created.
@@ -105,21 +108,27 @@ type GalleryApplicationVersionParameters struct {
 	GalleryApplicationIDSelector *v1.Selector `json:"galleryApplicationIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Gallery Application Version exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A manage_action block as defined below.
+	// +kubebuilder:validation:Optional
 	ManageAction []ManageActionParameters `json:"manageAction,omitempty" tf:"manage_action,omitempty"`
 
 	// The version name of the Gallery Application Version, such as 1.0.0. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A source block as defined below.
+	// +kubebuilder:validation:Optional
 	Source []SourceParameters `json:"source,omitempty" tf:"source,omitempty"`
 
 	// A mapping of tags to assign to the Gallery Application Version.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more target_region blocks as defined below.
+	// +kubebuilder:validation:Optional
 	TargetRegion []TargetRegionParameters `json:"targetRegion,omitempty" tf:"target_region,omitempty"`
 }
 
@@ -150,12 +159,15 @@ type ManageActionObservation struct {
 type ManageActionParameters struct {
 
 	// The command to install the Gallery Application. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Install *string `json:"install,omitempty" tf:"install,omitempty"`
 
 	// The command to remove the Gallery Application. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Remove *string `json:"remove,omitempty" tf:"remove,omitempty"`
 
 	// The command to update the Gallery Application. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Update *string `json:"update,omitempty" tf:"update,omitempty"`
 }
 
@@ -177,6 +189,7 @@ type SourceObservation struct {
 type SourceParameters struct {
 
 	// The Storage Blob URI of the default configuration. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	DefaultConfigurationLink *string `json:"defaultConfigurationLink,omitempty" tf:"default_configuration_link,omitempty"`
 
 	// The Storage Blob URI of the source application package. Changing this forces a new resource to be created.
@@ -232,9 +245,11 @@ type TargetRegionParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The number of replicas of the Gallery Application Version to be created per region. Possible values are between 1 and 10.
+	// +kubebuilder:validation:Optional
 	RegionalReplicaCount *float64 `json:"regionalReplicaCount,omitempty" tf:"regional_replica_count,omitempty"`
 
 	// The storage account type for the Gallery Application Version. Possible values are Standard_LRS, Premium_LRS and Standard_ZRS. Defaults to Standard_LRS.
+	// +kubebuilder:validation:Optional
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 }
 

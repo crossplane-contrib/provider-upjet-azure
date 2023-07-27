@@ -34,6 +34,7 @@ type SpringCloudAcceleratorObservation struct {
 type SpringCloudAcceleratorParameters struct {
 
 	// The name which should be used for this Spring Cloud Accelerator. Changing this forces a new Spring Cloud Accelerator to be created. The only possible value is default.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Accelerator to be created.

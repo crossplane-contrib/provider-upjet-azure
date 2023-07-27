@@ -40,6 +40,7 @@ type IntegrationRuntimeSelfHostedObservation struct {
 type IntegrationRuntimeSelfHostedParameters struct {
 
 	// Integration runtime description.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Synapse Workspace ID in which to associate the Integration Runtime with. Changing this forces a new Synapse Self-hosted Integration Runtime to be created.

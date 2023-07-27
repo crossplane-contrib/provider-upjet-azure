@@ -63,6 +63,7 @@ type RedisLinkedServerParameters struct {
 	LinkedRedisCacheIDSelector *v1.Selector `json:"linkedRedisCacheIdSelector,omitempty" tf:"-"`
 
 	// The location of the linked Redis cache. Changing this forces a new Redis to be created.
+	// +kubebuilder:validation:Optional
 	LinkedRedisCacheLocation *string `json:"linkedRedisCacheLocation,omitempty" tf:"linked_redis_cache_location,omitempty"`
 
 	// The name of the Resource Group where the Redis caches exists. Changing this forces a new Redis to be created.
@@ -79,6 +80,7 @@ type RedisLinkedServerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The role of the linked Redis cache (eg "Secondary"). Changing this forces a new Redis to be created. Possible values are Primary and Secondary.
+	// +kubebuilder:validation:Optional
 	ServerRole *string `json:"serverRole,omitempty" tf:"server_role,omitempty"`
 
 	// The name of Redis cache to link with. Changing this forces a new Redis to be created. (eg The primary role)

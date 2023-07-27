@@ -68,6 +68,7 @@ type SpringCloudAppRedisAssociationParameters struct {
 	RedisCacheIDSelector *v1.Selector `json:"redisCacheIdSelector,omitempty" tf:"-"`
 
 	// Should SSL be used when connecting to Redis? Defaults to true.
+	// +kubebuilder:validation:Optional
 	SSLEnabled *bool `json:"sslEnabled,omitempty" tf:"ssl_enabled,omitempty"`
 
 	// Specifies the Spring Cloud Application resource ID in which the Association is created. Changing this forces a new resource to be created.

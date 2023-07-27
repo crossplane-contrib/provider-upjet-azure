@@ -52,12 +52,15 @@ type DashboardObservation struct {
 type DashboardParameters struct {
 
 	// JSON data representing dashboard body. See above for details on how to obtain this from the Portal.
+	// +kubebuilder:validation:Optional
 	DashboardProperties *string `json:"dashboardProperties,omitempty" tf:"dashboard_properties,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Shared Dashboard. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which to create the dashboard. Changing this forces a new resource to be created.
@@ -74,6 +77,7 @@ type DashboardParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

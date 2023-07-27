@@ -64,12 +64,15 @@ type VirtualNetworkPeeringObservation struct {
 type VirtualNetworkPeeringParameters struct {
 
 	// Controls if forwarded traffic from VMs in the remote virtual network is allowed. Defaults to false.
+	// +kubebuilder:validation:Optional
 	AllowForwardedTraffic *bool `json:"allowForwardedTraffic,omitempty" tf:"allow_forwarded_traffic,omitempty"`
 
 	// Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. Defaults to false.
+	// +kubebuilder:validation:Optional
 	AllowGatewayTransit *bool `json:"allowGatewayTransit,omitempty" tf:"allow_gateway_transit,omitempty"`
 
 	// Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to true.
+	// +kubebuilder:validation:Optional
 	AllowVirtualNetworkAccess *bool `json:"allowVirtualNetworkAccess,omitempty" tf:"allow_virtual_network_access,omitempty"`
 
 	// The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created.
@@ -100,9 +103,11 @@ type VirtualNetworkPeeringParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of key values pairs that can be used to sync network routes from the remote virtual network to the local virtual network. See the trigger example for an example on how to set it up.
+	// +kubebuilder:validation:Optional
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Controls if remote gateways can be used on the local virtual network. If the flag is set to true, and allow_gateway_transit on the remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. Defaults to false.
+	// +kubebuilder:validation:Optional
 	UseRemoteGateways *bool `json:"useRemoteGateways,omitempty" tf:"use_remote_gateways,omitempty"`
 
 	// The name of the virtual network. Changing this forces a new resource to be created.

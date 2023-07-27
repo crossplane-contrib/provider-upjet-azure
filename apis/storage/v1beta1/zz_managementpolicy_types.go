@@ -40,12 +40,15 @@ type ActionsObservation struct {
 type ActionsParameters struct {
 
 	// A base_blob block as documented below.
+	// +kubebuilder:validation:Optional
 	BaseBlob []BaseBlobParameters `json:"baseBlob,omitempty" tf:"base_blob,omitempty"`
 
 	// A snapshot block as documented below.
+	// +kubebuilder:validation:Optional
 	Snapshot []SnapshotParameters `json:"snapshot,omitempty" tf:"snapshot,omitempty"`
 
 	// A version block as documented below.
+	// +kubebuilder:validation:Optional
 	Version []VersionParameters `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -124,36 +127,47 @@ type BaseBlobObservation struct {
 type BaseBlobParameters struct {
 
 	// Whether a blob should automatically be tiered from cool back to hot if it's accessed again after being tiered to cool. Defaults to false.
+	// +kubebuilder:validation:Optional
 	AutoTierToHotFromCoolEnabled *bool `json:"autoTierToHotFromCoolEnabled,omitempty" tf:"auto_tier_to_hot_from_cool_enabled,omitempty"`
 
 	// The age in days after creation to delete the blob snapshot. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	DeleteAfterDaysSinceCreationGreaterThan *float64 `json:"deleteAfterDaysSinceCreationGreaterThan,omitempty" tf:"delete_after_days_since_creation_greater_than,omitempty"`
 
 	// The age in days after last access time to delete the blob. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	DeleteAfterDaysSinceLastAccessTimeGreaterThan *float64 `json:"deleteAfterDaysSinceLastAccessTimeGreaterThan,omitempty" tf:"delete_after_days_since_last_access_time_greater_than,omitempty"`
 
 	// The age in days after last modification to delete the blob. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	DeleteAfterDaysSinceModificationGreaterThan *float64 `json:"deleteAfterDaysSinceModificationGreaterThan,omitempty" tf:"delete_after_days_since_modification_greater_than,omitempty"`
 
 	// The age in days after creation to archive storage. Supports blob currently at Hot or Cool tier. Must be between 0 and99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	TierToArchiveAfterDaysSinceCreationGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_creation_greater_than,omitempty"`
 
 	// The age in days after last access time to tier blobs to archive storage. Supports blob currently at Hot or Cool tier. Must be between 0 and99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	TierToArchiveAfterDaysSinceLastAccessTimeGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceLastAccessTimeGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_last_access_time_greater_than,omitempty"`
 
 	// The age in days after last tier change to the blobs to skip to be archved. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	TierToArchiveAfterDaysSinceLastTierChangeGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceLastTierChangeGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_last_tier_change_greater_than,omitempty"`
 
 	// The age in days after last modification to tier blobs to archive storage. Supports blob currently at Hot or Cool tier. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	TierToArchiveAfterDaysSinceModificationGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceModificationGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_modification_greater_than,omitempty"`
 
 	// The age in days after creation to cool storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	TierToCoolAfterDaysSinceCreationGreaterThan *float64 `json:"tierToCoolAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_cool_after_days_since_creation_greater_than,omitempty"`
 
 	// The age in days after last access time to tier blobs to cool storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	TierToCoolAfterDaysSinceLastAccessTimeGreaterThan *float64 `json:"tierToCoolAfterDaysSinceLastAccessTimeGreaterThan,omitempty" tf:"tier_to_cool_after_days_since_last_access_time_greater_than,omitempty"`
 
 	// The age in days after last modification to tier blobs to cool storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	TierToCoolAfterDaysSinceModificationGreaterThan *float64 `json:"tierToCoolAfterDaysSinceModificationGreaterThan,omitempty" tf:"tier_to_cool_after_days_since_modification_greater_than,omitempty"`
 }
 
@@ -184,12 +198,15 @@ type FiltersObservation struct {
 type FiltersParameters struct {
 
 	// An array of predefined values. Valid options are blockBlob and appendBlob.
+	// +kubebuilder:validation:Optional
 	BlobTypes []*string `json:"blobTypes,omitempty" tf:"blob_types,omitempty"`
 
 	// A match_blob_index_tag block as defined below. The block defines the blob index tag based filtering for blob objects.
+	// +kubebuilder:validation:Optional
 	MatchBlobIndexTag []MatchBlobIndexTagParameters `json:"matchBlobIndexTag,omitempty" tf:"match_blob_index_tag,omitempty"`
 
 	// An array of strings for prefixes to be matched.
+	// +kubebuilder:validation:Optional
 	PrefixMatch []*string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 }
 
@@ -214,6 +231,7 @@ type ManagementPolicyObservation struct {
 type ManagementPolicyParameters struct {
 
 	// A rule block as documented below.
+	// +kubebuilder:validation:Optional
 	Rule []RuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// Specifies the id of the storage account to apply the management policy to. Changing this forces a new resource to be created.
@@ -258,12 +276,15 @@ type MatchBlobIndexTagObservation struct {
 type MatchBlobIndexTagParameters struct {
 
 	// The name of the rule. Rule name is case-sensitive. It must be unique within a policy.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The comparison operator which is used for object comparison and filtering. Possible value is ==. Defaults to ==.
+	// +kubebuilder:validation:Optional
 	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
 
 	// The filter tag value used for tag based filtering for blob objects.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -300,15 +321,19 @@ type RuleObservation struct {
 type RuleParameters struct {
 
 	// An actions block as documented below.
+	// +kubebuilder:validation:Optional
 	Actions []ActionsParameters `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// Boolean to specify whether the rule is enabled.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A filters block as documented below.
+	// +kubebuilder:validation:Optional
 	Filters []FiltersParameters `json:"filters,omitempty" tf:"filters,omitempty"`
 
 	// The name of the rule. Rule name is case-sensitive. It must be unique within a policy.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
@@ -345,15 +370,19 @@ type SnapshotObservation struct {
 type SnapshotParameters struct {
 
 	// The age in days after creation to tier blob version to archive storage. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	ChangeTierToArchiveAfterDaysSinceCreation *float64 `json:"changeTierToArchiveAfterDaysSinceCreation,omitempty" tf:"change_tier_to_archive_after_days_since_creation,omitempty"`
 
 	// The age in days creation create to tier blob version to cool storage. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	ChangeTierToCoolAfterDaysSinceCreation *float64 `json:"changeTierToCoolAfterDaysSinceCreation,omitempty" tf:"change_tier_to_cool_after_days_since_creation,omitempty"`
 
 	// The age in days after creation to delete the blob snapshot. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	DeleteAfterDaysSinceCreationGreaterThan *float64 `json:"deleteAfterDaysSinceCreationGreaterThan,omitempty" tf:"delete_after_days_since_creation_greater_than,omitempty"`
 
 	// The age in days after last tier change to the blobs to skip to be archved. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	TierToArchiveAfterDaysSinceLastTierChangeGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceLastTierChangeGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_last_tier_change_greater_than,omitempty"`
 }
 
@@ -390,15 +419,19 @@ type VersionObservation struct {
 type VersionParameters struct {
 
 	// The age in days after creation to tier blob version to archive storage. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	ChangeTierToArchiveAfterDaysSinceCreation *float64 `json:"changeTierToArchiveAfterDaysSinceCreation,omitempty" tf:"change_tier_to_archive_after_days_since_creation,omitempty"`
 
 	// The age in days creation create to tier blob version to cool storage. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	ChangeTierToCoolAfterDaysSinceCreation *float64 `json:"changeTierToCoolAfterDaysSinceCreation,omitempty" tf:"change_tier_to_cool_after_days_since_creation,omitempty"`
 
 	// The age in days after creation to delete the blob version. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	DeleteAfterDaysSinceCreation *float64 `json:"deleteAfterDaysSinceCreation,omitempty" tf:"delete_after_days_since_creation,omitempty"`
 
 	// The age in days after last tier change to the blobs to skip to be archved. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
 	TierToArchiveAfterDaysSinceLastTierChangeGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceLastTierChangeGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_last_tier_change_greater_than,omitempty"`
 }
 

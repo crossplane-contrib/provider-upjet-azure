@@ -52,9 +52,11 @@ type SentinelAlertRuleFusionObservation struct {
 type SentinelAlertRuleFusionParameters struct {
 
 	// The GUID of the alert rule template which is used for this Sentinel Fusion Alert Rule. Changing this forces a new Sentinel Fusion Alert Rule to be created.
+	// +kubebuilder:validation:Optional
 	AlertRuleTemplateGUID *string `json:"alertRuleTemplateGuid,omitempty" tf:"alert_rule_template_guid,omitempty"`
 
 	// Should this Sentinel Fusion Alert Rule be enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The ID of the Log Analytics Workspace this Sentinel Fusion Alert Rule belongs to. Changing this forces a new Sentinel Fusion Alert Rule to be created.
@@ -72,9 +74,11 @@ type SentinelAlertRuleFusionParameters struct {
 	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The name which should be used for this Sentinel Fusion Alert Rule. Changing this forces a new Sentinel Fusion Alert Rule to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more source blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Source []SourceParameters `json:"source,omitempty" tf:"source,omitempty"`
 }
 
@@ -105,12 +109,15 @@ type SourceObservation struct {
 type SourceParameters struct {
 
 	// Whether this source signal is enabled or disabled in Fusion detection? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the Fusion source signal. Refer to Fusion alert rule template for supported values.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more sub_type blocks as defined below.
+	// +kubebuilder:validation:Optional
 	SubType []SubTypeParameters `json:"subType,omitempty" tf:"sub_type,omitempty"`
 }
 
@@ -141,12 +148,15 @@ type SubTypeObservation struct {
 type SubTypeParameters struct {
 
 	// Whether this source subtype under source signal is enabled or disabled in Fusion detection. Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The Name of the source subtype under a given source signal in Fusion detection. Refer to Fusion alert rule template for supported values.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of severities that are enabled for this source subtype consumed in Fusion detection. Possible values for each element are High, Medium, Low, Informational.
+	// +kubebuilder:validation:Optional
 	SeveritiesAllowed []*string `json:"severitiesAllowed,omitempty" tf:"severities_allowed,omitempty"`
 }
 

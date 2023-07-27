@@ -34,9 +34,11 @@ type ActionObservation struct {
 type ActionParameters struct {
 
 	// A request_header block as defined below.
+	// +kubebuilder:validation:Optional
 	RequestHeader []RequestHeaderParameters `json:"requestHeader,omitempty" tf:"request_header,omitempty"`
 
 	// A response_header block as defined below.
+	// +kubebuilder:validation:Optional
 	ResponseHeader []ResponseHeaderParameters `json:"responseHeader,omitempty" tf:"response_header,omitempty"`
 }
 
@@ -71,6 +73,7 @@ type FrontdoorRulesEngineObservation struct {
 type FrontdoorRulesEngineParameters struct {
 
 	// Whether this Rules engine configuration is enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the Front Door instance. Changing this forces a new resource to be created.
@@ -100,6 +103,7 @@ type FrontdoorRulesEngineParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A rule block as defined below.
+	// +kubebuilder:validation:Optional
 	Rule []FrontdoorRulesEngineRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
@@ -136,15 +140,19 @@ type FrontdoorRulesEngineRuleObservation struct {
 type FrontdoorRulesEngineRuleParameters struct {
 
 	// An action block as defined below.
+	// +kubebuilder:validation:Optional
 	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// One or more match_condition block as defined below.
+	// +kubebuilder:validation:Optional
 	MatchCondition []RuleMatchConditionParameters `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
 
 	// The name of the rule.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Priority of the rule, must be unique per rules engine definition.
+	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
@@ -175,12 +183,15 @@ type RequestHeaderObservation struct {
 type RequestHeaderParameters struct {
 
 	// can be set to Overwrite, Append or Delete.
+	// +kubebuilder:validation:Optional
 	HeaderActionType *string `json:"headerActionType,omitempty" tf:"header_action_type,omitempty"`
 
 	// header name (string).
+	// +kubebuilder:validation:Optional
 	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
 
 	// value name (string).
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -211,12 +222,15 @@ type ResponseHeaderObservation struct {
 type ResponseHeaderParameters struct {
 
 	// can be set to Overwrite, Append or Delete.
+	// +kubebuilder:validation:Optional
 	HeaderActionType *string `json:"headerActionType,omitempty" tf:"header_action_type,omitempty"`
 
 	// header name (string).
+	// +kubebuilder:validation:Optional
 	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
 
 	// value name (string).
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -265,21 +279,27 @@ type RuleMatchConditionObservation struct {
 type RuleMatchConditionParameters struct {
 
 	// can be set to true or false to negate the given condition. Defaults to true.
+	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// can be set to Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith or EndsWith
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// match against a specific key when variable is set to PostArgs or RequestHeader. It cannot be used with QueryString and RequestMethod.
+	// +kubebuilder:validation:Optional
 	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
 
 	// can be set to one or more values out of Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode and UrlEncode
+	// +kubebuilder:validation:Optional
 	Transform []*string `json:"transform,omitempty" tf:"transform,omitempty"`
 
 	// value name (string).
+	// +kubebuilder:validation:Optional
 	Value []*string `json:"value,omitempty" tf:"value,omitempty"`
 
 	// can be set to IsMobile, RemoteAddr, RequestMethod, QueryString, PostArgs, RequestURI, RequestPath, RequestFilename, RequestFilenameExtension,RequestHeader,RequestBody or RequestScheme.
+	// +kubebuilder:validation:Optional
 	Variable *string `json:"variable,omitempty" tf:"variable,omitempty"`
 }
 

@@ -73,15 +73,19 @@ type ReferenceInputBlobObservation struct {
 type ReferenceInputBlobParameters struct {
 
 	// The authentication mode for the Stream Analytics Reference Input. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	// +kubebuilder:validation:Optional
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
+	// +kubebuilder:validation:Optional
 	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
 
 	// The name of the Reference Input Blob. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The blob path pattern. Not a regular expression. It represents a pattern against which blob names will be matched to determine whether or not they should be included as input or output to the job.
+	// +kubebuilder:validation:Optional
 	PathPattern *string `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
 
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
@@ -98,6 +102,7 @@ type ReferenceInputBlobParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
+	// +kubebuilder:validation:Optional
 	Serialization []ReferenceInputBlobSerializationParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The Access Key which should be used to connect to this Storage Account. Required if authentication_mode is ConnectionString.
@@ -144,6 +149,7 @@ type ReferenceInputBlobParameters struct {
 	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 
 	// The time format. Wherever {time} appears in path_pattern, the value of this property is used as the time format instead.
+	// +kubebuilder:validation:Optional
 	TimeFormat *string `json:"timeFormat,omitempty" tf:"time_format,omitempty"`
 }
 
@@ -174,12 +180,15 @@ type ReferenceInputBlobSerializationObservation struct {
 type ReferenceInputBlobSerializationParameters struct {
 
 	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
+	// +kubebuilder:validation:Optional
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
+	// +kubebuilder:validation:Optional
 	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
 
 	// The serialization format used for the reference data. Possible values are Avro, Csv and Json.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

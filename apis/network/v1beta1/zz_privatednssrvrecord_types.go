@@ -52,6 +52,7 @@ type PrivateDNSSRVRecordObservation struct {
 type PrivateDNSSRVRecordParameters struct {
 
 	// One or more record blocks as defined below.
+	// +kubebuilder:validation:Optional
 	Record []PrivateDNSSRVRecordRecordParameters `json:"record,omitempty" tf:"record,omitempty"`
 
 	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
@@ -68,9 +69,11 @@ type PrivateDNSSRVRecordParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
+	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
@@ -120,15 +123,19 @@ type PrivateDNSSRVRecordRecordObservation struct {
 type PrivateDNSSRVRecordRecordParameters struct {
 
 	// The Port the service is listening on.
+	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The priority of the SRV record.
+	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The FQDN of the service.
+	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// The Weight of the SRV record.
+	// +kubebuilder:validation:Optional
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 

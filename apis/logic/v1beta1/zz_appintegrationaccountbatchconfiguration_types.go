@@ -55,6 +55,7 @@ type AppIntegrationAccountBatchConfigurationObservation struct {
 type AppIntegrationAccountBatchConfigurationParameters struct {
 
 	// The batch group name of the Logic App Integration Batch Configuration. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	BatchGroupName *string `json:"batchGroupName,omitempty" tf:"batch_group_name,omitempty"`
 
 	// The name of the Logic App Integration Account. Changing this forces a new resource to be created.
@@ -72,12 +73,15 @@ type AppIntegrationAccountBatchConfigurationParameters struct {
 	IntegrationAccountNameSelector *v1.Selector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
 
 	// A JSON mapping of any Metadata for this Logic App Integration Account Batch Configuration.
+	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name which should be used for this Logic App Integration Account Batch Configuration. Only Alphanumeric characters allowed. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A release_criteria block as documented below, which is used to select the criteria to meet before processing each batch.
+	// +kubebuilder:validation:Optional
 	ReleaseCriteria []ReleaseCriteriaParameters `json:"releaseCriteria,omitempty" tf:"release_criteria,omitempty"`
 
 	// The name of the Resource Group where the Logic App Integration Account Batch Configuration should exist. Changing this forces a new resource to be created.
@@ -115,9 +119,11 @@ type MonthlyObservation struct {
 type MonthlyParameters struct {
 
 	// The occurrence of the week within the month.
+	// +kubebuilder:validation:Optional
 	Week *float64 `json:"week,omitempty" tf:"week,omitempty"`
 
 	// The day of the occurrence. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
+	// +kubebuilder:validation:Optional
 	Weekday *string `json:"weekday,omitempty" tf:"weekday,omitempty"`
 }
 
@@ -166,21 +172,27 @@ type RecurrenceObservation struct {
 type RecurrenceParameters struct {
 
 	// The end time of the schedule, formatted as an RFC3339 string.
+	// +kubebuilder:validation:Optional
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
 	// The frequency of the schedule. Possible values are Day, Hour, Minute, Month, NotSpecified, Second, Week and Year.
+	// +kubebuilder:validation:Optional
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// The number of frequencys between runs.
+	// +kubebuilder:validation:Optional
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// A schedule block as documented below.
+	// +kubebuilder:validation:Optional
 	Schedule []ScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// The start time of the schedule, formatted as an RFC3339 string.
+	// +kubebuilder:validation:Optional
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
 
 	// The timezone of the start/end time.
+	// +kubebuilder:validation:Optional
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
@@ -211,12 +223,15 @@ type ReleaseCriteriaObservation struct {
 type ReleaseCriteriaParameters struct {
 
 	// The batch size in bytes for the Logic App Integration Batch Configuration.
+	// +kubebuilder:validation:Optional
 	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
 
 	// The message count for the Logic App Integration Batch Configuration.
+	// +kubebuilder:validation:Optional
 	MessageCount *float64 `json:"messageCount,omitempty" tf:"message_count,omitempty"`
 
 	// A recurrence block as documented below.
+	// +kubebuilder:validation:Optional
 	Recurrence []RecurrenceParameters `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }
 
@@ -259,18 +274,23 @@ type ScheduleObservation struct {
 type ScheduleParameters struct {
 
 	// A list containing a single item, which specifies the Hour interval at which this recurrence should be triggered.
+	// +kubebuilder:validation:Optional
 	Hours []*float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
 	// A list containing a single item which specifies the Minute interval at which this recurrence should be triggered.
+	// +kubebuilder:validation:Optional
 	Minutes []*float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
 	// A list of days of the month that the job should execute on.
+	// +kubebuilder:validation:Optional
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
 	// A monthly block as documented below.
+	// +kubebuilder:validation:Optional
 	Monthly []MonthlyParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
 
 	// A list of days of the week that the job should execute on. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
+	// +kubebuilder:validation:Optional
 	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
 }
 

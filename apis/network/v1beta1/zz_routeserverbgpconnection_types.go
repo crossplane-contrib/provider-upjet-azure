@@ -40,9 +40,11 @@ type RouteServerBGPConnectionObservation struct {
 type RouteServerBGPConnectionParameters struct {
 
 	// The peer autonomous system number for the Route Server Bgp Connection. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PeerAsn *float64 `json:"peerAsn,omitempty" tf:"peer_asn,omitempty"`
 
 	// The peer ip address for the Route Server Bgp Connection. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PeerIP *string `json:"peerIp,omitempty" tf:"peer_ip,omitempty"`
 
 	// The ID of the Route Server within which this Bgp connection should be created. Changing this forces a new resource to be created.

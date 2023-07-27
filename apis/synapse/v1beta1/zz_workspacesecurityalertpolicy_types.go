@@ -61,18 +61,23 @@ type WorkspaceSecurityAlertPolicyObservation struct {
 type WorkspaceSecurityAlertPolicyParameters struct {
 
 	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
+	// +kubebuilder:validation:Optional
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
 	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
+	// +kubebuilder:validation:Optional
 	EmailAccountAdminsEnabled *bool `json:"emailAccountAdminsEnabled,omitempty" tf:"email_account_admins_enabled,omitempty"`
 
 	// Specifies an array of email addresses to which the alert is sent.
+	// +kubebuilder:validation:Optional
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific workspace. Possible values are Disabled, Enabled and New.
+	// +kubebuilder:validation:Optional
 	PolicyState *string `json:"policyState,omitempty" tf:"policy_state,omitempty"`
 
 	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
 	// Specifies the identifier key of the Threat Detection audit storage account.

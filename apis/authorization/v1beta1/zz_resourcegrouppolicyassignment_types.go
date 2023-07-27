@@ -40,9 +40,11 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// A list of User Managed Identity IDs which should be assigned to the Policy Definition.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Type of Managed Identity which should be added to this Policy Definition. Possible values are SystemAssigned and UserAssigned.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -67,9 +69,11 @@ type NonComplianceMessageObservation struct {
 type NonComplianceMessageParameters struct {
 
 	// The non-compliance message text. When assigning policy sets (initiatives), unless policy_definition_reference_id is specified then this message will be the default for all policies.
+	// +kubebuilder:validation:Optional
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
 	// When assigning policy sets (initiatives), this is the ID of the policy definition that the non-compliance message applies to.
+	// +kubebuilder:validation:Optional
 	PolicyDefinitionReferenceID *string `json:"policyDefinitionReferenceId,omitempty" tf:"policy_definition_reference_id,omitempty"`
 }
 
@@ -94,9 +98,11 @@ type OverridesObservation struct {
 type OverridesParameters struct {
 
 	// One or more override_selector as defined below.
+	// +kubebuilder:validation:Optional
 	Selectors []SelectorsParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
 
 	// Specifies the value to override the policy property. Possible values for policyEffect override listed policy effects.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -184,33 +190,43 @@ type ResourceGroupPolicyAssignmentObservation struct {
 type ResourceGroupPolicyAssignmentParameters struct {
 
 	// A description which should be used for this Policy Assignment.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Display Name for this Policy Assignment.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Specifies if this Policy should be enforced or not? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enforce *bool `json:"enforce,omitempty" tf:"enforce,omitempty"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Policy Assignment should exist. Changing this forces a new Policy Assignment to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A JSON mapping of any Metadata for this Policy.
+	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// One or more non_compliance_message blocks as defined below.
+	// +kubebuilder:validation:Optional
 	NonComplianceMessage []NonComplianceMessageParameters `json:"nonComplianceMessage,omitempty" tf:"non_compliance_message,omitempty"`
 
 	// Specifies a list of Resource Scopes (for example a Subscription, or a Resource Group) within this Management Group which are excluded from this Policy.
+	// +kubebuilder:validation:Optional
 	NotScopes []*string `json:"notScopes,omitempty" tf:"not_scopes,omitempty"`
 
 	// One or more overrides blocks as defined below. More detail about overrides and resource_selectors see policy assignment structure
+	// +kubebuilder:validation:Optional
 	Overrides []OverridesParameters `json:"overrides,omitempty" tf:"overrides,omitempty"`
 
 	// A JSON mapping of any Parameters for this Policy.
+	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
@@ -242,6 +258,7 @@ type ResourceGroupPolicyAssignmentParameters struct {
 	ResourceGroupIDSelector *v1.Selector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
+	// +kubebuilder:validation:Optional
 	ResourceSelectors []ResourceSelectorsParameters `json:"resourceSelectors,omitempty" tf:"resource_selectors,omitempty"`
 }
 
@@ -266,9 +283,11 @@ type ResourceSelectorsObservation struct {
 type ResourceSelectorsParameters struct {
 
 	// Specifies a name for the resource selector.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more resource_selector block as defined below.
+	// +kubebuilder:validation:Optional
 	Selectors []ResourceSelectorsSelectorsParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
 }
 
@@ -299,12 +318,15 @@ type ResourceSelectorsSelectorsObservation struct {
 type ResourceSelectorsSelectorsParameters struct {
 
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
+	// +kubebuilder:validation:Optional
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
 	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
+	// +kubebuilder:validation:Optional
 	NotIn []*string `json:"notIn,omitempty" tf:"not_in,omitempty"`
 }
 
@@ -332,9 +354,11 @@ type SelectorsObservation struct {
 type SelectorsParameters struct {
 
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
+	// +kubebuilder:validation:Optional
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
+	// +kubebuilder:validation:Optional
 	NotIn []*string `json:"notIn,omitempty" tf:"not_in,omitempty"`
 }
 

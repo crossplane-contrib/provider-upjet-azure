@@ -40,6 +40,7 @@ type ManagerManagementGroupConnectionObservation struct {
 type ManagerManagementGroupConnectionParameters struct {
 
 	// A description of the Network Manager Management Group Connection.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the ID of the target Management Group. Changing this forces a new resource to be created.

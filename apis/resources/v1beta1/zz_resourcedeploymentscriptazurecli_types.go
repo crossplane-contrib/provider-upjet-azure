@@ -28,6 +28,7 @@ type ContainerObservation struct {
 type ContainerParameters struct {
 
 	// Container group name, if not specified then the name will get auto-generated. For more information, please refer to the Container Configuration documentation.
+	// +kubebuilder:validation:Optional
 	ContainerGroupName *string `json:"containerGroupName,omitempty" tf:"container_group_name,omitempty"`
 }
 
@@ -52,6 +53,7 @@ type EnvironmentVariableObservation struct {
 type EnvironmentVariableParameters struct {
 
 	// Specifies the name of the environment variable.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the value of the secure environment variable.
@@ -59,6 +61,7 @@ type EnvironmentVariableParameters struct {
 	SecureValueSecretRef *v1.SecretKeySelector `json:"secureValueSecretRef,omitempty" tf:"-"`
 
 	// Specifies the value of the environment variable.
+	// +kubebuilder:validation:Optional
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -94,6 +97,7 @@ type IdentityParameters struct {
 	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Type of the managed identity. The only possible value is UserAssigned. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -211,30 +215,39 @@ type ResourceDeploymentScriptAzureCliObservation struct {
 type ResourceDeploymentScriptAzureCliParameters struct {
 
 	// Specifies the cleanup preference when the script execution gets in a terminal state. Possible values are Always, OnExpiration, OnSuccess. Defaults to Always. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	CleanupPreference *string `json:"cleanupPreference,omitempty" tf:"cleanup_preference,omitempty"`
 
 	// Command line arguments to pass to the script. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	CommandLine *string `json:"commandLine,omitempty" tf:"command_line,omitempty"`
 
 	// A container block as defined below. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	Container []ContainerParameters `json:"container,omitempty" tf:"container,omitempty"`
 
 	// An environment_variable block as defined below. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	EnvironmentVariable []EnvironmentVariableParameters `json:"environmentVariable,omitempty" tf:"environment_variable,omitempty"`
 
 	// Gets or sets how the deployment script should be forced to execute even if the script resource has not changed. Can be current time stamp or a GUID. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	ForceUpdateTag *string `json:"forceUpdateTag,omitempty" tf:"force_update_tag,omitempty"`
 
 	// An identity block as defined below. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the Azure Region where the Resource Deployment Script should exist. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name which should be used for this Resource Deployment Script. The name length must be from 1 to 260 characters. The name can only contain alphanumeric, underscore, parentheses, hyphen and period, and it cannot end with a period. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Uri for the script. This is the entry point for the external script. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	PrimaryScriptURI *string `json:"primaryScriptUri,omitempty" tf:"primary_script_uri,omitempty"`
 
 	// Specifies the name of the Resource Group where the Resource Deployment Script should exist. Changing this forces a new Resource Deployment Script to be created.
@@ -251,24 +264,31 @@ type ResourceDeploymentScriptAzureCliParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Interval for which the service retains the script resource after it reaches a terminal state. Resource will be deleted when this duration expires. The time duration should be between 1 hour and 26 hours (inclusive) and should be specified in ISO 8601 format. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	RetentionInterval *string `json:"retentionInterval,omitempty" tf:"retention_interval,omitempty"`
 
 	// Script body. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	ScriptContent *string `json:"scriptContent,omitempty" tf:"script_content,omitempty"`
 
 	// A storage_account block as defined below. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	StorageAccount []StorageAccountParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
 
 	// Supporting files for the external script. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	SupportingScriptUris []*string `json:"supportingScriptUris,omitempty" tf:"supporting_script_uris,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Deployment Script.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Maximum allowed script execution time specified in ISO 8601 format. Needs to be greater than 0 and smaller than 1 day. Defaults to P1D. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
 	// Azure CLI module version to be used. The supported versions are 2.0.77, 2.0.78, 2.0.79, 2.0.80, 2.0.81, 2.1.0, 2.10.0, 2.10.1, 2.11.0, 2.11.1, 2.12.0, 2.12.1, 2.13.0, 2.14.0, 2.14.1, 2.14.2, 2.15.0, 2.15.1, 2.16.0, 2.17.0, 2.17.1, 2.18.0, 2.19.0, 2.19.1, 2.2.0, 2.20.0, 2.21.0, 2.22.0, 2.22.1, 2.23.0, 2.24.0, 2.24.1, 2.24.2, 2.25.0, 2.26.0, 2.26.1, 2.27.0, 2.27.1, 2.27.2, 2.28.0, 2.29.0, 2.29.1, 2.29.2, 2.3.0, 2.3.1, 2.30.0, 2.31.0, 2.32.0, 2.33.0, 2.33.1, 2.34.0, 2.34.1, 2.35.0, 2.36.0, 2.37.0, 2.38.0, 2.39.0, 2.4.0, 2.40.0, 2.41.0, 2.5.0, 2.5.1, 2.6.0, 2.7.0, 2.8.0, 2.9.0, 2.9.1. Changing this forces a new Resource Deployment Script to be created.
+	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -291,6 +311,7 @@ type StorageAccountParameters struct {
 	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
 
 	// Specifies the storage account name.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 

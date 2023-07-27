@@ -52,18 +52,23 @@ type APIMetadataObservation struct {
 type APIMetadataParameters struct {
 
 	// Detailed description of the APIs available on the Gateway instance.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Location of additional documentation for the APIs available on the Gateway instance.
+	// +kubebuilder:validation:Optional
 	DocumentationURL *string `json:"documentationUrl,omitempty" tf:"documentation_url,omitempty"`
 
 	// Base URL that API consumers will use to access APIs on the Gateway instance.
+	// +kubebuilder:validation:Optional
 	ServerURL *string `json:"serverUrl,omitempty" tf:"server_url,omitempty"`
 
 	// Specifies the title describing the context of the APIs available on the Gateway instance.
+	// +kubebuilder:validation:Optional
 	Title *string `json:"title,omitempty" tf:"title,omitempty"`
 
 	// Specifies the version of APIs available on this Gateway instance.
+	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -112,21 +117,27 @@ type CorsObservation struct {
 type CorsParameters struct {
 
 	// Allowed headers in cross-site requests. The special value * allows actual requests to send any header.
+	// +kubebuilder:validation:Optional
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// Allowed HTTP methods on cross-site requests. The special value * allows all methods. If not set, GET and HEAD are allowed by default. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and PUT.
+	// +kubebuilder:validation:Optional
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Allowed origins to make cross-site requests. The special value * allows all domains.
+	// +kubebuilder:validation:Optional
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// is user credentials are supported on cross-site requests?
+	// +kubebuilder:validation:Optional
 	CredentialsAllowed *bool `json:"credentialsAllowed,omitempty" tf:"credentials_allowed,omitempty"`
 
 	// HTTP response headers to expose for cross-site requests.
+	// +kubebuilder:validation:Optional
 	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
 
 	// How long, in seconds, the response from a pre-flight request can be cached by clients.
+	// +kubebuilder:validation:Optional
 	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
 
@@ -202,27 +213,35 @@ type SpringCloudGatewayObservation struct {
 type SpringCloudGatewayParameters struct {
 
 	// A api_metadata block as defined below.
+	// +kubebuilder:validation:Optional
 	APIMetadata []APIMetadataParameters `json:"apiMetadata,omitempty" tf:"api_metadata,omitempty"`
 
 	// Specifies a list of application performance monitoring types used in the Spring Cloud Gateway. The allowed values are AppDynamics, ApplicationInsights, Dynatrace, ElasticAPM and NewRelic.
+	// +kubebuilder:validation:Optional
 	ApplicationPerformanceMonitoringTypes []*string `json:"applicationPerformanceMonitoringTypes,omitempty" tf:"application_performance_monitoring_types,omitempty"`
 
 	// A cors block as defined below.
+	// +kubebuilder:validation:Optional
 	Cors []CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// Specifies the environment variables of the Spring Cloud Gateway as a map of key-value pairs. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// is only https is allowed?
+	// +kubebuilder:validation:Optional
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
 	// Specifies the required instance count of the Spring Cloud Gateway. Possible Values are between 1 and 500. Defaults to 1 if not specified.
+	// +kubebuilder:validation:Optional
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
 
 	// Indicates whether the Spring Cloud Gateway exposes endpoint.
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// A quota block as defined below.
+	// +kubebuilder:validation:Optional
 	Quota []SpringCloudGatewayQuotaParameters `json:"quota,omitempty" tf:"quota,omitempty"`
 
 	// Specifies the sensitive environment variables of the Spring Cloud Gateway as a map of key-value pairs. Changing this forces a new resource to be created.
@@ -244,6 +263,7 @@ type SpringCloudGatewayParameters struct {
 	SpringCloudServiceIDSelector *v1.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
 
 	// A sso block as defined below.
+	// +kubebuilder:validation:Optional
 	Sso []SpringCloudGatewaySsoParameters `json:"sso,omitempty" tf:"sso,omitempty"`
 }
 
@@ -268,9 +288,11 @@ type SpringCloudGatewayQuotaObservation struct {
 type SpringCloudGatewayQuotaParameters struct {
 
 	// Specifies the required cpu of the Spring Cloud Deployment. Possible Values are 500m, 1, 2, 3 and 4. Defaults to 1 if not specified.
+	// +kubebuilder:validation:Optional
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
 	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not specified.
+	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }
 
@@ -307,15 +329,19 @@ type SpringCloudGatewaySsoObservation struct {
 type SpringCloudGatewaySsoParameters struct {
 
 	// The public identifier for the application.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The secret known only to the application and the authorization server.
+	// +kubebuilder:validation:Optional
 	ClientSecret *string `json:"clientSecret,omitempty" tf:"client_secret,omitempty"`
 
 	// The URI of Issuer Identifier.
+	// +kubebuilder:validation:Optional
 	IssuerURI *string `json:"issuerUri,omitempty" tf:"issuer_uri,omitempty"`
 
 	// It defines the specific actions applications can be allowed to do on a user's behalf.
+	// +kubebuilder:validation:Optional
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 

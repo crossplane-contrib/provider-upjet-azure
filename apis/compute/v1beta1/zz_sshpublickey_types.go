@@ -46,9 +46,11 @@ type SSHPublicKeyObservation struct {
 type SSHPublicKeyParameters struct {
 
 	// The Azure Region where the SSH Public Key should exist. Changing this forces a new SSH Public Key to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// SSH public key used to authenticate to a virtual machine through ssh. the provided public key needs to be at least 2048-bit and in ssh-rsa format.
+	// +kubebuilder:validation:Optional
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// The name of the Resource Group where the SSH Public Key should exist. Changing this forces a new SSH Public Key to be created.
@@ -65,6 +67,7 @@ type SSHPublicKeyParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the SSH Public Key.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

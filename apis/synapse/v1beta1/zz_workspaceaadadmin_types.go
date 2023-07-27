@@ -44,9 +44,11 @@ type WorkspaceAADAdminObservation struct {
 type WorkspaceAADAdminParameters struct {
 
 	// The login name of the Azure AD Administrator of this Synapse Workspace.
+	// +kubebuilder:validation:Optional
 	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
 	// The object id of the Azure AD Administrator of this Synapse Workspace.
+	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// The ID of the Synapse Workspace where the Azure AD Administrator should be configured.
@@ -64,6 +66,7 @@ type WorkspaceAADAdminParameters struct {
 	SynapseWorkspaceIDSelector *v1.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// The tenant id of the Azure AD Administrator of this Synapse Workspace.
+	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 

@@ -40,6 +40,7 @@ type FlexibleServerFirewallRuleObservation struct {
 type FlexibleServerFirewallRuleParameters struct {
 
 	// The End IP Address associated with this PostgreSQL Flexible Server Firewall Rule.
+	// +kubebuilder:validation:Optional
 	EndIPAddress *string `json:"endIpAddress,omitempty" tf:"end_ip_address,omitempty"`
 
 	// The ID of the PostgreSQL Flexible Server from which to create this PostgreSQL Flexible Server Firewall Rule. Changing this forces a new PostgreSQL Flexible Server Firewall Rule to be created.
@@ -57,6 +58,7 @@ type FlexibleServerFirewallRuleParameters struct {
 	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 
 	// The Start IP Address associated with this PostgreSQL Flexible Server Firewall Rule.
+	// +kubebuilder:validation:Optional
 	StartIPAddress *string `json:"startIpAddress,omitempty" tf:"start_ip_address,omitempty"`
 }
 

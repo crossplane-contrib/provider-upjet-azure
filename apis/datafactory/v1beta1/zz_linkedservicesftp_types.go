@@ -94,12 +94,15 @@ type LinkedServiceSFTPObservation struct {
 type LinkedServiceSFTPParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The type of authentication used to connect to the web table source. Valid options are Anonymous, Basic and ClientCertificate.
+	// +kubebuilder:validation:Optional
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -117,18 +120,23 @@ type LinkedServiceSFTPParameters struct {
 	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
 
 	// The description for the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The SFTP server hostname.
+	// +kubebuilder:validation:Optional
 	Host *string `json:"host,omitempty" tf:"host,omitempty"`
 
 	// The host key fingerprint of the SFTP server.
+	// +kubebuilder:validation:Optional
 	HostKeyFingerprint *string `json:"hostKeyFingerprint,omitempty" tf:"host_key_fingerprint,omitempty"`
 
 	// The integration runtime reference to associate with the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Password to logon to the SFTP Server for Basic Authentication.
@@ -136,12 +144,15 @@ type LinkedServiceSFTPParameters struct {
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The TCP port number that the SFTP server uses to listen for client connection. Default value is 22.
+	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// Whether to validate host key fingerprint while connecting. If set to false, host_key_fingerprint must also be set.
+	// +kubebuilder:validation:Optional
 	SkipHostKeyValidation *bool `json:"skipHostKeyValidation,omitempty" tf:"skip_host_key_validation,omitempty"`
 
 	// The username used to log on to the SFTP server.
+	// +kubebuilder:validation:Optional
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 

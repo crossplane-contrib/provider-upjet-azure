@@ -39,6 +39,7 @@ type SourceControlTokenParameters struct {
 	TokenSecretSecretRef *v1.SecretKeySelector `json:"tokenSecretSecretRef,omitempty" tf:"-"`
 
 	// The Token type. Possible values include Bitbucket, Dropbox, Github, and OneDrive.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

@@ -34,9 +34,11 @@ type DiskEncryptionKeyObservation struct {
 type DiskEncryptionKeyParameters struct {
 
 	// The URL to the Key Vault Secret used as the Disk Encryption Key. This can be found as id on the azurerm_key_vault_secret resource.
+	// +kubebuilder:validation:Optional
 	SecretURL *string `json:"secretUrl,omitempty" tf:"secret_url,omitempty"`
 
 	// The ID of the source Key Vault. This can be found as id on the azurerm_key_vault resource.
+	// +kubebuilder:validation:Optional
 	SourceVaultID *string `json:"sourceVaultId,omitempty" tf:"source_vault_id,omitempty"`
 }
 
@@ -65,11 +67,14 @@ type EncryptionSettingsObservation struct {
 type EncryptionSettingsParameters struct {
 
 	// A disk_encryption_key block as defined above.
+	// +kubebuilder:validation:Optional
 	DiskEncryptionKey []DiskEncryptionKeyParameters `json:"diskEncryptionKey,omitempty" tf:"disk_encryption_key,omitempty"`
 
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A key_encryption_key block as defined below.
+	// +kubebuilder:validation:Optional
 	KeyEncryptionKey []KeyEncryptionKeyParameters `json:"keyEncryptionKey,omitempty" tf:"key_encryption_key,omitempty"`
 }
 
@@ -94,9 +99,11 @@ type KeyEncryptionKeyObservation struct {
 type KeyEncryptionKeyParameters struct {
 
 	// The URL to the Key Vault Key used as the Key Encryption Key. This can be found as id on the azurerm_key_vault_key resource.
+	// +kubebuilder:validation:Optional
 	KeyURL *string `json:"keyUrl,omitempty" tf:"key_url,omitempty"`
 
 	// The ID of the source Key Vault. This can be found as id on the azurerm_key_vault resource.
+	// +kubebuilder:validation:Optional
 	SourceVaultID *string `json:"sourceVaultId,omitempty" tf:"source_vault_id,omitempty"`
 }
 
@@ -298,63 +305,83 @@ type ManagedDiskObservation struct {
 type ManagedDiskParameters struct {
 
 	// The method to use when creating the managed disk. Changing this forces a new resource to be created. Possible values include:
+	// +kubebuilder:validation:Optional
 	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
 
 	// The ID of the disk access resource for using private endpoints on disks.
+	// +kubebuilder:validation:Optional
 	DiskAccessID *string `json:"diskAccessId,omitempty" tf:"disk_access_id,omitempty"`
 
 	// The ID of a Disk Encryption Set which should be used to encrypt this Managed Disk. Conflicts with secure_vm_disk_encryption_set_id.
+	// +kubebuilder:validation:Optional
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
 
 	// The number of IOPS allowed across all VMs mounting the shared disk as read-only; only settable for UltraSSD disks and PremiumV2 disks with shared disk enabled. One operation can transfer between 4k and 256k bytes.
+	// +kubebuilder:validation:Optional
 	DiskIopsReadOnly *float64 `json:"diskIopsReadOnly,omitempty" tf:"disk_iops_read_only,omitempty"`
 
 	// The number of IOPS allowed for this disk; only settable for UltraSSD disks and PremiumV2 disks. One operation can transfer between 4k and 256k bytes.
+	// +kubebuilder:validation:Optional
 	DiskIopsReadWrite *float64 `json:"diskIopsReadWrite,omitempty" tf:"disk_iops_read_write,omitempty"`
 
 	// The bandwidth allowed across all VMs mounting the shared disk as read-only; only settable for UltraSSD disks and PremiumV2 disks with shared disk enabled. MBps means millions of bytes per second.
+	// +kubebuilder:validation:Optional
 	DiskMbpsReadOnly *float64 `json:"diskMbpsReadOnly,omitempty" tf:"disk_mbps_read_only,omitempty"`
 
 	// The bandwidth allowed for this disk; only settable for UltraSSD disks and PremiumV2 disks. MBps means millions of bytes per second.
+	// +kubebuilder:validation:Optional
 	DiskMbpsReadWrite *float64 `json:"diskMbpsReadWrite,omitempty" tf:"disk_mbps_read_write,omitempty"`
 
 	// Specifies the size of the managed disk to create in gigabytes. If create_option is Copy or FromImage, then the value must be equal to or greater than the source's size. The size can only be increased.
+	// +kubebuilder:validation:Optional
 	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
 
 	// Specifies the Edge Zone within the Azure Region where this Managed Disk should exist. Changing this forces a new Managed Disk to be created.
+	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
 	// A encryption_settings block as defined below.
+	// +kubebuilder:validation:Optional
 	EncryptionSettings []EncryptionSettingsParameters `json:"encryptionSettings,omitempty" tf:"encryption_settings,omitempty"`
 
 	// ID of a Gallery Image Version to copy when create_option is FromImage. This field cannot be specified if image_reference_id is specified. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	GalleryImageReferenceID *string `json:"galleryImageReferenceId,omitempty" tf:"gallery_image_reference_id,omitempty"`
 
 	// The HyperV Generation of the Disk when the source of an Import or Copy operation targets a source that contains an operating system. Possible values are V1 and V2. For ImportSecure it must be set to V2. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
 	// ID of an existing platform/marketplace disk image to copy when create_option is FromImage. This field cannot be specified if gallery_image_reference_id is specified. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	ImageReferenceID *string `json:"imageReferenceId,omitempty" tf:"image_reference_id,omitempty"`
 
 	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Logical Sector Size. Possible values are: 512 and 4096. Defaults to 4096. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	LogicalSectorSize *float64 `json:"logicalSectorSize,omitempty" tf:"logical_sector_size,omitempty"`
 
 	// The maximum number of VMs that can attach to the disk at the same time. Value greater than one indicates a disk that can be mounted on multiple VMs at the same time.
+	// +kubebuilder:validation:Optional
 	MaxShares *float64 `json:"maxShares,omitempty" tf:"max_shares,omitempty"`
 
 	// Policy for accessing the disk via network. Allowed values are AllowAll, AllowPrivate, and DenyAll.
+	// +kubebuilder:validation:Optional
 	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty" tf:"network_access_policy,omitempty"`
 
 	// Specifies if On-Demand Bursting is enabled for the Managed Disk.
+	// +kubebuilder:validation:Optional
 	OnDemandBurstingEnabled *bool `json:"onDemandBurstingEnabled,omitempty" tf:"on_demand_bursting_enabled,omitempty"`
 
 	// Specify a value when the source of an Import, ImportSecure or Copy operation targets a source that contains an operating system. Valid values are Linux or Windows.
+	// +kubebuilder:validation:Optional
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
 	// Whether it is allowed to access the disk via public network. Defaults to true.
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Managed Disk should exist. Changing this forces a new resource to be created.
@@ -371,9 +398,11 @@ type ManagedDiskParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Disk Encryption Set which should be used to Encrypt this OS Disk when the Virtual Machine is a Confidential VM. Conflicts with disk_encryption_set_id. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SecureVMDiskEncryptionSetID *string `json:"secureVmDiskEncryptionSetId,omitempty" tf:"secure_vm_disk_encryption_set_id,omitempty"`
 
 	// Security Type of the Managed Disk when it is used for a Confidential VM. Possible values are ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey, ConfidentialVM_DiskEncryptedWithPlatformKey and ConfidentialVM_DiskEncryptedWithCustomerKey. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SecurityType *string `json:"securityType,omitempty" tf:"security_type,omitempty"`
 
 	// The ID of an existing Managed Disk or Snapshot to copy when create_option is Copy or the recovery point to restore when create_option is Restore. Changing this forces a new resource to be created.
@@ -391,27 +420,35 @@ type ManagedDiskParameters struct {
 	SourceResourceIDSelector *v1.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
 
 	// URI to a valid VHD file to be used when create_option is Import or ImportSecure. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 
 	// The ID of the Storage Account where the source_uri is located. Required when create_option is set to Import or ImportSecure. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// The type of storage to use for the managed disk. Possible values are Standard_LRS, StandardSSD_ZRS, Premium_LRS, PremiumV2_LRS, Premium_ZRS, StandardSSD_LRS or UltraSSD_LRS.
+	// +kubebuilder:validation:Optional
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The disk performance tier to use. Possible values are documented here. This feature is currently supported only for premium SSDs.
+	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 
 	// Specifies if Trusted Launch is enabled for the Managed Disk. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	TrustedLaunchEnabled *bool `json:"trustedLaunchEnabled,omitempty" tf:"trusted_launch_enabled,omitempty"`
 
 	// Specifies the size of the managed disk to create in bytes. Required when create_option is Upload. The value must be equal to the source disk to be copied in bytes. Source disk size could be calculated with ls -l or wc -c. More information can be found at Copy a managed disk. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	UploadSizeBytes *float64 `json:"uploadSizeBytes,omitempty" tf:"upload_size_bytes,omitempty"`
 
 	// Specifies the Availability Zone in which this Managed Disk should be located. Changing this property forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
 }
 

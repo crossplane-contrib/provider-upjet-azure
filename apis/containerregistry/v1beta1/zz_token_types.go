@@ -53,6 +53,7 @@ type TokenParameters struct {
 	ContainerRegistryNameSelector *v1.Selector `json:"containerRegistryNameSelector,omitempty" tf:"-"`
 
 	// Should the Container Registry token be enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the resource group in which to create the Container Registry token. Changing this forces a new resource to be created.

@@ -82,18 +82,23 @@ type ApplicationObservation struct {
 type ApplicationParameters struct {
 
 	// A display_name name. Custom display name for the IoT Central application. Default is resource name.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the supported Azure location where the resource has to be create. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the IotHub resource. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Whether public network access is allowed for the IoT Central Application. Defaults to true.
+	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group under which the IotHub resource has to be created. Changing this forces a new resource to be created.
@@ -110,15 +115,19 @@ type ApplicationParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A sku name. Possible values is ST0, ST1, ST2, Default value is ST1
+	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A sub_domain name. Subdomain for the IoT Central URL. Each application must have a unique subdomain.
+	// +kubebuilder:validation:Optional
 	SubDomain *string `json:"subDomain,omitempty" tf:"sub_domain,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A template name. IoT Central application template name. Default is a custom application. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Template *string `json:"template,omitempty" tf:"template,omitempty"`
 }
 
@@ -143,6 +152,7 @@ type IdentityObservation struct {
 type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this IoT Central Application. The only possible value is SystemAssigned.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

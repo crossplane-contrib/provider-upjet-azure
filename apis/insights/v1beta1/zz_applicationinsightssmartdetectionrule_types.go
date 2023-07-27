@@ -52,6 +52,7 @@ type ApplicationInsightsSmartDetectionRuleObservation struct {
 type ApplicationInsightsSmartDetectionRuleParameters struct {
 
 	// Specifies a list of additional recipients that will be sent emails on this Application Insights Smart Detection Rule.
+	// +kubebuilder:validation:Optional
 	AdditionalEmailRecipients []*string `json:"additionalEmailRecipients,omitempty" tf:"additional_email_recipients,omitempty"`
 
 	// The ID of the Application Insights component on which the Smart Detection Rule operates. Changing this forces a new resource to be created.
@@ -69,12 +70,15 @@ type ApplicationInsightsSmartDetectionRuleParameters struct {
 	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// Is the Application Insights Smart Detection Rule enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Specifies the name of the Application Insights Smart Detection Rule. Valid values include Slow page load time, Slow server response time, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Potential memory leak detected, Potential security issue detected and Abnormal rise in daily data volume, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Potential memory leak detected, Potential security issue detected, Abnormal rise in daily data volume. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Do emails get sent to subscription owners? Defaults to true.
+	// +kubebuilder:validation:Optional
 	SendEmailsToSubscriptionOwners *bool `json:"sendEmailsToSubscriptionOwners,omitempty" tf:"send_emails_to_subscription_owners,omitempty"`
 }
 

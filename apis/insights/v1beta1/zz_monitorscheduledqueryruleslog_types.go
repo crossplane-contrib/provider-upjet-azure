@@ -40,12 +40,15 @@ type MonitorScheduledQueryRulesLogCriteriaDimensionObservation struct {
 type MonitorScheduledQueryRulesLogCriteriaDimensionParameters struct {
 
 	// Name of the dimension.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Operator for dimension values, - 'Include'.
+	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// List of dimension values.
+	// +kubebuilder:validation:Optional
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -70,9 +73,11 @@ type MonitorScheduledQueryRulesLogCriteriaObservation struct {
 type MonitorScheduledQueryRulesLogCriteriaParameters struct {
 
 	// A dimension block as defined below.
+	// +kubebuilder:validation:Optional
 	Dimension []MonitorScheduledQueryRulesLogCriteriaDimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
 	// Name of the metric. Supported metrics are listed in the Azure Monitor Microsoft.OperationalInsights/workspaces metrics namespace.
+	// +kubebuilder:validation:Optional
 	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 }
 
@@ -136,9 +141,11 @@ type MonitorScheduledQueryRulesLogObservation struct {
 type MonitorScheduledQueryRulesLogParameters struct {
 
 	// A list of IDs of Resources referred into query.
+	// +kubebuilder:validation:Optional
 	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
 
 	// A criteria block as defined below.
+	// +kubebuilder:validation:Optional
 	Criteria []MonitorScheduledQueryRulesLogCriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
 	// The resource URI over which log search query is to be run.
@@ -156,15 +163,19 @@ type MonitorScheduledQueryRulesLogParameters struct {
 	DataSourceIDSelector *v1.Selector `json:"dataSourceIdSelector,omitempty" tf:"-"`
 
 	// The description of the scheduled query rule.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Whether this scheduled query rule is enabled. Default is true.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Specifies the Azure Region where the resource should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the scheduled query rule. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which to create the scheduled query rule instance. Changing this forces a new resource to be created.
@@ -181,6 +192,7 @@ type MonitorScheduledQueryRulesLogParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

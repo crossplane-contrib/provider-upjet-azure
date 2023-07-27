@@ -63,12 +63,15 @@ type OutputPowerBIObservation struct {
 type OutputPowerBIParameters struct {
 
 	// The name of the Power BI dataset.
+	// +kubebuilder:validation:Optional
 	DataSet *string `json:"dataset,omitempty" tf:"dataset,omitempty"`
 
 	// The ID of the Power BI group, this must be a valid UUID.
+	// +kubebuilder:validation:Optional
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
 	// The name of the Power BI group. Use this property to help remember which specific Power BI group id was used.
+	// +kubebuilder:validation:Optional
 	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
 
 	// The ID of the Stream Analytics Job. Changing this forces a new resource to be created.
@@ -86,12 +89,15 @@ type OutputPowerBIParameters struct {
 	StreamAnalyticsJobIDSelector *v1.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
 
 	// The name of the Power BI table under the specified dataset.
+	// +kubebuilder:validation:Optional
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
 	// The user display name of the user that was used to obtain the refresh token.
+	// +kubebuilder:validation:Optional
 	TokenUserDisplayName *string `json:"tokenUserDisplayName,omitempty" tf:"token_user_display_name,omitempty"`
 
 	// The user principal name (UPN) of the user that was used to obtain the refresh token.
+	// +kubebuilder:validation:Optional
 	TokenUserPrincipalName *string `json:"tokenUserPrincipalName,omitempty" tf:"token_user_principal_name,omitempty"`
 }
 

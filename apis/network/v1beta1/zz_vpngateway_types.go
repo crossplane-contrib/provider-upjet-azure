@@ -37,6 +37,7 @@ type Instance0BGPPeeringAddressObservation struct {
 type Instance0BGPPeeringAddressParameters struct {
 
 	// A list of custom BGP peering addresses to assign to this instance.
+	// +kubebuilder:validation:Optional
 	CustomIps []*string `json:"customIps,omitempty" tf:"custom_ips,omitempty"`
 }
 
@@ -64,6 +65,7 @@ type Instance1BGPPeeringAddressObservation struct {
 type Instance1BGPPeeringAddressParameters struct {
 
 	// A list of custom BGP peering addresses to assign to this instance.
+	// +kubebuilder:validation:Optional
 	CustomIps []*string `json:"customIps,omitempty" tf:"custom_ips,omitempty"`
 }
 
@@ -103,15 +105,19 @@ type VPNGatewayBGPSettingsObservation struct {
 type VPNGatewayBGPSettingsParameters struct {
 
 	// The ASN of the BGP Speaker. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
 
 	// An instance_bgp_peering_address block as defined below.
+	// +kubebuilder:validation:Optional
 	Instance0BGPPeeringAddress []Instance0BGPPeeringAddressParameters `json:"instance0BgpPeeringAddress,omitempty" tf:"instance_0_bgp_peering_address,omitempty"`
 
 	// An instance_bgp_peering_address block as defined below.
+	// +kubebuilder:validation:Optional
 	Instance1BGPPeeringAddress []Instance1BGPPeeringAddressParameters `json:"instance1BgpPeeringAddress,omitempty" tf:"instance_1_bgp_peering_address,omitempty"`
 
 	// The weight added to Routes learned from this BGP Speaker. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
 }
 
@@ -169,12 +175,15 @@ type VPNGatewayObservation struct {
 type VPNGatewayParameters struct {
 
 	// Is BGP route translation for NAT on this VPN Gateway enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
 	BGPRouteTranslationForNATEnabled *bool `json:"bgpRouteTranslationForNatEnabled,omitempty" tf:"bgp_route_translation_for_nat_enabled,omitempty"`
 
 	// A bgp_settings block as defined below.
+	// +kubebuilder:validation:Optional
 	BGPSettings []VPNGatewayBGPSettingsParameters `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
 
 	// The Azure location where this VPN Gateway should be created. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Name of the Resource Group in which this VPN Gateway should be created. Changing this forces a new resource to be created.
@@ -191,12 +200,15 @@ type VPNGatewayParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Azure routing preference lets you to choose how your traffic routes between Azure and the internet. You can choose to route traffic either via the Microsoft network (default value, Microsoft Network), or via the ISP network (public internet, set to Internet). More context of the configuration can be found in the Microsoft Docs to create a VPN Gateway. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	RoutingPreference *string `json:"routingPreference,omitempty" tf:"routing_preference,omitempty"`
 
 	// The Scale Unit for this VPN Gateway. Defaults to 1.
+	// +kubebuilder:validation:Optional
 	ScaleUnit *float64 `json:"scaleUnit,omitempty" tf:"scale_unit,omitempty"`
 
 	// A mapping of tags to assign to the VPN Gateway.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Hub within which this VPN Gateway should be created. Changing this forces a new resource to be created.

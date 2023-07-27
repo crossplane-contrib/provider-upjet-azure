@@ -58,12 +58,15 @@ type PowerBIEmbeddedObservation struct {
 type PowerBIEmbeddedParameters struct {
 
 	// A set of administrator user identities, which manages the Power BI Embedded and must be a member user or a service principal in your AAD tenant.
+	// +kubebuilder:validation:Optional
 	Administrators []*string `json:"administrators,omitempty" tf:"administrators,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Sets the PowerBI Embedded's mode. Possible values include: Gen1, Gen2. Defaults to Gen1. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// The name of the Resource Group where the PowerBI Embedded should be created. Changing this forces a new resource to be created.
@@ -80,9 +83,11 @@ type PowerBIEmbeddedParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Sets the PowerBI Embedded's pricing level's SKU. Possible values include: A1, A2, A3, A4, A5, A6.
+	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

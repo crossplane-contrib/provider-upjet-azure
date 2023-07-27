@@ -49,9 +49,11 @@ type BackupPolicyPostgreSQLObservation struct {
 type BackupPolicyPostgreSQLParameters struct {
 
 	// Specifies a list of repeating time interval. It supports weekly back. It should follow ISO 8601 repeating time interval. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
 	BackupRepeatingTimeIntervals []*string `json:"backupRepeatingTimeIntervals,omitempty" tf:"backup_repeating_time_intervals,omitempty"`
 
 	// The duration of default retention rule. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
 	DefaultRetentionDuration *string `json:"defaultRetentionDuration,omitempty" tf:"default_retention_duration,omitempty"`
 
 	// The name of the Resource Group where the Backup Policy PostgreSQL should exist. Changing this forces a new Backup Policy PostgreSQL to be created.
@@ -68,6 +70,7 @@ type BackupPolicyPostgreSQLParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
 	RetentionRule []BackupPolicyPostgreSQLRetentionRuleParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
 
 	// The name of the Backup Vault where the Backup Policy PostgreSQL should exist. Changing this forces a new Backup Policy PostgreSQL to be created.
@@ -117,15 +120,19 @@ type BackupPolicyPostgreSQLRetentionRuleObservation struct {
 type BackupPolicyPostgreSQLRetentionRuleParameters struct {
 
 	// A criteria block as defined below. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
 	Criteria []RetentionRuleCriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
 	// Duration after which the backup is deleted. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// The name which should be used for this retention rule. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the priority of the rule. The priority number must be unique for each rule. The lower the priority number, the higher the priority of the rule. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
@@ -168,18 +175,23 @@ type RetentionRuleCriteriaObservation struct {
 type RetentionRuleCriteriaParameters struct {
 
 	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
 	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
 
 	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
 	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
 	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
 
 	// Specifies a list of backup times for backup in the RFC3339 format. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
 	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
 
 	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
 	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
 }
 

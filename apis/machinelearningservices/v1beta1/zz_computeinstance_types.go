@@ -34,9 +34,11 @@ type AssignToUserObservation struct {
 type AssignToUserParameters struct {
 
 	// User’s AAD Object Id.
+	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// User’s AAD Tenant Id.
+	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
@@ -67,9 +69,11 @@ type ComputeInstanceIdentityObservation struct {
 type ComputeInstanceIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Instance. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -145,21 +149,27 @@ type ComputeInstanceObservation struct {
 type ComputeInstanceParameters struct {
 
 	// A assign_to_user block as defined below. A user explicitly assigned to a personal compute instance. Changing this forces a new Machine Learning Compute Instance to be created.
+	// +kubebuilder:validation:Optional
 	AssignToUser []AssignToUserParameters `json:"assignToUser,omitempty" tf:"assign_to_user,omitempty"`
 
 	// The Compute Instance Authorization type. Possible values include: personal. Changing this forces a new Machine Learning Compute Instance to be created.
+	// +kubebuilder:validation:Optional
 	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
 
 	// The description of the Machine Learning Compute Instance. Changing this forces a new Machine Learning Compute Instance to be created.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// An identity block as defined below. Changing this forces a new Machine Learning Compute Instance to be created.
+	// +kubebuilder:validation:Optional
 	Identity []ComputeInstanceIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Instance to be created.
+	// +kubebuilder:validation:Optional
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
 	// The Azure Region where the Machine Learning Compute Instance should exist. Changing this forces a new Machine Learning Compute Instance to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Compute Instance to be created.
@@ -177,6 +187,7 @@ type ComputeInstanceParameters struct {
 	MachineLearningWorkspaceIDSelector *v1.Selector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
 
 	// A ssh block as defined below. Specifies policy and settings for SSH access. Changing this forces a new Machine Learning Compute Instance to be created.
+	// +kubebuilder:validation:Optional
 	SSH []ComputeInstanceSSHParameters `json:"ssh,omitempty" tf:"ssh,omitempty"`
 
 	// Virtual network subnet resource ID the compute nodes belong to. Changing this forces a new Machine Learning Compute Instance to be created.
@@ -194,9 +205,11 @@ type ComputeInstanceParameters struct {
 	SubnetResourceIDSelector *v1.Selector `json:"subnetResourceIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Machine Learning Compute Instance. Changing this forces a new Machine Learning Compute Instance to be created.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Virtual Machine Size. Changing this forces a new Machine Learning Compute Instance to be created.
+	// +kubebuilder:validation:Optional
 	VirtualMachineSize *string `json:"virtualMachineSize,omitempty" tf:"virtual_machine_size,omitempty"`
 }
 
@@ -221,6 +234,7 @@ type ComputeInstanceSSHObservation struct {
 type ComputeInstanceSSHParameters struct {
 
 	// Specifies the SSH rsa public key file as a string. Use "ssh-keygen -t rsa -b 2048" to generate your SSH key pairs.
+	// +kubebuilder:validation:Optional
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 }
 

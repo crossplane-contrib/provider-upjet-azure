@@ -40,12 +40,15 @@ type DefinitionObservation struct {
 type DefinitionParameters struct {
 
 	// The description of this Subnet Service Endpoint Storage Policy Definition.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name which should be used for this Subnet Service Endpoint Storage Policy Definition.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies a list of resources that this Subnet Service Endpoint Storage Policy Definition applies to.
+	// +kubebuilder:validation:Optional
 	ServiceResources []*string `json:"serviceResources,omitempty" tf:"service_resources,omitempty"`
 }
 
@@ -82,9 +85,11 @@ type SubnetServiceEndpointStoragePolicyObservation struct {
 type SubnetServiceEndpointStoragePolicyParameters struct {
 
 	// A definition block as defined below
+	// +kubebuilder:validation:Optional
 	Definition []DefinitionParameters `json:"definition,omitempty" tf:"definition,omitempty"`
 
 	// The Azure Region where the Subnet Service Endpoint Storage Policy should exist. Changing this forces a new Subnet Service Endpoint Storage Policy to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Subnet Service Endpoint Storage Policy should exist. Changing this forces a new Subnet Service Endpoint Storage Policy to be created.
@@ -101,6 +106,7 @@ type SubnetServiceEndpointStoragePolicyParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Subnet Service Endpoint Storage Policy.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

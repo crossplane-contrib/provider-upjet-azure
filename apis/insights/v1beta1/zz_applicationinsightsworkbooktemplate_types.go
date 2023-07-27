@@ -76,21 +76,27 @@ type ApplicationInsightsWorkbookTemplateObservation struct {
 type ApplicationInsightsWorkbookTemplateParameters struct {
 
 	// Information about the author of the workbook template.
+	// +kubebuilder:validation:Optional
 	Author *string `json:"author,omitempty" tf:"author,omitempty"`
 
 	// A galleries block as defined below.
+	// +kubebuilder:validation:Optional
 	Galleries []GalleriesParameters `json:"galleries,omitempty" tf:"galleries,omitempty"`
 
 	// Key value pairs of localized gallery. Each key is the locale code of languages supported by the Azure portal.
+	// +kubebuilder:validation:Optional
 	Localized *string `json:"localized,omitempty" tf:"localized,omitempty"`
 
 	// Specifies the Azure Region where the Application Insights Workbook Template should exist. Changing this forces a new Application Insights Workbook Template to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name which should be used for this Application Insights Workbook Template. Changing this forces a new Application Insights Workbook Template to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Priority of the template. Determines which template to open when a workbook gallery is opened in viewer mode. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// Specifies the name of the Resource Group where the Application Insights Workbook Template should exist. Changing this forces a new Application Insights Workbook Template to be created.
@@ -107,9 +113,11 @@ type ApplicationInsightsWorkbookTemplateParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Application Insights Workbook Template.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Valid JSON object containing workbook template payload.
+	// +kubebuilder:validation:Optional
 	TemplateData *string `json:"templateData,omitempty" tf:"template_data,omitempty"`
 }
 
@@ -152,18 +160,23 @@ type GalleriesObservation struct {
 type GalleriesParameters struct {
 
 	// Category for the gallery.
+	// +kubebuilder:validation:Optional
 	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// Name of the workbook template in the gallery.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Order of the template within the gallery. Defaults to 0.
+	// +kubebuilder:validation:Optional
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// Azure resource type supported by the gallery. Defaults to Azure Monitor.
+	// +kubebuilder:validation:Optional
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Type of workbook supported by the workbook template. Defaults to workbook.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 

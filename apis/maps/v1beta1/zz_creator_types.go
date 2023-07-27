@@ -46,6 +46,7 @@ type CreatorObservation struct {
 type CreatorParameters struct {
 
 	// The Azure Region where the Azure Maps Creator should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Azure Maps Creator. Changing this forces a new resource to be created.
@@ -63,9 +64,11 @@ type CreatorParameters struct {
 	MapsAccountIDSelector *v1.Selector `json:"mapsAccountIdSelector,omitempty" tf:"-"`
 
 	// The storage units to be allocated. Integer values from 1 to 100, inclusive.
+	// +kubebuilder:validation:Optional
 	StorageUnits *float64 `json:"storageUnits,omitempty" tf:"storage_units,omitempty"`
 
 	// A mapping of tags which should be assigned to the Azure Maps Creator.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

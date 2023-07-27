@@ -86,15 +86,19 @@ type ProductParameters struct {
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// Do subscribers need to be approved prior to being able to use the Product?
+	// +kubebuilder:validation:Optional
 	ApprovalRequired *bool `json:"approvalRequired,omitempty" tf:"approval_required,omitempty"`
 
 	// A description of this Product, which may include HTML formatting tags.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Display Name for this API Management Product.
+	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Is this Product Published?
+	// +kubebuilder:validation:Optional
 	Published *bool `json:"published,omitempty" tf:"published,omitempty"`
 
 	// The name of the Resource Group in which the API Management Service should be exist. Changing this forces a new resource to be created.
@@ -111,12 +115,15 @@ type ProductParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Is a Subscription required to access API's included in this Product? Defaults to true.
+	// +kubebuilder:validation:Optional
 	SubscriptionRequired *bool `json:"subscriptionRequired,omitempty" tf:"subscription_required,omitempty"`
 
 	// The number of subscriptions a user can have to this Product at the same time.
+	// +kubebuilder:validation:Optional
 	SubscriptionsLimit *float64 `json:"subscriptionsLimit,omitempty" tf:"subscriptions_limit,omitempty"`
 
 	// The Terms and Conditions for this Product, which must be accepted by Developers before they can begin the Subscription process.
+	// +kubebuilder:validation:Optional
 	Terms *string `json:"terms,omitempty" tf:"terms,omitempty"`
 }
 

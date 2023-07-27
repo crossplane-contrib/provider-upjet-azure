@@ -34,9 +34,11 @@ type LaunchObservation struct {
 type LaunchParameters struct {
 
 	// Specifies a map of non-sensitive properties for launchProperties.
+	// +kubebuilder:validation:Optional
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Specifies a map of sensitive properties for launchProperties.
+	// +kubebuilder:validation:Optional
 	Secrets map[string]*string `json:"secrets,omitempty" tf:"secrets,omitempty"`
 }
 
@@ -67,9 +69,11 @@ type SpringCloudBuildPackBindingObservation struct {
 type SpringCloudBuildPackBindingParameters struct {
 
 	// Specifies the Build Pack Binding Type. Allowed values are ApacheSkyWalking, AppDynamics, ApplicationInsights, Dynatrace, ElasticAPM and NewRelic.
+	// +kubebuilder:validation:Optional
 	BindingType *string `json:"bindingType,omitempty" tf:"binding_type,omitempty"`
 
 	// A launch block as defined below.
+	// +kubebuilder:validation:Optional
 	Launch []LaunchParameters `json:"launch,omitempty" tf:"launch,omitempty"`
 
 	// The ID of the Spring Cloud Builder. Changing this forces a new Spring Cloud Build Pack Binding to be created.

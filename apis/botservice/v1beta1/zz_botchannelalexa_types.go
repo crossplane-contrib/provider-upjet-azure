@@ -57,6 +57,7 @@ type BotChannelAlexaParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group where the Alexa Channel should be created. Changing this forces a new resource to be created.
@@ -73,6 +74,7 @@ type BotChannelAlexaParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Alexa skill ID for the Alexa Channel.
+	// +kubebuilder:validation:Optional
 	SkillID *string `json:"skillId,omitempty" tf:"skill_id,omitempty"`
 }
 

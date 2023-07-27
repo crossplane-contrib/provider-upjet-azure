@@ -63,6 +63,7 @@ type BotChannelSlackParameters struct {
 	BotNameSelector *v1.Selector `json:"botNameSelector,omitempty" tf:"-"`
 
 	// The Client ID that will be used to authenticate with Slack.
+	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
 	// The Client Secret that will be used to authenticate with Slack.
@@ -70,9 +71,11 @@ type BotChannelSlackParameters struct {
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The Slack Landing Page URL.
+	// +kubebuilder:validation:Optional
 	LandingPageURL *string `json:"landingPageUrl,omitempty" tf:"landing_page_url,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the resource group in which to create the Bot Channel. Changing this forces a new resource to be created.

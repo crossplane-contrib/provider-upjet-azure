@@ -112,27 +112,35 @@ type ApplicationInsightsWebTestParameters struct {
 	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// An XML configuration specification for a WebTest (see here for more information).
+	// +kubebuilder:validation:Optional
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
 	// Purpose/user defined descriptive test for this WebTest.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Is the test actively being monitored.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Interval in seconds between test runs for this WebTest. Valid options are 300, 600 and 900. Defaults to 300.
+	// +kubebuilder:validation:Optional
 	Frequency *float64 `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// A list of where to physically run the tests from to give global coverage for accessibility of your application.
+	// +kubebuilder:validation:Optional
 	GeoLocations []*string `json:"geoLocations,omitempty" tf:"geo_locations,omitempty"`
 
 	// The kind of web test that this web test watches. Choices are ping and multistep. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. It needs to correlate with location of parent resource (azurerm_application_insights).
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Application Insights WebTest. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the resource group in which to create the Application Insights WebTest. Changing this forces a new resource
@@ -149,12 +157,15 @@ type ApplicationInsightsWebTestParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Allow for retries should this WebTest fail.
+	// +kubebuilder:validation:Optional
 	RetryEnabled *bool `json:"retryEnabled,omitempty" tf:"retry_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Seconds until this WebTest will timeout and fail. Default is 30.
+	// +kubebuilder:validation:Optional
 	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 

@@ -28,6 +28,7 @@ type GremlinDatabaseAutoscaleSettingsObservation struct {
 type GremlinDatabaseAutoscaleSettingsParameters struct {
 
 	// The maximum throughput of the Gremlin database (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
 
@@ -74,6 +75,7 @@ type GremlinDatabaseParameters struct {
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
 	// An autoscale_settings block as defined below.
+	// +kubebuilder:validation:Optional
 	AutoscaleSettings []GremlinDatabaseAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
 	// The name of the resource group in which the Cosmos DB Gremlin Database is created. Changing this forces a new resource to be created.
@@ -90,6 +92,7 @@ type GremlinDatabaseParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The throughput of the Gremlin database (RU/s). Must be set in increments of 100. The minimum value is 400.
+	// +kubebuilder:validation:Optional
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 

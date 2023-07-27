@@ -64,9 +64,11 @@ type RouteServerObservation struct {
 type RouteServerParameters struct {
 
 	// Whether to enable route exchange between Azure Route Server and the gateway(s)
+	// +kubebuilder:validation:Optional
 	BranchToBranchTrafficEnabled *bool `json:"branchToBranchTrafficEnabled,omitempty" tf:"branch_to_branch_traffic_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the Route Server should exist. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Public IP Address. This option is required since September 1st 2021. Changing this forces a new resource to be created.
@@ -97,6 +99,7 @@ type RouteServerParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The SKU of the Route Server. The only possible value is Standard. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// The ID of the Subnet that the Route Server will reside. Changing this forces a new resource to be created.
@@ -114,6 +117,7 @@ type RouteServerParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
+	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

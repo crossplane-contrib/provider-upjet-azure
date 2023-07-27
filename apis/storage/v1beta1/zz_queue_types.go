@@ -37,6 +37,7 @@ type QueueObservation struct {
 type QueueParameters struct {
 
 	// A mapping of MetaData which should be assigned to this Storage Queue.
+	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Specifies the Storage Account in which the Storage Queue should exist. Changing this forces a new resource to be created.

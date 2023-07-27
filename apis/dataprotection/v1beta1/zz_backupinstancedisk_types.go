@@ -71,6 +71,7 @@ type BackupInstanceDiskParameters struct {
 	DiskIDSelector *v1.Selector `json:"diskIdSelector,omitempty" tf:"-"`
 
 	// The Azure Region where the Backup Instance Disk should exist. Changing this forces a new Backup Instance Disk to be created.
+	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where snapshots are stored. Changing this forces a new Backup Instance Disk to be created.

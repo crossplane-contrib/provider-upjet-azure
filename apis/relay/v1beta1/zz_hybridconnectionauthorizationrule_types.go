@@ -66,9 +66,11 @@ type HybridConnectionAuthorizationRuleParameters struct {
 	HybridConnectionNameSelector *v1.Selector `json:"hybridConnectionNameSelector,omitempty" tf:"-"`
 
 	// Grants listen access to this Authorization Rule. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
 
 	// Grants manage access to this Authorization Rule. When this property is true - both listen and send must be set to true too. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Name of the Azure Relay Namespace for which this Azure Relay Hybrid Connection Authorization Rule will be created. Changing this forces a new Azure Relay Hybrid Connection Authorization Rule to be created.
@@ -98,6 +100,7 @@ type HybridConnectionAuthorizationRuleParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Grants send access to this Authorization Rule. Defaults to false.
+	// +kubebuilder:validation:Optional
 	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }
 

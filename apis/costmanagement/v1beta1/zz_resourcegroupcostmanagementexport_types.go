@@ -34,9 +34,11 @@ type ExportDataOptionsObservation struct {
 type ExportDataOptionsParameters struct {
 
 	// The time frame for pulling data for the query. If custom, then a specific time period must be provided. Possible values include: WeekToDate, MonthToDate, BillingMonthToDate, TheLast7Days, TheLastMonth, TheLastBillingMonth, Custom.
+	// +kubebuilder:validation:Optional
 	TimeFrame *string `json:"timeFrame,omitempty" tf:"time_frame,omitempty"`
 
 	// The type of the query. Possible values are ActualCost, AmortizedCost and Usage.
+	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -72,6 +74,7 @@ type ExportDataStorageLocationParameters struct {
 	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
 
 	// The path of the directory where exports will be uploaded. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	RootFolderPath *string `json:"rootFolderPath,omitempty" tf:"root_folder_path,omitempty"`
 }
 
@@ -126,21 +129,27 @@ type ResourceGroupCostManagementExportObservation struct {
 type ResourceGroupCostManagementExportParameters struct {
 
 	// Is the cost management export active? Default is true.
+	// +kubebuilder:validation:Optional
 	Active *bool `json:"active,omitempty" tf:"active,omitempty"`
 
 	// A export_data_options block as defined below.
+	// +kubebuilder:validation:Optional
 	ExportDataOptions []ExportDataOptionsParameters `json:"exportDataOptions,omitempty" tf:"export_data_options,omitempty"`
 
 	// A export_data_storage_location block as defined below.
+	// +kubebuilder:validation:Optional
 	ExportDataStorageLocation []ExportDataStorageLocationParameters `json:"exportDataStorageLocation,omitempty" tf:"export_data_storage_location,omitempty"`
 
 	// The date the export will stop capturing information.
+	// +kubebuilder:validation:Optional
 	RecurrencePeriodEndDate *string `json:"recurrencePeriodEndDate,omitempty" tf:"recurrence_period_end_date,omitempty"`
 
 	// The date the export will start capturing information.
+	// +kubebuilder:validation:Optional
 	RecurrencePeriodStartDate *string `json:"recurrencePeriodStartDate,omitempty" tf:"recurrence_period_start_date,omitempty"`
 
 	// How often the requested information will be exported. Valid values include Annually, Daily, Monthly, Weekly.
+	// +kubebuilder:validation:Optional
 	RecurrenceType *string `json:"recurrenceType,omitempty" tf:"recurrence_type,omitempty"`
 
 	// The id of the resource group on which to create an export. Changing this forces a new resource to be created.

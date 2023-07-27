@@ -46,15 +46,19 @@ type PermissionsObservation struct {
 type PermissionsParameters struct {
 
 	// One or more Allowed Actions, such as *, Microsoft.Resources/subscriptions/resourceGroups/read. See 'Azure Resource Manager resource provider operations' for details.
+	// +kubebuilder:validation:Optional
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// One or more Allowed Data Actions, such as *, Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read. See 'Azure Resource Manager resource provider operations' for details.
+	// +kubebuilder:validation:Optional
 	DataActions []*string `json:"dataActions,omitempty" tf:"data_actions,omitempty"`
 
 	// One or more Disallowed Actions, such as *, Microsoft.Resources/subscriptions/resourceGroups/read. See 'Azure Resource Manager resource provider operations' for details.
+	// +kubebuilder:validation:Optional
 	NotActions []*string `json:"notActions,omitempty" tf:"not_actions,omitempty"`
 
 	// One or more Disallowed Data Actions, such as *, Microsoft.Resources/subscriptions/resourceGroups/read. See 'Azure Resource Manager resource provider operations' for details.
+	// +kubebuilder:validation:Optional
 	NotDataActions []*string `json:"notDataActions,omitempty" tf:"not_data_actions,omitempty"`
 }
 
@@ -108,21 +112,27 @@ type RoleDefinitionObservation struct {
 type RoleDefinitionParameters struct {
 
 	// One or more assignable scopes for this Role Definition, such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM.
+	// +kubebuilder:validation:Optional
 	AssignableScopes []*string `json:"assignableScopes,omitempty" tf:"assignable_scopes,omitempty"`
 
 	// A description of the Role Definition.
+	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the Role Definition.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A permissions block as defined below.
+	// +kubebuilder:validation:Optional
 	Permissions []PermissionsParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// A unique UUID/GUID which identifies this role - one will be generated if not specified. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
 	// The scope at which the Role Definition applies to, such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM. It is recommended to use the first entry of the assignable_scopes. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 

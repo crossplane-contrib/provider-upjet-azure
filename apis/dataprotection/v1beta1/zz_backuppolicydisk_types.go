@@ -46,12 +46,15 @@ type BackupPolicyDiskObservation struct {
 type BackupPolicyDiskParameters struct {
 
 	// Specifies a list of repeating time interval. It should follow ISO 8601 repeating time interval . Changing this forces a new Backup Policy Disk to be created.
+	// +kubebuilder:validation:Optional
 	BackupRepeatingTimeIntervals []*string `json:"backupRepeatingTimeIntervals,omitempty" tf:"backup_repeating_time_intervals,omitempty"`
 
 	// The duration of default retention rule. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Disk to be created.
+	// +kubebuilder:validation:Optional
 	DefaultRetentionDuration *string `json:"defaultRetentionDuration,omitempty" tf:"default_retention_duration,omitempty"`
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy Disk to be created.
+	// +kubebuilder:validation:Optional
 	RetentionRule []RetentionRuleParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
 
 	// The ID of the Backup Vault within which the Backup Policy Disk should exist. Changing this forces a new Backup Policy Disk to be created.
@@ -84,6 +87,7 @@ type CriteriaObservation struct {
 type CriteriaParameters struct {
 
 	// Possible values are FirstOfDay and FirstOfWeek. Changing this forces a new Backup Policy Disk to be created.
+	// +kubebuilder:validation:Optional
 	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
 }
 
@@ -120,15 +124,19 @@ type RetentionRuleObservation struct {
 type RetentionRuleParameters struct {
 
 	// A criteria block as defined below. Changing this forces a new Backup Policy Disk to be created.
+	// +kubebuilder:validation:Optional
 	Criteria []CriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
 	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Disk to be created.
+	// +kubebuilder:validation:Optional
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// The name which should be used for this retention rule. Changing this forces a new Backup Policy Disk to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Retention Tag priority. Changing this forces a new Backup Policy Disk to be created.
+	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 

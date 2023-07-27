@@ -58,21 +58,27 @@ type CaptureDescriptionObservation struct {
 type CaptureDescriptionParameters struct {
 
 	// A destination block as defined below.
+	// +kubebuilder:validation:Optional
 	Destination []DestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
 
 	// Specifies if the Capture Description is Enabled.
+	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Specifies the Encoding used for the Capture Description. Possible values are Avro and AvroDeflate.
+	// +kubebuilder:validation:Optional
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
 	// Specifies the time interval in seconds at which the capture will happen. Values can be between 60 and 900 seconds. Defaults to 300 seconds.
+	// +kubebuilder:validation:Optional
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
 	// Specifies the amount of data built up in your EventHub before a Capture Operation occurs. Value should be between 10485760 and 524288000 bytes. Defaults to 314572800 bytes.
+	// +kubebuilder:validation:Optional
 	SizeLimitInBytes *float64 `json:"sizeLimitInBytes,omitempty" tf:"size_limit_in_bytes,omitempty"`
 
 	// Specifies if empty files should not be emitted if no events occur during the Capture time window. Defaults to false.
+	// +kubebuilder:validation:Optional
 	SkipEmptyArchives *bool `json:"skipEmptyArchives,omitempty" tf:"skip_empty_archives,omitempty"`
 }
 
@@ -109,15 +115,19 @@ type DestinationObservation struct {
 type DestinationParameters struct {
 
 	// The Blob naming convention for archiving. e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order
+	// +kubebuilder:validation:Optional
 	ArchiveNameFormat *string `json:"archiveNameFormat,omitempty" tf:"archive_name_format,omitempty"`
 
 	// The name of the Container within the Blob Storage Account where messages should be archived.
+	// +kubebuilder:validation:Optional
 	BlobContainerName *string `json:"blobContainerName,omitempty" tf:"blob_container_name,omitempty"`
 
 	// Specifies the name of the EventHub resource. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Blob Storage Account where messages should be archived.
+	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 }
 
@@ -166,9 +176,11 @@ type EventHubObservation struct {
 type EventHubParameters struct {
 
 	// A capture_description block as defined below.
+	// +kubebuilder:validation:Optional
 	CaptureDescription []CaptureDescriptionParameters `json:"captureDescription,omitempty" tf:"capture_description,omitempty"`
 
 	// Specifies the number of days to retain the events for this Event Hub.
+	// +kubebuilder:validation:Optional
 	MessageRetention *float64 `json:"messageRetention,omitempty" tf:"message_retention,omitempty"`
 
 	// Specifies the name of the EventHub Namespace. Changing this forces a new resource to be created.
@@ -185,6 +197,7 @@ type EventHubParameters struct {
 	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the current number of shards on the Event Hub. Changing this will force-recreate the resource.
+	// +kubebuilder:validation:Optional
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// The name of the resource group in which the EventHub's parent Namespace exists. Changing this forces a new resource to be created.
@@ -201,6 +214,7 @@ type EventHubParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the status of the Event Hub resource. Possible values are Active, Disabled and SendDisabled. Defaults to Active.
+	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 }
 
