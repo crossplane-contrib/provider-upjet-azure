@@ -50,6 +50,3 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: azurerm_cosmosdb_account
-
----
-

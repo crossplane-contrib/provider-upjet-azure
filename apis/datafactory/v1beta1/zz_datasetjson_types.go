@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DataSetJSONAzureBlobStorageLocationInitParameters struct {
+
+	// The container on the Azure Blob Storage Account hosting the file.
+	Container *string `json:"container,omitempty" tf:"container,omitempty"`
+
+	// Is the container using dynamic expression, function or system variables? Defaults to false.
+	DynamicContainerEnabled *bool `json:"dynamicContainerEnabled,omitempty" tf:"dynamic_container_enabled,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the file on the web server.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file on the web server.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
 type DataSetJSONAzureBlobStorageLocationObservation struct {
 
 	// The container on the Azure Blob Storage Account hosting the file.
@@ -37,8 +58,8 @@ type DataSetJSONAzureBlobStorageLocationObservation struct {
 type DataSetJSONAzureBlobStorageLocationParameters struct {
 
 	// The container on the Azure Blob Storage Account hosting the file.
-	// +kubebuilder:validation:Required
-	Container *string `json:"container" tf:"container,omitempty"`
+	// +kubebuilder:validation:Optional
+	Container *string `json:"container,omitempty" tf:"container,omitempty"`
 
 	// Is the container using dynamic expression, function or system variables? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -53,12 +74,30 @@ type DataSetJSONAzureBlobStorageLocationParameters struct {
 	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
 
 	// The filename of the file on the web server.
-	// +kubebuilder:validation:Required
-	Filename *string `json:"filename" tf:"filename,omitempty"`
+	// +kubebuilder:validation:Optional
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
 	// The folder path to the file on the web server.
-	// +kubebuilder:validation:Required
-	Path *string `json:"path" tf:"path,omitempty"`
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
+type DataSetJSONHTTPServerLocationInitParameters struct {
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the file on the web server.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file on the web server.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The base URL to the web server hosting the file.
+	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
 }
 
 type DataSetJSONHTTPServerLocationObservation struct {
@@ -90,16 +129,46 @@ type DataSetJSONHTTPServerLocationParameters struct {
 	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
 
 	// The filename of the file on the web server.
-	// +kubebuilder:validation:Required
-	Filename *string `json:"filename" tf:"filename,omitempty"`
+	// +kubebuilder:validation:Optional
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
 	// The folder path to the file on the web server.
-	// +kubebuilder:validation:Required
-	Path *string `json:"path" tf:"path,omitempty"`
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The base URL to the web server hosting the file.
-	// +kubebuilder:validation:Required
-	RelativeURL *string `json:"relativeUrl" tf:"relative_url,omitempty"`
+	// +kubebuilder:validation:Optional
+	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
+}
+
+type DataSetJSONInitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Dataset.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Dataset.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// A azure_blob_storage_location block as defined below.
+	AzureBlobStorageLocation []DataSetJSONAzureBlobStorageLocationInitParameters `json:"azureBlobStorageLocation,omitempty" tf:"azure_blob_storage_location,omitempty"`
+
+	// The description for the Data Factory Dataset.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The encoding format for the file.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
+	// A http_server_location block as defined below.
+	HTTPServerLocation []DataSetJSONHTTPServerLocationInitParameters `json:"httpServerLocation,omitempty" tf:"http_server_location,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Dataset.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// A schema_column block as defined below.
+	SchemaColumn []DataSetJSONSchemaColumnInitParameters `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
 }
 
 type DataSetJSONObservation struct {
@@ -207,6 +276,18 @@ type DataSetJSONParameters struct {
 	SchemaColumn []DataSetJSONSchemaColumnParameters `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
 }
 
+type DataSetJSONSchemaColumnInitParameters struct {
+
+	// The description of the column.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type DataSetJSONSchemaColumnObservation struct {
 
 	// The description of the column.
@@ -226,8 +307,8 @@ type DataSetJSONSchemaColumnParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the column.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
 	// +kubebuilder:validation:Optional
@@ -238,6 +319,18 @@ type DataSetJSONSchemaColumnParameters struct {
 type DataSetJSONSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DataSetJSONParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DataSetJSONInitParameters `json:"initProvider,omitempty"`
 }
 
 // DataSetJSONStatus defines the observed state of DataSetJSON.

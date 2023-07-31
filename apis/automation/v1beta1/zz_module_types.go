@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HashInitParameters struct {
+
+	// Specifies the algorithm used for the hash content.
+	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
+
+	// The hash value of the content.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type HashObservation struct {
 
 	// Specifies the algorithm used for the hash content.
@@ -25,12 +34,27 @@ type HashObservation struct {
 type HashParameters struct {
 
 	// Specifies the algorithm used for the hash content.
-	// +kubebuilder:validation:Required
-	Algorithm *string `json:"algorithm" tf:"algorithm,omitempty"`
+	// +kubebuilder:validation:Optional
+	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
 
 	// The hash value of the content.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ModuleInitParameters struct {
+
+	// A module_link block as defined below.
+	ModuleLink []ModuleLinkInitParameters `json:"moduleLink,omitempty" tf:"module_link,omitempty"`
+}
+
+type ModuleLinkInitParameters struct {
+
+	// A hash block as defined below.
+	Hash []HashInitParameters `json:"hash,omitempty" tf:"hash,omitempty"`
+
+	// The URI of the module content (zip or nupkg).
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ModuleLinkObservation struct {
@@ -49,8 +73,8 @@ type ModuleLinkParameters struct {
 	Hash []HashParameters `json:"hash,omitempty" tf:"hash,omitempty"`
 
 	// The URI of the module content (zip or nupkg).
-	// +kubebuilder:validation:Required
-	URI *string `json:"uri" tf:"uri,omitempty"`
+	// +kubebuilder:validation:Optional
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
 type ModuleObservation struct {
@@ -105,6 +129,18 @@ type ModuleParameters struct {
 type ModuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ModuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ModuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // ModuleStatus defines the observed state of Module.
@@ -125,7 +161,7 @@ type ModuleStatus struct {
 type Module struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.moduleLink)",message="moduleLink is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.moduleLink) || has(self.initProvider.moduleLink)",message="moduleLink is a required parameter"
 	Spec   ModuleSpec   `json:"spec"`
 	Status ModuleStatus `json:"status,omitempty"`
 }

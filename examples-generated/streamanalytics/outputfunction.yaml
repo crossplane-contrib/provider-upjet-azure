@@ -129,6 +129,3 @@ spec:
           SELECT *
           INTO [YourOutputAlias]
           FROM [YourInputAlias]
-
----
-

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AdditionalWorkspaceInitParameters struct {
+
+	// A list of data types which sent to workspace. Possible values are Alerts and RawEvents.
+	DataTypes []*string `json:"dataTypes,omitempty" tf:"data_types,omitempty"`
+
+	// The resource ID of the Log Analytics Workspace.
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+}
+
 type AdditionalWorkspaceObservation struct {
 
 	// A list of data types which sent to workspace. Possible values are Alerts and RawEvents.
@@ -25,12 +34,54 @@ type AdditionalWorkspaceObservation struct {
 type AdditionalWorkspaceParameters struct {
 
 	// A list of data types which sent to workspace. Possible values are Alerts and RawEvents.
-	// +kubebuilder:validation:Required
-	DataTypes []*string `json:"dataTypes" tf:"data_types,omitempty"`
+	// +kubebuilder:validation:Optional
+	DataTypes []*string `json:"dataTypes,omitempty" tf:"data_types,omitempty"`
 
 	// The resource ID of the Log Analytics Workspace.
-	// +kubebuilder:validation:Required
-	WorkspaceID *string `json:"workspaceId" tf:"workspace_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+}
+
+type IOTSecuritySolutionInitParameters struct {
+
+	// A additional_workspace block as defined below.
+	AdditionalWorkspace []AdditionalWorkspaceInitParameters `json:"additionalWorkspace,omitempty" tf:"additional_workspace,omitempty"`
+
+	// A list of disabled data sources for the Iot Security Solution. Possible value is TwinData.
+	DisabledDataSources []*string `json:"disabledDataSources,omitempty" tf:"disabled_data_sources,omitempty"`
+
+	// Specifies the Display Name for this Iot Security Solution.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Is the Iot Security Solution enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A list of data which is to exported to analytic workspace. Valid values include RawEvents.
+	EventsToExport []*string `json:"eventsToExport,omitempty" tf:"events_to_export,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the Log Analytics Workspace ID to which the security data will be sent.
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+
+	// Should IP addressed be unmasked in the log? Defaults to false.
+	LogUnmaskedIpsEnabled *bool `json:"logUnmaskedIpsEnabled,omitempty" tf:"log_unmasked_ips_enabled,omitempty"`
+
+	// Specifies the name of the Iot Security Solution. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// An Azure Resource Graph query used to set the resources monitored.
+	QueryForResources *string `json:"queryForResources,omitempty" tf:"query_for_resources,omitempty"`
+
+	// A list of subscription Ids on which the user defined resources query should be executed.
+	QuerySubscriptionIds []*string `json:"querySubscriptionIds,omitempty" tf:"query_subscription_ids,omitempty"`
+
+	// A recommendations_enabled block of options to enable or disable as defined below.
+	RecommendationsEnabled []RecommendationsEnabledInitParameters `json:"recommendationsEnabled,omitempty" tf:"recommendations_enabled,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type IOTSecuritySolutionObservation struct {
@@ -166,6 +217,57 @@ type IOTSecuritySolutionParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type RecommendationsEnabledInitParameters struct {
+
+	// Is Principal Authentication enabled for the ACR repository? Defaults to true.
+	AcrAuthentication *bool `json:"acrAuthentication,omitempty" tf:"acr_authentication,omitempty"`
+
+	// Is Agent send underutilized messages enabled? Defaults to true.
+	AgentSendUnutilizedMsg *bool `json:"agentSendUnutilizedMsg,omitempty" tf:"agent_send_unutilized_msg,omitempty"`
+
+	// Is Security related system configuration issues identified? Defaults to true.
+	Baseline *bool `json:"baseline,omitempty" tf:"baseline,omitempty"`
+
+	// Is IoT Edge Hub memory optimized? Defaults to true.
+	EdgeHubMemOptimize *bool `json:"edgeHubMemOptimize,omitempty" tf:"edge_hub_mem_optimize,omitempty"`
+
+	// Is logging configured for IoT Edge module? Defaults to true.
+	EdgeLoggingOption *bool `json:"edgeLoggingOption,omitempty" tf:"edge_logging_option,omitempty"`
+
+	// Is Default IP filter policy denied? Defaults to true.
+	IPFilterDenyAll *bool `json:"ipFilterDenyAll,omitempty" tf:"ip_filter_deny_all,omitempty"`
+
+	// Is IP filter rule source allowable IP range too large? Defaults to true.
+	IPFilterPermissiveRule *bool `json:"ipFilterPermissiveRule,omitempty" tf:"ip_filter_permissive_rule,omitempty"`
+
+	// Is inconsistent module settings enabled for SecurityGroup? Defaults to true.
+	InconsistentModuleSettings *bool `json:"inconsistentModuleSettings,omitempty" tf:"inconsistent_module_settings,omitempty"`
+
+	// is Azure IoT Security agent installed? Defaults to true.
+	InstallAgent *bool `json:"installAgent,omitempty" tf:"install_agent,omitempty"`
+
+	// Is any ports open on the device? Defaults to true.
+	OpenPorts *bool `json:"openPorts,omitempty" tf:"open_ports,omitempty"`
+
+	// Does firewall policy exist which allow necessary communication to/from the device? Defaults to true.
+	PermissiveFirewallPolicy *bool `json:"permissiveFirewallPolicy,omitempty" tf:"permissive_firewall_policy,omitempty"`
+
+	// Is only necessary addresses or ports are permitted in? Defaults to true.
+	PermissiveInputFirewallRules *bool `json:"permissiveInputFirewallRules,omitempty" tf:"permissive_input_firewall_rules,omitempty"`
+
+	// Is only necessary addresses or ports are permitted out? Defaults to true.
+	PermissiveOutputFirewallRules *bool `json:"permissiveOutputFirewallRules,omitempty" tf:"permissive_output_firewall_rules,omitempty"`
+
+	// Is high level permissions are needed for the module? Defaults to true.
+	PrivilegedDockerOptions *bool `json:"privilegedDockerOptions,omitempty" tf:"privileged_docker_options,omitempty"`
+
+	// Is any credentials shared among devices? Defaults to true.
+	SharedCredentials *bool `json:"sharedCredentials,omitempty" tf:"shared_credentials,omitempty"`
+
+	// Does TLS cipher suite need to be updated? Defaults to true.
+	VulnerableTLSCipherSuite *bool `json:"vulnerableTlsCipherSuite,omitempty" tf:"vulnerable_tls_cipher_suite,omitempty"`
+}
+
 type RecommendationsEnabledObservation struct {
 
 	// Is Principal Authentication enabled for the ACR repository? Defaults to true.
@@ -288,6 +390,18 @@ type RecommendationsEnabledParameters struct {
 type IOTSecuritySolutionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IOTSecuritySolutionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider IOTSecuritySolutionInitParameters `json:"initProvider,omitempty"`
 }
 
 // IOTSecuritySolutionStatus defines the observed state of IOTSecuritySolution.
@@ -308,9 +422,9 @@ type IOTSecuritySolutionStatus struct {
 type IOTSecuritySolution struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   IOTSecuritySolutionSpec   `json:"spec"`
 	Status IOTSecuritySolutionStatus `json:"status,omitempty"`
 }

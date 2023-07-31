@@ -69,6 +69,16 @@ func (tr *AccessConnector) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this AccessConnector
+func (tr *AccessConnector) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this AccessConnector using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AccessConnector) LateInitialize(attrs []byte) (bool, error) {
@@ -143,6 +153,16 @@ func (tr *Workspace) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this Workspace
+func (tr *Workspace) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this Workspace using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Workspace) LateInitialize(attrs []byte) (bool, error) {
@@ -215,6 +235,16 @@ func (tr *WorkspaceCustomerManagedKey) SetParameters(params map[string]any) erro
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this WorkspaceCustomerManagedKey
+func (tr *WorkspaceCustomerManagedKey) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this WorkspaceCustomerManagedKey using its observed tfState.

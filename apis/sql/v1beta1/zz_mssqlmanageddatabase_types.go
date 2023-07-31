@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MSSQLManagedDatabaseInitParameters struct {
+
+	// A long_term_retention_policy block as defined below.
+	LongTermRetentionPolicy []MSSQLManagedDatabaseLongTermRetentionPolicyInitParameters `json:"longTermRetentionPolicy,omitempty" tf:"long_term_retention_policy,omitempty"`
+
+	// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
+	ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
+}
+
+type MSSQLManagedDatabaseLongTermRetentionPolicyInitParameters struct {
+
+	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
+	MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
+
+	// The week of year to take the yearly backup. Value has to be between 1 and 52.
+	WeekOfYear *float64 `json:"weekOfYear,omitempty" tf:"week_of_year,omitempty"`
+
+	// The weekly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 520 weeks. e.g. P1Y, P1M, P1W or P7D.
+	WeeklyRetention *string `json:"weeklyRetention,omitempty" tf:"weekly_retention,omitempty"`
+
+	// The yearly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 10 years. e.g. P1Y, P12M, P52W or P365D.
+	YearlyRetention *string `json:"yearlyRetention,omitempty" tf:"yearly_retention,omitempty"`
+}
+
 type MSSQLManagedDatabaseLongTermRetentionPolicyObservation struct {
 
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
@@ -91,6 +115,18 @@ type MSSQLManagedDatabaseParameters struct {
 type MSSQLManagedDatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MSSQLManagedDatabaseParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MSSQLManagedDatabaseInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLManagedDatabaseStatus defines the observed state of MSSQLManagedDatabase.

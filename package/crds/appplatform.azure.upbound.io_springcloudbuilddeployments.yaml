@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: springcloudbuilddeployments.appplatform.azure.upbound.io
 spec:
   group: appplatform.azure.upbound.io
@@ -59,7 +58,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -184,21 +183,81 @@ spec:
                         type: object
                     type: object
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  addonJson:
+                    description: A JSON object that contains the addon configurations
+                      of the Spring Cloud Build Deployment.
+                    type: string
+                  buildResultId:
+                    description: The ID of the Spring Cloud Build Result.
+                    type: string
+                  environmentVariables:
+                    additionalProperties:
+                      type: string
+                    description: Specifies the environment variables of the Spring
+                      Cloud Deployment as a map of key-value pairs.
+                    type: object
+                  instanceCount:
+                    description: Specifies the required instance count of the Spring
+                      Cloud Deployment. Possible Values are between 1 and 500. Defaults
+                      to 1 if not specified.
+                    type: number
+                  quota:
+                    description: A quota block as defined below.
+                    items:
+                      properties:
+                        cpu:
+                          description: Specifies the required cpu of the Spring Cloud
+                            Deployment. Possible Values are 500m, 1, 2, 3 and 4. Defaults
+                            to 1 if not specified.
+                          type: string
+                        memory:
+                          description: Specifies the required memory size of the Spring
+                            Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi,
+                            3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not
+                            specified.
+                          type: string
+                      type: object
+                    type: array
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -372,7 +431,9 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: buildResultId is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.buildResultId)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.buildResultId)
+                || has(self.initProvider.buildResultId)'
           status:
             description: SpringCloudBuildDeploymentStatus defines the observed state
               of SpringCloudBuildDeployment.

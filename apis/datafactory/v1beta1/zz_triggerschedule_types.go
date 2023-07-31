@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MonthlyInitParameters struct {
+
+	// The occurrence of the specified day during the month. For example, a monthly property with weekday and week values of Sunday, -1 means the last Sunday of the month.
+	Week *float64 `json:"week,omitempty" tf:"week,omitempty"`
+
+	// The day of the week on which the trigger runs. For example, a monthly property with a weekday value of Sunday means every Sunday of the month.
+	Weekday *string `json:"weekday,omitempty" tf:"weekday,omitempty"`
+}
+
 type MonthlyObservation struct {
 
 	// The occurrence of the specified day during the month. For example, a monthly property with weekday and week values of Sunday, -1 means the last Sunday of the month.
@@ -29,8 +38,26 @@ type MonthlyParameters struct {
 	Week *float64 `json:"week,omitempty" tf:"week,omitempty"`
 
 	// The day of the week on which the trigger runs. For example, a monthly property with a weekday value of Sunday means every Sunday of the month.
-	// +kubebuilder:validation:Required
-	Weekday *string `json:"weekday" tf:"weekday,omitempty"`
+	// +kubebuilder:validation:Optional
+	Weekday *string `json:"weekday,omitempty" tf:"weekday,omitempty"`
+}
+
+type ScheduleInitParameters struct {
+
+	// Day(s) of the month on which the trigger is scheduled. This value can be specified with a monthly frequency only.
+	DaysOfMonth []*float64 `json:"daysOfMonth,omitempty" tf:"days_of_month,omitempty"`
+
+	// Days of the week on which the trigger is scheduled. This value can be specified only with a weekly frequency.
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// Hours of the day on which the trigger is scheduled.
+	Hours []*float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+
+	// Minutes of the hour on which the trigger is scheduled.
+	Minutes []*float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
+
+	// A monthly block as documented below, which specifies the days of the month on which the trigger is scheduled. The value can be specified only with a monthly frequency.
+	Monthly []MonthlyInitParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
 }
 
 type ScheduleObservation struct {
@@ -72,6 +99,42 @@ type ScheduleParameters struct {
 	// A monthly block as documented below, which specifies the days of the month on which the trigger is scheduled. The value can be specified only with a monthly frequency.
 	// +kubebuilder:validation:Optional
 	Monthly []MonthlyParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
+}
+
+type TriggerScheduleInitParameters struct {
+
+	// Specifies if the Data Factory Schedule Trigger is activated. Defaults to true.
+	Activated *bool `json:"activated,omitempty" tf:"activated,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Schedule Trigger.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The Schedule Trigger's description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The time the Schedule Trigger should end. The time will be represented in UTC.
+	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
+
+	// The trigger frequency. Valid values include Minute, Hour, Day, Week, Month. Defaults to Minute.
+	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+
+	// The interval for how often the trigger occurs. This defaults to 1.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// block as defined below.
+	Pipeline []TriggerSchedulePipelineInitParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
+
+	// The pipeline parameters that the trigger will act upon.
+	PipelineParameters map[string]*string `json:"pipelineParameters,omitempty" tf:"pipeline_parameters,omitempty"`
+
+	// A schedule block as defined below, which further specifies the recurrence schedule for the trigger. A schedule is capable of limiting or increasing the number of trigger executions specified by the frequency and interval properties.
+	Schedule []ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// The time the Schedule Trigger will start. This defaults to the current time. The time will be represented in UTC.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// The timezone of the start/end time.
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
 type TriggerScheduleObservation struct {
@@ -193,6 +256,15 @@ type TriggerScheduleParameters struct {
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
+type TriggerSchedulePipelineInitParameters struct {
+
+	// Reference pipeline name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The pipeline parameters that the trigger will act upon.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+}
+
 type TriggerSchedulePipelineObservation struct {
 
 	// Reference pipeline name.
@@ -205,8 +277,8 @@ type TriggerSchedulePipelineObservation struct {
 type TriggerSchedulePipelineParameters struct {
 
 	// Reference pipeline name.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The pipeline parameters that the trigger will act upon.
 	// +kubebuilder:validation:Optional
@@ -217,6 +289,18 @@ type TriggerSchedulePipelineParameters struct {
 type TriggerScheduleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TriggerScheduleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TriggerScheduleInitParameters `json:"initProvider,omitempty"`
 }
 
 // TriggerScheduleStatus defines the observed state of TriggerSchedule.

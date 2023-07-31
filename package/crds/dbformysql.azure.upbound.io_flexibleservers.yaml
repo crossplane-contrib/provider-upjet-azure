@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: flexibleservers.dbformysql.azure.upbound.io
 spec:
   group: dbformysql.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -223,8 +222,6 @@ spec:
                             standby Flexible Server should be located. Possible values
                             are 1, 2 and 3.
                           type: string
-                      required:
-                      - mode
                       type: object
                     type: array
                   identity:
@@ -242,9 +239,6 @@ spec:
                             that should be configured on this MySQL Flexible Server.
                             The only possible value is UserAssigned.
                           type: string
-                      required:
-                      - identityIds
-                      - type
                       type: object
                     type: array
                   location:
@@ -482,21 +476,197 @@ spec:
                       and 3.
                     type: string
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  administratorLogin:
+                    description: The Administrator login for the MySQL Flexible Server.
+                      Required when create_mode is Default. Changing this forces a
+                      new MySQL Flexible Server to be created.
+                    type: string
+                  backupRetentionDays:
+                    description: The backup retention days for the MySQL Flexible
+                      Server. Possible values are between 1 and 35 days. Defaults
+                      to 7.
+                    type: number
+                  createMode:
+                    description: The creation mode which can be used to restore or
+                      replicate existing servers. Possible values are Default, PointInTimeRestore,
+                      GeoRestore, and Replica. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  customerManagedKey:
+                    description: A customer_managed_key block as defined below.
+                    items:
+                      properties:
+                        geoBackupKeyVaultKeyId:
+                          description: The ID of the geo backup Key Vault Key. It
+                            can't cross region and need Customer Managed Key in same
+                            region as geo backup.
+                          type: string
+                        geoBackupUserAssignedIdentityId:
+                          description: The geo backup user managed identity id for
+                            a Customer Managed Key. Should be added with identity_ids.
+                            It can't cross region and need identity in same region
+                            as geo backup.
+                          type: string
+                        keyVaultKeyId:
+                          description: The ID of the Key Vault Key.
+                          type: string
+                        primaryUserAssignedIdentityId:
+                          description: Specifies the primary user managed identity
+                            id for a Customer Managed Key. Should be added with identity_ids.
+                          type: string
+                      type: object
+                    type: array
+                  geoRedundantBackupEnabled:
+                    description: Should geo redundant backup enabled? Defaults to
+                      false. Changing this forces a new MySQL Flexible Server to be
+                      created.
+                    type: boolean
+                  highAvailability:
+                    description: A high_availability block as defined below.
+                    items:
+                      properties:
+                        mode:
+                          description: The high availability mode for the MySQL Flexible
+                            Server. Possibles values are SameZone and ZoneRedundant.
+                          type: string
+                        standbyAvailabilityZone:
+                          description: Specifies the Availability Zone in which the
+                            standby Flexible Server should be located. Possible values
+                            are 1, 2 and 3.
+                          type: string
+                      type: object
+                    type: array
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this MySQL Flexible Server.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this MySQL Flexible Server.
+                            The only possible value is UserAssigned.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: The Azure Region where the MySQL Flexible Server
+                      should exist. Changing this forces a new MySQL Flexible Server
+                      to be created.
+                    type: string
+                  maintenanceWindow:
+                    description: A maintenance_window block as defined below.
+                    items:
+                      properties:
+                        dayOfWeek:
+                          description: The day of week for maintenance window. Defaults
+                            to 0.
+                          type: number
+                        startHour:
+                          description: The start hour for maintenance window. Defaults
+                            to 0.
+                          type: number
+                        startMinute:
+                          description: The start minute for maintenance window. Defaults
+                            to 0.
+                          type: number
+                      type: object
+                    type: array
+                  pointInTimeRestoreTimeInUtc:
+                    description: The point in time to restore from creation_source_server_id
+                      when create_mode is PointInTimeRestore. Changing this forces
+                      a new MySQL Flexible Server to be created.
+                    type: string
+                  replicationRole:
+                    description: The replication role. Possible value is None.
+                    type: string
+                  skuName:
+                    description: The SKU Name for the MySQL Flexible Server.
+                    type: string
+                  sourceServerId:
+                    description: The resource ID of the source MySQL Flexible Server
+                      to be restored. Required when create_mode is PointInTimeRestore,
+                      GeoRestore, and Replica. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  storage:
+                    description: A storage block as defined below.
+                    items:
+                      properties:
+                        autoGrowEnabled:
+                          description: Should Storage Auto Grow be enabled? Defaults
+                            to true.
+                          type: boolean
+                        iops:
+                          description: The storage IOPS for the MySQL Flexible Server.
+                            Possible values are between 360 and 20000.
+                          type: number
+                        sizeGb:
+                          description: The max storage allowed for the MySQL Flexible
+                            Server. Possible values are between 20 and 16384.
+                          type: number
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      MySQL Flexible Server.
+                    type: object
+                  version:
+                    description: The version of the MySQL Flexible Server to use.
+                      Possible values are 5.7, and 8.0.21. Changing this forces a
+                      new MySQL Flexible Server to be created.
+                    type: string
+                  zone:
+                    description: Specifies the Availability Zone in which this MySQL
+                      Flexible Server should be located. Possible values are 1, 2
+                      and 3.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -670,7 +840,9 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
           status:
             description: FlexibleServerStatus defines the observed state of FlexibleServer.
             properties:

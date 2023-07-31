@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DataSetDataLakeGen2InitParameters struct {
+
+	// The path of the file in the data lake file system to be shared with the receiver. Conflicts with folder_path Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
+	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
+
+	// The folder path in the data lake file system to be shared with the receiver. Conflicts with file_path Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
+	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
+}
+
 type DataSetDataLakeGen2Observation struct {
 
 	// The name of the Data Share Dataset.
@@ -93,6 +102,18 @@ type DataSetDataLakeGen2Parameters struct {
 type DataSetDataLakeGen2Spec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DataSetDataLakeGen2Parameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DataSetDataLakeGen2InitParameters `json:"initProvider,omitempty"`
 }
 
 // DataSetDataLakeGen2Status defines the observed state of DataSetDataLakeGen2.

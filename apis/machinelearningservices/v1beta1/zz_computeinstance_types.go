@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AssignToUserInitParameters struct {
+
+	// User’s AAD Object Id.
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
+	// User’s AAD Tenant Id.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
 type AssignToUserObservation struct {
 
 	// User’s AAD Object Id.
@@ -31,6 +40,15 @@ type AssignToUserParameters struct {
 	// User’s AAD Tenant Id.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
+type ComputeInstanceIdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Instance. Changing this forces a new resource to be created.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ComputeInstanceIdentityObservation struct {
@@ -55,8 +73,38 @@ type ComputeInstanceIdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ComputeInstanceInitParameters struct {
+
+	// A assign_to_user block as defined below. A user explicitly assigned to a personal compute instance. Changing this forces a new Machine Learning Compute Instance to be created.
+	AssignToUser []AssignToUserInitParameters `json:"assignToUser,omitempty" tf:"assign_to_user,omitempty"`
+
+	// The Compute Instance Authorization type. Possible values include: personal. Changing this forces a new Machine Learning Compute Instance to be created.
+	AuthorizationType *string `json:"authorizationType,omitempty" tf:"authorization_type,omitempty"`
+
+	// The description of the Machine Learning Compute Instance. Changing this forces a new Machine Learning Compute Instance to be created.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// An identity block as defined below. Changing this forces a new Machine Learning Compute Instance to be created.
+	Identity []ComputeInstanceIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Instance to be created.
+	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
+
+	// The Azure Region where the Machine Learning Compute Instance should exist. Changing this forces a new Machine Learning Compute Instance to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A ssh block as defined below. Specifies policy and settings for SSH access. Changing this forces a new Machine Learning Compute Instance to be created.
+	SSH []ComputeInstanceSSHInitParameters `json:"ssh,omitempty" tf:"ssh,omitempty"`
+
+	// A mapping of tags which should be assigned to the Machine Learning Compute Instance. Changing this forces a new Machine Learning Compute Instance to be created.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Virtual Machine Size. Changing this forces a new Machine Learning Compute Instance to be created.
+	VirtualMachineSize *string `json:"virtualMachineSize,omitempty" tf:"virtual_machine_size,omitempty"`
 }
 
 type ComputeInstanceObservation struct {
@@ -165,6 +213,12 @@ type ComputeInstanceParameters struct {
 	VirtualMachineSize *string `json:"virtualMachineSize,omitempty" tf:"virtual_machine_size,omitempty"`
 }
 
+type ComputeInstanceSSHInitParameters struct {
+
+	// Specifies the SSH rsa public key file as a string. Use "ssh-keygen -t rsa -b 2048" to generate your SSH key pairs.
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
+}
+
 type ComputeInstanceSSHObservation struct {
 
 	// Describes the port for connecting through SSH.
@@ -180,14 +234,26 @@ type ComputeInstanceSSHObservation struct {
 type ComputeInstanceSSHParameters struct {
 
 	// Specifies the SSH rsa public key file as a string. Use "ssh-keygen -t rsa -b 2048" to generate your SSH key pairs.
-	// +kubebuilder:validation:Required
-	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`
+	// +kubebuilder:validation:Optional
+	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 }
 
 // ComputeInstanceSpec defines the desired state of ComputeInstance
 type ComputeInstanceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ComputeInstanceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ComputeInstanceInitParameters `json:"initProvider,omitempty"`
 }
 
 // ComputeInstanceStatus defines the observed state of ComputeInstance.
@@ -208,8 +274,8 @@ type ComputeInstanceStatus struct {
 type ComputeInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.virtualMachineSize)",message="virtualMachineSize is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.virtualMachineSize) || has(self.initProvider.virtualMachineSize)",message="virtualMachineSize is a required parameter"
 	Spec   ComputeInstanceSpec   `json:"spec"`
 	Status ComputeInstanceStatus `json:"status,omitempty"`
 }

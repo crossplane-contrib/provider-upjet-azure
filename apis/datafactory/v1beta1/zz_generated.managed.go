@@ -17,9 +17,9 @@ func (mg *CustomDataSet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this CustomDataSet.
-func (mg *CustomDataSet) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this CustomDataSet.
+func (mg *CustomDataSet) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this CustomDataSet.
@@ -55,9 +55,9 @@ func (mg *CustomDataSet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this CustomDataSet.
-func (mg *CustomDataSet) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this CustomDataSet.
+func (mg *CustomDataSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this CustomDataSet.
@@ -93,9 +93,9 @@ func (mg *DataFlow) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataFlow.
-func (mg *DataFlow) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataFlow.
+func (mg *DataFlow) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataFlow.
@@ -131,9 +131,9 @@ func (mg *DataFlow) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataFlow.
-func (mg *DataFlow) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataFlow.
+func (mg *DataFlow) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataFlow.
@@ -169,9 +169,9 @@ func (mg *DataSetAzureBlob) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataSetAzureBlob.
-func (mg *DataSetAzureBlob) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataSetAzureBlob.
+func (mg *DataSetAzureBlob) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataSetAzureBlob.
@@ -207,9 +207,9 @@ func (mg *DataSetAzureBlob) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataSetAzureBlob.
-func (mg *DataSetAzureBlob) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataSetAzureBlob.
+func (mg *DataSetAzureBlob) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataSetAzureBlob.
@@ -245,9 +245,9 @@ func (mg *DataSetBinary) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataSetBinary.
-func (mg *DataSetBinary) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataSetBinary.
+func (mg *DataSetBinary) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataSetBinary.
@@ -283,9 +283,9 @@ func (mg *DataSetBinary) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataSetBinary.
-func (mg *DataSetBinary) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataSetBinary.
+func (mg *DataSetBinary) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataSetBinary.
@@ -321,9 +321,9 @@ func (mg *DataSetCosmosDBSQLAPI) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataSetCosmosDBSQLAPI.
-func (mg *DataSetCosmosDBSQLAPI) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataSetCosmosDBSQLAPI.
+func (mg *DataSetCosmosDBSQLAPI) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataSetCosmosDBSQLAPI.
@@ -359,9 +359,9 @@ func (mg *DataSetCosmosDBSQLAPI) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataSetCosmosDBSQLAPI.
-func (mg *DataSetCosmosDBSQLAPI) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataSetCosmosDBSQLAPI.
+func (mg *DataSetCosmosDBSQLAPI) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataSetCosmosDBSQLAPI.
@@ -397,9 +397,9 @@ func (mg *DataSetDelimitedText) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataSetDelimitedText.
-func (mg *DataSetDelimitedText) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataSetDelimitedText.
+func (mg *DataSetDelimitedText) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataSetDelimitedText.
@@ -435,9 +435,9 @@ func (mg *DataSetDelimitedText) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataSetDelimitedText.
-func (mg *DataSetDelimitedText) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataSetDelimitedText.
+func (mg *DataSetDelimitedText) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataSetDelimitedText.
@@ -473,9 +473,9 @@ func (mg *DataSetHTTP) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataSetHTTP.
-func (mg *DataSetHTTP) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataSetHTTP.
+func (mg *DataSetHTTP) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataSetHTTP.
@@ -511,9 +511,9 @@ func (mg *DataSetHTTP) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataSetHTTP.
-func (mg *DataSetHTTP) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataSetHTTP.
+func (mg *DataSetHTTP) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataSetHTTP.
@@ -549,9 +549,9 @@ func (mg *DataSetJSON) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataSetJSON.
-func (mg *DataSetJSON) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataSetJSON.
+func (mg *DataSetJSON) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataSetJSON.
@@ -587,9 +587,9 @@ func (mg *DataSetJSON) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataSetJSON.
-func (mg *DataSetJSON) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataSetJSON.
+func (mg *DataSetJSON) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataSetJSON.
@@ -625,9 +625,9 @@ func (mg *DataSetMySQL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataSetMySQL.
-func (mg *DataSetMySQL) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataSetMySQL.
+func (mg *DataSetMySQL) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataSetMySQL.
@@ -663,9 +663,9 @@ func (mg *DataSetMySQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataSetMySQL.
-func (mg *DataSetMySQL) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataSetMySQL.
+func (mg *DataSetMySQL) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataSetMySQL.
@@ -701,9 +701,9 @@ func (mg *DataSetParquet) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataSetParquet.
-func (mg *DataSetParquet) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataSetParquet.
+func (mg *DataSetParquet) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataSetParquet.
@@ -739,9 +739,9 @@ func (mg *DataSetParquet) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataSetParquet.
-func (mg *DataSetParquet) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataSetParquet.
+func (mg *DataSetParquet) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataSetParquet.
@@ -777,9 +777,9 @@ func (mg *DataSetPostgreSQL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataSetPostgreSQL.
-func (mg *DataSetPostgreSQL) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataSetPostgreSQL.
+func (mg *DataSetPostgreSQL) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataSetPostgreSQL.
@@ -815,9 +815,9 @@ func (mg *DataSetPostgreSQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataSetPostgreSQL.
-func (mg *DataSetPostgreSQL) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataSetPostgreSQL.
+func (mg *DataSetPostgreSQL) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataSetPostgreSQL.
@@ -853,9 +853,9 @@ func (mg *DataSetSQLServerTable) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataSetSQLServerTable.
-func (mg *DataSetSQLServerTable) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataSetSQLServerTable.
+func (mg *DataSetSQLServerTable) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataSetSQLServerTable.
@@ -891,9 +891,9 @@ func (mg *DataSetSQLServerTable) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataSetSQLServerTable.
-func (mg *DataSetSQLServerTable) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataSetSQLServerTable.
+func (mg *DataSetSQLServerTable) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataSetSQLServerTable.
@@ -929,9 +929,9 @@ func (mg *DataSetSnowflake) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DataSetSnowflake.
-func (mg *DataSetSnowflake) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DataSetSnowflake.
+func (mg *DataSetSnowflake) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DataSetSnowflake.
@@ -967,9 +967,9 @@ func (mg *DataSetSnowflake) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DataSetSnowflake.
-func (mg *DataSetSnowflake) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DataSetSnowflake.
+func (mg *DataSetSnowflake) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DataSetSnowflake.
@@ -1005,9 +1005,9 @@ func (mg *Factory) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Factory.
-func (mg *Factory) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Factory.
+func (mg *Factory) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Factory.
@@ -1043,9 +1043,9 @@ func (mg *Factory) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Factory.
-func (mg *Factory) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Factory.
+func (mg *Factory) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Factory.
@@ -1081,9 +1081,9 @@ func (mg *IntegrationRuntimeAzure) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this IntegrationRuntimeAzure.
-func (mg *IntegrationRuntimeAzure) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this IntegrationRuntimeAzure.
+func (mg *IntegrationRuntimeAzure) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IntegrationRuntimeAzure.
@@ -1119,9 +1119,9 @@ func (mg *IntegrationRuntimeAzure) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this IntegrationRuntimeAzure.
-func (mg *IntegrationRuntimeAzure) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this IntegrationRuntimeAzure.
+func (mg *IntegrationRuntimeAzure) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IntegrationRuntimeAzure.
@@ -1157,9 +1157,9 @@ func (mg *IntegrationRuntimeAzureSSIS) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this IntegrationRuntimeAzureSSIS.
-func (mg *IntegrationRuntimeAzureSSIS) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this IntegrationRuntimeAzureSSIS.
+func (mg *IntegrationRuntimeAzureSSIS) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IntegrationRuntimeAzureSSIS.
@@ -1195,9 +1195,9 @@ func (mg *IntegrationRuntimeAzureSSIS) SetDeletionPolicy(r xpv1.DeletionPolicy) 
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this IntegrationRuntimeAzureSSIS.
-func (mg *IntegrationRuntimeAzureSSIS) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this IntegrationRuntimeAzureSSIS.
+func (mg *IntegrationRuntimeAzureSSIS) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IntegrationRuntimeAzureSSIS.
@@ -1233,9 +1233,9 @@ func (mg *IntegrationRuntimeManaged) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this IntegrationRuntimeManaged.
-func (mg *IntegrationRuntimeManaged) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this IntegrationRuntimeManaged.
+func (mg *IntegrationRuntimeManaged) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IntegrationRuntimeManaged.
@@ -1271,9 +1271,9 @@ func (mg *IntegrationRuntimeManaged) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this IntegrationRuntimeManaged.
-func (mg *IntegrationRuntimeManaged) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this IntegrationRuntimeManaged.
+func (mg *IntegrationRuntimeManaged) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IntegrationRuntimeManaged.
@@ -1309,9 +1309,9 @@ func (mg *IntegrationRuntimeSelfHosted) GetDeletionPolicy() xpv1.DeletionPolicy 
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this IntegrationRuntimeSelfHosted.
-func (mg *IntegrationRuntimeSelfHosted) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this IntegrationRuntimeSelfHosted.
+func (mg *IntegrationRuntimeSelfHosted) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IntegrationRuntimeSelfHosted.
@@ -1347,9 +1347,9 @@ func (mg *IntegrationRuntimeSelfHosted) SetDeletionPolicy(r xpv1.DeletionPolicy)
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this IntegrationRuntimeSelfHosted.
-func (mg *IntegrationRuntimeSelfHosted) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this IntegrationRuntimeSelfHosted.
+func (mg *IntegrationRuntimeSelfHosted) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IntegrationRuntimeSelfHosted.
@@ -1385,9 +1385,9 @@ func (mg *LinkedCustomService) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedCustomService.
-func (mg *LinkedCustomService) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedCustomService.
+func (mg *LinkedCustomService) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedCustomService.
@@ -1423,9 +1423,9 @@ func (mg *LinkedCustomService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedCustomService.
-func (mg *LinkedCustomService) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedCustomService.
+func (mg *LinkedCustomService) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedCustomService.
@@ -1461,9 +1461,9 @@ func (mg *LinkedServiceAzureBlobStorage) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceAzureBlobStorage.
-func (mg *LinkedServiceAzureBlobStorage) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceAzureBlobStorage.
+func (mg *LinkedServiceAzureBlobStorage) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceAzureBlobStorage.
@@ -1499,9 +1499,9 @@ func (mg *LinkedServiceAzureBlobStorage) SetDeletionPolicy(r xpv1.DeletionPolicy
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceAzureBlobStorage.
-func (mg *LinkedServiceAzureBlobStorage) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceAzureBlobStorage.
+func (mg *LinkedServiceAzureBlobStorage) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceAzureBlobStorage.
@@ -1537,9 +1537,9 @@ func (mg *LinkedServiceAzureDatabricks) GetDeletionPolicy() xpv1.DeletionPolicy 
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceAzureDatabricks.
-func (mg *LinkedServiceAzureDatabricks) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceAzureDatabricks.
+func (mg *LinkedServiceAzureDatabricks) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceAzureDatabricks.
@@ -1575,9 +1575,9 @@ func (mg *LinkedServiceAzureDatabricks) SetDeletionPolicy(r xpv1.DeletionPolicy)
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceAzureDatabricks.
-func (mg *LinkedServiceAzureDatabricks) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceAzureDatabricks.
+func (mg *LinkedServiceAzureDatabricks) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceAzureDatabricks.
@@ -1613,9 +1613,9 @@ func (mg *LinkedServiceAzureFileStorage) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceAzureFileStorage.
-func (mg *LinkedServiceAzureFileStorage) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceAzureFileStorage.
+func (mg *LinkedServiceAzureFileStorage) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceAzureFileStorage.
@@ -1651,9 +1651,9 @@ func (mg *LinkedServiceAzureFileStorage) SetDeletionPolicy(r xpv1.DeletionPolicy
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceAzureFileStorage.
-func (mg *LinkedServiceAzureFileStorage) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceAzureFileStorage.
+func (mg *LinkedServiceAzureFileStorage) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceAzureFileStorage.
@@ -1689,9 +1689,9 @@ func (mg *LinkedServiceAzureFunction) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceAzureFunction.
-func (mg *LinkedServiceAzureFunction) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceAzureFunction.
+func (mg *LinkedServiceAzureFunction) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceAzureFunction.
@@ -1727,9 +1727,9 @@ func (mg *LinkedServiceAzureFunction) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceAzureFunction.
-func (mg *LinkedServiceAzureFunction) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceAzureFunction.
+func (mg *LinkedServiceAzureFunction) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceAzureFunction.
@@ -1765,9 +1765,9 @@ func (mg *LinkedServiceAzureSQLDatabase) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceAzureSQLDatabase.
-func (mg *LinkedServiceAzureSQLDatabase) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceAzureSQLDatabase.
+func (mg *LinkedServiceAzureSQLDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceAzureSQLDatabase.
@@ -1803,9 +1803,9 @@ func (mg *LinkedServiceAzureSQLDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceAzureSQLDatabase.
-func (mg *LinkedServiceAzureSQLDatabase) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceAzureSQLDatabase.
+func (mg *LinkedServiceAzureSQLDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceAzureSQLDatabase.
@@ -1841,9 +1841,9 @@ func (mg *LinkedServiceAzureSearch) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceAzureSearch.
-func (mg *LinkedServiceAzureSearch) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceAzureSearch.
+func (mg *LinkedServiceAzureSearch) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceAzureSearch.
@@ -1879,9 +1879,9 @@ func (mg *LinkedServiceAzureSearch) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceAzureSearch.
-func (mg *LinkedServiceAzureSearch) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceAzureSearch.
+func (mg *LinkedServiceAzureSearch) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceAzureSearch.
@@ -1917,9 +1917,9 @@ func (mg *LinkedServiceAzureTableStorage) GetDeletionPolicy() xpv1.DeletionPolic
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceAzureTableStorage.
-func (mg *LinkedServiceAzureTableStorage) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceAzureTableStorage.
+func (mg *LinkedServiceAzureTableStorage) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceAzureTableStorage.
@@ -1955,9 +1955,9 @@ func (mg *LinkedServiceAzureTableStorage) SetDeletionPolicy(r xpv1.DeletionPolic
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceAzureTableStorage.
-func (mg *LinkedServiceAzureTableStorage) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceAzureTableStorage.
+func (mg *LinkedServiceAzureTableStorage) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceAzureTableStorage.
@@ -1993,9 +1993,9 @@ func (mg *LinkedServiceCosmosDB) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceCosmosDB.
-func (mg *LinkedServiceCosmosDB) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceCosmosDB.
+func (mg *LinkedServiceCosmosDB) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceCosmosDB.
@@ -2031,9 +2031,9 @@ func (mg *LinkedServiceCosmosDB) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceCosmosDB.
-func (mg *LinkedServiceCosmosDB) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceCosmosDB.
+func (mg *LinkedServiceCosmosDB) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceCosmosDB.
@@ -2069,9 +2069,9 @@ func (mg *LinkedServiceCosmosDBMongoapi) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceCosmosDBMongoapi.
-func (mg *LinkedServiceCosmosDBMongoapi) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceCosmosDBMongoapi.
+func (mg *LinkedServiceCosmosDBMongoapi) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceCosmosDBMongoapi.
@@ -2107,9 +2107,9 @@ func (mg *LinkedServiceCosmosDBMongoapi) SetDeletionPolicy(r xpv1.DeletionPolicy
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceCosmosDBMongoapi.
-func (mg *LinkedServiceCosmosDBMongoapi) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceCosmosDBMongoapi.
+func (mg *LinkedServiceCosmosDBMongoapi) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceCosmosDBMongoapi.
@@ -2145,9 +2145,9 @@ func (mg *LinkedServiceDataLakeStorageGen2) GetDeletionPolicy() xpv1.DeletionPol
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceDataLakeStorageGen2.
-func (mg *LinkedServiceDataLakeStorageGen2) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceDataLakeStorageGen2.
+func (mg *LinkedServiceDataLakeStorageGen2) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceDataLakeStorageGen2.
@@ -2183,9 +2183,9 @@ func (mg *LinkedServiceDataLakeStorageGen2) SetDeletionPolicy(r xpv1.DeletionPol
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceDataLakeStorageGen2.
-func (mg *LinkedServiceDataLakeStorageGen2) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceDataLakeStorageGen2.
+func (mg *LinkedServiceDataLakeStorageGen2) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceDataLakeStorageGen2.
@@ -2221,9 +2221,9 @@ func (mg *LinkedServiceKeyVault) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceKeyVault.
-func (mg *LinkedServiceKeyVault) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceKeyVault.
+func (mg *LinkedServiceKeyVault) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceKeyVault.
@@ -2259,9 +2259,9 @@ func (mg *LinkedServiceKeyVault) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceKeyVault.
-func (mg *LinkedServiceKeyVault) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceKeyVault.
+func (mg *LinkedServiceKeyVault) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceKeyVault.
@@ -2297,9 +2297,9 @@ func (mg *LinkedServiceKusto) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceKusto.
-func (mg *LinkedServiceKusto) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceKusto.
+func (mg *LinkedServiceKusto) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceKusto.
@@ -2335,9 +2335,9 @@ func (mg *LinkedServiceKusto) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceKusto.
-func (mg *LinkedServiceKusto) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceKusto.
+func (mg *LinkedServiceKusto) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceKusto.
@@ -2373,9 +2373,9 @@ func (mg *LinkedServiceMySQL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceMySQL.
-func (mg *LinkedServiceMySQL) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceMySQL.
+func (mg *LinkedServiceMySQL) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceMySQL.
@@ -2411,9 +2411,9 @@ func (mg *LinkedServiceMySQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceMySQL.
-func (mg *LinkedServiceMySQL) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceMySQL.
+func (mg *LinkedServiceMySQL) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceMySQL.
@@ -2449,9 +2449,9 @@ func (mg *LinkedServiceOData) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceOData.
-func (mg *LinkedServiceOData) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceOData.
+func (mg *LinkedServiceOData) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceOData.
@@ -2487,9 +2487,9 @@ func (mg *LinkedServiceOData) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceOData.
-func (mg *LinkedServiceOData) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceOData.
+func (mg *LinkedServiceOData) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceOData.
@@ -2525,9 +2525,9 @@ func (mg *LinkedServiceOdbc) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceOdbc.
-func (mg *LinkedServiceOdbc) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceOdbc.
+func (mg *LinkedServiceOdbc) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceOdbc.
@@ -2563,9 +2563,9 @@ func (mg *LinkedServiceOdbc) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceOdbc.
-func (mg *LinkedServiceOdbc) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceOdbc.
+func (mg *LinkedServiceOdbc) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceOdbc.
@@ -2601,9 +2601,9 @@ func (mg *LinkedServicePostgreSQL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServicePostgreSQL.
-func (mg *LinkedServicePostgreSQL) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServicePostgreSQL.
+func (mg *LinkedServicePostgreSQL) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServicePostgreSQL.
@@ -2639,9 +2639,9 @@ func (mg *LinkedServicePostgreSQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServicePostgreSQL.
-func (mg *LinkedServicePostgreSQL) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServicePostgreSQL.
+func (mg *LinkedServicePostgreSQL) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServicePostgreSQL.
@@ -2677,9 +2677,9 @@ func (mg *LinkedServiceSFTP) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceSFTP.
-func (mg *LinkedServiceSFTP) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceSFTP.
+func (mg *LinkedServiceSFTP) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceSFTP.
@@ -2715,9 +2715,9 @@ func (mg *LinkedServiceSFTP) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceSFTP.
-func (mg *LinkedServiceSFTP) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceSFTP.
+func (mg *LinkedServiceSFTP) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceSFTP.
@@ -2753,9 +2753,9 @@ func (mg *LinkedServiceSQLServer) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceSQLServer.
-func (mg *LinkedServiceSQLServer) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceSQLServer.
+func (mg *LinkedServiceSQLServer) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceSQLServer.
@@ -2791,9 +2791,9 @@ func (mg *LinkedServiceSQLServer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceSQLServer.
-func (mg *LinkedServiceSQLServer) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceSQLServer.
+func (mg *LinkedServiceSQLServer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceSQLServer.
@@ -2829,9 +2829,9 @@ func (mg *LinkedServiceSnowflake) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceSnowflake.
-func (mg *LinkedServiceSnowflake) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceSnowflake.
+func (mg *LinkedServiceSnowflake) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceSnowflake.
@@ -2867,9 +2867,9 @@ func (mg *LinkedServiceSnowflake) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceSnowflake.
-func (mg *LinkedServiceSnowflake) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceSnowflake.
+func (mg *LinkedServiceSnowflake) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceSnowflake.
@@ -2905,9 +2905,9 @@ func (mg *LinkedServiceSynapse) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceSynapse.
-func (mg *LinkedServiceSynapse) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceSynapse.
+func (mg *LinkedServiceSynapse) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceSynapse.
@@ -2943,9 +2943,9 @@ func (mg *LinkedServiceSynapse) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceSynapse.
-func (mg *LinkedServiceSynapse) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceSynapse.
+func (mg *LinkedServiceSynapse) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceSynapse.
@@ -2981,9 +2981,9 @@ func (mg *LinkedServiceWeb) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinkedServiceWeb.
-func (mg *LinkedServiceWeb) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinkedServiceWeb.
+func (mg *LinkedServiceWeb) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinkedServiceWeb.
@@ -3019,9 +3019,9 @@ func (mg *LinkedServiceWeb) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinkedServiceWeb.
-func (mg *LinkedServiceWeb) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinkedServiceWeb.
+func (mg *LinkedServiceWeb) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinkedServiceWeb.
@@ -3057,9 +3057,9 @@ func (mg *ManagedPrivateEndpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ManagedPrivateEndpoint.
-func (mg *ManagedPrivateEndpoint) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ManagedPrivateEndpoint.
@@ -3095,9 +3095,9 @@ func (mg *ManagedPrivateEndpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ManagedPrivateEndpoint.
-func (mg *ManagedPrivateEndpoint) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ManagedPrivateEndpoint.
+func (mg *ManagedPrivateEndpoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ManagedPrivateEndpoint.
@@ -3133,9 +3133,9 @@ func (mg *Pipeline) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Pipeline.
-func (mg *Pipeline) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Pipeline.
+func (mg *Pipeline) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Pipeline.
@@ -3171,9 +3171,9 @@ func (mg *Pipeline) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Pipeline.
-func (mg *Pipeline) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Pipeline.
+func (mg *Pipeline) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Pipeline.
@@ -3209,9 +3209,9 @@ func (mg *TriggerBlobEvent) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this TriggerBlobEvent.
-func (mg *TriggerBlobEvent) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this TriggerBlobEvent.
+func (mg *TriggerBlobEvent) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this TriggerBlobEvent.
@@ -3247,9 +3247,9 @@ func (mg *TriggerBlobEvent) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this TriggerBlobEvent.
-func (mg *TriggerBlobEvent) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this TriggerBlobEvent.
+func (mg *TriggerBlobEvent) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this TriggerBlobEvent.
@@ -3285,9 +3285,9 @@ func (mg *TriggerCustomEvent) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this TriggerCustomEvent.
-func (mg *TriggerCustomEvent) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this TriggerCustomEvent.
@@ -3323,9 +3323,9 @@ func (mg *TriggerCustomEvent) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this TriggerCustomEvent.
-func (mg *TriggerCustomEvent) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this TriggerCustomEvent.
+func (mg *TriggerCustomEvent) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this TriggerCustomEvent.
@@ -3361,9 +3361,9 @@ func (mg *TriggerSchedule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this TriggerSchedule.
-func (mg *TriggerSchedule) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this TriggerSchedule.
+func (mg *TriggerSchedule) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this TriggerSchedule.
@@ -3399,9 +3399,9 @@ func (mg *TriggerSchedule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this TriggerSchedule.
-func (mg *TriggerSchedule) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this TriggerSchedule.
+func (mg *TriggerSchedule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this TriggerSchedule.

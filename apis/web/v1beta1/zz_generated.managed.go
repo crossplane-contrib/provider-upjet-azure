@@ -17,9 +17,9 @@ func (mg *AppActiveSlot) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppActiveSlot.
-func (mg *AppActiveSlot) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppActiveSlot.
+func (mg *AppActiveSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppActiveSlot.
@@ -55,9 +55,9 @@ func (mg *AppActiveSlot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppActiveSlot.
-func (mg *AppActiveSlot) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppActiveSlot.
+func (mg *AppActiveSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppActiveSlot.
@@ -93,9 +93,9 @@ func (mg *AppHybridConnection) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppHybridConnection.
-func (mg *AppHybridConnection) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppHybridConnection.
+func (mg *AppHybridConnection) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppHybridConnection.
@@ -131,9 +131,9 @@ func (mg *AppHybridConnection) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppHybridConnection.
-func (mg *AppHybridConnection) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppHybridConnection.
+func (mg *AppHybridConnection) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppHybridConnection.
@@ -169,9 +169,9 @@ func (mg *AppServicePlan) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppServicePlan.
-func (mg *AppServicePlan) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppServicePlan.
+func (mg *AppServicePlan) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppServicePlan.
@@ -207,9 +207,9 @@ func (mg *AppServicePlan) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppServicePlan.
-func (mg *AppServicePlan) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppServicePlan.
+func (mg *AppServicePlan) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppServicePlan.
@@ -245,9 +245,9 @@ func (mg *FunctionApp) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this FunctionApp.
-func (mg *FunctionApp) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this FunctionApp.
+func (mg *FunctionApp) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FunctionApp.
@@ -283,9 +283,9 @@ func (mg *FunctionApp) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this FunctionApp.
-func (mg *FunctionApp) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this FunctionApp.
+func (mg *FunctionApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FunctionApp.
@@ -321,9 +321,9 @@ func (mg *FunctionAppActiveSlot) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this FunctionAppActiveSlot.
-func (mg *FunctionAppActiveSlot) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this FunctionAppActiveSlot.
+func (mg *FunctionAppActiveSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FunctionAppActiveSlot.
@@ -359,9 +359,9 @@ func (mg *FunctionAppActiveSlot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this FunctionAppActiveSlot.
-func (mg *FunctionAppActiveSlot) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this FunctionAppActiveSlot.
+func (mg *FunctionAppActiveSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FunctionAppActiveSlot.
@@ -397,9 +397,9 @@ func (mg *FunctionAppFunction) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this FunctionAppFunction.
-func (mg *FunctionAppFunction) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this FunctionAppFunction.
+func (mg *FunctionAppFunction) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FunctionAppFunction.
@@ -435,9 +435,9 @@ func (mg *FunctionAppFunction) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this FunctionAppFunction.
-func (mg *FunctionAppFunction) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this FunctionAppFunction.
+func (mg *FunctionAppFunction) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FunctionAppFunction.
@@ -473,9 +473,9 @@ func (mg *FunctionAppHybridConnection) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this FunctionAppHybridConnection.
-func (mg *FunctionAppHybridConnection) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FunctionAppHybridConnection.
@@ -511,9 +511,9 @@ func (mg *FunctionAppHybridConnection) SetDeletionPolicy(r xpv1.DeletionPolicy) 
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this FunctionAppHybridConnection.
-func (mg *FunctionAppHybridConnection) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this FunctionAppHybridConnection.
+func (mg *FunctionAppHybridConnection) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FunctionAppHybridConnection.
@@ -549,9 +549,9 @@ func (mg *FunctionAppSlot) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this FunctionAppSlot.
-func (mg *FunctionAppSlot) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this FunctionAppSlot.
+func (mg *FunctionAppSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FunctionAppSlot.
@@ -587,9 +587,9 @@ func (mg *FunctionAppSlot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this FunctionAppSlot.
-func (mg *FunctionAppSlot) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this FunctionAppSlot.
+func (mg *FunctionAppSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FunctionAppSlot.
@@ -625,9 +625,9 @@ func (mg *LinuxFunctionApp) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinuxFunctionApp.
-func (mg *LinuxFunctionApp) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinuxFunctionApp.
+func (mg *LinuxFunctionApp) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinuxFunctionApp.
@@ -663,9 +663,9 @@ func (mg *LinuxFunctionApp) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinuxFunctionApp.
-func (mg *LinuxFunctionApp) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinuxFunctionApp.
+func (mg *LinuxFunctionApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinuxFunctionApp.
@@ -701,9 +701,9 @@ func (mg *LinuxFunctionAppSlot) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinuxFunctionAppSlot.
-func (mg *LinuxFunctionAppSlot) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinuxFunctionAppSlot.
+func (mg *LinuxFunctionAppSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinuxFunctionAppSlot.
@@ -739,9 +739,9 @@ func (mg *LinuxFunctionAppSlot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinuxFunctionAppSlot.
-func (mg *LinuxFunctionAppSlot) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinuxFunctionAppSlot.
+func (mg *LinuxFunctionAppSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinuxFunctionAppSlot.
@@ -777,9 +777,9 @@ func (mg *LinuxWebApp) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinuxWebApp.
-func (mg *LinuxWebApp) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinuxWebApp.
+func (mg *LinuxWebApp) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinuxWebApp.
@@ -815,9 +815,9 @@ func (mg *LinuxWebApp) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinuxWebApp.
-func (mg *LinuxWebApp) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinuxWebApp.
+func (mg *LinuxWebApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinuxWebApp.
@@ -853,9 +853,9 @@ func (mg *LinuxWebAppSlot) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this LinuxWebAppSlot.
-func (mg *LinuxWebAppSlot) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this LinuxWebAppSlot.
+func (mg *LinuxWebAppSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this LinuxWebAppSlot.
@@ -891,9 +891,9 @@ func (mg *LinuxWebAppSlot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this LinuxWebAppSlot.
-func (mg *LinuxWebAppSlot) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this LinuxWebAppSlot.
+func (mg *LinuxWebAppSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this LinuxWebAppSlot.
@@ -929,9 +929,9 @@ func (mg *ServicePlan) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ServicePlan.
-func (mg *ServicePlan) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ServicePlan.
+func (mg *ServicePlan) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ServicePlan.
@@ -967,9 +967,9 @@ func (mg *ServicePlan) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ServicePlan.
-func (mg *ServicePlan) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ServicePlan.
+func (mg *ServicePlan) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ServicePlan.
@@ -1005,9 +1005,9 @@ func (mg *SourceControlToken) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SourceControlToken.
-func (mg *SourceControlToken) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SourceControlToken.
+func (mg *SourceControlToken) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SourceControlToken.
@@ -1043,9 +1043,9 @@ func (mg *SourceControlToken) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SourceControlToken.
-func (mg *SourceControlToken) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SourceControlToken.
+func (mg *SourceControlToken) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SourceControlToken.
@@ -1081,9 +1081,9 @@ func (mg *StaticSite) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this StaticSite.
-func (mg *StaticSite) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this StaticSite.
+func (mg *StaticSite) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this StaticSite.
@@ -1119,9 +1119,9 @@ func (mg *StaticSite) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this StaticSite.
-func (mg *StaticSite) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this StaticSite.
+func (mg *StaticSite) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this StaticSite.
@@ -1157,9 +1157,9 @@ func (mg *WindowsFunctionApp) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this WindowsFunctionApp.
-func (mg *WindowsFunctionApp) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this WindowsFunctionApp.
+func (mg *WindowsFunctionApp) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WindowsFunctionApp.
@@ -1195,9 +1195,9 @@ func (mg *WindowsFunctionApp) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this WindowsFunctionApp.
-func (mg *WindowsFunctionApp) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this WindowsFunctionApp.
+func (mg *WindowsFunctionApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WindowsFunctionApp.
@@ -1233,9 +1233,9 @@ func (mg *WindowsFunctionAppSlot) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this WindowsFunctionAppSlot.
-func (mg *WindowsFunctionAppSlot) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this WindowsFunctionAppSlot.
+func (mg *WindowsFunctionAppSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WindowsFunctionAppSlot.
@@ -1271,9 +1271,9 @@ func (mg *WindowsFunctionAppSlot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this WindowsFunctionAppSlot.
-func (mg *WindowsFunctionAppSlot) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this WindowsFunctionAppSlot.
+func (mg *WindowsFunctionAppSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WindowsFunctionAppSlot.
@@ -1309,9 +1309,9 @@ func (mg *WindowsWebApp) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this WindowsWebApp.
-func (mg *WindowsWebApp) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this WindowsWebApp.
+func (mg *WindowsWebApp) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WindowsWebApp.
@@ -1347,9 +1347,9 @@ func (mg *WindowsWebApp) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this WindowsWebApp.
-func (mg *WindowsWebApp) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this WindowsWebApp.
+func (mg *WindowsWebApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WindowsWebApp.
@@ -1385,9 +1385,9 @@ func (mg *WindowsWebAppSlot) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this WindowsWebAppSlot.
-func (mg *WindowsWebAppSlot) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this WindowsWebAppSlot.
+func (mg *WindowsWebAppSlot) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this WindowsWebAppSlot.
@@ -1423,9 +1423,9 @@ func (mg *WindowsWebAppSlot) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this WindowsWebAppSlot.
-func (mg *WindowsWebAppSlot) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this WindowsWebAppSlot.
+func (mg *WindowsWebAppSlot) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this WindowsWebAppSlot.

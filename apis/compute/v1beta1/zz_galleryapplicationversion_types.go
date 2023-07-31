@@ -13,6 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GalleryApplicationVersionInitParameters struct {
+
+	// Should the Gallery Application reports health. Defaults to false.
+	EnableHealthCheck *bool `json:"enableHealthCheck,omitempty" tf:"enable_health_check,omitempty"`
+
+	// The end of life date in RFC3339 format of the Gallery Application Version.
+	EndOfLifeDate *string `json:"endOfLifeDate,omitempty" tf:"end_of_life_date,omitempty"`
+
+	// Should the Gallery Application Version be excluded from the latest filter? If set to true this Gallery Application Version won't be returned for the latest version. Defaults to false.
+	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty"`
+
+	// The Azure Region where the Gallery Application Version exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A manage_action block as defined below.
+	ManageAction []ManageActionInitParameters `json:"manageAction,omitempty" tf:"manage_action,omitempty"`
+
+	// The version name of the Gallery Application Version, such as 1.0.0. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A source block as defined below.
+	Source []SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
+
+	// A mapping of tags to assign to the Gallery Application Version.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// One or more target_region blocks as defined below.
+	TargetRegion []TargetRegionInitParameters `json:"targetRegion,omitempty" tf:"target_region,omitempty"`
+}
+
 type GalleryApplicationVersionObservation struct {
 
 	// Should the Gallery Application reports health. Defaults to false.
@@ -102,6 +132,18 @@ type GalleryApplicationVersionParameters struct {
 	TargetRegion []TargetRegionParameters `json:"targetRegion,omitempty" tf:"target_region,omitempty"`
 }
 
+type ManageActionInitParameters struct {
+
+	// The command to install the Gallery Application. Changing this forces a new resource to be created.
+	Install *string `json:"install,omitempty" tf:"install,omitempty"`
+
+	// The command to remove the Gallery Application. Changing this forces a new resource to be created.
+	Remove *string `json:"remove,omitempty" tf:"remove,omitempty"`
+
+	// The command to update the Gallery Application. Changing this forces a new resource to be created.
+	Update *string `json:"update,omitempty" tf:"update,omitempty"`
+}
+
 type ManageActionObservation struct {
 
 	// The command to install the Gallery Application. Changing this forces a new resource to be created.
@@ -117,16 +159,22 @@ type ManageActionObservation struct {
 type ManageActionParameters struct {
 
 	// The command to install the Gallery Application. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Install *string `json:"install" tf:"install,omitempty"`
+	// +kubebuilder:validation:Optional
+	Install *string `json:"install,omitempty" tf:"install,omitempty"`
 
 	// The command to remove the Gallery Application. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Remove *string `json:"remove" tf:"remove,omitempty"`
+	// +kubebuilder:validation:Optional
+	Remove *string `json:"remove,omitempty" tf:"remove,omitempty"`
 
 	// The command to update the Gallery Application. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Update *string `json:"update,omitempty" tf:"update,omitempty"`
+}
+
+type SourceInitParameters struct {
+
+	// The Storage Blob URI of the default configuration. Changing this forces a new resource to be created.
+	DefaultConfigurationLink *string `json:"defaultConfigurationLink,omitempty" tf:"default_configuration_link,omitempty"`
 }
 
 type SourceObservation struct {
@@ -159,6 +207,15 @@ type SourceParameters struct {
 	MediaLinkSelector *v1.Selector `json:"mediaLinkSelector,omitempty" tf:"-"`
 }
 
+type TargetRegionInitParameters struct {
+
+	// The number of replicas of the Gallery Application Version to be created per region. Possible values are between 1 and 10.
+	RegionalReplicaCount *float64 `json:"regionalReplicaCount,omitempty" tf:"regional_replica_count,omitempty"`
+
+	// The storage account type for the Gallery Application Version. Possible values are Standard_LRS, Premium_LRS and Standard_ZRS. Defaults to Standard_LRS.
+	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
+}
+
 type TargetRegionObservation struct {
 
 	// The Azure Region in which the Gallery Application Version exists.
@@ -188,8 +245,8 @@ type TargetRegionParameters struct {
 	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The number of replicas of the Gallery Application Version to be created per region. Possible values are between 1 and 10.
-	// +kubebuilder:validation:Required
-	RegionalReplicaCount *float64 `json:"regionalReplicaCount" tf:"regional_replica_count,omitempty"`
+	// +kubebuilder:validation:Optional
+	RegionalReplicaCount *float64 `json:"regionalReplicaCount,omitempty" tf:"regional_replica_count,omitempty"`
 
 	// The storage account type for the Gallery Application Version. Possible values are Standard_LRS, Premium_LRS and Standard_ZRS. Defaults to Standard_LRS.
 	// +kubebuilder:validation:Optional
@@ -200,6 +257,18 @@ type TargetRegionParameters struct {
 type GalleryApplicationVersionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GalleryApplicationVersionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider GalleryApplicationVersionInitParameters `json:"initProvider,omitempty"`
 }
 
 // GalleryApplicationVersionStatus defines the observed state of GalleryApplicationVersion.
@@ -220,11 +289,11 @@ type GalleryApplicationVersionStatus struct {
 type GalleryApplicationVersion struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.manageAction)",message="manageAction is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.source)",message="source is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetRegion)",message="targetRegion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.manageAction) || has(self.initProvider.manageAction)",message="manageAction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.source) || has(self.initProvider.source)",message="source is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetRegion) || has(self.initProvider.targetRegion)",message="targetRegion is a required parameter"
 	Spec   GalleryApplicationVersionSpec   `json:"spec"`
 	Status GalleryApplicationVersionStatus `json:"status,omitempty"`
 }

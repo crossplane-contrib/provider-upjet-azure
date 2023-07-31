@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BackupPolicyPostgreSQLInitParameters struct {
+
+	// Specifies a list of repeating time interval. It supports weekly back. It should follow ISO 8601 repeating time interval. Changing this forces a new Backup Policy PostgreSQL to be created.
+	BackupRepeatingTimeIntervals []*string `json:"backupRepeatingTimeIntervals,omitempty" tf:"backup_repeating_time_intervals,omitempty"`
+
+	// The duration of default retention rule. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy PostgreSQL to be created.
+	DefaultRetentionDuration *string `json:"defaultRetentionDuration,omitempty" tf:"default_retention_duration,omitempty"`
+
+	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy PostgreSQL to be created.
+	RetentionRule []BackupPolicyPostgreSQLRetentionRuleInitParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
+}
+
 type BackupPolicyPostgreSQLObservation struct {
 
 	// Specifies a list of repeating time interval. It supports weekly back. It should follow ISO 8601 repeating time interval. Changing this forces a new Backup Policy PostgreSQL to be created.
@@ -75,6 +87,21 @@ type BackupPolicyPostgreSQLParameters struct {
 	VaultNameSelector *v1.Selector `json:"vaultNameSelector,omitempty" tf:"-"`
 }
 
+type BackupPolicyPostgreSQLRetentionRuleInitParameters struct {
+
+	// A criteria block as defined below. Changing this forces a new Backup Policy PostgreSQL to be created.
+	Criteria []RetentionRuleCriteriaInitParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
+
+	// Duration after which the backup is deleted. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy PostgreSQL to be created.
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// The name which should be used for this retention rule. Changing this forces a new Backup Policy PostgreSQL to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the priority of the rule. The priority number must be unique for each rule. The lower the priority number, the higher the priority of the rule. Changing this forces a new Backup Policy PostgreSQL to be created.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+}
+
 type BackupPolicyPostgreSQLRetentionRuleObservation struct {
 
 	// A criteria block as defined below. Changing this forces a new Backup Policy PostgreSQL to be created.
@@ -93,20 +120,38 @@ type BackupPolicyPostgreSQLRetentionRuleObservation struct {
 type BackupPolicyPostgreSQLRetentionRuleParameters struct {
 
 	// A criteria block as defined below. Changing this forces a new Backup Policy PostgreSQL to be created.
-	// +kubebuilder:validation:Required
-	Criteria []RetentionRuleCriteriaParameters `json:"criteria" tf:"criteria,omitempty"`
+	// +kubebuilder:validation:Optional
+	Criteria []RetentionRuleCriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
 	// Duration after which the backup is deleted. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy PostgreSQL to be created.
-	// +kubebuilder:validation:Required
-	Duration *string `json:"duration" tf:"duration,omitempty"`
+	// +kubebuilder:validation:Optional
+	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// The name which should be used for this retention rule. Changing this forces a new Backup Policy PostgreSQL to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the priority of the rule. The priority number must be unique for each rule. The lower the priority number, the higher the priority of the rule. Changing this forces a new Backup Policy PostgreSQL to be created.
-	// +kubebuilder:validation:Required
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+}
+
+type RetentionRuleCriteriaInitParameters struct {
+
+	// Possible values are AllBackup, FirstOfDay, FirstOfWeek, FirstOfMonth and FirstOfYear. These values mean the first successful backup of the day/week/month/year. Changing this forces a new Backup Policy PostgreSQL to be created.
+	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
+
+	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new Backup Policy PostgreSQL to be created.
+	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+
+	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new Backup Policy PostgreSQL to be created.
+	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
+
+	// Specifies a list of backup times for backup in the RFC3339 format. Changing this forces a new Backup Policy PostgreSQL to be created.
+	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
+
+	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new Backup Policy PostgreSQL to be created.
+	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
 }
 
 type RetentionRuleCriteriaObservation struct {
@@ -154,6 +199,18 @@ type RetentionRuleCriteriaParameters struct {
 type BackupPolicyPostgreSQLSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BackupPolicyPostgreSQLParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BackupPolicyPostgreSQLInitParameters `json:"initProvider,omitempty"`
 }
 
 // BackupPolicyPostgreSQLStatus defines the observed state of BackupPolicyPostgreSQL.
@@ -174,8 +231,8 @@ type BackupPolicyPostgreSQLStatus struct {
 type BackupPolicyPostgreSQL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backupRepeatingTimeIntervals)",message="backupRepeatingTimeIntervals is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.defaultRetentionDuration)",message="defaultRetentionDuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backupRepeatingTimeIntervals) || has(self.initProvider.backupRepeatingTimeIntervals)",message="backupRepeatingTimeIntervals is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultRetentionDuration) || has(self.initProvider.defaultRetentionDuration)",message="defaultRetentionDuration is a required parameter"
 	Spec   BackupPolicyPostgreSQLSpec   `json:"spec"`
 	Status BackupPolicyPostgreSQLStatus `json:"status,omitempty"`
 }

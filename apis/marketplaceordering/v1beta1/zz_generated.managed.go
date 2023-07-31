@@ -17,9 +17,9 @@ func (mg *MarketplaceAgreement) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MarketplaceAgreement.
-func (mg *MarketplaceAgreement) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MarketplaceAgreement.
+func (mg *MarketplaceAgreement) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MarketplaceAgreement.
@@ -55,9 +55,9 @@ func (mg *MarketplaceAgreement) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MarketplaceAgreement.
-func (mg *MarketplaceAgreement) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MarketplaceAgreement.
+func (mg *MarketplaceAgreement) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MarketplaceAgreement.

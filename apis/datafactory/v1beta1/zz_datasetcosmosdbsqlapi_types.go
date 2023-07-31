@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DataSetCosmosDBSQLAPIInitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Dataset.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Dataset.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The collection name of the Data Factory Dataset Azure Cosmos DB SQL API.
+	CollectionName *string `json:"collectionName,omitempty" tf:"collection_name,omitempty"`
+
+	// The description for the Data Factory Dataset.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Dataset.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// A schema_column block as defined below.
+	SchemaColumn []DataSetCosmosDBSQLAPISchemaColumnInitParameters `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
+}
+
 type DataSetCosmosDBSQLAPIObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Dataset.
@@ -104,6 +128,18 @@ type DataSetCosmosDBSQLAPIParameters struct {
 	SchemaColumn []DataSetCosmosDBSQLAPISchemaColumnParameters `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
 }
 
+type DataSetCosmosDBSQLAPISchemaColumnInitParameters struct {
+
+	// The description of the column.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type DataSetCosmosDBSQLAPISchemaColumnObservation struct {
 
 	// The description of the column.
@@ -123,8 +159,8 @@ type DataSetCosmosDBSQLAPISchemaColumnParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the column.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
 	// +kubebuilder:validation:Optional
@@ -135,6 +171,18 @@ type DataSetCosmosDBSQLAPISchemaColumnParameters struct {
 type DataSetCosmosDBSQLAPISpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DataSetCosmosDBSQLAPIParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DataSetCosmosDBSQLAPIInitParameters `json:"initProvider,omitempty"`
 }
 
 // DataSetCosmosDBSQLAPIStatus defines the observed state of DataSetCosmosDBSQLAPI.

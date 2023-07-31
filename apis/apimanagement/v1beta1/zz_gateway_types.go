@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GatewayInitParameters struct {
+
+	// The description of the API Management Gateway.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A location_data block as documented below.
+	LocationData []LocationDataInitParameters `json:"locationData,omitempty" tf:"location_data,omitempty"`
+}
+
 type GatewayObservation struct {
 
 	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
@@ -53,6 +62,21 @@ type GatewayParameters struct {
 	LocationData []LocationDataParameters `json:"locationData,omitempty" tf:"location_data,omitempty"`
 }
 
+type LocationDataInitParameters struct {
+
+	// The city or locality where the resource is located.
+	City *string `json:"city,omitempty" tf:"city,omitempty"`
+
+	// The district, state, or province where the resource is located.
+	District *string `json:"district,omitempty" tf:"district,omitempty"`
+
+	// A canonical name for the geographic or physical location.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The country or region where the resource is located.
+	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+}
+
 type LocationDataObservation struct {
 
 	// The city or locality where the resource is located.
@@ -79,8 +103,8 @@ type LocationDataParameters struct {
 	District *string `json:"district,omitempty" tf:"district,omitempty"`
 
 	// A canonical name for the geographic or physical location.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The country or region where the resource is located.
 	// +kubebuilder:validation:Optional
@@ -91,6 +115,18 @@ type LocationDataParameters struct {
 type GatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GatewayParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider GatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // GatewayStatus defines the observed state of Gateway.
@@ -111,7 +147,7 @@ type GatewayStatus struct {
 type Gateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.locationData)",message="locationData is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.locationData) || has(self.initProvider.locationData)",message="locationData is a required parameter"
 	Spec   GatewaySpec   `json:"spec"`
 	Status GatewayStatus `json:"status,omitempty"`
 }

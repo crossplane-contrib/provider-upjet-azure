@@ -69,6 +69,16 @@ func (tr *AttachedDatabaseConfiguration) SetParameters(params map[string]any) er
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this AttachedDatabaseConfiguration
+func (tr *AttachedDatabaseConfiguration) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this AttachedDatabaseConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AttachedDatabaseConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *Cluster) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this Cluster
+func (tr *Cluster) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this Cluster using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *ClusterManagedPrivateEndpoint) SetParameters(params map[string]any) er
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this ClusterManagedPrivateEndpoint
+func (tr *ClusterManagedPrivateEndpoint) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this ClusterManagedPrivateEndpoint using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ClusterManagedPrivateEndpoint) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *ClusterPrincipalAssignment) SetParameters(params map[string]any) error
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this ClusterPrincipalAssignment
+func (tr *ClusterPrincipalAssignment) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this ClusterPrincipalAssignment using its observed tfState.
@@ -365,6 +405,16 @@ func (tr *Database) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this Database
+func (tr *Database) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this Database using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Database) LateInitialize(attrs []byte) (bool, error) {
@@ -437,6 +487,16 @@ func (tr *DatabasePrincipalAssignment) SetParameters(params map[string]any) erro
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this DatabasePrincipalAssignment
+func (tr *DatabasePrincipalAssignment) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this DatabasePrincipalAssignment using its observed tfState.
@@ -513,6 +573,16 @@ func (tr *EventGridDataConnection) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this EventGridDataConnection
+func (tr *EventGridDataConnection) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this EventGridDataConnection using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EventGridDataConnection) LateInitialize(attrs []byte) (bool, error) {
@@ -587,6 +657,16 @@ func (tr *EventHubDataConnection) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this EventHubDataConnection
+func (tr *EventHubDataConnection) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this EventHubDataConnection using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EventHubDataConnection) LateInitialize(attrs []byte) (bool, error) {
@@ -659,6 +739,16 @@ func (tr *IOTHubDataConnection) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this IOTHubDataConnection
+func (tr *IOTHubDataConnection) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this IOTHubDataConnection using its observed tfState.

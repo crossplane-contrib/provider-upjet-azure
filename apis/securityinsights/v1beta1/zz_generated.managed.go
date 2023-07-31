@@ -17,9 +17,9 @@ func (mg *SentinelAlertRuleFusion) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SentinelAlertRuleFusion.
-func (mg *SentinelAlertRuleFusion) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SentinelAlertRuleFusion.
@@ -55,9 +55,9 @@ func (mg *SentinelAlertRuleFusion) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SentinelAlertRuleFusion.
-func (mg *SentinelAlertRuleFusion) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SentinelAlertRuleFusion.
+func (mg *SentinelAlertRuleFusion) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SentinelAlertRuleFusion.
@@ -93,9 +93,9 @@ func (mg *SentinelAlertRuleMSSecurityIncident) GetDeletionPolicy() xpv1.Deletion
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SentinelAlertRuleMSSecurityIncident.
-func (mg *SentinelAlertRuleMSSecurityIncident) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SentinelAlertRuleMSSecurityIncident.
+func (mg *SentinelAlertRuleMSSecurityIncident) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SentinelAlertRuleMSSecurityIncident.
@@ -131,9 +131,9 @@ func (mg *SentinelAlertRuleMSSecurityIncident) SetDeletionPolicy(r xpv1.Deletion
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SentinelAlertRuleMSSecurityIncident.
-func (mg *SentinelAlertRuleMSSecurityIncident) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SentinelAlertRuleMSSecurityIncident.
+func (mg *SentinelAlertRuleMSSecurityIncident) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SentinelAlertRuleMSSecurityIncident.
@@ -169,9 +169,9 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetDeletionPolicy()
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
-func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
@@ -207,9 +207,9 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetDeletionPolicy(r
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
-func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
+func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
@@ -245,9 +245,9 @@ func (mg *SentinelAutomationRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SentinelAutomationRule.
-func (mg *SentinelAutomationRule) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SentinelAutomationRule.
+func (mg *SentinelAutomationRule) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SentinelAutomationRule.
@@ -283,9 +283,9 @@ func (mg *SentinelAutomationRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SentinelAutomationRule.
-func (mg *SentinelAutomationRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SentinelAutomationRule.
+func (mg *SentinelAutomationRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SentinelAutomationRule.
@@ -321,9 +321,9 @@ func (mg *SentinelDataConnectorIOT) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SentinelDataConnectorIOT.
-func (mg *SentinelDataConnectorIOT) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SentinelDataConnectorIOT.
+func (mg *SentinelDataConnectorIOT) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SentinelDataConnectorIOT.
@@ -359,9 +359,9 @@ func (mg *SentinelDataConnectorIOT) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SentinelDataConnectorIOT.
-func (mg *SentinelDataConnectorIOT) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SentinelDataConnectorIOT.
+func (mg *SentinelDataConnectorIOT) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SentinelDataConnectorIOT.
@@ -397,9 +397,9 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetDeletionPolicy() xpv1.Dele
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SentinelLogAnalyticsWorkspaceOnboarding.
-func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SentinelLogAnalyticsWorkspaceOnboarding.
@@ -435,9 +435,9 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetDeletionPolicy(r xpv1.Dele
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SentinelLogAnalyticsWorkspaceOnboarding.
-func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SentinelLogAnalyticsWorkspaceOnboarding.
+func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SentinelLogAnalyticsWorkspaceOnboarding.
@@ -473,9 +473,9 @@ func (mg *SentinelWatchlist) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SentinelWatchlist.
-func (mg *SentinelWatchlist) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SentinelWatchlist.
+func (mg *SentinelWatchlist) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SentinelWatchlist.
@@ -511,9 +511,9 @@ func (mg *SentinelWatchlist) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SentinelWatchlist.
-func (mg *SentinelWatchlist) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SentinelWatchlist.
+func (mg *SentinelWatchlist) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SentinelWatchlist.

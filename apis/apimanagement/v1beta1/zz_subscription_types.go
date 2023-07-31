@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SubscriptionInitParameters struct {
+
+	// The ID of the API which should be assigned to this Subscription. Changing this forces a new resource to be created.
+	APIID *string `json:"apiId,omitempty" tf:"api_id,omitempty"`
+
+	// Determines whether tracing can be enabled. Defaults to true.
+	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
+
+	// The state of this Subscription. Possible values are active, cancelled, expired, rejected, submitted and suspended. Defaults to submitted.
+	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// An Identifier which should used as the ID of this Subscription. If not specified a new Subscription ID will be generated. Changing this forces a new resource to be created.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+}
+
 type SubscriptionObservation struct {
 
 	// The ID of the API which should be assigned to this Subscription. Changing this forces a new resource to be created.
@@ -128,6 +143,18 @@ type SubscriptionParameters struct {
 type SubscriptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SubscriptionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SubscriptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // SubscriptionStatus defines the observed state of Subscription.

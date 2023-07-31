@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OutputTableInitParameters struct {
+
+	// The number of records for a batch operation. Must be between 1 and 100.
+	BatchSize *float64 `json:"batchSize,omitempty" tf:"batch_size,omitempty"`
+
+	// A list of the column names to be removed from output event entities.
+	ColumnsToRemove []*string `json:"columnsToRemove,omitempty" tf:"columns_to_remove,omitempty"`
+
+	// The name of the output column that contains the partition key.
+	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+
+	// The name of the output column that contains the row key.
+	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
+}
+
 type OutputTableObservation struct {
 
 	// The number of records for a batch operation. Must be between 1 and 100.
@@ -114,6 +129,18 @@ type OutputTableParameters struct {
 type OutputTableSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OutputTableParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider OutputTableInitParameters `json:"initProvider,omitempty"`
 }
 
 // OutputTableStatus defines the observed state of OutputTable.
@@ -134,10 +161,10 @@ type OutputTableStatus struct {
 type OutputTable struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.batchSize)",message="batchSize is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.partitionKey)",message="partitionKey is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rowKey)",message="rowKey is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageAccountKeySecretRef)",message="storageAccountKeySecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.batchSize) || has(self.initProvider.batchSize)",message="batchSize is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partitionKey) || has(self.initProvider.partitionKey)",message="partitionKey is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rowKey) || has(self.initProvider.rowKey)",message="rowKey is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageAccountKeySecretRef)",message="storageAccountKeySecretRef is a required parameter"
 	Spec   OutputTableSpec   `json:"spec"`
 	Status OutputTableStatus `json:"status,omitempty"`
 }

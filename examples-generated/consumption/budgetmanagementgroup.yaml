@@ -69,6 +69,3 @@ metadata:
 spec:
   forProvider:
     location: eastus
-
----
-

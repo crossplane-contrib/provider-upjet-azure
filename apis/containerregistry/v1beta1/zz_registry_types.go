@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EncryptionInitParameters struct {
+
+	// Boolean value that indicates whether encryption is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
+
+	// The ID of the Key Vault Key.
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id"`
+}
+
 type EncryptionObservation struct {
 
 	// Boolean value that indicates whether encryption is enabled.
@@ -50,6 +59,21 @@ type EncryptionParameters struct {
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id"`
 }
 
+type GeoreplicationsInitParameters struct {
+
+	// A location where the container registry should be geo-replicated.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Whether regional endpoint is enabled for this Container Registry?
+	RegionalEndpointEnabled *bool `json:"regionalEndpointEnabled,omitempty" tf:"regional_endpoint_enabled,omitempty"`
+
+	// A mapping of tags to assign to this replication location.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
+	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
+}
+
 type GeoreplicationsObservation struct {
 
 	// A location where the container registry should be geo-replicated.
@@ -68,8 +92,8 @@ type GeoreplicationsObservation struct {
 type GeoreplicationsParameters struct {
 
 	// A location where the container registry should be geo-replicated.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether regional endpoint is enabled for this Container Registry?
 	// +kubebuilder:validation:Optional
@@ -82,6 +106,15 @@ type GeoreplicationsParameters struct {
 	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
+}
+
+type IPRuleInitParameters struct {
+
+	// The behaviour for requests matching this rule. At this time the only supported value is Allow
+	Action *string `json:"action,omitempty" tf:"action"`
+
+	// The CIDR block from which requests will match the rule.
+	IPRange *string `json:"ipRange,omitempty" tf:"ip_range"`
 }
 
 type IPRuleObservation struct {
@@ -102,6 +135,15 @@ type IPRuleParameters struct {
 	// The CIDR block from which requests will match the rule.
 	// +kubebuilder:validation:Optional
 	IPRange *string `json:"ipRange,omitempty" tf:"ip_range"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Container Registry.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Container Registry. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
@@ -126,8 +168,20 @@ type IdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Container Registry. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type NetworkRuleSetInitParameters struct {
+
+	// The behaviour for requests matching no rules. Either Allow or Deny. Defaults to Allow
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action"`
+
+	// One or more ip_rule blocks as defined below.
+	IPRule []IPRuleInitParameters `json:"ipRule,omitempty" tf:"ip_rule"`
+
+	// One or more virtual_network blocks as defined below.
+	VirtualNetwork []VirtualNetworkInitParameters `json:"virtualNetwork,omitempty" tf:"virtual_network"`
 }
 
 type NetworkRuleSetObservation struct {
@@ -155,6 +209,60 @@ type NetworkRuleSetParameters struct {
 	// One or more virtual_network blocks as defined below.
 	// +kubebuilder:validation:Optional
 	VirtualNetwork []VirtualNetworkParameters `json:"virtualNetwork,omitempty" tf:"virtual_network"`
+}
+
+type RegistryInitParameters struct {
+
+	// Specifies whether the admin user is enabled. Defaults to false.
+	AdminEnabled *bool `json:"adminEnabled,omitempty" tf:"admin_enabled,omitempty"`
+
+	// Whether allows anonymous (unauthenticated) pull access to this Container Registry? This is only supported on resources with the Standard or Premium SKU.
+	AnonymousPullEnabled *bool `json:"anonymousPullEnabled,omitempty" tf:"anonymous_pull_enabled,omitempty"`
+
+	// Whether to enable dedicated data endpoints for this Container Registry? This is only supported on resources with the Premium SKU.
+	DataEndpointEnabled *bool `json:"dataEndpointEnabled,omitempty" tf:"data_endpoint_enabled,omitempty"`
+
+	// An encryption block as documented below.
+	Encryption []EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
+	// Boolean value that indicates whether export policy is enabled. Defaults to true. In order to set it to false, make sure the public_network_access_enabled is also set to false.
+	ExportPolicyEnabled *bool `json:"exportPolicyEnabled,omitempty" tf:"export_policy_enabled,omitempty"`
+
+	// A georeplications block as documented below.
+	Georeplications []GeoreplicationsInitParameters `json:"georeplications,omitempty" tf:"georeplications,omitempty"`
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Whether to allow trusted Azure services to access a network restricted Container Registry? Possible values are None and AzureServices. Defaults to AzureServices.
+	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
+
+	// A network_rule_set block as documented below.
+	NetworkRuleSet []NetworkRuleSetInitParameters `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty"`
+
+	// Whether public network access is allowed for the container registry. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Boolean value that indicates whether quarantine policy is enabled.
+	QuarantinePolicyEnabled *bool `json:"quarantinePolicyEnabled,omitempty" tf:"quarantine_policy_enabled,omitempty"`
+
+	// A retention_policy block as documented below.
+	RetentionPolicy []RetentionPolicyInitParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
+
+	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A trust_policy block as documented below.
+	TrustPolicy []TrustPolicyInitParameters `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
+
+	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
+	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
 
 type RegistryObservation struct {
@@ -307,6 +415,15 @@ type RegistryParameters struct {
 	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
 
+type RetentionPolicyInitParameters struct {
+
+	// The number of days to retain an untagged manifest after which it gets purged. Default is 7.
+	Days *float64 `json:"days,omitempty" tf:"days"`
+
+	// Boolean value that indicates whether the policy is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
+}
+
 type RetentionPolicyObservation struct {
 
 	// The number of days to retain an untagged manifest after which it gets purged. Default is 7.
@@ -327,6 +444,12 @@ type RetentionPolicyParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
 }
 
+type TrustPolicyInitParameters struct {
+
+	// Boolean value that indicates whether the policy is enabled.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
+}
+
 type TrustPolicyObservation struct {
 
 	// Boolean value that indicates whether the policy is enabled.
@@ -338,6 +461,12 @@ type TrustPolicyParameters struct {
 	// Boolean value that indicates whether the policy is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
+}
+
+type VirtualNetworkInitParameters struct {
+
+	// The behaviour for requests matching this rule. At this time the only supported value is Allow
+	Action *string `json:"action,omitempty" tf:"action"`
 }
 
 type VirtualNetworkObservation struct {
@@ -374,6 +503,18 @@ type VirtualNetworkParameters struct {
 type RegistrySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RegistryParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RegistryInitParameters `json:"initProvider,omitempty"`
 }
 
 // RegistryStatus defines the observed state of Registry.
@@ -394,8 +535,8 @@ type RegistryStatus struct {
 type Registry struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)",message="sku is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sku) || has(self.initProvider.sku)",message="sku is a required parameter"
 	Spec   RegistrySpec   `json:"spec"`
 	Status RegistryStatus `json:"status,omitempty"`
 }

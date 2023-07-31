@@ -13,6 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RoleAssignmentInitParameters struct {
+
+	// The condition that limits the resources that the role can be assigned to. Changing this forces a new resource to be created.
+	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// The version of the condition. Possible values are 1.0 or 2.0. Changing this forces a new resource to be created.
+	ConditionVersion *string `json:"conditionVersion,omitempty" tf:"condition_version,omitempty"`
+
+	// The delegated Azure Resource Id which contains a Managed Identity. Changing this forces a new resource to be created.
+	DelegatedManagedIdentityResourceID *string `json:"delegatedManagedIdentityResourceId,omitempty" tf:"delegated_managed_identity_resource_id,omitempty"`
+
+	// The description for this Role Assignment. Changing this forces a new resource to be created.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A unique UUID/GUID for this Role Assignment - one will be generated if not specified. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Principal (User, Group or Service Principal) to assign the Role Definition to. Changing this forces a new resource to be created.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The name of a built-in Role. Changing this forces a new resource to be created. Conflicts with role_definition_id.
+	RoleDefinitionName *string `json:"roleDefinitionName,omitempty" tf:"role_definition_name,omitempty"`
+
+	// The scope at which the Role Assignment applies to, such as /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333, /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup, or /subscriptions/0b1f6471-1bf0-4dda-aec3-111122223333/resourceGroups/myGroup/providers/Microsoft.Compute/virtualMachines/myVM, or /providers/Microsoft.Management/managementGroups/myMG. Changing this forces a new resource to be created.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// If the principal_id is a newly provisioned Service Principal set this value to true to skip the Azure Active Directory check which may fail due to replication lag. This argument is only valid if the principal_id is a Service Principal identity. Defaults to false.
+	SkipServicePrincipalAADCheck *bool `json:"skipServicePrincipalAadCheck,omitempty" tf:"skip_service_principal_aad_check,omitempty"`
+}
+
 type RoleAssignmentObservation struct {
 
 	// The condition that limits the resources that the role can be assigned to. Changing this forces a new resource to be created.
@@ -109,6 +139,18 @@ type RoleAssignmentParameters struct {
 type RoleAssignmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RoleAssignmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RoleAssignmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // RoleAssignmentStatus defines the observed state of RoleAssignment.
@@ -129,8 +171,8 @@ type RoleAssignmentStatus struct {
 type RoleAssignment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.principalId)",message="principalId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scope)",message="scope is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.principalId) || has(self.initProvider.principalId)",message="principalId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scope) || has(self.initProvider.scope)",message="scope is a required parameter"
 	Spec   RoleAssignmentSpec   `json:"spec"`
 	Status RoleAssignmentStatus `json:"status,omitempty"`
 }

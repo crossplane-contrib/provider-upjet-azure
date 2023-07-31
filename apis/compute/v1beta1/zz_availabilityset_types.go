@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AvailabilitySetInitParameters struct {
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies whether the availability set is managed or not. Possible values are true (to specify aligned) or false (to specify classic). Default is true. Changing this forces a new resource to be created.
+	Managed *bool `json:"managed,omitempty" tf:"managed,omitempty"`
+
+	// Specifies the number of fault domains that are used. Defaults to 3. Changing this forces a new resource to be created.
+	PlatformFaultDomainCount *float64 `json:"platformFaultDomainCount,omitempty" tf:"platform_fault_domain_count,omitempty"`
+
+	// Specifies the number of update domains that are used. Defaults to 5. Changing this forces a new resource to be created.
+	PlatformUpdateDomainCount *float64 `json:"platformUpdateDomainCount,omitempty" tf:"platform_update_domain_count,omitempty"`
+
+	// The ID of the Proximity Placement Group to which this Virtual Machine should be assigned. Changing this forces a new resource to be created.
+	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type AvailabilitySetObservation struct {
 
 	// The ID of the Availability Set.
@@ -84,6 +105,18 @@ type AvailabilitySetParameters struct {
 type AvailabilitySetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AvailabilitySetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AvailabilitySetInitParameters `json:"initProvider,omitempty"`
 }
 
 // AvailabilitySetStatus defines the observed state of AvailabilitySet.
@@ -104,7 +137,7 @@ type AvailabilitySetStatus struct {
 type AvailabilitySet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   AvailabilitySetSpec   `json:"spec"`
 	Status AvailabilitySetStatus `json:"status,omitempty"`
 }

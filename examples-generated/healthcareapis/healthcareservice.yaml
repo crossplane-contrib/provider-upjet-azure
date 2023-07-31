@@ -34,6 +34,3 @@ spec:
     tags:
       environment: testenv
       purpose: AcceptanceTests
-
----
-

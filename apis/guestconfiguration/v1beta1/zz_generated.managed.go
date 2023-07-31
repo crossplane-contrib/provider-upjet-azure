@@ -17,9 +17,9 @@ func (mg *PolicyVirtualMachineConfigurationAssignment) GetDeletionPolicy() xpv1.
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this PolicyVirtualMachineConfigurationAssignment.
-func (mg *PolicyVirtualMachineConfigurationAssignment) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this PolicyVirtualMachineConfigurationAssignment.
+func (mg *PolicyVirtualMachineConfigurationAssignment) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PolicyVirtualMachineConfigurationAssignment.
@@ -55,9 +55,9 @@ func (mg *PolicyVirtualMachineConfigurationAssignment) SetDeletionPolicy(r xpv1.
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this PolicyVirtualMachineConfigurationAssignment.
-func (mg *PolicyVirtualMachineConfigurationAssignment) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this PolicyVirtualMachineConfigurationAssignment.
+func (mg *PolicyVirtualMachineConfigurationAssignment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PolicyVirtualMachineConfigurationAssignment.

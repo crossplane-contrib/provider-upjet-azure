@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AzureBlobFsLocationInitParameters struct {
+
+	// The storage data lake gen2 file system on the Azure Blob Storage Account hosting the file.
+	FileSystem *string `json:"fileSystem,omitempty" tf:"file_system,omitempty"`
+
+	// The filename of the file.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
 type AzureBlobFsLocationObservation struct {
 
 	// The storage data lake gen2 file system on the Azure Blob Storage Account hosting the file.
@@ -28,8 +40,8 @@ type AzureBlobFsLocationObservation struct {
 type AzureBlobFsLocationParameters struct {
 
 	// The storage data lake gen2 file system on the Azure Blob Storage Account hosting the file.
-	// +kubebuilder:validation:Required
-	FileSystem *string `json:"fileSystem" tf:"file_system,omitempty"`
+	// +kubebuilder:validation:Optional
+	FileSystem *string `json:"fileSystem,omitempty" tf:"file_system,omitempty"`
 
 	// The filename of the file.
 	// +kubebuilder:validation:Optional
@@ -37,6 +49,27 @@ type AzureBlobFsLocationParameters struct {
 
 	// The folder path to the file.
 	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
+type DataSetDelimitedTextAzureBlobStorageLocationInitParameters struct {
+
+	// The container on the Azure Blob Storage Account hosting the file.
+	Container *string `json:"container,omitempty" tf:"container,omitempty"`
+
+	// Is the container using dynamic expression, function or system variables? Defaults to false.
+	DynamicContainerEnabled *bool `json:"dynamicContainerEnabled,omitempty" tf:"dynamic_container_enabled,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the file.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file. This can be an empty string.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
@@ -64,8 +97,8 @@ type DataSetDelimitedTextAzureBlobStorageLocationObservation struct {
 type DataSetDelimitedTextAzureBlobStorageLocationParameters struct {
 
 	// The container on the Azure Blob Storage Account hosting the file.
-	// +kubebuilder:validation:Required
-	Container *string `json:"container" tf:"container,omitempty"`
+	// +kubebuilder:validation:Optional
+	Container *string `json:"container,omitempty" tf:"container,omitempty"`
 
 	// Is the container using dynamic expression, function or system variables? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -86,6 +119,24 @@ type DataSetDelimitedTextAzureBlobStorageLocationParameters struct {
 	// The folder path to the file. This can be an empty string.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
+type DataSetDelimitedTextHTTPServerLocationInitParameters struct {
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the file on the web server.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file on the web server.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The base URL to the web server hosting the file.
+	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
 }
 
 type DataSetDelimitedTextHTTPServerLocationObservation struct {
@@ -117,16 +168,73 @@ type DataSetDelimitedTextHTTPServerLocationParameters struct {
 	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
 
 	// The filename of the file on the web server.
-	// +kubebuilder:validation:Required
-	Filename *string `json:"filename" tf:"filename,omitempty"`
+	// +kubebuilder:validation:Optional
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
 	// The folder path to the file on the web server.
-	// +kubebuilder:validation:Required
-	Path *string `json:"path" tf:"path,omitempty"`
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The base URL to the web server hosting the file.
-	// +kubebuilder:validation:Required
-	RelativeURL *string `json:"relativeUrl" tf:"relative_url,omitempty"`
+	// +kubebuilder:validation:Optional
+	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
+}
+
+type DataSetDelimitedTextInitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Dataset.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Dataset.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// An azure_blob_fs_location block as defined below.
+	AzureBlobFsLocation []AzureBlobFsLocationInitParameters `json:"azureBlobFsLocation,omitempty" tf:"azure_blob_fs_location,omitempty"`
+
+	// An azure_blob_storage_location block as defined below.
+	AzureBlobStorageLocation []DataSetDelimitedTextAzureBlobStorageLocationInitParameters `json:"azureBlobStorageLocation,omitempty" tf:"azure_blob_storage_location,omitempty"`
+
+	// The column delimiter. Defaults to ,.
+	ColumnDelimiter *string `json:"columnDelimiter,omitempty" tf:"column_delimiter,omitempty"`
+
+	// The compression codec used to read/write text files. Valid values are None, bzip2, gzip, deflate, ZipDeflate, TarGzip, Tar, snappy and lz4. Please note these values are case sensitive.
+	CompressionCodec *string `json:"compressionCodec,omitempty" tf:"compression_codec,omitempty"`
+
+	// The compression ratio for the Data Factory Dataset. Valid values are Fastest or Optimal. Please note these values are case sensitive.
+	CompressionLevel *string `json:"compressionLevel,omitempty" tf:"compression_level,omitempty"`
+
+	// The description for the Data Factory Dataset.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The encoding format for the file.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// The escape character. Defaults to \.
+	EscapeCharacter *string `json:"escapeCharacter,omitempty" tf:"escape_character,omitempty"`
+
+	// When used as input, treat the first row of data as headers. When used as output, write the headers into the output as the first row of data. Defaults to false.
+	FirstRowAsHeader *bool `json:"firstRowAsHeader,omitempty" tf:"first_row_as_header,omitempty"`
+
+	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
+	// A http_server_location block as defined below.
+	HTTPServerLocation []DataSetDelimitedTextHTTPServerLocationInitParameters `json:"httpServerLocation,omitempty" tf:"http_server_location,omitempty"`
+
+	// The null value string. Defaults to an empty string. Defaults to "".
+	NullValue *string `json:"nullValue,omitempty" tf:"null_value,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Dataset.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The quote character. Defaults to ".
+	QuoteCharacter *string `json:"quoteCharacter,omitempty" tf:"quote_character,omitempty"`
+
+	// The row delimiter. Defaults to any of the following values on read: \r\n, \r, \n, and \n or \r\n on write by mapping data flow and Copy activity respectively.
+	RowDelimiter *string `json:"rowDelimiter,omitempty" tf:"row_delimiter,omitempty"`
+
+	// A schema_column block as defined below.
+	SchemaColumn []DataSetDelimitedTextSchemaColumnInitParameters `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
 }
 
 type DataSetDelimitedTextObservation struct {
@@ -297,6 +405,18 @@ type DataSetDelimitedTextParameters struct {
 	SchemaColumn []DataSetDelimitedTextSchemaColumnParameters `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
 }
 
+type DataSetDelimitedTextSchemaColumnInitParameters struct {
+
+	// The description of the column.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type DataSetDelimitedTextSchemaColumnObservation struct {
 
 	// The description of the column.
@@ -316,8 +436,8 @@ type DataSetDelimitedTextSchemaColumnParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the column.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
 	// +kubebuilder:validation:Optional
@@ -328,6 +448,18 @@ type DataSetDelimitedTextSchemaColumnParameters struct {
 type DataSetDelimitedTextSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DataSetDelimitedTextParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DataSetDelimitedTextInitParameters `json:"initProvider,omitempty"`
 }
 
 // DataSetDelimitedTextStatus defines the observed state of DataSetDelimitedText.

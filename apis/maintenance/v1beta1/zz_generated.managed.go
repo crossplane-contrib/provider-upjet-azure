@@ -17,9 +17,9 @@ func (mg *MaintenanceAssignmentDedicatedHost) GetDeletionPolicy() xpv1.DeletionP
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MaintenanceAssignmentDedicatedHost.
-func (mg *MaintenanceAssignmentDedicatedHost) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MaintenanceAssignmentDedicatedHost.
+func (mg *MaintenanceAssignmentDedicatedHost) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MaintenanceAssignmentDedicatedHost.
@@ -55,9 +55,9 @@ func (mg *MaintenanceAssignmentDedicatedHost) SetDeletionPolicy(r xpv1.DeletionP
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MaintenanceAssignmentDedicatedHost.
-func (mg *MaintenanceAssignmentDedicatedHost) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MaintenanceAssignmentDedicatedHost.
+func (mg *MaintenanceAssignmentDedicatedHost) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MaintenanceAssignmentDedicatedHost.
@@ -93,9 +93,9 @@ func (mg *MaintenanceAssignmentVirtualMachine) GetDeletionPolicy() xpv1.Deletion
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MaintenanceAssignmentVirtualMachine.
-func (mg *MaintenanceAssignmentVirtualMachine) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MaintenanceAssignmentVirtualMachine.
+func (mg *MaintenanceAssignmentVirtualMachine) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MaintenanceAssignmentVirtualMachine.
@@ -131,9 +131,9 @@ func (mg *MaintenanceAssignmentVirtualMachine) SetDeletionPolicy(r xpv1.Deletion
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MaintenanceAssignmentVirtualMachine.
-func (mg *MaintenanceAssignmentVirtualMachine) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MaintenanceAssignmentVirtualMachine.
+func (mg *MaintenanceAssignmentVirtualMachine) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MaintenanceAssignmentVirtualMachine.
@@ -169,9 +169,9 @@ func (mg *MaintenanceConfiguration) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MaintenanceConfiguration.
-func (mg *MaintenanceConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MaintenanceConfiguration.
+func (mg *MaintenanceConfiguration) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MaintenanceConfiguration.
@@ -207,9 +207,9 @@ func (mg *MaintenanceConfiguration) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MaintenanceConfiguration.
-func (mg *MaintenanceConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MaintenanceConfiguration.
+func (mg *MaintenanceConfiguration) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MaintenanceConfiguration.

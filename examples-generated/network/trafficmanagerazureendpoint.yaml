@@ -77,6 +77,3 @@ spec:
     tags:
       environment: Production
     trafficRoutingMethod: Weighted
-
----
-

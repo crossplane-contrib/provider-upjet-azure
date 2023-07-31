@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: expressrouteports.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -96,9 +95,6 @@ spec:
                             that should be configured on this Express Route Port.
                             Only possible value is UserAssigned.
                           type: string
-                      required:
-                      - identityIds
-                      - type
                       type: object
                     type: array
                   link1:
@@ -243,21 +239,137 @@ spec:
                       Express Route Port.
                     type: object
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  bandwidthInGbps:
+                    description: Bandwidth of the Express Route Port in Gbps. Changing
+                      this forces a new Express Route Port to be created.
+                    type: number
+                  billingType:
+                    description: The billing type of the Express Route Port. Possible
+                      values are MeteredData and UnlimitedData.
+                    type: string
+                  encapsulation:
+                    description: 'The encapsulation method used for the Express Route
+                      Port. Changing this forces a new Express Route Port to be created.
+                      Possible values are: Dot1Q, QinQ.'
+                    type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Express Route Port.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Express Route Port.
+                            Only possible value is UserAssigned.
+                          type: string
+                      type: object
+                    type: array
+                  link1:
+                    description: A list of link blocks as defined below.
+                    items:
+                      properties:
+                        adminEnabled:
+                          description: Whether enable administration state on the
+                            Express Route Port Link? Defaults to false.
+                          type: boolean
+                        macsecCakKeyvaultSecretId:
+                          description: The ID of the Key Vault Secret that contains
+                            the Mac security CAK key for this Express Route Port Link.
+                          type: string
+                        macsecCipher:
+                          description: The MACSec cipher used for this Express Route
+                            Port Link. Possible values are GcmAes128 and GcmAes256.
+                            Defaults to GcmAes128.
+                          type: string
+                        macsecCknKeyvaultSecretId:
+                          description: The ID of the Key Vault Secret that contains
+                            the MACSec CKN key for this Express Route Port Link.
+                          type: string
+                      type: object
+                    type: array
+                  link2:
+                    description: A list of link blocks as defined below.
+                    items:
+                      properties:
+                        adminEnabled:
+                          description: Whether enable administration state on the
+                            Express Route Port Link? Defaults to false.
+                          type: boolean
+                        macsecCakKeyvaultSecretId:
+                          description: The ID of the Key Vault Secret that contains
+                            the Mac security CAK key for this Express Route Port Link.
+                          type: string
+                        macsecCipher:
+                          description: The MACSec cipher used for this Express Route
+                            Port Link. Possible values are GcmAes128 and GcmAes256.
+                            Defaults to GcmAes128.
+                          type: string
+                        macsecCknKeyvaultSecretId:
+                          description: The ID of the Key Vault Secret that contains
+                            the MACSec CKN key for this Express Route Port Link.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: The Azure Region where the Express Route Port should
+                      exist. Changing this forces a new Express Route Port to be created.
+                    type: string
+                  peeringLocation:
+                    description: The name of the peering location that this Express
+                      Route Port is physically mapped to. Changing this forces a new
+                      Express Route Port to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Express Route Port.
+                    type: object
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -431,13 +543,21 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: bandwidthInGbps is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.bandwidthInGbps)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.bandwidthInGbps)
+                || has(self.initProvider.bandwidthInGbps)'
             - message: encapsulation is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.encapsulation)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.encapsulation)
+                || has(self.initProvider.encapsulation)'
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: peeringLocation is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.peeringLocation)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.peeringLocation)
+                || has(self.initProvider.peeringLocation)'
           status:
             description: ExpressRoutePortStatus defines the observed state of ExpressRoutePort.
             properties:

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ModuleInitParameters struct {
+
+	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
+	Args *string `json:"args,omitempty" tf:"args,omitempty"`
+
+	// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type ModuleObservation struct {
 
 	// Configuration options for the module (e.g. ERROR_RATE 0.00 INITIAL_SIZE 400). Changing this forces a new resource to be created. Defaults to "".
@@ -31,8 +40,32 @@ type ModuleParameters struct {
 	Args *string `json:"args,omitempty" tf:"args,omitempty"`
 
 	// The name which should be used for this module. Possible values are RedisBloom, RedisTimeSeries, RediSearch and RedisJSON. Changing this forces a new Redis Enterprise Database to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type RedisEnterpriseDatabaseInitParameters struct {
+
+	// Specifies whether redis clients can connect using TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted. Possible values are Encrypted and Plaintext. Defaults to Encrypted. Changing this forces a new Redis Enterprise Database to be created.
+	ClientProtocol *string `json:"clientProtocol,omitempty" tf:"client_protocol,omitempty"`
+
+	// Clustering policy - default is OSSCluster. Specified at create time. Possible values are EnterpriseCluster and OSSCluster. Defaults to OSSCluster. Changing this forces a new Redis Enterprise Database to be created.
+	ClusteringPolicy *string `json:"clusteringPolicy,omitempty" tf:"clustering_policy,omitempty"`
+
+	// Redis eviction policy - default is VolatileLRU. Possible values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU, VolatileLFU, VolatileTTL, VolatileRandom and NoEviction. Changing this forces a new Redis Enterprise Database to be created.
+	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
+
+	// Nickname of the group of linked databases. Changing this force a new Redis Enterprise Geo Database to be created.
+	LinkedDatabaseGroupNickname *string `json:"linkedDatabaseGroupNickname,omitempty" tf:"linked_database_group_nickname,omitempty"`
+
+	// A list of database resources to link with this database with a maximum of 5.
+	LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
+
+	// A module block as defined below. Changing this forces a new resource to be created.
+	Module []ModuleInitParameters `json:"module,omitempty" tf:"module,omitempty"`
+
+	// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created. Defaults to 10000.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 }
 
 type RedisEnterpriseDatabaseObservation struct {
@@ -130,6 +163,18 @@ type RedisEnterpriseDatabaseParameters struct {
 type RedisEnterpriseDatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RedisEnterpriseDatabaseParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RedisEnterpriseDatabaseInitParameters `json:"initProvider,omitempty"`
 }
 
 // RedisEnterpriseDatabaseStatus defines the observed state of RedisEnterpriseDatabase.

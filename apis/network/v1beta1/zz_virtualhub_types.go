@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VirtualHubInitParameters_2 struct {
+
+	// The Address Prefix which should be used for this Virtual Hub. Changing this forces a new resource to be created. The address prefix subnet cannot be smaller than a .
+	AddressPrefix *string `json:"addressPrefix,omitempty" tf:"address_prefix,omitempty"`
+
+	// The hub routing preference. Possible values are ExpressRoute, ASPath and VpnGateway. Defaults to ExpressRoute.
+	HubRoutingPreference *string `json:"hubRoutingPreference,omitempty" tf:"hub_routing_preference,omitempty"`
+
+	// Specifies the supported Azure location where the Virtual Hub should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// One or more route blocks as defined below.
+	Route []VirtualHubRouteInitParameters `json:"route,omitempty" tf:"route,omitempty"`
+
+	// The SKU of the Virtual Hub. Possible values are Basic and Standard. Changing this forces a new resource to be created.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// A mapping of tags to assign to the Virtual Hub.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type VirtualHubObservation_2 struct {
 
 	// The Address Prefix which should be used for this Virtual Hub. Changing this forces a new resource to be created. The address prefix subnet cannot be smaller than a .
@@ -106,6 +127,15 @@ type VirtualHubParameters_2 struct {
 	VirtualWanIDSelector *v1.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
 }
 
+type VirtualHubRouteInitParameters struct {
+
+	// A list of Address Prefixes.
+	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
+
+	// The IP Address that Packets should be forwarded to as the Next Hop.
+	NextHopIPAddress *string `json:"nextHopIpAddress,omitempty" tf:"next_hop_ip_address,omitempty"`
+}
+
 type VirtualHubRouteObservation struct {
 
 	// A list of Address Prefixes.
@@ -118,18 +148,30 @@ type VirtualHubRouteObservation struct {
 type VirtualHubRouteParameters struct {
 
 	// A list of Address Prefixes.
-	// +kubebuilder:validation:Required
-	AddressPrefixes []*string `json:"addressPrefixes" tf:"address_prefixes,omitempty"`
+	// +kubebuilder:validation:Optional
+	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 
 	// The IP Address that Packets should be forwarded to as the Next Hop.
-	// +kubebuilder:validation:Required
-	NextHopIPAddress *string `json:"nextHopIpAddress" tf:"next_hop_ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	NextHopIPAddress *string `json:"nextHopIpAddress,omitempty" tf:"next_hop_ip_address,omitempty"`
 }
 
 // VirtualHubSpec defines the desired state of VirtualHub
 type VirtualHubSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VirtualHubParameters_2 `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VirtualHubInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // VirtualHubStatus defines the observed state of VirtualHub.
@@ -150,7 +192,7 @@ type VirtualHubStatus struct {
 type VirtualHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   VirtualHubSpec   `json:"spec"`
 	Status VirtualHubStatus `json:"status,omitempty"`
 }

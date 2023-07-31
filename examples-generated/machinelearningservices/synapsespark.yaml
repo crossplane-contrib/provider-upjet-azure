@@ -180,6 +180,3 @@ spec:
     storageDataLakeGen2FilesystemIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

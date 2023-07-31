@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ClearKeyEncryptionInitParameters struct {
+
+	// The URL template for the custom service that delivers content keys to the end user. This is not required when using Azure Media Services for issuing keys. Changing this forces a new Streaming Policy to be created.
+	CustomKeysAcquisitionURLTemplate *string `json:"customKeysAcquisitionUrlTemplate,omitempty" tf:"custom_keys_acquisition_url_template,omitempty"`
+}
+
 type ClearKeyEncryptionObservation struct {
 
 	// The URL template for the custom service that delivers content keys to the end user. This is not required when using Azure Media Services for issuing keys. Changing this forces a new Streaming Policy to be created.
@@ -22,8 +28,20 @@ type ClearKeyEncryptionObservation struct {
 type ClearKeyEncryptionParameters struct {
 
 	// The URL template for the custom service that delivers content keys to the end user. This is not required when using Azure Media Services for issuing keys. Changing this forces a new Streaming Policy to be created.
-	// +kubebuilder:validation:Required
-	CustomKeysAcquisitionURLTemplate *string `json:"customKeysAcquisitionUrlTemplate" tf:"custom_keys_acquisition_url_template,omitempty"`
+	// +kubebuilder:validation:Optional
+	CustomKeysAcquisitionURLTemplate *string `json:"customKeysAcquisitionUrlTemplate,omitempty" tf:"custom_keys_acquisition_url_template,omitempty"`
+}
+
+type ClearTrackConditionInitParameters struct {
+
+	// The track property condition operation. Possible value is Equal. Changing this forces a new Streaming Policy to be created.
+	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+
+	// The track property type. Possible value is FourCC. Changing this forces a new Streaming Policy to be created.
+	Property *string `json:"property,omitempty" tf:"property,omitempty"`
+
+	// The track property value. Changing this forces a new Streaming Policy to be created.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type ClearTrackConditionObservation struct {
@@ -41,16 +59,22 @@ type ClearTrackConditionObservation struct {
 type ClearTrackConditionParameters struct {
 
 	// The track property condition operation. Possible value is Equal. Changing this forces a new Streaming Policy to be created.
-	// +kubebuilder:validation:Required
-	Operation *string `json:"operation" tf:"operation,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
 
 	// The track property type. Possible value is FourCC. Changing this forces a new Streaming Policy to be created.
-	// +kubebuilder:validation:Required
-	Property *string `json:"property" tf:"property,omitempty"`
+	// +kubebuilder:validation:Optional
+	Property *string `json:"property,omitempty" tf:"property,omitempty"`
 
 	// The track property value. Changing this forces a new Streaming Policy to be created.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ClearTrackInitParameters struct {
+
+	// One or more condition blocks as defined below. Changing this forces a new Streaming Policy to be created.
+	Condition []ClearTrackConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 }
 
 type ClearTrackObservation struct {
@@ -62,8 +86,23 @@ type ClearTrackObservation struct {
 type ClearTrackParameters struct {
 
 	// One or more condition blocks as defined below. Changing this forces a new Streaming Policy to be created.
-	// +kubebuilder:validation:Required
-	Condition []ClearTrackConditionParameters `json:"condition" tf:"condition,omitempty"`
+	// +kubebuilder:validation:Optional
+	Condition []ClearTrackConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+}
+
+type CommonEncryptionCbcsInitParameters struct {
+
+	// A clear_key_encryption block as defined below. Changing this forces a new Streaming Policy to be created.
+	ClearKeyEncryption []ClearKeyEncryptionInitParameters `json:"clearKeyEncryption,omitempty" tf:"clear_key_encryption,omitempty"`
+
+	// A default_content_key block as defined below. Changing this forces a new Streaming Policy to be created.
+	DefaultContentKey []DefaultContentKeyInitParameters `json:"defaultContentKey,omitempty" tf:"default_content_key,omitempty"`
+
+	// A drm_fairplay block as defined below. Changing this forces a new Streaming Policy to be created.
+	DrmFairplay []DrmFairplayInitParameters `json:"drmFairplay,omitempty" tf:"drm_fairplay,omitempty"`
+
+	// A enabled_protocols block as defined below. Changing this forces a new Streaming Policy to be created.
+	EnabledProtocols []EnabledProtocolsInitParameters `json:"enabledProtocols,omitempty" tf:"enabled_protocols,omitempty"`
 }
 
 type CommonEncryptionCbcsObservation struct {
@@ -100,6 +139,12 @@ type CommonEncryptionCbcsParameters struct {
 	EnabledProtocols []EnabledProtocolsParameters `json:"enabledProtocols,omitempty" tf:"enabled_protocols,omitempty"`
 }
 
+type CommonEncryptionCencClearKeyEncryptionInitParameters struct {
+
+	// The URL template for the custom service that delivers content keys to the end user. This is not required when using Azure Media Services for issuing keys. Changing this forces a new Streaming Policy to be created.
+	CustomKeysAcquisitionURLTemplate *string `json:"customKeysAcquisitionUrlTemplate,omitempty" tf:"custom_keys_acquisition_url_template,omitempty"`
+}
+
 type CommonEncryptionCencClearKeyEncryptionObservation struct {
 
 	// The URL template for the custom service that delivers content keys to the end user. This is not required when using Azure Media Services for issuing keys. Changing this forces a new Streaming Policy to be created.
@@ -109,8 +154,14 @@ type CommonEncryptionCencClearKeyEncryptionObservation struct {
 type CommonEncryptionCencClearKeyEncryptionParameters struct {
 
 	// The URL template for the custom service that delivers content keys to the end user. This is not required when using Azure Media Services for issuing keys. Changing this forces a new Streaming Policy to be created.
-	// +kubebuilder:validation:Required
-	CustomKeysAcquisitionURLTemplate *string `json:"customKeysAcquisitionUrlTemplate" tf:"custom_keys_acquisition_url_template,omitempty"`
+	// +kubebuilder:validation:Optional
+	CustomKeysAcquisitionURLTemplate *string `json:"customKeysAcquisitionUrlTemplate,omitempty" tf:"custom_keys_acquisition_url_template,omitempty"`
+}
+
+type CommonEncryptionCencDefaultContentKeyInitParameters struct {
+
+	// Label can be used to specify Content Key when creating a Streaming Locator. Changing this forces a new Streaming Policy to be created.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
 }
 
 type CommonEncryptionCencDefaultContentKeyObservation struct {
@@ -140,6 +191,21 @@ type CommonEncryptionCencDefaultContentKeyParameters struct {
 	// Selector for a ContentKeyPolicy in media to populate policyName.
 	// +kubebuilder:validation:Optional
 	PolicyNameSelector *v1.Selector `json:"policyNameSelector,omitempty" tf:"-"`
+}
+
+type CommonEncryptionCencEnabledProtocolsInitParameters struct {
+
+	// Enable DASH protocol or not. Changing this forces a new Streaming Policy to be created.
+	Dash *bool `json:"dash,omitempty" tf:"dash,omitempty"`
+
+	// Enable Download protocol or not. Changing this forces a new Streaming Policy to be created.
+	Download *bool `json:"download,omitempty" tf:"download,omitempty"`
+
+	// Enable HLS protocol or not. Changing this forces a new Streaming Policy to be created.
+	Hls *bool `json:"hls,omitempty" tf:"hls,omitempty"`
+
+	// Enable SmoothStreaming protocol or not. Changing this forces a new Streaming Policy to be created.
+	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 }
 
 type CommonEncryptionCencEnabledProtocolsObservation struct {
@@ -174,6 +240,30 @@ type CommonEncryptionCencEnabledProtocolsParameters struct {
 	// Enable SmoothStreaming protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
+}
+
+type CommonEncryptionCencInitParameters struct {
+
+	// A clear_key_encryption block as defined below. Changing this forces a new Streaming Policy to be created.
+	ClearKeyEncryption []CommonEncryptionCencClearKeyEncryptionInitParameters `json:"clearKeyEncryption,omitempty" tf:"clear_key_encryption,omitempty"`
+
+	// One or more clear_track blocks as defined below. Changing this forces a new Streaming Policy to be created.
+	ClearTrack []ClearTrackInitParameters `json:"clearTrack,omitempty" tf:"clear_track,omitempty"`
+
+	// One or more content_key_to_track_mapping blocks as defined below. Changing this forces a new Streaming Policy to be created.
+	ContentKeyToTrackMapping []ContentKeyToTrackMappingInitParameters `json:"contentKeyToTrackMapping,omitempty" tf:"content_key_to_track_mapping,omitempty"`
+
+	// A default_content_key block as defined below. Changing this forces a new Streaming Policy to be created.
+	DefaultContentKey []CommonEncryptionCencDefaultContentKeyInitParameters `json:"defaultContentKey,omitempty" tf:"default_content_key,omitempty"`
+
+	// A drm_playready block as defined below. Changing this forces a new Streaming Policy to be created.
+	DrmPlayready []DrmPlayreadyInitParameters `json:"drmPlayready,omitempty" tf:"drm_playready,omitempty"`
+
+	// The URL template for the custom service that delivers licenses to the end user. This is not required when using Azure Media Services for issuing licenses. Changing this forces a new Streaming Policy to be created.
+	DrmWidevineCustomLicenseAcquisitionURLTemplate *string `json:"drmWidevineCustomLicenseAcquisitionUrlTemplate,omitempty" tf:"drm_widevine_custom_license_acquisition_url_template,omitempty"`
+
+	// A enabled_protocols block as defined below. Changing this forces a new Streaming Policy to be created.
+	EnabledProtocols []CommonEncryptionCencEnabledProtocolsInitParameters `json:"enabledProtocols,omitempty" tf:"enabled_protocols,omitempty"`
 }
 
 type CommonEncryptionCencObservation struct {
@@ -231,6 +321,18 @@ type CommonEncryptionCencParameters struct {
 	EnabledProtocols []CommonEncryptionCencEnabledProtocolsParameters `json:"enabledProtocols,omitempty" tf:"enabled_protocols,omitempty"`
 }
 
+type ContentKeyToTrackMappingInitParameters struct {
+
+	// Label can be used to specify Content Key when creating a Streaming Locator. Changing this forces a new Streaming Policy to be created.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Policy used by Default Key. Changing this forces a new Streaming Policy to be created.
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
+
+	// One or more track blocks as defined below. Changing this forces a new Streaming Policy to be created.
+	Track []TrackInitParameters `json:"track,omitempty" tf:"track,omitempty"`
+}
+
 type ContentKeyToTrackMappingObservation struct {
 
 	// Label can be used to specify Content Key when creating a Streaming Locator. Changing this forces a new Streaming Policy to be created.
@@ -254,8 +356,17 @@ type ContentKeyToTrackMappingParameters struct {
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 
 	// One or more track blocks as defined below. Changing this forces a new Streaming Policy to be created.
-	// +kubebuilder:validation:Required
-	Track []TrackParameters `json:"track" tf:"track,omitempty"`
+	// +kubebuilder:validation:Optional
+	Track []TrackParameters `json:"track,omitempty" tf:"track,omitempty"`
+}
+
+type DefaultContentKeyInitParameters struct {
+
+	// Label can be used to specify Content Key when creating a Streaming Locator. Changing this forces a new Streaming Policy to be created.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Policy used by Default Key. Changing this forces a new Streaming Policy to be created.
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 }
 
 type DefaultContentKeyObservation struct {
@@ -278,6 +389,15 @@ type DefaultContentKeyParameters struct {
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 }
 
+type DrmFairplayInitParameters struct {
+
+	// All license to be persistent or not. Changing this forces a new Streaming Policy to be created.
+	AllowPersistentLicense *bool `json:"allowPersistentLicense,omitempty" tf:"allow_persistent_license,omitempty"`
+
+	// The URL template for the custom service that delivers licenses to the end user. This is not required when using Azure Media Services for issuing licenses. Changing this forces a new Streaming Policy to be created.
+	CustomLicenseAcquisitionURLTemplate *string `json:"customLicenseAcquisitionUrlTemplate,omitempty" tf:"custom_license_acquisition_url_template,omitempty"`
+}
+
 type DrmFairplayObservation struct {
 
 	// All license to be persistent or not. Changing this forces a new Streaming Policy to be created.
@@ -295,6 +415,15 @@ type DrmFairplayParameters struct {
 
 	// The URL template for the custom service that delivers licenses to the end user. This is not required when using Azure Media Services for issuing licenses. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
+	CustomLicenseAcquisitionURLTemplate *string `json:"customLicenseAcquisitionUrlTemplate,omitempty" tf:"custom_license_acquisition_url_template,omitempty"`
+}
+
+type DrmPlayreadyInitParameters struct {
+
+	// Custom attributes for PlayReady. Changing this forces a new Streaming Policy to be created.
+	CustomAttributes *string `json:"customAttributes,omitempty" tf:"custom_attributes,omitempty"`
+
+	// The URL template for the custom service that delivers licenses to the end user. This is not required when using Azure Media Services for issuing licenses. Changing this forces a new Streaming Policy to be created.
 	CustomLicenseAcquisitionURLTemplate *string `json:"customLicenseAcquisitionUrlTemplate,omitempty" tf:"custom_license_acquisition_url_template,omitempty"`
 }
 
@@ -316,6 +445,21 @@ type DrmPlayreadyParameters struct {
 	// The URL template for the custom service that delivers licenses to the end user. This is not required when using Azure Media Services for issuing licenses. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	CustomLicenseAcquisitionURLTemplate *string `json:"customLicenseAcquisitionUrlTemplate,omitempty" tf:"custom_license_acquisition_url_template,omitempty"`
+}
+
+type EnabledProtocolsInitParameters struct {
+
+	// Enable DASH protocol or not. Changing this forces a new Streaming Policy to be created.
+	Dash *bool `json:"dash,omitempty" tf:"dash,omitempty"`
+
+	// Enable Download protocol or not. Changing this forces a new Streaming Policy to be created.
+	Download *bool `json:"download,omitempty" tf:"download,omitempty"`
+
+	// Enable HLS protocol or not. Changing this forces a new Streaming Policy to be created.
+	Hls *bool `json:"hls,omitempty" tf:"hls,omitempty"`
+
+	// Enable SmoothStreaming protocol or not. Changing this forces a new Streaming Policy to be created.
+	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 }
 
 type EnabledProtocolsObservation struct {
@@ -352,6 +496,15 @@ type EnabledProtocolsParameters struct {
 	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 }
 
+type EnvelopeEncryptionDefaultContentKeyInitParameters struct {
+
+	// Label can be used to specify Content Key when creating a Streaming Locator. Changing this forces a new Streaming Policy to be created.
+	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Policy used by Default Key. Changing this forces a new Streaming Policy to be created.
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
+}
+
 type EnvelopeEncryptionDefaultContentKeyObservation struct {
 
 	// Label can be used to specify Content Key when creating a Streaming Locator. Changing this forces a new Streaming Policy to be created.
@@ -370,6 +523,21 @@ type EnvelopeEncryptionDefaultContentKeyParameters struct {
 	// Policy used by Default Key. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
+}
+
+type EnvelopeEncryptionEnabledProtocolsInitParameters struct {
+
+	// Enable DASH protocol or not. Changing this forces a new Streaming Policy to be created.
+	Dash *bool `json:"dash,omitempty" tf:"dash,omitempty"`
+
+	// Enable Download protocol or not. Changing this forces a new Streaming Policy to be created.
+	Download *bool `json:"download,omitempty" tf:"download,omitempty"`
+
+	// Enable HLS protocol or not. Changing this forces a new Streaming Policy to be created.
+	Hls *bool `json:"hls,omitempty" tf:"hls,omitempty"`
+
+	// Enable SmoothStreaming protocol or not. Changing this forces a new Streaming Policy to be created.
+	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 }
 
 type EnvelopeEncryptionEnabledProtocolsObservation struct {
@@ -406,6 +574,18 @@ type EnvelopeEncryptionEnabledProtocolsParameters struct {
 	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 }
 
+type EnvelopeEncryptionInitParameters struct {
+
+	// The URL template for the custom service that delivers content keys to the end user. This is not required when using Azure Media Services for issuing keys. Changing this forces a new Streaming Policy to be created.
+	CustomKeysAcquisitionURLTemplate *string `json:"customKeysAcquisitionUrlTemplate,omitempty" tf:"custom_keys_acquisition_url_template,omitempty"`
+
+	// A default_content_key block as defined above. Changing this forces a new Streaming Policy to be created.
+	DefaultContentKey []EnvelopeEncryptionDefaultContentKeyInitParameters `json:"defaultContentKey,omitempty" tf:"default_content_key,omitempty"`
+
+	// A enabled_protocols block as defined above. Changing this forces a new Streaming Policy to be created.
+	EnabledProtocols []EnvelopeEncryptionEnabledProtocolsInitParameters `json:"enabledProtocols,omitempty" tf:"enabled_protocols,omitempty"`
+}
+
 type EnvelopeEncryptionObservation struct {
 
 	// The URL template for the custom service that delivers content keys to the end user. This is not required when using Azure Media Services for issuing keys. Changing this forces a new Streaming Policy to be created.
@@ -431,6 +611,21 @@ type EnvelopeEncryptionParameters struct {
 	// A enabled_protocols block as defined above. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	EnabledProtocols []EnvelopeEncryptionEnabledProtocolsParameters `json:"enabledProtocols,omitempty" tf:"enabled_protocols,omitempty"`
+}
+
+type NoEncryptionEnabledProtocolsInitParameters struct {
+
+	// Enable DASH protocol or not. Changing this forces a new Streaming Policy to be created.
+	Dash *bool `json:"dash,omitempty" tf:"dash,omitempty"`
+
+	// Enable Download protocol or not. Changing this forces a new Streaming Policy to be created.
+	Download *bool `json:"download,omitempty" tf:"download,omitempty"`
+
+	// Enable HLS protocol or not. Changing this forces a new Streaming Policy to be created.
+	Hls *bool `json:"hls,omitempty" tf:"hls,omitempty"`
+
+	// Enable SmoothStreaming protocol or not. Changing this forces a new Streaming Policy to be created.
+	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
 }
 
 type NoEncryptionEnabledProtocolsObservation struct {
@@ -465,6 +660,24 @@ type NoEncryptionEnabledProtocolsParameters struct {
 	// Enable SmoothStreaming protocol or not. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
 	SmoothStreaming *bool `json:"smoothStreaming,omitempty" tf:"smooth_streaming,omitempty"`
+}
+
+type StreamingPolicyInitParameters struct {
+
+	// A common_encryption_cbcs block as defined below. Changing this forces a new Streaming Policy to be created.
+	CommonEncryptionCbcs []CommonEncryptionCbcsInitParameters `json:"commonEncryptionCbcs,omitempty" tf:"common_encryption_cbcs,omitempty"`
+
+	// A common_encryption_cenc block as defined below. Changing this forces a new Streaming Policy to be created.
+	CommonEncryptionCenc []CommonEncryptionCencInitParameters `json:"commonEncryptionCenc,omitempty" tf:"common_encryption_cenc,omitempty"`
+
+	// Default Content Key used by current Streaming Policy. Changing this forces a new Streaming Policy to be created.
+	DefaultContentKeyPolicyName *string `json:"defaultContentKeyPolicyName,omitempty" tf:"default_content_key_policy_name,omitempty"`
+
+	// A envelope_encryption block as defined below. Changing this forces a new Streaming Policy to be created.
+	EnvelopeEncryption []EnvelopeEncryptionInitParameters `json:"envelopeEncryption,omitempty" tf:"envelope_encryption,omitempty"`
+
+	// A no_encryption_enabled_protocols block as defined below. Changing this forces a new Streaming Policy to be created.
+	NoEncryptionEnabledProtocols []NoEncryptionEnabledProtocolsInitParameters `json:"noEncryptionEnabledProtocols,omitempty" tf:"no_encryption_enabled_protocols,omitempty"`
 }
 
 type StreamingPolicyObservation struct {
@@ -543,6 +756,18 @@ type StreamingPolicyParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
+type TrackConditionInitParameters struct {
+
+	// The track property condition operation. Possible value is Equal. Changing this forces a new Streaming Policy to be created.
+	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+
+	// The track property type. Possible value is FourCC. Changing this forces a new Streaming Policy to be created.
+	Property *string `json:"property,omitempty" tf:"property,omitempty"`
+
+	// The track property value. Changing this forces a new Streaming Policy to be created.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type TrackConditionObservation struct {
 
 	// The track property condition operation. Possible value is Equal. Changing this forces a new Streaming Policy to be created.
@@ -558,16 +783,22 @@ type TrackConditionObservation struct {
 type TrackConditionParameters struct {
 
 	// The track property condition operation. Possible value is Equal. Changing this forces a new Streaming Policy to be created.
-	// +kubebuilder:validation:Required
-	Operation *string `json:"operation" tf:"operation,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
 
 	// The track property type. Possible value is FourCC. Changing this forces a new Streaming Policy to be created.
-	// +kubebuilder:validation:Required
-	Property *string `json:"property" tf:"property,omitempty"`
+	// +kubebuilder:validation:Optional
+	Property *string `json:"property,omitempty" tf:"property,omitempty"`
 
 	// The track property value. Changing this forces a new Streaming Policy to be created.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TrackInitParameters struct {
+
+	// One or more condition blocks as defined below. Changing this forces a new Streaming Policy to be created.
+	Condition []TrackConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 }
 
 type TrackObservation struct {
@@ -579,14 +810,26 @@ type TrackObservation struct {
 type TrackParameters struct {
 
 	// One or more condition blocks as defined below. Changing this forces a new Streaming Policy to be created.
-	// +kubebuilder:validation:Required
-	Condition []TrackConditionParameters `json:"condition" tf:"condition,omitempty"`
+	// +kubebuilder:validation:Optional
+	Condition []TrackConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 }
 
 // StreamingPolicySpec defines the desired state of StreamingPolicy
 type StreamingPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StreamingPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider StreamingPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // StreamingPolicyStatus defines the observed state of StreamingPolicy.

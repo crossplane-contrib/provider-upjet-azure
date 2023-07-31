@@ -70,6 +70,3 @@ spec:
     sku:
     - capacity: 1
       name: Standard_S1
-
----
-

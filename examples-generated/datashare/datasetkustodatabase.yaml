@@ -120,6 +120,3 @@ spec:
     principalId: ${azurerm_data_share_account.example.identity.0.principal_id}
     roleDefinitionName: Contributor
     scope: ${azurerm_kusto_cluster.example.id}
-
----
-

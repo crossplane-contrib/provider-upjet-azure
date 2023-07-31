@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MatchCriterionInitParameters struct {
+
+	// A list of AS paths.
+	AsPath []*string `json:"asPath,omitempty" tf:"as_path,omitempty"`
+
+	// A list of BGP communities.
+	Community []*string `json:"community,omitempty" tf:"community,omitempty"`
+
+	// The match condition to apply the rule of the Route Map. Possible values are Contains, Equals, NotContains, NotEquals and Unknown.
+	MatchCondition *string `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
+
+	// A list of route prefixes.
+	RoutePrefix []*string `json:"routePrefix,omitempty" tf:"route_prefix,omitempty"`
+}
+
 type MatchCriterionObservation struct {
 
 	// A list of AS paths.
@@ -39,11 +54,23 @@ type MatchCriterionParameters struct {
 	Community []*string `json:"community,omitempty" tf:"community,omitempty"`
 
 	// The match condition to apply the rule of the Route Map. Possible values are Contains, Equals, NotContains, NotEquals and Unknown.
-	// +kubebuilder:validation:Required
-	MatchCondition *string `json:"matchCondition" tf:"match_condition,omitempty"`
+	// +kubebuilder:validation:Optional
+	MatchCondition *string `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
 
 	// A list of route prefixes.
 	// +kubebuilder:validation:Optional
+	RoutePrefix []*string `json:"routePrefix,omitempty" tf:"route_prefix,omitempty"`
+}
+
+type ParameterInitParameters struct {
+
+	// A list of AS paths.
+	AsPath []*string `json:"asPath,omitempty" tf:"as_path,omitempty"`
+
+	// A list of BGP communities.
+	Community []*string `json:"community,omitempty" tf:"community,omitempty"`
+
+	// A list of route prefixes.
 	RoutePrefix []*string `json:"routePrefix,omitempty" tf:"route_prefix,omitempty"`
 }
 
@@ -72,6 +99,12 @@ type ParameterParameters struct {
 	// A list of route prefixes.
 	// +kubebuilder:validation:Optional
 	RoutePrefix []*string `json:"routePrefix,omitempty" tf:"route_prefix,omitempty"`
+}
+
+type RouteMapInitParameters struct {
+
+	// A rule block as defined below.
+	Rule []RouteMapRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type RouteMapObservation struct {
@@ -107,6 +140,21 @@ type RouteMapParameters struct {
 	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
+type RouteMapRuleInitParameters struct {
+
+	// An action block as defined below.
+	Action []RuleActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
+
+	// A match_criterion block as defined below.
+	MatchCriterion []MatchCriterionInitParameters `json:"matchCriterion,omitempty" tf:"match_criterion,omitempty"`
+
+	// The unique name for the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The next step after the rule is evaluated. Possible values are Continue, Terminate and Unknown. Defaults to Unknown.
+	NextStepIfMatched *string `json:"nextStepIfMatched,omitempty" tf:"next_step_if_matched,omitempty"`
+}
+
 type RouteMapRuleObservation struct {
 
 	// An action block as defined below.
@@ -133,12 +181,21 @@ type RouteMapRuleParameters struct {
 	MatchCriterion []MatchCriterionParameters `json:"matchCriterion,omitempty" tf:"match_criterion,omitempty"`
 
 	// The unique name for the rule.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The next step after the rule is evaluated. Possible values are Continue, Terminate and Unknown. Defaults to Unknown.
 	// +kubebuilder:validation:Optional
 	NextStepIfMatched *string `json:"nextStepIfMatched,omitempty" tf:"next_step_if_matched,omitempty"`
+}
+
+type RuleActionInitParameters struct {
+
+	// A parameter block as defined below.
+	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type RuleActionObservation struct {
@@ -153,18 +210,30 @@ type RuleActionObservation struct {
 type RuleActionParameters struct {
 
 	// A parameter block as defined below.
-	// +kubebuilder:validation:Required
-	Parameter []ParameterParameters `json:"parameter" tf:"parameter,omitempty"`
+	// +kubebuilder:validation:Optional
+	Parameter []ParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // RouteMapSpec defines the desired state of RouteMap
 type RouteMapSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RouteMapParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RouteMapInitParameters `json:"initProvider,omitempty"`
 }
 
 // RouteMapStatus defines the observed state of RouteMap.

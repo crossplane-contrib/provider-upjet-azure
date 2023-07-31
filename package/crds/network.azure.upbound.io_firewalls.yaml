@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: firewalls.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -245,8 +244,6 @@ spec:
                                   type: string
                               type: object
                           type: object
-                      required:
-                      - name
                       type: object
                     type: array
                   location:
@@ -349,9 +346,6 @@ spec:
                                   type: string
                               type: object
                           type: object
-                      required:
-                      - name
-                      - publicIpAddressId
                       type: object
                     type: array
                   privateIpRanges:
@@ -471,8 +465,6 @@ spec:
                           description: Specifies the ID of the Virtual Hub where the
                             Firewall resides in.
                           type: string
-                      required:
-                      - virtualHubId
                       type: object
                     type: array
                   zones:
@@ -483,21 +475,132 @@ spec:
                       type: string
                     type: array
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  dnsServers:
+                    description: A list of DNS servers that the Azure Firewall will
+                      direct DNS traffic to the for name resolution.
+                    items:
+                      type: string
+                    type: array
+                  firewallPolicyId:
+                    description: The ID of the Firewall Policy applied to this Firewall.
+                    type: string
+                  ipConfiguration:
+                    description: An ip_configuration block as documented below.
+                    items:
+                      properties:
+                        name:
+                          description: Specifies the name of the IP Configuration.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  managementIpConfiguration:
+                    description: A management_ip_configuration block as documented
+                      below, which allows force-tunnelling of traffic to be performed
+                      by the firewall. Adding or removing this block or changing the
+                      subnet_id in an existing block forces a new resource to be created.
+                      Changing this forces a new resource to be created.
+                    items:
+                      properties:
+                        name:
+                          description: Specifies the name of the IP Configuration.
+                          type: string
+                        publicIpAddressId:
+                          description: The ID of the Public IP Address associated
+                            with the firewall.
+                          type: string
+                      type: object
+                    type: array
+                  privateIpRanges:
+                    description: A list of SNAT private CIDR IP ranges, or the special
+                      string IANAPrivateRanges, which indicates Azure Firewall does
+                      not SNAT when the destination IP address is a private range
+                      per IANA RFC 1918.
+                    items:
+                      type: string
+                    type: array
+                  skuName:
+                    description: SKU name of the Firewall. Possible values are AZFW_Hub
+                      and AZFW_VNet. Changing this forces a new resource to be created.
+                    type: string
+                  skuTier:
+                    description: SKU tier of the Firewall. Possible values are Premium,
+                      Standard and Basic.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  threatIntelMode:
+                    description: 'The operation mode for threat intelligence-based
+                      filtering. Possible values are: Off, Alert and Deny. Defaults
+                      to Alert.'
+                    type: string
+                  virtualHub:
+                    description: A virtual_hub block as documented below.
+                    items:
+                      properties:
+                        publicIpCount:
+                          description: Specifies the number of public IPs to assign
+                            to the Firewall. Defaults to 1.
+                          type: number
+                        virtualHubId:
+                          description: Specifies the ID of the Virtual Hub where the
+                            Firewall resides in.
+                          type: string
+                      type: object
+                    type: array
+                  zones:
+                    description: Specifies a list of Availability Zones in which this
+                      Azure Firewall should be located. Changing this forces a new
+                      Azure Firewall to be created.
+                    items:
+                      type: string
+                    type: array
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -671,11 +774,17 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: skuName is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
+                || has(self.initProvider.skuName)'
             - message: skuTier is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuTier)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuTier)
+                || has(self.initProvider.skuTier)'
           status:
             description: FirewallStatus defines the observed state of Firewall.
             properties:

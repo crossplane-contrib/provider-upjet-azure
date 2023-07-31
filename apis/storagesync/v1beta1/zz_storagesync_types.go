@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type StorageSyncInitParameters struct {
+
+	// Incoming traffic policy. Possible values are AllowAllTraffic and AllowVirtualNetworksOnly.
+	IncomingTrafficPolicy *string `json:"incomingTrafficPolicy,omitempty" tf:"incoming_traffic_policy,omitempty"`
+
+	// The Azure Region where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags which should be assigned to the Storage Sync.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type StorageSyncObservation struct {
 
 	// The ID of the Storage Sync.
@@ -63,6 +75,18 @@ type StorageSyncParameters struct {
 type StorageSyncSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StorageSyncParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider StorageSyncInitParameters `json:"initProvider,omitempty"`
 }
 
 // StorageSyncStatus defines the observed state of StorageSync.
@@ -83,7 +107,7 @@ type StorageSyncStatus struct {
 type StorageSync struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   StorageSyncSpec   `json:"spec"`
 	Status StorageSyncStatus `json:"status,omitempty"`
 }

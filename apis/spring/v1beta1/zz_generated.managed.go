@@ -17,9 +17,9 @@ func (mg *CloudApplicationLiveView) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this CloudApplicationLiveView.
-func (mg *CloudApplicationLiveView) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this CloudApplicationLiveView.
+func (mg *CloudApplicationLiveView) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this CloudApplicationLiveView.
@@ -55,9 +55,9 @@ func (mg *CloudApplicationLiveView) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this CloudApplicationLiveView.
-func (mg *CloudApplicationLiveView) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this CloudApplicationLiveView.
+func (mg *CloudApplicationLiveView) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this CloudApplicationLiveView.

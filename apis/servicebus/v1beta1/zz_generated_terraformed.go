@@ -69,6 +69,16 @@ func (tr *ServiceBusNamespace) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this ServiceBusNamespace
+func (tr *ServiceBusNamespace) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this ServiceBusNamespace using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ServiceBusNamespace) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *NamespaceAuthorizationRule) SetParameters(params map[string]any) error
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this NamespaceAuthorizationRule
+func (tr *NamespaceAuthorizationRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this NamespaceAuthorizationRule using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *NamespaceDisasterRecoveryConfig) SetParameters(params map[string]any) 
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this NamespaceDisasterRecoveryConfig
+func (tr *NamespaceDisasterRecoveryConfig) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this NamespaceDisasterRecoveryConfig using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *NamespaceDisasterRecoveryConfig) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *NamespaceNetworkRuleSet) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this NamespaceNetworkRuleSet
+func (tr *NamespaceNetworkRuleSet) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this NamespaceNetworkRuleSet using its observed tfState.
@@ -365,6 +405,16 @@ func (tr *Queue) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this Queue
+func (tr *Queue) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this Queue using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Queue) LateInitialize(attrs []byte) (bool, error) {
@@ -437,6 +487,16 @@ func (tr *QueueAuthorizationRule) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this QueueAuthorizationRule
+func (tr *QueueAuthorizationRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this QueueAuthorizationRule using its observed tfState.
@@ -513,6 +573,16 @@ func (tr *Subscription) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this Subscription
+func (tr *Subscription) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this Subscription using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Subscription) LateInitialize(attrs []byte) (bool, error) {
@@ -585,6 +655,16 @@ func (tr *SubscriptionRule) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SubscriptionRule
+func (tr *SubscriptionRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SubscriptionRule using its observed tfState.
@@ -661,6 +741,16 @@ func (tr *Topic) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this Topic
+func (tr *Topic) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this Topic using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Topic) LateInitialize(attrs []byte) (bool, error) {
@@ -733,6 +823,16 @@ func (tr *TopicAuthorizationRule) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this TopicAuthorizationRule
+func (tr *TopicAuthorizationRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this TopicAuthorizationRule using its observed tfState.

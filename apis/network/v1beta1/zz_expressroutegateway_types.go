@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ExpressRouteGatewayInitParameters struct {
+
+	// Specified whether this gateway accept traffic from non-Virtual WAN networks. Defaults to false.
+	AllowNonVirtualWanTraffic *bool `json:"allowNonVirtualWanTraffic,omitempty" tf:"allow_non_virtual_wan_traffic,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The number of scale units with which to provision the ExpressRoute gateway. Each scale unit is equal to 2Gbps, with support for up to 10 scale units (20Gbps).
+	ScaleUnits *float64 `json:"scaleUnits,omitempty" tf:"scale_units,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ExpressRouteGatewayObservation struct {
 
 	// Specified whether this gateway accept traffic from non-Virtual WAN networks. Defaults to false.
@@ -87,6 +102,18 @@ type ExpressRouteGatewayParameters struct {
 type ExpressRouteGatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ExpressRouteGatewayParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ExpressRouteGatewayInitParameters `json:"initProvider,omitempty"`
 }
 
 // ExpressRouteGatewayStatus defines the observed state of ExpressRouteGateway.
@@ -107,8 +134,8 @@ type ExpressRouteGatewayStatus struct {
 type ExpressRouteGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scaleUnits)",message="scaleUnits is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scaleUnits) || has(self.initProvider.scaleUnits)",message="scaleUnits is a required parameter"
 	Spec   ExpressRouteGatewaySpec   `json:"spec"`
 	Status ExpressRouteGatewayStatus `json:"status,omitempty"`
 }

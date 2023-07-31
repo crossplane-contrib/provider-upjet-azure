@@ -69,6 +69,16 @@ func (tr *RedisCache) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this RedisCache
+func (tr *RedisCache) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this RedisCache using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *RedisCache) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *RedisEnterpriseCluster) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this RedisEnterpriseCluster
+func (tr *RedisEnterpriseCluster) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this RedisEnterpriseCluster using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *RedisEnterpriseDatabase) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this RedisEnterpriseDatabase
+func (tr *RedisEnterpriseDatabase) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this RedisEnterpriseDatabase using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *RedisEnterpriseDatabase) LateInitialize(attrs []byte) (bool, error) {
@@ -291,6 +321,16 @@ func (tr *RedisFirewallRule) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this RedisFirewallRule
+func (tr *RedisFirewallRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this RedisFirewallRule using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *RedisFirewallRule) LateInitialize(attrs []byte) (bool, error) {
@@ -363,6 +403,16 @@ func (tr *RedisLinkedServer) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this RedisLinkedServer
+func (tr *RedisLinkedServer) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this RedisLinkedServer using its observed tfState.

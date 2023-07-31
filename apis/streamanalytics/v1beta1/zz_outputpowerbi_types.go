@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OutputPowerBIInitParameters struct {
+
+	// The name of the Power BI dataset.
+	DataSet *string `json:"dataset,omitempty" tf:"dataset,omitempty"`
+
+	// The ID of the Power BI group, this must be a valid UUID.
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	// The name of the Power BI group. Use this property to help remember which specific Power BI group id was used.
+	GroupName *string `json:"groupName,omitempty" tf:"group_name,omitempty"`
+
+	// The name of the Power BI table under the specified dataset.
+	Table *string `json:"table,omitempty" tf:"table,omitempty"`
+
+	// The user display name of the user that was used to obtain the refresh token.
+	TokenUserDisplayName *string `json:"tokenUserDisplayName,omitempty" tf:"token_user_display_name,omitempty"`
+
+	// The user principal name (UPN) of the user that was used to obtain the refresh token.
+	TokenUserPrincipalName *string `json:"tokenUserPrincipalName,omitempty" tf:"token_user_principal_name,omitempty"`
+}
+
 type OutputPowerBIObservation struct {
 
 	// The name of the Power BI dataset.
@@ -84,6 +105,18 @@ type OutputPowerBIParameters struct {
 type OutputPowerBISpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OutputPowerBIParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider OutputPowerBIInitParameters `json:"initProvider,omitempty"`
 }
 
 // OutputPowerBIStatus defines the observed state of OutputPowerBI.
@@ -104,10 +137,10 @@ type OutputPowerBIStatus struct {
 type OutputPowerBI struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataset)",message="dataset is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.groupId)",message="groupId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.groupName)",message="groupName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.table)",message="table is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataset) || has(self.initProvider.dataset)",message="dataset is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupId) || has(self.initProvider.groupId)",message="groupId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupName) || has(self.initProvider.groupName)",message="groupName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.table) || has(self.initProvider.table)",message="table is a required parameter"
 	Spec   OutputPowerBISpec   `json:"spec"`
 	Status OutputPowerBIStatus `json:"status,omitempty"`
 }

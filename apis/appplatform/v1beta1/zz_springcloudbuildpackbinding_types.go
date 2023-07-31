@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LaunchInitParameters struct {
+
+	// Specifies a map of non-sensitive properties for launchProperties.
+	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// Specifies a map of sensitive properties for launchProperties.
+	Secrets map[string]*string `json:"secrets,omitempty" tf:"secrets,omitempty"`
+}
+
 type LaunchObservation struct {
 
 	// Specifies a map of non-sensitive properties for launchProperties.
@@ -31,6 +40,15 @@ type LaunchParameters struct {
 	// Specifies a map of sensitive properties for launchProperties.
 	// +kubebuilder:validation:Optional
 	Secrets map[string]*string `json:"secrets,omitempty" tf:"secrets,omitempty"`
+}
+
+type SpringCloudBuildPackBindingInitParameters struct {
+
+	// Specifies the Build Pack Binding Type. Allowed values are ApacheSkyWalking, AppDynamics, ApplicationInsights, Dynatrace, ElasticAPM and NewRelic.
+	BindingType *string `json:"bindingType,omitempty" tf:"binding_type,omitempty"`
+
+	// A launch block as defined below.
+	Launch []LaunchInitParameters `json:"launch,omitempty" tf:"launch,omitempty"`
 }
 
 type SpringCloudBuildPackBindingObservation struct {
@@ -77,6 +95,18 @@ type SpringCloudBuildPackBindingParameters struct {
 type SpringCloudBuildPackBindingSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudBuildPackBindingParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SpringCloudBuildPackBindingInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudBuildPackBindingStatus defines the observed state of SpringCloudBuildPackBinding.

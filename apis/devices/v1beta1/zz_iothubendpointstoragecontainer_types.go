@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IOTHubEndpointStorageContainerInitParameters struct {
+
+	// Type used to authenticate against the storage endpoint. Possible values are keyBased and identityBased. Defaults to keyBased.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// Time interval at which blobs are written to storage. Value should be between 60 and 720 seconds. Default value is 300 seconds.
+	BatchFrequencyInSeconds *float64 `json:"batchFrequencyInSeconds,omitempty" tf:"batch_frequency_in_seconds,omitempty"`
+
+	// Encoding that is used to serialize messages to blobs. Supported values are Avro, AvroDeflate and JSON. Default value is Avro. Changing this forces a new resource to be created.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// URI of the Storage Container endpoint. This corresponds to the primary_blob_endpoint of the parent storage account. This attribute can only be specified and is mandatory when authentication_type is identityBased.
+	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
+
+	// File name format for the blob. Default format is {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters are mandatory but can be reordered.
+	FileNameFormat *string `json:"fileNameFormat,omitempty" tf:"file_name_format,omitempty"`
+
+	// ID of the User Managed Identity used to authenticate against the storage endpoint.
+	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
+
+	// Maximum number of bytes for each blob written to storage. Value should be between 10485760(10MB) and 524288000(500MB). Default value is 314572800(300MB).
+	MaxChunkSizeInBytes *float64 `json:"maxChunkSizeInBytes,omitempty" tf:"max_chunk_size_in_bytes,omitempty"`
+}
+
 type IOTHubEndpointStorageContainerObservation struct {
 
 	// Type used to authenticate against the storage endpoint. Possible values are keyBased and identityBased. Defaults to keyBased.
@@ -128,6 +152,18 @@ type IOTHubEndpointStorageContainerParameters struct {
 type IOTHubEndpointStorageContainerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IOTHubEndpointStorageContainerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider IOTHubEndpointStorageContainerInitParameters `json:"initProvider,omitempty"`
 }
 
 // IOTHubEndpointStorageContainerStatus defines the observed state of IOTHubEndpointStorageContainer.

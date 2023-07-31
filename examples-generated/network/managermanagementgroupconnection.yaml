@@ -99,6 +99,3 @@ spec:
     principalId: ${data.azurerm_client_config.current.object_id}
     roleDefinitionName: Network Contributor
     scope: ${azurerm_management_group.example.id}
-
----
-

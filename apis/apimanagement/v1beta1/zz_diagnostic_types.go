@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BackendRequestDataMaskingHeadersInitParameters struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type BackendRequestDataMaskingHeadersObservation struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
@@ -25,12 +34,21 @@ type BackendRequestDataMaskingHeadersObservation struct {
 type BackendRequestDataMaskingHeadersParameters struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// The name of the header or the query parameter to mask.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type BackendRequestDataMaskingInitParameters struct {
+
+	// A headers block as defined below.
+	Headers []BackendRequestDataMaskingHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// A query_params block as defined below.
+	QueryParams []BackendRequestDataMaskingQueryParamsInitParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
 
 type BackendRequestDataMaskingObservation struct {
@@ -53,6 +71,15 @@ type BackendRequestDataMaskingParameters struct {
 	QueryParams []BackendRequestDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
 
+type BackendRequestDataMaskingQueryParamsInitParameters struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type BackendRequestDataMaskingQueryParamsObservation struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
@@ -65,12 +92,21 @@ type BackendRequestDataMaskingQueryParamsObservation struct {
 type BackendRequestDataMaskingQueryParamsParameters struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// The name of the header or the query parameter to mask.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type BackendResponseDataMaskingHeadersInitParameters struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type BackendResponseDataMaskingHeadersObservation struct {
@@ -85,12 +121,21 @@ type BackendResponseDataMaskingHeadersObservation struct {
 type BackendResponseDataMaskingHeadersParameters struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// The name of the header or the query parameter to mask.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type BackendResponseDataMaskingQueryParamsInitParameters struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type BackendResponseDataMaskingQueryParamsObservation struct {
@@ -105,12 +150,24 @@ type BackendResponseDataMaskingQueryParamsObservation struct {
 type BackendResponseDataMaskingQueryParamsParameters struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// The name of the header or the query parameter to mask.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type DiagnosticBackendRequestInitParameters struct {
+
+	// Number of payload bytes to log (up to 8192).
+	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
+
+	// A data_masking block as defined below.
+	DataMasking []BackendRequestDataMaskingInitParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
+
+	// Specifies a list of headers to log.
+	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
 type DiagnosticBackendRequestObservation struct {
@@ -140,6 +197,15 @@ type DiagnosticBackendRequestParameters struct {
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
+type DiagnosticBackendResponseDataMaskingInitParameters struct {
+
+	// A headers block as defined below.
+	Headers []BackendResponseDataMaskingHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// A query_params block as defined below.
+	QueryParams []BackendResponseDataMaskingQueryParamsInitParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
+}
+
 type DiagnosticBackendResponseDataMaskingObservation struct {
 
 	// A headers block as defined below.
@@ -158,6 +224,18 @@ type DiagnosticBackendResponseDataMaskingParameters struct {
 	// A query_params block as defined below.
 	// +kubebuilder:validation:Optional
 	QueryParams []BackendResponseDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
+}
+
+type DiagnosticBackendResponseInitParameters struct {
+
+	// Number of payload bytes to log (up to 8192).
+	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
+
+	// A data_masking block as defined below.
+	DataMasking []DiagnosticBackendResponseDataMaskingInitParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
+
+	// Specifies a list of headers to log.
+	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
 type DiagnosticBackendResponseObservation struct {
@@ -187,6 +265,15 @@ type DiagnosticBackendResponseParameters struct {
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
+type DiagnosticFrontendRequestDataMaskingHeadersInitParameters struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type DiagnosticFrontendRequestDataMaskingHeadersObservation struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
@@ -199,12 +286,21 @@ type DiagnosticFrontendRequestDataMaskingHeadersObservation struct {
 type DiagnosticFrontendRequestDataMaskingHeadersParameters struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// The name of the header or the query parameter to mask.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type DiagnosticFrontendRequestDataMaskingInitParameters struct {
+
+	// A headers block as defined below.
+	Headers []DiagnosticFrontendRequestDataMaskingHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// A query_params block as defined below.
+	QueryParams []DiagnosticFrontendRequestDataMaskingQueryParamsInitParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
 
 type DiagnosticFrontendRequestDataMaskingObservation struct {
@@ -227,6 +323,15 @@ type DiagnosticFrontendRequestDataMaskingParameters struct {
 	QueryParams []DiagnosticFrontendRequestDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
 
+type DiagnosticFrontendRequestDataMaskingQueryParamsInitParameters struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type DiagnosticFrontendRequestDataMaskingQueryParamsObservation struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
@@ -239,12 +344,24 @@ type DiagnosticFrontendRequestDataMaskingQueryParamsObservation struct {
 type DiagnosticFrontendRequestDataMaskingQueryParamsParameters struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// The name of the header or the query parameter to mask.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type DiagnosticFrontendRequestInitParameters struct {
+
+	// Number of payload bytes to log (up to 8192).
+	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
+
+	// A data_masking block as defined below.
+	DataMasking []DiagnosticFrontendRequestDataMaskingInitParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
+
+	// Specifies a list of headers to log.
+	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
 type DiagnosticFrontendRequestObservation struct {
@@ -274,6 +391,15 @@ type DiagnosticFrontendRequestParameters struct {
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
+type DiagnosticFrontendResponseDataMaskingHeadersInitParameters struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type DiagnosticFrontendResponseDataMaskingHeadersObservation struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
@@ -286,12 +412,21 @@ type DiagnosticFrontendResponseDataMaskingHeadersObservation struct {
 type DiagnosticFrontendResponseDataMaskingHeadersParameters struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// The name of the header or the query parameter to mask.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type DiagnosticFrontendResponseDataMaskingInitParameters struct {
+
+	// A headers block as defined below.
+	Headers []DiagnosticFrontendResponseDataMaskingHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// A query_params block as defined below.
+	QueryParams []DiagnosticFrontendResponseDataMaskingQueryParamsInitParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
 
 type DiagnosticFrontendResponseDataMaskingObservation struct {
@@ -314,6 +449,15 @@ type DiagnosticFrontendResponseDataMaskingParameters struct {
 	QueryParams []DiagnosticFrontendResponseDataMaskingQueryParamsParameters `json:"queryParams,omitempty" tf:"query_params,omitempty"`
 }
 
+type DiagnosticFrontendResponseDataMaskingQueryParamsInitParameters struct {
+
+	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// The name of the header or the query parameter to mask.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type DiagnosticFrontendResponseDataMaskingQueryParamsObservation struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
@@ -326,12 +470,24 @@ type DiagnosticFrontendResponseDataMaskingQueryParamsObservation struct {
 type DiagnosticFrontendResponseDataMaskingQueryParamsParameters struct {
 
 	// The data masking mode. Possible values are Mask and Hide for query_params. The only possible value is Mask for headers.
-	// +kubebuilder:validation:Required
-	Mode *string `json:"mode" tf:"mode,omitempty"`
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// The name of the header or the query parameter to mask.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type DiagnosticFrontendResponseInitParameters struct {
+
+	// Number of payload bytes to log (up to 8192).
+	BodyBytes *float64 `json:"bodyBytes,omitempty" tf:"body_bytes,omitempty"`
+
+	// A data_masking block as defined below.
+	DataMasking []DiagnosticFrontendResponseDataMaskingInitParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
+
+	// Specifies a list of headers to log.
+	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
 type DiagnosticFrontendResponseObservation struct {
@@ -359,6 +515,39 @@ type DiagnosticFrontendResponseParameters struct {
 	// Specifies a list of headers to log.
 	// +kubebuilder:validation:Optional
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
+}
+
+type DiagnosticInitParameters struct {
+
+	// Always log errors. Send telemetry if there is an erroneous condition, regardless of sampling settings.
+	AlwaysLogErrors *bool `json:"alwaysLogErrors,omitempty" tf:"always_log_errors,omitempty"`
+
+	// A backend_request block as defined below.
+	BackendRequest []DiagnosticBackendRequestInitParameters `json:"backendRequest,omitempty" tf:"backend_request,omitempty"`
+
+	// A backend_response block as defined below.
+	BackendResponse []DiagnosticBackendResponseInitParameters `json:"backendResponse,omitempty" tf:"backend_response,omitempty"`
+
+	// A frontend_request block as defined below.
+	FrontendRequest []DiagnosticFrontendRequestInitParameters `json:"frontendRequest,omitempty" tf:"frontend_request,omitempty"`
+
+	// A frontend_response block as defined below.
+	FrontendResponse []DiagnosticFrontendResponseInitParameters `json:"frontendResponse,omitempty" tf:"frontend_response,omitempty"`
+
+	// The HTTP Correlation Protocol to use. Possible values are None, Legacy or W3C.
+	HTTPCorrelationProtocol *string `json:"httpCorrelationProtocol,omitempty" tf:"http_correlation_protocol,omitempty"`
+
+	// Log client IP address.
+	LogClientIP *bool `json:"logClientIp,omitempty" tf:"log_client_ip,omitempty"`
+
+	// The format of the Operation Name for Application Insights telemetries. Possible values are Name, and Url. Defaults to Name.
+	OperationNameFormat *string `json:"operationNameFormat,omitempty" tf:"operation_name_format,omitempty"`
+
+	// Sampling (%). For high traffic APIs, please read this documentation to understand performance implications and log sampling. Valid values are between 0.0 and 100.0.
+	SamplingPercentage *float64 `json:"samplingPercentage,omitempty" tf:"sampling_percentage,omitempty"`
+
+	// Logging verbosity. Possible values are verbose, information or error.
+	Verbosity *string `json:"verbosity,omitempty" tf:"verbosity,omitempty"`
 }
 
 type DiagnosticObservation struct {
@@ -493,6 +682,18 @@ type DiagnosticParameters struct {
 type DiagnosticSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DiagnosticParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DiagnosticInitParameters `json:"initProvider,omitempty"`
 }
 
 // DiagnosticStatus defines the observed state of Diagnostic.

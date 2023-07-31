@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LoadBalancerOutboundRuleFrontendIPConfigurationInitParameters struct {
+
+	// The name of the Frontend IP Configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type LoadBalancerOutboundRuleFrontendIPConfigurationObservation struct {
 
 	// The ID of the Load Balancer Outbound Rule.
@@ -25,8 +31,26 @@ type LoadBalancerOutboundRuleFrontendIPConfigurationObservation struct {
 type LoadBalancerOutboundRuleFrontendIPConfigurationParameters struct {
 
 	// The name of the Frontend IP Configuration.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type LoadBalancerOutboundRuleInitParameters struct {
+
+	// The number of outbound ports to be used for NAT. Defaults to 1024.
+	AllocatedOutboundPorts *float64 `json:"allocatedOutboundPorts,omitempty" tf:"allocated_outbound_ports,omitempty"`
+
+	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
+	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
+
+	// One or more frontend_ip_configuration blocks as defined below.
+	FrontendIPConfiguration []LoadBalancerOutboundRuleFrontendIPConfigurationInitParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
+
+	// The timeout for the TCP idle connection Defaults to 4.
+	IdleTimeoutInMinutes *float64 `json:"idleTimeoutInMinutes,omitempty" tf:"idle_timeout_in_minutes,omitempty"`
+
+	// The transport protocol for the external endpoint. Possible values are Udp, Tcp or All.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 type LoadBalancerOutboundRuleObservation struct {
@@ -111,6 +135,18 @@ type LoadBalancerOutboundRuleParameters struct {
 type LoadBalancerOutboundRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LoadBalancerOutboundRuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LoadBalancerOutboundRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // LoadBalancerOutboundRuleStatus defines the observed state of LoadBalancerOutboundRule.
@@ -131,7 +167,7 @@ type LoadBalancerOutboundRuleStatus struct {
 type LoadBalancerOutboundRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.protocol)",message="protocol is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocol) || has(self.initProvider.protocol)",message="protocol is a required parameter"
 	Spec   LoadBalancerOutboundRuleSpec   `json:"spec"`
 	Status LoadBalancerOutboundRuleStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthorizationInitParameters struct {
+
+	// The authentication Parameter value.
+	Parameter *string `json:"parameter,omitempty" tf:"parameter,omitempty"`
+
+	// The authentication Scheme name.
+	Scheme *string `json:"scheme,omitempty" tf:"scheme,omitempty"`
+}
+
 type AuthorizationObservation struct {
 
 	// The authentication Parameter value.
@@ -31,6 +40,36 @@ type AuthorizationParameters struct {
 	// The authentication Scheme name.
 	// +kubebuilder:validation:Optional
 	Scheme *string `json:"scheme,omitempty" tf:"scheme,omitempty"`
+}
+
+type BackendInitParameters struct {
+
+	// A credentials block as documented below.
+	Credentials []CredentialsInitParameters `json:"credentials,omitempty" tf:"credentials,omitempty"`
+
+	// The description of the backend.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The protocol used by the backend host. Possible values are http or soap.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// A proxy block as documented below.
+	Proxy []BackendProxyInitParameters `json:"proxy,omitempty" tf:"proxy,omitempty"`
+
+	// The management URI of the backend host in an external system. This URI can be the ARM Resource ID of Logic Apps, Function Apps or API Apps, or the management endpoint of a Service Fabric cluster.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// A service_fabric_cluster block as documented below.
+	ServiceFabricCluster []ServiceFabricClusterInitParameters `json:"serviceFabricCluster,omitempty" tf:"service_fabric_cluster,omitempty"`
+
+	// A tls block as documented below.
+	TLS []TLSInitParameters `json:"tls,omitempty" tf:"tls,omitempty"`
+
+	// The title of the backend.
+	Title *string `json:"title,omitempty" tf:"title,omitempty"`
+
+	// The URL of the backend host.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
 type BackendObservation struct {
@@ -137,6 +176,15 @@ type BackendParameters struct {
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 }
 
+type BackendProxyInitParameters struct {
+
+	// The URL of the proxy server.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// The username to connect to the proxy server.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
 type BackendProxyObservation struct {
 
 	// The URL of the proxy server.
@@ -153,12 +201,27 @@ type BackendProxyParameters struct {
 	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The URL of the proxy server.
-	// +kubebuilder:validation:Required
-	URL *string `json:"url" tf:"url,omitempty"`
+	// +kubebuilder:validation:Optional
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 
 	// The username to connect to the proxy server.
-	// +kubebuilder:validation:Required
-	Username *string `json:"username" tf:"username,omitempty"`
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type CredentialsInitParameters struct {
+
+	// An authorization block as defined below.
+	Authorization []AuthorizationInitParameters `json:"authorization,omitempty" tf:"authorization,omitempty"`
+
+	// A list of client certificate thumbprints to present to the backend host. The certificates must exist within the API Management Service.
+	Certificate []*string `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// A mapping of header parameters to pass to the backend host. The keys are the header names and the values are a comma separated string of header values. This is converted to a list before being passed to the API.
+	Header map[string]*string `json:"header,omitempty" tf:"header,omitempty"`
+
+	// A mapping of query parameters to pass to the backend host. The keys are the query names and the values are a comma separated string of query values. This is converted to a list before being passed to the API.
+	Query map[string]*string `json:"query,omitempty" tf:"query,omitempty"`
 }
 
 type CredentialsObservation struct {
@@ -195,6 +258,15 @@ type CredentialsParameters struct {
 	Query map[string]*string `json:"query,omitempty" tf:"query,omitempty"`
 }
 
+type ServerX509NameInitParameters struct {
+
+	// The thumbprint for the issuer of the certificate.
+	IssuerCertificateThumbprint *string `json:"issuerCertificateThumbprint,omitempty" tf:"issuer_certificate_thumbprint,omitempty"`
+
+	// The common name of the certificate.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type ServerX509NameObservation struct {
 
 	// The thumbprint for the issuer of the certificate.
@@ -207,12 +279,33 @@ type ServerX509NameObservation struct {
 type ServerX509NameParameters struct {
 
 	// The thumbprint for the issuer of the certificate.
-	// +kubebuilder:validation:Required
-	IssuerCertificateThumbprint *string `json:"issuerCertificateThumbprint" tf:"issuer_certificate_thumbprint,omitempty"`
+	// +kubebuilder:validation:Optional
+	IssuerCertificateThumbprint *string `json:"issuerCertificateThumbprint,omitempty" tf:"issuer_certificate_thumbprint,omitempty"`
 
 	// The common name of the certificate.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type ServiceFabricClusterInitParameters struct {
+
+	// The client certificate resource id for the management endpoint.
+	ClientCertificateID *string `json:"clientCertificateId,omitempty" tf:"client_certificate_id,omitempty"`
+
+	// The client certificate thumbprint for the management endpoint.
+	ClientCertificateThumbprint *string `json:"clientCertificateThumbprint,omitempty" tf:"client_certificate_thumbprint,omitempty"`
+
+	// A list of cluster management endpoints.
+	ManagementEndpoints []*string `json:"managementEndpoints,omitempty" tf:"management_endpoints,omitempty"`
+
+	// The maximum number of retries when attempting resolve the partition.
+	MaxPartitionResolutionRetries *float64 `json:"maxPartitionResolutionRetries,omitempty" tf:"max_partition_resolution_retries,omitempty"`
+
+	// A list of thumbprints of the server certificates of the Service Fabric cluster.
+	ServerCertificateThumbprints []*string `json:"serverCertificateThumbprints,omitempty" tf:"server_certificate_thumbprints,omitempty"`
+
+	// One or more server_x509_name blocks as documented below.
+	ServerX509Name []ServerX509NameInitParameters `json:"serverX509Name,omitempty" tf:"server_x509_name,omitempty"`
 }
 
 type ServiceFabricClusterObservation struct {
@@ -247,12 +340,12 @@ type ServiceFabricClusterParameters struct {
 	ClientCertificateThumbprint *string `json:"clientCertificateThumbprint,omitempty" tf:"client_certificate_thumbprint,omitempty"`
 
 	// A list of cluster management endpoints.
-	// +kubebuilder:validation:Required
-	ManagementEndpoints []*string `json:"managementEndpoints" tf:"management_endpoints,omitempty"`
+	// +kubebuilder:validation:Optional
+	ManagementEndpoints []*string `json:"managementEndpoints,omitempty" tf:"management_endpoints,omitempty"`
 
 	// The maximum number of retries when attempting resolve the partition.
-	// +kubebuilder:validation:Required
-	MaxPartitionResolutionRetries *float64 `json:"maxPartitionResolutionRetries" tf:"max_partition_resolution_retries,omitempty"`
+	// +kubebuilder:validation:Optional
+	MaxPartitionResolutionRetries *float64 `json:"maxPartitionResolutionRetries,omitempty" tf:"max_partition_resolution_retries,omitempty"`
 
 	// A list of thumbprints of the server certificates of the Service Fabric cluster.
 	// +kubebuilder:validation:Optional
@@ -261,6 +354,15 @@ type ServiceFabricClusterParameters struct {
 	// One or more server_x509_name blocks as documented below.
 	// +kubebuilder:validation:Optional
 	ServerX509Name []ServerX509NameParameters `json:"serverX509Name,omitempty" tf:"server_x509_name,omitempty"`
+}
+
+type TLSInitParameters struct {
+
+	// Flag indicating whether SSL certificate chain validation should be done when using self-signed certificates for the backend host.
+	ValidateCertificateChain *bool `json:"validateCertificateChain,omitempty" tf:"validate_certificate_chain,omitempty"`
+
+	// Flag indicating whether SSL certificate name validation should be done when using self-signed certificates for the backend host.
+	ValidateCertificateName *bool `json:"validateCertificateName,omitempty" tf:"validate_certificate_name,omitempty"`
 }
 
 type TLSObservation struct {
@@ -287,6 +389,18 @@ type TLSParameters struct {
 type BackendSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BackendParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BackendInitParameters `json:"initProvider,omitempty"`
 }
 
 // BackendStatus defines the observed state of Backend.
@@ -307,8 +421,8 @@ type BackendStatus struct {
 type Backend struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.protocol)",message="protocol is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.url)",message="url is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protocol) || has(self.initProvider.protocol)",message="protocol is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.url) || has(self.initProvider.url)",message="url is a required parameter"
 	Spec   BackendSpec   `json:"spec"`
 	Status BackendStatus `json:"status,omitempty"`
 }

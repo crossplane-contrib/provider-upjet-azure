@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SecurityCenterSettingInitParameters struct {
+
+	// Boolean flag to enable/disable data access.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The setting to manage. Possible values are MCAS , WDATP and SENTINEL. Changing this forces a new resource to be created.
+	SettingName *string `json:"settingName,omitempty" tf:"setting_name,omitempty"`
+}
+
 type SecurityCenterSettingObservation struct {
 
 	// Boolean flag to enable/disable data access.
@@ -40,6 +49,18 @@ type SecurityCenterSettingParameters struct {
 type SecurityCenterSettingSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecurityCenterSettingParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SecurityCenterSettingInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecurityCenterSettingStatus defines the observed state of SecurityCenterSetting.
@@ -60,8 +81,8 @@ type SecurityCenterSettingStatus struct {
 type SecurityCenterSetting struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.enabled)",message="enabled is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.settingName)",message="settingName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || has(self.initProvider.enabled)",message="enabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.settingName) || has(self.initProvider.settingName)",message="settingName is a required parameter"
 	Spec   SecurityCenterSettingSpec   `json:"spec"`
 	Status SecurityCenterSettingStatus `json:"status,omitempty"`
 }

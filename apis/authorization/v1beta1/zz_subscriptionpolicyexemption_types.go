@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SubscriptionPolicyExemptionInitParameters struct {
+
+	// A description to use for this Policy Exemption.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A friendly display name to use for this Policy Exemption.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The category of this policy exemption. Possible values are Waiver and Mitigated.
+	ExemptionCategory *string `json:"exemptionCategory,omitempty" tf:"exemption_category,omitempty"`
+
+	// The expiration date and time in UTC ISO 8601 format of this policy exemption.
+	ExpiresOn *string `json:"expiresOn,omitempty" tf:"expires_on,omitempty"`
+
+	// The metadata for this policy exemption. This is a JSON string representing additional metadata that should be stored with the policy exemption.
+	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
+	PolicyDefinitionReferenceIds []*string `json:"policyDefinitionReferenceIds,omitempty" tf:"policy_definition_reference_ids,omitempty"`
+
+	// The Subscription ID where the Policy Exemption should be applied. Changing this forces a new resource to be created.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+}
+
 type SubscriptionPolicyExemptionObservation struct {
 
 	// A description to use for this Policy Exemption.
@@ -92,6 +116,18 @@ type SubscriptionPolicyExemptionParameters struct {
 type SubscriptionPolicyExemptionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SubscriptionPolicyExemptionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SubscriptionPolicyExemptionInitParameters `json:"initProvider,omitempty"`
 }
 
 // SubscriptionPolicyExemptionStatus defines the observed state of SubscriptionPolicyExemption.
@@ -112,8 +148,8 @@ type SubscriptionPolicyExemptionStatus struct {
 type SubscriptionPolicyExemption struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.exemptionCategory)",message="exemptionCategory is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.subscriptionId)",message="subscriptionId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exemptionCategory) || has(self.initProvider.exemptionCategory)",message="exemptionCategory is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionId) || has(self.initProvider.subscriptionId)",message="subscriptionId is a required parameter"
 	Spec   SubscriptionPolicyExemptionSpec   `json:"spec"`
 	Status SubscriptionPolicyExemptionStatus `json:"status,omitempty"`
 }

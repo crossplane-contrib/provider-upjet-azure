@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AzureBlobStorageLocationInitParameters struct {
+
+	// The container on the Azure Blob Storage Account hosting the file.
+	Container *string `json:"container,omitempty" tf:"container,omitempty"`
+
+	// Is the container using dynamic expression, function or system variables? Defaults to false.
+	DynamicContainerEnabled *bool `json:"dynamicContainerEnabled,omitempty" tf:"dynamic_container_enabled,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the file in the blob container.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file in the blob container.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
 type AzureBlobStorageLocationObservation struct {
 
 	// The container on the Azure Blob Storage Account hosting the file.
@@ -37,8 +58,8 @@ type AzureBlobStorageLocationObservation struct {
 type AzureBlobStorageLocationParameters struct {
 
 	// The container on the Azure Blob Storage Account hosting the file.
-	// +kubebuilder:validation:Required
-	Container *string `json:"container" tf:"container,omitempty"`
+	// +kubebuilder:validation:Optional
+	Container *string `json:"container,omitempty" tf:"container,omitempty"`
 
 	// Is the container using dynamic expression, function or system variables? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -61,6 +82,15 @@ type AzureBlobStorageLocationParameters struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
+type CompressionInitParameters struct {
+
+	// The level of compression. Possible values are Fastest and Optimal.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// The type of compression used during transport. Possible values are BZip2, Deflate, GZip, Tar, TarGZip and ZipDeflate.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type CompressionObservation struct {
 
 	// The level of compression. Possible values are Fastest and Optimal.
@@ -77,8 +107,38 @@ type CompressionParameters struct {
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
 	// The type of compression used during transport. Possible values are BZip2, Deflate, GZip, Tar, TarGZip and ZipDeflate.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type DataSetBinaryInitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Binary Dataset.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Binary Dataset.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// A azure_blob_storage_location block as defined below.
+	AzureBlobStorageLocation []AzureBlobStorageLocationInitParameters `json:"azureBlobStorageLocation,omitempty" tf:"azure_blob_storage_location,omitempty"`
+
+	// A compression block as defined below.
+	Compression []CompressionInitParameters `json:"compression,omitempty" tf:"compression,omitempty"`
+
+	// The description for the Data Factory Dataset.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
+	// A http_server_location block as defined below.
+	HTTPServerLocation []HTTPServerLocationInitParameters `json:"httpServerLocation,omitempty" tf:"http_server_location,omitempty"`
+
+	// Specifies a list of parameters to associate with the Data Factory Binary Dataset.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// A sftp_server_location block as defined below.
+	SFTPServerLocation []SFTPServerLocationInitParameters `json:"sftpServerLocation,omitempty" tf:"sftp_server_location,omitempty"`
 }
 
 type DataSetBinaryObservation struct {
@@ -186,6 +246,24 @@ type DataSetBinaryParameters struct {
 	SFTPServerLocation []SFTPServerLocationParameters `json:"sftpServerLocation,omitempty" tf:"sftp_server_location,omitempty"`
 }
 
+type HTTPServerLocationInitParameters struct {
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the file on the web server.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file on the web server.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The base URL to the web server hosting the file.
+	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
+}
+
 type HTTPServerLocationObservation struct {
 
 	// Is the filename using dynamic expression, function or system variables? Defaults to false.
@@ -215,16 +293,31 @@ type HTTPServerLocationParameters struct {
 	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
 
 	// The filename of the file on the web server.
-	// +kubebuilder:validation:Required
-	Filename *string `json:"filename" tf:"filename,omitempty"`
+	// +kubebuilder:validation:Optional
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
 	// The folder path to the file on the web server.
-	// +kubebuilder:validation:Required
-	Path *string `json:"path" tf:"path,omitempty"`
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// The base URL to the web server hosting the file.
-	// +kubebuilder:validation:Required
-	RelativeURL *string `json:"relativeUrl" tf:"relative_url,omitempty"`
+	// +kubebuilder:validation:Optional
+	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
+}
+
+type SFTPServerLocationInitParameters struct {
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the file on the SFTP server.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file on the SFTP server.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 type SFTPServerLocationObservation struct {
@@ -253,18 +346,30 @@ type SFTPServerLocationParameters struct {
 	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
 
 	// The filename of the file on the SFTP server.
-	// +kubebuilder:validation:Required
-	Filename *string `json:"filename" tf:"filename,omitempty"`
+	// +kubebuilder:validation:Optional
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
 	// The folder path to the file on the SFTP server.
-	// +kubebuilder:validation:Required
-	Path *string `json:"path" tf:"path,omitempty"`
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
 // DataSetBinarySpec defines the desired state of DataSetBinary
 type DataSetBinarySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DataSetBinaryParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DataSetBinaryInitParameters `json:"initProvider,omitempty"`
 }
 
 // DataSetBinaryStatus defines the observed state of DataSetBinary.

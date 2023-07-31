@@ -17,9 +17,9 @@ func (mg *ManagementGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ManagementGroup.
-func (mg *ManagementGroup) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ManagementGroup.
+func (mg *ManagementGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ManagementGroup.
@@ -55,9 +55,9 @@ func (mg *ManagementGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ManagementGroup.
-func (mg *ManagementGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ManagementGroup.
+func (mg *ManagementGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ManagementGroup.
@@ -93,9 +93,9 @@ func (mg *ManagementGroupSubscriptionAssociation) GetDeletionPolicy() xpv1.Delet
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ManagementGroupSubscriptionAssociation.
-func (mg *ManagementGroupSubscriptionAssociation) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ManagementGroupSubscriptionAssociation.
+func (mg *ManagementGroupSubscriptionAssociation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ManagementGroupSubscriptionAssociation.
@@ -131,9 +131,9 @@ func (mg *ManagementGroupSubscriptionAssociation) SetDeletionPolicy(r xpv1.Delet
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ManagementGroupSubscriptionAssociation.
-func (mg *ManagementGroupSubscriptionAssociation) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ManagementGroupSubscriptionAssociation.
+func (mg *ManagementGroupSubscriptionAssociation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ManagementGroupSubscriptionAssociation.

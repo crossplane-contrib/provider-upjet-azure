@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MonitorInitParameters struct {
+
+	// Name of the Logz organization. Changing this forces a new logz Monitor to be created.
+	CompanyName *string `json:"companyName,omitempty" tf:"company_name,omitempty"`
+
+	// Whether the resource monitoring is enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ID of the Enterprise App. Changing this forces a new logz Monitor to be created.
+	EnterpriseAppID *string `json:"enterpriseAppId,omitempty" tf:"enterprise_app_id,omitempty"`
+
+	// The Azure Region where the logz Monitor should exist. Changing this forces a new logz Monitor to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A plan block as defined below. Changing this forces a new resource to be created.
+	Plan []PlanInitParameters `json:"plan,omitempty" tf:"plan,omitempty"`
+
+	// A mapping of tags which should be assigned to the logz Monitor.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A user block as defined below. Changing this forces a new resource to be created.
+	User []UserInitParameters `json:"user,omitempty" tf:"user,omitempty"`
+}
+
 type MonitorObservation struct {
 
 	// Name of the Logz organization. Changing this forces a new logz Monitor to be created.
@@ -93,6 +117,21 @@ type MonitorParameters struct {
 	User []UserParameters `json:"user,omitempty" tf:"user,omitempty"`
 }
 
+type PlanInitParameters struct {
+
+	// Different billing cycles. Possible values are MONTHLY or WEEKLY. Changing this forces a new logz Monitor to be created.
+	BillingCycle *string `json:"billingCycle,omitempty" tf:"billing_cycle,omitempty"`
+
+	// Date when plan was applied. Changing this forces a new logz Monitor to be created.
+	EffectiveDate *string `json:"effectiveDate,omitempty" tf:"effective_date,omitempty"`
+
+	// Plan id as published by Logz. The only possible value is 100gb14days. Defaults to 100gb14days. Changing this forces a new logz Monitor to be created.
+	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
+
+	// Different usage types. Possible values are PAYG or COMMITTED. Changing this forces a new logz Monitor to be created.
+	UsageType *string `json:"usageType,omitempty" tf:"usage_type,omitempty"`
+}
+
 type PlanObservation struct {
 
 	// Different billing cycles. Possible values are MONTHLY or WEEKLY. Changing this forces a new logz Monitor to be created.
@@ -111,20 +150,35 @@ type PlanObservation struct {
 type PlanParameters struct {
 
 	// Different billing cycles. Possible values are MONTHLY or WEEKLY. Changing this forces a new logz Monitor to be created.
-	// +kubebuilder:validation:Required
-	BillingCycle *string `json:"billingCycle" tf:"billing_cycle,omitempty"`
+	// +kubebuilder:validation:Optional
+	BillingCycle *string `json:"billingCycle,omitempty" tf:"billing_cycle,omitempty"`
 
 	// Date when plan was applied. Changing this forces a new logz Monitor to be created.
-	// +kubebuilder:validation:Required
-	EffectiveDate *string `json:"effectiveDate" tf:"effective_date,omitempty"`
+	// +kubebuilder:validation:Optional
+	EffectiveDate *string `json:"effectiveDate,omitempty" tf:"effective_date,omitempty"`
 
 	// Plan id as published by Logz. The only possible value is 100gb14days. Defaults to 100gb14days. Changing this forces a new logz Monitor to be created.
 	// +kubebuilder:validation:Optional
 	PlanID *string `json:"planId,omitempty" tf:"plan_id,omitempty"`
 
 	// Different usage types. Possible values are PAYG or COMMITTED. Changing this forces a new logz Monitor to be created.
-	// +kubebuilder:validation:Required
-	UsageType *string `json:"usageType" tf:"usage_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	UsageType *string `json:"usageType,omitempty" tf:"usage_type,omitempty"`
+}
+
+type UserInitParameters struct {
+
+	// Email of the user used by Logz for contacting them if needed. Changing this forces a new logz Monitor to be created.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// First Name of the user. Changing this forces a new logz Monitor to be created.
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
+
+	// Last Name of the user. Changing this forces a new logz Monitor to be created.
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// Phone number of the user used by Logz for contacting them if needed. Changing this forces a new logz Monitor to be created.
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 }
 
 type UserObservation struct {
@@ -145,26 +199,38 @@ type UserObservation struct {
 type UserParameters struct {
 
 	// Email of the user used by Logz for contacting them if needed. Changing this forces a new logz Monitor to be created.
-	// +kubebuilder:validation:Required
-	Email *string `json:"email" tf:"email,omitempty"`
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// First Name of the user. Changing this forces a new logz Monitor to be created.
-	// +kubebuilder:validation:Required
-	FirstName *string `json:"firstName" tf:"first_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
 
 	// Last Name of the user. Changing this forces a new logz Monitor to be created.
-	// +kubebuilder:validation:Required
-	LastName *string `json:"lastName" tf:"last_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
 	// Phone number of the user used by Logz for contacting them if needed. Changing this forces a new logz Monitor to be created.
-	// +kubebuilder:validation:Required
-	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
+	// +kubebuilder:validation:Optional
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 }
 
 // MonitorSpec defines the desired state of Monitor
 type MonitorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MonitorParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MonitorInitParameters `json:"initProvider,omitempty"`
 }
 
 // MonitorStatus defines the observed state of Monitor.
@@ -185,9 +251,9 @@ type MonitorStatus struct {
 type Monitor struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.plan)",message="plan is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.user)",message="user is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.plan) || has(self.initProvider.plan)",message="plan is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.user) || has(self.initProvider.user)",message="user is a required parameter"
 	Spec   MonitorSpec   `json:"spec"`
 	Status MonitorStatus `json:"status,omitempty"`
 }

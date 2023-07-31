@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SecurityCenterContactInitParameters struct {
+
+	// Whether to send security alerts notifications to the security contact.
+	AlertNotifications *bool `json:"alertNotifications,omitempty" tf:"alert_notifications,omitempty"`
+
+	// Whether to send security alerts notifications to subscription admins.
+	AlertsToAdmins *bool `json:"alertsToAdmins,omitempty" tf:"alerts_to_admins,omitempty"`
+
+	// The email of the Security Center Contact.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// The name of the Security Center Contact. Defaults to default1.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The phone number of the Security Center Contact.
+	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
+}
+
 type SecurityCenterContactObservation struct {
 
 	// Whether to send security alerts notifications to the security contact.
@@ -61,6 +79,18 @@ type SecurityCenterContactParameters struct {
 type SecurityCenterContactSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecurityCenterContactParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SecurityCenterContactInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecurityCenterContactStatus defines the observed state of SecurityCenterContact.
@@ -81,9 +111,9 @@ type SecurityCenterContactStatus struct {
 type SecurityCenterContact struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.alertNotifications)",message="alertNotifications is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.alertsToAdmins)",message="alertsToAdmins is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.email)",message="email is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.alertNotifications) || has(self.initProvider.alertNotifications)",message="alertNotifications is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.alertsToAdmins) || has(self.initProvider.alertsToAdmins)",message="alertsToAdmins is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.email) || has(self.initProvider.email)",message="email is a required parameter"
 	Spec   SecurityCenterContactSpec   `json:"spec"`
 	Status SecurityCenterContactStatus `json:"status,omitempty"`
 }

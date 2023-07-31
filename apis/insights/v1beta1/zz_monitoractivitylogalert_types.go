@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ActionInitParameters struct {
+
+	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
+	WebhookProperties map[string]*string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
+}
+
 type ActionObservation struct {
 
 	// The ID of the Action Group can be sourced from the .
@@ -41,6 +47,51 @@ type ActionParameters struct {
 	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
 	// +kubebuilder:validation:Optional
 	WebhookProperties map[string]*string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
+}
+
+type CriteriaInitParameters struct {
+
+	// The email address or Azure Active Directory identifier of the user who performed the operation.
+	Caller *string `json:"caller,omitempty" tf:"caller,omitempty"`
+
+	// The category of the operation. Possible values are Administrative, Autoscale, Policy, Recommendation, ResourceHealth, Security and ServiceHealth.
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// The severity level of the event. Possible values are Verbose, Informational, Warning, Error, and Critical.
+	Level *string `json:"level,omitempty" tf:"level,omitempty"`
+
+	// The Resource Manager Role-Based Access Control operation name. Supported operation should be of the form: <resourceProvider>/<resourceType>/<operation>.
+	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
+
+	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence and Performance. It is only allowed when category is Recommendation.
+	RecommendationCategory *string `json:"recommendationCategory,omitempty" tf:"recommendation_category,omitempty"`
+
+	// The recommendation impact of the event. Possible values are High, Medium and Low. It is only allowed when category is Recommendation.
+	RecommendationImpact *string `json:"recommendationImpact,omitempty" tf:"recommendation_impact,omitempty"`
+
+	// The recommendation type of the event. It is only allowed when category is Recommendation.
+	RecommendationType *string `json:"recommendationType,omitempty" tf:"recommendation_type,omitempty"`
+
+	// The name of resource group monitored by the activity log alert.
+	ResourceGroup *string `json:"resourceGroup,omitempty" tf:"resource_group,omitempty"`
+
+	// A block to define fine grain resource health settings.
+	ResourceHealth []ResourceHealthInitParameters `json:"resourceHealth,omitempty" tf:"resource_health,omitempty"`
+
+	// The name of the resource provider monitored by the activity log alert.
+	ResourceProvider *string `json:"resourceProvider,omitempty" tf:"resource_provider,omitempty"`
+
+	// The resource type monitored by the activity log alert.
+	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// A block to define fine grain service health settings.
+	ServiceHealth []ServiceHealthInitParameters `json:"serviceHealth,omitempty" tf:"service_health,omitempty"`
+
+	// The status of the event. For example, Started, Failed, or Succeeded.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The sub status of the event.
+	SubStatus *string `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
 }
 
 type CriteriaObservation struct {
@@ -98,8 +149,8 @@ type CriteriaParameters struct {
 	Caller *string `json:"caller,omitempty" tf:"caller,omitempty"`
 
 	// The category of the operation. Possible values are Administrative, Autoscale, Policy, Recommendation, ResourceHealth, Security and ServiceHealth.
-	// +kubebuilder:validation:Required
-	Category *string `json:"category" tf:"category,omitempty"`
+	// +kubebuilder:validation:Optional
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
 
 	// The severity level of the event. Possible values are Verbose, Informational, Warning, Error, and Critical.
 	// +kubebuilder:validation:Optional
@@ -162,6 +213,27 @@ type CriteriaParameters struct {
 	// The sub status of the event.
 	// +kubebuilder:validation:Optional
 	SubStatus *string `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
+}
+
+type MonitorActivityLogAlertInitParameters struct {
+
+	// One or more action blocks as defined below.
+	Action []ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
+
+	// A criteria block as defined below.
+	Criteria []CriteriaInitParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
+
+	// The description of this activity log alert.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Should this Activity Log Alert be enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The name of the activity log alert. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MonitorActivityLogAlertObservation struct {
@@ -248,6 +320,18 @@ type MonitorActivityLogAlertParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ResourceHealthInitParameters struct {
+
+	// The current resource health statuses that will log an alert. Possible values are Available, Degraded, Unavailable and Unknown.
+	Current []*string `json:"current,omitempty" tf:"current,omitempty"`
+
+	// The previous resource health statuses that will log an alert. Possible values are Available, Degraded, Unavailable and Unknown.
+	Previous []*string `json:"previous,omitempty" tf:"previous,omitempty"`
+
+	// The reason that will log an alert. Possible values are PlatformInitiated (such as a problem with the resource in an affected region of an Azure incident), UserInitiated (such as a shutdown request of a VM) and Unknown.
+	Reason []*string `json:"reason,omitempty" tf:"reason,omitempty"`
+}
+
 type ResourceHealthObservation struct {
 
 	// The current resource health statuses that will log an alert. Possible values are Available, Degraded, Unavailable and Unknown.
@@ -273,6 +357,18 @@ type ResourceHealthParameters struct {
 	// The reason that will log an alert. Possible values are PlatformInitiated (such as a problem with the resource in an affected region of an Azure incident), UserInitiated (such as a shutdown request of a VM) and Unknown.
 	// +kubebuilder:validation:Optional
 	Reason []*string `json:"reason,omitempty" tf:"reason,omitempty"`
+}
+
+type ServiceHealthInitParameters struct {
+
+	// Events this alert will monitor Possible values are Incident, Maintenance, Informational, ActionRequired and Security.
+	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
+
+	// Locations this alert will monitor. For example, West Europe.
+	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
+
+	// Services this alert will monitor. For example, Activity Logs & Alerts, Action Groups. Defaults to all Services.
+	Services []*string `json:"services,omitempty" tf:"services,omitempty"`
 }
 
 type ServiceHealthObservation struct {
@@ -306,6 +402,18 @@ type ServiceHealthParameters struct {
 type MonitorActivityLogAlertSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MonitorActivityLogAlertParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MonitorActivityLogAlertInitParameters `json:"initProvider,omitempty"`
 }
 
 // MonitorActivityLogAlertStatus defines the observed state of MonitorActivityLogAlert.
@@ -326,8 +434,8 @@ type MonitorActivityLogAlertStatus struct {
 type MonitorActivityLogAlert struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.criteria)",message="criteria is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.criteria) || has(self.initProvider.criteria)",message="criteria is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   MonitorActivityLogAlertSpec   `json:"spec"`
 	Status MonitorActivityLogAlertStatus `json:"status,omitempty"`
 }

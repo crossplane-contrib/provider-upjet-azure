@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: backuppolicyvmworkloads.recoveryservices.azure.upbound.io
 spec:
   group: recoveryservices.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -112,8 +111,6 @@ spec:
                                   duration with duration type Days. Possible values
                                   are between 7 and 35.
                                 type: number
-                            required:
-                            - count
                             type: object
                           type: array
                         retentionMonthly:
@@ -150,9 +147,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - count
-                            - formatType
                             type: object
                           type: array
                         retentionWeekly:
@@ -171,9 +165,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - count
-                            - weekdays
                             type: object
                           type: array
                         retentionYearly:
@@ -218,10 +209,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - count
-                            - formatType
-                            - months
                             type: object
                           type: array
                         simpleRetention:
@@ -233,13 +220,8 @@ spec:
                                   duration with duration type Days. Possible values
                                   are between 7 and 35.
                                 type: number
-                            required:
-                            - count
                             type: object
                           type: array
-                      required:
-                      - backup
-                      - policyType
                       type: object
                     type: array
                   recoveryVaultName:
@@ -413,8 +395,6 @@ spec:
                           description: The timezone for the VM Workload Backup Policy.
                             The possible values are defined here.
                           type: string
-                      required:
-                      - timeZone
                       type: object
                     type: array
                   workloadType:
@@ -423,21 +403,222 @@ spec:
                       a new resource to be created.
                     type: string
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  protectionPolicy:
+                    description: One or more protection_policy blocks as defined below.
+                    items:
+                      properties:
+                        backup:
+                          description: A backup block as defined below.
+                          items:
+                            properties:
+                              frequency:
+                                description: The backup frequency for the VM Workload
+                                  Backup Policy. Possible values are Daily and Weekly.
+                                type: string
+                              frequencyInMinutes:
+                                description: The backup frequency in minutes for the
+                                  VM Workload Backup Policy. Possible values are 15,
+                                  30, 60, 120, 240, 480, 720 and 1440.
+                                type: number
+                              time:
+                                description: The time of day to perform the backup
+                                  in 24hour format.
+                                type: string
+                              weekdays:
+                                description: The weekday backups to retain. Possible
+                                  values are Sunday, Monday, Tuesday, Wednesday, Thursday,
+                                  Friday or Saturday.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        policyType:
+                          description: The type of the VM Workload Backup Policy.
+                            Possible values are Differential, Full, Incremental and
+                            Log.
+                          type: string
+                        retentionDaily:
+                          description: A retention_daily block as defined below.
+                          items:
+                            properties:
+                              count:
+                                description: The count that is used to count retention
+                                  duration with duration type Days. Possible values
+                                  are between 7 and 35.
+                                type: number
+                            type: object
+                          type: array
+                        retentionMonthly:
+                          description: A retention_monthly block as defined below.
+                          items:
+                            properties:
+                              count:
+                                description: The count that is used to count retention
+                                  duration with duration type Days. Possible values
+                                  are between 7 and 35.
+                                type: number
+                              formatType:
+                                description: The retention schedule format type for
+                                  yearly retention policy. Possible values are Daily
+                                  and Weekly.
+                                type: string
+                              monthdays:
+                                description: The monthday backups to retain. Possible
+                                  values are between 0 and 28.
+                                items:
+                                  type: number
+                                type: array
+                              weekdays:
+                                description: The weekday backups to retain. Possible
+                                  values are Sunday, Monday, Tuesday, Wednesday, Thursday,
+                                  Friday or Saturday.
+                                items:
+                                  type: string
+                                type: array
+                              weeks:
+                                description: The weeks of the month to retain backups
+                                  of. Possible values are First, Second, Third, Fourth,
+                                  Last.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        retentionWeekly:
+                          description: A retention_weekly block as defined below.
+                          items:
+                            properties:
+                              count:
+                                description: The count that is used to count retention
+                                  duration with duration type Days. Possible values
+                                  are between 7 and 35.
+                                type: number
+                              weekdays:
+                                description: The weekday backups to retain. Possible
+                                  values are Sunday, Monday, Tuesday, Wednesday, Thursday,
+                                  Friday or Saturday.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        retentionYearly:
+                          description: A retention_yearly block as defined below.
+                          items:
+                            properties:
+                              count:
+                                description: The count that is used to count retention
+                                  duration with duration type Days. Possible values
+                                  are between 7 and 35.
+                                type: number
+                              formatType:
+                                description: The retention schedule format type for
+                                  yearly retention policy. Possible values are Daily
+                                  and Weekly.
+                                type: string
+                              monthdays:
+                                description: The monthday backups to retain. Possible
+                                  values are between 0 and 28.
+                                items:
+                                  type: number
+                                type: array
+                              months:
+                                description: The months of the year to retain backups
+                                  of. Possible values are January, February, March,
+                                  April, May, June, July, August, September, October,
+                                  November and December.
+                                items:
+                                  type: string
+                                type: array
+                              weekdays:
+                                description: The weekday backups to retain. Possible
+                                  values are Sunday, Monday, Tuesday, Wednesday, Thursday,
+                                  Friday or Saturday.
+                                items:
+                                  type: string
+                                type: array
+                              weeks:
+                                description: The weeks of the month to retain backups
+                                  of. Possible values are First, Second, Third, Fourth,
+                                  Last.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        simpleRetention:
+                          description: A simple_retention block as defined below.
+                          items:
+                            properties:
+                              count:
+                                description: The count that is used to count retention
+                                  duration with duration type Days. Possible values
+                                  are between 7 and 35.
+                                type: number
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  settings:
+                    description: A settings block as defined below.
+                    items:
+                      properties:
+                        compressionEnabled:
+                          description: The compression setting for the VM Workload
+                            Backup Policy. Defaults to false.
+                          type: boolean
+                        timeZone:
+                          description: The timezone for the VM Workload Backup Policy.
+                            The possible values are defined here.
+                          type: string
+                      type: object
+                    type: array
+                  workloadType:
+                    description: The VM Workload type for the Backup Policy. Possible
+                      values are SQLDataBase and SAPHanaDatabase. Changing this forces
+                      a new resource to be created.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -611,11 +792,17 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: protectionPolicy is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.protectionPolicy)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.protectionPolicy)
+                || has(self.initProvider.protectionPolicy)'
             - message: settings is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.settings)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.settings)
+                || has(self.initProvider.settings)'
             - message: workloadType is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.workloadType)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.workloadType)
+                || has(self.initProvider.workloadType)'
           status:
             description: BackupPolicyVMWorkloadStatus defines the observed state of
               BackupPolicyVMWorkload.

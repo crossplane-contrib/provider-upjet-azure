@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AdditionalLocationInitParameters struct {
+
+	// The number of compute units in this region. Defaults to the capacity of the main region.
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// Only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in this additional location.
+	GatewayDisabled *bool `json:"gatewayDisabled,omitempty" tf:"gateway_disabled,omitempty"`
+
+	// The name of the Azure Region in which the API Management Service should be expanded to.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// ID of a standard SKU IPv4 Public IP.
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// A virtual_network_configuration block as defined below. Required when virtual_network_type is External or Internal.
+	VirtualNetworkConfiguration []VirtualNetworkConfigurationInitParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
+
+	// A list of availability zones. Changing this forces a new resource to be created.
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
+}
+
 type AdditionalLocationObservation struct {
 
 	// The number of compute units in this region. Defaults to the capacity of the main region.
@@ -54,8 +75,8 @@ type AdditionalLocationParameters struct {
 	GatewayDisabled *bool `json:"gatewayDisabled,omitempty" tf:"gateway_disabled,omitempty"`
 
 	// The name of the Azure Region in which the API Management Service should be expanded to.
-	// +kubebuilder:validation:Required
-	Location *string `json:"location" tf:"location,omitempty"`
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// ID of a standard SKU IPv4 Public IP.
 	// +kubebuilder:validation:Optional
@@ -68,6 +89,12 @@ type AdditionalLocationParameters struct {
 	// A list of availability zones. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
+}
+
+type CertificateInitParameters struct {
+
+	// The name of the Certificate Store where this certificate should be stored. Possible values are CertificateAuthority and Root.
+	StoreName *string `json:"storeName,omitempty" tf:"store_name,omitempty"`
 }
 
 type CertificateObservation struct {
@@ -96,8 +123,20 @@ type CertificateParameters struct {
 	EncodedCertificateSecretRef v1.SecretKeySelector `json:"encodedCertificateSecretRef" tf:"-"`
 
 	// The name of the Certificate Store where this certificate should be stored. Possible values are CertificateAuthority and Root.
-	// +kubebuilder:validation:Required
-	StoreName *string `json:"storeName" tf:"store_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	StoreName *string `json:"storeName,omitempty" tf:"store_name,omitempty"`
+}
+
+type DelegationInitParameters struct {
+
+	// Should subscription requests be delegated to an external url? Defaults to false.
+	SubscriptionsEnabled *bool `json:"subscriptionsEnabled,omitempty" tf:"subscriptions_enabled,omitempty"`
+
+	// The delegation URL.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// Should user registration requests be delegated to an external url? Defaults to false.
+	UserRegistrationEnabled *bool `json:"userRegistrationEnabled,omitempty" tf:"user_registration_enabled,omitempty"`
 }
 
 type DelegationObservation struct {
@@ -131,6 +170,9 @@ type DelegationParameters struct {
 	ValidationKeySecretRef *v1.SecretKeySelector `json:"validationKeySecretRef,omitempty" tf:"-"`
 }
 
+type DeveloperPortalInitParameters struct {
+}
+
 type DeveloperPortalObservation struct {
 
 	// The source of the certificate.
@@ -162,6 +204,12 @@ type DeveloperPortalObservation struct {
 }
 
 type DeveloperPortalParameters struct {
+}
+
+type HostNameConfigurationInitParameters struct {
+}
+
+type HostNameConfigurationManagementInitParameters struct {
 }
 
 type HostNameConfigurationManagementObservation struct {
@@ -218,6 +266,15 @@ type HostNameConfigurationObservation struct {
 type HostNameConfigurationParameters struct {
 }
 
+type IdentityInitParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this API Management Service.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this API Management Service. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type IdentityObservation struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this API Management Service.
@@ -240,8 +297,83 @@ type IdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this API Management Service. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type ManagementInitParameters struct {
+
+	// One or more additional_location blocks as defined below.
+	AdditionalLocation []AdditionalLocationInitParameters `json:"additionalLocation,omitempty" tf:"additional_location,omitempty"`
+
+	// One or more (up to 10) certificate blocks as defined below.
+	Certificate []CertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
+
+	// Enforce a client certificate to be presented on each request to the gateway? This is only supported when SKU type is Consumption.
+	ClientCertificateEnabled *bool `json:"clientCertificateEnabled,omitempty" tf:"client_certificate_enabled,omitempty"`
+
+	// A delegation block as defined below.
+	Delegation []DelegationInitParameters `json:"delegation,omitempty" tf:"delegation,omitempty"`
+
+	// Disable the gateway in main region? This is only supported when additional_location is set.
+	GatewayDisabled *bool `json:"gatewayDisabled,omitempty" tf:"gateway_disabled,omitempty"`
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The Azure location where the API Management Service exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The version which the control plane API calls to API Management service are limited with version equal to or newer than.
+	MinAPIVersion *string `json:"minApiVersion,omitempty" tf:"min_api_version,omitempty"`
+
+	// Email address from which the notification will be sent.
+	NotificationSenderEmail *string `json:"notificationSenderEmail,omitempty" tf:"notification_sender_email,omitempty"`
+
+	// A policy block as defined below.
+	Policy []PolicyInitParameters `json:"policy,omitempty" tf:"policy,omitempty"`
+
+	// A protocols block as defined below.
+	Protocols []ProtocolsInitParameters `json:"protocols,omitempty" tf:"protocols,omitempty"`
+
+	// ID of a standard SKU IPv4 Public IP.
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Is public access to the service allowed?. Defaults to true
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// The email of publisher/company.
+	PublisherEmail *string `json:"publisherEmail,omitempty" tf:"publisher_email,omitempty"`
+
+	// The name of publisher/company.
+	PublisherName *string `json:"publisherName,omitempty" tf:"publisher_name,omitempty"`
+
+	// A security block as defined below.
+	Security []SecurityInitParameters `json:"security,omitempty" tf:"security,omitempty"`
+
+	// A sign_in block as defined below.
+	SignIn []SignInInitParameters `json:"signIn,omitempty" tf:"sign_in,omitempty"`
+
+	// A sign_up block as defined below.
+	SignUp []SignUpInitParameters `json:"signUp,omitempty" tf:"sign_up,omitempty"`
+
+	// sku_name is a string consisting of two parts separated by an underscore(_). The first part is the name, valid values include: Consumption, Developer, Basic, Standard and Premium. The second part is the capacity (e.g. the number of deployed units of the sku), which must be a positive integer (e.g. Developer_1).
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags assigned to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A tenant_access block as defined below.
+	TenantAccess []TenantAccessInitParameters `json:"tenantAccess,omitempty" tf:"tenant_access,omitempty"`
+
+	// A virtual_network_configuration block as defined below. Required when virtual_network_type is External or Internal.
+	VirtualNetworkConfiguration []ManagementVirtualNetworkConfigurationInitParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
+
+	// The type of virtual network you want to use, valid values include: None, External, Internal.
+	VirtualNetworkType *string `json:"virtualNetworkType,omitempty" tf:"virtual_network_type,omitempty"`
+
+	// Specifies a list of Availability Zones in which this API Management service should be located. Changing this forces a new API Management service to be created.
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type ManagementObservation struct {
@@ -464,6 +596,9 @@ type ManagementParameters struct {
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
+type ManagementVirtualNetworkConfigurationInitParameters struct {
+}
+
 type ManagementVirtualNetworkConfigurationObservation struct {
 
 	// The id of the subnet that will be used for the API Management.
@@ -487,6 +622,15 @@ type ManagementVirtualNetworkConfigurationParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
+type PolicyInitParameters struct {
+
+	// The XML Content for this Policy.
+	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content"`
+
+	// A link to an API Management Policy XML Document, which must be publicly available.
+	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link"`
+}
+
 type PolicyObservation struct {
 
 	// The XML Content for this Policy.
@@ -505,6 +649,9 @@ type PolicyParameters struct {
 	// A link to an API Management Policy XML Document, which must be publicly available.
 	// +kubebuilder:validation:Optional
 	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link"`
+}
+
+type PortalInitParameters struct {
 }
 
 type PortalObservation struct {
@@ -540,6 +687,12 @@ type PortalObservation struct {
 type PortalParameters struct {
 }
 
+type ProtocolsInitParameters struct {
+
+	// Should HTTP/2 be supported by the API Management Service? Defaults to false.
+	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
+}
+
 type ProtocolsObservation struct {
 
 	// Should HTTP/2 be supported by the API Management Service? Defaults to false.
@@ -551,6 +704,9 @@ type ProtocolsParameters struct {
 	// Should HTTP/2 be supported by the API Management Service? Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableHttp2 *bool `json:"enableHttp2,omitempty" tf:"enable_http2,omitempty"`
+}
+
+type ProxyInitParameters struct {
 }
 
 type ProxyObservation struct {
@@ -589,6 +745,9 @@ type ProxyObservation struct {
 type ProxyParameters struct {
 }
 
+type ScmInitParameters struct {
+}
+
 type ScmObservation struct {
 
 	// The source of the certificate.
@@ -620,6 +779,60 @@ type ScmObservation struct {
 }
 
 type ScmParameters struct {
+}
+
+type SecurityInitParameters struct {
+
+	// Should SSL 3.0 be enabled on the backend of the gateway? Defaults to false.
+	EnableBackendSsl30 *bool `json:"enableBackendSsl30,omitempty" tf:"enable_backend_ssl30,omitempty"`
+
+	// Should TLS 1.0 be enabled on the backend of the gateway? Defaults to false.
+	EnableBackendTls10 *bool `json:"enableBackendTls10,omitempty" tf:"enable_backend_tls10,omitempty"`
+
+	// Should TLS 1.1 be enabled on the backend of the gateway? Defaults to false.
+	EnableBackendTls11 *bool `json:"enableBackendTls11,omitempty" tf:"enable_backend_tls11,omitempty"`
+
+	// Should SSL 3.0 be enabled on the frontend of the gateway? Defaults to false.
+	EnableFrontendSsl30 *bool `json:"enableFrontendSsl30,omitempty" tf:"enable_frontend_ssl30,omitempty"`
+
+	// Should TLS 1.0 be enabled on the frontend of the gateway? Defaults to false.
+	EnableFrontendTls10 *bool `json:"enableFrontendTls10,omitempty" tf:"enable_frontend_tls10,omitempty"`
+
+	// Should TLS 1.1 be enabled on the frontend of the gateway? Defaults to false.
+	EnableFrontendTls11 *bool `json:"enableFrontendTls11,omitempty" tf:"enable_frontend_tls11,omitempty"`
+
+	// Should the TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA cipher be enabled? Defaults to false.
+	TLSEcdheEcdsaWithAes128CbcShaCiphersEnabled *bool `json:"tlsEcdheEcdsaWithAes128CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_ecdsa_with_aes128_cbc_sha_ciphers_enabled,omitempty"`
+
+	// Should the TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA cipher be enabled? Defaults to false.
+	TLSEcdheEcdsaWithAes256CbcShaCiphersEnabled *bool `json:"tlsEcdheEcdsaWithAes256CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_ecdsa_with_aes256_cbc_sha_ciphers_enabled,omitempty"`
+
+	// Should the TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA cipher be enabled? Defaults to false.
+	TLSEcdheRsaWithAes128CbcShaCiphersEnabled *bool `json:"tlsEcdheRsaWithAes128CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_rsa_with_aes128_cbc_sha_ciphers_enabled,omitempty"`
+
+	// Should the TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA cipher be enabled? Defaults to false.
+	TLSEcdheRsaWithAes256CbcShaCiphersEnabled *bool `json:"tlsEcdheRsaWithAes256CbcShaCiphersEnabled,omitempty" tf:"tls_ecdhe_rsa_with_aes256_cbc_sha_ciphers_enabled,omitempty"`
+
+	// Should the TLS_RSA_WITH_AES_128_CBC_SHA256 cipher be enabled? Defaults to false.
+	TLSRsaWithAes128CbcSha256CiphersEnabled *bool `json:"tlsRsaWithAes128CbcSha256CiphersEnabled,omitempty" tf:"tls_rsa_with_aes128_cbc_sha256_ciphers_enabled,omitempty"`
+
+	// Should the TLS_RSA_WITH_AES_128_CBC_SHA cipher be enabled? Defaults to false.
+	TLSRsaWithAes128CbcShaCiphersEnabled *bool `json:"tlsRsaWithAes128CbcShaCiphersEnabled,omitempty" tf:"tls_rsa_with_aes128_cbc_sha_ciphers_enabled,omitempty"`
+
+	// Should the TLS_RSA_WITH_AES_128_GCM_SHA256 cipher be enabled? Defaults to false.
+	TLSRsaWithAes128GCMSha256CiphersEnabled *bool `json:"tlsRsaWithAes128GcmSha256CiphersEnabled,omitempty" tf:"tls_rsa_with_aes128_gcm_sha256_ciphers_enabled,omitempty"`
+
+	// Should the TLS_RSA_WITH_AES_256_CBC_SHA256 cipher be enabled? Defaults to false.
+	TLSRsaWithAes256CbcSha256CiphersEnabled *bool `json:"tlsRsaWithAes256CbcSha256CiphersEnabled,omitempty" tf:"tls_rsa_with_aes256_cbc_sha256_ciphers_enabled,omitempty"`
+
+	// Should the TLS_RSA_WITH_AES_256_CBC_SHA cipher be enabled? Defaults to false.
+	TLSRsaWithAes256CbcShaCiphersEnabled *bool `json:"tlsRsaWithAes256CbcShaCiphersEnabled,omitempty" tf:"tls_rsa_with_aes256_cbc_sha_ciphers_enabled,omitempty"`
+
+	// Should the TLS_RSA_WITH_AES_256_GCM_SHA384 cipher be enabled? Defaults to false.
+	TLSRsaWithAes256GCMSha384CiphersEnabled *bool `json:"tlsRsaWithAes256GcmSha384CiphersEnabled,omitempty" tf:"tls_rsa_with_aes256_gcm_sha384_ciphers_enabled,omitempty"`
+
+	// Should the TLS_RSA_WITH_3DES_EDE_CBC_SHA cipher be enabled for alL TLS versions (1.0, 1.1 and 1.2)?
+	TripleDesCiphersEnabled *bool `json:"tripleDesCiphersEnabled,omitempty" tf:"triple_des_ciphers_enabled,omitempty"`
 }
 
 type SecurityObservation struct {
@@ -747,6 +960,12 @@ type SecurityParameters struct {
 	TripleDesCiphersEnabled *bool `json:"tripleDesCiphersEnabled,omitempty" tf:"triple_des_ciphers_enabled,omitempty"`
 }
 
+type SignInInitParameters struct {
+
+	// Should anonymous users be redirected to the sign in page?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type SignInObservation struct {
 
 	// Should anonymous users be redirected to the sign in page?
@@ -756,8 +975,17 @@ type SignInObservation struct {
 type SignInParameters struct {
 
 	// Should anonymous users be redirected to the sign in page?
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type SignUpInitParameters struct {
+
+	// Can users sign up on the development portal?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A terms_of_service block as defined below.
+	TermsOfService []TermsOfServiceInitParameters `json:"termsOfService,omitempty" tf:"terms_of_service,omitempty"`
 }
 
 type SignUpObservation struct {
@@ -772,12 +1000,18 @@ type SignUpObservation struct {
 type SignUpParameters struct {
 
 	// Can users sign up on the development portal?
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A terms_of_service block as defined below.
-	// +kubebuilder:validation:Required
-	TermsOfService []TermsOfServiceParameters `json:"termsOfService" tf:"terms_of_service,omitempty"`
+	// +kubebuilder:validation:Optional
+	TermsOfService []TermsOfServiceParameters `json:"termsOfService,omitempty" tf:"terms_of_service,omitempty"`
+}
+
+type TenantAccessInitParameters struct {
+
+	// Should the access to the management API be enabled?
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 }
 
 type TenantAccessObservation struct {
@@ -792,8 +1026,20 @@ type TenantAccessObservation struct {
 type TenantAccessParameters struct {
 
 	// Should the access to the management API be enabled?
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type TermsOfServiceInitParameters struct {
+
+	// Should the user be asked for consent during sign up?
+	ConsentRequired *bool `json:"consentRequired,omitempty" tf:"consent_required,omitempty"`
+
+	// Should Terms of Service be displayed during sign up?.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The Terms of Service which users are required to agree to in order to sign up.
+	Text *string `json:"text,omitempty" tf:"text,omitempty"`
 }
 
 type TermsOfServiceObservation struct {
@@ -811,16 +1057,19 @@ type TermsOfServiceObservation struct {
 type TermsOfServiceParameters struct {
 
 	// Should the user be asked for consent during sign up?
-	// +kubebuilder:validation:Required
-	ConsentRequired *bool `json:"consentRequired" tf:"consent_required,omitempty"`
+	// +kubebuilder:validation:Optional
+	ConsentRequired *bool `json:"consentRequired,omitempty" tf:"consent_required,omitempty"`
 
 	// Should Terms of Service be displayed during sign up?.
-	// +kubebuilder:validation:Required
-	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
+	// +kubebuilder:validation:Optional
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The Terms of Service which users are required to agree to in order to sign up.
 	// +kubebuilder:validation:Optional
 	Text *string `json:"text,omitempty" tf:"text,omitempty"`
+}
+
+type VirtualNetworkConfigurationInitParameters struct {
 }
 
 type VirtualNetworkConfigurationObservation struct {
@@ -850,6 +1099,18 @@ type VirtualNetworkConfigurationParameters struct {
 type ManagementSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagementParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ManagementInitParameters `json:"initProvider,omitempty"`
 }
 
 // ManagementStatus defines the observed state of Management.
@@ -870,10 +1131,10 @@ type ManagementStatus struct {
 type Management struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.publisherEmail)",message="publisherEmail is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.publisherName)",message="publisherName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publisherEmail) || has(self.initProvider.publisherEmail)",message="publisherEmail is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publisherName) || has(self.initProvider.publisherName)",message="publisherName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
 	Spec   ManagementSpec   `json:"spec"`
 	Status ManagementStatus `json:"status,omitempty"`
 }

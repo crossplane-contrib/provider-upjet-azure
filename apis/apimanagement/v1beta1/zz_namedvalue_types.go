@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NamedValueInitParameters struct {
+
+	// The display name of this API Management Named Value.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// Specifies whether the API Management Named Value is secret. Valid values are true or false. The default value is false.
+	Secret *bool `json:"secret,omitempty" tf:"secret,omitempty"`
+
+	// A list of tags to be applied to the API Management Named Value.
+	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A value_from_key_vault block as defined below.
+	ValueFromKeyVault []ValueFromKeyVaultInitParameters `json:"valueFromKeyVault,omitempty" tf:"value_from_key_vault,omitempty"`
+}
+
 type NamedValueObservation struct {
 
 	// The name of the API Management Service in which the API Management Named Value should exist. Changing this forces a new resource to be created.
@@ -86,6 +101,15 @@ type NamedValueParameters struct {
 	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
+type ValueFromKeyVaultInitParameters struct {
+
+	// The client ID of User Assigned Identity, for the API Management Service, which will be used to access the key vault secret. The System Assigned Identity will be used in absence.
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// The resource ID of the Key Vault Secret.
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+}
+
 type ValueFromKeyVaultObservation struct {
 
 	// The client ID of User Assigned Identity, for the API Management Service, which will be used to access the key vault secret. The System Assigned Identity will be used in absence.
@@ -102,14 +126,26 @@ type ValueFromKeyVaultParameters struct {
 	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
 
 	// The resource ID of the Key Vault Secret.
-	// +kubebuilder:validation:Required
-	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 }
 
 // NamedValueSpec defines the desired state of NamedValue
 type NamedValueSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NamedValueParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider NamedValueInitParameters `json:"initProvider,omitempty"`
 }
 
 // NamedValueStatus defines the observed state of NamedValue.
@@ -130,7 +166,7 @@ type NamedValueStatus struct {
 type NamedValue struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
 	Spec   NamedValueSpec   `json:"spec"`
 	Status NamedValueStatus `json:"status,omitempty"`
 }

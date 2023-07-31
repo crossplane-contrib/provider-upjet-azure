@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: accounts.cognitiveservices.azure.upbound.io
 spec:
   group: cognitiveservices.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -108,8 +107,6 @@ spec:
                           description: The ID of the Key Vault Key which should be
                             used to Encrypt the data in this Cognitive Account.
                           type: string
-                      required:
-                      - keyVaultKeyId
                       type: object
                     type: array
                   dynamicThrottlingEnabled:
@@ -137,8 +134,6 @@ spec:
                             values are SystemAssigned, UserAssigned, SystemAssigned,
                             UserAssigned (to enable both).
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   kind:
@@ -290,8 +285,6 @@ spec:
                                 type: object
                             type: object
                           type: array
-                      required:
-                      - defaultAction
                       type: object
                     type: array
                   outboundNetworkAccessRestricted:
@@ -402,8 +395,6 @@ spec:
                         storageAccountId:
                           description: Full resource id of a Microsoft.Storage resource.
                           type: string
-                      required:
-                      - storageAccountId
                       type: object
                     type: array
                   tags:
@@ -412,21 +403,199 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  customQuestionAnsweringSearchServiceId:
+                    description: If kind is TextAnalytics this specifies the ID of
+                      the Search service.
+                    type: string
+                  customSubdomainName:
+                    description: The subdomain name used for token-based authentication.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  customerManagedKey:
+                    description: A customer_managed_key block as documented below.
+                    items:
+                      properties:
+                        identityClientId:
+                          description: The Client ID of the User Assigned Identity
+                            that has access to the key. This property only needs to
+                            be specified when there're multiple identities attached
+                            to the Cognitive Account.
+                          type: string
+                        keyVaultKeyId:
+                          description: The ID of the Key Vault Key which should be
+                            used to Encrypt the data in this Cognitive Account.
+                          type: string
+                      type: object
+                    type: array
+                  dynamicThrottlingEnabled:
+                    description: Whether to enable the dynamic throttling for this
+                      Cognitive Service Account.
+                    type: boolean
+                  fqdns:
+                    description: List of FQDNs allowed for the Cognitive Account.
+                    items:
+                      type: string
+                    type: array
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Cognitive Account.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Cognitive Account. Possible
+                            values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
+                          type: string
+                      type: object
+                    type: array
+                  kind:
+                    description: Specifies the type of Cognitive Service Account that
+                      should be created. Possible values are Academic, AnomalyDetector,
+                      Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search,
+                      Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7,
+                      CognitiveServices, ComputerVision, ContentModerator, CustomSpeech,
+                      CustomVision.Prediction, CustomVision.Training, Emotion, Face,
+                      FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring, MetricsAdvisor,
+                      OpenAI, Personalizer, QnAMaker, Recommendations, SpeakerRecognition,
+                      Speech, SpeechServices, SpeechTranslation, TextAnalytics, TextTranslation
+                      and WebLM. Changing this forces a new resource to be created.
+                    type: string
+                  localAuthEnabled:
+                    description: Whether local authentication methods is enabled for
+                      the Cognitive Account. Defaults to true.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  metricsAdvisorAadClientId:
+                    description: The Azure AD Client ID (Application ID). This attribute
+                      is only set when kind is MetricsAdvisor. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  metricsAdvisorAadTenantId:
+                    description: The Azure AD Tenant ID. This attribute is only set
+                      when kind is MetricsAdvisor. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  metricsAdvisorSuperUserName:
+                    description: The super user of Metrics Advisor. This attribute
+                      is only set when kind is MetricsAdvisor. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  metricsAdvisorWebsiteName:
+                    description: The website name of Metrics Advisor. This attribute
+                      is only set when kind is MetricsAdvisor. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  networkAcls:
+                    description: A network_acls block as defined below.
+                    items:
+                      properties:
+                        defaultAction:
+                          description: The Default Action to use when no rules match
+                            from ip_rules / virtual_network_rules. Possible values
+                            are Allow and Deny.
+                          type: string
+                        ipRules:
+                          description: One or more IP Addresses, or CIDR Blocks which
+                            should be able to access the Cognitive Account.
+                          items:
+                            type: string
+                          type: array
+                        virtualNetworkRules:
+                          description: A virtual_network_rules block as defined below.
+                          items:
+                            properties:
+                              ignoreMissingVnetServiceEndpoint:
+                                description: Whether ignore missing vnet service endpoint
+                                  or not. Default to false.
+                                type: boolean
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  outboundNetworkAccessRestricted:
+                    description: Whether outbound network access is restricted for
+                      the Cognitive Account. Defaults to false.
+                    type: boolean
+                  publicNetworkAccessEnabled:
+                    description: Whether public network access is allowed for the
+                      Cognitive Account. Defaults to true.
+                    type: boolean
+                  qnaRuntimeEndpoint:
+                    description: A URL to link a QnAMaker cognitive account to a QnA
+                      runtime.
+                    type: string
+                  skuName:
+                    description: Specifies the SKU Name for this Cognitive Service
+                      Account. Possible values are F0, F1, S0, S, S1, S2, S3, S4,
+                      S5, S6, P0, P1, P2, E0 and DC0.
+                    type: string
+                  storage:
+                    description: A storage block as defined below.
+                    items:
+                      properties:
+                        identityClientId:
+                          description: The client ID of the managed identity associated
+                            with the storage resource.
+                          type: string
+                        storageAccountId:
+                          description: Full resource id of a Microsoft.Storage resource.
+                          type: string
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -600,11 +769,17 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: kind is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.kind)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.kind)
+                || has(self.initProvider.kind)'
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: skuName is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
+                || has(self.initProvider.skuName)'
           status:
             description: AccountStatus defines the observed state of Account.
             properties:

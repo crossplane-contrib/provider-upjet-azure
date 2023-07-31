@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: cassandratables.cosmosdb.azure.upbound.io
 spec:
   group: cosmosdb.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -182,9 +181,6 @@ spec:
                                 description: Order of the key. Currently supported
                                   values are Asc and Desc.
                                 type: string
-                            required:
-                            - name
-                            - orderBy
                             type: object
                           type: array
                         column:
@@ -197,9 +193,6 @@ spec:
                               type:
                                 description: Type of the column to be created.
                                 type: string
-                            required:
-                            - name
-                            - type
                             type: object
                           type: array
                         partitionKey:
@@ -210,13 +203,8 @@ spec:
                               name:
                                 description: Name of the column to be created.
                                 type: string
-                            required:
-                            - name
                             type: object
                           type: array
-                      required:
-                      - column
-                      - partitionKey
                       type: object
                     type: array
                   throughput:
@@ -224,21 +212,112 @@ spec:
                       be set in increments of 100. The minimum value is 400.
                     type: number
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  analyticalStorageTtl:
+                    description: Time to live of the Analytical Storage. Possible
+                      values are between -1 and 2147483647 except 0. -1 means the
+                      Analytical Storage never expires. Changing this forces a new
+                      resource to be created.
+                    type: number
+                  autoscaleSettings:
+                    description: An autoscale_settings block as defined below.
+                    items:
+                      properties:
+                        maxThroughput:
+                          description: The maximum throughput of the Cassandra Table
+                            (RU/s). Must be between 1,000 and 1,000,000. Must be set
+                            in increments of 1,000. Conflicts with throughput.
+                          type: number
+                      type: object
+                    type: array
+                  defaultTtl:
+                    description: Time to live of the Cosmos DB Cassandra table. Possible
+                      values are at least -1. -1 means the Cassandra table never expires.
+                    type: number
+                  schema:
+                    description: A schema block as defined below.
+                    items:
+                      properties:
+                        clusterKey:
+                          description: One or more cluster_key blocks as defined below.
+                          items:
+                            properties:
+                              name:
+                                description: Name of the column to be created.
+                                type: string
+                              orderBy:
+                                description: Order of the key. Currently supported
+                                  values are Asc and Desc.
+                                type: string
+                            type: object
+                          type: array
+                        column:
+                          description: One or more column blocks as defined below.
+                          items:
+                            properties:
+                              name:
+                                description: Name of the column to be created.
+                                type: string
+                              type:
+                                description: Type of the column to be created.
+                                type: string
+                            type: object
+                          type: array
+                        partitionKey:
+                          description: One or more partition_key blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: Name of the column to be created.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  throughput:
+                    description: The throughput of Cassandra KeySpace (RU/s). Must
+                      be set in increments of 100. The minimum value is 400.
+                    type: number
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -412,7 +491,9 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: schema is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.schema)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.schema)
+                || has(self.initProvider.schema)'
           status:
             description: CassandraTableStatus defines the observed state of CassandraTable.
             properties:

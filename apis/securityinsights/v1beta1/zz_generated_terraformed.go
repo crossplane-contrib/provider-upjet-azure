@@ -69,6 +69,16 @@ func (tr *SentinelAlertRuleFusion) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SentinelAlertRuleFusion
+func (tr *SentinelAlertRuleFusion) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SentinelAlertRuleFusion using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SentinelAlertRuleFusion) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetParameters(param
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SentinelAlertRuleMachineLearningBehaviorAnalytics
+func (tr *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SentinelAlertRuleMachineLearningBehaviorAnalytics using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *SentinelAlertRuleMSSecurityIncident) SetParameters(params map[string]a
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SentinelAlertRuleMSSecurityIncident
+func (tr *SentinelAlertRuleMSSecurityIncident) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SentinelAlertRuleMSSecurityIncident using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SentinelAlertRuleMSSecurityIncident) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *SentinelAutomationRule) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SentinelAutomationRule
+func (tr *SentinelAutomationRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SentinelAutomationRule using its observed tfState.
@@ -365,6 +405,16 @@ func (tr *SentinelDataConnectorIOT) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SentinelDataConnectorIOT
+func (tr *SentinelDataConnectorIOT) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SentinelDataConnectorIOT using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SentinelDataConnectorIOT) LateInitialize(attrs []byte) (bool, error) {
@@ -439,6 +489,16 @@ func (tr *SentinelLogAnalyticsWorkspaceOnboarding) SetParameters(params map[stri
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SentinelLogAnalyticsWorkspaceOnboarding
+func (tr *SentinelLogAnalyticsWorkspaceOnboarding) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SentinelLogAnalyticsWorkspaceOnboarding using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SentinelLogAnalyticsWorkspaceOnboarding) LateInitialize(attrs []byte) (bool, error) {
@@ -511,6 +571,16 @@ func (tr *SentinelWatchlist) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SentinelWatchlist
+func (tr *SentinelWatchlist) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SentinelWatchlist using its observed tfState.

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CustomHeaderInitParameters struct {
+
+	// The name of the custom header.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of custom header. Applicable for HTTP and HTTPS protocol.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type CustomHeaderObservation struct {
 
 	// The name of the custom header.
@@ -25,12 +34,33 @@ type CustomHeaderObservation struct {
 type CustomHeaderParameters struct {
 
 	// The name of the custom header.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of custom header. Applicable for HTTP and HTTPS protocol.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type TrafficManagerAzureEndpointInitParameters struct {
+
+	// One or more custom_header blocks as defined below.
+	CustomHeader []CustomHeaderInitParameters `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
+
+	// Is the endpoint enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A list of Geographic Regions used to distribute traffic, such as WORLD, UK or DE. The same location can't be specified in two endpoints. See the Geographic Hierarchies documentation for more information.
+	GeoMappings []*string `json:"geoMappings,omitempty" tf:"geo_mappings,omitempty"`
+
+	// Specifies the priority of this Endpoint, this must be specified for Profiles using the Priority traffic routing method. Supports values between 1 and 1000, with no Endpoints sharing the same value. If omitted the value will be computed in order of creation.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// One or more subnet blocks as defined below. Changing this forces a new resource to be created.
+	Subnet []TrafficManagerAzureEndpointSubnetInitParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
+
+	// Specifies how much traffic should be distributed to this endpoint, this must be specified for Profiles using the Weighted traffic routing method. Valid values are between 1 and 1000.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 type TrafficManagerAzureEndpointObservation struct {
@@ -118,6 +148,18 @@ type TrafficManagerAzureEndpointParameters struct {
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
+type TrafficManagerAzureEndpointSubnetInitParameters struct {
+
+	// The first IP Address in this subnet.
+	First *string `json:"first,omitempty" tf:"first,omitempty"`
+
+	// The last IP Address in this subnet.
+	Last *string `json:"last,omitempty" tf:"last,omitempty"`
+
+	// The block size (number of leading bits in the subnet mask).
+	Scope *float64 `json:"scope,omitempty" tf:"scope,omitempty"`
+}
+
 type TrafficManagerAzureEndpointSubnetObservation struct {
 
 	// The first IP Address in this subnet.
@@ -133,8 +175,8 @@ type TrafficManagerAzureEndpointSubnetObservation struct {
 type TrafficManagerAzureEndpointSubnetParameters struct {
 
 	// The first IP Address in this subnet.
-	// +kubebuilder:validation:Required
-	First *string `json:"first" tf:"first,omitempty"`
+	// +kubebuilder:validation:Optional
+	First *string `json:"first,omitempty" tf:"first,omitempty"`
 
 	// The last IP Address in this subnet.
 	// +kubebuilder:validation:Optional
@@ -149,6 +191,18 @@ type TrafficManagerAzureEndpointSubnetParameters struct {
 type TrafficManagerAzureEndpointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TrafficManagerAzureEndpointParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TrafficManagerAzureEndpointInitParameters `json:"initProvider,omitempty"`
 }
 
 // TrafficManagerAzureEndpointStatus defines the observed state of TrafficManagerAzureEndpoint.

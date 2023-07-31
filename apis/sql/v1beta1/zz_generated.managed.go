@@ -17,9 +17,9 @@ func (mg *MSSQLDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLDatabase.
-func (mg *MSSQLDatabase) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLDatabase.
+func (mg *MSSQLDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLDatabase.
@@ -55,9 +55,9 @@ func (mg *MSSQLDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLDatabase.
-func (mg *MSSQLDatabase) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLDatabase.
+func (mg *MSSQLDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLDatabase.
@@ -93,9 +93,9 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetDeletionPolicy() xpv1.Deletion
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLDatabaseExtendedAuditingPolicy.
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLDatabaseExtendedAuditingPolicy.
@@ -131,9 +131,9 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetDeletionPolicy(r xpv1.Deletion
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLDatabaseExtendedAuditingPolicy.
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLDatabaseExtendedAuditingPolicy.
+func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLDatabaseExtendedAuditingPolicy.
@@ -169,9 +169,9 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetDeletionPolicy() 
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
@@ -207,9 +207,9 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetDeletionPolicy(r 
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
+func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
@@ -245,9 +245,9 @@ func (mg *MSSQLElasticPool) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLElasticPool.
@@ -283,9 +283,9 @@ func (mg *MSSQLElasticPool) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLElasticPool.
-func (mg *MSSQLElasticPool) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLElasticPool.
+func (mg *MSSQLElasticPool) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLElasticPool.
@@ -321,9 +321,9 @@ func (mg *MSSQLFailoverGroup) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLFailoverGroup.
+func (mg *MSSQLFailoverGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLFailoverGroup.
@@ -359,9 +359,9 @@ func (mg *MSSQLFailoverGroup) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLFailoverGroup.
-func (mg *MSSQLFailoverGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLFailoverGroup.
+func (mg *MSSQLFailoverGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLFailoverGroup.
@@ -397,9 +397,9 @@ func (mg *MSSQLFirewallRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLFirewallRule.
-func (mg *MSSQLFirewallRule) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLFirewallRule.
@@ -435,9 +435,9 @@ func (mg *MSSQLFirewallRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLFirewallRule.
-func (mg *MSSQLFirewallRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLFirewallRule.
+func (mg *MSSQLFirewallRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLFirewallRule.
@@ -473,9 +473,9 @@ func (mg *MSSQLJobAgent) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLJobAgent.
-func (mg *MSSQLJobAgent) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLJobAgent.
@@ -511,9 +511,9 @@ func (mg *MSSQLJobAgent) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLJobAgent.
-func (mg *MSSQLJobAgent) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLJobAgent.
+func (mg *MSSQLJobAgent) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLJobAgent.
@@ -549,9 +549,9 @@ func (mg *MSSQLJobCredential) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLJobCredential.
-func (mg *MSSQLJobCredential) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLJobCredential.
@@ -587,9 +587,9 @@ func (mg *MSSQLJobCredential) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLJobCredential.
-func (mg *MSSQLJobCredential) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLJobCredential.
+func (mg *MSSQLJobCredential) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLJobCredential.
@@ -625,9 +625,9 @@ func (mg *MSSQLManagedDatabase) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLManagedDatabase.
@@ -663,9 +663,9 @@ func (mg *MSSQLManagedDatabase) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLManagedDatabase.
-func (mg *MSSQLManagedDatabase) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLManagedDatabase.
+func (mg *MSSQLManagedDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLManagedDatabase.
@@ -701,9 +701,9 @@ func (mg *MSSQLManagedInstance) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLManagedInstance.
+func (mg *MSSQLManagedInstance) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLManagedInstance.
@@ -739,9 +739,9 @@ func (mg *MSSQLManagedInstance) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLManagedInstance.
-func (mg *MSSQLManagedInstance) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLManagedInstance.
+func (mg *MSSQLManagedInstance) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLManagedInstance.
@@ -777,9 +777,9 @@ func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetDeletionPolicy() 
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
@@ -815,9 +815,9 @@ func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetDeletionPolicy(r 
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLManagedInstanceActiveDirectoryAdministrator.
+func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
@@ -853,9 +853,9 @@ func (mg *MSSQLManagedInstanceFailoverGroup) GetDeletionPolicy() xpv1.DeletionPo
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLManagedInstanceFailoverGroup.
@@ -891,9 +891,9 @@ func (mg *MSSQLManagedInstanceFailoverGroup) SetDeletionPolicy(r xpv1.DeletionPo
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLManagedInstanceFailoverGroup.
-func (mg *MSSQLManagedInstanceFailoverGroup) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLManagedInstanceFailoverGroup.
+func (mg *MSSQLManagedInstanceFailoverGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLManagedInstanceFailoverGroup.
@@ -929,9 +929,9 @@ func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetDeletionPolicy() xpv1.
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLManagedInstanceVulnerabilityAssessment.
@@ -967,9 +967,9 @@ func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetDeletionPolicy(r xpv1.
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLManagedInstanceVulnerabilityAssessment.
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLManagedInstanceVulnerabilityAssessment.
+func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLManagedInstanceVulnerabilityAssessment.
@@ -1005,9 +1005,9 @@ func (mg *MSSQLOutboundFirewallRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLOutboundFirewallRule.
-func (mg *MSSQLOutboundFirewallRule) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLOutboundFirewallRule.
+func (mg *MSSQLOutboundFirewallRule) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLOutboundFirewallRule.
@@ -1043,9 +1043,9 @@ func (mg *MSSQLOutboundFirewallRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLOutboundFirewallRule.
-func (mg *MSSQLOutboundFirewallRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLOutboundFirewallRule.
+func (mg *MSSQLOutboundFirewallRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLOutboundFirewallRule.
@@ -1081,9 +1081,9 @@ func (mg *MSSQLServer) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLServer.
-func (mg *MSSQLServer) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLServer.
+func (mg *MSSQLServer) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLServer.
@@ -1119,9 +1119,9 @@ func (mg *MSSQLServer) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLServer.
-func (mg *MSSQLServer) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLServer.
+func (mg *MSSQLServer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLServer.
@@ -1157,9 +1157,9 @@ func (mg *MSSQLServerDNSAlias) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLServerDNSAlias.
-func (mg *MSSQLServerDNSAlias) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLServerDNSAlias.
+func (mg *MSSQLServerDNSAlias) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLServerDNSAlias.
@@ -1195,9 +1195,9 @@ func (mg *MSSQLServerDNSAlias) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLServerDNSAlias.
-func (mg *MSSQLServerDNSAlias) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLServerDNSAlias.
+func (mg *MSSQLServerDNSAlias) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLServerDNSAlias.
@@ -1233,9 +1233,9 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetDeletionPolicy() xpv1.De
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLServerMicrosoftSupportAuditingPolicy.
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLServerMicrosoftSupportAuditingPolicy.
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLServerMicrosoftSupportAuditingPolicy.
@@ -1271,9 +1271,9 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetDeletionPolicy(r xpv1.De
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLServerMicrosoftSupportAuditingPolicy.
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLServerMicrosoftSupportAuditingPolicy.
+func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLServerMicrosoftSupportAuditingPolicy.
@@ -1309,9 +1309,9 @@ func (mg *MSSQLServerSecurityAlertPolicy) GetDeletionPolicy() xpv1.DeletionPolic
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLServerSecurityAlertPolicy.
-func (mg *MSSQLServerSecurityAlertPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLServerSecurityAlertPolicy.
@@ -1347,9 +1347,9 @@ func (mg *MSSQLServerSecurityAlertPolicy) SetDeletionPolicy(r xpv1.DeletionPolic
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLServerSecurityAlertPolicy.
-func (mg *MSSQLServerSecurityAlertPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLServerSecurityAlertPolicy.
+func (mg *MSSQLServerSecurityAlertPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLServerSecurityAlertPolicy.
@@ -1385,9 +1385,9 @@ func (mg *MSSQLServerTransparentDataEncryption) GetDeletionPolicy() xpv1.Deletio
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLServerTransparentDataEncryption.
-func (mg *MSSQLServerTransparentDataEncryption) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLServerTransparentDataEncryption.
+func (mg *MSSQLServerTransparentDataEncryption) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLServerTransparentDataEncryption.
@@ -1423,9 +1423,9 @@ func (mg *MSSQLServerTransparentDataEncryption) SetDeletionPolicy(r xpv1.Deletio
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLServerTransparentDataEncryption.
-func (mg *MSSQLServerTransparentDataEncryption) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLServerTransparentDataEncryption.
+func (mg *MSSQLServerTransparentDataEncryption) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLServerTransparentDataEncryption.
@@ -1461,9 +1461,9 @@ func (mg *MSSQLServerVulnerabilityAssessment) GetDeletionPolicy() xpv1.DeletionP
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLServerVulnerabilityAssessment.
@@ -1499,9 +1499,9 @@ func (mg *MSSQLServerVulnerabilityAssessment) SetDeletionPolicy(r xpv1.DeletionP
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLServerVulnerabilityAssessment.
-func (mg *MSSQLServerVulnerabilityAssessment) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLServerVulnerabilityAssessment.
+func (mg *MSSQLServerVulnerabilityAssessment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLServerVulnerabilityAssessment.
@@ -1537,9 +1537,9 @@ func (mg *MSSQLVirtualNetworkRule) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this MSSQLVirtualNetworkRule.
-func (mg *MSSQLVirtualNetworkRule) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this MSSQLVirtualNetworkRule.
+func (mg *MSSQLVirtualNetworkRule) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this MSSQLVirtualNetworkRule.
@@ -1575,9 +1575,9 @@ func (mg *MSSQLVirtualNetworkRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this MSSQLVirtualNetworkRule.
-func (mg *MSSQLVirtualNetworkRule) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this MSSQLVirtualNetworkRule.
+func (mg *MSSQLVirtualNetworkRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this MSSQLVirtualNetworkRule.

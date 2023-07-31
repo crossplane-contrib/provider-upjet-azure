@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MonitorScheduledQueryRulesLogCriteriaDimensionInitParameters struct {
+
+	// Name of the dimension.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Operator for dimension values, - 'Include'.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// List of dimension values.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type MonitorScheduledQueryRulesLogCriteriaDimensionObservation struct {
 
 	// Name of the dimension.
@@ -28,16 +40,25 @@ type MonitorScheduledQueryRulesLogCriteriaDimensionObservation struct {
 type MonitorScheduledQueryRulesLogCriteriaDimensionParameters struct {
 
 	// Name of the dimension.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Operator for dimension values, - 'Include'.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// List of dimension values.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type MonitorScheduledQueryRulesLogCriteriaInitParameters struct {
+
+	// A dimension block as defined below.
+	Dimension []MonitorScheduledQueryRulesLogCriteriaDimensionInitParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
+
+	// Name of the metric. Supported metrics are listed in the Azure Monitor Microsoft.OperationalInsights/workspaces metrics namespace.
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
 }
 
 type MonitorScheduledQueryRulesLogCriteriaObservation struct {
@@ -52,12 +73,36 @@ type MonitorScheduledQueryRulesLogCriteriaObservation struct {
 type MonitorScheduledQueryRulesLogCriteriaParameters struct {
 
 	// A dimension block as defined below.
-	// +kubebuilder:validation:Required
-	Dimension []MonitorScheduledQueryRulesLogCriteriaDimensionParameters `json:"dimension" tf:"dimension,omitempty"`
+	// +kubebuilder:validation:Optional
+	Dimension []MonitorScheduledQueryRulesLogCriteriaDimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
 
 	// Name of the metric. Supported metrics are listed in the Azure Monitor Microsoft.OperationalInsights/workspaces metrics namespace.
-	// +kubebuilder:validation:Required
-	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+}
+
+type MonitorScheduledQueryRulesLogInitParameters struct {
+
+	// A list of IDs of Resources referred into query.
+	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
+
+	// A criteria block as defined below.
+	Criteria []MonitorScheduledQueryRulesLogCriteriaInitParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
+
+	// The description of the scheduled query rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Whether this scheduled query rule is enabled. Default is true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Specifies the Azure Region where the resource should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the scheduled query rule. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MonitorScheduledQueryRulesLogObservation struct {
@@ -155,6 +200,18 @@ type MonitorScheduledQueryRulesLogParameters struct {
 type MonitorScheduledQueryRulesLogSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MonitorScheduledQueryRulesLogParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MonitorScheduledQueryRulesLogInitParameters `json:"initProvider,omitempty"`
 }
 
 // MonitorScheduledQueryRulesLogStatus defines the observed state of MonitorScheduledQueryRulesLog.
@@ -175,9 +232,9 @@ type MonitorScheduledQueryRulesLogStatus struct {
 type MonitorScheduledQueryRulesLog struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.criteria)",message="criteria is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.criteria) || has(self.initProvider.criteria)",message="criteria is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   MonitorScheduledQueryRulesLogSpec   `json:"spec"`
 	Status MonitorScheduledQueryRulesLogStatus `json:"status,omitempty"`
 }

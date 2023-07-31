@@ -69,6 +69,16 @@ func (tr *HealthcareDICOMService) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this HealthcareDICOMService
+func (tr *HealthcareDICOMService) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this HealthcareDICOMService using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *HealthcareDICOMService) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *HealthcareFHIRService) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this HealthcareFHIRService
+func (tr *HealthcareFHIRService) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this HealthcareFHIRService using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *HealthcareMedtechService) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this HealthcareMedtechService
+func (tr *HealthcareMedtechService) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this HealthcareMedtechService using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *HealthcareMedtechService) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *HealthcareMedtechServiceFHIRDestination) SetParameters(params map[stri
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this HealthcareMedtechServiceFHIRDestination
+func (tr *HealthcareMedtechServiceFHIRDestination) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this HealthcareMedtechServiceFHIRDestination using its observed tfState.
@@ -365,6 +405,16 @@ func (tr *HealthcareService) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this HealthcareService
+func (tr *HealthcareService) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this HealthcareService using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *HealthcareService) LateInitialize(attrs []byte) (bool, error) {
@@ -437,6 +487,16 @@ func (tr *HealthcareWorkspace) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this HealthcareWorkspace
+func (tr *HealthcareWorkspace) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this HealthcareWorkspace using its observed tfState.

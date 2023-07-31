@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type StreamInputBlobInitParameters struct {
+
+	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
+	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
+
+	// The name of the Stream Input Blob. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The blob path pattern. Not a regular expression. It represents a pattern against which blob names will be matched to determine whether or not they should be included as input or output to the job.
+	PathPattern *string `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
+
+	// A serialization block as defined below.
+	Serialization []StreamInputBlobSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
+
+	// The time format. Wherever {time} appears in path_pattern, the value of this property is used as the time format instead.
+	TimeFormat *string `json:"timeFormat,omitempty" tf:"time_format,omitempty"`
+}
+
 type StreamInputBlobObservation struct {
 
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
@@ -125,6 +143,18 @@ type StreamInputBlobParameters struct {
 	TimeFormat *string `json:"timeFormat,omitempty" tf:"time_format,omitempty"`
 }
 
+type StreamInputBlobSerializationInitParameters struct {
+
+	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
+	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
+
+	// The serialization format used for incoming data streams. Possible values are Avro, Csv and Json.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type StreamInputBlobSerializationObservation struct {
 
 	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
@@ -148,14 +178,26 @@ type StreamInputBlobSerializationParameters struct {
 	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
 
 	// The serialization format used for incoming data streams. Possible values are Avro, Csv and Json.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // StreamInputBlobSpec defines the desired state of StreamInputBlob
 type StreamInputBlobSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StreamInputBlobParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider StreamInputBlobInitParameters `json:"initProvider,omitempty"`
 }
 
 // StreamInputBlobStatus defines the observed state of StreamInputBlob.
@@ -176,12 +218,12 @@ type StreamInputBlobStatus struct {
 type StreamInputBlob struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dateFormat)",message="dateFormat is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.pathPattern)",message="pathPattern is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serialization)",message="serialization is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageAccountKeySecretRef)",message="storageAccountKeySecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeFormat)",message="timeFormat is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dateFormat) || has(self.initProvider.dateFormat)",message="dateFormat is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pathPattern) || has(self.initProvider.pathPattern)",message="pathPattern is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serialization) || has(self.initProvider.serialization)",message="serialization is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageAccountKeySecretRef)",message="storageAccountKeySecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeFormat) || has(self.initProvider.timeFormat)",message="timeFormat is a required parameter"
 	Spec   StreamInputBlobSpec   `json:"spec"`
 	Status StreamInputBlobStatus `json:"status,omitempty"`
 }

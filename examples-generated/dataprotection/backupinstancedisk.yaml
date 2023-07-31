@@ -127,6 +127,3 @@ spec:
     principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
     roleDefinitionName: Disk Backup Reader
     scope: ${azurerm_managed_disk.example.id}
-
----
-

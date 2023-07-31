@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LinkedServiceKeyVaultInitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Linked Service Key Vault.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service Key Vault.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The description for the Data Factory Linked Service Key Vault.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service Key Vault.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service Key Vault.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+}
+
 type LinkedServiceKeyVaultObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service Key Vault.
@@ -95,6 +113,18 @@ type LinkedServiceKeyVaultParameters struct {
 type LinkedServiceKeyVaultSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LinkedServiceKeyVaultParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LinkedServiceKeyVaultInitParameters `json:"initProvider,omitempty"`
 }
 
 // LinkedServiceKeyVaultStatus defines the observed state of LinkedServiceKeyVault.

@@ -69,6 +69,16 @@ func (tr *EventHub) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this EventHub
+func (tr *EventHub) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this EventHub using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EventHub) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *AuthorizationRule) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this AuthorizationRule
+func (tr *AuthorizationRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this AuthorizationRule using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *ConsumerGroup) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this ConsumerGroup
+func (tr *ConsumerGroup) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this ConsumerGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ConsumerGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *EventHubNamespace) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this EventHubNamespace
+func (tr *EventHubNamespace) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this EventHubNamespace using its observed tfState.
@@ -366,6 +406,16 @@ func (tr *NamespaceAuthorizationRule) SetParameters(params map[string]any) error
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this NamespaceAuthorizationRule
+func (tr *NamespaceAuthorizationRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this NamespaceAuthorizationRule using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *NamespaceAuthorizationRule) LateInitialize(attrs []byte) (bool, error) {
@@ -440,6 +490,16 @@ func (tr *NamespaceDisasterRecoveryConfig) SetParameters(params map[string]any) 
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this NamespaceDisasterRecoveryConfig
+func (tr *NamespaceDisasterRecoveryConfig) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this NamespaceDisasterRecoveryConfig using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *NamespaceDisasterRecoveryConfig) LateInitialize(attrs []byte) (bool, error) {
@@ -512,6 +572,16 @@ func (tr *NamespaceSchemaGroup) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this NamespaceSchemaGroup
+func (tr *NamespaceSchemaGroup) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this NamespaceSchemaGroup using its observed tfState.

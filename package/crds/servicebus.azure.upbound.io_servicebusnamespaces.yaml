@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: servicebusnamespaces.servicebus.azure.upbound.io
 spec:
   group: servicebus.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -90,9 +89,6 @@ spec:
                           description: The ID of the Key Vault Key which should be
                             used to Encrypt the data in this ServiceBus Namespace.
                           type: string
-                      required:
-                      - identityId
-                      - keyVaultKeyId
                       type: object
                     type: array
                   identity:
@@ -111,8 +107,6 @@ spec:
                             Possible values are SystemAssigned, UserAssigned, SystemAssigned,
                             UserAssigned (to enable both).
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   localAuthEnabled:
@@ -227,21 +221,120 @@ spec:
                       be created.
                     type: boolean
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  capacity:
+                    description: Specifies the capacity. When sku is Premium, capacity
+                      can be 1, 2, 4, 8 or 16. When sku is Basic or Standard, capacity
+                      can be 0 only.
+                    type: number
+                  customerManagedKey:
+                    description: An customer_managed_key block as defined below.
+                    items:
+                      properties:
+                        identityId:
+                          description: The ID of the User Assigned Identity that has
+                            access to the key.
+                          type: string
+                        infrastructureEncryptionEnabled:
+                          description: Used to specify whether enable Infrastructure
+                            Encryption (Double Encryption). Changing this forces a
+                            new resource to be created.
+                          type: boolean
+                        keyVaultKeyId:
+                          description: The ID of the Key Vault Key which should be
+                            used to Encrypt the data in this ServiceBus Namespace.
+                          type: string
+                      type: object
+                    type: array
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this ServiceBus namespace.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this ServiceBus Namespace.
+                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
+                          type: string
+                      type: object
+                    type: array
+                  localAuthEnabled:
+                    description: Whether or not SAS authentication is enabled for
+                      the Service Bus namespace. Defaults to true.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  minimumTlsVersion:
+                    description: 'The minimum supported TLS version for this Service
+                      Bus Namespace. Valid values are: 1.0, 1.1 and 1.2. The current
+                      default minimum TLS version is 1.2.'
+                    type: string
+                  publicNetworkAccessEnabled:
+                    description: Is public network access enabled for the Service
+                      Bus Namespace? Defaults to true.
+                    type: boolean
+                  sku:
+                    description: Defines which tier to use. Options are Basic, Standard
+                      or Premium. Please note that setting this field to Premium will
+                      force the creation of a new resource.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  zoneRedundant:
+                    description: Whether or not this resource is zone redundant. sku
+                      needs to be Premium. Changing this forces a new resource to
+                      be created.
+                    type: boolean
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -415,9 +508,13 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: sku is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.sku)
+                || has(self.initProvider.sku)'
           status:
             description: ServiceBusNamespaceStatus defines the observed state of ServiceBusNamespace.
             properties:

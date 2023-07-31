@@ -12,6 +12,3 @@ spec:
     emailAddresses:
     - example@test.net
     emailSubject: My Test Anomaly Alert
-
----
-

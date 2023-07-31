@@ -30,6 +30,3 @@ metadata:
 spec:
   forProvider:
     location: West Europe
-
----
-

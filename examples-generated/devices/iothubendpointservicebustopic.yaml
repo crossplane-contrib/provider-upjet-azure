@@ -107,6 +107,3 @@ spec:
     topicIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

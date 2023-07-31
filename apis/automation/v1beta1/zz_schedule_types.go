@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MonthlyOccurrenceInitParameters struct {
+
+	// Day of the occurrence. Must be one of Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
+	Day *string `json:"day,omitempty" tf:"day,omitempty"`
+
+	// Occurrence of the week within the month. Must be between 1 and 5. -1 for last week within the month.
+	Occurrence *float64 `json:"occurrence,omitempty" tf:"occurrence,omitempty"`
+}
+
 type MonthlyOccurrenceObservation struct {
 
 	// Day of the occurrence. Must be one of Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
@@ -25,12 +34,42 @@ type MonthlyOccurrenceObservation struct {
 type MonthlyOccurrenceParameters struct {
 
 	// Day of the occurrence. Must be one of Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
-	// +kubebuilder:validation:Required
-	Day *string `json:"day" tf:"day,omitempty"`
+	// +kubebuilder:validation:Optional
+	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
 	// Occurrence of the week within the month. Must be between 1 and 5. -1 for last week within the month.
-	// +kubebuilder:validation:Required
-	Occurrence *float64 `json:"occurrence" tf:"occurrence,omitempty"`
+	// +kubebuilder:validation:Optional
+	Occurrence *float64 `json:"occurrence,omitempty" tf:"occurrence,omitempty"`
+}
+
+type ScheduleInitParameters struct {
+
+	// A description for this Schedule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The end time of the schedule.
+	ExpiryTime *string `json:"expiryTime,omitempty" tf:"expiry_time,omitempty"`
+
+	// The frequency of the schedule. - can be either OneTime, Day, Hour, Week, or Month.
+	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+
+	// The number of frequencys between runs. Only valid when frequency is Day, Hour, Week, or Month and defaults to 1.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// List of days of the month that the job should execute on. Must be between 1 and 31. -1 for last day of the month. Only valid when frequency is Month.
+	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
+
+	// List of monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
+	MonthlyOccurrence []MonthlyOccurrenceInitParameters `json:"monthlyOccurrence,omitempty" tf:"monthly_occurrence,omitempty"`
+
+	// Start time of the schedule. Must be at least five minutes in the future. Defaults to seven minutes in the future from the time the resource is created.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// The timezone of the start time. Defaults to Etc/UTC. For possible values see: https://docs.microsoft.com/en-us/rest/api/maps/timezone/gettimezoneenumwindows
+	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+
+	// List of days of the week that the job should execute on. Only valid when frequency is Week. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
+	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
 }
 
 type ScheduleObservation struct {
@@ -141,6 +180,18 @@ type ScheduleParameters struct {
 type ScheduleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ScheduleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ScheduleInitParameters `json:"initProvider,omitempty"`
 }
 
 // ScheduleStatus defines the observed state of Schedule.
@@ -161,7 +212,7 @@ type ScheduleStatus struct {
 type Schedule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frequency)",message="frequency is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frequency) || has(self.initProvider.frequency)",message="frequency is a required parameter"
 	Spec   ScheduleSpec   `json:"spec"`
 	Status ScheduleStatus `json:"status,omitempty"`
 }

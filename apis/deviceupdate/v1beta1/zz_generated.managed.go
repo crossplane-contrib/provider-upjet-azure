@@ -17,9 +17,9 @@ func (mg *IOTHubDeviceUpdateAccount) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this IOTHubDeviceUpdateAccount.
-func (mg *IOTHubDeviceUpdateAccount) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this IOTHubDeviceUpdateAccount.
+func (mg *IOTHubDeviceUpdateAccount) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IOTHubDeviceUpdateAccount.
@@ -55,9 +55,9 @@ func (mg *IOTHubDeviceUpdateAccount) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this IOTHubDeviceUpdateAccount.
-func (mg *IOTHubDeviceUpdateAccount) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this IOTHubDeviceUpdateAccount.
+func (mg *IOTHubDeviceUpdateAccount) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IOTHubDeviceUpdateAccount.
@@ -93,9 +93,9 @@ func (mg *IOTHubDeviceUpdateInstance) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this IOTHubDeviceUpdateInstance.
-func (mg *IOTHubDeviceUpdateInstance) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this IOTHubDeviceUpdateInstance.
+func (mg *IOTHubDeviceUpdateInstance) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IOTHubDeviceUpdateInstance.
@@ -131,9 +131,9 @@ func (mg *IOTHubDeviceUpdateInstance) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this IOTHubDeviceUpdateInstance.
-func (mg *IOTHubDeviceUpdateInstance) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this IOTHubDeviceUpdateInstance.
+func (mg *IOTHubDeviceUpdateInstance) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IOTHubDeviceUpdateInstance.

@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConnectionInitParameters struct {
+
+	// A description for this Connection.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The type of the Connection - can be either builtin type such as Azure, AzureClassicCertificate, and AzureServicePrincipal, or a user defined types. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// A mapping of key value pairs passed to the connection. Different type needs different parameters in the values. Builtin types have required field values as below:
+	Values map[string]*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type ConnectionObservation struct {
 
 	// The name of the automation account in which the Connection is created. Changing this forces a new resource to be created.
@@ -79,6 +91,18 @@ type ConnectionParameters struct {
 type ConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConnectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConnectionStatus defines the observed state of Connection.
@@ -99,8 +123,8 @@ type ConnectionStatus struct {
 type Connection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.values)",message="values is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.values) || has(self.initProvider.values)",message="values is a required parameter"
 	Spec   ConnectionSpec   `json:"spec"`
 	Status ConnectionStatus `json:"status,omitempty"`
 }

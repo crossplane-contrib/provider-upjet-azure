@@ -69,6 +69,16 @@ func (tr *SpringCloudAccelerator) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SpringCloudAccelerator
+func (tr *SpringCloudAccelerator) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SpringCloudAccelerator using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SpringCloudAccelerator) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *SpringCloudActiveDeployment) SetParameters(params map[string]any) erro
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SpringCloudActiveDeployment
+func (tr *SpringCloudActiveDeployment) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SpringCloudActiveDeployment using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *SpringCloudAPIPortal) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SpringCloudAPIPortal
+func (tr *SpringCloudAPIPortal) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SpringCloudAPIPortal using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SpringCloudAPIPortal) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *SpringCloudAPIPortalCustomDomain) SetParameters(params map[string]any)
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SpringCloudAPIPortalCustomDomain
+func (tr *SpringCloudAPIPortalCustomDomain) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SpringCloudAPIPortalCustomDomain using its observed tfState.
@@ -365,6 +405,16 @@ func (tr *SpringCloudApp) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SpringCloudApp
+func (tr *SpringCloudApp) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SpringCloudApp using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SpringCloudApp) LateInitialize(attrs []byte) (bool, error) {
@@ -437,6 +487,16 @@ func (tr *SpringCloudAppCosmosDBAssociation) SetParameters(params map[string]any
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SpringCloudAppCosmosDBAssociation
+func (tr *SpringCloudAppCosmosDBAssociation) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SpringCloudAppCosmosDBAssociation using its observed tfState.
@@ -513,6 +573,16 @@ func (tr *SpringCloudAppMySQLAssociation) SetParameters(params map[string]any) e
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SpringCloudAppMySQLAssociation
+func (tr *SpringCloudAppMySQLAssociation) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SpringCloudAppMySQLAssociation using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SpringCloudAppMySQLAssociation) LateInitialize(attrs []byte) (bool, error) {
@@ -585,6 +655,16 @@ func (tr *SpringCloudAppRedisAssociation) SetParameters(params map[string]any) e
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SpringCloudAppRedisAssociation
+func (tr *SpringCloudAppRedisAssociation) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SpringCloudAppRedisAssociation using its observed tfState.
@@ -661,6 +741,16 @@ func (tr *SpringCloudBuildDeployment) SetParameters(params map[string]any) error
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SpringCloudBuildDeployment
+func (tr *SpringCloudBuildDeployment) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SpringCloudBuildDeployment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SpringCloudBuildDeployment) LateInitialize(attrs []byte) (bool, error) {
@@ -733,6 +823,16 @@ func (tr *SpringCloudBuildPackBinding) SetParameters(params map[string]any) erro
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SpringCloudBuildPackBinding
+func (tr *SpringCloudBuildPackBinding) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SpringCloudBuildPackBinding using its observed tfState.
@@ -809,6 +909,16 @@ func (tr *SpringCloudBuilder) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SpringCloudBuilder
+func (tr *SpringCloudBuilder) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SpringCloudBuilder using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SpringCloudBuilder) LateInitialize(attrs []byte) (bool, error) {
@@ -881,6 +991,16 @@ func (tr *SpringCloudCertificate) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SpringCloudCertificate
+func (tr *SpringCloudCertificate) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SpringCloudCertificate using its observed tfState.
@@ -957,6 +1077,16 @@ func (tr *SpringCloudConfigurationService) SetParameters(params map[string]any) 
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SpringCloudConfigurationService
+func (tr *SpringCloudConfigurationService) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SpringCloudConfigurationService using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SpringCloudConfigurationService) LateInitialize(attrs []byte) (bool, error) {
@@ -1029,6 +1159,16 @@ func (tr *SpringCloudContainerDeployment) SetParameters(params map[string]any) e
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SpringCloudContainerDeployment
+func (tr *SpringCloudContainerDeployment) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SpringCloudContainerDeployment using its observed tfState.
@@ -1105,6 +1245,16 @@ func (tr *SpringCloudCustomDomain) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SpringCloudCustomDomain
+func (tr *SpringCloudCustomDomain) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SpringCloudCustomDomain using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SpringCloudCustomDomain) LateInitialize(attrs []byte) (bool, error) {
@@ -1177,6 +1327,16 @@ func (tr *SpringCloudCustomizedAccelerator) SetParameters(params map[string]any)
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SpringCloudCustomizedAccelerator
+func (tr *SpringCloudCustomizedAccelerator) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SpringCloudCustomizedAccelerator using its observed tfState.
@@ -1253,6 +1413,16 @@ func (tr *SpringCloudDevToolPortal) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SpringCloudDevToolPortal
+func (tr *SpringCloudDevToolPortal) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SpringCloudDevToolPortal using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SpringCloudDevToolPortal) LateInitialize(attrs []byte) (bool, error) {
@@ -1325,6 +1495,16 @@ func (tr *SpringCloudGateway) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SpringCloudGateway
+func (tr *SpringCloudGateway) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SpringCloudGateway using its observed tfState.
@@ -1401,6 +1581,16 @@ func (tr *SpringCloudGatewayCustomDomain) SetParameters(params map[string]any) e
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SpringCloudGatewayCustomDomain
+func (tr *SpringCloudGatewayCustomDomain) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SpringCloudGatewayCustomDomain using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SpringCloudGatewayCustomDomain) LateInitialize(attrs []byte) (bool, error) {
@@ -1473,6 +1663,16 @@ func (tr *SpringCloudJavaDeployment) SetParameters(params map[string]any) error 
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SpringCloudJavaDeployment
+func (tr *SpringCloudJavaDeployment) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SpringCloudJavaDeployment using its observed tfState.
@@ -1549,6 +1749,16 @@ func (tr *SpringCloudService) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this SpringCloudService
+func (tr *SpringCloudService) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this SpringCloudService using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SpringCloudService) LateInitialize(attrs []byte) (bool, error) {
@@ -1621,6 +1831,16 @@ func (tr *SpringCloudStorage) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SpringCloudStorage
+func (tr *SpringCloudStorage) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SpringCloudStorage using its observed tfState.

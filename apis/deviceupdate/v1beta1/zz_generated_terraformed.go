@@ -69,6 +69,16 @@ func (tr *IOTHubDeviceUpdateAccount) SetParameters(params map[string]any) error 
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this IOTHubDeviceUpdateAccount
+func (tr *IOTHubDeviceUpdateAccount) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this IOTHubDeviceUpdateAccount using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IOTHubDeviceUpdateAccount) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *IOTHubDeviceUpdateInstance) SetParameters(params map[string]any) error
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this IOTHubDeviceUpdateInstance
+func (tr *IOTHubDeviceUpdateInstance) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this IOTHubDeviceUpdateInstance using its observed tfState.

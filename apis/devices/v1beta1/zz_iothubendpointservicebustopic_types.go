@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IOTHubEndpointServiceBusTopicInitParameters struct {
+
+	// Type used to authenticate against the Service Bus Topic endpoint. Possible values are keyBased and identityBased. Defaults to keyBased.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// URI of the Service Bus endpoint. This attribute can only be specified and is mandatory when authentication_type is identityBased.
+	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
+
+	// Name of the Service Bus Topic. This attribute can only be specified and is mandatory when authentication_type is identityBased.
+	EntityPath *string `json:"entityPath,omitempty" tf:"entity_path,omitempty"`
+
+	// ID of the User Managed Identity used to authenticate against the Service Bus Topic endpoint.
+	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
+}
+
 type IOTHubEndpointServiceBusTopicObservation struct {
 
 	// Type used to authenticate against the Service Bus Topic endpoint. Possible values are keyBased and identityBased. Defaults to keyBased.
@@ -91,6 +106,18 @@ type IOTHubEndpointServiceBusTopicParameters struct {
 type IOTHubEndpointServiceBusTopicSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IOTHubEndpointServiceBusTopicParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider IOTHubEndpointServiceBusTopicInitParameters `json:"initProvider,omitempty"`
 }
 
 // IOTHubEndpointServiceBusTopicStatus defines the observed state of IOTHubEndpointServiceBusTopic.

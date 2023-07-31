@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: integrationruntimemanageds.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -59,7 +58,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -102,8 +101,6 @@ spec:
                           description: The endpoint of an Azure SQL Server that will
                             be used to host the SSIS catalog.
                           type: string
-                      required:
-                      - serverEndpoint
                       type: object
                     type: array
                   customSetupScript:
@@ -136,7 +133,6 @@ spec:
                           - namespace
                           type: object
                       required:
-                      - blobContainerUri
                       - sasTokenSecretRef
                       type: object
                     type: array
@@ -340,26 +336,120 @@ spec:
                           description: ID of the virtual network to which the nodes
                             of the Managed Integration Runtime will be added.
                           type: string
-                      required:
-                      - vnetId
                       type: object
                     type: array
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  catalogInfo:
+                    description: A catalog_info block as defined below.
+                    items:
+                      properties:
+                        administratorLogin:
+                          description: Administrator login name for the SQL Server.
+                          type: string
+                        pricingTier:
+                          description: 'Pricing tier for the database that will be
+                            created for the SSIS catalog. Valid values are: Basic,
+                            Standard, Premium and PremiumRS.'
+                          type: string
+                        serverEndpoint:
+                          description: The endpoint of an Azure SQL Server that will
+                            be used to host the SSIS catalog.
+                          type: string
+                      type: object
+                    type: array
+                  customSetupScript:
+                    description: A custom_setup_script block as defined below.
+                    items:
+                      properties:
+                        blobContainerUri:
+                          description: The blob endpoint for the container which contains
+                            a custom setup script that will be run on every node on
+                            startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup
+                            for more information.
+                          type: string
+                      type: object
+                    type: array
+                  description:
+                    description: Integration runtime description.
+                    type: string
+                  edition:
+                    description: The Managed Integration Runtime edition. Valid values
+                      are Standard and Enterprise. Defaults to Standard.
+                    type: string
+                  licenseType:
+                    description: The type of the license that is used. Valid values
+                      are LicenseIncluded and BasePrice. Defaults to LicenseIncluded.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  maxParallelExecutionsPerNode:
+                    description: Defines the maximum parallel executions per node.
+                      Defaults to 1. Max is 16.
+                    type: number
+                  nodeSize:
+                    description: 'The size of the nodes on which the Managed Integration
+                      Runtime runs. Valid values are: Standard_D2_v3, Standard_D4_v3,
+                      Standard_D8_v3, Standard_D16_v3, Standard_D32_v3, Standard_D64_v3,
+                      Standard_E2_v3, Standard_E4_v3, Standard_E8_v3, Standard_E16_v3,
+                      Standard_E32_v3, Standard_E64_v3, Standard_D1_v2, Standard_D2_v2,
+                      Standard_D3_v2, Standard_D4_v2, Standard_A4_v2 and Standard_A8_v2'
+                    type: string
+                  numberOfNodes:
+                    description: Number of nodes for the Managed Integration Runtime.
+                      Max is 10. Defaults to 1.
+                    type: number
+                  vnetIntegration:
+                    description: A vnet_integration block as defined below.
+                    items:
+                      properties:
+                        vnetId:
+                          description: ID of the virtual network to which the nodes
+                            of the Managed Integration Runtime will be added.
+                          type: string
+                      type: object
+                    type: array
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -533,9 +623,13 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: nodeSize is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeSize)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeSize)
+                || has(self.initProvider.nodeSize)'
           status:
             description: IntegrationRuntimeManagedStatus defines the observed state
               of IntegrationRuntimeManaged.

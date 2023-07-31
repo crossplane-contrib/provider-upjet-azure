@@ -46,6 +46,3 @@ spec:
     sku: Standard
     tags:
       source: terraform
-
----
-

@@ -13,6 +13,30 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OutputBlobInitParameters struct {
+
+	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
+	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
+
+	// The maximum wait time per batch in hh:mm:ss e.g. 00:02:00 for two minutes.
+	BatchMaxWaitTime *string `json:"batchMaxWaitTime,omitempty" tf:"batch_max_wait_time,omitempty"`
+
+	// The minimum number of rows per batch (must be between 0 and 10000).
+	BatchMinRows *float64 `json:"batchMinRows,omitempty" tf:"batch_min_rows,omitempty"`
+
+	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
+	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
+
+	// The blob path pattern. Not a regular expression. It represents a pattern against which blob names will be matched to determine whether or not they should be included as input or output to the job.
+	PathPattern *string `json:"pathPattern,omitempty" tf:"path_pattern,omitempty"`
+
+	// A serialization block as defined below.
+	Serialization []SerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
+
+	// The time format. Wherever {time} appears in path_pattern, the value of this property is used as the time format instead.
+	TimeFormat *string `json:"timeFormat,omitempty" tf:"time_format,omitempty"`
+}
+
 type OutputBlobObservation struct {
 
 	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
@@ -139,6 +163,21 @@ type OutputBlobParameters struct {
 	TimeFormat *string `json:"timeFormat,omitempty" tf:"time_format,omitempty"`
 }
 
+type SerializationInitParameters struct {
+
+	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
+	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+
+	// The delimiter that will be used to separate comma-separated value (CSV) records. Possible values are   (space), , (comma), 	 (tab), | (pipe) and ;.
+	FieldDelimiter *string `json:"fieldDelimiter,omitempty" tf:"field_delimiter,omitempty"`
+
+	// Specifies the format of the JSON the output will be written in. Possible values are Array and LineSeparated.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// The serialization format used for outgoing data streams. Possible values are Avro, Csv, Json and Parquet.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type SerializationObservation struct {
 
 	// The encoding of the incoming data in the case of input and the encoding of outgoing data in the case of output. It currently can only be set to UTF8.
@@ -169,14 +208,26 @@ type SerializationParameters struct {
 	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The serialization format used for outgoing data streams. Possible values are Avro, Csv, Json and Parquet.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // OutputBlobSpec defines the desired state of OutputBlob
 type OutputBlobSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OutputBlobParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider OutputBlobInitParameters `json:"initProvider,omitempty"`
 }
 
 // OutputBlobStatus defines the observed state of OutputBlob.
@@ -197,10 +248,10 @@ type OutputBlobStatus struct {
 type OutputBlob struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dateFormat)",message="dateFormat is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.pathPattern)",message="pathPattern is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serialization)",message="serialization is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeFormat)",message="timeFormat is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dateFormat) || has(self.initProvider.dateFormat)",message="dateFormat is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.pathPattern) || has(self.initProvider.pathPattern)",message="pathPattern is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serialization) || has(self.initProvider.serialization)",message="serialization is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.timeFormat) || has(self.initProvider.timeFormat)",message="timeFormat is a required parameter"
 	Spec   OutputBlobSpec   `json:"spec"`
 	Status OutputBlobStatus `json:"status,omitempty"`
 }

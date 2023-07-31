@@ -33,6 +33,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: azurerm_policy_set_definition
     subscriptionId: ${data.azurerm_subscription.example.id}
-
----
-

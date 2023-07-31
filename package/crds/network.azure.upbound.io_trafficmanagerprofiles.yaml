@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: trafficmanagerprofiles.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -83,9 +82,6 @@ spec:
                           description: The TTL value of the Profile used by Local
                             DNS resolvers and clients.
                           type: number
-                      required:
-                      - relativeName
-                      - ttl
                       type: object
                     type: array
                   maxReturn:
@@ -110,9 +106,6 @@ spec:
                                 description: The value of custom header. Applicable
                                   for HTTP and HTTPS protocol.
                                 type: string
-                            required:
-                            - name
-                            - value
                             type: object
                           type: array
                         expectedStatusCodeRanges:
@@ -154,9 +147,6 @@ spec:
                             Valid values are between 0 and 9. The default value is
                             3
                           type: number
-                      required:
-                      - port
-                      - protocol
                       type: object
                     type: array
                   profileStatus:
@@ -258,21 +248,146 @@ spec:
                       Traffic Manager profile.
                     type: boolean
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  dnsConfig:
+                    description: This block specifies the DNS configuration of the
+                      Profile, it supports the fields documented below.
+                    items:
+                      properties:
+                        relativeName:
+                          description: The relative domain name, this is combined
+                            with the domain name used by Traffic Manager to form the
+                            FQDN which is exported as documented below. Changing this
+                            forces a new resource to be created.
+                          type: string
+                        ttl:
+                          description: The TTL value of the Profile used by Local
+                            DNS resolvers and clients.
+                          type: number
+                      type: object
+                    type: array
+                  maxReturn:
+                    description: The amount of endpoints to return for DNS queries
+                      to this Profile. Possible values range from 1 to 8.
+                    type: number
+                  monitorConfig:
+                    description: This block specifies the Endpoint monitoring configuration
+                      for the Profile, it supports the fields documented below.
+                    items:
+                      properties:
+                        customHeader:
+                          description: One or more custom_header blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the Traffic Manager profile.
+                                  Changing this forces a new resource to be created.
+                                type: string
+                              value:
+                                description: The value of custom header. Applicable
+                                  for HTTP and HTTPS protocol.
+                                type: string
+                            type: object
+                          type: array
+                        expectedStatusCodeRanges:
+                          description: A list of status code ranges in the format
+                            of 100-101.
+                          items:
+                            type: string
+                          type: array
+                        intervalInSeconds:
+                          description: 'The interval used to check the endpoint health
+                            from a Traffic Manager probing agent. You can specify
+                            two values here: 30 (normal probing) and 10 (fast probing).
+                            The default value is 30.'
+                          type: number
+                        path:
+                          description: The path used by the monitoring checks. Required
+                            when protocol is set to HTTP or HTTPS - cannot be set
+                            when protocol is set to TCP.
+                          type: string
+                        port:
+                          description: The port number used by the monitoring checks.
+                          type: number
+                        protocol:
+                          description: The protocol used by the monitoring checks,
+                            supported values are HTTP, HTTPS and TCP.
+                          type: string
+                        timeoutInSeconds:
+                          description: The amount of time the Traffic Manager probing
+                            agent should wait before considering that check a failure
+                            when a health check probe is sent to the endpoint. If
+                            interval_in_seconds is set to 30, then timeout_in_seconds
+                            can be between 5 and 10. The default value is 10. If interval_in_seconds
+                            is set to 10, then valid values are between 5 and 9 and
+                            timeout_in_seconds is required.
+                          type: number
+                        toleratedNumberOfFailures:
+                          description: The number of failures a Traffic Manager probing
+                            agent tolerates before marking that endpoint as unhealthy.
+                            Valid values are between 0 and 9. The default value is
+                            3
+                          type: number
+                      type: object
+                    type: array
+                  profileStatus:
+                    description: The status of the profile, can be set to either Enabled
+                      or Disabled. Defaults to Enabled.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  trafficRoutingMethod:
+                    description: Specifies the algorithm used to route traffic. Possible
+                      values are Geographic, Weighted, Performance, Priority, Subnet
+                      and MultiValue.
+                    type: string
+                  trafficViewEnabled:
+                    description: Indicates whether Traffic View is enabled for the
+                      Traffic Manager profile.
+                    type: boolean
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -446,11 +561,17 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: dnsConfig is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dnsConfig)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.dnsConfig)
+                || has(self.initProvider.dnsConfig)'
             - message: monitorConfig is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.monitorConfig)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.monitorConfig)
+                || has(self.initProvider.monitorConfig)'
             - message: trafficRoutingMethod is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.trafficRoutingMethod)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.trafficRoutingMethod)
+                || has(self.initProvider.trafficRoutingMethod)'
           status:
             description: TrafficManagerProfileStatus defines the observed state of
               TrafficManagerProfile.

@@ -69,6 +69,16 @@ func (tr *IOTHub) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this IOTHub
+func (tr *IOTHub) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this IOTHub using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IOTHub) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *IOTHubCertificate) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this IOTHubCertificate
+func (tr *IOTHubCertificate) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this IOTHubCertificate using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *IOTHubConsumerGroup) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this IOTHubConsumerGroup
+func (tr *IOTHubConsumerGroup) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this IOTHubConsumerGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IOTHubConsumerGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *IOTHubDPS) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this IOTHubDPS
+func (tr *IOTHubDPS) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this IOTHubDPS using its observed tfState.
@@ -365,6 +405,16 @@ func (tr *IOTHubDPSCertificate) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this IOTHubDPSCertificate
+func (tr *IOTHubDPSCertificate) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this IOTHubDPSCertificate using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IOTHubDPSCertificate) LateInitialize(attrs []byte) (bool, error) {
@@ -437,6 +487,16 @@ func (tr *IOTHubDPSSharedAccessPolicy) SetParameters(params map[string]any) erro
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this IOTHubDPSSharedAccessPolicy
+func (tr *IOTHubDPSSharedAccessPolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this IOTHubDPSSharedAccessPolicy using its observed tfState.
@@ -513,6 +573,16 @@ func (tr *IOTHubEndpointEventHub) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this IOTHubEndpointEventHub
+func (tr *IOTHubEndpointEventHub) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this IOTHubEndpointEventHub using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IOTHubEndpointEventHub) LateInitialize(attrs []byte) (bool, error) {
@@ -585,6 +655,16 @@ func (tr *IOTHubEndpointServiceBusQueue) SetParameters(params map[string]any) er
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this IOTHubEndpointServiceBusQueue
+func (tr *IOTHubEndpointServiceBusQueue) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this IOTHubEndpointServiceBusQueue using its observed tfState.
@@ -661,6 +741,16 @@ func (tr *IOTHubEndpointServiceBusTopic) SetParameters(params map[string]any) er
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this IOTHubEndpointServiceBusTopic
+func (tr *IOTHubEndpointServiceBusTopic) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this IOTHubEndpointServiceBusTopic using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IOTHubEndpointServiceBusTopic) LateInitialize(attrs []byte) (bool, error) {
@@ -733,6 +823,16 @@ func (tr *IOTHubEndpointStorageContainer) SetParameters(params map[string]any) e
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this IOTHubEndpointStorageContainer
+func (tr *IOTHubEndpointStorageContainer) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this IOTHubEndpointStorageContainer using its observed tfState.
@@ -809,6 +909,16 @@ func (tr *IOTHubEnrichment) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this IOTHubEnrichment
+func (tr *IOTHubEnrichment) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this IOTHubEnrichment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IOTHubEnrichment) LateInitialize(attrs []byte) (bool, error) {
@@ -881,6 +991,16 @@ func (tr *IOTHubFallbackRoute) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this IOTHubFallbackRoute
+func (tr *IOTHubFallbackRoute) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this IOTHubFallbackRoute using its observed tfState.
@@ -957,6 +1077,16 @@ func (tr *IOTHubRoute) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this IOTHubRoute
+func (tr *IOTHubRoute) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this IOTHubRoute using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IOTHubRoute) LateInitialize(attrs []byte) (bool, error) {
@@ -1029,6 +1159,16 @@ func (tr *IOTHubSharedAccessPolicy) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this IOTHubSharedAccessPolicy
+func (tr *IOTHubSharedAccessPolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this IOTHubSharedAccessPolicy using its observed tfState.

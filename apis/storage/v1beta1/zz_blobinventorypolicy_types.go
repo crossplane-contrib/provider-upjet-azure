@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BlobInventoryPolicyInitParameters struct {
+
+	// One or more rules blocks as defined below.
+	Rules []RulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
+}
+
 type BlobInventoryPolicyObservation struct {
 
 	// The ID of the Storage Blob Inventory Policy.
@@ -46,6 +52,27 @@ type BlobInventoryPolicyParameters struct {
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
+type FilterInitParameters struct {
+
+	// A set of blob types. Possible values are blockBlob, appendBlob, and pageBlob. The storage account with is_hns_enabled is true doesn't support pageBlob.
+	BlobTypes []*string `json:"blobTypes,omitempty" tf:"blob_types,omitempty"`
+
+	// A set of strings for blob prefixes to be excluded. Maximum of 10 blob prefixes.
+	ExcludePrefixes []*string `json:"excludePrefixes,omitempty" tf:"exclude_prefixes,omitempty"`
+
+	// Includes blob versions in blob inventory or not? Defaults to false.
+	IncludeBlobVersions *bool `json:"includeBlobVersions,omitempty" tf:"include_blob_versions,omitempty"`
+
+	// Includes deleted blobs in blob inventory or not? Defaults to false.
+	IncludeDeleted *bool `json:"includeDeleted,omitempty" tf:"include_deleted,omitempty"`
+
+	// Includes blob snapshots in blob inventory or not? Defaults to false.
+	IncludeSnapshots *bool `json:"includeSnapshots,omitempty" tf:"include_snapshots,omitempty"`
+
+	// A set of strings for blob prefixes to be matched. Maximum of 10 blob prefixes.
+	PrefixMatch []*string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+}
+
 type FilterObservation struct {
 
 	// A set of blob types. Possible values are blockBlob, appendBlob, and pageBlob. The storage account with is_hns_enabled is true doesn't support pageBlob.
@@ -70,8 +97,8 @@ type FilterObservation struct {
 type FilterParameters struct {
 
 	// A set of blob types. Possible values are blockBlob, appendBlob, and pageBlob. The storage account with is_hns_enabled is true doesn't support pageBlob.
-	// +kubebuilder:validation:Required
-	BlobTypes []*string `json:"blobTypes" tf:"blob_types,omitempty"`
+	// +kubebuilder:validation:Optional
+	BlobTypes []*string `json:"blobTypes,omitempty" tf:"blob_types,omitempty"`
 
 	// A set of strings for blob prefixes to be excluded. Maximum of 10 blob prefixes.
 	// +kubebuilder:validation:Optional
@@ -92,6 +119,27 @@ type FilterParameters struct {
 	// A set of strings for blob prefixes to be matched. Maximum of 10 blob prefixes.
 	// +kubebuilder:validation:Optional
 	PrefixMatch []*string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
+}
+
+type RulesInitParameters struct {
+
+	// A filter block as defined above. Can only be set when the scope is Blob.
+	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
+
+	// The format of the inventory files. Possible values are Csv and Parquet.
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+
+	// The name which should be used for this Blob Inventory Policy Rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The inventory schedule applied by this rule. Possible values are Daily and Weekly.
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// A list of fields to be included in the inventory. See the Azure API reference for all the supported fields.
+	SchemaFields []*string `json:"schemaFields,omitempty" tf:"schema_fields,omitempty"`
+
+	// The scope of the inventory for this rule. Possible values are Blob and Container.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
 type RulesObservation struct {
@@ -125,24 +173,24 @@ type RulesParameters struct {
 	Filter []FilterParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// The format of the inventory files. Possible values are Csv and Parquet.
-	// +kubebuilder:validation:Required
-	Format *string `json:"format" tf:"format,omitempty"`
+	// +kubebuilder:validation:Optional
+	Format *string `json:"format,omitempty" tf:"format,omitempty"`
 
 	// The name which should be used for this Blob Inventory Policy Rule.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The inventory schedule applied by this rule. Possible values are Daily and Weekly.
-	// +kubebuilder:validation:Required
-	Schedule *string `json:"schedule" tf:"schedule,omitempty"`
+	// +kubebuilder:validation:Optional
+	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
 	// A list of fields to be included in the inventory. See the Azure API reference for all the supported fields.
-	// +kubebuilder:validation:Required
-	SchemaFields []*string `json:"schemaFields" tf:"schema_fields,omitempty"`
+	// +kubebuilder:validation:Optional
+	SchemaFields []*string `json:"schemaFields,omitempty" tf:"schema_fields,omitempty"`
 
 	// The scope of the inventory for this rule. Possible values are Blob and Container.
-	// +kubebuilder:validation:Required
-	Scope *string `json:"scope" tf:"scope,omitempty"`
+	// +kubebuilder:validation:Optional
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// The storage container name to store the blob inventory files for this rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
@@ -162,6 +210,18 @@ type RulesParameters struct {
 type BlobInventoryPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BlobInventoryPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BlobInventoryPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // BlobInventoryPolicyStatus defines the observed state of BlobInventoryPolicy.
@@ -182,7 +242,7 @@ type BlobInventoryPolicyStatus struct {
 type BlobInventoryPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rules)",message="rules is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rules) || has(self.initProvider.rules)",message="rules is a required parameter"
 	Spec   BlobInventoryPolicySpec   `json:"spec"`
 	Status BlobInventoryPolicyStatus `json:"status,omitempty"`
 }

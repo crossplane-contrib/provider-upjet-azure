@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AutomaticUpdateInitParameters struct {
+
+	// The automation account ID which holds the automatic update runbook and authenticates to Azure resources.
+	AutomationAccountID *string `json:"automationAccountId,omitempty" tf:"automation_account_id,omitempty"`
+
+	// Should the Mobility service installed on Azure virtual machines be automatically updated. Defaults to false.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
 type AutomaticUpdateObservation struct {
 
 	// The automation account ID which holds the automatic update runbook and authenticates to Azure resources.
@@ -31,6 +40,12 @@ type AutomaticUpdateParameters struct {
 	// Should the Mobility service installed on Azure virtual machines be automatically updated. Defaults to false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+}
+
+type SiteRecoveryProtectionContainerMappingInitParameters struct {
+
+	// a automatic_update block defined as below.
+	AutomaticUpdate []AutomaticUpdateInitParameters `json:"automaticUpdate,omitempty" tf:"automatic_update,omitempty"`
 }
 
 type SiteRecoveryProtectionContainerMappingObservation struct {
@@ -151,6 +166,18 @@ type SiteRecoveryProtectionContainerMappingParameters struct {
 type SiteRecoveryProtectionContainerMappingSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SiteRecoveryProtectionContainerMappingParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SiteRecoveryProtectionContainerMappingInitParameters `json:"initProvider,omitempty"`
 }
 
 // SiteRecoveryProtectionContainerMappingStatus defines the observed state of SiteRecoveryProtectionContainerMapping.

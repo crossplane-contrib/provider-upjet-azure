@@ -69,6 +69,16 @@ func (tr *DatabaseMigrationProject) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this DatabaseMigrationProject
+func (tr *DatabaseMigrationProject) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this DatabaseMigrationProject using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *DatabaseMigrationProject) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *DatabaseMigrationService) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this DatabaseMigrationService
+func (tr *DatabaseMigrationService) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this DatabaseMigrationService using its observed tfState.

@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LoadBalancerBackendAddressPoolInitParameters struct {
+
+	// One or more tunnel_interface blocks as defined below.
+	TunnelInterface []TunnelInterfaceInitParameters `json:"tunnelInterface,omitempty" tf:"tunnel_interface,omitempty"`
+
+	// The ID of the Virtual Network within which the Backend Address Pool should exist.
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
+}
+
 type LoadBalancerBackendAddressPoolObservation struct {
 
 	// The Backend IP Configurations associated with this Backend Address Pool.
@@ -65,6 +74,21 @@ type LoadBalancerBackendAddressPoolParameters struct {
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
+type TunnelInterfaceInitParameters struct {
+
+	// The unique identifier of this Gateway Lodbalancer Tunnel Interface.
+	Identifier *float64 `json:"identifier,omitempty" tf:"identifier,omitempty"`
+
+	// The port number that this Gateway Lodbalancer Tunnel Interface listens to.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The protocol used for this Gateway Lodbalancer Tunnel Interface. Possible values are None, Native and VXLAN.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The traffic type of this Gateway Lodbalancer Tunnel Interface. Possible values are None, Internal and External.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type TunnelInterfaceObservation struct {
 
 	// The unique identifier of this Gateway Lodbalancer Tunnel Interface.
@@ -83,26 +107,38 @@ type TunnelInterfaceObservation struct {
 type TunnelInterfaceParameters struct {
 
 	// The unique identifier of this Gateway Lodbalancer Tunnel Interface.
-	// +kubebuilder:validation:Required
-	Identifier *float64 `json:"identifier" tf:"identifier,omitempty"`
+	// +kubebuilder:validation:Optional
+	Identifier *float64 `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
 	// The port number that this Gateway Lodbalancer Tunnel Interface listens to.
-	// +kubebuilder:validation:Required
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The protocol used for this Gateway Lodbalancer Tunnel Interface. Possible values are None, Native and VXLAN.
-	// +kubebuilder:validation:Required
-	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
+	// +kubebuilder:validation:Optional
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// The traffic type of this Gateway Lodbalancer Tunnel Interface. Possible values are None, Internal and External.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 // LoadBalancerBackendAddressPoolSpec defines the desired state of LoadBalancerBackendAddressPool
 type LoadBalancerBackendAddressPoolSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LoadBalancerBackendAddressPoolParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LoadBalancerBackendAddressPoolInitParameters `json:"initProvider,omitempty"`
 }
 
 // LoadBalancerBackendAddressPoolStatus defines the observed state of LoadBalancerBackendAddressPool.

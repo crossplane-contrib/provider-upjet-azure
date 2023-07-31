@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppServiceCertificateOrderInitParameters struct {
+
+	// true if the certificate should be automatically renewed when it expires; otherwise, false. Defaults to true.
+	AutoRenew *bool `json:"autoRenew,omitempty" tf:"auto_renew,omitempty"`
+
+	// Last CSR that was created for this order.
+	Csr *string `json:"csr,omitempty" tf:"csr,omitempty"`
+
+	// The Distinguished Name for the App Service Certificate Order.
+	DistinguishedName *string `json:"distinguishedName,omitempty" tf:"distinguished_name,omitempty"`
+
+	// Certificate key size. Defaults to 2048.
+	KeySize *float64 `json:"keySize,omitempty" tf:"key_size,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. Currently the only valid value is global.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Certificate product type, such as Standard or WildCard.
+	ProductType *string `json:"productType,omitempty" tf:"product_type,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Duration in years (must be between 1 and 3). Defaults to 1.
+	ValidityInYears *float64 `json:"validityInYears,omitempty" tf:"validity_in_years,omitempty"`
+}
+
 type AppServiceCertificateOrderObservation struct {
 
 	// Reasons why App Service Certificate is not renewable at the current moment.
@@ -121,6 +148,9 @@ type AppServiceCertificateOrderParameters struct {
 	ValidityInYears *float64 `json:"validityInYears,omitempty" tf:"validity_in_years,omitempty"`
 }
 
+type CertificatesInitParameters struct {
+}
+
 type CertificatesObservation struct {
 
 	// The name of the App Service Certificate.
@@ -143,6 +173,18 @@ type CertificatesParameters struct {
 type AppServiceCertificateOrderSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppServiceCertificateOrderParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AppServiceCertificateOrderInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppServiceCertificateOrderStatus defines the observed state of AppServiceCertificateOrder.
@@ -163,7 +205,7 @@ type AppServiceCertificateOrderStatus struct {
 type AppServiceCertificateOrder struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   AppServiceCertificateOrderSpec   `json:"spec"`
 	Status AppServiceCertificateOrderStatus `json:"status,omitempty"`
 }

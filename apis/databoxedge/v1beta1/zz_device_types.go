@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DeviceInitParameters struct {
+
+	// The Azure Region where the Databox Edge Device should exist. Changing this forces a new Databox Edge Device to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The sku_name is comprised of two segments separated by a hyphen (e.g. TEA_1Node_UPS_Heater-Standard). The first segment of the sku_name defines the name of the SKU, possible values are Gateway, EdgeMR_Mini, EdgeP_Base, EdgeP_High, EdgePR_Base, EdgePR_Base_UPS, GPU, RCA_Large, RCA_Small, RDC, TCA_Large, TCA_Small, TDC, TEA_1Node, TEA_1Node_UPS, TEA_1Node_Heater, TEA_1Node_UPS_Heater, TEA_4Node_Heater, TEA_4Node_UPS_Heater or TMA. The second segment defines the tier of the sku_name, possible values are Standard. For more information see the product documentation. Changing this forces a new Databox Edge Device to be created.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Databox Edge Device.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DeviceObservation struct {
 
 	// A device_properties block as defined below.
@@ -62,6 +74,9 @@ type DeviceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type DevicePropertiesInitParameters struct {
+}
+
 type DevicePropertiesObservation struct {
 
 	// The Data Box Edge/Gateway device local capacity in MB.
@@ -105,6 +120,18 @@ type DevicePropertiesParameters struct {
 type DeviceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DeviceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DeviceInitParameters `json:"initProvider,omitempty"`
 }
 
 // DeviceStatus defines the observed state of Device.
@@ -125,8 +152,8 @@ type DeviceStatus struct {
 type Device struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
 	Spec   DeviceSpec   `json:"spec"`
 	Status DeviceStatus `json:"status,omitempty"`
 }

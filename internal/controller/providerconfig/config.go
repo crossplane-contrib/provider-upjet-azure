@@ -17,13 +17,11 @@ limitations under the License.
 package providerconfig
 
 import (
-	tjcontroller "github.com/upbound/upjet/pkg/controller"
-	ctrl "sigs.k8s.io/controller-runtime"
-	"sigs.k8s.io/controller-runtime/pkg/source"
-
 	"github.com/crossplane/crossplane-runtime/pkg/event"
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/providerconfig"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
+	tjcontroller "github.com/upbound/upjet/pkg/controller"
+	ctrl "sigs.k8s.io/controller-runtime"
 
 	"github.com/upbound/provider-azure/apis/v1beta1"
 )
@@ -41,7 +39,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		Named(name).
 		WithOptions(o.ForControllerRuntime()).
 		For(&v1beta1.ProviderConfig{}).
-		Watches(&source.Kind{Type: &v1beta1.ProviderConfigUsage{}}, &resource.EnqueueRequestForProviderConfig{}).
+		Watches(&v1beta1.ProviderConfigUsage{}, &resource.EnqueueRequestForProviderConfig{}).
 		Complete(providerconfig.NewReconciler(mgr, of,
 			providerconfig.WithLogger(o.Logger.WithValues("controller", name)),
 			providerconfig.WithRecorder(event.NewAPIRecorder(mgr.GetEventRecorderFor(name)))))

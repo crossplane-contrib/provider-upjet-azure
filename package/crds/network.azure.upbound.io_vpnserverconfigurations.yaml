@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: vpnserverconfigurations.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -82,10 +81,6 @@ spec:
                         tenant:
                           description: The Tenant which should be used for authentication.
                           type: string
-                      required:
-                      - audience
-                      - issuer
-                      - tenant
                       type: object
                     type: array
                   clientRevokedCertificate:
@@ -99,9 +94,6 @@ spec:
                         thumbprint:
                           description: The Thumbprint of the Certificate.
                           type: string
-                      required:
-                      - name
-                      - thumbprint
                       type: object
                     type: array
                   clientRootCertificate:
@@ -115,9 +107,6 @@ spec:
                         publicCertData:
                           description: The Public Key Data associated with the Certificate.
                           type: string
-                      required:
-                      - name
-                      - publicCertData
                       type: object
                     type: array
                   ipsecPolicy:
@@ -162,15 +151,6 @@ spec:
                           description: The IPSec Security Association lifetime in
                             seconds for a Site-to-Site VPN tunnel.
                           type: number
-                      required:
-                      - dhGroup
-                      - ikeEncryption
-                      - ikeIntegrity
-                      - ipsecEncryption
-                      - ipsecIntegrity
-                      - pfsGroup
-                      - saDataSizeKilobytes
-                      - saLifetimeSeconds
                       type: object
                     type: array
                   location:
@@ -194,9 +174,6 @@ spec:
                               thumbprint:
                                 description: The Thumbprint of the Certificate.
                                 type: string
-                            required:
-                            - name
-                            - thumbprint
                             type: object
                           type: array
                         server:
@@ -229,8 +206,6 @@ spec:
                                 - namespace
                                 type: object
                             required:
-                            - address
-                            - score
                             - secretSecretRef
                             type: object
                           type: array
@@ -247,9 +222,6 @@ spec:
                                 description: The Public Key Data associated with the
                                   Certificate.
                                 type: string
-                            required:
-                            - name
-                            - publicCertData
                             type: object
                           type: array
                       type: object
@@ -353,21 +325,203 @@ spec:
                       type: string
                     type: array
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  azureActiveDirectoryAuthentication:
+                    description: A azure_active_directory_authentication block as
+                      defined below.
+                    items:
+                      properties:
+                        audience:
+                          description: The Audience which should be used for authentication.
+                          type: string
+                        issuer:
+                          description: The Issuer which should be used for authentication.
+                          type: string
+                        tenant:
+                          description: The Tenant which should be used for authentication.
+                          type: string
+                      type: object
+                    type: array
+                  clientRevokedCertificate:
+                    description: One or more client_revoked_certificate blocks as
+                      defined below.
+                    items:
+                      properties:
+                        name:
+                          description: A name used to uniquely identify this certificate.
+                          type: string
+                        thumbprint:
+                          description: The Thumbprint of the Certificate.
+                          type: string
+                      type: object
+                    type: array
+                  clientRootCertificate:
+                    description: One or more client_root_certificate blocks as defined
+                      below.
+                    items:
+                      properties:
+                        name:
+                          description: A name used to uniquely identify this certificate.
+                          type: string
+                        publicCertData:
+                          description: The Public Key Data associated with the Certificate.
+                          type: string
+                      type: object
+                    type: array
+                  ipsecPolicy:
+                    description: A ipsec_policy block as defined below.
+                    items:
+                      properties:
+                        dhGroup:
+                          description: The DH Group, used in IKE Phase 1. Possible
+                            values include DHGroup1, DHGroup2, DHGroup14, DHGroup24,
+                            DHGroup2048, ECP256, ECP384 and None.
+                          type: string
+                        ikeEncryption:
+                          description: The IKE encryption algorithm, used for IKE
+                            Phase 2. Possible values include AES128, AES192, AES256,
+                            DES, DES3, GCMAES128 and GCMAES256.
+                          type: string
+                        ikeIntegrity:
+                          description: The IKE encryption integrity algorithm, used
+                            for IKE Phase 2. Possible values include GCMAES128, GCMAES256,
+                            MD5, SHA1, SHA256 and SHA384.
+                          type: string
+                        ipsecEncryption:
+                          description: The IPSec encryption algorithm, used for IKE
+                            phase 1. Possible values include AES128, AES192, AES256,
+                            DES, DES3, GCMAES128, GCMAES192, GCMAES256 and None.
+                          type: string
+                        ipsecIntegrity:
+                          description: The IPSec integrity algorithm, used for IKE
+                            phase 1. Possible values include GCMAES128, GCMAES192,
+                            GCMAES256, MD5, SHA1 and SHA256.
+                          type: string
+                        pfsGroup:
+                          description: The Pfs Group, used in IKE Phase 2. Possible
+                            values include ECP256, ECP384, PFS1, PFS2, PFS14, PFS24,
+                            PFS2048, PFSMM and None.
+                          type: string
+                        saDataSizeKilobytes:
+                          description: The IPSec Security Association payload size
+                            in KB for a Site-to-Site VPN tunnel.
+                          type: number
+                        saLifetimeSeconds:
+                          description: The IPSec Security Association lifetime in
+                            seconds for a Site-to-Site VPN tunnel.
+                          type: number
+                      type: object
+                    type: array
+                  location:
+                    description: The Azure location where this VPN Server Configuration
+                      should be created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  radius:
+                    description: A radius block as defined below.
+                    items:
+                      properties:
+                        clientRootCertificate:
+                          description: One or more client_root_certificate blocks
+                            as defined above.
+                          items:
+                            properties:
+                              name:
+                                description: A name used to uniquely identify this
+                                  certificate.
+                                type: string
+                              thumbprint:
+                                description: The Thumbprint of the Certificate.
+                                type: string
+                            type: object
+                          type: array
+                        server:
+                          description: One or more server blocks as defined below.
+                          items:
+                            properties:
+                              address:
+                                description: The Address of the Radius Server.
+                                type: string
+                              score:
+                                description: The Score of the Radius Server determines
+                                  the priority of the server. Ranges from 1 to 30.
+                                type: number
+                            type: object
+                          type: array
+                        serverRootCertificate:
+                          description: One or more server_root_certificate blocks
+                            as defined below.
+                          items:
+                            properties:
+                              name:
+                                description: A name used to uniquely identify this
+                                  certificate.
+                                type: string
+                              publicCertData:
+                                description: The Public Key Data associated with the
+                                  Certificate.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  vpnAuthenticationTypes:
+                    description: A list of Authentication Types applicable for this
+                      VPN Server Configuration. Possible values are AAD (Azure Active
+                      Directory), Certificate and Radius.
+                    items:
+                      type: string
+                    type: array
+                  vpnProtocols:
+                    description: A list of VPN Protocols to use for this Server Configuration.
+                      Possible values are IkeV2 and OpenVPN.
+                    items:
+                      type: string
+                    type: array
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -541,9 +695,13 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: vpnAuthenticationTypes is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vpnAuthenticationTypes)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vpnAuthenticationTypes)
+                || has(self.initProvider.vpnAuthenticationTypes)'
           status:
             description: VPNServerConfigurationStatus defines the observed state of
               VPNServerConfiguration.

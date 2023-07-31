@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MSSQLJobCredentialInitParameters struct {
+
+	// The username part of the credential.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
 type MSSQLJobCredentialObservation struct {
 
 	// The ID of the Elastic Job Credential.
@@ -54,6 +60,18 @@ type MSSQLJobCredentialParameters struct {
 type MSSQLJobCredentialSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MSSQLJobCredentialParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MSSQLJobCredentialInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLJobCredentialStatus defines the observed state of MSSQLJobCredential.
@@ -74,8 +92,8 @@ type MSSQLJobCredentialStatus struct {
 type MSSQLJobCredential struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.username)",message="username is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.passwordSecretRef)",message="passwordSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.username) || has(self.initProvider.username)",message="username is a required parameter"
 	Spec   MSSQLJobCredentialSpec   `json:"spec"`
 	Status MSSQLJobCredentialStatus `json:"status,omitempty"`
 }

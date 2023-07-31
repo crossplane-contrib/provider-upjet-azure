@@ -69,6 +69,16 @@ func (tr *HadoopCluster) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this HadoopCluster
+func (tr *HadoopCluster) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this HadoopCluster using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *HadoopCluster) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *HBaseCluster) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this HBaseCluster
+func (tr *HBaseCluster) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this HBaseCluster using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *InteractiveQueryCluster) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this InteractiveQueryCluster
+func (tr *InteractiveQueryCluster) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this InteractiveQueryCluster using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *InteractiveQueryCluster) LateInitialize(attrs []byte) (bool, error) {
@@ -291,6 +321,16 @@ func (tr *KafkaCluster) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this KafkaCluster
+func (tr *KafkaCluster) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this KafkaCluster using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *KafkaCluster) LateInitialize(attrs []byte) (bool, error) {
@@ -363,6 +403,16 @@ func (tr *SparkCluster) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SparkCluster
+func (tr *SparkCluster) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SparkCluster using its observed tfState.

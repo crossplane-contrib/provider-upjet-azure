@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CustomDNSConfigsInitParameters struct {
+}
+
 type CustomDNSConfigsObservation struct {
 
 	// The fully qualified domain name to the private_endpoint.
@@ -23,6 +26,9 @@ type CustomDNSConfigsObservation struct {
 }
 
 type CustomDNSConfigsParameters struct {
+}
+
+type PrivateDNSZoneConfigsInitParameters struct {
 }
 
 type PrivateDNSZoneConfigsObservation struct {
@@ -43,6 +49,12 @@ type PrivateDNSZoneConfigsObservation struct {
 type PrivateDNSZoneConfigsParameters struct {
 }
 
+type PrivateDNSZoneGroupInitParameters struct {
+
+	// Specifies the Name of the Private DNS Zone Group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
 type PrivateDNSZoneGroupObservation struct {
 
 	// The ID of the Private DNS Zone Group.
@@ -58,8 +70,8 @@ type PrivateDNSZoneGroupObservation struct {
 type PrivateDNSZoneGroupParameters struct {
 
 	// Specifies the Name of the Private DNS Zone Group.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the list of Private DNS Zones to include within the private_dns_zone_group.
 	// +crossplane:generate:reference:type=PrivateDNSZone
@@ -74,6 +86,21 @@ type PrivateDNSZoneGroupParameters struct {
 	// Selector for a list of PrivateDNSZone to populate privateDnsZoneIds.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIdsSelector *v1.Selector `json:"privateDnsZoneIdsSelector,omitempty" tf:"-"`
+}
+
+type PrivateEndpointIPConfigurationInitParameters struct {
+
+	// Specifies the member name this IP address applies to. If it is not specified, it will use the value of subresource_name. Changing this forces a new resource to be created.
+	MemberName *string `json:"memberName,omitempty" tf:"member_name,omitempty"`
+
+	// Specifies the Name of the IP Configuration. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the static IP address within the private endpoint's subnet to be used. Changing this forces a new resource to be created.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// Specifies the subresource this IP address applies to. subresource_names corresponds to group_id. Changing this forces a new resource to be created.
+	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 }
 
 type PrivateEndpointIPConfigurationObservation struct {
@@ -98,16 +125,40 @@ type PrivateEndpointIPConfigurationParameters struct {
 	MemberName *string `json:"memberName,omitempty" tf:"member_name,omitempty"`
 
 	// Specifies the Name of the IP Configuration. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the static IP address within the private endpoint's subnet to be used. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	PrivateIPAddress *string `json:"privateIpAddress" tf:"private_ip_address,omitempty"`
+	// +kubebuilder:validation:Optional
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
 	// Specifies the subresource this IP address applies to. subresource_names corresponds to group_id. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
+}
+
+type PrivateEndpointInitParameters struct {
+
+	// The custom name of the network interface attached to the private endpoint. Changing this forces a new resource to be created.
+	CustomNetworkInterfaceName *string `json:"customNetworkInterfaceName,omitempty" tf:"custom_network_interface_name,omitempty"`
+
+	// One or more ip_configuration blocks as defined below. This allows a static IP address to be set for this Private Endpoint, otherwise an address is dynamically allocated from the Subnet.
+	IPConfiguration []PrivateEndpointIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A private_dns_zone_group block as defined below.
+	PrivateDNSZoneGroup []PrivateDNSZoneGroupInitParameters `json:"privateDnsZoneGroup,omitempty" tf:"private_dns_zone_group,omitempty"`
+
+	// A private_service_connection block as defined below.
+	PrivateServiceConnection []PrivateServiceConnectionInitParameters `json:"privateServiceConnection,omitempty" tf:"private_service_connection,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type PrivateEndpointNetworkInterfaceInitParameters struct {
 }
 
 type PrivateEndpointNetworkInterfaceObservation struct {
@@ -215,6 +266,27 @@ type PrivateEndpointParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type PrivateServiceConnectionInitParameters struct {
+
+	// Does the Private Endpoint require Manual Approval from the remote resource owner? Changing this forces a new resource to be created.
+	IsManualConnection *bool `json:"isManualConnection,omitempty" tf:"is_manual_connection,omitempty"`
+
+	// Specifies the Name of the Private Service Connection. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Service Alias of the Private Link Enabled Remote Resource which this Private Endpoint should be connected to. One of private_connection_resource_id or private_connection_resource_alias must be specified. Changing this forces a new resource to be created.
+	PrivateConnectionResourceAlias *string `json:"privateConnectionResourceAlias,omitempty" tf:"private_connection_resource_alias,omitempty"`
+
+	// The ID of the Private Link Enabled Remote Resource which this Private Endpoint should be connected to. One of private_connection_resource_id or private_connection_resource_alias must be specified. Changing this forces a new resource to be created. For a web app or function app slot, the parent web app should be used in this field instead of a reference to the slot itself.
+	PrivateConnectionResourceID *string `json:"privateConnectionResourceId,omitempty" tf:"private_connection_resource_id,omitempty"`
+
+	// A message passed to the owner of the remote resource when the private endpoint attempts to establish the connection to the remote resource. The request message can be a maximum of 140 characters in length. Only valid if is_manual_connection is set to true.
+	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
+
+	// A list of subresource names which the Private Endpoint is able to connect to. subresource_names corresponds to group_id. Possible values are detailed in the product documentation in the Subresources column. Changing this forces a new resource to be created.
+	SubresourceNames []*string `json:"subresourceNames,omitempty" tf:"subresource_names,omitempty"`
+}
+
 type PrivateServiceConnectionObservation struct {
 
 	// Does the Private Endpoint require Manual Approval from the remote resource owner? Changing this forces a new resource to be created.
@@ -242,12 +314,12 @@ type PrivateServiceConnectionObservation struct {
 type PrivateServiceConnectionParameters struct {
 
 	// Does the Private Endpoint require Manual Approval from the remote resource owner? Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	IsManualConnection *bool `json:"isManualConnection" tf:"is_manual_connection,omitempty"`
+	// +kubebuilder:validation:Optional
+	IsManualConnection *bool `json:"isManualConnection,omitempty" tf:"is_manual_connection,omitempty"`
 
 	// Specifies the Name of the Private Service Connection. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Service Alias of the Private Link Enabled Remote Resource which this Private Endpoint should be connected to. One of private_connection_resource_id or private_connection_resource_alias must be specified. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -264,6 +336,9 @@ type PrivateServiceConnectionParameters struct {
 	// A list of subresource names which the Private Endpoint is able to connect to. subresource_names corresponds to group_id. Possible values are detailed in the product documentation in the Subresources column. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SubresourceNames []*string `json:"subresourceNames,omitempty" tf:"subresource_names,omitempty"`
+}
+
+type RecordSetsInitParameters struct {
 }
 
 type RecordSetsObservation struct {
@@ -291,6 +366,18 @@ type RecordSetsParameters struct {
 type PrivateEndpointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PrivateEndpointParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PrivateEndpointInitParameters `json:"initProvider,omitempty"`
 }
 
 // PrivateEndpointStatus defines the observed state of PrivateEndpoint.
@@ -311,8 +398,8 @@ type PrivateEndpointStatus struct {
 type PrivateEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.privateServiceConnection)",message="privateServiceConnection is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.privateServiceConnection) || has(self.initProvider.privateServiceConnection)",message="privateServiceConnection is a required parameter"
 	Spec   PrivateEndpointSpec   `json:"spec"`
 	Status PrivateEndpointStatus `json:"status,omitempty"`
 }

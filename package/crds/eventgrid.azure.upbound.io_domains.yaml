@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: domains.eventgrid.azure.upbound.io
 spec:
   group: eventgrid.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -93,8 +92,6 @@ spec:
                             that should be configured on this Event Grid Domain. Possible
                             values are SystemAssigned, UserAssigned.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   inboundIpRule:
@@ -272,21 +269,168 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  autoCreateTopicWithFirstSubscription:
+                    description: Whether to create the domain topic when the first
+                      event subscription at the scope of the domain topic is created.
+                      Defaults to true.
+                    type: boolean
+                  autoDeleteTopicWithLastSubscription:
+                    description: Whether to delete the domain topic when the last
+                      event subscription at the scope of the domain topic is deleted.
+                      Defaults to true.
+                    type: boolean
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Event Grid Domain.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Event Grid Domain. Possible
+                            values are SystemAssigned, UserAssigned.
+                          type: string
+                      type: object
+                    type: array
+                  inboundIpRule:
+                    description: One or more inbound_ip_rule blocks as defined below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to take when the rule is matched.
+                            Possible values are Allow.
+                          type: string
+                        ipMask:
+                          description: The IP mask (CIDR) to match on.
+                          type: string
+                      type: object
+                    type: array
+                  inputMappingDefaultValues:
+                    description: A input_mapping_default_values block as defined below.
+                      Changing this forces a new resource to be created.
+                    items:
+                      properties:
+                        dataVersion:
+                          description: Specifies the default data version of the EventGrid
+                            Event to associate with the domain. Changing this forces
+                            a new resource to be created.
+                          type: string
+                        eventType:
+                          description: Specifies the default event type of the EventGrid
+                            Event to associate with the domain. Changing this forces
+                            a new resource to be created.
+                          type: string
+                        subject:
+                          description: Specifies the default subject of the EventGrid
+                            Event to associate with the domain. Changing this forces
+                            a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  inputMappingFields:
+                    description: A input_mapping_fields block as defined below. Changing
+                      this forces a new resource to be created.
+                    items:
+                      properties:
+                        dataVersion:
+                          description: Specifies the data version of the EventGrid
+                            Event to associate with the domain. Changing this forces
+                            a new resource to be created.
+                          type: string
+                        eventTime:
+                          description: Specifies the event time of the EventGrid Event
+                            to associate with the domain. Changing this forces a new
+                            resource to be created.
+                          type: string
+                        eventType:
+                          description: Specifies the event type of the EventGrid Event
+                            to associate with the domain. Changing this forces a new
+                            resource to be created.
+                          type: string
+                        id:
+                          description: Specifies the id of the EventGrid Event to
+                            associate with the domain. Changing this forces a new
+                            resource to be created.
+                          type: string
+                        subject:
+                          description: Specifies the subject of the EventGrid Event
+                            to associate with the domain. Changing this forces a new
+                            resource to be created.
+                          type: string
+                        topic:
+                          description: Specifies the topic of the EventGrid Event
+                            to associate with the domain. Changing this forces a new
+                            resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  inputSchema:
+                    description: Specifies the schema in which incoming events will
+                      be published to this domain. Allowed values are CloudEventSchemaV1_0,
+                      CustomEventSchema, or EventGridSchema. Defaults to eventgridschema.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  localAuthEnabled:
+                    description: Whether local authentication methods is enabled for
+                      the EventGrid Domain. Defaults to true.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  publicNetworkAccessEnabled:
+                    description: Whether or not public network access is allowed for
+                      this server. Defaults to true.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -460,7 +604,9 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
           status:
             description: DomainStatus defines the observed state of Domain.
             properties:

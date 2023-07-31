@@ -19,6 +19,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: azurerm_api_management_api
     value: ${file("api_management_api_schema.xml")}
-
----
-

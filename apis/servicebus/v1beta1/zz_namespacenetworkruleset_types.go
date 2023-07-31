@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NamespaceNetworkRuleSetInitParameters struct {
+
+	// Specifies the default action for the ServiceBus Namespace Network Rule Set. Possible values are Allow and Deny. Defaults to Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the ServiceBus Namespace.
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// One or more network_rules blocks as defined below.
+	NetworkRules []NetworkRulesInitParameters `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
+
+	// Whether to allow traffic over public network. Possible values are true and false. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// If True, then Azure Services that are known and trusted for this resource type are allowed to bypass firewall configuration. See Trusted Microsoft Services
+	TrustedServicesAllowed *bool `json:"trustedServicesAllowed,omitempty" tf:"trusted_services_allowed,omitempty"`
+}
+
 type NamespaceNetworkRuleSetObservation struct {
 
 	// Specifies the default action for the ServiceBus Namespace Network Rule Set. Possible values are Allow and Deny. Defaults to Deny.
@@ -74,6 +92,12 @@ type NamespaceNetworkRuleSetParameters struct {
 	TrustedServicesAllowed *bool `json:"trustedServicesAllowed,omitempty" tf:"trusted_services_allowed,omitempty"`
 }
 
+type NetworkRulesInitParameters struct {
+
+	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
+	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+}
+
 type NetworkRulesObservation struct {
 
 	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
@@ -108,6 +132,18 @@ type NetworkRulesParameters struct {
 type NamespaceNetworkRuleSetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NamespaceNetworkRuleSetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider NamespaceNetworkRuleSetInitParameters `json:"initProvider,omitempty"`
 }
 
 // NamespaceNetworkRuleSetStatus defines the observed state of NamespaceNetworkRuleSet.

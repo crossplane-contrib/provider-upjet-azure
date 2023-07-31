@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IOTHubSharedAccessPolicyInitParameters struct {
+
+	// Adds DeviceConnect permission to this Shared Access Account. It allows sending and receiving on the device-side endpoints.
+	DeviceConnect *bool `json:"deviceConnect,omitempty" tf:"device_connect,omitempty"`
+
+	// Adds RegistryRead permission to this Shared Access Account. It allows read access to the identity registry.
+	RegistryRead *bool `json:"registryRead,omitempty" tf:"registry_read,omitempty"`
+
+	// Adds RegistryWrite permission to this Shared Access Account. It allows write access to the identity registry.
+	RegistryWrite *bool `json:"registryWrite,omitempty" tf:"registry_write,omitempty"`
+
+	// Adds ServiceConnect permission to this Shared Access Account. It allows sending and receiving on the cloud-side endpoints.
+	ServiceConnect *bool `json:"serviceConnect,omitempty" tf:"service_connect,omitempty"`
+}
+
 type IOTHubSharedAccessPolicyObservation struct {
 
 	// Adds DeviceConnect permission to this Shared Access Account. It allows sending and receiving on the device-side endpoints.
@@ -86,6 +101,18 @@ type IOTHubSharedAccessPolicyParameters struct {
 type IOTHubSharedAccessPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IOTHubSharedAccessPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider IOTHubSharedAccessPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // IOTHubSharedAccessPolicyStatus defines the observed state of IOTHubSharedAccessPolicy.

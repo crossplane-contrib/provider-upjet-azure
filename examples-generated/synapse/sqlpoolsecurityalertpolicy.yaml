@@ -144,6 +144,3 @@ spec:
         testing.upbound.io/example-name: example
     tags:
       Env: production
-
----
-
