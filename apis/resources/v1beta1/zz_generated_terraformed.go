@@ -79,15 +79,6 @@ func (tr *ResourceDeploymentScriptAzureCli) GetInitParameters() (map[string]any,
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ResourceDeploymentScriptAzureCli
-func (tr *ResourceDeploymentScriptAzureCli) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ResourceDeploymentScriptAzureCli using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ResourceDeploymentScriptAzureCli) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *ResourceDeploymentScriptAzurePowerShell) GetInitParameters() (map[stri
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ResourceDeploymentScriptAzurePowerShell
-func (tr *ResourceDeploymentScriptAzurePowerShell) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ResourceDeploymentScriptAzurePowerShell using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *ResourceGroupTemplateDeployment) GetInitParameters() (map[string]any, 
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ResourceGroupTemplateDeployment
-func (tr *ResourceGroupTemplateDeployment) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ResourceGroupTemplateDeployment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ResourceGroupTemplateDeployment) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *SubscriptionTemplateDeployment) GetInitParameters() (map[string]any, e
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SubscriptionTemplateDeployment
-func (tr *SubscriptionTemplateDeployment) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SubscriptionTemplateDeployment using its observed tfState.

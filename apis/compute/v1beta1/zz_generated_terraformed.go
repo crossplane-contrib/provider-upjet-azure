@@ -79,15 +79,6 @@ func (tr *AvailabilitySet) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this AvailabilitySet
-func (tr *AvailabilitySet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this AvailabilitySet using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AvailabilitySet) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *CapacityReservation) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this CapacityReservation
-func (tr *CapacityReservation) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this CapacityReservation using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *CapacityReservationGroup) GetInitParameters() (map[string]any, error) 
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this CapacityReservationGroup
-func (tr *CapacityReservationGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this CapacityReservationGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *CapacityReservationGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *DedicatedHost) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this DedicatedHost
-func (tr *DedicatedHost) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this DedicatedHost using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *DiskAccess) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this DiskAccess
-func (tr *DiskAccess) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this DiskAccess using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *DiskAccess) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *DiskEncryptionSet) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this DiskEncryptionSet
-func (tr *DiskEncryptionSet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this DiskEncryptionSet using its observed tfState.
@@ -637,15 +583,6 @@ func (tr *GalleryApplication) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this GalleryApplication
-func (tr *GalleryApplication) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this GalleryApplication using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *GalleryApplication) LateInitialize(attrs []byte) (bool, error) {
@@ -728,15 +665,6 @@ func (tr *GalleryApplicationVersion) GetInitParameters() (map[string]any, error)
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this GalleryApplicationVersion
-func (tr *GalleryApplicationVersion) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this GalleryApplicationVersion using its observed tfState.
@@ -823,15 +751,6 @@ func (tr *Image) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Image
-func (tr *Image) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Image using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Image) LateInitialize(attrs []byte) (bool, error) {
@@ -914,15 +833,6 @@ func (tr *LinuxVirtualMachine) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this LinuxVirtualMachine
-func (tr *LinuxVirtualMachine) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this LinuxVirtualMachine using its observed tfState.
@@ -1011,15 +921,6 @@ func (tr *LinuxVirtualMachineScaleSet) GetInitParameters() (map[string]any, erro
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this LinuxVirtualMachineScaleSet
-func (tr *LinuxVirtualMachineScaleSet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this LinuxVirtualMachineScaleSet using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LinuxVirtualMachineScaleSet) LateInitialize(attrs []byte) (bool, error) {
@@ -1102,15 +1003,6 @@ func (tr *ManagedDisk) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ManagedDisk
-func (tr *ManagedDisk) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ManagedDisk using its observed tfState.
@@ -1197,15 +1089,6 @@ func (tr *ManagedDiskSASToken) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ManagedDiskSASToken
-func (tr *ManagedDiskSASToken) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ManagedDiskSASToken using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ManagedDiskSASToken) LateInitialize(attrs []byte) (bool, error) {
@@ -1288,15 +1171,6 @@ func (tr *OrchestratedVirtualMachineScaleSet) GetInitParameters() (map[string]an
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this OrchestratedVirtualMachineScaleSet
-func (tr *OrchestratedVirtualMachineScaleSet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this OrchestratedVirtualMachineScaleSet using its observed tfState.
@@ -1383,15 +1257,6 @@ func (tr *ProximityPlacementGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ProximityPlacementGroup
-func (tr *ProximityPlacementGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ProximityPlacementGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ProximityPlacementGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -1474,15 +1339,6 @@ func (tr *SharedImage) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SharedImage
-func (tr *SharedImage) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SharedImage using its observed tfState.
@@ -1569,15 +1425,6 @@ func (tr *SharedImageGallery) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SharedImageGallery
-func (tr *SharedImageGallery) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SharedImageGallery using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SharedImageGallery) LateInitialize(attrs []byte) (bool, error) {
@@ -1660,15 +1507,6 @@ func (tr *Snapshot) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Snapshot
-func (tr *Snapshot) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Snapshot using its observed tfState.
@@ -1755,15 +1593,6 @@ func (tr *SSHPublicKey) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SSHPublicKey
-func (tr *SSHPublicKey) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SSHPublicKey using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SSHPublicKey) LateInitialize(attrs []byte) (bool, error) {
@@ -1846,15 +1675,6 @@ func (tr *WindowsVirtualMachine) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this WindowsVirtualMachine
-func (tr *WindowsVirtualMachine) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this WindowsVirtualMachine using its observed tfState.
@@ -1941,15 +1761,6 @@ func (tr *WindowsVirtualMachineScaleSet) GetInitParameters() (map[string]any, er
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this WindowsVirtualMachineScaleSet
-func (tr *WindowsVirtualMachineScaleSet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this WindowsVirtualMachineScaleSet using its observed tfState.

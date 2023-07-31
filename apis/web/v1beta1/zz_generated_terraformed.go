@@ -79,15 +79,6 @@ func (tr *AppServicePlan) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this AppServicePlan
-func (tr *AppServicePlan) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this AppServicePlan using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AppServicePlan) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *FunctionApp) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this FunctionApp
-func (tr *FunctionApp) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this FunctionApp using its observed tfState.
@@ -266,15 +248,6 @@ func (tr *FunctionAppActiveSlot) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this FunctionAppActiveSlot
-func (tr *FunctionAppActiveSlot) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this FunctionAppActiveSlot using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FunctionAppActiveSlot) LateInitialize(attrs []byte) (bool, error) {
@@ -357,15 +330,6 @@ func (tr *FunctionAppFunction) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this FunctionAppFunction
-func (tr *FunctionAppFunction) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this FunctionAppFunction using its observed tfState.
@@ -452,15 +416,6 @@ func (tr *FunctionAppHybridConnection) GetInitParameters() (map[string]any, erro
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this FunctionAppHybridConnection
-func (tr *FunctionAppHybridConnection) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this FunctionAppHybridConnection using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FunctionAppHybridConnection) LateInitialize(attrs []byte) (bool, error) {
@@ -545,15 +500,6 @@ func (tr *FunctionAppSlot) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this FunctionAppSlot
-func (tr *FunctionAppSlot) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this FunctionAppSlot using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FunctionAppSlot) LateInitialize(attrs []byte) (bool, error) {
@@ -636,15 +582,6 @@ func (tr *LinuxFunctionApp) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this LinuxFunctionApp
-func (tr *LinuxFunctionApp) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this LinuxFunctionApp using its observed tfState.
@@ -732,15 +669,6 @@ func (tr *LinuxFunctionAppSlot) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this LinuxFunctionAppSlot
-func (tr *LinuxFunctionAppSlot) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this LinuxFunctionAppSlot using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LinuxFunctionAppSlot) LateInitialize(attrs []byte) (bool, error) {
@@ -824,15 +752,6 @@ func (tr *LinuxWebApp) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this LinuxWebApp
-func (tr *LinuxWebApp) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this LinuxWebApp using its observed tfState.
@@ -920,15 +839,6 @@ func (tr *LinuxWebAppSlot) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this LinuxWebAppSlot
-func (tr *LinuxWebAppSlot) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this LinuxWebAppSlot using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LinuxWebAppSlot) LateInitialize(attrs []byte) (bool, error) {
@@ -1012,15 +922,6 @@ func (tr *ServicePlan) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ServicePlan
-func (tr *ServicePlan) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ServicePlan using its observed tfState.
@@ -1107,15 +1008,6 @@ func (tr *SourceControlToken) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SourceControlToken
-func (tr *SourceControlToken) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SourceControlToken using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SourceControlToken) LateInitialize(attrs []byte) (bool, error) {
@@ -1198,15 +1090,6 @@ func (tr *StaticSite) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this StaticSite
-func (tr *StaticSite) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this StaticSite using its observed tfState.
@@ -1293,15 +1176,6 @@ func (tr *AppActiveSlot) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this AppActiveSlot
-func (tr *AppActiveSlot) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this AppActiveSlot using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AppActiveSlot) LateInitialize(attrs []byte) (bool, error) {
@@ -1386,15 +1260,6 @@ func (tr *AppHybridConnection) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this AppHybridConnection
-func (tr *AppHybridConnection) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this AppHybridConnection using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AppHybridConnection) LateInitialize(attrs []byte) (bool, error) {
@@ -1477,15 +1342,6 @@ func (tr *WindowsFunctionApp) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this WindowsFunctionApp
-func (tr *WindowsFunctionApp) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this WindowsFunctionApp using its observed tfState.
@@ -1573,15 +1429,6 @@ func (tr *WindowsFunctionAppSlot) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this WindowsFunctionAppSlot
-func (tr *WindowsFunctionAppSlot) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this WindowsFunctionAppSlot using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *WindowsFunctionAppSlot) LateInitialize(attrs []byte) (bool, error) {
@@ -1667,15 +1514,6 @@ func (tr *WindowsWebApp) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this WindowsWebApp
-func (tr *WindowsWebApp) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this WindowsWebApp using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *WindowsWebApp) LateInitialize(attrs []byte) (bool, error) {
@@ -1759,15 +1597,6 @@ func (tr *WindowsWebAppSlot) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this WindowsWebAppSlot
-func (tr *WindowsWebAppSlot) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this WindowsWebAppSlot using its observed tfState.

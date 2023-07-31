@@ -79,15 +79,6 @@ func (tr *ManagedApplicationDefinition) GetInitParameters() (map[string]any, err
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ManagedApplicationDefinition
-func (tr *ManagedApplicationDefinition) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ManagedApplicationDefinition using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ManagedApplicationDefinition) LateInitialize(attrs []byte) (bool, error) {

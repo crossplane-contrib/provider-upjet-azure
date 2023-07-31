@@ -79,15 +79,6 @@ func (tr *BotChannelAlexa) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BotChannelAlexa
-func (tr *BotChannelAlexa) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BotChannelAlexa using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BotChannelAlexa) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *BotChannelDirectLine) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BotChannelDirectLine
-func (tr *BotChannelDirectLine) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BotChannelDirectLine using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *BotChannelLine) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BotChannelLine
-func (tr *BotChannelLine) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BotChannelLine using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BotChannelLine) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *BotChannelMSTeams) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BotChannelMSTeams
-func (tr *BotChannelMSTeams) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BotChannelMSTeams using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *BotChannelSlack) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BotChannelSlack
-func (tr *BotChannelSlack) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BotChannelSlack using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BotChannelSlack) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *BotChannelSMS) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BotChannelSMS
-func (tr *BotChannelSMS) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BotChannelSMS using its observed tfState.
@@ -637,15 +583,6 @@ func (tr *BotChannelWebChat) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BotChannelWebChat
-func (tr *BotChannelWebChat) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BotChannelWebChat using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BotChannelWebChat) LateInitialize(attrs []byte) (bool, error) {
@@ -728,15 +665,6 @@ func (tr *BotChannelsRegistration) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BotChannelsRegistration
-func (tr *BotChannelsRegistration) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BotChannelsRegistration using its observed tfState.
@@ -823,15 +751,6 @@ func (tr *BotConnection) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BotConnection
-func (tr *BotConnection) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BotConnection using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BotConnection) LateInitialize(attrs []byte) (bool, error) {
@@ -914,15 +833,6 @@ func (tr *BotWebApp) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BotWebApp
-func (tr *BotWebApp) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BotWebApp using its observed tfState.

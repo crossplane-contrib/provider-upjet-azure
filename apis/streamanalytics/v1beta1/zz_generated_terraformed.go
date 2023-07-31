@@ -79,15 +79,6 @@ func (tr *Cluster) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Cluster
-func (tr *Cluster) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Cluster using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Cluster) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *FunctionJavascriptUda) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this FunctionJavascriptUda
-func (tr *FunctionJavascriptUda) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this FunctionJavascriptUda using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *Job) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Job
-func (tr *Job) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Job using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Job) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *ManagedPrivateEndpoint) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ManagedPrivateEndpoint
-func (tr *ManagedPrivateEndpoint) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ManagedPrivateEndpoint using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *OutputBlob) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this OutputBlob
-func (tr *OutputBlob) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this OutputBlob using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *OutputBlob) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *OutputEventHub) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this OutputEventHub
-func (tr *OutputEventHub) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this OutputEventHub using its observed tfState.
@@ -637,15 +583,6 @@ func (tr *OutputFunction) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this OutputFunction
-func (tr *OutputFunction) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this OutputFunction using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *OutputFunction) LateInitialize(attrs []byte) (bool, error) {
@@ -728,15 +665,6 @@ func (tr *OutputMSSQL) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this OutputMSSQL
-func (tr *OutputMSSQL) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this OutputMSSQL using its observed tfState.
@@ -823,15 +751,6 @@ func (tr *OutputPowerBI) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this OutputPowerBI
-func (tr *OutputPowerBI) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this OutputPowerBI using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *OutputPowerBI) LateInitialize(attrs []byte) (bool, error) {
@@ -914,15 +833,6 @@ func (tr *OutputServiceBusQueue) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this OutputServiceBusQueue
-func (tr *OutputServiceBusQueue) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this OutputServiceBusQueue using its observed tfState.
@@ -1009,15 +919,6 @@ func (tr *OutputServiceBusTopic) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this OutputServiceBusTopic
-func (tr *OutputServiceBusTopic) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this OutputServiceBusTopic using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *OutputServiceBusTopic) LateInitialize(attrs []byte) (bool, error) {
@@ -1100,15 +1001,6 @@ func (tr *OutputSynapse) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this OutputSynapse
-func (tr *OutputSynapse) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this OutputSynapse using its observed tfState.
@@ -1195,15 +1087,6 @@ func (tr *OutputTable) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this OutputTable
-func (tr *OutputTable) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this OutputTable using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *OutputTable) LateInitialize(attrs []byte) (bool, error) {
@@ -1286,15 +1169,6 @@ func (tr *ReferenceInputBlob) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ReferenceInputBlob
-func (tr *ReferenceInputBlob) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ReferenceInputBlob using its observed tfState.
@@ -1381,15 +1255,6 @@ func (tr *ReferenceInputMSSQL) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ReferenceInputMSSQL
-func (tr *ReferenceInputMSSQL) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ReferenceInputMSSQL using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ReferenceInputMSSQL) LateInitialize(attrs []byte) (bool, error) {
@@ -1472,15 +1337,6 @@ func (tr *StreamInputBlob) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this StreamInputBlob
-func (tr *StreamInputBlob) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this StreamInputBlob using its observed tfState.
@@ -1567,15 +1423,6 @@ func (tr *StreamInputEventHub) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this StreamInputEventHub
-func (tr *StreamInputEventHub) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this StreamInputEventHub using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *StreamInputEventHub) LateInitialize(attrs []byte) (bool, error) {
@@ -1658,15 +1505,6 @@ func (tr *StreamInputIOTHub) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this StreamInputIOTHub
-func (tr *StreamInputIOTHub) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this StreamInputIOTHub using its observed tfState.

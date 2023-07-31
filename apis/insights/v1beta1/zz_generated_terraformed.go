@@ -79,15 +79,6 @@ func (tr *ApplicationInsights) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ApplicationInsights
-func (tr *ApplicationInsights) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ApplicationInsights using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ApplicationInsights) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *ApplicationInsightsAnalyticsItem) GetInitParameters() (map[string]any,
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ApplicationInsightsAnalyticsItem
-func (tr *ApplicationInsightsAnalyticsItem) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ApplicationInsightsAnalyticsItem using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *ApplicationInsightsAPIKey) GetInitParameters() (map[string]any, error)
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ApplicationInsightsAPIKey
-func (tr *ApplicationInsightsAPIKey) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ApplicationInsightsAPIKey using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ApplicationInsightsAPIKey) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *ApplicationInsightsSmartDetectionRule) GetInitParameters() (map[string
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ApplicationInsightsSmartDetectionRule
-func (tr *ApplicationInsightsSmartDetectionRule) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ApplicationInsightsSmartDetectionRule using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *ApplicationInsightsStandardWebTest) GetInitParameters() (map[string]an
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ApplicationInsightsStandardWebTest
-func (tr *ApplicationInsightsStandardWebTest) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ApplicationInsightsStandardWebTest using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ApplicationInsightsStandardWebTest) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *ApplicationInsightsWebTest) GetInitParameters() (map[string]any, error
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ApplicationInsightsWebTest
-func (tr *ApplicationInsightsWebTest) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ApplicationInsightsWebTest using its observed tfState.
@@ -637,15 +583,6 @@ func (tr *ApplicationInsightsWorkbook) GetInitParameters() (map[string]any, erro
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this ApplicationInsightsWorkbook
-func (tr *ApplicationInsightsWorkbook) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this ApplicationInsightsWorkbook using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ApplicationInsightsWorkbook) LateInitialize(attrs []byte) (bool, error) {
@@ -728,15 +665,6 @@ func (tr *ApplicationInsightsWorkbookTemplate) GetInitParameters() (map[string]a
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this ApplicationInsightsWorkbookTemplate
-func (tr *ApplicationInsightsWorkbookTemplate) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this ApplicationInsightsWorkbookTemplate using its observed tfState.
@@ -823,15 +751,6 @@ func (tr *MonitorActionGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MonitorActionGroup
-func (tr *MonitorActionGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MonitorActionGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MonitorActionGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -914,15 +833,6 @@ func (tr *MonitorActivityLogAlert) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MonitorActivityLogAlert
-func (tr *MonitorActivityLogAlert) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MonitorActivityLogAlert using its observed tfState.
@@ -1009,15 +919,6 @@ func (tr *MonitorAutoscaleSetting) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MonitorAutoscaleSetting
-func (tr *MonitorAutoscaleSetting) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MonitorAutoscaleSetting using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MonitorAutoscaleSetting) LateInitialize(attrs []byte) (bool, error) {
@@ -1100,15 +1001,6 @@ func (tr *MonitorDataCollectionEndpoint) GetInitParameters() (map[string]any, er
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MonitorDataCollectionEndpoint
-func (tr *MonitorDataCollectionEndpoint) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MonitorDataCollectionEndpoint using its observed tfState.
@@ -1195,15 +1087,6 @@ func (tr *MonitorDataCollectionRule) GetInitParameters() (map[string]any, error)
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MonitorDataCollectionRule
-func (tr *MonitorDataCollectionRule) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MonitorDataCollectionRule using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MonitorDataCollectionRule) LateInitialize(attrs []byte) (bool, error) {
@@ -1286,15 +1169,6 @@ func (tr *MonitorDataCollectionRuleAssociation) GetInitParameters() (map[string]
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MonitorDataCollectionRuleAssociation
-func (tr *MonitorDataCollectionRuleAssociation) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MonitorDataCollectionRuleAssociation using its observed tfState.
@@ -1381,15 +1255,6 @@ func (tr *MonitorMetricAlert) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MonitorMetricAlert
-func (tr *MonitorMetricAlert) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MonitorMetricAlert using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MonitorMetricAlert) LateInitialize(attrs []byte) (bool, error) {
@@ -1472,15 +1337,6 @@ func (tr *MonitorPrivateLinkScope) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MonitorPrivateLinkScope
-func (tr *MonitorPrivateLinkScope) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MonitorPrivateLinkScope using its observed tfState.
@@ -1567,15 +1423,6 @@ func (tr *MonitorPrivateLinkScopedService) GetInitParameters() (map[string]any, 
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MonitorPrivateLinkScopedService
-func (tr *MonitorPrivateLinkScopedService) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MonitorPrivateLinkScopedService using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MonitorPrivateLinkScopedService) LateInitialize(attrs []byte) (bool, error) {
@@ -1658,15 +1505,6 @@ func (tr *MonitorScheduledQueryRulesAlert) GetInitParameters() (map[string]any, 
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MonitorScheduledQueryRulesAlert
-func (tr *MonitorScheduledQueryRulesAlert) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MonitorScheduledQueryRulesAlert using its observed tfState.
@@ -1753,15 +1591,6 @@ func (tr *MonitorScheduledQueryRulesAlertV2) GetInitParameters() (map[string]any
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MonitorScheduledQueryRulesAlertV2
-func (tr *MonitorScheduledQueryRulesAlertV2) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MonitorScheduledQueryRulesAlertV2 using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MonitorScheduledQueryRulesAlertV2) LateInitialize(attrs []byte) (bool, error) {
@@ -1844,15 +1673,6 @@ func (tr *MonitorScheduledQueryRulesLog) GetInitParameters() (map[string]any, er
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MonitorScheduledQueryRulesLog
-func (tr *MonitorScheduledQueryRulesLog) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MonitorScheduledQueryRulesLog using its observed tfState.

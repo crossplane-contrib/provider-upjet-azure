@@ -79,15 +79,6 @@ func (tr *Monitor) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Monitor
-func (tr *Monitor) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Monitor using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Monitor) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *SubAccount) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SubAccount
-func (tr *SubAccount) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SubAccount using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *SubAccountTagRule) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SubAccountTagRule
-func (tr *SubAccountTagRule) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SubAccountTagRule using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SubAccountTagRule) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *TagRule) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this TagRule
-func (tr *TagRule) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this TagRule using its observed tfState.

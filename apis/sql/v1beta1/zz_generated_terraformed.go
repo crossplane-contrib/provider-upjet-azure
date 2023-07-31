@@ -79,15 +79,6 @@ func (tr *MSSQLDatabase) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MSSQLDatabase
-func (tr *MSSQLDatabase) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MSSQLDatabase using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MSSQLDatabase) LateInitialize(attrs []byte) (bool, error) {
@@ -174,15 +165,6 @@ func (tr *MSSQLDatabaseExtendedAuditingPolicy) GetInitParameters() (map[string]a
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MSSQLDatabaseExtendedAuditingPolicy
-func (tr *MSSQLDatabaseExtendedAuditingPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MSSQLDatabaseExtendedAuditingPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MSSQLDatabaseExtendedAuditingPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -267,15 +249,6 @@ func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetInitParameters() 
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline
-func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) LateInitialize(attrs []byte) (bool, error) {
@@ -358,15 +331,6 @@ func (tr *MSSQLElasticPool) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MSSQLElasticPool
-func (tr *MSSQLElasticPool) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MSSQLElasticPool using its observed tfState.
@@ -454,15 +418,6 @@ func (tr *MSSQLFailoverGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MSSQLFailoverGroup
-func (tr *MSSQLFailoverGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MSSQLFailoverGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MSSQLFailoverGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -545,15 +500,6 @@ func (tr *MSSQLFirewallRule) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MSSQLFirewallRule
-func (tr *MSSQLFirewallRule) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MSSQLFirewallRule using its observed tfState.
@@ -640,15 +586,6 @@ func (tr *MSSQLJobAgent) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MSSQLJobAgent
-func (tr *MSSQLJobAgent) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MSSQLJobAgent using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MSSQLJobAgent) LateInitialize(attrs []byte) (bool, error) {
@@ -731,15 +668,6 @@ func (tr *MSSQLJobCredential) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MSSQLJobCredential
-func (tr *MSSQLJobCredential) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MSSQLJobCredential using its observed tfState.
@@ -826,15 +754,6 @@ func (tr *MSSQLManagedDatabase) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MSSQLManagedDatabase
-func (tr *MSSQLManagedDatabase) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MSSQLManagedDatabase using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MSSQLManagedDatabase) LateInitialize(attrs []byte) (bool, error) {
@@ -917,15 +836,6 @@ func (tr *MSSQLManagedInstance) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MSSQLManagedInstance
-func (tr *MSSQLManagedInstance) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MSSQLManagedInstance using its observed tfState.
@@ -1012,15 +922,6 @@ func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) GetInitParameters() 
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MSSQLManagedInstanceActiveDirectoryAdministrator
-func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MSSQLManagedInstanceActiveDirectoryAdministrator using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) LateInitialize(attrs []byte) (bool, error) {
@@ -1103,15 +1004,6 @@ func (tr *MSSQLManagedInstanceFailoverGroup) GetInitParameters() (map[string]any
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MSSQLManagedInstanceFailoverGroup
-func (tr *MSSQLManagedInstanceFailoverGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MSSQLManagedInstanceFailoverGroup using its observed tfState.
@@ -1198,15 +1090,6 @@ func (tr *MSSQLManagedInstanceVulnerabilityAssessment) GetInitParameters() (map[
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MSSQLManagedInstanceVulnerabilityAssessment
-func (tr *MSSQLManagedInstanceVulnerabilityAssessment) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MSSQLManagedInstanceVulnerabilityAssessment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MSSQLManagedInstanceVulnerabilityAssessment) LateInitialize(attrs []byte) (bool, error) {
@@ -1289,15 +1172,6 @@ func (tr *MSSQLOutboundFirewallRule) GetInitParameters() (map[string]any, error)
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MSSQLOutboundFirewallRule
-func (tr *MSSQLOutboundFirewallRule) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MSSQLOutboundFirewallRule using its observed tfState.
@@ -1384,15 +1258,6 @@ func (tr *MSSQLServer) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MSSQLServer
-func (tr *MSSQLServer) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MSSQLServer using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MSSQLServer) LateInitialize(attrs []byte) (bool, error) {
@@ -1475,15 +1340,6 @@ func (tr *MSSQLServerDNSAlias) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MSSQLServerDNSAlias
-func (tr *MSSQLServerDNSAlias) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MSSQLServerDNSAlias using its observed tfState.
@@ -1570,15 +1426,6 @@ func (tr *MSSQLServerMicrosoftSupportAuditingPolicy) GetInitParameters() (map[st
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MSSQLServerMicrosoftSupportAuditingPolicy
-func (tr *MSSQLServerMicrosoftSupportAuditingPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MSSQLServerMicrosoftSupportAuditingPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MSSQLServerMicrosoftSupportAuditingPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -1661,15 +1508,6 @@ func (tr *MSSQLServerSecurityAlertPolicy) GetInitParameters() (map[string]any, e
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MSSQLServerSecurityAlertPolicy
-func (tr *MSSQLServerSecurityAlertPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MSSQLServerSecurityAlertPolicy using its observed tfState.
@@ -1756,15 +1594,6 @@ func (tr *MSSQLServerTransparentDataEncryption) GetInitParameters() (map[string]
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MSSQLServerTransparentDataEncryption
-func (tr *MSSQLServerTransparentDataEncryption) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MSSQLServerTransparentDataEncryption using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MSSQLServerTransparentDataEncryption) LateInitialize(attrs []byte) (bool, error) {
@@ -1849,15 +1678,6 @@ func (tr *MSSQLServerVulnerabilityAssessment) GetInitParameters() (map[string]an
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this MSSQLServerVulnerabilityAssessment
-func (tr *MSSQLServerVulnerabilityAssessment) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this MSSQLServerVulnerabilityAssessment using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MSSQLServerVulnerabilityAssessment) LateInitialize(attrs []byte) (bool, error) {
@@ -1940,15 +1760,6 @@ func (tr *MSSQLVirtualNetworkRule) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this MSSQLVirtualNetworkRule
-func (tr *MSSQLVirtualNetworkRule) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this MSSQLVirtualNetworkRule using its observed tfState.

@@ -79,15 +79,6 @@ func (tr *Endpoint) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Endpoint
-func (tr *Endpoint) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Endpoint using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Endpoint) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *FrontdoorCustomDomain) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this FrontdoorCustomDomain
-func (tr *FrontdoorCustomDomain) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this FrontdoorCustomDomain using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *FrontdoorCustomDomainAssociation) GetInitParameters() (map[string]any,
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this FrontdoorCustomDomainAssociation
-func (tr *FrontdoorCustomDomainAssociation) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this FrontdoorCustomDomainAssociation using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FrontdoorCustomDomainAssociation) LateInitialize(attrs []byte) (bool, error) {
@@ -358,15 +331,6 @@ func (tr *FrontdoorEndpoint) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this FrontdoorEndpoint
-func (tr *FrontdoorEndpoint) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this FrontdoorEndpoint using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FrontdoorEndpoint) LateInitialize(attrs []byte) (bool, error) {
@@ -449,15 +413,6 @@ func (tr *FrontdoorOrigin) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this FrontdoorOrigin
-func (tr *FrontdoorOrigin) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this FrontdoorOrigin using its observed tfState.
@@ -545,15 +500,6 @@ func (tr *FrontdoorOriginGroup) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this FrontdoorOriginGroup
-func (tr *FrontdoorOriginGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this FrontdoorOriginGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FrontdoorOriginGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -636,15 +582,6 @@ func (tr *FrontdoorProfile) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this FrontdoorProfile
-func (tr *FrontdoorProfile) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this FrontdoorProfile using its observed tfState.
@@ -731,15 +668,6 @@ func (tr *FrontdoorRoute) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this FrontdoorRoute
-func (tr *FrontdoorRoute) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this FrontdoorRoute using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FrontdoorRoute) LateInitialize(attrs []byte) (bool, error) {
@@ -822,15 +750,6 @@ func (tr *FrontdoorRule) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this FrontdoorRule
-func (tr *FrontdoorRule) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this FrontdoorRule using its observed tfState.
@@ -917,15 +836,6 @@ func (tr *FrontdoorRuleSet) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this FrontdoorRuleSet
-func (tr *FrontdoorRuleSet) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this FrontdoorRuleSet using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FrontdoorRuleSet) LateInitialize(attrs []byte) (bool, error) {
@@ -1008,15 +918,6 @@ func (tr *Profile) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this Profile
-func (tr *Profile) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this Profile using its observed tfState.

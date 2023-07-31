@@ -79,15 +79,6 @@ func (tr *BackupContainerStorageAccount) GetInitParameters() (map[string]any, er
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BackupContainerStorageAccount
-func (tr *BackupContainerStorageAccount) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BackupContainerStorageAccount using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BackupContainerStorageAccount) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *BackupPolicyFileShare) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BackupPolicyFileShare
-func (tr *BackupPolicyFileShare) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BackupPolicyFileShare using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *BackupPolicyVM) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BackupPolicyVM
-func (tr *BackupPolicyVM) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BackupPolicyVM using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BackupPolicyVM) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *BackupPolicyVMWorkload) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BackupPolicyVMWorkload
-func (tr *BackupPolicyVMWorkload) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BackupPolicyVMWorkload using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *BackupProtectedFileShare) GetInitParameters() (map[string]any, error) 
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this BackupProtectedFileShare
-func (tr *BackupProtectedFileShare) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this BackupProtectedFileShare using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BackupProtectedFileShare) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *BackupProtectedVM) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this BackupProtectedVM
-func (tr *BackupProtectedVM) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this BackupProtectedVM using its observed tfState.
@@ -637,15 +583,6 @@ func (tr *Vault) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this Vault
-func (tr *Vault) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this Vault using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Vault) LateInitialize(attrs []byte) (bool, error) {
@@ -728,15 +665,6 @@ func (tr *SiteRecoveryFabric) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SiteRecoveryFabric
-func (tr *SiteRecoveryFabric) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SiteRecoveryFabric using its observed tfState.
@@ -823,15 +751,6 @@ func (tr *SiteRecoveryNetworkMapping) GetInitParameters() (map[string]any, error
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SiteRecoveryNetworkMapping
-func (tr *SiteRecoveryNetworkMapping) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SiteRecoveryNetworkMapping using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SiteRecoveryNetworkMapping) LateInitialize(attrs []byte) (bool, error) {
@@ -914,15 +833,6 @@ func (tr *SiteRecoveryProtectionContainer) GetInitParameters() (map[string]any, 
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SiteRecoveryProtectionContainer
-func (tr *SiteRecoveryProtectionContainer) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SiteRecoveryProtectionContainer using its observed tfState.
@@ -1009,15 +919,6 @@ func (tr *SiteRecoveryProtectionContainerMapping) GetInitParameters() (map[strin
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SiteRecoveryProtectionContainerMapping
-func (tr *SiteRecoveryProtectionContainerMapping) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SiteRecoveryProtectionContainerMapping using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SiteRecoveryProtectionContainerMapping) LateInitialize(attrs []byte) (bool, error) {
@@ -1100,15 +1001,6 @@ func (tr *SiteRecoveryReplicationPolicy) GetInitParameters() (map[string]any, er
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SiteRecoveryReplicationPolicy
-func (tr *SiteRecoveryReplicationPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SiteRecoveryReplicationPolicy using its observed tfState.

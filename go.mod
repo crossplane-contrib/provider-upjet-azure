@@ -2,14 +2,12 @@ module github.com/upbound/provider-azure
 
 go 1.19
 
-replace github.com/upbound/upjet => github.com/lsviben/upjet v0.0.0-20230727085627-91de73c8db52
-
 require (
 	github.com/crossplane/crossplane-runtime v0.20.0
 	github.com/crossplane/crossplane-tools v0.0.0-20230714144037-2684f4bc7638
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.0
 	github.com/pkg/errors v0.9.1
-	github.com/upbound/upjet v0.9.0-rc.0.0.20230427131841-1d0b7b0c08f8
+	github.com/upbound/upjet v0.9.0-rc.0.0.20230731131908-7fb82a477111
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	k8s.io/apimachinery v0.27.3
 	k8s.io/client-go v0.27.3

@@ -79,15 +79,6 @@ func (tr *AdvancedThreatProtection) GetInitParameters() (map[string]any, error) 
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this AdvancedThreatProtection
-func (tr *AdvancedThreatProtection) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this AdvancedThreatProtection using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AdvancedThreatProtection) LateInitialize(attrs []byte) (bool, error) {
@@ -170,15 +161,6 @@ func (tr *IOTSecurityDeviceGroup) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this IOTSecurityDeviceGroup
-func (tr *IOTSecurityDeviceGroup) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this IOTSecurityDeviceGroup using its observed tfState.
@@ -265,15 +247,6 @@ func (tr *IOTSecuritySolution) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this IOTSecuritySolution
-func (tr *IOTSecuritySolution) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this IOTSecuritySolution using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *IOTSecuritySolution) LateInitialize(attrs []byte) (bool, error) {
@@ -356,15 +329,6 @@ func (tr *SecurityCenterAssessment) GetInitParameters() (map[string]any, error) 
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SecurityCenterAssessment
-func (tr *SecurityCenterAssessment) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SecurityCenterAssessment using its observed tfState.
@@ -451,15 +415,6 @@ func (tr *SecurityCenterAssessmentPolicy) GetInitParameters() (map[string]any, e
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SecurityCenterAssessmentPolicy
-func (tr *SecurityCenterAssessmentPolicy) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SecurityCenterAssessmentPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SecurityCenterAssessmentPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -542,15 +497,6 @@ func (tr *SecurityCenterAutoProvisioning) GetInitParameters() (map[string]any, e
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SecurityCenterAutoProvisioning
-func (tr *SecurityCenterAutoProvisioning) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SecurityCenterAutoProvisioning using its observed tfState.
@@ -637,15 +583,6 @@ func (tr *SecurityCenterContact) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SecurityCenterContact
-func (tr *SecurityCenterContact) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SecurityCenterContact using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SecurityCenterContact) LateInitialize(attrs []byte) (bool, error) {
@@ -728,15 +665,6 @@ func (tr *SecurityCenterServerVulnerabilityAssessment) GetInitParameters() (map[
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SecurityCenterServerVulnerabilityAssessment
-func (tr *SecurityCenterServerVulnerabilityAssessment) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SecurityCenterServerVulnerabilityAssessment using its observed tfState.
@@ -823,15 +751,6 @@ func (tr *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) GetInitPara
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SecurityCenterServerVulnerabilityAssessmentVirtualMachine
-func (tr *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SecurityCenterServerVulnerabilityAssessmentVirtualMachine using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SecurityCenterServerVulnerabilityAssessmentVirtualMachine) LateInitialize(attrs []byte) (bool, error) {
@@ -914,15 +833,6 @@ func (tr *SecurityCenterSetting) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SecurityCenterSetting
-func (tr *SecurityCenterSetting) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SecurityCenterSetting using its observed tfState.
@@ -1009,15 +919,6 @@ func (tr *SecurityCenterSubscriptionPricing) GetInitParameters() (map[string]any
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetInitParameters for this SecurityCenterSubscriptionPricing
-func (tr *SecurityCenterSubscriptionPricing) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
-}
-
 // LateInitialize this SecurityCenterSubscriptionPricing using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *SecurityCenterSubscriptionPricing) LateInitialize(attrs []byte) (bool, error) {
@@ -1100,15 +1001,6 @@ func (tr *SecurityCenterWorkspace) GetInitParameters() (map[string]any, error) {
 	}
 	base := map[string]any{}
 	return base, json.TFParser.Unmarshal(p, &base)
-}
-
-// SetInitParameters for this SecurityCenterWorkspace
-func (tr *SecurityCenterWorkspace) SetInitParameters(params map[string]any) error {
-	p, err := json.TFParser.Marshal(params)
-	if err != nil {
-		return err
-	}
-	return json.TFParser.Unmarshal(p, &tr.Spec.InitProvider)
 }
 
 // LateInitialize this SecurityCenterWorkspace using its observed tfState.
