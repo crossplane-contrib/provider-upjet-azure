@@ -4,7 +4,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.12.1
-  name: integrationruntimeazuressises.datafactory.azure.upbound.io
+  name: integrationruntimeazuressis.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
   names:
@@ -14,7 +14,7 @@ spec:
     - azure
     kind: IntegrationRuntimeAzureSSIS
     listKind: IntegrationRuntimeAzureSSISList
-    plural: integrationruntimeazuressises
+    plural: integrationruntimeazuressis
     singular: integrationruntimeazuressis
   scope: Cluster
   versions:

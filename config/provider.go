@@ -29,6 +29,7 @@ import (
 	"github.com/upbound/provider-azure/config/authorization"
 	"github.com/upbound/provider-azure/config/automation"
 	"github.com/upbound/provider-azure/config/base"
+	"github.com/upbound/provider-azure/config/botservice"
 	"github.com/upbound/provider-azure/config/cache"
 	"github.com/upbound/provider-azure/config/cdn"
 	"github.com/upbound/provider-azure/config/certificateregistration"
@@ -209,6 +210,7 @@ func GetProvider() *tjconfig.Provider {
 		logic.Configure,
 		security.Configure,
 		base.Configure,
+		botservice.Configure,
 		datashare.Configure,
 		notificationhubs.Configure,
 		storagesync.Configure,

@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.12.1
-  name: functionjavascriptuda.streamanalytics.azure.upbound.io
+  name: botchannelsms.botservice.azure.upbound.io
 spec:
-  group: streamanalytics.azure.upbound.io
+  group: botservice.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: FunctionJavascriptUda
-    listKind: FunctionJavascriptUdaList
-    plural: functionjavascriptuda
-    singular: functionjavascriptuda
+    kind: BotChannelSMS
+    listKind: BotChannelSMSList
+    plural: botchannelsms
+    singular: botchannelsms
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,9 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: FunctionJavascriptUda is the Schema for the FunctionJavascriptUdas
-          API. Manages a JavaScript UDA Function within a Stream Analytics Streaming
-          Job.
+        description: BotChannelSMS is the Schema for the BotChannelSMSs API. Manages
+          a SMS integration for a Bot Channel
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: FunctionJavascriptUdaSpec defines the desired state of FunctionJavascriptUda
+            description: BotChannelSMSSpec defines the desired state of BotChannelSMS
             properties:
               deletionPolicy:
                 default: Delete
@@ -68,42 +67,13 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  input:
-                    description: One or more input blocks as defined below.
-                    items:
-                      properties:
-                        configurationParameter:
-                          description: Is this input parameter a configuration parameter?
-                            Defaults to false.
-                          type: boolean
-                        type:
-                          description: The input data type of this JavaScript Function.
-                            Possible values include any, array, bigint, datetime,
-                            float, nvarchar(max) and record.
-                          type: string
-                      type: object
-                    type: array
-                  output:
-                    description: An output block as defined below.
-                    items:
-                      properties:
-                        type:
-                          description: The output data type from this JavaScript Function.
-                            Possible values include any, array, bigint, datetime,
-                            float, nvarchar(max) and record.
-                          type: string
-                      type: object
-                    type: array
-                  script:
-                    description: The JavaScript of this UDA Function.
+                  botName:
+                    description: The name of the Bot Resource this channel will be
+                      associated with. Changing this forces a new resource to be created.
                     type: string
-                  streamAnalyticsJobId:
-                    description: The resource ID of the Stream Analytics Job where
-                      this Function should be created. Changing this forces a new
-                      resource to be created.
-                    type: string
-                  streamAnalyticsJobIdRef:
-                    description: Reference to a Job to populate streamAnalyticsJobId.
+                  botNameRef:
+                    description: Reference to a BotChannelsRegistration in botservice
+                      to populate botName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -136,8 +106,9 @@ spec:
                     required:
                     - name
                     type: object
-                  streamAnalyticsJobIdSelector:
-                    description: Selector for a Job to populate streamAnalyticsJobId.
+                  botNameSelector:
+                    description: Selector for a BotChannelsRegistration in botservice
+                      to populate botName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -175,6 +146,114 @@ spec:
                             type: string
                         type: object
                     type: object
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  phoneNumber:
+                    description: The phone number for the SMS Channel.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group where the SMS Channel
+                      should be created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  smsChannelAccountSecurityId:
+                    description: The account security identifier (SID) for the SMS
+                      Channel.
+                    type: string
+                  smsChannelAuthTokenSecretRef:
+                    description: The authorization token for the SMS Channel.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.
@@ -189,34 +268,16 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  input:
-                    description: One or more input blocks as defined below.
-                    items:
-                      properties:
-                        configurationParameter:
-                          description: Is this input parameter a configuration parameter?
-                            Defaults to false.
-                          type: boolean
-                        type:
-                          description: The input data type of this JavaScript Function.
-                            Possible values include any, array, bigint, datetime,
-                            float, nvarchar(max) and record.
-                          type: string
-                      type: object
-                    type: array
-                  output:
-                    description: An output block as defined below.
-                    items:
-                      properties:
-                        type:
-                          description: The output data type from this JavaScript Function.
-                            Possible values include any, array, bigint, datetime,
-                            float, nvarchar(max) and record.
-                          type: string
-                      type: object
-                    type: array
-                  script:
-                    description: The JavaScript of this UDA Function.
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  phoneNumber:
+                    description: The phone number for the SMS Channel.
+                    type: string
+                  smsChannelAccountSecurityId:
+                    description: The account security identifier (SID) for the SMS
+                      Channel.
                     type: string
                 type: object
               managementPolicies:
@@ -417,60 +478,48 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: input is a required parameter
+            - message: location is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.input)
-                || has(self.initProvider.input)'
-            - message: output is a required parameter
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
+            - message: phoneNumber is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.output)
-                || has(self.initProvider.output)'
-            - message: script is a required parameter
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.phoneNumber)
+                || has(self.initProvider.phoneNumber)'
+            - message: smsChannelAccountSecurityId is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.script)
-                || has(self.initProvider.script)'
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.smsChannelAccountSecurityId)
+                || has(self.initProvider.smsChannelAccountSecurityId)'
+            - message: smsChannelAuthTokenSecretRef is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.smsChannelAuthTokenSecretRef)'
           status:
-            description: FunctionJavascriptUdaStatus defines the observed state of
-              FunctionJavascriptUda.
+            description: BotChannelSMSStatus defines the observed state of BotChannelSMS.
             properties:
               atProvider:
                 properties:
+                  botName:
+                    description: The name of the Bot Resource this channel will be
+                      associated with. Changing this forces a new resource to be created.
+                    type: string
                   id:
-                    description: The ID of the Stream Analytics JavaScript UDA Function.
+                    description: The ID of the SMS Integration for a Bot Channel.
                     type: string
-                  input:
-                    description: One or more input blocks as defined below.
-                    items:
-                      properties:
-                        configurationParameter:
-                          description: Is this input parameter a configuration parameter?
-                            Defaults to false.
-                          type: boolean
-                        type:
-                          description: The input data type of this JavaScript Function.
-                            Possible values include any, array, bigint, datetime,
-                            float, nvarchar(max) and record.
-                          type: string
-                      type: object
-                    type: array
-                  output:
-                    description: An output block as defined below.
-                    items:
-                      properties:
-                        type:
-                          description: The output data type from this JavaScript Function.
-                            Possible values include any, array, bigint, datetime,
-                            float, nvarchar(max) and record.
-                          type: string
-                      type: object
-                    type: array
-                  script:
-                    description: The JavaScript of this UDA Function.
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
                     type: string
-                  streamAnalyticsJobId:
-                    description: The resource ID of the Stream Analytics Job where
-                      this Function should be created. Changing this forces a new
-                      resource to be created.
+                  phoneNumber:
+                    description: The phone number for the SMS Channel.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group where the SMS Channel
+                      should be created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  smsChannelAccountSecurityId:
+                    description: The account security identifier (SID) for the SMS
+                      Channel.
                     type: string
                 type: object
               conditions:

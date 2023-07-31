@@ -4,7 +4,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.12.1
-  name: resourcedeploymentscriptazureclis.resources.azure.upbound.io
+  name: resourcedeploymentscriptazureclicli.resources.azure.upbound.io
 spec:
   group: resources.azure.upbound.io
   names:
@@ -14,7 +14,7 @@ spec:
     - azure
     kind: ResourceDeploymentScriptAzureCli
     listKind: ResourceDeploymentScriptAzureCliList
-    plural: resourcedeploymentscriptazureclis
+    plural: resourcedeploymentscriptazureclicli
     singular: resourcedeploymentscriptazurecli
   scope: Cluster
   versions:

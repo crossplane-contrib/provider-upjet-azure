@@ -34,6 +34,7 @@ func Configure(p *config.Provider) {
 			Type:      "Job",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
+		r.Path = "functionjavascriptudas"
 	})
 	p.AddResourceConfigurator("azurerm_stream_analytics_output_blob", func(r *config.Resource) {
 		r.References["stream_analytics_job_name"] = config.Reference{
