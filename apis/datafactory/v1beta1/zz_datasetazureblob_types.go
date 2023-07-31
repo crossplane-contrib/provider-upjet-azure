@@ -13,6 +13,39 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DataSetAzureBlobInitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Dataset.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Dataset.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The description for the Data Factory Dataset.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The filename of the Azure Blob.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder that this Dataset is in. If not specified, the Dataset will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Dataset.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The path of the Azure Blob.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// A schema_column block as defined below.
+	SchemaColumn []SchemaColumnInitParameters `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
+}
+
 type DataSetAzureBlobObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Dataset.
@@ -125,6 +158,18 @@ type DataSetAzureBlobParameters struct {
 	SchemaColumn []SchemaColumnParameters `json:"schemaColumn,omitempty" tf:"schema_column,omitempty"`
 }
 
+type SchemaColumnInitParameters struct {
+
+	// The description of the column.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the column.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type SchemaColumnObservation struct {
 
 	// The description of the column.
@@ -144,8 +189,8 @@ type SchemaColumnParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The name of the column.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
 	// +kubebuilder:validation:Optional
@@ -156,6 +201,18 @@ type SchemaColumnParameters struct {
 type DataSetAzureBlobSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DataSetAzureBlobParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DataSetAzureBlobInitParameters `json:"initProvider,omitempty"`
 }
 
 // DataSetAzureBlobStatus defines the observed state of DataSetAzureBlob.

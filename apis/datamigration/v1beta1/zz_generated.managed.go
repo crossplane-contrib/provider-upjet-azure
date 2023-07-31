@@ -17,9 +17,9 @@ func (mg *DatabaseMigrationProject) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DatabaseMigrationProject.
-func (mg *DatabaseMigrationProject) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DatabaseMigrationProject.
+func (mg *DatabaseMigrationProject) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DatabaseMigrationProject.
@@ -55,9 +55,9 @@ func (mg *DatabaseMigrationProject) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DatabaseMigrationProject.
-func (mg *DatabaseMigrationProject) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DatabaseMigrationProject.
+func (mg *DatabaseMigrationProject) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DatabaseMigrationProject.
@@ -93,9 +93,9 @@ func (mg *DatabaseMigrationService) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this DatabaseMigrationService.
-func (mg *DatabaseMigrationService) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this DatabaseMigrationService.
+func (mg *DatabaseMigrationService) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this DatabaseMigrationService.
@@ -131,9 +131,9 @@ func (mg *DatabaseMigrationService) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this DatabaseMigrationService.
-func (mg *DatabaseMigrationService) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this DatabaseMigrationService.
+func (mg *DatabaseMigrationService) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this DatabaseMigrationService.

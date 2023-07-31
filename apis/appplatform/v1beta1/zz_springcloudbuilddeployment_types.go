@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type QuotaInitParameters struct {
+
+	// Specifies the required cpu of the Spring Cloud Deployment. Possible Values are 500m, 1, 2, 3 and 4. Defaults to 1 if not specified.
+	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
+
+	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not specified.
+	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
+}
+
 type QuotaObservation struct {
 
 	// Specifies the required cpu of the Spring Cloud Deployment. Possible Values are 500m, 1, 2, 3 and 4. Defaults to 1 if not specified.
@@ -31,6 +40,24 @@ type QuotaParameters struct {
 	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not specified.
 	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
+}
+
+type SpringCloudBuildDeploymentInitParameters struct {
+
+	// A JSON object that contains the addon configurations of the Spring Cloud Build Deployment.
+	AddonJSON *string `json:"addonJson,omitempty" tf:"addon_json,omitempty"`
+
+	// The ID of the Spring Cloud Build Result.
+	BuildResultID *string `json:"buildResultId,omitempty" tf:"build_result_id,omitempty"`
+
+	// Specifies the environment variables of the Spring Cloud Deployment as a map of key-value pairs.
+	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
+
+	// Specifies the required instance count of the Spring Cloud Deployment. Possible Values are between 1 and 500. Defaults to 1 if not specified.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// A quota block as defined below.
+	Quota []QuotaInitParameters `json:"quota,omitempty" tf:"quota,omitempty"`
 }
 
 type SpringCloudBuildDeploymentObservation struct {
@@ -98,6 +125,18 @@ type SpringCloudBuildDeploymentParameters struct {
 type SpringCloudBuildDeploymentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudBuildDeploymentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SpringCloudBuildDeploymentInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudBuildDeploymentStatus defines the observed state of SpringCloudBuildDeployment.
@@ -118,7 +157,7 @@ type SpringCloudBuildDeploymentStatus struct {
 type SpringCloudBuildDeployment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.buildResultId)",message="buildResultId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.buildResultId) || has(self.initProvider.buildResultId)",message="buildResultId is a required parameter"
 	Spec   SpringCloudBuildDeploymentSpec   `json:"spec"`
 	Status SpringCloudBuildDeploymentStatus `json:"status,omitempty"`
 }

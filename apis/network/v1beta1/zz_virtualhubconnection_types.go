@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type RoutingPropagatedRouteTableInitParameters struct {
+
+	// The list of labels to assign to this route table.
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// A list of Route Table IDs to associated with this Virtual Hub Connection.
+	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
+}
+
 type RoutingPropagatedRouteTableObservation struct {
 
 	// The list of labels to assign to this route table.
@@ -31,6 +40,18 @@ type RoutingPropagatedRouteTableParameters struct {
 	// A list of Route Table IDs to associated with this Virtual Hub Connection.
 	// +kubebuilder:validation:Optional
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
+}
+
+type StaticVnetRouteInitParameters struct {
+
+	// A list of CIDR Ranges which should be used as Address Prefixes.
+	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
+
+	// The name which should be used for this Static Route.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The IP Address which should be used for the Next Hop.
+	NextHopIPAddress *string `json:"nextHopIpAddress,omitempty" tf:"next_hop_ip_address,omitempty"`
 }
 
 type StaticVnetRouteObservation struct {
@@ -58,6 +79,15 @@ type StaticVnetRouteParameters struct {
 	// The IP Address which should be used for the Next Hop.
 	// +kubebuilder:validation:Optional
 	NextHopIPAddress *string `json:"nextHopIpAddress,omitempty" tf:"next_hop_ip_address,omitempty"`
+}
+
+type VirtualHubConnectionInitParameters struct {
+
+	// Should Internet Security be enabled to secure internet traffic? Defaults to false.
+	InternetSecurityEnabled *bool `json:"internetSecurityEnabled,omitempty" tf:"internet_security_enabled,omitempty"`
+
+	// A routing block as defined below.
+	Routing []VirtualHubConnectionRoutingInitParameters `json:"routing,omitempty" tf:"routing,omitempty"`
 }
 
 type VirtualHubConnectionObservation struct {
@@ -117,6 +147,15 @@ type VirtualHubConnectionParameters struct {
 	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
+type VirtualHubConnectionRoutingInitParameters struct {
+
+	// A propagated_route_table block as defined below.
+	PropagatedRouteTable []RoutingPropagatedRouteTableInitParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
+
+	// A static_vnet_route block as defined below.
+	StaticVnetRoute []StaticVnetRouteInitParameters `json:"staticVnetRoute,omitempty" tf:"static_vnet_route,omitempty"`
+}
+
 type VirtualHubConnectionRoutingObservation struct {
 
 	// The ID of the route table associated with this Virtual Hub connection.
@@ -158,6 +197,18 @@ type VirtualHubConnectionRoutingParameters struct {
 type VirtualHubConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VirtualHubConnectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VirtualHubConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // VirtualHubConnectionStatus defines the observed state of VirtualHubConnection.

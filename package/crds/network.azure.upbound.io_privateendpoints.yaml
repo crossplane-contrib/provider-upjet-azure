@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: privateendpoints.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -98,9 +97,6 @@ spec:
                             to. subresource_names corresponds to group_id. Changing
                             this forces a new resource to be created.
                           type: string
-                      required:
-                      - name
-                      - privateIpAddress
                       type: object
                     type: array
                   location:
@@ -202,8 +198,6 @@ spec:
                                   type: string
                               type: object
                           type: object
-                      required:
-                      - name
                       type: object
                     type: array
                   privateServiceConnection:
@@ -251,9 +245,6 @@ spec:
                           items:
                             type: string
                           type: array
-                      required:
-                      - isManualConnection
-                      - name
                       type: object
                     type: array
                   resourceGroupName:
@@ -420,21 +411,144 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  customNetworkInterfaceName:
+                    description: The custom name of the network interface attached
+                      to the private endpoint. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  ipConfiguration:
+                    description: One or more ip_configuration blocks as defined below.
+                      This allows a static IP address to be set for this Private Endpoint,
+                      otherwise an address is dynamically allocated from the Subnet.
+                    items:
+                      properties:
+                        memberName:
+                          description: Specifies the member name this IP address applies
+                            to. If it is not specified, it will use the value of subresource_name.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        name:
+                          description: Specifies the Name of the IP Configuration.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        privateIpAddress:
+                          description: Specifies the static IP address within the
+                            private endpoint's subnet to be used. Changing this forces
+                            a new resource to be created.
+                          type: string
+                        subresourceName:
+                          description: Specifies the subresource this IP address applies
+                            to. subresource_names corresponds to group_id. Changing
+                            this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: The supported Azure location where the resource exists.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  privateDnsZoneGroup:
+                    description: A private_dns_zone_group block as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: Specifies the Name of the Private DNS Zone
+                            Group.
+                          type: string
+                      type: object
+                    type: array
+                  privateServiceConnection:
+                    description: A private_service_connection block as defined below.
+                    items:
+                      properties:
+                        isManualConnection:
+                          description: Does the Private Endpoint require Manual Approval
+                            from the remote resource owner? Changing this forces a
+                            new resource to be created.
+                          type: boolean
+                        name:
+                          description: Specifies the Name of the Private Service Connection.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        privateConnectionResourceAlias:
+                          description: The Service Alias of the Private Link Enabled
+                            Remote Resource which this Private Endpoint should be
+                            connected to. One of private_connection_resource_id or
+                            private_connection_resource_alias must be specified. Changing
+                            this forces a new resource to be created.
+                          type: string
+                        privateConnectionResourceId:
+                          description: The ID of the Private Link Enabled Remote Resource
+                            which this Private Endpoint should be connected to. One
+                            of private_connection_resource_id or private_connection_resource_alias
+                            must be specified. Changing this forces a new resource
+                            to be created. For a web app or function app slot, the
+                            parent web app should be used in this field instead of
+                            a reference to the slot itself.
+                          type: string
+                        requestMessage:
+                          description: A message passed to the owner of the remote
+                            resource when the private endpoint attempts to establish
+                            the connection to the remote resource. The request message
+                            can be a maximum of 140 characters in length. Only valid
+                            if is_manual_connection is set to true.
+                          type: string
+                        subresourceNames:
+                          description: A list of subresource names which the Private
+                            Endpoint is able to connect to. subresource_names corresponds
+                            to group_id. Possible values are detailed in the product
+                            documentation in the Subresources column. Changing this
+                            forces a new resource to be created.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -608,9 +722,13 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: privateServiceConnection is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.privateServiceConnection)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.privateServiceConnection)
+                || has(self.initProvider.privateServiceConnection)'
           status:
             description: PrivateEndpointStatus defines the observed state of PrivateEndpoint.
             properties:

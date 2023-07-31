@@ -3,20 +3,19 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
-  name: iothubdps.devices.azure.upbound.io
+    controller-gen.kubebuilder.io/version: v0.12.1
+  name: functionjavascriptuda.streamanalytics.azure.upbound.io
 spec:
-  group: devices.azure.upbound.io
+  group: streamanalytics.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: IOTHubDPS
-    listKind: IOTHubDPSList
-    plural: iothubdps
-    singular: iothubdps
+    kind: FunctionJavascriptUda
+    listKind: FunctionJavascriptUdaList
+    plural: functionjavascriptuda
+    singular: functionjavascriptuda
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -35,8 +34,9 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: IOTHubDPS is the Schema for the IOTHubDPSs API. Manages an IoT
-          Device Provisioning Service.
+        description: FunctionJavascriptUda is the Schema for the FunctionJavascriptUdas
+          API. Manages a JavaScript UDA Function within a Stream Analytics Streaming
+          Job.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -51,14 +51,14 @@ spec:
           metadata:
             type: object
           spec:
-            description: IOTHubDPSSpec defines the desired state of IOTHubDPS
+            description: FunctionJavascriptUdaSpec defines the desired state of FunctionJavascriptUda
             properties:
               deletionPolicy:
                 default: Delete
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -68,95 +68,42 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  allocationPolicy:
-                    description: The allocation policy of the IoT Device Provisioning
-                      Service (Hashed, GeoLatency or Static). Defaults to Hashed.
-                    type: string
-                  dataResidencyEnabled:
-                    description: Specifies if the IoT Device Provisioning Service
-                      has data residency and disaster recovery enabled. Defaults to
-                      false. Changing this forces a new resource to be created.
-                    type: boolean
-                  ipFilterRule:
-                    description: An ip_filter_rule block as defined below.
+                  input:
+                    description: One or more input blocks as defined below.
                     items:
                       properties:
-                        action:
-                          description: The desired action for requests captured by
-                            this rule. Possible values are Accept, Reject
-                          type: string
-                        ipMask:
-                          description: The IP address range in CIDR notation for the
-                            rule.
-                          type: string
-                        name:
-                          description: The name of the filter.
-                          type: string
-                        target:
-                          description: Target for requests captured by this rule.
-                            Possible values are All, DeviceApi and ServiceApi.
-                          type: string
-                      required:
-                      - action
-                      - ipMask
-                      - name
-                      type: object
-                    type: array
-                  linkedHub:
-                    description: A linked_hub block as defined below.
-                    items:
-                      properties:
-                        allocationWeight:
-                          description: The weight applied to the IoT Hub. Defaults
-                            to 1.
-                          type: number
-                        applyAllocationPolicy:
-                          description: Determines whether to apply allocation policies
-                            to the IoT Hub. Defaults to true.
+                        configurationParameter:
+                          description: Is this input parameter a configuration parameter?
+                            Defaults to false.
                           type: boolean
-                        connectionStringSecretRef:
-                          description: The connection string to connect to the IoT
-                            Hub.
-                          properties:
-                            key:
-                              description: The key to select.
-                              type: string
-                            name:
-                              description: Name of the secret.
-                              type: string
-                            namespace:
-                              description: Namespace of the secret.
-                              type: string
-                          required:
-                          - key
-                          - name
-                          - namespace
-                          type: object
-                        location:
-                          description: The location of the IoT hub.
+                        type:
+                          description: The input data type of this JavaScript Function.
+                            Possible values include any, array, bigint, datetime,
+                            float, nvarchar(max) and record.
                           type: string
-                      required:
-                      - connectionStringSecretRef
-                      - location
                       type: object
                     type: array
-                  location:
-                    description: Specifies the supported Azure location where the
-                      resource has to be created. Changing this forces a new resource
-                      to be created.
+                  output:
+                    description: An output block as defined below.
+                    items:
+                      properties:
+                        type:
+                          description: The output data type from this JavaScript Function.
+                            Possible values include any, array, bigint, datetime,
+                            float, nvarchar(max) and record.
+                          type: string
+                      type: object
+                    type: array
+                  script:
+                    description: The JavaScript of this UDA Function.
                     type: string
-                  publicNetworkAccessEnabled:
-                    description: Whether requests from Public Network are allowed.
-                      Defaults to true.
-                    type: boolean
-                  resourceGroupName:
-                    description: The name of the resource group under which the Iot
-                      Device Provisioning Service resource has to be created. Changing
-                      this forces a new resource to be created.
+                  streamAnalyticsJobId:
+                    description: The resource ID of the Stream Analytics Job where
+                      this Function should be created. Changing this forces a new
+                      resource to be created.
                     type: string
-                  resourceGroupNameRef:
-                    description: Reference to a ResourceGroup in azure to populate
-                      resourceGroupName.
+                  streamAnalyticsJobIdRef:
+                    description: Reference to a Job to populate streamAnalyticsJobId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -189,9 +136,8 @@ spec:
                     required:
                     - name
                     type: object
-                  resourceGroupNameSelector:
-                    description: Selector for a ResourceGroup in azure to populate
-                      resourceGroupName.
+                  streamAnalyticsJobIdSelector:
+                    description: Selector for a Job to populate streamAnalyticsJobId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -229,44 +175,76 @@ spec:
                             type: string
                         type: object
                     type: object
-                  sku:
-                    description: A sku block as defined below.
+                type: object
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  input:
+                    description: One or more input blocks as defined below.
                     items:
                       properties:
-                        capacity:
-                          description: The number of provisioned IoT Device Provisioning
-                            Service units.
-                          type: number
-                        name:
-                          description: The name of the sku. Currently can only be
-                            set to S1.
+                        configurationParameter:
+                          description: Is this input parameter a configuration parameter?
+                            Defaults to false.
+                          type: boolean
+                        type:
+                          description: The input data type of this JavaScript Function.
+                            Possible values include any, array, bigint, datetime,
+                            float, nvarchar(max) and record.
                           type: string
-                      required:
-                      - capacity
-                      - name
                       type: object
                     type: array
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
+                  output:
+                    description: An output block as defined below.
+                    items:
+                      properties:
+                        type:
+                          description: The output data type from this JavaScript Function.
+                            Possible values include any, array, bigint, datetime,
+                            float, nvarchar(max) and record.
+                          type: string
+                      type: object
+                    type: array
+                  script:
+                    description: The JavaScript of this UDA Function.
+                    type: string
                 type: object
-              managementPolicy:
-                default: FullControl
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -439,113 +417,61 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
-            - message: sku is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sku)
+            - message: input is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.input)
+                || has(self.initProvider.input)'
+            - message: output is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.output)
+                || has(self.initProvider.output)'
+            - message: script is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.script)
+                || has(self.initProvider.script)'
           status:
-            description: IOTHubDPSStatus defines the observed state of IOTHubDPS.
+            description: FunctionJavascriptUdaStatus defines the observed state of
+              FunctionJavascriptUda.
             properties:
               atProvider:
                 properties:
-                  allocationPolicy:
-                    description: The allocation policy of the IoT Device Provisioning
-                      Service (Hashed, GeoLatency or Static). Defaults to Hashed.
-                    type: string
-                  dataResidencyEnabled:
-                    description: Specifies if the IoT Device Provisioning Service
-                      has data residency and disaster recovery enabled. Defaults to
-                      false. Changing this forces a new resource to be created.
-                    type: boolean
-                  deviceProvisioningHostName:
-                    description: The device endpoint of the IoT Device Provisioning
-                      Service.
-                    type: string
                   id:
-                    description: The ID of the IoT Device Provisioning Service.
+                    description: The ID of the Stream Analytics JavaScript UDA Function.
                     type: string
-                  idScope:
-                    description: The unique identifier of the IoT Device Provisioning
-                      Service.
-                    type: string
-                  ipFilterRule:
-                    description: An ip_filter_rule block as defined below.
+                  input:
+                    description: One or more input blocks as defined below.
                     items:
                       properties:
-                        action:
-                          description: The desired action for requests captured by
-                            this rule. Possible values are Accept, Reject
-                          type: string
-                        ipMask:
-                          description: The IP address range in CIDR notation for the
-                            rule.
-                          type: string
-                        name:
-                          description: The name of the filter.
-                          type: string
-                        target:
-                          description: Target for requests captured by this rule.
-                            Possible values are All, DeviceApi and ServiceApi.
-                          type: string
-                      type: object
-                    type: array
-                  linkedHub:
-                    description: A linked_hub block as defined below.
-                    items:
-                      properties:
-                        allocationWeight:
-                          description: The weight applied to the IoT Hub. Defaults
-                            to 1.
-                          type: number
-                        applyAllocationPolicy:
-                          description: Determines whether to apply allocation policies
-                            to the IoT Hub. Defaults to true.
+                        configurationParameter:
+                          description: Is this input parameter a configuration parameter?
+                            Defaults to false.
                           type: boolean
-                        hostname:
-                          description: (Computed) The IoT Hub hostname.
-                          type: string
-                        location:
-                          description: The location of the IoT hub.
+                        type:
+                          description: The input data type of this JavaScript Function.
+                            Possible values include any, array, bigint, datetime,
+                            float, nvarchar(max) and record.
                           type: string
                       type: object
                     type: array
-                  location:
-                    description: Specifies the supported Azure location where the
-                      resource has to be created. Changing this forces a new resource
-                      to be created.
-                    type: string
-                  publicNetworkAccessEnabled:
-                    description: Whether requests from Public Network are allowed.
-                      Defaults to true.
-                    type: boolean
-                  resourceGroupName:
-                    description: The name of the resource group under which the Iot
-                      Device Provisioning Service resource has to be created. Changing
-                      this forces a new resource to be created.
-                    type: string
-                  serviceOperationsHostName:
-                    description: The service endpoint of the IoT Device Provisioning
-                      Service.
-                    type: string
-                  sku:
-                    description: A sku block as defined below.
+                  output:
+                    description: An output block as defined below.
                     items:
                       properties:
-                        capacity:
-                          description: The number of provisioned IoT Device Provisioning
-                            Service units.
-                          type: number
-                        name:
-                          description: The name of the sku. Currently can only be
-                            set to S1.
+                        type:
+                          description: The output data type from this JavaScript Function.
+                            Possible values include any, array, bigint, datetime,
+                            float, nvarchar(max) and record.
                           type: string
                       type: object
                     type: array
-                  tags:
-                    additionalProperties:
-                      type: string
-                    description: A mapping of tags to assign to the resource.
-                    type: object
+                  script:
+                    description: The JavaScript of this UDA Function.
+                    type: string
+                  streamAnalyticsJobId:
+                    description: The resource ID of the Stream Analytics Job where
+                      this Function should be created. Changing this forces a new
+                      resource to be created.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

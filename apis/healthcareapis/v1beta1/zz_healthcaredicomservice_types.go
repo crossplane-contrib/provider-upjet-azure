@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthenticationInitParameters struct {
+}
+
 type AuthenticationObservation struct {
 
 	// The intended audience to receive authentication tokens for the service. The default value is https://dicom.azurehealthcareapis.azure.com
@@ -24,6 +27,21 @@ type AuthenticationObservation struct {
 }
 
 type AuthenticationParameters struct {
+}
+
+type HealthcareDICOMServiceInitParameters struct {
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the Azure Region where the Healthcare DICOM Service should be created. Changing this forces a new Healthcare DICOM Service to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Whether to enabled public networks when data plane traffic coming from public networks while private endpoint is enabled. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// A mapping of tags to assign to the Healthcare DICOM Service.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type HealthcareDICOMServiceObservation struct {
@@ -88,6 +106,15 @@ type HealthcareDICOMServiceParameters struct {
 	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
+type IdentityInitParameters struct {
+
+	// A list of User Assigned Identity IDs which should be assigned to this Healthcare DICOM service.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The type of identity used for the Healthcare DICOM service. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned. If UserAssigned is set, an identity_ids must be set as well.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type IdentityObservation struct {
 
 	// A list of User Assigned Identity IDs which should be assigned to this Healthcare DICOM service.
@@ -110,8 +137,11 @@ type IdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of identity used for the Healthcare DICOM service. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned. If UserAssigned is set, an identity_ids must be set as well.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type PrivateEndpointInitParameters struct {
 }
 
 type PrivateEndpointObservation struct {
@@ -130,6 +160,18 @@ type PrivateEndpointParameters struct {
 type HealthcareDICOMServiceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HealthcareDICOMServiceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider HealthcareDICOMServiceInitParameters `json:"initProvider,omitempty"`
 }
 
 // HealthcareDICOMServiceStatus defines the observed state of HealthcareDICOMService.
@@ -150,7 +192,7 @@ type HealthcareDICOMServiceStatus struct {
 type HealthcareDICOMService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   HealthcareDICOMServiceSpec   `json:"spec"`
 	Status HealthcareDICOMServiceStatus `json:"status,omitempty"`
 }

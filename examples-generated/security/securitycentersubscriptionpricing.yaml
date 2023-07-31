@@ -10,6 +10,3 @@ spec:
   forProvider:
     resourceType: VirtualMachines
     tier: Standard
-
----
-

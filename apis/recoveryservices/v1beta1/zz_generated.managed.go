@@ -17,9 +17,9 @@ func (mg *BackupContainerStorageAccount) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupContainerStorageAccount.
-func (mg *BackupContainerStorageAccount) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupContainerStorageAccount.
+func (mg *BackupContainerStorageAccount) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupContainerStorageAccount.
@@ -55,9 +55,9 @@ func (mg *BackupContainerStorageAccount) SetDeletionPolicy(r xpv1.DeletionPolicy
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupContainerStorageAccount.
-func (mg *BackupContainerStorageAccount) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupContainerStorageAccount.
+func (mg *BackupContainerStorageAccount) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupContainerStorageAccount.
@@ -93,9 +93,9 @@ func (mg *BackupPolicyFileShare) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupPolicyFileShare.
-func (mg *BackupPolicyFileShare) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupPolicyFileShare.
+func (mg *BackupPolicyFileShare) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupPolicyFileShare.
@@ -131,9 +131,9 @@ func (mg *BackupPolicyFileShare) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupPolicyFileShare.
-func (mg *BackupPolicyFileShare) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupPolicyFileShare.
+func (mg *BackupPolicyFileShare) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupPolicyFileShare.
@@ -169,9 +169,9 @@ func (mg *BackupPolicyVM) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupPolicyVM.
-func (mg *BackupPolicyVM) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupPolicyVM.
+func (mg *BackupPolicyVM) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupPolicyVM.
@@ -207,9 +207,9 @@ func (mg *BackupPolicyVM) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupPolicyVM.
-func (mg *BackupPolicyVM) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupPolicyVM.
+func (mg *BackupPolicyVM) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupPolicyVM.
@@ -245,9 +245,9 @@ func (mg *BackupPolicyVMWorkload) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupPolicyVMWorkload.
-func (mg *BackupPolicyVMWorkload) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupPolicyVMWorkload.
+func (mg *BackupPolicyVMWorkload) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupPolicyVMWorkload.
@@ -283,9 +283,9 @@ func (mg *BackupPolicyVMWorkload) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupPolicyVMWorkload.
-func (mg *BackupPolicyVMWorkload) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupPolicyVMWorkload.
+func (mg *BackupPolicyVMWorkload) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupPolicyVMWorkload.
@@ -321,9 +321,9 @@ func (mg *BackupProtectedFileShare) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupProtectedFileShare.
-func (mg *BackupProtectedFileShare) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupProtectedFileShare.
+func (mg *BackupProtectedFileShare) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupProtectedFileShare.
@@ -359,9 +359,9 @@ func (mg *BackupProtectedFileShare) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupProtectedFileShare.
-func (mg *BackupProtectedFileShare) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupProtectedFileShare.
+func (mg *BackupProtectedFileShare) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupProtectedFileShare.
@@ -397,9 +397,9 @@ func (mg *BackupProtectedVM) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupProtectedVM.
-func (mg *BackupProtectedVM) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupProtectedVM.
+func (mg *BackupProtectedVM) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupProtectedVM.
@@ -435,9 +435,9 @@ func (mg *BackupProtectedVM) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupProtectedVM.
-func (mg *BackupProtectedVM) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupProtectedVM.
+func (mg *BackupProtectedVM) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupProtectedVM.
@@ -473,9 +473,9 @@ func (mg *SiteRecoveryFabric) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SiteRecoveryFabric.
-func (mg *SiteRecoveryFabric) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SiteRecoveryFabric.
+func (mg *SiteRecoveryFabric) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SiteRecoveryFabric.
@@ -511,9 +511,9 @@ func (mg *SiteRecoveryFabric) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SiteRecoveryFabric.
-func (mg *SiteRecoveryFabric) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SiteRecoveryFabric.
+func (mg *SiteRecoveryFabric) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SiteRecoveryFabric.
@@ -549,9 +549,9 @@ func (mg *SiteRecoveryNetworkMapping) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SiteRecoveryNetworkMapping.
-func (mg *SiteRecoveryNetworkMapping) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SiteRecoveryNetworkMapping.
+func (mg *SiteRecoveryNetworkMapping) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SiteRecoveryNetworkMapping.
@@ -587,9 +587,9 @@ func (mg *SiteRecoveryNetworkMapping) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SiteRecoveryNetworkMapping.
-func (mg *SiteRecoveryNetworkMapping) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SiteRecoveryNetworkMapping.
+func (mg *SiteRecoveryNetworkMapping) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SiteRecoveryNetworkMapping.
@@ -625,9 +625,9 @@ func (mg *SiteRecoveryProtectionContainer) GetDeletionPolicy() xpv1.DeletionPoli
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SiteRecoveryProtectionContainer.
-func (mg *SiteRecoveryProtectionContainer) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SiteRecoveryProtectionContainer.
+func (mg *SiteRecoveryProtectionContainer) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SiteRecoveryProtectionContainer.
@@ -663,9 +663,9 @@ func (mg *SiteRecoveryProtectionContainer) SetDeletionPolicy(r xpv1.DeletionPoli
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SiteRecoveryProtectionContainer.
-func (mg *SiteRecoveryProtectionContainer) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SiteRecoveryProtectionContainer.
+func (mg *SiteRecoveryProtectionContainer) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SiteRecoveryProtectionContainer.
@@ -701,9 +701,9 @@ func (mg *SiteRecoveryProtectionContainerMapping) GetDeletionPolicy() xpv1.Delet
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SiteRecoveryProtectionContainerMapping.
-func (mg *SiteRecoveryProtectionContainerMapping) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SiteRecoveryProtectionContainerMapping.
+func (mg *SiteRecoveryProtectionContainerMapping) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SiteRecoveryProtectionContainerMapping.
@@ -739,9 +739,9 @@ func (mg *SiteRecoveryProtectionContainerMapping) SetDeletionPolicy(r xpv1.Delet
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SiteRecoveryProtectionContainerMapping.
-func (mg *SiteRecoveryProtectionContainerMapping) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SiteRecoveryProtectionContainerMapping.
+func (mg *SiteRecoveryProtectionContainerMapping) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SiteRecoveryProtectionContainerMapping.
@@ -777,9 +777,9 @@ func (mg *SiteRecoveryReplicationPolicy) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SiteRecoveryReplicationPolicy.
-func (mg *SiteRecoveryReplicationPolicy) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SiteRecoveryReplicationPolicy.
+func (mg *SiteRecoveryReplicationPolicy) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SiteRecoveryReplicationPolicy.
@@ -815,9 +815,9 @@ func (mg *SiteRecoveryReplicationPolicy) SetDeletionPolicy(r xpv1.DeletionPolicy
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SiteRecoveryReplicationPolicy.
-func (mg *SiteRecoveryReplicationPolicy) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SiteRecoveryReplicationPolicy.
+func (mg *SiteRecoveryReplicationPolicy) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SiteRecoveryReplicationPolicy.
@@ -853,9 +853,9 @@ func (mg *Vault) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this Vault.
-func (mg *Vault) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this Vault.
+func (mg *Vault) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this Vault.
@@ -891,9 +891,9 @@ func (mg *Vault) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this Vault.
-func (mg *Vault) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this Vault.
+func (mg *Vault) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this Vault.

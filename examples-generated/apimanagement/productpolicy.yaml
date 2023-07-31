@@ -23,6 +23,3 @@ spec:
           <find-and-replace from="xyz" to="abc" />
         </inbound>
       </policies>
-
----
-

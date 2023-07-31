@@ -48,6 +48,3 @@ metadata:
 spec:
   forProvider:
     location: East US
-
----
-

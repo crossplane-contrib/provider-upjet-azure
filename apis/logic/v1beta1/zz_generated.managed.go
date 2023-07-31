@@ -17,9 +17,9 @@ func (mg *AppActionCustom) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppActionCustom.
-func (mg *AppActionCustom) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppActionCustom.
+func (mg *AppActionCustom) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppActionCustom.
@@ -55,9 +55,9 @@ func (mg *AppActionCustom) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppActionCustom.
-func (mg *AppActionCustom) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppActionCustom.
+func (mg *AppActionCustom) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppActionCustom.
@@ -93,9 +93,9 @@ func (mg *AppActionHTTP) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppActionHTTP.
-func (mg *AppActionHTTP) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppActionHTTP.
+func (mg *AppActionHTTP) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppActionHTTP.
@@ -131,9 +131,9 @@ func (mg *AppActionHTTP) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppActionHTTP.
-func (mg *AppActionHTTP) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppActionHTTP.
+func (mg *AppActionHTTP) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppActionHTTP.
@@ -169,9 +169,9 @@ func (mg *AppIntegrationAccount) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppIntegrationAccount.
-func (mg *AppIntegrationAccount) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppIntegrationAccount.
+func (mg *AppIntegrationAccount) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppIntegrationAccount.
@@ -207,9 +207,9 @@ func (mg *AppIntegrationAccount) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppIntegrationAccount.
-func (mg *AppIntegrationAccount) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppIntegrationAccount.
+func (mg *AppIntegrationAccount) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppIntegrationAccount.
@@ -245,9 +245,9 @@ func (mg *AppIntegrationAccountBatchConfiguration) GetDeletionPolicy() xpv1.Dele
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppIntegrationAccountBatchConfiguration.
+func (mg *AppIntegrationAccountBatchConfiguration) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppIntegrationAccountBatchConfiguration.
@@ -283,9 +283,9 @@ func (mg *AppIntegrationAccountBatchConfiguration) SetDeletionPolicy(r xpv1.Dele
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppIntegrationAccountBatchConfiguration.
-func (mg *AppIntegrationAccountBatchConfiguration) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppIntegrationAccountBatchConfiguration.
+func (mg *AppIntegrationAccountBatchConfiguration) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppIntegrationAccountBatchConfiguration.
@@ -321,9 +321,9 @@ func (mg *AppIntegrationAccountPartner) GetDeletionPolicy() xpv1.DeletionPolicy 
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppIntegrationAccountPartner.
-func (mg *AppIntegrationAccountPartner) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppIntegrationAccountPartner.
@@ -359,9 +359,9 @@ func (mg *AppIntegrationAccountPartner) SetDeletionPolicy(r xpv1.DeletionPolicy)
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppIntegrationAccountPartner.
-func (mg *AppIntegrationAccountPartner) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppIntegrationAccountPartner.
+func (mg *AppIntegrationAccountPartner) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppIntegrationAccountPartner.
@@ -397,9 +397,9 @@ func (mg *AppIntegrationAccountSchema) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppIntegrationAccountSchema.
-func (mg *AppIntegrationAccountSchema) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppIntegrationAccountSchema.
@@ -435,9 +435,9 @@ func (mg *AppIntegrationAccountSchema) SetDeletionPolicy(r xpv1.DeletionPolicy) 
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppIntegrationAccountSchema.
-func (mg *AppIntegrationAccountSchema) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppIntegrationAccountSchema.
+func (mg *AppIntegrationAccountSchema) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppIntegrationAccountSchema.
@@ -473,9 +473,9 @@ func (mg *AppIntegrationAccountSession) GetDeletionPolicy() xpv1.DeletionPolicy 
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppIntegrationAccountSession.
-func (mg *AppIntegrationAccountSession) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppIntegrationAccountSession.
@@ -511,9 +511,9 @@ func (mg *AppIntegrationAccountSession) SetDeletionPolicy(r xpv1.DeletionPolicy)
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppIntegrationAccountSession.
-func (mg *AppIntegrationAccountSession) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppIntegrationAccountSession.
+func (mg *AppIntegrationAccountSession) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppIntegrationAccountSession.
@@ -549,9 +549,9 @@ func (mg *AppTriggerCustom) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppTriggerCustom.
-func (mg *AppTriggerCustom) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppTriggerCustom.
+func (mg *AppTriggerCustom) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppTriggerCustom.
@@ -587,9 +587,9 @@ func (mg *AppTriggerCustom) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppTriggerCustom.
-func (mg *AppTriggerCustom) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppTriggerCustom.
+func (mg *AppTriggerCustom) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppTriggerCustom.
@@ -625,9 +625,9 @@ func (mg *AppTriggerHTTPRequest) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppTriggerHTTPRequest.
-func (mg *AppTriggerHTTPRequest) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppTriggerHTTPRequest.
@@ -663,9 +663,9 @@ func (mg *AppTriggerHTTPRequest) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppTriggerHTTPRequest.
-func (mg *AppTriggerHTTPRequest) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppTriggerHTTPRequest.
+func (mg *AppTriggerHTTPRequest) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppTriggerHTTPRequest.
@@ -701,9 +701,9 @@ func (mg *AppTriggerRecurrence) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppTriggerRecurrence.
@@ -739,9 +739,9 @@ func (mg *AppTriggerRecurrence) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppTriggerRecurrence.
-func (mg *AppTriggerRecurrence) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppTriggerRecurrence.
+func (mg *AppTriggerRecurrence) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppTriggerRecurrence.
@@ -777,9 +777,9 @@ func (mg *AppWorkflow) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this AppWorkflow.
-func (mg *AppWorkflow) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this AppWorkflow.
+func (mg *AppWorkflow) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this AppWorkflow.
@@ -815,9 +815,9 @@ func (mg *AppWorkflow) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this AppWorkflow.
-func (mg *AppWorkflow) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this AppWorkflow.
+func (mg *AppWorkflow) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this AppWorkflow.
@@ -853,9 +853,9 @@ func (mg *IntegrationServiceEnvironment) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this IntegrationServiceEnvironment.
-func (mg *IntegrationServiceEnvironment) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this IntegrationServiceEnvironment.
+func (mg *IntegrationServiceEnvironment) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this IntegrationServiceEnvironment.
@@ -891,9 +891,9 @@ func (mg *IntegrationServiceEnvironment) SetDeletionPolicy(r xpv1.DeletionPolicy
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this IntegrationServiceEnvironment.
-func (mg *IntegrationServiceEnvironment) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this IntegrationServiceEnvironment.
+func (mg *IntegrationServiceEnvironment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this IntegrationServiceEnvironment.

@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NotificationHubNamespaceInitParameters struct {
+
+	// Is this Notification Hub Namespace enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The Azure Region in which this Notification Hub Namespace should be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The Type of Namespace - possible values are Messaging or NotificationHub.
+	NamespaceType *string `json:"namespaceType,omitempty" tf:"namespace_type,omitempty"`
+
+	// The name of the SKU to use for this Notification Hub Namespace. Possible values are Free, Basic or Standard.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type NotificationHubNamespaceObservation struct {
 
 	// Is this Notification Hub Namespace enabled? Defaults to true.
@@ -80,6 +98,18 @@ type NotificationHubNamespaceParameters struct {
 type NotificationHubNamespaceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NotificationHubNamespaceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider NotificationHubNamespaceInitParameters `json:"initProvider,omitempty"`
 }
 
 // NotificationHubNamespaceStatus defines the observed state of NotificationHubNamespace.
@@ -100,9 +130,9 @@ type NotificationHubNamespaceStatus struct {
 type NotificationHubNamespace struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.namespaceType)",message="namespaceType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespaceType) || has(self.initProvider.namespaceType)",message="namespaceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
 	Spec   NotificationHubNamespaceSpec   `json:"spec"`
 	Status NotificationHubNamespaceStatus `json:"status,omitempty"`
 }

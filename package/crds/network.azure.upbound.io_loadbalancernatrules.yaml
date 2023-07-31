@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: loadbalancernatrules.network.azure.upbound.io
 spec:
   group: network.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -347,21 +346,90 @@ spec:
                         type: object
                     type: object
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  backendPort:
+                    description: The port used for internal connections on the endpoint.
+                      Possible values range between 1 and 65535, inclusive.
+                    type: number
+                  enableFloatingIp:
+                    description: Are the Floating IPs enabled for this Load Balancer
+                      Rule? A "floating” IP is reassigned to a secondary server in
+                      case the primary server fails. Required to configure a SQL AlwaysOn
+                      Availability Group. Defaults to false.
+                    type: boolean
+                  enableTcpReset:
+                    description: Is TCP Reset enabled for this Load Balancer Rule?
+                    type: boolean
+                  frontendIpConfigurationName:
+                    description: The name of the frontend IP configuration exposing
+                      this rule.
+                    type: string
+                  frontendPort:
+                    description: The port for the external endpoint. Port numbers
+                      for each Rule must be unique within the Load Balancer. Possible
+                      values range between 1 and 65534, inclusive.
+                    type: number
+                  frontendPortEnd:
+                    description: The port range end for the external endpoint. This
+                      property is used together with BackendAddressPool and FrontendPortRangeStart.
+                      Individual inbound NAT rule port mappings will be created for
+                      each backend address from BackendAddressPool. Acceptable values
+                      range from 1 to 65534, inclusive.
+                    type: number
+                  frontendPortStart:
+                    description: The port range start for the external endpoint. This
+                      property is used together with BackendAddressPool and FrontendPortRangeEnd.
+                      Individual inbound NAT rule port mappings will be created for
+                      each backend address from BackendAddressPool. Acceptable values
+                      range from 1 to 65534, inclusive.
+                    type: number
+                  idleTimeoutInMinutes:
+                    description: Specifies the idle timeout in minutes for TCP connections.
+                      Valid values are between 4 and 30 minutes. Defaults to 4 minutes.
+                    type: number
+                  protocol:
+                    description: The transport protocol for the external endpoint.
+                      Possible values are Udp, Tcp or All.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -535,11 +603,17 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: backendPort is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.backendPort)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.backendPort)
+                || has(self.initProvider.backendPort)'
             - message: frontendIpConfigurationName is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frontendIpConfigurationName)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.frontendIpConfigurationName)
+                || has(self.initProvider.frontendIpConfigurationName)'
             - message: protocol is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.protocol)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.protocol)
+                || has(self.initProvider.protocol)'
           status:
             description: LoadBalancerNatRuleStatus defines the observed state of LoadBalancerNatRule.
             properties:

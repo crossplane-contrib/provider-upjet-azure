@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LinkedServiceWebInitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The type of authentication used to connect to the web table source. Valid options are Anonymous, Basic and ClientCertificate.
+	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The URL of the web service endpoint (e.g. https://www.microsoft.com).
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+
+	// The username for Basic authentication. Required if authentication_type sets to Basic.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
 type LinkedServiceWebObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
@@ -103,6 +130,18 @@ type LinkedServiceWebParameters struct {
 type LinkedServiceWebSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LinkedServiceWebParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LinkedServiceWebInitParameters `json:"initProvider,omitempty"`
 }
 
 // LinkedServiceWebStatus defines the observed state of LinkedServiceWeb.
@@ -123,8 +162,8 @@ type LinkedServiceWebStatus struct {
 type LinkedServiceWeb struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.authenticationType)",message="authenticationType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.url)",message="url is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.authenticationType) || has(self.initProvider.authenticationType)",message="authenticationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.url) || has(self.initProvider.url)",message="url is a required parameter"
 	Spec   LinkedServiceWebSpec   `json:"spec"`
 	Status LinkedServiceWebStatus `json:"status,omitempty"`
 }

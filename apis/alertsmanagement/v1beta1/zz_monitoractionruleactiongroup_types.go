@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AlertContextInitParameters struct {
+
+	// The operator for a given condition. Possible values are Equals and NotEquals.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type AlertContextObservation struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
@@ -25,12 +34,21 @@ type AlertContextObservation struct {
 type AlertContextParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type AlertRuleIDInitParameters struct {
+
+	// The operator for a given condition. Possible values are Equals and NotEquals.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type AlertRuleIDObservation struct {
@@ -45,12 +63,36 @@ type AlertRuleIDObservation struct {
 type AlertRuleIDParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type ConditionInitParameters struct {
+
+	// A alert_context block as defined below.
+	AlertContext []AlertContextInitParameters `json:"alertContext,omitempty" tf:"alert_context,omitempty"`
+
+	// A alert_rule_id block as defined below.
+	AlertRuleID []AlertRuleIDInitParameters `json:"alertRuleId,omitempty" tf:"alert_rule_id,omitempty"`
+
+	// A description block as defined below.
+	Description []DescriptionInitParameters `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A monitor block as defined below.
+	Monitor []MonitorInitParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
+
+	// A monitor_service as block defined below.
+	MonitorService []MonitorServiceInitParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
+
+	// A severity block as defined below.
+	Severity []SeverityInitParameters `json:"severity,omitempty" tf:"severity,omitempty"`
+
+	// A target_resource_type block as defined below.
+	TargetResourceType []TargetResourceTypeInitParameters `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 }
 
 type ConditionObservation struct {
@@ -108,6 +150,15 @@ type ConditionParameters struct {
 	TargetResourceType []TargetResourceTypeParameters `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 }
 
+type DescriptionInitParameters struct {
+
+	// The operator for a given condition. Possible values are Equals and NotEquals.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type DescriptionObservation struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
@@ -120,12 +171,30 @@ type DescriptionObservation struct {
 type DescriptionParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type MonitorActionRuleActionGroupInitParameters struct {
+
+	// A condition block as defined below.
+	Condition []ConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+
+	// Specifies a description for the Action Rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Is the Action Rule enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A scope block as defined below.
+	Scope []ScopeInitParameters `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MonitorActionRuleActionGroupObservation struct {
@@ -205,6 +274,15 @@ type MonitorActionRuleActionGroupParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type MonitorInitParameters struct {
+
+	// The operator for a given condition. Possible values are Equals and NotEquals.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
 type MonitorObservation struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
@@ -217,12 +295,21 @@ type MonitorObservation struct {
 type MonitorParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type MonitorServiceInitParameters struct {
+
+	// The operator for a given condition. Possible values are Equals and NotEquals.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type MonitorServiceObservation struct {
@@ -237,12 +324,21 @@ type MonitorServiceObservation struct {
 type MonitorServiceParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type ScopeInitParameters struct {
+
+	// A list of resource IDs of the given scope type which will be the target of action rule.
+	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
+
+	// Specifies the type of target scope. Possible values are ResourceGroup and Resource.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type ScopeObservation struct {
@@ -257,12 +353,21 @@ type ScopeObservation struct {
 type ScopeParameters struct {
 
 	// A list of resource IDs of the given scope type which will be the target of action rule.
-	// +kubebuilder:validation:Required
-	ResourceIds []*string `json:"resourceIds" tf:"resource_ids,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
 
 	// Specifies the type of target scope. Possible values are ResourceGroup and Resource.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type SeverityInitParameters struct {
+
+	// The operator for a given condition. Possible values are Equals and NotEquals.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type SeverityObservation struct {
@@ -277,12 +382,21 @@ type SeverityObservation struct {
 type SeverityParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+}
+
+type TargetResourceTypeInitParameters struct {
+
+	// The operator for a given condition. Possible values are Equals and NotEquals.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// A list of values to match for a given condition. The values should be valid resource types.
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 type TargetResourceTypeObservation struct {
@@ -297,18 +411,30 @@ type TargetResourceTypeObservation struct {
 type TargetResourceTypeParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
-	// +kubebuilder:validation:Required
-	Values []*string `json:"values" tf:"values,omitempty"`
+	// +kubebuilder:validation:Optional
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
 // MonitorActionRuleActionGroupSpec defines the desired state of MonitorActionRuleActionGroup
 type MonitorActionRuleActionGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MonitorActionRuleActionGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MonitorActionRuleActionGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // MonitorActionRuleActionGroupStatus defines the observed state of MonitorActionRuleActionGroup.

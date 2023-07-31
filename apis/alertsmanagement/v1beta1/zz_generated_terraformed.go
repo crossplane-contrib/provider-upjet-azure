@@ -69,6 +69,16 @@ func (tr *MonitorActionRuleActionGroup) SetParameters(params map[string]any) err
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this MonitorActionRuleActionGroup
+func (tr *MonitorActionRuleActionGroup) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this MonitorActionRuleActionGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MonitorActionRuleActionGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *MonitorActionRuleSuppression) SetParameters(params map[string]any) err
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this MonitorActionRuleSuppression
+func (tr *MonitorActionRuleSuppression) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this MonitorActionRuleSuppression using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *MonitorAlertProcessingRuleActionGroup) SetParameters(params map[string
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this MonitorAlertProcessingRuleActionGroup
+func (tr *MonitorAlertProcessingRuleActionGroup) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this MonitorAlertProcessingRuleActionGroup using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MonitorAlertProcessingRuleActionGroup) LateInitialize(attrs []byte) (bool, error) {
@@ -291,6 +321,16 @@ func (tr *MonitorAlertProcessingRuleSuppression) SetParameters(params map[string
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this MonitorAlertProcessingRuleSuppression
+func (tr *MonitorAlertProcessingRuleSuppression) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this MonitorAlertProcessingRuleSuppression using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MonitorAlertProcessingRuleSuppression) LateInitialize(attrs []byte) (bool, error) {
@@ -363,6 +403,16 @@ func (tr *MonitorSmartDetectorAlertRule) SetParameters(params map[string]any) er
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this MonitorSmartDetectorAlertRule
+func (tr *MonitorSmartDetectorAlertRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this MonitorSmartDetectorAlertRule using its observed tfState.

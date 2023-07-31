@@ -18,6 +18,3 @@ spec:
       - 12076:52004
       name: rule
       ruleType: Community
-
----
-

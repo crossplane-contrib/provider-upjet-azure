@@ -11,6 +11,3 @@ spec:
     principalId: ${data.azurerm_client_config.example.object_id}
     roleDefinitionName: Reader
     scope: ${data.azurerm_subscription.primary.id}
-
----
-

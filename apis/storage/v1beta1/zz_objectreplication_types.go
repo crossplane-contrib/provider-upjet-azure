@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ObjectReplicationInitParameters struct {
+
+	// One or more rules blocks as defined below.
+	Rules []ObjectReplicationRulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
+}
+
 type ObjectReplicationObservation struct {
 
 	// The ID of the Object Replication in the destination storage account.
@@ -67,6 +73,15 @@ type ObjectReplicationParameters struct {
 	// Selector for a Account in storage to populate sourceStorageAccountId.
 	// +kubebuilder:validation:Optional
 	SourceStorageAccountIDSelector *v1.Selector `json:"sourceStorageAccountIdSelector,omitempty" tf:"-"`
+}
+
+type ObjectReplicationRulesInitParameters struct {
+
+	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z.
+	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
+
+	// Specifies a list of filters prefixes, the blobs whose names begin with which will be replicated.
+	FilterOutBlobsWithPrefix []*string `json:"filterOutBlobsWithPrefix,omitempty" tf:"filter_out_blobs_with_prefix,omitempty"`
 }
 
 type ObjectReplicationRulesObservation struct {
@@ -127,6 +142,18 @@ type ObjectReplicationRulesParameters struct {
 type ObjectReplicationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ObjectReplicationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ObjectReplicationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ObjectReplicationStatus defines the observed state of ObjectReplication.
@@ -147,7 +174,7 @@ type ObjectReplicationStatus struct {
 type ObjectReplication struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.rules)",message="rules is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rules) || has(self.initProvider.rules)",message="rules is a required parameter"
 	Spec   ObjectReplicationSpec   `json:"spec"`
 	Status ObjectReplicationStatus `json:"status,omitempty"`
 }

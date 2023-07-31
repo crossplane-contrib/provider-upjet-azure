@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DatabaseInitParameters struct {
+
+	// The time the data that should be kept in cache for fast queries as ISO 8601 timespan. Default is unlimited. For more information see: ISO 8601 Timespan
+	HotCachePeriod *string `json:"hotCachePeriod,omitempty" tf:"hot_cache_period,omitempty"`
+
+	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The time the data should be kept before it stops being accessible to queries as ISO 8601 timespan. Default is unlimited. For more information see: ISO 8601 Timespan
+	SoftDeletePeriod *string `json:"softDeletePeriod,omitempty" tf:"soft_delete_period,omitempty"`
+}
+
 type DatabaseObservation struct {
 
 	// Specifies the name of the Kusto Cluster this database will be added to. Changing this forces a new resource to be created.
@@ -82,6 +94,18 @@ type DatabaseParameters struct {
 type DatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DatabaseParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DatabaseInitParameters `json:"initProvider,omitempty"`
 }
 
 // DatabaseStatus defines the observed state of Database.
@@ -102,7 +126,7 @@ type DatabaseStatus struct {
 type Database struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   DatabaseSpec   `json:"spec"`
 	Status DatabaseStatus `json:"status,omitempty"`
 }

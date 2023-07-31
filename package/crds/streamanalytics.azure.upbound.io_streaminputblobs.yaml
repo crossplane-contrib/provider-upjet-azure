@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: streaminputblobs.streamanalytics.azure.upbound.io
 spec:
   group: streamanalytics.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -179,8 +178,6 @@ spec:
                           description: The serialization format used for incoming
                             data streams. Possible values are Avro, Csv and Json.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   storageAccountKeySecretRef:
@@ -435,21 +432,84 @@ spec:
                       the value of this property is used as the time format instead.
                     type: string
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  dateFormat:
+                    description: The date format. Wherever {date} appears in path_pattern,
+                      the value of this property is used as the date format instead.
+                    type: string
+                  name:
+                    description: The name of the Stream Input Blob. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  pathPattern:
+                    description: The blob path pattern. Not a regular expression.
+                      It represents a pattern against which blob names will be matched
+                      to determine whether or not they should be included as input
+                      or output to the job.
+                    type: string
+                  serialization:
+                    description: A serialization block as defined below.
+                    items:
+                      properties:
+                        encoding:
+                          description: The encoding of the incoming data in the case
+                            of input and the encoding of outgoing data in the case
+                            of output. It currently can only be set to UTF8.
+                          type: string
+                        fieldDelimiter:
+                          description: "The delimiter that will be used to separate
+                            comma-separated value (CSV) records. Possible values are
+                            \  (space), , (comma), \t (tab), | (pipe) and ;."
+                          type: string
+                        type:
+                          description: The serialization format used for incoming
+                            data streams. Possible values are Avro, Csv and Json.
+                          type: string
+                      type: object
+                    type: array
+                  timeFormat:
+                    description: The time format. Wherever {time} appears in path_pattern,
+                      the value of this property is used as the time format instead.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -623,17 +683,28 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: dateFormat is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dateFormat)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.dateFormat)
+                || has(self.initProvider.dateFormat)'
             - message: name is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: pathPattern is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.pathPattern)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.pathPattern)
+                || has(self.initProvider.pathPattern)'
             - message: serialization is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.serialization)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.serialization)
+                || has(self.initProvider.serialization)'
             - message: storageAccountKeySecretRef is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.storageAccountKeySecretRef)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageAccountKeySecretRef)'
             - message: timeFormat is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeFormat)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.timeFormat)
+                || has(self.initProvider.timeFormat)'
           status:
             description: StreamInputBlobStatus defines the observed state of StreamInputBlob.
             properties:

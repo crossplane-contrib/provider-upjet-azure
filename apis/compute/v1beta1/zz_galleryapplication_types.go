@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type GalleryApplicationInitParameters struct {
+
+	// A description of the Gallery Application.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The end of life date in RFC3339 format of the Gallery Application.
+	EndOfLifeDate *string `json:"endOfLifeDate,omitempty" tf:"end_of_life_date,omitempty"`
+
+	// The End User Licence Agreement of the Gallery Application.
+	Eula *string `json:"eula,omitempty" tf:"eula,omitempty"`
+
+	// The Azure Region where the Gallery Application exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The URI containing the Privacy Statement associated with the Gallery Application.
+	PrivacyStatementURI *string `json:"privacyStatementUri,omitempty" tf:"privacy_statement_uri,omitempty"`
+
+	// The URI containing the Release Notes associated with the Gallery Application.
+	ReleaseNoteURI *string `json:"releaseNoteUri,omitempty" tf:"release_note_uri,omitempty"`
+
+	// The type of the Operating System supported for the Gallery Application. Possible values are Linux and Windows. Changing this forces a new resource to be created.
+	SupportedOsType *string `json:"supportedOsType,omitempty" tf:"supported_os_type,omitempty"`
+
+	// A mapping of tags to assign to the Gallery Application.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type GalleryApplicationObservation struct {
 
 	// A description of the Gallery Application.
@@ -99,6 +126,18 @@ type GalleryApplicationParameters struct {
 type GalleryApplicationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     GalleryApplicationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider GalleryApplicationInitParameters `json:"initProvider,omitempty"`
 }
 
 // GalleryApplicationStatus defines the observed state of GalleryApplication.
@@ -119,8 +158,8 @@ type GalleryApplicationStatus struct {
 type GalleryApplication struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.supportedOsType)",message="supportedOsType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.supportedOsType) || has(self.initProvider.supportedOsType)",message="supportedOsType is a required parameter"
 	Spec   GalleryApplicationSpec   `json:"spec"`
 	Status GalleryApplicationStatus `json:"status,omitempty"`
 }

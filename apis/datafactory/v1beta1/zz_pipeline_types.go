@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PipelineInitParameters struct {
+
+	// A JSON object that contains the activities that will be associated with the Data Factory Pipeline.
+	ActivitiesJSON *string `json:"activitiesJson,omitempty" tf:"activities_json,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Pipeline.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The max number of concurrent runs for the Data Factory Pipeline. Must be between 1 and 50.
+	Concurrency *float64 `json:"concurrency,omitempty" tf:"concurrency,omitempty"`
+
+	// The description for the Data Factory Pipeline.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The folder that this Pipeline is in. If not specified, the Pipeline will appear at the root level.
+	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
+
+	// The TimeSpan value after which an Azure Monitoring Metric is fired.
+	MoniterMetricsAfterDuration *string `json:"moniterMetricsAfterDuration,omitempty" tf:"moniter_metrics_after_duration,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Pipeline.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// A map of variables to associate with the Data Factory Pipeline.
+	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
+}
+
 type PipelineObservation struct {
 
 	// A JSON object that contains the activities that will be associated with the Data Factory Pipeline.
@@ -99,6 +126,18 @@ type PipelineParameters struct {
 type PipelineSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PipelineParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PipelineInitParameters `json:"initProvider,omitempty"`
 }
 
 // PipelineStatus defines the observed state of Pipeline.

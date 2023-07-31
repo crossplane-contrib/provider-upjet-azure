@@ -69,6 +69,16 @@ func (tr *NotificationHub) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this NotificationHub
+func (tr *NotificationHub) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this NotificationHub using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *NotificationHub) LateInitialize(attrs []byte) (bool, error) {
@@ -143,6 +153,16 @@ func (tr *AuthorizationRule) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this AuthorizationRule
+func (tr *AuthorizationRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this AuthorizationRule using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *AuthorizationRule) LateInitialize(attrs []byte) (bool, error) {
@@ -215,6 +235,16 @@ func (tr *NotificationHubNamespace) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this NotificationHubNamespace
+func (tr *NotificationHubNamespace) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this NotificationHubNamespace using its observed tfState.

@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccountLocalUserInitParameters struct {
+
+	// The home directory of the Storage Account Local User.
+	HomeDirectory *string `json:"homeDirectory,omitempty" tf:"home_directory,omitempty"`
+
+	// One or more permission_scope blocks as defined below.
+	PermissionScope []PermissionScopeInitParameters `json:"permissionScope,omitempty" tf:"permission_scope,omitempty"`
+
+	// One or more ssh_authorized_key blocks as defined below.
+	SSHAuthorizedKey []SSHAuthorizedKeyInitParameters `json:"sshAuthorizedKey,omitempty" tf:"ssh_authorized_key,omitempty"`
+
+	// Specifies whether SSH Key Authentication is enabled. Defaults to false.
+	SSHKeyEnabled *bool `json:"sshKeyEnabled,omitempty" tf:"ssh_key_enabled,omitempty"`
+
+	// Specifies whether SSH Password Authentication is enabled. Defaults to false.
+	SSHPasswordEnabled *bool `json:"sshPasswordEnabled,omitempty" tf:"ssh_password_enabled,omitempty"`
+}
+
 type AccountLocalUserObservation struct {
 
 	// The home directory of the Storage Account Local User.
@@ -74,6 +92,15 @@ type AccountLocalUserParameters struct {
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
+type PermissionScopeInitParameters struct {
+
+	// A permissions block as defined below.
+	Permissions []PermissionsInitParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// The storage service used by this Storage Account Local User. Possible values are blob and file.
+	Service *string `json:"service,omitempty" tf:"service,omitempty"`
+}
+
 type PermissionScopeObservation struct {
 
 	// A permissions block as defined below.
@@ -89,8 +116,8 @@ type PermissionScopeObservation struct {
 type PermissionScopeParameters struct {
 
 	// A permissions block as defined below.
-	// +kubebuilder:validation:Required
-	Permissions []PermissionsParameters `json:"permissions" tf:"permissions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Permissions []PermissionsParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// The container name (when service is set to blob) or the file share name (when service is set to file), used by the Storage Account Local User.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
@@ -106,8 +133,26 @@ type PermissionScopeParameters struct {
 	ResourceNameSelector *v1.Selector `json:"resourceNameSelector,omitempty" tf:"-"`
 
 	// The storage service used by this Storage Account Local User. Possible values are blob and file.
-	// +kubebuilder:validation:Required
-	Service *string `json:"service" tf:"service,omitempty"`
+	// +kubebuilder:validation:Optional
+	Service *string `json:"service,omitempty" tf:"service,omitempty"`
+}
+
+type PermissionsInitParameters struct {
+
+	// (Defaults to 30 minutes) Used when creating the Storage Account Local User.
+	Create *bool `json:"create,omitempty" tf:"create,omitempty"`
+
+	// (Defaults to 30 minutes) Used when deleting the Storage Account Local User.
+	Delete *bool `json:"delete,omitempty" tf:"delete,omitempty"`
+
+	// Specifies if the Local User has the list permission for this scope. Defaults to false.
+	List *bool `json:"list,omitempty" tf:"list,omitempty"`
+
+	// (Defaults to 5 minutes) Used when retrieving the Storage Account Local User.
+	Read *bool `json:"read,omitempty" tf:"read,omitempty"`
+
+	// Specifies if the Local User has the write permission for this scope. Defaults to false.
+	Write *bool `json:"write,omitempty" tf:"write,omitempty"`
 }
 
 type PermissionsObservation struct {
@@ -151,6 +196,15 @@ type PermissionsParameters struct {
 	Write *bool `json:"write,omitempty" tf:"write,omitempty"`
 }
 
+type SSHAuthorizedKeyInitParameters struct {
+
+	// The description of this SSH authorized key.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The public key value of this SSH authorized key.
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+}
+
 type SSHAuthorizedKeyObservation struct {
 
 	// The description of this SSH authorized key.
@@ -167,14 +221,26 @@ type SSHAuthorizedKeyParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The public key value of this SSH authorized key.
-	// +kubebuilder:validation:Required
-	Key *string `json:"key" tf:"key,omitempty"`
+	// +kubebuilder:validation:Optional
+	Key *string `json:"key,omitempty" tf:"key,omitempty"`
 }
 
 // AccountLocalUserSpec defines the desired state of AccountLocalUser
 type AccountLocalUserSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AccountLocalUserParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AccountLocalUserInitParameters `json:"initProvider,omitempty"`
 }
 
 // AccountLocalUserStatus defines the observed state of AccountLocalUser.

@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: monitorscheduledqueryrulesalerts.insights.azure.upbound.io
 spec:
   group: insights.azure.upbound.io
@@ -60,7 +59,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -413,10 +412,6 @@ spec:
                                   rule should be triggered. Values must be between
                                   0 and 10000 inclusive.
                                 type: number
-                            required:
-                            - metricTriggerType
-                            - operator
-                            - threshold
                             type: object
                           type: array
                         operator:
@@ -428,27 +423,159 @@ spec:
                             should be triggered. Values must be between 0 and 10000
                             inclusive.
                           type: number
-                      required:
-                      - operator
-                      - threshold
                       type: object
                     type: array
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  action:
+                    description: An action block as defined below.
+                    items:
+                      properties:
+                        customWebhookPayload:
+                          description: Custom payload to be sent for all webhook payloads
+                            in alerting action.
+                          type: string
+                        emailSubject:
+                          description: Custom subject override for all email ids in
+                            Azure action group.
+                          type: string
+                      type: object
+                    type: array
+                  authorizedResourceIds:
+                    description: List of Resource IDs referred into query.
+                    items:
+                      type: string
+                    type: array
+                  autoMitigationEnabled:
+                    description: Should the alerts in this Metric Alert be auto resolved?
+                      Defaults to false. -> NOTE auto_mitigation_enabled and throttling
+                      are mutually exclusive and cannot both be set.
+                    type: boolean
+                  description:
+                    description: The description of the scheduled query rule.
+                    type: string
+                  enabled:
+                    description: Whether this scheduled query rule is enabled. Default
+                      is true.
+                    type: boolean
+                  frequency:
+                    description: Frequency (in minutes) at which rule condition should
+                      be evaluated. Values must be between 5 and 1440 (inclusive).
+                    type: number
+                  location:
+                    description: Specifies the Azure Region where the resource should
+                      exist. Changing this forces a new resource to be created.
+                    type: string
+                  name:
+                    description: The name of the scheduled query rule. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  query:
+                    description: Log search query.
+                    type: string
+                  queryType:
+                    description: The type of query results. Possible values are ResultCount
+                      and Number. Default is ResultCount. If set to Number, query
+                      must include an AggregatedValue column of a numeric type, for
+                      example, Heartbeat | summarize AggregatedValue = count() by
+                      bin(TimeGenerated, 5m).
+                    type: string
+                  severity:
+                    description: 'Severity of the alert. Possible values include:
+                      0, 1, 2, 3, or 4.'
+                    type: number
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                  throttling:
+                    description: Time (in minutes) for which Alerts should be throttled
+                      or suppressed. Values must be between 0 and 10000 (inclusive).
+                    type: number
+                  timeWindow:
+                    description: Time window for which data needs to be fetched for
+                      query (must be greater than or equal to frequency). Values must
+                      be between 5 and 2880 (inclusive).
+                    type: number
+                  trigger:
+                    description: A trigger block as defined below.
+                    items:
+                      properties:
+                        metricTrigger:
+                          description: A metric_trigger block as defined above. Trigger
+                            condition for metric query rule.
+                          items:
+                            properties:
+                              metricColumn:
+                                description: Evaluation of metric on a particular
+                                  column.
+                                type: string
+                              metricTriggerType:
+                                description: Metric Trigger Type - 'Consecutive' or
+                                  'Total'.
+                                type: string
+                              operator:
+                                description: Evaluation operation for rule - 'GreaterThan',
+                                  GreaterThanOrEqual', 'LessThan', or 'LessThanOrEqual'.
+                                type: string
+                              threshold:
+                                description: Result or count threshold based on which
+                                  rule should be triggered. Values must be between
+                                  0 and 10000 inclusive.
+                                type: number
+                            type: object
+                          type: array
+                        operator:
+                          description: Evaluation operation for rule - 'GreaterThan',
+                            GreaterThanOrEqual', 'LessThan', or 'LessThanOrEqual'.
+                          type: string
+                        threshold:
+                          description: Result or count threshold based on which rule
+                            should be triggered. Values must be between 0 and 10000
+                            inclusive.
+                          type: number
+                      type: object
+                    type: array
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -622,19 +749,33 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: action is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.action)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.action)
+                || has(self.initProvider.action)'
             - message: frequency is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frequency)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.frequency)
+                || has(self.initProvider.frequency)'
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: name is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: query is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.query)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.query)
+                || has(self.initProvider.query)'
             - message: timeWindow is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.timeWindow)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.timeWindow)
+                || has(self.initProvider.timeWindow)'
             - message: trigger is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.trigger)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.trigger)
+                || has(self.initProvider.trigger)'
           status:
             description: MonitorScheduledQueryRulesAlertStatus defines the observed
               state of MonitorScheduledQueryRulesAlert.

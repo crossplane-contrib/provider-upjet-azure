@@ -69,6 +69,16 @@ func (tr *MaintenanceAssignmentDedicatedHost) SetParameters(params map[string]an
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this MaintenanceAssignmentDedicatedHost
+func (tr *MaintenanceAssignmentDedicatedHost) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this MaintenanceAssignmentDedicatedHost using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MaintenanceAssignmentDedicatedHost) LateInitialize(attrs []byte) (bool, error) {
@@ -143,6 +153,16 @@ func (tr *MaintenanceAssignmentVirtualMachine) SetParameters(params map[string]a
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this MaintenanceAssignmentVirtualMachine
+func (tr *MaintenanceAssignmentVirtualMachine) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this MaintenanceAssignmentVirtualMachine using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *MaintenanceAssignmentVirtualMachine) LateInitialize(attrs []byte) (bool, error) {
@@ -215,6 +235,16 @@ func (tr *MaintenanceConfiguration) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this MaintenanceConfiguration
+func (tr *MaintenanceConfiguration) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this MaintenanceConfiguration using its observed tfState.

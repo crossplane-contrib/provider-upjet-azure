@@ -13,6 +13,46 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TopicInitParameters struct {
+
+	// The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted, minimum of 5 minutes.
+	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
+
+	// The ISO 8601 timespan duration of TTL of messages sent to this topic if no TTL value is set on the message itself.
+	DefaultMessageTTL *string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
+
+	// The ISO 8601 timespan duration during which duplicates can be detected. Defaults to 10 minutes. (PT10M)
+	DuplicateDetectionHistoryTimeWindow *string `json:"duplicateDetectionHistoryTimeWindow,omitempty" tf:"duplicate_detection_history_time_window,omitempty"`
+
+	// Boolean flag which controls if server-side batched operations are enabled.
+	EnableBatchedOperations *bool `json:"enableBatchedOperations,omitempty" tf:"enable_batched_operations,omitempty"`
+
+	// Boolean flag which controls whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
+	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
+
+	// Boolean flag which controls whether to enable Changing this forces a new resource to be created.
+	// the topic to be partitioned across multiple message brokers. Defaults to false.
+	// Changing this forces a new resource to be created.
+	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
+
+	// Integer value which controls the maximum size of a message allowed on the topic for Premium SKU. For supported values see the "Large messages support" section of this document.
+	MaxMessageSizeInKilobytes *float64 `json:"maxMessageSizeInKilobytes,omitempty" tf:"max_message_size_in_kilobytes,omitempty"`
+
+	// Integer value which controls the size of memory allocated for the topic. For supported values see the "Queue/topic size" section of this document.
+	MaxSizeInMegabytes *float64 `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
+
+	// Boolean flag which controls whether Changing this forces a new resource to be created.
+	// the Topic requires duplicate detection. Defaults to false. Changing this forces
+	// a new resource to be created.
+	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty"`
+
+	// The Status of the Service Bus Topic. Acceptable values are Active or Disabled. Defaults to Active.
+	Status *string `json:"status,omitempty" tf:"status,omitempty"`
+
+	// Boolean flag which controls whether the Topic supports ordering.
+	SupportOrdering *bool `json:"supportOrdering,omitempty" tf:"support_ordering,omitempty"`
+}
+
 type TopicObservation struct {
 
 	// The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted, minimum of 5 minutes.
@@ -130,6 +170,18 @@ type TopicParameters struct {
 type TopicSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TopicParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TopicInitParameters `json:"initProvider,omitempty"`
 }
 
 // TopicStatus defines the observed state of Topic.

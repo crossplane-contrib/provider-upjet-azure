@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NotificationRecipientUserInitParameters struct {
+
+	// The Notification Name to be received. Changing this forces a new API Management Notification Recipient User to be created. Possible values are AccountClosedPublisher, BCC, NewApplicationNotificationMessage, NewIssuePublisherNotificationMessage, PurchasePublisherNotificationMessage, QuotaLimitApproachingPublisherNotificationMessage, and RequestPublisherNotificationMessage.
+	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
+}
+
 type NotificationRecipientUserObservation struct {
 
 	// The ID of the API Management Service from which to create this Notification Recipient User. Changing this forces a new API Management Notification Recipient User to be created.
@@ -66,6 +72,18 @@ type NotificationRecipientUserParameters struct {
 type NotificationRecipientUserSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NotificationRecipientUserParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider NotificationRecipientUserInitParameters `json:"initProvider,omitempty"`
 }
 
 // NotificationRecipientUserStatus defines the observed state of NotificationRecipientUser.
@@ -86,7 +104,7 @@ type NotificationRecipientUserStatus struct {
 type NotificationRecipientUser struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.notificationType)",message="notificationType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.notificationType) || has(self.initProvider.notificationType)",message="notificationType is a required parameter"
 	Spec   NotificationRecipientUserSpec   `json:"spec"`
 	Status NotificationRecipientUserStatus `json:"status,omitempty"`
 }

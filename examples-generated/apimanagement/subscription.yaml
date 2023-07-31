@@ -20,6 +20,3 @@ spec:
     userIdSelector:
       matchLabels:
         testing.upbound.io/example-name: azurerm_api_management_user
-
----
-

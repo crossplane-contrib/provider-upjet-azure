@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SpringCloudGatewayCustomDomainInitParameters struct {
+
+	// The name which should be used for this Spring Cloud Gateway Custom Domain. Changing this forces a new Spring Cloud Gateway Custom Domain to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud Gateway Custom Domain.
+	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+}
+
 type SpringCloudGatewayCustomDomainObservation struct {
 
 	// The ID of the Spring Cloud Gateway Custom Domain.
@@ -57,6 +66,18 @@ type SpringCloudGatewayCustomDomainParameters struct {
 type SpringCloudGatewayCustomDomainSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudGatewayCustomDomainParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SpringCloudGatewayCustomDomainInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudGatewayCustomDomainStatus defines the observed state of SpringCloudGatewayCustomDomain.
@@ -77,7 +98,7 @@ type SpringCloudGatewayCustomDomainStatus struct {
 type SpringCloudGatewayCustomDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   SpringCloudGatewayCustomDomainSpec   `json:"spec"`
 	Status SpringCloudGatewayCustomDomainStatus `json:"status,omitempty"`
 }

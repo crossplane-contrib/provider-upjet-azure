@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CustomBGPAddressesInitParameters struct {
+
+	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (first one)
+	Primary *string `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (second one)
+	Secondary *string `json:"secondary,omitempty" tf:"secondary,omitempty"`
+}
+
 type CustomBGPAddressesObservation struct {
 
 	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (first one)
@@ -25,12 +34,41 @@ type CustomBGPAddressesObservation struct {
 type CustomBGPAddressesParameters struct {
 
 	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (first one)
-	// +kubebuilder:validation:Required
-	Primary *string `json:"primary" tf:"primary,omitempty"`
+	// +kubebuilder:validation:Optional
+	Primary *string `json:"primary,omitempty" tf:"primary,omitempty"`
 
 	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (second one)
-	// +kubebuilder:validation:Required
-	Secondary *string `json:"secondary" tf:"secondary,omitempty"`
+	// +kubebuilder:validation:Optional
+	Secondary *string `json:"secondary,omitempty" tf:"secondary,omitempty"`
+}
+
+type IpsecPolicyInitParameters struct {
+
+	// The DH group used in IKE phase 1 for initial SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048, DHGroup24, ECP256, ECP384, or None.
+	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
+
+	// The IKE encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
+	IkeEncryption *string `json:"ikeEncryption,omitempty" tf:"ike_encryption,omitempty"`
+
+	// The IKE integrity algorithm. Valid options are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
+	IkeIntegrity *string `json:"ikeIntegrity,omitempty" tf:"ike_integrity,omitempty"`
+
+	// The IPSec encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, or None.
+	IpsecEncryption *string `json:"ipsecEncryption,omitempty" tf:"ipsec_encryption,omitempty"`
+
+	// The IPSec integrity algorithm. Valid options are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
+	IpsecIntegrity *string `json:"ipsecIntegrity,omitempty" tf:"ipsec_integrity,omitempty"`
+
+	// The DH group used in IKE phase 2 for new child SA.
+	// Valid options are ECP256, ECP384, PFS1, PFS14, PFS2, PFS2048, PFS24, PFSMM,
+	// or None.
+	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
+
+	// The IPSec SA payload size in KB. Must be at least 1024 KB. Defaults to 102400000 KB.
+	SaDatasize *float64 `json:"saDatasize,omitempty" tf:"sa_datasize,omitempty"`
+
+	// The IPSec SA lifetime in seconds. Must be at least 300 seconds. Defaults to 27000 seconds.
+	SaLifetime *float64 `json:"saLifetime,omitempty" tf:"sa_lifetime,omitempty"`
 }
 
 type IpsecPolicyObservation struct {
@@ -65,30 +103,30 @@ type IpsecPolicyObservation struct {
 type IpsecPolicyParameters struct {
 
 	// The DH group used in IKE phase 1 for initial SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048, DHGroup24, ECP256, ECP384, or None.
-	// +kubebuilder:validation:Required
-	DhGroup *string `json:"dhGroup" tf:"dh_group,omitempty"`
+	// +kubebuilder:validation:Optional
+	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
 
 	// The IKE encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
-	// +kubebuilder:validation:Required
-	IkeEncryption *string `json:"ikeEncryption" tf:"ike_encryption,omitempty"`
+	// +kubebuilder:validation:Optional
+	IkeEncryption *string `json:"ikeEncryption,omitempty" tf:"ike_encryption,omitempty"`
 
 	// The IKE integrity algorithm. Valid options are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
-	// +kubebuilder:validation:Required
-	IkeIntegrity *string `json:"ikeIntegrity" tf:"ike_integrity,omitempty"`
+	// +kubebuilder:validation:Optional
+	IkeIntegrity *string `json:"ikeIntegrity,omitempty" tf:"ike_integrity,omitempty"`
 
 	// The IPSec encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, or None.
-	// +kubebuilder:validation:Required
-	IpsecEncryption *string `json:"ipsecEncryption" tf:"ipsec_encryption,omitempty"`
+	// +kubebuilder:validation:Optional
+	IpsecEncryption *string `json:"ipsecEncryption,omitempty" tf:"ipsec_encryption,omitempty"`
 
 	// The IPSec integrity algorithm. Valid options are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
-	// +kubebuilder:validation:Required
-	IpsecIntegrity *string `json:"ipsecIntegrity" tf:"ipsec_integrity,omitempty"`
+	// +kubebuilder:validation:Optional
+	IpsecIntegrity *string `json:"ipsecIntegrity,omitempty" tf:"ipsec_integrity,omitempty"`
 
 	// The DH group used in IKE phase 2 for new child SA.
 	// Valid options are ECP256, ECP384, PFS1, PFS14, PFS2, PFS2048, PFS24, PFSMM,
 	// or None.
-	// +kubebuilder:validation:Required
-	PfsGroup *string `json:"pfsGroup" tf:"pfs_group,omitempty"`
+	// +kubebuilder:validation:Optional
+	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
 
 	// The IPSec SA payload size in KB. Must be at least 1024 KB. Defaults to 102400000 KB.
 	// +kubebuilder:validation:Optional
@@ -97,6 +135,15 @@ type IpsecPolicyParameters struct {
 	// The IPSec SA lifetime in seconds. Must be at least 300 seconds. Defaults to 27000 seconds.
 	// +kubebuilder:validation:Optional
 	SaLifetime *float64 `json:"saLifetime,omitempty" tf:"sa_lifetime,omitempty"`
+}
+
+type TrafficSelectorPolicyInitParameters struct {
+
+	// List of local CIDRs.
+	LocalAddressCidrs []*string `json:"localAddressCidrs,omitempty" tf:"local_address_cidrs,omitempty"`
+
+	// List of remote CIDRs.
+	RemoteAddressCidrs []*string `json:"remoteAddressCidrs,omitempty" tf:"remote_address_cidrs,omitempty"`
 }
 
 type TrafficSelectorPolicyObservation struct {
@@ -111,12 +158,73 @@ type TrafficSelectorPolicyObservation struct {
 type TrafficSelectorPolicyParameters struct {
 
 	// List of local CIDRs.
-	// +kubebuilder:validation:Required
-	LocalAddressCidrs []*string `json:"localAddressCidrs" tf:"local_address_cidrs,omitempty"`
+	// +kubebuilder:validation:Optional
+	LocalAddressCidrs []*string `json:"localAddressCidrs,omitempty" tf:"local_address_cidrs,omitempty"`
 
 	// List of remote CIDRs.
-	// +kubebuilder:validation:Required
-	RemoteAddressCidrs []*string `json:"remoteAddressCidrs" tf:"remote_address_cidrs,omitempty"`
+	// +kubebuilder:validation:Optional
+	RemoteAddressCidrs []*string `json:"remoteAddressCidrs,omitempty" tf:"remote_address_cidrs,omitempty"`
+}
+
+type VirtualNetworkGatewayConnectionInitParameters struct {
+
+	// Connection mode to use. Possible values are Default, InitiatorOnly and ResponderOnly. Defaults to Default. Changing this value will force a resource to be created.
+	ConnectionMode *string `json:"connectionMode,omitempty" tf:"connection_mode,omitempty"`
+
+	// The IKE protocol version to use. Possible values are IKEv1 and IKEv2, values are IKEv1 and IKEv2. Defaults to IKEv2. Changing this forces a new resource to be created.
+	// -> Note: Only valid for IPSec connections on virtual network gateways with SKU VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.
+	ConnectionProtocol *string `json:"connectionProtocol,omitempty" tf:"connection_protocol,omitempty"`
+
+	// A custom_bgp_addresses (Border Gateway Protocol custom IP Addresses) block which is documented below.
+	// The block can only be used on IPSec / activeactive connections,
+	// For details about see the relevant section in the Azure documentation.
+	CustomBGPAddresses []CustomBGPAddressesInitParameters `json:"customBgpAddresses,omitempty" tf:"custom_bgp_addresses,omitempty"`
+
+	// The dead peer detection timeout of this connection in seconds. Changing this forces a new resource to be created.
+	DpdTimeoutSeconds *float64 `json:"dpdTimeoutSeconds,omitempty" tf:"dpd_timeout_seconds,omitempty"`
+
+	// A list of the egress NAT Rule Ids.
+	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
+
+	// If true, BGP (Border Gateway Protocol) is enabled for this connection. Defaults to false.
+	EnableBGP *bool `json:"enableBgp,omitempty" tf:"enable_bgp,omitempty"`
+
+	// The ID of the Express Route Circuit when creating an ExpressRoute connection (i.e. when type is ExpressRoute). The Express Route Circuit can be in the same or in a different subscription. Changing this forces a new resource to be created.
+	ExpressRouteCircuitID *string `json:"expressRouteCircuitId,omitempty" tf:"express_route_circuit_id,omitempty"`
+
+	// If true, data packets will bypass ExpressRoute Gateway for data forwarding This is only valid for ExpressRoute connections.
+	ExpressRouteGatewayBypass *bool `json:"expressRouteGatewayBypass,omitempty" tf:"express_route_gateway_bypass,omitempty"`
+
+	// A list of the ingress NAT Rule Ids.
+	IngressNATRuleIds []*string `json:"ingressNatRuleIds,omitempty" tf:"ingress_nat_rule_ids,omitempty"`
+
+	// A ipsec_policy block which is documented below.
+	// Only a single policy can be defined for a connection. For details on
+	// custom policies refer to the relevant section in the Azure documentation.
+	IpsecPolicy []IpsecPolicyInitParameters `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
+
+	// Use private local Azure IP for the connection. Changing this forces a new resource to be created.
+	LocalAzureIPAddressEnabled *bool `json:"localAzureIpAddressEnabled,omitempty" tf:"local_azure_ip_address_enabled,omitempty"`
+
+	// The location/region where the connection is located. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The routing weight. Defaults to 10.
+	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// One or more traffic_selector_policy blocks which are documented below.
+	// A traffic_selector_policy allows to specify a traffic selector policy proposal to be used in a virtual network gateway connection.
+	// For details about traffic selectors refer to the relevant section in the Azure documentation.
+	TrafficSelectorPolicy []TrafficSelectorPolicyInitParameters `json:"trafficSelectorPolicy,omitempty" tf:"traffic_selector_policy,omitempty"`
+
+	// The type of connection. Valid options are IPsec (Site-to-Site), ExpressRoute (ExpressRoute), and Vnet2Vnet (VNet-to-VNet). Each connection type requires different mandatory arguments (refer to the examples above). Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// If true, policy-based traffic selectors are enabled for this connection. Enabling policy-based traffic selectors requires an ipsec_policy block. Defaults to false.
+	UsePolicyBasedTrafficSelectors *bool `json:"usePolicyBasedTrafficSelectors,omitempty" tf:"use_policy_based_traffic_selectors,omitempty"`
 }
 
 type VirtualNetworkGatewayConnectionObservation struct {
@@ -340,6 +448,18 @@ type VirtualNetworkGatewayConnectionParameters struct {
 type VirtualNetworkGatewayConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VirtualNetworkGatewayConnectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VirtualNetworkGatewayConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // VirtualNetworkGatewayConnectionStatus defines the observed state of VirtualNetworkGatewayConnection.
@@ -360,8 +480,8 @@ type VirtualNetworkGatewayConnectionStatus struct {
 type VirtualNetworkGatewayConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
 	Spec   VirtualNetworkGatewayConnectionSpec   `json:"spec"`
 	Status VirtualNetworkGatewayConnectionStatus `json:"status,omitempty"`
 }

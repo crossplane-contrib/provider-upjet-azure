@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LogAnalyticsDataSourceWindowsEventInitParameters struct {
+
+	// Specifies the name of the Windows Event Log to collect events from.
+	EventLogName *string `json:"eventLogName,omitempty" tf:"event_log_name,omitempty"`
+
+	// Specifies an array of event types applied to the specified event log. Possible values include Error, Warning and Information.
+	EventTypes []*string `json:"eventTypes,omitempty" tf:"event_types,omitempty"`
+}
+
 type LogAnalyticsDataSourceWindowsEventObservation struct {
 
 	// Specifies the name of the Windows Event Log to collect events from.
@@ -72,6 +81,18 @@ type LogAnalyticsDataSourceWindowsEventParameters struct {
 type LogAnalyticsDataSourceWindowsEventSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LogAnalyticsDataSourceWindowsEventParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LogAnalyticsDataSourceWindowsEventInitParameters `json:"initProvider,omitempty"`
 }
 
 // LogAnalyticsDataSourceWindowsEventStatus defines the observed state of LogAnalyticsDataSourceWindowsEvent.
@@ -92,8 +113,8 @@ type LogAnalyticsDataSourceWindowsEventStatus struct {
 type LogAnalyticsDataSourceWindowsEvent struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventLogName)",message="eventLogName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.eventTypes)",message="eventTypes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventLogName) || has(self.initProvider.eventLogName)",message="eventLogName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventTypes) || has(self.initProvider.eventTypes)",message="eventTypes is a required parameter"
 	Spec   LogAnalyticsDataSourceWindowsEventSpec   `json:"spec"`
 	Status LogAnalyticsDataSourceWindowsEventStatus `json:"status,omitempty"`
 }

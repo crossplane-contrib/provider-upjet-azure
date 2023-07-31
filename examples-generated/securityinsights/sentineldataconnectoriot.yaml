@@ -57,6 +57,3 @@ metadata:
 spec:
   forProvider:
     workspaceId: ${azurerm_log_analytics_workspace.example.id}
-
----
-

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DefaultAutoShutdownInitParameters struct {
+
+	// The amount of time a VM will stay running after a user disconnects if this behavior is enabled. This value must be formatted as an ISO 8601 string.
+	DisconnectDelay *string `json:"disconnectDelay,omitempty" tf:"disconnect_delay,omitempty"`
+
+	// The amount of time a VM will idle before it is shutdown if this behavior is enabled. This value must be formatted as an ISO 8601 string.
+	IdleDelay *string `json:"idleDelay,omitempty" tf:"idle_delay,omitempty"`
+
+	// The amount of time a VM will stay running before it is shutdown if no connection is made and this behavior is enabled. This value must be formatted as an ISO 8601 string.
+	NoConnectDelay *string `json:"noConnectDelay,omitempty" tf:"no_connect_delay,omitempty"`
+
+	// Will a VM get shutdown when it has idled for a period of time? Possible values are LowUsage and UserAbsence.
+	ShutdownOnIdle *string `json:"shutdownOnIdle,omitempty" tf:"shutdown_on_idle,omitempty"`
+}
+
 type DefaultAutoShutdownObservation struct {
 
 	// The amount of time a VM will stay running after a user disconnects if this behavior is enabled. This value must be formatted as an ISO 8601 string.
@@ -47,6 +62,21 @@ type DefaultAutoShutdownParameters struct {
 	ShutdownOnIdle *string `json:"shutdownOnIdle,omitempty" tf:"shutdown_on_idle,omitempty"`
 }
 
+type DefaultConnectionInitParameters struct {
+
+	// The enabled access level for Client Access over RDP. Possible values are Private and Public.
+	ClientRdpAccess *string `json:"clientRdpAccess,omitempty" tf:"client_rdp_access,omitempty"`
+
+	// The enabled access level for Client Access over SSH. Possible values are Private and Public.
+	ClientSSHAccess *string `json:"clientSshAccess,omitempty" tf:"client_ssh_access,omitempty"`
+
+	// The enabled access level for Web Access over RDP. Possible values are Private and Public.
+	WebRdpAccess *string `json:"webRdpAccess,omitempty" tf:"web_rdp_access,omitempty"`
+
+	// The enabled access level for Web Access over SSH. Possible values are Private and Public.
+	WebSSHAccess *string `json:"webSshAccess,omitempty" tf:"web_ssh_access,omitempty"`
+}
+
 type DefaultConnectionObservation struct {
 
 	// The enabled access level for Client Access over RDP. Possible values are Private and Public.
@@ -79,6 +109,30 @@ type DefaultConnectionParameters struct {
 	// The enabled access level for Web Access over SSH. Possible values are Private and Public.
 	// +kubebuilder:validation:Optional
 	WebSSHAccess *string `json:"webSshAccess,omitempty" tf:"web_ssh_access,omitempty"`
+}
+
+type LabServicePlanInitParameters struct {
+
+	// The allowed regions for the lab creator to use when creating labs using this Lab Service Plan. The allowed region's count must be between 1 and 28.
+	AllowedRegions []*string `json:"allowedRegions,omitempty" tf:"allowed_regions,omitempty"`
+
+	// A default_auto_shutdown block as defined below.
+	DefaultAutoShutdown []DefaultAutoShutdownInitParameters `json:"defaultAutoShutdown,omitempty" tf:"default_auto_shutdown,omitempty"`
+
+	// A default_connection block as defined below.
+	DefaultConnection []DefaultConnectionInitParameters `json:"defaultConnection,omitempty" tf:"default_connection,omitempty"`
+
+	// The Azure Region where the Lab Service Plan should exist. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The resource ID of the Shared Image Gallery attached to this Lab Service Plan. When saving a lab template virtual machine image it will be persisted in this gallery. The shared images from the gallery can be made available to use when creating new labs.
+	SharedGalleryID *string `json:"sharedGalleryId,omitempty" tf:"shared_gallery_id,omitempty"`
+
+	// A support block as defined below.
+	Support []SupportInitParameters `json:"support,omitempty" tf:"support,omitempty"`
+
+	// A mapping of tags which should be assigned to the Lab Service Plan.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type LabServicePlanObservation struct {
@@ -172,6 +226,21 @@ type LabServicePlanParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type SupportInitParameters struct {
+
+	// The email address for the support contact.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// The instructions for users of the Lab Service Plan.
+	Instructions *string `json:"instructions,omitempty" tf:"instructions,omitempty"`
+
+	// The phone number for the support contact.
+	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
+
+	// The web address for users of the Lab Service Plan.
+	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+}
+
 type SupportObservation struct {
 
 	// The email address for the support contact.
@@ -210,6 +279,18 @@ type SupportParameters struct {
 type LabServicePlanSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LabServicePlanParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LabServicePlanInitParameters `json:"initProvider,omitempty"`
 }
 
 // LabServicePlanStatus defines the observed state of LabServicePlan.
@@ -230,8 +311,8 @@ type LabServicePlanStatus struct {
 type LabServicePlan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.allowedRegions)",message="allowedRegions is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.allowedRegions) || has(self.initProvider.allowedRegions)",message="allowedRegions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   LabServicePlanSpec   `json:"spec"`
 	Status LabServicePlanStatus `json:"status,omitempty"`
 }

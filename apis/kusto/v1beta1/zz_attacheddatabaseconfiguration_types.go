@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AttachedDatabaseConfigurationInitParameters struct {
+
+	// The default principals modification kind. Valid values are: None (default), Replace and Union.
+	DefaultPrincipalModificationKind *string `json:"defaultPrincipalModificationKind,omitempty" tf:"default_principal_modification_kind,omitempty"`
+
+	// Specifies the location of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Kusto Attached Database Configuration to create. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A sharing block as defined below.
+	Sharing []SharingInitParameters `json:"sharing,omitempty" tf:"sharing,omitempty"`
+}
+
 type AttachedDatabaseConfigurationObservation struct {
 
 	// The list of databases from the cluster_resource_id which are currently attached to the cluster.
@@ -118,6 +133,27 @@ type AttachedDatabaseConfigurationParameters struct {
 	Sharing []SharingParameters `json:"sharing,omitempty" tf:"sharing,omitempty"`
 }
 
+type SharingInitParameters struct {
+
+	// List of external tables exclude from the follower database.
+	ExternalTablesToExclude []*string `json:"externalTablesToExclude,omitempty" tf:"external_tables_to_exclude,omitempty"`
+
+	// List of external tables to include in the follower database.
+	ExternalTablesToInclude []*string `json:"externalTablesToInclude,omitempty" tf:"external_tables_to_include,omitempty"`
+
+	// List of materialized views exclude from the follower database.
+	MaterializedViewsToExclude []*string `json:"materializedViewsToExclude,omitempty" tf:"materialized_views_to_exclude,omitempty"`
+
+	// List of materialized views to include in the follower database.
+	MaterializedViewsToInclude []*string `json:"materializedViewsToInclude,omitempty" tf:"materialized_views_to_include,omitempty"`
+
+	// List of tables to exclude from the follower database.
+	TablesToExclude []*string `json:"tablesToExclude,omitempty" tf:"tables_to_exclude,omitempty"`
+
+	// List of tables to include in the follower database.
+	TablesToInclude []*string `json:"tablesToInclude,omitempty" tf:"tables_to_include,omitempty"`
+}
+
 type SharingObservation struct {
 
 	// List of external tables exclude from the follower database.
@@ -170,6 +206,18 @@ type SharingParameters struct {
 type AttachedDatabaseConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AttachedDatabaseConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AttachedDatabaseConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // AttachedDatabaseConfigurationStatus defines the observed state of AttachedDatabaseConfiguration.
@@ -190,8 +238,8 @@ type AttachedDatabaseConfigurationStatus struct {
 type AttachedDatabaseConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   AttachedDatabaseConfigurationSpec   `json:"spec"`
 	Status AttachedDatabaseConfigurationStatus `json:"status,omitempty"`
 }

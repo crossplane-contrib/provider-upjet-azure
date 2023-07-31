@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SecretInitParameters struct {
+
+	// Specifies the content type for the Key Vault Secret.
+	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
+	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
+
+	// Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
+	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type SecretObservation struct {
 
 	// Specifies the content type for the Key Vault Secret.
@@ -87,6 +102,18 @@ type SecretParameters struct {
 type SecretSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SecretParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SecretInitParameters `json:"initProvider,omitempty"`
 }
 
 // SecretStatus defines the observed state of Secret.
@@ -107,7 +134,7 @@ type SecretStatus struct {
 type Secret struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.valueSecretRef)",message="valueSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.valueSecretRef)",message="valueSecretRef is a required parameter"
 	Spec   SecretSpec   `json:"spec"`
 	Status SecretStatus `json:"status,omitempty"`
 }

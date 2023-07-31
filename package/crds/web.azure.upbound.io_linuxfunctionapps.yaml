@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: linuxfunctionapps.web.azure.upbound.io
 spec:
   group: web.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -126,8 +125,6 @@ spec:
                                   the client secret of the Client. Cannot be used
                                   with `client_secret`.
                                 type: string
-                            required:
-                            - clientId
                             type: object
                           type: array
                         additionalLoginParameters:
@@ -207,8 +204,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - appId
                             type: object
                           type: array
                         github:
@@ -258,8 +253,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - clientId
                             type: object
                           type: array
                         google:
@@ -310,8 +303,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - clientId
                             type: object
                           type: array
                         issuer:
@@ -371,8 +362,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - clientId
                             type: object
                           type: array
                         runtimeVersion:
@@ -432,8 +421,6 @@ spec:
                                   the OAuth 1.0a consumer secret of the Twitter application
                                   used for sign-in. Cannot be specified with `consumer_secret`.
                                 type: string
-                            required:
-                            - consumerKey
                             type: object
                           type: array
                         unauthenticatedClientAction:
@@ -443,8 +430,6 @@ spec:
                             when an unauthenticated client attempts to access the
                             app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.'
                           type: string
-                      required:
-                      - enabled
                       type: object
                     type: array
                   authSettingsV2:
@@ -535,9 +520,6 @@ spec:
                                   false Should the www-authenticate provider should
                                   be omitted from the request? Defaults to `false`
                                 type: boolean
-                            required:
-                            - clientId
-                            - tenantAuthEndpoint
                             type: object
                           type: array
                         appleV2:
@@ -555,9 +537,6 @@ spec:
                                   for authentication. The app setting name that contains
                                   the `client_secret` value used for Apple Login.
                                 type: string
-                            required:
-                            - clientId
-                            - clientSecretSettingName
                             type: object
                           type: array
                         authEnabled:
@@ -576,8 +555,6 @@ spec:
                                   Client to use to authenticate with Azure Static
                                   Web App Authentication.
                                 type: string
-                            required:
-                            - clientId
                             type: object
                           type: array
                         configFilePath:
@@ -618,10 +595,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - clientId
-                            - name
-                            - openidConfigurationEndpoint
                             type: object
                           type: array
                         defaultProvider:
@@ -666,9 +639,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - appId
-                            - appSecretSettingName
                             type: object
                           type: array
                         forwardProxyConvention:
@@ -713,9 +683,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - clientId
-                            - clientSecretSettingName
                             type: object
                           type: array
                         googleV2:
@@ -750,9 +717,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - clientId
-                            - clientSecretSettingName
                             type: object
                           type: array
                         httpRouteApiPrefix:
@@ -876,9 +840,6 @@ spec:
                                 items:
                                   type: string
                                 type: array
-                            required:
-                            - clientId
-                            - clientSecretSettingName
                             type: object
                           type: array
                         requireAuthentication:
@@ -913,9 +874,6 @@ spec:
                                   the OAuth 1.0a consumer secret of the Twitter application
                                   used for sign-in.
                                 type: string
-                            required:
-                            - consumerKey
-                            - consumerSecretSettingName
                             type: object
                           type: array
                         unauthenticatedAction:
@@ -927,8 +885,6 @@ spec:
                             `AllowAnonymous`, `Return401`, and `Return403`. Defaults
                             to `RedirectToLoginPage`.
                           type: string
-                      required:
-                      - login
                       type: object
                     type: array
                   backup:
@@ -978,9 +934,6 @@ spec:
                                   in RFC-3339 format. When the schedule should start
                                   working in RFC-3339 format.
                                 type: string
-                            required:
-                            - frequencyInterval
-                            - frequencyUnit
                             type: object
                           type: array
                         storageAccountUrlSecretRef:
@@ -1002,8 +955,6 @@ spec:
                           - namespace
                           type: object
                       required:
-                      - name
-                      - schedule
                       - storageAccountUrlSecretRef
                       type: object
                     type: array
@@ -1064,8 +1015,6 @@ spec:
                           - namespace
                           type: object
                       required:
-                      - name
-                      - type
                       - valueSecretRef
                       type: object
                     type: array
@@ -1111,8 +1060,6 @@ spec:
                             Possible values are SystemAssigned, UserAssigned, SystemAssigned,
                             UserAssigned (to enable both).
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   keyVaultReferenceIdentityId:
@@ -1438,10 +1385,6 @@ spec:
                                       - name
                                       - namespace
                                       type: object
-                                  required:
-                                  - imageName
-                                  - imageTag
-                                  - registryUrl
                                   type: object
                                 type: array
                               dotnetVersion:
@@ -1989,10 +1932,6 @@ spec:
                           type: string
                       required:
                       - accessKeySecretRef
-                      - accountName
-                      - name
-                      - shareName
-                      - type
                       type: object
                     type: array
                   storageAccountAccessKeySecretRef:
@@ -2197,21 +2136,1349 @@ spec:
                       in `app_settings`.
                     type: string
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  appSettings:
+                    additionalProperties:
+                      type: string
+                    description: A map of key-value pairs for App Settings and custom
+                      values. A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings)
+                      and custom values.
+                    type: object
+                  authSettings:
+                    description: A auth_settings block as defined below.
+                    items:
+                      properties:
+                        activeDirectory:
+                          description: An active_directory block as defined above.
+                          items:
+                            properties:
+                              allowedAudiences:
+                                description: Specifies a list of Allowed Audiences
+                                  that will be requested as part of Microsoft Sign-In
+                                  authentication. Specifies a list of Allowed audience
+                                  values to consider when validating JWTs issued by
+                                  Azure Active Directory.
+                                items:
+                                  type: string
+                                type: array
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication. The ID of the
+                                  Client to use to authenticate with Azure Active
+                                  Directory.
+                                type: string
+                              clientSecretSettingName:
+                                description: The app setting name containing the OAuth
+                                  2.0 client secret that was created for the app used
+                                  for authentication. The App Setting name that contains
+                                  the client secret of the Client. Cannot be used
+                                  with `client_secret`.
+                                type: string
+                            type: object
+                          type: array
+                        additionalLoginParameters:
+                          additionalProperties:
+                            type: string
+                          description: Specifies a map of login Parameters to send
+                            to the OpenID Connect authorization endpoint when a user
+                            logs in. Specifies a map of Login Parameters to send to
+                            the OpenID Connect authorization endpoint when a user
+                            logs in.
+                          type: object
+                        allowedExternalRedirectUrls:
+                          description: Specifies a list of External URLs that can
+                            be redirected to as part of logging in or logging out
+                            of the Linux Web App. Specifies a list of External URLs
+                            that can be redirected to as part of logging in or logging
+                            out of the Windows Web App.
+                          items:
+                            type: string
+                          type: array
+                        defaultProvider:
+                          description: 'The default authentication provider to use
+                            when multiple providers are configured. Possible values
+                            include: AzureActiveDirectory, Facebook, Google, MicrosoftAccount,
+                            Twitter, Github The default authentication provider to
+                            use when multiple providers are configured. Possible values
+                            include: `AzureActiveDirectory`, `Facebook`, `Google`,
+                            `MicrosoftAccount`, `Twitter`, `Github`.'
+                          type: string
+                        enabled:
+                          description: Should the Authentication / Authorization feature
+                            be enabled for the Linux Web App? Should the Authentication
+                            / Authorization feature be enabled?
+                          type: boolean
+                        facebook:
+                          description: A facebook block as defined below.
+                          items:
+                            properties:
+                              appId:
+                                description: The App ID of the Facebook app used for
+                                  login. The App ID of the Facebook app used for login.
+                                type: string
+                              appSecretSettingName:
+                                description: The app setting name that contains the
+                                  app_secret value used for Facebook Login. The app
+                                  setting name that contains the `app_secret` value
+                                  used for Facebook Login. Cannot be specified with
+                                  `app_secret`.
+                                type: string
+                              oauthScopes:
+                                description: Specifies a list of OAuth 2.0 scopes
+                                  that will be requested as part of Microsoft Account
+                                  authentication. If not specified, wl.basic is used
+                                  as the default scope. Specifies a list of OAuth
+                                  2.0 scopes to be requested as part of Facebook Login
+                                  authentication.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        github:
+                          description: A github block as defined below.
+                          items:
+                            properties:
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication. The ID of the
+                                  GitHub app used for login.
+                                type: string
+                              clientSecretSettingName:
+                                description: The app setting name containing the OAuth
+                                  2.0 client secret that was created for the app used
+                                  for authentication. The app setting name that contains
+                                  the `client_secret` value used for GitHub Login.
+                                  Cannot be specified with `client_secret`.
+                                type: string
+                              oauthScopes:
+                                description: Specifies a list of OAuth 2.0 scopes
+                                  that will be requested as part of Microsoft Account
+                                  authentication. If not specified, wl.basic is used
+                                  as the default scope. Specifies a list of OAuth
+                                  2.0 scopes that will be requested as part of GitHub
+                                  Login authentication.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        google:
+                          description: A google block as defined below.
+                          items:
+                            properties:
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication. The OpenID
+                                  Connect Client ID for the Google web application.
+                                type: string
+                              clientSecretSettingName:
+                                description: The app setting name containing the OAuth
+                                  2.0 client secret that was created for the app used
+                                  for authentication. The app setting name that contains
+                                  the `client_secret` value used for Google Login.
+                                  Cannot be specified with `client_secret`.
+                                type: string
+                              oauthScopes:
+                                description: Specifies a list of OAuth 2.0 scopes
+                                  that will be requested as part of Microsoft Account
+                                  authentication. If not specified, wl.basic is used
+                                  as the default scope. Specifies a list of OAuth
+                                  2.0 scopes that will be requested as part of Google
+                                  Sign-In authentication. If not specified, "openid",
+                                  "profile", and "email" are used as default scopes.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        issuer:
+                          description: The OpenID Connect Issuer URI that represents
+                            the entity which issues access tokens for this Linux Web
+                            App. The OpenID Connect Issuer URI that represents the
+                            entity which issues access tokens.
+                          type: string
+                        microsoft:
+                          description: A microsoft block as defined below.
+                          items:
+                            properties:
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication. The OAuth 2.0
+                                  client ID that was created for the app used for
+                                  authentication.
+                                type: string
+                              clientSecretSettingName:
+                                description: The app setting name containing the OAuth
+                                  2.0 client secret that was created for the app used
+                                  for authentication. The app setting name containing
+                                  the OAuth 2.0 client secret that was created for
+                                  the app used for authentication. Cannot be specified
+                                  with `client_secret`.
+                                type: string
+                              oauthScopes:
+                                description: Specifies a list of OAuth 2.0 scopes
+                                  that will be requested as part of Microsoft Account
+                                  authentication. If not specified, wl.basic is used
+                                  as the default scope. The list of OAuth 2.0 scopes
+                                  that will be requested as part of Microsoft Account
+                                  authentication. If not specified, `wl.basic` is
+                                  used as the default scope.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        runtimeVersion:
+                          description: The RuntimeVersion of the Authentication /
+                            Authorization feature in use for the Linux Web App. The
+                            RuntimeVersion of the Authentication / Authorization feature
+                            in use.
+                          type: string
+                        tokenRefreshExtensionHours:
+                          description: The number of hours after session token expiration
+                            that a session token can be used to call the token refresh
+                            API. Defaults to 72 hours. The number of hours after session
+                            token expiration that a session token can be used to call
+                            the token refresh API. Defaults to `72` hours.
+                          type: number
+                        tokenStoreEnabled:
+                          description: Should the Linux Web App durably store platform-specific
+                            security tokens that are obtained during login flows?
+                            Defaults to false. Should the Windows Web App durably
+                            store platform-specific security tokens that are obtained
+                            during login flows? Defaults to `false`.
+                          type: boolean
+                        twitter:
+                          description: A twitter block as defined below.
+                          items:
+                            properties:
+                              consumerKey:
+                                description: The OAuth 1.0a consumer key of the Twitter
+                                  application used for sign-in. The OAuth 1.0a consumer
+                                  key of the Twitter application used for sign-in.
+                                type: string
+                              consumerSecretSettingName:
+                                description: The app setting name that contains the
+                                  OAuth 1.0a consumer secret of the Twitter application
+                                  used for sign-in. The app setting name that contains
+                                  the OAuth 1.0a consumer secret of the Twitter application
+                                  used for sign-in. Cannot be specified with `consumer_secret`.
+                                type: string
+                            type: object
+                          type: array
+                        unauthenticatedClientAction:
+                          description: 'The action to take when an unauthenticated
+                            client attempts to access the app. Possible values include:
+                            RedirectToLoginPage, AllowAnonymous. The action to take
+                            when an unauthenticated client attempts to access the
+                            app. Possible values include: `RedirectToLoginPage`, `AllowAnonymous`.'
+                          type: string
+                      type: object
+                    type: array
+                  authSettingsV2:
+                    description: An auth_settings_v2 block as defined below.
+                    items:
+                      properties:
+                        activeDirectoryV2:
+                          description: An active_directory_v2 block as defined below.
+                          items:
+                            properties:
+                              allowedApplications:
+                                description: The list of allowed Applications for
+                                  the Default Authorisation Policy. The list of allowed
+                                  Applications for the Default Authorisation Policy.
+                                items:
+                                  type: string
+                                type: array
+                              allowedAudiences:
+                                description: Specifies a list of Allowed Audiences
+                                  that will be requested as part of Microsoft Sign-In
+                                  authentication. Specifies a list of Allowed audience
+                                  values to consider when validating JWTs issued by
+                                  Azure Active Directory.
+                                items:
+                                  type: string
+                                type: array
+                              allowedGroups:
+                                description: The list of allowed Group Names for the
+                                  Default Authorisation Policy. The list of allowed
+                                  Group Names for the Default Authorisation Policy.
+                                items:
+                                  type: string
+                                type: array
+                              allowedIdentities:
+                                description: The list of allowed Identities for the
+                                  Default Authorisation Policy. The list of allowed
+                                  Identities for the Default Authorisation Policy.
+                                items:
+                                  type: string
+                                type: array
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication. The ID of the
+                                  Client to use to authenticate with Azure Active
+                                  Directory.
+                                type: string
+                              clientSecretCertificateThumbprint:
+                                description: The thumbprint of the certificate used
+                                  for signing purposes. The thumbprint of the certificate
+                                  used for signing purposes.
+                                type: string
+                              clientSecretSettingName:
+                                description: The app setting name containing the OAuth
+                                  2.0 client secret that was created for the app used
+                                  for authentication. The App Setting name that contains
+                                  the client secret of the Client.
+                                type: string
+                              jwtAllowedClientApplications:
+                                description: A list of Allowed Client Applications
+                                  in the JWT Claim. A list of Allowed Client Applications
+                                  in the JWT Claim.
+                                items:
+                                  type: string
+                                type: array
+                              jwtAllowedGroups:
+                                description: A list of Allowed Groups in the JWT Claim.
+                                  A list of Allowed Groups in the JWT Claim.
+                                items:
+                                  type: string
+                                type: array
+                              loginParameters:
+                                additionalProperties:
+                                  type: string
+                                description: A map of key-value pairs to send to the
+                                  Authorisation Endpoint when a user logs in. A map
+                                  of key-value pairs to send to the Authorisation
+                                  Endpoint when a user logs in.
+                                type: object
+                              tenantAuthEndpoint:
+                                description: The Azure Tenant Endpoint for the Authenticating
+                                  Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+                                  The Azure Tenant Endpoint for the Authenticating
+                                  Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
+                                type: string
+                              wwwAuthenticationDisabled:
+                                description: Should the www-authenticate provider
+                                  should be omitted from the request? Defaults to
+                                  false Should the www-authenticate provider should
+                                  be omitted from the request? Defaults to `false`
+                                type: boolean
+                            type: object
+                          type: array
+                        appleV2:
+                          description: An apple_v2 block as defined below.
+                          items:
+                            properties:
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication. The OpenID
+                                  Connect Client ID for the Apple web application.
+                                type: string
+                              clientSecretSettingName:
+                                description: The app setting name containing the OAuth
+                                  2.0 client secret that was created for the app used
+                                  for authentication. The app setting name that contains
+                                  the `client_secret` value used for Apple Login.
+                                type: string
+                            type: object
+                          type: array
+                        authEnabled:
+                          description: Should the AuthV2 Settings be enabled. Defaults
+                            to false. Should the AuthV2 Settings be enabled. Defaults
+                            to `false`
+                          type: boolean
+                        azureStaticWebAppV2:
+                          description: An azure_static_web_app_v2 block as defined
+                            below.
+                          items:
+                            properties:
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication. The ID of the
+                                  Client to use to authenticate with Azure Static
+                                  Web App Authentication.
+                                type: string
+                            type: object
+                          type: array
+                        configFilePath:
+                          description: The path to the App Auth settings. The path
+                            to the App Auth settings. **Note:** Relative Paths are
+                            evaluated from the Site Root directory.
+                          type: string
+                        customOidcV2:
+                          description: Zero or more custom_oidc_v2 blocks as defined
+                            below.
+                          items:
+                            properties:
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication. The ID of the
+                                  Client to use to authenticate with this Custom OIDC.
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  Storage Account. The name of the Custom OIDC Authentication
+                                  Provider.
+                                type: string
+                              nameClaimType:
+                                description: The name of the claim that contains the
+                                  users name. The name of the claim that contains
+                                  the users name.
+                                type: string
+                              openidConfigurationEndpoint:
+                                description: The app setting name that contains the
+                                  client_secret value used for the Custom OIDC Login.
+                                  The endpoint that contains all the configuration
+                                  endpoints for this Custom OIDC provider.
+                                type: string
+                              scopes:
+                                description: The list of the scopes that should be
+                                  requested while authenticating. The list of the
+                                  scopes that should be requested while authenticating.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        defaultProvider:
+                          description: The Default Authentication Provider to use
+                            when more than one Authentication Provider is configured
+                            and the unauthenticated_action is set to RedirectToLoginPage.
+                            The Default Authentication Provider to use when the `unauthenticated_action`
+                            is set to `RedirectToLoginPage`.
+                          type: string
+                        excludedPaths:
+                          description: The paths which should be excluded from the
+                            unauthenticated_action when it is set to RedirectToLoginPage.
+                            The paths which should be excluded from the `unauthenticated_action`
+                            when it is set to `RedirectToLoginPage`.
+                          items:
+                            type: string
+                          type: array
+                        facebookV2:
+                          description: A facebook_v2 block as defined below.
+                          items:
+                            properties:
+                              appId:
+                                description: The App ID of the Facebook app used for
+                                  login. The App ID of the Facebook app used for login.
+                                type: string
+                              appSecretSettingName:
+                                description: The app setting name that contains the
+                                  app_secret value used for Facebook Login. The app
+                                  setting name that contains the `app_secret` value
+                                  used for Facebook Login.
+                                type: string
+                              graphApiVersion:
+                                description: The version of the Facebook API to be
+                                  used while logging in. The version of the Facebook
+                                  API to be used while logging in.
+                                type: string
+                              loginScopes:
+                                description: The list of Login scopes that should
+                                  be requested as part of Microsoft Account authentication.
+                                  Specifies a list of scopes to be requested as part
+                                  of Facebook Login authentication.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        forwardProxyConvention:
+                          description: The convention used to determine the url of
+                            the request made. Possible values include ForwardProxyConventionNoProxy,
+                            ForwardProxyConventionStandard, ForwardProxyConventionCustom.
+                            Defaults to ForwardProxyConventionNoProxy. The convention
+                            used to determine the url of the request made. Possible
+                            values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`,
+                            `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+                          type: string
+                        forwardProxyCustomHostHeaderName:
+                          description: The name of the custom header containing the
+                            host of the request. The name of the header containing
+                            the host of the request.
+                          type: string
+                        forwardProxyCustomSchemeHeaderName:
+                          description: The name of the custom header containing the
+                            scheme of the request. The name of the header containing
+                            the scheme of the request.
+                          type: string
+                        githubV2:
+                          description: A github_v2 block as defined below.
+                          items:
+                            properties:
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication. The ID of the
+                                  GitHub app used for login.
+                                type: string
+                              clientSecretSettingName:
+                                description: The app setting name containing the OAuth
+                                  2.0 client secret that was created for the app used
+                                  for authentication. The app setting name that contains
+                                  the `client_secret` value used for GitHub Login.
+                                type: string
+                              loginScopes:
+                                description: The list of Login scopes that should
+                                  be requested as part of Microsoft Account authentication.
+                                  Specifies a list of OAuth 2.0 scopes that will be
+                                  requested as part of GitHub Login authentication.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        googleV2:
+                          description: A google_v2 block as defined below.
+                          items:
+                            properties:
+                              allowedAudiences:
+                                description: Specifies a list of Allowed Audiences
+                                  that will be requested as part of Microsoft Sign-In
+                                  authentication. Specifies a list of Allowed Audiences
+                                  that will be requested as part of Google Sign-In
+                                  authentication.
+                                items:
+                                  type: string
+                                type: array
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication. The OpenID
+                                  Connect Client ID for the Google web application.
+                                type: string
+                              clientSecretSettingName:
+                                description: The app setting name containing the OAuth
+                                  2.0 client secret that was created for the app used
+                                  for authentication. The app setting name that contains
+                                  the `client_secret` value used for Google Login.
+                                type: string
+                              loginScopes:
+                                description: The list of Login scopes that should
+                                  be requested as part of Microsoft Account authentication.
+                                  Specifies a list of Login scopes that will be requested
+                                  as part of Google Sign-In authentication.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        httpRouteApiPrefix:
+                          description: The prefix that should precede all the authentication
+                            and authorisation paths. Defaults to /.auth. The prefix
+                            that should precede all the authentication and authorisation
+                            paths. Defaults to `/.auth`
+                          type: string
+                        login:
+                          description: A login block as defined below.
+                          items:
+                            properties:
+                              allowedExternalRedirectUrls:
+                                description: External URLs that can be redirected
+                                  to as part of logging in or logging out of the app.
+                                  This is an advanced setting typically only needed
+                                  by Windows Store application backends. External
+                                  URLs that can be redirected to as part of logging
+                                  in or logging out of the app. This is an advanced
+                                  setting typically only needed by Windows Store application
+                                  backends. **Note:** URLs within the current domain
+                                  are always implicitly allowed.
+                                items:
+                                  type: string
+                                type: array
+                              cookieExpirationConvention:
+                                description: 'The method by which cookies expire.
+                                  Possible values include: FixedTime, and IdentityProviderDerived.
+                                  Defaults to FixedTime. The method by which cookies
+                                  expire. Possible values include: `FixedTime`, and
+                                  `IdentityProviderDerived`. Defaults to `FixedTime`.'
+                                type: string
+                              cookieExpirationTime:
+                                description: The time after the request is made when
+                                  the session cookie should expire. Defaults to 08:00:00.
+                                  The time after the request is made when the session
+                                  cookie should expire. Defaults to `08:00:00`.
+                                type: string
+                              logoutEndpoint:
+                                description: The endpoint to which logout requests
+                                  should be made. The endpoint to which logout requests
+                                  should be made.
+                                type: string
+                              nonceExpirationTime:
+                                description: The time after the request is made when
+                                  the nonce should expire. Defaults to 00:05:00. The
+                                  time after the request is made when the nonce should
+                                  expire. Defaults to `00:05:00`.
+                                type: string
+                              preserveUrlFragmentsForLogins:
+                                description: Should the fragments from the request
+                                  be preserved after the login request is made. Defaults
+                                  to false. Should the fragments from the request
+                                  be preserved after the login request is made. Defaults
+                                  to `false`.
+                                type: boolean
+                              tokenRefreshExtensionTime:
+                                description: The number of hours after session token
+                                  expiration that a session token can be used to call
+                                  the token refresh API. Defaults to 72 hours. The
+                                  number of hours after session token expiration that
+                                  a session token can be used to call the token refresh
+                                  API. Defaults to `72` hours.
+                                type: number
+                              tokenStoreEnabled:
+                                description: Should the Token Store configuration
+                                  Enabled. Defaults to false Should the Token Store
+                                  configuration Enabled. Defaults to `false`
+                                type: boolean
+                              tokenStorePath:
+                                description: The directory path in the App Filesystem
+                                  in which the tokens will be stored. The directory
+                                  path in the App Filesystem in which the tokens will
+                                  be stored.
+                                type: string
+                              tokenStoreSasSettingName:
+                                description: The name of the app setting which contains
+                                  the SAS URL of the blob storage containing the tokens.
+                                  The name of the app setting which contains the SAS
+                                  URL of the blob storage containing the tokens.
+                                type: string
+                              validateNonce:
+                                description: Should the nonce be validated while completing
+                                  the login flow. Defaults to true. Should the nonce
+                                  be validated while completing the login flow. Defaults
+                                  to `true`.
+                                type: boolean
+                            type: object
+                          type: array
+                        microsoftV2:
+                          description: A microsoft_v2 block as defined below.
+                          items:
+                            properties:
+                              allowedAudiences:
+                                description: Specifies a list of Allowed Audiences
+                                  that will be requested as part of Microsoft Sign-In
+                                  authentication. Specifies a list of Allowed Audiences
+                                  that will be requested as part of Microsoft Sign-In
+                                  authentication.
+                                items:
+                                  type: string
+                                type: array
+                              clientId:
+                                description: The OAuth 2.0 client ID that was created
+                                  for the app used for authentication. The OAuth 2.0
+                                  client ID that was created for the app used for
+                                  authentication.
+                                type: string
+                              clientSecretSettingName:
+                                description: The app setting name containing the OAuth
+                                  2.0 client secret that was created for the app used
+                                  for authentication. The app setting name containing
+                                  the OAuth 2.0 client secret that was created for
+                                  the app used for authentication.
+                                type: string
+                              loginScopes:
+                                description: The list of Login scopes that should
+                                  be requested as part of Microsoft Account authentication.
+                                  The list of Login scopes that will be requested
+                                  as part of Microsoft Account authentication.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        requireAuthentication:
+                          description: Should the authentication flow be used for
+                            all requests. Should the authentication flow be used for
+                            all requests.
+                          type: boolean
+                        requireHttps:
+                          description: Should HTTPS be required on connections? Defaults
+                            to true. Should HTTPS be required on connections? Defaults
+                            to true.
+                          type: boolean
+                        runtimeVersion:
+                          description: The Runtime Version of the Authentication and
+                            Authorisation feature of this App. Defaults to ~1. The
+                            Runtime Version of the Authentication and Authorisation
+                            feature of this App. Defaults to `~1`
+                          type: string
+                        twitterV2:
+                          description: A twitter_v2 block as defined below.
+                          items:
+                            properties:
+                              consumerKey:
+                                description: The OAuth 1.0a consumer key of the Twitter
+                                  application used for sign-in. The OAuth 1.0a consumer
+                                  key of the Twitter application used for sign-in.
+                                type: string
+                              consumerSecretSettingName:
+                                description: The app setting name that contains the
+                                  OAuth 1.0a consumer secret of the Twitter application
+                                  used for sign-in. The app setting name that contains
+                                  the OAuth 1.0a consumer secret of the Twitter application
+                                  used for sign-in.
+                                type: string
+                            type: object
+                          type: array
+                        unauthenticatedAction:
+                          description: The action to take for requests made without
+                            authentication. Possible values include RedirectToLoginPage,
+                            AllowAnonymous, Return401, and Return403. Defaults to
+                            RedirectToLoginPage. The action to take for requests made
+                            without authentication. Possible values include `RedirectToLoginPage`,
+                            `AllowAnonymous`, `Return401`, and `Return403`. Defaults
+                            to `RedirectToLoginPage`.
+                          type: string
+                      type: object
+                    type: array
+                  backup:
+                    description: A backup block as defined below.
+                    items:
+                      properties:
+                        enabled:
+                          description: Should this backup job be enabled? Defaults
+                            to true. Should this backup job be enabled?
+                          type: boolean
+                        name:
+                          description: The name which should be used for this Backup.
+                            The name which should be used for this Backup.
+                          type: string
+                        schedule:
+                          description: A schedule block as defined below.
+                          items:
+                            properties:
+                              frequencyInterval:
+                                description: How often the backup should be executed
+                                  (e.g. for weekly backup, this should be set to 7
+                                  and frequency_unit should be set to Day). How often
+                                  the backup should be executed (e.g. for weekly backup,
+                                  this should be set to `7` and `frequency_unit` should
+                                  be set to `Day`).
+                                type: number
+                              frequencyUnit:
+                                description: 'The unit of time for how often the backup
+                                  should take place. Possible values include: Day
+                                  and Hour. The unit of time for how often the backup
+                                  should take place. Possible values include: `Day`
+                                  and `Hour`.'
+                                type: string
+                              keepAtLeastOneBackup:
+                                description: Should the service keep at least one
+                                  backup, regardless of age of backup. Defaults to
+                                  false. Should the service keep at least one backup,
+                                  regardless of age of backup. Defaults to `false`.
+                                type: boolean
+                              retentionPeriodDays:
+                                description: After how many days backups should be
+                                  deleted. Defaults to 30. After how many days backups
+                                  should be deleted.
+                                type: number
+                              startTime:
+                                description: When the schedule should start working
+                                  in RFC-3339 format. When the schedule should start
+                                  working in RFC-3339 format.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  builtinLoggingEnabled:
+                    description: Should built in logging be enabled. Configures AzureWebJobsDashboard
+                      app setting based on the configured storage setting. Defaults
+                      to true. Should built in logging be enabled. Configures `AzureWebJobsDashboard`
+                      app setting based on the configured storage setting
+                    type: boolean
+                  clientCertificateEnabled:
+                    description: Should the function app use Client Certificates.
+                      Should the function app use Client Certificates
+                    type: boolean
+                  clientCertificateExclusionPaths:
+                    description: Paths to exclude when using client certificates,
+                      separated by ; Paths to exclude when using client certificates,
+                      separated by ;
+                    type: string
+                  clientCertificateMode:
+                    description: The mode of the Function App's client certificates
+                      requirement for incoming requests. Possible values are Required,
+                      Optional, and OptionalInteractiveUser. The mode of the Function
+                      App's client certificates requirement for incoming requests.
+                      Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`
+                    type: string
+                  connectionString:
+                    description: One or more connection_string blocks as defined below.
+                    items:
+                      properties:
+                        name:
+                          description: The name which should be used for this Connection.
+                            The name which should be used for this Connection.
+                          type: string
+                        type:
+                          description: 'Type of database. Possible values include:
+                            MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus,
+                            EventHub, APIHub, DocDb, RedisCache, and PostgreSQL. Type
+                            of database. Possible values include: `MySQL`, `SQLServer`,
+                            `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`,
+                            `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.'
+                          type: string
+                      type: object
+                    type: array
+                  contentShareForceDisabled:
+                    description: Should the settings for linking the Function App
+                      to storage be suppressed. Force disable the content share settings.
+                    type: boolean
+                  dailyMemoryTimeQuota:
+                    description: The amount of memory in gigabyte-seconds that your
+                      application is allowed to consume per day. Setting this value
+                      only affects function apps under the consumption plan. Defaults
+                      to 0. The amount of memory in gigabyte-seconds that your application
+                      is allowed to consume per day. Setting this value only affects
+                      function apps in Consumption Plans.
+                    type: number
+                  enabled:
+                    description: Is the Function App enabled? Defaults to true. Is
+                      the Linux Function App enabled.
+                    type: boolean
+                  functionsExtensionVersion:
+                    description: The runtime version associated with the Function
+                      App. Defaults to ~4. The runtime version associated with the
+                      Function App.
+                    type: string
+                  httpsOnly:
+                    description: Can the Function App only be accessed via HTTPS?
+                      Defaults to false. Can the Function App only be accessed via
+                      HTTPS?
+                    type: boolean
+                  identity:
+                    description: A identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this Linux Function App.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Linux Function App.
+                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
+                          type: string
+                      type: object
+                    type: array
+                  keyVaultReferenceIdentityId:
+                    description: The User Assigned Identity ID used for accessing
+                      KeyVault secrets. The identity must be assigned to the application
+                      in the identity block. For more information see - Access vaults
+                      with a user-assigned identity The User Assigned Identity to
+                      use for Key Vault access.
+                    type: string
+                  location:
+                    description: The Azure Region where the Linux Function App should
+                      exist. Changing this forces a new Linux Function App to be created.
+                    type: string
+                  name:
+                    description: The name which should be used for this Linux Function
+                      App. Changing this forces a new Linux Function App to be created.
+                      Limit the function name to 32 characters to avoid naming collisions.
+                      For more information about Function App naming rule and Host
+                      ID Collisions Specifies the name of the Function App.
+                    type: string
+                  siteConfig:
+                    description: A site_config block as defined below.
+                    items:
+                      properties:
+                        alwaysOn:
+                          description: If this Linux Web App is Always On enabled.
+                            Defaults to false. If this Linux Web App is Always On
+                            enabled. Defaults to `false`.
+                          type: boolean
+                        apiDefinitionUrl:
+                          description: The URL of the API definition that describes
+                            this Linux Function App. The URL of the API definition
+                            that describes this Linux Function App.
+                          type: string
+                        apiManagementApiId:
+                          description: The ID of the API Management API for this Linux
+                            Function App. The ID of the API Management API for this
+                            Linux Function App.
+                          type: string
+                        appCommandLine:
+                          description: The App command line to launch. The program
+                            and any arguments used to launch this app via the command
+                            line. (Example `node myapp.js`).
+                          type: string
+                        appScaleLimit:
+                          description: The number of workers this function app can
+                            scale out to. Only applicable to apps on the Consumption
+                            and Premium plan. The number of workers this function
+                            app can scale out to. Only applicable to apps on the Consumption
+                            and Premium plan.
+                          type: number
+                        appServiceLogs:
+                          description: An app_service_logs block as defined above.
+                          items:
+                            properties:
+                              diskQuotaMb:
+                                description: The amount of disk space to use for logs.
+                                  Valid values are between 25 and 100. Defaults to
+                                  35. The amount of disk space to use for logs. Valid
+                                  values are between `25` and `100`.
+                                type: number
+                              retentionPeriodDays:
+                                description: After how many days backups should be
+                                  deleted. Defaults to 30. The retention period for
+                                  logs in days. Valid values are between `0` and `99999`.
+                                  Defaults to `0` (never delete).
+                                type: number
+                            type: object
+                          type: array
+                        applicationStack:
+                          description: An application_stack block as defined above.
+                          items:
+                            properties:
+                              docker:
+                                description: One or more docker blocks as defined
+                                  below. A docker block
+                                items:
+                                  properties:
+                                    imageName:
+                                      description: The name of the Docker image to
+                                        use. The name of the Docker image to use.
+                                      type: string
+                                    imageTag:
+                                      description: The image tag of the image to use.
+                                        The image tag of the image to use.
+                                      type: string
+                                    registryUrl:
+                                      description: The URL of the docker registry.
+                                        The URL of the docker registry.
+                                      type: string
+                                  type: object
+                                type: array
+                              dotnetVersion:
+                                description: The version of .NET to use. Possible
+                                  values include 3.1, 6.0 and 7.0. The version of
+                                  .Net. Possible values are `3.1`, `6.0` and `7.0`
+                                type: string
+                              javaVersion:
+                                description: The Version of Java to use. Supported
+                                  versions include 8, 11 & 17. The version of Java
+                                  to use. Possible values are `8`, `11`, and `17`
+                                type: string
+                              nodeVersion:
+                                description: The version of Node to run. Possible
+                                  values include 12, 14, 16 and 18. The version of
+                                  Node to use. Possible values include `12`, `14`,
+                                  `16` and `18`
+                                type: string
+                              powershellCoreVersion:
+                                description: The version of PowerShell Core to run.
+                                  Possible values are 7, and 7.2. The version of PowerShell
+                                  Core to use. Possibles values are `7`, and `7.2`
+                                type: string
+                              pythonVersion:
+                                description: The version of Python to run. Possible
+                                  values are 3.10, 3.9, 3.8 and 3.7. The version of
+                                  Python to use. Possible values include `3.10`, `3.9`,
+                                  `3.8`, and `3.7`.
+                                type: string
+                              useCustomRuntime:
+                                description: Should the Linux Function App use a custom
+                                  runtime?
+                                type: boolean
+                              useDotnetIsolatedRuntime:
+                                description: Should the DotNet process use an isolated
+                                  runtime. Defaults to false. Should the DotNet process
+                                  use an isolated runtime. Defaults to `false`.
+                                type: boolean
+                            type: object
+                          type: array
+                        containerRegistryManagedIdentityClientId:
+                          description: The Client ID of the Managed Service Identity
+                            to use for connections to the Azure Container Registry.
+                            The Client ID of the Managed Service Identity to use for
+                            connections to the Azure Container Registry.
+                          type: string
+                        containerRegistryUseManagedIdentity:
+                          description: Should connections for Azure Container Registry
+                            use Managed Identity. Should connections for Azure Container
+                            Registry use Managed Identity.
+                          type: boolean
+                        cors:
+                          description: A cors block as defined above.
+                          items:
+                            properties:
+                              allowedOrigins:
+                                description: Specifies a list of origins that should
+                                  be allowed to make cross-origin calls. Specifies
+                                  a list of origins that should be allowed to make
+                                  cross-origin calls.
+                                items:
+                                  type: string
+                                type: array
+                              supportCredentials:
+                                description: Are credentials allowed in CORS requests?
+                                  Defaults to false. Are credentials allowed in CORS
+                                  requests? Defaults to `false`.
+                                type: boolean
+                            type: object
+                          type: array
+                        defaultDocuments:
+                          description: Specifies a list of Default Documents for the
+                            Linux Web App. Specifies a list of Default Documents for
+                            the Linux Web App.
+                          items:
+                            type: string
+                          type: array
+                        elasticInstanceMinimum:
+                          description: The number of minimum instances for this Linux
+                            Function App. Only affects apps on Elastic Premium plans.
+                            The number of minimum instances for this Linux Function
+                            App. Only affects apps on Elastic Premium plans.
+                          type: number
+                        ftpsState:
+                          description: 'State of FTP / FTPS service for this function
+                            app. Possible values include: AllAllowed, FtpsOnly and
+                            Disabled. Defaults to Disabled. State of FTP / FTPS service
+                            for this function app. Possible values include: `AllAllowed`,
+                            `FtpsOnly` and `Disabled`. Defaults to `Disabled`.'
+                          type: string
+                        healthCheckEvictionTimeInMin:
+                          description: The amount of time in minutes that a node can
+                            be unhealthy before being removed from the load balancer.
+                            Possible values are between 2 and 10. Only valid in conjunction
+                            with health_check_path. The amount of time in minutes
+                            that a node is unhealthy before being removed from the
+                            load balancer. Possible values are between `2` and `10`.
+                            Defaults to `10`. Only valid in conjunction with `health_check_path`
+                          type: number
+                        healthCheckPath:
+                          description: The path to be checked for this function app
+                            health. The path to be checked for this function app health.
+                          type: string
+                        http2Enabled:
+                          description: Specifies if the HTTP2 protocol should be enabled.
+                            Defaults to false. Specifies if the http2 protocol should
+                            be enabled. Defaults to `false`.
+                          type: boolean
+                        ipRestriction:
+                          description: One or more ip_restriction blocks as defined
+                            above.
+                          items:
+                            properties:
+                              action:
+                                description: The action to take. Possible values are
+                                  Allow or Deny. The action to take. Possible values
+                                  are `Allow` or `Deny`.
+                                type: string
+                              headers:
+                                description: A headers block as defined above.
+                                items:
+                                  properties:
+                                    xAzureFdid:
+                                      description: Specifies a list of Azure Front
+                                        Door IDs.
+                                      items:
+                                        type: string
+                                      type: array
+                                    xFdHealthProbe:
+                                      description: Specifies if a Front Door Health
+                                        Probe should be expected. The only possible
+                                        value is 1.
+                                      items:
+                                        type: string
+                                      type: array
+                                    xForwardedFor:
+                                      description: Specifies a list of addresses for
+                                        which matching should be applied. Omitting
+                                        this value means allow any.
+                                      items:
+                                        type: string
+                                      type: array
+                                    xForwardedHost:
+                                      description: Specifies a list of Hosts for which
+                                        matching should be applied.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              ipAddress:
+                                description: 'The CIDR notation of the IP or IP Range
+                                  to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+                                  The CIDR notation of the IP or IP Range to match.
+                                  For example: `10.0.0.0/24` or `192.168.10.1/32`
+                                  or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`'
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  Storage Account. The name which should be used for
+                                  this `ip_restriction`.
+                                type: string
+                              priority:
+                                description: The priority value of this ip_restriction.
+                                  Defaults to 65000. The priority value of this `ip_restriction`.
+                                type: number
+                              serviceTag:
+                                description: The Service Tag used for this IP Restriction.
+                                  The Service Tag used for this IP Restriction.
+                                type: string
+                            type: object
+                          type: array
+                        loadBalancingMode:
+                          description: 'The Site load balancing mode. Possible values
+                            include: WeightedRoundRobin, LeastRequests, LeastResponseTime,
+                            WeightedTotalTraffic, RequestHash, PerSiteRoundRobin.
+                            Defaults to LeastRequests if omitted. The Site load balancing
+                            mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`,
+                            `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`,
+                            `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.'
+                          type: string
+                        managedPipelineMode:
+                          description: 'Managed pipeline mode. Possible values include:
+                            Integrated, Classic. Defaults to Integrated. The Managed
+                            Pipeline mode. Possible values include: `Integrated`,
+                            `Classic`. Defaults to `Integrated`.'
+                          type: string
+                        minimumTlsVersion:
+                          description: 'The configures the minimum version of TLS
+                            required for SSL requests. Possible values include: 1.0,
+                            1.1, and 1.2. Defaults to 1.2. The configures the minimum
+                            version of TLS required for SSL requests. Possible values
+                            include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.'
+                          type: string
+                        preWarmedInstanceCount:
+                          description: The number of pre-warmed instances for this
+                            function app. Only affects apps on an Elastic Premium
+                            plan. The number of pre-warmed instances for this function
+                            app. Only affects apps on an Elastic Premium plan.
+                          type: number
+                        remoteDebuggingEnabled:
+                          description: Should Remote Debugging be enabled. Defaults
+                            to false. Should Remote Debugging be enabled. Defaults
+                            to `false`.
+                          type: boolean
+                        remoteDebuggingVersion:
+                          description: The Remote Debugging Version. Possible values
+                            include VS2017, VS2019, and VS2022. The Remote Debugging
+                            Version. Possible values include `VS2017`, `VS2019`, and
+                            `VS2022“
+                          type: string
+                        runtimeScaleMonitoringEnabled:
+                          description: Should Scale Monitoring of the Functions Runtime
+                            be enabled? Should Functions Runtime Scale Monitoring
+                            be enabled.
+                          type: boolean
+                        scmIpRestriction:
+                          description: One or more scm_ip_restriction blocks as defined
+                            above.
+                          items:
+                            properties:
+                              action:
+                                description: The action to take. Possible values are
+                                  Allow or Deny. The action to take. Possible values
+                                  are `Allow` or `Deny`.
+                                type: string
+                              headers:
+                                description: A headers block as defined above.
+                                items:
+                                  properties:
+                                    xAzureFdid:
+                                      description: Specifies a list of Azure Front
+                                        Door IDs.
+                                      items:
+                                        type: string
+                                      type: array
+                                    xFdHealthProbe:
+                                      description: Specifies if a Front Door Health
+                                        Probe should be expected. The only possible
+                                        value is 1.
+                                      items:
+                                        type: string
+                                      type: array
+                                    xForwardedFor:
+                                      description: Specifies a list of addresses for
+                                        which matching should be applied. Omitting
+                                        this value means allow any.
+                                      items:
+                                        type: string
+                                      type: array
+                                    xForwardedHost:
+                                      description: Specifies a list of Hosts for which
+                                        matching should be applied.
+                                      items:
+                                        type: string
+                                      type: array
+                                  type: object
+                                type: array
+                              ipAddress:
+                                description: 'The CIDR notation of the IP or IP Range
+                                  to match. For example: 10.0.0.0/24 or 192.168.10.1/32
+                                  The CIDR notation of the IP or IP Range to match.
+                                  For example: `10.0.0.0/24` or `192.168.10.1/32`
+                                  or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`'
+                                type: string
+                              name:
+                                description: The name which should be used for this
+                                  Storage Account. The name which should be used for
+                                  this `ip_restriction`.
+                                type: string
+                              priority:
+                                description: The priority value of this ip_restriction.
+                                  Defaults to 65000. The priority value of this `ip_restriction`.
+                                type: number
+                              serviceTag:
+                                description: The Service Tag used for this IP Restriction.
+                                  The Service Tag used for this IP Restriction.
+                                type: string
+                            type: object
+                          type: array
+                        scmMinimumTlsVersion:
+                          description: 'Configures the minimum version of TLS required
+                            for SSL requests to the SCM site Possible values include:
+                            1.0, 1.1, and 1.2. Defaults to 1.2. Configures the minimum
+                            version of TLS required for SSL requests to the SCM site
+                            Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults
+                            to `1.2`.'
+                          type: string
+                        scmUseMainIpRestriction:
+                          description: Should the Linux Function App ip_restriction
+                            configuration be used for the SCM also. Should the Linux
+                            Function App `ip_restriction` configuration be used for
+                            the SCM also.
+                          type: boolean
+                        use32BitWorker:
+                          description: Should the Linux Web App use a 32-bit worker
+                            process. Defaults to true. Should the Linux Web App use
+                            a 32-bit worker.
+                          type: boolean
+                        vnetRouteAllEnabled:
+                          description: Should all outbound traffic to have NAT Gateways,
+                            Network Security Groups and User Defined Routes applied?
+                            Defaults to false. Should all outbound traffic to have
+                            Virtual Network Security Groups and User Defined Routes
+                            applied? Defaults to `false`.
+                          type: boolean
+                        websocketsEnabled:
+                          description: Should Web Sockets be enabled. Defaults to
+                            false. Should Web Sockets be enabled. Defaults to `false`.
+                          type: boolean
+                        workerCount:
+                          description: The number of Workers for this Linux Function
+                            App. The number of Workers for this Linux Function App.
+                          type: number
+                      type: object
+                    type: array
+                  stickySettings:
+                    description: A sticky_settings block as defined below.
+                    items:
+                      properties:
+                        appSettingNames:
+                          description: A list of app_setting names that the Linux
+                            Function App will not swap between Slots when a swap operation
+                            is triggered.
+                          items:
+                            type: string
+                          type: array
+                        connectionStringNames:
+                          description: A list of connection_string names that the
+                            Linux Function App will not swap between Slots when a
+                            swap operation is triggered.
+                          items:
+                            type: string
+                          type: array
+                      type: object
+                    type: array
+                  storageAccount:
+                    description: One or more storage_account blocks as defined below.
+                    items:
+                      properties:
+                        accountName:
+                          description: The Name of the Storage Account.
+                          type: string
+                        mountPath:
+                          description: The path at which to mount the storage share.
+                          type: string
+                        name:
+                          description: The name which should be used for this Storage
+                            Account.
+                          type: string
+                        shareName:
+                          description: The Name of the File Share or Container Name
+                            for Blob storage.
+                          type: string
+                        type:
+                          description: The Azure Storage Type. Possible values include
+                            AzureFiles and AzureBlob.
+                          type: string
+                      type: object
+                    type: array
+                  storageKeyVaultSecretId:
+                    description: The Key Vault Secret ID, optionally including version,
+                      that contains the Connection String to connect to the storage
+                      account for this Function App. The Key Vault Secret ID, including
+                      version, that contains the Connection String to connect to the
+                      storage account for this Function App.
+                    type: string
+                  storageUsesManagedIdentity:
+                    description: Should the Function App use Managed Identity to access
+                      the storage account. Conflicts with storage_account_access_key.
+                      Should the Function App use its Managed Identity to access storage?
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Linux Function App.
+                    type: object
+                  zipDeployFile:
+                    description: The local path and filename of the Zip packaged application
+                      to deploy to this Linux Function App. The local path and filename
+                      of the Zip packaged application to deploy to this Linux Function
+                      App. **Note:** Using this value requires either `WEBSITE_RUN_FROM_PACKAGE=1`
+                      or `SCM_DO_BUILD_DURING_DEPLOYMENT=true` to be set on the App
+                      in `app_settings`.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -2385,11 +3652,17 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: name is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: siteConfig is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.siteConfig)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.siteConfig)
+                || has(self.initProvider.siteConfig)'
           status:
             description: LinuxFunctionAppStatus defines the observed state of LinuxFunctionApp.
             properties:

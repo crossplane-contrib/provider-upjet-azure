@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IntegrationRuntimeInitParameters struct {
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A map of parameters to associate with the integration runtime.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+}
+
 type IntegrationRuntimeObservation struct {
 
 	// The integration runtime reference to associate with the Data Factory Linked Service.
@@ -25,12 +34,36 @@ type IntegrationRuntimeObservation struct {
 type IntegrationRuntimeParameters struct {
 
 	// The integration runtime reference to associate with the Data Factory Linked Service.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A map of parameters to associate with the integration runtime.
 	// +kubebuilder:validation:Optional
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+}
+
+type LinkedCustomServiceInitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// An integration_runtime block as defined below.
+	IntegrationRuntime []IntegrationRuntimeInitParameters `json:"integrationRuntime,omitempty" tf:"integration_runtime,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The type of data stores that will be connected to Data Factory. For full list of supported data stores, please refer to Azure Data Factory connector. Changing this forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// A JSON object that contains the properties of the Data Factory Linked Service.
+	TypePropertiesJSON *string `json:"typePropertiesJson,omitempty" tf:"type_properties_json,omitempty"`
 }
 
 type LinkedCustomServiceObservation struct {
@@ -112,6 +145,18 @@ type LinkedCustomServiceParameters struct {
 type LinkedCustomServiceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LinkedCustomServiceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LinkedCustomServiceInitParameters `json:"initProvider,omitempty"`
 }
 
 // LinkedCustomServiceStatus defines the observed state of LinkedCustomService.
@@ -132,8 +177,8 @@ type LinkedCustomServiceStatus struct {
 type LinkedCustomService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.type)",message="type is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.typePropertiesJson)",message="typePropertiesJson is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.type) || has(self.initProvider.type)",message="type is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.typePropertiesJson) || has(self.initProvider.typePropertiesJson)",message="typePropertiesJson is a required parameter"
 	Spec   LinkedCustomServiceSpec   `json:"spec"`
 	Status LinkedCustomServiceStatus `json:"status,omitempty"`
 }

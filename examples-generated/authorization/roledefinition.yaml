@@ -17,6 +17,3 @@ spec:
       - '*'
       notActions: []
     scope: ${data.azurerm_subscription.primary.id}
-
----
-

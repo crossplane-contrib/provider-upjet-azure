@@ -145,6 +145,3 @@ spec:
     sku: Basic
     type: Vpn
     vpnType: RouteBased
-
----
-

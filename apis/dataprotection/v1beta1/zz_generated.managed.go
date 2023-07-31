@@ -17,9 +17,9 @@ func (mg *BackupInstanceBlobStorage) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupInstanceBlobStorage.
-func (mg *BackupInstanceBlobStorage) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupInstanceBlobStorage.
+func (mg *BackupInstanceBlobStorage) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupInstanceBlobStorage.
@@ -55,9 +55,9 @@ func (mg *BackupInstanceBlobStorage) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupInstanceBlobStorage.
-func (mg *BackupInstanceBlobStorage) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupInstanceBlobStorage.
+func (mg *BackupInstanceBlobStorage) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupInstanceBlobStorage.
@@ -93,9 +93,9 @@ func (mg *BackupInstanceDisk) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupInstanceDisk.
-func (mg *BackupInstanceDisk) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupInstanceDisk.
+func (mg *BackupInstanceDisk) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupInstanceDisk.
@@ -131,9 +131,9 @@ func (mg *BackupInstanceDisk) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupInstanceDisk.
-func (mg *BackupInstanceDisk) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupInstanceDisk.
+func (mg *BackupInstanceDisk) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupInstanceDisk.
@@ -169,9 +169,9 @@ func (mg *BackupInstancePostgreSQL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupInstancePostgreSQL.
-func (mg *BackupInstancePostgreSQL) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupInstancePostgreSQL.
+func (mg *BackupInstancePostgreSQL) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupInstancePostgreSQL.
@@ -207,9 +207,9 @@ func (mg *BackupInstancePostgreSQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupInstancePostgreSQL.
-func (mg *BackupInstancePostgreSQL) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupInstancePostgreSQL.
+func (mg *BackupInstancePostgreSQL) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupInstancePostgreSQL.
@@ -245,9 +245,9 @@ func (mg *BackupPolicyBlobStorage) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupPolicyBlobStorage.
-func (mg *BackupPolicyBlobStorage) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupPolicyBlobStorage.
+func (mg *BackupPolicyBlobStorage) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupPolicyBlobStorage.
@@ -283,9 +283,9 @@ func (mg *BackupPolicyBlobStorage) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupPolicyBlobStorage.
-func (mg *BackupPolicyBlobStorage) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupPolicyBlobStorage.
+func (mg *BackupPolicyBlobStorage) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupPolicyBlobStorage.
@@ -321,9 +321,9 @@ func (mg *BackupPolicyDisk) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupPolicyDisk.
-func (mg *BackupPolicyDisk) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupPolicyDisk.
+func (mg *BackupPolicyDisk) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupPolicyDisk.
@@ -359,9 +359,9 @@ func (mg *BackupPolicyDisk) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupPolicyDisk.
-func (mg *BackupPolicyDisk) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupPolicyDisk.
+func (mg *BackupPolicyDisk) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupPolicyDisk.
@@ -397,9 +397,9 @@ func (mg *BackupPolicyPostgreSQL) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupPolicyPostgreSQL.
@@ -435,9 +435,9 @@ func (mg *BackupPolicyPostgreSQL) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupPolicyPostgreSQL.
-func (mg *BackupPolicyPostgreSQL) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupPolicyPostgreSQL.
+func (mg *BackupPolicyPostgreSQL) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupPolicyPostgreSQL.
@@ -473,9 +473,9 @@ func (mg *BackupVault) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this BackupVault.
-func (mg *BackupVault) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this BackupVault.
+func (mg *BackupVault) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this BackupVault.
@@ -511,9 +511,9 @@ func (mg *BackupVault) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this BackupVault.
-func (mg *BackupVault) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this BackupVault.
+func (mg *BackupVault) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this BackupVault.
@@ -549,9 +549,9 @@ func (mg *ResourceGuard) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ResourceGuard.
-func (mg *ResourceGuard) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ResourceGuard.
+func (mg *ResourceGuard) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ResourceGuard.
@@ -587,9 +587,9 @@ func (mg *ResourceGuard) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ResourceGuard.
-func (mg *ResourceGuard) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ResourceGuard.
+func (mg *ResourceGuard) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ResourceGuard.

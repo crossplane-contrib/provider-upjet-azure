@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IOTHubDPSSharedAccessPolicyInitParameters struct {
+
+	// Adds EnrollmentRead permission to this Shared Access Account. It allows read access to enrollment data.
+	EnrollmentRead *bool `json:"enrollmentRead,omitempty" tf:"enrollment_read,omitempty"`
+
+	// Adds EnrollmentWrite permission to this Shared Access Account. It allows write access to enrollment data.
+	EnrollmentWrite *bool `json:"enrollmentWrite,omitempty" tf:"enrollment_write,omitempty"`
+
+	// Adds RegistrationStatusRead permission to this Shared Access Account. It allows read access to device registrations.
+	RegistrationRead *bool `json:"registrationRead,omitempty" tf:"registration_read,omitempty"`
+
+	// Adds RegistrationStatusWrite permission to this Shared Access Account. It allows write access to device registrations.
+	RegistrationWrite *bool `json:"registrationWrite,omitempty" tf:"registration_write,omitempty"`
+
+	// Adds ServiceConfig permission to this Shared Access Account. It allows configuration of the Device Provisioning Service.
+	ServiceConfig *bool `json:"serviceConfig,omitempty" tf:"service_config,omitempty"`
+}
+
 type IOTHubDPSSharedAccessPolicyObservation struct {
 
 	// Adds EnrollmentRead permission to this Shared Access Account. It allows read access to enrollment data.
@@ -93,6 +111,18 @@ type IOTHubDPSSharedAccessPolicyParameters struct {
 type IOTHubDPSSharedAccessPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IOTHubDPSSharedAccessPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider IOTHubDPSSharedAccessPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // IOTHubDPSSharedAccessPolicyStatus defines the observed state of IOTHubDPSSharedAccessPolicy.

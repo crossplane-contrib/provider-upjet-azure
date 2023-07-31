@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ActionInitParameters struct {
+
+	// A request_header block as defined below.
+	RequestHeader []RequestHeaderInitParameters `json:"requestHeader,omitempty" tf:"request_header,omitempty"`
+
+	// A response_header block as defined below.
+	ResponseHeader []ResponseHeaderInitParameters `json:"responseHeader,omitempty" tf:"response_header,omitempty"`
+}
+
 type ActionObservation struct {
 
 	// A request_header block as defined below.
@@ -31,6 +40,15 @@ type ActionParameters struct {
 	// A response_header block as defined below.
 	// +kubebuilder:validation:Optional
 	ResponseHeader []ResponseHeaderParameters `json:"responseHeader,omitempty" tf:"response_header,omitempty"`
+}
+
+type FrontdoorRulesEngineInitParameters struct {
+
+	// Whether this Rules engine configuration is enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A rule block as defined below.
+	Rule []FrontdoorRulesEngineRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
 type FrontdoorRulesEngineObservation struct {
@@ -89,6 +107,21 @@ type FrontdoorRulesEngineParameters struct {
 	Rule []FrontdoorRulesEngineRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
+type FrontdoorRulesEngineRuleInitParameters struct {
+
+	// An action block as defined below.
+	Action []ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
+
+	// One or more match_condition block as defined below.
+	MatchCondition []RuleMatchConditionInitParameters `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
+
+	// The name of the rule.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Priority of the rule, must be unique per rules engine definition.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+}
+
 type FrontdoorRulesEngineRuleObservation struct {
 
 	// An action block as defined below.
@@ -115,12 +148,24 @@ type FrontdoorRulesEngineRuleParameters struct {
 	MatchCondition []RuleMatchConditionParameters `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
 
 	// The name of the rule.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Priority of the rule, must be unique per rules engine definition.
-	// +kubebuilder:validation:Required
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+}
+
+type RequestHeaderInitParameters struct {
+
+	// can be set to Overwrite, Append or Delete.
+	HeaderActionType *string `json:"headerActionType,omitempty" tf:"header_action_type,omitempty"`
+
+	// header name (string).
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+
+	// value name (string).
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type RequestHeaderObservation struct {
@@ -147,6 +192,18 @@ type RequestHeaderParameters struct {
 
 	// value name (string).
 	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type ResponseHeaderInitParameters struct {
+
+	// can be set to Overwrite, Append or Delete.
+	HeaderActionType *string `json:"headerActionType,omitempty" tf:"header_action_type,omitempty"`
+
+	// header name (string).
+	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+
+	// value name (string).
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
@@ -177,6 +234,27 @@ type ResponseHeaderParameters struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
+type RuleMatchConditionInitParameters struct {
+
+	// can be set to true or false to negate the given condition. Defaults to true.
+	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
+
+	// can be set to Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith or EndsWith
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// match against a specific key when variable is set to PostArgs or RequestHeader. It cannot be used with QueryString and RequestMethod.
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+
+	// can be set to one or more values out of Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode and UrlEncode
+	Transform []*string `json:"transform,omitempty" tf:"transform,omitempty"`
+
+	// value name (string).
+	Value []*string `json:"value,omitempty" tf:"value,omitempty"`
+
+	// can be set to IsMobile, RemoteAddr, RequestMethod, QueryString, PostArgs, RequestURI, RequestPath, RequestFilename, RequestFilenameExtension,RequestHeader,RequestBody or RequestScheme.
+	Variable *string `json:"variable,omitempty" tf:"variable,omitempty"`
+}
+
 type RuleMatchConditionObservation struct {
 
 	// can be set to true or false to negate the given condition. Defaults to true.
@@ -205,8 +283,8 @@ type RuleMatchConditionParameters struct {
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// can be set to Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith or EndsWith
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// match against a specific key when variable is set to PostArgs or RequestHeader. It cannot be used with QueryString and RequestMethod.
 	// +kubebuilder:validation:Optional
@@ -229,6 +307,18 @@ type RuleMatchConditionParameters struct {
 type FrontdoorRulesEngineSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FrontdoorRulesEngineParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider FrontdoorRulesEngineInitParameters `json:"initProvider,omitempty"`
 }
 
 // FrontdoorRulesEngineStatus defines the observed state of FrontdoorRulesEngine.

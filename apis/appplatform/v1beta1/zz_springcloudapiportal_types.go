@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SpringCloudAPIPortalInitParameters struct {
+
+	// is only https is allowed?
+	HTTPSOnlyEnabled *bool `json:"httpsOnlyEnabled,omitempty" tf:"https_only_enabled,omitempty"`
+
+	// Specifies the required instance count of the Spring Cloud API Portal. Possible Values are between 1 and 500. Defaults to 1 if not specified.
+	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// Is the public network access enabled?
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// A sso block as defined below.
+	Sso []SsoInitParameters `json:"sso,omitempty" tf:"sso,omitempty"`
+}
+
 type SpringCloudAPIPortalObservation struct {
 
 	// Specifies a list of Spring Cloud Gateway.
@@ -87,6 +102,21 @@ type SpringCloudAPIPortalParameters struct {
 	Sso []SsoParameters `json:"sso,omitempty" tf:"sso,omitempty"`
 }
 
+type SsoInitParameters struct {
+
+	// The public identifier for the application.
+	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The secret known only to the application and the authorization server.
+	ClientSecret *string `json:"clientSecret,omitempty" tf:"client_secret,omitempty"`
+
+	// The URI of Issuer Identifier.
+	IssuerURI *string `json:"issuerUri,omitempty" tf:"issuer_uri,omitempty"`
+
+	// It defines the specific actions applications can be allowed to do on a user's behalf.
+	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
+}
+
 type SsoObservation struct {
 
 	// The public identifier for the application.
@@ -125,6 +155,18 @@ type SsoParameters struct {
 type SpringCloudAPIPortalSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudAPIPortalParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SpringCloudAPIPortalInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudAPIPortalStatus defines the observed state of SpringCloudAPIPortal.

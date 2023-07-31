@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CustomRuleInitParameters struct {
+
+	// The action to perform when the rule is matched. Possible values are Allow, Block, Log, or Redirect.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Is the rule is enabled or disabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// One or more match_condition block defined below. Can support up to 10 match_condition blocks.
+	MatchCondition []MatchConditionInitParameters `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
+
+	// Gets name of the resource that is unique within a policy. This name can be used to access the resource.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The priority of the rule. Rules with a lower value will be evaluated before rules with a higher value. Defaults to 1.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The rate limit duration in minutes. Defaults to 1.
+	RateLimitDurationInMinutes *float64 `json:"rateLimitDurationInMinutes,omitempty" tf:"rate_limit_duration_in_minutes,omitempty"`
+
+	// The rate limit threshold. Defaults to 10.
+	RateLimitThreshold *float64 `json:"rateLimitThreshold,omitempty" tf:"rate_limit_threshold,omitempty"`
+
+	// The type of rule. Possible values are MatchRule or RateLimitRule.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type CustomRuleObservation struct {
 
 	// The action to perform when the rule is matched. Possible values are Allow, Block, Log, or Redirect.
@@ -43,8 +70,8 @@ type CustomRuleObservation struct {
 type CustomRuleParameters struct {
 
 	// The action to perform when the rule is matched. Possible values are Allow, Block, Log, or Redirect.
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Is the rule is enabled or disabled? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -55,8 +82,8 @@ type CustomRuleParameters struct {
 	MatchCondition []MatchConditionParameters `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
 
 	// Gets name of the resource that is unique within a policy. This name can be used to access the resource.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The priority of the rule. Rules with a lower value will be evaluated before rules with a higher value. Defaults to 1.
 	// +kubebuilder:validation:Optional
@@ -71,8 +98,35 @@ type CustomRuleParameters struct {
 	RateLimitThreshold *float64 `json:"rateLimitThreshold,omitempty" tf:"rate_limit_threshold,omitempty"`
 
 	// The type of rule. Possible values are MatchRule or RateLimitRule.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type FrontdoorFirewallPolicyInitParameters struct {
+
+	// If a custom_rule block's action type is block, this is the response body. The body must be specified in base64 encoding.
+	CustomBlockResponseBody *string `json:"customBlockResponseBody,omitempty" tf:"custom_block_response_body,omitempty"`
+
+	// If a custom_rule block's action type is block, this is the response status code. Possible values are 200, 403, 405, 406, or 429.
+	CustomBlockResponseStatusCode *float64 `json:"customBlockResponseStatusCode,omitempty" tf:"custom_block_response_status_code,omitempty"`
+
+	// One or more custom_rule blocks as defined below.
+	CustomRule []CustomRuleInitParameters `json:"customRule,omitempty" tf:"custom_rule,omitempty"`
+
+	// Is the policy a enabled state or disabled state. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// One or more managed_rule blocks as defined below.
+	ManagedRule []ManagedRuleInitParameters `json:"managedRule,omitempty" tf:"managed_rule,omitempty"`
+
+	// The firewall policy mode. Possible values are Detection, Prevention and defaults to Prevention.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+
+	// If action type is redirect, this field represents redirect URL for the client.
+	RedirectURL *string `json:"redirectUrl,omitempty" tf:"redirect_url,omitempty"`
+
+	// A mapping of tags to assign to the Web Application Firewall Policy.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type FrontdoorFirewallPolicyObservation struct {
@@ -162,6 +216,18 @@ type FrontdoorFirewallPolicyParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type ManagedRuleExclusionInitParameters struct {
+
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+}
+
 type ManagedRuleExclusionObservation struct {
 
 	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
@@ -177,16 +243,31 @@ type ManagedRuleExclusionObservation struct {
 type ManagedRuleExclusionParameters struct {
 
 	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
-	// +kubebuilder:validation:Required
-	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
+	// +kubebuilder:validation:Optional
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
 
 	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
-	// +kubebuilder:validation:Required
-	Selector *string `json:"selector" tf:"selector,omitempty"`
+	// +kubebuilder:validation:Optional
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+}
+
+type ManagedRuleInitParameters struct {
+
+	// One or more exclusion blocks as defined below.
+	Exclusion []ManagedRuleExclusionInitParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+
+	// One or more override blocks as defined below.
+	Override []OverrideInitParameters `json:"override,omitempty" tf:"override,omitempty"`
+
+	// The name of the managed rule to use with this resource.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The version on the managed rule to use with this resource.
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
 type ManagedRuleObservation struct {
@@ -215,12 +296,33 @@ type ManagedRuleParameters struct {
 	Override []OverrideParameters `json:"override,omitempty" tf:"override,omitempty"`
 
 	// The name of the managed rule to use with this resource.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// The version on the managed rule to use with this resource.
-	// +kubebuilder:validation:Required
-	Version *string `json:"version" tf:"version,omitempty"`
+	// +kubebuilder:validation:Optional
+	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+}
+
+type MatchConditionInitParameters struct {
+
+	// Up to 600 possible values to match. Limit is in total across all match_condition blocks and match_values arguments. String value itself can be up to 256 characters long.
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+
+	// Should the result of the condition be negated.
+	NegationCondition *bool `json:"negationCondition,omitempty" tf:"negation_condition,omitempty"`
+
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+
+	// Up to 5 transforms to apply. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, URLDecode orURLEncode.
+	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type MatchConditionObservation struct {
@@ -247,20 +349,20 @@ type MatchConditionObservation struct {
 type MatchConditionParameters struct {
 
 	// Up to 600 possible values to match. Limit is in total across all match_condition blocks and match_values arguments. String value itself can be up to 256 characters long.
-	// +kubebuilder:validation:Required
-	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
+	// +kubebuilder:validation:Optional
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
-	// +kubebuilder:validation:Required
-	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
+	// +kubebuilder:validation:Optional
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
 
 	// Should the result of the condition be negated.
 	// +kubebuilder:validation:Optional
 	NegationCondition *bool `json:"negationCondition,omitempty" tf:"negation_condition,omitempty"`
 
 	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
 	// +kubebuilder:validation:Optional
@@ -269,6 +371,18 @@ type MatchConditionParameters struct {
 	// Up to 5 transforms to apply. Possible values are Lowercase, RemoveNulls, Trim, Uppercase, URLDecode orURLEncode.
 	// +kubebuilder:validation:Optional
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
+}
+
+type OverrideExclusionInitParameters struct {
+
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
 }
 
 type OverrideExclusionObservation struct {
@@ -286,16 +400,28 @@ type OverrideExclusionObservation struct {
 type OverrideExclusionParameters struct {
 
 	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
-	// +kubebuilder:validation:Required
-	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
+	// +kubebuilder:validation:Optional
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
 
 	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
-	// +kubebuilder:validation:Required
-	Selector *string `json:"selector" tf:"selector,omitempty"`
+	// +kubebuilder:validation:Optional
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+}
+
+type OverrideInitParameters struct {
+
+	// One or more exclusion blocks as defined below.
+	Exclusion []OverrideExclusionInitParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+
+	// One or more rule blocks as defined below. If none are specified, all of the rules in the group will be disabled.
+	Rule []OverrideRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+
+	// The managed rule group to override.
+	RuleGroupName *string `json:"ruleGroupName,omitempty" tf:"rule_group_name,omitempty"`
 }
 
 type OverrideObservation struct {
@@ -321,8 +447,23 @@ type OverrideParameters struct {
 	Rule []OverrideRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// The managed rule group to override.
-	// +kubebuilder:validation:Required
-	RuleGroupName *string `json:"ruleGroupName" tf:"rule_group_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	RuleGroupName *string `json:"ruleGroupName,omitempty" tf:"rule_group_name,omitempty"`
+}
+
+type OverrideRuleInitParameters struct {
+
+	// The action to be applied when the rule matches. Possible values are Allow, Block, Log, or Redirect.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// Is the managed rule override enabled or disabled. Defaults to false
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// One or more exclusion blocks as defined below.
+	Exclusion []RuleExclusionInitParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
+
+	// Identifier for the managed rule.
+	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
 }
 
 type OverrideRuleObservation struct {
@@ -343,8 +484,8 @@ type OverrideRuleObservation struct {
 type OverrideRuleParameters struct {
 
 	// The action to be applied when the rule matches. Possible values are Allow, Block, Log, or Redirect.
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Is the managed rule override enabled or disabled. Defaults to false
 	// +kubebuilder:validation:Optional
@@ -355,8 +496,20 @@ type OverrideRuleParameters struct {
 	Exclusion []RuleExclusionParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
 
 	// Identifier for the managed rule.
-	// +kubebuilder:validation:Required
-	RuleID *string `json:"ruleId" tf:"rule_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	RuleID *string `json:"ruleId,omitempty" tf:"rule_id,omitempty"`
+}
+
+type RuleExclusionInitParameters struct {
+
+	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+
+	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+
+	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
 }
 
 type RuleExclusionObservation struct {
@@ -374,22 +527,34 @@ type RuleExclusionObservation struct {
 type RuleExclusionParameters struct {
 
 	// The request variable to compare with. Possible values are Cookies, PostArgs, QueryString, RemoteAddr, RequestBody, RequestHeader, RequestMethod, RequestUri, or SocketAddr.
-	// +kubebuilder:validation:Required
-	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
+	// +kubebuilder:validation:Optional
+	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
 
 	// Comparison type to use for matching with the variable value. Possible values are Any, BeginsWith, Contains, EndsWith, Equal, GeoMatch, GreaterThan, GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual or RegEx.
-	// +kubebuilder:validation:Required
-	Operator *string `json:"operator" tf:"operator,omitempty"`
+	// +kubebuilder:validation:Optional
+	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Match against a specific key if the match_variable is QueryString, PostArgs, RequestHeader or Cookies.
-	// +kubebuilder:validation:Required
-	Selector *string `json:"selector" tf:"selector,omitempty"`
+	// +kubebuilder:validation:Optional
+	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
 }
 
 // FrontdoorFirewallPolicySpec defines the desired state of FrontdoorFirewallPolicy
 type FrontdoorFirewallPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FrontdoorFirewallPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider FrontdoorFirewallPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // FrontdoorFirewallPolicyStatus defines the observed state of FrontdoorFirewallPolicy.

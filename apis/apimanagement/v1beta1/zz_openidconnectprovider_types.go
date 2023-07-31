@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type OpenIDConnectProviderInitParameters struct {
+
+	// A description of this OpenID Connect Provider.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A user-friendly name for this OpenID Connect Provider.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The URI of the Metadata endpoint.
+	MetadataEndpoint *string `json:"metadataEndpoint,omitempty" tf:"metadata_endpoint,omitempty"`
+}
+
 type OpenIDConnectProviderObservation struct {
 
 	// The name of the API Management Service in which this OpenID Connect Provider should be created. Changing this forces a new resource to be created.
@@ -87,6 +99,18 @@ type OpenIDConnectProviderParameters struct {
 type OpenIDConnectProviderSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     OpenIDConnectProviderParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider OpenIDConnectProviderInitParameters `json:"initProvider,omitempty"`
 }
 
 // OpenIDConnectProviderStatus defines the observed state of OpenIDConnectProvider.
@@ -107,10 +131,10 @@ type OpenIDConnectProviderStatus struct {
 type OpenIDConnectProvider struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientIdSecretRef)",message="clientIdSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.clientSecretSecretRef)",message="clientSecretSecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.metadataEndpoint)",message="metadataEndpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientIdSecretRef)",message="clientIdSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientSecretSecretRef)",message="clientSecretSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.metadataEndpoint) || has(self.initProvider.metadataEndpoint)",message="metadataEndpoint is a required parameter"
 	Spec   OpenIDConnectProviderSpec   `json:"spec"`
 	Status OpenIDConnectProviderStatus `json:"status,omitempty"`
 }

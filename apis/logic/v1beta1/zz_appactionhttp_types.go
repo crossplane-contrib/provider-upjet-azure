@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppActionHTTPInitParameters struct {
+
+	// Specifies the HTTP Body that should be sent to the uri when this HTTP Action is triggered.
+	Body *string `json:"body,omitempty" tf:"body,omitempty"`
+
+	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
+	Headers map[string]*string `json:"headers,omitempty" tf:"headers,omitempty"`
+
+	// Specifies the HTTP Method which should be used for this HTTP Action. Possible values include DELETE, GET, PATCH, POST and PUT.
+	Method *string `json:"method,omitempty" tf:"method,omitempty"`
+
+	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
+	Queries map[string]*string `json:"queries,omitempty" tf:"queries,omitempty"`
+
+	// Specifies the place of the HTTP Action in the Logic App Workflow. If not specified, the HTTP Action is right after the Trigger. A run_after block is as defined below.
+	RunAfter []RunAfterInitParameters `json:"runAfter,omitempty" tf:"run_after,omitempty"`
+
+	// Specifies the URI which will be called when this HTTP Action is triggered.
+	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+}
+
 type AppActionHTTPObservation struct {
 
 	// Specifies the HTTP Body that should be sent to the uri when this HTTP Action is triggered.
@@ -81,6 +102,15 @@ type AppActionHTTPParameters struct {
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 }
 
+type RunAfterInitParameters struct {
+
+	// Specifies the name of the precedent HTTP Action.
+	ActionName *string `json:"actionName,omitempty" tf:"action_name,omitempty"`
+
+	// Specifies the expected result of the precedent HTTP Action, only after which the current HTTP Action will be triggered. Possible values include Succeeded, Failed, Skipped and TimedOut.
+	ActionResult *string `json:"actionResult,omitempty" tf:"action_result,omitempty"`
+}
+
 type RunAfterObservation struct {
 
 	// Specifies the name of the precedent HTTP Action.
@@ -93,18 +123,30 @@ type RunAfterObservation struct {
 type RunAfterParameters struct {
 
 	// Specifies the name of the precedent HTTP Action.
-	// +kubebuilder:validation:Required
-	ActionName *string `json:"actionName" tf:"action_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ActionName *string `json:"actionName,omitempty" tf:"action_name,omitempty"`
 
 	// Specifies the expected result of the precedent HTTP Action, only after which the current HTTP Action will be triggered. Possible values include Succeeded, Failed, Skipped and TimedOut.
-	// +kubebuilder:validation:Required
-	ActionResult *string `json:"actionResult" tf:"action_result,omitempty"`
+	// +kubebuilder:validation:Optional
+	ActionResult *string `json:"actionResult,omitempty" tf:"action_result,omitempty"`
 }
 
 // AppActionHTTPSpec defines the desired state of AppActionHTTP
 type AppActionHTTPSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppActionHTTPParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AppActionHTTPInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppActionHTTPStatus defines the observed state of AppActionHTTP.
@@ -125,8 +167,8 @@ type AppActionHTTPStatus struct {
 type AppActionHTTP struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.method)",message="method is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.uri)",message="uri is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.method) || has(self.initProvider.method)",message="method is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.uri) || has(self.initProvider.uri)",message="uri is a required parameter"
 	Spec   AppActionHTTPSpec   `json:"spec"`
 	Status AppActionHTTPStatus `json:"status,omitempty"`
 }

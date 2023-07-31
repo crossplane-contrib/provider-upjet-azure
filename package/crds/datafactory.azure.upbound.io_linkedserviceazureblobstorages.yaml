@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: linkedserviceazureblobstorages.datafactory.azure.upbound.io
 spec:
   group: datafactory.azure.upbound.io
@@ -60,7 +59,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -283,8 +282,6 @@ spec:
                           description: Specifies the secret name in Azure Key Vault
                             that stores the SAS token.
                           type: string
-                      required:
-                      - secretName
                       type: object
                     type: array
                   parameters:
@@ -430,8 +427,6 @@ spec:
                           description: Specifies the secret name in Azure Key Vault
                             that stores the Service Principal key.
                           type: string
-                      required:
-                      - secretName
                       type: object
                     type: array
                   storageKind:
@@ -448,21 +443,122 @@ spec:
                       with service_principal_id and service_principal_key.
                     type: boolean
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  additionalProperties:
+                    additionalProperties:
+                      type: string
+                    description: A map of additional properties to associate with
+                      the Data Factory Linked Service.
+                    type: object
+                  annotations:
+                    description: List of tags that can be used for describing the
+                      Data Factory Linked Service.
+                    items:
+                      type: string
+                    type: array
+                  connectionStringInsecure:
+                    description: The connection string sent insecurely. Conflicts
+                      with connection_string, sas_uri and service_endpoint.
+                    type: string
+                  description:
+                    description: The description for the Data Factory Linked Service.
+                    type: string
+                  integrationRuntimeName:
+                    description: The integration runtime reference to associate with
+                      the Data Factory Linked Service.
+                    type: string
+                  keyVaultSasToken:
+                    description: A key_vault_sas_token block as defined below. Use
+                      this argument to store SAS Token in an existing Key Vault. It
+                      needs an existing Key Vault Data Factory Linked Service. A sas_uri
+                      is required.
+                    items:
+                      properties:
+                        secretName:
+                          description: Specifies the secret name in Azure Key Vault
+                            that stores the SAS token.
+                          type: string
+                      type: object
+                    type: array
+                  parameters:
+                    additionalProperties:
+                      type: string
+                    description: A map of parameters to associate with the Data Factory
+                      Linked Service.
+                    type: object
+                  servicePrincipalId:
+                    description: The service principal id in which to authenticate
+                      against the Azure Blob Storage account.
+                    type: string
+                  servicePrincipalKey:
+                    description: The service principal key in which to authenticate
+                      against the AAzure Blob Storage account.
+                    type: string
+                  servicePrincipalLinkedKeyVaultKey:
+                    description: A service_principal_linked_key_vault_key block as
+                      defined below. Use this argument to store Service Principal
+                      key in an existing Key Vault. It needs an existing Key Vault
+                      Data Factory Linked Service.
+                    items:
+                      properties:
+                        secretName:
+                          description: Specifies the secret name in Azure Key Vault
+                            that stores the Service Principal key.
+                          type: string
+                      type: object
+                    type: array
+                  storageKind:
+                    description: Specify the kind of the storage account. Allowed
+                      values are Storage, StorageV2, BlobStorage and BlockBlobStorage.
+                    type: string
+                  tenantId:
+                    description: The tenant id or name in which to authenticate against
+                      the Azure Blob Storage account.
+                    type: string
+                  useManagedIdentity:
+                    description: Whether to use the Data Factory's managed identity
+                      to authenticate against the Azure Blob Storage account. Incompatible
+                      with service_principal_id and service_principal_key.
+                    type: boolean
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default

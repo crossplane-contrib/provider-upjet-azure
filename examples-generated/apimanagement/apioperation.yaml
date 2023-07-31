@@ -23,6 +23,3 @@ spec:
     response:
     - statusCode: 200
     urlTemplate: /users/{id}/delete
-
----
-

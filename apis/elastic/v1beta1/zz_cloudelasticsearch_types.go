@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CloudElasticsearchInitParameters struct {
+
+	// Specifies the Email Address which should be associated with this Elasticsearch account. Changing this forces a new Elasticsearch to be created.
+	ElasticCloudEmailAddress *string `json:"elasticCloudEmailAddress,omitempty" tf:"elastic_cloud_email_address,omitempty"`
+
+	// The Azure Region where the Elasticsearch resource should exist. Changing this forces a new Elasticsearch to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A logs block as defined below.
+	Logs []LogsInitParameters `json:"logs,omitempty" tf:"logs,omitempty"`
+
+	// Specifies if the Elasticsearch should have monitoring configured? Defaults to true. Changing this forces a new Elasticsearch to be created.
+	MonitoringEnabled *bool `json:"monitoringEnabled,omitempty" tf:"monitoring_enabled,omitempty"`
+
+	// Specifies the name of the SKU for this Elasticsearch. Changing this forces a new Elasticsearch to be created.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags which should be assigned to the Elasticsearch resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type CloudElasticsearchObservation struct {
 
 	// The ID of the Deployment within Elastic Cloud.
@@ -98,6 +119,18 @@ type CloudElasticsearchParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type FilteringTagInitParameters struct {
+
+	// Specifies the type of action which should be taken when the Tag matches the name and value. Possible values are Exclude and Include.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The name which should be used for this Elasticsearch resource. Changing this forces a new Elasticsearch to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the value of the Tag which should be filtered.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type FilteringTagObservation struct {
 
 	// Specifies the type of action which should be taken when the Tag matches the name and value. Possible values are Exclude and Include.
@@ -113,16 +146,31 @@ type FilteringTagObservation struct {
 type FilteringTagParameters struct {
 
 	// Specifies the type of action which should be taken when the Tag matches the name and value. Possible values are Exclude and Include.
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The name which should be used for this Elasticsearch resource. Changing this forces a new Elasticsearch to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the value of the Tag which should be filtered.
-	// +kubebuilder:validation:Required
-	Value *string `json:"value" tf:"value,omitempty"`
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type LogsInitParameters struct {
+
+	// A list of filtering_tag blocks as defined above.
+	FilteringTag []FilteringTagInitParameters `json:"filteringTag,omitempty" tf:"filtering_tag,omitempty"`
+
+	// Specifies if the Azure Activity Logs should be sent to the Elasticsearch cluster. Defaults to false.
+	SendActivityLogs *bool `json:"sendActivityLogs,omitempty" tf:"send_activity_logs,omitempty"`
+
+	// Specifies if the AzureAD Logs should be sent to the Elasticsearch cluster. Defaults to false.
+	SendAzureadLogs *bool `json:"sendAzureadLogs,omitempty" tf:"send_azuread_logs,omitempty"`
+
+	// Specifies if the Azure Subscription Logs should be sent to the Elasticsearch cluster. Defaults to false.
+	SendSubscriptionLogs *bool `json:"sendSubscriptionLogs,omitempty" tf:"send_subscription_logs,omitempty"`
 }
 
 type LogsObservation struct {
@@ -163,6 +211,18 @@ type LogsParameters struct {
 type CloudElasticsearchSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     CloudElasticsearchParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider CloudElasticsearchInitParameters `json:"initProvider,omitempty"`
 }
 
 // CloudElasticsearchStatus defines the observed state of CloudElasticsearch.
@@ -183,9 +243,9 @@ type CloudElasticsearchStatus struct {
 type CloudElasticsearch struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.elasticCloudEmailAddress)",message="elasticCloudEmailAddress is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.elasticCloudEmailAddress) || has(self.initProvider.elasticCloudEmailAddress)",message="elasticCloudEmailAddress is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
 	Spec   CloudElasticsearchSpec   `json:"spec"`
 	Status CloudElasticsearchStatus `json:"status,omitempty"`
 }

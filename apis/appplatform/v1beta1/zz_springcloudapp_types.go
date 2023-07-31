@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CustomPersistentDiskInitParameters struct {
+
+	// These are the mount options for a persistent disk.
+	MountOptions []*string `json:"mountOptions,omitempty" tf:"mount_options,omitempty"`
+
+	// The mount path of the persistent disk.
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+
+	// Indicates whether the persistent disk is a readOnly one.
+	ReadOnlyEnabled *bool `json:"readOnlyEnabled,omitempty" tf:"read_only_enabled,omitempty"`
+
+	// The share name of the Azure File share.
+	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
+
+	// The name of the Spring Cloud Storage.
+	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
+}
+
 type CustomPersistentDiskObservation struct {
 
 	// These are the mount options for a persistent disk.
@@ -38,20 +56,29 @@ type CustomPersistentDiskParameters struct {
 	MountOptions []*string `json:"mountOptions,omitempty" tf:"mount_options,omitempty"`
 
 	// The mount path of the persistent disk.
-	// +kubebuilder:validation:Required
-	MountPath *string `json:"mountPath" tf:"mount_path,omitempty"`
+	// +kubebuilder:validation:Optional
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 
 	// Indicates whether the persistent disk is a readOnly one.
 	// +kubebuilder:validation:Optional
 	ReadOnlyEnabled *bool `json:"readOnlyEnabled,omitempty" tf:"read_only_enabled,omitempty"`
 
 	// The share name of the Azure File share.
-	// +kubebuilder:validation:Required
-	ShareName *string `json:"shareName" tf:"share_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
 
 	// The name of the Spring Cloud Storage.
-	// +kubebuilder:validation:Required
-	StorageName *string `json:"storageName" tf:"storage_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Spring Cloud Application.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Spring Cloud Application. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
@@ -76,8 +103,26 @@ type IdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Spring Cloud Application. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IngressSettingsInitParameters struct {
+
+	// Specifies how ingress should communicate with this app backend service. Allowed values are GRPC and Default. Defaults to Default.
+	BackendProtocol *string `json:"backendProtocol,omitempty" tf:"backend_protocol,omitempty"`
+
+	// Specifies the ingress read time out in seconds. Defaults to 300.
+	ReadTimeoutInSeconds *float64 `json:"readTimeoutInSeconds,omitempty" tf:"read_timeout_in_seconds,omitempty"`
+
+	// Specifies the ingress send time out in seconds. Defaults to 60.
+	SendTimeoutInSeconds *float64 `json:"sendTimeoutInSeconds,omitempty" tf:"send_timeout_in_seconds,omitempty"`
+
+	// Specifies the type of the affinity, set this to Cookie to enable session affinity. Allowed values are Cookie and None. Defaults to None.
+	SessionAffinity *string `json:"sessionAffinity,omitempty" tf:"session_affinity,omitempty"`
+
+	// Specifies the time in seconds until the cookie expires.
+	SessionCookieMaxAge *float64 `json:"sessionCookieMaxAge,omitempty" tf:"session_cookie_max_age,omitempty"`
 }
 
 type IngressSettingsObservation struct {
@@ -121,6 +166,15 @@ type IngressSettingsParameters struct {
 	SessionCookieMaxAge *float64 `json:"sessionCookieMaxAge,omitempty" tf:"session_cookie_max_age,omitempty"`
 }
 
+type PersistentDiskInitParameters struct {
+
+	// Specifies the mount path of the persistent disk. Defaults to /persistent.
+	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+
+	// Specifies the size of the persistent disk in GB. Possible values are between 0 and 50.
+	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+}
+
 type PersistentDiskObservation struct {
 
 	// Specifies the mount path of the persistent disk. Defaults to /persistent.
@@ -137,8 +191,38 @@ type PersistentDiskParameters struct {
 	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
 
 	// Specifies the size of the persistent disk in GB. Possible values are between 0 and 50.
-	// +kubebuilder:validation:Required
-	SizeInGb *float64 `json:"sizeInGb" tf:"size_in_gb,omitempty"`
+	// +kubebuilder:validation:Optional
+	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+}
+
+type SpringCloudAppInitParameters struct {
+
+	// A JSON object that contains the addon configurations of the Spring Cloud Service.
+	AddonJSON *string `json:"addonJson,omitempty" tf:"addon_json,omitempty"`
+
+	// A custom_persistent_disk block as defined below.
+	CustomPersistentDisk []CustomPersistentDiskInitParameters `json:"customPersistentDisk,omitempty" tf:"custom_persistent_disk,omitempty"`
+
+	// Is only HTTPS allowed? Defaults to false.
+	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// An ingress_settings block as defined below.
+	IngressSettings []IngressSettingsInitParameters `json:"ingressSettings,omitempty" tf:"ingress_settings,omitempty"`
+
+	// Does the Spring Cloud Application have public endpoint? Defaults to false.
+	IsPublic *bool `json:"isPublic,omitempty" tf:"is_public,omitempty"`
+
+	// An persistent_disk block as defined below.
+	PersistentDisk []PersistentDiskInitParameters `json:"persistentDisk,omitempty" tf:"persistent_disk,omitempty"`
+
+	// Should the App in vnet injection instance exposes endpoint which could be accessed from Internet?
+	PublicEndpointEnabled *bool `json:"publicEndpointEnabled,omitempty" tf:"public_endpoint_enabled,omitempty"`
+
+	// Is End to End TLS Enabled? Defaults to false.
+	TLSEnabled *bool `json:"tlsEnabled,omitempty" tf:"tls_enabled,omitempty"`
 }
 
 type SpringCloudAppObservation struct {
@@ -255,6 +339,18 @@ type SpringCloudAppParameters struct {
 type SpringCloudAppSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SpringCloudAppParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SpringCloudAppInitParameters `json:"initProvider,omitempty"`
 }
 
 // SpringCloudAppStatus defines the observed state of SpringCloudApp.

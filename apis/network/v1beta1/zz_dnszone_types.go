@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DNSZoneInitParameters struct {
+
+	// An soa_record block as defined below. Changing this forces a new resource to be created.
+	SoaRecord []SoaRecordInitParameters `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type DNSZoneObservation struct {
 
 	// The DNS Zone ID.
@@ -61,6 +70,36 @@ type DNSZoneParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type SoaRecordInitParameters struct {
+
+	// The email contact for the SOA record.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// The expire time for the SOA record. Defaults to 2419200.
+	ExpireTime *float64 `json:"expireTime,omitempty" tf:"expire_time,omitempty"`
+
+	// The domain name of the authoritative name server for the SOA record.
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+
+	// The minimum Time To Live for the SOA record. By convention, it is used to determine the negative caching duration. Defaults to 300.
+	MinimumTTL *float64 `json:"minimumTtl,omitempty" tf:"minimum_ttl,omitempty"`
+
+	// The refresh time for the SOA record. Defaults to 3600.
+	RefreshTime *float64 `json:"refreshTime,omitempty" tf:"refresh_time,omitempty"`
+
+	// The retry time for the SOA record. Defaults to 300.
+	RetryTime *float64 `json:"retryTime,omitempty" tf:"retry_time,omitempty"`
+
+	// The serial number for the SOA record. Defaults to 1.
+	SerialNumber *float64 `json:"serialNumber,omitempty" tf:"serial_number,omitempty"`
+
+	// The Time To Live of the SOA Record in seconds. Defaults to 3600.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the Record Set.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type SoaRecordObservation struct {
 
 	// The email contact for the SOA record.
@@ -96,16 +135,16 @@ type SoaRecordObservation struct {
 type SoaRecordParameters struct {
 
 	// The email contact for the SOA record.
-	// +kubebuilder:validation:Required
-	Email *string `json:"email" tf:"email,omitempty"`
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// The expire time for the SOA record. Defaults to 2419200.
 	// +kubebuilder:validation:Optional
 	ExpireTime *float64 `json:"expireTime,omitempty" tf:"expire_time,omitempty"`
 
 	// The domain name of the authoritative name server for the SOA record.
-	// +kubebuilder:validation:Required
-	HostName *string `json:"hostName" tf:"host_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// The minimum Time To Live for the SOA record. By convention, it is used to determine the negative caching duration. Defaults to 300.
 	// +kubebuilder:validation:Optional
@@ -136,6 +175,18 @@ type SoaRecordParameters struct {
 type DNSZoneSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DNSZoneParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DNSZoneInitParameters `json:"initProvider,omitempty"`
 }
 
 // DNSZoneStatus defines the observed state of DNSZone.

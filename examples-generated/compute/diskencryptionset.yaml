@@ -150,6 +150,3 @@ spec:
     principalId: ${azurerm_disk_encryption_set.example.identity.0.principal_id}
     roleDefinitionName: Key Vault Crypto Service Encryption User
     scope: ${azurerm_key_vault.example.id}
-
----
-

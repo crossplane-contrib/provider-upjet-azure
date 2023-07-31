@@ -17,9 +17,9 @@ func (mg *PowerBIEmbedded) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this PowerBIEmbedded.
+func (mg *PowerBIEmbedded) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this PowerBIEmbedded.
@@ -55,9 +55,9 @@ func (mg *PowerBIEmbedded) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this PowerBIEmbedded.
-func (mg *PowerBIEmbedded) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this PowerBIEmbedded.
+func (mg *PowerBIEmbedded) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this PowerBIEmbedded.

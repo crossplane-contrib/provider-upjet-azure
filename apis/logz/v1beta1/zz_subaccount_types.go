@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SubAccountInitParameters struct {
+
+	// Whether the resource monitoring is enabled? Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// A mapping of tags which should be assigned to the logz Sub Account.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A user block as defined below. Changing this forces a new resource to be created.
+	User []SubAccountUserInitParameters `json:"user,omitempty" tf:"user,omitempty"`
+}
+
 type SubAccountObservation struct {
 
 	// Whether the resource monitoring is enabled? Defaults to true.
@@ -60,6 +72,21 @@ type SubAccountParameters struct {
 	User []SubAccountUserParameters `json:"user,omitempty" tf:"user,omitempty"`
 }
 
+type SubAccountUserInitParameters struct {
+
+	// Email of the user used by Logz for contacting them if needed. A valid email address consists of an email prefix and an email domain. The prefix and domain may contain only letters, numbers, underscores, periods and dashes. Changing this forces a new logz Sub Account to be created.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// First Name of the user. Possible values must be between 1 and 50 characters in length. Changing this forces a new logz Sub Account to be created.
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
+
+	// Last Name of the user. Possible values must be between 1 and 50 characters in length. Changing this forces a new logz Sub Account to be created.
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+
+	// Phone number of the user used by Logz for contacting them if needed. Possible values must be between 1 and 40 characters in length. Changing this forces a new logz Sub Account to be created.
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+}
+
 type SubAccountUserObservation struct {
 
 	// Email of the user used by Logz for contacting them if needed. A valid email address consists of an email prefix and an email domain. The prefix and domain may contain only letters, numbers, underscores, periods and dashes. Changing this forces a new logz Sub Account to be created.
@@ -78,26 +105,38 @@ type SubAccountUserObservation struct {
 type SubAccountUserParameters struct {
 
 	// Email of the user used by Logz for contacting them if needed. A valid email address consists of an email prefix and an email domain. The prefix and domain may contain only letters, numbers, underscores, periods and dashes. Changing this forces a new logz Sub Account to be created.
-	// +kubebuilder:validation:Required
-	Email *string `json:"email" tf:"email,omitempty"`
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// First Name of the user. Possible values must be between 1 and 50 characters in length. Changing this forces a new logz Sub Account to be created.
-	// +kubebuilder:validation:Required
-	FirstName *string `json:"firstName" tf:"first_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
 
 	// Last Name of the user. Possible values must be between 1 and 50 characters in length. Changing this forces a new logz Sub Account to be created.
-	// +kubebuilder:validation:Required
-	LastName *string `json:"lastName" tf:"last_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
 
 	// Phone number of the user used by Logz for contacting them if needed. Possible values must be between 1 and 40 characters in length. Changing this forces a new logz Sub Account to be created.
-	// +kubebuilder:validation:Required
-	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
+	// +kubebuilder:validation:Optional
+	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
 }
 
 // SubAccountSpec defines the desired state of SubAccount
 type SubAccountSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SubAccountParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SubAccountInitParameters `json:"initProvider,omitempty"`
 }
 
 // SubAccountStatus defines the observed state of SubAccount.
@@ -118,7 +157,7 @@ type SubAccountStatus struct {
 type SubAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.user)",message="user is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.user) || has(self.initProvider.user)",message="user is a required parameter"
 	Spec   SubAccountSpec   `json:"spec"`
 	Status SubAccountStatus `json:"status,omitempty"`
 }

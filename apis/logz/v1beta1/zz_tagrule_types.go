@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type TagRuleInitParameters struct {
+
+	// Whether AAD logs should be sent to the Monitor resource?
+	SendAADLogs *bool `json:"sendAadLogs,omitempty" tf:"send_aad_logs,omitempty"`
+
+	// Whether activity logs from Azure resources should be sent to the Monitor resource?
+	SendActivityLogs *bool `json:"sendActivityLogs,omitempty" tf:"send_activity_logs,omitempty"`
+
+	// Whether subscription logs should be sent to the Monitor resource?
+	SendSubscriptionLogs *bool `json:"sendSubscriptionLogs,omitempty" tf:"send_subscription_logs,omitempty"`
+
+	// One or more (up to 10) tag_filter blocks as defined below.
+	TagFilter []TagRuleTagFilterInitParameters `json:"tagFilter,omitempty" tf:"tag_filter,omitempty"`
+}
+
 type TagRuleObservation struct {
 
 	// The ID of the logz Tag Rule.
@@ -67,6 +82,18 @@ type TagRuleParameters struct {
 	TagFilter []TagRuleTagFilterParameters `json:"tagFilter,omitempty" tf:"tag_filter,omitempty"`
 }
 
+type TagRuleTagFilterInitParameters struct {
+
+	// The action for a filtering tag. Possible values are Include and Exclude is allowed. Note that the Exclude takes priority over the Include.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The name of this tag_filter.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of this tag_filter.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type TagRuleTagFilterObservation struct {
 
 	// The action for a filtering tag. Possible values are Include and Exclude is allowed. Note that the Exclude takes priority over the Include.
@@ -82,12 +109,12 @@ type TagRuleTagFilterObservation struct {
 type TagRuleTagFilterParameters struct {
 
 	// The action for a filtering tag. Possible values are Include and Exclude is allowed. Note that the Exclude takes priority over the Include.
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The name of this tag_filter.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of this tag_filter.
 	// +kubebuilder:validation:Optional
@@ -98,6 +125,18 @@ type TagRuleTagFilterParameters struct {
 type TagRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TagRuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider TagRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // TagRuleStatus defines the observed state of TagRule.

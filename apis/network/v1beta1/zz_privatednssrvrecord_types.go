@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type PrivateDNSSRVRecordInitParameters struct {
+
+	// One or more record blocks as defined below.
+	Record []PrivateDNSSRVRecordRecordInitParameters `json:"record,omitempty" tf:"record,omitempty"`
+
+	// The Time To Live (TTL) of the DNS record in seconds.
+	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type PrivateDNSSRVRecordObservation struct {
 
 	// The FQDN of the DNS SRV Record.
@@ -78,6 +90,21 @@ type PrivateDNSSRVRecordParameters struct {
 	ZoneNameSelector *v1.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
 }
 
+type PrivateDNSSRVRecordRecordInitParameters struct {
+
+	// The Port the service is listening on.
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The priority of the SRV record.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+
+	// The FQDN of the service.
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+
+	// The Weight of the SRV record.
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+}
+
 type PrivateDNSSRVRecordRecordObservation struct {
 
 	// The Port the service is listening on.
@@ -96,26 +123,38 @@ type PrivateDNSSRVRecordRecordObservation struct {
 type PrivateDNSSRVRecordRecordParameters struct {
 
 	// The Port the service is listening on.
-	// +kubebuilder:validation:Required
-	Port *float64 `json:"port" tf:"port,omitempty"`
+	// +kubebuilder:validation:Optional
+	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
 	// The priority of the SRV record.
-	// +kubebuilder:validation:Required
-	Priority *float64 `json:"priority" tf:"priority,omitempty"`
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The FQDN of the service.
-	// +kubebuilder:validation:Required
-	Target *string `json:"target" tf:"target,omitempty"`
+	// +kubebuilder:validation:Optional
+	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 
 	// The Weight of the SRV record.
-	// +kubebuilder:validation:Required
-	Weight *float64 `json:"weight" tf:"weight,omitempty"`
+	// +kubebuilder:validation:Optional
+	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }
 
 // PrivateDNSSRVRecordSpec defines the desired state of PrivateDNSSRVRecord
 type PrivateDNSSRVRecordSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PrivateDNSSRVRecordParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PrivateDNSSRVRecordInitParameters `json:"initProvider,omitempty"`
 }
 
 // PrivateDNSSRVRecordStatus defines the observed state of PrivateDNSSRVRecord.
@@ -136,8 +175,8 @@ type PrivateDNSSRVRecordStatus struct {
 type PrivateDNSSRVRecord struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.record)",message="record is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.ttl)",message="ttl is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.record) || has(self.initProvider.record)",message="record is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ttl) || has(self.initProvider.ttl)",message="ttl is a required parameter"
 	Spec   PrivateDNSSRVRecordSpec   `json:"spec"`
 	Status PrivateDNSSRVRecordStatus `json:"status,omitempty"`
 }

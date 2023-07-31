@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MSSQLDatabaseExtendedAuditingPolicyInitParameters struct {
+
+	// Whether to enable the extended auditing policy. Possible values are true and false. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Enable audit events to Azure Monitor? Defaults to true.
+	LogMonitoringEnabled *bool `json:"logMonitoringEnabled,omitempty" tf:"log_monitoring_enabled,omitempty"`
+
+	// The number of days to retain logs for in the storage account. Defaults to 0.
+	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
+
+	// Is storage_account_access_key value the storage's secondary key?
+	StorageAccountAccessKeyIsSecondary *bool `json:"storageAccountAccessKeyIsSecondary,omitempty" tf:"storage_account_access_key_is_secondary,omitempty"`
+}
+
 type MSSQLDatabaseExtendedAuditingPolicyObservation struct {
 
 	// The ID of the SQL database to set the extended auditing policy. Changing this forces a new resource to be created.
@@ -92,6 +107,18 @@ type MSSQLDatabaseExtendedAuditingPolicyParameters struct {
 type MSSQLDatabaseExtendedAuditingPolicySpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MSSQLDatabaseExtendedAuditingPolicyParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MSSQLDatabaseExtendedAuditingPolicyInitParameters `json:"initProvider,omitempty"`
 }
 
 // MSSQLDatabaseExtendedAuditingPolicyStatus defines the observed state of MSSQLDatabaseExtendedAuditingPolicy.

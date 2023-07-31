@@ -13,6 +13,9 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AccessPolicyInitParameters struct {
+}
+
 type AccessPolicyObservation struct {
 
 	// The object ID of an Application in Azure Active Directory.
@@ -40,6 +43,18 @@ type AccessPolicyObservation struct {
 type AccessPolicyParameters struct {
 }
 
+type ContactInitParameters struct {
+
+	// E-mail address of the contact.
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+
+	// Name of the contact.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Phone number of the contact.
+	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
+}
+
 type ContactObservation struct {
 
 	// E-mail address of the contact.
@@ -55,8 +70,8 @@ type ContactObservation struct {
 type ContactParameters struct {
 
 	// E-mail address of the contact.
-	// +kubebuilder:validation:Required
-	Email *string `json:"email" tf:"email,omitempty"`
+	// +kubebuilder:validation:Optional
+	Email *string `json:"email,omitempty" tf:"email,omitempty"`
 
 	// Name of the contact.
 	// +kubebuilder:validation:Optional
@@ -65,6 +80,21 @@ type ContactParameters struct {
 	// Phone number of the contact.
 	// +kubebuilder:validation:Optional
 	Phone *string `json:"phone,omitempty" tf:"phone,omitempty"`
+}
+
+type NetworkAclsInitParameters struct {
+
+	// Specifies which traffic can bypass the network rules. Possible values are AzureServices and None.
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+
+	// The Default Action to use when no rules match from ip_rules / virtual_network_subnet_ids. Possible values are Allow and Deny.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault.
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// One or more Subnet IDs which should be able to access this Key Vault.
+	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
 type NetworkAclsObservation struct {
@@ -85,12 +115,12 @@ type NetworkAclsObservation struct {
 type NetworkAclsParameters struct {
 
 	// Specifies which traffic can bypass the network rules. Possible values are AzureServices and None.
-	// +kubebuilder:validation:Required
-	Bypass *string `json:"bypass" tf:"bypass,omitempty"`
+	// +kubebuilder:validation:Optional
+	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
 	// The Default Action to use when no rules match from ip_rules / virtual_network_subnet_ids. Possible values are Allow and Deny.
-	// +kubebuilder:validation:Required
-	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
+	// +kubebuilder:validation:Optional
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault.
 	// +kubebuilder:validation:Optional
@@ -99,6 +129,48 @@ type NetworkAclsParameters struct {
 	// One or more Subnet IDs which should be able to access this Key Vault.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
+}
+
+type VaultInitParameters struct {
+
+	// One or more contact block as defined below.
+	Contact []ContactInitParameters `json:"contact,omitempty" tf:"contact,omitempty"`
+
+	// Boolean flag to specify whether Azure Key Vault uses Role Based Access Control (RBAC) for authorization of data actions.
+	EnableRbacAuthorization *bool `json:"enableRbacAuthorization,omitempty" tf:"enable_rbac_authorization,omitempty"`
+
+	// Boolean flag to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
+	EnabledForDeployment *bool `json:"enabledForDeployment,omitempty" tf:"enabled_for_deployment,omitempty"`
+
+	// Boolean flag to specify whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys.
+	EnabledForDiskEncryption *bool `json:"enabledForDiskEncryption,omitempty" tf:"enabled_for_disk_encryption,omitempty"`
+
+	// Boolean flag to specify whether Azure Resource Manager is permitted to retrieve secrets from the key vault.
+	EnabledForTemplateDeployment *bool `json:"enabledForTemplateDeployment,omitempty" tf:"enabled_for_template_deployment,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A network_acls block as defined below.
+	NetworkAcls []NetworkAclsInitParameters `json:"networkAcls,omitempty" tf:"network_acls,omitempty"`
+
+	// Whether public network access is allowed for this Key Vault. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Is Purge Protection enabled for this Key Vault?
+	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
+
+	// The Name of the SKU used for this Key Vault. Possible values are standard and premium.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// The number of days that items should be retained for once soft-deleted. This value can be between 7 and 90 (the default) days.
+	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type VaultObservation struct {
@@ -227,6 +299,18 @@ type VaultParameters struct {
 type VaultSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VaultParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VaultInitParameters `json:"initProvider,omitempty"`
 }
 
 // VaultStatus defines the observed state of Vault.
@@ -247,9 +331,9 @@ type VaultStatus struct {
 type Vault struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.tenantId)",message="tenantId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tenantId) || has(self.initProvider.tenantId)",message="tenantId is a required parameter"
 	Spec   VaultSpec   `json:"spec"`
 	Status VaultStatus `json:"status,omitempty"`
 }

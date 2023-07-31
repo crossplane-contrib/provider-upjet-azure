@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: functionappfunctions.web.azure.upbound.io
 spec:
   group: web.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -90,9 +89,6 @@ spec:
                             this forces a new resource to be created. The filename
                             of the file to be uploaded.
                           type: string
-                      required:
-                      - content
-                      - name
                       type: object
                     type: array
                   functionAppId:
@@ -189,21 +185,83 @@ spec:
                       the function.
                     type: string
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  configJson:
+                    description: The config for this Function in JSON format. The
+                      config for this Function in JSON format.
+                    type: string
+                  enabled:
+                    description: Should this function be enabled. Defaults to true.
+                      Should this function be enabled. Defaults to `true`.
+                    type: boolean
+                  file:
+                    description: A file block as detailed below. Changing this forces
+                      a new resource to be created.
+                    items:
+                      properties:
+                        content:
+                          description: The content of the file. Changing this forces
+                            a new resource to be created. The content of the file.
+                          type: string
+                        name:
+                          description: The filename of the file to be uploaded. Changing
+                            this forces a new resource to be created. The filename
+                            of the file to be uploaded.
+                          type: string
+                      type: object
+                    type: array
+                  language:
+                    description: The language the Function is written in. Possible
+                      values are CSharp, Custom, Java, Javascript, Python, PowerShell,
+                      and TypeScript. The language the Function is written in.
+                    type: string
+                  name:
+                    description: The name of the function. Changing this forces a
+                      new resource to be created. The name of the function.
+                    type: string
+                  testData:
+                    description: The test data for the function. The test data for
+                      the function.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -377,9 +435,13 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: configJson is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.configJson)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.configJson)
+                || has(self.initProvider.configJson)'
             - message: name is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
           status:
             description: FunctionAppFunctionStatus defines the observed state of FunctionAppFunction.
             properties:

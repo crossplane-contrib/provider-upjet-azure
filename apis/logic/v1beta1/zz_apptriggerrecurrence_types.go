@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppTriggerRecurrenceInitParameters struct {
+
+	// Specifies the Frequency at which this Trigger should be run. Possible values include Month, Week, Day, Hour, Minute and Second.
+	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+
+	// Specifies interval used for the Frequency, for example a value of 4 for interval and hour for frequency would run the Trigger every 4 hours.
+	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// A schedule block as specified below.
+	Schedule []AppTriggerRecurrenceScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// Specifies the start date and time for this trigger in RFC3339 format: 2000-01-02T03:04:05Z.
+	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+
+	// Specifies the time zone for this trigger. Supported time zone options are listed here
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
+}
+
 type AppTriggerRecurrenceObservation struct {
 
 	// Specifies the Frequency at which this Trigger should be run. Possible values include Month, Week, Day, Hour, Minute and Second.
@@ -74,6 +92,18 @@ type AppTriggerRecurrenceParameters struct {
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
+type AppTriggerRecurrenceScheduleInitParameters struct {
+
+	// Specifies a list of hours when the trigger should run. Valid values are between 0 and 23.
+	AtTheseHours []*float64 `json:"atTheseHours,omitempty" tf:"at_these_hours,omitempty"`
+
+	// Specifies a list of minutes when the trigger should run. Valid values are between 0 and 59.
+	AtTheseMinutes []*float64 `json:"atTheseMinutes,omitempty" tf:"at_these_minutes,omitempty"`
+
+	// Specifies a list of days when the trigger should run. Valid values include Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, and Sunday.
+	OnTheseDays []*string `json:"onTheseDays,omitempty" tf:"on_these_days,omitempty"`
+}
+
 type AppTriggerRecurrenceScheduleObservation struct {
 
 	// Specifies a list of hours when the trigger should run. Valid values are between 0 and 23.
@@ -105,6 +135,18 @@ type AppTriggerRecurrenceScheduleParameters struct {
 type AppTriggerRecurrenceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppTriggerRecurrenceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AppTriggerRecurrenceInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppTriggerRecurrenceStatus defines the observed state of AppTriggerRecurrence.
@@ -125,8 +167,8 @@ type AppTriggerRecurrenceStatus struct {
 type AppTriggerRecurrence struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.frequency)",message="frequency is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.interval)",message="interval is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frequency) || has(self.initProvider.frequency)",message="frequency is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.interval) || has(self.initProvider.interval)",message="interval is a required parameter"
 	Spec   AppTriggerRecurrenceSpec   `json:"spec"`
 	Status AppTriggerRecurrenceStatus `json:"status,omitempty"`
 }

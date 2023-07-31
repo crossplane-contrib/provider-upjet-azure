@@ -159,14 +159,6 @@ var skipList = []string{
 
 // GetProvider returns provider configuration
 func GetProvider() *tjconfig.Provider {
-	// "azure" group contains resources that actually do not have a specific
-	// group, e.g. ResourceGroup with APIVersion "azure.upbound.io/v1beta1".
-	// We need to include the controllers for this group into the base packages
-	// list to get their controllers packaged together with the config package
-	// controllers.
-	basePackages := tjconfig.DefaultBasePackages
-	basePackages.Controller = append(basePackages.Controller, "internal/controller/azure/resourcegroup", "internal/controller/azure/resourceproviderregistration", "internal/controller/azure/subscription")
-
 	pc := tjconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, providerMetadata,
 		tjconfig.WithShortName("azure"),
 		tjconfig.WithRootGroup("azure.upbound.io"),
@@ -178,8 +170,15 @@ func GetProvider() *tjconfig.Provider {
 		tjconfig.WithReferenceInjectors([]tjconfig.ReferenceInjector{reference.NewInjector(modulePath)}),
 		tjconfig.WithFeaturesPackage("internal/features"),
 		tjconfig.WithMainTemplate(hack.MainTemplate),
-		tjconfig.WithBasePackages(basePackages),
 	)
+	// "azure" group contains resources that actually do not have a specific
+	// group, e.g. ResourceGroup with APIVersion "azure.upbound.io/v1beta1".
+	// We need to include the controllers for this group into the base packages
+	// list to get their controllers packaged together with the config package
+	// controllers (provider family config package).
+	for _, c := range []string{"internal/controller/azure/resourcegroup", "internal/controller/azure/resourceproviderregistration", "internal/controller/azure/subscription"} {
+		pc.BasePackages.ControllerMap[c] = "config"
+	}
 
 	// API group overrides from Terraform import statements
 	for _, r := range pc.Resources {

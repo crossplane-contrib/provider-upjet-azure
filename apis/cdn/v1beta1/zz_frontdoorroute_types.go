@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CacheInitParameters struct {
+
+	// Is content compression enabled? Possible values are true or false. Defaults to false.
+	CompressionEnabled *bool `json:"compressionEnabled,omitempty" tf:"compression_enabled,omitempty"`
+
+	// A list of one or more Content types (formerly known as MIME types) to compress. Possible values include application/eot, application/font, application/font-sfnt, application/javascript, application/json, application/opentype, application/otf, application/pkcs7-mime, application/truetype, application/ttf, application/vnd.ms-fontobject, application/xhtml+xml, application/xml, application/xml+rss, application/x-font-opentype, application/x-font-truetype, application/x-font-ttf, application/x-httpd-cgi, application/x-mpegurl, application/x-opentype, application/x-otf, application/x-perl, application/x-ttf, application/x-javascript, font/eot, font/ttf, font/otf, font/opentype, image/svg+xml, text/css, text/csv, text/html, text/javascript, text/js, text/plain, text/richtext, text/tab-separated-values, text/xml, text/x-script, text/x-component or text/x-java-source.
+	ContentTypesToCompress []*string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty"`
+
+	// Defines how the Front Door Route will cache requests that include query strings. Possible values include IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings or UseQueryString. Defaults it IgnoreQueryString.
+	QueryStringCachingBehavior *string `json:"queryStringCachingBehavior,omitempty" tf:"query_string_caching_behavior,omitempty"`
+
+	// Query strings to include or ignore.
+	QueryStrings []*string `json:"queryStrings,omitempty" tf:"query_strings,omitempty"`
+}
+
 type CacheObservation struct {
 
 	// Is content compression enabled? Possible values are true or false. Defaults to false.
@@ -45,6 +60,33 @@ type CacheParameters struct {
 	// Query strings to include or ignore.
 	// +kubebuilder:validation:Optional
 	QueryStrings []*string `json:"queryStrings,omitempty" tf:"query_strings,omitempty"`
+}
+
+type FrontdoorRouteInitParameters struct {
+
+	// A cache block as defined below.
+	Cache []CacheInitParameters `json:"cache,omitempty" tf:"cache,omitempty"`
+
+	// A directory path on the Front Door Origin that can be used to retrieve content (e.g. contoso.cloudapp.net/originpath).
+	CdnFrontdoorOriginPath *string `json:"cdnFrontdoorOriginPath,omitempty" tf:"cdn_frontdoor_origin_path,omitempty"`
+
+	// Is this Front Door Route enabled? Possible values are true or false. Defaults to true.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The Protocol that will be use when forwarding traffic to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest.
+	ForwardingProtocol *string `json:"forwardingProtocol,omitempty" tf:"forwarding_protocol,omitempty"`
+
+	// Automatically redirect HTTP traffic to HTTPS traffic? Possible values are true or false. Defaults to true.
+	HTTPSRedirectEnabled *bool `json:"httpsRedirectEnabled,omitempty" tf:"https_redirect_enabled,omitempty"`
+
+	// Should this Front Door Route be linked to the default endpoint? Possible values include true or false. Defaults to true.
+	LinkToDefaultDomain *bool `json:"linkToDefaultDomain,omitempty" tf:"link_to_default_domain,omitempty"`
+
+	// The route patterns of the rule.
+	PatternsToMatch []*string `json:"patternsToMatch,omitempty" tf:"patterns_to_match,omitempty"`
+
+	// One or more Protocols supported by this Front Door Route. Possible values are Http or Https.
+	SupportedProtocols []*string `json:"supportedProtocols,omitempty" tf:"supported_protocols,omitempty"`
 }
 
 type FrontdoorRouteObservation struct {
@@ -201,6 +243,18 @@ type FrontdoorRouteParameters struct {
 type FrontdoorRouteSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FrontdoorRouteParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider FrontdoorRouteInitParameters `json:"initProvider,omitempty"`
 }
 
 // FrontdoorRouteStatus defines the observed state of FrontdoorRoute.
@@ -221,8 +275,8 @@ type FrontdoorRouteStatus struct {
 type FrontdoorRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.patternsToMatch)",message="patternsToMatch is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.supportedProtocols)",message="supportedProtocols is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.patternsToMatch) || has(self.initProvider.patternsToMatch)",message="patternsToMatch is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.supportedProtocols) || has(self.initProvider.supportedProtocols)",message="supportedProtocols is a required parameter"
 	Spec   FrontdoorRouteSpec   `json:"spec"`
 	Status FrontdoorRouteStatus `json:"status,omitempty"`
 }

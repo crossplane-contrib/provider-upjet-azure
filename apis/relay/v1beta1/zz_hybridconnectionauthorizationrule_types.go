@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HybridConnectionAuthorizationRuleInitParameters struct {
+
+	// Grants listen access to this Authorization Rule. Defaults to false.
+	Listen *bool `json:"listen,omitempty" tf:"listen,omitempty"`
+
+	// Grants manage access to this Authorization Rule. When this property is true - both listen and send must be set to true too. Defaults to false.
+	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
+
+	// Grants send access to this Authorization Rule. Defaults to false.
+	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
+}
+
 type HybridConnectionAuthorizationRuleObservation struct {
 
 	// Name of the Azure Relay Hybrid Connection for which this Azure Relay Hybrid Connection Authorization Rule will be created. Changing this forces a new Azure Relay Hybrid Connection Authorization Rule to be created.
@@ -96,6 +108,18 @@ type HybridConnectionAuthorizationRuleParameters struct {
 type HybridConnectionAuthorizationRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HybridConnectionAuthorizationRuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider HybridConnectionAuthorizationRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // HybridConnectionAuthorizationRuleStatus defines the observed state of HybridConnectionAuthorizationRule.

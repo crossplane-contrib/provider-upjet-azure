@@ -69,6 +69,16 @@ func (tr *ActiveDirectoryAdministrator) SetParameters(params map[string]any) err
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this ActiveDirectoryAdministrator
+func (tr *ActiveDirectoryAdministrator) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this ActiveDirectoryAdministrator using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ActiveDirectoryAdministrator) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *Configuration) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this Configuration
+func (tr *Configuration) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this Configuration using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *Database) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this Database
+func (tr *Database) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this Database using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Database) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *FirewallRule) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this FirewallRule
+func (tr *FirewallRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this FirewallRule using its observed tfState.
@@ -365,6 +405,16 @@ func (tr *FlexibleDatabase) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this FlexibleDatabase
+func (tr *FlexibleDatabase) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this FlexibleDatabase using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FlexibleDatabase) LateInitialize(attrs []byte) (bool, error) {
@@ -437,6 +487,16 @@ func (tr *FlexibleServer) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this FlexibleServer
+func (tr *FlexibleServer) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this FlexibleServer using its observed tfState.
@@ -513,6 +573,16 @@ func (tr *FlexibleServerConfiguration) SetParameters(params map[string]any) erro
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this FlexibleServerConfiguration
+func (tr *FlexibleServerConfiguration) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this FlexibleServerConfiguration using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *FlexibleServerConfiguration) LateInitialize(attrs []byte) (bool, error) {
@@ -585,6 +655,16 @@ func (tr *FlexibleServerFirewallRule) SetParameters(params map[string]any) error
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this FlexibleServerFirewallRule
+func (tr *FlexibleServerFirewallRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this FlexibleServerFirewallRule using its observed tfState.
@@ -661,6 +741,16 @@ func (tr *Server) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this Server
+func (tr *Server) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this Server using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Server) LateInitialize(attrs []byte) (bool, error) {
@@ -733,6 +823,16 @@ func (tr *VirtualNetworkRule) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this VirtualNetworkRule
+func (tr *VirtualNetworkRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this VirtualNetworkRule using its observed tfState.

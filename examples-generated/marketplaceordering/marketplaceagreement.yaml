@@ -11,6 +11,3 @@ spec:
     offer: waf
     plan: hourly
     publisher: barracudanetworks
-
----
-

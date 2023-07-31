@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: hpccachenfstargets.storagecache.azure.upbound.io
 spec:
   group: storagecache.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -171,9 +170,6 @@ spec:
                             to map to the namespace_path. Defaults to "", in which
                             case the whole nfs_export is exported.
                           type: string
-                      required:
-                      - namespacePath
-                      - nfsExport
                       type: object
                     type: array
                   resourceGroupName:
@@ -268,21 +264,82 @@ spec:
                       and WRITE_WORKLOAD_CLOUDWS.'
                     type: string
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  namespaceJunction:
+                    description: Can be specified multiple times to define multiple
+                      namespace_junction. Each namespace_juntion block supports fields
+                      documented below.
+                    items:
+                      properties:
+                        accessPolicyName:
+                          description: The name of the access policy applied to this
+                            target. Defaults to default.
+                          type: string
+                        namespacePath:
+                          description: The client-facing file path of this NFS target
+                            within the HPC Cache NFS Target.
+                          type: string
+                        nfsExport:
+                          description: The NFS export of this NFS target within the
+                            HPC Cache NFS Target.
+                          type: string
+                        targetPath:
+                          description: The relative subdirectory path from the nfs_export
+                            to map to the namespace_path. Defaults to "", in which
+                            case the whole nfs_export is exported.
+                          type: string
+                      type: object
+                    type: array
+                  targetHostName:
+                    description: The IP address or fully qualified domain name (FQDN)
+                      of the HPC Cache NFS target. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  usageModel:
+                    description: 'The type of usage of the HPC Cache NFS Target. Possible
+                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15,
+                      WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
+                      and WRITE_WORKLOAD_CLOUDWS.'
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -456,11 +513,17 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: namespaceJunction is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.namespaceJunction)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.namespaceJunction)
+                || has(self.initProvider.namespaceJunction)'
             - message: targetHostName is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetHostName)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.targetHostName)
+                || has(self.initProvider.targetHostName)'
             - message: usageModel is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.usageModel)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.usageModel)
+                || has(self.initProvider.usageModel)'
           status:
             description: HPCCacheNFSTargetStatus defines the observed state of HPCCacheNFSTarget.
             properties:

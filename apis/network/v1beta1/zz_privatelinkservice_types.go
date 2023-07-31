@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type NATIPConfigurationInitParameters struct {
+
+	// Specifies the name which should be used for the NAT IP Configuration. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Is this is the Primary IP Configuration? Changing this forces a new resource to be created.
+	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// Specifies a Private Static IP Address for this IP Configuration.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The version of the IP Protocol which should be used. At this time the only supported value is IPv4. Defaults to IPv4.
+	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
+}
+
 type NATIPConfigurationObservation struct {
 
 	// Specifies the name which should be used for the NAT IP Configuration. Changing this forces a new resource to be created.
@@ -34,12 +49,12 @@ type NATIPConfigurationObservation struct {
 type NATIPConfigurationParameters struct {
 
 	// Specifies the name which should be used for the NAT IP Configuration. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Is this is the Primary IP Configuration? Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	Primary *bool `json:"primary" tf:"primary,omitempty"`
+	// +kubebuilder:validation:Optional
+	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
 
 	// Specifies a Private Static IP Address for this IP Configuration.
 	// +kubebuilder:validation:Optional
@@ -62,6 +77,33 @@ type NATIPConfigurationParameters struct {
 	// Selector for a Subnet to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type PrivateLinkServiceInitParameters struct {
+
+	// A list of Subscription UUID/GUID's that will be automatically be able to use this Private Link Service.
+	AutoApprovalSubscriptionIds []*string `json:"autoApprovalSubscriptionIds,omitempty" tf:"auto_approval_subscription_ids,omitempty"`
+
+	// Should the Private Link Service support the Proxy Protocol?
+	EnableProxyProtocol *bool `json:"enableProxyProtocol,omitempty" tf:"enable_proxy_protocol,omitempty"`
+
+	// List of FQDNs allowed for the Private Link Service.
+	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
+
+	// A list of Frontend IP Configuration IDs from a Standard Load Balancer, where traffic from the Private Link Service should be routed. You can use Load Balancer Rules to direct this traffic to appropriate backend pools where your applications are running. Changing this forces a new resource to be created.
+	LoadBalancerFrontendIPConfigurationIds []*string `json:"loadBalancerFrontendIpConfigurationIds,omitempty" tf:"load_balancer_frontend_ip_configuration_ids,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// One or more (up to 8) nat_ip_configuration block as defined below.
+	NATIPConfiguration []NATIPConfigurationInitParameters `json:"natIpConfiguration,omitempty" tf:"nat_ip_configuration,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A list of Subscription UUID/GUID's that will be able to see this Private Link Service.
+	VisibilitySubscriptionIds []*string `json:"visibilitySubscriptionIds,omitempty" tf:"visibility_subscription_ids,omitempty"`
 }
 
 type PrivateLinkServiceObservation struct {
@@ -151,6 +193,18 @@ type PrivateLinkServiceParameters struct {
 type PrivateLinkServiceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     PrivateLinkServiceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider PrivateLinkServiceInitParameters `json:"initProvider,omitempty"`
 }
 
 // PrivateLinkServiceStatus defines the observed state of PrivateLinkService.
@@ -171,9 +225,9 @@ type PrivateLinkServiceStatus struct {
 type PrivateLinkService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.loadBalancerFrontendIpConfigurationIds)",message="loadBalancerFrontendIpConfigurationIds is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.natIpConfiguration)",message="natIpConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.loadBalancerFrontendIpConfigurationIds) || has(self.initProvider.loadBalancerFrontendIpConfigurationIds)",message="loadBalancerFrontendIpConfigurationIds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.natIpConfiguration) || has(self.initProvider.natIpConfiguration)",message="natIpConfiguration is a required parameter"
 	Spec   PrivateLinkServiceSpec   `json:"spec"`
 	Status PrivateLinkServiceStatus `json:"status,omitempty"`
 }

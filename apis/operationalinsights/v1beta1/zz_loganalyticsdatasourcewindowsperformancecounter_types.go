@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LogAnalyticsDataSourceWindowsPerformanceCounterInitParameters struct {
+
+	// The friendly name of the performance counter.
+	CounterName *string `json:"counterName,omitempty" tf:"counter_name,omitempty"`
+
+	// The name of the virtual machine instance to which the Windows Performance Counter DataSource be applied. Specify a * will apply to all instances.
+	InstanceName *string `json:"instanceName,omitempty" tf:"instance_name,omitempty"`
+
+	// The time of sample interval in seconds. Supports values between 10 and 2147483647.
+	IntervalSeconds *float64 `json:"intervalSeconds,omitempty" tf:"interval_seconds,omitempty"`
+
+	// The object name of the Log Analytics Windows Performance Counter DataSource.
+	ObjectName *string `json:"objectName,omitempty" tf:"object_name,omitempty"`
+}
+
 type LogAnalyticsDataSourceWindowsPerformanceCounterObservation struct {
 
 	// The friendly name of the performance counter.
@@ -86,6 +101,18 @@ type LogAnalyticsDataSourceWindowsPerformanceCounterParameters struct {
 type LogAnalyticsDataSourceWindowsPerformanceCounterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LogAnalyticsDataSourceWindowsPerformanceCounterParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LogAnalyticsDataSourceWindowsPerformanceCounterInitParameters `json:"initProvider,omitempty"`
 }
 
 // LogAnalyticsDataSourceWindowsPerformanceCounterStatus defines the observed state of LogAnalyticsDataSourceWindowsPerformanceCounter.
@@ -106,10 +133,10 @@ type LogAnalyticsDataSourceWindowsPerformanceCounterStatus struct {
 type LogAnalyticsDataSourceWindowsPerformanceCounter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.counterName)",message="counterName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.instanceName)",message="instanceName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.intervalSeconds)",message="intervalSeconds is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.objectName)",message="objectName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.counterName) || has(self.initProvider.counterName)",message="counterName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceName) || has(self.initProvider.instanceName)",message="instanceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.intervalSeconds) || has(self.initProvider.intervalSeconds)",message="intervalSeconds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.objectName) || has(self.initProvider.objectName)",message="objectName is a required parameter"
 	Spec   LogAnalyticsDataSourceWindowsPerformanceCounterSpec   `json:"spec"`
 	Status LogAnalyticsDataSourceWindowsPerformanceCounterStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,42 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ApplicationInsightsWebTestInitParameters struct {
+
+	// An XML configuration specification for a WebTest (see here for more information).
+	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
+
+	// Purpose/user defined descriptive test for this WebTest.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Is the test actively being monitored.
+	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// Interval in seconds between test runs for this WebTest. Valid options are 300, 600 and 900. Defaults to 300.
+	Frequency *float64 `json:"frequency,omitempty" tf:"frequency,omitempty"`
+
+	// A list of where to physically run the tests from to give global coverage for accessibility of your application.
+	GeoLocations []*string `json:"geoLocations,omitempty" tf:"geo_locations,omitempty"`
+
+	// The kind of web test that this web test watches. Choices are ping and multistep. Changing this forces a new resource to be created.
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. It needs to correlate with location of parent resource (azurerm_application_insights).
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the Application Insights WebTest. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Allow for retries should this WebTest fail.
+	RetryEnabled *bool `json:"retryEnabled,omitempty" tf:"retry_enabled,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Seconds until this WebTest will timeout and fail. Default is 30.
+	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
 type ApplicationInsightsWebTestObservation struct {
 
 	// The ID of the Application Insights component on which the WebTest operates. Changing this forces a new resource to be created.
@@ -137,6 +173,18 @@ type ApplicationInsightsWebTestParameters struct {
 type ApplicationInsightsWebTestSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ApplicationInsightsWebTestParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ApplicationInsightsWebTestInitParameters `json:"initProvider,omitempty"`
 }
 
 // ApplicationInsightsWebTestStatus defines the observed state of ApplicationInsightsWebTest.
@@ -157,11 +205,11 @@ type ApplicationInsightsWebTestStatus struct {
 type ApplicationInsightsWebTest struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.configuration)",message="configuration is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.geoLocations)",message="geoLocations is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.kind)",message="kind is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.configuration) || has(self.initProvider.configuration)",message="configuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.geoLocations) || has(self.initProvider.geoLocations)",message="geoLocations is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.kind) || has(self.initProvider.kind)",message="kind is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
 	Spec   ApplicationInsightsWebTestSpec   `json:"spec"`
 	Status ApplicationInsightsWebTestStatus `json:"status,omitempty"`
 }

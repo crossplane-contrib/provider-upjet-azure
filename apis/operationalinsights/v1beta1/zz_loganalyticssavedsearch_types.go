@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LogAnalyticsSavedSearchInitParameters struct {
+
+	// The category that the Saved Search will be listed under. Changing this forces a new resource to be created.
+	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+
+	// The name that Saved Search will be displayed as. Changing this forces a new resource to be created.
+	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
+
+	// The function alias if the query serves as a function. Changing this forces a new resource to be created.
+	FunctionAlias *string `json:"functionAlias,omitempty" tf:"function_alias,omitempty"`
+
+	// The function parameters if the query serves as a function. Changing this forces a new resource to be created.
+	FunctionParameters []*string `json:"functionParameters,omitempty" tf:"function_parameters,omitempty"`
+
+	// The query expression for the saved search. Changing this forces a new resource to be created.
+	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+
+	// A mapping of tags which should be assigned to the Logs Analytics Saved Search. Changing this forces a new resource to be created.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type LogAnalyticsSavedSearchObservation struct {
 
 	// The category that the Saved Search will be listed under. Changing this forces a new resource to be created.
@@ -85,6 +106,18 @@ type LogAnalyticsSavedSearchParameters struct {
 type LogAnalyticsSavedSearchSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LogAnalyticsSavedSearchParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LogAnalyticsSavedSearchInitParameters `json:"initProvider,omitempty"`
 }
 
 // LogAnalyticsSavedSearchStatus defines the observed state of LogAnalyticsSavedSearch.
@@ -105,9 +138,9 @@ type LogAnalyticsSavedSearchStatus struct {
 type LogAnalyticsSavedSearch struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.category)",message="category is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.displayName)",message="displayName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.query)",message="query is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.category) || has(self.initProvider.category)",message="category is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.query) || has(self.initProvider.query)",message="query is a required parameter"
 	Spec   LogAnalyticsSavedSearchSpec   `json:"spec"`
 	Status LogAnalyticsSavedSearchStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,13 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type HealthcareMedtechServiceIdentityInitParameters struct {
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Healthcare Med Tech Service. Possible values are SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type HealthcareMedtechServiceIdentityObservation struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
@@ -32,8 +39,23 @@ type HealthcareMedtechServiceIdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Healthcare Med Tech Service. Possible values are SystemAssigned.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type HealthcareMedtechServiceInitParameters struct {
+
+	// Specifies the Device Mappings of the Med Tech Service.
+	DeviceMappingJSON *string `json:"deviceMappingJson,omitempty" tf:"device_mapping_json,omitempty"`
+
+	// An identity block as defined below.
+	Identity []HealthcareMedtechServiceIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Specifies the Azure Region where the Healthcare Med Tech Service should be created. Changing this forces a new Healthcare Med Tech Service to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A mapping of tags to assign to the Healthcare Med Tech Service.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type HealthcareMedtechServiceObservation struct {
@@ -142,6 +164,18 @@ type HealthcareMedtechServiceParameters struct {
 type HealthcareMedtechServiceSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     HealthcareMedtechServiceParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider HealthcareMedtechServiceInitParameters `json:"initProvider,omitempty"`
 }
 
 // HealthcareMedtechServiceStatus defines the observed state of HealthcareMedtechService.
@@ -162,8 +196,8 @@ type HealthcareMedtechServiceStatus struct {
 type HealthcareMedtechService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.deviceMappingJson)",message="deviceMappingJson is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deviceMappingJson) || has(self.initProvider.deviceMappingJson)",message="deviceMappingJson is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   HealthcareMedtechServiceSpec   `json:"spec"`
 	Status HealthcareMedtechServiceStatus `json:"status,omitempty"`
 }

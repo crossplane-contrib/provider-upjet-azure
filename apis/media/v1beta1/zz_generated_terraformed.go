@@ -69,6 +69,16 @@ func (tr *Asset) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this Asset
+func (tr *Asset) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this Asset using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Asset) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *AssetFilter) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this AssetFilter
+func (tr *AssetFilter) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this AssetFilter using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *ContentKeyPolicy) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this ContentKeyPolicy
+func (tr *ContentKeyPolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this ContentKeyPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ContentKeyPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *Job) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this Job
+func (tr *Job) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this Job using its observed tfState.
@@ -365,6 +405,16 @@ func (tr *LiveEvent) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this LiveEvent
+func (tr *LiveEvent) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this LiveEvent using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *LiveEvent) LateInitialize(attrs []byte) (bool, error) {
@@ -437,6 +487,16 @@ func (tr *LiveEventOutput) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this LiveEventOutput
+func (tr *LiveEventOutput) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this LiveEventOutput using its observed tfState.
@@ -513,6 +573,16 @@ func (tr *ServicesAccount) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this ServicesAccount
+func (tr *ServicesAccount) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this ServicesAccount using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ServicesAccount) LateInitialize(attrs []byte) (bool, error) {
@@ -585,6 +655,16 @@ func (tr *ServicesAccountFilter) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this ServicesAccountFilter
+func (tr *ServicesAccountFilter) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this ServicesAccountFilter using its observed tfState.
@@ -661,6 +741,16 @@ func (tr *StreamingEndpoint) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this StreamingEndpoint
+func (tr *StreamingEndpoint) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this StreamingEndpoint using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *StreamingEndpoint) LateInitialize(attrs []byte) (bool, error) {
@@ -733,6 +823,16 @@ func (tr *StreamingLocator) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this StreamingLocator
+func (tr *StreamingLocator) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this StreamingLocator using its observed tfState.
@@ -809,6 +909,16 @@ func (tr *StreamingPolicy) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this StreamingPolicy
+func (tr *StreamingPolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this StreamingPolicy using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *StreamingPolicy) LateInitialize(attrs []byte) (bool, error) {
@@ -881,6 +991,16 @@ func (tr *Transform) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this Transform
+func (tr *Transform) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this Transform using its observed tfState.

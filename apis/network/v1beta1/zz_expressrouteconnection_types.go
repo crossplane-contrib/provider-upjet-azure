@@ -13,6 +13,24 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ExpressRouteConnectionInitParameters struct {
+
+	// The authorization key to establish the Express Route Connection.
+	AuthorizationKey *string `json:"authorizationKey,omitempty" tf:"authorization_key,omitempty"`
+
+	// Is Internet security enabled for this Express Route Connection?
+	EnableInternetSecurity *bool `json:"enableInternetSecurity,omitempty" tf:"enable_internet_security,omitempty"`
+
+	// Specified whether Fast Path is enabled for Virtual Wan Firewall Hub. Defaults to false.
+	ExpressRouteGatewayBypassEnabled *bool `json:"expressRouteGatewayBypassEnabled,omitempty" tf:"express_route_gateway_bypass_enabled,omitempty"`
+
+	// A routing block as defined below.
+	Routing []RoutingInitParameters `json:"routing,omitempty" tf:"routing,omitempty"`
+
+	// The routing weight associated to the Express Route Connection. Possible value is between 0 and 32000. Defaults to 0.
+	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
+}
+
 type ExpressRouteConnectionObservation struct {
 
 	// The authorization key to establish the Express Route Connection.
@@ -91,6 +109,15 @@ type ExpressRouteConnectionParameters struct {
 	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
 }
 
+type PropagatedRouteTableInitParameters struct {
+
+	// The list of labels to logically group route tables.
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// A list of IDs of the Virtual Hub Route Table to propagate routes from Express Route Connection to the route table.
+	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
+}
+
 type PropagatedRouteTableObservation struct {
 
 	// The list of labels to logically group route tables.
@@ -109,6 +136,21 @@ type PropagatedRouteTableParameters struct {
 	// A list of IDs of the Virtual Hub Route Table to propagate routes from Express Route Connection to the route table.
 	// +kubebuilder:validation:Optional
 	RouteTableIds []*string `json:"routeTableIds,omitempty" tf:"route_table_ids,omitempty"`
+}
+
+type RoutingInitParameters struct {
+
+	// The ID of the Virtual Hub Route Table associated with this Express Route Connection.
+	AssociatedRouteTableID *string `json:"associatedRouteTableId,omitempty" tf:"associated_route_table_id,omitempty"`
+
+	// The ID of the Route Map associated with this Express Route Connection for inbound routes.
+	InboundRouteMapID *string `json:"inboundRouteMapId,omitempty" tf:"inbound_route_map_id,omitempty"`
+
+	// The ID of the Route Map associated with this Express Route Connection for outbound routes.
+	OutboundRouteMapID *string `json:"outboundRouteMapId,omitempty" tf:"outbound_route_map_id,omitempty"`
+
+	// A propagated_route_table block as defined below.
+	PropagatedRouteTable []PropagatedRouteTableInitParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
 }
 
 type RoutingObservation struct {
@@ -149,6 +191,18 @@ type RoutingParameters struct {
 type ExpressRouteConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ExpressRouteConnectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ExpressRouteConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // ExpressRouteConnectionStatus defines the observed state of ExpressRouteConnection.

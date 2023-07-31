@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IdentityInitParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Redis Cluster.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Redis Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type IdentityObservation struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Redis Cluster.
@@ -35,8 +44,20 @@ type IdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Redis Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type PatchScheduleInitParameters struct {
+
+	// the Weekday name - possible values include Monday, Tuesday, Wednesday etc.
+	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
+
+	// The ISO 8601 timespan which specifies the amount of time the Redis Cache can be updated. Defaults to PT5H.
+	MaintenanceWindow *string `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
+
+	// the Start Hour for maintenance in UTC - possible values range from 0 - 23.
+	StartHourUtc *float64 `json:"startHourUtc,omitempty" tf:"start_hour_utc,omitempty"`
 }
 
 type PatchScheduleObservation struct {
@@ -54,8 +75,8 @@ type PatchScheduleObservation struct {
 type PatchScheduleParameters struct {
 
 	// the Weekday name - possible values include Monday, Tuesday, Wednesday etc.
-	// +kubebuilder:validation:Required
-	DayOfWeek *string `json:"dayOfWeek" tf:"day_of_week,omitempty"`
+	// +kubebuilder:validation:Optional
+	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
 	// The ISO 8601 timespan which specifies the amount of time the Redis Cache can be updated. Defaults to PT5H.
 	// +kubebuilder:validation:Optional
@@ -64,6 +85,63 @@ type PatchScheduleParameters struct {
 	// the Start Hour for maintenance in UTC - possible values range from 0 - 23.
 	// +kubebuilder:validation:Optional
 	StartHourUtc *float64 `json:"startHourUtc,omitempty" tf:"start_hour_utc,omitempty"`
+}
+
+type RedisCacheInitParameters struct {
+
+	// The size of the Redis cache to deploy. Valid values for a SKU family of C (Basic/Standard) are 0, 1, 2, 3, 4, 5, 6, and for P (Premium) family are 1, 2, 3, 4, 5.
+	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+
+	// Enable the non-SSL port (6379) - disabled by default.
+	EnableNonSSLPort *bool `json:"enableNonSslPort,omitempty" tf:"enable_non_ssl_port,omitempty"`
+
+	// The SKU family/pricing group to use. Valid values are C (for Basic/Standard SKU family) and P (for Premium)
+	Family *string `json:"family,omitempty" tf:"family,omitempty"`
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The location of the resource group. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.0.
+	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
+	// A list of patch_schedule blocks as defined below.
+	PatchSchedule []PatchScheduleInitParameters `json:"patchSchedule,omitempty" tf:"patch_schedule,omitempty"`
+
+	// The Static IP Address to assign to the Redis Cache when hosted inside the Virtual Network. This argument implies the use of subnet_id. Changing this forces a new resource to be created.
+	PrivateStaticIPAddress *string `json:"privateStaticIpAddress,omitempty" tf:"private_static_ip_address,omitempty"`
+
+	// Whether or not public network access is allowed for this Redis Cache. true means this resource could be accessed by both public and private endpoint. false means only private endpoint access is allowed. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// A redis_configuration as defined below - with some limitations by SKU - defaults/details are shown below.
+	RedisConfiguration []RedisConfigurationInitParameters `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
+
+	// Redis version. Only major version needed. Valid values: 4, 6.
+	RedisVersion *string `json:"redisVersion,omitempty" tf:"redis_version,omitempty"`
+
+	// Amount of replicas to create per master for this Redis Cache.
+	ReplicasPerMaster *float64 `json:"replicasPerMaster,omitempty" tf:"replicas_per_master,omitempty"`
+
+	// Amount of replicas to create per primary for this Redis Cache. If both replicas_per_primary and replicas_per_master are set, they need to be equal.
+	ReplicasPerPrimary *float64 `json:"replicasPerPrimary,omitempty" tf:"replicas_per_primary,omitempty"`
+
+	// Only available when using the Premium SKU The number of Shards to create on the Redis Cluster.
+	ShardCount *float64 `json:"shardCount,omitempty" tf:"shard_count,omitempty"`
+
+	// The SKU of Redis to use. Possible values are Basic, Standard and Premium.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// A mapping of tenant settings to assign to the resource.
+	TenantSettings map[string]*string `json:"tenantSettings,omitempty" tf:"tenant_settings,omitempty"`
+
+	// Specifies a list of Availability Zones in which this Redis Cache should be located. Changing this forces a new Redis Cache to be created.
+	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type RedisCacheObservation struct {
@@ -243,6 +321,39 @@ type RedisCacheParameters struct {
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
+type RedisConfigurationInitParameters struct {
+
+	// Enable or disable AOF persistence for this Redis Cache. Defaults to false.
+	AofBackupEnabled *bool `json:"aofBackupEnabled,omitempty" tf:"aof_backup_enabled,omitempty"`
+
+	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
+	EnableAuthentication *bool `json:"enableAuthentication,omitempty" tf:"enable_authentication,omitempty"`
+
+	// Value in megabytes reserved to accommodate for memory fragmentation. Defaults are shown below.
+	MaxfragmentationmemoryReserved *float64 `json:"maxfragmentationmemoryReserved,omitempty" tf:"maxfragmentationmemory_reserved,omitempty"`
+
+	// The max-memory delta for this Redis instance. Defaults are shown below.
+	MaxmemoryDelta *float64 `json:"maxmemoryDelta,omitempty" tf:"maxmemory_delta,omitempty"`
+
+	// How Redis will select what to remove when maxmemory is reached. Defaults are shown below. Defaults to volatile-lru.
+	MaxmemoryPolicy *string `json:"maxmemoryPolicy,omitempty" tf:"maxmemory_policy,omitempty"`
+
+	// Value in megabytes reserved for non-cache usage e.g. failover. Defaults are shown below.
+	MaxmemoryReserved *float64 `json:"maxmemoryReserved,omitempty" tf:"maxmemory_reserved,omitempty"`
+
+	// Keyspace notifications allows clients to subscribe to Pub/Sub channels in order to receive events affecting the Redis data set in some way. Reference
+	NotifyKeySpaceEvents *string `json:"notifyKeyspaceEvents,omitempty" tf:"notify_keyspace_events,omitempty"`
+
+	// Is Backup Enabled? Only supported on Premium SKUs. Defaults to false.
+	RdbBackupEnabled *bool `json:"rdbBackupEnabled,omitempty" tf:"rdb_backup_enabled,omitempty"`
+
+	// The Backup Frequency in Minutes. Only supported on Premium SKUs. Possible values are: 15, 30, 60, 360, 720 and 1440.
+	RdbBackupFrequency *float64 `json:"rdbBackupFrequency,omitempty" tf:"rdb_backup_frequency,omitempty"`
+
+	// The maximum number of snapshots to create as a backup. Only supported for Premium SKUs.
+	RdbBackupMaxSnapshotCount *float64 `json:"rdbBackupMaxSnapshotCount,omitempty" tf:"rdb_backup_max_snapshot_count,omitempty"`
+}
+
 type RedisConfigurationObservation struct {
 
 	// Enable or disable AOF persistence for this Redis Cache. Defaults to false.
@@ -338,6 +449,18 @@ type RedisConfigurationParameters struct {
 type RedisCacheSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     RedisCacheParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider RedisCacheInitParameters `json:"initProvider,omitempty"`
 }
 
 // RedisCacheStatus defines the observed state of RedisCache.
@@ -358,11 +481,11 @@ type RedisCacheStatus struct {
 type RedisCache struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.capacity)",message="capacity is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.family)",message="family is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.redisVersion)",message="redisVersion is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.capacity) || has(self.initProvider.capacity)",message="capacity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.family) || has(self.initProvider.family)",message="family is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.redisVersion) || has(self.initProvider.redisVersion)",message="redisVersion is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
 	Spec   RedisCacheSpec   `json:"spec"`
 	Status RedisCacheStatus `json:"status,omitempty"`
 }

@@ -49,6 +49,7 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		Named(name).
 		WithOptions(o.ForControllerRuntime()).
-		For(&v1beta1.PrivateDNSTXTRecord{}).
+		WithEventFilter(xpresource.DesiredStateChanged()).
+		Watches(&v1beta1.PrivateDNSTXTRecord{}, o.EventHandler).
 		Complete(ratelimiter.NewReconciler(name, r, o.GlobalRateLimiter))
 }

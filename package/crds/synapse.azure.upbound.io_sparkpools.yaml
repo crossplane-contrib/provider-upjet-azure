@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: sparkpools.synapse.azure.upbound.io
 spec:
   group: synapse.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -76,8 +75,6 @@ spec:
                           description: Number of minutes of idle time before the Spark
                             Pool is automatically paused. Must be between 5 and 10080.
                           type: number
-                      required:
-                      - delayInMinutes
                       type: object
                     type: array
                   autoScale:
@@ -93,9 +90,6 @@ spec:
                           description: The minimum number of nodes the Spark Pool
                             can support. Must be between 3 and 200.
                           type: number
-                      required:
-                      - maxNodeCount
-                      - minNodeCount
                       type: object
                     type: array
                   cacheSize:
@@ -119,9 +113,6 @@ spec:
                         filename:
                           description: The name of the library requirements file.
                           type: string
-                      required:
-                      - content
-                      - filename
                       type: object
                     type: array
                   maxExecutors:
@@ -159,9 +150,6 @@ spec:
                           description: The name of the file where the spark configuration
                             content will be stored.
                           type: string
-                      required:
-                      - content
-                      - filename
                       type: object
                     type: array
                   sparkEventsFolder:
@@ -260,21 +248,148 @@ spec:
                       Synapse Spark Pool.
                     type: object
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  autoPause:
+                    description: An auto_pause block as defined below.
+                    items:
+                      properties:
+                        delayInMinutes:
+                          description: Number of minutes of idle time before the Spark
+                            Pool is automatically paused. Must be between 5 and 10080.
+                          type: number
+                      type: object
+                    type: array
+                  autoScale:
+                    description: An auto_scale block as defined below. Exactly one
+                      of node_count or auto_scale must be specified.
+                    items:
+                      properties:
+                        maxNodeCount:
+                          description: The maximum number of nodes the Spark Pool
+                            can support. Must be between 3 and 200.
+                          type: number
+                        minNodeCount:
+                          description: The minimum number of nodes the Spark Pool
+                            can support. Must be between 3 and 200.
+                          type: number
+                      type: object
+                    type: array
+                  cacheSize:
+                    description: The cache size in the Spark Pool.
+                    type: number
+                  computeIsolationEnabled:
+                    description: Indicates whether compute isolation is enabled or
+                      not. Defaults to false.
+                    type: boolean
+                  dynamicExecutorAllocationEnabled:
+                    description: Indicates whether Dynamic Executor Allocation is
+                      enabled or not. Defaults to false.
+                    type: boolean
+                  libraryRequirement:
+                    description: A library_requirement block as defined below.
+                    items:
+                      properties:
+                        content:
+                          description: The content of library requirements.
+                          type: string
+                        filename:
+                          description: The name of the library requirements file.
+                          type: string
+                      type: object
+                    type: array
+                  maxExecutors:
+                    description: The maximum number of executors allocated only when
+                      dynamic_executor_allocation_enabled set to true.
+                    type: number
+                  minExecutors:
+                    description: The minimum number of executors allocated only when
+                      dynamic_executor_allocation_enabled set to true.
+                    type: number
+                  nodeCount:
+                    description: The number of nodes in the Spark Pool. Exactly one
+                      of node_count or auto_scale must be specified.
+                    type: number
+                  nodeSize:
+                    description: The level of node in the Spark Pool. Possible values
+                      are Small, Medium, Large, None, XLarge, XXLarge and XXXLarge.
+                    type: string
+                  nodeSizeFamily:
+                    description: The kind of nodes that the Spark Pool provides. Possible
+                      values are MemoryOptimized and None.
+                    type: string
+                  sessionLevelPackagesEnabled:
+                    description: Indicates whether session level packages are enabled
+                      or not. Defaults to false.
+                    type: boolean
+                  sparkConfig:
+                    description: A spark_config block as defined below.
+                    items:
+                      properties:
+                        content:
+                          description: The contents of a spark configuration.
+                          type: string
+                        filename:
+                          description: The name of the file where the spark configuration
+                            content will be stored.
+                          type: string
+                      type: object
+                    type: array
+                  sparkEventsFolder:
+                    description: The Spark events folder. Defaults to /events.
+                    type: string
+                  sparkLogFolder:
+                    description: The default folder where Spark logs will be written.
+                      Defaults to /logs.
+                    type: string
+                  sparkVersion:
+                    description: The Apache Spark version. Possible values are 2.4
+                      , 3.1 , 3.2 and 3.3. Defaults to 2.4.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Synapse Spark Pool.
+                    type: object
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -448,9 +563,13 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: nodeSize is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeSize)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeSize)
+                || has(self.initProvider.nodeSize)'
             - message: nodeSizeFamily is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.nodeSizeFamily)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.nodeSizeFamily)
+                || has(self.initProvider.nodeSizeFamily)'
           status:
             description: SparkPoolStatus defines the observed state of SparkPool.
             properties:

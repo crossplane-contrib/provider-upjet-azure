@@ -13,6 +13,45 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LinkedServiceSQLServerInitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Linked Service SQL Server.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service SQL Server.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The connection string in which to authenticate with the SQL Server. Exactly one of either connection_string or key_vault_connection_string is required.
+	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+
+	// The description for the Data Factory Linked Service SQL Server.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service SQL Server.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A key_vault_connection_string block as defined below. Use this argument to store SQL Server connection string in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service. Exactly one of either connection_string or key_vault_connection_string is required.
+	KeyVaultConnectionString []LinkedServiceSQLServerKeyVaultConnectionStringInitParameters `json:"keyVaultConnectionString,omitempty" tf:"key_vault_connection_string,omitempty"`
+
+	// A key_vault_password block as defined below. Use this argument to store SQL Server password in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service.
+	KeyVaultPassword []LinkedServiceSQLServerKeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service SQL Server.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The on-premises Windows authentication user name.
+	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
+}
+
+type LinkedServiceSQLServerKeyVaultConnectionStringInitParameters struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Specifies the secret name in Azure Key Vault that stores SQL Server connection string.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+}
+
 type LinkedServiceSQLServerKeyVaultConnectionStringObservation struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
@@ -25,12 +64,18 @@ type LinkedServiceSQLServerKeyVaultConnectionStringObservation struct {
 type LinkedServiceSQLServerKeyVaultConnectionStringParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
-	// +kubebuilder:validation:Required
-	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Specifies the secret name in Azure Key Vault that stores SQL Server connection string.
-	// +kubebuilder:validation:Required
-	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+}
+
+type LinkedServiceSQLServerKeyVaultPasswordInitParameters struct {
+
+	// Specifies the secret name in Azure Key Vault that stores SQL Server password.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceSQLServerKeyVaultPasswordObservation struct {
@@ -58,8 +103,8 @@ type LinkedServiceSQLServerKeyVaultPasswordParameters struct {
 	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the secret name in Azure Key Vault that stores SQL Server password.
-	// +kubebuilder:validation:Required
-	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
+	// +kubebuilder:validation:Optional
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceSQLServerObservation struct {
@@ -155,6 +200,18 @@ type LinkedServiceSQLServerParameters struct {
 type LinkedServiceSQLServerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LinkedServiceSQLServerParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LinkedServiceSQLServerInitParameters `json:"initProvider,omitempty"`
 }
 
 // LinkedServiceSQLServerStatus defines the observed state of LinkedServiceSQLServer.

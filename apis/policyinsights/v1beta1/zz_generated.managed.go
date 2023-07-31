@@ -17,9 +17,9 @@ func (mg *ResourcePolicyRemediation) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this ResourcePolicyRemediation.
-func (mg *ResourcePolicyRemediation) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this ResourcePolicyRemediation.
+func (mg *ResourcePolicyRemediation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this ResourcePolicyRemediation.
@@ -55,9 +55,9 @@ func (mg *ResourcePolicyRemediation) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this ResourcePolicyRemediation.
-func (mg *ResourcePolicyRemediation) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this ResourcePolicyRemediation.
+func (mg *ResourcePolicyRemediation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this ResourcePolicyRemediation.
@@ -93,9 +93,9 @@ func (mg *SubscriptionPolicyRemediation) GetDeletionPolicy() xpv1.DeletionPolicy
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this SubscriptionPolicyRemediation.
-func (mg *SubscriptionPolicyRemediation) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this SubscriptionPolicyRemediation.
+func (mg *SubscriptionPolicyRemediation) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this SubscriptionPolicyRemediation.
@@ -131,9 +131,9 @@ func (mg *SubscriptionPolicyRemediation) SetDeletionPolicy(r xpv1.DeletionPolicy
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this SubscriptionPolicyRemediation.
-func (mg *SubscriptionPolicyRemediation) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this SubscriptionPolicyRemediation.
+func (mg *SubscriptionPolicyRemediation) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this SubscriptionPolicyRemediation.

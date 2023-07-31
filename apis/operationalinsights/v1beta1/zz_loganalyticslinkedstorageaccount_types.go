@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LogAnalyticsLinkedStorageAccountInitParameters struct {
+
+	// The data source type which should be used for this Log Analytics Linked Storage Account. Possible values are CustomLogs, AzureWatson, Query, Ingestion and Alerts. Changing this forces a new Log Analytics Linked Storage Account to be created.
+	DataSourceType *string `json:"dataSourceType,omitempty" tf:"data_source_type,omitempty"`
+}
+
 type LogAnalyticsLinkedStorageAccountObservation struct {
 
 	// The data source type which should be used for this Log Analytics Linked Storage Account. Possible values are CustomLogs, AzureWatson, Query, Ingestion and Alerts. Changing this forces a new Log Analytics Linked Storage Account to be created.
@@ -83,6 +89,18 @@ type LogAnalyticsLinkedStorageAccountParameters struct {
 type LogAnalyticsLinkedStorageAccountSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LogAnalyticsLinkedStorageAccountParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LogAnalyticsLinkedStorageAccountInitParameters `json:"initProvider,omitempty"`
 }
 
 // LogAnalyticsLinkedStorageAccountStatus defines the observed state of LogAnalyticsLinkedStorageAccount.
@@ -103,7 +121,7 @@ type LogAnalyticsLinkedStorageAccountStatus struct {
 type LogAnalyticsLinkedStorageAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataSourceType)",message="dataSourceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataSourceType) || has(self.initProvider.dataSourceType)",message="dataSourceType is a required parameter"
 	Spec   LogAnalyticsLinkedStorageAccountSpec   `json:"spec"`
 	Status LogAnalyticsLinkedStorageAccountStatus `json:"status,omitempty"`
 }

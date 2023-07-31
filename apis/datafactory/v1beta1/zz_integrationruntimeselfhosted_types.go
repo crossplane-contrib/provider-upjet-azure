@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IntegrationRuntimeSelfHostedInitParameters struct {
+
+	// Integration runtime description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// A rbac_authorization block as defined below. Changing this forces a new resource to be created.
+	RbacAuthorization []RbacAuthorizationInitParameters `json:"rbacAuthorization,omitempty" tf:"rbac_authorization,omitempty"`
+}
+
 type IntegrationRuntimeSelfHostedObservation struct {
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
@@ -59,6 +68,12 @@ type IntegrationRuntimeSelfHostedParameters struct {
 	RbacAuthorization []RbacAuthorizationParameters `json:"rbacAuthorization,omitempty" tf:"rbac_authorization,omitempty"`
 }
 
+type RbacAuthorizationInitParameters struct {
+
+	// The resource identifier of the integration runtime to be shared.
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+}
+
 type RbacAuthorizationObservation struct {
 
 	// The resource identifier of the integration runtime to be shared.
@@ -68,14 +83,26 @@ type RbacAuthorizationObservation struct {
 type RbacAuthorizationParameters struct {
 
 	// The resource identifier of the integration runtime to be shared.
-	// +kubebuilder:validation:Required
-	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
+	// +kubebuilder:validation:Optional
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 }
 
 // IntegrationRuntimeSelfHostedSpec defines the desired state of IntegrationRuntimeSelfHosted
 type IntegrationRuntimeSelfHostedSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     IntegrationRuntimeSelfHostedParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider IntegrationRuntimeSelfHostedInitParameters `json:"initProvider,omitempty"`
 }
 
 // IntegrationRuntimeSelfHostedStatus defines the observed state of IntegrationRuntimeSelfHosted.

@@ -69,6 +69,3 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: P1v2
-
----
-

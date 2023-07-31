@@ -69,6 +69,16 @@ func (tr *HybridConnection) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this HybridConnection
+func (tr *HybridConnection) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this HybridConnection using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *HybridConnection) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *HybridConnectionAuthorizationRule) SetParameters(params map[string]any
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this HybridConnectionAuthorizationRule
+func (tr *HybridConnectionAuthorizationRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this HybridConnectionAuthorizationRule using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *EventRelayNamespace) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this EventRelayNamespace
+func (tr *EventRelayNamespace) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this EventRelayNamespace using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *EventRelayNamespace) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *NamespaceAuthorizationRule) SetParameters(params map[string]any) error
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this NamespaceAuthorizationRule
+func (tr *NamespaceAuthorizationRule) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this NamespaceAuthorizationRule using its observed tfState.

@@ -13,6 +13,36 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConfigurationInitParameters struct {
+
+	// An encryption block as defined below.
+	Encryption []EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Whether local authentication methods is enabled. Defaults to true.
+	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The Public Network Access setting of the App Configuration. Possible values are Enabled and Disabled.
+	PublicNetworkAccess *string `json:"publicNetworkAccess,omitempty" tf:"public_network_access,omitempty"`
+
+	// Whether Purge Protection is enabled. This field only works for standard sku. Defaults to false.
+	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
+
+	// The SKU name of the App Configuration. Possible values are free and standard. Defaults to free.
+	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+
+	// The number of days that items should be retained for once soft-deleted. This field only works for standard sku. This value can be between 1 and 7 days. Defaults to 7. Changing this forces a new resource to be created.
+	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type ConfigurationObservation struct {
 
 	// An encryption block as defined below.
@@ -116,6 +146,9 @@ type ConfigurationParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
+type EncryptionInitParameters struct {
+}
+
 type EncryptionObservation struct {
 
 	// Specifies the client id of the identity which will be used to access key vault.
@@ -156,6 +189,15 @@ type EncryptionParameters struct {
 	KeyVaultKeyIdentifierSelector *v1.Selector `json:"keyVaultKeyIdentifierSelector,omitempty" tf:"-"`
 }
 
+type IdentityInitParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type IdentityObservation struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
@@ -178,8 +220,11 @@ type IdentityParameters struct {
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type PrimaryReadKeyInitParameters struct {
 }
 
 type PrimaryReadKeyObservation struct {
@@ -197,6 +242,9 @@ type PrimaryReadKeyObservation struct {
 type PrimaryReadKeyParameters struct {
 }
 
+type PrimaryWriteKeyInitParameters struct {
+}
+
 type PrimaryWriteKeyObservation struct {
 
 	// The Connection String for this Access Key - comprising of the Endpoint, ID and Secret.
@@ -212,6 +260,9 @@ type PrimaryWriteKeyObservation struct {
 type PrimaryWriteKeyParameters struct {
 }
 
+type SecondaryReadKeyInitParameters struct {
+}
+
 type SecondaryReadKeyObservation struct {
 
 	// The Connection String for this Access Key - comprising of the Endpoint, ID and Secret.
@@ -225,6 +276,9 @@ type SecondaryReadKeyObservation struct {
 }
 
 type SecondaryReadKeyParameters struct {
+}
+
+type SecondaryWriteKeyInitParameters struct {
 }
 
 type SecondaryWriteKeyObservation struct {
@@ -246,6 +300,18 @@ type SecondaryWriteKeyParameters struct {
 type ConfigurationSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConfigurationParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ConfigurationInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConfigurationStatus defines the observed state of Configuration.
@@ -266,7 +332,7 @@ type ConfigurationStatus struct {
 type Configuration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   ConfigurationSpec   `json:"spec"`
 	Status ConfigurationStatus `json:"status,omitempty"`
 }

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AssetInitParameters struct {
+
+	// The alternate ID of the Asset.
+	AlternateID *string `json:"alternateId,omitempty" tf:"alternate_id,omitempty"`
+
+	// The name of the asset blob container. Changing this forces a new Media Asset to be created.
+	Container *string `json:"container,omitempty" tf:"container,omitempty"`
+
+	// The Asset description.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The name of the storage account where to store the media asset. Changing this forces a new Media Asset to be created.
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+}
+
 type AssetObservation struct {
 
 	// The alternate ID of the Asset.
@@ -86,6 +101,18 @@ type AssetParameters struct {
 type AssetSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AssetParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AssetInitParameters `json:"initProvider,omitempty"`
 }
 
 // AssetStatus defines the observed state of Asset.

@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SubAccountTagRuleInitParameters struct {
+
+	// Whether AAD logs should be sent to the Monitor resource?
+	SendAADLogs *bool `json:"sendAadLogs,omitempty" tf:"send_aad_logs,omitempty"`
+
+	// Whether activity logs from this Logz Sub Account Tag Rule should be sent to the Monitor resource?
+	SendActivityLogs *bool `json:"sendActivityLogs,omitempty" tf:"send_activity_logs,omitempty"`
+
+	// Whether subscription logs should be sent to the Monitor resource?
+	SendSubscriptionLogs *bool `json:"sendSubscriptionLogs,omitempty" tf:"send_subscription_logs,omitempty"`
+
+	// One or more (up to 10) tag_filter blocks as defined below.
+	TagFilter []TagFilterInitParameters `json:"tagFilter,omitempty" tf:"tag_filter,omitempty"`
+}
+
 type SubAccountTagRuleObservation struct {
 
 	// The ID of the Logz Sub Account Tag Rule.
@@ -67,6 +82,18 @@ type SubAccountTagRuleParameters struct {
 	TagFilter []TagFilterParameters `json:"tagFilter,omitempty" tf:"tag_filter,omitempty"`
 }
 
+type TagFilterInitParameters struct {
+
+	// The action is used to limit logs collection to include or exclude Azure resources with specific tags. Possible values are Include and Exclude. Note that the Exclude takes priority over the Include.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The name of the tag to match.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the tag to match.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
 type TagFilterObservation struct {
 
 	// The action is used to limit logs collection to include or exclude Azure resources with specific tags. Possible values are Include and Exclude. Note that the Exclude takes priority over the Include.
@@ -82,12 +109,12 @@ type TagFilterObservation struct {
 type TagFilterParameters struct {
 
 	// The action is used to limit logs collection to include or exclude Azure resources with specific tags. Possible values are Include and Exclude. Note that the Exclude takes priority over the Include.
-	// +kubebuilder:validation:Required
-	Action *string `json:"action" tf:"action,omitempty"`
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The name of the tag to match.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The value of the tag to match.
 	// +kubebuilder:validation:Optional
@@ -98,6 +125,18 @@ type TagFilterParameters struct {
 type SubAccountTagRuleSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SubAccountTagRuleParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SubAccountTagRuleInitParameters `json:"initProvider,omitempty"`
 }
 
 // SubAccountTagRuleStatus defines the observed state of SubAccountTagRule.

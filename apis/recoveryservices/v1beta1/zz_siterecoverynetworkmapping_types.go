@@ -13,6 +13,18 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type SiteRecoveryNetworkMappingInitParameters struct {
+
+	// The name of the network mapping. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the ASR fabric where mapping should be created. Changing this forces a new resource to be created.
+	SourceRecoveryFabricName *string `json:"sourceRecoveryFabricName,omitempty" tf:"source_recovery_fabric_name,omitempty"`
+
+	// The Azure Site Recovery fabric object corresponding to the recovery Azure region. Changing this forces a new resource to be created.
+	TargetRecoveryFabricName *string `json:"targetRecoveryFabricName,omitempty" tf:"target_recovery_fabric_name,omitempty"`
+}
+
 type SiteRecoveryNetworkMappingObservation struct {
 
 	// The ID of the Site Recovery Network Mapping.
@@ -113,6 +125,18 @@ type SiteRecoveryNetworkMappingParameters struct {
 type SiteRecoveryNetworkMappingSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SiteRecoveryNetworkMappingParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider SiteRecoveryNetworkMappingInitParameters `json:"initProvider,omitempty"`
 }
 
 // SiteRecoveryNetworkMappingStatus defines the observed state of SiteRecoveryNetworkMapping.
@@ -133,9 +157,9 @@ type SiteRecoveryNetworkMappingStatus struct {
 type SiteRecoveryNetworkMapping struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.sourceRecoveryFabricName)",message="sourceRecoveryFabricName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.targetRecoveryFabricName)",message="targetRecoveryFabricName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceRecoveryFabricName) || has(self.initProvider.sourceRecoveryFabricName)",message="sourceRecoveryFabricName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetRecoveryFabricName) || has(self.initProvider.targetRecoveryFabricName)",message="targetRecoveryFabricName is a required parameter"
 	Spec   SiteRecoveryNetworkMappingSpec   `json:"spec"`
 	Status SiteRecoveryNetworkMappingStatus `json:"status,omitempty"`
 }

@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: runbooks.automation.azure.upbound.io
 spec:
   group: automation.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -173,9 +172,6 @@ spec:
                                       description: Specifies the expected hash value
                                         of the content.
                                       type: string
-                                  required:
-                                  - algorithm
-                                  - value
                                   type: object
                                 type: array
                               uri:
@@ -184,8 +180,6 @@ spec:
                               version:
                                 description: Specifies the version of the content
                                 type: string
-                            required:
-                            - uri
                             type: object
                           type: array
                         editModeEnabled:
@@ -215,9 +209,6 @@ spec:
                               type:
                                 description: Specifies the type of this parameter.
                                 type: string
-                            required:
-                            - key
-                            - type
                             type: object
                           type: array
                       type: object
@@ -277,9 +268,6 @@ spec:
                                 description: Specifies the expected hash value of
                                   the content.
                                 type: string
-                            required:
-                            - algorithm
-                            - value
                             type: object
                           type: array
                         uri:
@@ -288,8 +276,6 @@ spec:
                         version:
                           description: Specifies the version of the content
                           type: string
-                      required:
-                      - uri
                       type: object
                     type: array
                   resourceGroupName:
@@ -383,21 +369,189 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  content:
+                    description: The desired content of the runbook.
+                    type: string
+                  description:
+                    description: A description for this credential.
+                    type: string
+                  draft:
+                    description: A draft block as defined below .
+                    items:
+                      properties:
+                        contentLink:
+                          description: A publish_content_link block as defined above.
+                          items:
+                            properties:
+                              hash:
+                                description: A hash block as defined below.
+                                items:
+                                  properties:
+                                    algorithm:
+                                      description: Specifies the hash algorithm used
+                                        to hash the content.
+                                      type: string
+                                    value:
+                                      description: Specifies the expected hash value
+                                        of the content.
+                                      type: string
+                                  type: object
+                                type: array
+                              uri:
+                                description: The URI of the runbook content.
+                                type: string
+                              version:
+                                description: Specifies the version of the content
+                                type: string
+                            type: object
+                          type: array
+                        editModeEnabled:
+                          description: Whether the draft in edit mode.
+                          type: boolean
+                        outputTypes:
+                          description: Specifies the output types of the runbook.
+                          items:
+                            type: string
+                          type: array
+                        parameters:
+                          description: A list of parameters block as defined below.
+                          items:
+                            properties:
+                              defaultValue:
+                                description: Specifies the default value of the parameter.
+                                type: string
+                              key:
+                                description: The name of the parameter.
+                                type: string
+                              mandatory:
+                                description: Whether this parameter is mandatory.
+                                type: boolean
+                              position:
+                                description: Specifies the position of the parameter.
+                                type: number
+                              type:
+                                description: Specifies the type of this parameter.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
+                  jobSchedule:
+                    items:
+                      properties:
+                        jobScheduleId:
+                          description: The Automation Runbook ID.
+                          type: string
+                        parameters:
+                          additionalProperties:
+                            type: string
+                          description: A list of parameters block as defined below.
+                          type: object
+                        runOn:
+                          type: string
+                        scheduleName:
+                          description: Specifies the name of the Runbook. Changing
+                            this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  logActivityTraceLevel:
+                    description: Specifies the activity-level tracing options of the
+                      runbook, available only for Graphical runbooks. Possible values
+                      are 0 for None, 9 for Basic, and 15 for Detailed. Must turn
+                      on Verbose logging in order to see the tracing.
+                    type: number
+                  logProgress:
+                    description: Progress log option.
+                    type: boolean
+                  logVerbose:
+                    description: Verbose log option.
+                    type: boolean
+                  name:
+                    description: Specifies the name of the Runbook. Changing this
+                      forces a new resource to be created.
+                    type: string
+                  publishContentLink:
+                    description: The published runbook content link.
+                    items:
+                      properties:
+                        hash:
+                          description: A hash block as defined below.
+                          items:
+                            properties:
+                              algorithm:
+                                description: Specifies the hash algorithm used to
+                                  hash the content.
+                                type: string
+                              value:
+                                description: Specifies the expected hash value of
+                                  the content.
+                                type: string
+                            type: object
+                          type: array
+                        uri:
+                          description: The URI of the runbook content.
+                          type: string
+                        version:
+                          description: Specifies the version of the content
+                          type: string
+                      type: object
+                    type: array
+                  runbookType:
+                    description: The type of the runbook - can be either Graph, GraphPowerShell,
+                      GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, Python3,
+                      Python2 or Script. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -571,15 +725,25 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: logProgress is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.logProgress)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.logProgress)
+                || has(self.initProvider.logProgress)'
             - message: logVerbose is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.logVerbose)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.logVerbose)
+                || has(self.initProvider.logVerbose)'
             - message: name is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: runbookType is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.runbookType)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.runbookType)
+                || has(self.initProvider.runbookType)'
           status:
             description: RunBookStatus defines the observed state of RunBook.
             properties:

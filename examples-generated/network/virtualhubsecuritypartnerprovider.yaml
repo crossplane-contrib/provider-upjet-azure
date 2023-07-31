@@ -90,6 +90,3 @@ spec:
     virtualHubIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

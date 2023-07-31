@@ -13,6 +13,27 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type StandardEnvironmentInitParameters struct {
+
+	// Specifies the ISO8601 timespan specifying the minimum number of days the environment's events will be available for query. Changing this forces a new resource to be created.
+	DataRetentionTime *string `json:"dataRetentionTime,omitempty" tf:"data_retention_time,omitempty"`
+
+	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the event property which will be used to partition data. Changing this forces a new resource to be created.
+	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+
+	// Specifies the SKU Name for this IoT Time Series Insights Standard Environment. It is string consisting of two parts separated by an underscore(_).The first part is the name, valid values include: S1 and S2. The second part is the capacity (e.g. the number of deployed units of the sku), which must be a positive integer (e.g. S1_1). Possible values are S1_1, S1_2, S1_3, S1_4, S1_5, S1_6, S1_7, S1_8, S1_9, S1_10, S2_1, S2_2, S2_3, S2_4, S2_5, S2_6, S2_7, S2_8, S2_9 and S2_10. Changing this forces a new resource to be created.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// Specifies the behaviour the IoT Time Series Insights service should take when the environment's capacity has been exceeded. Valid values include PauseIngress and PurgeOldData. Defaults to PurgeOldData.
+	StorageLimitExceededBehavior *string `json:"storageLimitExceededBehavior,omitempty" tf:"storage_limit_exceeded_behavior,omitempty"`
+
+	// A mapping of tags to assign to the resource.
+	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
 type StandardEnvironmentObservation struct {
 
 	// Specifies the ISO8601 timespan specifying the minimum number of days the environment's events will be available for query. Changing this forces a new resource to be created.
@@ -84,6 +105,18 @@ type StandardEnvironmentParameters struct {
 type StandardEnvironmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     StandardEnvironmentParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider StandardEnvironmentInitParameters `json:"initProvider,omitempty"`
 }
 
 // StandardEnvironmentStatus defines the observed state of StandardEnvironment.
@@ -104,9 +137,9 @@ type StandardEnvironmentStatus struct {
 type StandardEnvironment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.dataRetentionTime)",message="dataRetentionTime is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skuName)",message="skuName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataRetentionTime) || has(self.initProvider.dataRetentionTime)",message="dataRetentionTime is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skuName) || has(self.initProvider.skuName)",message="skuName is a required parameter"
 	Spec   StandardEnvironmentSpec   `json:"spec"`
 	Status StandardEnvironmentStatus `json:"status,omitempty"`
 }

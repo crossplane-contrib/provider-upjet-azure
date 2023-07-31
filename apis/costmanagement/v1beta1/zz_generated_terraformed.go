@@ -69,6 +69,16 @@ func (tr *CostAnomalyAlert) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this CostAnomalyAlert
+func (tr *CostAnomalyAlert) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this CostAnomalyAlert using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *CostAnomalyAlert) LateInitialize(attrs []byte) (bool, error) {
@@ -143,6 +153,16 @@ func (tr *ResourceGroupCostManagementExport) SetParameters(params map[string]any
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this ResourceGroupCostManagementExport
+func (tr *ResourceGroupCostManagementExport) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this ResourceGroupCostManagementExport using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *ResourceGroupCostManagementExport) LateInitialize(attrs []byte) (bool, error) {
@@ -215,6 +235,16 @@ func (tr *SubscriptionCostManagementExport) SetParameters(params map[string]any)
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this SubscriptionCostManagementExport
+func (tr *SubscriptionCostManagementExport) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this SubscriptionCostManagementExport using its observed tfState.

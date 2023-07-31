@@ -29,6 +29,3 @@ metadata:
 spec:
   forProvider:
     location: West US
-
----
-

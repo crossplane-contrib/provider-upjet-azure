@@ -69,6 +69,16 @@ func (tr *BackupInstanceBlobStorage) SetParameters(params map[string]any) error 
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this BackupInstanceBlobStorage
+func (tr *BackupInstanceBlobStorage) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this BackupInstanceBlobStorage using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BackupInstanceBlobStorage) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *BackupInstanceDisk) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this BackupInstanceDisk
+func (tr *BackupInstanceDisk) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this BackupInstanceDisk using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *BackupInstancePostgreSQL) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this BackupInstancePostgreSQL
+func (tr *BackupInstancePostgreSQL) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this BackupInstancePostgreSQL using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BackupInstancePostgreSQL) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *BackupPolicyBlobStorage) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this BackupPolicyBlobStorage
+func (tr *BackupPolicyBlobStorage) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this BackupPolicyBlobStorage using its observed tfState.
@@ -365,6 +405,16 @@ func (tr *BackupPolicyDisk) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this BackupPolicyDisk
+func (tr *BackupPolicyDisk) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this BackupPolicyDisk using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BackupPolicyDisk) LateInitialize(attrs []byte) (bool, error) {
@@ -437,6 +487,16 @@ func (tr *BackupPolicyPostgreSQL) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this BackupPolicyPostgreSQL
+func (tr *BackupPolicyPostgreSQL) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this BackupPolicyPostgreSQL using its observed tfState.
@@ -513,6 +573,16 @@ func (tr *BackupVault) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this BackupVault
+func (tr *BackupVault) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this BackupVault using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *BackupVault) LateInitialize(attrs []byte) (bool, error) {
@@ -585,6 +655,16 @@ func (tr *ResourceGuard) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this ResourceGuard
+func (tr *ResourceGuard) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this ResourceGuard using its observed tfState.

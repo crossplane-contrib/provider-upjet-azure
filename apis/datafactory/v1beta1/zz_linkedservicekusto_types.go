@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type LinkedServiceKustoInitParameters struct {
+
+	// A map of additional properties to associate with the Data Factory Linked Service.
+	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
+
+	// List of tags that can be used for describing the Data Factory Linked Service.
+	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The description for the Data Factory Linked Service.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// The integration runtime reference to associate with the Data Factory Linked Service.
+	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
+
+	// A map of parameters to associate with the Data Factory Linked Service.
+	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The service principal id in which to authenticate against the Kusto Database.
+	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
+
+	// The service principal tenant id or name in which to authenticate against the Kusto Database.
+	Tenant *string `json:"tenant,omitempty" tf:"tenant,omitempty"`
+
+	// Whether to use the Data Factory's managed identity to authenticate against the Kusto Database.
+	UseManagedIdentity *bool `json:"useManagedIdentity,omitempty" tf:"use_managed_identity,omitempty"`
+}
+
 type LinkedServiceKustoObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
@@ -136,6 +163,18 @@ type LinkedServiceKustoParameters struct {
 type LinkedServiceKustoSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LinkedServiceKustoParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider LinkedServiceKustoInitParameters `json:"initProvider,omitempty"`
 }
 
 // LinkedServiceKustoStatus defines the observed state of LinkedServiceKusto.

@@ -118,6 +118,3 @@ spec:
         testing.upbound.io/example-name: example
     vpnAuthenticationTypes:
     - Certificate
-
----
-

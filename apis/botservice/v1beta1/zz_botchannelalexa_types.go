@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type BotChannelAlexaInitParameters struct {
+
+	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The Alexa skill ID for the Alexa Channel.
+	SkillID *string `json:"skillId,omitempty" tf:"skill_id,omitempty"`
+}
+
 type BotChannelAlexaObservation struct {
 
 	// The name of the Bot Resource this channel will be associated with. Changing this forces a new resource to be created.
@@ -73,6 +82,18 @@ type BotChannelAlexaParameters struct {
 type BotChannelAlexaSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     BotChannelAlexaParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider BotChannelAlexaInitParameters `json:"initProvider,omitempty"`
 }
 
 // BotChannelAlexaStatus defines the observed state of BotChannelAlexa.
@@ -93,8 +114,8 @@ type BotChannelAlexaStatus struct {
 type BotChannelAlexa struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.skillId)",message="skillId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.skillId) || has(self.initProvider.skillId)",message="skillId is a required parameter"
 	Spec   BotChannelAlexaSpec   `json:"spec"`
 	Status BotChannelAlexaStatus `json:"status,omitempty"`
 }

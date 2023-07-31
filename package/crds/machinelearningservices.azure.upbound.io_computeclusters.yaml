@@ -3,8 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.11.3
-  creationTimestamp: null
+    controller-gen.kubebuilder.io/version: v0.12.1
   name: computeclusters.machinelearningservices.azure.upbound.io
 spec:
   group: machinelearningservices.azure.upbound.io
@@ -58,7 +57,7 @@ spec:
                 description: 'DeletionPolicy specifies what will happen to the underlying
                   external when this managed resource is deleted - either "Delete"
                   or "Orphan" the external resource. This field is planned to be deprecated
-                  in favor of the ManagementPolicy field in a future release. Currently,
+                  in favor of the ManagementPolicies field in a future release. Currently,
                   both could be set independently and non-default values would be
                   honored if the feature flag is enabled. See the design doc for more
                   information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
@@ -92,8 +91,6 @@ spec:
                             SystemAssigned, UserAssigned (to enable both). Changing
                             this forces a new resource to be created.
                           type: string
-                      required:
-                      - type
                       type: object
                     type: array
                   localAuthEnabled:
@@ -210,10 +207,6 @@ spec:
                             standard for duration. Changing this forces a new Machine
                             Learning Compute Cluster to be created.'
                           type: string
-                      required:
-                      - maxNodeCount
-                      - minNodeCount
-                      - scaleDownNodesAfterIdleDuration
                       type: object
                     type: array
                   ssh:
@@ -238,8 +231,6 @@ spec:
                             Changing this forces a new Machine Learning Compute Cluster
                             to be created.
                           type: string
-                      required:
-                      - adminUsername
                       type: object
                     type: array
                   sshPublicAccessEnabled:
@@ -342,21 +333,154 @@ spec:
                       Learning Compute Cluster to be created.
                     type: string
                 type: object
-              managementPolicy:
-                default: FullControl
+              initProvider:
+                description: THIS IS AN ALPHA FIELD. Do not use it in production.
+                  It is not honored unless the relevant Crossplane feature flag is
+                  enabled, and may be changed or removed without notice. InitProvider
+                  holds the same fields as ForProvider, with the exception of Identifier
+                  and other resource reference fields. The fields that are in InitProvider
+                  are merged into ForProvider when the resource is created. The same
+                  fields are also added to the terraform ignore_changes hook, to avoid
+                  updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after
+                  creation, for example because of an external controller is managing
+                  them, like an autoscaler.
+                properties:
+                  description:
+                    description: The description of the Machine Learning compute.
+                      Changing this forces a new Machine Learning Compute Cluster
+                      to be created.
+                    type: string
+                  identity:
+                    description: An identity block as defined below. Changing this
+                      forces a new Machine Learning Compute Cluster to be created.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Machine Learning Compute Cluster.
+                            Changing this forces a new resource to be created.
+                          items:
+                            type: string
+                          type: array
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Machine Learning Compute
+                            Cluster. Possible values are SystemAssigned, UserAssigned,
+                            SystemAssigned, UserAssigned (to enable both). Changing
+                            this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  localAuthEnabled:
+                    description: Whether local authentication methods is enabled.
+                      Defaults to true. Changing this forces a new Machine Learning
+                      Compute Cluster to be created.
+                    type: boolean
+                  location:
+                    description: The Azure Region where the Machine Learning Compute
+                      Cluster should exist. Changing this forces a new Machine Learning
+                      Compute Cluster to be created.
+                    type: string
+                  name:
+                    description: The name which should be used for this Machine Learning
+                      Compute Cluster. Changing this forces a new Machine Learning
+                      Compute Cluster to be created.
+                    type: string
+                  scaleSettings:
+                    description: A scale_settings block as defined below. Changing
+                      this forces a new Machine Learning Compute Cluster to be created.
+                    items:
+                      properties:
+                        maxNodeCount:
+                          description: Maximum node count. Changing this forces a
+                            new Machine Learning Compute Cluster to be created.
+                          type: number
+                        minNodeCount:
+                          description: Minimal node count. Changing this forces a
+                            new Machine Learning Compute Cluster to be created.
+                          type: number
+                        scaleDownNodesAfterIdleDuration:
+                          description: 'Node Idle Time Before Scale Down: defines
+                            the time until the compute is shutdown when it has gone
+                            into Idle state. Is defined according to W3C XML schema
+                            standard for duration. Changing this forces a new Machine
+                            Learning Compute Cluster to be created.'
+                          type: string
+                      type: object
+                    type: array
+                  ssh:
+                    description: Credentials for an administrator user account that
+                      will be created on each compute node. A ssh block as defined
+                      below. Changing this forces a new Machine Learning Compute Cluster
+                      to be created.
+                    items:
+                      properties:
+                        adminPassword:
+                          description: Password of the administrator user account.
+                            Changing this forces a new Machine Learning Compute Cluster
+                            to be created.
+                          type: string
+                        adminUsername:
+                          description: Name of the administrator user account which
+                            can be used to SSH to nodes. Changing this forces a new
+                            Machine Learning Compute Cluster to be created.
+                          type: string
+                        keyValue:
+                          description: SSH public key of the administrator user account.
+                            Changing this forces a new Machine Learning Compute Cluster
+                            to be created.
+                          type: string
+                      type: object
+                    type: array
+                  sshPublicAccessEnabled:
+                    description: A boolean value indicating whether enable the public
+                      SSH port. Changing this forces a new Machine Learning Compute
+                      Cluster to be created.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Machine Learning Compute Cluster. Changing this forces a new
+                      Machine Learning Compute Cluster to be created.
+                    type: object
+                  vmPriority:
+                    description: The priority of the VM. Changing this forces a new
+                      Machine Learning Compute Cluster to be created. Accepted values
+                      are Dedicated and LowPriority.
+                    type: string
+                  vmSize:
+                    description: The size of the VM. Changing this forces a new Machine
+                      Learning Compute Cluster to be created.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
                 description: 'THIS IS AN ALPHA FIELD. Do not use it in production.
                   It is not honored unless the relevant Crossplane feature flag is
-                  enabled, and may be changed or removed without notice. ManagementPolicy
-                  specifies the level of control Crossplane has over the managed external
-                  resource. This field is planned to replace the DeletionPolicy field
-                  in a future release. Currently, both could be set independently
-                  and non-default values would be honored if the feature flag is enabled.
-                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
-                enum:
-                - FullControl
-                - ObserveOnly
-                - OrphanOnDelete
-                type: string
+                  enabled, and may be changed or removed without notice. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
               providerConfigRef:
                 default:
                   name: default
@@ -530,15 +654,25 @@ spec:
             type: object
             x-kubernetes-validations:
             - message: location is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
             - message: name is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.name)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || has(self.initProvider.name)'
             - message: scaleSettings is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.scaleSettings)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.scaleSettings)
+                || has(self.initProvider.scaleSettings)'
             - message: vmPriority is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vmPriority)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vmPriority)
+                || has(self.initProvider.vmPriority)'
             - message: vmSize is a required parameter
-              rule: self.managementPolicy == 'ObserveOnly' || has(self.forProvider.vmSize)
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vmSize)
+                || has(self.initProvider.vmSize)'
           status:
             description: ComputeClusterStatus defines the observed state of ComputeCluster.
             properties:

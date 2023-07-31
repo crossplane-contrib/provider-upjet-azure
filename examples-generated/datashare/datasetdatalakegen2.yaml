@@ -120,6 +120,3 @@ spec:
     storageAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-
----
-

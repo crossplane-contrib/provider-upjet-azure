@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ConsumerGroupInitParameters struct {
+
+	// Specifies the user metadata.
+	UserMetadata *string `json:"userMetadata,omitempty" tf:"user_metadata,omitempty"`
+}
+
 type ConsumerGroupObservation struct {
 
 	// Specifies the name of the EventHub. Changing this forces a new resource to be created.
@@ -81,6 +87,18 @@ type ConsumerGroupParameters struct {
 type ConsumerGroupSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ConsumerGroupParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider ConsumerGroupInitParameters `json:"initProvider,omitempty"`
 }
 
 // ConsumerGroupStatus defines the observed state of ConsumerGroup.

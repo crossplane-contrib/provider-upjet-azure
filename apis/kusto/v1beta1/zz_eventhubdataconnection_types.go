@@ -13,6 +13,33 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EventHubDataConnectionInitParameters struct {
+
+	// Specifies compression type for the connection. Allowed values: GZip and None. Defaults to None. Changing this forces a new resource to be created.
+	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
+
+	// Specifies the data format of the EventHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSVE, TSV, TXT, and W3CLOGFILE.
+	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
+
+	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created.
+	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
+
+	// Specifies a list of system properties for the Event Hub.
+	EventSystemProperties []*string `json:"eventSystemProperties,omitempty" tf:"event_system_properties,omitempty"`
+
+	// The resource ID of a managed identity (system or user assigned) to be used to authenticate with event hub.
+	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
+
+	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the mapping rule used for the message ingestion. Mapping rule must exist before resource is created.
+	MappingRuleName *string `json:"mappingRuleName,omitempty" tf:"mapping_rule_name,omitempty"`
+
+	// Specifies the target table name used for the message ingestion. Table must exist before resource is created.
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+}
+
 type EventHubDataConnectionObservation struct {
 
 	// Specifies the name of the Kusto Cluster this data connection will be added to. Changing this forces a new resource to be created.
@@ -163,6 +190,18 @@ type EventHubDataConnectionParameters struct {
 type EventHubDataConnectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     EventHubDataConnectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider EventHubDataConnectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // EventHubDataConnectionStatus defines the observed state of EventHubDataConnection.
@@ -183,7 +222,7 @@ type EventHubDataConnectionStatus struct {
 type EventHubDataConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
 	Spec   EventHubDataConnectionSpec   `json:"spec"`
 	Status EventHubDataConnectionStatus `json:"status,omitempty"`
 }

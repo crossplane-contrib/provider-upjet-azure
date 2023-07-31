@@ -56,6 +56,3 @@ spec:
         testing.upbound.io/example-name: example
     vpnAuthenticationTypes:
     - Radius
-
----
-

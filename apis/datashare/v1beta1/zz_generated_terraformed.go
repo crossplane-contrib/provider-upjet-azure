@@ -69,6 +69,16 @@ func (tr *DataShare) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this DataShare
+func (tr *DataShare) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this DataShare using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *DataShare) LateInitialize(attrs []byte) (bool, error) {
@@ -141,6 +151,16 @@ func (tr *Account) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this Account
+func (tr *Account) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this Account using its observed tfState.
@@ -217,6 +237,16 @@ func (tr *DataSetBlobStorage) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this DataSetBlobStorage
+func (tr *DataSetBlobStorage) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this DataSetBlobStorage using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *DataSetBlobStorage) LateInitialize(attrs []byte) (bool, error) {
@@ -289,6 +319,16 @@ func (tr *DataSetDataLakeGen2) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this DataSetDataLakeGen2
+func (tr *DataSetDataLakeGen2) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this DataSetDataLakeGen2 using its observed tfState.
@@ -365,6 +405,16 @@ func (tr *DataSetKustoCluster) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
+// GetInitParameters of this DataSetKustoCluster
+func (tr *DataSetKustoCluster) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
 // LateInitialize this DataSetKustoCluster using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *DataSetKustoCluster) LateInitialize(attrs []byte) (bool, error) {
@@ -437,6 +487,16 @@ func (tr *DataSetKustoDatabase) SetParameters(params map[string]any) error {
 		return err
 	}
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this DataSetKustoDatabase
+func (tr *DataSetKustoDatabase) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
 }
 
 // LateInitialize this DataSetKustoDatabase using its observed tfState.

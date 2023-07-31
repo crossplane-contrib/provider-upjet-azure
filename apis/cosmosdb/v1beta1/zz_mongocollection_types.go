@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type MongoCollectionAutoscaleSettingsInitParameters struct {
+
+	// The maximum throughput of the MongoDB collection (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
+	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
+}
+
 type MongoCollectionAutoscaleSettingsObservation struct {
 
 	// The maximum throughput of the MongoDB collection (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
@@ -24,6 +30,15 @@ type MongoCollectionAutoscaleSettingsParameters struct {
 	// The maximum throughput of the MongoDB collection (RU/s). Must be between 1,000 and 1,000,000. Must be set in increments of 1,000. Conflicts with throughput.
 	// +kubebuilder:validation:Optional
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
+}
+
+type MongoCollectionIndexInitParameters struct {
+
+	// Specifies the list of user settable keys for each Cosmos DB Mongo Collection.
+	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
+
+	// Is the index unique or not? Defaults to false.
+	Unique *bool `json:"unique,omitempty" tf:"unique,omitempty"`
 }
 
 type MongoCollectionIndexObservation struct {
@@ -38,12 +53,33 @@ type MongoCollectionIndexObservation struct {
 type MongoCollectionIndexParameters struct {
 
 	// Specifies the list of user settable keys for each Cosmos DB Mongo Collection.
-	// +kubebuilder:validation:Required
-	Keys []*string `json:"keys" tf:"keys,omitempty"`
+	// +kubebuilder:validation:Optional
+	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
 
 	// Is the index unique or not? Defaults to false.
 	// +kubebuilder:validation:Optional
 	Unique *bool `json:"unique,omitempty" tf:"unique,omitempty"`
+}
+
+type MongoCollectionInitParameters struct {
+
+	// The default time to live of Analytical Storage for this Mongo Collection. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time.
+	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
+
+	// An autoscale_settings block as defined below.
+	AutoscaleSettings []MongoCollectionAutoscaleSettingsInitParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
+
+	// The default Time To Live in seconds. If the value is -1, items are not automatically expired.
+	DefaultTTLSeconds *float64 `json:"defaultTtlSeconds,omitempty" tf:"default_ttl_seconds,omitempty"`
+
+	// One or more index blocks as defined below.
+	Index []MongoCollectionIndexInitParameters `json:"index,omitempty" tf:"index,omitempty"`
+
+	// The name of the key to partition on for sharding. There must not be any other unique index keys. Changing this forces a new resource to be created.
+	ShardKey *string `json:"shardKey,omitempty" tf:"shard_key,omitempty"`
+
+	// The throughput of the MongoDB collection (RU/s). Must be set in increments of 100. The minimum value is 400.
+	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
 type MongoCollectionObservation struct {
@@ -148,6 +184,9 @@ type MongoCollectionParameters struct {
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
+type SystemIndexesInitParameters struct {
+}
+
 type SystemIndexesObservation struct {
 
 	// The list of system keys which are not settable for each Cosmos DB Mongo Collection.
@@ -164,6 +203,18 @@ type SystemIndexesParameters struct {
 type MongoCollectionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     MongoCollectionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider MongoCollectionInitParameters `json:"initProvider,omitempty"`
 }
 
 // MongoCollectionStatus defines the observed state of MongoCollection.

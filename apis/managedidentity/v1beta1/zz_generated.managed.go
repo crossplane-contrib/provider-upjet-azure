@@ -17,9 +17,9 @@ func (mg *FederatedIdentityCredential) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this FederatedIdentityCredential.
-func (mg *FederatedIdentityCredential) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this FederatedIdentityCredential.
+func (mg *FederatedIdentityCredential) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this FederatedIdentityCredential.
@@ -55,9 +55,9 @@ func (mg *FederatedIdentityCredential) SetDeletionPolicy(r xpv1.DeletionPolicy) 
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this FederatedIdentityCredential.
-func (mg *FederatedIdentityCredential) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this FederatedIdentityCredential.
+func (mg *FederatedIdentityCredential) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this FederatedIdentityCredential.
@@ -93,9 +93,9 @@ func (mg *UserAssignedIdentity) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicy of this UserAssignedIdentity.
-func (mg *UserAssignedIdentity) GetManagementPolicy() xpv1.ManagementPolicy {
-	return mg.Spec.ManagementPolicy
+// GetManagementPolicies of this UserAssignedIdentity.
+func (mg *UserAssignedIdentity) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
 }
 
 // GetProviderConfigReference of this UserAssignedIdentity.
@@ -131,9 +131,9 @@ func (mg *UserAssignedIdentity) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicy of this UserAssignedIdentity.
-func (mg *UserAssignedIdentity) SetManagementPolicy(r xpv1.ManagementPolicy) {
-	mg.Spec.ManagementPolicy = r
+// SetManagementPolicies of this UserAssignedIdentity.
+func (mg *UserAssignedIdentity) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
 }
 
 // SetProviderConfigReference of this UserAssignedIdentity.

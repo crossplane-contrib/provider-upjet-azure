@@ -13,6 +13,12 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AppIntegrationAccountSessionInitParameters struct {
+
+	// The content of the Logic App Integration Account Session.
+	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+}
+
 type AppIntegrationAccountSessionObservation struct {
 
 	// The content of the Logic App Integration Account Session.
@@ -66,6 +72,18 @@ type AppIntegrationAccountSessionParameters struct {
 type AppIntegrationAccountSessionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppIntegrationAccountSessionParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider AppIntegrationAccountSessionInitParameters `json:"initProvider,omitempty"`
 }
 
 // AppIntegrationAccountSessionStatus defines the observed state of AppIntegrationAccountSession.
@@ -86,7 +104,7 @@ type AppIntegrationAccountSessionStatus struct {
 type AppIntegrationAccountSession struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="self.managementPolicy == 'ObserveOnly' || has(self.forProvider.content)",message="content is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.content) || has(self.initProvider.content)",message="content is a required parameter"
 	Spec   AppIntegrationAccountSessionSpec   `json:"spec"`
 	Status AppIntegrationAccountSessionStatus `json:"status,omitempty"`
 }

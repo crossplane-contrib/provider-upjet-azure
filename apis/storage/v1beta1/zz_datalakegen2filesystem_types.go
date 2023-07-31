@@ -13,6 +13,21 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AceInitParameters struct {
+
+	// Specifies the Object ID of the Azure Active Directory User or Group that the entry relates to. Only valid for user or group entries.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the permissions for the entry in rwx form. For example, rwx gives full permissions but r-- only gives read permissions.
+	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+
+	// Specifies whether the ACE represents an access entry or a default entry. Default value is access.
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Specifies the type of entry. Can be user, group, mask or other.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
 type AceObservation struct {
 
 	// Specifies the Object ID of the Azure Active Directory User or Group that the entry relates to. Only valid for user or group entries.
@@ -35,16 +50,31 @@ type AceParameters struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the permissions for the entry in rwx form. For example, rwx gives full permissions but r-- only gives read permissions.
-	// +kubebuilder:validation:Required
-	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
+	// +kubebuilder:validation:Optional
+	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
 	// Specifies whether the ACE represents an access entry or a default entry. Default value is access.
 	// +kubebuilder:validation:Optional
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// Specifies the type of entry. Can be user, group, mask or other.
-	// +kubebuilder:validation:Required
-	Type *string `json:"type" tf:"type,omitempty"`
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type DataLakeGen2FileSystemInitParameters struct {
+
+	// One or more ace blocks as defined below to specify the entries for the ACL for the path.
+	Ace []AceInitParameters `json:"ace,omitempty" tf:"ace,omitempty"`
+
+	// Specifies the Object ID of the Azure Active Directory Group to make the owning group of the root path (i.e. /). Possible values also include $superuser.
+	Group *string `json:"group,omitempty" tf:"group,omitempty"`
+
+	// Specifies the Object ID of the Azure Active Directory User to make the owning user of the root path (i.e. /). Possible values also include $superuser.
+	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
+
+	// A mapping of Key to Base64-Encoded Values which should be assigned to this Data Lake Gen2 File System.
+	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 }
 
 type DataLakeGen2FileSystemObservation struct {
@@ -105,6 +135,18 @@ type DataLakeGen2FileSystemParameters struct {
 type DataLakeGen2FileSystemSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     DataLakeGen2FileSystemParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider DataLakeGen2FileSystemInitParameters `json:"initProvider,omitempty"`
 }
 
 // DataLakeGen2FileSystemStatus defines the observed state of DataLakeGen2FileSystem.

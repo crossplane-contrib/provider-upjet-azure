@@ -138,6 +138,3 @@ spec:
       publisher: MicrosoftWindowsServer
       sku: 2019-Datacenter
       version: latest
-
----
-

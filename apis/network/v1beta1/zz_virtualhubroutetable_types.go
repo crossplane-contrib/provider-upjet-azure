@@ -13,6 +13,15 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type VirtualHubRouteTableInitParameters struct {
+
+	// List of labels associated with this route table.
+	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+
+	// A route block as defined below.
+	Route []VirtualHubRouteTableRouteInitParameters `json:"route,omitempty" tf:"route,omitempty"`
+}
+
 type VirtualHubRouteTableObservation struct {
 
 	// The ID of the Virtual Hub Route Table.
@@ -53,6 +62,21 @@ type VirtualHubRouteTableParameters struct {
 	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
+type VirtualHubRouteTableRouteInitParameters struct {
+
+	// A list of destination addresses for this route.
+	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
+
+	// The type of destinations. Possible values are CIDR, ResourceId and Service.
+	DestinationsType *string `json:"destinationsType,omitempty" tf:"destinations_type,omitempty"`
+
+	// The name which should be used for this route.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The type of next hop. Currently the only possible value is ResourceId. Defaults to ResourceId.
+	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
+}
+
 type VirtualHubRouteTableRouteObservation struct {
 
 	// A list of destination addresses for this route.
@@ -74,16 +98,16 @@ type VirtualHubRouteTableRouteObservation struct {
 type VirtualHubRouteTableRouteParameters struct {
 
 	// A list of destination addresses for this route.
-	// +kubebuilder:validation:Required
-	Destinations []*string `json:"destinations" tf:"destinations,omitempty"`
+	// +kubebuilder:validation:Optional
+	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// The type of destinations. Possible values are CIDR, ResourceId and Service.
-	// +kubebuilder:validation:Required
-	DestinationsType *string `json:"destinationsType" tf:"destinations_type,omitempty"`
+	// +kubebuilder:validation:Optional
+	DestinationsType *string `json:"destinationsType,omitempty" tf:"destinations_type,omitempty"`
 
 	// The name which should be used for this route.
-	// +kubebuilder:validation:Required
-	Name *string `json:"name" tf:"name,omitempty"`
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The next hop's resource ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualHubConnection
@@ -108,6 +132,18 @@ type VirtualHubRouteTableRouteParameters struct {
 type VirtualHubRouteTableSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     VirtualHubRouteTableParameters `json:"forProvider"`
+	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
+	// unless the relevant Crossplane feature flag is enabled, and may be
+	// changed or removed without notice.
+	// InitProvider holds the same fields as ForProvider, with the exception
+	// of Identifier and other resource reference fields. The fields that are
+	// in InitProvider are merged into ForProvider when the resource is created.
+	// The same fields are also added to the terraform ignore_changes hook, to
+	// avoid updating them after creation. This is useful for fields that are
+	// required on creation, but we do not desire to update them after creation,
+	// for example because of an external controller is managing them, like an
+	// autoscaler.
+	InitProvider VirtualHubRouteTableInitParameters `json:"initProvider,omitempty"`
 }
 
 // VirtualHubRouteTableStatus defines the observed state of VirtualHubRouteTable.
