@@ -105,7 +105,8 @@ func main() {
 	// This removes some complexity for setting up development environments.
 	var scheduler terraform.ProviderScheduler = terraform.NewNoOpProviderScheduler()
 	if len(*nativeProviderPath) != 0 {
-		scheduler = terraform.NewSharedProviderScheduler(log, *pluginProcessTTL, terraform.WithNativeProviderPath(*nativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*providerSource))
+		scheduler = terraform.NewSharedProviderScheduler(log, *pluginProcessTTL,
+			terraform.WithSharedProviderOptions(terraform.WithNativeProviderPath(*nativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*providerSource)))
 	}
 
 	o := tjcontroller.Options{
