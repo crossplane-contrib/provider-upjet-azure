@@ -25,6 +25,9 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_subscription", func(r *config.Resource) {
 		r.UseAsync = false
 		r.ShortGroup = ""
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"billing_scope_id", "subscription_id"},
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_resource_provider_registration", func(r *config.Resource) {
