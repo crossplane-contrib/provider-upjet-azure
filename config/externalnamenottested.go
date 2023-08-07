@@ -641,10 +641,4 @@ var ExternalNameNotTestedConfigs = map[string]config.ExternalName{
 	//
 	// /subscriptions/00000000-0000-0000-0000-00000000000/resourceGroups/groupName/providers/Microsoft.RecoveryServices/vaults/vaultName/replicationRecoveryPlans/planName
 	"azurerm_site_recovery_replication_recovery_plan": config.TemplatedStringAsIdentifier("name", "{{ .parameters.recovery_vault_id }}/replicationRecoveryPlans/{{ .external_name }}"),
-
-	// load
-	//
-	// An existing Load Test can be imported into Terraform using the resource id
-	// /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}
-	"azurerm_load_test": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.LoadTestService/loadTests/{{ .external_name }}"),
 }

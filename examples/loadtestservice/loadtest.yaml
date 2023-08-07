@@ -1,0 +1,30 @@
+apiVersion: loadtestservice.azure.upbound.io/v1beta1
+kind: LoadTest
+metadata:
+  annotations:
+    meta.upbound.io/example-id: loadtestservice/v1beta1/loadtest
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-load-test
+
+
+---
+
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-load-test
+  labels:
+    testing.upbound.io/example-name: example-load-test
+spec:
+  forProvider:
+    location: "West Europe"
+    tags:
+      provisioner: crossplane

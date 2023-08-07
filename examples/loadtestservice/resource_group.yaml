@@ -1,0 +1,9 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-resources
+spec:
+  forProvider:
+    location: "West Europe"
+    tags:
+      provisioner: crossplane
