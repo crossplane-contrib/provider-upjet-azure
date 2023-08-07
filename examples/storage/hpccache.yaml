@@ -1,12 +1,68 @@
 apiVersion: storagecache.azure.upbound.io/v1beta1
 kind: HPCCache
 metadata:
-  name: example2
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccache
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-hpccache
 spec:
   forProvider:
     cacheSizeInGb: 3072
     location: West Europe
-    resourceGroupNameRef:
-      name: example-resources
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     skuName: Standard_2G
-    subnetId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-resources/providers/Microsoft.Network/virtualNetworks/deletemepls/subnets/default
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-hpccache
+spec:
+  forProvider:
+    addressPrefixes:
+      - 10.0.1.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-hpccache
+spec:
+  forProvider:
+    addressSpace:
+      - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storagecache/v1beta1/hpccache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-hpccache
+spec:
+  forProvider:
+    location: West Europe
