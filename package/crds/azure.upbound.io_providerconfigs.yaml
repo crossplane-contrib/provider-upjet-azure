@@ -102,6 +102,7 @@ spec:
                     - SystemAssignedManagedIdentity
                     - OIDCTokenFile
                     - Upbound
+                    - Filesystem
                     type: string
                 required:
                 - source
