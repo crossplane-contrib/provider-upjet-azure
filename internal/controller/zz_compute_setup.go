@@ -28,6 +28,7 @@ import (
 	sharedimagegallery "github.com/upbound/provider-azure/internal/controller/compute/sharedimagegallery"
 	snapshot "github.com/upbound/provider-azure/internal/controller/compute/snapshot"
 	sshpublickey "github.com/upbound/provider-azure/internal/controller/compute/sshpublickey"
+	virtualmachineextension "github.com/upbound/provider-azure/internal/controller/compute/virtualmachineextension"
 	windowsvirtualmachine "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachine"
 	windowsvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachinescaleset"
 )
@@ -55,6 +56,7 @@ func Setup_compute(mgr ctrl.Manager, o controller.Options) error {
 		sharedimagegallery.Setup,
 		snapshot.Setup,
 		sshpublickey.Setup,
+		virtualmachineextension.Setup,
 		windowsvirtualmachine.Setup,
 		windowsvirtualmachinescaleset.Setup,
 	} {

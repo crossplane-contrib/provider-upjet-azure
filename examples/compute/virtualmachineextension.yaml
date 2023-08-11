@@ -1,8 +1,33 @@
 apiVersion: compute.azure.upbound.io/v1beta1
+kind: VirtualMachineExtension
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/virtualmachineextension
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    publisher: Microsoft.Azure.Extensions
+    settings: |2
+       {
+        "commandToExecute": "hostname && uptime"
+       }
+    tags:
+      environment: Production
+    type: CustomScript
+    typeHandlerVersion: "2.0"
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta1
 kind: LinuxVirtualMachine
 metadata:
   annotations:
-    meta.upbound.io/example-id: compute/v1beta1/linuxvirtualmachine
+    meta.upbound.io/example-id: compute/v1beta1/virtualmachineextension
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -34,14 +59,14 @@ apiVersion: network.azure.upbound.io/v1beta1
 kind: NetworkInterface
 metadata:
   annotations:
-    meta.upbound.io/example-id: compute/v1beta1/linuxvirtualmachine
+    meta.upbound.io/example-id: compute/v1beta1/virtualmachineextension
   labels:
     testing.upbound.io/example-name: example
   name: example
 spec:
   forProvider:
     ipConfiguration:
-    - name: internal
+    - name: testconfiguration1
       privateIpAddressAllocation: Dynamic
       subnetIdSelector:
         matchLabels:
@@ -57,7 +82,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: compute/v1beta1/linuxvirtualmachine
+    meta.upbound.io/example-id: compute/v1beta1/virtualmachineextension
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -71,7 +96,7 @@ apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
-    meta.upbound.io/example-id: compute/v1beta1/linuxvirtualmachine
+    meta.upbound.io/example-id: compute/v1beta1/virtualmachineextension
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -92,7 +117,7 @@ apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
   annotations:
-    meta.upbound.io/example-id: compute/v1beta1/linuxvirtualmachine
+    meta.upbound.io/example-id: compute/v1beta1/virtualmachineextension
   labels:
     testing.upbound.io/example-name: example
   name: example

@@ -43,6 +43,10 @@ func Configure(p *config.Provider) {
 		}
 		r.MetaResource.ArgumentDocs["scale_in_policy"] = "Deprecated: scaleInPolicy will be removed in favour of the scaleIn code block."
 	})
+	p.AddResourceConfigurator("azurerm_virtual_machine_extension", func(r *config.Resource) {
+		r.Kind = "VirtualMachineExtension"
+		r.ShortGroup = "compute"
+	})
 	/* Note on testing:
 	* - create a storage account
 	* - upload a text file with *.vhd extension

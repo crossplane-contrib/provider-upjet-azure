@@ -178,6 +178,15 @@ func (l *SnapshotList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this VirtualMachineExtensionList.
+func (l *VirtualMachineExtensionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this WindowsVirtualMachineList.
 func (l *WindowsVirtualMachineList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
