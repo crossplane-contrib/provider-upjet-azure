@@ -53,7 +53,7 @@ type IntegrationRuntimeManagedCatalogInfoParameters struct {
 
 	// The endpoint of an Azure SQL Server that will be used to host the SSIS catalog.
 	// +kubebuilder:validation:Optional
-	ServerEndpoint *string `json:"serverEndpoint,omitempty" tf:"server_endpoint,omitempty"`
+	ServerEndpoint *string `json:"serverEndpoint" tf:"server_endpoint,omitempty"`
 }
 
 type IntegrationRuntimeManagedCustomSetupScriptInitParameters struct {
@@ -72,7 +72,7 @@ type IntegrationRuntimeManagedCustomSetupScriptParameters struct {
 
 	// The blob endpoint for the container which contains a custom setup script that will be run on every node on startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
 	// +kubebuilder:validation:Optional
-	BlobContainerURI *string `json:"blobContainerUri,omitempty" tf:"blob_container_uri,omitempty"`
+	BlobContainerURI *string `json:"blobContainerUri" tf:"blob_container_uri,omitempty"`
 
 	// A container SAS token that gives access to the files. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
 	// +kubebuilder:validation:Required
@@ -240,7 +240,7 @@ type IntegrationRuntimeManagedVnetIntegrationParameters struct {
 
 	// ID of the virtual network to which the nodes of the Managed Integration Runtime will be added.
 	// +kubebuilder:validation:Optional
-	VnetID *string `json:"vnetId,omitempty" tf:"vnet_id,omitempty"`
+	VnetID *string `json:"vnetId" tf:"vnet_id,omitempty"`
 }
 
 // IntegrationRuntimeManagedSpec defines the desired state of IntegrationRuntimeManaged

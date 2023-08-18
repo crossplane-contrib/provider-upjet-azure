@@ -173,7 +173,7 @@ type AudioParameters struct {
 
 	// The label of the job input which is to be used as an overlay. The input must specify exact one file. You can specify an image file in JPG, PNG, GIF or BMP format, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file.
 	// +kubebuilder:validation:Optional
-	InputLabel *string `json:"inputLabel,omitempty" tf:"input_label,omitempty"`
+	InputLabel *string `json:"inputLabel" tf:"input_label,omitempty"`
 
 	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
 	// +kubebuilder:validation:Optional
@@ -206,7 +206,7 @@ type BuiltinPresetParameters struct {
 
 	// The built-in preset to be used for encoding videos. The Possible values are AACGoodQualityAudio, AdaptiveStreaming, ContentAwareEncoding, ContentAwareEncodingExperimental, CopyAllBitrateNonInterleaved, DDGoodQualityAudio, H265AdaptiveStreaming, H265ContentAwareEncoding, H265SingleBitrate4K, H265SingleBitrate1080p, H265SingleBitrate720p, H264MultipleBitrate1080p, H264MultipleBitrateSD, H264MultipleBitrate720p, H264SingleBitrate1080p, H264SingleBitrateSD and H264SingleBitrate720p.
 	// +kubebuilder:validation:Optional
-	PresetName *string `json:"presetName,omitempty" tf:"preset_name,omitempty"`
+	PresetName *string `json:"presetName" tf:"preset_name,omitempty"`
 }
 
 type CodecInitParameters struct {
@@ -413,7 +413,7 @@ type CustomPresetParameters struct {
 
 	// One or more codec blocks as defined above.
 	// +kubebuilder:validation:Optional
-	Codec []CodecParameters `json:"codec,omitempty" tf:"codec,omitempty"`
+	Codec []CodecParameters `json:"codec" tf:"codec,omitempty"`
 
 	// A filter block as defined below.
 	// +kubebuilder:validation:Optional
@@ -421,7 +421,7 @@ type CustomPresetParameters struct {
 
 	// One or more format blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Format []FormatParameters `json:"format,omitempty" tf:"format,omitempty"`
+	Format []FormatParameters `json:"format" tf:"format,omitempty"`
 }
 
 type DdAudioInitParameters struct {
@@ -579,11 +579,11 @@ type FadeInParameters struct {
 
 	// The duration of the fade effect in the video. The value can be in ISO 8601 format (For example, PT05S to fade In/Out a color during 5 seconds), or a frame count (For example, 10 to fade 10 frames from the start time), or a relative value to stream duration (For example, 10% to fade 10% of stream duration).
 	// +kubebuilder:validation:Optional
-	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration *string `json:"duration" tf:"duration,omitempty"`
 
 	// The color for the fade in/out. It can be on the CSS Level1 colors or an RGB/hex value: e.g: rgb(255,0,0), 0xFF0000 or #FF0000.
 	// +kubebuilder:validation:Optional
-	FadeColor *string `json:"fadeColor,omitempty" tf:"fade_color,omitempty"`
+	FadeColor *string `json:"fadeColor" tf:"fade_color,omitempty"`
 
 	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
 	// +kubebuilder:validation:Optional
@@ -618,11 +618,11 @@ type FadeOutParameters struct {
 
 	// The duration of the fade effect in the video. The value can be in ISO 8601 format (For example, PT05S to fade In/Out a color during 5 seconds), or a frame count (For example, 10 to fade 10 frames from the start time), or a relative value to stream duration (For example, 10% to fade 10% of stream duration).
 	// +kubebuilder:validation:Optional
-	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration *string `json:"duration" tf:"duration,omitempty"`
 
 	// The color for the fade in/out. It can be on the CSS Level1 colors or an RGB/hex value: e.g: rgb(255,0,0), 0xFF0000 or #FF0000.
 	// +kubebuilder:validation:Optional
-	FadeColor *string `json:"fadeColor,omitempty" tf:"fade_color,omitempty"`
+	FadeColor *string `json:"fadeColor" tf:"fade_color,omitempty"`
 
 	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
 	// +kubebuilder:validation:Optional
@@ -962,7 +962,7 @@ type H265VideoLayerParameters struct {
 
 	// The average bitrate in bits per second at which to encode the input video when generating this layer.
 	// +kubebuilder:validation:Optional
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *float64 `json:"bitrate" tf:"bitrate,omitempty"`
 
 	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. The default is 5 seconds (PT5S).
 	// +kubebuilder:validation:Optional
@@ -1197,7 +1197,7 @@ type JpgImageParameters struct {
 
 	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
 	// +kubebuilder:validation:Optional
-	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+	Start *string `json:"start" tf:"start,omitempty"`
 
 	// The intervals at which thumbnails are generated. The value can be in ISO 8601 format (For example, PT05S for one image every 5 seconds), or a frame count (For example, 30 for one image every 30 frames), or a relative value to stream duration (For example, 10% for one image every 10% of stream duration). Note: Step value will affect the first generated thumbnail, which may not be exactly the one specified at transform preset start time. This is due to the encoder, which tries to select the best thumbnail between start time and Step position from start time as the first output. As the default value is 10%, it means if stream has long duration, the first generated thumbnail might be far away from the one specified at start time. Try to select reasonable value for Step if the first thumbnail is expected close to start time, or set Range value at 1 if only one thumbnail is needed at start time.
 	// +kubebuilder:validation:Optional
@@ -1228,7 +1228,7 @@ type JpgParameters struct {
 
 	// The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename.
 	// +kubebuilder:validation:Optional
-	FilenamePattern *string `json:"filenamePattern,omitempty" tf:"filename_pattern,omitempty"`
+	FilenamePattern *string `json:"filenamePattern" tf:"filename_pattern,omitempty"`
 }
 
 type LayerInitParameters struct {
@@ -1339,7 +1339,7 @@ type LayerParameters struct {
 
 	// The average bitrate in bits per second at which to encode the input video when generating this layer.
 	// +kubebuilder:validation:Optional
-	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
+	Bitrate *float64 `json:"bitrate" tf:"bitrate,omitempty"`
 
 	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. The default is 5 seconds (PT5S).
 	// +kubebuilder:validation:Optional
@@ -1412,7 +1412,7 @@ type Mp4Parameters struct {
 
 	// The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename.
 	// +kubebuilder:validation:Optional
-	FilenamePattern *string `json:"filenamePattern,omitempty" tf:"filename_pattern,omitempty"`
+	FilenamePattern *string `json:"filenamePattern" tf:"filename_pattern,omitempty"`
 
 	// One or more output_file blocks as defined above.
 	// +kubebuilder:validation:Optional
@@ -1435,7 +1435,7 @@ type OutputFileParameters struct {
 
 	// The list of labels that describe how the encoder should multiplex video and audio into an output file. For example, if the encoder is producing two video layers with labels v1 and v2, and one audio layer with label a1, then an array like ["v1", "a1"] tells the encoder to produce an output file with the video track represented by v1 and the audio track represented by a1.
 	// +kubebuilder:validation:Optional
-	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels []*string `json:"labels" tf:"labels,omitempty"`
 }
 
 type OutputInitParameters struct {
@@ -1659,7 +1659,7 @@ type PngImageParameters struct {
 
 	// The start position, with reference to the input video, at which the overlay starts. The value should be in ISO 8601 format. For example, PT05S to start the overlay at 5 seconds into the input video. If not specified the overlay starts from the beginning of the input video.
 	// +kubebuilder:validation:Optional
-	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+	Start *string `json:"start" tf:"start,omitempty"`
 
 	// The intervals at which thumbnails are generated. The value can be in ISO 8601 format (For example, PT05S for one image every 5 seconds), or a frame count (For example, 30 for one image every 30 frames), or a relative value to stream duration (For example, 10% for one image every 10% of stream duration). Note: Step value will affect the first generated thumbnail, which may not be exactly the one specified at transform preset start time. This is due to the encoder, which tries to select the best thumbnail between start time and Step position from start time as the first output. As the default value is 10%, it means if stream has long duration, the first generated thumbnail might be far away from the one specified at start time. Try to select reasonable value for Step if the first thumbnail is expected close to start time, or set Range value at 1 if only one thumbnail is needed at start time.
 	// +kubebuilder:validation:Optional
@@ -1690,7 +1690,7 @@ type PngParameters struct {
 
 	// The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename.
 	// +kubebuilder:validation:Optional
-	FilenamePattern *string `json:"filenamePattern,omitempty" tf:"filename_pattern,omitempty"`
+	FilenamePattern *string `json:"filenamePattern" tf:"filename_pattern,omitempty"`
 }
 
 type PositionInitParameters struct {
@@ -1929,14 +1929,14 @@ type TransportStreamOutputFileParameters struct {
 
 	// The list of labels that describe how the encoder should multiplex video and audio into an output file. For example, if the encoder is producing two video layers with labels v1 and v2, and one audio layer with label a1, then an array like ["v1", "a1"] tells the encoder to produce an output file with the video track represented by v1 and the audio track represented by a1.
 	// +kubebuilder:validation:Optional
-	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
+	Labels []*string `json:"labels" tf:"labels,omitempty"`
 }
 
 type TransportStreamParameters struct {
 
 	// The file naming pattern used for the creation of output files. The following macros are supported in the file name: {Basename} - An expansion macro that will use the name of the input video file. If the base name(the file suffix is not included) of the input video file is less than 32 characters long, the base name of input video files will be used. If the length of base name of the input video file exceeds 32 characters, the base name is truncated to the first 32 characters in total length. {Extension} - The appropriate extension for this format. {Label} - The label assigned to the codec/layer. {Index} - A unique index for thumbnails. Only applicable to thumbnails. {AudioStream} - string "Audio" plus audio stream number(start from 1). {Bitrate} - The audio/video bitrate in kbps. Not applicable to thumbnails. {Codec} - The type of the audio/video codec. {Resolution} - The video resolution. Any unsubstituted macros will be collapsed and removed from the filename.
 	// +kubebuilder:validation:Optional
-	FilenamePattern *string `json:"filenamePattern,omitempty" tf:"filename_pattern,omitempty"`
+	FilenamePattern *string `json:"filenamePattern" tf:"filename_pattern,omitempty"`
 
 	// One or more output_file blocks as defined above.
 	// +kubebuilder:validation:Optional
@@ -2125,7 +2125,7 @@ type VideoParameters struct {
 
 	// The label of the job input which is to be used as an overlay. The input must specify exact one file. You can specify an image file in JPG, PNG, GIF or BMP format, or an audio file (such as a WAV, MP3, WMA or M4A file), or a video file.
 	// +kubebuilder:validation:Optional
-	InputLabel *string `json:"inputLabel,omitempty" tf:"input_label,omitempty"`
+	InputLabel *string `json:"inputLabel" tf:"input_label,omitempty"`
 
 	// The opacity of the overlay. The value should be in the range between 0 to 1.0. Default to 1.0, which means the overlay is opaque.
 	// +kubebuilder:validation:Optional

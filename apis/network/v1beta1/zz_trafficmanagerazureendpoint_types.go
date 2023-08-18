@@ -35,11 +35,11 @@ type CustomHeaderParameters struct {
 
 	// The name of the custom header.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of custom header. Applicable for HTTP and HTTPS protocol.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type TrafficManagerAzureEndpointInitParameters struct {
@@ -176,7 +176,7 @@ type TrafficManagerAzureEndpointSubnetParameters struct {
 
 	// The first IP Address in this subnet.
 	// +kubebuilder:validation:Optional
-	First *string `json:"first,omitempty" tf:"first,omitempty"`
+	First *string `json:"first" tf:"first,omitempty"`
 
 	// The last IP Address in this subnet.
 	// +kubebuilder:validation:Optional

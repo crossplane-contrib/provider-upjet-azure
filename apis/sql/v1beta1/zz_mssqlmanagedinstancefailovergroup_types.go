@@ -118,7 +118,7 @@ type MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyParameters 
 
 	// The failover mode. Possible values are Automatic or Manual.
 	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
 type PartnerRegionInitParameters struct {

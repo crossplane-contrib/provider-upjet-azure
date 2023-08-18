@@ -110,11 +110,11 @@ type TagRuleTagFilterParameters struct {
 
 	// The action for a filtering tag. Possible values are Include and Exclude is allowed. Note that the Exclude takes priority over the Include.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The name of this tag_filter.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of this tag_filter.
 	// +kubebuilder:validation:Optional

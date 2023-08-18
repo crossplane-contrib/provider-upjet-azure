@@ -117,7 +117,7 @@ type PermissionScopeParameters struct {
 
 	// A permissions block as defined below.
 	// +kubebuilder:validation:Optional
-	Permissions []PermissionsParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
+	Permissions []PermissionsParameters `json:"permissions" tf:"permissions,omitempty"`
 
 	// The container name (when service is set to blob) or the file share name (when service is set to file), used by the Storage Account Local User.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
@@ -134,7 +134,7 @@ type PermissionScopeParameters struct {
 
 	// The storage service used by this Storage Account Local User. Possible values are blob and file.
 	// +kubebuilder:validation:Optional
-	Service *string `json:"service,omitempty" tf:"service,omitempty"`
+	Service *string `json:"service" tf:"service,omitempty"`
 }
 
 type PermissionsInitParameters struct {
@@ -222,7 +222,7 @@ type SSHAuthorizedKeyParameters struct {
 
 	// The public key value of this SSH authorized key.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 }
 
 // AccountLocalUserSpec defines the desired state of AccountLocalUser

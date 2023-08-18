@@ -71,7 +71,7 @@ type HPCCacheAccessPolicyAccessRuleParameters struct {
 
 	// The access level for this rule. Possible values are: rw, ro, no.
 	// +kubebuilder:validation:Optional
-	Access *string `json:"access,omitempty" tf:"access,omitempty"`
+	Access *string `json:"access" tf:"access,omitempty"`
 
 	// The anonymous GID used when root_squash_enabled is true.
 	// +kubebuilder:validation:Optional
@@ -91,7 +91,7 @@ type HPCCacheAccessPolicyAccessRuleParameters struct {
 
 	// The scope of this rule. The scope and (potentially) the filter determine which clients match the rule. Possible values are: default, network, host.
 	// +kubebuilder:validation:Optional
-	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+	Scope *string `json:"scope" tf:"scope,omitempty"`
 
 	// Whether allow access to subdirectories under the root export?
 	// +kubebuilder:validation:Optional

@@ -74,23 +74,23 @@ type SpacecraftLinksParameters struct {
 
 	// Bandwidth in Mhz.
 	// +kubebuilder:validation:Optional
-	BandwidthMhz *float64 `json:"bandwidthMhz,omitempty" tf:"bandwidth_mhz,omitempty"`
+	BandwidthMhz *float64 `json:"bandwidthMhz" tf:"bandwidth_mhz,omitempty"`
 
 	// Center frequency in Mhz.
 	// +kubebuilder:validation:Optional
-	CenterFrequencyMhz *float64 `json:"centerFrequencyMhz,omitempty" tf:"center_frequency_mhz,omitempty"`
+	CenterFrequencyMhz *float64 `json:"centerFrequencyMhz" tf:"center_frequency_mhz,omitempty"`
 
 	// Direction if the communication. Possible values are Uplink and Downlink.
 	// +kubebuilder:validation:Optional
-	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
+	Direction *string `json:"direction" tf:"direction,omitempty"`
 
 	// Name of the link.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Polarization. Possible values are RHCP, LHCP, linearVertical and linearHorizontal.
 	// +kubebuilder:validation:Optional
-	Polarization *string `json:"polarization,omitempty" tf:"polarization,omitempty"`
+	Polarization *string `json:"polarization" tf:"polarization,omitempty"`
 }
 
 type SpacecraftObservation struct {

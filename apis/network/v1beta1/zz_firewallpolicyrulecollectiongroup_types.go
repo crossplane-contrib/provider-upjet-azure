@@ -47,19 +47,19 @@ type ApplicationRuleCollectionParameters struct {
 
 	// The action to take for the application rules in this collection. Possible values are Allow and Deny.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The name which should be used for this application rule collection.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The priority of the application rule collection. The range is 100 - 65000.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// One or more application_rule (application rule) blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Rule []ApplicationRuleCollectionRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule []ApplicationRuleCollectionRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
 
 type ApplicationRuleCollectionRuleInitParameters struct {
@@ -158,7 +158,7 @@ type ApplicationRuleCollectionRuleParameters struct {
 
 	// The name which should be used for this network rule collection.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies a list of network protocols this rule applies to. Possible values are Any, TCP, UDP, ICMP.
 	// +kubebuilder:validation:Optional
@@ -284,19 +284,19 @@ type NATRuleCollectionParameters struct {
 
 	// The action to take for the NAT rules in this collection. Currently, the only possible value is Dnat.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The name which should be used for this NAT rule collection.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The priority of the NAT rule collection. The range is 100 - 65000.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// A nat_rule (NAT rule) block as defined below.
 	// +kubebuilder:validation:Optional
-	Rule []NATRuleCollectionRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule []NATRuleCollectionRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
 
 type NATRuleCollectionRuleInitParameters struct {
@@ -371,11 +371,11 @@ type NATRuleCollectionRuleParameters struct {
 
 	// The name which should be used for this network rule collection.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies a list of network protocols this rule applies to. Possible values are Any, TCP, UDP, ICMP.
 	// +kubebuilder:validation:Optional
-	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+	Protocols []*string `json:"protocols" tf:"protocols,omitempty"`
 
 	// Specifies a list of source IP addresses (including CIDR, IP range and *).
 	// +kubebuilder:validation:Optional
@@ -395,7 +395,7 @@ type NATRuleCollectionRuleParameters struct {
 
 	// Specifies the translated port.
 	// +kubebuilder:validation:Optional
-	TranslatedPort *float64 `json:"translatedPort,omitempty" tf:"translated_port,omitempty"`
+	TranslatedPort *float64 `json:"translatedPort" tf:"translated_port,omitempty"`
 }
 
 type NetworkRuleCollectionInitParameters struct {
@@ -432,19 +432,19 @@ type NetworkRuleCollectionParameters struct {
 
 	// The action to take for the network rules in this collection. Possible values are Allow and Deny.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The name which should be used for this network rule collection.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The priority of the network rule collection. The range is 100 - 65000.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// One or more network_rule (network rule) blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Rule []NetworkRuleCollectionRuleParameters `json:"rule,omitempty" tf:"rule,omitempty"`
+	Rule []NetworkRuleCollectionRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
 
 type NetworkRuleCollectionRuleInitParameters struct {
@@ -517,15 +517,15 @@ type NetworkRuleCollectionRuleParameters struct {
 
 	// Specifies a list of destination ports.
 	// +kubebuilder:validation:Optional
-	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
+	DestinationPorts []*string `json:"destinationPorts" tf:"destination_ports,omitempty"`
 
 	// The name which should be used for this network rule collection.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies a list of network protocols this rule applies to. Possible values are Any, TCP, UDP, ICMP.
 	// +kubebuilder:validation:Optional
-	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+	Protocols []*string `json:"protocols" tf:"protocols,omitempty"`
 
 	// Specifies a list of source IP addresses (including CIDR, IP range and *).
 	// +kubebuilder:validation:Optional
@@ -558,11 +558,11 @@ type ProtocolsParameters struct {
 
 	// Port number of the protocol. Range is 0-64000.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port" tf:"port,omitempty"`
 
 	// Protocol type. Possible values are Http and Https.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // FirewallPolicyRuleCollectionGroupSpec defines the desired state of FirewallPolicyRuleCollectionGroup

@@ -109,11 +109,11 @@ type AllowedParameters struct {
 
 	// A day in a week. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
 	// +kubebuilder:validation:Optional
-	Day *string `json:"day,omitempty" tf:"day,omitempty"`
+	Day *string `json:"day" tf:"day,omitempty"`
 
 	// An array of hour slots in a day. For example, specifying 1 will allow maintenance from 1:00am to 2:00am. Specifying 1, 2 will allow maintenance from 1:00am to 3:00m. Possible values are between 0 and 23.
 	// +kubebuilder:validation:Optional
-	Hours []*float64 `json:"hours,omitempty" tf:"hours,omitempty"`
+	Hours []*float64 `json:"hours" tf:"hours,omitempty"`
 }
 
 type AutoScalerProfileInitParameters struct {
@@ -384,7 +384,7 @@ type ConfidentialComputingParameters struct {
 
 	// Should the SGX quote helper be enabled?
 	// +kubebuilder:validation:Optional
-	SgxQuoteHelperEnabled *bool `json:"sgxQuoteHelperEnabled,omitempty" tf:"sgx_quote_helper_enabled,omitempty"`
+	SgxQuoteHelperEnabled *bool `json:"sgxQuoteHelperEnabled" tf:"sgx_quote_helper_enabled,omitempty"`
 }
 
 type ConnectorIdentityInitParameters struct {
@@ -687,7 +687,7 @@ type DefaultNodePoolParameters struct {
 
 	// The name which should be used for the default Kubernetes Node Pool. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The initial number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000 and between min_count and max_count.
 	// +kubebuilder:validation:Optional
@@ -773,7 +773,7 @@ type DefaultNodePoolParameters struct {
 
 	// The size of the Virtual Machine, such as Standard_DS2_v2.
 	// +kubebuilder:validation:Optional
-	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
+	VMSize *string `json:"vmSize" tf:"vm_size,omitempty"`
 
 	// The ID of a Subnet where the Kubernetes Node Pool should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
@@ -820,11 +820,11 @@ type GmsaParameters struct {
 
 	// Specifies the DNS server for Windows gMSA. Set this to an empty string if you have configured the DNS server in the VNet which was used to create the managed cluster.
 	// +kubebuilder:validation:Optional
-	DNSServer *string `json:"dnsServer,omitempty" tf:"dns_server,omitempty"`
+	DNSServer *string `json:"dnsServer" tf:"dns_server,omitempty"`
 
 	// Specifies the root domain name for Windows gMSA. Set this to an empty string if you have configured the DNS server in the VNet which was used to create the managed cluster.
 	// +kubebuilder:validation:Optional
-	RootDomain *string `json:"rootDomain,omitempty" tf:"root_domain,omitempty"`
+	RootDomain *string `json:"rootDomain" tf:"root_domain,omitempty"`
 }
 
 type HTTPProxyConfigInitParameters struct {
@@ -902,7 +902,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Kubernetes Cluster. Possible values are SystemAssigned or UserAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type IngressApplicationGatewayIdentityInitParameters struct {
@@ -1007,7 +1007,7 @@ type KeyManagementServiceParameters struct {
 
 	// Identifier of Azure Key Vault key. See key identifier format for more details. When Azure Key Vault key management service is enabled, this field is required and must be a valid key identifier. When enabled is false, leave the field empty.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
 
 	// Network access of the key vault Network access of key vault. The possible values are Public and Private. Public means the key vault allows public access from all networks. Private means the key vault disables public access and enables private link. The default value is Public.
 	// +kubebuilder:validation:Optional
@@ -1845,11 +1845,11 @@ type LinuxProfileParameters struct {
 
 	// The Admin Username for the Cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
+	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
 
 	// An ssh_key block. Only one is currently allowed. Changing this will update the key on all node pools. More information can be found in the documentation.
 	// +kubebuilder:validation:Optional
-	SSHKey []SSHKeyParameters `json:"sshKey,omitempty" tf:"ssh_key,omitempty"`
+	SSHKey []SSHKeyParameters `json:"sshKey" tf:"ssh_key,omitempty"`
 }
 
 type LoadBalancerProfileInitParameters struct {
@@ -1969,7 +1969,7 @@ type MicrosoftDefenderParameters struct {
 
 	// Specifies the ID of the Log Analytics Workspace where the audit logs collected by Microsoft Defender should be sent to.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId" tf:"log_analytics_workspace_id,omitempty"`
 }
 
 type MonitorMetricsInitParameters struct {
@@ -2171,7 +2171,7 @@ type NetworkProfileParameters struct {
 
 	// Network plugin to use for networking. Currently supported values are azure, kubenet and none. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	NetworkPlugin *string `json:"networkPlugin,omitempty" tf:"network_plugin,omitempty"`
+	NetworkPlugin *string `json:"networkPlugin" tf:"network_plugin,omitempty"`
 
 	// Specifies the network plugin mode used for building the Kubernetes network. Possible value is Overlay. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -2243,11 +2243,11 @@ type NotAllowedParameters struct {
 
 	// The end of a time span, formatted as an RFC3339 string.
 	// +kubebuilder:validation:Optional
-	End *string `json:"end,omitempty" tf:"end,omitempty"`
+	End *string `json:"end" tf:"end,omitempty"`
 
 	// The start of a time span, formatted as an RFC3339 string.
 	// +kubebuilder:validation:Optional
-	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+	Start *string `json:"start" tf:"start,omitempty"`
 }
 
 type OmsAgentIdentityInitParameters struct {
@@ -2293,7 +2293,7 @@ type OmsAgentParameters struct {
 
 	// The ID of the Log Analytics Workspace which the OMS Agent should send data to.
 	// +kubebuilder:validation:Optional
-	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId" tf:"log_analytics_workspace_id,omitempty"`
 
 	// Is managed identity authentication for monitoring enabled?
 	// +kubebuilder:validation:Optional
@@ -2316,7 +2316,7 @@ type SSHKeyParameters struct {
 
 	// The Public SSH Key used to access the cluster.
 	// +kubebuilder:validation:Optional
-	KeyData *string `json:"keyData,omitempty" tf:"key_data,omitempty"`
+	KeyData *string `json:"keyData" tf:"key_data,omitempty"`
 }
 
 type SecretIdentityInitParameters struct {
@@ -2353,7 +2353,7 @@ type ServiceMeshProfileParameters struct {
 
 	// The mode of the service mesh. Possible value is Istio.
 	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
 type ServicePrincipalInitParameters struct {
@@ -2372,7 +2372,7 @@ type ServicePrincipalParameters struct {
 
 	// The Client ID for the Service Principal.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The Client Secret for the Service Principal.
 	// +kubebuilder:validation:Required
@@ -2753,7 +2753,7 @@ type UpgradeSettingsParameters struct {
 
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	// +kubebuilder:validation:Optional
-	MaxSurge *string `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+	MaxSurge *string `json:"maxSurge" tf:"max_surge,omitempty"`
 }
 
 type WebAppRoutingInitParameters struct {
@@ -2772,7 +2772,7 @@ type WebAppRoutingParameters struct {
 
 	// Specifies the ID of the DNS Zone in which DNS entries are created for applications deployed to the cluster when Web App Routing is enabled. For Bring-Your-Own DNS zones this property should be set to an empty string "".
 	// +kubebuilder:validation:Optional
-	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
+	DNSZoneID *string `json:"dnsZoneId" tf:"dns_zone_id,omitempty"`
 }
 
 type WindowsProfileInitParameters struct {
@@ -2807,7 +2807,7 @@ type WindowsProfileParameters struct {
 
 	// The Admin Username for Windows VMs. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
+	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
 
 	// A gmsa block as defined below.
 	// +kubebuilder:validation:Optional

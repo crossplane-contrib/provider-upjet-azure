@@ -356,7 +356,7 @@ type AnalyticalStorageParameters struct {
 
 	// The schema type of the Analytical Storage for this Cosmos DB account. Possible values are FullFidelity and WellDefined.
 	// +kubebuilder:validation:Optional
-	SchemaType *string `json:"schemaType,omitempty" tf:"schema_type,omitempty"`
+	SchemaType *string `json:"schemaType" tf:"schema_type,omitempty"`
 }
 
 type BackupInitParameters struct {
@@ -405,7 +405,7 @@ type BackupParameters struct {
 
 	// The type of the backup. Possible values are Continuous and Periodic. Migration of Periodic to Continuous is one-way, changing Continuous to Periodic forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type CapabilitiesInitParameters struct {
@@ -424,7 +424,7 @@ type CapabilitiesParameters struct {
 
 	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type CapacityInitParameters struct {
@@ -443,7 +443,7 @@ type CapacityParameters struct {
 
 	// The total throughput limit imposed on this Cosmos DB account (RU/s). Possible values are at least -1. -1 means no limit.
 	// +kubebuilder:validation:Optional
-	TotalThroughputLimit *float64 `json:"totalThroughputLimit,omitempty" tf:"total_throughput_limit,omitempty"`
+	TotalThroughputLimit *float64 `json:"totalThroughputLimit" tf:"total_throughput_limit,omitempty"`
 }
 
 type ConsistencyPolicyInitParameters struct {
@@ -474,7 +474,7 @@ type ConsistencyPolicyParameters struct {
 
 	// The Consistency Level to use for this CosmosDB Account - can be either BoundedStaleness, Eventual, Session, Strong or ConsistentPrefix.
 	// +kubebuilder:validation:Optional
-	ConsistencyLevel *string `json:"consistencyLevel,omitempty" tf:"consistency_level,omitempty"`
+	ConsistencyLevel *string `json:"consistencyLevel" tf:"consistency_level,omitempty"`
 
 	// When used with the Bounded Staleness consistency level, this value represents the time amount of staleness (in seconds) tolerated. The accepted range for this value is 5 - 86400 (1 day). Defaults to 5. Required when consistency_level is set to BoundedStaleness.
 	// +kubebuilder:validation:Optional
@@ -525,23 +525,23 @@ type CorsRuleParameters struct {
 
 	// A list of headers that are allowed to be a part of the cross-origin request.
 	// +kubebuilder:validation:Optional
-	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
 
 	// A list of HTTP headers that are allowed to be executed by the origin. Valid options are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or PATCH.
 	// +kubebuilder:validation:Optional
-	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// A list of origin domains that will be allowed by CORS.
 	// +kubebuilder:validation:Optional
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// A list of response headers that are exposed to CORS clients.
 	// +kubebuilder:validation:Optional
-	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
+	ExposedHeaders []*string `json:"exposedHeaders" tf:"exposed_headers,omitempty"`
 
 	// The number of seconds the client should cache a preflight response.
 	// +kubebuilder:validation:Optional
-	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds" tf:"max_age_in_seconds,omitempty"`
 }
 
 type DatabaseInitParameters struct {
@@ -570,7 +570,7 @@ type DatabaseParameters struct {
 
 	// Specifies the name of the CosmosDB Account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type GeoLocationInitParameters struct {
@@ -604,11 +604,11 @@ type GeoLocationParameters struct {
 
 	// The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists. Changing this causes the location to be re-provisioned and cannot be changed for the location with failover priority 0.
 	// +kubebuilder:validation:Optional
-	FailoverPriority *float64 `json:"failoverPriority,omitempty" tf:"failover_priority,omitempty"`
+	FailoverPriority *float64 `json:"failoverPriority" tf:"failover_priority,omitempty"`
 
 	// The name of the Azure region to host replicated data.
 	// +kubebuilder:validation:Optional
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+	Location *string `json:"location" tf:"location,omitempty"`
 
 	// Should zone redundancy be enabled for this region? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -647,7 +647,7 @@ type IdentityParameters struct {
 
 	// The Type of Managed Identity assigned to this Cosmos account. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RestoreInitParameters struct {
@@ -679,7 +679,7 @@ type RestoreParameters struct {
 
 	// The creation time of the database or the collection (Datetime Format RFC 3339). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	RestoreTimestampInUtc *string `json:"restoreTimestampInUtc,omitempty" tf:"restore_timestamp_in_utc,omitempty"`
+	RestoreTimestampInUtc *string `json:"restoreTimestampInUtc" tf:"restore_timestamp_in_utc,omitempty"`
 
 	// The resource ID of the restorable database account from which the restore has to be initiated. The example is /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Account
@@ -718,7 +718,7 @@ type VirtualNetworkRuleParameters struct {
 
 	// The ID of the virtual network subnet.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 
 	// If set to true, the specified subnet will be added as a virtual network rule even if its CosmosDB service endpoint is not active. Defaults to false.
 	// +kubebuilder:validation:Optional

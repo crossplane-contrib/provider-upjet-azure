@@ -53,7 +53,7 @@ type ImportParameters struct {
 
 	// Specifies the name of the SQL administrator.
 	// +kubebuilder:validation:Optional
-	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
+	AdministratorLogin *string `json:"administratorLogin" tf:"administrator_login,omitempty"`
 
 	// Specifies the password of the SQL administrator.
 	// +kubebuilder:validation:Required
@@ -61,7 +61,7 @@ type ImportParameters struct {
 
 	// Specifies the type of authentication used to access the server. Valid values are SQL or ADPassword.
 	// +kubebuilder:validation:Optional
-	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
+	AuthenticationType *string `json:"authenticationType" tf:"authentication_type,omitempty"`
 
 	// The resource id for the storage account used to store BACPAC file. If set, private endpoint connection will be created for the storage account. Must match storage account used for storage_uri parameter.
 	// +kubebuilder:validation:Optional
@@ -73,11 +73,11 @@ type ImportParameters struct {
 
 	// Specifies the type of access key for the storage account. Valid values are StorageAccessKey or SharedAccessKey.
 	// +kubebuilder:validation:Optional
-	StorageKeyType *string `json:"storageKeyType,omitempty" tf:"storage_key_type,omitempty"`
+	StorageKeyType *string `json:"storageKeyType" tf:"storage_key_type,omitempty"`
 
 	// Specifies the blob URI of the .bacpac file.
 	// +kubebuilder:validation:Optional
-	StorageURI *string `json:"storageUri,omitempty" tf:"storage_uri,omitempty"`
+	StorageURI *string `json:"storageUri" tf:"storage_uri,omitempty"`
 }
 
 type LongTermRetentionPolicyInitParameters struct {
@@ -444,7 +444,7 @@ type ShortTermRetentionPolicyParameters struct {
 
 	// Point In Time Restore configuration. Value has to be between 7 and 35.
 	// +kubebuilder:validation:Optional
-	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
+	RetentionDays *float64 `json:"retentionDays" tf:"retention_days,omitempty"`
 }
 
 type ThreatDetectionPolicyInitParameters struct {

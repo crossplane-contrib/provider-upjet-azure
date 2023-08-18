@@ -183,7 +183,7 @@ type NotificationParameters struct {
 
 	// The action of the artifact that wants to be subscribed for the Connected Registry. Possible values are push, delete and * (i.e. any).
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The digest of the artifact that wants to be subscribed for the Connected Registry.
 	// +kubebuilder:validation:Optional
@@ -191,7 +191,7 @@ type NotificationParameters struct {
 
 	// The name of the artifact that wants to be subscribed for the Connected Registry.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The tag of the artifact that wants to be subscribed for the Connected Registry.
 	// +kubebuilder:validation:Optional

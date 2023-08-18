@@ -100,11 +100,11 @@ type BusinessIdentityParameters struct {
 
 	// The authenticating body that provides unique business identities to organizations.
 	// +kubebuilder:validation:Optional
-	Qualifier *string `json:"qualifier,omitempty" tf:"qualifier,omitempty"`
+	Qualifier *string `json:"qualifier" tf:"qualifier,omitempty"`
 
 	// The value that identifies the documents that your logic apps receive.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // AppIntegrationAccountPartnerSpec defines the desired state of AppIntegrationAccountPartner

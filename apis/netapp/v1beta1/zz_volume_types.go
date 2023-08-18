@@ -48,7 +48,7 @@ type DataProtectionReplicationParameters struct {
 
 	// Location of the primary volume. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	RemoteVolumeLocation *string `json:"remoteVolumeLocation,omitempty" tf:"remote_volume_location,omitempty"`
+	RemoteVolumeLocation *string `json:"remoteVolumeLocation" tf:"remote_volume_location,omitempty"`
 
 	// Resource ID of the primary volume.
 	// +crossplane:generate:reference:type=Volume
@@ -66,7 +66,7 @@ type DataProtectionReplicationParameters struct {
 
 	// Replication frequency, supported values are '10minutes', 'hourly', 'daily', values are case sensitive.
 	// +kubebuilder:validation:Optional
-	ReplicationFrequency *string `json:"replicationFrequency,omitempty" tf:"replication_frequency,omitempty"`
+	ReplicationFrequency *string `json:"replicationFrequency" tf:"replication_frequency,omitempty"`
 }
 
 type DataProtectionSnapshotPolicyInitParameters struct {
@@ -141,7 +141,7 @@ type ExportPolicyRuleParameters struct {
 
 	// A list of allowed clients IPv4 addresses.
 	// +kubebuilder:validation:Optional
-	AllowedClients []*string `json:"allowedClients,omitempty" tf:"allowed_clients,omitempty"`
+	AllowedClients []*string `json:"allowedClients" tf:"allowed_clients,omitempty"`
 
 	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only one value is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
 	// +kubebuilder:validation:Optional
@@ -153,7 +153,7 @@ type ExportPolicyRuleParameters struct {
 
 	// The index number of the rule.
 	// +kubebuilder:validation:Optional
-	RuleIndex *float64 `json:"ruleIndex,omitempty" tf:"rule_index,omitempty"`
+	RuleIndex *float64 `json:"ruleIndex" tf:"rule_index,omitempty"`
 
 	// Is the file system on unix read only?
 	// +kubebuilder:validation:Optional

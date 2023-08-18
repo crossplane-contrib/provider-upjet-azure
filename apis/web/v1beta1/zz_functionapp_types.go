@@ -39,7 +39,7 @@ type ActiveDirectoryParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
 	// +kubebuilder:validation:Optional
@@ -156,7 +156,7 @@ type AuthSettingsParameters struct {
 
 	// Is Authentication enabled?
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// A facebook block as defined below.
 	// +kubebuilder:validation:Optional
@@ -217,11 +217,11 @@ type ConnectionStringParameters struct {
 
 	// The name of the Connection String.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The type of the Connection String. Possible values are APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub, PostgreSQL, RedisCache, ServiceBus, SQLAzure and SQLServer.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The value for the Connection String.
 	// +kubebuilder:validation:Required
@@ -250,7 +250,7 @@ type CorsParameters struct {
 
 	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
 	// +kubebuilder:validation:Optional
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// Are credentials supported?
 	// +kubebuilder:validation:Optional
@@ -279,7 +279,7 @@ type FacebookParameters struct {
 
 	// The App ID of the Facebook app used for login
 	// +kubebuilder:validation:Optional
-	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+	AppID *string `json:"appId" tf:"app_id,omitempty"`
 
 	// The App Secret of the Facebook app used for Facebook login.
 	// +kubebuilder:validation:Required
@@ -565,7 +565,7 @@ type GoogleParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
 	// +kubebuilder:validation:Required
@@ -743,7 +743,7 @@ type IdentityParameters struct {
 
 	// Specifies the identity type of the Function App. Possible values are SystemAssigned (where Azure will generate a Service Principal for you), UserAssigned where you can specify the Service Principal IDs in the identity_ids field, and SystemAssigned, UserAssigned which assigns both a system managed identity as well as the specified user assigned identities.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type MicrosoftInitParameters struct {
@@ -768,7 +768,7 @@ type MicrosoftParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
 	// +kubebuilder:validation:Required
@@ -1223,7 +1223,7 @@ type TwitterParameters struct {
 
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	// +kubebuilder:validation:Optional
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// +kubebuilder:validation:Required

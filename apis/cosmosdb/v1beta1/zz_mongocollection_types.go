@@ -54,7 +54,7 @@ type MongoCollectionIndexParameters struct {
 
 	// Specifies the list of user settable keys for each Cosmos DB Mongo Collection.
 	// +kubebuilder:validation:Optional
-	Keys []*string `json:"keys,omitempty" tf:"keys,omitempty"`
+	Keys []*string `json:"keys" tf:"keys,omitempty"`
 
 	// Is the index unique or not? Defaults to false.
 	// +kubebuilder:validation:Optional

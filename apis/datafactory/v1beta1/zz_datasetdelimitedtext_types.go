@@ -41,7 +41,7 @@ type AzureBlobFsLocationParameters struct {
 
 	// The storage data lake gen2 file system on the Azure Blob Storage Account hosting the file.
 	// +kubebuilder:validation:Optional
-	FileSystem *string `json:"fileSystem,omitempty" tf:"file_system,omitempty"`
+	FileSystem *string `json:"fileSystem" tf:"file_system,omitempty"`
 
 	// The filename of the file.
 	// +kubebuilder:validation:Optional
@@ -98,7 +98,7 @@ type DataSetDelimitedTextAzureBlobStorageLocationParameters struct {
 
 	// The container on the Azure Blob Storage Account hosting the file.
 	// +kubebuilder:validation:Optional
-	Container *string `json:"container,omitempty" tf:"container,omitempty"`
+	Container *string `json:"container" tf:"container,omitempty"`
 
 	// Is the container using dynamic expression, function or system variables? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -169,15 +169,15 @@ type DataSetDelimitedTextHTTPServerLocationParameters struct {
 
 	// The filename of the file on the web server.
 	// +kubebuilder:validation:Optional
-	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+	Filename *string `json:"filename" tf:"filename,omitempty"`
 
 	// The folder path to the file on the web server.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 
 	// The base URL to the web server hosting the file.
 	// +kubebuilder:validation:Optional
-	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
+	RelativeURL *string `json:"relativeUrl" tf:"relative_url,omitempty"`
 }
 
 type DataSetDelimitedTextInitParameters struct {
@@ -437,7 +437,7 @@ type DataSetDelimitedTextSchemaColumnParameters struct {
 
 	// The name of the column.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Type of the column. Valid values are Byte, Byte[], Boolean, Date, DateTime,DateTimeOffset, Decimal, Double, Guid, Int16, Int32, Int64, Single, String, TimeSpan. Please note these values are case sensitive.
 	// +kubebuilder:validation:Optional

@@ -61,7 +61,7 @@ type PacketCaptureFilterParameters struct {
 
 	// The Protocol to be filtered on. Possible values include Any, TCP and UDP. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// The remote IP Address to be filtered on. Notation: "127.0.0.1" for single address entry. "127.0.0.1-127.0.0.255" for range. "127.0.0.1;127.0.0.5;" for multiple entries. Multiple ranges not currently supported. Mixing ranges with multiple entries not currently supported.. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

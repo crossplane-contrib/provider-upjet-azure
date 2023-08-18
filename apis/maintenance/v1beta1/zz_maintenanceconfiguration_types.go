@@ -251,11 +251,11 @@ type WindowParameters struct {
 
 	// Effective start date of the maintenance window in YYYY-MM-DD hh:mm format.
 	// +kubebuilder:validation:Optional
-	StartDateTime *string `json:"startDateTime,omitempty" tf:"start_date_time,omitempty"`
+	StartDateTime *string `json:"startDateTime" tf:"start_date_time,omitempty"`
 
 	// The time zone for the maintenance window. A list of timezones can be obtained by executing [System.TimeZoneInfo]::GetSystemTimeZones() in PowerShell.
 	// +kubebuilder:validation:Optional
-	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
+	TimeZone *string `json:"timeZone" tf:"time_zone,omitempty"`
 }
 
 type WindowsInitParameters struct {

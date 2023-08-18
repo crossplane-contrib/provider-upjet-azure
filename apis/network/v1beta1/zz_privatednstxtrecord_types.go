@@ -106,7 +106,7 @@ type PrivateDNSTXTRecordRecordParameters struct {
 
 	// The value of the TXT record. Max length: 1024 characters
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // PrivateDNSTXTRecordSpec defines the desired state of PrivateDNSTXTRecord

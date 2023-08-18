@@ -35,11 +35,11 @@ type AdditionalWorkspaceParameters struct {
 
 	// A list of data types which sent to workspace. Possible values are Alerts and RawEvents.
 	// +kubebuilder:validation:Optional
-	DataTypes []*string `json:"dataTypes,omitempty" tf:"data_types,omitempty"`
+	DataTypes []*string `json:"dataTypes" tf:"data_types,omitempty"`
 
 	// The resource ID of the Log Analytics Workspace.
 	// +kubebuilder:validation:Optional
-	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+	WorkspaceID *string `json:"workspaceId" tf:"workspace_id,omitempty"`
 }
 
 type IOTSecuritySolutionInitParameters struct {

@@ -53,11 +53,11 @@ type CustomRulesParameters struct {
 
 	// Type of action. Possible values are Allow, Block and Log.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// One or more match_conditions blocks as defined below.
 	// +kubebuilder:validation:Optional
-	MatchConditions []MatchConditionsParameters `json:"matchConditions,omitempty" tf:"match_conditions,omitempty"`
+	MatchConditions []MatchConditionsParameters `json:"matchConditions" tf:"match_conditions,omitempty"`
 
 	// Gets name of the resource that is unique within a policy. This name can be used to access the resource.
 	// +kubebuilder:validation:Optional
@@ -65,11 +65,11 @@ type CustomRulesParameters struct {
 
 	// Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// Describes the type of rule. Possible values are MatchRule and Invalid.
 	// +kubebuilder:validation:Optional
-	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
+	RuleType *string `json:"ruleType" tf:"rule_type,omitempty"`
 }
 
 type ExcludedRuleSetInitParameters struct {
@@ -147,7 +147,7 @@ type ManagedRuleSetParameters struct {
 
 	// The rule set version. Possible values: 0.1, 1.0, 2.2.9, 3.0, 3.1 and 3.2.
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 type ManagedRulesExclusionInitParameters struct {
@@ -188,15 +188,15 @@ type ManagedRulesExclusionParameters struct {
 
 	// The name of the Match Variable. Possible values: RequestArgKeys, RequestArgNames, RequestArgValues, RequestCookieKeys, RequestCookieNames, RequestCookieValues, RequestHeaderKeys, RequestHeaderNames, RequestHeaderValues.
 	// +kubebuilder:validation:Optional
-	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
 
 	// Describes field of the matchVariable collection
 	// +kubebuilder:validation:Optional
-	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+	Selector *string `json:"selector" tf:"selector,omitempty"`
 
 	// Describes operator to be matched. Possible values: Contains, EndsWith, Equals, EqualsAny, StartsWith.
 	// +kubebuilder:validation:Optional
-	SelectorMatchOperator *string `json:"selectorMatchOperator,omitempty" tf:"selector_match_operator,omitempty"`
+	SelectorMatchOperator *string `json:"selectorMatchOperator" tf:"selector_match_operator,omitempty"`
 }
 
 type ManagedRulesInitParameters struct {
@@ -225,7 +225,7 @@ type ManagedRulesParameters struct {
 
 	// One or more managed_rule_set block defined below.
 	// +kubebuilder:validation:Optional
-	ManagedRuleSet []ManagedRuleSetParameters `json:"managedRuleSet,omitempty" tf:"managed_rule_set,omitempty"`
+	ManagedRuleSet []ManagedRuleSetParameters `json:"managedRuleSet" tf:"managed_rule_set,omitempty"`
 }
 
 type MatchConditionsInitParameters struct {
@@ -272,7 +272,7 @@ type MatchConditionsParameters struct {
 
 	// One or more match_variables blocks as defined below.
 	// +kubebuilder:validation:Optional
-	MatchVariables []MatchVariablesParameters `json:"matchVariables,omitempty" tf:"match_variables,omitempty"`
+	MatchVariables []MatchVariablesParameters `json:"matchVariables" tf:"match_variables,omitempty"`
 
 	// Describes if this is negate condition or not
 	// +kubebuilder:validation:Optional
@@ -280,7 +280,7 @@ type MatchConditionsParameters struct {
 
 	// Describes operator to be matched. Possible values are Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith, EndsWith and Regex.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of transformations to do before the match is attempted. Possible values are HtmlEntityDecode, Lowercase, RemoveNulls, Trim, UrlDecode and UrlEncode.
 	// +kubebuilder:validation:Optional
@@ -313,7 +313,7 @@ type MatchVariablesParameters struct {
 
 	// The name of the Match Variable. Possible values are RemoteAddr, RequestMethod, QueryString, PostArgs, RequestUri, RequestHeaders, RequestBody and RequestCookies.
 	// +kubebuilder:validation:Optional
-	VariableName *string `json:"variableName,omitempty" tf:"variable_name,omitempty"`
+	VariableName *string `json:"variableName" tf:"variable_name,omitempty"`
 }
 
 type PolicySettingsInitParameters struct {
@@ -424,7 +424,7 @@ type RuleGroupOverrideParameters struct {
 
 	// The name of the Rule Group. Possible values are BadBots, crs_20_protocol_violations, crs_21_protocol_anomalies, crs_23_request_limits, crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks, crs_41_sql_injection_attacks, crs_41_xss_attacks, crs_42_tight_security, crs_45_trojans, General, GoodBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION, REQUEST-944-APPLICATION-ATTACK-JAVA and UnknownBots.
 	// +kubebuilder:validation:Optional
-	RuleGroupName *string `json:"ruleGroupName,omitempty" tf:"rule_group_name,omitempty"`
+	RuleGroupName *string `json:"ruleGroupName" tf:"rule_group_name,omitempty"`
 }
 
 type RuleGroupOverrideRuleInitParameters struct {
@@ -463,7 +463,7 @@ type RuleGroupOverrideRuleParameters struct {
 
 	// Identifier for the managed rule.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 }
 
 type RuleGroupParameters struct {
@@ -474,7 +474,7 @@ type RuleGroupParameters struct {
 
 	// The name of the Rule Group. Possible values are BadBots, crs_20_protocol_violations, crs_21_protocol_anomalies, crs_23_request_limits, crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks, crs_41_sql_injection_attacks, crs_41_xss_attacks, crs_42_tight_security, crs_45_trojans, General, GoodBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION, REQUEST-944-APPLICATION-ATTACK-JAVA and UnknownBots.
 	// +kubebuilder:validation:Optional
-	RuleGroupName *string `json:"ruleGroupName,omitempty" tf:"rule_group_name,omitempty"`
+	RuleGroupName *string `json:"ruleGroupName" tf:"rule_group_name,omitempty"`
 }
 
 type WebApplicationFirewallPolicyInitParameters struct {

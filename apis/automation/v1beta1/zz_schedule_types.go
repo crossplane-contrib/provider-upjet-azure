@@ -35,11 +35,11 @@ type MonthlyOccurrenceParameters struct {
 
 	// Day of the occurrence. Must be one of Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday.
 	// +kubebuilder:validation:Optional
-	Day *string `json:"day,omitempty" tf:"day,omitempty"`
+	Day *string `json:"day" tf:"day,omitempty"`
 
 	// Occurrence of the week within the month. Must be between 1 and 5. -1 for last week within the month.
 	// +kubebuilder:validation:Optional
-	Occurrence *float64 `json:"occurrence,omitempty" tf:"occurrence,omitempty"`
+	Occurrence *float64 `json:"occurrence" tf:"occurrence,omitempty"`
 }
 
 type ScheduleInitParameters struct {

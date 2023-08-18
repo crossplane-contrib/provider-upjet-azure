@@ -98,7 +98,7 @@ type InputParameters struct {
 
 	// The input data type of this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type OutputInitParameters struct {
@@ -117,7 +117,7 @@ type OutputParameters struct {
 
 	// The output data type from this JavaScript Function. Possible values include any, array, bigint, datetime, float, nvarchar(max) and record.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // FunctionJavascriptUdaSpec defines the desired state of FunctionJavascriptUda

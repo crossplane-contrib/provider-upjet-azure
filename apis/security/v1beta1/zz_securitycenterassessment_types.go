@@ -111,7 +111,7 @@ type StatusParameters struct {
 
 	// Specifies the programmatic code of the assessment status. Possible values are Healthy, Unhealthy and NotApplicable.
 	// +kubebuilder:validation:Optional
-	Code *string `json:"code,omitempty" tf:"code,omitempty"`
+	Code *string `json:"code" tf:"code,omitempty"`
 
 	// Specifies the human readable description of the assessment status.
 	// +kubebuilder:validation:Optional

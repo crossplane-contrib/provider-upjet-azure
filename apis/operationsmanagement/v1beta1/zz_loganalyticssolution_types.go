@@ -141,7 +141,7 @@ type PlanParameters struct {
 
 	// The product name of the solution. For example OMSGallery/Containers. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+	Product *string `json:"product" tf:"product,omitempty"`
 
 	// A promotion code to be used with the solution. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -149,7 +149,7 @@ type PlanParameters struct {
 
 	// The publisher of the solution. For example Microsoft. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 }
 
 // LogAnalyticsSolutionSpec defines the desired state of LogAnalyticsSolution

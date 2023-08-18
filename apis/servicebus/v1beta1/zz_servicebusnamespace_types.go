@@ -41,7 +41,7 @@ type CustomerManagedKeyParameters struct {
 
 	// The ID of the User Assigned Identity that has access to the key.
 	// +kubebuilder:validation:Optional
-	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
+	IdentityID *string `json:"identityId" tf:"identity_id,omitempty"`
 
 	// Used to specify whether enable Infrastructure Encryption (Double Encryption). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -49,7 +49,7 @@ type CustomerManagedKeyParameters struct {
 
 	// The ID of the Key Vault Key which should be used to Encrypt the data in this ServiceBus Namespace.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
 }
 
 type IdentityInitParameters struct {
@@ -84,7 +84,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this ServiceBus Namespace. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ServiceBusNamespaceInitParameters struct {

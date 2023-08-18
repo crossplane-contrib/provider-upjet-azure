@@ -65,11 +65,11 @@ type LinkedServiceSQLServerKeyVaultConnectionStringParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
-	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
 
 	// Specifies the secret name in Azure Key Vault that stores SQL Server connection string.
 	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceSQLServerKeyVaultPasswordInitParameters struct {
@@ -104,7 +104,7 @@ type LinkedServiceSQLServerKeyVaultPasswordParameters struct {
 
 	// Specifies the secret name in Azure Key Vault that stores SQL Server password.
 	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceSQLServerObservation struct {

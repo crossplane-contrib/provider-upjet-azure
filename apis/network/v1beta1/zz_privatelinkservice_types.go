@@ -50,11 +50,11 @@ type NATIPConfigurationParameters struct {
 
 	// Specifies the name which should be used for the NAT IP Configuration. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Is this is the Primary IP Configuration? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+	Primary *bool `json:"primary" tf:"primary,omitempty"`
 
 	// Specifies a Private Static IP Address for this IP Configuration.
 	// +kubebuilder:validation:Optional

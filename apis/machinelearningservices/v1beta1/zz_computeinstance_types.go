@@ -74,7 +74,7 @@ type ComputeInstanceIdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ComputeInstanceInitParameters struct {
@@ -235,7 +235,7 @@ type ComputeInstanceSSHParameters struct {
 
 	// Specifies the SSH rsa public key file as a string. Use "ssh-keygen -t rsa -b 2048" to generate your SSH key pairs.
 	// +kubebuilder:validation:Optional
-	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
+	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`
 }
 
 // ComputeInstanceSpec defines the desired state of ComputeInstance

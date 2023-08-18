@@ -161,11 +161,11 @@ type GalleriesParameters struct {
 
 	// Category for the gallery.
 	// +kubebuilder:validation:Optional
-	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+	Category *string `json:"category" tf:"category,omitempty"`
 
 	// Name of the workbook template in the gallery.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Order of the template within the gallery. Defaults to 0.
 	// +kubebuilder:validation:Optional

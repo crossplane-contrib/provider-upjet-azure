@@ -146,7 +146,7 @@ type EncryptionParameters struct {
 
 	// The ID of the Key Vault Key which should be used to Encrypt the data in this Automation Account.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
 
 	// The User Assigned Managed Identity ID to be used for accessing the Customer Managed Key for encryption.
 	// +kubebuilder:validation:Optional
@@ -185,7 +185,7 @@ type IdentityParameters struct {
 
 	// The type of identity used for this Automation Account. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type PrivateEndpointConnectionInitParameters struct {

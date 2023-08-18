@@ -35,11 +35,11 @@ type BackupParameters struct {
 
 	// Sets the backup frequency. Currently, only Daily is supported
 	// +kubebuilder:validation:Optional
-	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+	Frequency *string `json:"frequency" tf:"frequency,omitempty"`
 
 	// The time of day to perform the backup in 24-hour format. Times must be either on the hour or half hour (e.g. 12:00, 12:30, 13:00, etc.)
 	// +kubebuilder:validation:Optional
-	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+	Time *string `json:"time" tf:"time,omitempty"`
 }
 
 type BackupPolicyFileShareInitParameters struct {
@@ -162,7 +162,7 @@ type RetentionDailyParameters struct {
 
 	// The number of daily backups to keep. Must be between 1 and 200 (inclusive)
 	// +kubebuilder:validation:Optional
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count" tf:"count,omitempty"`
 }
 
 type RetentionMonthlyInitParameters struct {
@@ -193,15 +193,15 @@ type RetentionMonthlyParameters struct {
 
 	// The number of monthly backups to keep. Must be between 1 and 120
 	// +kubebuilder:validation:Optional
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count" tf:"count,omitempty"`
 
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +kubebuilder:validation:Optional
-	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
+	Weekdays []*string `json:"weekdays" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
 	// +kubebuilder:validation:Optional
-	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
+	Weeks []*string `json:"weeks" tf:"weeks,omitempty"`
 }
 
 type RetentionWeeklyInitParameters struct {
@@ -226,11 +226,11 @@ type RetentionWeeklyParameters struct {
 
 	// The number of daily backups to keep. Must be between 1 and 200 (inclusive)
 	// +kubebuilder:validation:Optional
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count" tf:"count,omitempty"`
 
 	// The weekday backups to retain. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +kubebuilder:validation:Optional
-	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
+	Weekdays []*string `json:"weekdays" tf:"weekdays,omitempty"`
 }
 
 type RetentionYearlyInitParameters struct {
@@ -267,19 +267,19 @@ type RetentionYearlyParameters struct {
 
 	// The number of yearly backups to keep. Must be between 1 and 10
 	// +kubebuilder:validation:Optional
-	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+	Count *float64 `json:"count" tf:"count,omitempty"`
 
 	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, Augest, September, October, November and December.
 	// +kubebuilder:validation:Optional
-	Months []*string `json:"months,omitempty" tf:"months,omitempty"`
+	Months []*string `json:"months" tf:"months,omitempty"`
 
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +kubebuilder:validation:Optional
-	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
+	Weekdays []*string `json:"weekdays" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
 	// +kubebuilder:validation:Optional
-	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
+	Weeks []*string `json:"weeks" tf:"weeks,omitempty"`
 }
 
 // BackupPolicyFileShareSpec defines the desired state of BackupPolicyFileShare

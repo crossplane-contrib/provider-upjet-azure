@@ -45,11 +45,11 @@ type DefinitionParameters struct {
 
 	// The name which should be used for this Subnet Service Endpoint Storage Policy Definition.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies a list of resources that this Subnet Service Endpoint Storage Policy Definition applies to.
 	// +kubebuilder:validation:Optional
-	ServiceResources []*string `json:"serviceResources,omitempty" tf:"service_resources,omitempty"`
+	ServiceResources []*string `json:"serviceResources" tf:"service_resources,omitempty"`
 }
 
 type SubnetServiceEndpointStoragePolicyInitParameters struct {

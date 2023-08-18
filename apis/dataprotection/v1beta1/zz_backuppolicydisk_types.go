@@ -125,19 +125,19 @@ type RetentionRuleParameters struct {
 
 	// A criteria block as defined below. Changing this forces a new Backup Policy Disk to be created.
 	// +kubebuilder:validation:Optional
-	Criteria []CriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
+	Criteria []CriteriaParameters `json:"criteria" tf:"criteria,omitempty"`
 
 	// Duration of deletion after given timespan. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy Disk to be created.
 	// +kubebuilder:validation:Optional
-	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration *string `json:"duration" tf:"duration,omitempty"`
 
 	// The name which should be used for this retention rule. Changing this forces a new Backup Policy Disk to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Retention Tag priority. Changing this forces a new Backup Policy Disk to be created.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 }
 
 // BackupPolicyDiskSpec defines the desired state of BackupPolicyDisk

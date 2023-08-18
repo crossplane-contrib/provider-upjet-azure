@@ -76,7 +76,7 @@ type AdditionalLocationParameters struct {
 
 	// The name of the Azure Region in which the API Management Service should be expanded to.
 	// +kubebuilder:validation:Optional
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+	Location *string `json:"location" tf:"location,omitempty"`
 
 	// ID of a standard SKU IPv4 Public IP.
 	// +kubebuilder:validation:Optional
@@ -124,7 +124,7 @@ type CertificateParameters struct {
 
 	// The name of the Certificate Store where this certificate should be stored. Possible values are CertificateAuthority and Root.
 	// +kubebuilder:validation:Optional
-	StoreName *string `json:"storeName,omitempty" tf:"store_name,omitempty"`
+	StoreName *string `json:"storeName" tf:"store_name,omitempty"`
 }
 
 type DelegationInitParameters struct {
@@ -298,7 +298,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this API Management Service. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ManagementInitParameters struct {
@@ -976,7 +976,7 @@ type SignInParameters struct {
 
 	// Should anonymous users be redirected to the sign in page?
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type SignUpInitParameters struct {
@@ -1001,11 +1001,11 @@ type SignUpParameters struct {
 
 	// Can users sign up on the development portal?
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// A terms_of_service block as defined below.
 	// +kubebuilder:validation:Optional
-	TermsOfService []TermsOfServiceParameters `json:"termsOfService,omitempty" tf:"terms_of_service,omitempty"`
+	TermsOfService []TermsOfServiceParameters `json:"termsOfService" tf:"terms_of_service,omitempty"`
 }
 
 type TenantAccessInitParameters struct {
@@ -1027,7 +1027,7 @@ type TenantAccessParameters struct {
 
 	// Should the access to the management API be enabled?
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type TermsOfServiceInitParameters struct {
@@ -1058,11 +1058,11 @@ type TermsOfServiceParameters struct {
 
 	// Should the user be asked for consent during sign up?
 	// +kubebuilder:validation:Optional
-	ConsentRequired *bool `json:"consentRequired,omitempty" tf:"consent_required,omitempty"`
+	ConsentRequired *bool `json:"consentRequired" tf:"consent_required,omitempty"`
 
 	// Should Terms of Service be displayed during sign up?.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// The Terms of Service which users are required to agree to in order to sign up.
 	// +kubebuilder:validation:Optional

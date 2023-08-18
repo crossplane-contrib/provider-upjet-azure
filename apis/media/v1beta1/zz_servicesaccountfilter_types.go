@@ -159,7 +159,7 @@ type ServicesAccountFilterPresentationTimeRangeParameters struct {
 
 	// Specified as the number of milliseconds in one unit timescale. For example, if you want to set a start_in_units at 30 seconds, you would use a value of 30 when using the unit_timescale_in_milliseconds in 1000. Or if you want to set start_in_units in 30 milliseconds, you would use a value of 30 when using the unit_timescale_in_milliseconds in 1. Applies timescale to start_in_units, start_timescale and presentation_window_in_timescale and live_backoff_in_timescale.
 	// +kubebuilder:validation:Optional
-	UnitTimescaleInMilliseconds *float64 `json:"unitTimescaleInMilliseconds,omitempty" tf:"unit_timescale_in_milliseconds,omitempty"`
+	UnitTimescaleInMilliseconds *float64 `json:"unitTimescaleInMilliseconds" tf:"unit_timescale_in_milliseconds,omitempty"`
 }
 
 type ServicesAccountFilterTrackSelectionInitParameters struct {
@@ -178,7 +178,7 @@ type ServicesAccountFilterTrackSelectionParameters struct {
 
 	// One or more selection blocks as defined above.
 	// +kubebuilder:validation:Optional
-	Condition []TrackSelectionConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+	Condition []TrackSelectionConditionParameters `json:"condition" tf:"condition,omitempty"`
 }
 
 type TrackSelectionConditionInitParameters struct {
@@ -209,15 +209,15 @@ type TrackSelectionConditionParameters struct {
 
 	// The condition operation to test a track property against. Supported values are Equal and NotEqual.
 	// +kubebuilder:validation:Optional
-	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+	Operation *string `json:"operation" tf:"operation,omitempty"`
 
 	// The track property to compare. Supported values are Bitrate, FourCC, Language, Name and Type. Check documentation for more details.
 	// +kubebuilder:validation:Optional
-	Property *string `json:"property,omitempty" tf:"property,omitempty"`
+	Property *string `json:"property" tf:"property,omitempty"`
 
 	// The track property value to match or not match.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // ServicesAccountFilterSpec defines the desired state of ServicesAccountFilter

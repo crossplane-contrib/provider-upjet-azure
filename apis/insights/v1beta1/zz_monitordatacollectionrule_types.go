@@ -29,7 +29,7 @@ type AzureMonitorMetricsParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ColumnInitParameters struct {
@@ -54,11 +54,11 @@ type ColumnParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Data Collection Rule. Possible values are SystemAssigned and UserAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type DataFlowInitParameters struct {
@@ -105,7 +105,7 @@ type DataFlowParameters struct {
 
 	// Specifies a list of destination names. A azure_monitor_metrics data source only allows for stream of kind Microsoft-InsightsMetrics.
 	// +kubebuilder:validation:Optional
-	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
+	Destinations []*string `json:"destinations" tf:"destinations,omitempty"`
 
 	// The output stream of the transform. Only required if the data flow changes data to a different stream.
 	// +kubebuilder:validation:Optional
@@ -113,7 +113,7 @@ type DataFlowParameters struct {
 
 	// Specifies a list of streams. Possible values include but not limited to Microsoft-Event, Microsoft-InsightsMetrics, Microsoft-Perf, Microsoft-Syslog,and Microsoft-WindowsEvent.
 	// +kubebuilder:validation:Optional
-	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
+	Streams []*string `json:"streams" tf:"streams,omitempty"`
 
 	// The KQL query to transform stream data.
 	// +kubebuilder:validation:Optional
@@ -136,7 +136,7 @@ type DataImportParameters struct {
 
 	// An event_hub_data_source block as defined below.
 	// +kubebuilder:validation:Optional
-	EventHubDataSource []EventHubDataSourceParameters `json:"eventHubDataSource,omitempty" tf:"event_hub_data_source,omitempty"`
+	EventHubDataSource []EventHubDataSourceParameters `json:"eventHubDataSource" tf:"event_hub_data_source,omitempty"`
 }
 
 type DataSourcesInitParameters struct {
@@ -369,11 +369,11 @@ type EventHubDataSourceParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The stream to collect from Event Hub. Possible value should be a custom stream name.
 	// +kubebuilder:validation:Optional
-	Stream *string `json:"stream,omitempty" tf:"stream,omitempty"`
+	Stream *string `json:"stream" tf:"stream,omitempty"`
 }
 
 type EventHubDirectInitParameters struct {
@@ -398,11 +398,11 @@ type EventHubDirectParameters struct {
 
 	// The resource ID of the Event Hub.
 	// +kubebuilder:validation:Optional
-	EventHubID *string `json:"eventHubId,omitempty" tf:"event_hub_id,omitempty"`
+	EventHubID *string `json:"eventHubId" tf:"event_hub_id,omitempty"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type EventHubInitParameters struct {
@@ -438,7 +438,7 @@ type EventHubParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ExtensionInitParameters struct {
@@ -485,7 +485,7 @@ type ExtensionParameters struct {
 
 	// The name of the VM extension.
 	// +kubebuilder:validation:Optional
-	ExtensionName *string `json:"extensionName,omitempty" tf:"extension_name,omitempty"`
+	ExtensionName *string `json:"extensionName" tf:"extension_name,omitempty"`
 
 	// Specifies a list of data sources this extension needs data from. An item should be a name of a supported data source which produces only one stream. Supported data sources type: performance_counter, windows_event_log,and syslog.
 	// +kubebuilder:validation:Optional
@@ -493,11 +493,11 @@ type ExtensionParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
 	// +kubebuilder:validation:Optional
-	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
+	Streams []*string `json:"streams" tf:"streams,omitempty"`
 }
 
 type IisLogInitParameters struct {
@@ -532,11 +532,11 @@ type IisLogParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
 	// +kubebuilder:validation:Optional
-	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
+	Streams []*string `json:"streams" tf:"streams,omitempty"`
 }
 
 type LabelIncludeFilterInitParameters struct {
@@ -561,11 +561,11 @@ type LabelIncludeFilterParameters struct {
 
 	// The label of the filter. This label should be unique across all label_include_fileter block. Possible value is microsoft_metrics_include_label.
 	// +kubebuilder:validation:Optional
-	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+	Label *string `json:"label" tf:"label,omitempty"`
 
 	// The value of the filter.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type LogAnalyticsInitParameters struct {
@@ -587,7 +587,7 @@ type LogAnalyticsParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID of a Log Analytic Workspace resource.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
@@ -644,15 +644,15 @@ type LogFileParameters struct {
 
 	// Specifies a list of file patterns where the log files are located. For example, C:\\JavaLogs\\*.log.
 	// +kubebuilder:validation:Optional
-	FilePatterns []*string `json:"filePatterns,omitempty" tf:"file_patterns,omitempty"`
+	FilePatterns []*string `json:"filePatterns" tf:"file_patterns,omitempty"`
 
 	// The data format of the log files. possible value is text.
 	// +kubebuilder:validation:Optional
-	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+	Format *string `json:"format" tf:"format,omitempty"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A settings block as defined below.
 	// +kubebuilder:validation:Optional
@@ -660,7 +660,7 @@ type LogFileParameters struct {
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
 	// +kubebuilder:validation:Optional
-	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
+	Streams []*string `json:"streams" tf:"streams,omitempty"`
 }
 
 type MonitorAccountInitParameters struct {
@@ -685,11 +685,11 @@ type MonitorAccountParameters struct {
 
 	// The resource ID of the Monitor Account.
 	// +kubebuilder:validation:Optional
-	MonitorAccountID *string `json:"monitorAccountId,omitempty" tf:"monitor_account_id,omitempty"`
+	MonitorAccountID *string `json:"monitorAccountId" tf:"monitor_account_id,omitempty"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type MonitorDataCollectionRuleIdentityInitParameters struct {
@@ -724,7 +724,7 @@ type MonitorDataCollectionRuleIdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Data Collection Rule. Possible values are SystemAssigned and UserAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type MonitorDataCollectionRuleInitParameters struct {
@@ -899,19 +899,19 @@ type PerformanceCounterParameters struct {
 
 	// Specifies a list of specifier names of the performance counters you want to collect. To get a list of performance counters on Windows, run the command typeperf. Please see this document for more information.
 	// +kubebuilder:validation:Optional
-	CounterSpecifiers []*string `json:"counterSpecifiers,omitempty" tf:"counter_specifiers,omitempty"`
+	CounterSpecifiers []*string `json:"counterSpecifiers" tf:"counter_specifiers,omitempty"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 300 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
 	// +kubebuilder:validation:Optional
-	SamplingFrequencyInSeconds *float64 `json:"samplingFrequencyInSeconds,omitempty" tf:"sampling_frequency_in_seconds,omitempty"`
+	SamplingFrequencyInSeconds *float64 `json:"samplingFrequencyInSeconds" tf:"sampling_frequency_in_seconds,omitempty"`
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
 	// +kubebuilder:validation:Optional
-	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
+	Streams []*string `json:"streams" tf:"streams,omitempty"`
 }
 
 type PlatformTelemetryInitParameters struct {
@@ -936,11 +936,11 @@ type PlatformTelemetryParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
 	// +kubebuilder:validation:Optional
-	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
+	Streams []*string `json:"streams" tf:"streams,omitempty"`
 }
 
 type PrometheusForwarderInitParameters struct {
@@ -975,11 +975,11 @@ type PrometheusForwarderParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
 	// +kubebuilder:validation:Optional
-	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
+	Streams []*string `json:"streams" tf:"streams,omitempty"`
 }
 
 type SettingsInitParameters struct {
@@ -998,7 +998,7 @@ type SettingsParameters struct {
 
 	// A text block as defined below.
 	// +kubebuilder:validation:Optional
-	Text []TextParameters `json:"text,omitempty" tf:"text,omitempty"`
+	Text []TextParameters `json:"text" tf:"text,omitempty"`
 }
 
 type StorageBlobDirectInitParameters struct {
@@ -1029,15 +1029,15 @@ type StorageBlobDirectParameters struct {
 
 	// The Storage Container name.
 	// +kubebuilder:validation:Optional
-	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+	ContainerName *string `json:"containerName" tf:"container_name,omitempty"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The resource ID of the Storage Account.
 	// +kubebuilder:validation:Optional
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+	StorageAccountID *string `json:"storageAccountId" tf:"storage_account_id,omitempty"`
 }
 
 type StorageBlobInitParameters struct {
@@ -1075,7 +1075,7 @@ type StorageBlobParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The resource ID of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
@@ -1120,15 +1120,15 @@ type StorageTableDirectParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The resource ID of the Storage Account.
 	// +kubebuilder:validation:Optional
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+	StorageAccountID *string `json:"storageAccountId" tf:"storage_account_id,omitempty"`
 
 	// The Storage Table name.
 	// +kubebuilder:validation:Optional
-	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+	TableName *string `json:"tableName" tf:"table_name,omitempty"`
 }
 
 type StreamDeclarationInitParameters struct {
@@ -1153,11 +1153,11 @@ type StreamDeclarationParameters struct {
 
 	// One or more column blocks as defined above.
 	// +kubebuilder:validation:Optional
-	Column []ColumnParameters `json:"column,omitempty" tf:"column,omitempty"`
+	Column []ColumnParameters `json:"column" tf:"column,omitempty"`
 
 	// The name of the custom stream. This name should be unique across all stream_declaration blocks.
 	// +kubebuilder:validation:Optional
-	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
+	StreamName *string `json:"streamName" tf:"stream_name,omitempty"`
 }
 
 type SyslogInitParameters struct {
@@ -1194,15 +1194,15 @@ type SyslogParameters struct {
 
 	// Specifies a list of facility names. Use a wildcard * to collect logs for all facility names. Possible values are auth, authpriv, cron, daemon, kern, lpr, mail, mark, news, syslog, user, uucp, local0, local1, local2, local3, local4, local5, local6, local7,and *.
 	// +kubebuilder:validation:Optional
-	FacilityNames []*string `json:"facilityNames,omitempty" tf:"facility_names,omitempty"`
+	FacilityNames []*string `json:"facilityNames" tf:"facility_names,omitempty"`
 
 	// Specifies a list of log levels. Use a wildcard * to collect logs for all log levels. Possible values are Debug, Info, Notice, Warning, Error, Critical, Alert, Emergency,and *.
 	// +kubebuilder:validation:Optional
-	LogLevels []*string `json:"logLevels,omitempty" tf:"log_levels,omitempty"`
+	LogLevels []*string `json:"logLevels" tf:"log_levels,omitempty"`
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
 	// +kubebuilder:validation:Optional
@@ -1225,7 +1225,7 @@ type TextParameters struct {
 
 	// The timestamp format of the text log files. Possible values are ISO 8601, YYYY-MM-DD HH:MM:SS, M/D/YYYY HH:MM:SS AM/PM, Mon DD, YYYY HH:MM:SS, yyMMdd HH:mm:ss, ddMMyy HH:mm:ss, MMM d hh:mm:ss, dd/MMM/yyyy:HH:mm:ss zzz,and yyyy-MM-ddTHH:mm:ssK.
 	// +kubebuilder:validation:Optional
-	RecordStartTimestampFormat *string `json:"recordStartTimestampFormat,omitempty" tf:"record_start_timestamp_format,omitempty"`
+	RecordStartTimestampFormat *string `json:"recordStartTimestampFormat" tf:"record_start_timestamp_format,omitempty"`
 }
 
 type WindowsEventLogInitParameters struct {
@@ -1256,15 +1256,15 @@ type WindowsEventLogParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
 	// +kubebuilder:validation:Optional
-	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
+	Streams []*string `json:"streams" tf:"streams,omitempty"`
 
 	// Specifies a list of Windows Event Log queries in XPath expression. Please see this document for more information.
 	// +kubebuilder:validation:Optional
-	XPathQueries []*string `json:"xPathQueries,omitempty" tf:"x_path_queries,omitempty"`
+	XPathQueries []*string `json:"xPathQueries" tf:"x_path_queries,omitempty"`
 }
 
 type WindowsFirewallLogInitParameters struct {
@@ -1289,11 +1289,11 @@ type WindowsFirewallLogParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
 	// +kubebuilder:validation:Optional
-	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
+	Streams []*string `json:"streams" tf:"streams,omitempty"`
 }
 
 // MonitorDataCollectionRuleSpec defines the desired state of MonitorDataCollectionRule

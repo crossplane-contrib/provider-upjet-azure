@@ -33,7 +33,7 @@ type AdminUserParameters struct {
 
 	// The username to use when signing in to Lab Service Lab VMs.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type AutoShutdownInitParameters struct {
@@ -363,7 +363,7 @@ type NonAdminUserParameters struct {
 
 	// The username to use when signing in to Lab Service Lab VMs.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type RosterInitParameters struct {
@@ -444,7 +444,7 @@ type SecurityParameters struct {
 
 	// Is open access enabled to allow any user or only specified users to register to a Lab Service Lab?
 	// +kubebuilder:validation:Optional
-	OpenAccessEnabled *bool `json:"openAccessEnabled,omitempty" tf:"open_access_enabled,omitempty"`
+	OpenAccessEnabled *bool `json:"openAccessEnabled" tf:"open_access_enabled,omitempty"`
 }
 
 type SkuInitParameters struct {
@@ -469,11 +469,11 @@ type SkuParameters struct {
 
 	// The capacity for the SKU. Possible values are between 0 and 400.
 	// +kubebuilder:validation:Optional
-	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
 
 	// The name of the SKU. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type VirtualMachineInitParameters struct {
@@ -538,7 +538,7 @@ type VirtualMachineParameters struct {
 
 	// An admin_user block as defined below.
 	// +kubebuilder:validation:Optional
-	AdminUser []AdminUserParameters `json:"adminUser,omitempty" tf:"admin_user,omitempty"`
+	AdminUser []AdminUserParameters `json:"adminUser" tf:"admin_user,omitempty"`
 
 	// The create option to indicate what Lab Service Lab VMs are created from. Possible values are Image and TemplateVM. Defaults to Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -546,7 +546,7 @@ type VirtualMachineParameters struct {
 
 	// An image_reference block as defined below.
 	// +kubebuilder:validation:Optional
-	ImageReference []ImageReferenceParameters `json:"imageReference,omitempty" tf:"image_reference,omitempty"`
+	ImageReference []ImageReferenceParameters `json:"imageReference" tf:"image_reference,omitempty"`
 
 	// A non_admin_user block as defined below.
 	// +kubebuilder:validation:Optional
@@ -558,7 +558,7 @@ type VirtualMachineParameters struct {
 
 	// A sku block as defined below.
 	// +kubebuilder:validation:Optional
-	Sku []SkuParameters `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku []SkuParameters `json:"sku" tf:"sku,omitempty"`
 
 	// The initial quota allocated to each Lab Service Lab user. Defaults to PT0S. This value must be formatted as an ISO 8601 string.
 	// +kubebuilder:validation:Optional

@@ -59,15 +59,15 @@ type CaptureDescriptionParameters struct {
 
 	// A destination block as defined below.
 	// +kubebuilder:validation:Optional
-	Destination []DestinationParameters `json:"destination,omitempty" tf:"destination,omitempty"`
+	Destination []DestinationParameters `json:"destination" tf:"destination,omitempty"`
 
 	// Specifies if the Capture Description is Enabled.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Specifies the Encoding used for the Capture Description. Possible values are Avro and AvroDeflate.
 	// +kubebuilder:validation:Optional
-	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
+	Encoding *string `json:"encoding" tf:"encoding,omitempty"`
 
 	// Specifies the time interval in seconds at which the capture will happen. Values can be between 60 and 900 seconds. Defaults to 300 seconds.
 	// +kubebuilder:validation:Optional
@@ -116,19 +116,19 @@ type DestinationParameters struct {
 
 	// The Blob naming convention for archiving. e.g. {Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}. Here all the parameters (Namespace,EventHub .. etc) are mandatory irrespective of order
 	// +kubebuilder:validation:Optional
-	ArchiveNameFormat *string `json:"archiveNameFormat,omitempty" tf:"archive_name_format,omitempty"`
+	ArchiveNameFormat *string `json:"archiveNameFormat" tf:"archive_name_format,omitempty"`
 
 	// The name of the Container within the Blob Storage Account where messages should be archived.
 	// +kubebuilder:validation:Optional
-	BlobContainerName *string `json:"blobContainerName,omitempty" tf:"blob_container_name,omitempty"`
+	BlobContainerName *string `json:"blobContainerName" tf:"blob_container_name,omitempty"`
 
 	// Specifies the name of the EventHub resource. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID of the Blob Storage Account where messages should be archived.
 	// +kubebuilder:validation:Optional
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+	StorageAccountID *string `json:"storageAccountId" tf:"storage_account_id,omitempty"`
 }
 
 type EventHubInitParameters struct {

@@ -41,15 +41,15 @@ type PolicyParameters struct {
 
 	// The name of the VPN Server Configuration Policy member.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The attribute type of the VPN Server Configuration Policy member. Possible values are AADGroupId, CertificateGroupId and RadiusAzureGroupId.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The value of the attribute that is used for the VPN Server Configuration Policy member.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type VPNServerConfigurationPolicyGroupInitParameters struct {

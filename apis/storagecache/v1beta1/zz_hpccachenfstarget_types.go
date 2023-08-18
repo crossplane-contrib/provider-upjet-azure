@@ -125,11 +125,11 @@ type NamespaceJunctionParameters struct {
 
 	// The NFS export of this NFS target within the HPC Cache NFS Target.
 	// +kubebuilder:validation:Optional
-	NFSExport *string `json:"nfsExport,omitempty" tf:"nfs_export,omitempty"`
+	NFSExport *string `json:"nfsExport" tf:"nfs_export,omitempty"`
 
 	// The client-facing file path of this NFS target within the HPC Cache NFS Target.
 	// +kubebuilder:validation:Optional
-	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
+	NamespacePath *string `json:"namespacePath" tf:"namespace_path,omitempty"`
 
 	// The relative subdirectory path from the nfs_export to map to the namespace_path. Defaults to "", in which case the whole nfs_export is exported.
 	// +kubebuilder:validation:Optional

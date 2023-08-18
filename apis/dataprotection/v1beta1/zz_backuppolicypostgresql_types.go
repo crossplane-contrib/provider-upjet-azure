@@ -121,19 +121,19 @@ type BackupPolicyPostgreSQLRetentionRuleParameters struct {
 
 	// A criteria block as defined below. Changing this forces a new Backup Policy PostgreSQL to be created.
 	// +kubebuilder:validation:Optional
-	Criteria []RetentionRuleCriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
+	Criteria []RetentionRuleCriteriaParameters `json:"criteria" tf:"criteria,omitempty"`
 
 	// Duration after which the backup is deleted. It should follow ISO 8601 duration format. Changing this forces a new Backup Policy PostgreSQL to be created.
 	// +kubebuilder:validation:Optional
-	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
+	Duration *string `json:"duration" tf:"duration,omitempty"`
 
 	// The name which should be used for this retention rule. Changing this forces a new Backup Policy PostgreSQL to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the priority of the rule. The priority number must be unique for each rule. The lower the priority number, the higher the priority of the rule. Changing this forces a new Backup Policy PostgreSQL to be created.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 }
 
 type RetentionRuleCriteriaInitParameters struct {

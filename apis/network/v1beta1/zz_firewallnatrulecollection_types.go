@@ -154,19 +154,19 @@ type FirewallNATRuleCollectionRuleParameters struct {
 
 	// A list of destination IP addresses and/or IP ranges.
 	// +kubebuilder:validation:Optional
-	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
+	DestinationAddresses []*string `json:"destinationAddresses" tf:"destination_addresses,omitempty"`
 
 	// A list of destination ports.
 	// +kubebuilder:validation:Optional
-	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
+	DestinationPorts []*string `json:"destinationPorts" tf:"destination_ports,omitempty"`
 
 	// Specifies the name of the rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A list of protocols. Possible values are Any, ICMP, TCP and UDP. If action is Dnat, protocols can only be TCP and UDP.
 	// +kubebuilder:validation:Optional
-	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+	Protocols []*string `json:"protocols" tf:"protocols,omitempty"`
 
 	// A list of source IP addresses and/or IP ranges.
 	// +kubebuilder:validation:Optional
@@ -178,11 +178,11 @@ type FirewallNATRuleCollectionRuleParameters struct {
 
 	// The address of the service behind the Firewall.
 	// +kubebuilder:validation:Optional
-	TranslatedAddress *string `json:"translatedAddress,omitempty" tf:"translated_address,omitempty"`
+	TranslatedAddress *string `json:"translatedAddress" tf:"translated_address,omitempty"`
 
 	// The port of the service behind the Firewall.
 	// +kubebuilder:validation:Optional
-	TranslatedPort *string `json:"translatedPort,omitempty" tf:"translated_port,omitempty"`
+	TranslatedPort *string `json:"translatedPort" tf:"translated_port,omitempty"`
 }
 
 // FirewallNATRuleCollectionSpec defines the desired state of FirewallNATRuleCollection

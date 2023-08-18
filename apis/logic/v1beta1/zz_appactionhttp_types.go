@@ -124,11 +124,11 @@ type RunAfterParameters struct {
 
 	// Specifies the name of the precedent HTTP Action.
 	// +kubebuilder:validation:Optional
-	ActionName *string `json:"actionName,omitempty" tf:"action_name,omitempty"`
+	ActionName *string `json:"actionName" tf:"action_name,omitempty"`
 
 	// Specifies the expected result of the precedent HTTP Action, only after which the current HTTP Action will be triggered. Possible values include Succeeded, Failed, Skipped and TimedOut.
 	// +kubebuilder:validation:Optional
-	ActionResult *string `json:"actionResult,omitempty" tf:"action_result,omitempty"`
+	ActionResult *string `json:"actionResult" tf:"action_result,omitempty"`
 }
 
 // AppActionHTTPSpec defines the desired state of AppActionHTTP

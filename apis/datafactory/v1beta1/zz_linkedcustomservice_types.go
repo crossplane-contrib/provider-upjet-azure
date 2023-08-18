@@ -35,7 +35,7 @@ type IntegrationRuntimeParameters struct {
 
 	// The integration runtime reference to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A map of parameters to associate with the integration runtime.
 	// +kubebuilder:validation:Optional

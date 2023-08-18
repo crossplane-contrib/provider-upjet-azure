@@ -53,15 +53,15 @@ type CorsParameters struct {
 
 	// A set of headers to be allowed via CORS.
 	// +kubebuilder:validation:Optional
-	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
 
 	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
 	// +kubebuilder:validation:Optional
-	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// A set of origins to be allowed via CORS.
 	// +kubebuilder:validation:Optional
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// If credentials are allowed via CORS.
 	// +kubebuilder:validation:Optional
@@ -102,12 +102,12 @@ type HealthcareFHIRServiceAuthenticationParameters struct {
 
 	// The intended audience to receive authentication tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
 	// +kubebuilder:validation:Optional
-	Audience *string `json:"audience,omitempty" tf:"audience,omitempty"`
+	Audience *string `json:"audience" tf:"audience,omitempty"`
 
 	// The Azure Active Directory (tenant) that serves as the authentication authority to access the service.
 	// Authority must be registered to Azure AD and in the following format: https://{Azure-AD-endpoint}/{tenant-id}.
 	// +kubebuilder:validation:Optional
-	Authority *string `json:"authority,omitempty" tf:"authority,omitempty"`
+	Authority *string `json:"authority" tf:"authority,omitempty"`
 
 	// Whether smart proxy is enabled.
 	// +kubebuilder:validation:Optional
@@ -146,7 +146,7 @@ type HealthcareFHIRServiceIdentityParameters struct {
 
 	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type HealthcareFHIRServiceInitParameters struct {
@@ -333,7 +333,7 @@ type OciArtifactParameters struct {
 
 	// An Azure container registry used for export operations of the service instance.
 	// +kubebuilder:validation:Optional
-	LoginServer *string `json:"loginServer,omitempty" tf:"login_server,omitempty"`
+	LoginServer *string `json:"loginServer" tf:"login_server,omitempty"`
 }
 
 // HealthcareFHIRServiceSpec defines the desired state of HealthcareFHIRService

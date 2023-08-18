@@ -38,7 +38,7 @@ type Instance0BGPPeeringAddressParameters struct {
 
 	// A list of custom BGP peering addresses to assign to this instance.
 	// +kubebuilder:validation:Optional
-	CustomIps []*string `json:"customIps,omitempty" tf:"custom_ips,omitempty"`
+	CustomIps []*string `json:"customIps" tf:"custom_ips,omitempty"`
 }
 
 type Instance1BGPPeeringAddressInitParameters struct {
@@ -66,7 +66,7 @@ type Instance1BGPPeeringAddressParameters struct {
 
 	// A list of custom BGP peering addresses to assign to this instance.
 	// +kubebuilder:validation:Optional
-	CustomIps []*string `json:"customIps,omitempty" tf:"custom_ips,omitempty"`
+	CustomIps []*string `json:"customIps" tf:"custom_ips,omitempty"`
 }
 
 type VPNGatewayBGPSettingsInitParameters struct {
@@ -106,7 +106,7 @@ type VPNGatewayBGPSettingsParameters struct {
 
 	// The ASN of the BGP Speaker. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
+	Asn *float64 `json:"asn" tf:"asn,omitempty"`
 
 	// An instance_bgp_peering_address block as defined below.
 	// +kubebuilder:validation:Optional
@@ -118,7 +118,7 @@ type VPNGatewayBGPSettingsParameters struct {
 
 	// The weight added to Routes learned from this BGP Speaker. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
+	PeerWeight *float64 `json:"peerWeight" tf:"peer_weight,omitempty"`
 }
 
 type VPNGatewayInitParameters struct {

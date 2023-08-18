@@ -241,7 +241,7 @@ type FileUploadParameters struct {
 
 	// The name of the root container where the files should be uploaded to. The container need not exist but should be creatable using the connection_string specified.
 	// +kubebuilder:validation:Optional
-	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+	ContainerName *string `json:"containerName" tf:"container_name,omitempty"`
 
 	// The period of time for which a file upload notification message is available to consume before it expires, specified as an ISO 8601 timespan duration. This value must be between 1 minute and 48 hours. Defaults to PT1H.
 	// +kubebuilder:validation:Optional
@@ -474,11 +474,11 @@ type IPRuleParameters struct {
 
 	// The IP address range in CIDR notation for the IP rule.
 	// +kubebuilder:validation:Optional
-	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
+	IPMask *string `json:"ipMask" tf:"ip_mask,omitempty"`
 
 	// The name of the sku. Possible values are B1, B2, B3, F1, S1, S2, and S3.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type IdentityInitParameters struct {
@@ -513,7 +513,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this IoT Hub. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type NetworkRuleSetInitParameters struct {
@@ -616,11 +616,11 @@ type SkuParameters struct {
 
 	// The number of provisioned IoT Hub units.
 	// +kubebuilder:validation:Optional
-	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
 
 	// The name of the sku. Possible values are B1, B2, B3, F1, S1, S2, and S3.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 // IOTHubSpec defines the desired state of IOTHub

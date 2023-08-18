@@ -110,11 +110,11 @@ type TagFilterParameters struct {
 
 	// The action is used to limit logs collection to include or exclude Azure resources with specific tags. Possible values are Include and Exclude. Note that the Exclude takes priority over the Include.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The name of the tag to match.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of the tag to match.
 	// +kubebuilder:validation:Optional

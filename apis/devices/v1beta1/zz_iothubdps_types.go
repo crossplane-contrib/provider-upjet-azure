@@ -152,11 +152,11 @@ type IOTHubDPSSkuParameters struct {
 
 	// The number of provisioned IoT Device Provisioning Service units.
 	// +kubebuilder:validation:Optional
-	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
 
 	// The name of the sku. Currently can only be set to S1.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type IPFilterRuleInitParameters struct {
@@ -193,15 +193,15 @@ type IPFilterRuleParameters struct {
 
 	// The desired action for requests captured by this rule. Possible values are Accept, Reject
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The IP address range in CIDR notation for the rule.
 	// +kubebuilder:validation:Optional
-	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
+	IPMask *string `json:"ipMask" tf:"ip_mask,omitempty"`
 
 	// The name of the filter.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Target for requests captured by this rule. Possible values are All, DeviceApi and ServiceApi.
 	// +kubebuilder:validation:Optional
@@ -251,7 +251,7 @@ type LinkedHubParameters struct {
 
 	// The location of the IoT hub.
 	// +kubebuilder:validation:Optional
-	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+	Location *string `json:"location" tf:"location,omitempty"`
 }
 
 // IOTHubDPSSpec defines the desired state of IOTHubDPS

@@ -202,7 +202,7 @@ type TrackSelectionParameters struct {
 
 	// One or more condition blocks as defined above.
 	// +kubebuilder:validation:Optional
-	Condition []ConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+	Condition []ConditionParameters `json:"condition" tf:"condition,omitempty"`
 }
 
 // AssetFilterSpec defines the desired state of AssetFilter

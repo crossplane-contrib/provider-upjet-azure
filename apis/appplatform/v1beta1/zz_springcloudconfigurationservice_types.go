@@ -85,11 +85,11 @@ type RepositoryParameters struct {
 
 	// Specifies the label of the repository.
 	// +kubebuilder:validation:Optional
-	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+	Label *string `json:"label" tf:"label,omitempty"`
 
 	// Specifies the name which should be used for this repository.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the password of git repository basic auth.
 	// +kubebuilder:validation:Optional
@@ -97,7 +97,7 @@ type RepositoryParameters struct {
 
 	// Specifies the collection of patterns of the repository.
 	// +kubebuilder:validation:Optional
-	Patterns []*string `json:"patterns,omitempty" tf:"patterns,omitempty"`
+	Patterns []*string `json:"patterns" tf:"patterns,omitempty"`
 
 	// Specifies the SSH private key of git repository.
 	// +kubebuilder:validation:Optional
@@ -113,7 +113,7 @@ type RepositoryParameters struct {
 
 	// Specifies the URI of the repository.
 	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+	URI *string `json:"uri" tf:"uri,omitempty"`
 
 	// Specifies the username of git repository basic auth.
 	// +kubebuilder:validation:Optional

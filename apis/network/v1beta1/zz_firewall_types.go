@@ -38,7 +38,7 @@ type FirewallIPConfigurationParameters struct {
 
 	// Specifies the name of the IP Configuration.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID of the Public IP Address associated with the firewall.
 	// +crossplane:generate:reference:type=PublicIP
@@ -245,11 +245,11 @@ type ManagementIPConfigurationParameters struct {
 
 	// Specifies the name of the IP Configuration.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID of the Public IP Address associated with the firewall.
 	// +kubebuilder:validation:Optional
-	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+	PublicIPAddressID *string `json:"publicIpAddressId" tf:"public_ip_address_id,omitempty"`
 
 	// Reference to the subnet associated with the IP Configuration. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Subnet
@@ -298,7 +298,7 @@ type VirtualHubParameters struct {
 
 	// Specifies the ID of the Virtual Hub where the Firewall resides in.
 	// +kubebuilder:validation:Optional
-	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
+	VirtualHubID *string `json:"virtualHubId" tf:"virtual_hub_id,omitempty"`
 }
 
 // FirewallSpec defines the desired state of Firewall

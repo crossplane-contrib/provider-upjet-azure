@@ -46,7 +46,7 @@ type EventHubParameters struct {
 
 	// The name of an EventHub.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type LoggerInitParameters struct {

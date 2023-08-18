@@ -29,7 +29,7 @@ type AutoPauseParameters struct {
 
 	// Number of minutes of idle time before the Spark Pool is automatically paused. Must be between 5 and 10080.
 	// +kubebuilder:validation:Optional
-	DelayInMinutes *float64 `json:"delayInMinutes,omitempty" tf:"delay_in_minutes,omitempty"`
+	DelayInMinutes *float64 `json:"delayInMinutes" tf:"delay_in_minutes,omitempty"`
 }
 
 type AutoScaleInitParameters struct {
@@ -54,11 +54,11 @@ type AutoScaleParameters struct {
 
 	// The maximum number of nodes the Spark Pool can support. Must be between 3 and 200.
 	// +kubebuilder:validation:Optional
-	MaxNodeCount *float64 `json:"maxNodeCount,omitempty" tf:"max_node_count,omitempty"`
+	MaxNodeCount *float64 `json:"maxNodeCount" tf:"max_node_count,omitempty"`
 
 	// The minimum number of nodes the Spark Pool can support. Must be between 3 and 200.
 	// +kubebuilder:validation:Optional
-	MinNodeCount *float64 `json:"minNodeCount,omitempty" tf:"min_node_count,omitempty"`
+	MinNodeCount *float64 `json:"minNodeCount" tf:"min_node_count,omitempty"`
 }
 
 type LibraryRequirementInitParameters struct {
@@ -83,11 +83,11 @@ type LibraryRequirementParameters struct {
 
 	// The content of library requirements.
 	// +kubebuilder:validation:Optional
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+	Content *string `json:"content" tf:"content,omitempty"`
 
 	// The name of the library requirements file.
 	// +kubebuilder:validation:Optional
-	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+	Filename *string `json:"filename" tf:"filename,omitempty"`
 }
 
 type SparkConfigInitParameters struct {
@@ -112,11 +112,11 @@ type SparkConfigParameters struct {
 
 	// The contents of a spark configuration.
 	// +kubebuilder:validation:Optional
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+	Content *string `json:"content" tf:"content,omitempty"`
 
 	// The name of the file where the spark configuration content will be stored.
 	// +kubebuilder:validation:Optional
-	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+	Filename *string `json:"filename" tf:"filename,omitempty"`
 }
 
 type SparkPoolInitParameters struct {

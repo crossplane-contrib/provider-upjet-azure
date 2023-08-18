@@ -35,11 +35,11 @@ type AuthorizationParameters struct {
 
 	// Specifies a role definition identifier for the provider. This role will define all the permissions that the provider must have on the managed application's container resource group. This role definition cannot have permission to delete the resource group.
 	// +kubebuilder:validation:Optional
-	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
+	RoleDefinitionID *string `json:"roleDefinitionId" tf:"role_definition_id,omitempty"`
 
 	// Specifies a service principal identifier for the provider. This is the identity that the provider will use to call ARM to manage the managed application resources.
 	// +kubebuilder:validation:Optional
-	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
+	ServicePrincipalID *string `json:"servicePrincipalId" tf:"service_principal_id,omitempty"`
 }
 
 type ManagedApplicationDefinitionInitParameters struct {

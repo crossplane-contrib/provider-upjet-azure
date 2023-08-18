@@ -172,7 +172,7 @@ type DataSetSnowflakeSchemaColumnParameters struct {
 
 	// The name of the column.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The total number of digits allowed.
 	// +kubebuilder:validation:Optional

@@ -72,7 +72,7 @@ type NetworkInterfaceIPConfigurationParameters struct {
 
 	// A name used for this IP Configuration.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Is this the Primary IP Configuration? Must be true for the first ip_configuration when multiple are specified. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -84,7 +84,7 @@ type NetworkInterfaceIPConfigurationParameters struct {
 
 	// The allocation method used for the Private IP Address. Possible values are Dynamic and Static.
 	// +kubebuilder:validation:Optional
-	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
+	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation" tf:"private_ip_address_allocation,omitempty"`
 
 	// The IP Version to use. Possible values are IPv4 or IPv6. Defaults to IPv4.
 	// +kubebuilder:validation:Optional

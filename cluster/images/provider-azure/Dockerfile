@@ -1,4 +1,4 @@
-FROM alpine:3.16.2 AS builder
+FROM alpine:3.18.3 AS builder
 RUN apk --no-cache add curl
 
 ARG TARGETOS
@@ -12,7 +12,7 @@ ARG TERRAFORM_PROVIDER_VERSION
 ARG TERRAFORM_PROVIDER_DOWNLOAD_NAME
 ## End of - Provider-dependent configuration
 
-RUN curl -L -o /tmp/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip \
+RUN curl -L -o /tmp/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip https://github.com/upbound/terraform/releases/download/v${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip \
   && unzip /tmp/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip -d /tmp/ \
   && chmod +x /tmp/terraform \
   && rm /tmp/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip \
@@ -22,7 +22,7 @@ RUN curl -L -o /tmp/terraform_${TERRAFORM_VERSION}_${TARGETOS}_${TARGETARCH}.zip
   && rm /tmp/${TERRAFORM_PROVIDER_DOWNLOAD_NAME}_${TERRAFORM_PROVIDER_VERSION}_${TARGETOS}_${TARGETARCH}.zip
 # End of - Setup Terraform environment
 
-FROM alpine:3.16.2 as base
+FROM alpine:3.18.3 as base
 
 ARG CROSSPLANE_PROVIDER_VERSION
 ARG TARGETOS

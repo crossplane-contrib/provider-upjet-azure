@@ -89,11 +89,11 @@ type RevokedCertificateParameters struct {
 
 	// A user-defined name of the root certificate.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the public data of the certificate.
 	// +kubebuilder:validation:Optional
-	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+	Thumbprint *string `json:"thumbprint" tf:"thumbprint,omitempty"`
 }
 
 type RootCertificateInitParameters struct {
@@ -118,11 +118,11 @@ type RootCertificateParameters struct {
 
 	// A user-defined name of the root certificate.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM). In particular, this argument must not include the -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers.
 	// +kubebuilder:validation:Optional
-	PublicCertData *string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty"`
+	PublicCertData *string `json:"publicCertData" tf:"public_cert_data,omitempty"`
 }
 
 type VPNClientConfigurationInitParameters struct {
@@ -218,7 +218,7 @@ type VPNClientConfigurationParameters struct {
 
 	// The address space out of which IP addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation.
 	// +kubebuilder:validation:Optional
-	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
+	AddressSpace []*string `json:"addressSpace" tf:"address_space,omitempty"`
 
 	// The address of the Radius server.
 	// +kubebuilder:validation:Optional

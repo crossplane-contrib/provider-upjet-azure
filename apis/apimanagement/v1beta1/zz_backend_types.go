@@ -202,11 +202,11 @@ type BackendProxyParameters struct {
 
 	// The URL of the proxy server.
 	// +kubebuilder:validation:Optional
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+	URL *string `json:"url" tf:"url,omitempty"`
 
 	// The username to connect to the proxy server.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type CredentialsInitParameters struct {
@@ -280,11 +280,11 @@ type ServerX509NameParameters struct {
 
 	// The thumbprint for the issuer of the certificate.
 	// +kubebuilder:validation:Optional
-	IssuerCertificateThumbprint *string `json:"issuerCertificateThumbprint,omitempty" tf:"issuer_certificate_thumbprint,omitempty"`
+	IssuerCertificateThumbprint *string `json:"issuerCertificateThumbprint" tf:"issuer_certificate_thumbprint,omitempty"`
 
 	// The common name of the certificate.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ServiceFabricClusterInitParameters struct {
@@ -341,11 +341,11 @@ type ServiceFabricClusterParameters struct {
 
 	// A list of cluster management endpoints.
 	// +kubebuilder:validation:Optional
-	ManagementEndpoints []*string `json:"managementEndpoints,omitempty" tf:"management_endpoints,omitempty"`
+	ManagementEndpoints []*string `json:"managementEndpoints" tf:"management_endpoints,omitempty"`
 
 	// The maximum number of retries when attempting resolve the partition.
 	// +kubebuilder:validation:Optional
-	MaxPartitionResolutionRetries *float64 `json:"maxPartitionResolutionRetries,omitempty" tf:"max_partition_resolution_retries,omitempty"`
+	MaxPartitionResolutionRetries *float64 `json:"maxPartitionResolutionRetries" tf:"max_partition_resolution_retries,omitempty"`
 
 	// A list of thumbprints of the server certificates of the Service Fabric cluster.
 	// +kubebuilder:validation:Optional

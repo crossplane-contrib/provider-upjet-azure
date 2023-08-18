@@ -33,7 +33,7 @@ type AdditionalUnattendContentParameters struct {
 
 	// The name of the setting to which the content applies. Possible values are AutoLogon and FirstLogonCommands. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Setting *string `json:"setting,omitempty" tf:"setting,omitempty"`
+	Setting *string `json:"setting" tf:"setting,omitempty"`
 }
 
 type WindowsVirtualMachineAdditionalCapabilitiesInitParameters struct {
@@ -120,7 +120,7 @@ type WindowsVirtualMachineGalleryApplicationParameters struct {
 
 	// Specifies the Gallery Application Version resource ID.
 	// +kubebuilder:validation:Optional
-	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
+	VersionID *string `json:"versionId" tf:"version_id,omitempty"`
 }
 
 type WindowsVirtualMachineIdentityInitParameters struct {
@@ -155,7 +155,7 @@ type WindowsVirtualMachineIdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Windows Virtual Machine. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type WindowsVirtualMachineInitParameters struct {
@@ -462,7 +462,7 @@ type WindowsVirtualMachineOsDiskDiffDiskSettingsParameters struct {
 
 	// Specifies the Ephemeral Disk Settings for the OS Disk. At this time the only possible value is Local. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Option *string `json:"option,omitempty" tf:"option,omitempty"`
+	Option *string `json:"option" tf:"option,omitempty"`
 
 	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -533,7 +533,7 @@ type WindowsVirtualMachineOsDiskParameters struct {
 
 	// The Type of Caching which should be used for the Internal OS Disk. Possible values are None, ReadOnly and ReadWrite.
 	// +kubebuilder:validation:Optional
-	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
+	Caching *string `json:"caching" tf:"caching,omitempty"`
 
 	// A diff_disk_settings block as defined above. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -561,7 +561,7 @@ type WindowsVirtualMachineOsDiskParameters struct {
 
 	// The Type of Storage Account which should back this the Internal OS Disk. Possible values are Standard_LRS, StandardSSD_LRS, Premium_LRS, StandardSSD_ZRS and Premium_ZRS. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
+	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
 
 	// Should Write Accelerator be Enabled for this OS Disk? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -802,15 +802,15 @@ type WindowsVirtualMachinePlanParameters struct {
 
 	// Specifies the Name of the Marketplace Image this Virtual Machine should be created from. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the Product of the Marketplace Image this Virtual Machine should be created from. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+	Product *string `json:"product" tf:"product,omitempty"`
 
 	// Specifies the Publisher of the Marketplace Image this Virtual Machine should be created from. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 }
 
 type WindowsVirtualMachineSecretCertificateInitParameters struct {
@@ -835,11 +835,11 @@ type WindowsVirtualMachineSecretCertificateParameters struct {
 
 	// The certificate store on the Virtual Machine where the certificate should be added.
 	// +kubebuilder:validation:Optional
-	Store *string `json:"store,omitempty" tf:"store,omitempty"`
+	Store *string `json:"store" tf:"store,omitempty"`
 
 	// The Secret URL of a Key Vault Certificate.
 	// +kubebuilder:validation:Optional
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+	URL *string `json:"url" tf:"url,omitempty"`
 }
 
 type WindowsVirtualMachineSecretInitParameters struct {
@@ -864,11 +864,11 @@ type WindowsVirtualMachineSecretParameters struct {
 
 	// One or more certificate blocks as defined above.
 	// +kubebuilder:validation:Optional
-	Certificate []WindowsVirtualMachineSecretCertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
+	Certificate []WindowsVirtualMachineSecretCertificateParameters `json:"certificate" tf:"certificate,omitempty"`
 
 	// The ID of the Key Vault from which all Secrets should be sourced.
 	// +kubebuilder:validation:Optional
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+	KeyVaultID *string `json:"keyVaultId" tf:"key_vault_id,omitempty"`
 }
 
 type WindowsVirtualMachineSourceImageReferenceInitParameters struct {
@@ -905,19 +905,19 @@ type WindowsVirtualMachineSourceImageReferenceParameters struct {
 
 	// Specifies the offer of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
+	Offer *string `json:"offer" tf:"offer,omitempty"`
 
 	// Specifies the publisher of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
 	// Specifies the SKU of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku *string `json:"sku" tf:"sku,omitempty"`
 
 	// Specifies the version of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 type WindowsVirtualMachineTerminationNotificationInitParameters struct {
@@ -942,7 +942,7 @@ type WindowsVirtualMachineTerminationNotificationParameters struct {
 
 	// Should the termination notification be enabled on this Virtual Machine?
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
 	// +kubebuilder:validation:Optional
@@ -975,7 +975,7 @@ type WindowsVirtualMachineWinrmListenerParameters struct {
 
 	// Specifies the protocol of listener. Possible values are Http or Https. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 }
 
 // WindowsVirtualMachineSpec defines the desired state of WindowsVirtualMachine

@@ -33,7 +33,7 @@ type BasicAuthenticationParameters struct {
 
 	// The username which can be used to authenticate to the OData endpoint.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type LinkedServiceODataInitParameters struct {

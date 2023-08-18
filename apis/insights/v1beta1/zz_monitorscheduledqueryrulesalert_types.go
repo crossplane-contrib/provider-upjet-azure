@@ -307,15 +307,15 @@ type TriggerMetricTriggerParameters struct {
 
 	// Metric Trigger Type - 'Consecutive' or 'Total'.
 	// +kubebuilder:validation:Optional
-	MetricTriggerType *string `json:"metricTriggerType,omitempty" tf:"metric_trigger_type,omitempty"`
+	MetricTriggerType *string `json:"metricTriggerType" tf:"metric_trigger_type,omitempty"`
 
 	// Evaluation operation for rule - 'GreaterThan', GreaterThanOrEqual', 'LessThan', or 'LessThanOrEqual'.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// Result or count threshold based on which rule should be triggered. Values must be between 0 and 10000 inclusive.
 	// +kubebuilder:validation:Optional
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 }
 
 type TriggerObservation struct {
@@ -338,11 +338,11 @@ type TriggerParameters struct {
 
 	// Evaluation operation for rule - 'GreaterThan', GreaterThanOrEqual', 'LessThan', or 'LessThanOrEqual'.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// Result or count threshold based on which rule should be triggered. Values must be between 0 and 10000 inclusive.
 	// +kubebuilder:validation:Optional
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 }
 
 // MonitorScheduledQueryRulesAlertSpec defines the desired state of MonitorScheduledQueryRulesAlert

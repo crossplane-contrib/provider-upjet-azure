@@ -29,7 +29,7 @@ type PermissionsParameters struct {
 
 	// A list of data actions that are allowed for the Cosmos DB SQL Role Definition.
 	// +kubebuilder:validation:Optional
-	DataActions []*string `json:"dataActions,omitempty" tf:"data_actions,omitempty"`
+	DataActions []*string `json:"dataActions" tf:"data_actions,omitempty"`
 }
 
 type SQLRoleDefinitionInitParameters struct {

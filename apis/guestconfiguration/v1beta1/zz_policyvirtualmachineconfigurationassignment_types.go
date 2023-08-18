@@ -94,11 +94,11 @@ type ParameterParameters struct {
 
 	// The name of the configuration parameter to check.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value to check the configuration parameter with.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type PolicyVirtualMachineConfigurationAssignmentInitParameters struct {

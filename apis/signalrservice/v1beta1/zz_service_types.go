@@ -29,7 +29,7 @@ type CorsParameters struct {
 
 	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
 	// +kubebuilder:validation:Optional
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 }
 
 type IdentityInitParameters struct {
@@ -64,7 +64,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this signalR. Possible values are SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type LiveTraceInitParameters struct {
@@ -348,11 +348,11 @@ type SkuParameters struct {
 
 	// Specifies the number of units associated with this SignalR service. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90 and 100.
 	// +kubebuilder:validation:Optional
-	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
 
 	// Specifies which tier to use. Valid values are Free_F1, Standard_S1 and Premium_P1.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type UpstreamEndpointInitParameters struct {
@@ -389,19 +389,19 @@ type UpstreamEndpointParameters struct {
 
 	// The categories to match on, or * for all.
 	// +kubebuilder:validation:Optional
-	CategoryPattern []*string `json:"categoryPattern,omitempty" tf:"category_pattern,omitempty"`
+	CategoryPattern []*string `json:"categoryPattern" tf:"category_pattern,omitempty"`
 
 	// The events to match on, or * for all.
 	// +kubebuilder:validation:Optional
-	EventPattern []*string `json:"eventPattern,omitempty" tf:"event_pattern,omitempty"`
+	EventPattern []*string `json:"eventPattern" tf:"event_pattern,omitempty"`
 
 	// The hubs to match on, or * for all.
 	// +kubebuilder:validation:Optional
-	HubPattern []*string `json:"hubPattern,omitempty" tf:"hub_pattern,omitempty"`
+	HubPattern []*string `json:"hubPattern" tf:"hub_pattern,omitempty"`
 
 	// The upstream URL Template. This can be a url or a template such as http://host.com/{hub}/api/{category}/{event}.
 	// +kubebuilder:validation:Optional
-	URLTemplate *string `json:"urlTemplate,omitempty" tf:"url_template,omitempty"`
+	URLTemplate *string `json:"urlTemplate" tf:"url_template,omitempty"`
 }
 
 // ServiceSpec defines the desired state of Service

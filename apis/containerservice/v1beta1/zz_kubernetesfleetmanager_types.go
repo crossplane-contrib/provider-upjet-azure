@@ -28,7 +28,7 @@ type HubProfileObservation struct {
 type HubProfileParameters struct {
 
 	// +kubebuilder:validation:Optional
-	DNSPrefix *string `json:"dnsPrefix,omitempty" tf:"dns_prefix,omitempty"`
+	DNSPrefix *string `json:"dnsPrefix" tf:"dns_prefix,omitempty"`
 }
 
 type KubernetesFleetManagerInitParameters struct {

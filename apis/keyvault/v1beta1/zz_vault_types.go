@@ -71,7 +71,7 @@ type ContactParameters struct {
 
 	// E-mail address of the contact.
 	// +kubebuilder:validation:Optional
-	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+	Email *string `json:"email" tf:"email,omitempty"`
 
 	// Name of the contact.
 	// +kubebuilder:validation:Optional
@@ -116,11 +116,11 @@ type NetworkAclsParameters struct {
 
 	// Specifies which traffic can bypass the network rules. Possible values are AzureServices and None.
 	// +kubebuilder:validation:Optional
-	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+	Bypass *string `json:"bypass" tf:"bypass,omitempty"`
 
 	// The Default Action to use when no rules match from ip_rules / virtual_network_subnet_ids. Possible values are Allow and Deny.
 	// +kubebuilder:validation:Optional
-	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault.
 	// +kubebuilder:validation:Optional

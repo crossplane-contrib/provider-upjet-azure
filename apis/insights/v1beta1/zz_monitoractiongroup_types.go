@@ -45,7 +45,7 @@ type AADAuthParameters struct {
 
 	// The webhook application object Id for AAD auth.
 	// +kubebuilder:validation:Optional
-	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
 
 	// The tenant id for AAD auth.
 	// +kubebuilder:validation:Optional
@@ -80,11 +80,11 @@ type ArmRoleReceiverParameters struct {
 
 	// The name of the ARM role receiver.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The arm role id.
 	// +kubebuilder:validation:Optional
-	RoleID *string `json:"roleId,omitempty" tf:"role_id,omitempty"`
+	RoleID *string `json:"roleId" tf:"role_id,omitempty"`
 
 	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional
@@ -143,23 +143,23 @@ type AutomationRunBookReceiverParameters struct {
 
 	// The automation account ID which holds this runbook and authenticates to Azure resources.
 	// +kubebuilder:validation:Optional
-	AutomationAccountID *string `json:"automationAccountId,omitempty" tf:"automation_account_id,omitempty"`
+	AutomationAccountID *string `json:"automationAccountId" tf:"automation_account_id,omitempty"`
 
 	// Indicates whether this instance is global runbook.
 	// +kubebuilder:validation:Optional
-	IsGlobalRunBook *bool `json:"isGlobalRunbook,omitempty" tf:"is_global_runbook,omitempty"`
+	IsGlobalRunBook *bool `json:"isGlobalRunbook" tf:"is_global_runbook,omitempty"`
 
 	// The name of the automation runbook receiver.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The name for this runbook.
 	// +kubebuilder:validation:Optional
-	RunBookName *string `json:"runbookName,omitempty" tf:"runbook_name,omitempty"`
+	RunBookName *string `json:"runbookName" tf:"runbook_name,omitempty"`
 
 	// The URI where webhooks should be sent.
 	// +kubebuilder:validation:Optional
-	ServiceURI *string `json:"serviceUri,omitempty" tf:"service_uri,omitempty"`
+	ServiceURI *string `json:"serviceUri" tf:"service_uri,omitempty"`
 
 	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional
@@ -167,7 +167,7 @@ type AutomationRunBookReceiverParameters struct {
 
 	// The resource id for webhook linked to this runbook.
 	// +kubebuilder:validation:Optional
-	WebhookResourceID *string `json:"webhookResourceId,omitempty" tf:"webhook_resource_id,omitempty"`
+	WebhookResourceID *string `json:"webhookResourceId" tf:"webhook_resource_id,omitempty"`
 }
 
 type AzureAppPushReceiverInitParameters struct {
@@ -192,11 +192,11 @@ type AzureAppPushReceiverParameters struct {
 
 	// The email address of the user signed into the mobile app who will receive push notifications from this receiver.
 	// +kubebuilder:validation:Optional
-	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
+	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
 
 	// The name of the Azure app push receiver.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type AzureFunctionReceiverInitParameters struct {
@@ -239,19 +239,19 @@ type AzureFunctionReceiverParameters struct {
 
 	// The Azure resource ID of the function app.
 	// +kubebuilder:validation:Optional
-	FunctionAppResourceID *string `json:"functionAppResourceId,omitempty" tf:"function_app_resource_id,omitempty"`
+	FunctionAppResourceID *string `json:"functionAppResourceId" tf:"function_app_resource_id,omitempty"`
 
 	// The function name in the function app.
 	// +kubebuilder:validation:Optional
-	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+	FunctionName *string `json:"functionName" tf:"function_name,omitempty"`
 
 	// The HTTP trigger url where HTTP request sent to.
 	// +kubebuilder:validation:Optional
-	HTTPTriggerURL *string `json:"httpTriggerUrl,omitempty" tf:"http_trigger_url,omitempty"`
+	HTTPTriggerURL *string `json:"httpTriggerUrl" tf:"http_trigger_url,omitempty"`
 
 	// The name of the Azure Function receiver.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional
@@ -286,11 +286,11 @@ type EmailReceiverParameters struct {
 
 	// The email address of this receiver.
 	// +kubebuilder:validation:Optional
-	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
+	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
 
 	// The name of the email receiver. Names must be unique (case-insensitive) across all receivers within an action group.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional
@@ -361,7 +361,7 @@ type EventHubReceiverParameters struct {
 
 	// The name of the EventHub Receiver, must be unique within action group.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID for the subscription containing this Event Hub. Default to the subscription ID of the Action Group.
 	// +kubebuilder:validation:Optional
@@ -416,23 +416,23 @@ type ItsmReceiverParameters struct {
 
 	// The unique connection identifier of the ITSM connection.
 	// +kubebuilder:validation:Optional
-	ConnectionID *string `json:"connectionId,omitempty" tf:"connection_id,omitempty"`
+	ConnectionID *string `json:"connectionId" tf:"connection_id,omitempty"`
 
 	// The name of the ITSM receiver.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The region of the workspace.
 	// +kubebuilder:validation:Optional
-	Region *string `json:"region,omitempty" tf:"region,omitempty"`
+	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A JSON blob for the configurations of the ITSM action. CreateMultipleWorkItems option will be part of this blob as well.
 	// +kubebuilder:validation:Optional
-	TicketConfiguration *string `json:"ticketConfiguration,omitempty" tf:"ticket_configuration,omitempty"`
+	TicketConfiguration *string `json:"ticketConfiguration" tf:"ticket_configuration,omitempty"`
 
 	// The Azure Log Analytics workspace ID where this connection is defined. Format is <subscription id>|<workspace id>, for example 00000000-0000-0000-0000-000000000000|00000000-0000-0000-0000-000000000000.
 	// +kubebuilder:validation:Optional
-	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+	WorkspaceID *string `json:"workspaceId" tf:"workspace_id,omitempty"`
 }
 
 type LogicAppReceiverInitParameters struct {
@@ -469,15 +469,15 @@ type LogicAppReceiverParameters struct {
 
 	// The callback url where HTTP request sent to.
 	// +kubebuilder:validation:Optional
-	CallbackURL *string `json:"callbackUrl,omitempty" tf:"callback_url,omitempty"`
+	CallbackURL *string `json:"callbackUrl" tf:"callback_url,omitempty"`
 
 	// The name of the logic app receiver.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Azure resource ID of the logic app.
 	// +kubebuilder:validation:Optional
-	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
 
 	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional
@@ -690,15 +690,15 @@ type SMSReceiverParameters struct {
 
 	// The country code of the SMS receiver.
 	// +kubebuilder:validation:Optional
-	CountryCode *string `json:"countryCode,omitempty" tf:"country_code,omitempty"`
+	CountryCode *string `json:"countryCode" tf:"country_code,omitempty"`
 
 	// The name of the SMS receiver. Names must be unique (case-insensitive) across all receivers within an action group.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The phone number of the SMS receiver.
 	// +kubebuilder:validation:Optional
-	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
 }
 
 type VoiceReceiverInitParameters struct {
@@ -729,15 +729,15 @@ type VoiceReceiverParameters struct {
 
 	// The country code of the voice receiver.
 	// +kubebuilder:validation:Optional
-	CountryCode *string `json:"countryCode,omitempty" tf:"country_code,omitempty"`
+	CountryCode *string `json:"countryCode" tf:"country_code,omitempty"`
 
 	// The name of the voice receiver.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The phone number of the voice receiver.
 	// +kubebuilder:validation:Optional
-	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
 }
 
 type WebhookReceiverInitParameters struct {
@@ -778,11 +778,11 @@ type WebhookReceiverParameters struct {
 
 	// The name of the webhook receiver. Names must be unique (case-insensitive) across all receivers within an action group.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The URI where webhooks should be sent.
 	// +kubebuilder:validation:Optional
-	ServiceURI *string `json:"serviceUri,omitempty" tf:"service_uri,omitempty"`
+	ServiceURI *string `json:"serviceUri" tf:"service_uri,omitempty"`
 
 	// Enables or disables the common alert schema.
 	// +kubebuilder:validation:Optional

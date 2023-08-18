@@ -87,7 +87,7 @@ type LoadBalancerFrontendIPConfigurationParameters struct {
 
 	// Specifies the name of the frontend IP configuration.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Private IP Address to assign to the Load Balancer. The last one and first four IPs in any range are reserved and cannot be manually assigned.
 	// +kubebuilder:validation:Optional

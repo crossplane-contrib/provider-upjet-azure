@@ -649,7 +649,7 @@ type KubernetesClusterNodePoolUpgradeSettingsParameters struct {
 
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	// +kubebuilder:validation:Optional
-	MaxSurge *string `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+	MaxSurge *string `json:"maxSurge" tf:"max_surge,omitempty"`
 }
 
 type KubernetesClusterNodePoolWindowsProfileInitParameters struct {

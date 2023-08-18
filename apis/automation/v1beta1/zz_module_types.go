@@ -35,11 +35,11 @@ type HashParameters struct {
 
 	// Specifies the algorithm used for the hash content.
 	// +kubebuilder:validation:Optional
-	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
+	Algorithm *string `json:"algorithm" tf:"algorithm,omitempty"`
 
 	// The hash value of the content.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ModuleInitParameters struct {
@@ -74,7 +74,7 @@ type ModuleLinkParameters struct {
 
 	// The URI of the module content (zip or nupkg).
 	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type ModuleObservation struct {

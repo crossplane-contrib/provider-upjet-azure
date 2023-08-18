@@ -77,7 +77,7 @@ type ResourcePolicyAssignmentIdentityParameters struct {
 
 	// The Type of Managed Identity which should be added to this Policy Definition. Possible values are SystemAssigned and UserAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ResourcePolicyAssignmentInitParameters struct {
@@ -144,7 +144,7 @@ type ResourcePolicyAssignmentNonComplianceMessageParameters struct {
 
 	// The non-compliance message text. When assigning policy sets (initiatives), unless policy_definition_reference_id is specified then this message will be the default for all policies.
 	// +kubebuilder:validation:Optional
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+	Content *string `json:"content" tf:"content,omitempty"`
 
 	// When assigning policy sets (initiatives), this is the ID of the policy definition that the non-compliance message applies to.
 	// +kubebuilder:validation:Optional
@@ -225,7 +225,7 @@ type ResourcePolicyAssignmentOverridesParameters struct {
 
 	// Specifies the value to override the policy property. Possible values for policyEffect override listed policy effects.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ResourcePolicyAssignmentParameters struct {
@@ -323,7 +323,7 @@ type ResourcePolicyAssignmentResourceSelectorsParameters struct {
 
 	// One or more resource_selector block as defined below.
 	// +kubebuilder:validation:Optional
-	Selectors []ResourcePolicyAssignmentResourceSelectorsSelectorsParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
+	Selectors []ResourcePolicyAssignmentResourceSelectorsSelectorsParameters `json:"selectors" tf:"selectors,omitempty"`
 }
 
 type ResourcePolicyAssignmentResourceSelectorsSelectorsInitParameters struct {
@@ -358,7 +358,7 @@ type ResourcePolicyAssignmentResourceSelectorsSelectorsParameters struct {
 
 	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
 	// +kubebuilder:validation:Optional
-	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+	Kind *string `json:"kind" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
 	// +kubebuilder:validation:Optional

@@ -33,7 +33,7 @@ type BasicAuthParameters struct {
 
 	// Specifies the username of git repository basic auth.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type GitRepositoryInitParameters struct {
@@ -112,7 +112,7 @@ type GitRepositoryParameters struct {
 
 	// Specifies Git repository URL for the accelerator.
 	// +kubebuilder:validation:Optional
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+	URL *string `json:"url" tf:"url,omitempty"`
 }
 
 type SSHAuthInitParameters struct {

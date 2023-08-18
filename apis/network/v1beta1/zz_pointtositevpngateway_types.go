@@ -51,7 +51,7 @@ type ConnectionConfigurationParameters struct {
 
 	// The Name which should be used for this Connection Configuration.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A route block as defined below.
 	// +kubebuilder:validation:Optional
@@ -59,7 +59,7 @@ type ConnectionConfigurationParameters struct {
 
 	// A vpn_client_address_pool block as defined below.
 	// +kubebuilder:validation:Optional
-	VPNClientAddressPool []VPNClientAddressPoolParameters `json:"vpnClientAddressPool,omitempty" tf:"vpn_client_address_pool,omitempty"`
+	VPNClientAddressPool []VPNClientAddressPoolParameters `json:"vpnClientAddressPool" tf:"vpn_client_address_pool,omitempty"`
 }
 
 type PointToSiteVPNGatewayInitParameters struct {
@@ -218,7 +218,7 @@ type RouteParameters struct {
 
 	// The Virtual Hub Route Table resource id associated with this Routing Configuration.
 	// +kubebuilder:validation:Optional
-	AssociatedRouteTableID *string `json:"associatedRouteTableId,omitempty" tf:"associated_route_table_id,omitempty"`
+	AssociatedRouteTableID *string `json:"associatedRouteTableId" tf:"associated_route_table_id,omitempty"`
 
 	// The resource ID of the Route Map associated with this Routing Configuration for inbound learned routes.
 	// +kubebuilder:validation:Optional
@@ -255,7 +255,7 @@ type RoutePropagatedRouteTableParameters struct {
 
 	// The list of Virtual Hub Route Table resource id which the routes will be propagated to.
 	// +kubebuilder:validation:Optional
-	Ids []*string `json:"ids,omitempty" tf:"ids,omitempty"`
+	Ids []*string `json:"ids" tf:"ids,omitempty"`
 
 	// The list of labels to logically group Virtual Hub Route Tables which the routes will be propagated to.
 	// +kubebuilder:validation:Optional
@@ -278,7 +278,7 @@ type VPNClientAddressPoolParameters struct {
 
 	// A list of CIDR Ranges which should be used as Address Prefixes.
 	// +kubebuilder:validation:Optional
-	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
+	AddressPrefixes []*string `json:"addressPrefixes" tf:"address_prefixes,omitempty"`
 }
 
 // PointToSiteVPNGatewaySpec defines the desired state of PointToSiteVPNGateway

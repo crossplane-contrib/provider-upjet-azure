@@ -35,11 +35,11 @@ type CompositeIndexIndexParameters struct {
 
 	// Order of the index. Possible values are Ascending or Descending.
 	// +kubebuilder:validation:Optional
-	Order *string `json:"order,omitempty" tf:"order,omitempty"`
+	Order *string `json:"order" tf:"order,omitempty"`
 
 	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 }
 
 type ExcludedPathInitParameters struct {
@@ -58,7 +58,7 @@ type ExcludedPathParameters struct {
 
 	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 }
 
 type IncludedPathInitParameters struct {
@@ -77,7 +77,7 @@ type IncludedPathParameters struct {
 
 	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 }
 
 type IndexingPolicyCompositeIndexInitParameters struct {
@@ -96,7 +96,7 @@ type IndexingPolicyCompositeIndexParameters struct {
 
 	// One or more index blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Index []CompositeIndexIndexParameters `json:"index,omitempty" tf:"index,omitempty"`
+	Index []CompositeIndexIndexParameters `json:"index" tf:"index,omitempty"`
 }
 
 type IndexingPolicyInitParameters struct {
@@ -177,7 +177,7 @@ type IndexingPolicySpatialIndexParameters struct {
 
 	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 }
 
 type SQLContainerAutoscaleSettingsInitParameters struct {
@@ -235,7 +235,7 @@ type SQLContainerConflictResolutionPolicyParameters struct {
 
 	// Indicates the conflict resolution mode. Possible values include: LastWriterWins, Custom.
 	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
 type SQLContainerInitParameters struct {
@@ -404,7 +404,7 @@ type SQLContainerUniqueKeyParameters struct {
 
 	// A list of paths to use for this unique key. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+	Paths []*string `json:"paths" tf:"paths,omitempty"`
 }
 
 // SQLContainerSpec defines the desired state of SQLContainer

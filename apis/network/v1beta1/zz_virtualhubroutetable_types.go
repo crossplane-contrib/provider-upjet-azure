@@ -99,15 +99,15 @@ type VirtualHubRouteTableRouteParameters struct {
 
 	// A list of destination addresses for this route.
 	// +kubebuilder:validation:Optional
-	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
+	Destinations []*string `json:"destinations" tf:"destinations,omitempty"`
 
 	// The type of destinations. Possible values are CIDR, ResourceId and Service.
 	// +kubebuilder:validation:Optional
-	DestinationsType *string `json:"destinationsType,omitempty" tf:"destinations_type,omitempty"`
+	DestinationsType *string `json:"destinationsType" tf:"destinations_type,omitempty"`
 
 	// The name which should be used for this route.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The next hop's resource ID.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualHubConnection

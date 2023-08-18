@@ -118,15 +118,15 @@ type RecordParameters struct {
 
 	// Extensible CAA flags, currently only 1 is implemented to set the issuer critical flag.
 	// +kubebuilder:validation:Optional
-	Flags *float64 `json:"flags,omitempty" tf:"flags,omitempty"`
+	Flags *float64 `json:"flags" tf:"flags,omitempty"`
 
 	// A property tag, options are issue, issuewild and iodef.
 	// +kubebuilder:validation:Optional
-	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag *string `json:"tag" tf:"tag,omitempty"`
 
 	// A property value such as a registrar domain.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // DNSCAARecordSpec defines the desired state of DNSCAARecord

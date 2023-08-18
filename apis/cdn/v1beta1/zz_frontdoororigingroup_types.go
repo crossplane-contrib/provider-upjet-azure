@@ -116,7 +116,7 @@ type HealthProbeParameters struct {
 
 	// Specifies the number of seconds between health probes. Possible values are between 5 and 31536000 seconds (inclusive).
 	// +kubebuilder:validation:Optional
-	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
+	IntervalInSeconds *float64 `json:"intervalInSeconds" tf:"interval_in_seconds,omitempty"`
 
 	// Specifies the path relative to the origin that is used to determine the health of the origin. Defaults to /.
 	// +kubebuilder:validation:Optional
@@ -124,7 +124,7 @@ type HealthProbeParameters struct {
 
 	// Specifies the protocol to use for health probe. Possible values are Http and Https.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// Specifies the type of health probe request that is made. Possible values are GET and HEAD. Defaults to HEAD.
 	// +kubebuilder:validation:Optional

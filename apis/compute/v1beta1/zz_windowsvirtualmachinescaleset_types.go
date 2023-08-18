@@ -35,11 +35,11 @@ type IPConfigurationPublicIPAddressIPTagParameters struct {
 
 	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
+	Tag *string `json:"tag" tf:"tag,omitempty"`
 
 	// The Type of IP Tag, such as FirstPartyUsage. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type NetworkInterfaceIPConfigurationPublicIPAddressInitParameters struct {
@@ -100,7 +100,7 @@ type NetworkInterfaceIPConfigurationPublicIPAddressParameters struct {
 
 	// The Name of the Public IP Address Configuration.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID of the Public IP Address Prefix from where Public IP Addresses should be allocated. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -150,7 +150,7 @@ type WindowsVirtualMachineScaleSetAdditionalUnattendContentParameters struct {
 
 	// The name of the setting to which the content applies. Possible values are AutoLogon and FirstLogonCommands. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Setting *string `json:"setting,omitempty" tf:"setting,omitempty"`
+	Setting *string `json:"setting" tf:"setting,omitempty"`
 }
 
 type WindowsVirtualMachineScaleSetAutomaticInstanceRepairInitParameters struct {
@@ -175,7 +175,7 @@ type WindowsVirtualMachineScaleSetAutomaticInstanceRepairParameters struct {
 
 	// Should the automatic instance repair be enabled on this Virtual Machine Scale Set?
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Amount of time (in minutes, between 30 and 90, defaults to 30 minutes) for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. The time duration should be specified in ISO 8601 format. Defaults to PT30M.
 	// +kubebuilder:validation:Optional
@@ -204,11 +204,11 @@ type WindowsVirtualMachineScaleSetAutomaticOsUpgradePolicyParameters struct {
 
 	// Should automatic rollbacks be disabled?
 	// +kubebuilder:validation:Optional
-	DisableAutomaticRollback *bool `json:"disableAutomaticRollback,omitempty" tf:"disable_automatic_rollback,omitempty"`
+	DisableAutomaticRollback *bool `json:"disableAutomaticRollback" tf:"disable_automatic_rollback,omitempty"`
 
 	// Should OS Upgrades automatically be applied to Scale Set instances in a rolling fashion when a newer version of the OS Image becomes available?
 	// +kubebuilder:validation:Optional
-	EnableAutomaticOsUpgrade *bool `json:"enableAutomaticOsUpgrade,omitempty" tf:"enable_automatic_os_upgrade,omitempty"`
+	EnableAutomaticOsUpgrade *bool `json:"enableAutomaticOsUpgrade" tf:"enable_automatic_os_upgrade,omitempty"`
 }
 
 type WindowsVirtualMachineScaleSetBootDiagnosticsInitParameters struct {
@@ -300,7 +300,7 @@ type WindowsVirtualMachineScaleSetDataDiskParameters struct {
 
 	// The type of Caching which should be used for this Data Disk. Possible values are None, ReadOnly and ReadWrite.
 	// +kubebuilder:validation:Optional
-	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
+	Caching *string `json:"caching" tf:"caching,omitempty"`
 
 	// The create option which should be used for this Data Disk. Possible values are Empty and FromImage. Defaults to Empty. (FromImage should only be used if the source image includes data disks).
 	// +kubebuilder:validation:Optional
@@ -312,11 +312,11 @@ type WindowsVirtualMachineScaleSetDataDiskParameters struct {
 
 	// The size of the Data Disk which should be created.
 	// +kubebuilder:validation:Optional
-	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
+	DiskSizeGb *float64 `json:"diskSizeGb" tf:"disk_size_gb,omitempty"`
 
 	// The Logical Unit Number of the Data Disk, which must be unique within the Virtual Machine.
 	// +kubebuilder:validation:Optional
-	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
+	Lun *float64 `json:"lun" tf:"lun,omitempty"`
 
 	// The name of the Data Disk.
 	// +kubebuilder:validation:Optional
@@ -324,7 +324,7 @@ type WindowsVirtualMachineScaleSetDataDiskParameters struct {
 
 	// The Type of Storage Account which should back this Data Disk. Possible values include Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS, Premium_LRS, PremiumV2_LRS, Premium_ZRS and UltraSSD_LRS.
 	// +kubebuilder:validation:Optional
-	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
+	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
 
 	// Specifies the Read-Write IOPS for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.
 	// +kubebuilder:validation:Optional
@@ -421,7 +421,7 @@ type WindowsVirtualMachineScaleSetExtensionParameters struct {
 
 	// The name for the Virtual Machine Scale Set Extension.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A protected_settings_from_key_vault block as defined below.
 	// +kubebuilder:validation:Optional
@@ -437,7 +437,7 @@ type WindowsVirtualMachineScaleSetExtensionParameters struct {
 
 	// Specifies the Publisher of the Extension.
 	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
 	// A JSON String which specifies Settings for the Extension.
 	// +kubebuilder:validation:Optional
@@ -445,11 +445,11 @@ type WindowsVirtualMachineScaleSetExtensionParameters struct {
 
 	// Specifies the Type of the Extension.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// Specifies the version of the extension to use, available versions can be found using the Azure CLI.
 	// +kubebuilder:validation:Optional
-	TypeHandlerVersion *string `json:"typeHandlerVersion,omitempty" tf:"type_handler_version,omitempty"`
+	TypeHandlerVersion *string `json:"typeHandlerVersion" tf:"type_handler_version,omitempty"`
 }
 
 type WindowsVirtualMachineScaleSetExtensionProtectedSettingsFromKeyVaultInitParameters struct {
@@ -474,11 +474,11 @@ type WindowsVirtualMachineScaleSetExtensionProtectedSettingsFromKeyVaultParamete
 
 	// The URL to the Key Vault Secret which stores the protected settings.
 	// +kubebuilder:validation:Optional
-	SecretURL *string `json:"secretUrl,omitempty" tf:"secret_url,omitempty"`
+	SecretURL *string `json:"secretUrl" tf:"secret_url,omitempty"`
 
 	// The ID of the source Key Vault.
 	// +kubebuilder:validation:Optional
-	SourceVaultID *string `json:"sourceVaultId,omitempty" tf:"source_vault_id,omitempty"`
+	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }
 
 type WindowsVirtualMachineScaleSetGalleryApplicationInitParameters struct {
@@ -527,7 +527,7 @@ type WindowsVirtualMachineScaleSetGalleryApplicationParameters struct {
 
 	// Specifies the Gallery Application Version resource ID. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
+	VersionID *string `json:"versionId" tf:"version_id,omitempty"`
 }
 
 type WindowsVirtualMachineScaleSetGalleryApplicationsInitParameters struct {
@@ -567,7 +567,7 @@ type WindowsVirtualMachineScaleSetGalleryApplicationsParameters struct {
 
 	// The ID of the Windows Virtual Machine Scale Set.
 	// +kubebuilder:validation:Optional
-	PackageReferenceID *string `json:"packageReferenceId,omitempty" tf:"package_reference_id,omitempty"`
+	PackageReferenceID *string `json:"packageReferenceId" tf:"package_reference_id,omitempty"`
 
 	// The IP Tag associated with the Public IP, such as SQL or Storage. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -606,7 +606,7 @@ type WindowsVirtualMachineScaleSetIdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Windows Virtual Machine Scale Set. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type WindowsVirtualMachineScaleSetInitParameters struct {
@@ -850,7 +850,7 @@ type WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationParameters stru
 
 	// The Name of the Public IP Address Configuration.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Is this the Primary IP Configuration?
 	// +kubebuilder:validation:Optional
@@ -943,11 +943,11 @@ type WindowsVirtualMachineScaleSetNetworkInterfaceParameters struct {
 
 	// One or more ip_configuration blocks as defined above.
 	// +kubebuilder:validation:Optional
-	IPConfiguration []WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+	IPConfiguration []WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 
 	// The Name which should be used for this Network Interface. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID of a Network Security Group which should be assigned to this Network Interface.
 	// +kubebuilder:validation:Optional
@@ -1153,7 +1153,7 @@ type WindowsVirtualMachineScaleSetOsDiskDiffDiskSettingsParameters struct {
 
 	// Specifies the Ephemeral Disk Settings for the OS Disk. At this time the only possible value is Local. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Option *string `json:"option,omitempty" tf:"option,omitempty"`
+	Option *string `json:"option" tf:"option,omitempty"`
 
 	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1218,7 +1218,7 @@ type WindowsVirtualMachineScaleSetOsDiskParameters struct {
 
 	// The Type of Caching which should be used for the Internal OS Disk. Possible values are None, ReadOnly and ReadWrite.
 	// +kubebuilder:validation:Optional
-	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
+	Caching *string `json:"caching" tf:"caching,omitempty"`
 
 	// A diff_disk_settings block as defined above. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -1242,7 +1242,7 @@ type WindowsVirtualMachineScaleSetOsDiskParameters struct {
 
 	// The Type of Storage Account which should back this the Internal OS Disk. Possible values include Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS, Premium_LRS and Premium_ZRS. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
+	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
 
 	// Should Write Accelerator be Enabled for this OS Disk? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -1516,15 +1516,15 @@ type WindowsVirtualMachineScaleSetPlanParameters struct {
 
 	// Specifies the name of the image from the marketplace. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the product of the image from the marketplace. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+	Product *string `json:"product" tf:"product,omitempty"`
 
 	// Specifies the publisher of the image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 }
 
 type WindowsVirtualMachineScaleSetRollingUpgradePolicyInitParameters struct {
@@ -1577,19 +1577,19 @@ type WindowsVirtualMachineScaleSetRollingUpgradePolicyParameters struct {
 
 	// The maximum percent of total virtual machine instances that will be upgraded simultaneously by the rolling upgrade in one batch. As this is a maximum, unhealthy instances in previous or future batches can cause the percentage of instances in a batch to decrease to ensure higher reliability.
 	// +kubebuilder:validation:Optional
-	MaxBatchInstancePercent *float64 `json:"maxBatchInstancePercent,omitempty" tf:"max_batch_instance_percent,omitempty"`
+	MaxBatchInstancePercent *float64 `json:"maxBatchInstancePercent" tf:"max_batch_instance_percent,omitempty"`
 
 	// The maximum percentage of the total virtual machine instances in the scale set that can be simultaneously unhealthy, either as a result of being upgraded, or by being found in an unhealthy state by the virtual machine health checks before the rolling upgrade aborts. This constraint will be checked prior to starting any batch.
 	// +kubebuilder:validation:Optional
-	MaxUnhealthyInstancePercent *float64 `json:"maxUnhealthyInstancePercent,omitempty" tf:"max_unhealthy_instance_percent,omitempty"`
+	MaxUnhealthyInstancePercent *float64 `json:"maxUnhealthyInstancePercent" tf:"max_unhealthy_instance_percent,omitempty"`
 
 	// The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts.
 	// +kubebuilder:validation:Optional
-	MaxUnhealthyUpgradedInstancePercent *float64 `json:"maxUnhealthyUpgradedInstancePercent,omitempty" tf:"max_unhealthy_upgraded_instance_percent,omitempty"`
+	MaxUnhealthyUpgradedInstancePercent *float64 `json:"maxUnhealthyUpgradedInstancePercent" tf:"max_unhealthy_upgraded_instance_percent,omitempty"`
 
 	// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format.
 	// +kubebuilder:validation:Optional
-	PauseTimeBetweenBatches *string `json:"pauseTimeBetweenBatches,omitempty" tf:"pause_time_between_batches,omitempty"`
+	PauseTimeBetweenBatches *string `json:"pauseTimeBetweenBatches" tf:"pause_time_between_batches,omitempty"`
 
 	// Upgrade all unhealthy instances in a scale set before any healthy instances. Possible values are true or false.
 	// +kubebuilder:validation:Optional
@@ -1647,11 +1647,11 @@ type WindowsVirtualMachineScaleSetSecretCertificateParameters struct {
 
 	// The certificate store on the Virtual Machine where the certificate should be added.
 	// +kubebuilder:validation:Optional
-	Store *string `json:"store,omitempty" tf:"store,omitempty"`
+	Store *string `json:"store" tf:"store,omitempty"`
 
 	// The Secret URL of a Key Vault Certificate.
 	// +kubebuilder:validation:Optional
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+	URL *string `json:"url" tf:"url,omitempty"`
 }
 
 type WindowsVirtualMachineScaleSetSecretInitParameters struct {
@@ -1676,11 +1676,11 @@ type WindowsVirtualMachineScaleSetSecretParameters struct {
 
 	// One or more certificate blocks as defined above.
 	// +kubebuilder:validation:Optional
-	Certificate []WindowsVirtualMachineScaleSetSecretCertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
+	Certificate []WindowsVirtualMachineScaleSetSecretCertificateParameters `json:"certificate" tf:"certificate,omitempty"`
 
 	// The ID of the Key Vault from which all Secrets should be sourced.
 	// +kubebuilder:validation:Optional
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+	KeyVaultID *string `json:"keyVaultId" tf:"key_vault_id,omitempty"`
 }
 
 type WindowsVirtualMachineScaleSetSourceImageReferenceInitParameters struct {
@@ -1717,19 +1717,19 @@ type WindowsVirtualMachineScaleSetSourceImageReferenceParameters struct {
 
 	// Specifies the offer of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
+	Offer *string `json:"offer" tf:"offer,omitempty"`
 
 	// Specifies the publisher of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
 	// Specifies the SKU of the image used to create the virtual machines.
 	// +kubebuilder:validation:Optional
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku *string `json:"sku" tf:"sku,omitempty"`
 
 	// Specifies the version of the image used to create the virtual machines.
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 type WindowsVirtualMachineScaleSetSpotRestoreInitParameters struct {
@@ -1783,7 +1783,7 @@ type WindowsVirtualMachineScaleSetTerminateNotificationParameters struct {
 
 	// Should the terminate notification be enabled on this Virtual Machine Scale Set?
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
 	// +kubebuilder:validation:Optional
@@ -1812,7 +1812,7 @@ type WindowsVirtualMachineScaleSetTerminationNotificationParameters struct {
 
 	// Should the termination notification be enabled on this Virtual Machine Scale Set?
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
 	// +kubebuilder:validation:Optional
@@ -1845,7 +1845,7 @@ type WindowsVirtualMachineScaleSetWinrmListenerParameters struct {
 
 	// The Protocol of the WinRM Listener. Possible values are Http and Https. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 }
 
 // WindowsVirtualMachineScaleSetSpec defines the desired state of WindowsVirtualMachineScaleSet

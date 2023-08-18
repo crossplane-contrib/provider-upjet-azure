@@ -160,11 +160,11 @@ type ExpressRouteCircuitSkuParameters struct {
 
 	// The billing mode for bandwidth. Possible values are MeteredData or UnlimitedData.
 	// +kubebuilder:validation:Optional
-	Family *string `json:"family,omitempty" tf:"family,omitempty"`
+	Family *string `json:"family" tf:"family,omitempty"`
 
 	// The service tier. Possible values are Basic, Local, Standard or Premium.
 	// +kubebuilder:validation:Optional
-	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+	Tier *string `json:"tier" tf:"tier,omitempty"`
 }
 
 // ExpressRouteCircuitSpec defines the desired state of ExpressRouteCircuit

@@ -29,7 +29,7 @@ type ClearKeyEncryptionParameters struct {
 
 	// The URL template for the custom service that delivers content keys to the end user. This is not required when using Azure Media Services for issuing keys. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
-	CustomKeysAcquisitionURLTemplate *string `json:"customKeysAcquisitionUrlTemplate,omitempty" tf:"custom_keys_acquisition_url_template,omitempty"`
+	CustomKeysAcquisitionURLTemplate *string `json:"customKeysAcquisitionUrlTemplate" tf:"custom_keys_acquisition_url_template,omitempty"`
 }
 
 type ClearTrackConditionInitParameters struct {
@@ -60,15 +60,15 @@ type ClearTrackConditionParameters struct {
 
 	// The track property condition operation. Possible value is Equal. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
-	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+	Operation *string `json:"operation" tf:"operation,omitempty"`
 
 	// The track property type. Possible value is FourCC. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
-	Property *string `json:"property,omitempty" tf:"property,omitempty"`
+	Property *string `json:"property" tf:"property,omitempty"`
 
 	// The track property value. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ClearTrackInitParameters struct {
@@ -87,7 +87,7 @@ type ClearTrackParameters struct {
 
 	// One or more condition blocks as defined below. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
-	Condition []ClearTrackConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+	Condition []ClearTrackConditionParameters `json:"condition" tf:"condition,omitempty"`
 }
 
 type CommonEncryptionCbcsInitParameters struct {
@@ -155,7 +155,7 @@ type CommonEncryptionCencClearKeyEncryptionParameters struct {
 
 	// The URL template for the custom service that delivers content keys to the end user. This is not required when using Azure Media Services for issuing keys. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
-	CustomKeysAcquisitionURLTemplate *string `json:"customKeysAcquisitionUrlTemplate,omitempty" tf:"custom_keys_acquisition_url_template,omitempty"`
+	CustomKeysAcquisitionURLTemplate *string `json:"customKeysAcquisitionUrlTemplate" tf:"custom_keys_acquisition_url_template,omitempty"`
 }
 
 type CommonEncryptionCencDefaultContentKeyInitParameters struct {
@@ -357,7 +357,7 @@ type ContentKeyToTrackMappingParameters struct {
 
 	// One or more track blocks as defined below. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
-	Track []TrackParameters `json:"track,omitempty" tf:"track,omitempty"`
+	Track []TrackParameters `json:"track" tf:"track,omitempty"`
 }
 
 type DefaultContentKeyInitParameters struct {
@@ -784,15 +784,15 @@ type TrackConditionParameters struct {
 
 	// The track property condition operation. Possible value is Equal. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
-	Operation *string `json:"operation,omitempty" tf:"operation,omitempty"`
+	Operation *string `json:"operation" tf:"operation,omitempty"`
 
 	// The track property type. Possible value is FourCC. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
-	Property *string `json:"property,omitempty" tf:"property,omitempty"`
+	Property *string `json:"property" tf:"property,omitempty"`
 
 	// The track property value. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type TrackInitParameters struct {
@@ -811,7 +811,7 @@ type TrackParameters struct {
 
 	// One or more condition blocks as defined below. Changing this forces a new Streaming Policy to be created.
 	// +kubebuilder:validation:Optional
-	Condition []TrackConditionParameters `json:"condition,omitempty" tf:"condition,omitempty"`
+	Condition []TrackConditionParameters `json:"condition" tf:"condition,omitempty"`
 }
 
 // StreamingPolicySpec defines the desired state of StreamingPolicy

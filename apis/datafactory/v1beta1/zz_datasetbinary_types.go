@@ -59,7 +59,7 @@ type AzureBlobStorageLocationParameters struct {
 
 	// The container on the Azure Blob Storage Account hosting the file.
 	// +kubebuilder:validation:Optional
-	Container *string `json:"container,omitempty" tf:"container,omitempty"`
+	Container *string `json:"container" tf:"container,omitempty"`
 
 	// Is the container using dynamic expression, function or system variables? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -108,7 +108,7 @@ type CompressionParameters struct {
 
 	// The type of compression used during transport. Possible values are BZip2, Deflate, GZip, Tar, TarGZip and ZipDeflate.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type DataSetBinaryInitParameters struct {
@@ -294,15 +294,15 @@ type HTTPServerLocationParameters struct {
 
 	// The filename of the file on the web server.
 	// +kubebuilder:validation:Optional
-	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+	Filename *string `json:"filename" tf:"filename,omitempty"`
 
 	// The folder path to the file on the web server.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 
 	// The base URL to the web server hosting the file.
 	// +kubebuilder:validation:Optional
-	RelativeURL *string `json:"relativeUrl,omitempty" tf:"relative_url,omitempty"`
+	RelativeURL *string `json:"relativeUrl" tf:"relative_url,omitempty"`
 }
 
 type SFTPServerLocationInitParameters struct {
@@ -347,11 +347,11 @@ type SFTPServerLocationParameters struct {
 
 	// The filename of the file on the SFTP server.
 	// +kubebuilder:validation:Optional
-	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+	Filename *string `json:"filename" tf:"filename,omitempty"`
 
 	// The folder path to the file on the SFTP server.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 }
 
 // DataSetBinarySpec defines the desired state of DataSetBinary

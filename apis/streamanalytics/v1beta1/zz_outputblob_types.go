@@ -209,7 +209,7 @@ type SerializationParameters struct {
 
 	// The serialization format used for outgoing data streams. Possible values are Avro, Csv, Json and Parquet.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // OutputBlobSpec defines the desired state of OutputBlob

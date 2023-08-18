@@ -104,7 +104,7 @@ type LocationDataParameters struct {
 
 	// A canonical name for the geographic or physical location.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The country or region where the resource is located.
 	// +kubebuilder:validation:Optional

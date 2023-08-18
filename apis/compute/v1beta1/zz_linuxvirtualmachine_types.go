@@ -54,11 +54,11 @@ type AdminSSHKeyParameters struct {
 
 	// The Public Key which should be used for authentication, which needs to be at least 2048-bit and in ssh-rsa format. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
+	PublicKey *string `json:"publicKey" tf:"public_key,omitempty"`
 
 	// The Username for which this Public SSH Key should be configured. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type BootDiagnosticsInitParameters struct {
@@ -96,7 +96,7 @@ type CertificateParameters struct {
 
 	// The Secret URL of a Key Vault Certificate.
 	// +kubebuilder:validation:Optional
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+	URL *string `json:"url" tf:"url,omitempty"`
 }
 
 type DiffDiskSettingsInitParameters struct {
@@ -121,7 +121,7 @@ type DiffDiskSettingsParameters struct {
 
 	// Specifies the Ephemeral Disk Settings for the OS Disk. At this time the only possible value is Local. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Option *string `json:"option,omitempty" tf:"option,omitempty"`
+	Option *string `json:"option" tf:"option,omitempty"`
 
 	// Specifies where to store the Ephemeral Disk. Possible values are CacheDisk and ResourceDisk. Defaults to CacheDisk. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -174,7 +174,7 @@ type LinuxVirtualMachineGalleryApplicationParameters struct {
 
 	// Specifies the Gallery Application Version resource ID.
 	// +kubebuilder:validation:Optional
-	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
+	VersionID *string `json:"versionId" tf:"version_id,omitempty"`
 }
 
 type LinuxVirtualMachineIdentityInitParameters struct {
@@ -209,7 +209,7 @@ type LinuxVirtualMachineIdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Linux Virtual Machine. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type LinuxVirtualMachineInitParameters struct {
@@ -540,7 +540,7 @@ type LinuxVirtualMachineOsDiskParameters struct {
 
 	// The Type of Caching which should be used for the Internal OS Disk. Possible values are None, ReadOnly and ReadWrite.
 	// +kubebuilder:validation:Optional
-	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
+	Caching *string `json:"caching" tf:"caching,omitempty"`
 
 	// A diff_disk_settings block as defined above. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -568,7 +568,7 @@ type LinuxVirtualMachineOsDiskParameters struct {
 
 	// The Type of Storage Account which should back this the Internal OS Disk. Possible values are Standard_LRS, StandardSSD_LRS, Premium_LRS, StandardSSD_ZRS and Premium_ZRS. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
+	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
 
 	// Should Write Accelerator be Enabled for this OS Disk? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -797,15 +797,15 @@ type PlanParameters struct {
 
 	// Specifies the Name of the Marketplace Image this Virtual Machine should be created from. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the Product of the Marketplace Image this Virtual Machine should be created from. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+	Product *string `json:"product" tf:"product,omitempty"`
 
 	// Specifies the Publisher of the Marketplace Image this Virtual Machine should be created from. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 }
 
 type SecretInitParameters struct {
@@ -830,11 +830,11 @@ type SecretParameters struct {
 
 	// One or more certificate blocks as defined above.
 	// +kubebuilder:validation:Optional
-	Certificate []CertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
+	Certificate []CertificateParameters `json:"certificate" tf:"certificate,omitempty"`
 
 	// The ID of the Key Vault from which all Secrets should be sourced.
 	// +kubebuilder:validation:Optional
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+	KeyVaultID *string `json:"keyVaultId" tf:"key_vault_id,omitempty"`
 }
 
 type SourceImageReferenceInitParameters struct {
@@ -871,19 +871,19 @@ type SourceImageReferenceParameters struct {
 
 	// Specifies the offer of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
+	Offer *string `json:"offer" tf:"offer,omitempty"`
 
 	// Specifies the publisher of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
 	// Specifies the SKU of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku *string `json:"sku" tf:"sku,omitempty"`
 
 	// Specifies the version of the image used to create the virtual machines. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 type TerminationNotificationInitParameters struct {
@@ -908,7 +908,7 @@ type TerminationNotificationParameters struct {
 
 	// Should the termination notification be enabled on this Virtual Machine?
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
 	// +kubebuilder:validation:Optional
