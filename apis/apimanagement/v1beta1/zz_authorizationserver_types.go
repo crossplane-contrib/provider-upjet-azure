@@ -227,11 +227,11 @@ type TokenBodyParameterParameters struct {
 
 	// The Name of the Parameter.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Value of the Parameter.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // AuthorizationServerSpec defines the desired state of AuthorizationServer

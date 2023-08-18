@@ -106,19 +106,19 @@ type SubAccountUserParameters struct {
 
 	// Email of the user used by Logz for contacting them if needed. A valid email address consists of an email prefix and an email domain. The prefix and domain may contain only letters, numbers, underscores, periods and dashes. Changing this forces a new logz Sub Account to be created.
 	// +kubebuilder:validation:Optional
-	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+	Email *string `json:"email" tf:"email,omitempty"`
 
 	// First Name of the user. Possible values must be between 1 and 50 characters in length. Changing this forces a new logz Sub Account to be created.
 	// +kubebuilder:validation:Optional
-	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
+	FirstName *string `json:"firstName" tf:"first_name,omitempty"`
 
 	// Last Name of the user. Possible values must be between 1 and 50 characters in length. Changing this forces a new logz Sub Account to be created.
 	// +kubebuilder:validation:Optional
-	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+	LastName *string `json:"lastName" tf:"last_name,omitempty"`
 
 	// Phone number of the user used by Logz for contacting them if needed. Possible values must be between 1 and 40 characters in length. Changing this forces a new logz Sub Account to be created.
 	// +kubebuilder:validation:Optional
-	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
 }
 
 // SubAccountSpec defines the desired state of SubAccount

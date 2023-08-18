@@ -35,11 +35,11 @@ type KeyPropertyParameters struct {
 
 	// The name of the key property. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The data type of the key property. Valid values include Bool, DateTime, Double, String. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ReferenceDataSetInitParameters struct {

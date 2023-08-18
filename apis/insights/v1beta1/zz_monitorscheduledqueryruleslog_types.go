@@ -41,7 +41,7 @@ type MonitorScheduledQueryRulesLogCriteriaDimensionParameters struct {
 
 	// Name of the dimension.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Operator for dimension values, - 'Include'.
 	// +kubebuilder:validation:Optional
@@ -49,7 +49,7 @@ type MonitorScheduledQueryRulesLogCriteriaDimensionParameters struct {
 
 	// List of dimension values.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type MonitorScheduledQueryRulesLogCriteriaInitParameters struct {
@@ -74,11 +74,11 @@ type MonitorScheduledQueryRulesLogCriteriaParameters struct {
 
 	// A dimension block as defined below.
 	// +kubebuilder:validation:Optional
-	Dimension []MonitorScheduledQueryRulesLogCriteriaDimensionParameters `json:"dimension,omitempty" tf:"dimension,omitempty"`
+	Dimension []MonitorScheduledQueryRulesLogCriteriaDimensionParameters `json:"dimension" tf:"dimension,omitempty"`
 
 	// Name of the metric. Supported metrics are listed in the Azure Monitor Microsoft.OperationalInsights/workspaces metrics namespace.
 	// +kubebuilder:validation:Optional
-	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 }
 
 type MonitorScheduledQueryRulesLogInitParameters struct {

@@ -98,7 +98,7 @@ type FilterParameters struct {
 
 	// A set of blob types. Possible values are blockBlob, appendBlob, and pageBlob. The storage account with is_hns_enabled is true doesn't support pageBlob.
 	// +kubebuilder:validation:Optional
-	BlobTypes []*string `json:"blobTypes,omitempty" tf:"blob_types,omitempty"`
+	BlobTypes []*string `json:"blobTypes" tf:"blob_types,omitempty"`
 
 	// A set of strings for blob prefixes to be excluded. Maximum of 10 blob prefixes.
 	// +kubebuilder:validation:Optional
@@ -174,23 +174,23 @@ type RulesParameters struct {
 
 	// The format of the inventory files. Possible values are Csv and Parquet.
 	// +kubebuilder:validation:Optional
-	Format *string `json:"format,omitempty" tf:"format,omitempty"`
+	Format *string `json:"format" tf:"format,omitempty"`
 
 	// The name which should be used for this Blob Inventory Policy Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The inventory schedule applied by this rule. Possible values are Daily and Weekly.
 	// +kubebuilder:validation:Optional
-	Schedule *string `json:"schedule,omitempty" tf:"schedule,omitempty"`
+	Schedule *string `json:"schedule" tf:"schedule,omitempty"`
 
 	// A list of fields to be included in the inventory. See the Azure API reference for all the supported fields.
 	// +kubebuilder:validation:Optional
-	SchemaFields []*string `json:"schemaFields,omitempty" tf:"schema_fields,omitempty"`
+	SchemaFields []*string `json:"schemaFields" tf:"schema_fields,omitempty"`
 
 	// The scope of the inventory for this rule. Possible values are Blob and Container.
 	// +kubebuilder:validation:Optional
-	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+	Scope *string `json:"scope" tf:"scope,omitempty"`
 
 	// The storage container name to store the blob inventory files for this rule.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container

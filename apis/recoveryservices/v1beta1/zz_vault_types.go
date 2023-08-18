@@ -47,11 +47,11 @@ type EncryptionParameters struct {
 
 	// Enabling/Disabling the Double Encryption state.
 	// +kubebuilder:validation:Optional
-	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
+	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled" tf:"infrastructure_encryption_enabled,omitempty"`
 
 	// The Key Vault key id used to encrypt this vault. Key managed by Vault Managed Hardware Security Module is also supported.
 	// +kubebuilder:validation:Optional
-	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
 
 	// Indicate that system assigned identity should be used or not. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -94,7 +94,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Recovery Services Vault. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type MonitoringInitParameters struct {

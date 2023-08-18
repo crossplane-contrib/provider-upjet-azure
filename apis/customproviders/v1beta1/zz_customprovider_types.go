@@ -35,11 +35,11 @@ type ActionParameters struct {
 
 	// Specifies the endpoint of the action.
 	// +kubebuilder:validation:Optional
-	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 
 	// Specifies the name of the action.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type CustomProviderInitParameters struct {
@@ -148,11 +148,11 @@ type ResourceTypeParameters struct {
 
 	// Specifies the endpoint of the route definition.
 	// +kubebuilder:validation:Optional
-	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+	Endpoint *string `json:"endpoint" tf:"endpoint,omitempty"`
 
 	// Specifies the name of the route definition.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. This value defaults to ResourceTypeRoutingProxy.
 	// +kubebuilder:validation:Optional
@@ -175,7 +175,7 @@ type ValidationParameters struct {
 
 	// The endpoint where the validation specification is located.
 	// +kubebuilder:validation:Optional
-	Specification *string `json:"specification,omitempty" tf:"specification,omitempty"`
+	Specification *string `json:"specification" tf:"specification,omitempty"`
 }
 
 // CustomProviderSpec defines the desired state of CustomProvider

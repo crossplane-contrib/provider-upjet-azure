@@ -160,11 +160,11 @@ type ManageActionParameters struct {
 
 	// The command to install the Gallery Application. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Install *string `json:"install,omitempty" tf:"install,omitempty"`
+	Install *string `json:"install" tf:"install,omitempty"`
 
 	// The command to remove the Gallery Application. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Remove *string `json:"remove,omitempty" tf:"remove,omitempty"`
+	Remove *string `json:"remove" tf:"remove,omitempty"`
 
 	// The command to update the Gallery Application. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -246,7 +246,7 @@ type TargetRegionParameters struct {
 
 	// The number of replicas of the Gallery Application Version to be created per region. Possible values are between 1 and 10.
 	// +kubebuilder:validation:Optional
-	RegionalReplicaCount *float64 `json:"regionalReplicaCount,omitempty" tf:"regional_replica_count,omitempty"`
+	RegionalReplicaCount *float64 `json:"regionalReplicaCount" tf:"regional_replica_count,omitempty"`
 
 	// The storage account type for the Gallery Application Version. Possible values are Standard_LRS, Premium_LRS and Standard_ZRS. Defaults to Standard_LRS.
 	// +kubebuilder:validation:Optional

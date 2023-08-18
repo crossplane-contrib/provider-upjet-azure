@@ -35,11 +35,11 @@ type RetentionPolicyParameters struct {
 
 	// The number of days to retain flow log records.
 	// +kubebuilder:validation:Optional
-	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+	Days *float64 `json:"days" tf:"days,omitempty"`
 
 	// Boolean flag to enable/disable retention.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type TrafficAnalyticsInitParameters struct {
@@ -76,7 +76,7 @@ type TrafficAnalyticsParameters struct {
 
 	// Boolean flag to enable/disable traffic analytics.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// How frequently service should do flow analytics in minutes. Defaults to 60.
 	// +kubebuilder:validation:Optional
@@ -98,7 +98,7 @@ type TrafficAnalyticsParameters struct {
 
 	// The location of the attached workspace.
 	// +kubebuilder:validation:Optional
-	WorkspaceRegion *string `json:"workspaceRegion,omitempty" tf:"workspace_region,omitempty"`
+	WorkspaceRegion *string `json:"workspaceRegion" tf:"workspace_region,omitempty"`
 
 	// The resource ID of the attached workspace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace

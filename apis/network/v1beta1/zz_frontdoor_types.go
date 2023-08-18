@@ -65,7 +65,7 @@ type BackendParameters struct {
 
 	// Location of the backend (IP address or FQDN)
 	// +kubebuilder:validation:Optional
-	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+	Address *string `json:"address" tf:"address,omitempty"`
 
 	// Enable or Disable use of this Backend Routing Rule. Permitted values are true or false. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -73,15 +73,15 @@ type BackendParameters struct {
 
 	// The HTTP TCP port number. Possible values are between 1 - 65535.
 	// +kubebuilder:validation:Optional
-	HTTPPort *float64 `json:"httpPort,omitempty" tf:"http_port,omitempty"`
+	HTTPPort *float64 `json:"httpPort" tf:"http_port,omitempty"`
 
 	// The HTTPS TCP port number. Possible values are between 1 - 65535.
 	// +kubebuilder:validation:Optional
-	HTTPSPort *float64 `json:"httpsPort,omitempty" tf:"https_port,omitempty"`
+	HTTPSPort *float64 `json:"httpsPort" tf:"https_port,omitempty"`
 
 	// The value to use as the host header sent to the backend.
 	// +kubebuilder:validation:Optional
-	HostHeader *string `json:"hostHeader,omitempty" tf:"host_header,omitempty"`
+	HostHeader *string `json:"hostHeader" tf:"host_header,omitempty"`
 
 	// Priority to use for load balancing. Higher priorities will not be used for load balancing if any lower priority backend is healthy. Defaults to 1.
 	// +kubebuilder:validation:Optional
@@ -149,7 +149,7 @@ type BackendPoolHealthProbeParameters struct {
 
 	// Specifies the name of the Health Probe.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The path to use for the Health Probe. Default is /.
 	// +kubebuilder:validation:Optional
@@ -220,7 +220,7 @@ type BackendPoolLoadBalancingParameters struct {
 
 	// Specifies the name of the Load Balancer.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The number of samples to consider for load balancing decisions. Defaults to 4.
 	// +kubebuilder:validation:Optional
@@ -253,19 +253,19 @@ type BackendPoolParameters struct {
 
 	// A backend block as defined below.
 	// +kubebuilder:validation:Optional
-	Backend []BackendParameters `json:"backend,omitempty" tf:"backend,omitempty"`
+	Backend []BackendParameters `json:"backend" tf:"backend,omitempty"`
 
 	// Specifies the name of the backend_pool_health_probe block within this resource to use for this Backend Pool.
 	// +kubebuilder:validation:Optional
-	HealthProbeName *string `json:"healthProbeName,omitempty" tf:"health_probe_name,omitempty"`
+	HealthProbeName *string `json:"healthProbeName" tf:"health_probe_name,omitempty"`
 
 	// Specifies the name of the backend_pool_load_balancing block within this resource to use for this Backend Pool.
 	// +kubebuilder:validation:Optional
-	LoadBalancingName *string `json:"loadBalancingName,omitempty" tf:"load_balancing_name,omitempty"`
+	LoadBalancingName *string `json:"loadBalancingName" tf:"load_balancing_name,omitempty"`
 
 	// Specifies the name of the Backend Pool.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type BackendPoolSettingsInitParameters struct {
@@ -294,7 +294,7 @@ type BackendPoolSettingsParameters struct {
 
 	// Enforce certificate name check on HTTPS requests to all backend pools, this setting will have no effect on HTTP requests. Permitted values are true or false.
 	// +kubebuilder:validation:Optional
-	EnforceBackendPoolsCertificateNameCheck *bool `json:"enforceBackendPoolsCertificateNameCheck,omitempty" tf:"enforce_backend_pools_certificate_name_check,omitempty"`
+	EnforceBackendPoolsCertificateNameCheck *bool `json:"enforceBackendPoolsCertificateNameCheck" tf:"enforce_backend_pools_certificate_name_check,omitempty"`
 }
 
 type ExplicitResourceOrderInitParameters struct {
@@ -373,7 +373,7 @@ type ForwardingConfigurationParameters struct {
 
 	// Specifies the name of the Backend Pool to forward the incoming traffic to.
 	// +kubebuilder:validation:Optional
-	BackendPoolName *string `json:"backendPoolName,omitempty" tf:"backend_pool_name,omitempty"`
+	BackendPoolName *string `json:"backendPoolName" tf:"backend_pool_name,omitempty"`
 
 	// Specify the minimum caching duration (in ISO8601 notation e.g. P1DT2H for 1 day and 2 hours). Needs to be greater than 0 and smaller than 365 days. cache_duration works only in combination with cache_enabled set to true.
 	// +kubebuilder:validation:Optional
@@ -588,11 +588,11 @@ type FrontendEndpointParameters struct {
 
 	// Specifies the host name of the frontend_endpoint. Must be a domain name. In order to use a name.azurefd.net domain, the name value must match the Front Door name.
 	// +kubebuilder:validation:Optional
-	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+	HostName *string `json:"hostName" tf:"host_name,omitempty"`
 
 	// Specifies the name of the frontend_endpoint.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Whether to allow session affinity on this host. Valid options are true or false Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -662,7 +662,7 @@ type RoutingRuleParameters struct {
 
 	// Protocol schemes to match for the Backend Routing Rule. Possible values are Http and Https.
 	// +kubebuilder:validation:Optional
-	AcceptedProtocols []*string `json:"acceptedProtocols,omitempty" tf:"accepted_protocols,omitempty"`
+	AcceptedProtocols []*string `json:"acceptedProtocols" tf:"accepted_protocols,omitempty"`
 
 	// Enable or Disable use of this Backend Routing Rule. Permitted values are true or false. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -674,15 +674,15 @@ type RoutingRuleParameters struct {
 
 	// The names of the frontend_endpoint blocks within this resource to associate with this routing_rule.
 	// +kubebuilder:validation:Optional
-	FrontendEndpoints []*string `json:"frontendEndpoints,omitempty" tf:"frontend_endpoints,omitempty"`
+	FrontendEndpoints []*string `json:"frontendEndpoints" tf:"frontend_endpoints,omitempty"`
 
 	// Specifies the name of the Routing Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The route patterns for the Backend Routing Rule.
 	// +kubebuilder:validation:Optional
-	PatternsToMatch []*string `json:"patternsToMatch,omitempty" tf:"patterns_to_match,omitempty"`
+	PatternsToMatch []*string `json:"patternsToMatch" tf:"patterns_to_match,omitempty"`
 
 	// A redirect_configuration block as defined below.
 	// +kubebuilder:validation:Optional
@@ -751,11 +751,11 @@ type RoutingRuleRedirectConfigurationParameters struct {
 
 	// Protocol to use when redirecting. Valid options are HttpOnly, HttpsOnly, or MatchRequest.
 	// +kubebuilder:validation:Optional
-	RedirectProtocol *string `json:"redirectProtocol,omitempty" tf:"redirect_protocol,omitempty"`
+	RedirectProtocol *string `json:"redirectProtocol" tf:"redirect_protocol,omitempty"`
 
 	// Status code for the redirect. Valida options are Moved, Found, TemporaryRedirect, PermanentRedirect.
 	// +kubebuilder:validation:Optional
-	RedirectType *string `json:"redirectType,omitempty" tf:"redirect_type,omitempty"`
+	RedirectType *string `json:"redirectType" tf:"redirect_type,omitempty"`
 }
 
 // FrontDoorSpec defines the desired state of FrontDoor

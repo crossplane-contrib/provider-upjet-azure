@@ -41,15 +41,15 @@ type ApplicationInsightsWebTestLocationAvailabilityCriteriaParameters struct {
 
 	// The ID of the Application Insights Resource.
 	// +kubebuilder:validation:Optional
-	ComponentID *string `json:"componentId,omitempty" tf:"component_id,omitempty"`
+	ComponentID *string `json:"componentId" tf:"component_id,omitempty"`
 
 	// The number of failed locations.
 	// +kubebuilder:validation:Optional
-	FailedLocationCount *float64 `json:"failedLocationCount,omitempty" tf:"failed_location_count,omitempty"`
+	FailedLocationCount *float64 `json:"failedLocationCount" tf:"failed_location_count,omitempty"`
 
 	// The ID of the Application Insights Web Test.
 	// +kubebuilder:validation:Optional
-	WebTestID *string `json:"webTestId,omitempty" tf:"web_test_id,omitempty"`
+	WebTestID *string `json:"webTestId" tf:"web_test_id,omitempty"`
 }
 
 type DimensionInitParameters struct {
@@ -80,15 +80,15 @@ type DimensionParameters struct {
 
 	// The name of the Metric Alert. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The criteria operator. Possible values are LessThan, GreaterThan and GreaterOrLessThan.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// The list of dimension values.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type DynamicCriteriaDimensionInitParameters struct {
@@ -119,15 +119,15 @@ type DynamicCriteriaDimensionParameters struct {
 
 	// The name of the Metric Alert. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The criteria operator. Possible values are LessThan, GreaterThan and GreaterOrLessThan.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// The list of dimension values.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type DynamicCriteriaInitParameters struct {
@@ -200,11 +200,11 @@ type DynamicCriteriaParameters struct {
 
 	// The statistic that runs over the metric values. Possible values are Average, Count, Minimum, Maximum and Total.
 	// +kubebuilder:validation:Optional
-	Aggregation *string `json:"aggregation,omitempty" tf:"aggregation,omitempty"`
+	Aggregation *string `json:"aggregation" tf:"aggregation,omitempty"`
 
 	// The extent of deviation required to trigger an alert. Possible values are Low, Medium and High.
 	// +kubebuilder:validation:Optional
-	AlertSensitivity *string `json:"alertSensitivity,omitempty" tf:"alert_sensitivity,omitempty"`
+	AlertSensitivity *string `json:"alertSensitivity" tf:"alert_sensitivity,omitempty"`
 
 	// One or more dimension blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -224,15 +224,15 @@ type DynamicCriteriaParameters struct {
 
 	// One of the metric names to be monitored.
 	// +kubebuilder:validation:Optional
-	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
 	// One of the metric namespaces to be monitored.
 	// +kubebuilder:validation:Optional
-	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
+	MetricNamespace *string `json:"metricNamespace" tf:"metric_namespace,omitempty"`
 
 	// The criteria operator. Possible values are LessThan, GreaterThan and GreaterOrLessThan.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// Skip the metric validation to allow creating an alert rule on a custom metric that isn't yet emitted?
 	// +kubebuilder:validation:Optional
@@ -327,7 +327,7 @@ type MonitorMetricAlertCriteriaParameters struct {
 
 	// The statistic that runs over the metric values. Possible values are Average, Count, Minimum, Maximum and Total.
 	// +kubebuilder:validation:Optional
-	Aggregation *string `json:"aggregation,omitempty" tf:"aggregation,omitempty"`
+	Aggregation *string `json:"aggregation" tf:"aggregation,omitempty"`
 
 	// One or more dimension blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -335,15 +335,15 @@ type MonitorMetricAlertCriteriaParameters struct {
 
 	// One of the metric names to be monitored.
 	// +kubebuilder:validation:Optional
-	MetricName *string `json:"metricName,omitempty" tf:"metric_name,omitempty"`
+	MetricName *string `json:"metricName" tf:"metric_name,omitempty"`
 
 	// One of the metric namespaces to be monitored.
 	// +kubebuilder:validation:Optional
-	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
+	MetricNamespace *string `json:"metricNamespace" tf:"metric_namespace,omitempty"`
 
 	// The criteria operator. Possible values are Equals, GreaterThan, GreaterThanOrEqual, LessThan and LessThanOrEqual.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// Skip the metric validation to allow creating an alert rule on a custom metric that isn't yet emitted? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -351,7 +351,7 @@ type MonitorMetricAlertCriteriaParameters struct {
 
 	// The criteria threshold value that activates the alert.
 	// +kubebuilder:validation:Optional
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 }
 
 type MonitorMetricAlertInitParameters struct {

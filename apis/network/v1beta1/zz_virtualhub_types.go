@@ -149,11 +149,11 @@ type VirtualHubRouteParameters struct {
 
 	// A list of Address Prefixes.
 	// +kubebuilder:validation:Optional
-	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
+	AddressPrefixes []*string `json:"addressPrefixes" tf:"address_prefixes,omitempty"`
 
 	// The IP Address that Packets should be forwarded to as the Next Hop.
 	// +kubebuilder:validation:Optional
-	NextHopIPAddress *string `json:"nextHopIpAddress,omitempty" tf:"next_hop_ip_address,omitempty"`
+	NextHopIPAddress *string `json:"nextHopIpAddress" tf:"next_hop_ip_address,omitempty"`
 }
 
 // VirtualHubSpec defines the desired state of VirtualHub

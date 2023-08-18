@@ -114,7 +114,7 @@ type AccountNetworkRulesPrivateLinkAccessParameters struct {
 
 	// The resource id of the resource access rule to be granted access.
 	// +kubebuilder:validation:Optional
-	EndpointResourceID *string `json:"endpointResourceId,omitempty" tf:"endpoint_resource_id,omitempty"`
+	EndpointResourceID *string `json:"endpointResourceId" tf:"endpoint_resource_id,omitempty"`
 
 	// The tenant id of the resource of the resource access rule to be granted access. Defaults to the current tenant id.
 	// +kubebuilder:validation:Optional

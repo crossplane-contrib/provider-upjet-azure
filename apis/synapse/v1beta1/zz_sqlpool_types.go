@@ -35,11 +35,11 @@ type RestoreParameters struct {
 
 	// Specifies the Snapshot time to restore formatted as an RFC3339 date string. Changing this forces a new Synapse SQL Pool to be created.
 	// +kubebuilder:validation:Optional
-	PointInTime *string `json:"pointInTime,omitempty" tf:"point_in_time,omitempty"`
+	PointInTime *string `json:"pointInTime" tf:"point_in_time,omitempty"`
 
 	// The ID of the Synapse SQL Pool or SQL Database which is to restore. Changing this forces a new Synapse SQL Pool to be created.
 	// +kubebuilder:validation:Optional
-	SourceDatabaseID *string `json:"sourceDatabaseId,omitempty" tf:"source_database_id,omitempty"`
+	SourceDatabaseID *string `json:"sourceDatabaseId" tf:"source_database_id,omitempty"`
 }
 
 type SQLPoolInitParameters struct {

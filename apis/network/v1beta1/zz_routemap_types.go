@@ -55,7 +55,7 @@ type MatchCriterionParameters struct {
 
 	// The match condition to apply the rule of the Route Map. Possible values are Contains, Equals, NotContains, NotEquals and Unknown.
 	// +kubebuilder:validation:Optional
-	MatchCondition *string `json:"matchCondition,omitempty" tf:"match_condition,omitempty"`
+	MatchCondition *string `json:"matchCondition" tf:"match_condition,omitempty"`
 
 	// A list of route prefixes.
 	// +kubebuilder:validation:Optional
@@ -182,7 +182,7 @@ type RouteMapRuleParameters struct {
 
 	// The unique name for the rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The next step after the rule is evaluated. Possible values are Continue, Terminate and Unknown. Defaults to Unknown.
 	// +kubebuilder:validation:Optional
@@ -211,11 +211,11 @@ type RuleActionParameters struct {
 
 	// A parameter block as defined below.
 	// +kubebuilder:validation:Optional
-	Parameter []ParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
+	Parameter []ParameterParameters `json:"parameter" tf:"parameter,omitempty"`
 
 	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // RouteMapSpec defines the desired state of RouteMap

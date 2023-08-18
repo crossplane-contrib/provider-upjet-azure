@@ -149,11 +149,11 @@ type FrontdoorRulesEngineRuleParameters struct {
 
 	// The name of the rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Priority of the rule, must be unique per rules engine definition.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 }
 
 type RequestHeaderInitParameters struct {
@@ -284,7 +284,7 @@ type RuleMatchConditionParameters struct {
 
 	// can be set to Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith or EndsWith
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// match against a specific key when variable is set to PostArgs or RequestHeader. It cannot be used with QueryString and RequestMethod.
 	// +kubebuilder:validation:Optional

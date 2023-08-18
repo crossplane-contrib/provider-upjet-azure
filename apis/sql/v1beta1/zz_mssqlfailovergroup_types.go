@@ -157,7 +157,7 @@ type ReadWriteEndpointFailoverPolicyParameters struct {
 
 	// The failover policy of the read-write endpoint for the failover group. Possible values are Automatic or Manual.
 	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
 // MSSQLFailoverGroupSpec defines the desired state of MSSQLFailoverGroup

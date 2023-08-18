@@ -133,11 +133,11 @@ type FirewallPolicyIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Firewall Policy.
 	// +kubebuilder:validation:Optional
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Firewall Policy. Only possible value is UserAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type FirewallPolicyInitParameters struct {
@@ -361,11 +361,11 @@ type InsightsParameters struct {
 
 	// The ID of the default Log Analytics Workspace that the Firewalls associated with this Firewall Policy will send their logs to, when there is no location matches in the log_analytics_workspace.
 	// +kubebuilder:validation:Optional
-	DefaultLogAnalyticsWorkspaceID *string `json:"defaultLogAnalyticsWorkspaceId,omitempty" tf:"default_log_analytics_workspace_id,omitempty"`
+	DefaultLogAnalyticsWorkspaceID *string `json:"defaultLogAnalyticsWorkspaceId" tf:"default_log_analytics_workspace_id,omitempty"`
 
 	// Whether the insights functionality is enabled for this Firewall Policy.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// A list of log_analytics_workspace block as defined below.
 	// +kubebuilder:validation:Optional
@@ -447,11 +447,11 @@ type LogAnalyticsWorkspaceParameters struct {
 
 	// The location of the Firewalls, that when matches this Log Analytics Workspace will be used to consume their logs.
 	// +kubebuilder:validation:Optional
-	FirewallLocation *string `json:"firewallLocation,omitempty" tf:"firewall_location,omitempty"`
+	FirewallLocation *string `json:"firewallLocation" tf:"firewall_location,omitempty"`
 
 	// 12-digit number (id) which identifies your signature.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 }
 
 type SignatureOverridesInitParameters struct {
@@ -505,11 +505,11 @@ type TLSCertificateParameters struct {
 
 	// The ID of the Key Vault, where the secret or certificate is stored.
 	// +kubebuilder:validation:Optional
-	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+	KeyVaultSecretID *string `json:"keyVaultSecretId" tf:"key_vault_secret_id,omitempty"`
 
 	// The name of the certificate.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ThreatIntelligenceAllowlistInitParameters struct {
@@ -615,11 +615,11 @@ type TrafficBypassParameters struct {
 
 	// The name which should be used for this bypass traffic setting.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The protocols any of ANY, TCP, ICMP, UDP that shall be bypassed by intrusion detection.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// Specifies a list of source addresses that shall be bypassed by intrusion detection.
 	// +kubebuilder:validation:Optional

@@ -35,11 +35,11 @@ type CustomBGPAddressesParameters struct {
 
 	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (first one)
 	// +kubebuilder:validation:Optional
-	Primary *string `json:"primary,omitempty" tf:"primary,omitempty"`
+	Primary *string `json:"primary" tf:"primary,omitempty"`
 
 	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (second one)
 	// +kubebuilder:validation:Optional
-	Secondary *string `json:"secondary,omitempty" tf:"secondary,omitempty"`
+	Secondary *string `json:"secondary" tf:"secondary,omitempty"`
 }
 
 type IpsecPolicyInitParameters struct {
@@ -104,29 +104,29 @@ type IpsecPolicyParameters struct {
 
 	// The DH group used in IKE phase 1 for initial SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048, DHGroup24, ECP256, ECP384, or None.
 	// +kubebuilder:validation:Optional
-	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
+	DhGroup *string `json:"dhGroup" tf:"dh_group,omitempty"`
 
 	// The IKE encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
 	// +kubebuilder:validation:Optional
-	IkeEncryption *string `json:"ikeEncryption,omitempty" tf:"ike_encryption,omitempty"`
+	IkeEncryption *string `json:"ikeEncryption" tf:"ike_encryption,omitempty"`
 
 	// The IKE integrity algorithm. Valid options are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
 	// +kubebuilder:validation:Optional
-	IkeIntegrity *string `json:"ikeIntegrity,omitempty" tf:"ike_integrity,omitempty"`
+	IkeIntegrity *string `json:"ikeIntegrity" tf:"ike_integrity,omitempty"`
 
 	// The IPSec encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, or None.
 	// +kubebuilder:validation:Optional
-	IpsecEncryption *string `json:"ipsecEncryption,omitempty" tf:"ipsec_encryption,omitempty"`
+	IpsecEncryption *string `json:"ipsecEncryption" tf:"ipsec_encryption,omitempty"`
 
 	// The IPSec integrity algorithm. Valid options are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
 	// +kubebuilder:validation:Optional
-	IpsecIntegrity *string `json:"ipsecIntegrity,omitempty" tf:"ipsec_integrity,omitempty"`
+	IpsecIntegrity *string `json:"ipsecIntegrity" tf:"ipsec_integrity,omitempty"`
 
 	// The DH group used in IKE phase 2 for new child SA.
 	// Valid options are ECP256, ECP384, PFS1, PFS14, PFS2, PFS2048, PFS24, PFSMM,
 	// or None.
 	// +kubebuilder:validation:Optional
-	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
+	PfsGroup *string `json:"pfsGroup" tf:"pfs_group,omitempty"`
 
 	// The IPSec SA payload size in KB. Must be at least 1024 KB. Defaults to 102400000 KB.
 	// +kubebuilder:validation:Optional
@@ -159,11 +159,11 @@ type TrafficSelectorPolicyParameters struct {
 
 	// List of local CIDRs.
 	// +kubebuilder:validation:Optional
-	LocalAddressCidrs []*string `json:"localAddressCidrs,omitempty" tf:"local_address_cidrs,omitempty"`
+	LocalAddressCidrs []*string `json:"localAddressCidrs" tf:"local_address_cidrs,omitempty"`
 
 	// List of remote CIDRs.
 	// +kubebuilder:validation:Optional
-	RemoteAddressCidrs []*string `json:"remoteAddressCidrs,omitempty" tf:"remote_address_cidrs,omitempty"`
+	RemoteAddressCidrs []*string `json:"remoteAddressCidrs" tf:"remote_address_cidrs,omitempty"`
 }
 
 type VirtualNetworkGatewayConnectionInitParameters struct {

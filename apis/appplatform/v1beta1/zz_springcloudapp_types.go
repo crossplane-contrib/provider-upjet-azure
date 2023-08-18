@@ -57,7 +57,7 @@ type CustomPersistentDiskParameters struct {
 
 	// The mount path of the persistent disk.
 	// +kubebuilder:validation:Optional
-	MountPath *string `json:"mountPath,omitempty" tf:"mount_path,omitempty"`
+	MountPath *string `json:"mountPath" tf:"mount_path,omitempty"`
 
 	// Indicates whether the persistent disk is a readOnly one.
 	// +kubebuilder:validation:Optional
@@ -65,11 +65,11 @@ type CustomPersistentDiskParameters struct {
 
 	// The share name of the Azure File share.
 	// +kubebuilder:validation:Optional
-	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
+	ShareName *string `json:"shareName" tf:"share_name,omitempty"`
 
 	// The name of the Spring Cloud Storage.
 	// +kubebuilder:validation:Optional
-	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
+	StorageName *string `json:"storageName" tf:"storage_name,omitempty"`
 }
 
 type IdentityInitParameters struct {
@@ -104,7 +104,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Spring Cloud Application. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type IngressSettingsInitParameters struct {
@@ -192,7 +192,7 @@ type PersistentDiskParameters struct {
 
 	// Specifies the size of the persistent disk in GB. Possible values are between 0 and 50.
 	// +kubebuilder:validation:Optional
-	SizeInGb *float64 `json:"sizeInGb,omitempty" tf:"size_in_gb,omitempty"`
+	SizeInGb *float64 `json:"sizeInGb" tf:"size_in_gb,omitempty"`
 }
 
 type SpringCloudAppInitParameters struct {

@@ -51,7 +51,7 @@ type AceParameters struct {
 
 	// Specifies the permissions for the entry in rwx form. For example, rwx gives full permissions but r-- only gives read permissions.
 	// +kubebuilder:validation:Optional
-	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
 
 	// Specifies whether the ACE represents an access entry or a default entry. Default value is access.
 	// +kubebuilder:validation:Optional
@@ -59,7 +59,7 @@ type AceParameters struct {
 
 	// Specifies the type of entry. Can be user, group, mask or other.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type DataLakeGen2FileSystemInitParameters struct {

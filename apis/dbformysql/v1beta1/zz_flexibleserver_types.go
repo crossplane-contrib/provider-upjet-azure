@@ -329,7 +329,7 @@ type HighAvailabilityParameters struct {
 
 	// The high availability mode for the MySQL Flexible Server. Possibles values are SameZone and ZoneRedundant.
 	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+	Mode *string `json:"mode" tf:"mode,omitempty"`
 
 	// Specifies the Availability Zone in which the standby Flexible Server should be located. Possible values are 1, 2 and 3.
 	// +kubebuilder:validation:Optional
@@ -358,11 +358,11 @@ type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this MySQL Flexible Server.
 	// +kubebuilder:validation:Optional
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this MySQL Flexible Server. The only possible value is UserAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type MaintenanceWindowInitParameters struct {

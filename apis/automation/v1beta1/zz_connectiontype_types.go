@@ -129,11 +129,11 @@ type FieldParameters struct {
 
 	// The name which should be used for this connection field definition.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The type of the connection field definition.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // ConnectionTypeSpec defines the desired state of ConnectionType

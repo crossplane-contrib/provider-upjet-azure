@@ -45,7 +45,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Redis Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type PatchScheduleInitParameters struct {
@@ -76,7 +76,7 @@ type PatchScheduleParameters struct {
 
 	// the Weekday name - possible values include Monday, Tuesday, Wednesday etc.
 	// +kubebuilder:validation:Optional
-	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
+	DayOfWeek *string `json:"dayOfWeek" tf:"day_of_week,omitempty"`
 
 	// The ISO 8601 timespan which specifies the amount of time the Redis Cache can be updated. Defaults to PT5H.
 	// +kubebuilder:validation:Optional

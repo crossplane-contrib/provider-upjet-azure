@@ -41,15 +41,15 @@ type IPv4FirewallRuleParameters struct {
 
 	// Specifies the name of the firewall rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// End of the firewall rule range as IPv4 address.
 	// +kubebuilder:validation:Optional
-	RangeEnd *string `json:"rangeEnd,omitempty" tf:"range_end,omitempty"`
+	RangeEnd *string `json:"rangeEnd" tf:"range_end,omitempty"`
 
 	// Start of the firewall rule range as IPv4 address.
 	// +kubebuilder:validation:Optional
-	RangeStart *string `json:"rangeStart,omitempty" tf:"range_start,omitempty"`
+	RangeStart *string `json:"rangeStart" tf:"range_start,omitempty"`
 }
 
 type ServerInitParameters struct {

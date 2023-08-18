@@ -35,11 +35,11 @@ type BGPParameters struct {
 
 	// The BGP speaker's ASN.
 	// +kubebuilder:validation:Optional
-	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
+	Asn *float64 `json:"asn" tf:"asn,omitempty"`
 
 	// The BGP peering IP address.
 	// +kubebuilder:validation:Optional
-	PeeringAddress *string `json:"peeringAddress,omitempty" tf:"peering_address,omitempty"`
+	PeeringAddress *string `json:"peeringAddress" tf:"peering_address,omitempty"`
 }
 
 type LinkInitParameters struct {
@@ -103,7 +103,7 @@ type LinkParameters struct {
 
 	// The name which should be used for this VPN Site Link.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The name of the physical link at the VPN Site. Example: ATT, Verizon.
 	// +kubebuilder:validation:Optional

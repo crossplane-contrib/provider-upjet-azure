@@ -94,11 +94,11 @@ type IPRuleParameters struct {
 
 	// The IP address range in CIDR notation for the IP Rule.
 	// +kubebuilder:validation:Optional
-	IPMask *string `json:"ipMask,omitempty" tf:"ip_mask,omitempty"`
+	IPMask *string `json:"ipMask" tf:"ip_mask,omitempty"`
 
 	// The name of the IP Rule
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 // ApplicationNetworkRuleSetSpec defines the desired state of ApplicationNetworkRuleSet

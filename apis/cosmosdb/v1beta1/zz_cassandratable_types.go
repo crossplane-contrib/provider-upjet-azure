@@ -133,11 +133,11 @@ type ClusterKeyParameters struct {
 
 	// Name of the column to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Order of the key. Currently supported values are Asc and Desc.
 	// +kubebuilder:validation:Optional
-	OrderBy *string `json:"orderBy,omitempty" tf:"order_by,omitempty"`
+	OrderBy *string `json:"orderBy" tf:"order_by,omitempty"`
 }
 
 type ColumnInitParameters struct {
@@ -162,11 +162,11 @@ type ColumnParameters struct {
 
 	// Name of the column to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Type of the column to be created.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type PartitionKeyInitParameters struct {
@@ -185,7 +185,7 @@ type PartitionKeyParameters struct {
 
 	// Name of the column to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type SchemaInitParameters struct {
@@ -220,11 +220,11 @@ type SchemaParameters struct {
 
 	// One or more column blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Column []ColumnParameters `json:"column,omitempty" tf:"column,omitempty"`
+	Column []ColumnParameters `json:"column" tf:"column,omitempty"`
 
 	// One or more partition_key blocks as defined below.
 	// +kubebuilder:validation:Optional
-	PartitionKey []PartitionKeyParameters `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
+	PartitionKey []PartitionKeyParameters `json:"partitionKey" tf:"partition_key,omitempty"`
 }
 
 // CassandraTableSpec defines the desired state of CassandraTable

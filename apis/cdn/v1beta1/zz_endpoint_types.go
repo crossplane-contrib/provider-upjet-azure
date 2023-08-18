@@ -35,7 +35,7 @@ type CacheExpirationActionParameters struct {
 
 	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	// +kubebuilder:validation:Optional
-	Behavior *string `json:"behavior,omitempty" tf:"behavior,omitempty"`
+	Behavior *string `json:"behavior" tf:"behavior,omitempty"`
 
 	// Duration of the cache. Only allowed when behavior is set to Override or SetIfMissing. Format: [d.]hh:mm:ss
 	// +kubebuilder:validation:Optional
@@ -64,7 +64,7 @@ type CacheKeyQueryStringActionParameters struct {
 
 	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	// +kubebuilder:validation:Optional
-	Behavior *string `json:"behavior,omitempty" tf:"behavior,omitempty"`
+	Behavior *string `json:"behavior" tf:"behavior,omitempty"`
 
 	// Comma separated list of parameter values.
 	// +kubebuilder:validation:Optional
@@ -119,11 +119,11 @@ type CookiesConditionParameters struct {
 
 	// Valid values are Any, BeginsWith, Contains, EndsWith, Equal, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual, RegEx and Wildcard.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// Header name.
 	// +kubebuilder:validation:Optional
-	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+	Selector *string `json:"selector" tf:"selector,omitempty"`
 
 	// A list of transforms. Valid values are Lowercase and Uppercase.
 	// +kubebuilder:validation:Optional
@@ -300,11 +300,11 @@ type DeliveryRuleParameters struct {
 
 	// The Name which should be used for this Delivery Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The order used for this rule. The order values should be sequential and begin at 1.
 	// +kubebuilder:validation:Optional
-	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
+	Order *float64 `json:"order" tf:"order,omitempty"`
 
 	// A post_arg_condition block as defined below.
 	// +kubebuilder:validation:Optional
@@ -387,7 +387,7 @@ type DeviceConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
-	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
 
 	// Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -623,15 +623,15 @@ type GeoFilterParameters struct {
 
 	// The Action of the Geo Filter. Possible values include Allow and Block.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// A List of two letter country codes (e.g. US, GB) to be associated with this Geo Filter.
 	// +kubebuilder:validation:Optional
-	CountryCodes []*string `json:"countryCodes,omitempty" tf:"country_codes,omitempty"`
+	CountryCodes []*string `json:"countryCodes" tf:"country_codes,omitempty"`
 
 	// The relative path applicable to geo filter.
 	// +kubebuilder:validation:Optional
-	RelativePath *string `json:"relativePath,omitempty" tf:"relative_path,omitempty"`
+	RelativePath *string `json:"relativePath" tf:"relative_path,omitempty"`
 }
 
 type GlobalDeliveryRuleCacheExpirationActionInitParameters struct {
@@ -656,7 +656,7 @@ type GlobalDeliveryRuleCacheExpirationActionParameters struct {
 
 	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	// +kubebuilder:validation:Optional
-	Behavior *string `json:"behavior,omitempty" tf:"behavior,omitempty"`
+	Behavior *string `json:"behavior" tf:"behavior,omitempty"`
 
 	// Duration of the cache. Only allowed when behavior is set to Override or SetIfMissing. Format: [d.]hh:mm:ss
 	// +kubebuilder:validation:Optional
@@ -685,7 +685,7 @@ type GlobalDeliveryRuleCacheKeyQueryStringActionParameters struct {
 
 	// The behavior of the cache key for query strings. Valid values are Exclude, ExcludeAll, Include and IncludeAll.
 	// +kubebuilder:validation:Optional
-	Behavior *string `json:"behavior,omitempty" tf:"behavior,omitempty"`
+	Behavior *string `json:"behavior" tf:"behavior,omitempty"`
 
 	// Comma separated list of parameter values.
 	// +kubebuilder:validation:Optional
@@ -741,11 +741,11 @@ type GlobalDeliveryRuleModifyRequestHeaderActionParameters struct {
 
 	// Action to be executed on a header value. Valid values are Append, Delete and Overwrite.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The name of the origin. This is an arbitrary value. However, this value needs to be unique under the endpoint. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of the header. Only needed when action is set to Append or overwrite.
 	// +kubebuilder:validation:Optional
@@ -780,11 +780,11 @@ type GlobalDeliveryRuleModifyResponseHeaderActionParameters struct {
 
 	// Action to be executed on a header value. Valid values are Append, Delete and Overwrite.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The name of the origin. This is an arbitrary value. However, this value needs to be unique under the endpoint. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of the header. Only needed when action is set to Append or overwrite.
 	// +kubebuilder:validation:Optional
@@ -905,7 +905,7 @@ type GlobalDeliveryRuleURLRedirectActionParameters struct {
 
 	// Type of the redirect. Valid values are Found, Moved, PermanentRedirect and TemporaryRedirect.
 	// +kubebuilder:validation:Optional
-	RedirectType *string `json:"redirectType,omitempty" tf:"redirect_type,omitempty"`
+	RedirectType *string `json:"redirectType" tf:"redirect_type,omitempty"`
 }
 
 type GlobalDeliveryRuleURLRewriteActionInitParameters struct {
@@ -936,7 +936,7 @@ type GlobalDeliveryRuleURLRewriteActionParameters struct {
 
 	// This value must start with a / and can't be longer than 260 characters.
 	// +kubebuilder:validation:Optional
-	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+	Destination *string `json:"destination" tf:"destination,omitempty"`
 
 	// Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -944,7 +944,7 @@ type GlobalDeliveryRuleURLRewriteActionParameters struct {
 
 	// This value must start with a / and can't be longer than 260 characters.
 	// +kubebuilder:validation:Optional
-	SourcePattern *string `json:"sourcePattern,omitempty" tf:"source_pattern,omitempty"`
+	SourcePattern *string `json:"sourcePattern" tf:"source_pattern,omitempty"`
 }
 
 type HTTPVersionConditionInitParameters struct {
@@ -975,7 +975,7 @@ type HTTPVersionConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
-	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
 
 	// Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -1014,11 +1014,11 @@ type ModifyRequestHeaderActionParameters struct {
 
 	// Action to be executed on a header value. Valid values are Append, Delete and Overwrite.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The name of the origin. This is an arbitrary value. However, this value needs to be unique under the endpoint. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of the header. Only needed when action is set to Append or overwrite.
 	// +kubebuilder:validation:Optional
@@ -1053,11 +1053,11 @@ type ModifyResponseHeaderActionParameters struct {
 
 	// Action to be executed on a header value. Valid values are Append, Delete and Overwrite.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The name of the origin. This is an arbitrary value. However, this value needs to be unique under the endpoint. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of the header. Only needed when action is set to Append or overwrite.
 	// +kubebuilder:validation:Optional
@@ -1106,11 +1106,11 @@ type OriginParameters struct {
 
 	// A string that determines the hostname/IP address of the origin server. This string can be a domain name, Storage Account endpoint, Web App endpoint, IPv4 address or IPv6 address. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+	HostName *string `json:"hostName" tf:"host_name,omitempty"`
 
 	// The name of the origin. This is an arbitrary value. However, this value needs to be unique under the endpoint. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type PostArgConditionInitParameters struct {
@@ -1161,11 +1161,11 @@ type PostArgConditionParameters struct {
 
 	// Valid values are Any, BeginsWith, Contains, EndsWith, Equal, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual, RegEx and Wildcard.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// Header name.
 	// +kubebuilder:validation:Optional
-	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+	Selector *string `json:"selector" tf:"selector,omitempty"`
 
 	// A list of transforms. Valid values are Lowercase and Uppercase.
 	// +kubebuilder:validation:Optional
@@ -1214,7 +1214,7 @@ type QueryStringConditionParameters struct {
 
 	// Valid values are Any, BeginsWith, Contains, EndsWith, Equal, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual, RegEx and Wildcard.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of transforms. Valid values are Lowercase and Uppercase.
 	// +kubebuilder:validation:Optional
@@ -1257,7 +1257,7 @@ type RemoteAddressConditionParameters struct {
 
 	// Valid values are Any, BeginsWith, Contains, EndsWith, Equal, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual, RegEx and Wildcard.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 }
 
 type RequestBodyConditionInitParameters struct {
@@ -1302,7 +1302,7 @@ type RequestBodyConditionParameters struct {
 
 	// Valid values are Any, BeginsWith, Contains, EndsWith, Equal, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual, RegEx and Wildcard.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of transforms. Valid values are Lowercase and Uppercase.
 	// +kubebuilder:validation:Optional
@@ -1357,11 +1357,11 @@ type RequestHeaderConditionParameters struct {
 
 	// Valid values are Any, BeginsWith, Contains, EndsWith, Equal, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual, RegEx and Wildcard.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// Header name.
 	// +kubebuilder:validation:Optional
-	Selector *string `json:"selector,omitempty" tf:"selector,omitempty"`
+	Selector *string `json:"selector" tf:"selector,omitempty"`
 
 	// A list of transforms. Valid values are Lowercase and Uppercase.
 	// +kubebuilder:validation:Optional
@@ -1396,7 +1396,7 @@ type RequestMethodConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
-	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
 
 	// Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -1435,7 +1435,7 @@ type RequestSchemeConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
-	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
+	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
 
 	// Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -1488,7 +1488,7 @@ type RequestURIConditionParameters struct {
 
 	// Valid values are Any, BeginsWith, Contains, EndsWith, Equal, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual, RegEx and Wildcard.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of transforms. Valid values are Lowercase and Uppercase.
 	// +kubebuilder:validation:Optional
@@ -1537,7 +1537,7 @@ type URLFileExtensionConditionParameters struct {
 
 	// Valid values are Any, BeginsWith, Contains, EndsWith, Equal, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual, RegEx and Wildcard.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of transforms. Valid values are Lowercase and Uppercase.
 	// +kubebuilder:validation:Optional
@@ -1586,7 +1586,7 @@ type URLFileNameConditionParameters struct {
 
 	// Valid values are Any, BeginsWith, Contains, EndsWith, Equal, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual, RegEx and Wildcard.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of transforms. Valid values are Lowercase and Uppercase.
 	// +kubebuilder:validation:Optional
@@ -1635,7 +1635,7 @@ type URLPathConditionParameters struct {
 
 	// Valid values are Any, BeginsWith, Contains, EndsWith, Equal, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual, RegEx and Wildcard.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of transforms. Valid values are Lowercase and Uppercase.
 	// +kubebuilder:validation:Optional
@@ -1708,7 +1708,7 @@ type URLRedirectActionParameters struct {
 
 	// Type of the redirect. Valid values are Found, Moved, PermanentRedirect and TemporaryRedirect.
 	// +kubebuilder:validation:Optional
-	RedirectType *string `json:"redirectType,omitempty" tf:"redirect_type,omitempty"`
+	RedirectType *string `json:"redirectType" tf:"redirect_type,omitempty"`
 }
 
 type URLRewriteActionInitParameters struct {
@@ -1739,7 +1739,7 @@ type URLRewriteActionParameters struct {
 
 	// This value must start with a / and can't be longer than 260 characters.
 	// +kubebuilder:validation:Optional
-	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
+	Destination *string `json:"destination" tf:"destination,omitempty"`
 
 	// Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -1747,7 +1747,7 @@ type URLRewriteActionParameters struct {
 
 	// This value must start with a / and can't be longer than 260 characters.
 	// +kubebuilder:validation:Optional
-	SourcePattern *string `json:"sourcePattern,omitempty" tf:"source_pattern,omitempty"`
+	SourcePattern *string `json:"sourcePattern" tf:"source_pattern,omitempty"`
 }
 
 // EndpointSpec defines the desired state of Endpoint

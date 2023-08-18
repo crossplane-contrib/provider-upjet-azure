@@ -65,11 +65,11 @@ type ManagedHardwareSecurityModuleNetworkAclsParameters struct {
 
 	// Specifies which traffic can bypass the network rules. Possible values are AzureServices and None.
 	// +kubebuilder:validation:Optional
-	Bypass *string `json:"bypass,omitempty" tf:"bypass,omitempty"`
+	Bypass *string `json:"bypass" tf:"bypass,omitempty"`
 
 	// The Default Action to use. Possible values are Allow and Deny.
 	// +kubebuilder:validation:Optional
-	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 }
 
 type ManagedHardwareSecurityModuleObservation struct {

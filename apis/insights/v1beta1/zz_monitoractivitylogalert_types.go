@@ -150,7 +150,7 @@ type CriteriaParameters struct {
 
 	// The category of the operation. Possible values are Administrative, Autoscale, Policy, Recommendation, ResourceHealth, Security and ServiceHealth.
 	// +kubebuilder:validation:Optional
-	Category *string `json:"category,omitempty" tf:"category,omitempty"`
+	Category *string `json:"category" tf:"category,omitempty"`
 
 	// The severity level of the event. Possible values are Verbose, Informational, Warning, Error, and Critical.
 	// +kubebuilder:validation:Optional

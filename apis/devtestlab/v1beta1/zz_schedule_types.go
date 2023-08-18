@@ -29,7 +29,7 @@ type DailyRecurrenceParameters struct {
 
 	// The time each day when the schedule takes effect.
 	// +kubebuilder:validation:Optional
-	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+	Time *string `json:"time" tf:"time,omitempty"`
 }
 
 type HourlyRecurrenceInitParameters struct {
@@ -48,7 +48,7 @@ type HourlyRecurrenceParameters struct {
 
 	// Minutes of the hour the schedule will run.
 	// +kubebuilder:validation:Optional
-	Minute *float64 `json:"minute,omitempty" tf:"minute,omitempty"`
+	Minute *float64 `json:"minute" tf:"minute,omitempty"`
 }
 
 type ScheduleInitParameters struct {
@@ -246,7 +246,7 @@ type WeeklyRecurrenceParameters struct {
 
 	// The time when the schedule takes effect.
 	// +kubebuilder:validation:Optional
-	Time *string `json:"time,omitempty" tf:"time,omitempty"`
+	Time *string `json:"time" tf:"time,omitempty"`
 
 	// A list of days that this schedule takes effect . Possible values include Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
 	// +kubebuilder:validation:Optional

@@ -41,15 +41,15 @@ type ActiveDirectoryParameters struct {
 
 	// The ID of the Client Application.
 	// +kubebuilder:validation:Optional
-	ClientApplicationID *string `json:"clientApplicationId,omitempty" tf:"client_application_id,omitempty"`
+	ClientApplicationID *string `json:"clientApplicationId" tf:"client_application_id,omitempty"`
 
 	// The ID of the Cluster Application.
 	// +kubebuilder:validation:Optional
-	ClusterApplicationID *string `json:"clusterApplicationId,omitempty" tf:"cluster_application_id,omitempty"`
+	ClusterApplicationID *string `json:"clusterApplicationId" tf:"cluster_application_id,omitempty"`
 
 	// The ID of the Tenant.
 	// +kubebuilder:validation:Optional
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
 }
 
 type AuthenticationCertificateInitParameters struct {
@@ -84,11 +84,11 @@ type AuthenticationCertificateParameters struct {
 
 	// The thumbprint of the certificate.
 	// +kubebuilder:validation:Optional
-	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+	Thumbprint *string `json:"thumbprint" tf:"thumbprint,omitempty"`
 
 	// The type of the certificate. Can be AdminClient or ReadOnlyClient.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type AuthenticationInitParameters struct {
@@ -142,11 +142,11 @@ type CertificatesParameters struct {
 
 	// The certificate store on the Virtual Machine to which the certificate should be added.
 	// +kubebuilder:validation:Optional
-	Store *string `json:"store,omitempty" tf:"store,omitempty"`
+	Store *string `json:"store" tf:"store,omitempty"`
 
 	// The URL of a certificate that has been uploaded to Key Vault as a secret
 	// +kubebuilder:validation:Optional
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+	URL *string `json:"url" tf:"url,omitempty"`
 }
 
 type CustomFabricSettingInitParameters struct {
@@ -177,15 +177,15 @@ type CustomFabricSettingParameters struct {
 
 	// Parameter name.
 	// +kubebuilder:validation:Optional
-	Parameter *string `json:"parameter,omitempty" tf:"parameter,omitempty"`
+	Parameter *string `json:"parameter" tf:"parameter,omitempty"`
 
 	// Section name.
 	// +kubebuilder:validation:Optional
-	Section *string `json:"section,omitempty" tf:"section,omitempty"`
+	Section *string `json:"section" tf:"section,omitempty"`
 
 	// Parameter value.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type LBRuleInitParameters struct {
@@ -228,15 +228,15 @@ type LBRuleParameters struct {
 
 	// LB Backend port.
 	// +kubebuilder:validation:Optional
-	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
+	BackendPort *float64 `json:"backendPort" tf:"backend_port,omitempty"`
 
 	// LB Frontend port.
 	// +kubebuilder:validation:Optional
-	FrontendPort *float64 `json:"frontendPort,omitempty" tf:"frontend_port,omitempty"`
+	FrontendPort *float64 `json:"frontendPort" tf:"frontend_port,omitempty"`
 
 	// Protocol for the probe. Can be one of tcp, udp, http, or https.
 	// +kubebuilder:validation:Optional
-	ProbeProtocol *string `json:"probeProtocol,omitempty" tf:"probe_protocol,omitempty"`
+	ProbeProtocol *string `json:"probeProtocol" tf:"probe_protocol,omitempty"`
 
 	// Path for the probe to check, when probe protocol is set to http.
 	// +kubebuilder:validation:Optional
@@ -244,7 +244,7 @@ type LBRuleParameters struct {
 
 	// The transport protocol used in this rule. Can be one of tcp or udp.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 }
 
 type ManagedClusterInitParameters struct {
@@ -407,7 +407,7 @@ type ManagedClusterNodeTypeParameters struct {
 
 	// Sets the port range available for applications. Format is <from_port>-<to_port>, for example 10000-20000.
 	// +kubebuilder:validation:Optional
-	ApplicationPortRange *string `json:"applicationPortRange,omitempty" tf:"application_port_range,omitempty"`
+	ApplicationPortRange *string `json:"applicationPortRange" tf:"application_port_range,omitempty"`
 
 	// Specifies a list of key/value pairs used to set capacity tags for this node type.
 	// +kubebuilder:validation:Optional
@@ -415,7 +415,7 @@ type ManagedClusterNodeTypeParameters struct {
 
 	// The size of the data disk in gigabytes..
 	// +kubebuilder:validation:Optional
-	DataDiskSizeGb *float64 `json:"dataDiskSizeGb,omitempty" tf:"data_disk_size_gb,omitempty"`
+	DataDiskSizeGb *float64 `json:"dataDiskSizeGb" tf:"data_disk_size_gb,omitempty"`
 
 	// The type of the disk to use for storing data. It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
 	// +kubebuilder:validation:Optional
@@ -423,7 +423,7 @@ type ManagedClusterNodeTypeParameters struct {
 
 	// Sets the port range available for the OS. Format is <from_port>-<to_port>, for example 10000-20000. There has to be at least 255 ports available and cannot overlap with application_port_range..
 	// +kubebuilder:validation:Optional
-	EphemeralPortRange *string `json:"ephemeralPortRange,omitempty" tf:"ephemeral_port_range,omitempty"`
+	EphemeralPortRange *string `json:"ephemeralPortRange" tf:"ephemeral_port_range,omitempty"`
 
 	// If set the node type can be composed of multiple placement groups.
 	// +kubebuilder:validation:Optional
@@ -431,7 +431,7 @@ type ManagedClusterNodeTypeParameters struct {
 
 	// The name which should be used for this node type.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies a list of placement tags that can be used to indicate where services should run..
 	// +kubebuilder:validation:Optional
@@ -447,23 +447,23 @@ type ManagedClusterNodeTypeParameters struct {
 
 	// The offer type of the marketplace image cluster VMs will use.
 	// +kubebuilder:validation:Optional
-	VMImageOffer *string `json:"vmImageOffer,omitempty" tf:"vm_image_offer,omitempty"`
+	VMImageOffer *string `json:"vmImageOffer" tf:"vm_image_offer,omitempty"`
 
 	// The publisher of the marketplace image cluster VMs will use.
 	// +kubebuilder:validation:Optional
-	VMImagePublisher *string `json:"vmImagePublisher,omitempty" tf:"vm_image_publisher,omitempty"`
+	VMImagePublisher *string `json:"vmImagePublisher" tf:"vm_image_publisher,omitempty"`
 
 	// The SKU of the marketplace image cluster VMs will use.
 	// +kubebuilder:validation:Optional
-	VMImageSku *string `json:"vmImageSku,omitempty" tf:"vm_image_sku,omitempty"`
+	VMImageSku *string `json:"vmImageSku" tf:"vm_image_sku,omitempty"`
 
 	// The version of the marketplace image cluster VMs will use.
 	// +kubebuilder:validation:Optional
-	VMImageVersion *string `json:"vmImageVersion,omitempty" tf:"vm_image_version,omitempty"`
+	VMImageVersion *string `json:"vmImageVersion" tf:"vm_image_version,omitempty"`
 
 	// The number of instances this node type will launch.
 	// +kubebuilder:validation:Optional
-	VMInstanceCount *float64 `json:"vmInstanceCount,omitempty" tf:"vm_instance_count,omitempty"`
+	VMInstanceCount *float64 `json:"vmInstanceCount" tf:"vm_instance_count,omitempty"`
 
 	// One or more vm_secrets blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -471,7 +471,7 @@ type ManagedClusterNodeTypeParameters struct {
 
 	// The size of the instances in this node type.
 	// +kubebuilder:validation:Optional
-	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
+	VMSize *string `json:"vmSize" tf:"vm_size,omitempty"`
 }
 
 type ManagedClusterObservation struct {
@@ -623,11 +623,11 @@ type VMSecretsParameters struct {
 
 	// One or more certificates blocks as defined above.
 	// +kubebuilder:validation:Optional
-	Certificates []CertificatesParameters `json:"certificates,omitempty" tf:"certificates,omitempty"`
+	Certificates []CertificatesParameters `json:"certificates" tf:"certificates,omitempty"`
 
 	// The ID of the Vault that contain the certificates.
 	// +kubebuilder:validation:Optional
-	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
+	VaultID *string `json:"vaultId" tf:"vault_id,omitempty"`
 }
 
 // ManagedClusterSpec defines the desired state of ManagedCluster

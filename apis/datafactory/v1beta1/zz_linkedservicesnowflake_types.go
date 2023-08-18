@@ -69,7 +69,7 @@ type LinkedServiceSnowflakeKeyVaultPasswordParameters struct {
 
 	// Specifies the secret name in Azure Key Vault that stores Snowflake password.
 	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceSnowflakeObservation struct {

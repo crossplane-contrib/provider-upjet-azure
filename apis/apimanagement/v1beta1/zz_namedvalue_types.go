@@ -127,7 +127,7 @@ type ValueFromKeyVaultParameters struct {
 
 	// The resource ID of the Key Vault Secret.
 	// +kubebuilder:validation:Optional
-	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
+	SecretID *string `json:"secretId" tf:"secret_id,omitempty"`
 }
 
 // NamedValueSpec defines the desired state of NamedValue

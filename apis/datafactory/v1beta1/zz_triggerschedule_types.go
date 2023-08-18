@@ -39,7 +39,7 @@ type MonthlyParameters struct {
 
 	// The day of the week on which the trigger runs. For example, a monthly property with a weekday value of Sunday means every Sunday of the month.
 	// +kubebuilder:validation:Optional
-	Weekday *string `json:"weekday,omitempty" tf:"weekday,omitempty"`
+	Weekday *string `json:"weekday" tf:"weekday,omitempty"`
 }
 
 type ScheduleInitParameters struct {
@@ -278,7 +278,7 @@ type TriggerSchedulePipelineParameters struct {
 
 	// Reference pipeline name.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The pipeline parameters that the trigger will act upon.
 	// +kubebuilder:validation:Optional

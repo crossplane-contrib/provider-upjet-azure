@@ -40,12 +40,12 @@ type FileParameters struct {
 	// The content of the file. Changing this forces a new resource to be created.
 	// The content of the file.
 	// +kubebuilder:validation:Optional
-	Content *string `json:"content,omitempty" tf:"content,omitempty"`
+	Content *string `json:"content" tf:"content,omitempty"`
 
 	// The filename of the file to be uploaded. Changing this forces a new resource to be created.
 	// The filename of the file to be uploaded.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type FunctionAppFunctionInitParameters struct {

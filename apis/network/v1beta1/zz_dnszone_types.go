@@ -136,7 +136,7 @@ type SoaRecordParameters struct {
 
 	// The email contact for the SOA record.
 	// +kubebuilder:validation:Optional
-	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+	Email *string `json:"email" tf:"email,omitempty"`
 
 	// The expire time for the SOA record. Defaults to 2419200.
 	// +kubebuilder:validation:Optional
@@ -144,7 +144,7 @@ type SoaRecordParameters struct {
 
 	// The domain name of the authoritative name server for the SOA record.
 	// +kubebuilder:validation:Optional
-	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+	HostName *string `json:"hostName" tf:"host_name,omitempty"`
 
 	// The minimum Time To Live for the SOA record. By convention, it is used to determine the negative caching duration. Defaults to 300.
 	// +kubebuilder:validation:Optional

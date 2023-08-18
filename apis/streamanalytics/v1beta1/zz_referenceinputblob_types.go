@@ -189,7 +189,7 @@ type ReferenceInputBlobSerializationParameters struct {
 
 	// The serialization format used for the reference data. Possible values are Avro, Csv and Json.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // ReferenceInputBlobSpec defines the desired state of ReferenceInputBlob

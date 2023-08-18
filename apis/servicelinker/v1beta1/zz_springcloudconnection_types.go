@@ -77,7 +77,7 @@ type AuthenticationParameters struct {
 
 	// The authentication type. Possible values are systemAssignedIdentity, userAssignedIdentity, servicePrincipalSecret, servicePrincipalCertificate, secret. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SecretStoreInitParameters struct {
@@ -96,7 +96,7 @@ type SecretStoreParameters struct {
 
 	// The key vault id to store secret.
 	// +kubebuilder:validation:Optional
-	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+	KeyVaultID *string `json:"keyVaultId" tf:"key_vault_id,omitempty"`
 }
 
 type SpringCloudConnectionInitParameters struct {

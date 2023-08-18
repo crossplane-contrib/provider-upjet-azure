@@ -35,11 +35,11 @@ type FeatureParameters struct {
 
 	// Specifies the name of the feature to register.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Should this feature be Registered or Unregistered?
 	// +kubebuilder:validation:Optional
-	Registered *bool `json:"registered,omitempty" tf:"registered,omitempty"`
+	Registered *bool `json:"registered" tf:"registered,omitempty"`
 }
 
 type ResourceProviderRegistrationInitParameters struct {

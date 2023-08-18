@@ -41,7 +41,7 @@ type CertificateContactsContactParameters struct {
 
 	// E-mail address of the contact.
 	// +kubebuilder:validation:Optional
-	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+	Email *string `json:"email" tf:"email,omitempty"`
 
 	// Name of the contact.
 	// +kubebuilder:validation:Optional

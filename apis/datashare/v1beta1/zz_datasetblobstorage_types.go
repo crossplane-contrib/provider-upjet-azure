@@ -139,7 +139,7 @@ type StorageAccountParameters struct {
 
 	// The subscription id of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
 	// +kubebuilder:validation:Optional
-	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+	SubscriptionID *string `json:"subscriptionId" tf:"subscription_id,omitempty"`
 }
 
 // DataSetBlobStorageSpec defines the desired state of DataSetBlobStorage

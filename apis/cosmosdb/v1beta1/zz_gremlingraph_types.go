@@ -29,7 +29,7 @@ type CompositeIndexParameters struct {
 
 	// One or more index blocks as defined below.
 	// +kubebuilder:validation:Optional
-	Index []IndexParameters `json:"index,omitempty" tf:"index,omitempty"`
+	Index []IndexParameters `json:"index" tf:"index,omitempty"`
 }
 
 type ConflictResolutionPolicyInitParameters struct {
@@ -68,7 +68,7 @@ type ConflictResolutionPolicyParameters struct {
 
 	// Indicates the conflict resolution mode. Possible values include: LastWriterWins, Custom.
 	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+	Mode *string `json:"mode" tf:"mode,omitempty"`
 }
 
 type GremlinGraphAutoscaleSettingsInitParameters struct {
@@ -252,11 +252,11 @@ type IndexParameters struct {
 
 	// Order of the index. Possible values are Ascending or Descending.
 	// +kubebuilder:validation:Optional
-	Order *string `json:"order,omitempty" tf:"order,omitempty"`
+	Order *string `json:"order" tf:"order,omitempty"`
 
 	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 }
 
 type IndexPolicyInitParameters struct {
@@ -321,7 +321,7 @@ type IndexPolicyParameters struct {
 
 	// Indicates the indexing mode. Possible values include: Consistent, Lazy, None.
 	// +kubebuilder:validation:Optional
-	IndexingMode *string `json:"indexingMode,omitempty" tf:"indexing_mode,omitempty"`
+	IndexingMode *string `json:"indexingMode" tf:"indexing_mode,omitempty"`
 
 	// One or more spatial_index blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -346,7 +346,7 @@ type SpatialIndexParameters struct {
 
 	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 }
 
 type UniqueKeyInitParameters struct {
@@ -365,7 +365,7 @@ type UniqueKeyParameters struct {
 
 	// A list of paths to use for this unique key. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+	Paths []*string `json:"paths" tf:"paths,omitempty"`
 }
 
 // GremlinGraphSpec defines the desired state of GremlinGraph

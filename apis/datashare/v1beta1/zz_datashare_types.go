@@ -110,15 +110,15 @@ type SnapshotScheduleParameters struct {
 
 	// The name of the snapshot schedule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The interval of the synchronization with the source data. Possible values are Hour and Day.
 	// +kubebuilder:validation:Optional
-	Recurrence *string `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
+	Recurrence *string `json:"recurrence" tf:"recurrence,omitempty"`
 
 	// The synchronization with the source data's start time.
 	// +kubebuilder:validation:Optional
-	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+	StartTime *string `json:"startTime" tf:"start_time,omitempty"`
 }
 
 // DataShareSpec defines the desired state of DataShare

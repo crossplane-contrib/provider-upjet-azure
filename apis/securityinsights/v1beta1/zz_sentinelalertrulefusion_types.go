@@ -114,7 +114,7 @@ type SourceParameters struct {
 
 	// The name of the Fusion source signal. Refer to Fusion alert rule template for supported values.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// One or more sub_type blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -153,11 +153,11 @@ type SubTypeParameters struct {
 
 	// The Name of the source subtype under a given source signal in Fusion detection. Refer to Fusion alert rule template for supported values.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A list of severities that are enabled for this source subtype consumed in Fusion detection. Possible values for each element are High, Medium, Low, Informational.
 	// +kubebuilder:validation:Optional
-	SeveritiesAllowed []*string `json:"severitiesAllowed,omitempty" tf:"severities_allowed,omitempty"`
+	SeveritiesAllowed []*string `json:"severitiesAllowed" tf:"severities_allowed,omitempty"`
 }
 
 // SentinelAlertRuleFusionSpec defines the desired state of SentinelAlertRuleFusion

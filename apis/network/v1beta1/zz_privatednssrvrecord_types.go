@@ -124,19 +124,19 @@ type PrivateDNSSRVRecordRecordParameters struct {
 
 	// The Port the service is listening on.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port" tf:"port,omitempty"`
 
 	// The priority of the SRV record.
 	// +kubebuilder:validation:Optional
-	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
 	// The FQDN of the service.
 	// +kubebuilder:validation:Optional
-	Target *string `json:"target,omitempty" tf:"target,omitempty"`
+	Target *string `json:"target" tf:"target,omitempty"`
 
 	// The Weight of the SRV record.
 	// +kubebuilder:validation:Optional
-	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
+	Weight *float64 `json:"weight" tf:"weight,omitempty"`
 }
 
 // PrivateDNSSRVRecordSpec defines the desired state of PrivateDNSSRVRecord

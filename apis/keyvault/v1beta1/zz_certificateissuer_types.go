@@ -47,7 +47,7 @@ type AdminParameters struct {
 
 	// E-mail address of the admin.
 	// +kubebuilder:validation:Optional
-	EmailAddress *string `json:"emailAddress,omitempty" tf:"email_address,omitempty"`
+	EmailAddress *string `json:"emailAddress" tf:"email_address,omitempty"`
 
 	// First name of the admin.
 	// +kubebuilder:validation:Optional

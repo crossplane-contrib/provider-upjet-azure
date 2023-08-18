@@ -135,7 +135,7 @@ type SiteParameters struct {
 
 	// The name of the site
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// This field is required when is_secure_site_enabled is enabled. Determines which origins can establish a Directline conversation for this site.
 	// +kubebuilder:validation:Optional

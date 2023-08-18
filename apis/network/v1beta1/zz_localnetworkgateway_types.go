@@ -41,11 +41,11 @@ type BGPSettingsParameters struct {
 
 	// The BGP speaker's ASN.
 	// +kubebuilder:validation:Optional
-	Asn *float64 `json:"asn,omitempty" tf:"asn,omitempty"`
+	Asn *float64 `json:"asn" tf:"asn,omitempty"`
 
 	// The BGP peering address and BGP identifier of this BGP speaker.
 	// +kubebuilder:validation:Optional
-	BGPPeeringAddress *string `json:"bgpPeeringAddress,omitempty" tf:"bgp_peering_address,omitempty"`
+	BGPPeeringAddress *string `json:"bgpPeeringAddress" tf:"bgp_peering_address,omitempty"`
 
 	// The weight added to routes learned from this BGP speaker.
 	// +kubebuilder:validation:Optional

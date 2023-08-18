@@ -200,7 +200,7 @@ type IPv6Parameters struct {
 
 	// A subnet for the primary link.
 	// +kubebuilder:validation:Optional
-	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix,omitempty" tf:"primary_peer_address_prefix,omitempty"`
+	PrimaryPeerAddressPrefix *string `json:"primaryPeerAddressPrefix" tf:"primary_peer_address_prefix,omitempty"`
 
 	// The ID of the Route Filter. Only available when peering_type is set to MicrosoftPeering.
 	// +kubebuilder:validation:Optional
@@ -208,7 +208,7 @@ type IPv6Parameters struct {
 
 	// A subnet for the secondary link.
 	// +kubebuilder:validation:Optional
-	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix,omitempty" tf:"secondary_peer_address_prefix,omitempty"`
+	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix" tf:"secondary_peer_address_prefix,omitempty"`
 }
 
 type MicrosoftPeeringConfigInitParameters struct {
@@ -249,7 +249,7 @@ type MicrosoftPeeringConfigParameters struct {
 
 	// A list of Advertised Public Prefixes.
 	// +kubebuilder:validation:Optional
-	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes,omitempty" tf:"advertised_public_prefixes,omitempty"`
+	AdvertisedPublicPrefixes []*string `json:"advertisedPublicPrefixes" tf:"advertised_public_prefixes,omitempty"`
 
 	// The CustomerASN of the peering. Defaults to 0.
 	// +kubebuilder:validation:Optional

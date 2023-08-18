@@ -169,11 +169,11 @@ type PerDatabaseSettingsParameters struct {
 
 	// The maximum capacity any one database can consume.
 	// +kubebuilder:validation:Optional
-	MaxCapacity *float64 `json:"maxCapacity,omitempty" tf:"max_capacity,omitempty"`
+	MaxCapacity *float64 `json:"maxCapacity" tf:"max_capacity,omitempty"`
 
 	// The minimum capacity all databases are guaranteed.
 	// +kubebuilder:validation:Optional
-	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+	MinCapacity *float64 `json:"minCapacity" tf:"min_capacity,omitempty"`
 }
 
 type SkuInitParameters struct {
@@ -210,7 +210,7 @@ type SkuParameters struct {
 
 	// The scale up/out capacity, representing server's compute units. For more information see the documentation for your Elasticpool configuration: vCore-based or DTU-based.
 	// +kubebuilder:validation:Optional
-	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
 
 	// The family of hardware Gen4, Gen5, Fsv2 or DC.
 	// +kubebuilder:validation:Optional
@@ -218,11 +218,11 @@ type SkuParameters struct {
 
 	// Specifies the SKU Name for this Elasticpool. The name of the SKU, will be either vCore based tier + family pattern (e.g. GP_Gen4, BC_Gen5) or the DTU based BasicPool, StandardPool, or PremiumPool pattern. Possible values are BasicPool, StandardPool, PremiumPool, GP_Gen4, GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5 and BC_DC.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The tier of the particular SKU. Possible values are GeneralPurpose, BusinessCritical, Basic, Standard, or Premium. For more information see the documentation for your Elasticpool configuration: vCore-based or DTU-based.
 	// +kubebuilder:validation:Optional
-	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+	Tier *string `json:"tier" tf:"tier,omitempty"`
 }
 
 // MSSQLElasticPoolSpec defines the desired state of MSSQLElasticPool

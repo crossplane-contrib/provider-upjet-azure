@@ -134,7 +134,7 @@ type PrivateDNSZoneSoaRecordParameters struct {
 
 	// The email contact for the SOA record.
 	// +kubebuilder:validation:Optional
-	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+	Email *string `json:"email" tf:"email,omitempty"`
 
 	// The expire time for the SOA record. Defaults to 2419200.
 	// +kubebuilder:validation:Optional

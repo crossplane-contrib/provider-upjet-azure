@@ -35,11 +35,11 @@ type DiskEncryptionKeyParameters struct {
 
 	// The URL to the Key Vault Secret used as the Disk Encryption Key. This can be found as id on the azurerm_key_vault_secret resource.
 	// +kubebuilder:validation:Optional
-	SecretURL *string `json:"secretUrl,omitempty" tf:"secret_url,omitempty"`
+	SecretURL *string `json:"secretUrl" tf:"secret_url,omitempty"`
 
 	// The ID of the source Key Vault. This can be found as id on the azurerm_key_vault resource.
 	// +kubebuilder:validation:Optional
-	SourceVaultID *string `json:"sourceVaultId,omitempty" tf:"source_vault_id,omitempty"`
+	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }
 
 type EncryptionSettingsInitParameters struct {
@@ -100,11 +100,11 @@ type KeyEncryptionKeyParameters struct {
 
 	// The URL to the Key Vault Key used as the Key Encryption Key. This can be found as id on the azurerm_key_vault_key resource.
 	// +kubebuilder:validation:Optional
-	KeyURL *string `json:"keyUrl,omitempty" tf:"key_url,omitempty"`
+	KeyURL *string `json:"keyUrl" tf:"key_url,omitempty"`
 
 	// The ID of the source Key Vault. This can be found as id on the azurerm_key_vault resource.
 	// +kubebuilder:validation:Optional
-	SourceVaultID *string `json:"sourceVaultId,omitempty" tf:"source_vault_id,omitempty"`
+	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }
 
 type ManagedDiskInitParameters struct {

@@ -35,11 +35,11 @@ type ContentLinkHashParameters struct {
 
 	// Specifies the hash algorithm used to hash the content.
 	// +kubebuilder:validation:Optional
-	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
+	Algorithm *string `json:"algorithm" tf:"algorithm,omitempty"`
 
 	// Specifies the expected hash value of the content.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type ContentLinkInitParameters struct {
@@ -74,7 +74,7 @@ type ContentLinkParameters struct {
 
 	// The URI of the runbook content.
 	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+	URI *string `json:"uri" tf:"uri,omitempty"`
 
 	// Specifies the version of the content
 	// +kubebuilder:validation:Optional
@@ -224,7 +224,7 @@ type ParametersParameters struct {
 
 	// The name of the parameter.
 	// +kubebuilder:validation:Optional
-	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+	Key *string `json:"key" tf:"key,omitempty"`
 
 	// Whether this parameter is mandatory.
 	// +kubebuilder:validation:Optional
@@ -236,7 +236,7 @@ type ParametersParameters struct {
 
 	// Specifies the type of this parameter.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type PublishContentLinkHashInitParameters struct {
@@ -261,11 +261,11 @@ type PublishContentLinkHashParameters struct {
 
 	// Specifies the hash algorithm used to hash the content.
 	// +kubebuilder:validation:Optional
-	Algorithm *string `json:"algorithm,omitempty" tf:"algorithm,omitempty"`
+	Algorithm *string `json:"algorithm" tf:"algorithm,omitempty"`
 
 	// Specifies the expected hash value of the content.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type PublishContentLinkInitParameters struct {
@@ -300,7 +300,7 @@ type PublishContentLinkParameters struct {
 
 	// The URI of the runbook content.
 	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+	URI *string `json:"uri" tf:"uri,omitempty"`
 
 	// Specifies the version of the content
 	// +kubebuilder:validation:Optional

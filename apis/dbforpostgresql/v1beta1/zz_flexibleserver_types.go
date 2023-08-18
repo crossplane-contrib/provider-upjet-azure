@@ -355,7 +355,7 @@ type HighAvailabilityParameters struct {
 
 	// The high availability mode for the PostgreSQL Flexible Server. Possible value are SameZone or ZoneRedundant.
 	// +kubebuilder:validation:Optional
-	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+	Mode *string `json:"mode" tf:"mode,omitempty"`
 
 	// Specifies the Availability Zone in which the standby Flexible Server should be located.
 	// +kubebuilder:validation:Optional
@@ -394,7 +394,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this PostgreSQL Flexible Server. Should be set to UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type MaintenanceWindowInitParameters struct {

@@ -35,11 +35,11 @@ type AlertRuleNameParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type DailyInitParameters struct {
@@ -64,11 +64,11 @@ type DailyParameters struct {
 
 	// Specifies the recurrence end time (H:M:S).
 	// +kubebuilder:validation:Optional
-	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
+	EndTime *string `json:"endTime" tf:"end_time,omitempty"`
 
 	// Specifies the recurrence start time (H:M:S).
 	// +kubebuilder:validation:Optional
-	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
+	StartTime *string `json:"startTime" tf:"start_time,omitempty"`
 }
 
 type MonitorAlertProcessingRuleActionGroupConditionAlertContextInitParameters struct {
@@ -93,11 +93,11 @@ type MonitorAlertProcessingRuleActionGroupConditionAlertContextParameters struct
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type MonitorAlertProcessingRuleActionGroupConditionAlertRuleIDInitParameters struct {
@@ -122,11 +122,11 @@ type MonitorAlertProcessingRuleActionGroupConditionAlertRuleIDParameters struct 
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type MonitorAlertProcessingRuleActionGroupConditionDescriptionInitParameters struct {
@@ -151,11 +151,11 @@ type MonitorAlertProcessingRuleActionGroupConditionDescriptionParameters struct 
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type MonitorAlertProcessingRuleActionGroupConditionInitParameters struct {
@@ -216,11 +216,11 @@ type MonitorAlertProcessingRuleActionGroupConditionMonitorServiceParameters stru
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type MonitorAlertProcessingRuleActionGroupConditionObservation struct {
@@ -328,11 +328,11 @@ type MonitorAlertProcessingRuleActionGroupConditionSeverityParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type MonitorAlertProcessingRuleActionGroupConditionTargetResourceTypeInitParameters struct {
@@ -357,11 +357,11 @@ type MonitorAlertProcessingRuleActionGroupConditionTargetResourceTypeParameters 
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type MonitorAlertProcessingRuleActionGroupInitParameters struct {
@@ -547,11 +547,11 @@ type MonitorConditionParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type MonthlyInitParameters struct {
@@ -582,7 +582,7 @@ type MonthlyParameters struct {
 
 	// Specifies a list of dayOfMonth to recurrence. Possible values are integers between 1 - 31.
 	// +kubebuilder:validation:Optional
-	DaysOfMonth []*float64 `json:"daysOfMonth,omitempty" tf:"days_of_month,omitempty"`
+	DaysOfMonth []*float64 `json:"daysOfMonth" tf:"days_of_month,omitempty"`
 
 	// Specifies the recurrence end time (H:M:S).
 	// +kubebuilder:validation:Optional
@@ -654,11 +654,11 @@ type SignalTypeParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type TargetResourceGroupInitParameters struct {
@@ -683,11 +683,11 @@ type TargetResourceGroupParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type TargetResourceInitParameters struct {
@@ -712,11 +712,11 @@ type TargetResourceParameters struct {
 
 	// The operator for a given condition. Possible values are Equals, NotEquals, Contains, and DoesNotContain.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type WeeklyInitParameters struct {
@@ -747,7 +747,7 @@ type WeeklyParameters struct {
 
 	// Specifies a list of dayOfWeek to recurrence. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, and Saturday.
 	// +kubebuilder:validation:Optional
-	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
+	DaysOfWeek []*string `json:"daysOfWeek" tf:"days_of_week,omitempty"`
 
 	// Specifies the recurrence end time (H:M:S).
 	// +kubebuilder:validation:Optional

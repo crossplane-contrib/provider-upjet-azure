@@ -35,11 +35,11 @@ type SubscriptionCostManagementExportExportDataOptionsParameters struct {
 
 	// The time frame for pulling data for the query. If custom, then a specific time period must be provided. Possible values include: WeekToDate, MonthToDate, BillingMonthToDate, TheLast7Days, TheLastMonth, TheLastBillingMonth, Custom.
 	// +kubebuilder:validation:Optional
-	TimeFrame *string `json:"timeFrame,omitempty" tf:"time_frame,omitempty"`
+	TimeFrame *string `json:"timeFrame" tf:"time_frame,omitempty"`
 
 	// The type of the query. Possible values are ActualCost, AmortizedCost and Usage.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SubscriptionCostManagementExportExportDataStorageLocationInitParameters struct {
@@ -75,7 +75,7 @@ type SubscriptionCostManagementExportExportDataStorageLocationParameters struct 
 
 	// The path of the directory where exports will be uploaded. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	RootFolderPath *string `json:"rootFolderPath,omitempty" tf:"root_folder_path,omitempty"`
+	RootFolderPath *string `json:"rootFolderPath" tf:"root_folder_path,omitempty"`
 }
 
 type SubscriptionCostManagementExportInitParameters struct {

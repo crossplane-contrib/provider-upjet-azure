@@ -47,19 +47,19 @@ type APNSCredentialParameters struct {
 
 	// The Application Mode which defines which server the APNS Messages should be sent to. Possible values are Production and Sandbox.
 	// +kubebuilder:validation:Optional
-	ApplicationMode *string `json:"applicationMode,omitempty" tf:"application_mode,omitempty"`
+	ApplicationMode *string `json:"applicationMode" tf:"application_mode,omitempty"`
 
 	// The Bundle ID of the iOS/macOS application to send push notifications for, such as com.hashicorp.example.
 	// +kubebuilder:validation:Optional
-	BundleID *string `json:"bundleId,omitempty" tf:"bundle_id,omitempty"`
+	BundleID *string `json:"bundleId" tf:"bundle_id,omitempty"`
 
 	// The Apple Push Notifications Service (APNS) Key.
 	// +kubebuilder:validation:Optional
-	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
 
 	// The ID of the team the Token.
 	// +kubebuilder:validation:Optional
-	TeamID *string `json:"teamId,omitempty" tf:"team_id,omitempty"`
+	TeamID *string `json:"teamId" tf:"team_id,omitempty"`
 
 	// The Push Token associated with the Apple Developer Account. This is the contents of the key downloaded from the Apple Developer Portal between the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- blocks.
 	// +kubebuilder:validation:Required

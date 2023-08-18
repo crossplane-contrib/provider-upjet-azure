@@ -35,11 +35,11 @@ type ConditionAlertContextParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type ConditionAlertRuleIDInitParameters struct {
@@ -64,11 +64,11 @@ type ConditionAlertRuleIDParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type ConditionDescriptionInitParameters struct {
@@ -93,11 +93,11 @@ type ConditionDescriptionParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type ConditionMonitorInitParameters struct {
@@ -122,11 +122,11 @@ type ConditionMonitorParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type ConditionMonitorServiceInitParameters struct {
@@ -151,11 +151,11 @@ type ConditionMonitorServiceParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type ConditionSeverityInitParameters struct {
@@ -180,11 +180,11 @@ type ConditionSeverityParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type ConditionTargetResourceTypeInitParameters struct {
@@ -209,11 +209,11 @@ type ConditionTargetResourceTypeParameters struct {
 
 	// The operator for a given condition. Possible values are Equals and NotEquals.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// A list of values to match for a given condition. The values should be valid resource types.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type MonitorActionRuleSuppressionConditionInitParameters struct {
@@ -405,11 +405,11 @@ type MonitorActionRuleSuppressionScopeParameters struct {
 
 	// A list of resource IDs of the given scope type which will be the target of action rule.
 	// +kubebuilder:validation:Optional
-	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
+	ResourceIds []*string `json:"resourceIds" tf:"resource_ids,omitempty"`
 
 	// Specifies the type of target scope. Possible values are ResourceGroup and Resource.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ScheduleInitParameters struct {
@@ -446,7 +446,7 @@ type ScheduleParameters struct {
 
 	// specifies the recurrence UTC end datetime (Y-m-d'T'H:M:S'Z').
 	// +kubebuilder:validation:Optional
-	EndDateUtc *string `json:"endDateUtc,omitempty" tf:"end_date_utc,omitempty"`
+	EndDateUtc *string `json:"endDateUtc" tf:"end_date_utc,omitempty"`
 
 	// specifies the list of dayOfMonth to recurrence. Possible values are between 1 - 31. Required if recurrence_type is Monthly.
 	// +kubebuilder:validation:Optional
@@ -458,7 +458,7 @@ type ScheduleParameters struct {
 
 	// specifies the recurrence UTC start datetime (Y-m-d'T'H:M:S'Z').
 	// +kubebuilder:validation:Optional
-	StartDateUtc *string `json:"startDateUtc,omitempty" tf:"start_date_utc,omitempty"`
+	StartDateUtc *string `json:"startDateUtc" tf:"start_date_utc,omitempty"`
 }
 
 type SuppressionInitParameters struct {
@@ -483,7 +483,7 @@ type SuppressionParameters struct {
 
 	// Specifies the type of suppression. Possible values are Always, Daily, Monthly, Once, and Weekly.
 	// +kubebuilder:validation:Optional
-	RecurrenceType *string `json:"recurrenceType,omitempty" tf:"recurrence_type,omitempty"`
+	RecurrenceType *string `json:"recurrenceType" tf:"recurrence_type,omitempty"`
 
 	// A schedule block as defined below. Required if recurrence_type is Daily, Monthly, Once or Weekly.
 	// +kubebuilder:validation:Optional

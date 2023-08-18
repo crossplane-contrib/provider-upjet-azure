@@ -59,11 +59,11 @@ type ChannelsParameters struct {
 
 	// Bandwidth in MHz.
 	// +kubebuilder:validation:Optional
-	BandwidthMhz *float64 `json:"bandwidthMhz,omitempty" tf:"bandwidth_mhz,omitempty"`
+	BandwidthMhz *float64 `json:"bandwidthMhz" tf:"bandwidth_mhz,omitempty"`
 
 	// Center frequency in MHz.
 	// +kubebuilder:validation:Optional
-	CenterFrequencyMhz *float64 `json:"centerFrequencyMhz,omitempty" tf:"center_frequency_mhz,omitempty"`
+	CenterFrequencyMhz *float64 `json:"centerFrequencyMhz" tf:"center_frequency_mhz,omitempty"`
 
 	// Copy of the modem configuration file such as Kratos QRadio or Kratos QuantumRx. Only valid for downlink directions. If provided, the modem connects to the customer endpoint and sends demodulated data instead of a VITA.49 stream.
 	// +kubebuilder:validation:Optional
@@ -71,7 +71,7 @@ type ChannelsParameters struct {
 
 	// Customer End point to store/retrieve data during a contact. An end_point block as defined below.
 	// +kubebuilder:validation:Optional
-	EndPoint []EndPointParameters `json:"endPoint,omitempty" tf:"end_point,omitempty"`
+	EndPoint []EndPointParameters `json:"endPoint" tf:"end_point,omitempty"`
 
 	// Copy of the modem configuration file such as Kratos QRadio. Only valid for uplink directions. If provided, the modem connects to the customer endpoint and accepts commands from the customer instead of a VITA.49 stream.
 	// +kubebuilder:validation:Optional
@@ -79,7 +79,7 @@ type ChannelsParameters struct {
 
 	// The name of the contact profile. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ContactProfileInitParameters struct {
@@ -231,7 +231,7 @@ type EndPointParameters struct {
 
 	// Name of an end point.
 	// +kubebuilder:validation:Optional
-	EndPointName *string `json:"endPointName,omitempty" tf:"end_point_name,omitempty"`
+	EndPointName *string `json:"endPointName" tf:"end_point_name,omitempty"`
 
 	// IP address of an end point.
 	// +kubebuilder:validation:Optional
@@ -239,11 +239,11 @@ type EndPointParameters struct {
 
 	// TCP port to listen on to receive data.
 	// +kubebuilder:validation:Optional
-	Port *string `json:"port,omitempty" tf:"port,omitempty"`
+	Port *string `json:"port" tf:"port,omitempty"`
 
 	// Protocol of an end point. Possible values are TCP and UDP.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 }
 
 type LinksInitParameters struct {
@@ -280,19 +280,19 @@ type LinksParameters struct {
 
 	// A list of contact profile link channels. A channels block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Channels []ChannelsParameters `json:"channels,omitempty" tf:"channels,omitempty"`
+	Channels []ChannelsParameters `json:"channels" tf:"channels,omitempty"`
 
 	// Direction of the link. Possible values are Uplink and Downlink.
 	// +kubebuilder:validation:Optional
-	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
+	Direction *string `json:"direction" tf:"direction,omitempty"`
 
 	// Name of the link.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Polarization of the link. Possible values are LHCP, RHCP, linearVertical and linearHorizontal.
 	// +kubebuilder:validation:Optional
-	Polarization *string `json:"polarization,omitempty" tf:"polarization,omitempty"`
+	Polarization *string `json:"polarization" tf:"polarization,omitempty"`
 }
 
 // ContactProfileSpec defines the desired state of ContactProfile

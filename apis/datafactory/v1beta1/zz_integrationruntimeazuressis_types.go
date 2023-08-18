@@ -73,7 +73,7 @@ type CatalogInfoParameters struct {
 
 	// The endpoint of an Azure SQL Server that will be used to host the SSIS catalog.
 	// +kubebuilder:validation:Optional
-	ServerEndpoint *string `json:"serverEndpoint,omitempty" tf:"server_endpoint,omitempty"`
+	ServerEndpoint *string `json:"serverEndpoint" tf:"server_endpoint,omitempty"`
 }
 
 type CommandKeyInitParameters struct {
@@ -112,11 +112,11 @@ type CommandKeyParameters struct {
 
 	// The target computer or domain name.
 	// +kubebuilder:validation:Optional
-	TargetName *string `json:"targetName,omitempty" tf:"target_name,omitempty"`
+	TargetName *string `json:"targetName" tf:"target_name,omitempty"`
 
 	// The username for the target device.
 	// +kubebuilder:validation:Optional
-	UserName *string `json:"userName,omitempty" tf:"user_name,omitempty"`
+	UserName *string `json:"userName" tf:"user_name,omitempty"`
 }
 
 type ComponentInitParameters struct {
@@ -149,7 +149,7 @@ type ComponentParameters struct {
 
 	// Name of the package store.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type CustomSetupScriptInitParameters struct {
@@ -168,7 +168,7 @@ type CustomSetupScriptParameters struct {
 
 	// The blob endpoint for the container which contains a custom setup script that will be run on every node on startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
 	// +kubebuilder:validation:Optional
-	BlobContainerURI *string `json:"blobContainerUri,omitempty" tf:"blob_container_uri,omitempty"`
+	BlobContainerURI *string `json:"blobContainerUri" tf:"blob_container_uri,omitempty"`
 
 	// A container SAS token that gives access to the files. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
 	// +kubebuilder:validation:Required
@@ -453,7 +453,7 @@ type KeyVaultLicenseParameters struct {
 
 	// Name of the Linked Service to associate with the packages.
 	// +kubebuilder:validation:Optional
-	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
 
 	// A map of parameters to associate with the Key Vault Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -461,7 +461,7 @@ type KeyVaultLicenseParameters struct {
 
 	// Specifies the secret name in Azure Key Vault.
 	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
 
 	// Specifies the secret version in Azure Key Vault.
 	// +kubebuilder:validation:Optional
@@ -502,7 +502,7 @@ type KeyVaultPasswordParameters struct {
 
 	// Name of the Linked Service to associate with the packages.
 	// +kubebuilder:validation:Optional
-	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
 
 	// A map of parameters to associate with the Key Vault Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
@@ -510,7 +510,7 @@ type KeyVaultPasswordParameters struct {
 
 	// Specifies the secret name in Azure Key Vault.
 	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
 
 	// Specifies the secret version in Azure Key Vault.
 	// +kubebuilder:validation:Optional
@@ -539,11 +539,11 @@ type PackageStoreParameters struct {
 
 	// Name of the Linked Service to associate with the packages.
 	// +kubebuilder:validation:Optional
-	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
 
 	// Name of the package store.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ProxyInitParameters struct {
@@ -578,11 +578,11 @@ type ProxyParameters struct {
 
 	// Name of Self Hosted Integration Runtime as a proxy.
 	// +kubebuilder:validation:Optional
-	SelfHostedIntegrationRuntimeName *string `json:"selfHostedIntegrationRuntimeName,omitempty" tf:"self_hosted_integration_runtime_name,omitempty"`
+	SelfHostedIntegrationRuntimeName *string `json:"selfHostedIntegrationRuntimeName" tf:"self_hosted_integration_runtime_name,omitempty"`
 
 	// Name of Azure Blob Storage linked service to reference the staging data store to be used when moving data between self-hosted and Azure-SSIS integration runtimes.
 	// +kubebuilder:validation:Optional
-	StagingStorageLinkedServiceName *string `json:"stagingStorageLinkedServiceName,omitempty" tf:"staging_storage_linked_service_name,omitempty"`
+	StagingStorageLinkedServiceName *string `json:"stagingStorageLinkedServiceName" tf:"staging_storage_linked_service_name,omitempty"`
 }
 
 type VnetIntegrationInitParameters struct {

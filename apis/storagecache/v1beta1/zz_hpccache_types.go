@@ -71,7 +71,7 @@ type AccessRuleParameters struct {
 
 	// The access level for this rule. Possible values are: rw, ro, no.
 	// +kubebuilder:validation:Optional
-	Access *string `json:"access,omitempty" tf:"access,omitempty"`
+	Access *string `json:"access" tf:"access,omitempty"`
 
 	// The anonymous GID used when root_squash_enabled is true.
 	// +kubebuilder:validation:Optional
@@ -91,7 +91,7 @@ type AccessRuleParameters struct {
 
 	// The scope of this rule. The scope and (potentially) the filter determine which clients match the rule. Possible values are: default, network, host.
 	// +kubebuilder:validation:Optional
-	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+	Scope *string `json:"scope" tf:"scope,omitempty"`
 
 	// Whether allow access to subdirectories under the root export?
 	// +kubebuilder:validation:Optional
@@ -118,7 +118,7 @@ type BindParameters struct {
 
 	// The Bind Distinguished Name (DN) identity to be used in the secure LDAP connection.
 	// +kubebuilder:validation:Optional
-	Dn *string `json:"dn,omitempty" tf:"dn,omitempty"`
+	Dn *string `json:"dn" tf:"dn,omitempty"`
 
 	// The password of the Active Directory domain administrator.
 	// +kubebuilder:validation:Required
@@ -151,7 +151,7 @@ type DNSParameters struct {
 
 	// A list of DNS servers for the HPC Cache. At most three IP(s) are allowed to set.
 	// +kubebuilder:validation:Optional
-	Servers []*string `json:"servers,omitempty" tf:"servers,omitempty"`
+	Servers []*string `json:"servers" tf:"servers,omitempty"`
 }
 
 type DefaultAccessPolicyInitParameters struct {
@@ -170,7 +170,7 @@ type DefaultAccessPolicyParameters struct {
 
 	// One to three access_rule blocks as defined above.
 	// +kubebuilder:validation:Optional
-	AccessRule []AccessRuleParameters `json:"accessRule,omitempty" tf:"access_rule,omitempty"`
+	AccessRule []AccessRuleParameters `json:"accessRule" tf:"access_rule,omitempty"`
 }
 
 type DirectoryActiveDirectoryInitParameters struct {
@@ -219,11 +219,11 @@ type DirectoryActiveDirectoryParameters struct {
 
 	// The NetBIOS name to assign to the HPC Cache when it joins the Active Directory domain as a server.
 	// +kubebuilder:validation:Optional
-	CacheNetbiosName *string `json:"cacheNetbiosName,omitempty" tf:"cache_netbios_name,omitempty"`
+	CacheNetbiosName *string `json:"cacheNetbiosName" tf:"cache_netbios_name,omitempty"`
 
 	// The primary DNS IP address used to resolve the Active Directory domain controller's FQDN.
 	// +kubebuilder:validation:Optional
-	DNSPrimaryIP *string `json:"dnsPrimaryIp,omitempty" tf:"dns_primary_ip,omitempty"`
+	DNSPrimaryIP *string `json:"dnsPrimaryIp" tf:"dns_primary_ip,omitempty"`
 
 	// The secondary DNS IP address used to resolve the Active Directory domain controller's FQDN.
 	// +kubebuilder:validation:Optional
@@ -231,11 +231,11 @@ type DirectoryActiveDirectoryParameters struct {
 
 	// The fully qualified domain name of the Active Directory domain controller.
 	// +kubebuilder:validation:Optional
-	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
 	// The Active Directory domain's NetBIOS name.
 	// +kubebuilder:validation:Optional
-	DomainNetbiosName *string `json:"domainNetbiosName,omitempty" tf:"domain_netbios_name,omitempty"`
+	DomainNetbiosName *string `json:"domainNetbiosName" tf:"domain_netbios_name,omitempty"`
 
 	// The password of the Active Directory domain administrator.
 	// +kubebuilder:validation:Required
@@ -243,7 +243,7 @@ type DirectoryActiveDirectoryParameters struct {
 
 	// The username of the Active Directory domain administrator.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type DirectoryFlatFileInitParameters struct {
@@ -268,11 +268,11 @@ type DirectoryFlatFileParameters struct {
 
 	// The URI of the file containing group information (/etc/group file format in Unix-like OS).
 	// +kubebuilder:validation:Optional
-	GroupFileURI *string `json:"groupFileUri,omitempty" tf:"group_file_uri,omitempty"`
+	GroupFileURI *string `json:"groupFileUri" tf:"group_file_uri,omitempty"`
 
 	// The URI of the file containing user information (/etc/passwd file format in Unix-like OS).
 	// +kubebuilder:validation:Optional
-	PasswordFileURI *string `json:"passwordFileUri,omitempty" tf:"password_file_uri,omitempty"`
+	PasswordFileURI *string `json:"passwordFileUri" tf:"password_file_uri,omitempty"`
 }
 
 type DirectoryLdapInitParameters struct {
@@ -321,7 +321,7 @@ type DirectoryLdapParameters struct {
 
 	// The base distinguished name (DN) for the LDAP domain.
 	// +kubebuilder:validation:Optional
-	BaseDn *string `json:"baseDn,omitempty" tf:"base_dn,omitempty"`
+	BaseDn *string `json:"baseDn" tf:"base_dn,omitempty"`
 
 	// A bind block as defined above.
 	// +kubebuilder:validation:Optional
@@ -341,7 +341,7 @@ type DirectoryLdapParameters struct {
 
 	// The FQDN or IP address of the LDAP server.
 	// +kubebuilder:validation:Optional
-	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+	Server *string `json:"server" tf:"server,omitempty"`
 }
 
 type HPCCacheInitParameters struct {
@@ -554,11 +554,11 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this HPC Cache. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this HPC Cache. Only possible value is UserAssigned. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // HPCCacheSpec defines the desired state of HPCCache

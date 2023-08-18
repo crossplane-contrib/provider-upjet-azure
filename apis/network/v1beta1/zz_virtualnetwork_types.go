@@ -35,11 +35,11 @@ type DDOSProtectionPlanParameters struct {
 
 	// Enable/disable DDoS Protection Plan on Virtual Network.
 	// +kubebuilder:validation:Optional
-	Enable *bool `json:"enable,omitempty" tf:"enable,omitempty"`
+	Enable *bool `json:"enable" tf:"enable,omitempty"`
 
 	// The ID of DDoS Protection Plan.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 }
 
 type VirtualNetworkInitParameters struct {

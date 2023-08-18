@@ -201,7 +201,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SSHInitParameters struct {
@@ -236,7 +236,7 @@ type SSHParameters struct {
 
 	// Name of the administrator user account which can be used to SSH to nodes. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
-	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
+	AdminUsername *string `json:"adminUsername" tf:"admin_username,omitempty"`
 
 	// SSH public key of the administrator user account. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
@@ -271,15 +271,15 @@ type ScaleSettingsParameters struct {
 
 	// Maximum node count. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
-	MaxNodeCount *float64 `json:"maxNodeCount,omitempty" tf:"max_node_count,omitempty"`
+	MaxNodeCount *float64 `json:"maxNodeCount" tf:"max_node_count,omitempty"`
 
 	// Minimal node count. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
-	MinNodeCount *float64 `json:"minNodeCount,omitempty" tf:"min_node_count,omitempty"`
+	MinNodeCount *float64 `json:"minNodeCount" tf:"min_node_count,omitempty"`
 
 	// Node Idle Time Before Scale Down: defines the time until the compute is shutdown when it has gone into Idle state. Is defined according to W3C XML schema standard for duration. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
-	ScaleDownNodesAfterIdleDuration *string `json:"scaleDownNodesAfterIdleDuration,omitempty" tf:"scale_down_nodes_after_idle_duration,omitempty"`
+	ScaleDownNodesAfterIdleDuration *string `json:"scaleDownNodesAfterIdleDuration" tf:"scale_down_nodes_after_idle_duration,omitempty"`
 }
 
 // ComputeClusterSpec defines the desired state of ComputeCluster

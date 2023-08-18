@@ -173,7 +173,7 @@ type IdentityParameters struct {
 
 	// The type of Managed Service Identity that is configured on this Workbook. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // ApplicationInsightsWorkbookSpec defines the desired state of ApplicationInsightsWorkbook

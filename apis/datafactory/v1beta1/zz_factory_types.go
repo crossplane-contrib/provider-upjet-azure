@@ -191,23 +191,23 @@ type GithubConfigurationParameters struct {
 
 	// Specifies the GitHub account name.
 	// +kubebuilder:validation:Optional
-	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
 
 	// Specifies the branch of the repository to get code from.
 	// +kubebuilder:validation:Optional
-	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
+	BranchName *string `json:"branchName" tf:"branch_name,omitempty"`
 
 	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com. Use https://github.com for open source repositories.
 	// +kubebuilder:validation:Optional
-	GitURL *string `json:"gitUrl,omitempty" tf:"git_url,omitempty"`
+	GitURL *string `json:"gitUrl" tf:"git_url,omitempty"`
 
 	// Specifies the name of the git repository.
 	// +kubebuilder:validation:Optional
-	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+	RepositoryName *string `json:"repositoryName" tf:"repository_name,omitempty"`
 
 	// Specifies the root folder within the repository. Set to / for the top level.
 	// +kubebuilder:validation:Optional
-	RootFolder *string `json:"rootFolder,omitempty" tf:"root_folder,omitempty"`
+	RootFolder *string `json:"rootFolder" tf:"root_folder,omitempty"`
 }
 
 type GlobalParameterInitParameters struct {
@@ -238,15 +238,15 @@ type GlobalParameterParameters struct {
 
 	// Specifies the global parameter name.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the global parameter type. Possible Values are Array, Bool, Float, Int, Object or String.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// Specifies the global parameter value.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type IdentityInitParameters struct {
@@ -281,7 +281,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Data Factory. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type VstsConfigurationInitParameters struct {
@@ -330,27 +330,27 @@ type VstsConfigurationParameters struct {
 
 	// Specifies the VSTS account name.
 	// +kubebuilder:validation:Optional
-	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
 
 	// Specifies the branch of the repository to get code from.
 	// +kubebuilder:validation:Optional
-	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
+	BranchName *string `json:"branchName" tf:"branch_name,omitempty"`
 
 	// Specifies the name of the VSTS project.
 	// +kubebuilder:validation:Optional
-	ProjectName *string `json:"projectName,omitempty" tf:"project_name,omitempty"`
+	ProjectName *string `json:"projectName" tf:"project_name,omitempty"`
 
 	// Specifies the name of the git repository.
 	// +kubebuilder:validation:Optional
-	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+	RepositoryName *string `json:"repositoryName" tf:"repository_name,omitempty"`
 
 	// Specifies the root folder within the repository. Set to / for the top level.
 	// +kubebuilder:validation:Optional
-	RootFolder *string `json:"rootFolder,omitempty" tf:"root_folder,omitempty"`
+	RootFolder *string `json:"rootFolder" tf:"root_folder,omitempty"`
 
 	// Specifies the Tenant ID associated with the VSTS account.
 	// +kubebuilder:validation:Optional
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
 }
 
 // FactorySpec defines the desired state of Factory

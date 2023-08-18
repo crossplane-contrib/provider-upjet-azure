@@ -151,11 +151,11 @@ type PlanParameters struct {
 
 	// Different billing cycles. Possible values are MONTHLY or WEEKLY. Changing this forces a new logz Monitor to be created.
 	// +kubebuilder:validation:Optional
-	BillingCycle *string `json:"billingCycle,omitempty" tf:"billing_cycle,omitempty"`
+	BillingCycle *string `json:"billingCycle" tf:"billing_cycle,omitempty"`
 
 	// Date when plan was applied. Changing this forces a new logz Monitor to be created.
 	// +kubebuilder:validation:Optional
-	EffectiveDate *string `json:"effectiveDate,omitempty" tf:"effective_date,omitempty"`
+	EffectiveDate *string `json:"effectiveDate" tf:"effective_date,omitempty"`
 
 	// Plan id as published by Logz. The only possible value is 100gb14days. Defaults to 100gb14days. Changing this forces a new logz Monitor to be created.
 	// +kubebuilder:validation:Optional
@@ -163,7 +163,7 @@ type PlanParameters struct {
 
 	// Different usage types. Possible values are PAYG or COMMITTED. Changing this forces a new logz Monitor to be created.
 	// +kubebuilder:validation:Optional
-	UsageType *string `json:"usageType,omitempty" tf:"usage_type,omitempty"`
+	UsageType *string `json:"usageType" tf:"usage_type,omitempty"`
 }
 
 type UserInitParameters struct {
@@ -200,19 +200,19 @@ type UserParameters struct {
 
 	// Email of the user used by Logz for contacting them if needed. Changing this forces a new logz Monitor to be created.
 	// +kubebuilder:validation:Optional
-	Email *string `json:"email,omitempty" tf:"email,omitempty"`
+	Email *string `json:"email" tf:"email,omitempty"`
 
 	// First Name of the user. Changing this forces a new logz Monitor to be created.
 	// +kubebuilder:validation:Optional
-	FirstName *string `json:"firstName,omitempty" tf:"first_name,omitempty"`
+	FirstName *string `json:"firstName" tf:"first_name,omitempty"`
 
 	// Last Name of the user. Changing this forces a new logz Monitor to be created.
 	// +kubebuilder:validation:Optional
-	LastName *string `json:"lastName,omitempty" tf:"last_name,omitempty"`
+	LastName *string `json:"lastName" tf:"last_name,omitempty"`
 
 	// Phone number of the user used by Logz for contacting them if needed. Changing this forces a new logz Monitor to be created.
 	// +kubebuilder:validation:Optional
-	PhoneNumber *string `json:"phoneNumber,omitempty" tf:"phone_number,omitempty"`
+	PhoneNumber *string `json:"phoneNumber" tf:"phone_number,omitempty"`
 }
 
 // MonitorSpec defines the desired state of Monitor

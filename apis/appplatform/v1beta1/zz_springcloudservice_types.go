@@ -79,7 +79,7 @@ type ConfigServerGitSettingParameters struct {
 
 	// The URI of the default Git repository used as the Config Server back end, should be started with http://, https://, git@, or ssh://.
 	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type ConfigServerGitSettingRepositoryInitParameters struct {
@@ -142,7 +142,7 @@ type ConfigServerGitSettingRepositoryParameters struct {
 
 	// A name to identify on the Git repository, required only if repos exists.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// An array of strings used to match an application name. For each pattern, use the {application}/{profile} format with wildcards.
 	// +kubebuilder:validation:Optional
@@ -158,7 +158,7 @@ type ConfigServerGitSettingRepositoryParameters struct {
 
 	// The URI of the Git repository that's used as the Config Server back end should be started with http://, https://, git@, or ssh://.
 	// +kubebuilder:validation:Optional
-	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
+	URI *string `json:"uri" tf:"uri,omitempty"`
 }
 
 type ConfigServerGitSettingSSHAuthInitParameters struct {
@@ -218,7 +218,7 @@ type HTTPBasicAuthParameters struct {
 
 	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type NetworkInitParameters struct {
@@ -279,7 +279,7 @@ type NetworkParameters struct {
 
 	// A list of (at least 3) CIDR ranges (at least /16) which are used to host the Spring Cloud infrastructure, which must not overlap with any existing CIDR ranges in the Subnet. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	CidrRanges []*string `json:"cidrRanges,omitempty" tf:"cidr_ranges,omitempty"`
+	CidrRanges []*string `json:"cidrRanges" tf:"cidr_ranges,omitempty"`
 
 	// Ingress read time out in seconds.
 	// +kubebuilder:validation:Optional
@@ -324,7 +324,7 @@ type RepositoryHTTPBasicAuthParameters struct {
 
 	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 type RepositorySSHAuthInitParameters struct {

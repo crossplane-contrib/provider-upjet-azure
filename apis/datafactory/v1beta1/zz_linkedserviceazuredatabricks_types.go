@@ -47,11 +47,11 @@ type InstancePoolParameters struct {
 
 	// Spark version of a the cluster.
 	// +kubebuilder:validation:Optional
-	ClusterVersion *string `json:"clusterVersion,omitempty" tf:"cluster_version,omitempty"`
+	ClusterVersion *string `json:"clusterVersion" tf:"cluster_version,omitempty"`
 
 	// Identifier of the instance pool within the linked ADB instance.
 	// +kubebuilder:validation:Optional
-	InstancePoolID *string `json:"instancePoolId,omitempty" tf:"instance_pool_id,omitempty"`
+	InstancePoolID *string `json:"instancePoolId" tf:"instance_pool_id,omitempty"`
 
 	// The max number of worker nodes. Set this value if you want to enable autoscaling between the min_number_of_workers and this value. Omit this value to use a fixed number of workers defined in the min_number_of_workers property.
 	// +kubebuilder:validation:Optional
@@ -117,11 +117,11 @@ type LinkedServiceAzureDatabricksKeyVaultPasswordParameters struct {
 
 	// Specifies the name of an existing Key Vault Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
-	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+	LinkedServiceName *string `json:"linkedServiceName" tf:"linked_service_name,omitempty"`
 
 	// Specifies the secret name in Azure Key Vault that stores ADB access token.
 	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceAzureDatabricksObservation struct {
@@ -311,7 +311,7 @@ type NewClusterConfigParameters struct {
 
 	// Spark version of a the cluster.
 	// +kubebuilder:validation:Optional
-	ClusterVersion *string `json:"clusterVersion,omitempty" tf:"cluster_version,omitempty"`
+	ClusterVersion *string `json:"clusterVersion" tf:"cluster_version,omitempty"`
 
 	// Tags for the cluster resource.
 	// +kubebuilder:validation:Optional
@@ -339,7 +339,7 @@ type NewClusterConfigParameters struct {
 
 	// Node type for the new cluster.
 	// +kubebuilder:validation:Optional
-	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
+	NodeType *string `json:"nodeType" tf:"node_type,omitempty"`
 
 	// User-specified Spark configuration variables key-value pairs.
 	// +kubebuilder:validation:Optional

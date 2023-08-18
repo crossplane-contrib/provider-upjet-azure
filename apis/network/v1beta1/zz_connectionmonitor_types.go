@@ -190,7 +190,7 @@ type EndpointParameters struct {
 
 	// The name of the endpoint for the Network Connection Monitor .
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The resource ID which is used as the endpoint by the Network Connection Monitor.
 	// +kubebuilder:validation:Optional
@@ -321,11 +321,11 @@ type HTTPConfigurationRequestHeaderParameters struct {
 
 	// The name of the test group for the Network Connection Monitor.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of the HTTP header.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type IcmpConfigurationInitParameters struct {
@@ -437,7 +437,7 @@ type TCPConfigurationParameters struct {
 
 	// The port for the TCP connection.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port" tf:"port,omitempty"`
 
 	// Should path evaluation with trace route be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -510,7 +510,7 @@ type TestConfigurationParameters struct {
 
 	// The name of test configuration for the Network Connection Monitor.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The preferred IP version which is used in the test evaluation. Possible values are IPv4 and IPv6.
 	// +kubebuilder:validation:Optional
@@ -518,7 +518,7 @@ type TestConfigurationParameters struct {
 
 	// The protocol used to evaluate tests. Possible values are Tcp, Http and Icmp.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// A success_threshold block as defined below.
 	// +kubebuilder:validation:Optional
@@ -573,7 +573,7 @@ type TestGroupParameters struct {
 
 	// A list of destination endpoint names.
 	// +kubebuilder:validation:Optional
-	DestinationEndpoints []*string `json:"destinationEndpoints,omitempty" tf:"destination_endpoints,omitempty"`
+	DestinationEndpoints []*string `json:"destinationEndpoints" tf:"destination_endpoints,omitempty"`
 
 	// Should the test group be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -581,15 +581,15 @@ type TestGroupParameters struct {
 
 	// The name of the test group for the Network Connection Monitor.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A list of source endpoint names.
 	// +kubebuilder:validation:Optional
-	SourceEndpoints []*string `json:"sourceEndpoints,omitempty" tf:"source_endpoints,omitempty"`
+	SourceEndpoints []*string `json:"sourceEndpoints" tf:"source_endpoints,omitempty"`
 
 	// A list of test configuration names.
 	// +kubebuilder:validation:Optional
-	TestConfigurationNames []*string `json:"testConfigurationNames,omitempty" tf:"test_configuration_names,omitempty"`
+	TestConfigurationNames []*string `json:"testConfigurationNames" tf:"test_configuration_names,omitempty"`
 }
 
 // ConnectionMonitorSpec defines the desired state of ConnectionMonitor

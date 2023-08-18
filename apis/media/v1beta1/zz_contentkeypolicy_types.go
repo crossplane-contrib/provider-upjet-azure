@@ -128,7 +128,7 @@ type ExplicitAnalogTelevisionOutputRestrictionParameters struct {
 
 	// The restriction control bits. Possible value is integer between 0 and 3 inclusive.
 	// +kubebuilder:validation:Optional
-	ControlBits *float64 `json:"controlBits,omitempty" tf:"control_bits,omitempty"`
+	ControlBits *float64 `json:"controlBits" tf:"control_bits,omitempty"`
 }
 
 type FairplayConfigurationInitParameters struct {
@@ -539,7 +539,7 @@ type PolicyOptionParameters struct {
 
 	// The name which should be used for this Policy Option.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Enable an open restriction. License or key will be delivered on every request.
 	// +kubebuilder:validation:Optional

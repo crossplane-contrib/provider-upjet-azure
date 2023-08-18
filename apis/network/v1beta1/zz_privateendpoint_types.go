@@ -71,7 +71,7 @@ type PrivateDNSZoneGroupParameters struct {
 
 	// Specifies the Name of the Private DNS Zone Group.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the list of Private DNS Zones to include within the private_dns_zone_group.
 	// +crossplane:generate:reference:type=PrivateDNSZone
@@ -126,11 +126,11 @@ type PrivateEndpointIPConfigurationParameters struct {
 
 	// Specifies the Name of the IP Configuration. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the static IP address within the private endpoint's subnet to be used. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+	PrivateIPAddress *string `json:"privateIpAddress" tf:"private_ip_address,omitempty"`
 
 	// Specifies the subresource this IP address applies to. subresource_names corresponds to group_id. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -315,11 +315,11 @@ type PrivateServiceConnectionParameters struct {
 
 	// Does the Private Endpoint require Manual Approval from the remote resource owner? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	IsManualConnection *bool `json:"isManualConnection,omitempty" tf:"is_manual_connection,omitempty"`
+	IsManualConnection *bool `json:"isManualConnection" tf:"is_manual_connection,omitempty"`
 
 	// Specifies the Name of the Private Service Connection. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Service Alias of the Private Link Enabled Remote Resource which this Private Endpoint should be connected to. One of private_connection_resource_id or private_connection_resource_alias must be specified. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

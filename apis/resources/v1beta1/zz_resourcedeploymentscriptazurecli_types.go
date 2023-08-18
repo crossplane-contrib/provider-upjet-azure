@@ -54,7 +54,7 @@ type EnvironmentVariableParameters struct {
 
 	// Specifies the name of the environment variable.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the value of the secure environment variable.
 	// +kubebuilder:validation:Optional
@@ -98,7 +98,7 @@ type IdentityParameters struct {
 
 	// Type of the managed identity. The only possible value is UserAssigned. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ResourceDeploymentScriptAzureCliInitParameters struct {
@@ -312,7 +312,7 @@ type StorageAccountParameters struct {
 
 	// Specifies the storage account name.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 // ResourceDeploymentScriptAzureCliSpec defines the desired state of ResourceDeploymentScriptAzureCli

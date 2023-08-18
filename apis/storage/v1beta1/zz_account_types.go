@@ -505,27 +505,27 @@ type ActiveDirectoryParameters struct {
 
 	// Specifies the domain GUID.
 	// +kubebuilder:validation:Optional
-	DomainGUID *string `json:"domainGuid,omitempty" tf:"domain_guid,omitempty"`
+	DomainGUID *string `json:"domainGuid" tf:"domain_guid,omitempty"`
 
 	// Specifies the primary domain that the AD DNS server is authoritative for.
 	// +kubebuilder:validation:Optional
-	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
+	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
 	// Specifies the security identifier (SID).
 	// +kubebuilder:validation:Optional
-	DomainSid *string `json:"domainSid,omitempty" tf:"domain_sid,omitempty"`
+	DomainSid *string `json:"domainSid" tf:"domain_sid,omitempty"`
 
 	// Specifies the Active Directory forest.
 	// +kubebuilder:validation:Optional
-	ForestName *string `json:"forestName,omitempty" tf:"forest_name,omitempty"`
+	ForestName *string `json:"forestName" tf:"forest_name,omitempty"`
 
 	// Specifies the NetBIOS domain name.
 	// +kubebuilder:validation:Optional
-	NetbiosDomainName *string `json:"netbiosDomainName,omitempty" tf:"netbios_domain_name,omitempty"`
+	NetbiosDomainName *string `json:"netbiosDomainName" tf:"netbios_domain_name,omitempty"`
 
 	// Specifies the security identifier (SID) for Azure Storage.
 	// +kubebuilder:validation:Optional
-	StorageSid *string `json:"storageSid,omitempty" tf:"storage_sid,omitempty"`
+	StorageSid *string `json:"storageSid" tf:"storage_sid,omitempty"`
 }
 
 type AzureFilesAuthenticationInitParameters struct {
@@ -554,7 +554,7 @@ type AzureFilesAuthenticationParameters struct {
 
 	// Specifies the directory service used. Possible values are AADDS, AD and AADKERB.
 	// +kubebuilder:validation:Optional
-	DirectoryType *string `json:"directoryType,omitempty" tf:"directory_type,omitempty"`
+	DirectoryType *string `json:"directoryType" tf:"directory_type,omitempty"`
 }
 
 type BlobPropertiesInitParameters struct {
@@ -717,24 +717,24 @@ type CorsRuleParameters struct {
 
 	// A list of headers that are allowed to be a part of the cross-origin request.
 	// +kubebuilder:validation:Optional
-	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
 
 	// A list of HTTP methods that are allowed to be executed by the origin. Valid options are
 	// DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or PATCH.
 	// +kubebuilder:validation:Optional
-	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// A list of origin domains that will be allowed by CORS.
 	// +kubebuilder:validation:Optional
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// A list of response headers that are exposed to CORS clients.
 	// +kubebuilder:validation:Optional
-	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
+	ExposedHeaders []*string `json:"exposedHeaders" tf:"exposed_headers,omitempty"`
 
 	// The number of seconds the client should cache a preflight response.
 	// +kubebuilder:validation:Optional
-	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds" tf:"max_age_in_seconds,omitempty"`
 }
 
 type CustomDomainInitParameters struct {
@@ -759,7 +759,7 @@ type CustomDomainParameters struct {
 
 	// The Custom Domain Name to use for the Storage Account, which will be validated by Azure.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Should the Custom Domain Name be validated by using indirect CNAME validation?
 	// +kubebuilder:validation:Optional
@@ -788,11 +788,11 @@ type CustomerManagedKeyParameters struct {
 
 	// The ID of the Key Vault Key, supplying a version-less key ID will enable auto-rotation of this key.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
 
 	// The ID of a user assigned identity.
 	// +kubebuilder:validation:Optional
-	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId" tf:"user_assigned_identity_id,omitempty"`
 }
 
 type DeleteRetentionPolicyInitParameters struct {
@@ -848,7 +848,7 @@ type HourMetricsParameters struct {
 
 	// Indicates whether minute metrics are enabled for the Queue service.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Indicates whether metrics should generate summary statistics for called API operations.
 	// +kubebuilder:validation:Optional
@@ -860,7 +860,7 @@ type HourMetricsParameters struct {
 
 	// The version of storage analytics to configure.
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 type IdentityInitParameters struct {
@@ -895,7 +895,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Storage Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ImmutabilityPolicyInitParameters struct {
@@ -926,15 +926,15 @@ type ImmutabilityPolicyParameters struct {
 
 	// When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted.
 	// +kubebuilder:validation:Optional
-	AllowProtectedAppendWrites *bool `json:"allowProtectedAppendWrites,omitempty" tf:"allow_protected_append_writes,omitempty"`
+	AllowProtectedAppendWrites *bool `json:"allowProtectedAppendWrites" tf:"allow_protected_append_writes,omitempty"`
 
 	// The immutability period for the blobs in the container since the policy creation, in days.
 	// +kubebuilder:validation:Optional
-	PeriodSinceCreationInDays *float64 `json:"periodSinceCreationInDays,omitempty" tf:"period_since_creation_in_days,omitempty"`
+	PeriodSinceCreationInDays *float64 `json:"periodSinceCreationInDays" tf:"period_since_creation_in_days,omitempty"`
 
 	// Defines the mode of the policy. Disabled state disables the policy, Unlocked state allows increase and decrease of immutability retention time and also allows toggling allowProtectedAppendWrites property, Locked state only allows the increase of the immutability retention time. A policy can only be created in a Disabled or Unlocked state and can be toggled between the two states. Only a policy in an Unlocked state can transition to a Locked state which cannot be reverted.
 	// +kubebuilder:validation:Optional
-	State *string `json:"state,omitempty" tf:"state,omitempty"`
+	State *string `json:"state" tf:"state,omitempty"`
 }
 
 type LoggingInitParameters struct {
@@ -977,11 +977,11 @@ type LoggingParameters struct {
 
 	// (Defaults to 60 minutes) Used when deleting the Storage Account.
 	// +kubebuilder:validation:Optional
-	Delete *bool `json:"delete,omitempty" tf:"delete,omitempty"`
+	Delete *bool `json:"delete" tf:"delete,omitempty"`
 
 	// (Defaults to 5 minutes) Used when retrieving the Storage Account.
 	// +kubebuilder:validation:Optional
-	Read *bool `json:"read,omitempty" tf:"read,omitempty"`
+	Read *bool `json:"read" tf:"read,omitempty"`
 
 	// Specifies the number of days that logs will be retained.
 	// +kubebuilder:validation:Optional
@@ -989,11 +989,11 @@ type LoggingParameters struct {
 
 	// The version of storage analytics to configure.
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 
 	// Indicates whether all write requests should be logged.
 	// +kubebuilder:validation:Optional
-	Write *bool `json:"write,omitempty" tf:"write,omitempty"`
+	Write *bool `json:"write" tf:"write,omitempty"`
 }
 
 type MinuteMetricsInitParameters struct {
@@ -1030,7 +1030,7 @@ type MinuteMetricsParameters struct {
 
 	// Indicates whether minute metrics are enabled for the Queue service.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Indicates whether metrics should generate summary statistics for called API operations.
 	// +kubebuilder:validation:Optional
@@ -1042,7 +1042,7 @@ type MinuteMetricsParameters struct {
 
 	// The version of storage analytics to configure.
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 type NetworkRulesInitParameters struct {
@@ -1089,7 +1089,7 @@ type NetworkRulesParameters struct {
 
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
 	// +kubebuilder:validation:Optional
-	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
 	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918),  are not allowed.
 	// +kubebuilder:validation:Optional
@@ -1126,7 +1126,7 @@ type PrivateLinkAccessParameters struct {
 
 	// The resource id of the resource access rule to be granted access.
 	// +kubebuilder:validation:Optional
-	EndpointResourceID *string `json:"endpointResourceId,omitempty" tf:"endpoint_resource_id,omitempty"`
+	EndpointResourceID *string `json:"endpointResourceId" tf:"endpoint_resource_id,omitempty"`
 
 	// The tenant id of the resource of the resource access rule to be granted access. Defaults to the current tenant id.
 	// +kubebuilder:validation:Optional
@@ -1175,24 +1175,24 @@ type QueuePropertiesCorsRuleParameters struct {
 
 	// A list of headers that are allowed to be a part of the cross-origin request.
 	// +kubebuilder:validation:Optional
-	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
 
 	// A list of HTTP methods that are allowed to be executed by the origin. Valid options are
 	// DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or PATCH.
 	// +kubebuilder:validation:Optional
-	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// A list of origin domains that will be allowed by CORS.
 	// +kubebuilder:validation:Optional
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// A list of response headers that are exposed to CORS clients.
 	// +kubebuilder:validation:Optional
-	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
+	ExposedHeaders []*string `json:"exposedHeaders" tf:"exposed_headers,omitempty"`
 
 	// The number of seconds the client should cache a preflight response.
 	// +kubebuilder:validation:Optional
-	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds" tf:"max_age_in_seconds,omitempty"`
 }
 
 type QueuePropertiesInitParameters struct {
@@ -1260,7 +1260,7 @@ type RestorePolicyParameters struct {
 
 	// Specifies the number of days that the azurerm_storage_share should be retained, between 1 and 365 days. Defaults to 7.
 	// +kubebuilder:validation:Optional
-	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+	Days *float64 `json:"days" tf:"days,omitempty"`
 }
 
 type RetentionPolicyInitParameters struct {
@@ -1347,7 +1347,7 @@ type SASPolicyParameters struct {
 
 	// The SAS expiration period in format of DD.HH:MM:SS.
 	// +kubebuilder:validation:Optional
-	ExpirationPeriod *string `json:"expirationPeriod,omitempty" tf:"expiration_period,omitempty"`
+	ExpirationPeriod *string `json:"expirationPeriod" tf:"expiration_period,omitempty"`
 }
 
 type SMBInitParameters struct {
@@ -1451,24 +1451,24 @@ type SharePropertiesCorsRuleParameters struct {
 
 	// A list of headers that are allowed to be a part of the cross-origin request.
 	// +kubebuilder:validation:Optional
-	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
+	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
 
 	// A list of HTTP methods that are allowed to be executed by the origin. Valid options are
 	// DELETE, GET, HEAD, MERGE, POST, OPTIONS, PUT or PATCH.
 	// +kubebuilder:validation:Optional
-	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// A list of origin domains that will be allowed by CORS.
 	// +kubebuilder:validation:Optional
-	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// A list of response headers that are exposed to CORS clients.
 	// +kubebuilder:validation:Optional
-	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
+	ExposedHeaders []*string `json:"exposedHeaders" tf:"exposed_headers,omitempty"`
 
 	// The number of seconds the client should cache a preflight response.
 	// +kubebuilder:validation:Optional
-	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds" tf:"max_age_in_seconds,omitempty"`
 }
 
 type SharePropertiesInitParameters struct {

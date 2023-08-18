@@ -140,7 +140,7 @@ type NotificationSettingsParameters struct {
 
 	// Whether to enable pre-shutdown notifications. Possible values are true and false.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// Time in minutes between 15 and 120 before a shutdown event at which a notification will be sent. Defaults to 30.
 	// +kubebuilder:validation:Optional

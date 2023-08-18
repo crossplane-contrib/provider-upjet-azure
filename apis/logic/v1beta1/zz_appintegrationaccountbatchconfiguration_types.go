@@ -120,11 +120,11 @@ type MonthlyParameters struct {
 
 	// The occurrence of the week within the month.
 	// +kubebuilder:validation:Optional
-	Week *float64 `json:"week,omitempty" tf:"week,omitempty"`
+	Week *float64 `json:"week" tf:"week,omitempty"`
 
 	// The day of the occurrence. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
 	// +kubebuilder:validation:Optional
-	Weekday *string `json:"weekday,omitempty" tf:"weekday,omitempty"`
+	Weekday *string `json:"weekday" tf:"weekday,omitempty"`
 }
 
 type RecurrenceInitParameters struct {
@@ -177,11 +177,11 @@ type RecurrenceParameters struct {
 
 	// The frequency of the schedule. Possible values are Day, Hour, Minute, Month, NotSpecified, Second, Week and Year.
 	// +kubebuilder:validation:Optional
-	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
+	Frequency *string `json:"frequency" tf:"frequency,omitempty"`
 
 	// The number of frequencys between runs.
 	// +kubebuilder:validation:Optional
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
 	// A schedule block as documented below.
 	// +kubebuilder:validation:Optional

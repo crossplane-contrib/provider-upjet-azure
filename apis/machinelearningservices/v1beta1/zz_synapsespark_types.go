@@ -45,7 +45,7 @@ type SynapseSparkIdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Synapse Spark. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SynapseSparkInitParameters struct {

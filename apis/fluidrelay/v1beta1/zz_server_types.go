@@ -45,7 +45,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Fluid Relay Service. Possible values are SystemAssigned,UserAssigned and SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type ServerInitParameters struct {

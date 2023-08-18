@@ -35,7 +35,7 @@ type CassandraClusterIdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Cassandra Cluster. The only possible value is SystemAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type CassandraClusterInitParameters struct {

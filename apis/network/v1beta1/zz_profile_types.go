@@ -32,7 +32,7 @@ type ContainerNetworkInterfaceIPConfigurationParameters struct {
 
 	// Specifies the name of the Network Profile. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Reference to the subnet associated with the IP Configuration.
 	// +crossplane:generate:reference:type=Subnet
@@ -71,11 +71,11 @@ type ContainerNetworkInterfaceParameters struct {
 
 	// One or more ip_configuration blocks as documented below.
 	// +kubebuilder:validation:Optional
-	IPConfiguration []ContainerNetworkInterfaceIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+	IPConfiguration []ContainerNetworkInterfaceIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 
 	// Specifies the name of the IP Configuration.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ProfileInitParameters struct {

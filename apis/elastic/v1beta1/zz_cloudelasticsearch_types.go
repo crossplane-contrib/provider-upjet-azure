@@ -147,15 +147,15 @@ type FilteringTagParameters struct {
 
 	// Specifies the type of action which should be taken when the Tag matches the name and value. Possible values are Exclude and Include.
 	// +kubebuilder:validation:Optional
-	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+	Action *string `json:"action" tf:"action,omitempty"`
 
 	// The name which should be used for this Elasticsearch resource. Changing this forces a new Elasticsearch to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the value of the Tag which should be filtered.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type LogsInitParameters struct {

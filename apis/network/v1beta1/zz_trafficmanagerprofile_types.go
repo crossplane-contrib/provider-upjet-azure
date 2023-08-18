@@ -35,11 +35,11 @@ type DNSConfigParameters struct {
 
 	// The relative domain name, this is combined with the domain name used by Traffic Manager to form the FQDN which is exported as documented below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	RelativeName *string `json:"relativeName,omitempty" tf:"relative_name,omitempty"`
+	RelativeName *string `json:"relativeName" tf:"relative_name,omitempty"`
 
 	// The TTL value of the Profile used by Local DNS resolvers and clients.
 	// +kubebuilder:validation:Optional
-	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
+	TTL *float64 `json:"ttl" tf:"ttl,omitempty"`
 }
 
 type MonitorConfigCustomHeaderInitParameters struct {
@@ -64,11 +64,11 @@ type MonitorConfigCustomHeaderParameters struct {
 
 	// The name of the Traffic Manager profile. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value of custom header. Applicable for HTTP and HTTPS protocol.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type MonitorConfigInitParameters struct {
@@ -145,11 +145,11 @@ type MonitorConfigParameters struct {
 
 	// The port number used by the monitoring checks.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port" tf:"port,omitempty"`
 
 	// The protocol used by the monitoring checks, supported values are HTTP, HTTPS and TCP.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// The amount of time the Traffic Manager probing agent should wait before considering that check a failure when a health check probe is sent to the endpoint. If interval_in_seconds is set to 30, then timeout_in_seconds can be between 5 and 10. The default value is 10. If interval_in_seconds is set to 10, then valid values are between 5 and 9 and timeout_in_seconds is required.
 	// +kubebuilder:validation:Optional

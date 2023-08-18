@@ -47,19 +47,19 @@ type GalleryImageReferenceParameters struct {
 
 	// The Offer of the Gallery Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
+	Offer *string `json:"offer" tf:"offer,omitempty"`
 
 	// The Publisher of the Gallery Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
 	// The SKU of the Gallery Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku *string `json:"sku" tf:"sku,omitempty"`
 
 	// The Version of the Gallery Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 type InboundNATRuleInitParameters struct {
@@ -87,11 +87,11 @@ type InboundNATRuleParameters struct {
 
 	// The Backend Port associated with this NAT Rule. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
+	BackendPort *float64 `json:"backendPort" tf:"backend_port,omitempty"`
 
 	// The Protocol used for this NAT Rule. Possible values are Tcp and Udp.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 }
 
 type LinuxVirtualMachineInitParameters struct {

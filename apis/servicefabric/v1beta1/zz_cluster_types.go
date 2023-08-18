@@ -35,11 +35,11 @@ type ApplicationPortsParameters struct {
 
 	// The end of the Ephemeral Port Range on this Node Type.
 	// +kubebuilder:validation:Optional
-	EndPort *float64 `json:"endPort,omitempty" tf:"end_port,omitempty"`
+	EndPort *float64 `json:"endPort" tf:"end_port,omitempty"`
 
 	// The start of the Ephemeral Port Range on this Node Type.
 	// +kubebuilder:validation:Optional
-	StartPort *float64 `json:"startPort,omitempty" tf:"start_port,omitempty"`
+	StartPort *float64 `json:"startPort" tf:"start_port,omitempty"`
 }
 
 type AzureActiveDirectoryInitParameters struct {
@@ -70,15 +70,15 @@ type AzureActiveDirectoryParameters struct {
 
 	// The Azure Active Directory Client ID which should be used for the Client Application.
 	// +kubebuilder:validation:Optional
-	ClientApplicationID *string `json:"clientApplicationId,omitempty" tf:"client_application_id,omitempty"`
+	ClientApplicationID *string `json:"clientApplicationId" tf:"client_application_id,omitempty"`
 
 	// The Azure Active Directory Cluster Application ID.
 	// +kubebuilder:validation:Optional
-	ClusterApplicationID *string `json:"clusterApplicationId,omitempty" tf:"cluster_application_id,omitempty"`
+	ClusterApplicationID *string `json:"clusterApplicationId" tf:"cluster_application_id,omitempty"`
 
 	// The Azure Active Directory Tenant ID.
 	// +kubebuilder:validation:Optional
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
 }
 
 type CertificateCommonNamesInitParameters struct {
@@ -103,11 +103,11 @@ type CertificateCommonNamesParameters struct {
 
 	// A common_names block as defined below.
 	// +kubebuilder:validation:Optional
-	CommonNames []CommonNamesParameters `json:"commonNames,omitempty" tf:"common_names,omitempty"`
+	CommonNames []CommonNamesParameters `json:"commonNames" tf:"common_names,omitempty"`
 
 	// The X509 Store where the Certificate Exists, such as My.
 	// +kubebuilder:validation:Optional
-	X509StoreName *string `json:"x509StoreName,omitempty" tf:"x509_store_name,omitempty"`
+	X509StoreName *string `json:"x509StoreName" tf:"x509_store_name,omitempty"`
 }
 
 type CertificateInitParameters struct {
@@ -138,7 +138,7 @@ type CertificateParameters struct {
 
 	// The Thumbprint of the Certificate.
 	// +kubebuilder:validation:Optional
-	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+	Thumbprint *string `json:"thumbprint" tf:"thumbprint,omitempty"`
 
 	// The Secondary Thumbprint of the Certificate.
 	// +kubebuilder:validation:Optional
@@ -146,7 +146,7 @@ type CertificateParameters struct {
 
 	// The X509 Store where the Certificate Exists, such as My.
 	// +kubebuilder:validation:Optional
-	X509StoreName *string `json:"x509StoreName,omitempty" tf:"x509_store_name,omitempty"`
+	X509StoreName *string `json:"x509StoreName" tf:"x509_store_name,omitempty"`
 }
 
 type ClientCertificateCommonNameInitParameters struct {
@@ -177,11 +177,11 @@ type ClientCertificateCommonNameParameters struct {
 
 	// The common or subject name of the certificate.
 	// +kubebuilder:validation:Optional
-	CommonName *string `json:"commonName,omitempty" tf:"common_name,omitempty"`
+	CommonName *string `json:"commonName" tf:"common_name,omitempty"`
 
 	// Does the Client Certificate have Admin Access to the cluster? Non-admin clients can only perform read only operations on the cluster.
 	// +kubebuilder:validation:Optional
-	IsAdmin *bool `json:"isAdmin,omitempty" tf:"is_admin,omitempty"`
+	IsAdmin *bool `json:"isAdmin" tf:"is_admin,omitempty"`
 
 	// The Issuer Thumbprint of the Certificate.
 	// +kubebuilder:validation:Optional
@@ -210,11 +210,11 @@ type ClientCertificateThumbprintParameters struct {
 
 	// Does the Client Certificate have Admin Access to the cluster? Non-admin clients can only perform read only operations on the cluster.
 	// +kubebuilder:validation:Optional
-	IsAdmin *bool `json:"isAdmin,omitempty" tf:"is_admin,omitempty"`
+	IsAdmin *bool `json:"isAdmin" tf:"is_admin,omitempty"`
 
 	// The Thumbprint associated with the Client Certificate.
 	// +kubebuilder:validation:Optional
-	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+	Thumbprint *string `json:"thumbprint" tf:"thumbprint,omitempty"`
 }
 
 type ClusterInitParameters struct {
@@ -480,7 +480,7 @@ type CommonNamesParameters struct {
 
 	// The common or subject name of the certificate.
 	// +kubebuilder:validation:Optional
-	CertificateCommonName *string `json:"certificateCommonName,omitempty" tf:"certificate_common_name,omitempty"`
+	CertificateCommonName *string `json:"certificateCommonName" tf:"certificate_common_name,omitempty"`
 
 	// The Issuer Thumbprint of the Certificate.
 	// +kubebuilder:validation:Optional
@@ -566,23 +566,23 @@ type DiagnosticsConfigParameters struct {
 
 	// The Blob Endpoint of the Storage Account.
 	// +kubebuilder:validation:Optional
-	BlobEndpoint *string `json:"blobEndpoint,omitempty" tf:"blob_endpoint,omitempty"`
+	BlobEndpoint *string `json:"blobEndpoint" tf:"blob_endpoint,omitempty"`
 
 	// The protected diagnostics storage key name, such as StorageAccountKey1.
 	// +kubebuilder:validation:Optional
-	ProtectedAccountKeyName *string `json:"protectedAccountKeyName,omitempty" tf:"protected_account_key_name,omitempty"`
+	ProtectedAccountKeyName *string `json:"protectedAccountKeyName" tf:"protected_account_key_name,omitempty"`
 
 	// The Queue Endpoint of the Storage Account.
 	// +kubebuilder:validation:Optional
-	QueueEndpoint *string `json:"queueEndpoint,omitempty" tf:"queue_endpoint,omitempty"`
+	QueueEndpoint *string `json:"queueEndpoint" tf:"queue_endpoint,omitempty"`
 
 	// The name of the Storage Account where the Diagnostics should be sent to.
 	// +kubebuilder:validation:Optional
-	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+	StorageAccountName *string `json:"storageAccountName" tf:"storage_account_name,omitempty"`
 
 	// The Table Endpoint of the Storage Account.
 	// +kubebuilder:validation:Optional
-	TableEndpoint *string `json:"tableEndpoint,omitempty" tf:"table_endpoint,omitempty"`
+	TableEndpoint *string `json:"tableEndpoint" tf:"table_endpoint,omitempty"`
 }
 
 type EphemeralPortsInitParameters struct {
@@ -607,11 +607,11 @@ type EphemeralPortsParameters struct {
 
 	// The end of the Ephemeral Port Range on this Node Type.
 	// +kubebuilder:validation:Optional
-	EndPort *float64 `json:"endPort,omitempty" tf:"end_port,omitempty"`
+	EndPort *float64 `json:"endPort" tf:"end_port,omitempty"`
 
 	// The start of the Ephemeral Port Range on this Node Type.
 	// +kubebuilder:validation:Optional
-	StartPort *float64 `json:"startPort,omitempty" tf:"start_port,omitempty"`
+	StartPort *float64 `json:"startPort" tf:"start_port,omitempty"`
 }
 
 type FabricSettingsInitParameters struct {
@@ -636,7 +636,7 @@ type FabricSettingsParameters struct {
 
 	// The name of the Fabric Setting, such as Security or Federation.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A map containing settings for the specified Fabric Setting.
 	// +kubebuilder:validation:Optional
@@ -768,7 +768,7 @@ type NodeTypeParameters struct {
 
 	// The Port used for the Client Endpoint for this Node Type.
 	// +kubebuilder:validation:Optional
-	ClientEndpointPort *float64 `json:"clientEndpointPort,omitempty" tf:"client_endpoint_port,omitempty"`
+	ClientEndpointPort *float64 `json:"clientEndpointPort" tf:"client_endpoint_port,omitempty"`
 
 	// The Durability Level for this Node Type. Possible values include Bronze, Gold and Silver. Defaults to Bronze.
 	// +kubebuilder:validation:Optional
@@ -780,15 +780,15 @@ type NodeTypeParameters struct {
 
 	// The Port used for the HTTP Endpoint for this Node Type.
 	// +kubebuilder:validation:Optional
-	HTTPEndpointPort *float64 `json:"httpEndpointPort,omitempty" tf:"http_endpoint_port,omitempty"`
+	HTTPEndpointPort *float64 `json:"httpEndpointPort" tf:"http_endpoint_port,omitempty"`
 
 	// The number of nodes for this Node Type.
 	// +kubebuilder:validation:Optional
-	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+	InstanceCount *float64 `json:"instanceCount" tf:"instance_count,omitempty"`
 
 	// Is this the Primary Node Type?
 	// +kubebuilder:validation:Optional
-	IsPrimary *bool `json:"isPrimary,omitempty" tf:"is_primary,omitempty"`
+	IsPrimary *bool `json:"isPrimary" tf:"is_primary,omitempty"`
 
 	// Should this node type run only stateless services?
 	// +kubebuilder:validation:Optional
@@ -800,7 +800,7 @@ type NodeTypeParameters struct {
 
 	// The name of the Node Type.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The placement tags applied to nodes in the node type, which can be used to indicate where certain services (workload) should run.
 	// +kubebuilder:validation:Optional
@@ -833,7 +833,7 @@ type ReverseProxyCertificateCommonNamesCommonNamesParameters struct {
 
 	// The common or subject name of the certificate.
 	// +kubebuilder:validation:Optional
-	CertificateCommonName *string `json:"certificateCommonName,omitempty" tf:"certificate_common_name,omitempty"`
+	CertificateCommonName *string `json:"certificateCommonName" tf:"certificate_common_name,omitempty"`
 
 	// The Issuer Thumbprint of the Certificate.
 	// +kubebuilder:validation:Optional
@@ -862,11 +862,11 @@ type ReverseProxyCertificateCommonNamesParameters struct {
 
 	// A common_names block as defined below.
 	// +kubebuilder:validation:Optional
-	CommonNames []ReverseProxyCertificateCommonNamesCommonNamesParameters `json:"commonNames,omitempty" tf:"common_names,omitempty"`
+	CommonNames []ReverseProxyCertificateCommonNamesCommonNamesParameters `json:"commonNames" tf:"common_names,omitempty"`
 
 	// The X509 Store where the Certificate Exists, such as My.
 	// +kubebuilder:validation:Optional
-	X509StoreName *string `json:"x509StoreName,omitempty" tf:"x509_store_name,omitempty"`
+	X509StoreName *string `json:"x509StoreName" tf:"x509_store_name,omitempty"`
 }
 
 type ReverseProxyCertificateInitParameters struct {
@@ -897,7 +897,7 @@ type ReverseProxyCertificateParameters struct {
 
 	// The Thumbprint of the Certificate.
 	// +kubebuilder:validation:Optional
-	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
+	Thumbprint *string `json:"thumbprint" tf:"thumbprint,omitempty"`
 
 	// The Secondary Thumbprint of the Certificate.
 	// +kubebuilder:validation:Optional
@@ -905,7 +905,7 @@ type ReverseProxyCertificateParameters struct {
 
 	// The X509 Store where the Certificate Exists, such as My.
 	// +kubebuilder:validation:Optional
-	X509StoreName *string `json:"x509StoreName,omitempty" tf:"x509_store_name,omitempty"`
+	X509StoreName *string `json:"x509StoreName" tf:"x509_store_name,omitempty"`
 }
 
 type UpgradePolicyInitParameters struct {

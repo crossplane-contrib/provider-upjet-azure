@@ -274,7 +274,7 @@ type CustomerManagedKeyParameters struct {
 
 	// The ID of the Key Vault Key which should be used to Encrypt the data in this Cognitive Account.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
 }
 
 type IdentityInitParameters struct {
@@ -309,7 +309,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type NetworkAclsInitParameters struct {
@@ -340,7 +340,7 @@ type NetworkAclsParameters struct {
 
 	// The Default Action to use when no rules match from ip_rules / virtual_network_rules. Possible values are Allow and Deny.
 	// +kubebuilder:validation:Optional
-	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account.
 	// +kubebuilder:validation:Optional
@@ -377,7 +377,7 @@ type StorageParameters struct {
 
 	// Full resource id of a Microsoft.Storage resource.
 	// +kubebuilder:validation:Optional
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+	StorageAccountID *string `json:"storageAccountId" tf:"storage_account_id,omitempty"`
 }
 
 type VirtualNetworkRulesInitParameters struct {

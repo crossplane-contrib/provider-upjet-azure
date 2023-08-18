@@ -377,7 +377,7 @@ type AuthenticationCertificateParameters struct {
 
 	// The Name of the Authentication Certificate to use.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type AutoscaleConfigurationInitParameters struct {
@@ -406,7 +406,7 @@ type AutoscaleConfigurationParameters struct {
 
 	// Minimum capacity for autoscaling. Accepted values are in the range 0 to 100.
 	// +kubebuilder:validation:Optional
-	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
+	MinCapacity *float64 `json:"minCapacity" tf:"min_capacity,omitempty"`
 }
 
 type BackendAddressPoolInitParameters struct {
@@ -448,7 +448,7 @@ type BackendAddressPoolParameters struct {
 
 	// The name of the Backend Address Pool.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type BackendHTTPSettingsAuthenticationCertificateInitParameters struct {
@@ -470,7 +470,7 @@ type BackendHTTPSettingsAuthenticationCertificateParameters struct {
 
 	// The Name of the URL Path Map.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type BackendHTTPSettingsInitParameters struct {
@@ -579,7 +579,7 @@ type BackendHTTPSettingsParameters struct {
 
 	// Is Cookie-Based Affinity enabled? Possible values are Enabled and Disabled.
 	// +kubebuilder:validation:Optional
-	CookieBasedAffinity *string `json:"cookieBasedAffinity,omitempty" tf:"cookie_based_affinity,omitempty"`
+	CookieBasedAffinity *string `json:"cookieBasedAffinity" tf:"cookie_based_affinity,omitempty"`
 
 	// Host header to be sent to the backend servers. Cannot be set if pick_host_name_from_backend_address is set to true.
 	// +kubebuilder:validation:Optional
@@ -587,7 +587,7 @@ type BackendHTTPSettingsParameters struct {
 
 	// The name of the Backend HTTP Settings Collection.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Path which should be used as a prefix for all HTTP requests.
 	// +kubebuilder:validation:Optional
@@ -599,7 +599,7 @@ type BackendHTTPSettingsParameters struct {
 
 	// The port which should be used for this Backend HTTP Settings Collection.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port" tf:"port,omitempty"`
 
 	// The name of an associated HTTP Probe.
 	// +kubebuilder:validation:Optional
@@ -607,7 +607,7 @@ type BackendHTTPSettingsParameters struct {
 
 	// The Protocol which should be used. Possible values are Http and Https.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// The request timeout in seconds, which must be between 1 and 86400 seconds. Defaults to 30.
 	// +kubebuilder:validation:Optional
@@ -660,11 +660,11 @@ type ConditionParameters struct {
 
 	// The pattern, either fixed string or regular expression, that evaluates the truthfulness of the condition.
 	// +kubebuilder:validation:Optional
-	Pattern *string `json:"pattern,omitempty" tf:"pattern,omitempty"`
+	Pattern *string `json:"pattern" tf:"pattern,omitempty"`
 
 	// The variable of the condition.
 	// +kubebuilder:validation:Optional
-	Variable *string `json:"variable,omitempty" tf:"variable,omitempty"`
+	Variable *string `json:"variable" tf:"variable,omitempty"`
 }
 
 type ConnectionDrainingInitParameters struct {
@@ -689,11 +689,11 @@ type ConnectionDrainingParameters struct {
 
 	// The number of seconds connection draining is active. Acceptable values are from 1 second to 3600 seconds.
 	// +kubebuilder:validation:Optional
-	DrainTimeoutSec *float64 `json:"drainTimeoutSec,omitempty" tf:"drain_timeout_sec,omitempty"`
+	DrainTimeoutSec *float64 `json:"drainTimeoutSec" tf:"drain_timeout_sec,omitempty"`
 
 	// Is the Web Application Firewall enabled?
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 }
 
 type CustomErrorConfigurationInitParameters struct {
@@ -721,11 +721,11 @@ type CustomErrorConfigurationParameters struct {
 
 	// Error page URL of the application gateway customer error.
 	// +kubebuilder:validation:Optional
-	CustomErrorPageURL *string `json:"customErrorPageUrl,omitempty" tf:"custom_error_page_url,omitempty"`
+	CustomErrorPageURL *string `json:"customErrorPageUrl" tf:"custom_error_page_url,omitempty"`
 
 	// Status code of the application gateway customer error. Possible values are HttpStatus403 and HttpStatus502
 	// +kubebuilder:validation:Optional
-	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
 }
 
 type DisabledRuleGroupInitParameters struct {
@@ -750,7 +750,7 @@ type DisabledRuleGroupParameters struct {
 
 	// The rule group where specific rules should be disabled. Possible values are BadBots, crs_20_protocol_violations, crs_21_protocol_anomalies, crs_23_request_limits, crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks, crs_41_sql_injection_attacks, crs_41_xss_attacks, crs_42_tight_security, crs_45_trojans, General, GoodBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION, REQUEST-944-APPLICATION-ATTACK-JAVA and UnknownBots.
 	// +kubebuilder:validation:Optional
-	RuleGroupName *string `json:"ruleGroupName,omitempty" tf:"rule_group_name,omitempty"`
+	RuleGroupName *string `json:"ruleGroupName" tf:"rule_group_name,omitempty"`
 
 	// A list of rules which should be disabled in that group. Disables all rules in the specified group if rules is not specified.
 	// +kubebuilder:validation:Optional
@@ -785,7 +785,7 @@ type ExclusionParameters struct {
 
 	// Match variable of the exclusion rule to exclude header, cookie or GET arguments. Possible values are RequestArgKeys, RequestArgNames, RequestArgValues, RequestCookieKeys, RequestCookieNames, RequestCookieValues, RequestHeaderKeys, RequestHeaderNames and RequestHeaderValues
 	// +kubebuilder:validation:Optional
-	MatchVariable *string `json:"matchVariable,omitempty" tf:"match_variable,omitempty"`
+	MatchVariable *string `json:"matchVariable" tf:"match_variable,omitempty"`
 
 	// String value which will be used for the filter operation. If empty will exclude all traffic on this match_variable
 	// +kubebuilder:validation:Optional
@@ -842,7 +842,7 @@ type FrontendIPConfigurationParameters struct {
 
 	// The name of the Frontend IP Configuration.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Private IP Address to use for the Application Gateway.
 	// +kubebuilder:validation:Optional
@@ -910,11 +910,11 @@ type FrontendPortParameters struct {
 
 	// The name of the Frontend Port.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The port used for this Frontend Port.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port" tf:"port,omitempty"`
 }
 
 type GatewayIPConfigurationInitParameters struct {
@@ -939,7 +939,7 @@ type GatewayIPConfigurationParameters struct {
 
 	// The Name of this Gateway IP Configuration.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The ID of the Subnet which the Application Gateway should be connected to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
@@ -978,11 +978,11 @@ type GlobalParameters struct {
 
 	// Whether Application Gateway's Request buffer is enabled.
 	// +kubebuilder:validation:Optional
-	RequestBufferingEnabled *bool `json:"requestBufferingEnabled,omitempty" tf:"request_buffering_enabled,omitempty"`
+	RequestBufferingEnabled *bool `json:"requestBufferingEnabled" tf:"request_buffering_enabled,omitempty"`
 
 	// Whether Application Gateway's Response buffer is enabled.
 	// +kubebuilder:validation:Optional
-	ResponseBufferingEnabled *bool `json:"responseBufferingEnabled,omitempty" tf:"response_buffering_enabled,omitempty"`
+	ResponseBufferingEnabled *bool `json:"responseBufferingEnabled" tf:"response_buffering_enabled,omitempty"`
 }
 
 type HTTPListenerCustomErrorConfigurationInitParameters struct {
@@ -1010,11 +1010,11 @@ type HTTPListenerCustomErrorConfigurationParameters struct {
 
 	// Error page URL of the application gateway customer error.
 	// +kubebuilder:validation:Optional
-	CustomErrorPageURL *string `json:"customErrorPageUrl,omitempty" tf:"custom_error_page_url,omitempty"`
+	CustomErrorPageURL *string `json:"customErrorPageUrl" tf:"custom_error_page_url,omitempty"`
 
 	// A list of allowed status codes for this Health Probe.
 	// +kubebuilder:validation:Optional
-	StatusCode *string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+	StatusCode *string `json:"statusCode" tf:"status_code,omitempty"`
 }
 
 type HTTPListenerInitParameters struct {
@@ -1116,11 +1116,11 @@ type HTTPListenerParameters struct {
 
 	// The Name of the Frontend IP Configuration used for this HTTP Listener.
 	// +kubebuilder:validation:Optional
-	FrontendIPConfigurationName *string `json:"frontendIpConfigurationName,omitempty" tf:"frontend_ip_configuration_name,omitempty"`
+	FrontendIPConfigurationName *string `json:"frontendIpConfigurationName" tf:"frontend_ip_configuration_name,omitempty"`
 
 	// The Name of the Frontend Port use for this HTTP Listener.
 	// +kubebuilder:validation:Optional
-	FrontendPortName *string `json:"frontendPortName,omitempty" tf:"frontend_port_name,omitempty"`
+	FrontendPortName *string `json:"frontendPortName" tf:"frontend_port_name,omitempty"`
 
 	// The Hostname which should be used for this HTTP Listener. Setting this value changes Listener Type to 'Multi site'.
 	// +kubebuilder:validation:Optional
@@ -1132,11 +1132,11 @@ type HTTPListenerParameters struct {
 
 	// The Name of the HTTP Listener.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Protocol to use for this HTTP Listener. Possible values are Http and Https.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// Should Server Name Indication be Required? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -1188,11 +1188,11 @@ type IPConfigurationParameters struct {
 
 	// The Name of the URL Path Map.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Is this the Primary IP Configuration?
 	// +kubebuilder:validation:Optional
-	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+	Primary *bool `json:"primary" tf:"primary,omitempty"`
 
 	// The Static IP Address which should be used.
 	// +kubebuilder:validation:Optional
@@ -1200,7 +1200,7 @@ type IPConfigurationParameters struct {
 
 	// The allocation method used for the Private IP Address. Possible values are Dynamic and Static.
 	// +kubebuilder:validation:Optional
-	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
+	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation" tf:"private_ip_address_allocation,omitempty"`
 
 	// The ID of the subnet the private link configuration should connect to.
 	// +crossplane:generate:reference:type=Subnet
@@ -1239,11 +1239,11 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Application Gateway.
 	// +kubebuilder:validation:Optional
-	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Application Gateway. Only possible value is UserAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type MatchInitParameters struct {
@@ -1272,7 +1272,7 @@ type MatchParameters struct {
 
 	// A list of allowed status codes for this Health Probe.
 	// +kubebuilder:validation:Optional
-	StatusCode []*string `json:"statusCode,omitempty" tf:"status_code,omitempty"`
+	StatusCode []*string `json:"statusCode" tf:"status_code,omitempty"`
 }
 
 type PathRuleInitParameters struct {
@@ -1354,11 +1354,11 @@ type PathRuleParameters struct {
 
 	// The Name of the URL Path Map.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A list of Paths used in this Path Rule.
 	// +kubebuilder:validation:Optional
-	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
+	Paths []*string `json:"paths" tf:"paths,omitempty"`
 
 	// The Name of the Redirect Configuration which should be used for this Routing Rule. Cannot be set if either backend_address_pool_name or backend_http_settings_name is set.
 	// +kubebuilder:validation:Optional
@@ -1409,11 +1409,11 @@ type PrivateLinkConfigurationParameters struct {
 
 	// One or more ip_configuration blocks as defined below.
 	// +kubebuilder:validation:Optional
-	IPConfiguration []IPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+	IPConfiguration []IPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
 
 	// The name of the private link configuration.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type ProbeInitParameters struct {
@@ -1499,7 +1499,7 @@ type ProbeParameters struct {
 
 	// The Interval between two consecutive probes in seconds. Possible values range from 1 second to a maximum of 86,400 seconds.
 	// +kubebuilder:validation:Optional
-	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
+	Interval *float64 `json:"interval" tf:"interval,omitempty"`
 
 	// A match block as defined above.
 	// +kubebuilder:validation:Optional
@@ -1511,11 +1511,11 @@ type ProbeParameters struct {
 
 	// The Name of the Probe.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Path used for this Probe.
 	// +kubebuilder:validation:Optional
-	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+	Path *string `json:"path" tf:"path,omitempty"`
 
 	// Whether the host header should be picked from the backend HTTP settings. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -1527,15 +1527,15 @@ type ProbeParameters struct {
 
 	// The Protocol used for this Probe. Possible values are Http and Https.
 	// +kubebuilder:validation:Optional
-	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
 	// The Timeout used for this Probe, which indicates when a probe becomes unhealthy. Possible values range from 1 second to a maximum of 86,400 seconds.
 	// +kubebuilder:validation:Optional
-	Timeout *float64 `json:"timeout,omitempty" tf:"timeout,omitempty"`
+	Timeout *float64 `json:"timeout" tf:"timeout,omitempty"`
 
 	// The Unhealthy Threshold for this Probe, which indicates the amount of retries which should be attempted before a node is deemed unhealthy. Possible values are from 1 to 20.
 	// +kubebuilder:validation:Optional
-	UnhealthyThreshold *float64 `json:"unhealthyThreshold,omitempty" tf:"unhealthy_threshold,omitempty"`
+	UnhealthyThreshold *float64 `json:"unhealthyThreshold" tf:"unhealthy_threshold,omitempty"`
 }
 
 type RedirectConfigurationInitParameters struct {
@@ -1598,11 +1598,11 @@ type RedirectConfigurationParameters struct {
 
 	// Unique name of the redirect configuration block
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The type of redirect. Possible values are Permanent, Temporary, Found and SeeOther
 	// +kubebuilder:validation:Optional
-	RedirectType *string `json:"redirectType,omitempty" tf:"redirect_type,omitempty"`
+	RedirectType *string `json:"redirectType" tf:"redirect_type,omitempty"`
 
 	// The name of the listener to redirect to. Cannot be set if target_url is set.
 	// +kubebuilder:validation:Optional
@@ -1635,11 +1635,11 @@ type RequestHeaderConfigurationParameters struct {
 
 	// Header name of the header configuration.
 	// +kubebuilder:validation:Optional
-	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+	HeaderName *string `json:"headerName" tf:"header_name,omitempty"`
 
 	// Header value of the header configuration. To delete a response header set this property to an empty string.
 	// +kubebuilder:validation:Optional
-	HeaderValue *string `json:"headerValue,omitempty" tf:"header_value,omitempty"`
+	HeaderValue *string `json:"headerValue" tf:"header_value,omitempty"`
 }
 
 type RequestRoutingRuleInitParameters struct {
@@ -1735,11 +1735,11 @@ type RequestRoutingRuleParameters struct {
 
 	// The Name of the HTTP Listener which should be used for this Routing Rule.
 	// +kubebuilder:validation:Optional
-	HTTPListenerName *string `json:"httpListenerName,omitempty" tf:"http_listener_name,omitempty"`
+	HTTPListenerName *string `json:"httpListenerName" tf:"http_listener_name,omitempty"`
 
 	// The Name of this Request Routing Rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Rule evaluation order can be dictated by specifying an integer value from 1 to 20000 with 1 being the highest priority and 20000 being the lowest priority.
 	// +kubebuilder:validation:Optional
@@ -1755,7 +1755,7 @@ type RequestRoutingRuleParameters struct {
 
 	// The Type of Routing that should be used for this Rule. Possible values are Basic and PathBasedRouting.
 	// +kubebuilder:validation:Optional
-	RuleType *string `json:"ruleType,omitempty" tf:"rule_type,omitempty"`
+	RuleType *string `json:"ruleType" tf:"rule_type,omitempty"`
 
 	// The Name of the URL Path Map which should be associated with this Routing Rule.
 	// +kubebuilder:validation:Optional
@@ -1784,11 +1784,11 @@ type ResponseHeaderConfigurationParameters struct {
 
 	// Header name of the header configuration.
 	// +kubebuilder:validation:Optional
-	HeaderName *string `json:"headerName,omitempty" tf:"header_name,omitempty"`
+	HeaderName *string `json:"headerName" tf:"header_name,omitempty"`
 
 	// Header value of the header configuration. To delete a response header set this property to an empty string.
 	// +kubebuilder:validation:Optional
-	HeaderValue *string `json:"headerValue,omitempty" tf:"header_value,omitempty"`
+	HeaderValue *string `json:"headerValue" tf:"header_value,omitempty"`
 }
 
 type RewriteRuleInitParameters struct {
@@ -1841,7 +1841,7 @@ type RewriteRuleParameters struct {
 
 	// The Name of the URL Path Map.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// One or more request_header_configuration blocks as defined above.
 	// +kubebuilder:validation:Optional
@@ -1853,7 +1853,7 @@ type RewriteRuleParameters struct {
 
 	// Rule sequence of the rewrite rule that determines the order of execution in a set.
 	// +kubebuilder:validation:Optional
-	RuleSequence *float64 `json:"ruleSequence,omitempty" tf:"rule_sequence,omitempty"`
+	RuleSequence *float64 `json:"ruleSequence" tf:"rule_sequence,omitempty"`
 
 	// One url block as defined below
 	// +kubebuilder:validation:Optional
@@ -1885,7 +1885,7 @@ type RewriteRuleSetParameters struct {
 
 	// Unique name of the rewrite rule set block
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// One or more rewrite_rule blocks as defined above.
 	// +kubebuilder:validation:Optional
@@ -1928,7 +1928,7 @@ type SSLCertificateParameters struct {
 
 	// The Name of the SSL certificate that is unique within this Application Gateway
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Password for the pfx file specified in data. Required if data is set.
 	// +kubebuilder:validation:Optional
@@ -2031,7 +2031,7 @@ type SSLProfileParameters struct {
 
 	// The name of the SSL Profile that is unique within this Application Gateway.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// a ssl_policy block as defined below.
 	// +kubebuilder:validation:Optional
@@ -2137,11 +2137,11 @@ type SkuParameters struct {
 
 	// The Name of the SKU to use for this Application Gateway. Possible values are Standard_Small, Standard_Medium, Standard_Large, Standard_v2, WAF_Medium, WAF_Large, and WAF_v2.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Tier of the SKU to use for this Application Gateway. Possible values are Standard, Standard_v2, WAF and WAF_v2.
 	// +kubebuilder:validation:Optional
-	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+	Tier *string `json:"tier" tf:"tier,omitempty"`
 }
 
 type TrustedClientCertificateInitParameters struct {
@@ -2167,7 +2167,7 @@ type TrustedClientCertificateParameters struct {
 
 	// The name of the Trusted Client Certificate that is unique within this Application Gateway.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type TrustedRootCertificateInitParameters struct {
@@ -2203,7 +2203,7 @@ type TrustedRootCertificateParameters struct {
 
 	// The Name of the Trusted Root Certificate to use.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type URLInitParameters struct {
@@ -2332,11 +2332,11 @@ type URLPathMapParameters struct {
 
 	// The Name of the URL Path Map.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// One or more path_rule blocks as defined above.
 	// +kubebuilder:validation:Optional
-	PathRule []PathRuleParameters `json:"pathRule,omitempty" tf:"path_rule,omitempty"`
+	PathRule []PathRuleParameters `json:"pathRule" tf:"path_rule,omitempty"`
 }
 
 type WafConfigurationInitParameters struct {
@@ -2407,7 +2407,7 @@ type WafConfigurationParameters struct {
 
 	// Is the Web Application Firewall enabled?
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// one or more exclusion blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -2419,7 +2419,7 @@ type WafConfigurationParameters struct {
 
 	// The Web Application Firewall Mode. Possible values are Detection and Prevention.
 	// +kubebuilder:validation:Optional
-	FirewallMode *string `json:"firewallMode,omitempty" tf:"firewall_mode,omitempty"`
+	FirewallMode *string `json:"firewallMode" tf:"firewall_mode,omitempty"`
 
 	// The Maximum Request Body Size in KB. Accepted values are in the range 1KB to 128KB. Defaults to 128KB.
 	// +kubebuilder:validation:Optional
@@ -2435,7 +2435,7 @@ type WafConfigurationParameters struct {
 
 	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 2.2.9, 3.0, 3.1 and 3.2.
 	// +kubebuilder:validation:Optional
-	RuleSetVersion *string `json:"ruleSetVersion,omitempty" tf:"rule_set_version,omitempty"`
+	RuleSetVersion *string `json:"ruleSetVersion" tf:"rule_set_version,omitempty"`
 }
 
 // ApplicationGatewaySpec defines the desired state of ApplicationGateway

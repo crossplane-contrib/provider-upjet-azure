@@ -108,11 +108,11 @@ type ProtocolParameters struct {
 
 	// Specify a port for the connection.
 	// +kubebuilder:validation:Optional
-	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+	Port *float64 `json:"port" tf:"port,omitempty"`
 
 	// Specifies the type of connection. Possible values are Http, Https and Mssql.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type RuleInitParameters struct {
@@ -175,7 +175,7 @@ type RuleParameters struct {
 
 	// Specifies the name of the rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// One or more protocol blocks as defined below.
 	// +kubebuilder:validation:Optional

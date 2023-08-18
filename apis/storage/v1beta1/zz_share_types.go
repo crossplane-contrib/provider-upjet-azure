@@ -39,7 +39,7 @@ type ACLParameters struct {
 
 	// The ID which should be used for this Shared Identifier.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 }
 
 type AccessPolicyInitParameters struct {
@@ -74,7 +74,7 @@ type AccessPolicyParameters struct {
 
 	// The permissions which should be associated with this Shared Identifier. Possible value is combination of r (read), w (write), d (delete), and l (list).
 	// +kubebuilder:validation:Optional
-	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
 
 	// The time at which this Access Policy should be valid from, in ISO8601 format.
 	// +kubebuilder:validation:Optional

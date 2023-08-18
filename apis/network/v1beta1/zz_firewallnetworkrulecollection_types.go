@@ -166,15 +166,15 @@ type FirewallNetworkRuleCollectionRuleParameters struct {
 
 	// A list of destination ports.
 	// +kubebuilder:validation:Optional
-	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
+	DestinationPorts []*string `json:"destinationPorts" tf:"destination_ports,omitempty"`
 
 	// Specifies the name of the rule.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A list of protocols. Possible values are Any, ICMP, TCP and UDP.
 	// +kubebuilder:validation:Optional
-	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
+	Protocols []*string `json:"protocols" tf:"protocols,omitempty"`
 
 	// A list of source IP addresses and/or IP ranges.
 	// +kubebuilder:validation:Optional

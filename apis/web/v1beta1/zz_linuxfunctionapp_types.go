@@ -140,7 +140,7 @@ type ActiveDirectoryV2Parameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with Azure Active Directory.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The thumbprint of the certificate used for signing purposes.
 	// The thumbprint of the certificate used for signing purposes.
@@ -170,7 +170,7 @@ type ActiveDirectoryV2Parameters struct {
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	// +kubebuilder:validation:Optional
-	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
+	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
 
 	// Should the www-authenticate provider should be omitted from the request? Defaults to false
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
@@ -243,12 +243,12 @@ type AppleV2Parameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Apple web application.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Apple Login.
 	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
 }
 
 type ApplicationStackInitParameters struct {
@@ -595,7 +595,7 @@ type AuthSettingsV2Parameters struct {
 
 	// A login block as defined below.
 	// +kubebuilder:validation:Optional
-	Login []LoginParameters `json:"login,omitempty" tf:"login,omitempty"`
+	Login []LoginParameters `json:"login" tf:"login,omitempty"`
 
 	// A microsoft_v2 block as defined below.
 	// +kubebuilder:validation:Optional
@@ -645,7 +645,7 @@ type AzureStaticWebAppV2Parameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with Azure Static Web App Authentication.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 }
 
 type BackupInitParameters struct {
@@ -686,11 +686,11 @@ type BackupParameters struct {
 	// The name which should be used for this Backup.
 	// The name which should be used for this Backup.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// A schedule block as defined below.
 	// +kubebuilder:validation:Optional
-	Schedule []ScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
+	Schedule []ScheduleParameters `json:"schedule" tf:"schedule,omitempty"`
 
 	// The SAS URL to the container.
 	// The SAS URL to the container.
@@ -773,12 +773,12 @@ type CustomOidcV2Parameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with this Custom OIDC.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The name which should be used for this Storage Account.
 	// The name of the Custom OIDC Authentication Provider.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The name of the claim that contains the users name.
 	// The name of the claim that contains the users name.
@@ -788,7 +788,7 @@ type CustomOidcV2Parameters struct {
 	// The app setting name that contains the client_secret value used for the Custom OIDC Login.
 	// The endpoint that contains all the configuration endpoints for this Custom OIDC provider.
 	// +kubebuilder:validation:Optional
-	OpenIDConfigurationEndpoint *string `json:"openidConfigurationEndpoint,omitempty" tf:"openid_configuration_endpoint,omitempty"`
+	OpenIDConfigurationEndpoint *string `json:"openidConfigurationEndpoint" tf:"openid_configuration_endpoint,omitempty"`
 
 	// The list of the scopes that should be requested while authenticating.
 	// The list of the scopes that should be requested while authenticating.
@@ -831,12 +831,12 @@ type DockerParameters struct {
 	// The name of the Docker image to use.
 	// The name of the Docker image to use.
 	// +kubebuilder:validation:Optional
-	ImageName *string `json:"imageName,omitempty" tf:"image_name,omitempty"`
+	ImageName *string `json:"imageName" tf:"image_name,omitempty"`
 
 	// The image tag of the image to use.
 	// The image tag of the image to use.
 	// +kubebuilder:validation:Optional
-	ImageTag *string `json:"imageTag,omitempty" tf:"image_tag,omitempty"`
+	ImageTag *string `json:"imageTag" tf:"image_tag,omitempty"`
 
 	// The password for the account to use to connect to the registry.
 	// The password for the account to use to connect to the registry.
@@ -846,7 +846,7 @@ type DockerParameters struct {
 	// The URL of the docker registry.
 	// The URL of the docker registry.
 	// +kubebuilder:validation:Optional
-	RegistryURL *string `json:"registryUrl,omitempty" tf:"registry_url,omitempty"`
+	RegistryURL *string `json:"registryUrl" tf:"registry_url,omitempty"`
 
 	// The username to use for connections to the registry.
 	// The username to use for connections to the registry.
@@ -897,12 +897,12 @@ type FacebookV2Parameters struct {
 	// The App ID of the Facebook app used for login.
 	// The App ID of the Facebook app used for login.
 	// +kubebuilder:validation:Optional
-	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+	AppID *string `json:"appId" tf:"app_id,omitempty"`
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
 	// The app setting name that contains the `app_secret` value used for Facebook Login.
 	// +kubebuilder:validation:Optional
-	AppSecretSettingName *string `json:"appSecretSettingName,omitempty" tf:"app_secret_setting_name,omitempty"`
+	AppSecretSettingName *string `json:"appSecretSettingName" tf:"app_secret_setting_name,omitempty"`
 
 	// The version of the Facebook API to be used while logging in.
 	// The version of the Facebook API to be used while logging in.
@@ -950,7 +950,7 @@ type GithubParameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the GitHub app used for login.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
@@ -1003,12 +1003,12 @@ type GithubV2Parameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the GitHub app used for login.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for GitHub Login.
 	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
 
 	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
 	// Specifies a list of OAuth 2.0 scopes that will be requested as part of GitHub Login authentication.
@@ -1064,12 +1064,12 @@ type GoogleV2Parameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Google web application.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Google Login.
 	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
 
 	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
 	// Specifies a list of Login scopes that will be requested as part of Google Sign-In authentication.
@@ -1117,7 +1117,7 @@ type LinuxFunctionAppAuthSettingsActiveDirectoryParameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the Client to use to authenticate with Azure Active Directory.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
@@ -1165,7 +1165,7 @@ type LinuxFunctionAppAuthSettingsFacebookParameters struct {
 	// The App ID of the Facebook app used for login.
 	// The App ID of the Facebook app used for login.
 	// +kubebuilder:validation:Optional
-	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+	AppID *string `json:"appId" tf:"app_id,omitempty"`
 
 	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
 	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
@@ -1218,7 +1218,7 @@ type LinuxFunctionAppAuthSettingsGoogleParameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Google web application.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
@@ -1328,7 +1328,7 @@ type LinuxFunctionAppAuthSettingsMicrosoftParameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
 	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
@@ -1427,7 +1427,7 @@ type LinuxFunctionAppAuthSettingsParameters struct {
 	// Should the Authentication / Authorization feature be enabled for the Linux Web App?
 	// Should the Authentication / Authorization feature be enabled?
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// A facebook block as defined below.
 	// +kubebuilder:validation:Optional
@@ -1502,7 +1502,7 @@ type LinuxFunctionAppAuthSettingsTwitterParameters struct {
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	// +kubebuilder:validation:Optional
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
@@ -1542,12 +1542,12 @@ type LinuxFunctionAppConnectionStringParameters struct {
 	// The name which should be used for this Connection.
 	// The name which should be used for this Connection.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
 	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The connection string value.
 	// The connection string value.
@@ -1587,7 +1587,7 @@ type LinuxFunctionAppIdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type LinuxFunctionAppInitParameters struct {
@@ -2915,12 +2915,12 @@ type MicrosoftV2Parameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// +kubebuilder:validation:Optional
-	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// +kubebuilder:validation:Optional
-	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
+	ClientSecretSettingName *string `json:"clientSecretSettingName" tf:"client_secret_setting_name,omitempty"`
 
 	// The list of Login scopes that should be requested as part of Microsoft Account authentication.
 	// The list of Login scopes that will be requested as part of Microsoft Account authentication.
@@ -2982,12 +2982,12 @@ type ScheduleParameters struct {
 	// How often the backup should be executed (e.g. for weekly backup, this should be set to 7 and frequency_unit should be set to Day).
 	// How often the backup should be executed (e.g. for weekly backup, this should be set to `7` and `frequency_unit` should be set to `Day`).
 	// +kubebuilder:validation:Optional
-	FrequencyInterval *float64 `json:"frequencyInterval,omitempty" tf:"frequency_interval,omitempty"`
+	FrequencyInterval *float64 `json:"frequencyInterval" tf:"frequency_interval,omitempty"`
 
 	// The unit of time for how often the backup should take place. Possible values include: Day and Hour.
 	// The unit of time for how often the backup should take place. Possible values include: `Day` and `Hour`.
 	// +kubebuilder:validation:Optional
-	FrequencyUnit *string `json:"frequencyUnit,omitempty" tf:"frequency_unit,omitempty"`
+	FrequencyUnit *string `json:"frequencyUnit" tf:"frequency_unit,omitempty"`
 
 	// Should the service keep at least one backup, regardless of age of backup. Defaults to false.
 	// Should the service keep at least one backup, regardless of age of backup. Defaults to `false`.
@@ -3127,7 +3127,7 @@ type StorageAccountParameters struct {
 
 	// The Name of the Storage Account.
 	// +kubebuilder:validation:Optional
-	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
 
 	// The path at which to mount the storage share.
 	// +kubebuilder:validation:Optional
@@ -3135,15 +3135,15 @@ type StorageAccountParameters struct {
 
 	// The name which should be used for this Storage Account.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Name of the File Share or Container Name for Blob storage.
 	// +kubebuilder:validation:Optional
-	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
+	ShareName *string `json:"shareName" tf:"share_name,omitempty"`
 
 	// The Azure Storage Type. Possible values include AzureFiles and AzureBlob.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type TwitterV2InitParameters struct {
@@ -3173,12 +3173,12 @@ type TwitterV2Parameters struct {
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	// +kubebuilder:validation:Optional
-	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
 
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// +kubebuilder:validation:Optional
-	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
+	ConsumerSecretSettingName *string `json:"consumerSecretSettingName" tf:"consumer_secret_setting_name,omitempty"`
 }
 
 // LinuxFunctionAppSpec defines the desired state of LinuxFunctionApp

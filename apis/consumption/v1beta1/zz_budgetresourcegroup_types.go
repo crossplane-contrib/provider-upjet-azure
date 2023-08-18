@@ -80,7 +80,7 @@ type BudgetResourceGroupFilterTagParameters struct {
 
 	// The name of the tag to use for the filter.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The operator to use for comparison. The allowed values are In.
 	// +kubebuilder:validation:Optional
@@ -88,7 +88,7 @@ type BudgetResourceGroupFilterTagParameters struct {
 
 	// Specifies a list of values for the tag.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type BudgetResourceGroupInitParameters struct {
@@ -183,11 +183,11 @@ type BudgetResourceGroupNotificationParameters struct {
 
 	// The comparison operator for the notification. Must be one of EqualTo, GreaterThan, or GreaterThanOrEqualTo.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0 and 1000.
 	// +kubebuilder:validation:Optional
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 
 	// The type of threshold for the notification. This determines whether the notification is triggered by forecasted costs or actual costs. The allowed values are Actual and Forecasted. Default is Actual. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -295,7 +295,7 @@ type BudgetResourceGroupTimePeriodParameters struct {
 
 	// The start date for the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than twelve months. Past start date should be selected within the timegrain period. Changing this forces a new Resource Group Consumption Budget to be created.
 	// +kubebuilder:validation:Optional
-	StartDate *string `json:"startDate,omitempty" tf:"start_date,omitempty"`
+	StartDate *string `json:"startDate" tf:"start_date,omitempty"`
 }
 
 type FilterDimensionInitParameters struct {
@@ -326,7 +326,7 @@ type FilterDimensionParameters struct {
 
 	// The name of the tag to use for the filter.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The operator to use for comparison. The allowed values are In.
 	// +kubebuilder:validation:Optional
@@ -334,7 +334,7 @@ type FilterDimensionParameters struct {
 
 	// Specifies a list of values for the tag.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type FilterNotDimensionInitParameters struct {
@@ -365,7 +365,7 @@ type FilterNotDimensionParameters struct {
 
 	// The name of the tag to use for the filter.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The operator to use for comparison. The allowed values are In.
 	// +kubebuilder:validation:Optional
@@ -373,7 +373,7 @@ type FilterNotDimensionParameters struct {
 
 	// Specifies a list of values for the tag.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type FilterNotInitParameters struct {
@@ -433,7 +433,7 @@ type NotTagParameters struct {
 
 	// The name of the tag to use for the filter.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The operator to use for comparison. The allowed values are In.
 	// +kubebuilder:validation:Optional
@@ -441,7 +441,7 @@ type NotTagParameters struct {
 
 	// Specifies a list of values for the tag.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 // BudgetResourceGroupSpec defines the desired state of BudgetResourceGroup

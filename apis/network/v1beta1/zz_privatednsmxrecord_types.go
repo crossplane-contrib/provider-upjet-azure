@@ -112,11 +112,11 @@ type PrivateDNSMXRecordRecordParameters struct {
 
 	// The FQDN of the exchange to MX record points to.
 	// +kubebuilder:validation:Optional
-	Exchange *string `json:"exchange,omitempty" tf:"exchange,omitempty"`
+	Exchange *string `json:"exchange" tf:"exchange,omitempty"`
 
 	// The preference of the MX record.
 	// +kubebuilder:validation:Optional
-	Preference *float64 `json:"preference,omitempty" tf:"preference,omitempty"`
+	Preference *float64 `json:"preference" tf:"preference,omitempty"`
 }
 
 // PrivateDNSMXRecordSpec defines the desired state of PrivateDNSMXRecord

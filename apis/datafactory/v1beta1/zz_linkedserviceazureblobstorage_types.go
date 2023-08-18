@@ -45,7 +45,7 @@ type KeyVaultSASTokenParameters struct {
 
 	// Specifies the secret name in Azure Key Vault that stores the SAS token.
 	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
 }
 
 type LinkedServiceAzureBlobStorageInitParameters struct {
@@ -251,7 +251,7 @@ type ServicePrincipalLinkedKeyVaultKeyParameters struct {
 
 	// Specifies the secret name in Azure Key Vault that stores the Service Principal key.
 	// +kubebuilder:validation:Optional
-	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
 }
 
 // LinkedServiceAzureBlobStorageSpec defines the desired state of LinkedServiceAzureBlobStorage

@@ -199,7 +199,7 @@ type FiltersParameters struct {
 
 	// An array of predefined values. Valid options are blockBlob and appendBlob.
 	// +kubebuilder:validation:Optional
-	BlobTypes []*string `json:"blobTypes,omitempty" tf:"blob_types,omitempty"`
+	BlobTypes []*string `json:"blobTypes" tf:"blob_types,omitempty"`
 
 	// A match_blob_index_tag block as defined below. The block defines the blob index tag based filtering for blob objects.
 	// +kubebuilder:validation:Optional
@@ -277,7 +277,7 @@ type MatchBlobIndexTagParameters struct {
 
 	// The name of the rule. Rule name is case-sensitive. It must be unique within a policy.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The comparison operator which is used for object comparison and filtering. Possible value is ==. Defaults to ==.
 	// +kubebuilder:validation:Optional
@@ -285,7 +285,7 @@ type MatchBlobIndexTagParameters struct {
 
 	// The filter tag value used for tag based filtering for blob objects.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type RuleInitParameters struct {
@@ -322,19 +322,19 @@ type RuleParameters struct {
 
 	// An actions block as documented below.
 	// +kubebuilder:validation:Optional
-	Actions []ActionsParameters `json:"actions,omitempty" tf:"actions,omitempty"`
+	Actions []ActionsParameters `json:"actions" tf:"actions,omitempty"`
 
 	// Boolean to specify whether the rule is enabled.
 	// +kubebuilder:validation:Optional
-	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
 	// A filters block as documented below.
 	// +kubebuilder:validation:Optional
-	Filters []FiltersParameters `json:"filters,omitempty" tf:"filters,omitempty"`
+	Filters []FiltersParameters `json:"filters" tf:"filters,omitempty"`
 
 	// The name of the rule. Rule name is case-sensitive. It must be unique within a policy.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type SnapshotInitParameters struct {

@@ -84,7 +84,7 @@ type RbacAuthorizationParameters struct {
 
 	// The resource identifier of the integration runtime to be shared.
 	// +kubebuilder:validation:Optional
-	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+	ResourceID *string `json:"resourceId" tf:"resource_id,omitempty"`
 }
 
 // IntegrationRuntimeSelfHostedSpec defines the desired state of IntegrationRuntimeSelfHosted

@@ -195,7 +195,7 @@ type StreamInputEventHubSerializationParameters struct {
 
 	// The serialization format used for incoming data streams. Possible values are Avro, Csv and Json.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // StreamInputEventHubSpec defines the desired state of StreamInputEventHub

@@ -41,15 +41,15 @@ type AzureadBasedServicePrincipalParameters struct {
 
 	// Specifies the Ledger Role to grant this AzureAD Service Principal. Possible values are Administrator, Contributor and Reader.
 	// +kubebuilder:validation:Optional
-	LedgerRoleName *string `json:"ledgerRoleName,omitempty" tf:"ledger_role_name,omitempty"`
+	LedgerRoleName *string `json:"ledgerRoleName" tf:"ledger_role_name,omitempty"`
 
 	// Specifies the Principal ID of the AzureAD Service Principal.
 	// +kubebuilder:validation:Optional
-	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+	PrincipalID *string `json:"principalId" tf:"principal_id,omitempty"`
 
 	// Specifies the Tenant ID for this AzureAD Service Principal.
 	// +kubebuilder:validation:Optional
-	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+	TenantID *string `json:"tenantId" tf:"tenant_id,omitempty"`
 }
 
 type CertificateBasedSecurityPrincipalInitParameters struct {
@@ -74,11 +74,11 @@ type CertificateBasedSecurityPrincipalParameters struct {
 
 	// Specifies the Ledger Role to grant this Certificate Security Principal. Possible values are Administrator, Contributor and Reader.
 	// +kubebuilder:validation:Optional
-	LedgerRoleName *string `json:"ledgerRoleName,omitempty" tf:"ledger_role_name,omitempty"`
+	LedgerRoleName *string `json:"ledgerRoleName" tf:"ledger_role_name,omitempty"`
 
 	// The public key, in PEM format, of the certificate used by this identity to authenticate with the Confidential Ledger.
 	// +kubebuilder:validation:Optional
-	PemPublicKey *string `json:"pemPublicKey,omitempty" tf:"pem_public_key,omitempty"`
+	PemPublicKey *string `json:"pemPublicKey" tf:"pem_public_key,omitempty"`
 }
 
 type LedgerInitParameters struct {

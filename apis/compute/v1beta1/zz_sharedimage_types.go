@@ -41,15 +41,15 @@ type IdentifierParameters struct {
 
 	// The Offer Name for this Shared Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Offer *string `json:"offer,omitempty" tf:"offer,omitempty"`
+	Offer *string `json:"offer" tf:"offer,omitempty"`
 
 	// The Publisher Name for this Gallery Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
 
 	// The Name of the SKU for this Gallery Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
+	Sku *string `json:"sku" tf:"sku,omitempty"`
 }
 
 type PurchasePlanInitParameters struct {
@@ -80,7 +80,7 @@ type PurchasePlanParameters struct {
 
 	// The Purchase Plan Name for this Shared Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The Purchase Plan Product for this Gallery Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

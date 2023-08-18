@@ -35,7 +35,7 @@ type IdentityParameters struct {
 
 	// The type of Managed Service Identity that is configured on this Digital Twins instance. The only possible value is SystemAssigned.
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type InstanceInitParameters struct {

@@ -41,15 +41,15 @@ type CriteriaDimensionParameters struct {
 
 	// Specifies the name which should be used for this Monitor Scheduled Query Rule. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Operator for dimension values. Possible values are Exclude,and Include.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// List of dimension values. Use a wildcard * to collect all.
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+	Values []*string `json:"values" tf:"values,omitempty"`
 }
 
 type FailingPeriodsInitParameters struct {
@@ -74,11 +74,11 @@ type FailingPeriodsParameters struct {
 
 	// Specifies the number of violations to trigger an alert. Should be smaller or equal to number_of_evaluation_periods. Possible value is integer between 1 and 6.
 	// +kubebuilder:validation:Optional
-	MinimumFailingPeriodsToTriggerAlert *float64 `json:"minimumFailingPeriodsToTriggerAlert,omitempty" tf:"minimum_failing_periods_to_trigger_alert,omitempty"`
+	MinimumFailingPeriodsToTriggerAlert *float64 `json:"minimumFailingPeriodsToTriggerAlert" tf:"minimum_failing_periods_to_trigger_alert,omitempty"`
 
 	// Specifies the number of aggregated look-back points. The look-back time window is calculated based on the aggregation granularity window_duration and the selected number of aggregated points. Possible value is integer between 1 and 6.
 	// +kubebuilder:validation:Optional
-	NumberOfEvaluationPeriods *float64 `json:"numberOfEvaluationPeriods,omitempty" tf:"number_of_evaluation_periods,omitempty"`
+	NumberOfEvaluationPeriods *float64 `json:"numberOfEvaluationPeriods" tf:"number_of_evaluation_periods,omitempty"`
 }
 
 type MonitorScheduledQueryRulesAlertV2ActionInitParameters struct {
@@ -180,11 +180,11 @@ type MonitorScheduledQueryRulesAlertV2CriteriaParameters struct {
 
 	// Specifies the criteria operator. Possible values are Equal, GreaterThan, GreaterThanOrEqual, LessThan,and LessThanOrEqual.
 	// +kubebuilder:validation:Optional
-	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
+	Operator *string `json:"operator" tf:"operator,omitempty"`
 
 	// The query to run on logs. The results returned by this query are used to populate the alert.
 	// +kubebuilder:validation:Optional
-	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+	Query *string `json:"query" tf:"query,omitempty"`
 
 	// Specifies the column containing the resource ID. The content of the column must be an uri formatted as resource ID.
 	// +kubebuilder:validation:Optional
@@ -192,11 +192,11 @@ type MonitorScheduledQueryRulesAlertV2CriteriaParameters struct {
 
 	// Specifies the criteria threshold value that activates the alert.
 	// +kubebuilder:validation:Optional
-	Threshold *float64 `json:"threshold,omitempty" tf:"threshold,omitempty"`
+	Threshold *float64 `json:"threshold" tf:"threshold,omitempty"`
 
 	// The type of aggregation to apply to the data points in aggregation granularity. Possible values are Average, Count, Maximum, Minimum,and Total.
 	// +kubebuilder:validation:Optional
-	TimeAggregationMethod *string `json:"timeAggregationMethod,omitempty" tf:"time_aggregation_method,omitempty"`
+	TimeAggregationMethod *string `json:"timeAggregationMethod" tf:"time_aggregation_method,omitempty"`
 }
 
 type MonitorScheduledQueryRulesAlertV2InitParameters struct {

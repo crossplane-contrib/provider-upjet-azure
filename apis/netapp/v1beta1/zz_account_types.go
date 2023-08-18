@@ -111,11 +111,11 @@ type ActiveDirectoryParameters struct {
 
 	// A list of DNS server IP addresses for the Active Directory domain. Only allows IPv4 address.
 	// +kubebuilder:validation:Optional
-	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
+	DNSServers []*string `json:"dnsServers" tf:"dns_servers,omitempty"`
 
 	// The name of the Active Directory domain.
 	// +kubebuilder:validation:Optional
-	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
+	Domain *string `json:"domain" tf:"domain,omitempty"`
 
 	// The Organizational Unit (OU) within the Active Directory Domain.
 	// +kubebuilder:validation:Optional
@@ -127,11 +127,11 @@ type ActiveDirectoryParameters struct {
 
 	// The NetBIOS name which should be used for the NetApp SMB Server, which will be registered as a computer account in the AD and used to mount volumes.
 	// +kubebuilder:validation:Optional
-	SMBServerName *string `json:"smbServerName,omitempty" tf:"smb_server_name,omitempty"`
+	SMBServerName *string `json:"smbServerName" tf:"smb_server_name,omitempty"`
 
 	// The Username of Active Directory Domain Administrator.
 	// +kubebuilder:validation:Optional
-	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+	Username *string `json:"username" tf:"username,omitempty"`
 }
 
 // AccountSpec defines the desired state of Account

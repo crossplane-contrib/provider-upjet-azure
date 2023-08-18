@@ -340,11 +340,11 @@ type ImportParameters struct {
 
 	// The format of the content from which the API Definition should be imported. Possible values are: openapi, openapi+json, openapi+json-link, openapi-link, swagger-json, swagger-link-json, wadl-link-json, wadl-xml, wsdl and wsdl-link.
 	// +kubebuilder:validation:Optional
-	ContentFormat *string `json:"contentFormat,omitempty" tf:"content_format,omitempty"`
+	ContentFormat *string `json:"contentFormat" tf:"content_format,omitempty"`
 
 	// The Content from which the API Definition should be imported. When a content_format of *-link-* is specified this must be a URL, otherwise this must be defined inline.
 	// +kubebuilder:validation:Optional
-	ContentValue *string `json:"contentValue,omitempty" tf:"content_value,omitempty"`
+	ContentValue *string `json:"contentValue" tf:"content_value,omitempty"`
 
 	// A wsdl_selector block as defined below, which allows you to limit the import of a WSDL to only a subset of the document. This can only be specified when content_format is wsdl or wsdl-link.
 	// +kubebuilder:validation:Optional
@@ -402,7 +402,7 @@ type Oauth2AuthorizationParameters struct {
 
 	// OAuth authorization server identifier. The name of an OAuth2 Authorization Server.
 	// +kubebuilder:validation:Optional
-	AuthorizationServerName *string `json:"authorizationServerName,omitempty" tf:"authorization_server_name,omitempty"`
+	AuthorizationServerName *string `json:"authorizationServerName" tf:"authorization_server_name,omitempty"`
 
 	// Operations scope.
 	// +kubebuilder:validation:Optional
@@ -435,7 +435,7 @@ type OpenIDAuthenticationParameters struct {
 
 	// OpenID Connect provider identifier. The name of an OpenID Connect Provider.
 	// +kubebuilder:validation:Optional
-	OpenIDProviderName *string `json:"openidProviderName,omitempty" tf:"openid_provider_name,omitempty"`
+	OpenIDProviderName *string `json:"openidProviderName" tf:"openid_provider_name,omitempty"`
 }
 
 type SubscriptionKeyParameterNamesInitParameters struct {
@@ -460,11 +460,11 @@ type SubscriptionKeyParameterNamesParameters struct {
 
 	// The name of the HTTP Header which should be used for the Subscription Key.
 	// +kubebuilder:validation:Optional
-	Header *string `json:"header,omitempty" tf:"header,omitempty"`
+	Header *string `json:"header" tf:"header,omitempty"`
 
 	// The name of the QueryString parameter which should be used for the Subscription Key.
 	// +kubebuilder:validation:Optional
-	Query *string `json:"query,omitempty" tf:"query,omitempty"`
+	Query *string `json:"query" tf:"query,omitempty"`
 }
 
 type WsdlSelectorInitParameters struct {
@@ -489,11 +489,11 @@ type WsdlSelectorParameters struct {
 
 	// The name of endpoint (port) to import from WSDL.
 	// +kubebuilder:validation:Optional
-	EndpointName *string `json:"endpointName,omitempty" tf:"endpoint_name,omitempty"`
+	EndpointName *string `json:"endpointName" tf:"endpoint_name,omitempty"`
 
 	// The name of service to import from WSDL.
 	// +kubebuilder:validation:Optional
-	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
+	ServiceName *string `json:"serviceName" tf:"service_name,omitempty"`
 }
 
 // APISpec defines the desired state of API

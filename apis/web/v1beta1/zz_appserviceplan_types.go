@@ -176,11 +176,11 @@ type SkuParameters struct {
 
 	// Specifies the plan's instance size.
 	// +kubebuilder:validation:Optional
-	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+	Size *string `json:"size" tf:"size,omitempty"`
 
 	// Specifies the plan's pricing tier.
 	// +kubebuilder:validation:Optional
-	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+	Tier *string `json:"tier" tf:"tier,omitempty"`
 }
 
 // AppServicePlanSpec defines the desired state of AppServicePlan

@@ -189,7 +189,7 @@ type ContentParameters struct {
 
 	// A string value containing the content to match on.
 	// +kubebuilder:validation:Optional
-	ContentMatch *string `json:"contentMatch,omitempty" tf:"content_match,omitempty"`
+	ContentMatch *string `json:"contentMatch" tf:"content_match,omitempty"`
 
 	// Ignore the casing in the content_match value.
 	// +kubebuilder:validation:Optional
@@ -222,11 +222,11 @@ type HeaderParameters struct {
 
 	// The name which should be used for this Application Insights Standard WebTest. Changing this forces a new Application Insights Standard WebTest to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value which should be used for a header in the request.
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 type RequestInitParameters struct {
@@ -295,7 +295,7 @@ type RequestParameters struct {
 
 	// The WebTest request URL.
 	// +kubebuilder:validation:Optional
-	URL *string `json:"url,omitempty" tf:"url,omitempty"`
+	URL *string `json:"url" tf:"url,omitempty"`
 }
 
 type ValidationRulesInitParameters struct {

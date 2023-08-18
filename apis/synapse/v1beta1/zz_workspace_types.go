@@ -104,11 +104,11 @@ type AzureDevopsRepoParameters struct {
 
 	// Specifies the Azure DevOps account name.
 	// +kubebuilder:validation:Optional
-	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
 
 	// Specifies the collaboration branch of the repository to get code from.
 	// +kubebuilder:validation:Optional
-	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
+	BranchName *string `json:"branchName" tf:"branch_name,omitempty"`
 
 	// The last commit ID.
 	// +kubebuilder:validation:Optional
@@ -116,15 +116,15 @@ type AzureDevopsRepoParameters struct {
 
 	// Specifies the name of the Azure DevOps project.
 	// +kubebuilder:validation:Optional
-	ProjectName *string `json:"projectName,omitempty" tf:"project_name,omitempty"`
+	ProjectName *string `json:"projectName" tf:"project_name,omitempty"`
 
 	// Specifies the name of the git repository.
 	// +kubebuilder:validation:Optional
-	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+	RepositoryName *string `json:"repositoryName" tf:"repository_name,omitempty"`
 
 	// Specifies the root folder within the repository. Set to / for the top level.
 	// +kubebuilder:validation:Optional
-	RootFolder *string `json:"rootFolder,omitempty" tf:"root_folder,omitempty"`
+	RootFolder *string `json:"rootFolder" tf:"root_folder,omitempty"`
 
 	// the ID of the tenant for the Azure DevOps account.
 	// +kubebuilder:validation:Optional
@@ -213,11 +213,11 @@ type GithubRepoParameters struct {
 
 	// Specifies the GitHub account name.
 	// +kubebuilder:validation:Optional
-	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+	AccountName *string `json:"accountName" tf:"account_name,omitempty"`
 
 	// Specifies the collaboration branch of the repository to get code from.
 	// +kubebuilder:validation:Optional
-	BranchName *string `json:"branchName,omitempty" tf:"branch_name,omitempty"`
+	BranchName *string `json:"branchName" tf:"branch_name,omitempty"`
 
 	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com.
 	// +kubebuilder:validation:Optional
@@ -229,11 +229,11 @@ type GithubRepoParameters struct {
 
 	// Specifies the name of the git repository.
 	// +kubebuilder:validation:Optional
-	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
+	RepositoryName *string `json:"repositoryName" tf:"repository_name,omitempty"`
 
 	// Specifies the root folder within the repository. Set to / for the top level.
 	// +kubebuilder:validation:Optional
-	RootFolder *string `json:"rootFolder,omitempty" tf:"root_folder,omitempty"`
+	RootFolder *string `json:"rootFolder" tf:"root_folder,omitempty"`
 }
 
 type IdentityInitParameters struct {
@@ -268,7 +268,7 @@ type IdentityParameters struct {
 
 	// Specifies the type of Managed Service Identity that should be associated with this Synapse Workspace. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
-	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 type SQLAADAdminInitParameters struct {

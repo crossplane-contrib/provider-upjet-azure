@@ -39,7 +39,7 @@ type BuildPackGroupParameters struct {
 
 	// The name which should be used for this build pack group.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type SpringCloudBuilderInitParameters struct {
@@ -123,11 +123,11 @@ type StackParameters struct {
 
 	// Specifies the ID of the ClusterStack.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 
 	// Specifies the version of the ClusterStack
 	// +kubebuilder:validation:Optional
-	Version *string `json:"version,omitempty" tf:"version,omitempty"`
+	Version *string `json:"version" tf:"version,omitempty"`
 }
 
 // SpringCloudBuilderSpec defines the desired state of SpringCloudBuilder

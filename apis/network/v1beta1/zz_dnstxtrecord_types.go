@@ -106,7 +106,7 @@ type DNSTXTRecordRecordParameters struct {
 
 	// The value of the record. Max length: 1024 characters
 	// +kubebuilder:validation:Optional
-	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+	Value *string `json:"value" tf:"value,omitempty"`
 }
 
 // DNSTXTRecordSpec defines the desired state of DNSTXTRecord

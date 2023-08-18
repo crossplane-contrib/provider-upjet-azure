@@ -41,15 +41,15 @@ type ACLAccessPolicyParameters struct {
 
 	// The ISO8061 UTC time at which this Access Policy should be valid until.
 	// +kubebuilder:validation:Optional
-	Expiry *string `json:"expiry,omitempty" tf:"expiry,omitempty"`
+	Expiry *string `json:"expiry" tf:"expiry,omitempty"`
 
 	// The permissions which should associated with this Shared Identifier.
 	// +kubebuilder:validation:Optional
-	Permissions *string `json:"permissions,omitempty" tf:"permissions,omitempty"`
+	Permissions *string `json:"permissions" tf:"permissions,omitempty"`
 
 	// The ISO8061 UTC time at which this Access Policy should be valid from.
 	// +kubebuilder:validation:Optional
-	Start *string `json:"start,omitempty" tf:"start,omitempty"`
+	Start *string `json:"start" tf:"start,omitempty"`
 }
 
 type TableACLInitParameters struct {
@@ -78,7 +78,7 @@ type TableACLParameters struct {
 
 	// The ID which should be used for this Shared Identifier.
 	// +kubebuilder:validation:Optional
-	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+	ID *string `json:"id" tf:"id,omitempty"`
 }
 
 type TableInitParameters struct {

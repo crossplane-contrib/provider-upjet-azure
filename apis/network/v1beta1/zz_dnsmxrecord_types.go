@@ -112,11 +112,11 @@ type DNSMXRecordRecordParameters struct {
 
 	// The mail server responsible for the domain covered by the MX record.
 	// +kubebuilder:validation:Optional
-	Exchange *string `json:"exchange,omitempty" tf:"exchange,omitempty"`
+	Exchange *string `json:"exchange" tf:"exchange,omitempty"`
 
 	// String representing the "preference” value of the MX records. Records with lower preference value take priority.
 	// +kubebuilder:validation:Optional
-	Preference *string `json:"preference,omitempty" tf:"preference,omitempty"`
+	Preference *string `json:"preference" tf:"preference,omitempty"`
 }
 
 // DNSMXRecordSpec defines the desired state of DNSMXRecord

@@ -94,11 +94,11 @@ type SkuParameters struct {
 
 	// Specifies the number of instances to be reserved. It must be a positive integer and not exceed the quota in the subscription.
 	// +kubebuilder:validation:Optional
-	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
+	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
 
 	// Name of the sku, such as Standard_F2. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 // CapacityReservationSpec defines the desired state of CapacityReservation
