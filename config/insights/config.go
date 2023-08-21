@@ -46,4 +46,10 @@ func Configure(p *config.Provider) {
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+	p.AddResourceConfigurator("azurerm_monitor_diagnostic_setting", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			// log is deprecated in favour of the enabled_log property and will be removed in version 4.0 of the AzureRM Provider.
+			IgnoredFields: []string{"log", "enabled_log"},
+		}
+	})
 }
