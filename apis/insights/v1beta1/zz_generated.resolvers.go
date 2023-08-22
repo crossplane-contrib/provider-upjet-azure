@@ -12,6 +12,7 @@ import (
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta13 "github.com/upbound/provider-azure/apis/compute/v1beta1"
 	v1beta14 "github.com/upbound/provider-azure/apis/eventhub/v1beta1"
+	v1beta15 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
 	v1beta11 "github.com/upbound/provider-azure/apis/operationalinsights/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	v1beta12 "github.com/upbound/provider-azure/apis/storage/v1beta1"
@@ -639,6 +640,48 @@ func (mg *MonitorDataCollectionRuleAssociation) ResolveReferences(ctx context.Co
 		To: reference.To{
 			List:    &v1beta13.LinuxVirtualMachineList{},
 			Managed: &v1beta13.LinuxVirtualMachine{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TargetResourceID")
+	}
+	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &v1beta12.AccountList{},
+			Managed: &v1beta12.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountID")
+	}
+	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.TargetResourceIDRef,
+		Selector:     mg.Spec.ForProvider.TargetResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta15.VaultList{},
+			Managed: &v1beta15.Vault{},
 		},
 	})
 	if err != nil {
