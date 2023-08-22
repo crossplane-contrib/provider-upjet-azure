@@ -226,6 +226,9 @@ type MonitorDiagnosticSettingInitParameters struct {
 
 	// The ID of the market partner solution where Diagnostics Data should be sent. For potential partner integrations, click to learn more about partner integration.
 	PartnerSolutionID *string `json:"partnerSolutionId,omitempty" tf:"partner_solution_id,omitempty"`
+
+	// The ID of an existing Resource on which to configure Diagnostic Settings. Changing this forces a new resource to be created.
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }
 
 type MonitorDiagnosticSettingObservation struct {
@@ -320,18 +323,8 @@ type MonitorDiagnosticSettingParameters struct {
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// The ID of an existing Resource on which to configure Diagnostic Settings. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Vault
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
-
-	// Reference to a Vault in keyvault to populate targetResourceId.
-	// +kubebuilder:validation:Optional
-	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
-
-	// Selector for a Vault in keyvault to populate targetResourceId.
-	// +kubebuilder:validation:Optional
-	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type RetentionPolicyInitParameters struct {
@@ -400,6 +393,7 @@ type MonitorDiagnosticSetting struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetResourceId) || has(self.initProvider.targetResourceId)",message="targetResourceId is a required parameter"
 	Spec   MonitorDiagnosticSettingSpec   `json:"spec"`
 	Status MonitorDiagnosticSettingStatus `json:"status,omitempty"`
 }

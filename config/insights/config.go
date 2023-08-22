@@ -51,5 +51,7 @@ func Configure(p *config.Provider) {
 			// log is deprecated in favour of the enabled_log property and will be removed in version 4.0 of the AzureRM Provider.
 			IgnoredFields: []string{"log", "enabled_log"},
 		}
+		// target_resource_id references several different types, terraform example auto configures this to only keyvault type
+		delete(r.References, "target_resource_id")
 	})
 }
