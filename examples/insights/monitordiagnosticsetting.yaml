@@ -5,7 +5,7 @@ metadata:
     meta.upbound.io/example-id: insights/v1beta1/monitordiagnosticsetting
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: monitor
 spec:
   forProvider:
     enabledLog:
@@ -16,7 +16,7 @@ spec:
     - category: AllMetrics
       retentionPolicy:
       - enabled: false
-    name: example
+    name: monitor
     storageAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -33,7 +33,7 @@ metadata:
     meta.upbound.io/example-id: insights/v1beta1/monitordiagnosticsetting
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: monitor
 spec:
   forProvider:
     location: West Europe
@@ -54,7 +54,7 @@ metadata:
     meta.upbound.io/example-id: insights/v1beta1/monitordiagnosticsetting
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: monitor
 spec:
   forProvider:
     location: West Europe
@@ -68,7 +68,7 @@ metadata:
     meta.upbound.io/example-id: insights/v1beta1/monitordiagnosticsetting
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: monitor
 spec:
   forProvider:
     accountReplicationType: LRS
