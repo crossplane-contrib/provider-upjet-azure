@@ -20,7 +20,7 @@ spec:
     storageAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: insightsmds
-    targetResourceId: ${azurerm_key_vault.insightsmds.id}
+    targetResourceId: "${data.azurerm_client_config.current.subscription_resource_id}/resourceGroups/insightsmds/providers/Microsoft.KeyVault/vaults/insightsmds"
 
 ---
 
