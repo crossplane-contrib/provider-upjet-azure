@@ -158,11 +158,11 @@ type VirtualMachineExtensionProtectedSettingsFromKeyVaultParameters struct {
 
 	// The URL to the Key Vault Secret which stores the protected settings.
 	// +kubebuilder:validation:Optional
-	SecretURL *string `json:"secretUrl,omitempty" tf:"secret_url,omitempty"`
+	SecretURL *string `json:"secretUrl" tf:"secret_url,omitempty"`
 
 	// The ID of the source Key Vault.
 	// +kubebuilder:validation:Optional
-	SourceVaultID *string `json:"sourceVaultId,omitempty" tf:"source_vault_id,omitempty"`
+	SourceVaultID *string `json:"sourceVaultId" tf:"source_vault_id,omitempty"`
 }
 
 // VirtualMachineExtensionSpec defines the desired state of VirtualMachineExtension
