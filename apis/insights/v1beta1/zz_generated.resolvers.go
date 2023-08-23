@@ -650,6 +650,32 @@ func (mg *MonitorDataCollectionRuleAssociation) ResolveReferences(ctx context.Co
 	return nil
 }
 
+// ResolveReferences of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.ForProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &v1beta12.AccountList{},
+			Managed: &v1beta12.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountID")
+	}
+	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this MonitorMetricAlert.
 func (mg *MonitorMetricAlert) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

@@ -441,6 +441,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_application_insights_standard_web_test": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Insights/webTests/{{ .external_name }}"),
 	// logic
 	"azurerm_integration_service_environment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Logic/integrationServiceEnvironments/{{ .external_name }}"),
+	// Diagnostic Settings can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.KeyVault/vaults/vault1|logMonitoring1
+	"azurerm_monitor_diagnostic_setting": config.IdentifierFromProvider,
 
 	// management
 	// /providers/Microsoft.Management/managementGroups/group1

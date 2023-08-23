@@ -346,6 +346,7 @@ import (
 	monitordatacollectionendpoint "github.com/upbound/provider-azure/internal/controller/insights/monitordatacollectionendpoint"
 	monitordatacollectionrule "github.com/upbound/provider-azure/internal/controller/insights/monitordatacollectionrule"
 	monitordatacollectionruleassociation "github.com/upbound/provider-azure/internal/controller/insights/monitordatacollectionruleassociation"
+	monitordiagnosticsetting "github.com/upbound/provider-azure/internal/controller/insights/monitordiagnosticsetting"
 	monitormetricalert "github.com/upbound/provider-azure/internal/controller/insights/monitormetricalert"
 	monitorprivatelinkscope "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscope"
 	monitorprivatelinkscopedservice "github.com/upbound/provider-azure/internal/controller/insights/monitorprivatelinkscopedservice"
@@ -1065,6 +1066,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		monitordatacollectionendpoint.Setup,
 		monitordatacollectionrule.Setup,
 		monitordatacollectionruleassociation.Setup,
+		monitordiagnosticsetting.Setup,
 		monitormetricalert.Setup,
 		monitorprivatelinkscope.Setup,
 		monitorprivatelinkscopedservice.Setup,

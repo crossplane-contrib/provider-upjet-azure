@@ -1071,6 +1071,82 @@ func (mg *MonitorDataCollectionRuleAssociation) SetWriteConnectionSecretToRefere
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+/*
+GetProviderReference of this MonitorDiagnosticSetting.
+Deprecated: Use GetProviderConfigReference.
+*/
+func (mg *MonitorDiagnosticSetting) GetProviderReference() *xpv1.Reference {
+	return mg.Spec.ProviderReference
+}
+
+// GetPublishConnectionDetailsTo of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+/*
+SetProviderReference of this MonitorDiagnosticSetting.
+Deprecated: Use SetProviderConfigReference.
+*/
+func (mg *MonitorDiagnosticSetting) SetProviderReference(r *xpv1.Reference) {
+	mg.Spec.ProviderReference = r
+}
+
+// SetPublishConnectionDetailsTo of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this MonitorDiagnosticSetting.
+func (mg *MonitorDiagnosticSetting) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this MonitorMetricAlert.
 func (mg *MonitorMetricAlert) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
