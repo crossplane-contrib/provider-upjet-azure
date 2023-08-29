@@ -1,4 +1,26 @@
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServerActiveDirectoryAdministrator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserveractivedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    principalName: example-sp
+    principalType: ServicePrincipal
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-flexible-server-pg
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: FlexibleServerConfiguration
 metadata:
   labels:

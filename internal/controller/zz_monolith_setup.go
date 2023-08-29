@@ -275,6 +275,7 @@ import (
 	databasedbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/database"
 	firewallruledbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/firewallrule"
 	flexibleserverdbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserver"
+	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserveractivedirectoryadministrator"
 	flexibleserverconfigurationdbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserverconfiguration"
 	flexibleserverdatabase "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserverdatabase"
 	flexibleserverfirewallruledbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserverfirewallrule"
@@ -995,6 +996,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		databasedbforpostgresql.Setup,
 		firewallruledbforpostgresql.Setup,
 		flexibleserverdbforpostgresql.Setup,
+		flexibleserveractivedirectoryadministrator.Setup,
 		flexibleserverconfigurationdbforpostgresql.Setup,
 		flexibleserverdatabase.Setup,
 		flexibleserverfirewallruledbforpostgresql.Setup,
