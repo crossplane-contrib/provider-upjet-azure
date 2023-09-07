@@ -67,6 +67,12 @@ func Configure(p *config.Provider) {
 		}
 	})
 
+	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_active_directory_administrator", func(r *config.Resource) {
+		r.References["server_name"] = config.Reference{
+			Type: "FlexibleServer",
+		}
+	})
+
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_database", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
 			Type:      "FlexibleServer",

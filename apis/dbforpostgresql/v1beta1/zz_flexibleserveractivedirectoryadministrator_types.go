@@ -30,6 +30,9 @@ type FlexibleServerActiveDirectoryAdministratorObservation struct {
 	// The ID of the PostgreSQL Flexible Server Active Directory Administrator.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The object ID of a user, service principal or security group in the Azure Active Directory tenant set as the Flexible Server Admin. Changing this forces a new resource to be created.
+	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
+
 	// The name of Azure Active Directory principal. Changing this forces a new resource to be created.
 	PrincipalName *string `json:"principalName,omitempty" tf:"principal_name,omitempty"`
 
@@ -47,6 +50,10 @@ type FlexibleServerActiveDirectoryAdministratorObservation struct {
 }
 
 type FlexibleServerActiveDirectoryAdministratorParameters struct {
+
+	// The object ID of a user, service principal or security group in the Azure Active Directory tenant set as the Flexible Server Admin. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Required
+	ObjectID *string `json:"objectId" tf:"object_id,omitempty"`
 
 	// The name of Azure Active Directory principal. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -70,15 +77,15 @@ type FlexibleServerActiveDirectoryAdministratorParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the PostgreSQL Flexible Server on which to set the administrator. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbforpostgresql/v1beta1.Server
+	// +crossplane:generate:reference:type=FlexibleServer
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// Reference to a Server in dbforpostgresql to populate serverName.
+	// Reference to a FlexibleServer to populate serverName.
 	// +kubebuilder:validation:Optional
 	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
 
-	// Selector for a Server in dbforpostgresql to populate serverName.
+	// Selector for a FlexibleServer to populate serverName.
 	// +kubebuilder:validation:Optional
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 

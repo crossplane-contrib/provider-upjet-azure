@@ -272,8 +272,8 @@ func (mg *FlexibleServerActiveDirectoryAdministrator) ResolveReferences(ctx cont
 		Reference:    mg.Spec.ForProvider.ServerNameRef,
 		Selector:     mg.Spec.ForProvider.ServerNameSelector,
 		To: reference.To{
-			List:    &ServerList{},
-			Managed: &Server{},
+			List:    &FlexibleServerList{},
+			Managed: &FlexibleServer{},
 		},
 	})
 	if err != nil {

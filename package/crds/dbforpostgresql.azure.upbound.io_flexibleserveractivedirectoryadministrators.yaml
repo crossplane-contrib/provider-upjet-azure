@@ -69,6 +69,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  objectId:
+                    description: The object ID of a user, service principal or security
+                      group in the Azure Active Directory tenant set as the Flexible
+                      Server Admin. Changing this forces a new resource to be created.
+                    type: string
                   principalName:
                     description: The name of Azure Active Directory principal. Changing
                       this forces a new resource to be created.
@@ -163,8 +168,7 @@ spec:
                       to be created.
                     type: string
                   serverNameRef:
-                    description: Reference to a Server in dbforpostgresql to populate
-                      serverName.
+                    description: Reference to a FlexibleServer to populate serverName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -198,8 +202,7 @@ spec:
                     - name
                     type: object
                   serverNameSelector:
-                    description: Selector for a Server in dbforpostgresql to populate
-                      serverName.
+                    description: Selector for a FlexibleServer to populate serverName.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -241,6 +244,8 @@ spec:
                     description: The Azure Tenant ID. Changing this forces a new resource
                       to be created.
                     type: string
+                required:
+                - objectId
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.
@@ -488,6 +493,11 @@ spec:
                   id:
                     description: The ID of the PostgreSQL Flexible Server Active Directory
                       Administrator.
+                    type: string
+                  objectId:
+                    description: The object ID of a user, service principal or security
+                      group in the Azure Active Directory tenant set as the Flexible
+                      Server Admin. Changing this forces a new resource to be created.
                     type: string
                   principalName:
                     description: The name of Azure Active Directory principal. Changing

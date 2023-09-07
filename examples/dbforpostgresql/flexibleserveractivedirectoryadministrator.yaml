@@ -9,7 +9,7 @@ metadata:
 spec:
   forProvider:
     objectId: ${data.azurerm_client_config.current.object_id}
-    principalName: example-sp
+    principalName: official-provider-testing
     principalType: ServicePrincipal
     resourceGroupNameSelector:
       matchLabels:
@@ -28,11 +28,14 @@ metadata:
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserveractivedirectoryadministrator
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-flex-server-ad-admin-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    administrator_login_password: 4-v3ry-53cr37-p455w0rd
-    administratorLogin: 4dm1n157r470r
+    administratorLogin: psqladmin
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
     authentication:
     - activeDirectoryAuthEnabled: true
       tenantId: ${data.azurerm_client_config.current.tenant_id}
@@ -42,7 +45,7 @@ spec:
         testing.upbound.io/example-name: example
     skuName: GP_Standard_D2s_v3
     version: "12"
-    zone: "2"
+    storageMb: 32768
 
 ---
 
@@ -53,7 +56,18 @@ metadata:
     meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserveractivedirectoryadministrator
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-flex-server-ad-admin-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
+
+---
+
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
