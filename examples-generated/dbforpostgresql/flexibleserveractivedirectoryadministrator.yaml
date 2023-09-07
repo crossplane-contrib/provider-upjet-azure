@@ -1,0 +1,59 @@
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServerActiveDirectoryAdministrator
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserveractivedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    objectId: ${data.azurerm_client_config.current.object_id}
+    principalName: example-sp
+    principalType: ServicePrincipal
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
+kind: FlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserveractivedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administrator_login_password: 4-v3ry-53cr37-p455w0rd
+    administratorLogin: 4dm1n157r470r
+    authentication:
+    - activeDirectoryAuthEnabled: true
+      tenantId: ${data.azurerm_client_config.current.tenant_id}
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: GP_Standard_D2s_v3
+    version: "12"
+    zone: "2"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/flexibleserveractivedirectoryadministrator
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

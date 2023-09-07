@@ -14,6 +14,7 @@ import (
 	database "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/database"
 	firewallrule "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/firewallrule"
 	flexibleserver "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserver"
+	flexibleserveractivedirectoryadministrator "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserveractivedirectoryadministrator"
 	flexibleserverconfiguration "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserverconfiguration"
 	flexibleserverdatabase "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserverdatabase"
 	flexibleserverfirewallrule "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/flexibleserverfirewallrule"
@@ -31,6 +32,7 @@ func Setup_dbforpostgresql(mgr ctrl.Manager, o controller.Options) error {
 		database.Setup,
 		firewallrule.Setup,
 		flexibleserver.Setup,
+		flexibleserveractivedirectoryadministrator.Setup,
 		flexibleserverconfiguration.Setup,
 		flexibleserverdatabase.Setup,
 		flexibleserverfirewallrule.Setup,
