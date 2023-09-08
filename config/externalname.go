@@ -1860,8 +1860,18 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
 	e := config.NameAsIdentifier
-	e.GetExternalNameFn = getResourceNameFromIDURLFn(2)
-	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+	e.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
+		base["name"] = strings.Split(externalName, "/")[0]
+	}
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("cannot get id")
+		}
+		words := strings.Split(id.(string), "/")
+		return fmt.Sprintf("%s/%s", words[len(words)-2], words[len(words)-1]), nil
+	}
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
 		keyVaultID, ok := parameters["key_vault_id"]
 		if !ok {
 			return "", errors.New("cannot get key_vault_id")
@@ -1869,18 +1879,14 @@ func keyVaultURLIDConf(resourceType string) config.ExternalName {
 		words := strings.Split(keyVaultID.(string), "/")
 		keyVaultName := words[len(words)-1]
 
-		name, ok := parameters["name"]
-		if !ok {
-			return "", errors.New("cannot get name")
+		if len(externalName) == 0 || len(strings.Split(externalName, "/")) < 2 {
+			if parameters["version"] == nil || parameters["version"] == "" {
+				return "", nil
+			}
 		}
 
-		version, ok := parameters["version"]
-		if !ok {
-			return "", nil
-		}
-
-		return fmt.Sprintf("https://%s.vault.azure.net/%s/%s/%s",
-			keyVaultName, resourceType, name, version), nil
+		return fmt.Sprintf("https://%s.vault.azure.net/%s/%s",
+			keyVaultName, resourceType, externalName), nil
 	}
 	return e
 }
