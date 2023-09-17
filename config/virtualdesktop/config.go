@@ -25,6 +25,5 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_host_pool", func(r *config.Resource) {
 		r.Kind = "VirtualDesktopHostPool"
-		r.ExternalName = config.NameAsIdentifier
 	})
 }
