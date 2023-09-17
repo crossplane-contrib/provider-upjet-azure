@@ -1856,6 +1856,14 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// App Configurations can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroup1/providers/Microsoft.AppConfiguration/configurationStores/appConf1
 	"azurerm_app_configuration": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.AppConfiguration/configurationStores/{{ .external_name }}"),
+
+	// virtualdesktophostpool
+	//
+	// Virtual Desktop Host Pool can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup1/providers/Microsoft.DesktopVirtualization/hostPools/myhostpool
+	"azurerm_virtual_desktop_host_pool": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DesktopVirtualization/hostPools/{{ .external_name }}"),
+
+
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
