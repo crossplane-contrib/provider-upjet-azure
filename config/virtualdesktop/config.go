@@ -25,5 +25,22 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_host_pool", func(r *config.Resource) {
 		r.Kind = "VirtualDesktopHostPool"
+
 	})
+
+	p.AddResourceConfigurator("azurerm_virtual_desktop_host_pool_registration_info", func(r *config.Resource) {
+		r.Kind = "VirtualDesktopHostPoolRegistrationInfo"
+
+	})
+
+	p.AddResourceConfigurator("azurerm_virtual_desktop_application_group", func(r *config.Resource) {
+		r.Kind = "VirtualDesktopApplicationGroup"
+
+	})
+
+	// p.AddResourceConfigurator("azurerm_virtual_desktop_host_pool_registration_info", func(r *config.Resource) {
+	// 	r.Kind = "VirtualDesktopWorkspace"
+	// 	r.ShortGroup = "virtualdesktopworkspace"
+	// })
+
 }
