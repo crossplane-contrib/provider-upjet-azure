@@ -60,3 +60,42 @@ metadata:
     hostpoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
+---
+
+
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+kind: VirtualDesktopWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspace
+  labels:
+    testing.upbound.io/example-name: workspace
+  name: workspace
+spec:
+  forProvider:
+    description: A description of my workspace
+    friendlyName: FriendlyName
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+
+---
+
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+kind: VirtualDesktopWorkspaceApplicationGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/virtualdesktopworkspaceapplicationgroupassociation
+  labels:
+    testing.upbound.io/example-name: workspaceremoteapp
+  name: workspaceremoteapp
+spec:
+  forProvider:
+    applicationGroupId: ${azurerm_virtual_desktop_application_group.remoteapp.id}
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: workspace
+

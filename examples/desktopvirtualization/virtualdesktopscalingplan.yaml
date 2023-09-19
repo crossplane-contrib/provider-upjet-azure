@@ -1,0 +1,102 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/desktophostpool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "scope is generic and context specific"
+  name: example
+spec:
+  forProvider:
+    principalId: ${data.azurerm_client_config.example.object_id}
+    roleDefinitionName: Reader
+    scope: ${data.azurerm_subscription.primary.id}
+
+---
+
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+kind: VirtualDesktopHostPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/desktophostpool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  forProvider:
+    customRdpProperties: audiocapturemode:i:1;audiomode:i:0;
+    description: 'Acceptance Test: A pooled host pool - pooleddepthfirst'
+    friendlyName: pooleddepthfirst
+    loadBalancerType: DepthFirst
+    location: West Europe
+    maximumSessionsAllowed: 50
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scheduledAgentUpdates:
+    - enabled: true
+      schedule:
+      - dayOfWeek: Saturday
+        hourOfDay: 2
+    startVmOnConnect: true
+    type: Pooled
+    validateEnvironment: true
+
+---
+
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+kind: VirtualDesktopScalingPlan
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/scalingplan
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  forProvider:
+    description: Example Scaling Plan
+    friendlyName: Scaling Plan Example
+    hostPool:
+    - hostpoolIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      scalingPlanEnabled: true
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    schedule:
+    - daysOfWeek:
+      - Monday
+      - Tuesday
+      - Wednesday
+      - Thursday
+      - Friday
+      name: Weekdays
+      offPeakLoadBalancingAlgorithm: DepthFirst
+      offPeakStartTime: "22:00"
+      peakLoadBalancingAlgorithm: BreadthFirst
+      peakStartTime: "09:00"
+      rampDownCapacityThresholdPercent: 5
+      rampDownForceLogoffUsers: false
+      rampDownLoadBalancingAlgorithm: DepthFirst
+      rampDownMinimumHostsPercent: 10
+      rampDownNotificationMessage: Please log off in the next 45 minutes...
+      rampDownStartTime: "19:00"
+      rampDownStopHostsWhen: ZeroSessions
+      rampDownWaitTimeMinutes: 45
+      rampUpCapacityThresholdPercent: 10
+      rampUpLoadBalancingAlgorithm: BreadthFirst
+      rampUpMinimumHostsPercent: 20
+      rampUpStartTime: "05:00"
+    timeZone: GMT Standard Time

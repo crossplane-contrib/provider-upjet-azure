@@ -25,22 +25,36 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_host_pool", func(r *config.Resource) {
 		r.Kind = "VirtualDesktopHostPool"
-
+		r.ShortGroup = "virtualdesktophostpool"
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_host_pool_registration_info", func(r *config.Resource) {
 		r.Kind = "VirtualDesktopHostPoolRegistrationInfo"
-
+		r.ShortGroup = "virtualdesktophostpoolregistrationinfo"
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_application_group", func(r *config.Resource) {
 		r.Kind = "VirtualDesktopApplicationGroup"
-
+		r.ShortGroup = "virtualdesktopapplicationgroup"
 	})
 
-	// p.AddResourceConfigurator("azurerm_virtual_desktop_host_pool_registration_info", func(r *config.Resource) {
-	// 	r.Kind = "VirtualDesktopWorkspace"
-	// 	r.ShortGroup = "virtualdesktopworkspace"
-	// })
+	p.AddResourceConfigurator("azurerm_virtual_desktop_workspace", func(r *config.Resource) {
+		r.Kind = "VirtualDesktopWorkspace"
+		r.ShortGroup = "virtualdesktopworkspace"
+	})
 
+	p.AddResourceConfigurator("azurerm_virtual_desktop_workspace_application_group_association", func(r *config.Resource) {
+		r.Kind = "VirtualDesktopWorkspaceApplicationAssociation"
+		r.ShortGroup = "virtualdesktopworkspaceapplicationassociation"
+	})
+
+	p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
+		r.Kind = "VirtualDesktopApplication"
+		r.ShortGroup = "virtualdesktopapplication"
+	})
+
+	p.AddResourceConfigurator("azurerm_virtual_desktop_scaling_plan", func(r *config.Resource) {
+		r.Kind = "VirtualDesktopScalingPlan"
+		r.ShortGroup = "virtualdesktopscalingplan"
+	})
 }

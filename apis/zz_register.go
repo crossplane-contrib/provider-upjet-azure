@@ -43,6 +43,7 @@ import (
 	v1beta1dbformariadb "github.com/upbound/provider-azure/apis/dbformariadb/v1beta1"
 	v1beta1dbformysql "github.com/upbound/provider-azure/apis/dbformysql/v1beta1"
 	v1beta1dbforpostgresql "github.com/upbound/provider-azure/apis/dbforpostgresql/v1beta1"
+	v1beta1desktopvirtualization "github.com/upbound/provider-azure/apis/desktopvirtualization/v1beta1"
 	v1beta1devices "github.com/upbound/provider-azure/apis/devices/v1beta1"
 	v1beta1deviceupdate "github.com/upbound/provider-azure/apis/deviceupdate/v1beta1"
 	v1beta1devtestlab "github.com/upbound/provider-azure/apis/devtestlab/v1beta1"
@@ -102,6 +103,7 @@ import (
 	v1beta1timeseriesinsights "github.com/upbound/provider-azure/apis/timeseriesinsights/v1beta1"
 	v1alpha1 "github.com/upbound/provider-azure/apis/v1alpha1"
 	v1beta1apis "github.com/upbound/provider-azure/apis/v1beta1"
+	v1beta1virtual "github.com/upbound/provider-azure/apis/virtual/v1beta1"
 	v1beta1web "github.com/upbound/provider-azure/apis/web/v1beta1"
 )
 
@@ -141,6 +143,7 @@ func init() {
 		v1beta1dbformariadb.SchemeBuilder.AddToScheme,
 		v1beta1dbformysql.SchemeBuilder.AddToScheme,
 		v1beta1dbforpostgresql.SchemeBuilder.AddToScheme,
+		v1beta1desktopvirtualization.SchemeBuilder.AddToScheme,
 		v1beta1devices.SchemeBuilder.AddToScheme,
 		v1beta1deviceupdate.SchemeBuilder.AddToScheme,
 		v1beta1devtestlab.SchemeBuilder.AddToScheme,
@@ -200,6 +203,7 @@ func init() {
 		v1beta1timeseriesinsights.SchemeBuilder.AddToScheme,
 		v1alpha1.SchemeBuilder.AddToScheme,
 		v1beta1apis.SchemeBuilder.AddToScheme,
+		v1beta1virtual.SchemeBuilder.AddToScheme,
 		v1beta1web.SchemeBuilder.AddToScheme,
 	)
 }

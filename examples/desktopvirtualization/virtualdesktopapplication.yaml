@@ -10,6 +10,7 @@ spec:
   forProvider:
     location: West Europe
 
+
 ---
 
 apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
@@ -60,3 +61,26 @@ metadata:
     hostpoolIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
+---
+
+apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+kind: VirtualDesktopApplication
+metadata:
+  annotations:
+    meta.upbound.io/example-id: desktopvirtualization/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  forProvider:
+    applicationGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: remoteapp
+    commandLineArgumentPolicy: DoNotAllow
+    commandLineArguments: --incognito
+    description: Chromium based web browser
+    friendlyName: Google Chrome
+    iconIndex: 0
+    iconPath: C:\Program Files\Google\Chrome\Application\chrome.exe
+    path: C:\Program Files\Google\Chrome\Application\chrome.exe
+    showInPortal: false

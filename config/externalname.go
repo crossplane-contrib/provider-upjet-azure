@@ -1868,6 +1868,18 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Virtual Desktop Application Group can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup1/providers/Microsoft.DesktopVirtualization/applicationGroups/myapplicationgroup
 	"azurerm_virtual_desktop_application_group": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DesktopVirtualization/applicationGroups/{{ .external_name }}"),
+	// Virtual Desktop Workspace can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup1/providers/Microsoft.DesktopVirtualization/workspaces/myworkspace
+	"azurerm_virtual_desktop_workspace": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DesktopVirtualization/workspaces/{{ .external_name }}"),
+	// Virtual Desktop Workspace Application Group Association can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup1/providers/Microsoft.DesktopVirtualization/workspaces/myworkspace|/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup1/providers/Microsoft.DesktopVirtualization/applicationGroups/myapplicationgroup
+	"azurerm_virtual_desktop_workspace_application_group_association": config.IdentifierFromProvider,
+	// Virtual Desktop Application can be imported using the resource id
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup1/providers/Microsoft.DesktopVirtualization/applicationGroups/myapplicationgroup/applications/myapplication
+	"azurerm_virtual_desktop_application": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DesktopVirtualization/applicationGroups/{{ .parameters.application_group }}/applications/{{ .external_name }}"),
+	// Virtual Desktop Scaling Plan can be imported using the resource id
+	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.DesktopVirtualization/scalingPlans/plan1
+	"azurerm_virtual_desktop_scaling_plan": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DesktopVirtualization/scalingPlans/{{ .external_name }}"),
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
