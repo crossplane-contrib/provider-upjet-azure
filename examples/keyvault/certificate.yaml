@@ -47,7 +47,7 @@ apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: AccessPolicy
 metadata:
   annotations:
-    meta.upbound.io/example-id: keyvault/v1beta1/certificatecontacts
+    meta.upbound.io/example-id: keyvault/v1beta1/certificate
   labels:
     testing.upbound.io/example-name: example-cert
   name: example-cert
@@ -74,7 +74,7 @@ spec:
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example-cert
-    objectId: ${data.azurerm_client_config.current.object_id}
+    objectId: ${data.azurerm_client_config.service_principal.object_id}
     secretPermissions:
       - Set
     tenantId: ${data.azurerm_client_config.current.tenant_id}

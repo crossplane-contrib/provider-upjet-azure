@@ -3,7 +3,6 @@ kind: Key
 metadata:
   annotations:
     meta.upbound.io/example-id: keyvault/v1beta1/key
-    upjet.upbound.io/manual-intervention: "This resource depends on existing resource(AccessPolicy in this example)"
   labels:
     testing.upbound.io/example-name: example
   name: uptest-${Rand.RFC1123Subdomain}
@@ -32,21 +31,48 @@ apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: AccessPolicy
 metadata:
   annotations:
-    meta.upbound.io/example-id: keyvault/v1beta1/accesspolicy
-    upjet.upbound.io/manual-intervention: "This resource required ID of a user, service principal, or security group for objectId"
+    meta.upbound.io/example-id: keyvault/v1beta1/key
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     keyPermissions:
       - Get
+      - UnwrapKey
+      - WrapKey
+      - Create
+      - Delete
+      - Recover
+      - List
+      - Update
+      - GetRotationPolicy
+      - SetRotationPolicy
+    certificatePermissions:
+      - Create
+      - Delete
+      - DeleteIssuers
+      - Get
+      - GetIssuers
+      - SetIssuers
+      - Import
+      - List
+      - ListIssuers
+      - ManageContacts
+      - ManageIssuers
+      - Purge
+      - SetIssuers
+      - Update
+      - Recover
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    objectId: ${data.azurerm_client_config.current.object_id}
+    objectId: ${data.azurerm_client_config.service_principal.object_id}
     secretPermissions:
       - Get
+      - Set
+      - Delete
+      - Recover
     tenantId: ${data.azurerm_client_config.current.tenant_id}
 
 ---
@@ -55,7 +81,6 @@ kind: Vault
 metadata:
   annotations:
     meta.upbound.io/example-id: keyvault/v1beta1/key
-    upjet.upbound.io/manual-intervention: "This resource is skipping because parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: uptest-${Rand.RFC1123Subdomain}
@@ -75,7 +100,6 @@ kind: ResourceGroup
 metadata:
   annotations:
     meta.upbound.io/example-id: keyvault/v1beta1/key
-    upjet.upbound.io/manual-intervention: "This resource is skipping because parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
   name: uptest-${Rand.RFC1123Subdomain}
