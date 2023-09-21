@@ -41,6 +41,9 @@ func Configure(p *config.Provider) {
 			Type:      "Vault",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"rotation_policy"},
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_certificate", func(r *config.Resource) {

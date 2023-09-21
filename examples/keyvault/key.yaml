@@ -1,27 +1,37 @@
 apiVersion: keyvault.azure.upbound.io/v1beta1
-kind: Secret
+kind: Key
 metadata:
   annotations:
-    meta.upbound.io/example-id: keyvault/v1beta1/secret
+    meta.upbound.io/example-id: keyvault/v1beta1/key
   labels:
     testing.upbound.io/example-name: example
   name: uptest-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
+    keyOpts:
+      - decrypt
+      - encrypt
+      - sign
+      - unwrapKey
+      - verify
+      - wrapKey
+    keySize: 2048
+    keyType: RSA
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    valueSecretRef:
-      key: value
-      name: example-secret
-      namespace: upbound-system
+    rotationPolicy:
+      - automatic:
+          - timeBeforeExpiry: P30D
+        expireAfter: P90D
+        notifyBeforeExpiry: P29D
 
 ---
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: AccessPolicy
 metadata:
   annotations:
-    meta.upbound.io/example-id: keyvault/v1beta1/secret
+    meta.upbound.io/example-id: keyvault/v1beta1/key
   labels:
     testing.upbound.io/example-name: example
   name: example-${Rand.RFC1123Subdomain}
@@ -70,7 +80,7 @@ apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: Vault
 metadata:
   annotations:
-    meta.upbound.io/example-id: keyvault/v1beta1/secret
+    meta.upbound.io/example-id: keyvault/v1beta1/key
   labels:
     testing.upbound.io/example-name: example
   name: uptest-${Rand.RFC1123Subdomain}
@@ -89,20 +99,10 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: keyvault/v1beta1/secret
+    meta.upbound.io/example-id: keyvault/v1beta1/key
   labels:
     testing.upbound.io/example-name: example
-  name: example-keyvault-${Rand.RFC1123Subdomain}
+  name: uptest-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
-
----
-apiVersion: v1
-data:
-  value: dXBib3VuZHJvY2tz
-kind: Secret
-metadata:
-  name: example-secret
-  namespace: upbound-system
-type: Opaque
