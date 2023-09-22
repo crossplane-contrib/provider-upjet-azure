@@ -644,6 +644,32 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	return nil
 }
 
+// ResolveReferences of this VirtualMachineExtension.
+func (mg *VirtualMachineExtension) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
+		To: reference.To{
+			List:    &LinuxVirtualMachineList{},
+			Managed: &LinuxVirtualMachine{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualMachineID")
+	}
+	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this WindowsVirtualMachine.
 func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)

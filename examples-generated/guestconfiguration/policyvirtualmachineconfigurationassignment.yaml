@@ -87,6 +87,26 @@ spec:
 
 ---
 
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: VirtualMachineExtension
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guestconfiguration/v1beta1/policyvirtualmachineconfigurationassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    autoUpgradeMinorVersion: "true"
+    publisher: Microsoft.GuestConfiguration
+    type: ConfigurationforWindows
+    typeHandlerVersion: "1.29"
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
 apiVersion: network.azure.upbound.io/v1beta1
 kind: VirtualNetwork
 metadata:
