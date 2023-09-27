@@ -98,8 +98,8 @@ type ManagedDiskSASTokenStatus struct {
 type ManagedDiskSASToken struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessLevel) || has(self.initProvider.accessLevel)",message="accessLevel is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.durationInSeconds) || has(self.initProvider.durationInSeconds)",message="durationInSeconds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessLevel) || (has(self.initProvider) && has(self.initProvider.accessLevel))",message="spec.forProvider.accessLevel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.durationInSeconds) || (has(self.initProvider) && has(self.initProvider.durationInSeconds))",message="spec.forProvider.durationInSeconds is a required parameter"
 	Spec   ManagedDiskSASTokenSpec   `json:"spec"`
 	Status ManagedDiskSASTokenStatus `json:"status,omitempty"`
 }

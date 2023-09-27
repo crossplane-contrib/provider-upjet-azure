@@ -449,10 +449,10 @@ type MonitorScheduledQueryRulesAlertV2Status struct {
 type MonitorScheduledQueryRulesAlertV2 struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.criteria) || has(self.initProvider.criteria)",message="criteria is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.severity) || has(self.initProvider.severity)",message="severity is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.windowDuration) || has(self.initProvider.windowDuration)",message="windowDuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.criteria) || (has(self.initProvider) && has(self.initProvider.criteria))",message="spec.forProvider.criteria is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.severity) || (has(self.initProvider) && has(self.initProvider.severity))",message="spec.forProvider.severity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.windowDuration) || (has(self.initProvider) && has(self.initProvider.windowDuration))",message="spec.forProvider.windowDuration is a required parameter"
 	Spec   MonitorScheduledQueryRulesAlertV2Spec   `json:"spec"`
 	Status MonitorScheduledQueryRulesAlertV2Status `json:"status,omitempty"`
 }

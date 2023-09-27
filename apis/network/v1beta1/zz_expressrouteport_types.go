@@ -339,10 +339,10 @@ type ExpressRoutePortStatus struct {
 type ExpressRoutePort struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bandwidthInGbps) || has(self.initProvider.bandwidthInGbps)",message="bandwidthInGbps is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.encapsulation) || has(self.initProvider.encapsulation)",message="encapsulation is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peeringLocation) || has(self.initProvider.peeringLocation)",message="peeringLocation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.bandwidthInGbps) || (has(self.initProvider) && has(self.initProvider.bandwidthInGbps))",message="spec.forProvider.bandwidthInGbps is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.encapsulation) || (has(self.initProvider) && has(self.initProvider.encapsulation))",message="spec.forProvider.encapsulation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peeringLocation) || (has(self.initProvider) && has(self.initProvider.peeringLocation))",message="spec.forProvider.peeringLocation is a required parameter"
 	Spec   ExpressRoutePortSpec   `json:"spec"`
 	Status ExpressRoutePortStatus `json:"status,omitempty"`
 }

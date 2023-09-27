@@ -825,7 +825,7 @@ type MonitorActionGroupStatus struct {
 type MonitorActionGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.shortName) || has(self.initProvider.shortName)",message="shortName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.shortName) || (has(self.initProvider) && has(self.initProvider.shortName))",message="spec.forProvider.shortName is a required parameter"
 	Spec   MonitorActionGroupSpec   `json:"spec"`
 	Status MonitorActionGroupStatus `json:"status,omitempty"`
 }

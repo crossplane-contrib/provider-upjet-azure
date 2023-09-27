@@ -71,7 +71,7 @@ type SecurityCenterAutoProvisioningStatus struct {
 type SecurityCenterAutoProvisioning struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.autoProvision) || has(self.initProvider.autoProvision)",message="autoProvision is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.autoProvision) || (has(self.initProvider) && has(self.initProvider.autoProvision))",message="spec.forProvider.autoProvision is a required parameter"
 	Spec   SecurityCenterAutoProvisioningSpec   `json:"spec"`
 	Status SecurityCenterAutoProvisioningStatus `json:"status,omitempty"`
 }

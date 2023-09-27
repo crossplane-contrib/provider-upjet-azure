@@ -101,8 +101,8 @@ type IdentityProviderTwitterStatus struct {
 type IdentityProviderTwitter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.apiKeySecretRef)",message="apiKeySecretRef is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.apiSecretKeySecretRef)",message="apiSecretKeySecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.apiKeySecretRef)",message="spec.forProvider.apiKeySecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.apiSecretKeySecretRef)",message="spec.forProvider.apiSecretKeySecretRef is a required parameter"
 	Spec   IdentityProviderTwitterSpec   `json:"spec"`
 	Status IdentityProviderTwitterStatus `json:"status,omitempty"`
 }

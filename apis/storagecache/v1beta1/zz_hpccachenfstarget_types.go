@@ -172,9 +172,9 @@ type HPCCacheNFSTargetStatus struct {
 type HPCCacheNFSTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespaceJunction) || has(self.initProvider.namespaceJunction)",message="namespaceJunction is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetHostName) || has(self.initProvider.targetHostName)",message="targetHostName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.usageModel) || has(self.initProvider.usageModel)",message="usageModel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespaceJunction) || (has(self.initProvider) && has(self.initProvider.namespaceJunction))",message="spec.forProvider.namespaceJunction is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetHostName) || (has(self.initProvider) && has(self.initProvider.targetHostName))",message="spec.forProvider.targetHostName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.usageModel) || (has(self.initProvider) && has(self.initProvider.usageModel))",message="spec.forProvider.usageModel is a required parameter"
 	Spec   HPCCacheNFSTargetSpec   `json:"spec"`
 	Status HPCCacheNFSTargetStatus `json:"status,omitempty"`
 }

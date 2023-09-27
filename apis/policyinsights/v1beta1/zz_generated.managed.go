@@ -27,14 +27,6 @@ func (mg *ResourcePolicyRemediation) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ResourcePolicyRemediation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ResourcePolicyRemediation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ResourcePolicyRemediation.
 func (mg *ResourcePolicyRemediation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *ResourcePolicyRemediation) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this ResourcePolicyRemediation.
 func (mg *ResourcePolicyRemediation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ResourcePolicyRemediation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ResourcePolicyRemediation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ResourcePolicyRemediation.
@@ -103,14 +87,6 @@ func (mg *SubscriptionPolicyRemediation) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SubscriptionPolicyRemediation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SubscriptionPolicyRemediation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SubscriptionPolicyRemediation.
 func (mg *SubscriptionPolicyRemediation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *SubscriptionPolicyRemediation) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this SubscriptionPolicyRemediation.
 func (mg *SubscriptionPolicyRemediation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SubscriptionPolicyRemediation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SubscriptionPolicyRemediation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SubscriptionPolicyRemediation.

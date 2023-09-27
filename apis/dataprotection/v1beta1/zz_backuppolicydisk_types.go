@@ -176,8 +176,8 @@ type BackupPolicyDiskStatus struct {
 type BackupPolicyDisk struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backupRepeatingTimeIntervals) || has(self.initProvider.backupRepeatingTimeIntervals)",message="backupRepeatingTimeIntervals is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultRetentionDuration) || has(self.initProvider.defaultRetentionDuration)",message="defaultRetentionDuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backupRepeatingTimeIntervals) || (has(self.initProvider) && has(self.initProvider.backupRepeatingTimeIntervals))",message="spec.forProvider.backupRepeatingTimeIntervals is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.defaultRetentionDuration) || (has(self.initProvider) && has(self.initProvider.defaultRetentionDuration))",message="spec.forProvider.defaultRetentionDuration is a required parameter"
 	Spec   BackupPolicyDiskSpec   `json:"spec"`
 	Status BackupPolicyDiskStatus `json:"status,omitempty"`
 }

@@ -98,8 +98,8 @@ type NamespaceSchemaGroupStatus struct {
 type NamespaceSchemaGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schemaCompatibility) || has(self.initProvider.schemaCompatibility)",message="schemaCompatibility is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schemaType) || has(self.initProvider.schemaType)",message="schemaType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schemaCompatibility) || (has(self.initProvider) && has(self.initProvider.schemaCompatibility))",message="spec.forProvider.schemaCompatibility is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schemaType) || (has(self.initProvider) && has(self.initProvider.schemaType))",message="spec.forProvider.schemaType is a required parameter"
 	Spec   NamespaceSchemaGroupSpec   `json:"spec"`
 	Status NamespaceSchemaGroupStatus `json:"status,omitempty"`
 }

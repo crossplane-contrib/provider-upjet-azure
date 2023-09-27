@@ -123,8 +123,8 @@ type RouteStatus struct {
 type Route struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressPrefix) || has(self.initProvider.addressPrefix)",message="addressPrefix is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nextHopType) || has(self.initProvider.nextHopType)",message="nextHopType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressPrefix) || (has(self.initProvider) && has(self.initProvider.addressPrefix))",message="spec.forProvider.addressPrefix is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.nextHopType) || (has(self.initProvider) && has(self.initProvider.nextHopType))",message="spec.forProvider.nextHopType is a required parameter"
 	Spec   RouteSpec   `json:"spec"`
 	Status RouteStatus `json:"status,omitempty"`
 }

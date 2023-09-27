@@ -113,8 +113,8 @@ type RedisFirewallRuleStatus struct {
 type RedisFirewallRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endIp) || has(self.initProvider.endIp)",message="endIp is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.startIp) || has(self.initProvider.startIp)",message="startIp is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endIp) || (has(self.initProvider) && has(self.initProvider.endIp))",message="spec.forProvider.endIp is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.startIp) || (has(self.initProvider) && has(self.initProvider.startIp))",message="spec.forProvider.startIp is a required parameter"
 	Spec   RedisFirewallRuleSpec   `json:"spec"`
 	Status RedisFirewallRuleStatus `json:"status,omitempty"`
 }

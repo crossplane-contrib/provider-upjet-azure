@@ -27,14 +27,6 @@ func (mg *Endpoint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Endpoint.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Endpoint) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Endpoint.
 func (mg *Endpoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Endpoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Endpoint.
 func (mg *Endpoint) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Endpoint.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Endpoint) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Endpoint.
@@ -103,14 +87,6 @@ func (mg *FrontdoorCustomDomain) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this FrontdoorCustomDomain.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *FrontdoorCustomDomain) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this FrontdoorCustomDomain.
 func (mg *FrontdoorCustomDomain) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *FrontdoorCustomDomain) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this FrontdoorCustomDomain.
 func (mg *FrontdoorCustomDomain) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this FrontdoorCustomDomain.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *FrontdoorCustomDomain) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this FrontdoorCustomDomain.
@@ -179,14 +147,6 @@ func (mg *FrontdoorCustomDomainAssociation) GetProviderConfigReference() *xpv1.R
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this FrontdoorCustomDomainAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *FrontdoorCustomDomainAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this FrontdoorCustomDomainAssociation.
 func (mg *FrontdoorCustomDomainAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *FrontdoorCustomDomainAssociation) SetManagementPolicies(r xpv1.Managem
 // SetProviderConfigReference of this FrontdoorCustomDomainAssociation.
 func (mg *FrontdoorCustomDomainAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this FrontdoorCustomDomainAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *FrontdoorCustomDomainAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this FrontdoorCustomDomainAssociation.
@@ -255,14 +207,6 @@ func (mg *FrontdoorEndpoint) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this FrontdoorEndpoint.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *FrontdoorEndpoint) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this FrontdoorEndpoint.
 func (mg *FrontdoorEndpoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *FrontdoorEndpoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this FrontdoorEndpoint.
 func (mg *FrontdoorEndpoint) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this FrontdoorEndpoint.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *FrontdoorEndpoint) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this FrontdoorEndpoint.
@@ -331,14 +267,6 @@ func (mg *FrontdoorOrigin) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this FrontdoorOrigin.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *FrontdoorOrigin) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this FrontdoorOrigin.
 func (mg *FrontdoorOrigin) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *FrontdoorOrigin) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this FrontdoorOrigin.
 func (mg *FrontdoorOrigin) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this FrontdoorOrigin.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *FrontdoorOrigin) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this FrontdoorOrigin.
@@ -407,14 +327,6 @@ func (mg *FrontdoorOriginGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this FrontdoorOriginGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *FrontdoorOriginGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this FrontdoorOriginGroup.
 func (mg *FrontdoorOriginGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *FrontdoorOriginGroup) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this FrontdoorOriginGroup.
 func (mg *FrontdoorOriginGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this FrontdoorOriginGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *FrontdoorOriginGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this FrontdoorOriginGroup.
@@ -483,14 +387,6 @@ func (mg *FrontdoorProfile) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this FrontdoorProfile.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *FrontdoorProfile) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this FrontdoorProfile.
 func (mg *FrontdoorProfile) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *FrontdoorProfile) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this FrontdoorProfile.
 func (mg *FrontdoorProfile) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this FrontdoorProfile.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *FrontdoorProfile) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this FrontdoorProfile.
@@ -559,14 +447,6 @@ func (mg *FrontdoorRoute) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this FrontdoorRoute.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *FrontdoorRoute) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this FrontdoorRoute.
 func (mg *FrontdoorRoute) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -595,14 +475,6 @@ func (mg *FrontdoorRoute) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this FrontdoorRoute.
 func (mg *FrontdoorRoute) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this FrontdoorRoute.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *FrontdoorRoute) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this FrontdoorRoute.
@@ -635,14 +507,6 @@ func (mg *FrontdoorRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this FrontdoorRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *FrontdoorRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this FrontdoorRule.
 func (mg *FrontdoorRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -671,14 +535,6 @@ func (mg *FrontdoorRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this FrontdoorRule.
 func (mg *FrontdoorRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this FrontdoorRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *FrontdoorRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this FrontdoorRule.
@@ -711,14 +567,6 @@ func (mg *FrontdoorRuleSet) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this FrontdoorRuleSet.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *FrontdoorRuleSet) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this FrontdoorRuleSet.
 func (mg *FrontdoorRuleSet) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -747,14 +595,6 @@ func (mg *FrontdoorRuleSet) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this FrontdoorRuleSet.
 func (mg *FrontdoorRuleSet) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this FrontdoorRuleSet.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *FrontdoorRuleSet) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this FrontdoorRuleSet.
@@ -787,14 +627,6 @@ func (mg *Profile) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Profile.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Profile) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Profile.
 func (mg *Profile) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -823,14 +655,6 @@ func (mg *Profile) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Profile.
 func (mg *Profile) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Profile.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Profile) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Profile.

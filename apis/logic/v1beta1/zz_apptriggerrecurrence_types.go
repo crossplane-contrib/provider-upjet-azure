@@ -167,8 +167,8 @@ type AppTriggerRecurrenceStatus struct {
 type AppTriggerRecurrence struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frequency) || has(self.initProvider.frequency)",message="frequency is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.interval) || has(self.initProvider.interval)",message="interval is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frequency) || (has(self.initProvider) && has(self.initProvider.frequency))",message="spec.forProvider.frequency is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.interval) || (has(self.initProvider) && has(self.initProvider.interval))",message="spec.forProvider.interval is a required parameter"
 	Spec   AppTriggerRecurrenceSpec   `json:"spec"`
 	Status AppTriggerRecurrenceStatus `json:"status,omitempty"`
 }

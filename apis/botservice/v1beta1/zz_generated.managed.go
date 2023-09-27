@@ -27,14 +27,6 @@ func (mg *BotChannelAlexa) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BotChannelAlexa.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BotChannelAlexa) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BotChannelAlexa.
 func (mg *BotChannelAlexa) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *BotChannelAlexa) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotChannelAlexa.
 func (mg *BotChannelAlexa) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BotChannelAlexa.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BotChannelAlexa) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BotChannelAlexa.
@@ -103,14 +87,6 @@ func (mg *BotChannelDirectLine) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BotChannelDirectLine.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BotChannelDirectLine) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BotChannelDirectLine.
 func (mg *BotChannelDirectLine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *BotChannelDirectLine) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this BotChannelDirectLine.
 func (mg *BotChannelDirectLine) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BotChannelDirectLine.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BotChannelDirectLine) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BotChannelDirectLine.
@@ -179,14 +147,6 @@ func (mg *BotChannelLine) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BotChannelLine.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BotChannelLine) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BotChannelLine.
 func (mg *BotChannelLine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *BotChannelLine) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotChannelLine.
 func (mg *BotChannelLine) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BotChannelLine.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BotChannelLine) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BotChannelLine.
@@ -255,14 +207,6 @@ func (mg *BotChannelMSTeams) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BotChannelMSTeams.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BotChannelMSTeams) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BotChannelMSTeams.
 func (mg *BotChannelMSTeams) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *BotChannelMSTeams) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotChannelMSTeams.
 func (mg *BotChannelMSTeams) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BotChannelMSTeams.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BotChannelMSTeams) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BotChannelMSTeams.
@@ -331,14 +267,6 @@ func (mg *BotChannelSMS) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BotChannelSMS.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BotChannelSMS) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BotChannelSMS.
 func (mg *BotChannelSMS) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *BotChannelSMS) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotChannelSMS.
 func (mg *BotChannelSMS) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BotChannelSMS.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BotChannelSMS) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BotChannelSMS.
@@ -407,14 +327,6 @@ func (mg *BotChannelSlack) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BotChannelSlack.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BotChannelSlack) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BotChannelSlack.
 func (mg *BotChannelSlack) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *BotChannelSlack) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotChannelSlack.
 func (mg *BotChannelSlack) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BotChannelSlack.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BotChannelSlack) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BotChannelSlack.
@@ -483,14 +387,6 @@ func (mg *BotChannelWebChat) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BotChannelWebChat.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BotChannelWebChat) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BotChannelWebChat.
 func (mg *BotChannelWebChat) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *BotChannelWebChat) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotChannelWebChat.
 func (mg *BotChannelWebChat) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BotChannelWebChat.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BotChannelWebChat) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BotChannelWebChat.
@@ -559,14 +447,6 @@ func (mg *BotChannelsRegistration) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BotChannelsRegistration.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BotChannelsRegistration) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BotChannelsRegistration.
 func (mg *BotChannelsRegistration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -595,14 +475,6 @@ func (mg *BotChannelsRegistration) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this BotChannelsRegistration.
 func (mg *BotChannelsRegistration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BotChannelsRegistration.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BotChannelsRegistration) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BotChannelsRegistration.
@@ -635,14 +507,6 @@ func (mg *BotConnection) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BotConnection.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BotConnection) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BotConnection.
 func (mg *BotConnection) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -671,14 +535,6 @@ func (mg *BotConnection) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotConnection.
 func (mg *BotConnection) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BotConnection.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BotConnection) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BotConnection.
@@ -711,14 +567,6 @@ func (mg *BotWebApp) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BotWebApp.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BotWebApp) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BotWebApp.
 func (mg *BotWebApp) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -747,14 +595,6 @@ func (mg *BotWebApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BotWebApp.
 func (mg *BotWebApp) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BotWebApp.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BotWebApp) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BotWebApp.

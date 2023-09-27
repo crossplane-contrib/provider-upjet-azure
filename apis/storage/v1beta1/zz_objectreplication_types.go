@@ -174,7 +174,7 @@ type ObjectReplicationStatus struct {
 type ObjectReplication struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rules) || has(self.initProvider.rules)",message="rules is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.rules) || (has(self.initProvider) && has(self.initProvider.rules))",message="spec.forProvider.rules is a required parameter"
 	Spec   ObjectReplicationSpec   `json:"spec"`
 	Status ObjectReplicationStatus `json:"status,omitempty"`
 }

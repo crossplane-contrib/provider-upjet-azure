@@ -27,14 +27,6 @@ func (mg *EventRelayNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this EventRelayNamespace.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *EventRelayNamespace) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this EventRelayNamespace.
 func (mg *EventRelayNamespace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *EventRelayNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this EventRelayNamespace.
 func (mg *EventRelayNamespace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this EventRelayNamespace.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *EventRelayNamespace) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this EventRelayNamespace.
@@ -103,14 +87,6 @@ func (mg *HybridConnection) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HybridConnection.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HybridConnection) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HybridConnection.
 func (mg *HybridConnection) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *HybridConnection) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this HybridConnection.
 func (mg *HybridConnection) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HybridConnection.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HybridConnection) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HybridConnection.
@@ -179,14 +147,6 @@ func (mg *HybridConnectionAuthorizationRule) GetProviderConfigReference() *xpv1.
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HybridConnectionAuthorizationRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HybridConnectionAuthorizationRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HybridConnectionAuthorizationRule.
 func (mg *HybridConnectionAuthorizationRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *HybridConnectionAuthorizationRule) SetManagementPolicies(r xpv1.Manage
 // SetProviderConfigReference of this HybridConnectionAuthorizationRule.
 func (mg *HybridConnectionAuthorizationRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HybridConnectionAuthorizationRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HybridConnectionAuthorizationRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HybridConnectionAuthorizationRule.
@@ -255,14 +207,6 @@ func (mg *NamespaceAuthorizationRule) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this NamespaceAuthorizationRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *NamespaceAuthorizationRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this NamespaceAuthorizationRule.
 func (mg *NamespaceAuthorizationRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *NamespaceAuthorizationRule) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this NamespaceAuthorizationRule.
 func (mg *NamespaceAuthorizationRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this NamespaceAuthorizationRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *NamespaceAuthorizationRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this NamespaceAuthorizationRule.

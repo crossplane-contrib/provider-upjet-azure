@@ -135,7 +135,7 @@ type SQLStoredProcedureStatus struct {
 type SQLStoredProcedure struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || has(self.initProvider.body)",message="body is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.body) || (has(self.initProvider) && has(self.initProvider.body))",message="spec.forProvider.body is a required parameter"
 	Spec   SQLStoredProcedureSpec   `json:"spec"`
 	Status SQLStoredProcedureStatus `json:"status,omitempty"`
 }

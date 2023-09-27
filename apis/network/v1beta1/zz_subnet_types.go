@@ -225,7 +225,7 @@ type SubnetStatus struct {
 type Subnet struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressPrefixes) || has(self.initProvider.addressPrefixes)",message="addressPrefixes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressPrefixes) || (has(self.initProvider) && has(self.initProvider.addressPrefixes))",message="spec.forProvider.addressPrefixes is a required parameter"
 	Spec   SubnetSpec   `json:"spec"`
 	Status SubnetStatus `json:"status,omitempty"`
 }

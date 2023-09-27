@@ -1006,7 +1006,7 @@ type KubernetesClusterNodePoolStatus struct {
 type KubernetesClusterNodePool struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vmSize) || has(self.initProvider.vmSize)",message="vmSize is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vmSize) || (has(self.initProvider) && has(self.initProvider.vmSize))",message="spec.forProvider.vmSize is a required parameter"
 	Spec   KubernetesClusterNodePoolSpec   `json:"spec"`
 	Status KubernetesClusterNodePoolStatus `json:"status,omitempty"`
 }

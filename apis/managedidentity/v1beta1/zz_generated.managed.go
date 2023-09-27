@@ -27,14 +27,6 @@ func (mg *FederatedIdentityCredential) GetProviderConfigReference() *xpv1.Refere
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this FederatedIdentityCredential.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *FederatedIdentityCredential) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this FederatedIdentityCredential.
 func (mg *FederatedIdentityCredential) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *FederatedIdentityCredential) SetManagementPolicies(r xpv1.ManagementPo
 // SetProviderConfigReference of this FederatedIdentityCredential.
 func (mg *FederatedIdentityCredential) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this FederatedIdentityCredential.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *FederatedIdentityCredential) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this FederatedIdentityCredential.
@@ -103,14 +87,6 @@ func (mg *UserAssignedIdentity) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this UserAssignedIdentity.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *UserAssignedIdentity) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this UserAssignedIdentity.
 func (mg *UserAssignedIdentity) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *UserAssignedIdentity) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this UserAssignedIdentity.
 func (mg *UserAssignedIdentity) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this UserAssignedIdentity.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *UserAssignedIdentity) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this UserAssignedIdentity.

@@ -27,14 +27,6 @@ func (mg *MarketplaceAgreement) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MarketplaceAgreement.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MarketplaceAgreement) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MarketplaceAgreement.
 func (mg *MarketplaceAgreement) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *MarketplaceAgreement) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this MarketplaceAgreement.
 func (mg *MarketplaceAgreement) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MarketplaceAgreement.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MarketplaceAgreement) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MarketplaceAgreement.

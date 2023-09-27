@@ -27,14 +27,6 @@ func (mg *KubernetesCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this KubernetesCluster.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *KubernetesCluster) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this KubernetesCluster.
 func (mg *KubernetesCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *KubernetesCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this KubernetesCluster.
 func (mg *KubernetesCluster) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this KubernetesCluster.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *KubernetesCluster) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this KubernetesCluster.
@@ -103,14 +87,6 @@ func (mg *KubernetesClusterNodePool) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this KubernetesClusterNodePool.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *KubernetesClusterNodePool) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this KubernetesClusterNodePool.
 func (mg *KubernetesClusterNodePool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *KubernetesClusterNodePool) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this KubernetesClusterNodePool.
 func (mg *KubernetesClusterNodePool) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this KubernetesClusterNodePool.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *KubernetesClusterNodePool) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this KubernetesClusterNodePool.
@@ -179,14 +147,6 @@ func (mg *KubernetesFleetManager) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this KubernetesFleetManager.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *KubernetesFleetManager) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this KubernetesFleetManager.
 func (mg *KubernetesFleetManager) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *KubernetesFleetManager) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this KubernetesFleetManager.
 func (mg *KubernetesFleetManager) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this KubernetesFleetManager.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *KubernetesFleetManager) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this KubernetesFleetManager.

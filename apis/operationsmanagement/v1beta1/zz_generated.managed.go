@@ -27,14 +27,6 @@ func (mg *LogAnalyticsSolution) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this LogAnalyticsSolution.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *LogAnalyticsSolution) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this LogAnalyticsSolution.
 func (mg *LogAnalyticsSolution) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *LogAnalyticsSolution) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this LogAnalyticsSolution.
 func (mg *LogAnalyticsSolution) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this LogAnalyticsSolution.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *LogAnalyticsSolution) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this LogAnalyticsSolution.

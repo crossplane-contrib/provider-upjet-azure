@@ -183,7 +183,7 @@ type WebPubsubNetworkACLStatus struct {
 type WebPubsubNetworkACL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicNetwork) || has(self.initProvider.publicNetwork)",message="publicNetwork is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicNetwork) || (has(self.initProvider) && has(self.initProvider.publicNetwork))",message="spec.forProvider.publicNetwork is a required parameter"
 	Spec   WebPubsubNetworkACLSpec   `json:"spec"`
 	Status WebPubsubNetworkACLStatus `json:"status,omitempty"`
 }

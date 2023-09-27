@@ -178,7 +178,7 @@ type DataSetBlobStorageStatus struct {
 type DataSetBlobStorage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageAccount) || has(self.initProvider.storageAccount)",message="storageAccount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageAccount) || (has(self.initProvider) && has(self.initProvider.storageAccount))",message="spec.forProvider.storageAccount is a required parameter"
 	Spec   DataSetBlobStorageSpec   `json:"spec"`
 	Status DataSetBlobStorageStatus `json:"status,omitempty"`
 }

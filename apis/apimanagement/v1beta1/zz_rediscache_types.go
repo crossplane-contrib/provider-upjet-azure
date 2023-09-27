@@ -119,7 +119,7 @@ type RedisCacheStatus struct {
 type RedisCache struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionStringSecretRef)",message="connectionStringSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionStringSecretRef)",message="spec.forProvider.connectionStringSecretRef is a required parameter"
 	Spec   RedisCacheSpec   `json:"spec"`
 	Status RedisCacheStatus `json:"status,omitempty"`
 }

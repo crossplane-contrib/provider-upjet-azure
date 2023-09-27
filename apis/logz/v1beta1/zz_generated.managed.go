@@ -27,14 +27,6 @@ func (mg *Monitor) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Monitor.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Monitor) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Monitor.
 func (mg *Monitor) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *Monitor) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Monitor.
 func (mg *Monitor) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Monitor.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Monitor) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Monitor.
@@ -103,14 +87,6 @@ func (mg *SubAccount) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SubAccount.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SubAccount) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SubAccount.
 func (mg *SubAccount) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *SubAccount) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SubAccount.
 func (mg *SubAccount) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SubAccount.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SubAccount) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SubAccount.
@@ -179,14 +147,6 @@ func (mg *SubAccountTagRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SubAccountTagRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SubAccountTagRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SubAccountTagRule.
 func (mg *SubAccountTagRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *SubAccountTagRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SubAccountTagRule.
 func (mg *SubAccountTagRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SubAccountTagRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SubAccountTagRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SubAccountTagRule.
@@ -255,14 +207,6 @@ func (mg *TagRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this TagRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *TagRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this TagRule.
 func (mg *TagRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *TagRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this TagRule.
 func (mg *TagRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this TagRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *TagRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this TagRule.

@@ -27,14 +27,6 @@ func (mg *NetworkACL) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this NetworkACL.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *NetworkACL) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this NetworkACL.
 func (mg *NetworkACL) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *NetworkACL) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this NetworkACL.
 func (mg *NetworkACL) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this NetworkACL.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *NetworkACL) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this NetworkACL.
@@ -103,14 +87,6 @@ func (mg *Service) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Service.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Service) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Service.
 func (mg *Service) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Service) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Service.
 func (mg *Service) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Service.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Service) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Service.
@@ -179,14 +147,6 @@ func (mg *SignalrSharedPrivateLinkResource) GetProviderConfigReference() *xpv1.R
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SignalrSharedPrivateLinkResource.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SignalrSharedPrivateLinkResource) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SignalrSharedPrivateLinkResource.
 func (mg *SignalrSharedPrivateLinkResource) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *SignalrSharedPrivateLinkResource) SetManagementPolicies(r xpv1.Managem
 // SetProviderConfigReference of this SignalrSharedPrivateLinkResource.
 func (mg *SignalrSharedPrivateLinkResource) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SignalrSharedPrivateLinkResource.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SignalrSharedPrivateLinkResource) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SignalrSharedPrivateLinkResource.
@@ -255,14 +207,6 @@ func (mg *WebPubsub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this WebPubsub.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *WebPubsub) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this WebPubsub.
 func (mg *WebPubsub) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *WebPubsub) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this WebPubsub.
 func (mg *WebPubsub) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this WebPubsub.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *WebPubsub) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this WebPubsub.
@@ -331,14 +267,6 @@ func (mg *WebPubsubHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this WebPubsubHub.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *WebPubsubHub) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this WebPubsubHub.
 func (mg *WebPubsubHub) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *WebPubsubHub) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this WebPubsubHub.
 func (mg *WebPubsubHub) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this WebPubsubHub.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *WebPubsubHub) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this WebPubsubHub.
@@ -407,14 +327,6 @@ func (mg *WebPubsubNetworkACL) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this WebPubsubNetworkACL.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *WebPubsubNetworkACL) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this WebPubsubNetworkACL.
 func (mg *WebPubsubNetworkACL) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *WebPubsubNetworkACL) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this WebPubsubNetworkACL.
 func (mg *WebPubsubNetworkACL) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this WebPubsubNetworkACL.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *WebPubsubNetworkACL) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this WebPubsubNetworkACL.

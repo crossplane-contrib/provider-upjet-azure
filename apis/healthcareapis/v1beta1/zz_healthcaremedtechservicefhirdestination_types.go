@@ -125,9 +125,9 @@ type HealthcareMedtechServiceFHIRDestinationStatus struct {
 type HealthcareMedtechServiceFHIRDestination struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationFhirMappingJson) || has(self.initProvider.destinationFhirMappingJson)",message="destinationFhirMappingJson is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationIdentityResolutionType) || has(self.initProvider.destinationIdentityResolutionType)",message="destinationIdentityResolutionType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationFhirMappingJson) || (has(self.initProvider) && has(self.initProvider.destinationFhirMappingJson))",message="spec.forProvider.destinationFhirMappingJson is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationIdentityResolutionType) || (has(self.initProvider) && has(self.initProvider.destinationIdentityResolutionType))",message="spec.forProvider.destinationIdentityResolutionType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	Spec   HealthcareMedtechServiceFHIRDestinationSpec   `json:"spec"`
 	Status HealthcareMedtechServiceFHIRDestinationStatus `json:"status,omitempty"`
 }

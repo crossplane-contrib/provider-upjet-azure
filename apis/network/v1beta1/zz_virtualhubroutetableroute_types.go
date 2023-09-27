@@ -125,8 +125,8 @@ type VirtualHubRouteTableRouteStatus struct {
 type VirtualHubRouteTableRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinations) || has(self.initProvider.destinations)",message="destinations is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationsType) || has(self.initProvider.destinationsType)",message="destinationsType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinations) || (has(self.initProvider) && has(self.initProvider.destinations))",message="spec.forProvider.destinations is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.destinationsType) || (has(self.initProvider) && has(self.initProvider.destinationsType))",message="spec.forProvider.destinationsType is a required parameter"
 	Spec   VirtualHubRouteTableRouteSpec   `json:"spec"`
 	Status VirtualHubRouteTableRouteStatus `json:"status,omitempty"`
 }

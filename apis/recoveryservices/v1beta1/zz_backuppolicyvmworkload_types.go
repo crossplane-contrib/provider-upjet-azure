@@ -475,9 +475,9 @@ type BackupPolicyVMWorkloadStatus struct {
 type BackupPolicyVMWorkload struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protectionPolicy) || has(self.initProvider.protectionPolicy)",message="protectionPolicy is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.settings) || has(self.initProvider.settings)",message="settings is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.workloadType) || has(self.initProvider.workloadType)",message="workloadType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.protectionPolicy) || (has(self.initProvider) && has(self.initProvider.protectionPolicy))",message="spec.forProvider.protectionPolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.settings) || (has(self.initProvider) && has(self.initProvider.settings))",message="spec.forProvider.settings is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.workloadType) || (has(self.initProvider) && has(self.initProvider.workloadType))",message="spec.forProvider.workloadType is a required parameter"
 	Spec   BackupPolicyVMWorkloadSpec   `json:"spec"`
 	Status BackupPolicyVMWorkloadStatus `json:"status,omitempty"`
 }

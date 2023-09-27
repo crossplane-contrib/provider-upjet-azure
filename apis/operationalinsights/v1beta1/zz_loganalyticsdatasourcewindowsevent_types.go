@@ -113,8 +113,8 @@ type LogAnalyticsDataSourceWindowsEventStatus struct {
 type LogAnalyticsDataSourceWindowsEvent struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventLogName) || has(self.initProvider.eventLogName)",message="eventLogName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventTypes) || has(self.initProvider.eventTypes)",message="eventTypes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventLogName) || (has(self.initProvider) && has(self.initProvider.eventLogName))",message="spec.forProvider.eventLogName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventTypes) || (has(self.initProvider) && has(self.initProvider.eventTypes))",message="spec.forProvider.eventTypes is a required parameter"
 	Spec   LogAnalyticsDataSourceWindowsEventSpec   `json:"spec"`
 	Status LogAnalyticsDataSourceWindowsEventStatus `json:"status,omitempty"`
 }

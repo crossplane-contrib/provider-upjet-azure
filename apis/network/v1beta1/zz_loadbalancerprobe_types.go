@@ -140,7 +140,7 @@ type LoadBalancerProbeStatus struct {
 type LoadBalancerProbe struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.port) || has(self.initProvider.port)",message="port is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.port) || (has(self.initProvider) && has(self.initProvider.port))",message="spec.forProvider.port is a required parameter"
 	Spec   LoadBalancerProbeSpec   `json:"spec"`
 	Status LoadBalancerProbeStatus `json:"status,omitempty"`
 }

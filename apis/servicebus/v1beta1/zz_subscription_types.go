@@ -240,7 +240,7 @@ type SubscriptionStatus struct {
 type Subscription struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxDeliveryCount) || has(self.initProvider.maxDeliveryCount)",message="maxDeliveryCount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxDeliveryCount) || (has(self.initProvider) && has(self.initProvider.maxDeliveryCount))",message="spec.forProvider.maxDeliveryCount is a required parameter"
 	Spec   SubscriptionSpec   `json:"spec"`
 	Status SubscriptionStatus `json:"status,omitempty"`
 }

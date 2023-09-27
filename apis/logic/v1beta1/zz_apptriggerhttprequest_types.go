@@ -111,7 +111,7 @@ type AppTriggerHTTPRequestStatus struct {
 type AppTriggerHTTPRequest struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schema) || has(self.initProvider.schema)",message="schema is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.schema) || (has(self.initProvider) && has(self.initProvider.schema))",message="spec.forProvider.schema is a required parameter"
 	Spec   AppTriggerHTTPRequestSpec   `json:"spec"`
 	Status AppTriggerHTTPRequestStatus `json:"status,omitempty"`
 }

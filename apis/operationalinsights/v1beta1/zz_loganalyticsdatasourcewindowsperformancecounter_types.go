@@ -133,10 +133,10 @@ type LogAnalyticsDataSourceWindowsPerformanceCounterStatus struct {
 type LogAnalyticsDataSourceWindowsPerformanceCounter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.counterName) || has(self.initProvider.counterName)",message="counterName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceName) || has(self.initProvider.instanceName)",message="instanceName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.intervalSeconds) || has(self.initProvider.intervalSeconds)",message="intervalSeconds is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.objectName) || has(self.initProvider.objectName)",message="objectName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.counterName) || (has(self.initProvider) && has(self.initProvider.counterName))",message="spec.forProvider.counterName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceName) || (has(self.initProvider) && has(self.initProvider.instanceName))",message="spec.forProvider.instanceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.intervalSeconds) || (has(self.initProvider) && has(self.initProvider.intervalSeconds))",message="spec.forProvider.intervalSeconds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.objectName) || (has(self.initProvider) && has(self.initProvider.objectName))",message="spec.forProvider.objectName is a required parameter"
 	Spec   LogAnalyticsDataSourceWindowsPerformanceCounterSpec   `json:"spec"`
 	Status LogAnalyticsDataSourceWindowsPerformanceCounterStatus `json:"status,omitempty"`
 }

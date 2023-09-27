@@ -254,8 +254,8 @@ type EventHubStatus struct {
 type EventHub struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.messageRetention) || has(self.initProvider.messageRetention)",message="messageRetention is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partitionCount) || has(self.initProvider.partitionCount)",message="partitionCount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.messageRetention) || (has(self.initProvider) && has(self.initProvider.messageRetention))",message="spec.forProvider.messageRetention is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partitionCount) || (has(self.initProvider) && has(self.initProvider.partitionCount))",message="spec.forProvider.partitionCount is a required parameter"
 	Spec   EventHubSpec   `json:"spec"`
 	Status EventHubStatus `json:"status,omitempty"`
 }

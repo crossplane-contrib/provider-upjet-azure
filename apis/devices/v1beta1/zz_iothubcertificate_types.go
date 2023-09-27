@@ -107,7 +107,7 @@ type IOTHubCertificateStatus struct {
 type IOTHubCertificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateContentSecretRef)",message="certificateContentSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateContentSecretRef)",message="spec.forProvider.certificateContentSecretRef is a required parameter"
 	Spec   IOTHubCertificateSpec   `json:"spec"`
 	Status IOTHubCertificateStatus `json:"status,omitempty"`
 }

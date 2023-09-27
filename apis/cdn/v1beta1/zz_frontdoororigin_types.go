@@ -255,7 +255,7 @@ type FrontdoorOriginStatus struct {
 type FrontdoorOrigin struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateNameCheckEnabled) || has(self.initProvider.certificateNameCheckEnabled)",message="certificateNameCheckEnabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateNameCheckEnabled) || (has(self.initProvider) && has(self.initProvider.certificateNameCheckEnabled))",message="spec.forProvider.certificateNameCheckEnabled is a required parameter"
 	Spec   FrontdoorOriginSpec   `json:"spec"`
 	Status FrontdoorOriginStatus `json:"status,omitempty"`
 }

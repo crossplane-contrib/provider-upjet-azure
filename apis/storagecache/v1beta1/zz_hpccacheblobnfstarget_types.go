@@ -133,9 +133,9 @@ type HPCCacheBlobNFSTargetStatus struct {
 type HPCCacheBlobNFSTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespacePath) || has(self.initProvider.namespacePath)",message="namespacePath is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageContainerId) || has(self.initProvider.storageContainerId)",message="storageContainerId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.usageModel) || has(self.initProvider.usageModel)",message="usageModel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespacePath) || (has(self.initProvider) && has(self.initProvider.namespacePath))",message="spec.forProvider.namespacePath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageContainerId) || (has(self.initProvider) && has(self.initProvider.storageContainerId))",message="spec.forProvider.storageContainerId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.usageModel) || (has(self.initProvider) && has(self.initProvider.usageModel))",message="spec.forProvider.usageModel is a required parameter"
 	Spec   HPCCacheBlobNFSTargetSpec   `json:"spec"`
 	Status HPCCacheBlobNFSTargetStatus `json:"status,omitempty"`
 }

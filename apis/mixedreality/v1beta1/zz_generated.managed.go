@@ -27,14 +27,6 @@ func (mg *SpatialAnchorsAccount) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpatialAnchorsAccount.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpatialAnchorsAccount) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpatialAnchorsAccount.
 func (mg *SpatialAnchorsAccount) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *SpatialAnchorsAccount) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this SpatialAnchorsAccount.
 func (mg *SpatialAnchorsAccount) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpatialAnchorsAccount.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpatialAnchorsAccount) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpatialAnchorsAccount.

@@ -166,9 +166,9 @@ type SpringCloudBuilderStatus struct {
 type SpringCloudBuilder struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.buildPackGroup) || has(self.initProvider.buildPackGroup)",message="buildPackGroup is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.stack) || has(self.initProvider.stack)",message="stack is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.buildPackGroup) || (has(self.initProvider) && has(self.initProvider.buildPackGroup))",message="spec.forProvider.buildPackGroup is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.stack) || (has(self.initProvider) && has(self.initProvider.stack))",message="spec.forProvider.stack is a required parameter"
 	Spec   SpringCloudBuilderSpec   `json:"spec"`
 	Status SpringCloudBuilderStatus `json:"status,omitempty"`
 }

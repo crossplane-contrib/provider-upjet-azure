@@ -225,9 +225,9 @@ type PrivateLinkServiceStatus struct {
 type PrivateLinkService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.loadBalancerFrontendIpConfigurationIds) || has(self.initProvider.loadBalancerFrontendIpConfigurationIds)",message="loadBalancerFrontendIpConfigurationIds is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.natIpConfiguration) || has(self.initProvider.natIpConfiguration)",message="natIpConfiguration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.loadBalancerFrontendIpConfigurationIds) || (has(self.initProvider) && has(self.initProvider.loadBalancerFrontendIpConfigurationIds))",message="spec.forProvider.loadBalancerFrontendIpConfigurationIds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.natIpConfiguration) || (has(self.initProvider) && has(self.initProvider.natIpConfiguration))",message="spec.forProvider.natIpConfiguration is a required parameter"
 	Spec   PrivateLinkServiceSpec   `json:"spec"`
 	Status PrivateLinkServiceStatus `json:"status,omitempty"`
 }

@@ -135,7 +135,7 @@ type ManagedStorageAccountStatus struct {
 type ManagedStorageAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageAccountKey) || has(self.initProvider.storageAccountKey)",message="storageAccountKey is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.storageAccountKey) || (has(self.initProvider) && has(self.initProvider.storageAccountKey))",message="spec.forProvider.storageAccountKey is a required parameter"
 	Spec   ManagedStorageAccountSpec   `json:"spec"`
 	Status ManagedStorageAccountStatus `json:"status,omitempty"`
 }

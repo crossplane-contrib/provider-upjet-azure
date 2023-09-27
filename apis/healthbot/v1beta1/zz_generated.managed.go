@@ -27,14 +27,6 @@ func (mg *HealthBot) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HealthBot.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HealthBot) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HealthBot.
 func (mg *HealthBot) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *HealthBot) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this HealthBot.
 func (mg *HealthBot) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HealthBot.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HealthBot) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HealthBot.

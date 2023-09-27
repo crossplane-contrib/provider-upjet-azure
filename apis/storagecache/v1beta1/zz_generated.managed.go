@@ -27,14 +27,6 @@ func (mg *HPCCache) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HPCCache.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HPCCache) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HPCCache.
 func (mg *HPCCache) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *HPCCache) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this HPCCache.
 func (mg *HPCCache) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HPCCache.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HPCCache) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HPCCache.
@@ -103,14 +87,6 @@ func (mg *HPCCacheAccessPolicy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HPCCacheAccessPolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HPCCacheAccessPolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HPCCacheAccessPolicy.
 func (mg *HPCCacheAccessPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *HPCCacheAccessPolicy) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this HPCCacheAccessPolicy.
 func (mg *HPCCacheAccessPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HPCCacheAccessPolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HPCCacheAccessPolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HPCCacheAccessPolicy.
@@ -179,14 +147,6 @@ func (mg *HPCCacheBlobNFSTarget) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HPCCacheBlobNFSTarget.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HPCCacheBlobNFSTarget) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HPCCacheBlobNFSTarget.
 func (mg *HPCCacheBlobNFSTarget) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *HPCCacheBlobNFSTarget) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this HPCCacheBlobNFSTarget.
 func (mg *HPCCacheBlobNFSTarget) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HPCCacheBlobNFSTarget.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HPCCacheBlobNFSTarget) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HPCCacheBlobNFSTarget.
@@ -255,14 +207,6 @@ func (mg *HPCCacheBlobTarget) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HPCCacheBlobTarget.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HPCCacheBlobTarget) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HPCCacheBlobTarget.
 func (mg *HPCCacheBlobTarget) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *HPCCacheBlobTarget) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this HPCCacheBlobTarget.
 func (mg *HPCCacheBlobTarget) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HPCCacheBlobTarget.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HPCCacheBlobTarget) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HPCCacheBlobTarget.
@@ -331,14 +267,6 @@ func (mg *HPCCacheNFSTarget) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HPCCacheNFSTarget.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HPCCacheNFSTarget) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HPCCacheNFSTarget.
 func (mg *HPCCacheNFSTarget) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *HPCCacheNFSTarget) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this HPCCacheNFSTarget.
 func (mg *HPCCacheNFSTarget) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HPCCacheNFSTarget.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HPCCacheNFSTarget) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HPCCacheNFSTarget.

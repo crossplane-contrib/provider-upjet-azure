@@ -526,7 +526,7 @@ type MonitorActionRuleSuppressionStatus struct {
 type MonitorActionRuleSuppression struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.suppression) || has(self.initProvider.suppression)",message="suppression is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.suppression) || (has(self.initProvider) && has(self.initProvider.suppression))",message="spec.forProvider.suppression is a required parameter"
 	Spec   MonitorActionRuleSuppressionSpec   `json:"spec"`
 	Status MonitorActionRuleSuppressionStatus `json:"status,omitempty"`
 }

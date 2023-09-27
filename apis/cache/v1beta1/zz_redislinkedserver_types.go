@@ -133,8 +133,8 @@ type RedisLinkedServerStatus struct {
 type RedisLinkedServer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.linkedRedisCacheLocation) || has(self.initProvider.linkedRedisCacheLocation)",message="linkedRedisCacheLocation is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serverRole) || has(self.initProvider.serverRole)",message="serverRole is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.linkedRedisCacheLocation) || (has(self.initProvider) && has(self.initProvider.linkedRedisCacheLocation))",message="spec.forProvider.linkedRedisCacheLocation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.serverRole) || (has(self.initProvider) && has(self.initProvider.serverRole))",message="spec.forProvider.serverRole is a required parameter"
 	Spec   RedisLinkedServerSpec   `json:"spec"`
 	Status RedisLinkedServerStatus `json:"status,omitempty"`
 }

@@ -275,8 +275,8 @@ type FrontdoorRouteStatus struct {
 type FrontdoorRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.patternsToMatch) || has(self.initProvider.patternsToMatch)",message="patternsToMatch is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.supportedProtocols) || has(self.initProvider.supportedProtocols)",message="supportedProtocols is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.patternsToMatch) || (has(self.initProvider) && has(self.initProvider.patternsToMatch))",message="spec.forProvider.patternsToMatch is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.supportedProtocols) || (has(self.initProvider) && has(self.initProvider.supportedProtocols))",message="spec.forProvider.supportedProtocols is a required parameter"
 	Spec   FrontdoorRouteSpec   `json:"spec"`
 	Status FrontdoorRouteStatus `json:"status,omitempty"`
 }

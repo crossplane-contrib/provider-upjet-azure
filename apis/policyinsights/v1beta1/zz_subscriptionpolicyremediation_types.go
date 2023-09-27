@@ -158,7 +158,7 @@ type SubscriptionPolicyRemediationStatus struct {
 type SubscriptionPolicyRemediation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionId) || has(self.initProvider.subscriptionId)",message="subscriptionId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionId) || (has(self.initProvider) && has(self.initProvider.subscriptionId))",message="spec.forProvider.subscriptionId is a required parameter"
 	Spec   SubscriptionPolicyRemediationSpec   `json:"spec"`
 	Status SubscriptionPolicyRemediationStatus `json:"status,omitempty"`
 }

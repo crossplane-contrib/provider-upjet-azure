@@ -297,9 +297,9 @@ type TrafficManagerProfileStatus struct {
 type TrafficManagerProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dnsConfig) || has(self.initProvider.dnsConfig)",message="dnsConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.monitorConfig) || has(self.initProvider.monitorConfig)",message="monitorConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trafficRoutingMethod) || has(self.initProvider.trafficRoutingMethod)",message="trafficRoutingMethod is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dnsConfig) || (has(self.initProvider) && has(self.initProvider.dnsConfig))",message="spec.forProvider.dnsConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.monitorConfig) || (has(self.initProvider) && has(self.initProvider.monitorConfig))",message="spec.forProvider.monitorConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trafficRoutingMethod) || (has(self.initProvider) && has(self.initProvider.trafficRoutingMethod))",message="spec.forProvider.trafficRoutingMethod is a required parameter"
 	Spec   TrafficManagerProfileSpec   `json:"spec"`
 	Status TrafficManagerProfileStatus `json:"status,omitempty"`
 }

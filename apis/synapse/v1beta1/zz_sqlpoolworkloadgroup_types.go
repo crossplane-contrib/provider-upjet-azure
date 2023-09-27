@@ -138,8 +138,8 @@ type SQLPoolWorkloadGroupStatus struct {
 type SQLPoolWorkloadGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxResourcePercent) || has(self.initProvider.maxResourcePercent)",message="maxResourcePercent is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minResourcePercent) || has(self.initProvider.minResourcePercent)",message="minResourcePercent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.maxResourcePercent) || (has(self.initProvider) && has(self.initProvider.maxResourcePercent))",message="spec.forProvider.maxResourcePercent is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.minResourcePercent) || (has(self.initProvider) && has(self.initProvider.minResourcePercent))",message="spec.forProvider.minResourcePercent is a required parameter"
 	Spec   SQLPoolWorkloadGroupSpec   `json:"spec"`
 	Status SQLPoolWorkloadGroupStatus `json:"status,omitempty"`
 }

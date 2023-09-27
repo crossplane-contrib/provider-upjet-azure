@@ -167,8 +167,8 @@ type AppActionHTTPStatus struct {
 type AppActionHTTP struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.method) || has(self.initProvider.method)",message="method is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.uri) || has(self.initProvider.uri)",message="uri is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.method) || (has(self.initProvider) && has(self.initProvider.method))",message="spec.forProvider.method is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.uri) || (has(self.initProvider) && has(self.initProvider.uri))",message="spec.forProvider.uri is a required parameter"
 	Spec   AppActionHTTPSpec   `json:"spec"`
 	Status AppActionHTTPStatus `json:"status,omitempty"`
 }

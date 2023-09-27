@@ -148,8 +148,8 @@ type SubscriptionPolicyExemptionStatus struct {
 type SubscriptionPolicyExemption struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exemptionCategory) || has(self.initProvider.exemptionCategory)",message="exemptionCategory is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionId) || has(self.initProvider.subscriptionId)",message="subscriptionId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exemptionCategory) || (has(self.initProvider) && has(self.initProvider.exemptionCategory))",message="spec.forProvider.exemptionCategory is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionId) || (has(self.initProvider) && has(self.initProvider.subscriptionId))",message="spec.forProvider.subscriptionId is a required parameter"
 	Spec   SubscriptionPolicyExemptionSpec   `json:"spec"`
 	Status SubscriptionPolicyExemptionStatus `json:"status,omitempty"`
 }

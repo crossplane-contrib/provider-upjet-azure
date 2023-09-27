@@ -133,9 +133,9 @@ type ConnectionClassicCertificateStatus struct {
 type ConnectionClassicCertificate struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateAssetName) || has(self.initProvider.certificateAssetName)",message="certificateAssetName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionId) || has(self.initProvider.subscriptionId)",message="subscriptionId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionName) || has(self.initProvider.subscriptionName)",message="subscriptionName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.certificateAssetName) || (has(self.initProvider) && has(self.initProvider.certificateAssetName))",message="spec.forProvider.certificateAssetName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionId) || (has(self.initProvider) && has(self.initProvider.subscriptionId))",message="spec.forProvider.subscriptionId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subscriptionName) || (has(self.initProvider) && has(self.initProvider.subscriptionName))",message="spec.forProvider.subscriptionName is a required parameter"
 	Spec   ConnectionClassicCertificateSpec   `json:"spec"`
 	Status ConnectionClassicCertificateStatus `json:"status,omitempty"`
 }

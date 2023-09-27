@@ -383,9 +383,9 @@ type ApplicationInsightsStandardWebTestStatus struct {
 type ApplicationInsightsStandardWebTest struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.geoLocations) || has(self.initProvider.geoLocations)",message="geoLocations is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.request) || has(self.initProvider.request)",message="request is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.geoLocations) || (has(self.initProvider) && has(self.initProvider.geoLocations))",message="spec.forProvider.geoLocations is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.request) || (has(self.initProvider) && has(self.initProvider.request))",message="spec.forProvider.request is a required parameter"
 	Spec   ApplicationInsightsStandardWebTestSpec   `json:"spec"`
 	Status ApplicationInsightsStandardWebTestStatus `json:"status,omitempty"`
 }

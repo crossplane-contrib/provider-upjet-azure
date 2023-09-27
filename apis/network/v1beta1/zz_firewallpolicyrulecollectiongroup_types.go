@@ -601,7 +601,7 @@ type FirewallPolicyRuleCollectionGroupStatus struct {
 type FirewallPolicyRuleCollectionGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.priority) || has(self.initProvider.priority)",message="priority is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.priority) || (has(self.initProvider) && has(self.initProvider.priority))",message="spec.forProvider.priority is a required parameter"
 	Spec   FirewallPolicyRuleCollectionGroupSpec   `json:"spec"`
 	Status FirewallPolicyRuleCollectionGroupStatus `json:"status,omitempty"`
 }

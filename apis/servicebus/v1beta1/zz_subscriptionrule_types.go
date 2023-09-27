@@ -219,7 +219,7 @@ type SubscriptionRuleStatus struct {
 type SubscriptionRule struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.filterType) || has(self.initProvider.filterType)",message="filterType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.filterType) || (has(self.initProvider) && has(self.initProvider.filterType))",message="spec.forProvider.filterType is a required parameter"
 	Spec   SubscriptionRuleSpec   `json:"spec"`
 	Status SubscriptionRuleStatus `json:"status,omitempty"`
 }
