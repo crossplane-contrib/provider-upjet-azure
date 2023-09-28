@@ -20,6 +20,7 @@ spec:
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    name: generated-certificate
     rotationPolicy:
     - automatic:
       - timeBeforeExpiry: P30D

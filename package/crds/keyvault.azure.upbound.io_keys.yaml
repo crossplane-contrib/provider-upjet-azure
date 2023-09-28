@@ -171,6 +171,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  name:
+                    description: Specifies the name of the Key Vault Key. Changing
+                      this forces a new resource to be created.
+                    type: string
                   notBeforeDate:
                     description: Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
                     type: string
@@ -248,6 +252,10 @@ spec:
                     description: Specifies the Key Type to use for this Key Vault
                       Key. Possible values are EC (Elliptic Curve), EC-HSM, RSA and
                       RSA-HSM. Changing this forces a new resource to be created.
+                    type: string
+                  name:
+                    description: Specifies the name of the Key Vault Key. Changing
+                      this forces a new resource to be created.
                     type: string
                   notBeforeDate:
                     description: Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
@@ -456,6 +464,10 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.keyType)
                 || (has(self.initProvider) && has(self.initProvider.keyType))'
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: KeyStatus defines the observed state of Key.
             properties:
@@ -501,6 +513,10 @@ spec:
                     type: string
                   "n":
                     description: The RSA modulus of this Key Vault Key.
+                    type: string
+                  name:
+                    description: Specifies the name of the Key Vault Key. Changing
+                      this forces a new resource to be created.
                     type: string
                   notBeforeDate:
                     description: Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').

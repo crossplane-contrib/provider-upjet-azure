@@ -1860,10 +1860,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
-	e := config.NameAsIdentifier
-	e.SetIdentifierArgumentFn = func(base map[string]any, externalName string) {
-		base["name"] = strings.Split(externalName, "/")[0]
-	}
+	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
 		id, ok := tfstate["id"]
 		if !ok {
