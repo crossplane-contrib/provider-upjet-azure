@@ -443,7 +443,7 @@ type SQLContainerStatus struct {
 type SQLContainer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partitionKeyPath) || has(self.initProvider.partitionKeyPath)",message="partitionKeyPath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partitionKeyPath) || (has(self.initProvider) && has(self.initProvider.partitionKeyPath))",message="spec.forProvider.partitionKeyPath is a required parameter"
 	Spec   SQLContainerSpec   `json:"spec"`
 	Status SQLContainerStatus `json:"status,omitempty"`
 }

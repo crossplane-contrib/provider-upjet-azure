@@ -130,7 +130,7 @@ type HPCCacheBlobTargetStatus struct {
 type HPCCacheBlobTarget struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespacePath) || has(self.initProvider.namespacePath)",message="namespacePath is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.namespacePath) || (has(self.initProvider) && has(self.initProvider.namespacePath))",message="spec.forProvider.namespacePath is a required parameter"
 	Spec   HPCCacheBlobTargetSpec   `json:"spec"`
 	Status HPCCacheBlobTargetStatus `json:"status,omitempty"`
 }

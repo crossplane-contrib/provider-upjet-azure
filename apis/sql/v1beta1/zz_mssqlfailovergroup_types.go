@@ -196,8 +196,8 @@ type MSSQLFailoverGroupStatus struct {
 type MSSQLFailoverGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partnerServer) || has(self.initProvider.partnerServer)",message="partnerServer is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.readWriteEndpointFailoverPolicy) || has(self.initProvider.readWriteEndpointFailoverPolicy)",message="readWriteEndpointFailoverPolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partnerServer) || (has(self.initProvider) && has(self.initProvider.partnerServer))",message="spec.forProvider.partnerServer is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.readWriteEndpointFailoverPolicy) || (has(self.initProvider) && has(self.initProvider.readWriteEndpointFailoverPolicy))",message="spec.forProvider.readWriteEndpointFailoverPolicy is a required parameter"
 	Spec   MSSQLFailoverGroupSpec   `json:"spec"`
 	Status MSSQLFailoverGroupStatus `json:"status,omitempty"`
 }

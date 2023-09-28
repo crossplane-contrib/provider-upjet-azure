@@ -158,9 +158,9 @@ type SentinelAlertRuleMSSecurityIncidentStatus struct {
 type SentinelAlertRuleMSSecurityIncident struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || has(self.initProvider.displayName)",message="displayName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.productFilter) || has(self.initProvider.productFilter)",message="productFilter is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.severityFilter) || has(self.initProvider.severityFilter)",message="severityFilter is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.displayName) || (has(self.initProvider) && has(self.initProvider.displayName))",message="spec.forProvider.displayName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.productFilter) || (has(self.initProvider) && has(self.initProvider.productFilter))",message="spec.forProvider.productFilter is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.severityFilter) || (has(self.initProvider) && has(self.initProvider.severityFilter))",message="spec.forProvider.severityFilter is a required parameter"
 	Spec   SentinelAlertRuleMSSecurityIncidentSpec   `json:"spec"`
 	Status SentinelAlertRuleMSSecurityIncidentStatus `json:"status,omitempty"`
 }

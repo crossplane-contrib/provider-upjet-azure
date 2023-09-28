@@ -147,7 +147,7 @@ type GatewayStatus struct {
 type Gateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.locationData) || has(self.initProvider.locationData)",message="locationData is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.locationData) || (has(self.initProvider) && has(self.initProvider.locationData))",message="spec.forProvider.locationData is a required parameter"
 	Spec   GatewaySpec   `json:"spec"`
 	Status GatewayStatus `json:"status,omitempty"`
 }

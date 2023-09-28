@@ -104,7 +104,7 @@ type NetworkInterfaceBackendAddressPoolAssociationStatus struct {
 type NetworkInterfaceBackendAddressPoolAssociation struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipConfigurationName) || has(self.initProvider.ipConfigurationName)",message="ipConfigurationName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipConfigurationName) || (has(self.initProvider) && has(self.initProvider.ipConfigurationName))",message="spec.forProvider.ipConfigurationName is a required parameter"
 	Spec   NetworkInterfaceBackendAddressPoolAssociationSpec   `json:"spec"`
 	Status NetworkInterfaceBackendAddressPoolAssociationStatus `json:"status,omitempty"`
 }

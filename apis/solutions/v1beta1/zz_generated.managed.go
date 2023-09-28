@@ -27,14 +27,6 @@ func (mg *ManagedApplicationDefinition) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ManagedApplicationDefinition.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ManagedApplicationDefinition) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ManagedApplicationDefinition.
 func (mg *ManagedApplicationDefinition) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *ManagedApplicationDefinition) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this ManagedApplicationDefinition.
 func (mg *ManagedApplicationDefinition) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ManagedApplicationDefinition.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ManagedApplicationDefinition) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ManagedApplicationDefinition.

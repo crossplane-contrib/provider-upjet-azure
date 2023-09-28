@@ -121,7 +121,7 @@ type LogAnalyticsLinkedStorageAccountStatus struct {
 type LogAnalyticsLinkedStorageAccount struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataSourceType) || has(self.initProvider.dataSourceType)",message="dataSourceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dataSourceType) || (has(self.initProvider) && has(self.initProvider.dataSourceType))",message="spec.forProvider.dataSourceType is a required parameter"
 	Spec   LogAnalyticsLinkedStorageAccountSpec   `json:"spec"`
 	Status LogAnalyticsLinkedStorageAccountStatus `json:"status,omitempty"`
 }

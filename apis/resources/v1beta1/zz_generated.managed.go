@@ -27,14 +27,6 @@ func (mg *ResourceDeploymentScriptAzureCli) GetProviderConfigReference() *xpv1.R
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ResourceDeploymentScriptAzureCli.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ResourceDeploymentScriptAzureCli) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ResourceDeploymentScriptAzureCli.
 func (mg *ResourceDeploymentScriptAzureCli) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *ResourceDeploymentScriptAzureCli) SetManagementPolicies(r xpv1.Managem
 // SetProviderConfigReference of this ResourceDeploymentScriptAzureCli.
 func (mg *ResourceDeploymentScriptAzureCli) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ResourceDeploymentScriptAzureCli.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ResourceDeploymentScriptAzureCli) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ResourceDeploymentScriptAzureCli.
@@ -103,14 +87,6 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) GetProviderConfigReference() 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ResourceDeploymentScriptAzurePowerShell.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ResourceDeploymentScriptAzurePowerShell) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ResourceDeploymentScriptAzurePowerShell.
 func (mg *ResourceDeploymentScriptAzurePowerShell) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) SetManagementPolicies(r xpv1.
 // SetProviderConfigReference of this ResourceDeploymentScriptAzurePowerShell.
 func (mg *ResourceDeploymentScriptAzurePowerShell) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ResourceDeploymentScriptAzurePowerShell.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ResourceDeploymentScriptAzurePowerShell) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ResourceDeploymentScriptAzurePowerShell.
@@ -179,14 +147,6 @@ func (mg *ResourceGroupTemplateDeployment) GetProviderConfigReference() *xpv1.Re
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ResourceGroupTemplateDeployment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ResourceGroupTemplateDeployment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ResourceGroupTemplateDeployment.
 func (mg *ResourceGroupTemplateDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *ResourceGroupTemplateDeployment) SetManagementPolicies(r xpv1.Manageme
 // SetProviderConfigReference of this ResourceGroupTemplateDeployment.
 func (mg *ResourceGroupTemplateDeployment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ResourceGroupTemplateDeployment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ResourceGroupTemplateDeployment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ResourceGroupTemplateDeployment.
@@ -255,14 +207,6 @@ func (mg *SubscriptionTemplateDeployment) GetProviderConfigReference() *xpv1.Ref
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SubscriptionTemplateDeployment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SubscriptionTemplateDeployment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SubscriptionTemplateDeployment.
 func (mg *SubscriptionTemplateDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *SubscriptionTemplateDeployment) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this SubscriptionTemplateDeployment.
 func (mg *SubscriptionTemplateDeployment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SubscriptionTemplateDeployment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SubscriptionTemplateDeployment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SubscriptionTemplateDeployment.

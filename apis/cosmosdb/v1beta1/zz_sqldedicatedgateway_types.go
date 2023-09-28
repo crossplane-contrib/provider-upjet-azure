@@ -98,8 +98,8 @@ type SQLDedicatedGatewayStatus struct {
 type SQLDedicatedGateway struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceCount) || has(self.initProvider.instanceCount)",message="instanceCount is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceSize) || has(self.initProvider.instanceSize)",message="instanceSize is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceCount) || (has(self.initProvider) && has(self.initProvider.instanceCount))",message="spec.forProvider.instanceCount is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceSize) || (has(self.initProvider) && has(self.initProvider.instanceSize))",message="spec.forProvider.instanceSize is a required parameter"
 	Spec   SQLDedicatedGatewaySpec   `json:"spec"`
 	Status SQLDedicatedGatewayStatus `json:"status,omitempty"`
 }

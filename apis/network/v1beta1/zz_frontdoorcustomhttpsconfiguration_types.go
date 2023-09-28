@@ -154,8 +154,8 @@ type FrontdoorCustomHTTPSConfigurationStatus struct {
 type FrontdoorCustomHTTPSConfiguration struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.customHttpsProvisioningEnabled) || has(self.initProvider.customHttpsProvisioningEnabled)",message="customHttpsProvisioningEnabled is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frontendEndpointId) || has(self.initProvider.frontendEndpointId)",message="frontendEndpointId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.customHttpsProvisioningEnabled) || (has(self.initProvider) && has(self.initProvider.customHttpsProvisioningEnabled))",message="spec.forProvider.customHttpsProvisioningEnabled is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frontendEndpointId) || (has(self.initProvider) && has(self.initProvider.frontendEndpointId))",message="spec.forProvider.frontendEndpointId is a required parameter"
 	Spec   FrontdoorCustomHTTPSConfigurationSpec   `json:"spec"`
 	Status FrontdoorCustomHTTPSConfigurationStatus `json:"status,omitempty"`
 }

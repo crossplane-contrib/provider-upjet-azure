@@ -138,7 +138,7 @@ type LinkedServiceMySQLStatus struct {
 type LinkedServiceMySQL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionString) || has(self.initProvider.connectionString)",message="connectionString is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.connectionString) || (has(self.initProvider) && has(self.initProvider.connectionString))",message="spec.forProvider.connectionString is a required parameter"
 	Spec   LinkedServiceMySQLSpec   `json:"spec"`
 	Status LinkedServiceMySQLStatus `json:"status,omitempty"`
 }

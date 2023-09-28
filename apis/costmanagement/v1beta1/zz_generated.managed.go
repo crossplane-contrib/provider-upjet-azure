@@ -27,14 +27,6 @@ func (mg *CostAnomalyAlert) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this CostAnomalyAlert.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *CostAnomalyAlert) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this CostAnomalyAlert.
 func (mg *CostAnomalyAlert) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *CostAnomalyAlert) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this CostAnomalyAlert.
 func (mg *CostAnomalyAlert) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this CostAnomalyAlert.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *CostAnomalyAlert) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this CostAnomalyAlert.
@@ -103,14 +87,6 @@ func (mg *ResourceGroupCostManagementExport) GetProviderConfigReference() *xpv1.
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ResourceGroupCostManagementExport.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ResourceGroupCostManagementExport) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ResourceGroupCostManagementExport.
 func (mg *ResourceGroupCostManagementExport) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ResourceGroupCostManagementExport) SetManagementPolicies(r xpv1.Manage
 // SetProviderConfigReference of this ResourceGroupCostManagementExport.
 func (mg *ResourceGroupCostManagementExport) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ResourceGroupCostManagementExport.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ResourceGroupCostManagementExport) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ResourceGroupCostManagementExport.
@@ -179,14 +147,6 @@ func (mg *SubscriptionCostManagementExport) GetProviderConfigReference() *xpv1.R
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SubscriptionCostManagementExport.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SubscriptionCostManagementExport) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SubscriptionCostManagementExport.
 func (mg *SubscriptionCostManagementExport) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *SubscriptionCostManagementExport) SetManagementPolicies(r xpv1.Managem
 // SetProviderConfigReference of this SubscriptionCostManagementExport.
 func (mg *SubscriptionCostManagementExport) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SubscriptionCostManagementExport.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SubscriptionCostManagementExport) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SubscriptionCostManagementExport.

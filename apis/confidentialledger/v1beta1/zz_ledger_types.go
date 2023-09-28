@@ -201,9 +201,9 @@ type LedgerStatus struct {
 type Ledger struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.azureadBasedServicePrincipal) || has(self.initProvider.azureadBasedServicePrincipal)",message="azureadBasedServicePrincipal is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ledgerType) || has(self.initProvider.ledgerType)",message="ledgerType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || has(self.initProvider.location)",message="location is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.azureadBasedServicePrincipal) || (has(self.initProvider) && has(self.initProvider.azureadBasedServicePrincipal))",message="spec.forProvider.azureadBasedServicePrincipal is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ledgerType) || (has(self.initProvider) && has(self.initProvider.ledgerType))",message="spec.forProvider.ledgerType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	Spec   LedgerSpec   `json:"spec"`
 	Status LedgerStatus `json:"status,omitempty"`
 }

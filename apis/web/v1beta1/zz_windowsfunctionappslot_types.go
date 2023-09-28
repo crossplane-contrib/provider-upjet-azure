@@ -3048,7 +3048,7 @@ type WindowsFunctionAppSlotStatus struct {
 type WindowsFunctionAppSlot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.siteConfig) || has(self.initProvider.siteConfig)",message="siteConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.siteConfig) || (has(self.initProvider) && has(self.initProvider.siteConfig))",message="spec.forProvider.siteConfig is a required parameter"
 	Spec   WindowsFunctionAppSlotSpec   `json:"spec"`
 	Status WindowsFunctionAppSlotStatus `json:"status,omitempty"`
 }

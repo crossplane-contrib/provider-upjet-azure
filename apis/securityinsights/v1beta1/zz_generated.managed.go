@@ -27,14 +27,6 @@ func (mg *SentinelAlertRuleFusion) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SentinelAlertRuleFusion.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SentinelAlertRuleFusion) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SentinelAlertRuleFusion.
 func (mg *SentinelAlertRuleFusion) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *SentinelAlertRuleFusion) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this SentinelAlertRuleFusion.
 func (mg *SentinelAlertRuleFusion) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SentinelAlertRuleFusion.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SentinelAlertRuleFusion) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SentinelAlertRuleFusion.
@@ -103,14 +87,6 @@ func (mg *SentinelAlertRuleMSSecurityIncident) GetProviderConfigReference() *xpv
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SentinelAlertRuleMSSecurityIncident.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SentinelAlertRuleMSSecurityIncident) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SentinelAlertRuleMSSecurityIncident.
 func (mg *SentinelAlertRuleMSSecurityIncident) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *SentinelAlertRuleMSSecurityIncident) SetManagementPolicies(r xpv1.Mana
 // SetProviderConfigReference of this SentinelAlertRuleMSSecurityIncident.
 func (mg *SentinelAlertRuleMSSecurityIncident) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SentinelAlertRuleMSSecurityIncident.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SentinelAlertRuleMSSecurityIncident) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SentinelAlertRuleMSSecurityIncident.
@@ -179,14 +147,6 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetProviderConfigRe
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
 func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetManagementPolici
 // SetProviderConfigReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
 func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SentinelAlertRuleMachineLearningBehaviorAnalytics) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SentinelAlertRuleMachineLearningBehaviorAnalytics.
@@ -255,14 +207,6 @@ func (mg *SentinelAutomationRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SentinelAutomationRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SentinelAutomationRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SentinelAutomationRule.
 func (mg *SentinelAutomationRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *SentinelAutomationRule) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this SentinelAutomationRule.
 func (mg *SentinelAutomationRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SentinelAutomationRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SentinelAutomationRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SentinelAutomationRule.
@@ -331,14 +267,6 @@ func (mg *SentinelDataConnectorIOT) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SentinelDataConnectorIOT.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SentinelDataConnectorIOT) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SentinelDataConnectorIOT.
 func (mg *SentinelDataConnectorIOT) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *SentinelDataConnectorIOT) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this SentinelDataConnectorIOT.
 func (mg *SentinelDataConnectorIOT) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SentinelDataConnectorIOT.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SentinelDataConnectorIOT) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SentinelDataConnectorIOT.
@@ -407,14 +327,6 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetProviderConfigReference() 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SentinelLogAnalyticsWorkspaceOnboarding.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SentinelLogAnalyticsWorkspaceOnboarding.
 func (mg *SentinelLogAnalyticsWorkspaceOnboarding) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetManagementPolicies(r xpv1.
 // SetProviderConfigReference of this SentinelLogAnalyticsWorkspaceOnboarding.
 func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SentinelLogAnalyticsWorkspaceOnboarding.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SentinelLogAnalyticsWorkspaceOnboarding) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SentinelLogAnalyticsWorkspaceOnboarding.
@@ -483,14 +387,6 @@ func (mg *SentinelWatchlist) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SentinelWatchlist.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SentinelWatchlist) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SentinelWatchlist.
 func (mg *SentinelWatchlist) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *SentinelWatchlist) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SentinelWatchlist.
 func (mg *SentinelWatchlist) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SentinelWatchlist.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SentinelWatchlist) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SentinelWatchlist.

@@ -248,7 +248,7 @@ type StreamingLocatorStatus struct {
 type StreamingLocator struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.streamingPolicyName) || has(self.initProvider.streamingPolicyName)",message="streamingPolicyName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.streamingPolicyName) || (has(self.initProvider) && has(self.initProvider.streamingPolicyName))",message="spec.forProvider.streamingPolicyName is a required parameter"
 	Spec   StreamingLocatorSpec   `json:"spec"`
 	Status StreamingLocatorStatus `json:"status,omitempty"`
 }

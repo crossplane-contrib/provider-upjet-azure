@@ -219,8 +219,8 @@ type JobStatus struct {
 type Job struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inputAsset) || has(self.initProvider.inputAsset)",message="inputAsset is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outputAsset) || has(self.initProvider.outputAsset)",message="outputAsset is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.inputAsset) || (has(self.initProvider) && has(self.initProvider.inputAsset))",message="spec.forProvider.inputAsset is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.outputAsset) || (has(self.initProvider) && has(self.initProvider.outputAsset))",message="spec.forProvider.outputAsset is a required parameter"
 	Spec   JobSpec   `json:"spec"`
 	Status JobStatus `json:"status,omitempty"`
 }

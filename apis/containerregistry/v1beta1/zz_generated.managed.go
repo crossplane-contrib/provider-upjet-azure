@@ -27,14 +27,6 @@ func (mg *AgentPool) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AgentPool.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AgentPool) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AgentPool.
 func (mg *AgentPool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *AgentPool) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AgentPool.
 func (mg *AgentPool) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AgentPool.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AgentPool) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AgentPool.
@@ -103,14 +87,6 @@ func (mg *ContainerConnectedRegistry) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ContainerConnectedRegistry.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ContainerConnectedRegistry) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ContainerConnectedRegistry.
 func (mg *ContainerConnectedRegistry) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ContainerConnectedRegistry) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this ContainerConnectedRegistry.
 func (mg *ContainerConnectedRegistry) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ContainerConnectedRegistry.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ContainerConnectedRegistry) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ContainerConnectedRegistry.
@@ -179,14 +147,6 @@ func (mg *Registry) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Registry.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Registry) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Registry.
 func (mg *Registry) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *Registry) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Registry.
 func (mg *Registry) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Registry.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Registry) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Registry.
@@ -255,14 +207,6 @@ func (mg *ScopeMap) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ScopeMap.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ScopeMap) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ScopeMap.
 func (mg *ScopeMap) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *ScopeMap) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ScopeMap.
 func (mg *ScopeMap) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ScopeMap.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ScopeMap) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ScopeMap.
@@ -331,14 +267,6 @@ func (mg *Token) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Token.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Token) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Token.
 func (mg *Token) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *Token) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Token.
 func (mg *Token) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Token.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Token) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Token.
@@ -407,14 +327,6 @@ func (mg *TokenPassword) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this TokenPassword.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *TokenPassword) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this TokenPassword.
 func (mg *TokenPassword) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *TokenPassword) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this TokenPassword.
 func (mg *TokenPassword) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this TokenPassword.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *TokenPassword) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this TokenPassword.
@@ -483,14 +387,6 @@ func (mg *Webhook) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Webhook.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Webhook) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Webhook.
 func (mg *Webhook) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *Webhook) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Webhook.
 func (mg *Webhook) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Webhook.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Webhook) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Webhook.

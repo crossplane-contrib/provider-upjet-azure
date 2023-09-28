@@ -27,14 +27,6 @@ func (mg *LabServiceLab) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this LabServiceLab.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *LabServiceLab) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this LabServiceLab.
 func (mg *LabServiceLab) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *LabServiceLab) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this LabServiceLab.
 func (mg *LabServiceLab) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this LabServiceLab.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *LabServiceLab) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this LabServiceLab.
@@ -103,14 +87,6 @@ func (mg *LabServicePlan) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this LabServicePlan.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *LabServicePlan) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this LabServicePlan.
 func (mg *LabServicePlan) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *LabServicePlan) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this LabServicePlan.
 func (mg *LabServicePlan) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this LabServicePlan.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *LabServicePlan) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this LabServicePlan.

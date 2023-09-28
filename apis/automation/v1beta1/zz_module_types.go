@@ -161,7 +161,7 @@ type ModuleStatus struct {
 type Module struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.moduleLink) || has(self.initProvider.moduleLink)",message="moduleLink is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.moduleLink) || (has(self.initProvider) && has(self.initProvider.moduleLink))",message="spec.forProvider.moduleLink is a required parameter"
 	Spec   ModuleSpec   `json:"spec"`
 	Status ModuleStatus `json:"status,omitempty"`
 }

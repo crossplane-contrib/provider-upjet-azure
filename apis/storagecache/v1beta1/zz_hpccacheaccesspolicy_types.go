@@ -177,7 +177,7 @@ type HPCCacheAccessPolicyStatus struct {
 type HPCCacheAccessPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessRule) || has(self.initProvider.accessRule)",message="accessRule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessRule) || (has(self.initProvider) && has(self.initProvider.accessRule))",message="spec.forProvider.accessRule is a required parameter"
 	Spec   HPCCacheAccessPolicySpec   `json:"spec"`
 	Status HPCCacheAccessPolicyStatus `json:"status,omitempty"`
 }

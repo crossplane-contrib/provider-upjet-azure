@@ -27,14 +27,6 @@ func (mg *GlobalVMShutdownSchedule) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this GlobalVMShutdownSchedule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *GlobalVMShutdownSchedule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this GlobalVMShutdownSchedule.
 func (mg *GlobalVMShutdownSchedule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *GlobalVMShutdownSchedule) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this GlobalVMShutdownSchedule.
 func (mg *GlobalVMShutdownSchedule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this GlobalVMShutdownSchedule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *GlobalVMShutdownSchedule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this GlobalVMShutdownSchedule.
@@ -103,14 +87,6 @@ func (mg *Lab) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Lab.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Lab) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Lab.
 func (mg *Lab) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *Lab) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Lab.
 func (mg *Lab) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Lab.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Lab) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Lab.
@@ -179,14 +147,6 @@ func (mg *LinuxVirtualMachine) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this LinuxVirtualMachine.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *LinuxVirtualMachine) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this LinuxVirtualMachine.
 func (mg *LinuxVirtualMachine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *LinuxVirtualMachine) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this LinuxVirtualMachine.
 func (mg *LinuxVirtualMachine) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this LinuxVirtualMachine.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *LinuxVirtualMachine) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this LinuxVirtualMachine.
@@ -255,14 +207,6 @@ func (mg *Policy) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Policy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Policy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Policy.
 func (mg *Policy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *Policy) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Policy.
 func (mg *Policy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Policy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Policy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Policy.
@@ -331,14 +267,6 @@ func (mg *Schedule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this Schedule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *Schedule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this Schedule.
 func (mg *Schedule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *Schedule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this Schedule.
 func (mg *Schedule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this Schedule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *Schedule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this Schedule.
@@ -407,14 +327,6 @@ func (mg *VirtualNetwork) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this VirtualNetwork.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *VirtualNetwork) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this VirtualNetwork.
 func (mg *VirtualNetwork) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *VirtualNetwork) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this VirtualNetwork.
 func (mg *VirtualNetwork) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this VirtualNetwork.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *VirtualNetwork) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this VirtualNetwork.
@@ -483,14 +387,6 @@ func (mg *WindowsVirtualMachine) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this WindowsVirtualMachine.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *WindowsVirtualMachine) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this WindowsVirtualMachine.
 func (mg *WindowsVirtualMachine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *WindowsVirtualMachine) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this WindowsVirtualMachine.
 func (mg *WindowsVirtualMachine) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this WindowsVirtualMachine.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *WindowsVirtualMachine) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this WindowsVirtualMachine.

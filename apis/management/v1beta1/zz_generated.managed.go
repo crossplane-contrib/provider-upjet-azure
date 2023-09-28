@@ -27,14 +27,6 @@ func (mg *ManagementGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ManagementGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ManagementGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ManagementGroup.
 func (mg *ManagementGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *ManagementGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ManagementGroup.
 func (mg *ManagementGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ManagementGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ManagementGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ManagementGroup.
@@ -103,14 +87,6 @@ func (mg *ManagementGroupSubscriptionAssociation) GetProviderConfigReference() *
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ManagementGroupSubscriptionAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ManagementGroupSubscriptionAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ManagementGroupSubscriptionAssociation.
 func (mg *ManagementGroupSubscriptionAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ManagementGroupSubscriptionAssociation) SetManagementPolicies(r xpv1.M
 // SetProviderConfigReference of this ManagementGroupSubscriptionAssociation.
 func (mg *ManagementGroupSubscriptionAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ManagementGroupSubscriptionAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ManagementGroupSubscriptionAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ManagementGroupSubscriptionAssociation.

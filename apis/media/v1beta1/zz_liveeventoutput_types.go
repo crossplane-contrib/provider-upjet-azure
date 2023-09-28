@@ -151,7 +151,7 @@ type LiveEventOutputStatus struct {
 type LiveEventOutput struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.archiveWindowDuration) || has(self.initProvider.archiveWindowDuration)",message="archiveWindowDuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.archiveWindowDuration) || (has(self.initProvider) && has(self.initProvider.archiveWindowDuration))",message="spec.forProvider.archiveWindowDuration is a required parameter"
 	Spec   LiveEventOutputSpec   `json:"spec"`
 	Status LiveEventOutputStatus `json:"status,omitempty"`
 }

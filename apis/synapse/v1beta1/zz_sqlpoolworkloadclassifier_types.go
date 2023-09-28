@@ -138,7 +138,7 @@ type SQLPoolWorkloadClassifierStatus struct {
 type SQLPoolWorkloadClassifier struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.memberName) || has(self.initProvider.memberName)",message="memberName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.memberName) || (has(self.initProvider) && has(self.initProvider.memberName))",message="spec.forProvider.memberName is a required parameter"
 	Spec   SQLPoolWorkloadClassifierSpec   `json:"spec"`
 	Status SQLPoolWorkloadClassifierStatus `json:"status,omitempty"`
 }

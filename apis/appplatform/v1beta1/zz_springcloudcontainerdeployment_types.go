@@ -197,8 +197,8 @@ type SpringCloudContainerDeploymentStatus struct {
 type SpringCloudContainerDeployment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.image) || has(self.initProvider.image)",message="image is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.server) || has(self.initProvider.server)",message="server is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.image) || (has(self.initProvider) && has(self.initProvider.image))",message="spec.forProvider.image is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.server) || (has(self.initProvider) && has(self.initProvider.server))",message="spec.forProvider.server is a required parameter"
 	Spec   SpringCloudContainerDeploymentSpec   `json:"spec"`
 	Status SpringCloudContainerDeploymentStatus `json:"status,omitempty"`
 }

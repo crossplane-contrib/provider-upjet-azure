@@ -113,8 +113,8 @@ type SiteRecoveryReplicationPolicyStatus struct {
 type SiteRecoveryReplicationPolicy struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.applicationConsistentSnapshotFrequencyInMinutes) || has(self.initProvider.applicationConsistentSnapshotFrequencyInMinutes)",message="applicationConsistentSnapshotFrequencyInMinutes is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recoveryPointRetentionInMinutes) || has(self.initProvider.recoveryPointRetentionInMinutes)",message="recoveryPointRetentionInMinutes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.applicationConsistentSnapshotFrequencyInMinutes) || (has(self.initProvider) && has(self.initProvider.applicationConsistentSnapshotFrequencyInMinutes))",message="spec.forProvider.applicationConsistentSnapshotFrequencyInMinutes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recoveryPointRetentionInMinutes) || (has(self.initProvider) && has(self.initProvider.recoveryPointRetentionInMinutes))",message="spec.forProvider.recoveryPointRetentionInMinutes is a required parameter"
 	Spec   SiteRecoveryReplicationPolicySpec   `json:"spec"`
 	Status SiteRecoveryReplicationPolicyStatus `json:"status,omitempty"`
 }

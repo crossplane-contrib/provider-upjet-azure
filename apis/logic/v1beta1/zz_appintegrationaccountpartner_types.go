@@ -143,7 +143,7 @@ type AppIntegrationAccountPartnerStatus struct {
 type AppIntegrationAccountPartner struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.businessIdentity) || has(self.initProvider.businessIdentity)",message="businessIdentity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.businessIdentity) || (has(self.initProvider) && has(self.initProvider.businessIdentity))",message="spec.forProvider.businessIdentity is a required parameter"
 	Spec   AppIntegrationAccountPartnerSpec   `json:"spec"`
 	Status AppIntegrationAccountPartnerStatus `json:"status,omitempty"`
 }

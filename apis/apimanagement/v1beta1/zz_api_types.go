@@ -532,7 +532,7 @@ type APIStatus struct {
 type API struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.revision) || has(self.initProvider.revision)",message="revision is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.revision) || (has(self.initProvider) && has(self.initProvider.revision))",message="spec.forProvider.revision is a required parameter"
 	Spec   APISpec   `json:"spec"`
 	Status APIStatus `json:"status,omitempty"`
 }

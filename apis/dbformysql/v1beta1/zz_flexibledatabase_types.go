@@ -113,8 +113,8 @@ type FlexibleDatabaseStatus struct {
 type FlexibleDatabase struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.charset) || has(self.initProvider.charset)",message="charset is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.collation) || has(self.initProvider.collation)",message="collation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.charset) || (has(self.initProvider) && has(self.initProvider.charset))",message="spec.forProvider.charset is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.collation) || (has(self.initProvider) && has(self.initProvider.collation))",message="spec.forProvider.collation is a required parameter"
 	Spec   FlexibleDatabaseSpec   `json:"spec"`
 	Status FlexibleDatabaseStatus `json:"status,omitempty"`
 }

@@ -88,7 +88,7 @@ type BackupPolicyBlobStorageStatus struct {
 type BackupPolicyBlobStorage struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.retentionDuration) || has(self.initProvider.retentionDuration)",message="retentionDuration is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.retentionDuration) || (has(self.initProvider) && has(self.initProvider.retentionDuration))",message="spec.forProvider.retentionDuration is a required parameter"
 	Spec   BackupPolicyBlobStorageSpec   `json:"spec"`
 	Status BackupPolicyBlobStorageStatus `json:"status,omitempty"`
 }

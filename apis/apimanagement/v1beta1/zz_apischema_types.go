@@ -149,7 +149,7 @@ type APISchemaStatus struct {
 type APISchema struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentType) || has(self.initProvider.contentType)",message="contentType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.contentType) || (has(self.initProvider) && has(self.initProvider.contentType))",message="spec.forProvider.contentType is a required parameter"
 	Spec   APISchemaSpec   `json:"spec"`
 	Status APISchemaStatus `json:"status,omitempty"`
 }

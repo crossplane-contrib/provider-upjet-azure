@@ -27,14 +27,6 @@ func (mg *StorageSync) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this StorageSync.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *StorageSync) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this StorageSync.
 func (mg *StorageSync) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *StorageSync) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this StorageSync.
 func (mg *StorageSync) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this StorageSync.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *StorageSync) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this StorageSync.

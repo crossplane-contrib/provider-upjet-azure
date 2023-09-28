@@ -140,7 +140,7 @@ type ResourceGroupTemplateDeploymentStatus struct {
 type ResourceGroupTemplateDeployment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deploymentMode) || has(self.initProvider.deploymentMode)",message="deploymentMode is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.deploymentMode) || (has(self.initProvider) && has(self.initProvider.deploymentMode))",message="spec.forProvider.deploymentMode is a required parameter"
 	Spec   ResourceGroupTemplateDeploymentSpec   `json:"spec"`
 	Status ResourceGroupTemplateDeploymentStatus `json:"status,omitempty"`
 }

@@ -121,9 +121,9 @@ type ManagedStorageAccountSASTokenDefinitionStatus struct {
 type ManagedStorageAccountSASTokenDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sasTemplateUri) || has(self.initProvider.sasTemplateUri)",message="sasTemplateUri is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sasType) || has(self.initProvider.sasType)",message="sasType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.validityPeriod) || has(self.initProvider.validityPeriod)",message="validityPeriod is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sasTemplateUri) || (has(self.initProvider) && has(self.initProvider.sasTemplateUri))",message="spec.forProvider.sasTemplateUri is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sasType) || (has(self.initProvider) && has(self.initProvider.sasType))",message="spec.forProvider.sasType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.validityPeriod) || (has(self.initProvider) && has(self.initProvider.validityPeriod))",message="spec.forProvider.validityPeriod is a required parameter"
 	Spec   ManagedStorageAccountSASTokenDefinitionSpec   `json:"spec"`
 	Status ManagedStorageAccountSASTokenDefinitionStatus `json:"status,omitempty"`
 }

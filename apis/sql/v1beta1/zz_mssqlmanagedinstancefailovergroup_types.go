@@ -172,7 +172,7 @@ type MSSQLManagedInstanceFailoverGroupStatus struct {
 type MSSQLManagedInstanceFailoverGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.readWriteEndpointFailoverPolicy) || has(self.initProvider.readWriteEndpointFailoverPolicy)",message="readWriteEndpointFailoverPolicy is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.readWriteEndpointFailoverPolicy) || (has(self.initProvider) && has(self.initProvider.readWriteEndpointFailoverPolicy))",message="spec.forProvider.readWriteEndpointFailoverPolicy is a required parameter"
 	Spec   MSSQLManagedInstanceFailoverGroupSpec   `json:"spec"`
 	Status MSSQLManagedInstanceFailoverGroupStatus `json:"status,omitempty"`
 }

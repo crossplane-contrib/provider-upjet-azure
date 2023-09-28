@@ -160,8 +160,8 @@ type FrontdoorCustomDomainStatus struct {
 type FrontdoorCustomDomain struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.hostName) || has(self.initProvider.hostName)",message="hostName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tls) || has(self.initProvider.tls)",message="tls is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.hostName) || (has(self.initProvider) && has(self.initProvider.hostName))",message="spec.forProvider.hostName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.tls) || (has(self.initProvider) && has(self.initProvider.tls))",message="spec.forProvider.tls is a required parameter"
 	Spec   FrontdoorCustomDomainSpec   `json:"spec"`
 	Status FrontdoorCustomDomainStatus `json:"status,omitempty"`
 }

@@ -107,8 +107,8 @@ type IdentityProviderFacebookStatus struct {
 type IdentityProviderFacebook struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appId) || has(self.initProvider.appId)",message="appId is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appSecretSecretRef)",message="appSecretSecretRef is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appId) || (has(self.initProvider) && has(self.initProvider.appId))",message="spec.forProvider.appId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.appSecretSecretRef)",message="spec.forProvider.appSecretSecretRef is a required parameter"
 	Spec   IdentityProviderFacebookSpec   `json:"spec"`
 	Status IdentityProviderFacebookStatus `json:"status,omitempty"`
 }

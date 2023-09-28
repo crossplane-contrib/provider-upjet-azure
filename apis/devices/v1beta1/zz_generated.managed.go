@@ -27,14 +27,6 @@ func (mg *IOTHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHub.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHub) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHub.
 func (mg *IOTHub) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *IOTHub) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IOTHub.
 func (mg *IOTHub) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHub.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHub) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHub.
@@ -103,14 +87,6 @@ func (mg *IOTHubCertificate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubCertificate.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubCertificate) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubCertificate.
 func (mg *IOTHubCertificate) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *IOTHubCertificate) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IOTHubCertificate.
 func (mg *IOTHubCertificate) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubCertificate.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubCertificate) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubCertificate.
@@ -179,14 +147,6 @@ func (mg *IOTHubConsumerGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubConsumerGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubConsumerGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubConsumerGroup.
 func (mg *IOTHubConsumerGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *IOTHubConsumerGroup) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this IOTHubConsumerGroup.
 func (mg *IOTHubConsumerGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubConsumerGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubConsumerGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubConsumerGroup.
@@ -255,14 +207,6 @@ func (mg *IOTHubDPS) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubDPS.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubDPS) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubDPS.
 func (mg *IOTHubDPS) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *IOTHubDPS) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IOTHubDPS.
 func (mg *IOTHubDPS) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubDPS.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubDPS) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubDPS.
@@ -331,14 +267,6 @@ func (mg *IOTHubDPSCertificate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubDPSCertificate.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubDPSCertificate) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubDPSCertificate.
 func (mg *IOTHubDPSCertificate) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *IOTHubDPSCertificate) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this IOTHubDPSCertificate.
 func (mg *IOTHubDPSCertificate) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubDPSCertificate.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubDPSCertificate) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubDPSCertificate.
@@ -407,14 +327,6 @@ func (mg *IOTHubDPSSharedAccessPolicy) GetProviderConfigReference() *xpv1.Refere
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubDPSSharedAccessPolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubDPSSharedAccessPolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubDPSSharedAccessPolicy.
 func (mg *IOTHubDPSSharedAccessPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *IOTHubDPSSharedAccessPolicy) SetManagementPolicies(r xpv1.ManagementPo
 // SetProviderConfigReference of this IOTHubDPSSharedAccessPolicy.
 func (mg *IOTHubDPSSharedAccessPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubDPSSharedAccessPolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubDPSSharedAccessPolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubDPSSharedAccessPolicy.
@@ -483,14 +387,6 @@ func (mg *IOTHubEndpointEventHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubEndpointEventHub.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubEndpointEventHub) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubEndpointEventHub.
 func (mg *IOTHubEndpointEventHub) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *IOTHubEndpointEventHub) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this IOTHubEndpointEventHub.
 func (mg *IOTHubEndpointEventHub) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubEndpointEventHub.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubEndpointEventHub) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubEndpointEventHub.
@@ -559,14 +447,6 @@ func (mg *IOTHubEndpointServiceBusQueue) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubEndpointServiceBusQueue.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubEndpointServiceBusQueue) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubEndpointServiceBusQueue.
 func (mg *IOTHubEndpointServiceBusQueue) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -595,14 +475,6 @@ func (mg *IOTHubEndpointServiceBusQueue) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this IOTHubEndpointServiceBusQueue.
 func (mg *IOTHubEndpointServiceBusQueue) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubEndpointServiceBusQueue.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubEndpointServiceBusQueue) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubEndpointServiceBusQueue.
@@ -635,14 +507,6 @@ func (mg *IOTHubEndpointServiceBusTopic) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubEndpointServiceBusTopic.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubEndpointServiceBusTopic) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubEndpointServiceBusTopic.
 func (mg *IOTHubEndpointServiceBusTopic) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -671,14 +535,6 @@ func (mg *IOTHubEndpointServiceBusTopic) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this IOTHubEndpointServiceBusTopic.
 func (mg *IOTHubEndpointServiceBusTopic) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubEndpointServiceBusTopic.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubEndpointServiceBusTopic) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubEndpointServiceBusTopic.
@@ -711,14 +567,6 @@ func (mg *IOTHubEndpointStorageContainer) GetProviderConfigReference() *xpv1.Ref
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubEndpointStorageContainer.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubEndpointStorageContainer) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubEndpointStorageContainer.
 func (mg *IOTHubEndpointStorageContainer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -747,14 +595,6 @@ func (mg *IOTHubEndpointStorageContainer) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this IOTHubEndpointStorageContainer.
 func (mg *IOTHubEndpointStorageContainer) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubEndpointStorageContainer.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubEndpointStorageContainer) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubEndpointStorageContainer.
@@ -787,14 +627,6 @@ func (mg *IOTHubEnrichment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubEnrichment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubEnrichment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubEnrichment.
 func (mg *IOTHubEnrichment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -823,14 +655,6 @@ func (mg *IOTHubEnrichment) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IOTHubEnrichment.
 func (mg *IOTHubEnrichment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubEnrichment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubEnrichment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubEnrichment.
@@ -863,14 +687,6 @@ func (mg *IOTHubFallbackRoute) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubFallbackRoute.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubFallbackRoute) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubFallbackRoute.
 func (mg *IOTHubFallbackRoute) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -899,14 +715,6 @@ func (mg *IOTHubFallbackRoute) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this IOTHubFallbackRoute.
 func (mg *IOTHubFallbackRoute) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubFallbackRoute.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubFallbackRoute) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubFallbackRoute.
@@ -939,14 +747,6 @@ func (mg *IOTHubRoute) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubRoute.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubRoute) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubRoute.
 func (mg *IOTHubRoute) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -975,14 +775,6 @@ func (mg *IOTHubRoute) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this IOTHubRoute.
 func (mg *IOTHubRoute) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubRoute.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubRoute) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubRoute.
@@ -1015,14 +807,6 @@ func (mg *IOTHubSharedAccessPolicy) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubSharedAccessPolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubSharedAccessPolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubSharedAccessPolicy.
 func (mg *IOTHubSharedAccessPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1051,14 +835,6 @@ func (mg *IOTHubSharedAccessPolicy) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this IOTHubSharedAccessPolicy.
 func (mg *IOTHubSharedAccessPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubSharedAccessPolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubSharedAccessPolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubSharedAccessPolicy.

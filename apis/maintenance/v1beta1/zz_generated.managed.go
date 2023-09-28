@@ -27,14 +27,6 @@ func (mg *MaintenanceAssignmentDedicatedHost) GetProviderConfigReference() *xpv1
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MaintenanceAssignmentDedicatedHost.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MaintenanceAssignmentDedicatedHost) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MaintenanceAssignmentDedicatedHost.
 func (mg *MaintenanceAssignmentDedicatedHost) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *MaintenanceAssignmentDedicatedHost) SetManagementPolicies(r xpv1.Manag
 // SetProviderConfigReference of this MaintenanceAssignmentDedicatedHost.
 func (mg *MaintenanceAssignmentDedicatedHost) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MaintenanceAssignmentDedicatedHost.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MaintenanceAssignmentDedicatedHost) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MaintenanceAssignmentDedicatedHost.
@@ -103,14 +87,6 @@ func (mg *MaintenanceAssignmentVirtualMachine) GetProviderConfigReference() *xpv
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MaintenanceAssignmentVirtualMachine.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MaintenanceAssignmentVirtualMachine) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MaintenanceAssignmentVirtualMachine.
 func (mg *MaintenanceAssignmentVirtualMachine) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *MaintenanceAssignmentVirtualMachine) SetManagementPolicies(r xpv1.Mana
 // SetProviderConfigReference of this MaintenanceAssignmentVirtualMachine.
 func (mg *MaintenanceAssignmentVirtualMachine) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MaintenanceAssignmentVirtualMachine.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MaintenanceAssignmentVirtualMachine) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MaintenanceAssignmentVirtualMachine.
@@ -179,14 +147,6 @@ func (mg *MaintenanceConfiguration) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MaintenanceConfiguration.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MaintenanceConfiguration) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MaintenanceConfiguration.
 func (mg *MaintenanceConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *MaintenanceConfiguration) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this MaintenanceConfiguration.
 func (mg *MaintenanceConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MaintenanceConfiguration.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MaintenanceConfiguration) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MaintenanceConfiguration.

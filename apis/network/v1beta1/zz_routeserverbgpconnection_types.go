@@ -98,8 +98,8 @@ type RouteServerBGPConnectionStatus struct {
 type RouteServerBGPConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerAsn) || has(self.initProvider.peerAsn)",message="peerAsn is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerIp) || has(self.initProvider.peerIp)",message="peerIp is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerAsn) || (has(self.initProvider) && has(self.initProvider.peerAsn))",message="spec.forProvider.peerAsn is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.peerIp) || (has(self.initProvider) && has(self.initProvider.peerIp))",message="spec.forProvider.peerIp is a required parameter"
 	Spec   RouteServerBGPConnectionSpec   `json:"spec"`
 	Status RouteServerBGPConnectionStatus `json:"status,omitempty"`
 }

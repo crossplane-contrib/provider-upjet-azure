@@ -345,7 +345,7 @@ type ExpressRouteCircuitPeeringStatus struct {
 type ExpressRouteCircuitPeering struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vlanId) || has(self.initProvider.vlanId)",message="vlanId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.vlanId) || (has(self.initProvider) && has(self.initProvider.vlanId))",message="spec.forProvider.vlanId is a required parameter"
 	Spec   ExpressRouteCircuitPeeringSpec   `json:"spec"`
 	Status ExpressRouteCircuitPeeringStatus `json:"status,omitempty"`
 }

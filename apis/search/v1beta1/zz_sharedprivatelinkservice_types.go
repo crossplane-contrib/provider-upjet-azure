@@ -118,7 +118,7 @@ type SharedPrivateLinkServiceStatus struct {
 type SharedPrivateLinkService struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subresourceName) || has(self.initProvider.subresourceName)",message="subresourceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.subresourceName) || (has(self.initProvider) && has(self.initProvider.subresourceName))",message="spec.forProvider.subresourceName is a required parameter"
 	Spec   SharedPrivateLinkServiceSpec   `json:"spec"`
 	Status SharedPrivateLinkServiceStatus `json:"status,omitempty"`
 }

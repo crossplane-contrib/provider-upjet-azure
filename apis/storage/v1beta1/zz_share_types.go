@@ -201,7 +201,7 @@ type ShareStatus struct {
 type Share struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.quota) || has(self.initProvider.quota)",message="quota is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.quota) || (has(self.initProvider) && has(self.initProvider.quota))",message="spec.forProvider.quota is a required parameter"
 	Spec   ShareSpec   `json:"spec"`
 	Status ShareStatus `json:"status,omitempty"`
 }

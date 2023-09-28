@@ -407,7 +407,7 @@ type BackupPolicyVMStatus struct {
 type BackupPolicyVM struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backup) || has(self.initProvider.backup)",message="backup is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backup) || (has(self.initProvider) && has(self.initProvider.backup))",message="spec.forProvider.backup is a required parameter"
 	Spec   BackupPolicyVMSpec   `json:"spec"`
 	Status BackupPolicyVMStatus `json:"status,omitempty"`
 }

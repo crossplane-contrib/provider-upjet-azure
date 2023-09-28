@@ -119,7 +119,7 @@ type ExpressRouteCircuitConnectionStatus struct {
 type ExpressRouteCircuitConnection struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressPrefixIpv4) || has(self.initProvider.addressPrefixIpv4)",message="addressPrefixIpv4 is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.addressPrefixIpv4) || (has(self.initProvider) && has(self.initProvider.addressPrefixIpv4))",message="spec.forProvider.addressPrefixIpv4 is a required parameter"
 	Spec   ExpressRouteCircuitConnectionSpec   `json:"spec"`
 	Status ExpressRouteCircuitConnectionStatus `json:"status,omitempty"`
 }

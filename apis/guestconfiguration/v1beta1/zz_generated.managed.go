@@ -27,14 +27,6 @@ func (mg *PolicyVirtualMachineConfigurationAssignment) GetProviderConfigReferenc
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this PolicyVirtualMachineConfigurationAssignment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PolicyVirtualMachineConfigurationAssignment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this PolicyVirtualMachineConfigurationAssignment.
 func (mg *PolicyVirtualMachineConfigurationAssignment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *PolicyVirtualMachineConfigurationAssignment) SetManagementPolicies(r x
 // SetProviderConfigReference of this PolicyVirtualMachineConfigurationAssignment.
 func (mg *PolicyVirtualMachineConfigurationAssignment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PolicyVirtualMachineConfigurationAssignment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PolicyVirtualMachineConfigurationAssignment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PolicyVirtualMachineConfigurationAssignment.

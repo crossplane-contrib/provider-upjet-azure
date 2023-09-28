@@ -157,9 +157,9 @@ type SiteRecoveryNetworkMappingStatus struct {
 type SiteRecoveryNetworkMapping struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceRecoveryFabricName) || has(self.initProvider.sourceRecoveryFabricName)",message="sourceRecoveryFabricName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetRecoveryFabricName) || has(self.initProvider.targetRecoveryFabricName)",message="targetRecoveryFabricName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sourceRecoveryFabricName) || (has(self.initProvider) && has(self.initProvider.sourceRecoveryFabricName))",message="spec.forProvider.sourceRecoveryFabricName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.targetRecoveryFabricName) || (has(self.initProvider) && has(self.initProvider.targetRecoveryFabricName))",message="spec.forProvider.targetRecoveryFabricName is a required parameter"
 	Spec   SiteRecoveryNetworkMappingSpec   `json:"spec"`
 	Status SiteRecoveryNetworkMappingStatus `json:"status,omitempty"`
 }

@@ -136,7 +136,7 @@ type TokenPasswordStatus struct {
 type TokenPassword struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.password1) || has(self.initProvider.password1)",message="password1 is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.password1) || (has(self.initProvider) && has(self.initProvider.password1))",message="spec.forProvider.password1 is a required parameter"
 	Spec   TokenPasswordSpec   `json:"spec"`
 	Status TokenPasswordStatus `json:"status,omitempty"`
 }
