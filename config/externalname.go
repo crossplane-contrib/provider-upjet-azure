@@ -1989,13 +1989,14 @@ func managementGroupSubscriptionAssociation() config.ExternalName {
 		w := strings.Split(id.(string), "/")
 		return fmt.Sprintf("%s/%s", w[len(w)-3], w[len(w)-1]), nil
 	}
-	// if we construct id according to the full path above, the underlying
-	// terraform non-deterministically fails with
-	//  "could not read properties for Management Group "example-sub""
-	// just populate the id with empty string solves it. Same happens in
-	// isolated test with terraform cli
 	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-		return "", nil
+		if len(externalName) == 0 || len(strings.Split(externalName, "/")) < 2 {
+			return "", nil
+		}
+		w := strings.Split(externalName, "/")
+		managementGroupName := w[0]
+		subscriptionId := w[1]
+		return fmt.Sprintf("/managementGroup/%s/subscription/%s", managementGroupName, subscriptionId), nil
 	}
 	return e
 }
