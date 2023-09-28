@@ -102,6 +102,7 @@ metadata:
   name: example-backupinstancepostgresql
 spec:
   forProvider:
+    name: exampleBackupInstancePostgresql
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -137,6 +137,7 @@ spec:
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    name: example-certificate
 
 ---
 

@@ -21,6 +21,9 @@ type SecretInitParameters struct {
 	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
+	// Specifies the name of the Key Vault Secret. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
 	// Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
 	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
 
@@ -41,6 +44,9 @@ type SecretObservation struct {
 
 	// The ID of the Key Vault where the Secret should be created. Changing this forces a new resource to be created.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Specifies the name of the Key Vault Secret. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
 	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
@@ -84,6 +90,10 @@ type SecretParameters struct {
 	// Selector for a Vault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+
+	// Specifies the name of the Key Vault Secret. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Key not usable before the provided UTC datetime (Y-m-d'T'H:M:S'Z').
 	// +kubebuilder:validation:Optional
@@ -134,6 +144,7 @@ type SecretStatus struct {
 type Secret struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.valueSecretRef)",message="spec.forProvider.valueSecretRef is a required parameter"
 	Spec   SecretSpec   `json:"spec"`
 	Status SecretStatus `json:"status,omitempty"`

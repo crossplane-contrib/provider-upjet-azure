@@ -8,6 +8,7 @@ metadata:
   name: uptest-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
+    name: custom-Non-RFC1123Name
     keyOpts:
       - decrypt
       - encrypt

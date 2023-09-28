@@ -351,6 +351,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  name:
+                    description: Specifies the name of the Key Vault Certificate.
+                      Changing this forces a new resource to be created.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -540,6 +544,10 @@ spec:
                           type: array
                       type: object
                     type: array
+                  name:
+                    description: Specifies the name of the Key Vault Certificate.
+                      Changing this forces a new resource to be created.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -707,6 +715,11 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.name is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
+                || (has(self.initProvider) && has(self.initProvider.name))'
           status:
             description: CertificateStatus defines the observed state of Certificate.
             properties:
@@ -958,6 +971,10 @@ spec:
                   keyVaultId:
                     description: The ID of the Key Vault where the Certificate should
                       be created. Changing this forces a new resource to be created.
+                    type: string
+                  name:
+                    description: Specifies the name of the Key Vault Certificate.
+                      Changing this forces a new resource to be created.
                     type: string
                   resourceManagerId:
                     description: The (Versioned) ID for this Key Vault Certificate.

@@ -130,6 +130,7 @@ metadata:
   name: examplekey
 spec:
   forProvider:
+    name: exampleKey
     keyOpts:
     - decrypt
     - encrypt
