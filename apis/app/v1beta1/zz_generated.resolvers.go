@@ -26,7 +26,7 @@ func (mg *ContainerApp) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
-		Extract:      rconfig.ExtractResourceID(),
+		Extract:      resource.ExtractResourceID(),
 		Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 		Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
 		To: reference.To{

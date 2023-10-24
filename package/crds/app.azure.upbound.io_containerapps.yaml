@@ -74,8 +74,8 @@ spec:
                       to host this Container App.
                     type: string
                   containerAppEnvironmentIdRef:
-                    description: Reference to a ContainerAppEnvironment to populate
-                      containerAppEnvironmentId.
+                    description: Reference to a ContainerAppEnvironment in app to
+                      populate containerAppEnvironmentId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,8 +109,8 @@ spec:
                     - name
                     type: object
                   containerAppEnvironmentIdSelector:
-                    description: Selector for a ContainerAppEnvironment to populate
-                      containerAppEnvironmentId.
+                    description: Selector for a ContainerAppEnvironment in app to
+                      populate containerAppEnvironmentId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
