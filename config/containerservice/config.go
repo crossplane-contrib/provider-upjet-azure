@@ -29,6 +29,19 @@ import (
 
 // Configure configures kubernetes group
 func Configure(p *config.Provider) {
+	p.AddResourceConfigurator("azurerm_container_app", func(r *config.Resource) {
+		r.TerraformResource.Schema["secret"].Elem.(*schema.Resource).Schema["value"].Sensitive = true
+		r.Kind = "ContainerApp"
+		r.References["container_app_environment_id"] = config.Reference{
+			Type:      "ContainerAppEnvironment",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_container_app_environment", func(r *config.Resource) {
+		r.Kind = "ContainerAppEnvironment"
+	})
+
 	p.AddResourceConfigurator("azurerm_kubernetes_cluster", func(r *config.Resource) {
 		// Note(ezgidemirel): Following fields are not marked as "sensitive" in Terraform cli schema output.
 		// We need to configure them explicitly to store in connectionDetails secret.

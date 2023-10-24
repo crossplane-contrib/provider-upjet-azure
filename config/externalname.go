@@ -367,6 +367,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_linux_web_app_slot": config.IdentifierFromProvider,
 
 	// containerservice
+	"azurerm_container_app":                config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.App/containerApps/{{ .external_name }}"),
+	"azurerm_container_app_environment":    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.App/managedEnvironments/{{ .external_name }}"),
 	"azurerm_kubernetes_cluster":           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerService/managedClusters/{{ .external_name }}"),
 	"azurerm_kubernetes_cluster_node_pool": config.TemplatedStringAsIdentifier("name", "{{ .parameters.kubernetes_cluster_id }}/agentPools/{{ .external_name }}"),
 

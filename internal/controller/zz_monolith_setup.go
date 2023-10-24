@@ -53,6 +53,8 @@ import (
 	subscription "github.com/upbound/provider-azure/internal/controller/apimanagement/subscription"
 	tag "github.com/upbound/provider-azure/internal/controller/apimanagement/tag"
 	user "github.com/upbound/provider-azure/internal/controller/apimanagement/user"
+	containerapp "github.com/upbound/provider-azure/internal/controller/app/containerapp"
+	containerappenvironment "github.com/upbound/provider-azure/internal/controller/app/containerappenvironment"
 	configuration "github.com/upbound/provider-azure/internal/controller/appconfiguration/configuration"
 	springcloudaccelerator "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudaccelerator"
 	springcloudactivedeployment "github.com/upbound/provider-azure/internal/controller/appplatform/springcloudactivedeployment"
@@ -772,6 +774,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		subscription.Setup,
 		tag.Setup,
 		user.Setup,
+		containerapp.Setup,
+		containerappenvironment.Setup,
 		configuration.Setup,
 		springcloudaccelerator.Setup,
 		springcloudactivedeployment.Setup,
