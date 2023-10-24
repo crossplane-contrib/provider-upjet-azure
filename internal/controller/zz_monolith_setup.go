@@ -380,6 +380,7 @@ import (
 	iothubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/iothubdataconnection"
 	labservicelab "github.com/upbound/provider-azure/internal/controller/labservices/labservicelab"
 	labserviceplan "github.com/upbound/provider-azure/internal/controller/labservices/labserviceplan"
+	loadtest "github.com/upbound/provider-azure/internal/controller/loadtestservice/loadtest"
 	appactioncustom "github.com/upbound/provider-azure/internal/controller/logic/appactioncustom"
 	appactionhttp "github.com/upbound/provider-azure/internal/controller/logic/appactionhttp"
 	appintegrationaccount "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccount"
@@ -1104,6 +1105,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		iothubdataconnection.Setup,
 		labservicelab.Setup,
 		labserviceplan.Setup,
+		loadtest.Setup,
 		appactioncustom.Setup,
 		appactionhttp.Setup,
 		appintegrationaccount.Setup,
