@@ -366,7 +366,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Web/sites/site1/slots/slot1
 	"azurerm_linux_web_app_slot": config.IdentifierFromProvider,
 
-	// container app
+	// containerapp
 	"azurerm_container_app":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.App/containerApps/{{ .external_name }}"),
 	"azurerm_container_app_environment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.App/managedEnvironments/{{ .external_name }}"),
 
