@@ -67,62 +67,62 @@ func (mg *ContainerApp) SetWriteConnectionSecretToReference(r *xpv1.SecretRefere
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
-// GetCondition of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+// GetCondition of this Environment.
+func (mg *Environment) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
 }
 
-// GetDeletionPolicy of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) GetDeletionPolicy() xpv1.DeletionPolicy {
+// GetDeletionPolicy of this Environment.
+func (mg *Environment) GetDeletionPolicy() xpv1.DeletionPolicy {
 	return mg.Spec.DeletionPolicy
 }
 
-// GetManagementPolicies of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) GetManagementPolicies() xpv1.ManagementPolicies {
+// GetManagementPolicies of this Environment.
+func (mg *Environment) GetManagementPolicies() xpv1.ManagementPolicies {
 	return mg.Spec.ManagementPolicies
 }
 
-// GetProviderConfigReference of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) GetProviderConfigReference() *xpv1.Reference {
+// GetProviderConfigReference of this Environment.
+func (mg *Environment) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-// GetPublishConnectionDetailsTo of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+// GetPublishConnectionDetailsTo of this Environment.
+func (mg *Environment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
 }
 
-// GetWriteConnectionSecretToReference of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+// GetWriteConnectionSecretToReference of this Environment.
+func (mg *Environment) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
 	return mg.Spec.WriteConnectionSecretToReference
 }
 
-// SetConditions of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) SetConditions(c ...xpv1.Condition) {
+// SetConditions of this Environment.
+func (mg *Environment) SetConditions(c ...xpv1.Condition) {
 	mg.Status.SetConditions(c...)
 }
 
-// SetDeletionPolicy of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+// SetDeletionPolicy of this Environment.
+func (mg *Environment) SetDeletionPolicy(r xpv1.DeletionPolicy) {
 	mg.Spec.DeletionPolicy = r
 }
 
-// SetManagementPolicies of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) SetManagementPolicies(r xpv1.ManagementPolicies) {
+// SetManagementPolicies of this Environment.
+func (mg *Environment) SetManagementPolicies(r xpv1.ManagementPolicies) {
 	mg.Spec.ManagementPolicies = r
 }
 
-// SetProviderConfigReference of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) SetProviderConfigReference(r *xpv1.Reference) {
+// SetProviderConfigReference of this Environment.
+func (mg *Environment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
 }
 
-// SetPublishConnectionDetailsTo of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+// SetPublishConnectionDetailsTo of this Environment.
+func (mg *Environment) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
 	mg.Spec.PublishConnectionDetailsTo = r
 }
 
-// SetWriteConnectionSecretToReference of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+// SetWriteConnectionSecretToReference of this Environment.
+func (mg *Environment) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }

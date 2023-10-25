@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: containerappenvironments.app.azure.upbound.io
+  name: environments.containerapp.azure.upbound.io
 spec:
-  group: app.azure.upbound.io
+  group: containerapp.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: ContainerAppEnvironment
-    listKind: ContainerAppEnvironmentList
-    plural: containerappenvironments
-    singular: containerappenvironment
+    kind: Environment
+    listKind: EnvironmentList
+    plural: environments
+    singular: environment
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: ContainerAppEnvironment is the Schema for the ContainerAppEnvironments
-          API. Manages a Container App Environment.
+        description: Environment is the Schema for the Environments API. Manages a
+          Container App Environment.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,8 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: ContainerAppEnvironmentSpec defines the desired state of
-              ContainerAppEnvironment
+            description: EnvironmentSpec defines the desired state of Environment
             properties:
               deletionPolicy:
                 default: Delete
@@ -526,8 +525,7 @@ spec:
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
                 || (has(self.initProvider) && has(self.initProvider.location))'
           status:
-            description: ContainerAppEnvironmentStatus defines the observed state
-              of ContainerAppEnvironment.
+            description: EnvironmentStatus defines the observed state of Environment.
             properties:
               atProvider:
                 properties:

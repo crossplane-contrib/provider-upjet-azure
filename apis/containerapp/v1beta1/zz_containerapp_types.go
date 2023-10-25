@@ -95,16 +95,16 @@ type ContainerAppParameters struct {
 
 	// The ID of the Container App Environment within which this Container App should exist. Changing this forces a new resource to be created.
 	// The ID of the Container App Environment to host this Container App.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/app/v1beta1.ContainerAppEnvironment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerapp/v1beta1.Environment
 	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`
 
-	// Reference to a ContainerAppEnvironment in app to populate containerAppEnvironmentId.
+	// Reference to a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentIDRef *v1.Reference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
 
-	// Selector for a ContainerAppEnvironment in app to populate containerAppEnvironmentId.
+	// Selector for a Environment in containerapp to populate containerAppEnvironmentId.
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentIDSelector *v1.Selector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
 

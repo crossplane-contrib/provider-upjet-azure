@@ -4,9 +4,9 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: containerapps.app.azure.upbound.io
+  name: containerapps.containerapp.azure.upbound.io
 spec:
-  group: app.azure.upbound.io
+  group: containerapp.azure.upbound.io
   names:
     categories:
     - crossplane
@@ -74,8 +74,8 @@ spec:
                       to host this Container App.
                     type: string
                   containerAppEnvironmentIdRef:
-                    description: Reference to a ContainerAppEnvironment in app to
-                      populate containerAppEnvironmentId.
+                    description: Reference to a Environment in containerapp to populate
+                      containerAppEnvironmentId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -109,8 +109,8 @@ spec:
                     - name
                     type: object
                   containerAppEnvironmentIdSelector:
-                    description: Selector for a ContainerAppEnvironment in app to
-                      populate containerAppEnvironmentId.
+                    description: Selector for a Environment in containerapp to populate
+                      containerAppEnvironmentId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the

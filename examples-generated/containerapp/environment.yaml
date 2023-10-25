@@ -1,34 +1,8 @@
-apiVersion: app.azure.upbound.io/v1beta1
-kind: ContainerApp
+apiVersion: containerapp.azure.upbound.io/v1beta1
+kind: Environment
 metadata:
   annotations:
-    meta.upbound.io/example-id: app/v1beta1/containerapp
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    containerAppEnvironmentIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    revisionMode: Single
-    template:
-    - container:
-      - cpu: 0.25
-        image: mcr.microsoft.com/azuredocs/containerapps-helloworld:latest
-        memory: 0.5Gi
-        name: examplecontainerapp
-
----
-
-apiVersion: app.azure.upbound.io/v1beta1
-kind: ContainerAppEnvironment
-metadata:
-  annotations:
-    meta.upbound.io/example-id: app/v1beta1/containerapp
+    meta.upbound.io/example-id: containerapp/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -48,7 +22,7 @@ apiVersion: operationalinsights.azure.upbound.io/v1beta1
 kind: Workspace
 metadata:
   annotations:
-    meta.upbound.io/example-id: app/v1beta1/containerapp
+    meta.upbound.io/example-id: containerapp/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -67,7 +41,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: app/v1beta1/containerapp
+    meta.upbound.io/example-id: containerapp/v1beta1/environment
   labels:
     testing.upbound.io/example-name: example
   name: example

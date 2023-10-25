@@ -30,8 +30,8 @@ func (mg *ContainerApp) ResolveReferences(ctx context.Context, c client.Reader) 
 		Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
 		Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
 		To: reference.To{
-			List:    &ContainerAppEnvironmentList{},
-			Managed: &ContainerAppEnvironment{},
+			List:    &EnvironmentList{},
+			Managed: &Environment{},
 		},
 	})
 	if err != nil {
@@ -59,8 +59,8 @@ func (mg *ContainerApp) ResolveReferences(ctx context.Context, c client.Reader) 
 	return nil
 }
 
-// ResolveReferences of this ContainerAppEnvironment.
-func (mg *ContainerAppEnvironment) ResolveReferences(ctx context.Context, c client.Reader) error {
+// ResolveReferences of this Environment.
+func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse

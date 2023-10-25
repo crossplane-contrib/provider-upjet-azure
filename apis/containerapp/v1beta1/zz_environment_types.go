@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type ContainerAppEnvironmentInitParameters struct {
+type EnvironmentInitParameters struct {
 
 	// Should the Container Environment operate in Internal Load Balancing Mode? Defaults to false. Changing this forces a new resource to be created.
 	// Should the Container Environment operate in Internal Load Balancing Mode? Defaults to `false`. **Note:** can only be set to `true` if `infrastructure_subnet_id` is specified.
@@ -26,7 +26,7 @@ type ContainerAppEnvironmentInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type ContainerAppEnvironmentObservation struct {
+type EnvironmentObservation struct {
 
 	// The default, publicly resolvable, name of this Container App Environment.
 	// The default publicly resolvable name of this Container App Environment
@@ -73,7 +73,7 @@ type ContainerAppEnvironmentObservation struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-type ContainerAppEnvironmentParameters struct {
+type EnvironmentParameters struct {
 
 	// The existing Subnet to use for the Container Apps Control Plane. Changing this forces a new resource to be created.
 	// The existing Subnet to use for the Container Apps Control Plane. **NOTE:** The Subnet must have a `/21` or larger address space.
@@ -132,10 +132,10 @@ type ContainerAppEnvironmentParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
-// ContainerAppEnvironmentSpec defines the desired state of ContainerAppEnvironment
-type ContainerAppEnvironmentSpec struct {
+// EnvironmentSpec defines the desired state of Environment
+type EnvironmentSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     ContainerAppEnvironmentParameters `json:"forProvider"`
+	ForProvider     EnvironmentParameters `json:"forProvider"`
 	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
 	// unless the relevant Crossplane feature flag is enabled, and may be
 	// changed or removed without notice.
@@ -147,49 +147,49 @@ type ContainerAppEnvironmentSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider ContainerAppEnvironmentInitParameters `json:"initProvider,omitempty"`
+	InitProvider EnvironmentInitParameters `json:"initProvider,omitempty"`
 }
 
-// ContainerAppEnvironmentStatus defines the observed state of ContainerAppEnvironment.
-type ContainerAppEnvironmentStatus struct {
+// EnvironmentStatus defines the observed state of Environment.
+type EnvironmentStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        ContainerAppEnvironmentObservation `json:"atProvider,omitempty"`
+	AtProvider        EnvironmentObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// ContainerAppEnvironment is the Schema for the ContainerAppEnvironments API. Manages a Container App Environment.
+// Environment is the Schema for the Environments API. Manages a Container App Environment.
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}
-type ContainerAppEnvironment struct {
+type Environment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
-	Spec   ContainerAppEnvironmentSpec   `json:"spec"`
-	Status ContainerAppEnvironmentStatus `json:"status,omitempty"`
+	Spec   EnvironmentSpec   `json:"spec"`
+	Status EnvironmentStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// ContainerAppEnvironmentList contains a list of ContainerAppEnvironments
-type ContainerAppEnvironmentList struct {
+// EnvironmentList contains a list of Environments
+type EnvironmentList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []ContainerAppEnvironment `json:"items"`
+	Items           []Environment `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	ContainerAppEnvironment_Kind             = "ContainerAppEnvironment"
-	ContainerAppEnvironment_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: ContainerAppEnvironment_Kind}.String()
-	ContainerAppEnvironment_KindAPIVersion   = ContainerAppEnvironment_Kind + "." + CRDGroupVersion.String()
-	ContainerAppEnvironment_GroupVersionKind = CRDGroupVersion.WithKind(ContainerAppEnvironment_Kind)
+	Environment_Kind             = "Environment"
+	Environment_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: Environment_Kind}.String()
+	Environment_KindAPIVersion   = Environment_Kind + "." + CRDGroupVersion.String()
+	Environment_GroupVersionKind = CRDGroupVersion.WithKind(Environment_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&ContainerAppEnvironment{}, &ContainerAppEnvironmentList{})
+	SchemeBuilder.Register(&Environment{}, &EnvironmentList{})
 }

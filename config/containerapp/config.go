@@ -14,27 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-package containerservice
+package containerapp
 
 import (
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/upbound/upjet/pkg/config"
-
-	"github.com/upbound/provider-azure/apis/rconfig"
 )
 
 // Configure configures kubernetes group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_container_app", func(r *config.Resource) {
-		r.TerraformResource.Schema["secret"].Elem.(*schema.Resource).Schema["value"].Sensitive = true
-		r.Kind = "ContainerApp"
-		r.References["container_app_environment_id"] = config.Reference{
-			Type:      "ContainerAppEnvironment",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
-		}
+		r.ShortGroup = "containerapp"
 	})
 
 	p.AddResourceConfigurator("azurerm_container_app_environment", func(r *config.Resource) {
-		r.Kind = "ContainerAppEnvironment"
+		r.ShortGroup = "containerapp"
+		r.Kind = "Environment"
 	})
 }

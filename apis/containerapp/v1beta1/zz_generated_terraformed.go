@@ -97,18 +97,18 @@ func (tr *ContainerApp) GetTerraformSchemaVersion() int {
 	return 0
 }
 
-// GetTerraformResourceType returns Terraform resource type for this ContainerAppEnvironment
-func (mg *ContainerAppEnvironment) GetTerraformResourceType() string {
+// GetTerraformResourceType returns Terraform resource type for this Environment
+func (mg *Environment) GetTerraformResourceType() string {
 	return "azurerm_container_app_environment"
 }
 
-// GetConnectionDetailsMapping for this ContainerAppEnvironment
-func (tr *ContainerAppEnvironment) GetConnectionDetailsMapping() map[string]string {
+// GetConnectionDetailsMapping for this Environment
+func (tr *Environment) GetConnectionDetailsMapping() map[string]string {
 	return nil
 }
 
-// GetObservation of this ContainerAppEnvironment
-func (tr *ContainerAppEnvironment) GetObservation() (map[string]any, error) {
+// GetObservation of this Environment
+func (tr *Environment) GetObservation() (map[string]any, error) {
 	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
 	if err != nil {
 		return nil, err
@@ -117,8 +117,8 @@ func (tr *ContainerAppEnvironment) GetObservation() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(o, &base)
 }
 
-// SetObservation for this ContainerAppEnvironment
-func (tr *ContainerAppEnvironment) SetObservation(obs map[string]any) error {
+// SetObservation for this Environment
+func (tr *Environment) SetObservation(obs map[string]any) error {
 	p, err := json.TFParser.Marshal(obs)
 	if err != nil {
 		return err
@@ -126,16 +126,16 @@ func (tr *ContainerAppEnvironment) SetObservation(obs map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
 }
 
-// GetID returns ID of underlying Terraform resource of this ContainerAppEnvironment
-func (tr *ContainerAppEnvironment) GetID() string {
+// GetID returns ID of underlying Terraform resource of this Environment
+func (tr *Environment) GetID() string {
 	if tr.Status.AtProvider.ID == nil {
 		return ""
 	}
 	return *tr.Status.AtProvider.ID
 }
 
-// GetParameters of this ContainerAppEnvironment
-func (tr *ContainerAppEnvironment) GetParameters() (map[string]any, error) {
+// GetParameters of this Environment
+func (tr *Environment) GetParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
 	if err != nil {
 		return nil, err
@@ -144,8 +144,8 @@ func (tr *ContainerAppEnvironment) GetParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// SetParameters for this ContainerAppEnvironment
-func (tr *ContainerAppEnvironment) SetParameters(params map[string]any) error {
+// SetParameters for this Environment
+func (tr *Environment) SetParameters(params map[string]any) error {
 	p, err := json.TFParser.Marshal(params)
 	if err != nil {
 		return err
@@ -153,8 +153,8 @@ func (tr *ContainerAppEnvironment) SetParameters(params map[string]any) error {
 	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
 }
 
-// GetInitParameters of this ContainerAppEnvironment
-func (tr *ContainerAppEnvironment) GetInitParameters() (map[string]any, error) {
+// GetInitParameters of this Environment
+func (tr *Environment) GetInitParameters() (map[string]any, error) {
 	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
 	if err != nil {
 		return nil, err
@@ -163,10 +163,10 @@ func (tr *ContainerAppEnvironment) GetInitParameters() (map[string]any, error) {
 	return base, json.TFParser.Unmarshal(p, &base)
 }
 
-// LateInitialize this ContainerAppEnvironment using its observed tfState.
+// LateInitialize this Environment using its observed tfState.
 // returns True if there are any spec changes for the resource.
-func (tr *ContainerAppEnvironment) LateInitialize(attrs []byte) (bool, error) {
-	params := &ContainerAppEnvironmentParameters{}
+func (tr *Environment) LateInitialize(attrs []byte) (bool, error) {
+	params := &EnvironmentParameters{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
@@ -177,6 +177,6 @@ func (tr *ContainerAppEnvironment) LateInitialize(attrs []byte) (bool, error) {
 }
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
-func (tr *ContainerAppEnvironment) GetTerraformSchemaVersion() int {
+func (tr *Environment) GetTerraformSchemaVersion() int {
 	return 0
 }

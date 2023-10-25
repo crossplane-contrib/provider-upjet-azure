@@ -13,7 +13,6 @@ import (
 	v1beta1 "github.com/upbound/provider-azure/apis/alertsmanagement/v1beta1"
 	v1beta1analysisservices "github.com/upbound/provider-azure/apis/analysisservices/v1beta1"
 	v1beta1apimanagement "github.com/upbound/provider-azure/apis/apimanagement/v1beta1"
-	v1beta1app "github.com/upbound/provider-azure/apis/app/v1beta1"
 	v1beta1appconfiguration "github.com/upbound/provider-azure/apis/appconfiguration/v1beta1"
 	v1beta1appplatform "github.com/upbound/provider-azure/apis/appplatform/v1beta1"
 	v1beta1attestation "github.com/upbound/provider-azure/apis/attestation/v1beta1"
@@ -30,6 +29,7 @@ import (
 	v1beta1compute "github.com/upbound/provider-azure/apis/compute/v1beta1"
 	v1beta1confidentialledger "github.com/upbound/provider-azure/apis/confidentialledger/v1beta1"
 	v1beta1consumption "github.com/upbound/provider-azure/apis/consumption/v1beta1"
+	v1beta1containerapp "github.com/upbound/provider-azure/apis/containerapp/v1beta1"
 	v1beta1containerregistry "github.com/upbound/provider-azure/apis/containerregistry/v1beta1"
 	v1beta1containerservice "github.com/upbound/provider-azure/apis/containerservice/v1beta1"
 	v1beta1cosmosdb "github.com/upbound/provider-azure/apis/cosmosdb/v1beta1"
@@ -113,7 +113,6 @@ func init() {
 		v1beta1.SchemeBuilder.AddToScheme,
 		v1beta1analysisservices.SchemeBuilder.AddToScheme,
 		v1beta1apimanagement.SchemeBuilder.AddToScheme,
-		v1beta1app.SchemeBuilder.AddToScheme,
 		v1beta1appconfiguration.SchemeBuilder.AddToScheme,
 		v1beta1appplatform.SchemeBuilder.AddToScheme,
 		v1beta1attestation.SchemeBuilder.AddToScheme,
@@ -130,6 +129,7 @@ func init() {
 		v1beta1compute.SchemeBuilder.AddToScheme,
 		v1beta1confidentialledger.SchemeBuilder.AddToScheme,
 		v1beta1consumption.SchemeBuilder.AddToScheme,
+		v1beta1containerapp.SchemeBuilder.AddToScheme,
 		v1beta1containerregistry.SchemeBuilder.AddToScheme,
 		v1beta1containerservice.SchemeBuilder.AddToScheme,
 		v1beta1cosmosdb.SchemeBuilder.AddToScheme,

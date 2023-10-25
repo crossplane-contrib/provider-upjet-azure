@@ -90,7 +90,7 @@ func main() {
 
 	mgr, err := ctrl.NewManager(cfg, ctrl.Options{
 		LeaderElection:   *leaderElection,
-		LeaderElectionID: "crossplane-leader-election-provider-azure-app",
+		LeaderElectionID: "crossplane-leader-election-provider-azure-containerapp",
 		Cache: cache.Options{
 			SyncPeriod: syncInterval,
 		},
@@ -162,6 +162,6 @@ func main() {
 	}
 
 	rand.Seed(time.Now().UnixNano())
-	kingpin.FatalIfError(controller.Setup_app(mgr, o), "Cannot setup Azure controllers")
+	kingpin.FatalIfError(controller.Setup_containerapp(mgr, o), "Cannot setup Azure controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
 }

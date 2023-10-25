@@ -1,8 +1,8 @@
-apiVersion: app.azure.upbound.io/v1beta1
+apiVersion: containerapp.azure.upbound.io/v1beta1
 kind: ContainerApp
 metadata:
   annotations:
-    meta.upbound.io/example-id: app/v1beta1/containerapp
+    meta.upbound.io/example-id: containerapp/v1beta1/containerapp
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -24,11 +24,11 @@ spec:
 
 ---
 
-apiVersion: app.azure.upbound.io/v1beta1
-kind: ContainerAppEnvironment
+apiVersion: containerapp.azure.upbound.io/v1beta1
+kind: Environment
 metadata:
   annotations:
-    meta.upbound.io/example-id: app/v1beta1/containerapp
+    meta.upbound.io/example-id: containerapp/v1beta1/containerapp
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -48,7 +48,7 @@ apiVersion: operationalinsights.azure.upbound.io/v1beta1
 kind: Workspace
 metadata:
   annotations:
-    meta.upbound.io/example-id: app/v1beta1/containerapp
+    meta.upbound.io/example-id: containerapp/v1beta1/containerapp
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -67,7 +67,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: app/v1beta1/containerapp
+    meta.upbound.io/example-id: containerapp/v1beta1/containerapp
   labels:
     testing.upbound.io/example-name: example
   name: example

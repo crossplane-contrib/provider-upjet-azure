@@ -19,7 +19,7 @@ import (
 	"github.com/upbound/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	v1beta1 "github.com/upbound/provider-azure/apis/app/v1beta1"
+	v1beta1 "github.com/upbound/provider-azure/apis/containerapp/v1beta1"
 	features "github.com/upbound/provider-azure/internal/features"
 )
 

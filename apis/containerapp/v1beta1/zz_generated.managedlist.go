@@ -7,8 +7,8 @@ package v1beta1
 
 import resource "github.com/crossplane/crossplane-runtime/pkg/resource"
 
-// GetItems of this ContainerAppEnvironmentList.
-func (l *ContainerAppEnvironmentList) GetItems() []resource.Managed {
+// GetItems of this ContainerAppList.
+func (l *ContainerAppList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
@@ -16,8 +16,8 @@ func (l *ContainerAppEnvironmentList) GetItems() []resource.Managed {
 	return items
 }
 
-// GetItems of this ContainerAppList.
-func (l *ContainerAppList) GetItems() []resource.Managed {
+// GetItems of this EnvironmentList.
+func (l *EnvironmentList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
