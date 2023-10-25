@@ -36,6 +36,7 @@ import (
 	"github.com/upbound/provider-azure/config/common"
 	"github.com/upbound/provider-azure/config/compute"
 	"github.com/upbound/provider-azure/config/consumption"
+	"github.com/upbound/provider-azure/config/containerapp"
 	"github.com/upbound/provider-azure/config/containerregistry"
 	"github.com/upbound/provider-azure/config/containerservice"
 	"github.com/upbound/provider-azure/config/cosmosdb"
@@ -194,6 +195,7 @@ func GetProvider() *tjconfig.Provider {
 		cache.Configure,
 		resource.Configure,
 		resources.Configure,
+		containerapp.Configure,
 		containerservice.Configure,
 		postgresql.Configure,
 		cosmosdb.Configure,

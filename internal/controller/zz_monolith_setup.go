@@ -159,6 +159,8 @@ import (
 	budgetmanagementgroup "github.com/upbound/provider-azure/internal/controller/consumption/budgetmanagementgroup"
 	budgetresourcegroup "github.com/upbound/provider-azure/internal/controller/consumption/budgetresourcegroup"
 	budgetsubscription "github.com/upbound/provider-azure/internal/controller/consumption/budgetsubscription"
+	containerapp "github.com/upbound/provider-azure/internal/controller/containerapp/containerapp"
+	environment "github.com/upbound/provider-azure/internal/controller/containerapp/environment"
 	agentpool "github.com/upbound/provider-azure/internal/controller/containerregistry/agentpool"
 	containerconnectedregistry "github.com/upbound/provider-azure/internal/controller/containerregistry/containerconnectedregistry"
 	registry "github.com/upbound/provider-azure/internal/controller/containerregistry/registry"
@@ -882,6 +884,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		budgetmanagementgroup.Setup,
 		budgetresourcegroup.Setup,
 		budgetsubscription.Setup,
+		containerapp.Setup,
+		environment.Setup,
 		agentpool.Setup,
 		containerconnectedregistry.Setup,
 		registry.Setup,
