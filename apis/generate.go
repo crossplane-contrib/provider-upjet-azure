@@ -32,7 +32,7 @@ limitations under the License.
 //go:generate bash -c "find ../cmd/provider -type d -maxdepth 1 -mindepth 1 -empty -delete"
 
 // Scrape metadata from Terraform registry
-//go:generate go run github.com/upbound/upjet/cmd/scraper -n hashicorp/terraform-provider-azurerm -r ../.work/terraform-provider-azurerm/website/docs/r -o ../config/provider-metadata.yaml
+//go:generate go run github.com/crossplane/upjet/cmd/scraper -n hashicorp/terraform-provider-azurerm -r ../.work/terraform-provider-azurerm/website/docs/r -o ../config/provider-metadata.yaml
 
 // Run Upjet generator
 //go:generate go run ../cmd/generator/main.go ..
@@ -50,5 +50,5 @@ import (
 
 	_ "github.com/crossplane/crossplane-tools/cmd/angryjet" //nolint:typecheck
 
-	_ "github.com/upbound/upjet/cmd/scraper"
+	_ "github.com/crossplane/upjet/cmd/scraper"
 )

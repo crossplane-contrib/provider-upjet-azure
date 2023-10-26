@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -47,7 +51,7 @@ type CapacityReservationParameters struct {
 
 	// The ID of the Capacity Reservation Group where the Capacity Reservation exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.CapacityReservationGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
 

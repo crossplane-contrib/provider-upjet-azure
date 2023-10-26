@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -96,7 +100,7 @@ type ContainerAppParameters struct {
 	// The ID of the Container App Environment within which this Container App should exist. Changing this forces a new resource to be created.
 	// The ID of the Container App Environment to host this Container App.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerapp/v1beta1.Environment
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`
 

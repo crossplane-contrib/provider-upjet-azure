@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -45,7 +49,7 @@ type AzureadAdministratorParameters struct {
 
 	// The login username of the Azure AD Administrator of this SQL Server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	LoginUsername *string `json:"loginUsername,omitempty" tf:"login_username,omitempty"`
 
@@ -59,7 +63,7 @@ type AzureadAdministratorParameters struct {
 
 	// The object id of the Azure AD Administrator of this SQL Server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("principal_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("principal_id",true)
 	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
@@ -231,7 +235,7 @@ type MSSQLServerParameters struct {
 
 	// Specifies the primary user managed identity id. Required if type is UserAssigned and should be combined with identity_ids.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 
@@ -266,7 +270,7 @@ type MSSQLServerParameters struct {
 
 	// The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>) to be used as the Customer Managed Key(CMK/BYOK) for the Transparent Data Encryption(TDE) layer.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TransparentDataEncryptionKeyVaultKeyID *string `json:"transparentDataEncryptionKeyVaultKeyId,omitempty" tf:"transparent_data_encryption_key_vault_key_id,omitempty"`
 

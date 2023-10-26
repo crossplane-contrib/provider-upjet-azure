@@ -17,7 +17,7 @@ limitations under the License.
 package costmanagement
 
 import (
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 )
 
 // Configure configures costmanagement group
@@ -25,7 +25,7 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_subscription_cost_management_export", func(r *config.Resource) {
 		r.References["subscription_id"] = config.Reference{
 			Type:      "github.com/upbound/provider-azure/apis/azure/v1beta1.Subscription",
-			Extractor: "github.com/upbound/upjet/pkg/resource.ExtractResourceID()",
+			Extractor: "github.com/crossplane/upjet/pkg/resource.ExtractResourceID()",
 		}
 	})
 }

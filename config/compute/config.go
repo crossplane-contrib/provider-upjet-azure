@@ -7,7 +7,7 @@ package compute
 import (
 	"github.com/upbound/provider-azure/apis/rconfig"
 
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 )
 
 // Configure configures cosmodb group

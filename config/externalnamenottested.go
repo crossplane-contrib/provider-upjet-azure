@@ -1,6 +1,6 @@
 package config
 
-import "github.com/upbound/upjet/pkg/config"
+import "github.com/crossplane/upjet/pkg/config"
 
 // ExternalNameNotTestedConfigs contains no-tested configurations for this
 // provider.

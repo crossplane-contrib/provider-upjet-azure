@@ -3,7 +3,7 @@ package alertsmanagement
 import (
 	"github.com/upbound/provider-azure/apis/rconfig"
 
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 )
 
 // Configure alertsmanagement group

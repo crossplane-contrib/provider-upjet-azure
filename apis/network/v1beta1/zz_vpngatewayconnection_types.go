@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -89,7 +93,7 @@ type VPNGatewayConnectionParameters struct {
 
 	// The ID of the remote VPN Site, which will connect to the VPN Gateway. Changing this forces a new VPN Gateway Connection to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VPNSite
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RemoteVPNSiteID *string `json:"remoteVpnSiteId,omitempty" tf:"remote_vpn_site_id,omitempty"`
 
@@ -111,7 +115,7 @@ type VPNGatewayConnectionParameters struct {
 
 	// The ID of the VPN Gateway that this VPN Gateway Connection belongs to. Changing this forces a new VPN Gateway Connection to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VPNGateway
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPNGatewayID *string `json:"vpnGatewayId,omitempty" tf:"vpn_gateway_id,omitempty"`
 

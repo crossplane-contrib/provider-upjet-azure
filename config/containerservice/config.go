@@ -19,9 +19,9 @@ package containerservice
 import (
 	"encoding/base64"
 
+	"github.com/crossplane/upjet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/pkg/errors"
-	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/provider-azure/apis/rconfig"
 	"github.com/upbound/provider-azure/config/common"

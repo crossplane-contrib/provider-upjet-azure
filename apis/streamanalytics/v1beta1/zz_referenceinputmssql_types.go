@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -120,7 +124,7 @@ type ReferenceInputMSSQLParameters struct {
 
 	// The fully qualified domain name of the MS SQL server.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta1.MSSQLServer
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("fully_qualified_domain_name",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("fully_qualified_domain_name",true)
 	// +kubebuilder:validation:Optional
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 

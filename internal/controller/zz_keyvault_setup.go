@@ -1,13 +1,13 @@
-/*
-Copyright 2021 Upbound Inc.
-*/
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
 
 package controller
 
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/upbound/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/controller"
 
 	accesspolicy "github.com/upbound/provider-azure/internal/controller/keyvault/accesspolicy"
 	certificate "github.com/upbound/provider-azure/internal/controller/keyvault/certificate"

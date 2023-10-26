@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -44,7 +48,7 @@ type BackupInstancePostgreSQLParameters struct {
 
 	// The ID of the Backup Policy.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta1.BackupPolicyPostgreSQL
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
@@ -58,7 +62,7 @@ type BackupInstancePostgreSQLParameters struct {
 
 	// The ID or versionless ID of the key vault secret which stores the connection string of the database.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Secret
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("versionless_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("versionless_id",true)
 	// +kubebuilder:validation:Optional
 	DatabaseCredentialKeyVaultSecretID *string `json:"databaseCredentialKeyVaultSecretId,omitempty" tf:"database_credential_key_vault_secret_id,omitempty"`
 
@@ -72,7 +76,7 @@ type BackupInstancePostgreSQLParameters struct {
 
 	// The ID of the source database. Changing this forces a new Backup Instance PostgreSQL to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbforpostgresql/v1beta1.Database
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
 
@@ -90,7 +94,7 @@ type BackupInstancePostgreSQLParameters struct {
 
 	// The ID of the Backup Vault within which the PostgreSQL Backup Instance should exist. Changing this forces a new Backup Instance PostgreSQL to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta1.BackupVault
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -32,7 +36,7 @@ type FrontdoorCustomDomainAssociationParameters struct {
 
 	// The ID of the Front Door Custom Domain that should be managed by the association resource. Changing this forces a new association resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorCustomDomain
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorCustomDomainID *string `json:"cdnFrontdoorCustomDomainId,omitempty" tf:"cdn_frontdoor_custom_domain_id,omitempty"`
 
@@ -46,7 +50,7 @@ type FrontdoorCustomDomainAssociationParameters struct {
 
 	// One or more IDs of the Front Door Route to which the Front Door Custom Domain is associated with.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorRoute
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorRouteIds []*string `json:"cdnFrontdoorRouteIds,omitempty" tf:"cdn_frontdoor_route_ids,omitempty"`
 

@@ -17,7 +17,7 @@ limitations under the License.
 package logic
 
 import (
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 
 	"github.com/upbound/provider-azure/apis/rconfig"
 )
@@ -29,7 +29,7 @@ func Configure(p *config.Provider) {
 
 		r.References["virtual_network_subnet_ids"] = config.Reference{
 			Type:      rconfig.APISPackagePath + "/network/v1beta1.Subnet",
-			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("id",true)`,
+			Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("id",true)`,
 		}
 	})
 }

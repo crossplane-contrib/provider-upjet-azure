@@ -17,7 +17,7 @@ limitations under the License.
 package eventhub
 
 import (
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 )
 
 // Configure configures resource group

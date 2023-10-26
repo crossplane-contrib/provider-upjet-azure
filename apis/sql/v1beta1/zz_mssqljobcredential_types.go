@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -35,7 +39,7 @@ type MSSQLJobCredentialParameters struct {
 
 	// The ID of the Elastic Job Agent. Changing this forces a new Elastic Job Credential to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta1.MSSQLJobAgent
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	JobAgentID *string `json:"jobAgentId,omitempty" tf:"job_agent_id,omitempty"`
 
