@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -154,7 +158,7 @@ type CustomerManagedKeyParameters struct {
 
 	// The Azure Key Vault Key Versionless ID to be used as the Customer Managed Key (CMK) for double encryption (e.g. https://example-keyvault.vault.azure.net/type/cmk/).
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("versionless_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("versionless_id",true)
 	// +kubebuilder:validation:Optional
 	KeyVersionlessID *string `json:"keyVersionlessId,omitempty" tf:"key_versionless_id,omitempty"`
 
@@ -528,7 +532,7 @@ type WorkspaceParameters struct {
 
 	// Specifies the ID of storage data lake gen2 filesystem resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.DataLakeGen2FileSystem
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageDataLakeGen2FileSystemID *string `json:"storageDataLakeGen2FilesystemId,omitempty" tf:"storage_data_lake_gen2_filesystem_id,omitempty"`
 

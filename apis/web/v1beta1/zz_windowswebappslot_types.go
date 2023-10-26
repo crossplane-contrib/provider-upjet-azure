@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -2322,7 +2326,7 @@ type WindowsWebAppSlotParameters struct {
 
 	// The ID of the Windows Web App this Deployment Slot will be part of. Changing this forces a new Windows Web App to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.WindowsWebApp
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AppServiceID *string `json:"appServiceId,omitempty" tf:"app_service_id,omitempty"`
 

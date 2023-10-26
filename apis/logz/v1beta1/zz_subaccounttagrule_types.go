@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -53,7 +57,7 @@ type SubAccountTagRuleParameters struct {
 
 	// The ID of the Logz Sub Account. Changing this forces a new Logz Sub Account Tag Rule to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logz/v1beta1.SubAccount
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogzSubAccountID *string `json:"logzSubAccountId,omitempty" tf:"logz_sub_account_id,omitempty"`
 

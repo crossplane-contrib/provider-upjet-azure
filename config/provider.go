@@ -20,8 +20,8 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
-	tjconfig "github.com/upbound/upjet/pkg/config"
-	"github.com/upbound/upjet/pkg/registry/reference"
+	tjconfig "github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/registry/reference"
 
 	"github.com/upbound/provider-azure/config/alertsmanagement"
 	"github.com/upbound/provider-azure/config/apimanagement"

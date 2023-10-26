@@ -17,7 +17,7 @@ limitations under the License.
 package security
 
 import (
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 
 	"github.com/upbound/provider-azure/apis/rconfig"
 )
@@ -38,7 +38,7 @@ func Configure(p *config.Provider) {
 
 		r.References["iothub_ids"] = config.Reference{
 			Type:      rconfig.APISPackagePath + "/devices/v1beta1.IOTHub",
-			Extractor: `github.com/upbound/upjet/pkg/resource.ExtractParamPath("id",true)`,
+			Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("id",true)`,
 		}
 	})
 }
