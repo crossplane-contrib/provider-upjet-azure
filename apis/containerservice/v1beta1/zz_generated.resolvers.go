@@ -10,7 +10,8 @@ import (
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
-	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta12 "github.com/upbound/provider-azure/apis/azure/v1beta1"
+	v1beta11 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
 	v1beta1 "github.com/upbound/provider-azure/apis/network/v1beta1"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
@@ -113,6 +114,24 @@ func (mg *KubernetesCluster) ResolveReferences(ctx context.Context, c client.Rea
 		mg.Spec.ForProvider.IngressApplicationGateway[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.KeyManagementService); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyManagementService[i3].KeyVaultKeyID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.KeyManagementService[i3].KeyVaultKeyIDRef,
+			Selector:     mg.Spec.ForProvider.KeyManagementService[i3].KeyVaultKeyIDSelector,
+			To: reference.To{
+				List:    &v1beta11.KeyList{},
+				Managed: &v1beta11.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.KeyManagementService[i3].KeyVaultKeyID")
+		}
+		mg.Spec.ForProvider.KeyManagementService[i3].KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.KeyManagementService[i3].KeyVaultKeyIDRef = rsp.ResolvedReference
+
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateDNSZoneID),
 		Extract:      resource.ExtractResourceID(),
@@ -135,8 +154,8 @@ func (mg *KubernetesCluster) ResolveReferences(ctx context.Context, c client.Rea
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta12.ResourceGroupList{},
+			Managed: &v1beta12.ResourceGroup{},
 		},
 	})
 	if err != nil {
@@ -219,8 +238,8 @@ func (mg *KubernetesFleetManager) ResolveReferences(ctx context.Context, c clien
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
 		To: reference.To{
-			List:    &v1beta11.ResourceGroupList{},
-			Managed: &v1beta11.ResourceGroup{},
+			List:    &v1beta12.ResourceGroupList{},
+			Managed: &v1beta12.ResourceGroup{},
 		},
 	})
 	if err != nil {

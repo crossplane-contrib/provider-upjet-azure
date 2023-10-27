@@ -49,6 +49,11 @@ func Configure(p *config.Provider) {
 		r.TerraformResource.Schema["kube_config"].Elem.(*schema.Resource).
 			Schema["password"].Sensitive = true
 
+		r.References["key_management_service.key_vault_key_id"] = config.Reference{
+			Type:      rconfig.VaultKeyReferencePath,
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+
 		r.Kind = "KubernetesCluster"
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"kubelet_identity", "private_link_enabled",
