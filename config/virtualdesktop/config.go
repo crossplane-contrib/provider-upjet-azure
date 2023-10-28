@@ -20,41 +20,43 @@ import (
 	"github.com/upbound/upjet/pkg/config"
 )
 
+const group = "virtualdesktop"
+
 // Configure configures virtual desktop
 func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_host_pool", func(r *config.Resource) {
 		r.Kind = "HostPool"
-		r.ShortGroup = "avdhp"
+		r.ShortGroup = group
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_host_pool_registration_info", func(r *config.Resource) {
 		r.Kind = "HostPoolRegistrationInfo"
-		r.ShortGroup = "avdhpri"
+		r.ShortGroup = group
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_application_group", func(r *config.Resource) {
 		r.Kind = "ApplicationGroup"
-		r.ShortGroup = "avdag"
+		r.ShortGroup = group
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_workspace", func(r *config.Resource) {
 		r.Kind = "Workspace"
-		r.ShortGroup = "avdw"
+		r.ShortGroup = group
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_workspace_application_group_association", func(r *config.Resource) {
 		r.Kind = "WorkspaceApplicationAssociation"
-		r.ShortGroup = "avdwaa"
+		r.ShortGroup = group
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_application", func(r *config.Resource) {
 		r.Kind = "Application"
-		r.ShortGroup = "avda"
+		r.ShortGroup = group
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_scaling_plan", func(r *config.Resource) {
 		r.Kind = "ScalingPlan"
-		r.ShortGroup = "avdsp"
+		r.ShortGroup = group
 	})
 }
