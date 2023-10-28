@@ -1864,7 +1864,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_virtual_desktop_host_pool": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DesktopVirtualization/hostPools/{{ .external_name }}"),
 	// Virtual Desktop Host Pool Registration Info can be imported using the resource id
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.DesktopVirtualization/hostPools/pool1/registrationInfo/default
-	"azurerm_virtual_desktop_host_pool_registration_info": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DesktopVirtualization/hostPools/{{ .external_name }}/registrationInfo/default"),
+	"azurerm_virtual_desktop_host_pool_registration_info": config.TemplatedStringAsIdentifier("", "{{ .parameters.hostpool_id }}/registrationInfo/default"),
 	// Virtual Desktop Application Group can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup1/providers/Microsoft.DesktopVirtualization/applicationGroups/myapplicationgroup
 	"azurerm_virtual_desktop_application_group": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DesktopVirtualization/applicationGroups/{{ .external_name }}"),
@@ -1876,7 +1876,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_virtual_desktop_workspace_application_group_association": config.IdentifierFromProvider,
 	// Virtual Desktop Application can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup1/providers/Microsoft.DesktopVirtualization/applicationGroups/myapplicationgroup/applications/myapplication
-	"azurerm_virtual_desktop_application": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DesktopVirtualization/applicationGroups/{{ .parameters.application_group }}/applications/{{ .external_name }}"),
+	"azurerm_virtual_desktop_application": config.TemplatedStringAsIdentifier("name", "{{ .parameters.application_group_id }}/applications/{{ .external_name }}"),
 	// Virtual Desktop Scaling Plan can be imported using the resource id
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.DesktopVirtualization/scalingPlans/plan1
 	"azurerm_virtual_desktop_scaling_plan": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DesktopVirtualization/scalingPlans/{{ .external_name }}"),
