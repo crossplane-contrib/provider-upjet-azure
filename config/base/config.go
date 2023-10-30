@@ -36,7 +36,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_resource_group", func(r *config.Resource) {
-		r.UseAsync = false
+		r.UseAsync = true
 		r.Kind = "ResourceGroup"
 		r.ShortGroup = ""
 	})
