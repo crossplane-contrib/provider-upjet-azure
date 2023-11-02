@@ -3,7 +3,7 @@ module github.com/upbound/provider-azure
 go 1.19
 
 require (
-	github.com/crossplane/crossplane-runtime v1.14.0-rc.1
+	github.com/crossplane/crossplane-runtime v1.14.1
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
 	github.com/crossplane/upjet v0.11.0-rc.0.0.20231012093706-c4a76d2a7505
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.0
