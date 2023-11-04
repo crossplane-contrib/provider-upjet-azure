@@ -328,7 +328,7 @@ type FunctionAppInitParameters struct {
 	// Specifies the name of the Function App. Changing this forces a new resource to be created. Limit the function name to 32 characters to avoid naming collisions. For more information about Function App naming rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A string indicating the Operating System type for this function app. Possible values are linux and “(empty string). Changing this forces a new resource to be created. Defaults to "".
+	// A string indicating the Operating System type for this function app. Possible values are linux and ``(empty string). Changing this forces a new resource to be created. Defaults to "".
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
 	// A site_config object as defined below.
@@ -397,7 +397,7 @@ type FunctionAppObservation struct {
 	// Specifies the name of the Function App. Changing this forces a new resource to be created. Limit the function name to 32 characters to avoid naming collisions. For more information about Function App naming rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A string indicating the Operating System type for this function app. Possible values are linux and “(empty string). Changing this forces a new resource to be created. Defaults to "".
+	// A string indicating the Operating System type for this function app. Possible values are linux and ``(empty string). Changing this forces a new resource to be created. Defaults to "".
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
 	// A comma separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12
@@ -492,7 +492,7 @@ type FunctionAppParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// A string indicating the Operating System type for this function app. Possible values are linux and “(empty string). Changing this forces a new resource to be created. Defaults to "".
+	// A string indicating the Operating System type for this function app. Possible values are linux and ``(empty string). Changing this forces a new resource to be created. Defaults to "".
 	// +kubebuilder:validation:Optional
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 

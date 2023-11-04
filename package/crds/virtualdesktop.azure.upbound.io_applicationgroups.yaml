@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.12.1
-  name: datasetsnowflakes.datafactory.azure.upbound.io
+  name: applicationgroups.virtualdesktop.azure.upbound.io
 spec:
-  group: datafactory.azure.upbound.io
+  group: virtualdesktop.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: DataSetSnowflake
-    listKind: DataSetSnowflakeList
-    plural: datasetsnowflakes
-    singular: datasetsnowflake
+    kind: ApplicationGroup
+    listKind: ApplicationGroupList
+    plural: applicationgroups
+    singular: applicationgroup
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DataSetSnowflake is the Schema for the DataSetSnowflakes API.
-          Manages a Snowflake Dataset inside a Azure Data Factory.
+        description: ApplicationGroup is the Schema for the ApplicationGroups API.
+          Manages a Virtual Desktop Application Group.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: DataSetSnowflakeSpec defines the desired state of DataSetSnowflake
+            description: ApplicationGroupSpec defines the desired state of ApplicationGroup
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,111 +67,26 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset Snowflake.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Dataset Snowflake.
-                    items:
-                      type: string
-                    type: array
-                  dataFactoryId:
-                    description: The Data Factory ID in which to associate the Linked
-                      Service with. Changing this forces a new resource.
+                  defaultDesktopDisplayName:
+                    description: Option to set the display name for the default sessionDesktop
+                      desktop when type is set to Desktop.
                     type: string
-                  dataFactoryIdRef:
-                    description: Reference to a Factory in datafactory to populate
-                      dataFactoryId.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  dataFactoryIdSelector:
-                    description: Selector for a Factory in datafactory to populate
-                      dataFactoryId.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
                   description:
-                    description: The description for the Data Factory Dataset Snowflake.
+                    description: Option to set a description for the Virtual Desktop
+                      Application Group.
                     type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
+                  friendlyName:
+                    description: Option to set a friendly name for the Virtual Desktop
+                      Application Group.
                     type: string
-                  linkedServiceName:
-                    description: The Data Factory Linked Service name in which to
-                      associate the Dataset with.
+                  hostPoolId:
+                    description: Resource ID for a Virtual Desktop Host Pool to associate
+                      with the Virtual Desktop Application Group. Changing the name
+                      forces a new resource to be created.
                     type: string
-                  linkedServiceNameRef:
-                    description: Reference to a LinkedServiceSnowflake in datafactory
-                      to populate linkedServiceName.
+                  hostPoolIdRef:
+                    description: Reference to a HostPool in virtualdesktop to populate
+                      hostPoolId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -204,9 +119,9 @@ spec:
                     required:
                     - name
                     type: object
-                  linkedServiceNameSelector:
-                    description: Selector for a LinkedServiceSnowflake in datafactory
-                      to populate linkedServiceName.
+                  hostPoolIdSelector:
+                    description: Selector for a HostPool in virtualdesktop to populate
+                      hostPoolId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -244,42 +159,100 @@ spec:
                             type: string
                         type: object
                     type: object
-                  parameters:
+                  location:
+                    description: The location/region where the Virtual Desktop Application
+                      Group is located. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Virtual Desktop Application Group. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
                     additionalProperties:
                       type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset Snowflake.
+                    description: A mapping of tags to assign to the resource.
                     type: object
-                  schemaColumn:
-                    description: A schema_column block as defined below.
-                    items:
-                      properties:
-                        name:
-                          description: The name of the column.
-                          type: string
-                        precision:
-                          description: The total number of digits allowed.
-                          type: number
-                        scale:
-                          description: The number of digits allowed to the right of
-                            the decimal point.
-                          type: number
-                        type:
-                          description: Type of the column. Valid values are NUMBER,
-                            DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT``FLOAT4,
-                            FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR,
-                            CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE,
-                            DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ,
-                            TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please
-                            note these values are case sensitive.
-                          type: string
-                      type: object
-                    type: array
-                  schemaName:
-                    description: The schema name of the Data Factory Dataset Snowflake.
-                    type: string
-                  tableName:
-                    description: The table name of the Data Factory Dataset Snowflake.
+                  type:
+                    description: Type of Virtual Desktop Application Group. Valid
+                      options are RemoteApp or Desktop application groups. Changing
+                      this forces a new resource to be created.
                     type: string
                 type: object
               initProvider:
@@ -295,61 +268,32 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset Snowflake.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Dataset Snowflake.
-                    items:
-                      type: string
-                    type: array
+                  defaultDesktopDisplayName:
+                    description: Option to set the display name for the default sessionDesktop
+                      desktop when type is set to Desktop.
+                    type: string
                   description:
-                    description: The description for the Data Factory Dataset Snowflake.
+                    description: Option to set a description for the Virtual Desktop
+                      Application Group.
                     type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
+                  friendlyName:
+                    description: Option to set a friendly name for the Virtual Desktop
+                      Application Group.
                     type: string
-                  parameters:
+                  location:
+                    description: The location/region where the Virtual Desktop Application
+                      Group is located. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  tags:
                     additionalProperties:
                       type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset Snowflake.
+                    description: A mapping of tags to assign to the resource.
                     type: object
-                  schemaColumn:
-                    description: A schema_column block as defined below.
-                    items:
-                      properties:
-                        name:
-                          description: The name of the column.
-                          type: string
-                        precision:
-                          description: The total number of digits allowed.
-                          type: number
-                        scale:
-                          description: The number of digits allowed to the right of
-                            the decimal point.
-                          type: number
-                        type:
-                          description: Type of the column. Valid values are NUMBER,
-                            DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT``FLOAT4,
-                            FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR,
-                            CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE,
-                            DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ,
-                            TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please
-                            note these values are case sensitive.
-                          type: string
-                      type: object
-                    type: array
-                  schemaName:
-                    description: The schema name of the Data Factory Dataset Snowflake.
-                    type: string
-                  tableName:
-                    description: The table name of the Data Factory Dataset Snowflake.
+                  type:
+                    description: Type of Virtual Desktop Application Group. Valid
+                      options are RemoteApp or Desktop application groups. Changing
+                      this forces a new resource to be created.
                     type: string
                 type: object
               managementPolicies:
@@ -549,77 +493,59 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || has(self.initProvider.location)'
+            - message: type is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.type)
+                || has(self.initProvider.type)'
           status:
-            description: DataSetSnowflakeStatus defines the observed state of DataSetSnowflake.
+            description: ApplicationGroupStatus defines the observed state of ApplicationGroup.
             properties:
               atProvider:
                 properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset Snowflake.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Dataset Snowflake.
-                    items:
-                      type: string
-                    type: array
-                  dataFactoryId:
-                    description: The Data Factory ID in which to associate the Linked
-                      Service with. Changing this forces a new resource.
+                  defaultDesktopDisplayName:
+                    description: Option to set the display name for the default sessionDesktop
+                      desktop when type is set to Desktop.
                     type: string
                   description:
-                    description: The description for the Data Factory Dataset Snowflake.
+                    description: Option to set a description for the Virtual Desktop
+                      Application Group.
                     type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
+                  friendlyName:
+                    description: Option to set a friendly name for the Virtual Desktop
+                      Application Group.
+                    type: string
+                  hostPoolId:
+                    description: Resource ID for a Virtual Desktop Host Pool to associate
+                      with the Virtual Desktop Application Group. Changing the name
+                      forces a new resource to be created.
                     type: string
                   id:
-                    description: The ID of the Data Factory Snowflake Dataset.
+                    description: The ID of the Virtual Desktop Application Group.
                     type: string
-                  linkedServiceName:
-                    description: The Data Factory Linked Service name in which to
-                      associate the Dataset with.
+                  location:
+                    description: The location/region where the Virtual Desktop Application
+                      Group is located. Changing this forces a new resource to be
+                      created.
                     type: string
-                  parameters:
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the Virtual Desktop Application Group. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  tags:
                     additionalProperties:
                       type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset Snowflake.
+                    description: A mapping of tags to assign to the resource.
                     type: object
-                  schemaColumn:
-                    description: A schema_column block as defined below.
-                    items:
-                      properties:
-                        name:
-                          description: The name of the column.
-                          type: string
-                        precision:
-                          description: The total number of digits allowed.
-                          type: number
-                        scale:
-                          description: The number of digits allowed to the right of
-                            the decimal point.
-                          type: number
-                        type:
-                          description: Type of the column. Valid values are NUMBER,
-                            DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT``FLOAT4,
-                            FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR,
-                            CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE,
-                            DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ,
-                            TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please
-                            note these values are case sensitive.
-                          type: string
-                      type: object
-                    type: array
-                  schemaName:
-                    description: The schema name of the Data Factory Dataset Snowflake.
-                    type: string
-                  tableName:
-                    description: The table name of the Data Factory Dataset Snowflake.
+                  type:
+                    description: Type of Virtual Desktop Application Group. Valid
+                      options are RemoteApp or Desktop application groups. Changing
+                      this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

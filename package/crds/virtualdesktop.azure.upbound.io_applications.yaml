@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.12.1
-  name: datasetsnowflakes.datafactory.azure.upbound.io
+  name: applications.virtualdesktop.azure.upbound.io
 spec:
-  group: datafactory.azure.upbound.io
+  group: virtualdesktop.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: DataSetSnowflake
-    listKind: DataSetSnowflakeList
-    plural: datasetsnowflakes
-    singular: datasetsnowflake
+    kind: Application
+    listKind: ApplicationList
+    plural: applications
+    singular: application
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DataSetSnowflake is the Schema for the DataSetSnowflakes API.
-          Manages a Snowflake Dataset inside a Azure Data Factory.
+        description: Application is the Schema for the Applications API. Manages a
+          Virtual Desktop Application.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +50,7 @@ spec:
           metadata:
             type: object
           spec:
-            description: DataSetSnowflakeSpec defines the desired state of DataSetSnowflake
+            description: ApplicationSpec defines the desired state of Application
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,25 +67,14 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset Snowflake.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Dataset Snowflake.
-                    items:
-                      type: string
-                    type: array
-                  dataFactoryId:
-                    description: The Data Factory ID in which to associate the Linked
-                      Service with. Changing this forces a new resource.
+                  applicationGroupId:
+                    description: Resource ID for a Virtual Desktop Application Group
+                      to associate with the Virtual Desktop Application. Changing
+                      this forces a new resource to be created.
                     type: string
-                  dataFactoryIdRef:
-                    description: Reference to a Factory in datafactory to populate
-                      dataFactoryId.
+                  applicationGroupIdRef:
+                    description: Reference to a ApplicationGroup in virtualdesktop
+                      to populate applicationGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -118,9 +107,9 @@ spec:
                     required:
                     - name
                     type: object
-                  dataFactoryIdSelector:
-                    description: Selector for a Factory in datafactory to populate
-                      dataFactoryId.
+                  applicationGroupIdSelector:
+                    description: Selector for a ApplicationGroup in virtualdesktop
+                      to populate applicationGroupId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -158,129 +147,39 @@ spec:
                             type: string
                         type: object
                     type: object
+                  commandLineArgumentPolicy:
+                    description: 'Specifies whether this published application can
+                      be launched with command line arguments provided by the client,
+                      command line arguments specified at publish time, or no command
+                      line arguments at all. Possible values include: DoNotAllow,
+                      Allow, Require.'
+                    type: string
+                  commandLineArguments:
+                    description: Command Line Arguments for Virtual Desktop Application.
+                    type: string
                   description:
-                    description: The description for the Data Factory Dataset Snowflake.
+                    description: Option to set a description for the Virtual Desktop
+                      Application.
                     type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
+                  friendlyName:
+                    description: Option to set a friendly name for the Virtual Desktop
+                      Application.
                     type: string
-                  linkedServiceName:
-                    description: The Data Factory Linked Service name in which to
-                      associate the Dataset with.
+                  iconIndex:
+                    description: The index of the icon you wish to use.
+                    type: number
+                  iconPath:
+                    description: Specifies the path for an icon which will be used
+                      for this Virtual Desktop Application.
                     type: string
-                  linkedServiceNameRef:
-                    description: Reference to a LinkedServiceSnowflake in datafactory
-                      to populate linkedServiceName.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  linkedServiceNameSelector:
-                    description: Selector for a LinkedServiceSnowflake in datafactory
-                      to populate linkedServiceName.
-                    properties:
-                      matchControllerRef:
-                        description: MatchControllerRef ensures an object with the
-                          same controller reference as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: Resolution specifies whether resolution of
-                              this reference is required. The default is 'Required',
-                              which means the reconcile will fail if the reference
-                              cannot be resolved. 'Optional' means this reference
-                              will be a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: Resolve specifies when this reference should
-                              be resolved. The default is 'IfNotPresent', which will
-                              attempt to resolve the reference only when the corresponding
-                              field is not present. Use 'Always' to resolve the reference
-                              on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset Snowflake.
-                    type: object
-                  schemaColumn:
-                    description: A schema_column block as defined below.
-                    items:
-                      properties:
-                        name:
-                          description: The name of the column.
-                          type: string
-                        precision:
-                          description: The total number of digits allowed.
-                          type: number
-                        scale:
-                          description: The number of digits allowed to the right of
-                            the decimal point.
-                          type: number
-                        type:
-                          description: Type of the column. Valid values are NUMBER,
-                            DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT``FLOAT4,
-                            FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR,
-                            CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE,
-                            DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ,
-                            TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please
-                            note these values are case sensitive.
-                          type: string
-                      type: object
-                    type: array
-                  schemaName:
-                    description: The schema name of the Data Factory Dataset Snowflake.
+                  path:
+                    description: The file path location of the app on the Virtual
+                      Desktop OS.
                     type: string
-                  tableName:
-                    description: The table name of the Data Factory Dataset Snowflake.
-                    type: string
+                  showInPortal:
+                    description: Specifies whether to show the RemoteApp program in
+                      the RD Web Access server.
+                    type: boolean
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.
@@ -295,62 +194,39 @@ spec:
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
                 properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset Snowflake.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Dataset Snowflake.
-                    items:
-                      type: string
-                    type: array
+                  commandLineArgumentPolicy:
+                    description: 'Specifies whether this published application can
+                      be launched with command line arguments provided by the client,
+                      command line arguments specified at publish time, or no command
+                      line arguments at all. Possible values include: DoNotAllow,
+                      Allow, Require.'
+                    type: string
+                  commandLineArguments:
+                    description: Command Line Arguments for Virtual Desktop Application.
+                    type: string
                   description:
-                    description: The description for the Data Factory Dataset Snowflake.
+                    description: Option to set a description for the Virtual Desktop
+                      Application.
                     type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
+                  friendlyName:
+                    description: Option to set a friendly name for the Virtual Desktop
+                      Application.
                     type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset Snowflake.
-                    type: object
-                  schemaColumn:
-                    description: A schema_column block as defined below.
-                    items:
-                      properties:
-                        name:
-                          description: The name of the column.
-                          type: string
-                        precision:
-                          description: The total number of digits allowed.
-                          type: number
-                        scale:
-                          description: The number of digits allowed to the right of
-                            the decimal point.
-                          type: number
-                        type:
-                          description: Type of the column. Valid values are NUMBER,
-                            DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT``FLOAT4,
-                            FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR,
-                            CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE,
-                            DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ,
-                            TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please
-                            note these values are case sensitive.
-                          type: string
-                      type: object
-                    type: array
-                  schemaName:
-                    description: The schema name of the Data Factory Dataset Snowflake.
+                  iconIndex:
+                    description: The index of the icon you wish to use.
+                    type: number
+                  iconPath:
+                    description: Specifies the path for an icon which will be used
+                      for this Virtual Desktop Application.
                     type: string
-                  tableName:
-                    description: The table name of the Data Factory Dataset Snowflake.
+                  path:
+                    description: The file path location of the app on the Virtual
+                      Desktop OS.
                     type: string
+                  showInPortal:
+                    description: Specifies whether to show the RemoteApp program in
+                      the RD Web Access server.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -549,78 +425,61 @@ spec:
             required:
             - forProvider
             type: object
+            x-kubernetes-validations:
+            - message: commandLineArgumentPolicy is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.commandLineArgumentPolicy)
+                || has(self.initProvider.commandLineArgumentPolicy)'
+            - message: path is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.path)
+                || has(self.initProvider.path)'
           status:
-            description: DataSetSnowflakeStatus defines the observed state of DataSetSnowflake.
+            description: ApplicationStatus defines the observed state of Application.
             properties:
               atProvider:
                 properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset Snowflake.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Dataset Snowflake.
-                    items:
-                      type: string
-                    type: array
-                  dataFactoryId:
-                    description: The Data Factory ID in which to associate the Linked
-                      Service with. Changing this forces a new resource.
+                  applicationGroupId:
+                    description: Resource ID for a Virtual Desktop Application Group
+                      to associate with the Virtual Desktop Application. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  commandLineArgumentPolicy:
+                    description: 'Specifies whether this published application can
+                      be launched with command line arguments provided by the client,
+                      command line arguments specified at publish time, or no command
+                      line arguments at all. Possible values include: DoNotAllow,
+                      Allow, Require.'
+                    type: string
+                  commandLineArguments:
+                    description: Command Line Arguments for Virtual Desktop Application.
                     type: string
                   description:
-                    description: The description for the Data Factory Dataset Snowflake.
+                    description: Option to set a description for the Virtual Desktop
+                      Application.
                     type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
+                  friendlyName:
+                    description: Option to set a friendly name for the Virtual Desktop
+                      Application.
+                    type: string
+                  iconIndex:
+                    description: The index of the icon you wish to use.
+                    type: number
+                  iconPath:
+                    description: Specifies the path for an icon which will be used
+                      for this Virtual Desktop Application.
                     type: string
                   id:
-                    description: The ID of the Data Factory Snowflake Dataset.
+                    description: The ID of the Virtual Desktop Application.
                     type: string
-                  linkedServiceName:
-                    description: The Data Factory Linked Service name in which to
-                      associate the Dataset with.
+                  path:
+                    description: The file path location of the app on the Virtual
+                      Desktop OS.
                     type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset Snowflake.
-                    type: object
-                  schemaColumn:
-                    description: A schema_column block as defined below.
-                    items:
-                      properties:
-                        name:
-                          description: The name of the column.
-                          type: string
-                        precision:
-                          description: The total number of digits allowed.
-                          type: number
-                        scale:
-                          description: The number of digits allowed to the right of
-                            the decimal point.
-                          type: number
-                        type:
-                          description: Type of the column. Valid values are NUMBER,
-                            DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT``FLOAT4,
-                            FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR,
-                            CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE,
-                            DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ,
-                            TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please
-                            note these values are case sensitive.
-                          type: string
-                      type: object
-                    type: array
-                  schemaName:
-                    description: The schema name of the Data Factory Dataset Snowflake.
-                    type: string
-                  tableName:
-                    description: The table name of the Data Factory Dataset Snowflake.
-                    type: string
+                  showInPortal:
+                    description: Specifies whether to show the RemoteApp program in
+                      the RD Web Access server.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

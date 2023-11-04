@@ -1,0 +1,97 @@
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: chrome
+  name: chrome
+spec:
+  forProvider:
+    applicationGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: remoteapp
+    commandLineArgumentPolicy: DoNotAllow
+    commandLineArguments: --incognito
+    description: Chromium based web browser
+    friendlyName: Google Chrome
+    iconIndex: 0
+    iconPath: C:\Program Files\Google\Chrome\Application\chrome.exe
+    path: C:\Program Files\Google\Chrome\Application\chrome.exe
+    showInPortal: false
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
+kind: ApplicationGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: remoteapp
+  name: remoteapp
+spec:
+  forProvider:
+    description: 'Acceptance Test: An application group'
+    friendlyName: TestAppGroup
+    hostPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pooledbreadthfirst
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: RemoteApp
+
+---
+
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
+kind: HostPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: personalautomatic
+  name: personalautomatic
+spec:
+  forProvider:
+    loadBalancerType: BreadthFirst
+    location: West Europe
+    personalDesktopAssignmentType: Automatic
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: Personal
+
+---
+
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
+kind: HostPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: pooledbreadthfirst
+  name: pooledbreadthfirst
+spec:
+  forProvider:
+    loadBalancerType: BreadthFirst
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: Pooled

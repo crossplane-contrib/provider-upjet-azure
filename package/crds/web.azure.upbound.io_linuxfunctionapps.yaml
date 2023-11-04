@@ -1679,7 +1679,7 @@ spec:
                           description: The Remote Debugging Version. Possible values
                             include VS2017, VS2019, and VS2022. The Remote Debugging
                             Version. Possible values include `VS2017`, `VS2019`, and
-                            `VS2022“
+                            `VS2022``
                           type: string
                         runtimeScaleMonitoringEnabled:
                           description: Should Scale Monitoring of the Functions Runtime
@@ -3275,7 +3275,7 @@ spec:
                           description: The Remote Debugging Version. Possible values
                             include VS2017, VS2019, and VS2022. The Remote Debugging
                             Version. Possible values include `VS2017`, `VS2019`, and
-                            `VS2022“
+                            `VS2022``
                           type: string
                         runtimeScaleMonitoringEnabled:
                           description: Should Scale Monitoring of the Functions Runtime
@@ -4901,7 +4901,7 @@ spec:
                           description: The Remote Debugging Version. Possible values
                             include VS2017, VS2019, and VS2022. The Remote Debugging
                             Version. Possible values include `VS2017`, `VS2019`, and
-                            `VS2022“
+                            `VS2022``
                           type: string
                         runtimeScaleMonitoringEnabled:
                           description: Should Scale Monitoring of the Functions Runtime

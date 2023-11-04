@@ -4,18 +4,18 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.12.1
-  name: datasetsnowflakes.datafactory.azure.upbound.io
+  name: workspaceapplicationassociations.virtualdesktop.azure.upbound.io
 spec:
-  group: datafactory.azure.upbound.io
+  group: virtualdesktop.azure.upbound.io
   names:
     categories:
     - crossplane
     - managed
     - azure
-    kind: DataSetSnowflake
-    listKind: DataSetSnowflakeList
-    plural: datasetsnowflakes
-    singular: datasetsnowflake
+    kind: WorkspaceApplicationAssociation
+    listKind: WorkspaceApplicationAssociationList
+    plural: workspaceapplicationassociations
+    singular: workspaceapplicationassociation
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,8 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: DataSetSnowflake is the Schema for the DataSetSnowflakes API.
-          Manages a Snowflake Dataset inside a Azure Data Factory.
+        description: WorkspaceApplicationAssociation is the Schema for the WorkspaceApplicationAssociations
+          API. Manages a Virtual Desktop Workspace Application Group Association.
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,7 +50,8 @@ spec:
           metadata:
             type: object
           spec:
-            description: DataSetSnowflakeSpec defines the desired state of DataSetSnowflake
+            description: WorkspaceApplicationAssociationSpec defines the desired state
+              of WorkspaceApplicationAssociation
             properties:
               deletionPolicy:
                 default: Delete
@@ -67,25 +68,13 @@ spec:
                 type: string
               forProvider:
                 properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset Snowflake.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Dataset Snowflake.
-                    items:
-                      type: string
-                    type: array
-                  dataFactoryId:
-                    description: The Data Factory ID in which to associate the Linked
-                      Service with. Changing this forces a new resource.
+                  applicationGroupId:
+                    description: The resource ID for the Virtual Desktop Application
+                      Group. Changing this forces a new resource to be created.
                     type: string
-                  dataFactoryIdRef:
-                    description: Reference to a Factory in datafactory to populate
-                      dataFactoryId.
+                  applicationGroupIdRef:
+                    description: Reference to a ApplicationGroup in virtualdesktop
+                      to populate applicationGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -118,9 +107,9 @@ spec:
                     required:
                     - name
                     type: object
-                  dataFactoryIdSelector:
-                    description: Selector for a Factory in datafactory to populate
-                      dataFactoryId.
+                  applicationGroupIdSelector:
+                    description: Selector for a ApplicationGroup in virtualdesktop
+                      to populate applicationGroupId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -158,20 +147,13 @@ spec:
                             type: string
                         type: object
                     type: object
-                  description:
-                    description: The description for the Data Factory Dataset Snowflake.
+                  workspaceId:
+                    description: The resource ID for the Virtual Desktop Workspace.
+                      Changing this forces a new resource to be created.
                     type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
-                    type: string
-                  linkedServiceName:
-                    description: The Data Factory Linked Service name in which to
-                      associate the Dataset with.
-                    type: string
-                  linkedServiceNameRef:
-                    description: Reference to a LinkedServiceSnowflake in datafactory
-                      to populate linkedServiceName.
+                  workspaceIdRef:
+                    description: Reference to a Workspace in virtualdesktop to populate
+                      workspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -204,9 +186,9 @@ spec:
                     required:
                     - name
                     type: object
-                  linkedServiceNameSelector:
-                    description: Selector for a LinkedServiceSnowflake in datafactory
-                      to populate linkedServiceName.
+                  workspaceIdSelector:
+                    description: Selector for a Workspace in virtualdesktop to populate
+                      workspaceId.
                     properties:
                       matchControllerRef:
                         description: MatchControllerRef ensures an object with the
@@ -244,43 +226,6 @@ spec:
                             type: string
                         type: object
                     type: object
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset Snowflake.
-                    type: object
-                  schemaColumn:
-                    description: A schema_column block as defined below.
-                    items:
-                      properties:
-                        name:
-                          description: The name of the column.
-                          type: string
-                        precision:
-                          description: The total number of digits allowed.
-                          type: number
-                        scale:
-                          description: The number of digits allowed to the right of
-                            the decimal point.
-                          type: number
-                        type:
-                          description: Type of the column. Valid values are NUMBER,
-                            DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT``FLOAT4,
-                            FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR,
-                            CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE,
-                            DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ,
-                            TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please
-                            note these values are case sensitive.
-                          type: string
-                      type: object
-                    type: array
-                  schemaName:
-                    description: The schema name of the Data Factory Dataset Snowflake.
-                    type: string
-                  tableName:
-                    description: The table name of the Data Factory Dataset Snowflake.
-                    type: string
                 type: object
               initProvider:
                 description: THIS IS AN ALPHA FIELD. Do not use it in production.
@@ -294,63 +239,6 @@ spec:
                   required on creation, but we do not desire to update them after
                   creation, for example because of an external controller is managing
                   them, like an autoscaler.
-                properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset Snowflake.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Dataset Snowflake.
-                    items:
-                      type: string
-                    type: array
-                  description:
-                    description: The description for the Data Factory Dataset Snowflake.
-                    type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset Snowflake.
-                    type: object
-                  schemaColumn:
-                    description: A schema_column block as defined below.
-                    items:
-                      properties:
-                        name:
-                          description: The name of the column.
-                          type: string
-                        precision:
-                          description: The total number of digits allowed.
-                          type: number
-                        scale:
-                          description: The number of digits allowed to the right of
-                            the decimal point.
-                          type: number
-                        type:
-                          description: Type of the column. Valid values are NUMBER,
-                            DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT``FLOAT4,
-                            FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR,
-                            CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE,
-                            DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ,
-                            TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please
-                            note these values are case sensitive.
-                          type: string
-                      type: object
-                    type: array
-                  schemaName:
-                    description: The schema name of the Data Factory Dataset Snowflake.
-                    type: string
-                  tableName:
-                    description: The table name of the Data Factory Dataset Snowflake.
-                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -550,76 +438,22 @@ spec:
             - forProvider
             type: object
           status:
-            description: DataSetSnowflakeStatus defines the observed state of DataSetSnowflake.
+            description: WorkspaceApplicationAssociationStatus defines the observed
+              state of WorkspaceApplicationAssociation.
             properties:
               atProvider:
                 properties:
-                  additionalProperties:
-                    additionalProperties:
-                      type: string
-                    description: A map of additional properties to associate with
-                      the Data Factory Dataset Snowflake.
-                    type: object
-                  annotations:
-                    description: List of tags that can be used for describing the
-                      Data Factory Dataset Snowflake.
-                    items:
-                      type: string
-                    type: array
-                  dataFactoryId:
-                    description: The Data Factory ID in which to associate the Linked
-                      Service with. Changing this forces a new resource.
-                    type: string
-                  description:
-                    description: The description for the Data Factory Dataset Snowflake.
-                    type: string
-                  folder:
-                    description: The folder that this Dataset is in. If not specified,
-                      the Dataset will appear at the root level.
+                  applicationGroupId:
+                    description: The resource ID for the Virtual Desktop Application
+                      Group. Changing this forces a new resource to be created.
                     type: string
                   id:
-                    description: The ID of the Data Factory Snowflake Dataset.
+                    description: The ID of the Virtual Desktop Workspace Application
+                      Group association.
                     type: string
-                  linkedServiceName:
-                    description: The Data Factory Linked Service name in which to
-                      associate the Dataset with.
-                    type: string
-                  parameters:
-                    additionalProperties:
-                      type: string
-                    description: A map of parameters to associate with the Data Factory
-                      Dataset Snowflake.
-                    type: object
-                  schemaColumn:
-                    description: A schema_column block as defined below.
-                    items:
-                      properties:
-                        name:
-                          description: The name of the column.
-                          type: string
-                        precision:
-                          description: The total number of digits allowed.
-                          type: number
-                        scale:
-                          description: The number of digits allowed to the right of
-                            the decimal point.
-                          type: number
-                        type:
-                          description: Type of the column. Valid values are NUMBER,
-                            DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT``FLOAT4,
-                            FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR,
-                            CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE,
-                            DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ,
-                            TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please
-                            note these values are case sensitive.
-                          type: string
-                      type: object
-                    type: array
-                  schemaName:
-                    description: The schema name of the Data Factory Dataset Snowflake.
-                    type: string
-                  tableName:
-                    description: The table name of the Data Factory Dataset Snowflake.
+                  workspaceId:
+                    description: The resource ID for the Virtual Desktop Workspace.
+                      Changing this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

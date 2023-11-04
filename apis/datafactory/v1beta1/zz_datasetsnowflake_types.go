@@ -149,7 +149,7 @@ type DataSetSnowflakeSchemaColumnInitParameters struct {
 	// The number of digits allowed to the right of the decimal point.
 	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
 
-	// Type of the column. Valid values are NUMBER, DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT“FLOAT4, FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR, CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE, DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ, TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please note these values are case sensitive.
+	// Type of the column. Valid values are NUMBER, DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT``FLOAT4, FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR, CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE, DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ, TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please note these values are case sensitive.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -164,7 +164,7 @@ type DataSetSnowflakeSchemaColumnObservation struct {
 	// The number of digits allowed to the right of the decimal point.
 	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
 
-	// Type of the column. Valid values are NUMBER, DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT“FLOAT4, FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR, CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE, DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ, TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please note these values are case sensitive.
+	// Type of the column. Valid values are NUMBER, DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT``FLOAT4, FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR, CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE, DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ, TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please note these values are case sensitive.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -182,7 +182,7 @@ type DataSetSnowflakeSchemaColumnParameters struct {
 	// +kubebuilder:validation:Optional
 	Scale *float64 `json:"scale,omitempty" tf:"scale,omitempty"`
 
-	// Type of the column. Valid values are NUMBER, DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT“FLOAT4, FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR, CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE, DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ, TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please note these values are case sensitive.
+	// Type of the column. Valid values are NUMBER, DECIMAL, NUMERIC, INT, INTEGER, BIGINT, SMALLINT, FLOAT``FLOAT4, FLOAT8, DOUBLE, DOUBLE PRECISION, REAL, VARCHAR, CHAR, CHARACTER, STRING, TEXT, BINARY, VARBINARY, BOOLEAN, DATE, DATETIME, TIME, TIMESTAMP, TIMESTAMP_LTZ, TIMESTAMP_NTZ, TIMESTAMP_TZ, VARIANT, OBJECT, ARRAY, GEOGRAPHY. Please note these values are case sensitive.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
