@@ -2,7 +2,7 @@ apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: desktopvirtualization/v1beta1/desktophostpool
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/desktophostpool
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -13,11 +13,11 @@ spec:
 
 ---
 
-apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
 kind: VirtualDesktopHostPool
 metadata:
   annotations:
-    meta.upbound.io/example-id: desktopvirtualization/v1beta1/desktophostpool
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/desktophostpool
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -42,11 +42,11 @@ metadata:
 
 ---
 
-apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
 kind: VirtualDesktopApplicationGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: desktopvirtualization/v1beta1/applicationgroup
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/applicationgroup
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -64,11 +64,11 @@ metadata:
 
 ---
 
-apiVersion: desktopvirtualization.azure.upbound.io/v1beta1
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
 kind: VirtualDesktopApplication
 metadata:
   annotations:
-    meta.upbound.io/example-id: desktopvirtualization/v1beta1/application
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/application
   labels:
     testing.upbound.io/example-name: example
   name: example
