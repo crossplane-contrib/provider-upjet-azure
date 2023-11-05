@@ -7,7 +7,7 @@ weight: 2
 # Azure official provider documentation
 Upbound supports and maintains the Upbound Azure official provider.
 
-## Install the provider
+## Install the provider-azure
 ### Prerequisites
 #### Upbound Up command-line
 The Upbound Up command-line simplifies configuration and management of Upbound
@@ -36,7 +36,7 @@ up uxp install
 
 Find more information in the [Upbound UXP documentation](https://docs.upbound.io/uxp/).
 
-### Install the provider
+### Install the provider-azure
 
 Install the Upbound official Azure provider with the following configuration file
 
@@ -58,12 +58,12 @@ Verify the configuration with `kubectl get providers`.
 ```shell
 $ kubectl get providers
 NAME           INSTALLED   HEALTHY   PACKAGE                                       AGE
-provider-azure   True        True      xpkg.upbound.io/upbound/provider-azure:v0.16.0  62s
+provider-azure   True        True      xpkg.upbound.io/upbound/provider-azure:v0.36.0  62s
 ```
 
 View the Crossplane [Provider CRD definition](https://doc.crds.dev/github.com/crossplane/crossplane/pkg.crossplane.io/Provider/v1) to view all available `Provider` options.
 
-## Configure the provider
+## Configure the provider-azure
 The Azure provider requires credentials for authentication to Azure Cloud Platform. The Azure provider consumes the credentials from a Kubernetes secret object.
 
 ### Install Azure CLI

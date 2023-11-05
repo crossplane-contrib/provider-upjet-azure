@@ -27,14 +27,6 @@ func (mg *AuthorizationRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AuthorizationRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AuthorizationRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AuthorizationRule.
 func (mg *AuthorizationRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *AuthorizationRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AuthorizationRule.
 func (mg *AuthorizationRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AuthorizationRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AuthorizationRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AuthorizationRule.
@@ -103,14 +87,6 @@ func (mg *ConsumerGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this ConsumerGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *ConsumerGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this ConsumerGroup.
 func (mg *ConsumerGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *ConsumerGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this ConsumerGroup.
 func (mg *ConsumerGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this ConsumerGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *ConsumerGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this ConsumerGroup.
@@ -179,14 +147,6 @@ func (mg *EventHub) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this EventHub.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *EventHub) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this EventHub.
 func (mg *EventHub) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *EventHub) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this EventHub.
 func (mg *EventHub) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this EventHub.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *EventHub) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this EventHub.
@@ -255,14 +207,6 @@ func (mg *EventHubNamespace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this EventHubNamespace.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *EventHubNamespace) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this EventHubNamespace.
 func (mg *EventHubNamespace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *EventHubNamespace) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this EventHubNamespace.
 func (mg *EventHubNamespace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this EventHubNamespace.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *EventHubNamespace) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this EventHubNamespace.
@@ -331,14 +267,6 @@ func (mg *NamespaceAuthorizationRule) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this NamespaceAuthorizationRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *NamespaceAuthorizationRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this NamespaceAuthorizationRule.
 func (mg *NamespaceAuthorizationRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *NamespaceAuthorizationRule) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this NamespaceAuthorizationRule.
 func (mg *NamespaceAuthorizationRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this NamespaceAuthorizationRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *NamespaceAuthorizationRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this NamespaceAuthorizationRule.
@@ -407,14 +327,6 @@ func (mg *NamespaceDisasterRecoveryConfig) GetProviderConfigReference() *xpv1.Re
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this NamespaceDisasterRecoveryConfig.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *NamespaceDisasterRecoveryConfig) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this NamespaceDisasterRecoveryConfig.
 func (mg *NamespaceDisasterRecoveryConfig) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *NamespaceDisasterRecoveryConfig) SetManagementPolicies(r xpv1.Manageme
 // SetProviderConfigReference of this NamespaceDisasterRecoveryConfig.
 func (mg *NamespaceDisasterRecoveryConfig) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this NamespaceDisasterRecoveryConfig.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *NamespaceDisasterRecoveryConfig) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this NamespaceDisasterRecoveryConfig.
@@ -483,14 +387,6 @@ func (mg *NamespaceSchemaGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this NamespaceSchemaGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *NamespaceSchemaGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this NamespaceSchemaGroup.
 func (mg *NamespaceSchemaGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *NamespaceSchemaGroup) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this NamespaceSchemaGroup.
 func (mg *NamespaceSchemaGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this NamespaceSchemaGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *NamespaceSchemaGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this NamespaceSchemaGroup.

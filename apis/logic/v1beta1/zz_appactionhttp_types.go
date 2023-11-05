@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -73,7 +77,7 @@ type AppActionHTTPParameters struct {
 
 	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logic/v1beta1.AppWorkflow
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogicAppID *string `json:"logicAppId,omitempty" tf:"logic_app_id,omitempty"`
 
@@ -135,9 +139,8 @@ type RunAfterParameters struct {
 type AppActionHTTPSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppActionHTTPParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -167,8 +170,8 @@ type AppActionHTTPStatus struct {
 type AppActionHTTP struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.method) || has(self.initProvider.method)",message="method is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.uri) || has(self.initProvider.uri)",message="uri is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.method) || (has(self.initProvider) && has(self.initProvider.method))",message="spec.forProvider.method is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.uri) || (has(self.initProvider) && has(self.initProvider.uri))",message="spec.forProvider.uri is a required parameter"
 	Spec   AppActionHTTPSpec   `json:"spec"`
 	Status AppActionHTTPStatus `json:"status,omitempty"`
 }

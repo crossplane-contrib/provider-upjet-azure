@@ -7,7 +7,7 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 )
 
 // ExternalNameConfigs is a map of external name configurations for the whole
@@ -215,7 +215,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_ssh_public_key": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Compute/sshPublicKeys/{{ .external_name }}"),
 	// Disk SAS Token can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/microsoft.compute/disks/manageddisk1
-	"azurerm_managed_disk_sas_token": config.IdentifierFromProvider,
+	"azurerm_managed_disk_sas_token":    config.IdentifierFromProvider,
+	"azurerm_virtual_machine_extension": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_machine_id }}/extensions/{{ .external_name }}"),
 
 	// cdn
 	//
@@ -245,9 +246,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// cosmosdb
 	"azurerm_cosmosdb_sql_database":  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .external_name }}"),
 	"azurerm_cosmosdb_sql_container": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .parameters.database_name }}/containers/{{ .external_name }}"),
-	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/upbound/upjet/issues/32
+	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/crossplane/upjet/issues/32
 	"azurerm_cosmosdb_sql_role_assignment": config.IdentifierFromProvider,
-	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/upbound/upjet/issues/32
+	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/crossplane/upjet/issues/32
 	"azurerm_cosmosdb_sql_role_definition":  config.IdentifierFromProvider,
 	"azurerm_cosmosdb_mongo_database":       config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/mongodbDatabases/{{ .external_name }}"),
 	"azurerm_cosmosdb_mongo_collection":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/mongodbDatabases/{{ .parameters.database_name }}/collections/{{ .external_name }}"),
@@ -364,6 +365,10 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Linux Web Apps can be imported using the resource id
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.Web/sites/site1/slots/slot1
 	"azurerm_linux_web_app_slot": config.IdentifierFromProvider,
+
+	// containerapp
+	"azurerm_container_app":             config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.App/containerApps/{{ .external_name }}"),
+	"azurerm_container_app_environment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.App/managedEnvironments/{{ .external_name }}"),
 
 	// containerservice
 	"azurerm_kubernetes_cluster":           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerService/managedClusters/{{ .external_name }}"),
@@ -722,9 +727,9 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_synapse_workspace_sql_aad_admin": config.IdentifierFromProvider,
 
 	// security
-	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/upbound/upjet/issues/32
+	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/crossplane/upjet/issues/32
 	"azurerm_advanced_threat_protection": config.IdentifierFromProvider,
-	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/upbound/upjet/issues/32
+	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/crossplane/upjet/issues/32
 	"azurerm_iot_security_device_group": config.IdentifierFromProvider,
 	"azurerm_iot_security_solution":     config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Security/iotSecuritySolutions/{{ .external_name }}"),
 
@@ -1880,12 +1885,26 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Virtual Desktop Scaling Plan can be imported using the resource id
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/resGroup1/providers/Microsoft.DesktopVirtualization/scalingPlans/plan1
 	"azurerm_virtual_desktop_scaling_plan": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DesktopVirtualization/scalingPlans/{{ .external_name }}"),
+
+	// load
+	//
+	// An existing Load Test can be imported into Terraform using the resource id
+	// /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LoadTestService/loadTests/{loadTestName}
+	"azurerm_load_test": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.LoadTestService/loadTests/{{ .external_name }}"),
+
 }
 
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
-	e := config.NameAsIdentifier
-	e.GetExternalNameFn = getResourceNameFromIDURLFn(2)
-	e.GetIDFn = func(_ context.Context, _ string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+	e := config.IdentifierFromProvider
+	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
+		id, ok := tfstate["id"]
+		if !ok {
+			return "", errors.New("cannot get id")
+		}
+		words := strings.Split(id.(string), "/")
+		return fmt.Sprintf("%s/%s", words[len(words)-2], words[len(words)-1]), nil
+	}
+	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
 		keyVaultID, ok := parameters["key_vault_id"]
 		if !ok {
 			return "", errors.New("cannot get key_vault_id")
@@ -1893,18 +1912,14 @@ func keyVaultURLIDConf(resourceType string) config.ExternalName {
 		words := strings.Split(keyVaultID.(string), "/")
 		keyVaultName := words[len(words)-1]
 
-		name, ok := parameters["name"]
-		if !ok {
-			return "", errors.New("cannot get name")
+		if len(externalName) == 0 || len(strings.Split(externalName, "/")) < 2 {
+			if parameters["version"] == nil || parameters["version"] == "" {
+				return "", nil
+			}
 		}
 
-		version, ok := parameters["version"]
-		if !ok {
-			return "", nil
-		}
-
-		return fmt.Sprintf("https://%s.vault.azure.net/%s/%s/%s",
-			keyVaultName, resourceType, name, version), nil
+		return fmt.Sprintf("https://%s.vault.azure.net/%s/%s",
+			keyVaultName, resourceType, externalName), nil
 	}
 	return e
 }
@@ -2009,13 +2024,14 @@ func managementGroupSubscriptionAssociation() config.ExternalName {
 		w := strings.Split(id.(string), "/")
 		return fmt.Sprintf("%s/%s", w[len(w)-3], w[len(w)-1]), nil
 	}
-	// if we construct id according to the full path above, the underlying
-	// terraform non-deterministically fails with
-	//  "could not read properties for Management Group "example-sub""
-	// just populate the id with empty string solves it. Same happens in
-	// isolated test with terraform cli
 	e.GetIDFn = func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
-		return "", nil
+		if len(externalName) == 0 || len(strings.Split(externalName, "/")) < 2 {
+			return "", nil
+		}
+		w := strings.Split(externalName, "/")
+		managementGroupName := w[0]
+		subscriptionId := w[1]
+		return fmt.Sprintf("/managementGroup/%s/subscription/%s", managementGroupName, subscriptionId), nil
 	}
 	return e
 }

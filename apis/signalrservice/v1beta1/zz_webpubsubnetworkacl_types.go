@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -59,7 +63,7 @@ type WebPubsubNetworkACLParameters struct {
 
 	// The ID of the Web Pubsub service. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/signalrservice/v1beta1.WebPubsub
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WebPubsubID *string `json:"webPubsubId,omitempty" tf:"web_pubsub_id,omitempty"`
 
@@ -105,7 +109,7 @@ type WebPubsubNetworkACLPrivateEndpointParameters struct {
 
 	// The ID of the Private Endpoint which is based on the Web Pubsub service.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PrivateEndpoint
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -151,9 +155,8 @@ type WebPubsubNetworkACLPublicNetworkParameters struct {
 type WebPubsubNetworkACLSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WebPubsubNetworkACLParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -183,7 +186,7 @@ type WebPubsubNetworkACLStatus struct {
 type WebPubsubNetworkACL struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicNetwork) || has(self.initProvider.publicNetwork)",message="publicNetwork is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.publicNetwork) || (has(self.initProvider) && has(self.initProvider.publicNetwork))",message="spec.forProvider.publicNetwork is a required parameter"
 	Spec   WebPubsubNetworkACLSpec   `json:"spec"`
 	Status WebPubsubNetworkACLStatus `json:"status,omitempty"`
 }

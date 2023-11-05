@@ -22,7 +22,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
-	tjconfig "github.com/upbound/upjet/pkg/config"
+	tjconfig "github.com/crossplane/upjet/pkg/config"
 
 	"github.com/upbound/provider-azure/apis/rconfig"
 

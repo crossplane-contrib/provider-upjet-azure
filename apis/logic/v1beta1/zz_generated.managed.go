@@ -27,14 +27,6 @@ func (mg *AppActionCustom) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AppActionCustom.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AppActionCustom) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AppActionCustom.
 func (mg *AppActionCustom) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *AppActionCustom) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AppActionCustom.
 func (mg *AppActionCustom) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AppActionCustom.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AppActionCustom) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AppActionCustom.
@@ -103,14 +87,6 @@ func (mg *AppActionHTTP) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AppActionHTTP.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AppActionHTTP) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AppActionHTTP.
 func (mg *AppActionHTTP) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *AppActionHTTP) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AppActionHTTP.
 func (mg *AppActionHTTP) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AppActionHTTP.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AppActionHTTP) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AppActionHTTP.
@@ -179,14 +147,6 @@ func (mg *AppIntegrationAccount) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AppIntegrationAccount.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AppIntegrationAccount) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AppIntegrationAccount.
 func (mg *AppIntegrationAccount) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *AppIntegrationAccount) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this AppIntegrationAccount.
 func (mg *AppIntegrationAccount) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AppIntegrationAccount.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AppIntegrationAccount) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AppIntegrationAccount.
@@ -255,14 +207,6 @@ func (mg *AppIntegrationAccountBatchConfiguration) GetProviderConfigReference() 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AppIntegrationAccountBatchConfiguration.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AppIntegrationAccountBatchConfiguration) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AppIntegrationAccountBatchConfiguration.
 func (mg *AppIntegrationAccountBatchConfiguration) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *AppIntegrationAccountBatchConfiguration) SetManagementPolicies(r xpv1.
 // SetProviderConfigReference of this AppIntegrationAccountBatchConfiguration.
 func (mg *AppIntegrationAccountBatchConfiguration) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AppIntegrationAccountBatchConfiguration.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AppIntegrationAccountBatchConfiguration) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AppIntegrationAccountBatchConfiguration.
@@ -331,14 +267,6 @@ func (mg *AppIntegrationAccountPartner) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AppIntegrationAccountPartner.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AppIntegrationAccountPartner) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AppIntegrationAccountPartner.
 func (mg *AppIntegrationAccountPartner) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *AppIntegrationAccountPartner) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this AppIntegrationAccountPartner.
 func (mg *AppIntegrationAccountPartner) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AppIntegrationAccountPartner.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AppIntegrationAccountPartner) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AppIntegrationAccountPartner.
@@ -407,14 +327,6 @@ func (mg *AppIntegrationAccountSchema) GetProviderConfigReference() *xpv1.Refere
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AppIntegrationAccountSchema.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AppIntegrationAccountSchema) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AppIntegrationAccountSchema.
 func (mg *AppIntegrationAccountSchema) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *AppIntegrationAccountSchema) SetManagementPolicies(r xpv1.ManagementPo
 // SetProviderConfigReference of this AppIntegrationAccountSchema.
 func (mg *AppIntegrationAccountSchema) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AppIntegrationAccountSchema.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AppIntegrationAccountSchema) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AppIntegrationAccountSchema.
@@ -483,14 +387,6 @@ func (mg *AppIntegrationAccountSession) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AppIntegrationAccountSession.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AppIntegrationAccountSession) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AppIntegrationAccountSession.
 func (mg *AppIntegrationAccountSession) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *AppIntegrationAccountSession) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this AppIntegrationAccountSession.
 func (mg *AppIntegrationAccountSession) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AppIntegrationAccountSession.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AppIntegrationAccountSession) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AppIntegrationAccountSession.
@@ -559,14 +447,6 @@ func (mg *AppTriggerCustom) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AppTriggerCustom.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AppTriggerCustom) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AppTriggerCustom.
 func (mg *AppTriggerCustom) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -595,14 +475,6 @@ func (mg *AppTriggerCustom) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AppTriggerCustom.
 func (mg *AppTriggerCustom) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AppTriggerCustom.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AppTriggerCustom) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AppTriggerCustom.
@@ -635,14 +507,6 @@ func (mg *AppTriggerHTTPRequest) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AppTriggerHTTPRequest.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AppTriggerHTTPRequest) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AppTriggerHTTPRequest.
 func (mg *AppTriggerHTTPRequest) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -671,14 +535,6 @@ func (mg *AppTriggerHTTPRequest) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this AppTriggerHTTPRequest.
 func (mg *AppTriggerHTTPRequest) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AppTriggerHTTPRequest.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AppTriggerHTTPRequest) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AppTriggerHTTPRequest.
@@ -711,14 +567,6 @@ func (mg *AppTriggerRecurrence) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AppTriggerRecurrence.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AppTriggerRecurrence) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AppTriggerRecurrence.
 func (mg *AppTriggerRecurrence) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -747,14 +595,6 @@ func (mg *AppTriggerRecurrence) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this AppTriggerRecurrence.
 func (mg *AppTriggerRecurrence) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AppTriggerRecurrence.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AppTriggerRecurrence) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AppTriggerRecurrence.
@@ -787,14 +627,6 @@ func (mg *AppWorkflow) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this AppWorkflow.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *AppWorkflow) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this AppWorkflow.
 func (mg *AppWorkflow) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -823,14 +655,6 @@ func (mg *AppWorkflow) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this AppWorkflow.
 func (mg *AppWorkflow) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this AppWorkflow.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *AppWorkflow) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this AppWorkflow.
@@ -863,14 +687,6 @@ func (mg *IntegrationServiceEnvironment) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IntegrationServiceEnvironment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IntegrationServiceEnvironment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IntegrationServiceEnvironment.
 func (mg *IntegrationServiceEnvironment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -899,14 +715,6 @@ func (mg *IntegrationServiceEnvironment) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this IntegrationServiceEnvironment.
 func (mg *IntegrationServiceEnvironment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IntegrationServiceEnvironment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IntegrationServiceEnvironment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IntegrationServiceEnvironment.

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -14,9 +18,9 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/ratelimiter"
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
-	tjcontroller "github.com/upbound/upjet/pkg/controller"
-	"github.com/upbound/upjet/pkg/controller/handler"
-	"github.com/upbound/upjet/pkg/terraform"
+	tjcontroller "github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/controller/handler"
+	"github.com/crossplane/upjet/pkg/terraform"
 	ctrl "sigs.k8s.io/controller-runtime"
 
 	v1beta1 "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
@@ -27,7 +31,6 @@ import (
 func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 	name := managed.ControllerName(v1beta1.Certificate_GroupVersionKind.String())
 	var initializers managed.InitializerChain
-	initializers = append(initializers, managed.NewNameAsExternalName(mgr.GetClient()))
 	cps := []managed.ConnectionPublisher{managed.NewAPISecretPublisher(mgr.GetClient(), mgr.GetScheme())}
 	if o.SecretStoreConfigGVK != nil {
 		cps = append(cps, connection.NewDetailsManager(mgr.GetClient(), *o.SecretStoreConfigGVK, connection.WithTLSConfig(o.ESSOptions.TLSConfig)))
@@ -46,7 +49,10 @@ func Setup(mgr ctrl.Manager, o tjcontroller.Options) error {
 		managed.WithConnectionPublishers(cps...),
 		managed.WithPollInterval(o.PollInterval),
 	}
-	if o.Features.Enabled(features.EnableAlphaManagementPolicies) {
+	if o.PollJitter != 0 {
+		opts = append(opts, managed.WithPollJitterHook(o.PollJitter))
+	}
+	if o.Features.Enabled(features.EnableBetaManagementPolicies) {
 		opts = append(opts, managed.WithManagementPolicies())
 	}
 	r := managed.NewReconciler(mgr, xpresource.ManagedKind(v1beta1.Certificate_GroupVersionKind), opts...)

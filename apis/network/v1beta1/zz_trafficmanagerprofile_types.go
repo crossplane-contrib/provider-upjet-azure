@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -265,9 +269,8 @@ type TrafficManagerProfileParameters struct {
 type TrafficManagerProfileSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     TrafficManagerProfileParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -297,9 +300,9 @@ type TrafficManagerProfileStatus struct {
 type TrafficManagerProfile struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dnsConfig) || has(self.initProvider.dnsConfig)",message="dnsConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.monitorConfig) || has(self.initProvider.monitorConfig)",message="monitorConfig is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trafficRoutingMethod) || has(self.initProvider.trafficRoutingMethod)",message="trafficRoutingMethod is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.dnsConfig) || (has(self.initProvider) && has(self.initProvider.dnsConfig))",message="spec.forProvider.dnsConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.monitorConfig) || (has(self.initProvider) && has(self.initProvider.monitorConfig))",message="spec.forProvider.monitorConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.trafficRoutingMethod) || (has(self.initProvider) && has(self.initProvider.trafficRoutingMethod))",message="spec.forProvider.trafficRoutingMethod is a required parameter"
 	Spec   TrafficManagerProfileSpec   `json:"spec"`
 	Status TrafficManagerProfileStatus `json:"status,omitempty"`
 }

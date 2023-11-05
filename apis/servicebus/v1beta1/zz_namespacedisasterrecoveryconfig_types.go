@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -35,7 +39,7 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// The Shared access policies used to access the connection string for the alias.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.NamespaceAuthorizationRule
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AliasAuthorizationRuleID *string `json:"aliasAuthorizationRuleId,omitempty" tf:"alias_authorization_rule_id,omitempty"`
 
@@ -49,7 +53,7 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// The ID of the Service Bus Namespace to replicate to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.ServiceBusNamespace
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PartnerNamespaceID *string `json:"partnerNamespaceId,omitempty" tf:"partner_namespace_id,omitempty"`
 
@@ -63,7 +67,7 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 
 	// The ID of the primary Service Bus Namespace to replicate. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.ServiceBusNamespace
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrimaryNamespaceID *string `json:"primaryNamespaceId,omitempty" tf:"primary_namespace_id,omitempty"`
 
@@ -80,9 +84,8 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 type NamespaceDisasterRecoveryConfigSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     NamespaceDisasterRecoveryConfigParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.

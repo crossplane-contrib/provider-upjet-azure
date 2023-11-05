@@ -27,14 +27,6 @@ func (mg *HBaseCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HBaseCluster.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HBaseCluster) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HBaseCluster.
 func (mg *HBaseCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *HBaseCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this HBaseCluster.
 func (mg *HBaseCluster) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HBaseCluster.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HBaseCluster) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HBaseCluster.
@@ -103,14 +87,6 @@ func (mg *HadoopCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HadoopCluster.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HadoopCluster) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HadoopCluster.
 func (mg *HadoopCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *HadoopCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this HadoopCluster.
 func (mg *HadoopCluster) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HadoopCluster.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HadoopCluster) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HadoopCluster.
@@ -179,14 +147,6 @@ func (mg *InteractiveQueryCluster) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this InteractiveQueryCluster.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *InteractiveQueryCluster) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this InteractiveQueryCluster.
 func (mg *InteractiveQueryCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *InteractiveQueryCluster) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this InteractiveQueryCluster.
 func (mg *InteractiveQueryCluster) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this InteractiveQueryCluster.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *InteractiveQueryCluster) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this InteractiveQueryCluster.
@@ -255,14 +207,6 @@ func (mg *KafkaCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this KafkaCluster.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *KafkaCluster) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this KafkaCluster.
 func (mg *KafkaCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *KafkaCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this KafkaCluster.
 func (mg *KafkaCluster) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this KafkaCluster.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *KafkaCluster) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this KafkaCluster.
@@ -331,14 +267,6 @@ func (mg *SparkCluster) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SparkCluster.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SparkCluster) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SparkCluster.
 func (mg *SparkCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *SparkCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SparkCluster.
 func (mg *SparkCluster) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SparkCluster.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SparkCluster) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SparkCluster.

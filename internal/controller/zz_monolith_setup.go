@@ -1,13 +1,13 @@
-/*
-Copyright 2021 Upbound Inc.
-*/
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
 
 package controller
 
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/upbound/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/controller"
 
 	monitoractionruleactiongroup "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoractionruleactiongroup"
 	monitoractionrulesuppression "github.com/upbound/provider-azure/internal/controller/alertsmanagement/monitoractionrulesuppression"
@@ -152,12 +152,15 @@ import (
 	sharedimagegallery "github.com/upbound/provider-azure/internal/controller/compute/sharedimagegallery"
 	snapshot "github.com/upbound/provider-azure/internal/controller/compute/snapshot"
 	sshpublickey "github.com/upbound/provider-azure/internal/controller/compute/sshpublickey"
+	virtualmachineextension "github.com/upbound/provider-azure/internal/controller/compute/virtualmachineextension"
 	windowsvirtualmachine "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachine"
 	windowsvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachinescaleset"
 	ledger "github.com/upbound/provider-azure/internal/controller/confidentialledger/ledger"
 	budgetmanagementgroup "github.com/upbound/provider-azure/internal/controller/consumption/budgetmanagementgroup"
 	budgetresourcegroup "github.com/upbound/provider-azure/internal/controller/consumption/budgetresourcegroup"
 	budgetsubscription "github.com/upbound/provider-azure/internal/controller/consumption/budgetsubscription"
+	containerapp "github.com/upbound/provider-azure/internal/controller/containerapp/containerapp"
+	environment "github.com/upbound/provider-azure/internal/controller/containerapp/environment"
 	agentpool "github.com/upbound/provider-azure/internal/controller/containerregistry/agentpool"
 	containerconnectedregistry "github.com/upbound/provider-azure/internal/controller/containerregistry/containerconnectedregistry"
 	registry "github.com/upbound/provider-azure/internal/controller/containerregistry/registry"
@@ -377,6 +380,7 @@ import (
 	iothubdataconnection "github.com/upbound/provider-azure/internal/controller/kusto/iothubdataconnection"
 	labservicelab "github.com/upbound/provider-azure/internal/controller/labservices/labservicelab"
 	labserviceplan "github.com/upbound/provider-azure/internal/controller/labservices/labserviceplan"
+	loadtest "github.com/upbound/provider-azure/internal/controller/loadtestservice/loadtest"
 	appactioncustom "github.com/upbound/provider-azure/internal/controller/logic/appactioncustom"
 	appactionhttp "github.com/upbound/provider-azure/internal/controller/logic/appactionhttp"
 	appintegrationaccount "github.com/upbound/provider-azure/internal/controller/logic/appintegrationaccount"
@@ -880,12 +884,15 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		sharedimagegallery.Setup,
 		snapshot.Setup,
 		sshpublickey.Setup,
+		virtualmachineextension.Setup,
 		windowsvirtualmachine.Setup,
 		windowsvirtualmachinescaleset.Setup,
 		ledger.Setup,
 		budgetmanagementgroup.Setup,
 		budgetresourcegroup.Setup,
 		budgetsubscription.Setup,
+		containerapp.Setup,
+		environment.Setup,
 		agentpool.Setup,
 		containerconnectedregistry.Setup,
 		registry.Setup,
@@ -1105,6 +1112,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		iothubdataconnection.Setup,
 		labservicelab.Setup,
 		labserviceplan.Setup,
+		loadtest.Setup,
 		appactioncustom.Setup,
 		appactionhttp.Setup,
 		appintegrationaccount.Setup,

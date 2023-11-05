@@ -74,6 +74,7 @@ metadata:
     testing.upbound.io/example-name: wssqlaadadmin-key
   name: wssqlaadadmin-key
 spec:
+  name: workspace-encryption-key
   forProvider:
     keyOpts:
     - unwrapKey

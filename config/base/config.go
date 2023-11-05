@@ -17,7 +17,7 @@ limitations under the License.
 package base
 
 import (
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 )
 
 // Configure configures the base group
@@ -36,7 +36,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_resource_group", func(r *config.Resource) {
-		r.UseAsync = false
+		r.UseAsync = true
 		r.Kind = "ResourceGroup"
 		r.ShortGroup = ""
 	})

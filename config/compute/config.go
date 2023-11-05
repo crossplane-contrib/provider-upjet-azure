@@ -7,7 +7,7 @@ package compute
 import (
 	"github.com/upbound/provider-azure/apis/rconfig"
 
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 )
 
 // Configure configures cosmodb group
@@ -42,6 +42,10 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"scale_in_policy"},
 		}
 		r.MetaResource.ArgumentDocs["scale_in_policy"] = "Deprecated: scaleInPolicy will be removed in favour of the scaleIn code block."
+	})
+	p.AddResourceConfigurator("azurerm_virtual_machine_extension", func(r *config.Resource) {
+		r.Kind = "VirtualMachineExtension"
+		r.ShortGroup = "compute"
 	})
 	/* Note on testing:
 	* - create a storage account

@@ -1,0 +1,112 @@
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/certificate
+  labels:
+    testing.upbound.io/example-name: example-cert
+  name: uptest-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    name: custom-Non-RFC1123Name
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-cert
+    certificatePolicy:
+      - issuerParameters:
+          - name: Self
+        keyProperties:
+          - exportable: true
+            keySize: 4096
+            keyType: RSA
+            reuseKey: true
+        secretProperties:
+          - contentType: application/x-pkcs12
+        lifetimeAction:
+          - action:
+              - actionType: AutoRenew
+            trigger:
+              - daysBeforeExpiry: 30
+        x509CertificateProperties:
+          - extendedKeyUsage:
+              - "1.3.6.1.5.5.7.3.1"
+            keyUsage:
+              - cRLSign
+              - dataEncipherment
+              - digitalSignature
+              - keyAgreement
+              - keyCertSign
+              - keyEncipherment
+            subjectAlternativeNames:
+              - dnsNames:
+                  - upbound.io
+            subject: CN=upbound
+            validityInMonths: 12
+
+---
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/certificate
+  labels:
+    testing.upbound.io/example-name: example-cert
+  name: example-cert
+spec:
+  forProvider:
+    certificatePermissions:
+      - Create
+      - Delete
+      - DeleteIssuers
+      - Get
+      - GetIssuers
+      - SetIssuers
+      - Import
+      - List
+      - ListIssuers
+      - ManageContacts
+      - ManageIssuers
+      - Purge
+      - SetIssuers
+      - Update
+      - Recover
+    keyPermissions:
+      - Create
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-cert
+    objectId: ${data.azurerm_client_config.service_principal.object_id}
+    secretPermissions:
+      - Set
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/certificate
+  labels:
+    testing.upbound.io/example-name: example-cert
+  name: uptest-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-cert
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/certificate
+  labels:
+    testing.upbound.io/example-name: example-cert
+  name: uptest-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe

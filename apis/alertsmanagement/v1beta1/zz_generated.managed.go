@@ -27,14 +27,6 @@ func (mg *MonitorActionRuleActionGroup) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MonitorActionRuleActionGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MonitorActionRuleActionGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MonitorActionRuleActionGroup.
 func (mg *MonitorActionRuleActionGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *MonitorActionRuleActionGroup) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this MonitorActionRuleActionGroup.
 func (mg *MonitorActionRuleActionGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MonitorActionRuleActionGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MonitorActionRuleActionGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MonitorActionRuleActionGroup.
@@ -103,14 +87,6 @@ func (mg *MonitorActionRuleSuppression) GetProviderConfigReference() *xpv1.Refer
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MonitorActionRuleSuppression.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MonitorActionRuleSuppression) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MonitorActionRuleSuppression.
 func (mg *MonitorActionRuleSuppression) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *MonitorActionRuleSuppression) SetManagementPolicies(r xpv1.ManagementP
 // SetProviderConfigReference of this MonitorActionRuleSuppression.
 func (mg *MonitorActionRuleSuppression) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MonitorActionRuleSuppression.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MonitorActionRuleSuppression) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MonitorActionRuleSuppression.
@@ -179,14 +147,6 @@ func (mg *MonitorAlertProcessingRuleActionGroup) GetProviderConfigReference() *x
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MonitorAlertProcessingRuleActionGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MonitorAlertProcessingRuleActionGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MonitorAlertProcessingRuleActionGroup.
 func (mg *MonitorAlertProcessingRuleActionGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *MonitorAlertProcessingRuleActionGroup) SetManagementPolicies(r xpv1.Ma
 // SetProviderConfigReference of this MonitorAlertProcessingRuleActionGroup.
 func (mg *MonitorAlertProcessingRuleActionGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MonitorAlertProcessingRuleActionGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MonitorAlertProcessingRuleActionGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MonitorAlertProcessingRuleActionGroup.
@@ -255,14 +207,6 @@ func (mg *MonitorAlertProcessingRuleSuppression) GetProviderConfigReference() *x
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MonitorAlertProcessingRuleSuppression.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MonitorAlertProcessingRuleSuppression) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MonitorAlertProcessingRuleSuppression.
 func (mg *MonitorAlertProcessingRuleSuppression) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *MonitorAlertProcessingRuleSuppression) SetManagementPolicies(r xpv1.Ma
 // SetProviderConfigReference of this MonitorAlertProcessingRuleSuppression.
 func (mg *MonitorAlertProcessingRuleSuppression) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MonitorAlertProcessingRuleSuppression.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MonitorAlertProcessingRuleSuppression) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MonitorAlertProcessingRuleSuppression.
@@ -331,14 +267,6 @@ func (mg *MonitorSmartDetectorAlertRule) GetProviderConfigReference() *xpv1.Refe
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MonitorSmartDetectorAlertRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MonitorSmartDetectorAlertRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MonitorSmartDetectorAlertRule.
 func (mg *MonitorSmartDetectorAlertRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *MonitorSmartDetectorAlertRule) SetManagementPolicies(r xpv1.Management
 // SetProviderConfigReference of this MonitorSmartDetectorAlertRule.
 func (mg *MonitorSmartDetectorAlertRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MonitorSmartDetectorAlertRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MonitorSmartDetectorAlertRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MonitorSmartDetectorAlertRule.

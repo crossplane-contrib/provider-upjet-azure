@@ -1,13 +1,13 @@
-/*
-Copyright 2021 Upbound Inc.
-*/
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
 
 package controller
 
 import (
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/upbound/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/controller"
 
 	availabilityset "github.com/upbound/provider-azure/internal/controller/compute/availabilityset"
 	capacityreservation "github.com/upbound/provider-azure/internal/controller/compute/capacityreservation"
@@ -28,6 +28,7 @@ import (
 	sharedimagegallery "github.com/upbound/provider-azure/internal/controller/compute/sharedimagegallery"
 	snapshot "github.com/upbound/provider-azure/internal/controller/compute/snapshot"
 	sshpublickey "github.com/upbound/provider-azure/internal/controller/compute/sshpublickey"
+	virtualmachineextension "github.com/upbound/provider-azure/internal/controller/compute/virtualmachineextension"
 	windowsvirtualmachine "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachine"
 	windowsvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachinescaleset"
 )
@@ -55,6 +56,7 @@ func Setup_compute(mgr ctrl.Manager, o controller.Options) error {
 		sharedimagegallery.Setup,
 		snapshot.Setup,
 		sshpublickey.Setup,
+		virtualmachineextension.Setup,
 		windowsvirtualmachine.Setup,
 		windowsvirtualmachinescaleset.Setup,
 	} {

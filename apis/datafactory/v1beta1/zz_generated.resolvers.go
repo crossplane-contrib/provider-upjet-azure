@@ -8,6 +8,7 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 	v1beta1 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta12 "github.com/upbound/provider-azure/apis/databricks/v1beta1"
@@ -18,7 +19,6 @@ import (
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	v1beta13 "github.com/upbound/provider-azure/apis/search/v1beta1"
 	v1beta16 "github.com/upbound/provider-azure/apis/storage/v1beta1"
-	resource "github.com/upbound/upjet/pkg/resource"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 

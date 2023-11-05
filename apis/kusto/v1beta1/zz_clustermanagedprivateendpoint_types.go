@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -66,7 +70,7 @@ type ClusterManagedPrivateEndpointParameters struct {
 
 	// The ARM resource ID of the resource for which the managed private endpoint is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateLinkResourceID *string `json:"privateLinkResourceId,omitempty" tf:"private_link_resource_id,omitempty"`
 
@@ -80,7 +84,7 @@ type ClusterManagedPrivateEndpointParameters struct {
 
 	// The region of the resource to which the managed private endpoint is created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("location",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
 	// +kubebuilder:validation:Optional
 	PrivateLinkResourceRegion *string `json:"privateLinkResourceRegion,omitempty" tf:"private_link_resource_region,omitempty"`
 
@@ -114,9 +118,8 @@ type ClusterManagedPrivateEndpointParameters struct {
 type ClusterManagedPrivateEndpointSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ClusterManagedPrivateEndpointParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -146,7 +149,7 @@ type ClusterManagedPrivateEndpointStatus struct {
 type ClusterManagedPrivateEndpoint struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupId) || has(self.initProvider.groupId)",message="groupId is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.groupId) || (has(self.initProvider) && has(self.initProvider.groupId))",message="spec.forProvider.groupId is a required parameter"
 	Spec   ClusterManagedPrivateEndpointSpec   `json:"spec"`
 	Status ClusterManagedPrivateEndpointStatus `json:"status,omitempty"`
 }

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -29,6 +33,7 @@ import (
 	v1beta1compute "github.com/upbound/provider-azure/apis/compute/v1beta1"
 	v1beta1confidentialledger "github.com/upbound/provider-azure/apis/confidentialledger/v1beta1"
 	v1beta1consumption "github.com/upbound/provider-azure/apis/consumption/v1beta1"
+	v1beta1containerapp "github.com/upbound/provider-azure/apis/containerapp/v1beta1"
 	v1beta1containerregistry "github.com/upbound/provider-azure/apis/containerregistry/v1beta1"
 	v1beta1containerservice "github.com/upbound/provider-azure/apis/containerservice/v1beta1"
 	v1beta1cosmosdb "github.com/upbound/provider-azure/apis/cosmosdb/v1beta1"
@@ -60,6 +65,7 @@ import (
 	v1beta1keyvault "github.com/upbound/provider-azure/apis/keyvault/v1beta1"
 	v1beta1kusto "github.com/upbound/provider-azure/apis/kusto/v1beta1"
 	v1beta1labservices "github.com/upbound/provider-azure/apis/labservices/v1beta1"
+	v1beta1loadtestservice "github.com/upbound/provider-azure/apis/loadtestservice/v1beta1"
 	v1beta1logic "github.com/upbound/provider-azure/apis/logic/v1beta1"
 	v1beta1logz "github.com/upbound/provider-azure/apis/logz/v1beta1"
 	v1beta1machinelearningservices "github.com/upbound/provider-azure/apis/machinelearningservices/v1beta1"
@@ -128,6 +134,7 @@ func init() {
 		v1beta1compute.SchemeBuilder.AddToScheme,
 		v1beta1confidentialledger.SchemeBuilder.AddToScheme,
 		v1beta1consumption.SchemeBuilder.AddToScheme,
+		v1beta1containerapp.SchemeBuilder.AddToScheme,
 		v1beta1containerregistry.SchemeBuilder.AddToScheme,
 		v1beta1containerservice.SchemeBuilder.AddToScheme,
 		v1beta1cosmosdb.SchemeBuilder.AddToScheme,
@@ -159,6 +166,7 @@ func init() {
 		v1beta1keyvault.SchemeBuilder.AddToScheme,
 		v1beta1kusto.SchemeBuilder.AddToScheme,
 		v1beta1labservices.SchemeBuilder.AddToScheme,
+		v1beta1loadtestservice.SchemeBuilder.AddToScheme,
 		v1beta1logic.SchemeBuilder.AddToScheme,
 		v1beta1logz.SchemeBuilder.AddToScheme,
 		v1beta1machinelearningservices.SchemeBuilder.AddToScheme,

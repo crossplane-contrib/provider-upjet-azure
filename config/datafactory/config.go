@@ -17,7 +17,7 @@ limitations under the License.
 package datafactory
 
 import (
-	"github.com/upbound/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config"
 )
 
 // Configure configures datafactory group

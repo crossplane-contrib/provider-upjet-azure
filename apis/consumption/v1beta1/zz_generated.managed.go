@@ -27,14 +27,6 @@ func (mg *BudgetManagementGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BudgetManagementGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BudgetManagementGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BudgetManagementGroup.
 func (mg *BudgetManagementGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *BudgetManagementGroup) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this BudgetManagementGroup.
 func (mg *BudgetManagementGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BudgetManagementGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BudgetManagementGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BudgetManagementGroup.
@@ -103,14 +87,6 @@ func (mg *BudgetResourceGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BudgetResourceGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BudgetResourceGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BudgetResourceGroup.
 func (mg *BudgetResourceGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *BudgetResourceGroup) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this BudgetResourceGroup.
 func (mg *BudgetResourceGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BudgetResourceGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BudgetResourceGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BudgetResourceGroup.
@@ -179,14 +147,6 @@ func (mg *BudgetSubscription) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this BudgetSubscription.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *BudgetSubscription) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this BudgetSubscription.
 func (mg *BudgetSubscription) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *BudgetSubscription) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this BudgetSubscription.
 func (mg *BudgetSubscription) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this BudgetSubscription.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *BudgetSubscription) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this BudgetSubscription.

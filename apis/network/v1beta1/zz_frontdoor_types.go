@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -762,9 +766,8 @@ type RoutingRuleRedirectConfigurationParameters struct {
 type FrontDoorSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FrontDoorParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -794,11 +797,11 @@ type FrontDoorStatus struct {
 type FrontDoor struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backendPool) || has(self.initProvider.backendPool)",message="backendPool is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backendPoolHealthProbe) || has(self.initProvider.backendPoolHealthProbe)",message="backendPoolHealthProbe is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backendPoolLoadBalancing) || has(self.initProvider.backendPoolLoadBalancing)",message="backendPoolLoadBalancing is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frontendEndpoint) || has(self.initProvider.frontendEndpoint)",message="frontendEndpoint is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.routingRule) || has(self.initProvider.routingRule)",message="routingRule is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backendPool) || (has(self.initProvider) && has(self.initProvider.backendPool))",message="spec.forProvider.backendPool is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backendPoolHealthProbe) || (has(self.initProvider) && has(self.initProvider.backendPoolHealthProbe))",message="spec.forProvider.backendPoolHealthProbe is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.backendPoolLoadBalancing) || (has(self.initProvider) && has(self.initProvider.backendPoolLoadBalancing))",message="spec.forProvider.backendPoolLoadBalancing is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.frontendEndpoint) || (has(self.initProvider) && has(self.initProvider.frontendEndpoint))",message="spec.forProvider.frontendEndpoint is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.routingRule) || (has(self.initProvider) && has(self.initProvider.routingRule))",message="spec.forProvider.routingRule is a required parameter"
 	Spec   FrontDoorSpec   `json:"spec"`
 	Status FrontDoorStatus `json:"status,omitempty"`
 }

@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -61,7 +65,7 @@ type SubscriptionCostManagementExportExportDataStorageLocationParameters struct 
 
 	// The Resource Manager ID of the container where exports will be uploaded. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("resource_manager_id",true)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_manager_id",true)
 	// +kubebuilder:validation:Optional
 	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
 
@@ -164,7 +168,7 @@ type SubscriptionCostManagementExportParameters struct {
 
 	// The id of the subscription on which to create an export. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.Subscription
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 
@@ -181,9 +185,8 @@ type SubscriptionCostManagementExportParameters struct {
 type SubscriptionCostManagementExportSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     SubscriptionCostManagementExportParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -213,12 +216,12 @@ type SubscriptionCostManagementExportStatus struct {
 type SubscriptionCostManagementExport struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exportDataOptions) || has(self.initProvider.exportDataOptions)",message="exportDataOptions is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exportDataStorageLocation) || has(self.initProvider.exportDataStorageLocation)",message="exportDataStorageLocation is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || has(self.initProvider.name)",message="name is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recurrencePeriodEndDate) || has(self.initProvider.recurrencePeriodEndDate)",message="recurrencePeriodEndDate is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recurrencePeriodStartDate) || has(self.initProvider.recurrencePeriodStartDate)",message="recurrencePeriodStartDate is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recurrenceType) || has(self.initProvider.recurrenceType)",message="recurrenceType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exportDataOptions) || (has(self.initProvider) && has(self.initProvider.exportDataOptions))",message="spec.forProvider.exportDataOptions is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.exportDataStorageLocation) || (has(self.initProvider) && has(self.initProvider.exportDataStorageLocation))",message="spec.forProvider.exportDataStorageLocation is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recurrencePeriodEndDate) || (has(self.initProvider) && has(self.initProvider.recurrencePeriodEndDate))",message="spec.forProvider.recurrencePeriodEndDate is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recurrencePeriodStartDate) || (has(self.initProvider) && has(self.initProvider.recurrencePeriodStartDate))",message="spec.forProvider.recurrencePeriodStartDate is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.recurrenceType) || (has(self.initProvider) && has(self.initProvider.recurrenceType))",message="spec.forProvider.recurrenceType is a required parameter"
 	Spec   SubscriptionCostManagementExportSpec   `json:"spec"`
 	Status SubscriptionCostManagementExportStatus `json:"status,omitempty"`
 }

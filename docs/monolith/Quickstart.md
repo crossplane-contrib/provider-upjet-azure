@@ -8,7 +8,7 @@ weight: 1
 
 This guide walks through the process to install Upbound Universal Crossplane and install the Azure official provider.
 
-To use this official provider, install Upbound Universal Crossplane into your Kubernetes cluster, install the `Provider`, apply a `ProviderConfig`, and create a *managed resource* in Azure via Kubernetes.
+To use Azure official provider, install Upbound Universal Crossplane into your Kubernetes cluster, install the `Provider`, apply a `ProviderConfig`, and create a *managed resource* in Azure via Kubernetes.
 
 ## Install the Up command-line
 Download and install the Upbound `up` command-line.
@@ -22,7 +22,7 @@ Verify the version of `up` with `up --version`
 
 ```shell
 $ up --version
-v0.13.0
+v0.19.1
 ```
 
 _Note_: official providers only support `up` command-line versions v0.13.0 or later.
@@ -32,23 +32,21 @@ Install Upbound Universal Crossplane with the Up command-line.
 
 ```shell
 $ up uxp install
-UXP 1.9.0-up.3 installed
+UXP 1.13.2-up.2 installed
 ```
 
 Verify the UXP pods are running with `kubectl get pods -n upbound-system`
 
 ```shell
 $ kubectl get pods -n upbound-system
-NAME                                        READY   STATUS    RESTARTS      AGE
-crossplane-7fdfbd897c-pmrml                 1/1     Running   0             68m
-crossplane-rbac-manager-7d6867bc4d-v7wpb    1/1     Running   0             68m
-upbound-bootstrapper-5f47977d54-t8kvk       1/1     Running   0             68m
-xgql-7c4b74c458-5bf2q                       1/1     Running   3 (67m ago)   68m
+NAME                                       READY   STATUS    RESTARTS   AGE
+crossplane-77ff754998-5j9rm                1/1     Running   0          49s
+crossplane-rbac-manager-79b8bdd6d8-nwmb9   1/1     Running   0          49s
 ```
 
 ## Install the official Azure provider
 
-Install the official provider into the Kubernetes cluster with a Kubernetes configuration file. 
+Install the official `provider-azure` into the Kubernetes cluster with a Kubernetes configuration file.
 
 ```yaml
 apiVersion: pkg.crossplane.io/v1
@@ -66,13 +64,13 @@ After installing the provider, verify the install with `kubectl get providers`.
 ```shell
 $ kubectl get provider
 NAME             INSTALLED   HEALTHY   PACKAGE                                         AGE
-provider-azure   True        True      xpkg.upbound.io/upbound/provider-azure:v0.16.0   58s
+provider-azure   True        True      xpkg.upbound.io/upbound/provider-azure:v0.36.0   58s
 ```
 
 It may take up to 5 minutes to report `HEALTHY`.
 
 ## Create a Kubernetes secret
-The provider requires credentials to create and manage Azure resources.
+The `provider-azure` requires credentials to create and manage Azure resources.
 
 ### Install the Azure command-line
 Generating an [authentication file](https://docs.microsoft.com/en-us/azure/developer/go/azure-sdk-authorization#use-file-based-authentication) requires the Azure command-line. Follow the documentation from Microsoft to [Download and install the Azure command-line](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli).
@@ -130,7 +128,7 @@ Data
 creds:  629 bytes
 ```
 ## Create a ProviderConfig
-Create a `ProviderConfig` Kubernetes configuration file to attach the Azure credentials to the installed official provider.
+Create a `ProviderConfig` Kubernetes configuration file to attach the Azure credentials to the installed official `provider-azure`.
 
 ```yaml
 apiVersion: azure.upbound.io/v1beta1
@@ -169,7 +167,7 @@ Spec:
 ```
 
 ## Create a managed resource
-Create a managed resource to verify the provider is functioning. 
+Create a managed resource to verify the `provider-azure` is functioning.
 
 This example creates an Azure resource group.
 

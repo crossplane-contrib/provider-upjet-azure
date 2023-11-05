@@ -27,14 +27,6 @@ func (mg *CloudApplicationLiveView) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this CloudApplicationLiveView.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *CloudApplicationLiveView) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this CloudApplicationLiveView.
 func (mg *CloudApplicationLiveView) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *CloudApplicationLiveView) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this CloudApplicationLiveView.
 func (mg *CloudApplicationLiveView) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this CloudApplicationLiveView.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *CloudApplicationLiveView) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this CloudApplicationLiveView.

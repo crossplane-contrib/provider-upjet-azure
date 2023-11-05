@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -1979,7 +1983,7 @@ type WindowsFunctionAppSlotParameters struct {
 	// The name of the Windows Function App this Slot is a member of. Changing this forces a new resource to be created.
 	// The ID of the Windows Function App this Slot is a member of.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.WindowsFunctionApp
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
 
@@ -3016,9 +3020,8 @@ type WindowsFunctionAppSlotStorageAccountParameters struct {
 type WindowsFunctionAppSlotSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     WindowsFunctionAppSlotParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -3048,7 +3051,7 @@ type WindowsFunctionAppSlotStatus struct {
 type WindowsFunctionAppSlot struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.siteConfig) || has(self.initProvider.siteConfig)",message="siteConfig is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.siteConfig) || (has(self.initProvider) && has(self.initProvider.siteConfig))",message="spec.forProvider.siteConfig is a required parameter"
 	Spec   WindowsFunctionAppSlotSpec   `json:"spec"`
 	Status WindowsFunctionAppSlotStatus `json:"status,omitempty"`
 }

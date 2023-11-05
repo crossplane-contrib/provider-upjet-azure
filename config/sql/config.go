@@ -19,8 +19,8 @@ package sql
 import (
 	"fmt"
 
+	"github.com/crossplane/upjet/pkg/config"
 	"github.com/pkg/errors"
-	"github.com/upbound/upjet/pkg/config"
 
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 

@@ -27,14 +27,6 @@ func (mg *PowerBIEmbedded) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this PowerBIEmbedded.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *PowerBIEmbedded) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this PowerBIEmbedded.
 func (mg *PowerBIEmbedded) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *PowerBIEmbedded) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this PowerBIEmbedded.
 func (mg *PowerBIEmbedded) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this PowerBIEmbedded.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *PowerBIEmbedded) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this PowerBIEmbedded.

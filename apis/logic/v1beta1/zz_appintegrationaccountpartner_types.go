@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -48,7 +52,7 @@ type AppIntegrationAccountPartnerParameters struct {
 
 	// The name of the Logic App Integration Account. Changing this forces a new Logic App Integration Account Partner to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logic/v1beta1.AppIntegrationAccount
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
 	// +kubebuilder:validation:Optional
 	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
 
@@ -111,9 +115,8 @@ type BusinessIdentityParameters struct {
 type AppIntegrationAccountPartnerSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     AppIntegrationAccountPartnerParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -143,7 +146,7 @@ type AppIntegrationAccountPartnerStatus struct {
 type AppIntegrationAccountPartner struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.businessIdentity) || has(self.initProvider.businessIdentity)",message="businessIdentity is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.businessIdentity) || (has(self.initProvider) && has(self.initProvider.businessIdentity))",message="spec.forProvider.businessIdentity is a required parameter"
 	Spec   AppIntegrationAccountPartnerSpec   `json:"spec"`
 	Status AppIntegrationAccountPartnerStatus `json:"status,omitempty"`
 }

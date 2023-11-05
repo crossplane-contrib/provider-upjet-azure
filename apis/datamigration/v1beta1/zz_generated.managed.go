@@ -27,14 +27,6 @@ func (mg *DatabaseMigrationProject) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this DatabaseMigrationProject.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *DatabaseMigrationProject) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this DatabaseMigrationProject.
 func (mg *DatabaseMigrationProject) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *DatabaseMigrationProject) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this DatabaseMigrationProject.
 func (mg *DatabaseMigrationProject) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this DatabaseMigrationProject.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *DatabaseMigrationProject) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this DatabaseMigrationProject.
@@ -103,14 +87,6 @@ func (mg *DatabaseMigrationService) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this DatabaseMigrationService.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *DatabaseMigrationService) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this DatabaseMigrationService.
 func (mg *DatabaseMigrationService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *DatabaseMigrationService) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this DatabaseMigrationService.
 func (mg *DatabaseMigrationService) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this DatabaseMigrationService.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *DatabaseMigrationService) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this DatabaseMigrationService.

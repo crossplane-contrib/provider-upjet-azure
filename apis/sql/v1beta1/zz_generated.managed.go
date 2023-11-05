@@ -27,14 +27,6 @@ func (mg *MSSQLDatabase) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLDatabase.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLDatabase) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLDatabase.
 func (mg *MSSQLDatabase) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *MSSQLDatabase) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MSSQLDatabase.
 func (mg *MSSQLDatabase) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLDatabase.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLDatabase) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLDatabase.
@@ -103,14 +87,6 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetProviderConfigReference() *xpv
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLDatabaseExtendedAuditingPolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLDatabaseExtendedAuditingPolicy.
 func (mg *MSSQLDatabaseExtendedAuditingPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetManagementPolicies(r xpv1.Mana
 // SetProviderConfigReference of this MSSQLDatabaseExtendedAuditingPolicy.
 func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLDatabaseExtendedAuditingPolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLDatabaseExtendedAuditingPolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLDatabaseExtendedAuditingPolicy.
@@ -179,14 +147,6 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetProviderConfigRef
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
 func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetManagementPolicie
 // SetProviderConfigReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
 func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLDatabaseVulnerabilityAssessmentRuleBaseline.
@@ -255,14 +207,6 @@ func (mg *MSSQLElasticPool) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLElasticPool.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLElasticPool) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLElasticPool.
 func (mg *MSSQLElasticPool) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *MSSQLElasticPool) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MSSQLElasticPool.
 func (mg *MSSQLElasticPool) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLElasticPool.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLElasticPool) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLElasticPool.
@@ -331,14 +267,6 @@ func (mg *MSSQLFailoverGroup) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLFailoverGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLFailoverGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLFailoverGroup.
 func (mg *MSSQLFailoverGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *MSSQLFailoverGroup) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MSSQLFailoverGroup.
 func (mg *MSSQLFailoverGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLFailoverGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLFailoverGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLFailoverGroup.
@@ -407,14 +327,6 @@ func (mg *MSSQLFirewallRule) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLFirewallRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLFirewallRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLFirewallRule.
 func (mg *MSSQLFirewallRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *MSSQLFirewallRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MSSQLFirewallRule.
 func (mg *MSSQLFirewallRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLFirewallRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLFirewallRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLFirewallRule.
@@ -483,14 +387,6 @@ func (mg *MSSQLJobAgent) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLJobAgent.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLJobAgent) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLJobAgent.
 func (mg *MSSQLJobAgent) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *MSSQLJobAgent) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MSSQLJobAgent.
 func (mg *MSSQLJobAgent) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLJobAgent.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLJobAgent) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLJobAgent.
@@ -559,14 +447,6 @@ func (mg *MSSQLJobCredential) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLJobCredential.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLJobCredential) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLJobCredential.
 func (mg *MSSQLJobCredential) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -595,14 +475,6 @@ func (mg *MSSQLJobCredential) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MSSQLJobCredential.
 func (mg *MSSQLJobCredential) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLJobCredential.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLJobCredential) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLJobCredential.
@@ -635,14 +507,6 @@ func (mg *MSSQLManagedDatabase) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLManagedDatabase.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLManagedDatabase) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLManagedDatabase.
 func (mg *MSSQLManagedDatabase) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -671,14 +535,6 @@ func (mg *MSSQLManagedDatabase) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this MSSQLManagedDatabase.
 func (mg *MSSQLManagedDatabase) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLManagedDatabase.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLManagedDatabase) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLManagedDatabase.
@@ -711,14 +567,6 @@ func (mg *MSSQLManagedInstance) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLManagedInstance.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLManagedInstance) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLManagedInstance.
 func (mg *MSSQLManagedInstance) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -747,14 +595,6 @@ func (mg *MSSQLManagedInstance) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this MSSQLManagedInstance.
 func (mg *MSSQLManagedInstance) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLManagedInstance.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLManagedInstance) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLManagedInstance.
@@ -787,14 +627,6 @@ func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetProviderConfigRef
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLManagedInstanceActiveDirectoryAdministrator.
 func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -823,14 +655,6 @@ func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetManagementPolicie
 // SetProviderConfigReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
 func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLManagedInstanceActiveDirectoryAdministrator.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLManagedInstanceActiveDirectoryAdministrator) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLManagedInstanceActiveDirectoryAdministrator.
@@ -863,14 +687,6 @@ func (mg *MSSQLManagedInstanceFailoverGroup) GetProviderConfigReference() *xpv1.
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLManagedInstanceFailoverGroup.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLManagedInstanceFailoverGroup) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLManagedInstanceFailoverGroup.
 func (mg *MSSQLManagedInstanceFailoverGroup) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -899,14 +715,6 @@ func (mg *MSSQLManagedInstanceFailoverGroup) SetManagementPolicies(r xpv1.Manage
 // SetProviderConfigReference of this MSSQLManagedInstanceFailoverGroup.
 func (mg *MSSQLManagedInstanceFailoverGroup) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLManagedInstanceFailoverGroup.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLManagedInstanceFailoverGroup) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLManagedInstanceFailoverGroup.
@@ -939,14 +747,6 @@ func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetProviderConfigReferenc
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLManagedInstanceVulnerabilityAssessment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLManagedInstanceVulnerabilityAssessment.
 func (mg *MSSQLManagedInstanceVulnerabilityAssessment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -975,14 +775,6 @@ func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetManagementPolicies(r x
 // SetProviderConfigReference of this MSSQLManagedInstanceVulnerabilityAssessment.
 func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLManagedInstanceVulnerabilityAssessment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLManagedInstanceVulnerabilityAssessment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLManagedInstanceVulnerabilityAssessment.
@@ -1015,14 +807,6 @@ func (mg *MSSQLOutboundFirewallRule) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLOutboundFirewallRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLOutboundFirewallRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLOutboundFirewallRule.
 func (mg *MSSQLOutboundFirewallRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1051,14 +835,6 @@ func (mg *MSSQLOutboundFirewallRule) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this MSSQLOutboundFirewallRule.
 func (mg *MSSQLOutboundFirewallRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLOutboundFirewallRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLOutboundFirewallRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLOutboundFirewallRule.
@@ -1091,14 +867,6 @@ func (mg *MSSQLServer) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLServer.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLServer) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLServer.
 func (mg *MSSQLServer) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1127,14 +895,6 @@ func (mg *MSSQLServer) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this MSSQLServer.
 func (mg *MSSQLServer) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLServer.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLServer) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLServer.
@@ -1167,14 +927,6 @@ func (mg *MSSQLServerDNSAlias) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLServerDNSAlias.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLServerDNSAlias) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLServerDNSAlias.
 func (mg *MSSQLServerDNSAlias) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1203,14 +955,6 @@ func (mg *MSSQLServerDNSAlias) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this MSSQLServerDNSAlias.
 func (mg *MSSQLServerDNSAlias) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLServerDNSAlias.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLServerDNSAlias) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLServerDNSAlias.
@@ -1243,14 +987,6 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetProviderConfigReference(
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLServerMicrosoftSupportAuditingPolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLServerMicrosoftSupportAuditingPolicy.
 func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1279,14 +1015,6 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetManagementPolicies(r xpv
 // SetProviderConfigReference of this MSSQLServerMicrosoftSupportAuditingPolicy.
 func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLServerMicrosoftSupportAuditingPolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLServerMicrosoftSupportAuditingPolicy.
@@ -1319,14 +1047,6 @@ func (mg *MSSQLServerSecurityAlertPolicy) GetProviderConfigReference() *xpv1.Ref
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLServerSecurityAlertPolicy.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLServerSecurityAlertPolicy) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLServerSecurityAlertPolicy.
 func (mg *MSSQLServerSecurityAlertPolicy) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1355,14 +1075,6 @@ func (mg *MSSQLServerSecurityAlertPolicy) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this MSSQLServerSecurityAlertPolicy.
 func (mg *MSSQLServerSecurityAlertPolicy) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLServerSecurityAlertPolicy.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLServerSecurityAlertPolicy) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLServerSecurityAlertPolicy.
@@ -1395,14 +1107,6 @@ func (mg *MSSQLServerTransparentDataEncryption) GetProviderConfigReference() *xp
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLServerTransparentDataEncryption.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLServerTransparentDataEncryption) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLServerTransparentDataEncryption.
 func (mg *MSSQLServerTransparentDataEncryption) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1431,14 +1135,6 @@ func (mg *MSSQLServerTransparentDataEncryption) SetManagementPolicies(r xpv1.Man
 // SetProviderConfigReference of this MSSQLServerTransparentDataEncryption.
 func (mg *MSSQLServerTransparentDataEncryption) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLServerTransparentDataEncryption.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLServerTransparentDataEncryption) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLServerTransparentDataEncryption.
@@ -1471,14 +1167,6 @@ func (mg *MSSQLServerVulnerabilityAssessment) GetProviderConfigReference() *xpv1
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLServerVulnerabilityAssessment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLServerVulnerabilityAssessment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLServerVulnerabilityAssessment.
 func (mg *MSSQLServerVulnerabilityAssessment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1507,14 +1195,6 @@ func (mg *MSSQLServerVulnerabilityAssessment) SetManagementPolicies(r xpv1.Manag
 // SetProviderConfigReference of this MSSQLServerVulnerabilityAssessment.
 func (mg *MSSQLServerVulnerabilityAssessment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLServerVulnerabilityAssessment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLServerVulnerabilityAssessment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLServerVulnerabilityAssessment.
@@ -1547,14 +1227,6 @@ func (mg *MSSQLVirtualNetworkRule) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this MSSQLVirtualNetworkRule.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *MSSQLVirtualNetworkRule) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this MSSQLVirtualNetworkRule.
 func (mg *MSSQLVirtualNetworkRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1583,14 +1255,6 @@ func (mg *MSSQLVirtualNetworkRule) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this MSSQLVirtualNetworkRule.
 func (mg *MSSQLVirtualNetworkRule) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this MSSQLVirtualNetworkRule.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *MSSQLVirtualNetworkRule) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this MSSQLVirtualNetworkRule.

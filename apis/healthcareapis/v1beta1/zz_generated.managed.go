@@ -27,14 +27,6 @@ func (mg *HealthcareDICOMService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HealthcareDICOMService.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HealthcareDICOMService) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HealthcareDICOMService.
 func (mg *HealthcareDICOMService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *HealthcareDICOMService) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this HealthcareDICOMService.
 func (mg *HealthcareDICOMService) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HealthcareDICOMService.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HealthcareDICOMService) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HealthcareDICOMService.
@@ -103,14 +87,6 @@ func (mg *HealthcareFHIRService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HealthcareFHIRService.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HealthcareFHIRService) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HealthcareFHIRService.
 func (mg *HealthcareFHIRService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *HealthcareFHIRService) SetManagementPolicies(r xpv1.ManagementPolicies
 // SetProviderConfigReference of this HealthcareFHIRService.
 func (mg *HealthcareFHIRService) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HealthcareFHIRService.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HealthcareFHIRService) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HealthcareFHIRService.
@@ -179,14 +147,6 @@ func (mg *HealthcareMedtechService) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HealthcareMedtechService.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HealthcareMedtechService) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HealthcareMedtechService.
 func (mg *HealthcareMedtechService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *HealthcareMedtechService) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this HealthcareMedtechService.
 func (mg *HealthcareMedtechService) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HealthcareMedtechService.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HealthcareMedtechService) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HealthcareMedtechService.
@@ -255,14 +207,6 @@ func (mg *HealthcareMedtechServiceFHIRDestination) GetProviderConfigReference() 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HealthcareMedtechServiceFHIRDestination.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HealthcareMedtechServiceFHIRDestination) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HealthcareMedtechServiceFHIRDestination.
 func (mg *HealthcareMedtechServiceFHIRDestination) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *HealthcareMedtechServiceFHIRDestination) SetManagementPolicies(r xpv1.
 // SetProviderConfigReference of this HealthcareMedtechServiceFHIRDestination.
 func (mg *HealthcareMedtechServiceFHIRDestination) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HealthcareMedtechServiceFHIRDestination.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HealthcareMedtechServiceFHIRDestination) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HealthcareMedtechServiceFHIRDestination.
@@ -331,14 +267,6 @@ func (mg *HealthcareService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HealthcareService.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HealthcareService) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HealthcareService.
 func (mg *HealthcareService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *HealthcareService) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this HealthcareService.
 func (mg *HealthcareService) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HealthcareService.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HealthcareService) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HealthcareService.
@@ -407,14 +327,6 @@ func (mg *HealthcareWorkspace) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this HealthcareWorkspace.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *HealthcareWorkspace) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this HealthcareWorkspace.
 func (mg *HealthcareWorkspace) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *HealthcareWorkspace) SetManagementPolicies(r xpv1.ManagementPolicies) 
 // SetProviderConfigReference of this HealthcareWorkspace.
 func (mg *HealthcareWorkspace) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this HealthcareWorkspace.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *HealthcareWorkspace) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this HealthcareWorkspace.

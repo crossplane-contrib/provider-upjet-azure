@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -81,9 +85,8 @@ type LogAnalyticsDataSourceWindowsEventParameters struct {
 type LogAnalyticsDataSourceWindowsEventSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LogAnalyticsDataSourceWindowsEventParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -113,8 +116,8 @@ type LogAnalyticsDataSourceWindowsEventStatus struct {
 type LogAnalyticsDataSourceWindowsEvent struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventLogName) || has(self.initProvider.eventLogName)",message="eventLogName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventTypes) || has(self.initProvider.eventTypes)",message="eventTypes is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventLogName) || (has(self.initProvider) && has(self.initProvider.eventLogName))",message="spec.forProvider.eventLogName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.eventTypes) || (has(self.initProvider) && has(self.initProvider.eventTypes))",message="spec.forProvider.eventTypes is a required parameter"
 	Spec   LogAnalyticsDataSourceWindowsEventSpec   `json:"spec"`
 	Status LogAnalyticsDataSourceWindowsEventStatus `json:"status,omitempty"`
 }

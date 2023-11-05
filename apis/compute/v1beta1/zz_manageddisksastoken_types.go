@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -49,7 +53,7 @@ type ManagedDiskSASTokenParameters struct {
 
 	// The ID of an existing Managed Disk which should be exported. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.ManagedDisk
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
@@ -66,9 +70,8 @@ type ManagedDiskSASTokenParameters struct {
 type ManagedDiskSASTokenSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagedDiskSASTokenParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -98,8 +101,8 @@ type ManagedDiskSASTokenStatus struct {
 type ManagedDiskSASToken struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessLevel) || has(self.initProvider.accessLevel)",message="accessLevel is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.durationInSeconds) || has(self.initProvider.durationInSeconds)",message="durationInSeconds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.accessLevel) || (has(self.initProvider) && has(self.initProvider.accessLevel))",message="spec.forProvider.accessLevel is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.durationInSeconds) || (has(self.initProvider) && has(self.initProvider.durationInSeconds))",message="spec.forProvider.durationInSeconds is a required parameter"
 	Spec   ManagedDiskSASTokenSpec   `json:"spec"`
 	Status ManagedDiskSASTokenStatus `json:"status,omitempty"`
 }

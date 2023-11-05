@@ -27,14 +27,6 @@ func (mg *IOTHubDeviceUpdateAccount) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubDeviceUpdateAccount.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubDeviceUpdateAccount) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubDeviceUpdateAccount.
 func (mg *IOTHubDeviceUpdateAccount) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *IOTHubDeviceUpdateAccount) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this IOTHubDeviceUpdateAccount.
 func (mg *IOTHubDeviceUpdateAccount) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubDeviceUpdateAccount.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubDeviceUpdateAccount) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubDeviceUpdateAccount.
@@ -103,14 +87,6 @@ func (mg *IOTHubDeviceUpdateInstance) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this IOTHubDeviceUpdateInstance.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *IOTHubDeviceUpdateInstance) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this IOTHubDeviceUpdateInstance.
 func (mg *IOTHubDeviceUpdateInstance) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *IOTHubDeviceUpdateInstance) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this IOTHubDeviceUpdateInstance.
 func (mg *IOTHubDeviceUpdateInstance) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this IOTHubDeviceUpdateInstance.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *IOTHubDeviceUpdateInstance) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this IOTHubDeviceUpdateInstance.

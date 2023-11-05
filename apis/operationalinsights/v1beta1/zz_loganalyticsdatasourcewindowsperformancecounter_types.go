@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -101,9 +105,8 @@ type LogAnalyticsDataSourceWindowsPerformanceCounterParameters struct {
 type LogAnalyticsDataSourceWindowsPerformanceCounterSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     LogAnalyticsDataSourceWindowsPerformanceCounterParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -133,10 +136,10 @@ type LogAnalyticsDataSourceWindowsPerformanceCounterStatus struct {
 type LogAnalyticsDataSourceWindowsPerformanceCounter struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.counterName) || has(self.initProvider.counterName)",message="counterName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceName) || has(self.initProvider.instanceName)",message="instanceName is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.intervalSeconds) || has(self.initProvider.intervalSeconds)",message="intervalSeconds is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.objectName) || has(self.initProvider.objectName)",message="objectName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.counterName) || (has(self.initProvider) && has(self.initProvider.counterName))",message="spec.forProvider.counterName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.instanceName) || (has(self.initProvider) && has(self.initProvider.instanceName))",message="spec.forProvider.instanceName is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.intervalSeconds) || (has(self.initProvider) && has(self.initProvider.intervalSeconds))",message="spec.forProvider.intervalSeconds is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.objectName) || (has(self.initProvider) && has(self.initProvider.objectName))",message="spec.forProvider.objectName is a required parameter"
 	Spec   LogAnalyticsDataSourceWindowsPerformanceCounterSpec   `json:"spec"`
 	Status LogAnalyticsDataSourceWindowsPerformanceCounterStatus `json:"status,omitempty"`
 }

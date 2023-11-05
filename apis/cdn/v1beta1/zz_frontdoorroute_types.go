@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -142,7 +146,7 @@ type FrontdoorRouteParameters struct {
 
 	// The IDs of the Front Door Custom Domains which are associated with this Front Door Route.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorCustomDomain
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorCustomDomainIds []*string `json:"cdnFrontdoorCustomDomainIds,omitempty" tf:"cdn_frontdoor_custom_domain_ids,omitempty"`
 
@@ -156,7 +160,7 @@ type FrontdoorRouteParameters struct {
 
 	// The resource ID of the Front Door Endpoint where this Front Door Route should exist. Changing this forces a new Front Door Route to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorEndpoint
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorEndpointID *string `json:"cdnFrontdoorEndpointId,omitempty" tf:"cdn_frontdoor_endpoint_id,omitempty"`
 
@@ -170,7 +174,7 @@ type FrontdoorRouteParameters struct {
 
 	// The resource ID of the Front Door Origin Group where this Front Door Route should be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorOriginGroup
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorOriginGroupID *string `json:"cdnFrontdoorOriginGroupId,omitempty" tf:"cdn_frontdoor_origin_group_id,omitempty"`
 
@@ -184,7 +188,7 @@ type FrontdoorRouteParameters struct {
 
 	// One or more Front Door Origin resource IDs that this Front Door Route will link to.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorOrigin
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorOriginIds []*string `json:"cdnFrontdoorOriginIds,omitempty" tf:"cdn_frontdoor_origin_ids,omitempty"`
 
@@ -202,7 +206,7 @@ type FrontdoorRouteParameters struct {
 
 	// A list of the Front Door Rule Set IDs which should be assigned to this Front Door Route.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorRuleSet
-	// +crossplane:generate:reference:extractor=github.com/upbound/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorRuleSetIds []*string `json:"cdnFrontdoorRuleSetIds,omitempty" tf:"cdn_frontdoor_rule_set_ids,omitempty"`
 
@@ -243,9 +247,8 @@ type FrontdoorRouteParameters struct {
 type FrontdoorRouteSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     FrontdoorRouteParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -275,8 +278,8 @@ type FrontdoorRouteStatus struct {
 type FrontdoorRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.patternsToMatch) || has(self.initProvider.patternsToMatch)",message="patternsToMatch is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.supportedProtocols) || has(self.initProvider.supportedProtocols)",message="supportedProtocols is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.patternsToMatch) || (has(self.initProvider) && has(self.initProvider.patternsToMatch))",message="spec.forProvider.patternsToMatch is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.supportedProtocols) || (has(self.initProvider) && has(self.initProvider.supportedProtocols))",message="spec.forProvider.supportedProtocols is a required parameter"
 	Spec   FrontdoorRouteSpec   `json:"spec"`
 	Status FrontdoorRouteStatus `json:"status,omitempty"`
 }

@@ -27,14 +27,6 @@ func (mg *SpringCloudAPIPortal) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudAPIPortal.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudAPIPortal) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudAPIPortal.
 func (mg *SpringCloudAPIPortal) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -63,14 +55,6 @@ func (mg *SpringCloudAPIPortal) SetManagementPolicies(r xpv1.ManagementPolicies)
 // SetProviderConfigReference of this SpringCloudAPIPortal.
 func (mg *SpringCloudAPIPortal) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudAPIPortal.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudAPIPortal) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudAPIPortal.
@@ -103,14 +87,6 @@ func (mg *SpringCloudAPIPortalCustomDomain) GetProviderConfigReference() *xpv1.R
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudAPIPortalCustomDomain.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudAPIPortalCustomDomain) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudAPIPortalCustomDomain.
 func (mg *SpringCloudAPIPortalCustomDomain) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -139,14 +115,6 @@ func (mg *SpringCloudAPIPortalCustomDomain) SetManagementPolicies(r xpv1.Managem
 // SetProviderConfigReference of this SpringCloudAPIPortalCustomDomain.
 func (mg *SpringCloudAPIPortalCustomDomain) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudAPIPortalCustomDomain.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudAPIPortalCustomDomain) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudAPIPortalCustomDomain.
@@ -179,14 +147,6 @@ func (mg *SpringCloudAccelerator) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudAccelerator.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudAccelerator) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudAccelerator.
 func (mg *SpringCloudAccelerator) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -215,14 +175,6 @@ func (mg *SpringCloudAccelerator) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this SpringCloudAccelerator.
 func (mg *SpringCloudAccelerator) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudAccelerator.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudAccelerator) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudAccelerator.
@@ -255,14 +207,6 @@ func (mg *SpringCloudActiveDeployment) GetProviderConfigReference() *xpv1.Refere
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudActiveDeployment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudActiveDeployment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudActiveDeployment.
 func (mg *SpringCloudActiveDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -291,14 +235,6 @@ func (mg *SpringCloudActiveDeployment) SetManagementPolicies(r xpv1.ManagementPo
 // SetProviderConfigReference of this SpringCloudActiveDeployment.
 func (mg *SpringCloudActiveDeployment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudActiveDeployment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudActiveDeployment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudActiveDeployment.
@@ -331,14 +267,6 @@ func (mg *SpringCloudApp) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudApp.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudApp) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudApp.
 func (mg *SpringCloudApp) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -367,14 +295,6 @@ func (mg *SpringCloudApp) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SpringCloudApp.
 func (mg *SpringCloudApp) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudApp.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudApp) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudApp.
@@ -407,14 +327,6 @@ func (mg *SpringCloudAppCosmosDBAssociation) GetProviderConfigReference() *xpv1.
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudAppCosmosDBAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudAppCosmosDBAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudAppCosmosDBAssociation.
 func (mg *SpringCloudAppCosmosDBAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -443,14 +355,6 @@ func (mg *SpringCloudAppCosmosDBAssociation) SetManagementPolicies(r xpv1.Manage
 // SetProviderConfigReference of this SpringCloudAppCosmosDBAssociation.
 func (mg *SpringCloudAppCosmosDBAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudAppCosmosDBAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudAppCosmosDBAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudAppCosmosDBAssociation.
@@ -483,14 +387,6 @@ func (mg *SpringCloudAppMySQLAssociation) GetProviderConfigReference() *xpv1.Ref
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudAppMySQLAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudAppMySQLAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudAppMySQLAssociation.
 func (mg *SpringCloudAppMySQLAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -519,14 +415,6 @@ func (mg *SpringCloudAppMySQLAssociation) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this SpringCloudAppMySQLAssociation.
 func (mg *SpringCloudAppMySQLAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudAppMySQLAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudAppMySQLAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudAppMySQLAssociation.
@@ -559,14 +447,6 @@ func (mg *SpringCloudAppRedisAssociation) GetProviderConfigReference() *xpv1.Ref
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudAppRedisAssociation.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudAppRedisAssociation) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudAppRedisAssociation.
 func (mg *SpringCloudAppRedisAssociation) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -595,14 +475,6 @@ func (mg *SpringCloudAppRedisAssociation) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this SpringCloudAppRedisAssociation.
 func (mg *SpringCloudAppRedisAssociation) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudAppRedisAssociation.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudAppRedisAssociation) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudAppRedisAssociation.
@@ -635,14 +507,6 @@ func (mg *SpringCloudBuildDeployment) GetProviderConfigReference() *xpv1.Referen
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudBuildDeployment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudBuildDeployment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudBuildDeployment.
 func (mg *SpringCloudBuildDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -671,14 +535,6 @@ func (mg *SpringCloudBuildDeployment) SetManagementPolicies(r xpv1.ManagementPol
 // SetProviderConfigReference of this SpringCloudBuildDeployment.
 func (mg *SpringCloudBuildDeployment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudBuildDeployment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudBuildDeployment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudBuildDeployment.
@@ -711,14 +567,6 @@ func (mg *SpringCloudBuildPackBinding) GetProviderConfigReference() *xpv1.Refere
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudBuildPackBinding.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudBuildPackBinding) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudBuildPackBinding.
 func (mg *SpringCloudBuildPackBinding) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -747,14 +595,6 @@ func (mg *SpringCloudBuildPackBinding) SetManagementPolicies(r xpv1.ManagementPo
 // SetProviderConfigReference of this SpringCloudBuildPackBinding.
 func (mg *SpringCloudBuildPackBinding) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudBuildPackBinding.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudBuildPackBinding) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudBuildPackBinding.
@@ -787,14 +627,6 @@ func (mg *SpringCloudBuilder) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudBuilder.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudBuilder) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudBuilder.
 func (mg *SpringCloudBuilder) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -823,14 +655,6 @@ func (mg *SpringCloudBuilder) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SpringCloudBuilder.
 func (mg *SpringCloudBuilder) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudBuilder.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudBuilder) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudBuilder.
@@ -863,14 +687,6 @@ func (mg *SpringCloudCertificate) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudCertificate.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudCertificate) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudCertificate.
 func (mg *SpringCloudCertificate) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -899,14 +715,6 @@ func (mg *SpringCloudCertificate) SetManagementPolicies(r xpv1.ManagementPolicie
 // SetProviderConfigReference of this SpringCloudCertificate.
 func (mg *SpringCloudCertificate) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudCertificate.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudCertificate) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudCertificate.
@@ -939,14 +747,6 @@ func (mg *SpringCloudConfigurationService) GetProviderConfigReference() *xpv1.Re
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudConfigurationService.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudConfigurationService) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudConfigurationService.
 func (mg *SpringCloudConfigurationService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -975,14 +775,6 @@ func (mg *SpringCloudConfigurationService) SetManagementPolicies(r xpv1.Manageme
 // SetProviderConfigReference of this SpringCloudConfigurationService.
 func (mg *SpringCloudConfigurationService) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudConfigurationService.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudConfigurationService) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudConfigurationService.
@@ -1015,14 +807,6 @@ func (mg *SpringCloudContainerDeployment) GetProviderConfigReference() *xpv1.Ref
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudContainerDeployment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudContainerDeployment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudContainerDeployment.
 func (mg *SpringCloudContainerDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1051,14 +835,6 @@ func (mg *SpringCloudContainerDeployment) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this SpringCloudContainerDeployment.
 func (mg *SpringCloudContainerDeployment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudContainerDeployment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudContainerDeployment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudContainerDeployment.
@@ -1091,14 +867,6 @@ func (mg *SpringCloudCustomDomain) GetProviderConfigReference() *xpv1.Reference 
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudCustomDomain.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudCustomDomain) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudCustomDomain.
 func (mg *SpringCloudCustomDomain) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1127,14 +895,6 @@ func (mg *SpringCloudCustomDomain) SetManagementPolicies(r xpv1.ManagementPolici
 // SetProviderConfigReference of this SpringCloudCustomDomain.
 func (mg *SpringCloudCustomDomain) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudCustomDomain.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudCustomDomain) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudCustomDomain.
@@ -1167,14 +927,6 @@ func (mg *SpringCloudCustomizedAccelerator) GetProviderConfigReference() *xpv1.R
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudCustomizedAccelerator.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudCustomizedAccelerator) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudCustomizedAccelerator.
 func (mg *SpringCloudCustomizedAccelerator) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1203,14 +955,6 @@ func (mg *SpringCloudCustomizedAccelerator) SetManagementPolicies(r xpv1.Managem
 // SetProviderConfigReference of this SpringCloudCustomizedAccelerator.
 func (mg *SpringCloudCustomizedAccelerator) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudCustomizedAccelerator.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudCustomizedAccelerator) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudCustomizedAccelerator.
@@ -1243,14 +987,6 @@ func (mg *SpringCloudDevToolPortal) GetProviderConfigReference() *xpv1.Reference
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudDevToolPortal.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudDevToolPortal) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudDevToolPortal.
 func (mg *SpringCloudDevToolPortal) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1279,14 +1015,6 @@ func (mg *SpringCloudDevToolPortal) SetManagementPolicies(r xpv1.ManagementPolic
 // SetProviderConfigReference of this SpringCloudDevToolPortal.
 func (mg *SpringCloudDevToolPortal) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudDevToolPortal.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudDevToolPortal) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudDevToolPortal.
@@ -1319,14 +1047,6 @@ func (mg *SpringCloudGateway) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudGateway.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudGateway) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudGateway.
 func (mg *SpringCloudGateway) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1355,14 +1075,6 @@ func (mg *SpringCloudGateway) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SpringCloudGateway.
 func (mg *SpringCloudGateway) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudGateway.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudGateway) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudGateway.
@@ -1395,14 +1107,6 @@ func (mg *SpringCloudGatewayCustomDomain) GetProviderConfigReference() *xpv1.Ref
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudGatewayCustomDomain.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudGatewayCustomDomain) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudGatewayCustomDomain.
 func (mg *SpringCloudGatewayCustomDomain) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1431,14 +1135,6 @@ func (mg *SpringCloudGatewayCustomDomain) SetManagementPolicies(r xpv1.Managemen
 // SetProviderConfigReference of this SpringCloudGatewayCustomDomain.
 func (mg *SpringCloudGatewayCustomDomain) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudGatewayCustomDomain.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudGatewayCustomDomain) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudGatewayCustomDomain.
@@ -1471,14 +1167,6 @@ func (mg *SpringCloudJavaDeployment) GetProviderConfigReference() *xpv1.Referenc
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudJavaDeployment.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudJavaDeployment) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudJavaDeployment.
 func (mg *SpringCloudJavaDeployment) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1507,14 +1195,6 @@ func (mg *SpringCloudJavaDeployment) SetManagementPolicies(r xpv1.ManagementPoli
 // SetProviderConfigReference of this SpringCloudJavaDeployment.
 func (mg *SpringCloudJavaDeployment) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudJavaDeployment.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudJavaDeployment) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudJavaDeployment.
@@ -1547,14 +1227,6 @@ func (mg *SpringCloudService) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudService.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudService) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudService.
 func (mg *SpringCloudService) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1583,14 +1255,6 @@ func (mg *SpringCloudService) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SpringCloudService.
 func (mg *SpringCloudService) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudService.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudService) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudService.
@@ -1623,14 +1287,6 @@ func (mg *SpringCloudStorage) GetProviderConfigReference() *xpv1.Reference {
 	return mg.Spec.ProviderConfigReference
 }
 
-/*
-GetProviderReference of this SpringCloudStorage.
-Deprecated: Use GetProviderConfigReference.
-*/
-func (mg *SpringCloudStorage) GetProviderReference() *xpv1.Reference {
-	return mg.Spec.ProviderReference
-}
-
 // GetPublishConnectionDetailsTo of this SpringCloudStorage.
 func (mg *SpringCloudStorage) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
 	return mg.Spec.PublishConnectionDetailsTo
@@ -1659,14 +1315,6 @@ func (mg *SpringCloudStorage) SetManagementPolicies(r xpv1.ManagementPolicies) {
 // SetProviderConfigReference of this SpringCloudStorage.
 func (mg *SpringCloudStorage) SetProviderConfigReference(r *xpv1.Reference) {
 	mg.Spec.ProviderConfigReference = r
-}
-
-/*
-SetProviderReference of this SpringCloudStorage.
-Deprecated: Use SetProviderConfigReference.
-*/
-func (mg *SpringCloudStorage) SetProviderReference(r *xpv1.Reference) {
-	mg.Spec.ProviderReference = r
 }
 
 // SetPublishConnectionDetailsTo of this SpringCloudStorage.

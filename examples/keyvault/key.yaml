@@ -1,0 +1,109 @@
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Key
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/key
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    name: custom-Non-RFC1123Name
+    keyOpts:
+      - decrypt
+      - encrypt
+      - sign
+      - unwrapKey
+      - verify
+      - wrapKey
+    keySize: 2048
+    keyType: RSA
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    rotationPolicy:
+      - automatic:
+          - timeBeforeExpiry: P30D
+        expireAfter: P90D
+        notifyBeforeExpiry: P29D
+
+---
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/key
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    keyPermissions:
+      - Get
+      - UnwrapKey
+      - WrapKey
+      - Create
+      - Delete
+      - Recover
+      - List
+      - Update
+      - GetRotationPolicy
+      - SetRotationPolicy
+    certificatePermissions:
+      - Create
+      - Delete
+      - DeleteIssuers
+      - Get
+      - GetIssuers
+      - SetIssuers
+      - Import
+      - List
+      - ListIssuers
+      - ManageContacts
+      - ManageIssuers
+      - Purge
+      - SetIssuers
+      - Update
+      - Recover
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    objectId: ${data.azurerm_client_config.service_principal.object_id}
+    secretPermissions:
+      - Get
+      - Set
+      - Delete
+      - Recover
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/key
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: premium
+    softDeleteRetentionDays: 7
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta1/key
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe

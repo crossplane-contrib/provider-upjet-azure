@@ -17,8 +17,8 @@ limitations under the License.
 package devices
 
 import (
+	"github.com/crossplane/upjet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/upbound/upjet/pkg/config"
 
 	"github.com/upbound/provider-azure/apis/rconfig"
 )

@@ -20,8 +20,8 @@ import (
 	// Note(ezgidemirel): we are importing this to embed provider schema document
 	_ "embed"
 
-	tjconfig "github.com/upbound/upjet/pkg/config"
-	"github.com/upbound/upjet/pkg/registry/reference"
+	tjconfig "github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/registry/reference"
 
 	"github.com/upbound/provider-azure/config/alertsmanagement"
 	"github.com/upbound/provider-azure/config/apimanagement"
@@ -36,6 +36,7 @@ import (
 	"github.com/upbound/provider-azure/config/common"
 	"github.com/upbound/provider-azure/config/compute"
 	"github.com/upbound/provider-azure/config/consumption"
+	"github.com/upbound/provider-azure/config/containerapp"
 	"github.com/upbound/provider-azure/config/containerregistry"
 	"github.com/upbound/provider-azure/config/containerservice"
 	"github.com/upbound/provider-azure/config/cosmosdb"
@@ -105,8 +106,6 @@ var skipList = []string{
 	// deprecated
 	"azurerm_virtual_machine_scale_set",
 	"azurerm_virtual_machine_configuration_policy_assignment",
-	"azurerm_virtual_machine",
-	"azurerm_virtual_machine_extension",
 	"azurerm_virtual_machine_data_disk_attachment",
 	"azurerm_virtual_machine_scale_set_extension",
 	"azurerm_sql_server",
@@ -187,6 +186,7 @@ func GetProvider() *tjconfig.Provider {
 		cache.Configure,
 		resource.Configure,
 		resources.Configure,
+		containerapp.Configure,
 		containerservice.Configure,
 		postgresql.Configure,
 		cosmosdb.Configure,

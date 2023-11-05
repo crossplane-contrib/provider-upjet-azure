@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+//
+// SPDX-License-Identifier: Apache-2.0
+
 /*
 Copyright 2022 Upbound Inc.
 */
@@ -89,9 +93,8 @@ type ManagedStorageAccountSASTokenDefinitionParameters struct {
 type ManagedStorageAccountSASTokenDefinitionSpec struct {
 	v1.ResourceSpec `json:",inline"`
 	ForProvider     ManagedStorageAccountSASTokenDefinitionParameters `json:"forProvider"`
-	// THIS IS AN ALPHA FIELD. Do not use it in production. It is not honored
-	// unless the relevant Crossplane feature flag is enabled, and may be
-	// changed or removed without notice.
+	// THIS IS A BETA FIELD. It will be honored
+	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
 	// of Identifier and other resource reference fields. The fields that are
 	// in InitProvider are merged into ForProvider when the resource is created.
@@ -121,9 +124,9 @@ type ManagedStorageAccountSASTokenDefinitionStatus struct {
 type ManagedStorageAccountSASTokenDefinition struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sasTemplateUri) || has(self.initProvider.sasTemplateUri)",message="sasTemplateUri is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sasType) || has(self.initProvider.sasType)",message="sasType is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.validityPeriod) || has(self.initProvider.validityPeriod)",message="validityPeriod is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sasTemplateUri) || (has(self.initProvider) && has(self.initProvider.sasTemplateUri))",message="spec.forProvider.sasTemplateUri is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.sasType) || (has(self.initProvider) && has(self.initProvider.sasType))",message="spec.forProvider.sasType is a required parameter"
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.validityPeriod) || (has(self.initProvider) && has(self.initProvider.validityPeriod))",message="spec.forProvider.validityPeriod is a required parameter"
 	Spec   ManagedStorageAccountSASTokenDefinitionSpec   `json:"spec"`
 	Status ManagedStorageAccountSASTokenDefinitionStatus `json:"status,omitempty"`
 }
