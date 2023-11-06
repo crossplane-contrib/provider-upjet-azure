@@ -1,0 +1,30 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/hostpool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/workspace
+  labels:
+    testing.upbound.io/example-name: workspace
+  name: workspace
+spec:
+  forProvider:
+    description: A description of my workspace
+    friendlyName: FriendlyName
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

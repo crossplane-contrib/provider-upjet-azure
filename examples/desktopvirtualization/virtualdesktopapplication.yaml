@@ -1,0 +1,86 @@
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/hostpool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+
+---
+
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
+kind: HostPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/hostpool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  forProvider:
+    customRdpProperties: audiocapturemode:i:1;audiomode:i:0;
+    description: 'Acceptance Test: A pooled host pool - pooleddepthfirst'
+    friendlyName: pooleddepthfirst
+    loadBalancerType: DepthFirst
+    location: West Europe
+    maximumSessionsAllowed: 50
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scheduledAgentUpdates:
+    - enabled: true
+      schedule:
+      - dayOfWeek: Saturday
+        hourOfDay: 2
+    startVmOnConnect: true
+    type: Pooled
+    validateEnvironment: true
+
+---
+
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
+kind: ApplicationGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/applicationgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  forProvider:
+    description: A description of my workspace
+    friendlyName: FriendlyName
+    location: West Europe
+    type: Type of Virtual Desktop Application Group
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    hostpoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
+kind: Application
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/application
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+  forProvider:
+    applicationGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: remoteapp
+    commandLineArgumentPolicy: DoNotAllow
+    commandLineArguments: --incognito
+    description: Chromium based web browser
+    friendlyName: Google Chrome
+    iconIndex: 0
+    iconPath: C:\Program Files\Google\Chrome\Application\chrome.exe
+    path: C:\Program Files\Google\Chrome\Application\chrome.exe
+    showInPortal: false

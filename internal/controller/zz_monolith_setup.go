@@ -285,6 +285,12 @@ import (
 	serverdbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/server"
 	serverkey "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/serverkey"
 	virtualnetworkruledbforpostgresql "github.com/upbound/provider-azure/internal/controller/dbforpostgresql/virtualnetworkrule"
+	virtualdesktopapplication "github.com/upbound/provider-azure/internal/controller/desktopvirtualization/virtualdesktopapplication"
+	virtualdesktopapplicationgroup "github.com/upbound/provider-azure/internal/controller/desktopvirtualization/virtualdesktopapplicationgroup"
+	virtualdesktophostpoolregistrationinfo "github.com/upbound/provider-azure/internal/controller/desktopvirtualization/virtualdesktophostpoolregistrationinfo"
+	virtualdesktopscalingplan "github.com/upbound/provider-azure/internal/controller/desktopvirtualization/virtualdesktopscalingplan"
+	virtualdesktopworkspace "github.com/upbound/provider-azure/internal/controller/desktopvirtualization/virtualdesktopworkspace"
+	virtualdesktopworkspaceapplicationgroupassociation "github.com/upbound/provider-azure/internal/controller/desktopvirtualization/virtualdesktopworkspaceapplicationgroupassociation"
 	iothub "github.com/upbound/provider-azure/internal/controller/devices/iothub"
 	iothubcertificate "github.com/upbound/provider-azure/internal/controller/devices/iothubcertificate"
 	iothubconsumergroup "github.com/upbound/provider-azure/internal/controller/devices/iothubconsumergroup"
@@ -706,6 +712,7 @@ import (
 	gen2environment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/gen2environment"
 	referencedataset "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/referencedataset"
 	standardenvironment "github.com/upbound/provider-azure/internal/controller/timeseriesinsights/standardenvironment"
+	desktophostpool "github.com/upbound/provider-azure/internal/controller/virtual/desktophostpool"
 	appactiveslot "github.com/upbound/provider-azure/internal/controller/web/appactiveslot"
 	apphybridconnection "github.com/upbound/provider-azure/internal/controller/web/apphybridconnection"
 	appserviceplan "github.com/upbound/provider-azure/internal/controller/web/appserviceplan"
@@ -1010,6 +1017,12 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		serverdbforpostgresql.Setup,
 		serverkey.Setup,
 		virtualnetworkruledbforpostgresql.Setup,
+		virtualdesktopapplication.Setup,
+		virtualdesktopapplicationgroup.Setup,
+		virtualdesktophostpoolregistrationinfo.Setup,
+		virtualdesktopscalingplan.Setup,
+		virtualdesktopworkspace.Setup,
+		virtualdesktopworkspaceapplicationgroupassociation.Setup,
 		iothub.Setup,
 		iothubcertificate.Setup,
 		iothubconsumergroup.Setup,
@@ -1431,6 +1444,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		gen2environment.Setup,
 		referencedataset.Setup,
 		standardenvironment.Setup,
+		desktophostpool.Setup,
 		appactiveslot.Setup,
 		apphybridconnection.Setup,
 		appserviceplan.Setup,
