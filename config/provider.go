@@ -99,9 +99,6 @@ var skipList = []string{
 	"azurerm_storage_disks_pool",
 	"azurerm_storage_sync_group",
 	"azurerm_storage_sync_cloud_endpoint", // depends on azurerm_storage_sync_group
-	"azurerm_virtual_desktop_application_group",
-	// associated with non-generated
-	"azurerm_virtual_desktop_workspace_application_group_association",
 	// generated name too long
 	"azurerm_network_interface_application_gateway_backend_address_pool_association",
 	"azurerm_sentinel_data_connector_microsoft_defender_advanced_threat_protection",
@@ -121,12 +118,6 @@ var skipList = []string{
 	"azurerm_sql_elasticpool",
 	"azurerm_sql_firewall_rule",
 	"azurerm_site_recovery_replicated_vm", // depends on azurerm_virtual_machine
-	// irrelevant
-	"azurerm_virtual_desktop_application",
-	"azurerm_virtual_desktop_host_pool",
-	"azurerm_virtual_desktop_workspace",
-	"azurerm_virtual_desktop_scaling_plan",                // depends on azurerm_virtual_desktop_host_pool
-	"azurerm_virtual_desktop_host_pool_registration_info", // depends on azurerm_virtual_desktop_host_pool
 	// other upjet issues
 	"azurerm_container_registry_task",
 	"azurerm_dashboard",
@@ -137,7 +128,6 @@ var skipList = []string{
 	"azurerm_data_factory_trigger_tumbling_window",
 	"azurerm_storage_share_file",
 	"azurerm_sql_virtual_network_rule",
-	"azurerm_virtual_desktop_workspace",
 	"azurerm_data_lake_analytics_account",
 	"azurerm_log_analytics_storage_insights",
 	"azurerm_virtual_hub_bgp_connection",
