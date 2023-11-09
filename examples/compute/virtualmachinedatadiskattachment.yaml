@@ -42,7 +42,7 @@ metadata:
 spec:
   forProvider:
     caching: ReadWrite
-    lun: "10"
+    lun: 1
     managedDiskIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
