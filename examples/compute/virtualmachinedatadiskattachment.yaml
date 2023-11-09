@@ -78,16 +78,16 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta1/virtualmachinedatadiskattachment
   labels:
-    testing.upbound.io/example-name: main
-  name: main
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     ipConfiguration:
-    - name: internal
+    - name: example
       privateIpAddressAllocation: Dynamic
       subnetIdSelector:
         matchLabels:
-          testing.upbound.io/example-name: internal
+          testing.upbound.io/example-name: example
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -115,8 +115,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta1/virtualmachinedatadiskattachment
   labels:
-    testing.upbound.io/example-name: internal
-  name: internal
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     addressPrefixes:
@@ -126,7 +126,7 @@ spec:
         testing.upbound.io/example-name: example
     virtualNetworkNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: main
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -136,8 +136,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: compute/v1beta1/virtualmachinedatadiskattachment
   labels:
-    testing.upbound.io/example-name: main
-  name: main
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     addressSpace:
