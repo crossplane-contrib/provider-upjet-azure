@@ -667,6 +667,22 @@ func (mg *VirtualMachineDataDiskAttachment) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.ManagedDiskID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagedDiskIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
+		Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
+		To: reference.To{
+			List:    &LinuxVirtualMachineList{},
+			Managed: &LinuxVirtualMachine{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualMachineID")
+	}
+	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
+
 	return nil
 }
 

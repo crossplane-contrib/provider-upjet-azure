@@ -47,6 +47,12 @@ func Configure(p *config.Provider) {
 		r.Kind = "VirtualMachineExtension"
 		r.ShortGroup = "compute"
 	})
+	p.AddResourceConfigurator("azurerm_virtual_machine_data_disk_attachment", func(r *config.Resource) {
+		r.References["virtual_machine_id"] = config.Reference{
+			Type:      rconfig.APISPackagePath + "/compute/v1beta1.LinuxVirtualMachine",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 	/* Note on testing:
 	* - create a storage account
 	* - upload a text file with *.vhd extension

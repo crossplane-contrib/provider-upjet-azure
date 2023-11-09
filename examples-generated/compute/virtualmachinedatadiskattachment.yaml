@@ -13,7 +13,9 @@ spec:
     managedDiskIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    virtualMachineId: ${azurerm_virtual_machine.example.id}
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 

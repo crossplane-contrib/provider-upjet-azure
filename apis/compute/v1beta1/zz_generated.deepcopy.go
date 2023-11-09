@@ -16149,6 +16149,16 @@ func (in *VirtualMachineDataDiskAttachmentParameters) DeepCopyInto(out *VirtualM
 		*out = new(string)
 		**out = **in
 	}
+	if in.VirtualMachineIDRef != nil {
+		in, out := &in.VirtualMachineIDRef, &out.VirtualMachineIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.VirtualMachineIDSelector != nil {
+		in, out := &in.VirtualMachineIDSelector, &out.VirtualMachineIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.WriteAcceleratorEnabled != nil {
 		in, out := &in.WriteAcceleratorEnabled, &out.WriteAcceleratorEnabled
 		*out = new(bool)

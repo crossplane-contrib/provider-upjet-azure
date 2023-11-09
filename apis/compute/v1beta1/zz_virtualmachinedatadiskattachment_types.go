@@ -85,8 +85,18 @@ type VirtualMachineDataDiskAttachmentParameters struct {
 	ManagedDiskIDSelector *v1.Selector `json:"managedDiskIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Virtual Machine to which the Data Disk should be attached. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
-	VirtualMachineID *string `json:"virtualMachineId" tf:"virtual_machine_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.LinuxVirtualMachine
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`
+
+	// Reference to a LinuxVirtualMachine in compute to populate virtualMachineId.
+	// +kubebuilder:validation:Optional
+	VirtualMachineIDRef *v1.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
+
+	// Selector for a LinuxVirtualMachine in compute to populate virtualMachineId.
+	// +kubebuilder:validation:Optional
+	VirtualMachineIDSelector *v1.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
 
 	// Specifies if Write Accelerator is enabled on the disk. This can only be enabled on Premium_LRS managed disks with no caching and M-Series VMs. Defaults to false.
 	// +kubebuilder:validation:Optional
