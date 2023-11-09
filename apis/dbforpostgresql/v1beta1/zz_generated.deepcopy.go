@@ -2231,6 +2231,11 @@ func (in *FlexibleServerParameters) DeepCopyInto(out *FlexibleServerParameters) 
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.AutoGeneratePassword != nil {
+		in, out := &in.AutoGeneratePassword, &out.AutoGeneratePassword
+		*out = new(bool)
+		**out = **in
+	}
 	if in.BackupRetentionDays != nil {
 		in, out := &in.BackupRetentionDays, &out.BackupRetentionDays
 		*out = new(float64)
