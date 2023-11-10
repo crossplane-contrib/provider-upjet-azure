@@ -117,7 +117,8 @@ spec:
                     type: array
                   autoGeneratePassword:
                     description: If true, the password will be auto-generated and
-                      stored in the Secret referenced by the passwordSecretRef field.
+                      stored in the Secret referenced by the administratorPasswordSecretRef
+                      field.
                     type: boolean
                   backupRetentionDays:
                     description: The backup retention days for the PostgreSQL Flexible

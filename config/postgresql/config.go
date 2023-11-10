@@ -109,7 +109,7 @@ func Configure(p *config.Provider) {
 			}, nil
 		}
 		desc, _ := comments.New("If true, the password will be auto-generated and"+
-			" stored in the Secret referenced by the passwordSecretRef field.",
+			" stored in the Secret referenced by the administratorPasswordSecretRef field.",
 			comments.WithTFTag("-"))
 		r.TerraformResource.Schema["auto_generate_password"] = &schema.Schema{
 			Type:        schema.TypeBool,

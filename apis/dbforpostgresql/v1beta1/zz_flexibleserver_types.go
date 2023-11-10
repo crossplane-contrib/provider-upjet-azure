@@ -232,7 +232,7 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	Authentication []AuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// If true, the password will be auto-generated and stored in the Secret referenced by the passwordSecretRef field.
+	// If true, the password will be auto-generated and stored in the Secret referenced by the administratorPasswordSecretRef field.
 	// +upjet:crd:field:TFTag=-
 	// +kubebuilder:validation:Optional
 	AutoGeneratePassword *bool `json:"autoGeneratePassword,omitempty" tf:"-"`
