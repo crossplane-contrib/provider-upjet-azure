@@ -1,6 +1,8 @@
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: FlexibleServerConfiguration
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/FlexibleServer
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -17,6 +19,8 @@ spec:
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: FlexibleServerDatabase
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/FlexibleServer
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -33,6 +37,8 @@ spec:
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: FlexibleServerFirewallRule
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/FlexibleServer
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -49,9 +55,11 @@ spec:
 apiVersion: dbforpostgresql.azure.upbound.io/v1beta1
 kind: FlexibleServer
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/FlexibleServer
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     administratorLogin: psqladmin
@@ -59,6 +67,7 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
+    autoGeneratePassword: true
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -72,20 +81,11 @@ spec:
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
+  annotations:
+    meta.upbound.io/example-id: dbforpostgresql/v1beta1/FlexibleServer
   labels:
     testing.upbound.io/example-name: example-flexible-server-pg
   name: example-flexible-server-pg-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
-
----
-
-apiVersion: v1
-data:
-  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
-kind: Secret
-metadata:
-  name: example-secret
-  namespace: upbound-system
-type: Opaque

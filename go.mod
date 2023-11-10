@@ -6,10 +6,12 @@ require (
 	github.com/crossplane/crossplane-runtime v1.14.1
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
 	github.com/crossplane/upjet v0.11.0-rc.0.0.20231012093706-c4a76d2a7505
+	github.com/google/go-cmp v0.6.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.0
 	github.com/pkg/errors v0.9.1
 	github.com/upbound/upjet v0.10.0
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
+	k8s.io/api v0.28.3
 	k8s.io/apimachinery v0.28.3
 	k8s.io/client-go v0.28.3
 	sigs.k8s.io/controller-runtime v0.16.3
@@ -44,7 +46,6 @@ require (
 	github.com/golang/mock v1.6.0 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/gnostic-models v0.6.8 // indirect
-	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/google/uuid v1.3.1 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
@@ -109,7 +110,6 @@ require (
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
-	k8s.io/api v0.28.3 // indirect
 	k8s.io/apiextensions-apiserver v0.28.3 // indirect
 	k8s.io/component-base v0.28.3 // indirect
 	k8s.io/klog/v2 v2.100.1 // indirect

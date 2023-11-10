@@ -224,12 +224,18 @@ type FlexibleServerParameters struct {
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
 	// The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
 	// +kubebuilder:validation:Optional
 	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
 	// An authentication block as defined below.
 	// +kubebuilder:validation:Optional
 	Authentication []AuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// If true, the password will be auto-generated and stored in the Secret referenced by the administratorPasswordSecretRef field.
+	// +upjet:crd:field:TFTag=-
+	// +kubebuilder:validation:Optional
+	AutoGeneratePassword *bool `json:"autoGeneratePassword,omitempty" tf:"-"`
 
 	// The backup retention days for the PostgreSQL Flexible Server. Possible values are between 7 and 35 days.
 	// +kubebuilder:validation:Optional

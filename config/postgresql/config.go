@@ -21,10 +21,13 @@ import (
 	"strconv"
 
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/types/comments"
 
 	"github.com/upbound/provider-azure/apis/rconfig"
+	"github.com/upbound/provider-azure/config/common"
 )
 
 const (
@@ -102,8 +105,26 @@ func Configure(p *config.Provider) {
 				xpv1.ResourceCredentialsSecretUserKey:     []byte(fmt.Sprintf("%s@%s", attr["administrator_login"], attr["name"])),
 				xpv1.ResourceCredentialsSecretEndpointKey: []byte(attr["fqdn"].(string)),
 				xpv1.ResourceCredentialsSecretPortKey:     []byte(strconv.Itoa(postgresqlServerPort)),
+				xpv1.ResourceCredentialsSecretPasswordKey: []byte(attr["administrator_password"].(string)),
 			}, nil
 		}
+		desc, _ := comments.New("If true, the password will be auto-generated and"+
+			" stored in the Secret referenced by the administratorPasswordSecretRef field.",
+			comments.WithTFTag("-"))
+		r.TerraformResource.Schema["auto_generate_password"] = &schema.Schema{
+			Type:        schema.TypeBool,
+			Optional:    true,
+			Description: desc.String(),
+		}
+		r.InitializerFns = append(r.InitializerFns,
+			common.PasswordGenerator(
+				"spec.forProvider.administratorPasswordSecretRef",
+				"spec.forProvider.autoGeneratePassword",
+			))
+		r.TerraformResource.Schema["administrator_password"].Description = "Password for the " +
+			"master DB user. If you set autoGeneratePassword to true, the Secret" +
+			" referenced here will be created or updated with generated password" +
+			" if it does not already contain one."
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_virtual_network_rule", func(r *config.Resource) {
