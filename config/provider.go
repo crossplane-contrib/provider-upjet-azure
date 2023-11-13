@@ -108,7 +108,6 @@ var skipList = []string{
 	// deprecated
 	"azurerm_virtual_machine_scale_set",
 	"azurerm_virtual_machine_configuration_policy_assignment",
-	"azurerm_virtual_machine_data_disk_attachment",
 	"azurerm_virtual_machine_scale_set_extension",
 	"azurerm_sql_server",
 	"azurerm_video_analyzer",

@@ -217,6 +217,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/microsoft.compute/disks/manageddisk1
 	"azurerm_managed_disk_sas_token":    config.IdentifierFromProvider,
 	"azurerm_virtual_machine_extension": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_machine_id }}/extensions/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Compute/virtualMachines/machine1/dataDisks/disk1
+	"azurerm_virtual_machine_data_disk_attachment": config.IdentifierFromProvider,
 
 	// cdn
 	//
