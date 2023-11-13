@@ -49,8 +49,8 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("azurerm_virtual_machine_data_disk_attachment", func(r *config.Resource) {
 		r.References["virtual_machine_id"] = config.Reference{
-			Type:      rconfig.APISPackagePath + "/compute/v1beta1.LinuxVirtualMachine",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_linux_virtual_machine",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 	/* Note on testing:

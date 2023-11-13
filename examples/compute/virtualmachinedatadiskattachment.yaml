@@ -1,9 +1,29 @@
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: VirtualMachineDataDiskAttachment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/virtualmachinedatadiskattachment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    caching: ReadWrite
+    lun: 1
+    managedDiskIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
 
 apiVersion: compute.azure.upbound.io/v1beta1
 kind: LinuxVirtualMachine
 metadata:
   annotations:
-    meta.upbound.io/example-id: compute/v1beta1/virtualmachineextension
+    meta.upbound.io/example-id: compute/v1beta1/virtualmachinedatadiskattachment
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -28,27 +48,6 @@ spec:
       publisher: Canonical
       sku: 16.04-LTS
       version: latest
-
----
-
-apiVersion: compute.azure.upbound.io/v1beta1
-kind: VirtualMachineDataDiskAttachment
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1beta1/virtualmachinedatadiskattachment
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    caching: ReadWrite
-    lun: 1
-    managedDiskIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    virtualMachineIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
 
 ---
 
