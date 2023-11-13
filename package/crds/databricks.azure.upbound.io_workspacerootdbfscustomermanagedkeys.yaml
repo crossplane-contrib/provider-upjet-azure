@@ -4,7 +4,7 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.13.0
-  name: workspacecustomermanagedkeys.databricks.azure.upbound.io
+  name: workspacerootdbfscustomermanagedkeys.databricks.azure.upbound.io
 spec:
   group: databricks.azure.upbound.io
   names:
@@ -12,10 +12,10 @@ spec:
     - crossplane
     - managed
     - azure
-    kind: WorkspaceCustomerManagedKey
-    listKind: WorkspaceCustomerManagedKeyList
-    plural: workspacecustomermanagedkeys
-    singular: workspacecustomermanagedkey
+    kind: WorkspaceRootDbfsCustomerManagedKey
+    listKind: WorkspaceRootDbfsCustomerManagedKeyList
+    plural: workspacerootdbfscustomermanagedkeys
+    singular: workspacerootdbfscustomermanagedkey
   scope: Cluster
   versions:
   - additionalPrinterColumns:
@@ -34,8 +34,9 @@ spec:
     name: v1beta1
     schema:
       openAPIV3Schema:
-        description: WorkspaceCustomerManagedKey is the Schema for the WorkspaceCustomerManagedKeys
-          API. Manages a Customer Managed Key for a Databricks Workspace root DBFS
+        description: WorkspaceRootDbfsCustomerManagedKey is the Schema for the WorkspaceRootDbfsCustomerManagedKeys
+          API. Manages a Customer Managed Key for the Databricks Workspaces root Databricks
+          File System(DBFS)
         properties:
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
@@ -50,8 +51,8 @@ spec:
           metadata:
             type: object
           spec:
-            description: WorkspaceCustomerManagedKeySpec defines the desired state
-              of WorkspaceCustomerManagedKey
+            description: WorkspaceRootDbfsCustomerManagedKeySpec defines the desired
+              state of WorkspaceRootDbfsCustomerManagedKey
             properties:
               deletionPolicy:
                 default: Delete
@@ -69,7 +70,7 @@ spec:
               forProvider:
                 properties:
                   keyVaultKeyId:
-                    description: The ID of the Key Vault.
+                    description: The resource ID of the Key Vault Key to be used.
                     type: string
                   keyVaultKeyIdRef:
                     description: Reference to a Key in keyvault to populate keyVaultKeyId.
@@ -145,7 +146,7 @@ spec:
                         type: object
                     type: object
                   workspaceId:
-                    description: The ID of the Databricks Workspace..
+                    description: The resource ID of the Databricks Workspace.
                     type: string
                   workspaceIdRef:
                     description: Reference to a Workspace in databricks to populate
@@ -396,8 +397,8 @@ spec:
             - forProvider
             type: object
           status:
-            description: WorkspaceCustomerManagedKeyStatus defines the observed state
-              of WorkspaceCustomerManagedKey.
+            description: WorkspaceRootDbfsCustomerManagedKeyStatus defines the observed
+              state of WorkspaceRootDbfsCustomerManagedKey.
             properties:
               atProvider:
                 properties:
@@ -405,10 +406,10 @@ spec:
                     description: The ID of the Databricks Workspace.
                     type: string
                   keyVaultKeyId:
-                    description: The ID of the Key Vault.
+                    description: The resource ID of the Key Vault Key to be used.
                     type: string
                   workspaceId:
-                    description: The ID of the Databricks Workspace..
+                    description: The resource ID of the Databricks Workspace.
                     type: string
                 type: object
               conditions:

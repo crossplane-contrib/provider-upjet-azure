@@ -17,26 +17,26 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type WorkspaceCustomerManagedKeyInitParameters struct {
+type WorkspaceRootDbfsCustomerManagedKeyInitParameters struct {
 }
 
-type WorkspaceCustomerManagedKeyObservation struct {
+type WorkspaceRootDbfsCustomerManagedKeyObservation struct {
 
 	// The ID of the Databricks Workspace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The ID of the Key Vault.
+	// The resource ID of the Key Vault Key to be used.
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
-	// The ID of the Databricks Workspace..
+	// The resource ID of the Databricks Workspace.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 }
 
-type WorkspaceCustomerManagedKeyParameters struct {
+type WorkspaceRootDbfsCustomerManagedKeyParameters struct {
 
-	// The ID of the Key Vault.
+	// The resource ID of the Key Vault Key to be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
@@ -48,9 +48,9 @@ type WorkspaceCustomerManagedKeyParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 
-	// The ID of the Databricks Workspace..
+	// The resource ID of the Databricks Workspace.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/databricks/v1beta1.Workspace
-	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
@@ -63,10 +63,10 @@ type WorkspaceCustomerManagedKeyParameters struct {
 	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
-// WorkspaceCustomerManagedKeySpec defines the desired state of WorkspaceCustomerManagedKey
-type WorkspaceCustomerManagedKeySpec struct {
+// WorkspaceRootDbfsCustomerManagedKeySpec defines the desired state of WorkspaceRootDbfsCustomerManagedKey
+type WorkspaceRootDbfsCustomerManagedKeySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     WorkspaceCustomerManagedKeyParameters `json:"forProvider"`
+	ForProvider     WorkspaceRootDbfsCustomerManagedKeyParameters `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -77,48 +77,48 @@ type WorkspaceCustomerManagedKeySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider WorkspaceCustomerManagedKeyInitParameters `json:"initProvider,omitempty"`
+	InitProvider WorkspaceRootDbfsCustomerManagedKeyInitParameters `json:"initProvider,omitempty"`
 }
 
-// WorkspaceCustomerManagedKeyStatus defines the observed state of WorkspaceCustomerManagedKey.
-type WorkspaceCustomerManagedKeyStatus struct {
+// WorkspaceRootDbfsCustomerManagedKeyStatus defines the observed state of WorkspaceRootDbfsCustomerManagedKey.
+type WorkspaceRootDbfsCustomerManagedKeyStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        WorkspaceCustomerManagedKeyObservation `json:"atProvider,omitempty"`
+	AtProvider        WorkspaceRootDbfsCustomerManagedKeyObservation `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// WorkspaceCustomerManagedKey is the Schema for the WorkspaceCustomerManagedKeys API. Manages a Customer Managed Key for a Databricks Workspace root DBFS
+// WorkspaceRootDbfsCustomerManagedKey is the Schema for the WorkspaceRootDbfsCustomerManagedKeys API. Manages a Customer Managed Key for the Databricks Workspaces root Databricks File System(DBFS)
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:subresource:status
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}
-type WorkspaceCustomerManagedKey struct {
+type WorkspaceRootDbfsCustomerManagedKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WorkspaceCustomerManagedKeySpec   `json:"spec"`
-	Status            WorkspaceCustomerManagedKeyStatus `json:"status,omitempty"`
+	Spec              WorkspaceRootDbfsCustomerManagedKeySpec   `json:"spec"`
+	Status            WorkspaceRootDbfsCustomerManagedKeyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 
-// WorkspaceCustomerManagedKeyList contains a list of WorkspaceCustomerManagedKeys
-type WorkspaceCustomerManagedKeyList struct {
+// WorkspaceRootDbfsCustomerManagedKeyList contains a list of WorkspaceRootDbfsCustomerManagedKeys
+type WorkspaceRootDbfsCustomerManagedKeyList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []WorkspaceCustomerManagedKey `json:"items"`
+	Items           []WorkspaceRootDbfsCustomerManagedKey `json:"items"`
 }
 
 // Repository type metadata.
 var (
-	WorkspaceCustomerManagedKey_Kind             = "WorkspaceCustomerManagedKey"
-	WorkspaceCustomerManagedKey_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: WorkspaceCustomerManagedKey_Kind}.String()
-	WorkspaceCustomerManagedKey_KindAPIVersion   = WorkspaceCustomerManagedKey_Kind + "." + CRDGroupVersion.String()
-	WorkspaceCustomerManagedKey_GroupVersionKind = CRDGroupVersion.WithKind(WorkspaceCustomerManagedKey_Kind)
+	WorkspaceRootDbfsCustomerManagedKey_Kind             = "WorkspaceRootDbfsCustomerManagedKey"
+	WorkspaceRootDbfsCustomerManagedKey_GroupKind        = schema.GroupKind{Group: CRDGroup, Kind: WorkspaceRootDbfsCustomerManagedKey_Kind}.String()
+	WorkspaceRootDbfsCustomerManagedKey_KindAPIVersion   = WorkspaceRootDbfsCustomerManagedKey_Kind + "." + CRDGroupVersion.String()
+	WorkspaceRootDbfsCustomerManagedKey_GroupVersionKind = CRDGroupVersion.WithKind(WorkspaceRootDbfsCustomerManagedKey_Kind)
 )
 
 func init() {
-	SchemeBuilder.Register(&WorkspaceCustomerManagedKey{}, &WorkspaceCustomerManagedKeyList{})
+	SchemeBuilder.Register(&WorkspaceRootDbfsCustomerManagedKey{}, &WorkspaceRootDbfsCustomerManagedKeyList{})
 }

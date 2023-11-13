@@ -41,6 +41,7 @@ import (
 	"github.com/upbound/provider-azure/config/containerservice"
 	"github.com/upbound/provider-azure/config/cosmosdb"
 	"github.com/upbound/provider-azure/config/costmanagement"
+	"github.com/upbound/provider-azure/config/databricks"
 	"github.com/upbound/provider-azure/config/datafactory"
 	"github.com/upbound/provider-azure/config/dataprotection"
 	"github.com/upbound/provider-azure/config/datashare"
@@ -234,6 +235,7 @@ func GetProvider() *tjconfig.Provider {
 		certificateregistration.Configure,
 		orbital.Configure,
 		appplatform.Configure,
+		databricks.Configure,
 	} {
 		configure(pc)
 	}

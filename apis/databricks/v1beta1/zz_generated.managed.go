@@ -186,3 +186,63 @@ func (mg *WorkspaceCustomerManagedKey) SetPublishConnectionDetailsTo(r *xpv1.Pub
 func (mg *WorkspaceCustomerManagedKey) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
 	mg.Spec.WriteConnectionSecretToReference = r
 }
+
+// GetCondition of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
